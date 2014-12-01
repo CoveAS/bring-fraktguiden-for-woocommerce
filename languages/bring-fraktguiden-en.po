@@ -1,0 +1,166 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Driv Digital
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: woocommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: post@drivdigital.no\n"
+"POT-Creation-Date: 2014-11-26 14:33+0100\n"
+"PO-Revision-Date: 2014-11-26 14:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#: class-bring-fraktguiden.php:26 class-bring-fraktguiden.php:117
+msgid "Bring Fraktguiden"
+msgstr "Bring Fraktguiden"
+
+#: class-bring-fraktguiden.php:108
+msgid "Enable"
+msgstr "Enable"
+
+#: class-bring-fraktguiden.php:110
+msgid "Enable Bring Fraktguiden"
+msgstr "Enable Bring Fraktguiden"
+
+#: class-bring-fraktguiden.php:114
+msgid "Title"
+msgstr "Title"
+
+#: class-bring-fraktguiden.php:116
+msgid "This controls the title which the user sees during checkout."
+msgstr "This controls the title which the user sees during checkout."
+
+#: class-bring-fraktguiden.php:120
+msgid "Delivery Fee"
+msgstr "Bring Fraktguiden"
+
+#: class-bring-fraktguiden.php:122
+msgid ""
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
+msgstr ""
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
+
+#: class-bring-fraktguiden.php:126
+msgid "Post office"
+msgstr "Post office"
+
+#: class-bring-fraktguiden.php:128
+msgid "Shipping from post office"
+msgstr "Shipping from post office"
+
+#: class-bring-fraktguiden.php:132
+msgid "From zip"
+msgstr "From zip"
+
+#: class-bring-fraktguiden.php:134
+msgid ""
+"This is the zip code of where you deliver from. For example, the post "
+"office. Should be 4 digits."
+msgstr ""
+"This is the zip code of where you deliver from. For example, the post "
+"office. Should be 4 digits."
+
+#: class-bring-fraktguiden.php:138
+msgid "Display price"
+msgstr "Display price"
+
+#: class-bring-fraktguiden.php:140
+msgid "How to calculate delivery charges"
+msgstr "How to calculate delivery charges"
+
+#: class-bring-fraktguiden.php:143
+msgid "VAT included"
+msgstr "VAT included"
+
+#: class-bring-fraktguiden.php:144
+msgid "VAT excluded"
+msgstr "VAT excluded"
+
+#: class-bring-fraktguiden.php:148
+msgid "Method availability"
+msgstr "Method availability"
+
+#: class-bring-fraktguiden.php:153
+msgid "All allowed countries"
+msgstr "All allowed countries"
+
+#: class-bring-fraktguiden.php:154 class-bring-fraktguiden.php:158
+msgid "Specific Countries"
+msgstr "Specific Countries"
+
+#: class-bring-fraktguiden.php:166
+msgid "Services"
+msgstr "Services"
+
+#: class-bring-fraktguiden.php:174
+msgid "Debug"
+msgstr "Debug"
+
+#: class-bring-fraktguiden.php:176
+msgid "Enable debug logs"
+msgstr "Enable debug logs"
+
+#: class-bring-fraktguiden.php:177
+msgid "These logs will be saved in <code>wc-logs/</code>"
+msgstr "These logs will be saved in <code>wc-logs/</code>"
+
+#: class-bring-fraktguiden.php:192
+msgid ""
+"Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
+msgstr ""
+"Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
+
+#: class-bring-fraktguiden.php:200
+msgid "Gateway Disabled"
+msgstr "Gateway Disabled"
+
+#: class-bring-fraktguiden.php:201
+#, php-format
+msgid ""
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
+"be enabled. Please enable them on the <a href=\"%s\">Catalog tab</a>. <br/> "
+"In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"currency. Choose that from the <a href=\"%s\">General tab</a>"
+msgstr ""
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
+"be enabled. Please enable them on the <a href=\"%s\">Catalog tab</a>. <br/> "
+"In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"currency. Choose that from the <a href=\"%s\">General tab</a>"
+
+#: class-bring-fraktguiden.php:245
+msgid ""
+"Cannot calculate Bring shiping as a product added is missing dimensions. "
+"Product: "
+msgstr ""
+"Cannot calculate Bring shiping as a product added is missing dimensions. "
+"Product: "
+
+#: class-bring-fraktguiden.php:256
+msgid ""
+"The products that were added to the cart do not have dimensions and "
+"therefore Bring cannot calculate shipping. Products: "
+msgstr ""
+"The products that were added to the cart do not have dimensions and "
+"therefore Bring cannot calculate shipping. Products: "
+
+#: class-bring-fraktguiden.php:282
+msgid "Rates were found: "
+msgstr "Rates were found: "
+
+#: class-bring-fraktguiden.php:284
+msgid "No rates were found for params: "
+msgstr "No rates were found for params: "
+
+#: class-bring-fraktguiden.php:286
+msgid "Request url: "
+msgstr "Request url: "
