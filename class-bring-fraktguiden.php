@@ -56,7 +56,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
   }
 
   /**
-   * Check if weight or dimensions are enabled.
+   * Check if weight units or dimensions units are enabled.
    *
    * @return boolean
    */
