@@ -7,14 +7,14 @@
  *
  * @category    Shipping Method
  * @author      Driv Digital
+ * Version:     1.0.1
  * @package     Woocommerce
  */
-class WC_Bring_Fraktguiden extends WC_Shipping_Method {
+class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
-  /**
-   *
-   */
-  const SERVICE_URL = 'http://fraktguide.bring.no/fraktguide/products/all.json';
+  const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
+
+  const TEXT_DOMAIN = 'bring-fraktguiden';
 
   /**
    * @constructor
@@ -23,7 +23,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
     global $woocommerce;
 
     $this->id           = 'bring_fraktguiden';
-    $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+    $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
 
     // Load the form fields.
     $this->init_form_fields();
@@ -50,13 +50,13 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
 
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
-    if ( !$this->is_valid_for_use() ) {
+    if ( ! $this->is_valid_for_use() ) {
       $this->enabled = false;
     }
   }
 
   /**
-   * Check if weight units or dimensions units are enabled.
+   * Check if weight or dimensions are enabled.
    *
    * @return boolean
    */
@@ -74,7 +74,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
    */
   public function init_form_fields() {
     global $woocommerce;
-    $services = array(
+    $services          = array(
         'SERVICEPAKKE'                 => 'Klimanøytral Servicepakke',
         'PA_DOREN'                     => 'På Døren',
         'BPAKKE_DOR-DOR'               => 'Bedriftspakke',
@@ -105,57 +105,57 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
     );
     $this->form_fields = array(
         'enabled'      => array(
-            'title'   => __( 'Enable', 'bring-fraktguiden' ),
+            'title'   => __( 'Enable', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
-            'label'   => __( 'Enable Bring Fraktguiden', 'bring-fraktguiden' ),
+            'label'   => __( 'Enable Bring Fraktguiden', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
         'title'        => array(
-            'title'       => __( 'Title', 'bring-fraktguiden' ),
+            'title'       => __( 'Title', self::TEXT_DOMAIN ),
             'type'        => 'text',
-            'description' => __( 'This controls the title which the user sees during checkout.', 'bring-fraktguiden' ),
-            'default'     => __( 'Bring Fraktguiden', 'bring-fraktguiden' )
+            'description' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
+            'default'     => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
         ),
         'handling_fee' => array(
-            'title'       => __( 'Delivery Fee', 'bring-fraktguiden' ),
+            'title'       => __( 'Delivery Fee', self::TEXT_DOMAIN ),
             'type'        => 'text',
-            'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
+            'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
         'post_office'  => array(
-            'title'   => __( 'Post office', 'bring-fraktguiden' ),
+            'title'   => __( 'Post office', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
-            'label'   => __( 'Shipping from post office', 'bring-fraktguiden' ),
+            'label'   => __( 'Shipping from post office', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
         'from_zip'     => array(
-            'title'       => __( 'From zip', 'bring-fraktguiden' ),
+            'title'       => __( 'From zip', self::TEXT_DOMAIN ),
             'type'        => 'text',
-            'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', 'bring-fraktguiden' ),
+            'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
         'vat'          => array(
-            'title'       => __( 'Display price', 'bring-fraktguiden' ),
+            'title'       => __( 'Display price', self::TEXT_DOMAIN ),
             'type'        => 'select',
-            'description' => __( 'How to calculate delivery charges', 'bring-fraktguiden' ),
+            'description' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
             'default'     => 'include',
             'options'     => array(
-                'include' => __( 'VAT included', 'bring-fraktguiden' ),
-                'exclude' => __( 'VAT excluded', 'bring-fraktguiden' )
+                'include' => __( 'VAT included', self::TEXT_DOMAIN ),
+                'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
             ),
         ),
         'availability' => array(
-            'title'   => __( 'Method availability', 'bring-fraktguiden' ),
+            'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
             'type'    => 'select',
             'default' => 'all',
             'class'   => 'availability',
             'options' => array(
-                'all'      => __( 'All allowed countries', 'bring-fraktguiden' ),
-                'specific' => __( 'Specific Countries', 'bring-fraktguiden' )
+                'all'      => __( 'All allowed countries', self::TEXT_DOMAIN ),
+                'specific' => __( 'Specific Countries', self::TEXT_DOMAIN )
             )
         ),
         'countries'    => array(
-            'title'   => __( 'Specific Countries', 'bring-fraktguiden' ),
+            'title'   => __( 'Specific Countries', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
             'css'     => 'width: 450px;',
@@ -163,7 +163,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
             'options' => $woocommerce->countries->countries
         ),
         'services'     => array(
-            'title'   => __( 'Services', 'bring-fraktguiden' ),
+            'title'   => __( 'Services', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
             'css'     => 'width: 450px;',
@@ -171,10 +171,10 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
             'options' => $services
         ),
         'debug'        => array(
-            'title'       => __( 'Debug', 'bring-fraktguiden' ),
+            'title'       => __( 'Debug', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
-            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
-            'description' => __( 'These logs will be saved in <code>wc-logs/</code>', 'bring-fraktguiden' ),
+            'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
+            'description' => __( 'These logs will be saved in <code>wc-logs/</code>', self::TEXT_DOMAIN ),
             'default'     => 'no'
         ),
     );
@@ -189,7 +189,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
     global $woocommerce; ?>
 
     <h3><?php echo $this->method_title; ?></h3>
-    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
+    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
 
     <table class="form-table">
 
@@ -197,8 +197,8 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
         $this->generate_settings_html();
       else : ?>
         <div class="inline error"><p>
-            <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
-            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', 'bring-fraktguiden' ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
+            <strong><?php _e( 'Gateway Disabled', self::TEXT_DOMAIN ); ?></strong>
+            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', self::TEXT_DOMAIN ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
           </p></div>
       <?php endif; ?>
 
@@ -212,84 +212,118 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
    */
   public function calculate_shipping() {
     global $woocommerce;
-    $titles            = array();
-    $shipping_required = false;
-    $weight            = $length = $width = $height = 0;
+    $titles       = array();
+    $total_weight = 0;
+    $total_volume = 0;
+
     foreach ( $woocommerce->cart->get_cart() as $values ) {
       $_product = $values['data'];
 
       // Check if the product has shipping enabled.
-      if ( !$_product->needs_shipping() ) {
+      if ( ! $_product->needs_shipping() ) {
         continue;
       }
 
       // Does the product have dimensions?
       if ( $_product->has_dimensions() ) {
 
-        $shipping_required = true;
+        $quantity = $values['quantity'];
 
-        // Weight of current product.
-        $weight += $_product->weight * $values['quantity'];
+        // Calculate and add to weight.
+        $total_weight += $_product->weight * $quantity;
 
-        $length += $_product->length * $values['quantity'];
-        $width += $_product->width * $values['quantity'];
-        $height += $_product->height * $values['quantity'];
+        // Calculate volume.
+        $volume = ( $_product->length * $_product->width * $_product->height ) * $quantity;
+
+        $total_volume += $volume;
 
         if ( $this->debug != 'no' ) {
           $titles[] = $_product->get_title();
         }
-
       } else {
-
         if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, __( 'Cannot calculate Bring shiping as a product added is missing dimensions. Product: ' . $_product->get_title(), 'bring-fraktguiden' ) );
+          $this->log->add( $this->id, 'Cannot calculate. product added is missing dimensions. Product: ' . $_product->get_title() );
         }
         return false;
       }
     }
 
-    // No products are shippable, or no products have dimensions.
-    if ( empty( $length ) ) {
-
-      if ( $shipping_required ) {
-        if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, __( 'The products that were added to the cart do not have dimensions and therefore Bring cannot calculate shipping. Products: ' . print_r( $titles, true ), 'bring-fraktguiden' ) );
-        }
-      }
-      return false;
+    if ( $this->debug != 'no' ) {
+      $this->log->add( $this->id, "Volume: {$this->get_volume( $total_volume )}" );
     }
 
     $params = array(
+        'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
-        'length'              => $this->get_dimension( $length ),
-        'width'               => $this->get_dimension( $width ),
-        'height'              => $this->get_dimension( $height ),
-        'weightInGrams'       => $this->get_weight( $weight ),
-        'priceAdjustment'     => 'PA_DOREN_89',
+        'volume'              => $this->get_volume( $total_volume ),
+        'weightInGrams'       => $this->get_weight( $total_weight ),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
     );
 
-    $params   = array_filter( $params );
-    $query    = add_query_arg( $params, self::SERVICE_URL );
+    // Remove empty parameters (eg.: to and from).
+    $params = array_filter( $params );
+    // Query format parameters.
+    $query = add_query_arg( $params, self::SERVICE_URL );
+    // Run the query
     $response = wp_remote_get( $query );
-    $decoded  = $this->convert_xml_to_array( $response['body'] );
-    $rates    = $this->get_services_from_response( $decoded );
+    // Decode the JSON data from bring.
+    $decoded = json_decode( $response['body'], true );
+    // Filter the data to get the selected services from the settings.
+    $rates = $this->get_services_from_response( $decoded );
+
+    if ( $this->debug != 'no' ) {
+      $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
+    }
 
     if ( $this->debug != 'no' ) {
       if ( $rates ) {
-        $this->log->add( $this->id, __( 'Rates were found: ' . print_r( $rates, true ), 'bring-fraktguiden' ) );
+        $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
       } else {
-        $this->log->add( $this->id, __( 'No rates were found for params: ' . print_r( $params, true ), 'bring-fraktguiden' ) );
+        $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
       }
-      $this->log->add( $this->id, __( 'Request url: ' . print_r( $query, true ), 'bring-fraktguiden' ) );
+      $this->log->add( $this->id, 'Request url: ' . print_r( $query, true ) );
     }
 
+    // Calculate rate.
     if ( $rates ) {
       foreach ( $rates as $rate ) {
         $this->add_rate( $rate );
       }
+    }
+  }
+
+  /**
+   * Return volume in dm.
+   *
+   * @param $dimension
+   * @return float
+   */
+  public function get_volume( $dimension ) {
+    switch ( $this->dimens_unit ) {
+
+      case 'mm' :
+        return $dimension / 100;
+
+      case 'in' :
+        return $dimension * 0.254;
+
+      case 'yd' :
+        return $dimension * 9.144;
+
+      case 'cm' :
+        return $dimension / 1000;
+
+      case 'm' :
+        return $dimension / 10;
+
+      /* Unknown dimension unit */
+      default :
+        if ( $this->debug != 'no' ) {
+          $this->log->add( $this->id, sprintf( 'Could not calculate dimension unit for %s', $this->dimens_unit ) );
+        }
+        return false;
     }
   }
 
@@ -317,7 +351,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
       /* Unknown weight unit */
       default :
         if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, __( sprintf( 'Could not calculate weight unit for %s', $this->weight_unit ), 'bring-fraktguiden' ) );
+          $this->log->add( $this->id, sprintf( 'Could not calculate weight unit for %s', $this->weight_unit ) );
         }
         return false;
     }
@@ -333,8 +367,8 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
 
     switch ( $this->dimens_unit ) {
 
-      case 'cm' :
-        return $dimension;
+      case 'mm' :
+        return $dimension / 10.000;
 
       case 'in' :
         return $dimension / 0.39370;
@@ -342,8 +376,8 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
       case 'yd' :
         return $dimension / 0.010936;
 
-      case 'mm' :
-        return $dimension / 10.000;
+      case 'cm' :
+        return $dimension;
 
       case 'm' :
         return $dimension / 0.010000;
@@ -351,26 +385,13 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
       /* Unknown dimension unit */
       default :
         if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, __( sprintf( 'Could not calculate dimension unit for %s', $this->dimens_unit ), 'bring-fraktguiden' ) );
+          $this->log->add( $this->id, sprintf( 'Could not calculate dimension unit for %s', $this->dimens_unit ) );
         }
         return false;
-
     }
   }
 
   /**
-   * Convert the Bring XML response to an array.
-   *
-   * @param string $response
-   * @return array
-   */
-  private function convert_xml_to_array( $response ) {
-    return json_decode( $response, true );
-  }
-
-  /**
-   *
-   *
    * @param array $response .
    * @return array|boolean
    *
@@ -378,7 +399,7 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
    */
   private function get_services_from_response( $response ) {
 
-    if ( !$response || ( is_array( $response ) && count( $response ) == 0 ) || empty( $response['Product'] ) ) {
+    if ( ! $response || ( is_array( $response ) && count( $response ) == 0 ) || empty( $response['Product'] ) ) {
       return false;
     }
 
@@ -392,15 +413,12 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
     }
 
     foreach ( $response['Product'] as $serviceDetails ) {
-      if ( !empty( $this->services ) && !in_array( $serviceDetails['ProductId'], $this->services ) ) {
+      if ( ! empty( $this->services ) && ! in_array( $serviceDetails['ProductId'], $this->services ) ) {
         continue;
       }
 
       $service = $serviceDetails['Price']['PackagePriceWithoutAdditionalServices'];
       $rate    = $this->vat == 'exclude' ? $service['AmountWithoutVAT'] : $service['AmountWithVAT'];
-      if ( 'PA_DOREN' == $serviceDetails['ProductId'] && 89 == $service['AmountWithoutVAT'] ) {
-        $rate = $service['AmountWithoutVAT'] / 1.25;
-      }
 
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
@@ -415,18 +433,5 @@ class WC_Bring_Fraktguiden extends WC_Shipping_Method {
 
 }
 
-/**
- * add_bring_method function.
- *
- * @package  WooCommerce/Classes/Shipping
- * @access public
- * @param array $methods
- * @return array
- */
-function add_bring_method( $methods ) {
-  $methods[] = 'WC_Bring_Fraktguiden';
-  return $methods;
-}
 
-// Add the method to WooCommerce.
-add_filter( 'woocommerce_shipping_methods', 'add_bring_method' );
+

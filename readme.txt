@@ -11,6 +11,3 @@ In order to calculate volume, your products must have:
 There will be no rates calculated if a product doesn't have the above requirements.
 
 ---------------------------------------------------------------------------------
-
-
-xgettext --default-domain=woocommerce --language=PHP --keyword=__ --keyword=_e --sort-by-file --copyright-holder="Driv Digital" --package-name=woocommerce --output-dir=languages --output=bring-fraktguiden.po  --package-version=1.0.0 --msgid-bugs-address="post@drivdigital.no" *.php
