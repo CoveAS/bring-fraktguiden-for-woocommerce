@@ -8,7 +8,7 @@
  * Author URI:          http://drivdigital.no
  * License:             MIT
  *
- * Version:             1.0.0
+ * Version:             1.0.2
  * Requires at least:   3.2.1
  * Tested up to:        4.0.1
  *
