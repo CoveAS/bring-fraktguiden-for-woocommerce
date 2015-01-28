@@ -211,10 +211,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @return mixed Value.
    */
   public function calculate_shipping() {
+    // Use LAFFPack for packaging.
+    include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
+
     global $woocommerce;
     $titles       = array();
     $total_weight = 0;
-    $total_volume = 0;
+
+    // Initialize LAFFPack
+    $packer = new LAFFPack();
+
+    // Boxes
+    $products_dimensions = array();
 
     foreach ( $woocommerce->cart->get_cart() as $values ) {
       $_product = $values['data'];
@@ -232,10 +240,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         // Calculate and add to weight.
         $total_weight += $_product->weight * $quantity;
 
-        // Calculate volume.
-        $volume = ( $_product->length * $_product->width * $_product->height ) * $quantity;
-
-        $total_volume += $volume;
+        // Add product dimensions to the products_dimensions array.
+        for ( $i = 0; $i < $quantity; $i++ ) {
+          $products_dimensions[] = array(
+              'length' => $_product->length,
+              'width'  => $_product->width,
+              'height' => $_product->height
+          );
+        }
 
         if ( $this->debug != 'no' ) {
           $titles[] = $_product->get_title();
@@ -248,16 +260,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       }
     }
 
-    if ( $this->debug != 'no' ) {
-      $this->log->add( $this->id, "Volume: {$this->get_volume( $total_volume )}" );
-    }
+    // Pack the boxes.
+    $packer->pack( $products_dimensions );
 
+    // Get the estimated container size from LAFFPack.
+    $container_size = $packer->get_container_dimensions();
+
+    // Request params.
     $params = array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
-        'volume'              => $this->get_volume( $total_volume ),
+        'length'              => $this->get_dimension( $container_size['length'] ),
+        'width'               => $this->get_dimension( $container_size['width'] ),
+        'height'              => $this->get_dimension( $container_size['height'] ),
         'weightInGrams'       => $this->get_weight( $total_weight ),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
     );
@@ -422,7 +439,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
-          'cost'  => $rate,
+          'cost'  => round( $rate ),
           'label' => $serviceDetails['GuiInformation']['DisplayName'],
       );
 
