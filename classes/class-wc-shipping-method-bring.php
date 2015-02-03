@@ -7,7 +7,6 @@
  *
  * @category    Shipping Method
  * @author      Driv Digital
- * Version:     1.0.1
  * @package     Woocommerce
  */
 class WC_Shipping_Method_Bring extends WC_Shipping_Method {
@@ -242,10 +241,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
         // Add product dimensions to the products_dimensions array.
         for ( $i = 0; $i < $quantity; $i++ ) {
+
+          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+          $dims = array(
+            $_product->length,
+            $_product->width,
+            $_product->height
+          );
+          rsort( $dims );
+
           $products_dimensions[] = array(
-              'length' => $_product->length,
-              'width'  => $_product->width,
-              'height' => $_product->height
+              'length' => $dims[0],
+              'width'  => $dims[1],
+              'height' => $dims[2]
           );
         }
 
@@ -258,6 +266,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         }
         return false;
       }
+    }
+
+    if ( $this->debug != 'no' ) {
+      $this->log->add( $this->id, 'Dimensions before packaging: ' . print_r($products_dimensions, 1) );
     }
 
     // Pack the boxes.
