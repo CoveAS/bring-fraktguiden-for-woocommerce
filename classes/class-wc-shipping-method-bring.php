@@ -227,45 +227,54 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $_product = $values['data'];
 
       // Check if the product has shipping enabled.
-      if ( ! $_product->needs_shipping() ) {
+      if ( !$_product->needs_shipping() ) {
+        // The product does not need shipping. Skip
         continue;
       }
 
       // Does the product have dimensions?
-      if ( $_product->has_dimensions() ) {
 
-        $quantity = $values['quantity'];
+      $quantity = $values['quantity'];
 
-        // Calculate and add to weight.
-        $total_weight += $_product->weight * $quantity;
+      // Calculate and add to weight.
+      $total_weight += $_product->weight * $quantity;
 
-        // Add product dimensions to the products_dimensions array.
-        for ( $i = 0; $i < $quantity; $i++ ) {
+      // Add product dimensions to the products_dimensions array.
+      for ( $i = 0; $i < $quantity; $i++ ) {
 
-          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+        if ( !$_product->has_dimensions() ) {
+          // If the product has no dimensions, assume the lowest unit 1x1x1 cm
+          $dims = array( 0, 0, 0 );
+        }
+        else {
+          // Use defined product dimensions
           $dims = array(
             $_product->length,
             $_product->width,
             $_product->height
           );
-          rsort( $dims );
-
-          $products_dimensions[] = array(
-              'length' => $dims[0],
-              'width'  => $dims[1],
-              'height' => $dims[2]
-          );
         }
 
-        if ( $this->debug != 'no' ) {
-          $titles[] = $_product->get_title();
-        }
-      } else {
-        if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, 'Cannot calculate. product added is missing dimensions. Product: ' . $_product->get_title() );
-        }
-        return false;
+        // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+        rsort( $dims );
+
+        $products_dimensions[] = array(
+            'length' => $dims[0],
+            'width'  => $dims[1],
+            'height' => $dims[2]
+        );
       }
+
+      if ( $this->debug != 'no' ) {
+        $titles[] = $_product->get_title();
+      }
+      //}
+      //else {
+      //  if ( $this->debug != 'no' ) {
+      //    $this->log->add( $this->id, 'Cannot calculate. product added is missing dimensions. Product: ' . $_product->get_title() );
+      //  }
+      //  return false;
+      //}
     }
 
     if ( $this->debug != 'no' ) {
@@ -297,6 +306,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $query = add_query_arg( $params, self::SERVICE_URL );
     // Run the query
     $response = wp_remote_get( $query );
+    if ( is_wp_error( $response ) ) {
+      return FALSE;
+    }
     // Decode the JSON data from bring.
     $decoded = json_decode( $response['body'], true );
     // Filter the data to get the selected services from the settings.
@@ -397,27 +409,34 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     switch ( $this->dimens_unit ) {
 
       case 'mm' :
-        return $dimension / 10.000;
-
+        $dimension = $dimension / 10.000;
+        break;
       case 'in' :
-        return $dimension / 0.39370;
-
+        $dimension = $dimension / 0.39370;
+        break;
       case 'yd' :
-        return $dimension / 0.010936;
-
+        $dimension = $dimension / 0.010936;
+        break;
       case 'cm' :
-        return $dimension;
-
+        $dimension = $dimension;
+        break;
       case 'm' :
-        return $dimension / 0.010000;
-
+        $dimension = $dimension / 0.010000;
+        break;
       /* Unknown dimension unit */
       default :
         if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, sprintf( 'Could not calculate dimension unit for %s', $this->dimens_unit ) );
+          $this->log->add( $this->id, sprintf( 'Could not convert into cm for %s', $this->dimens_unit ) );
         }
         return false;
     }
+
+    if ( 1 > $dimension ) {
+      // Minimum 1 cm
+      $dimension = 1;
+    }
+
+    return $dimension;
   }
 
   /**
