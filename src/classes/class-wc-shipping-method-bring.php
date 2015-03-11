@@ -47,12 +47,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = $this->settings['vat'];
     $this->services     = $this->settings['services'];
 
-    // SERVICEPAKKE only!
-    include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
-    $this->packer             = new LAFFPack();
-    $this->containers_to_ship = array();
-    $this->popped_boxes       = array();
-
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
     if ( ! $this->is_valid_for_use() ) {
@@ -272,23 +266,67 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     // Start packaging.
-    $this->pack( $products_dimensions );
+    if ( $this->use_multi_packaging() ) {
+      include_once( __DIR__ . 'class-multi-packaging.php' );
+      $packer = new Fraktguiden_Multi_Packaging();
+    } else {
+      include_once( __DIR__ . 'class-simple-packaging.php' );
+      $packer = new Fraktguiden_Simple_Packaging();
+    }
+
+    $packer->pack( $products_dimensions );
 
     // Request params.
-    $params = array(
+    $standard_params = array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
     );
-    // Add container params.
-    for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
-      $params['length' . $i]        = $this->containers_to_ship[$i]['length'];
-      $params['width' . $i]         = $this->containers_to_ship[$i]['width'];
-      $params['height' . $i]        = $this->containers_to_ship[$i]['height'];
-      $params['weightInGrams' . $i] = $this->containers_to_ship[$i]['weight_in_grams'];
-    }
+
+    $params = $packer->create_weight_dimensions_param( $standard_params );
+
+
+
+//
+//    // Pack the boxes.
+//    $packer->pack( $products_dimensions );
+//
+//    // Get the estimated container size from LAFFPack.
+//    $container_size = $packer->get_container_dimensions();
+//
+//    // Request params.
+//    $params = array(
+//        'clientUrl'           => $_SERVER['HTTP_HOST'],
+//        'from'                => $this->from_zip,
+//        'to'                  => $woocommerce->customer->get_shipping_postcode(),
+//        'toCountry'           => $woocommerce->customer->get_shipping_country(),
+//        'length'              => $this->get_dimension( $container_size['length'] ),
+//        'width'               => $this->get_dimension( $container_size['width'] ),
+//        'height'              => $this->get_dimension( $container_size['height'] ),
+//        'weightInGrams'       => $this->get_weight( $total_weight ),
+//        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
+//    );
+//
+
+
+
+//    // Request params.
+//    $params = array(
+//        'clientUrl'           => $_SERVER['HTTP_HOST'],
+//        'from'                => $this->from_zip,
+//        'to'                  => $woocommerce->customer->get_shipping_postcode(),
+//        'toCountry'           => $woocommerce->customer->get_shipping_country(),
+//        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
+//    );
+//    // Add container params.
+//    for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
+//      $params['length' . $i]        = $this->containers_to_ship[$i]['length'];
+//      $params['width' . $i]         = $this->containers_to_ship[$i]['width'];
+//      $params['height' . $i]        = $this->containers_to_ship[$i]['height'];
+//      $params['weightInGrams' . $i] = $this->containers_to_ship[$i]['weight_in_grams'];
+//    }
 
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );
@@ -323,91 +361,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $this->add_rate( $rate );
       }
     }
-  }
-
-  /**
-   * // SERVICEPAKKE only!
-   *
-   * @param $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
-   */
-  private function pack( $product_boxes ) {
-
-    // Calculate total weight of boxes.
-    $total_weight = 0;
-    foreach ( $product_boxes as $box ) {
-      $total_weight += $box['weight'];
-    }
-
-    // Pack the boxes in a container.
-    $this->packer->pack( $product_boxes );
-    $container_size = $this->packer->get_container_dimensions();
-    // Get the sizes in cm.
-    $container = array(
-        'weight_in_grams' => $this->get_weight( $total_weight ),
-        'length'          => $this->get_dimension( $container_size['length'] ),
-        'width'           => $this->get_dimension( $container_size['width'] ),
-        'height'          => $this->get_dimension( $container_size['height'] ),
-    );
-
-    // Check if the container exceeds max values.
-    if ( $this->exceeds_max_values( $container ) ) {
-      // Move one item to the popped cache and run again.
-      $this->popped_boxes[] = array_pop( $product_boxes );
-      $this->pack( $product_boxes );
-    } else {
-      // The container is valid, save it to the cache.
-      $this->containers_to_ship[] = $container;
-
-      // Check the remaining boxes.
-      if ( count( $this->popped_boxes ) > 0 ) {
-        $popped = $this->popped_boxes;
-        unset( $this->popped_boxes );
-        $this->popped_boxes = array();
-        $this->pack( $popped );
-      }
-    }
-  }
-
-  /**
-   * Checks if the given package size qualifies for package splitting.
-   *
-   * SERVICEPAKKE only!.
-   *
-   * @param $container_size
-   * @return bool
-   *
-   */
-  private function exceeds_max_values( $container_size ) {
-
-    $weight = $container_size['weight_in_grams'];
-
-    // Create L x W x H array by removing the weight element.
-    $dimensions = $container_size;
-    unset( $dimensions['weight_in_grams'] );
-    // Reverse sort the dimensions/L x W x H array.
-    arsort( $dimensions );
-    // The longest side should now be on the first element.
-    $longest_side = current( $dimensions );
-    // Store the other sides.
-    $side2 = next( $dimensions );
-    $side3 = next( $dimensions );
-
-    // Add the longest side and add the other sides multiplied by 2.
-    $longest_plus_circumference = $longest_side + ( $side2 * 2 ) + ( $side3 * 2 );
-
-    if ( $weight > 35000 ) {
-      return true;
-    }
-
-    if ( $longest_side > 240 ) {
-      return true;
-    }
-
-    if ( $longest_plus_circumference > 360 ) {
-      return true;
-    }
-
-    return false;
   }
 
   /**
@@ -555,13 +508,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
-   * Returns the longest side of a dimension array (length, width, height)
-   * @param $dimensions Array
-   * @return mixed
+   * Returns true if multi packaging should be used.
+   *
+   * @return bool
    */
-  private function get_longest_side( $dimensions ) {
-    arsort( $dimensions );
-    return current( $dimensions );
+  private function use_multi_packaging() {
+    // Only return true if SERVICEPAKKE is selected in services for now.
+    return count( $this->services ) == 1 && in_array( 'SERVICEPAKKE', $this->services );
   }
 
 }
