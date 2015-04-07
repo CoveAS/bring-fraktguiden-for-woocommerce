@@ -266,11 +266,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     // Start packaging.
+    // Select packaging.
     if ( $this->use_multi_packaging() ) {
-      include_once( __DIR__ . 'class-multi-packaging.php' );
+      include_once( __DIR__ . '/class-multi-packaging.php' );
       $packer = new Fraktguiden_Multi_Packaging();
     } else {
-      include_once( __DIR__ . 'class-simple-packaging.php' );
+      include_once( __DIR__ . '/class-simple-packaging.php' );
       $packer = new Fraktguiden_Simple_Packaging();
     }
 
@@ -513,7 +514,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @return bool
    */
   private function use_multi_packaging() {
-    // Only return true if SERVICEPAKKE is selected in services for now.
+    // If only SERVICEPAKKE is selected in services.
     return count( $this->services ) == 1 && in_array( 'SERVICEPAKKE', $this->services );
   }
 

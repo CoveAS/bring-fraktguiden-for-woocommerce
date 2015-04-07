@@ -1,4 +1,5 @@
 <?php
+include_once( __DIR__ . '/interface-packaging.php' );
 
 class Fraktguiden_Multi_Packaging implements iPackaging {
 

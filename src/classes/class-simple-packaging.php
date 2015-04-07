@@ -1,4 +1,5 @@
 <?php
+include_once( __DIR__ . '/interface-packaging.php' );
 
 class Fraktguiden_Simple_Packaging implements iPackaging {
 
@@ -15,7 +16,9 @@ class Fraktguiden_Simple_Packaging implements iPackaging {
    * @param $product_boxes Array
    * product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
    */
-  public function pack( $product_boxes ) {}
+  public function pack( $product_boxes ) {
+
+  }
 
   public function create_weight_dimensions_param( $standard_params ) {
     return $standard_params;
