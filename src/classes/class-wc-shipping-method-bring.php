@@ -262,9 +262,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Create request params.
     $params = array_merge( $this->create_standard_url_params(), $packer->create_url_dim_weight_params() );
 
-    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($params,1) . PHP_EOL, FILE_APPEND);
-
-
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );
     // Query format parameters.

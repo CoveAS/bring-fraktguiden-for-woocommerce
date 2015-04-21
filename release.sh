@@ -20,14 +20,14 @@ function print_out() {
 #------------------------------------------------------------------------------
 # Start:
 #------------------------------------------------------------------------------
-print_out "[MSG] Releasing version ${VERSION}"
+print_out "[INFO] Releasing version ${VERSION}"
 
 # ------------------------------------------------------------------------------
 # Setup directories for the release:
 # ------------------------------------------------------------------------------
 if [ ! -d ${RELEASE_DIR} ]; then
   mkdir ${RELEASE_DIR}
-  print_out "[MSG] ${RELEASE_DIR} directory created."
+  print_out "[INFO] ${RELEASE_DIR} directory created."
 fi
 
 temp_src=${TEMP_DIR}/${PLUGIN_NAME}
@@ -63,7 +63,7 @@ mv ${file_name} ../${RELEASE_DIR} && cd ..
 # Clean up:
 # ------------------------------------------------------------------------------
 rm -rf ${TEMP_DIR}
-print_out "[MSG] Cleaning up."
+print_out "[INFO] Cleaning up."
 print_out "[SUCCESS] ${RELEASE_DIR}/${file_name} created."
 
 

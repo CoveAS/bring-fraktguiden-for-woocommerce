@@ -7,8 +7,6 @@ class Fraktguiden_Packaging {
 
   public function __construct( $multi_pack = false ) {
 
-    file_put_contents( '/Users/thomasandersen/logs/test-plugin.log', 'use_multipack: ' . print_r( (int)$multi_pack, 1 ) . PHP_EOL, FILE_APPEND );
-
     include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
 
     $this->multi_pack  = $multi_pack;
