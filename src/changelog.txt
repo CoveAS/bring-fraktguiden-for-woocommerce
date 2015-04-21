@@ -2,9 +2,7 @@
 
 * Support for multipackaging.
   For Service package (Servicepakke) only.
-  If only SERVICEPAKKE is selected in the configuration and the cart does not contain
-  a product with weight that exceeds 35Kg the plugin now calculates the shipping
-  using multiple packages.
+  In order to get a more precise shipping price quote from Bring, the plugin now splits the cart into multiple packages when necessary.
 
 YYYY.MM.DD - version 1.0.0
 
