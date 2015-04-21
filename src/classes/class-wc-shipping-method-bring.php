@@ -208,31 +208,22 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @return mixed Value.
    */
   public function calculate_shipping() {
-
     global $woocommerce;
-    $titles       = array();
-    $total_weight = 0;
-
-    // Boxes
-    $products_dimensions = array();
-
+    $titles = array();
+    // Array of l,w,h and weight for each product in the cart.
+    $product_boxes = array();
+    // Traverse each product in the cart and create a create a product box (l,w,h,weight).
     foreach ( $woocommerce->cart->get_cart() as $values ) {
       $_product = $values['data'];
 
       // Check if the product has shipping enabled.
       if ( ! $_product->needs_shipping() ) {
-        // The product does not need shipping. Skip
+        // The product does not need shipping. Skip.
         continue;
       }
 
-      // Does the product have dimensions?
-
+      // Add product dimensions to the product_boxes array.
       $quantity = $values['quantity'];
-
-      // Calculate and add to weight.
-      $total_weight += $_product->weight * $quantity;
-
-      // Add product dimensions to the products_dimensions array.
       for ( $i = 0; $i < $quantity; $i++ ) {
 
         if ( ! $_product->has_dimensions() ) {
@@ -250,7 +241,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
         rsort( $dims );
 
-        $products_dimensions[] = array(
+        $product_boxes[] = array(
             'length' => $dims[0],
             'width'  => $dims[1],
             'height' => $dims[2],
@@ -265,25 +256,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     // Start packaging.
     if ( $this->use_multi_packaging() ) {
-      include_once( __DIR__ . '/class-multi-packaging.php' );
+      include_once( __DIR__ . '/packaging/class-multi-packaging.php' );
       $packer = new Fraktguiden_Multi_Packaging();
     } else {
-      include_once( __DIR__ . '/class-simple-packaging.php' );
+      include_once( __DIR__ . '/packaging/class-simple-packaging.php' );
       $packer = new Fraktguiden_Simple_Packaging();
     }
+    $packer->pack( $product_boxes );
 
-    $packer->pack( $products_dimensions );
-
-    // Request params.
-    $standard_params = array(
-        'clientUrl'           => $_SERVER['HTTP_HOST'],
-        'from'                => $this->from_zip,
-        'to'                  => $woocommerce->customer->get_shipping_postcode(),
-        'toCountry'           => $woocommerce->customer->get_shipping_country(),
-        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
-    );
-    $params = array_merge( $standard_params, $packer->get_dimensions_weight_url_params() );
-
+    // Create request params.
+    $params = array_merge( $this->get_standard_url_params(), $packer->get_dimensions_weight_url_params() );
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );
     // Query format parameters.
@@ -326,7 +308,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * Fixme: always return array.
    */
   private function get_services_from_response( $response ) {
-
     if ( ! $response || ( is_array( $response ) && count( $response ) == 0 ) || empty( $response['Product'] ) ) {
       return false;
     }
@@ -360,16 +341,28 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
+   * Standard url params for the Bring http request.
+   *
+   * @return array
+   */
+  public function get_standard_url_params() {
+    global $woocommerce;
+    return array(
+        'clientUrl'           => $_SERVER['HTTP_HOST'],
+        'from'                => $this->from_zip,
+        'to'                  => $woocommerce->customer->get_shipping_postcode(),
+        'toCountry'           => $woocommerce->customer->get_shipping_country(),
+        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
+    );
+  }
+
+  /**
    * Returns true if multi packaging should be used.
    *
    * @return bool
    */
   private function use_multi_packaging() {
-    // If only SERVICEPAKKE is selected in services.
     return count( $this->services ) == 1 && in_array( 'SERVICEPAKKE', $this->services );
   }
 
 }
-
-
-

@@ -1,6 +1,6 @@
 2015.02.19 - version 1.0.6
 
-* xxx
+* Support for multipackaging. Available when only SERVICEPAKKE is selected.
 
 YYYY.MM.DD - version 1.0.0
 
