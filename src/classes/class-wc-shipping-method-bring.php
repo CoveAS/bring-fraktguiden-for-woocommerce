@@ -255,17 +255,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     // Start packaging.
-    if ( $this->use_multi_packaging() ) {
-      include_once( __DIR__ . '/packaging/class-multi-packaging.php' );
-      $packer = new Fraktguiden_Multi_Packaging();
-    } else {
-      include_once( __DIR__ . '/packaging/class-simple-packaging.php' );
-      $packer = new Fraktguiden_Simple_Packaging();
-    }
+    include_once( __DIR__ . '/class-packaging.php' );
+    $packer = new Fraktguiden_Packaging( $this->use_multi_packaging() );
     $packer->pack( $product_boxes );
 
     // Create request params.
-    $params = array_merge( $this->get_standard_url_params(), $packer->get_dimensions_weight_url_params() );
+    $params = array_merge( $this->create_standard_url_params(), $packer->create_url_dim_weight_params() );
+
+    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($params,1) . PHP_EOL, FILE_APPEND);
+
+
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );
     // Query format parameters.
@@ -345,7 +344,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    *
    * @return array
    */
-  public function get_standard_url_params() {
+  public function create_standard_url_params() {
     global $woocommerce;
     return array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
