@@ -48,7 +48,8 @@ class Fraktguiden_Packaging {
       $this->containers_to_ship[] = $container;
     } else {
       // Check if the container exceeds max values.
-      if ( $this->exceeds_max_values( $container ) ) {
+      // Note: This only works for SERVICEPAKKE.
+      if ( $this->exceeds_max_servicepakke_values( $container ) ) {
         // Move one item to the popped cache and run again.
         $this->popped_boxes_cache[] = array_pop( $product_boxes );
         $this->pack( $product_boxes );
@@ -85,10 +86,10 @@ class Fraktguiden_Packaging {
   /**
    * Checks if the given package size qualifies for package splitting.
    *
-   * @param $container_size
+   * @param array $container_size Array with container width/height/length/weight.
    * @return bool
    */
-  private function exceeds_max_values( $container_size ) {
+  private function exceeds_max_servicepakke_values( $container_size ) {
 
     $weight = $container_size['weight_in_grams'];
     if ( $weight > 35000 ) {
