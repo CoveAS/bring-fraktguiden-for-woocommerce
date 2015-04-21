@@ -91,6 +91,9 @@ class Fraktguiden_Packaging {
   private function exceeds_max_values( $container_size ) {
 
     $weight = $container_size['weight_in_grams'];
+    if ( $weight > 35000 ) {
+      return true;
+    }
 
     // Create L x W x H array by removing the weight element.
     $dimensions = $container_size;
@@ -99,21 +102,16 @@ class Fraktguiden_Packaging {
     arsort( $dimensions );
     // The longest side should now be on the first element.
     $longest_side = current( $dimensions );
+    if ( $longest_side > 240 ) {
+      return true;
+    }
+
     // Store the other sides.
     $side2 = next( $dimensions );
     $side3 = next( $dimensions );
 
     // Add the longest side and add the other sides multiplied by 2.
     $longest_plus_circumference = $longest_side + ( $side2 * 2 ) + ( $side3 * 2 );
-
-    if ( $weight > 35000 ) {
-      return true;
-    }
-
-    if ( $longest_side > 240 ) {
-      return true;
-    }
-
     if ( $longest_plus_circumference > 360 ) {
       return true;
     }
