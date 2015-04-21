@@ -260,7 +260,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $packer->pack( $product_boxes );
 
     // Create request params.
-    $params = array_merge( $this->create_standard_url_params(), $packer->create_url_dim_weight_params() );
+    $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_weight_params() );
 
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );

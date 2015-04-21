@@ -66,7 +66,12 @@ class Fraktguiden_Packaging {
     }
   }
 
-  public function create_url_dim_weight_params() {
+  /**
+   * Creates an array of dimension/s and weight/s for each container.
+   *
+   * @return array
+   */
+  public function create_dim_weight_params() {
     $params = array();
     for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
       $params['length' . $i]        = $this->containers_to_ship[$i]['length'];
