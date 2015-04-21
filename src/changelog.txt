@@ -1,6 +1,10 @@
 2015.04.21 - version 1.0.6
 
-* Support for multipackaging. Available when only SERVICEPAKKE is selected.
+* Support for multipackaging.
+  For Service package (Servicepakke) only.
+  If only SERVICEPAKKE is selected in the configuration and the cart does not contain
+  a product with weight that exceeds 35Kg the plugin now calculates the shipping
+  using multiple packages.
 
 YYYY.MM.DD - version 1.0.0
 

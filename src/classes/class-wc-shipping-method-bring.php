@@ -256,8 +256,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     // Start packaging.
     include_once( __DIR__ . '/class-packaging.php' );
-    $packer = new Fraktguiden_Packaging( $this->use_multi_packaging() );
-    $packer->pack( $product_boxes );
+    $packer = new Fraktguiden_Packaging();
+    $multi_pack = $this->use_multi_packaging();
+    if ( $multi_pack && ! $packer->validate( $product_boxes ) ) {
+      return false;
+    }
+
+    // Pack.
+    $packer->pack( $product_boxes, $multi_pack );
 
     // Create request params.
     $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_weight_params() );

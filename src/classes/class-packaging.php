@@ -5,11 +5,10 @@ class Fraktguiden_Packaging {
   private $containers_to_ship;
   private $popped_boxes_cache;
 
-  public function __construct( $multi_pack = false ) {
+  public function __construct() {
 
     include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
 
-    $this->multi_pack  = $multi_pack;
     $this->packer      = new LAFFPack();
     $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
     $this->weight_unit = get_option( 'woocommerce_weight_unit' );
@@ -22,9 +21,10 @@ class Fraktguiden_Packaging {
    * Pack product box/es into container/s
    * @recursive
    *
-   * @param $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
+   * @param array $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
+   * @param boolean $multi_pack
    */
-  public function pack( $product_boxes ) {
+  public function pack( $product_boxes, $multi_pack = false ) {
 
     // Calculate total weight of boxes.
     $total_weight = 0;
@@ -34,8 +34,8 @@ class Fraktguiden_Packaging {
 
     // Pack the boxes in a container.
     $this->packer->pack( $product_boxes );
-
     $container_size = $this->packer->get_container_dimensions();
+
     // Get the sizes in cm.
     $container = array(
         'weight_in_grams' => $this->get_weight( $total_weight ),
@@ -44,15 +44,13 @@ class Fraktguiden_Packaging {
         'height'          => $this->get_dimension( $container_size['height'] ),
     );
 
-    if ( ! $this->multi_pack ) {
-      $this->containers_to_ship[] = $container;
-    } else {
+    if ( $multi_pack ) {
       // Check if the container exceeds max values.
       // Note: This only works for SERVICEPAKKE.
       if ( $this->exceeds_max_servicepakke_values( $container ) ) {
         // Move one item to the popped cache and run again.
         $this->popped_boxes_cache[] = array_pop( $product_boxes );
-        $this->pack( $product_boxes );
+        $this->pack( $product_boxes, true );
       } else {
         // The container size is within max values, save it to the cache.
         $this->containers_to_ship[] = $container;
@@ -61,9 +59,12 @@ class Fraktguiden_Packaging {
           $popped = $this->popped_boxes_cache;
           unset( $this->popped_boxes_cache );
           $this->popped_boxes_cache = array();
-          $this->pack( $popped );
+          $this->pack( $popped, true );
         }
       }
+    }
+    else {
+      $this->containers_to_ship[] = $container;
     }
   }
 
@@ -81,6 +82,15 @@ class Fraktguiden_Packaging {
       $params['weightInGrams' . $i] = $this->containers_to_ship[$i]['weight_in_grams'];
     }
     return $params;
+  }
+
+  public function validate( $product_boxes ) {
+    foreach ( $product_boxes as $box ) {
+      if ( $this->get_weight( $box['weight'] ) > 35000 ) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
