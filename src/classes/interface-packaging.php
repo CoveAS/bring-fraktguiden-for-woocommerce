@@ -2,5 +2,5 @@
 
 interface iPackaging {
   public function pack( $products_dimensions );
-  public function create_weight_dimensions_param( $standard_params );
+  public function get_dimensions_weight_url_params();
 }

@@ -1,5 +1,6 @@
 <?php
 include_once( __DIR__ . '/interface-packaging.php' );
+include_once( __DIR__ . '/class-fraktguiden-util.php' );
 
 class Fraktguiden_Multi_Packaging implements iPackaging {
 
@@ -8,11 +9,15 @@ class Fraktguiden_Multi_Packaging implements iPackaging {
     include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
 
     $this->packer             = new LAFFPack();
+    $this->util               = new Fraktguiden_Util();
     $this->containers_to_ship = array();
     $this->popped_boxes       = array();
   }
 
   /**
+   * Pack product box/es into container/s
+   * @recursive
+   *
    * @param $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
    */
   public function pack( $product_boxes ) {
@@ -25,13 +30,14 @@ class Fraktguiden_Multi_Packaging implements iPackaging {
 
     // Pack the boxes in a container.
     $this->packer->pack( $product_boxes );
+
     $container_size = $this->packer->get_container_dimensions();
     // Get the sizes in cm.
     $container = array(
-        'weight_in_grams' => $this->get_weight( $total_weight ),
-        'length'          => $this->get_dimension( $container_size['length'] ),
-        'width'           => $this->get_dimension( $container_size['width'] ),
-        'height'          => $this->get_dimension( $container_size['height'] ),
+        'weight_in_grams' => $this->util->get_weight( $total_weight ),
+        'length'          => $this->util->get_dimension( $container_size['length'] ),
+        'width'           => $this->util->get_dimension( $container_size['width'] ),
+        'height'          => $this->util->get_dimension( $container_size['height'] ),
     );
 
     // Check if the container exceeds max values.
@@ -40,7 +46,7 @@ class Fraktguiden_Multi_Packaging implements iPackaging {
       $this->popped_boxes[] = array_pop( $product_boxes );
       $this->pack( $product_boxes );
     } else {
-      // The container is valid, save it to the cache.
+      // The container size is within max values, save it to the cache.
       $this->containers_to_ship[] = $container;
 
       // Check the remaining boxes.
@@ -53,8 +59,15 @@ class Fraktguiden_Multi_Packaging implements iPackaging {
     }
   }
 
-  public function create_weight_dimensions_param( $standard_params ) {
-    return $standard_params;
+  public function get_dimensions_weight_url_params() {
+    $params = array();
+    for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
+      $params['length' . $i]        = $this->containers_to_ship[$i]['length'];
+      $params['width' . $i]         = $this->containers_to_ship[$i]['width'];
+      $params['height' . $i]        = $this->containers_to_ship[$i]['height'];
+      $params['weightInGrams' . $i] = $this->containers_to_ship[$i]['weight_in_grams'];
+    }
+    return $params;
   }
 
   /**

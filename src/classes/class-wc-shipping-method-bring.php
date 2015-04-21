@@ -33,8 +33,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Debug configuration
     $this->debug       = $this->settings['debug'];
     $this->log         = new WC_Logger();
-    $this->weight_unit = get_option( 'woocommerce_weight_unit' );
-    $this->dimens_unit = get_option( 'woocommerce_dimension_unit' );
 
     // Define user set variables
     $this->enabled      = $this->settings['enabled'];
@@ -266,7 +264,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     // Start packaging.
-    // Select packaging.
     if ( $this->use_multi_packaging() ) {
       include_once( __DIR__ . '/class-multi-packaging.php' );
       $packer = new Fraktguiden_Multi_Packaging();
@@ -285,49 +282,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
     );
-
-    $params = $packer->create_weight_dimensions_param( $standard_params );
-
-
-
-//
-//    // Pack the boxes.
-//    $packer->pack( $products_dimensions );
-//
-//    // Get the estimated container size from LAFFPack.
-//    $container_size = $packer->get_container_dimensions();
-//
-//    // Request params.
-//    $params = array(
-//        'clientUrl'           => $_SERVER['HTTP_HOST'],
-//        'from'                => $this->from_zip,
-//        'to'                  => $woocommerce->customer->get_shipping_postcode(),
-//        'toCountry'           => $woocommerce->customer->get_shipping_country(),
-//        'length'              => $this->get_dimension( $container_size['length'] ),
-//        'width'               => $this->get_dimension( $container_size['width'] ),
-//        'height'              => $this->get_dimension( $container_size['height'] ),
-//        'weightInGrams'       => $this->get_weight( $total_weight ),
-//        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
-//    );
-//
-
-
-
-//    // Request params.
-//    $params = array(
-//        'clientUrl'           => $_SERVER['HTTP_HOST'],
-//        'from'                => $this->from_zip,
-//        'to'                  => $woocommerce->customer->get_shipping_postcode(),
-//        'toCountry'           => $woocommerce->customer->get_shipping_country(),
-//        'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
-//    );
-//    // Add container params.
-//    for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
-//      $params['length' . $i]        = $this->containers_to_ship[$i]['length'];
-//      $params['width' . $i]         = $this->containers_to_ship[$i]['width'];
-//      $params['height' . $i]        = $this->containers_to_ship[$i]['height'];
-//      $params['weightInGrams' . $i] = $this->containers_to_ship[$i]['weight_in_grams'];
-//    }
+    $params = array_merge( $standard_params, $packer->get_dimensions_weight_url_params() );
 
     // Remove empty parameters (eg.: to and from).
     $params = array_filter( $params );
@@ -362,110 +317,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $this->add_rate( $rate );
       }
     }
-  }
-
-  /**
-   * Return volume in dm.
-   *
-   * @param $dimension
-   * @return float
-   */
-  public function get_volume( $dimension ) {
-    switch ( $this->dimens_unit ) {
-
-      case 'mm' :
-        return $dimension / 100;
-
-      case 'in' :
-        return $dimension * 0.254;
-
-      case 'yd' :
-        return $dimension * 9.144;
-
-      case 'cm' :
-        return $dimension / 1000;
-
-      case 'm' :
-        return $dimension / 10;
-
-      /* Unknown dimension unit */
-      default :
-        if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, sprintf( 'Could not calculate dimension unit for %s', $this->dimens_unit ) );
-        }
-        return false;
-    }
-  }
-
-  /**
-   * Return weight in grams.
-   *
-   * @param float $weight
-   * @return float
-   */
-  public function get_weight( $weight ) {
-    switch ( $this->weight_unit ) {
-
-      case 'g' :
-        return $weight;
-
-      case 'kg' :
-        return $weight / 0.0010000;
-
-      case 'lbs' :
-        return $weight / 0.0022046;
-
-      case 'oz' :
-        return $weight / 0.035274;
-
-      /* Unknown weight unit */
-      default :
-        if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, sprintf( 'Could not calculate weight unit for %s', $this->weight_unit ) );
-        }
-        return false;
-    }
-  }
-
-  /**
-   * Return dimension in centimeters.
-   *
-   * @param float $dimension
-   * @return float
-   */
-  public function get_dimension( $dimension ) {
-
-    switch ( $this->dimens_unit ) {
-
-      case 'mm' :
-        $dimension = $dimension / 10.000;
-        break;
-      case 'in' :
-        $dimension = $dimension / 0.39370;
-        break;
-      case 'yd' :
-        $dimension = $dimension / 0.010936;
-        break;
-      case 'cm' :
-        $dimension = $dimension;
-        break;
-      case 'm' :
-        $dimension = $dimension / 0.010000;
-        break;
-      /* Unknown dimension unit */
-      default :
-        if ( $this->debug != 'no' ) {
-          $this->log->add( $this->id, sprintf( 'Could not convert into cm for %s', $this->dimens_unit ) );
-        }
-        return false;
-    }
-
-    if ( 1 > $dimension ) {
-      // Minimum 1 cm
-      $dimension = 1;
-    }
-
-    return $dimension;
   }
 
   /**
