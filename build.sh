@@ -1,6 +1,15 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------------------
+# INFO
+#
+# Usage: ./build.sh
+#
+# Updates the version number and zips the project ready for deployment.
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
 # Variables:
 # ------------------------------------------------------------------------------
 PLUGIN_NAME=woocommerce-bring-fraktguiden
@@ -9,7 +18,7 @@ TEMP_DIR=temp
 RELEASE_DIR=release
 CHANGE_LOG_FIRST_LINE=`head -n 1 ${SRC_DIR}/changelog.txt`
 VERSION=`echo "$CHANGE_LOG_FIRST_LINE" | sed 's/[0-9]\{4\}.[0-9]\{2\}.[0-9]\{2\} - version //g'`
-RELEASE_DATE=`echo "$CHANGE_LOG_FIRST_LINE" | sed 's/ - version [0-9]\{1,2\}.[0-9]\{1,2\}.[0-9]\{1,2\}//g'`
+RELEASE_DATE=`echo "$CHANGE_LOG_FIRST_LINE" | sed 's/ - version [0-9]\{1,2\}-[0-9]\{1,2\}-[0-9]\{1,2\}//g'`
 
 function print_out() {
   local d=$(date +"%m-%d-%Y %H:%I:%S")
@@ -64,11 +73,8 @@ mv ${file_name} ../${RELEASE_DIR} && cd ..
 # ------------------------------------------------------------------------------
 rm -rf ${TEMP_DIR}
 print_out "[INFO] Cleaning up."
-print_out "[SUCCESS] ${RELEASE_DIR}/${file_name} created."
-
-
-
-
+print_out "[INFO] File created: ${RELEASE_DIR}/${file_name}"
+echo ""
 
 
 

@@ -1,9 +1,9 @@
-2015.04.21 - version 1.0.6
+9999-99-99 - version 1.0.6
 
 * Support for multipackaging.
   For Service package (Servicepakke) only.
-  In order to get a more precise shipping price quote from Bring, the plugin now splits the cart into multiple packages when necessary.
+  In order to get a more precise shipping price quote, the plugin now splits the cart into multiple packages when necessary.
 
-YYYY.MM.DD - version 1.0.0
+2014-12-15 - version 1.0.0
 
 * Initial release.
