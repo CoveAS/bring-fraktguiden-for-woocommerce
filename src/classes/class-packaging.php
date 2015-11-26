@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Fraktguiden_Packaging
+ *
+ * Packs products into 'containers'
+ */
 class Fraktguiden_Packaging {
 
   private $containers_to_ship;
@@ -9,7 +14,7 @@ class Fraktguiden_Packaging {
 
     include_once( __DIR__ . '/../vendor/php-laff/laff-pack.php' );
 
-    $this->packer      = new LAFFPack();
+    $this->laff_pack   = new LAFFPack();
     $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
     $this->weight_unit = get_option( 'woocommerce_weight_unit' );
 
@@ -18,7 +23,7 @@ class Fraktguiden_Packaging {
   }
 
   /**
-   * Pack product box/es into container/s
+   * Pack product box(es) into container/s
    * @recursive
    *
    * @param array $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
@@ -33,8 +38,8 @@ class Fraktguiden_Packaging {
     }
 
     // Pack the boxes in a container.
-    $this->packer->pack( $product_boxes );
-    $container_size = $this->packer->get_container_dimensions();
+    $this->laff_pack->pack( $product_boxes );
+    $container_size = $this->laff_pack->get_container_dimensions();
 
     // Get the sizes in cm.
     $container = array(
@@ -51,7 +56,8 @@ class Fraktguiden_Packaging {
         // Move one item to the popped cache and run again.
         $this->popped_boxes_cache[] = array_pop( $product_boxes );
         $this->pack( $product_boxes, true );
-      } else {
+      }
+      else {
         // The container size is within max values, save it to the cache.
         $this->containers_to_ship[] = $container;
         // Check the remaining boxes.
@@ -73,7 +79,7 @@ class Fraktguiden_Packaging {
    *
    * @return array
    */
-  public function create_dim_and_weight_params() {
+  public function create_coli_params() {
     $params = array();
     for ( $i = 0; $i < count( $this->containers_to_ship ); $i++ ) {
       $params['length' . $i]        = $this->containers_to_ship[$i]['length'];

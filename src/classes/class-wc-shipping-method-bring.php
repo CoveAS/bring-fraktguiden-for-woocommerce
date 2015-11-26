@@ -9,20 +9,18 @@
  * @author      Driv Digital
  * @package     Woocommerce
  */
-
-
 class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  const INIT_MAX_PRODUCTS = 100;
+
   /**
    * @constructor
    */
   public function __construct() {
-    global $woocommerce;
-
     $this->id           = 'bring_fraktguiden';
     $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
 
@@ -33,8 +31,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->init_settings();
 
     // Debug configuration
-    $this->debug       = $this->settings['debug'];
-    $this->log         = new WC_Logger();
+    $this->debug = $this->settings['debug'];
+    $this->log   = new WC_Logger();
 
     // Define user set variables
     $this->enabled      = $this->settings['enabled'];
@@ -46,6 +44,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->post_office  = $this->settings['post_office'];
     $this->vat          = $this->settings['vat'];
     $this->services     = $this->settings['services'];
+    $this->max_products = !empty($this->settings['max_products']) ? (int)$this->settings['max_products'] : self::INIT_MAX_PRODUCTS;
+
+    ini_set( 'xdebug.max_nesting_level', ((int)$this->max_products * 10) );
 
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
@@ -169,6 +170,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
+
+        'max_products'     => array(
+            'title'       => __( 'Max products', self::TEXT_DOMAIN ),
+            'type'        => 'text',
+            'description' => __( 'Maximum of products in the cart before offering a flat rate', self::TEXT_DOMAIN ),
+            'default'     => self::INIT_MAX_PRODUCTS
+        ),
+
+        'bring_alt_flat_fee'     => array(
+            'title'       => __( 'Flat fee', self::TEXT_DOMAIN ),
+            'type'        => 'text',
+            'description' => __( 'If the cart reaches max fee (see previous setting) offer a flat fee', self::TEXT_DOMAIN ),
+            'default'     => ''
+        ),
+
         'debug'        => array(
             'title'       => __( 'Debug', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
@@ -206,21 +222,26 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /**
    * Calculate shipping costs.
-   *
-   * @return mixed Value.
    */
   public function calculate_shipping() {
     global $woocommerce;
+
+
+    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
+      return false;
+    }
+
     $titles = array();
     // Array of l,w,h and weight for each product in the cart.
     $product_boxes = array();
     // Traverse each product in the cart and create a create a product box (l,w,h,weight).
-    foreach ( $woocommerce->cart->get_cart() as $values ) {
-      $_product = $values['data'];
 
-      // Check if the product has shipping enabled.
-      if ( ! $_product->needs_shipping() ) {
-        // The product does not need shipping. Skip.
+//    require_once(__DIR__.'/ChromePhp.php');
+//    ChromePhp::log($woocommerce->cart->get_cart_contents_count());
+
+    foreach ( $woocommerce->cart->get_cart() as $values ) {
+      $product = $values['data'];
+      if ( ! $product->needs_shipping() ) {
         continue;
       }
 
@@ -228,15 +249,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $quantity = $values['quantity'];
       for ( $i = 0; $i < $quantity; $i++ ) {
 
-        if ( ! $_product->has_dimensions() ) {
+        if ( ! $product->has_dimensions() ) {
           // If the product has no dimensions, assume the lowest unit 1x1x1 cm
           $dims = array( 0, 0, 0 );
-        } else {
+        }
+        else {
           // Use defined product dimensions
           $dims = array(
-              $_product->length,
-              $_product->width,
-              $_product->height
+              $product->length,
+              $product->width,
+              $product->height
           );
         }
 
@@ -247,32 +269,29 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'length' => $dims[0],
             'width'  => $dims[1],
             'height' => $dims[2],
-            'weight' => $_product->weight
+            'weight' => $product->weight
         );
       }
 
       if ( $this->debug != 'no' ) {
-        $titles[] = $_product->get_title();
+        $titles[] = $product->get_title();
       }
     }
+
+
+
 
     // Start packaging.
     include_once( __DIR__ . '/class-packaging.php' );
     $packer = new Fraktguiden_Packaging();
-    $multi_pack = $this->use_multi_packaging();
-    if ( $multi_pack && ! $packer->validate( $product_boxes ) ) {
-      return false;
-    }
 
-    // Pack.
-    $packer->pack( $product_boxes, $multi_pack );
-
+    // Pack products.
+    $packer->pack( $product_boxes, true );
     // Create request params.
-    $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_and_weight_params() );
-
-    // Remove empty parameters.
+    $params = array_merge( $this->create_standard_url_params(), $packer->create_coli_params() );
+    // Remove any empty elements.
     $params = array_filter( $params );
-    // Query format parameters.
+    // Format parameters.
     $query = add_query_arg( $params, self::SERVICE_URL );
     // Run the query.
     $response = wp_remote_get( $query );
@@ -280,13 +299,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       return false;
     }
 
-    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($params,1) . PHP_EOL, FILE_APPEND);
-    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($response,1) . PHP_EOL, FILE_APPEND);
-
     // Decode the JSON data from bring.
-    $decoded = json_decode( $response['body'], true );
+    $json = json_decode( $response['body'], true );
     // Filter the data to get the selected services from the settings.
-    $rates = $this->get_services_from_response( $decoded );
+    $rates = $this->get_services_from_response( $json );
 
     if ( $this->debug != 'no' ) {
       $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
@@ -295,7 +311,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( $this->debug != 'no' ) {
       if ( $rates ) {
         $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
-      } else {
+      }
+      else {
         $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
       }
       $this->log->add( $this->id, 'Request url: ' . print_r( $query, true ) );
@@ -362,15 +379,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
     );
-  }
-
-  /**
-   * Returns true if multi packaging should be used.
-   *
-   * @return bool
-   */
-  private function use_multi_packaging() {
-    return count( $this->services ) == 1 && in_array( 'SERVICEPAKKE', $this->services );
   }
 
 }
