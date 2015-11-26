@@ -75,6 +75,12 @@ rm -rf ${TEMP_DIR}
 print_out "[INFO] Cleaning up."
 print_out "[INFO] File created: ${RELEASE_DIR}/${file_name}"
 echo ""
+print_out "Todo: "
+print_out " * Increase the version number in ${SRC_DIR}/changelog.txt"
+print_out " * Git tag the version on release"
+
+sed -i '1s/^/your text\n/' src/changelog.txt
+
 
 
 

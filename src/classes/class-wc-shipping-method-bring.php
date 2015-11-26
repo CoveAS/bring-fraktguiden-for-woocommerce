@@ -9,6 +9,8 @@
  * @author      Driv Digital
  * @package     Woocommerce
  */
+
+
 class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
@@ -266,17 +268,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $packer->pack( $product_boxes, $multi_pack );
 
     // Create request params.
-    $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_weight_params() );
+    $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_and_weight_params() );
 
-    // Remove empty parameters (eg.: to and from).
+    // Remove empty parameters.
     $params = array_filter( $params );
     // Query format parameters.
     $query = add_query_arg( $params, self::SERVICE_URL );
     // Run the query.
     $response = wp_remote_get( $query );
     if ( is_wp_error( $response ) ) {
-      return FALSE;
+      return false;
     }
+
+    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($params,1) . PHP_EOL, FILE_APPEND);
+    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($response,1) . PHP_EOL, FILE_APPEND);
+
     // Decode the JSON data from bring.
     $decoded = json_decode( $response['body'], true );
     // Filter the data to get the selected services from the settings.
