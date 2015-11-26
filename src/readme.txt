@@ -18,7 +18,7 @@ Special thanks goes to Matt Gates for allowing us to use his code as a base for 
 This section describes how to install the plugin and get it working.
 
 1. Upload `woocommerce-bring-fraktguiden` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Screenshots ==
 
