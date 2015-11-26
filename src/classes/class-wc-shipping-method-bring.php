@@ -9,8 +9,6 @@
  * @author      Driv Digital
  * @package     Woocommerce
  */
-
-
 class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
@@ -21,7 +19,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @constructor
    */
   public function __construct() {
-    global $woocommerce;
 
     $this->id           = 'bring_fraktguiden';
     $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
@@ -33,8 +30,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->init_settings();
 
     // Debug configuration
-    $this->debug       = $this->settings['debug'];
-    $this->log         = new WC_Logger();
+    $this->debug = $this->settings['debug'];
+    $this->log   = new WC_Logger();
+
+    $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
+    $this->weight_unit = get_option( 'woocommerce_weight_unit' );
 
     // Define user set variables
     $this->enabled      = $this->settings['enabled'];
@@ -206,107 +206,33 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /**
    * Calculate shipping costs.
-   *
-   * @return mixed Value.
+   * Called by WooCommerce.
    */
   public function calculate_shipping() {
-    global $woocommerce;
-    $titles = array();
-    // Array of l,w,h and weight for each product in the cart.
-    $product_boxes = array();
-    // Traverse each product in the cart and create a create a product box (l,w,h,weight).
-    foreach ( $woocommerce->cart->get_cart() as $values ) {
-      $_product = $values['data'];
 
-      // Check if the product has shipping enabled.
-      if ( ! $_product->needs_shipping() ) {
-        // The product does not need shipping. Skip.
-        continue;
-      }
-
-      // Add product dimensions to the product_boxes array.
-      $quantity = $values['quantity'];
-      for ( $i = 0; $i < $quantity; $i++ ) {
-
-        if ( ! $_product->has_dimensions() ) {
-          // If the product has no dimensions, assume the lowest unit 1x1x1 cm
-          $dims = array( 0, 0, 0 );
-        } else {
-          // Use defined product dimensions
-          $dims = array(
-              $_product->length,
-              $_product->width,
-              $_product->height
-          );
-        }
-
-        // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
-        rsort( $dims );
-
-        $product_boxes[] = array(
-            'length' => $dims[0],
-            'width'  => $dims[1],
-            'height' => $dims[2],
-            'weight' => $_product->weight
-        );
-      }
-
-      if ( $this->debug != 'no' ) {
-        $titles[] = $_product->get_title();
-      }
-    }
-
-    // Start packaging.
-    include_once( __DIR__ . '/class-packaging.php' );
-    $packer = new Fraktguiden_Packaging();
-    $multi_pack = $this->use_multi_packaging();
-    if ( $multi_pack && ! $packer->validate( $product_boxes ) ) {
-      return false;
-    }
-
-    // Pack.
-    $packer->pack( $product_boxes, $multi_pack );
-
-    // Create request params.
-    $params = array_merge( $this->create_standard_url_params(), $packer->create_dim_and_weight_params() );
-
+    // Request params.
+    $params = array_merge( $this->create_standard_params(), $this->create_dimension_params() );
     // Remove empty parameters.
     $params = array_filter( $params );
-    // Query format parameters.
-    $query = add_query_arg( $params, self::SERVICE_URL );
     // Run the query.
+    $query = add_query_arg( $params, self::SERVICE_URL );
+
+    // Get the response.
     $response = wp_remote_get( $query );
     if ( is_wp_error( $response ) ) {
-      return false;
+      return;
     }
-
-    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($params,1) . PHP_EOL, FILE_APPEND);
-    file_put_contents('/Users/thomasandersen/logs/test-plugin.log', print_r($response,1) . PHP_EOL, FILE_APPEND);
-
     // Decode the JSON data from bring.
     $decoded = json_decode( $response['body'], true );
-    // Filter the data to get the selected services from the settings.
+    // Filter the data to get the selected services from the admin settings.
     $rates = $this->get_services_from_response( $decoded );
-
-    if ( $this->debug != 'no' ) {
-      $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
-    }
-
-    if ( $this->debug != 'no' ) {
-      if ( $rates ) {
-        $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
-      } else {
-        $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
-      }
-      $this->log->add( $this->id, 'Request url: ' . print_r( $query, true ) );
-    }
-
     // Calculate rate.
     if ( $rates ) {
       foreach ( $rates as $rate ) {
         $this->add_rate( $rate );
       }
     }
+    return;
   }
 
   /**
@@ -353,7 +279,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    *
    * @return array
    */
-  public function create_standard_url_params() {
+  public function create_standard_params() {
     global $woocommerce;
     return array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
@@ -364,13 +290,132 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     );
   }
 
-  /**
-   * Returns true if multi packaging should be used.
-   *
-   * @return bool
-   */
-  private function use_multi_packaging() {
-    return count( $this->services ) == 1 && in_array( 'SERVICEPAKKE', $this->services );
+  public function create_dimension_params() {
+    global $woocommerce;
+
+    $result    = array();
+    $param_num = 0;
+
+    foreach ( $woocommerce->cart->get_cart() as $values ) {
+      $simple_prod = $values['data'];
+      if ( ! $simple_prod->needs_shipping() ) {
+        continue;
+      }
+
+      for ( $i = 0; $i < $values['quantity']; $i++ ) {
+        if ( ! $simple_prod->has_dimensions() ) {
+          // If the product has no dimensions, assume the lowest unit 1x1x1 cm
+          $dims = array( 0, 0, 0 );
+        }
+        else {
+          // Use defined product dimensions
+          $dims = array(
+              $simple_prod->length,
+              $simple_prod->width,
+              $simple_prod->height
+          );
+        }
+
+        $result['length' . $param_num]        = $this->get_dimension( $dims[0] );
+        $result['width' . $param_num]         = $this->get_dimension( $dims[1] );
+        $result['height' . $param_num]        = $this->get_dimension( $dims[2] );
+        $result['weightInGrams' . $param_num] = $this->get_weight( $simple_prod->weight );
+
+        $param_num++;
+      }
+    }
+    return $result;
   }
 
+  /**
+   * Return weight in grams.
+   *
+   * @param float $weight
+   * @return float
+   */
+  public function get_weight( $weight ) {
+    switch ( $this->weight_unit ) {
+
+      case 'g' :
+        return $weight;
+
+      case 'kg' :
+        return $weight / 0.0010000;
+
+      case 'lbs' :
+        return $weight / 0.0022046;
+
+      case 'oz' :
+        return $weight / 0.035274;
+
+      /* Unknown weight unit */
+      default :
+        return false;
+    }
+  }
+
+  /**
+   * Return dimension in centimeters.
+   *
+   * @param float $dimension
+   * @return float
+   */
+  public function get_dimension( $dimension ) {
+    switch ( $this->dim_unit ) {
+      case 'mm' :
+        $dimension = $dimension / 10.000;
+        break;
+      case 'in' :
+        $dimension = $dimension / 0.39370;
+        break;
+      case 'yd' :
+        $dimension = $dimension / 0.010936;
+        break;
+      case 'cm' :
+        $dimension = $dimension;
+        break;
+      case 'm' :
+        $dimension = $dimension / 0.010000;
+        break;
+      /* Unknown dimension unit */
+      default :
+        return false;
+    }
+
+    if ( 1 > $dimension ) {
+      // Minimum 1 cm
+      $dimension = 1;
+    }
+
+    return $dimension;
+  }
+
+  /**
+   * Return volume in dm.
+   *
+   * @param $dimension
+   * @return float
+   */
+  public function get_volume( $dimension ) {
+    switch ( $this->dim_unit ) {
+      case 'mm' :
+        return $dimension / 100;
+
+      case 'in' :
+        return $dimension * 0.254;
+
+      case 'yd' :
+        return $dimension * 9.144;
+
+      case 'cm' :
+        return $dimension / 1000;
+
+      case 'm' :
+        return $dimension / 10;
+      /* Unknown dimension unit */
+      default :
+        return false;
+    }
+  }
 }
+

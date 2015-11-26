@@ -1,8 +1,6 @@
 9999-99-99 - version 1.0.6
 
-* Support for multipackaging.
-  For Service package (Servicepakke) only.
-  In order to get a more precise shipping price quote, the plugin now splits the cart into multiple packages when necessary.
+* Improved support for multipackaging.
 
 2014-12-15 - version 1.0.0
 
