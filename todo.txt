@@ -1,1 +1,9 @@
-- NO oversetting for 'Max products'
+Todo:
+- build script
+- complete NO translation
+- update readme
+- readme.md
+
+Known issues:
+  - If WooCommerce's "Enable shipping calculator on cart page" is enabled and Fraktguiden is set up to only calculate rates for 'Specific countries', the calculator does not respect the setting.
+
