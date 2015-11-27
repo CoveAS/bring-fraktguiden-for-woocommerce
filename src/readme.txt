@@ -7,27 +7,40 @@ Tested up to:        4.0.1
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
-Bring fraktguiden provides shipping calculation based on rates from bring.no
+Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
+
+Bring Fraktguiden is a general..
+The plugin effectively packs the products into containers and returns quotes from Bring.
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+Prerequisites
+
+Make sure WooCommerce has the following settings
+  * Dimension unit and weight unit (see WooCommerce > Settings > Products)
+  * Currency (see WooCommerce > Settings > General)
+
+In order to calculate shipping, products needs dimensions and weight.
+No rate will be given if a product in the cart has none of the attributes.
+
+Install
 
 1. Upload `woocommerce-bring-fraktguiden` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+3. Navigate to wp-admin > WooCommerce > Settings > Shipping
+4. Enable and configure Bring Fraktguiden
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+
+* Improved support for multipackaging. The plugin is now more efficient ...
+
+= 1.0.0 =
+
+* Initial release.
+
