@@ -5,7 +5,7 @@
  *
  * Packs products into 'containers'
  */
-class Fraktguiden_Packaging {
+class Fraktguiden_Packer {
 
   private $containers_to_ship;
   private $popped_boxes_cache;
