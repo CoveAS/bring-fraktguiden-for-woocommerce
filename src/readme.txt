@@ -38,7 +38,9 @@ Install
 
 = 1.0.1 =
 
-* Improved support for multipackaging. The plugin is now more efficient ...
+* Improved support for multi packaging.
+* Fixed so any fee is added to the rate.
+
 
 = 1.0.0 =
 
