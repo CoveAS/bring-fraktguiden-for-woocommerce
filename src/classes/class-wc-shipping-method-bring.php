@@ -37,21 +37,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->log   = new WC_Logger();
 
     // Define user set variables
-    $this->enabled       = $this->settings['enabled'];
-    $this->title         = $this->settings['title'];
-    $this->availability  = $this->settings['availability'];
-    $this->countries     = $this->settings['countries'];
-    $this->fee           = $this->settings['handling_fee'];
-    $this->from_zip      = $this->settings['from_zip'];
-    $this->post_office   = $this->settings['post_office'];
-    $this->vat           = $this->settings['vat'];
-    $this->services      = $this->settings['services'];
-    $this->max_products  = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
+    $this->enabled      = $this->settings['enabled'];
+    $this->title        = $this->settings['title'];
+    $this->availability = $this->settings['availability'];
+    $this->countries    = $this->settings['countries'];
+    $this->fee          = $this->settings['handling_fee'];
+    $this->from_zip     = $this->settings['from_zip'];
+    $this->post_office  = $this->settings['post_office'];
+    $this->vat          = $this->settings['vat'];
+    $this->services     = $this->settings['services'];
+    $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
     if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
       $this->alt_flat_rate = (int)$this->settings['alt_flat_rate'];
     }
-    elseif ( $this->settings['alt_flat_rate'] == '' ) {
+    elseif ( empty( $this->settings['alt_flat_rate'] ) ) {
       $this->alt_flat_rate = '';
     }
     else {
@@ -238,7 +238,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     // Offer flat rate if the cart contents exceeds max product.
     if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
-      if (  $this->alt_flat_rate == '' ) {
+      if ( $this->alt_flat_rate == '' ) {
         return;
       }
       $rate = array(
@@ -271,20 +271,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             );
           }
 
-          // Return if product is larger than available Bring packages.
-          if ( $product->weight > 35000 || $packer->exceeds_max_package_values( $dims ) ) {
-            return;
-          }
-
           // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
           rsort( $dims );
 
-          $product_boxes[] = array(
-              'length' => $dims[0],
-              'width'  => $dims[1],
-              'height' => $dims[2],
-              'weight' => $product->weight
+          $box = array(
+              'length'          => $dims[0],
+              'width'           => $dims[1],
+              'height'          => $dims[2],
+              'weight'          => $product->weight,
+              'weight_in_grams' => $packer->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
           );
+
+          // Return if product is larger than available Bring packages.
+          if ( $packer->exceeds_max_package_values( $box ) ) {
+            return;
+          }
+
+          $product_boxes[] = $box;
         }
       }
 
