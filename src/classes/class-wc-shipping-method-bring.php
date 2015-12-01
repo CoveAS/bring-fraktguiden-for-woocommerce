@@ -189,7 +189,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'alt_flat_rate' => array(
             'title'       => __( 'Flat rate', self::TEXT_DOMAIN ),
             'type'        => 'text',
-            'description' => __( 'If the cart reaches max products offer a flat rate (see previous setting)', self::TEXT_DOMAIN ),
+            'description' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
             'default'     => self::DEFAULT_ALT_FLAT_RATE
         ),
         'debug'         => array(

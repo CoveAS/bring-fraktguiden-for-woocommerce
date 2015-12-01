@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "POT-Creation-Date: 2015-11-27 21:38+0100\n"
-"PO-Revision-Date: 2015-11-27 21:46+0100\n"
+"PO-Revision-Date: 2015-12-01 16:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -40,12 +40,8 @@ msgid "Delivery Fee"
 msgstr "Delivery Fee"
 
 #: class-wc-shipping-method-bring.php:132
-msgid ""
-"What fee do you want to charge for Bring, disregarded if you choose free. "
-"Leave blank to disable."
-msgstr ""
-"What fee do you want to charge for Bring, disregarded if you choose free. "
-"Leave blank to disable."
+msgid "What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable."
+msgstr "What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable."
 
 #: class-wc-shipping-method-bring.php:136
 msgid "Post office"
@@ -60,12 +56,8 @@ msgid "From zip"
 msgstr "From zip"
 
 #: class-wc-shipping-method-bring.php:144
-msgid ""
-"This is the zip code of where you deliver from. For example, the post "
-"office. Should be 4 digits."
-msgstr ""
-"This is the zip code of where you deliver from. For example, the post "
-"office. Should be 4 digits."
+msgid "This is the zip code of where you deliver from. For example, the post office. Should be 4 digits."
+msgstr "This is the zip code of where you deliver from. For example, the post office. Should be 4 digits."
 
 #: class-wc-shipping-method-bring.php:148
 msgid "Display price"
@@ -91,8 +83,7 @@ msgstr "Method availability"
 msgid "All allowed countries"
 msgstr "All allowed countries"
 
-#: class-wc-shipping-method-bring.php:164
-#: class-wc-shipping-method-bring.php:168
+#: class-wc-shipping-method-bring.php:164 class-wc-shipping-method-bring.php:168
 msgid "Specific Countries"
 msgstr "Specific Countries"
 
@@ -114,9 +105,9 @@ msgstr "Flat rate"
 
 #: class-wc-shipping-method-bring.php:192
 msgid ""
-"If the cart reaches max products offer a flat rate (see previous setting)"
+"Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions"
 msgstr ""
-"If the cart reaches max products offer a flat rate (see previous setting)"
+"Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions"
 
 #: class-wc-shipping-method-bring.php:196
 msgid "Debug"
@@ -133,12 +124,10 @@ msgstr "These logs will be saved in <code>wc-logs/</code>"
 #: class-wc-shipping-method-bring.php:223
 #, php-format
 msgid ""
-"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
-"be enabled. Please enable them on the <a href=\"%s\">Catalog tab</a>. <br/> "
-"In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the "
+"<a href=\"%s\">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=\"%s\">General tab</a>"
 msgstr ""
-"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
-"be enabled. Please enable them on the <a href=“%s”>Catalog tab</a>. <br/> In "
-"addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the "
+"<a href=“%s”>Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=“%s”>General tab</a>"

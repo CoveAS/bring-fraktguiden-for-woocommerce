@@ -11,8 +11,7 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
 
-Bring Fraktguiden is a general..
-The plugin effectively packs the products into containers and returns quotes from Bring.
+The plugin tries to effectively pack the cart items into containers instead of stacking the items on top of another.
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
@@ -20,12 +19,13 @@ Special thanks goes to Matt Gates for allowing us to use his code as a base for 
 
 Prerequisites
 
-Make sure WooCommerce has the following settings
+Make sure WooCommerce if configured with the following settings
   * Dimension unit and weight unit (see WooCommerce > Settings > Products)
   * Currency (see WooCommerce > Settings > General)
 
-In order to calculate shipping, products needs dimensions and weight.
-No rate will be given if a product in the cart has none of the attributes.
+In order to calculate shipping, products in the stock needs dimensions and weight.
+
+Please note Bring
 
 Install
 
