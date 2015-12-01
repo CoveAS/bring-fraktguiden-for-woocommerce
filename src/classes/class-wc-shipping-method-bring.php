@@ -233,7 +233,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function calculate_shipping() {
     global $woocommerce;
 
-    // Offer flat rate if the cart contents exceeds max product settings.
+    include_once( __DIR__ . '/class-packer.php' );
+    $packer = new Fraktguiden_Packer();
+
+    // Offer flat rate if the cart contents exceeds max product.
     if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
       if (  $this->alt_flat_rate == '' ) {
         return;
@@ -246,7 +249,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->add_rate( $rate );
     }
     else {
-      // Create an array of 'product boxex' (l,w,h,weight).
+      // Create an array of 'product boxes' (l,w,h,weight).
       $product_boxes = array();
       foreach ( $woocommerce->cart->get_cart() as $values ) {
         $product = $values['data'];
@@ -268,6 +271,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             );
           }
 
+          // Return if product is larger than available Bring packages.
+          if ( $product->weight > 35000 || $packer->exceeds_max_package_values( $dims ) ) {
+            return;
+          }
+
           // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
           rsort( $dims );
 
@@ -280,10 +288,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         }
       }
 
-      // Start packaging.
-      include_once( __DIR__ . '/class-packer.php' );
-      $packer = new Fraktguiden_Packer();
-      // Pack products.
+      // Pack product boxes.
+
       $packer->pack( $product_boxes, true );
 
       // Create the url.

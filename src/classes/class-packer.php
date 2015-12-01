@@ -52,7 +52,7 @@ class Fraktguiden_Packer {
     if ( $multi_pack ) {
       // Check if the container exceeds max values.
       // Note: This only works for SERVICEPAKKE.
-      if ( $this->exceeds_max_servicepakke_values( $container ) ) {
+      if ( $this->exceeds_max_package_values( $container ) ) {
         // Move one item to the popped cache and run again.
         $this->popped_boxes_cache[] = array_pop( $product_boxes );
         $this->pack( $product_boxes, true );
@@ -105,7 +105,7 @@ class Fraktguiden_Packer {
    * @param array $container_size Array with container width/height/length/weight.
    * @return bool
    */
-  private function exceeds_max_servicepakke_values( $container_size ) {
+  public function exceeds_max_package_values( $container_size ) {
 
     $weight = $container_size['weight_in_grams'];
     if ( $weight > 35000 ) {
