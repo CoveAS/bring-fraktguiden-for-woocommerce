@@ -1,6 +1,7 @@
 .idea/
 .DS_Store
-.wordpress
 .woocommerce
-temp/
+.wordpress
+tmp/
 release/
+ChromePhp.php

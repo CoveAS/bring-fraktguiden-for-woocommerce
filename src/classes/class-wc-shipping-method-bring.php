@@ -15,11 +15,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  const DEFAULT_MAX_PRODUCTS = 100;
+
+  const DEFAULT_ALT_FLAT_RATE = 200;
+
   /**
    * @constructor
    */
   public function __construct() {
-
     $this->id           = 'bring_fraktguiden';
     $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
 
@@ -33,9 +36,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->debug = $this->settings['debug'];
     $this->log   = new WC_Logger();
 
-    $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
-    $this->weight_unit = get_option( 'woocommerce_weight_unit' );
-
     // Define user set variables
     $this->enabled      = $this->settings['enabled'];
     $this->title        = $this->settings['title'];
@@ -46,6 +46,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->post_office  = $this->settings['post_office'];
     $this->vat          = $this->settings['vat'];
     $this->services     = $this->settings['services'];
+    $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
+    // Extra safety, in case shop owner blanks ('') the value.
+    if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
+      $this->alt_flat_rate = (int)$this->settings['alt_flat_rate'];
+    }
+    elseif ( empty( $this->settings['alt_flat_rate'] ) ) {
+      $this->alt_flat_rate = '';
+    }
+    else {
+      $this->alt_flat_rate = self::DEFAULT_ALT_FLAT_RATE;
+    }
+
+    ini_set( 'xdebug.max_nesting_level', 10000 );
 
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
@@ -55,8 +68,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
-   * Check if weight or dimensions are enabled.
-   *
    * @return boolean
    */
   public function is_valid_for_use() {
@@ -103,37 +114,37 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'COURIER_6H'                   => 'Bud 6 timer',
     );
     $this->form_fields = array(
-        'enabled'      => array(
+        'enabled'       => array(
             'title'   => __( 'Enable', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
             'label'   => __( 'Enable Bring Fraktguiden', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
-        'title'        => array(
+        'title'         => array(
             'title'       => __( 'Title', self::TEXT_DOMAIN ),
             'type'        => 'text',
             'description' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
             'default'     => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
         ),
-        'handling_fee' => array(
+        'handling_fee'  => array(
             'title'       => __( 'Delivery Fee', self::TEXT_DOMAIN ),
             'type'        => 'text',
             'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
-        'post_office'  => array(
+        'post_office'   => array(
             'title'   => __( 'Post office', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
             'label'   => __( 'Shipping from post office', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
-        'from_zip'     => array(
+        'from_zip'      => array(
             'title'       => __( 'From zip', self::TEXT_DOMAIN ),
             'type'        => 'text',
             'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
-        'vat'          => array(
+        'vat'           => array(
             'title'       => __( 'Display price', self::TEXT_DOMAIN ),
             'type'        => 'select',
             'description' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
@@ -143,7 +154,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
             ),
         ),
-        'availability' => array(
+        'availability'  => array(
             'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
             'type'    => 'select',
             'default' => 'all',
@@ -153,7 +164,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'specific' => __( 'Specific Countries', self::TEXT_DOMAIN )
             )
         ),
-        'countries'    => array(
+        'countries'     => array(
             'title'   => __( 'Specific Countries', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
@@ -161,7 +172,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $woocommerce->countries->countries
         ),
-        'services'     => array(
+        'services'      => array(
             'title'   => __( 'Services', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
@@ -169,7 +180,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
-        'debug'        => array(
+        'max_products'  => array(
+            'title'       => __( 'Max products', self::TEXT_DOMAIN ),
+            'type'        => 'text',
+            'description' => __( 'Maximum of products in the cart before offering a flat rate', self::TEXT_DOMAIN ),
+            'default'     => self::DEFAULT_MAX_PRODUCTS
+        ),
+        'alt_flat_rate' => array(
+            'title'       => __( 'Flat rate', self::TEXT_DOMAIN ),
+            'type'        => 'text',
+            'description' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
+            'default'     => self::DEFAULT_ALT_FLAT_RATE
+        ),
+        'debug'         => array(
             'title'       => __( 'Debug', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
             'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
@@ -206,40 +229,103 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /**
    * Calculate shipping costs.
-   * Called by WooCommerce.
    */
   public function calculate_shipping() {
+    global $woocommerce;
 
-    // Request params.
-    $params = array_merge( $this->create_standard_params(), $this->create_dimension_params() );
-    // Remove empty parameters.
-    $params = array_filter( $params );
-    // Run the query.
-    $query = add_query_arg( $params, self::SERVICE_URL );
+    include_once( __DIR__ . '/class-packer.php' );
+    $packer = new Fraktguiden_Packer();
 
-    // Get the response.
-    $response = wp_remote_get( $query );
-    if ( is_wp_error( $response ) ) {
-      return;
+    // Offer flat rate if the cart contents exceeds max product.
+    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
+      if ( $this->alt_flat_rate == '' ) {
+        return;
+      }
+      $rate = array(
+          'id'    => $this->id . ':' . 'alt_flat_rate',
+          'cost'  => $this->alt_flat_rate,
+          'label' => $this->method_title . ' flat rate',
+      );
+      $this->add_rate( $rate );
     }
-    // Decode the JSON data from bring.
-    $decoded = json_decode( $response['body'], true );
-    // Filter the data to get the selected services from the admin settings.
-    $rates = $this->get_services_from_response( $decoded );
-    // Calculate rate.
-    if ( $rates ) {
-      foreach ( $rates as $rate ) {
-        $this->add_rate( $rate );
+    else {
+      // Create an array of 'product boxes' (l,w,h,weight).
+      $product_boxes = array();
+      foreach ( $woocommerce->cart->get_cart() as $values ) {
+        $product = $values['data'];
+        if ( ! $product->needs_shipping() ) {
+          continue;
+        }
+
+        $quantity = $values['quantity'];
+        for ( $i = 0; $i < $quantity; $i++ ) {
+          if ( ! $product->has_dimensions() ) {
+            // If the product has no dimensions, assume the lowest unit 1x1x1 cm
+            $dims = array( 0, 0, 0 );
+          }
+          else {
+            $dims = array(
+                $product->length,
+                $product->width,
+                $product->height
+            );
+          }
+
+          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+          rsort( $dims );
+
+          $box = array(
+              'length'          => $dims[0],
+              'width'           => $dims[1],
+              'height'          => $dims[2],
+              'weight'          => $product->weight,
+              'weight_in_grams' => $packer->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
+          );
+
+          // Return if product is larger than available Bring packages.
+          if ( $packer->exceeds_max_package_values( $box ) ) {
+            return;
+          }
+
+          $product_boxes[] = $box;
+        }
+      }
+
+      // Pack product boxes.
+
+      $packer->pack( $product_boxes, true );
+
+      // Create the url.
+
+      // Request parameters.
+      $params = array_merge( $this->create_standard_url_params(), $packer->create_coli_params() );
+      // Remove any empty elements.
+      $params = array_filter( $params );
+      // Create url.
+      $query = add_query_arg( $params, self::SERVICE_URL );
+      // Make the request.
+      $response = wp_remote_get( $query );
+      // If the request fails, just return.
+      if ( is_wp_error( $response ) ) {
+        return;
+      }
+
+      // Decode the JSON data from bring.
+      $json = json_decode( $response['body'], true );
+      // Filter the response json to get only the selected services from the settings.
+      $rates = $this->get_services_from_response( $json );
+      // Calculate rate.
+      if ( $rates ) {
+        foreach ( $rates as $rate ) {
+          $this->add_rate( $rate );
+        }
       }
     }
-    return;
   }
 
   /**
-   * @param array $response .
+   * @param array $response The JSON response from Bring.
    * @return array|boolean
-   *
-   * Fixme: always return array.
    */
   private function get_services_from_response( $response ) {
     if ( ! $response || ( is_array( $response ) && count( $response ) == 0 ) || empty( $response['Product'] ) ) {
@@ -248,7 +334,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     $rates = array();
 
-    // Fix for when only one product exists. It's not returned in an array :/
+    // Fix for when only one service is found. It's not returned in an array :/
     if ( empty( $response['Product'][0] ) ) {
       $cache = $response['Product'];
       unset( $response['Product'] );
@@ -265,7 +351,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
-          'cost'  => round( $rate ),
+          'cost'  => round( $rate ) + (int)$this->fee,
           'label' => $serviceDetails['GuiInformation']['DisplayName'],
       );
 
@@ -279,7 +365,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    *
    * @return array
    */
-  public function create_standard_params() {
+  public function create_standard_url_params() {
     global $woocommerce;
     return array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
@@ -290,132 +376,4 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     );
   }
 
-  public function create_dimension_params() {
-    global $woocommerce;
-
-    $result    = array();
-    $param_num = 0;
-
-    foreach ( $woocommerce->cart->get_cart() as $values ) {
-      $simple_prod = $values['data'];
-      if ( ! $simple_prod->needs_shipping() ) {
-        continue;
-      }
-
-      for ( $i = 0; $i < $values['quantity']; $i++ ) {
-        if ( ! $simple_prod->has_dimensions() ) {
-          // If the product has no dimensions, assume the lowest unit 1x1x1 cm
-          $dims = array( 0, 0, 0 );
-        }
-        else {
-          // Use defined product dimensions
-          $dims = array(
-              $simple_prod->length,
-              $simple_prod->width,
-              $simple_prod->height
-          );
-        }
-
-        $result['length' . $param_num]        = $this->get_dimension( $dims[0] );
-        $result['width' . $param_num]         = $this->get_dimension( $dims[1] );
-        $result['height' . $param_num]        = $this->get_dimension( $dims[2] );
-        $result['weightInGrams' . $param_num] = $this->get_weight( $simple_prod->weight );
-
-        $param_num++;
-      }
-    }
-    return $result;
-  }
-
-  /**
-   * Return weight in grams.
-   *
-   * @param float $weight
-   * @return float
-   */
-  public function get_weight( $weight ) {
-    switch ( $this->weight_unit ) {
-
-      case 'g' :
-        return $weight;
-
-      case 'kg' :
-        return $weight / 0.0010000;
-
-      case 'lbs' :
-        return $weight / 0.0022046;
-
-      case 'oz' :
-        return $weight / 0.035274;
-
-      /* Unknown weight unit */
-      default :
-        return false;
-    }
-  }
-
-  /**
-   * Return dimension in centimeters.
-   *
-   * @param float $dimension
-   * @return float
-   */
-  public function get_dimension( $dimension ) {
-    switch ( $this->dim_unit ) {
-      case 'mm' :
-        $dimension = $dimension / 10.000;
-        break;
-      case 'in' :
-        $dimension = $dimension / 0.39370;
-        break;
-      case 'yd' :
-        $dimension = $dimension / 0.010936;
-        break;
-      case 'cm' :
-        $dimension = $dimension;
-        break;
-      case 'm' :
-        $dimension = $dimension / 0.010000;
-        break;
-      /* Unknown dimension unit */
-      default :
-        return false;
-    }
-
-    if ( 1 > $dimension ) {
-      // Minimum 1 cm
-      $dimension = 1;
-    }
-
-    return $dimension;
-  }
-
-  /**
-   * Return volume in dm.
-   *
-   * @param $dimension
-   * @return float
-   */
-  public function get_volume( $dimension ) {
-    switch ( $this->dim_unit ) {
-      case 'mm' :
-        return $dimension / 100;
-
-      case 'in' :
-        return $dimension * 0.254;
-
-      case 'yd' :
-        return $dimension * 9.144;
-
-      case 'cm' :
-        return $dimension / 1000;
-
-      case 'm' :
-        return $dimension / 10;
-      /* Unknown dimension unit */
-      default :
-        return false;
-    }
-  }
 }
-
