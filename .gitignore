@@ -5,3 +5,4 @@
 tmp/
 release/
 ChromePhp.php
+node_modules

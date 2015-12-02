@@ -1,0 +1,23 @@
+{
+  "name": "woocommerce-bring-fraktguiden",
+  "version": "1.0.1",
+  "description": "Bring Fraktguiden provides shipping calculation based on rates from bring.no",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:drivdigital/woocommerce-bring-fraktguiden.git"
+  },
+  "keywords": [
+    "woocommerce",
+    "bring",
+    "shipping"
+  ],
+  "author": "Driv Digital",
+  "license": "MIT",
+  "devDependencies": {
+    "shelljs": "^0.5.3"
+  }
+}
