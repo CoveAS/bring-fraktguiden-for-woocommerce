@@ -36,7 +36,7 @@ Install
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1.0-SNAPSHOT =
 
 * Improved support for multi packaging.
 * Fixed so any fee is added to the rate.
