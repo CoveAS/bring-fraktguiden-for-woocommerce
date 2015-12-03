@@ -58,6 +58,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->alt_flat_rate = self::DEFAULT_ALT_FLAT_RATE;
     }
 
+    // Make sure xdebug nesting limit is raised as the packer makes a lot of recursion.
+    // PHP does not have a function nesting limit, but a lot of installations has xdebug enabled
+    // where function nesting limit is default / 256.
+    // http://stackoverflow.com/questions/4293775/increasing-nesting-functions-calls-limit
     ini_set( 'xdebug.max_nesting_level', 10000 );
 
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
