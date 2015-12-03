@@ -56,7 +56,7 @@ function getVersionNumber() {
     }
 
     var changeLog = parts[1];
-    var logs = changeLog.match( /^= \d\.\d\.\d[-|\w]+ =/gm );
+    var logs = changeLog.match( /^= \d\.\d\.\d(|[-|\s|\w]+) =/gm );
     if ( !logs ) {
         echo( 'Could not find a version number. Aborting.' );
         exit( 1 );
