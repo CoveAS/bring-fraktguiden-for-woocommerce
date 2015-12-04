@@ -27,6 +27,7 @@ target.release = function () {
     var versionNumber = getVersionNumber();
 
     sed( '-i', '##VERSION##', versionNumber, dir + '/woocommerce-bring-fraktguiden.php' );
+    sed( '-i', '##VERSION##', versionNumber, dir + '/readme.txt' );
 
     cd( TMP_DIR );
     var zipfile = '../' + RELEASE_DIR + '/' + PLUGIN_NAME + '-' + versionNumber + '.zip';
