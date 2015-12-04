@@ -10,7 +10,8 @@ License URI: http://opensource.org/licenses/MIT
 
 == Description ==
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
-The plugin tries to effectively pack the cart items into containers instead of stacking the items on top of another.
+All standard shipping methods from Bring is bulit-in. Volume calculation based on product dimensions and weight.
+
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
 == Installation ==
