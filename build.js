@@ -9,7 +9,7 @@ target.all = function () {
 };
 
 target.release = function () {
-    clean();
+    clean(true);
 
     if ( !test( '-d', TMP_DIR ) ) {
         mkdir( TMP_DIR );
@@ -33,16 +33,16 @@ target.release = function () {
     var zipfile = '../' + RELEASE_DIR + '/' + PLUGIN_NAME + '-' + versionNumber + '.zip';
     exec( 'zip -r ' + zipfile + ' ' + PLUGIN_NAME );
     cd( '../' );
-    clean();
+    //clean();
 };
 
 target.clean = function () {
     clean( true );
 };
 
-function clean( full ) {
+function clean( all ) {
     rm( '-rf', TMP_DIR );
-    if ( full ) {
+    if ( all ) {
         rm( '-rf', RELEASE_DIR );
     }
 }
