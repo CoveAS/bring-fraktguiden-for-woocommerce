@@ -1,12 +1,16 @@
 === Bring Fraktguiden for WooCommerce ===
+Author: Driv Digital
+Author URI: https://drivdigital.no
 Contributors: Driv Digital, Matt Gates
 Donate link: http://drivdigital.no/
-Tags: woocommerce, shipping, bring
+Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 3.2.1
 Tested up to: 4.0.1
 Stable tag: ##VERSION##
 License: The MIT License
 License URI: http://opensource.org/licenses/MIT
+
+Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
@@ -32,9 +36,9 @@ In order to calculate shipping, products in the stock must have dimensions and w
 
 == Frequently Asked Questions ==
 
-Q: Rates does not show up on the cart page.
+Q: Why do rates not show up on the cart page?
 
-A: Reates are only shown when the customer has a valid zip code.
+A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
 
