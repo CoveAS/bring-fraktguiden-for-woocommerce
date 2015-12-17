@@ -15,3 +15,7 @@ Run `node build` with one of the following targets:
 `clean`
 
 - Cleans the project
+
+`publish`
+
+- Publishes the plugin source to wordpress.org

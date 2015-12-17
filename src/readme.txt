@@ -22,7 +22,7 @@ Special thanks goes to Matt Gates for allowing us to use his code as a base for 
 
 Prerequisites
 
-Make sure WooCommerce if configured with the following settings
+Make sure WooCommerce is configured with:
 
 * Dimension unit and weight unit (see WooCommerce > Settings > Products)
 * Currency (see WooCommerce > Settings > General)

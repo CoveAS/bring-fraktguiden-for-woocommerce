@@ -1,6 +1,0 @@
-Todo:
-- update readme
-
-Known issues:
-  - If WooCommerce's "Enable shipping calculator on cart page" is enabled and Fraktguiden is set up to only calculate rates for 'Specific countries', the calculator does not respect the setting.
-
