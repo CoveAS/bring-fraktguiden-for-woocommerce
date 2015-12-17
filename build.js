@@ -14,7 +14,7 @@ const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-
  */
 target = {
     release: release,
-    sync:    sync,
+    publish: publish,
     clean:   function () {
         clean( true )
     }
@@ -25,39 +25,24 @@ target = {
  * Uses latest version number found in plugin readme.txt
  */
 function release() {
-    var versionNumber = getVersionNumber();
-    var zipFileName = PLUGIN_NAME + '-' + versionNumber + '.zip';
+    var zipFileName = PLUGIN_NAME + '-' + getVersionNumber() + '.zip';
 
-    clean( true );
+    prepareTempDir();
 
-    // 1. Create the directories used for the build process.
-    mkdir( '-p', TEMP_DIR );
-    mkdir( RELEASE_DIR );
-
-    // 2. Copy the source files to the temporary directory.
-    cp( '-R', SRC_DIR + '/', TEMP_DIR );
-
-    // 3. Replace occurences of the version macro with the version number found in the plugin readme file.
-
-    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/woocommerce-bring-fraktguiden.php' );
-    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/readme.txt' );
-
-    // 4. Create the zip.
     cd( TEMP_DIR );
     // :)
     cd( '../' );
     exec( 'zip -r ' + '../' + RELEASE_DIR + '/' + zipFileName + ' ' + PLUGIN_NAME );
 
-//    cp( '-R', TEMP_DIR, RELEASE_DIR );
-    //clean();
+    clean();
 }
 
 /**
  * Syncs the git repo with the wordpress.org repo.
  */
-function sync() {
+function publish() {
 
-    // todo prep a directory.
+    prepareTempDir();
 
     cd( __dirname + '/' + RELEASE_DIR );
     if ( test( '-d', 'svn' ) ) {
@@ -94,6 +79,8 @@ function sync() {
     } );
     // Commit the changes.
     exec( 'svn commit -m "Sync with git repository"' );
+
+    clean();
 }
 
 function clean( all ) {
@@ -102,6 +89,24 @@ function clean( all ) {
     if ( all ) {
         rm( '-rf', RELEASE_DIR );
     }
+}
+
+function prepareTempDir() {
+    var versionNumber = getVersionNumber();
+
+    clean( true );
+
+    // 1. Create the directories used for the build process.
+    mkdir( '-p', TEMP_DIR );
+    mkdir( RELEASE_DIR );
+
+    // 2. Copy the source files to the temporary directory.
+    cp( '-R', SRC_DIR + '/', TEMP_DIR );
+
+    // 3. Replace occurences of the version macro with the version number found in the plugin readme file.
+
+    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/woocommerce-bring-fraktguiden.php' );
+    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/readme.txt' );
 }
 
 function getVersionNumber() {

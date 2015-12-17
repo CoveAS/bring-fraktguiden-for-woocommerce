@@ -10,7 +10,7 @@ Run `node build` with one of the following targets:
 
 `release`
 
-- Creates a zip file for distribution
+- Creates a zip file in the release directory
 
 `clean`
 
@@ -18,4 +18,4 @@ Run `node build` with one of the following targets:
 
 `publish`
 
-- Publishes the plugin source to wordpress.org
+- Publishes the source to the wordpress.org svn repository
