@@ -2,20 +2,16 @@
 
 See src/readme.txt
 
-## Hacking
+## Building
 
-Make sure you have and npm installed.
-
-Run `npm install` in the project root.
-
-### Build targets
+Before building the project, verify that you have NPM (Node Package Manager) installed
 
 Run `node build` with one of the following targets:
 
 `release`
 
-Creates a zip. See the created release folder.
+- Creates a zip file for distribution
 
 `clean`
 
-Removes the release and tmp folder.
+- Cleans the project
