@@ -5,7 +5,8 @@ require( 'shelljs/make' );
 const PLUGIN_NAME = 'woocommerce-bring-fraktguiden';
 const SRC_DIR = 'src';
 const RELEASE_DIR = 'release';
-const TEMP_DIR = 'tmp/woocommerce-bring-fraktguiden';
+const TEMP = 'temp';
+const TEMP_DIR = TEMP + '/woocommerce-bring-fraktguiden';
 const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-woocommerce';
 
 /**
@@ -15,44 +16,52 @@ const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-
 target = {
     release: release,
     publish: publish,
-    clean:   function () {
-        clean( true )
+    zip: zip,
+    version: function () {
+        echo( getVersionNumber() );
+    },
+    clean: function() {
+        clean(true);
     }
 };
 
-/**
- * Creates a release.
- * Uses latest version number found in plugin readme.txt
- */
-function release() {
-    var zipFileName = PLUGIN_NAME + '-' + getVersionNumber() + '.zip';
+function zip() {
+    // Create a temporary directory and work with files from there.
+    prepare();
 
-    prepareTempDir();
-
-    cd( TEMP_DIR );
-    // :)
-    cd( '../' );
-    exec( 'zip -r ' + '../' + RELEASE_DIR + '/' + zipFileName + ' ' + PLUGIN_NAME );
+    cd( TEMP );
+    var versionNumber = getVersionNumber();
+    var dateString = createDateString(new Date());
+    var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + dateString + '.zip';
+    var destination = __dirname + '/' + RELEASE_DIR + '/' + fileName;
+    exec( 'zip -r ' + destination + ' ' + PLUGIN_NAME );
 
     clean();
 }
 
-/**
- * Syncs the git repo with the wordpress.org repo.
- */
-function publish() {
+function release() {
+    zip();
+    publish( getVersionNumber() );
+}
 
-    prepareTempDir();
+/**
+ * Publishes the git repo to the wordpress.org svn repo.
+
+ * @param version String if given, a new tag will be created in the svn repository.
+ */
+function publish( version ) {
+    prepare();
+
+    var svnDir = 'wordpress.org';
 
     cd( __dirname + '/' + RELEASE_DIR );
-    if ( test( '-d', 'svn' ) ) {
-        rm( '-rf', 'svn' );
+    if ( test( '-d', svnDir ) ) {
+        rm( '-rf', svnDir );
     }
-
-    mkdir( '-p', 'svn' );
-    cd( 'svn' );
+    mkdir( '-p', svnDir );
 
     // Checkout the repo.
+    cd( svnDir );
     exec( 'svn co ' + WORDPRESS_REPO + ' .', {silent: true} );
 
     // Remove all files from trunk in order to pick up deleted files changes.
@@ -77,41 +86,52 @@ function publish() {
             }
         }
     } );
-    // Commit the changes.
-    exec( 'svn commit -m "Sync with git repository"' );
+
+    // Start committing the changes.
+    var gitRevision = exec('git rev-parse HEAD', {silent:true} ).output.replace('\n','');
+    var commitMessage = 'Sync with git repository (' + gitRevision + ')';
+
+    // Create a new svn tag if version is given.
+    if ( version ) {
+        exec( 'svn cp trunk tags/' + version );
+        commitMessage += ' - tagging version ' + version;
+    }
+
+    echo( commitMessage );
+
+    // Commit.
+    exec( 'svn commit -m "' + commitMessage + '"' );
 
     clean();
 }
 
 function clean( all ) {
     cd( __dirname );
-    rm( '-rf', 'tmp' );
+    rm( '-rf', TEMP );
     if ( all ) {
         rm( '-rf', RELEASE_DIR );
     }
 }
 
-function prepareTempDir() {
+function prepare() {
+    clean();
+    cd( __dirname );
+
     var versionNumber = getVersionNumber();
 
-    clean( true );
-
-    // 1. Create the directories used for the build process.
     mkdir( '-p', TEMP_DIR );
-    mkdir( RELEASE_DIR );
+    if ( ! test( '-d', RELEASE_DIR ) ) mkdir( RELEASE_DIR );
 
-    // 2. Copy the source files to the temporary directory.
     cp( '-R', SRC_DIR + '/', TEMP_DIR );
-
-    // 3. Replace occurences of the version macro with the version number found in the plugin readme file.
 
     sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/woocommerce-bring-fraktguiden.php' );
     sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/readme.txt' );
 }
 
 function getVersionNumber() {
-    var readmeFile = SRC_DIR + '/readme.txt';
+    var readmeFile = __dirname + '/' + SRC_DIR + '/readme.txt';
     var contents = cat( readmeFile );
+
     var parts = contents.split( '== Changelog ==' );
     if ( parts.length != 2 ) {
         echo( 'Could not find "== Changelog ==" in ' + readmeFile + '. Aborting' );
@@ -126,4 +146,16 @@ function getVersionNumber() {
     }
     var versionNumber = logs[0].replace( /=/g, '' ).trim();
     return versionNumber;
+}
+
+function createDateString( d ) {
+    function pad( n ) {
+        return n < 10 ? '0' + n : n
+    }
+    return d.getUTCFullYear()+'-'
+        + pad(d.getUTCMonth()+1)+'-'
+        + pad(d.getUTCDate())+'-'
+        + pad(d.getUTCHours())+''
+        + pad(d.getUTCMinutes())+''
+        + pad(d.getUTCSeconds())+''
 }
