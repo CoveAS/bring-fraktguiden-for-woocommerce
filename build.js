@@ -16,12 +16,12 @@ const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-
 target = {
     release: release,
     publish: publish,
-    zip: zip,
+    zip:     zip,
     version: function () {
         echo( getVersionNumber() );
     },
-    clean: function() {
-        clean(true);
+    clean:   function () {
+        clean( true );
     }
 };
 
@@ -31,7 +31,7 @@ function zip() {
 
     cd( TEMP );
     var versionNumber = getVersionNumber();
-    var dateString = createDateString(new Date());
+    var dateString = createDateString( new Date() );
     var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + dateString + '.zip';
     var destination = __dirname + '/' + RELEASE_DIR + '/' + fileName;
     exec( 'zip -r ' + destination + ' ' + PLUGIN_NAME );
@@ -64,6 +64,11 @@ function publish( version ) {
     cd( svnDir );
     exec( 'svn co ' + WORDPRESS_REPO + ' .', {silent: true} );
 
+    if ( version && test( '-d', 'tags/' + version ) ) {
+        echo( version +' exists. A new version should be created in readme.txt' );
+        exit( 1 );
+    }
+
     // Remove all files from trunk in order to pick up deleted files changes.
     rm( '-rf', 'trunk/*' );
 
@@ -88,7 +93,7 @@ function publish( version ) {
     } );
 
     // Start committing the changes.
-    var gitRevision = exec('git rev-parse HEAD', {silent:true} ).output.replace('\n','');
+    var gitRevision = exec( 'git rev-parse HEAD', {silent: true} ).output.replace( '\n', '' );
     var commitMessage = 'Sync with git repository (' + gitRevision + ')';
 
     // Create a new svn tag if version is given.
@@ -152,10 +157,11 @@ function createDateString( d ) {
     function pad( n ) {
         return n < 10 ? '0' + n : n
     }
-    return d.getUTCFullYear()+'-'
-        + pad(d.getUTCMonth()+1)+'-'
-        + pad(d.getUTCDate())+'-'
-        + pad(d.getUTCHours())+''
-        + pad(d.getUTCMinutes())+''
-        + pad(d.getUTCSeconds())+''
+
+    return d.getUTCFullYear() + '-'
+        + pad( d.getUTCMonth() + 1 ) + '-'
+        + pad( d.getUTCDate() ) + '-'
+        + pad( d.getUTCHours() ) + ''
+        + pad( d.getUTCMinutes() ) + ''
+        + pad( d.getUTCSeconds() ) + ''
 }
