@@ -1,4 +1,4 @@
-/* globals require, __dirname, mkdir, sed, cd, cp, echo, cat, exec, rm, exit */
+/* globals require, ls, test,  __dirname, mkdir, sed, cd, cp, echo, cat, exec, rm, exit */
 
 require( 'shelljs/make' );
 
@@ -11,46 +11,46 @@ const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-
 
 /**
  * Build targets
- * @type {{release: release, publish: publish, clean: Function}}
+ * Usage:
+ *  node build <target-name>
  */
 target = {
+    /**
+     * Creates a release and pushes the version to wordpress.org
+     */
     release: release,
-    publish: publish,
-    zip:     zip,
+    /**
+     * Pushes the current source code to wordpress.org trunk
+     */
+    push: push,
+    /**
+     * Creates a zip file in the release directory
+     */
+    zip: zip,
+    /**
+     * Prints the current version number
+     */
     version: function () {
         echo( getVersionNumber() );
     },
-    clean:   function () {
+    /**
+     * Cleans the project
+     */
+    clean: function () {
         clean( true );
     }
 };
 
-function zip() {
-    // Create a temporary directory and work with files from there.
-    prepare();
-
-    cd( TEMP );
-    var versionNumber = getVersionNumber();
-    var dateString = createDateString( new Date() );
-    var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + dateString + '.zip';
-    var destination = __dirname + '/' + RELEASE_DIR + '/' + fileName;
-    exec( 'zip -r ' + destination + ' ' + PLUGIN_NAME );
-
-    clean();
-}
-
 function release() {
-    zip();
-    publish( getVersionNumber() );
+    push( getVersionNumber() );
 }
 
 /**
  * Publishes the git repo to the wordpress.org svn repo.
-
  * @param version String if given, a new tag will be created in the svn repository.
  */
-function publish( version ) {
-    prepare();
+function push( version ) {
+    createTempSourceDir();
 
     var svnDir = 'wordpress.org';
 
@@ -65,7 +65,7 @@ function publish( version ) {
     exec( 'svn co ' + WORDPRESS_REPO + ' .', {silent: true} );
 
     if ( version && test( '-d', 'tags/' + version ) ) {
-        echo( version +' exists. A new version should be created in readme.txt' );
+        echo( version + ' exists. A new version should be created in readme.txt' );
         exit( 1 );
     }
 
@@ -110,6 +110,20 @@ function publish( version ) {
     clean();
 }
 
+function zip() {
+    createTempSourceDir();
+
+    return;
+    cd( TEMP );
+    var versionNumber = getVersionNumber();
+    var dateString = createDateString( new Date() );
+    var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + dateString + '.zip';
+    var destination = __dirname + '/' + RELEASE_DIR + '/' + fileName;
+    exec( 'zip -r ' + destination + ' ' + PLUGIN_NAME );
+
+    clean();
+}
+
 function clean( all ) {
     cd( __dirname );
     rm( '-rf', TEMP );
@@ -118,19 +132,22 @@ function clean( all ) {
     }
 }
 
-function prepare() {
+function createTempSourceDir() {
     clean();
     cd( __dirname );
 
     var versionNumber = getVersionNumber();
 
     mkdir( '-p', TEMP_DIR );
-    if ( ! test( '-d', RELEASE_DIR ) ) mkdir( RELEASE_DIR );
+    if ( !test( '-d', RELEASE_DIR ) ) mkdir( RELEASE_DIR );
 
     cp( '-R', SRC_DIR + '/', TEMP_DIR );
 
-    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/woocommerce-bring-fraktguiden.php' );
-    sed( '-i', '##VERSION##', versionNumber, TEMP_DIR + '/readme.txt' );
+    ls( '-R', TEMP_DIR + '/*' ).forEach( function ( file ) {
+        if ( !test( '-d', file ) ) {
+            sed( '-i', /##VERSION##/g, versionNumber, file );
+        }
+    } );
 }
 
 function getVersionNumber() {
@@ -145,7 +162,7 @@ function getVersionNumber() {
 
     var changeLog = parts[1];
     var logs = changeLog.match( /^= \d\.\d\.\d(|[-|\s|\w]+) =/gm );
-    if ( ! logs ) {
+    if ( !logs ) {
         echo( 'Could not find a version number. Aborting.' );
         exit( 1 );
     }

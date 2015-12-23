@@ -20,6 +20,6 @@ Run `node build` with one of the following targets:
 
 - (wordpress.org "committers" only) Used for publishing a new release - Creates a new version (svn-tag)  based on current source and pushes the tag and source to wordpress.org
 
-`publish`
+`push`
 
 - (wordpress.org "committers" only) Pushes the current source to wordpress.org trunk
