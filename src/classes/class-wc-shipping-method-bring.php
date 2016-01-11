@@ -317,6 +317,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $json = json_decode( $response['body'], true );
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
+
+      if ( $this->debug != 'no' ) {
+        $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
+
+        if ( $rates ) {
+          $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
+        } else {
+          $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
+        }
+
+        $this->log->add( $this->id, 'Request url: ' . print_r( $query, true ) );
+      }
+
       // Calculate rate.
       if ( $rates ) {
         foreach ( $rates as $rate ) {
