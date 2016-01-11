@@ -1,13 +1,18 @@
 /* globals require, ls, test,  __dirname, mkdir, sed, cd, cp, echo, cat, exec, rm, exit */
 
 require( 'shelljs/make' );
+var git = require( './build-util/git' );
+var wp = require( './build-util/wp-plugin' );
 
+const SELF_DIR = __dirname;
 const PLUGIN_NAME = 'woocommerce-bring-fraktguiden';
-const SRC_DIR = 'src';
-const RELEASE_DIR = 'release';
-const TEMP = 'temp';
-const TEMP_DIR = TEMP + '/woocommerce-bring-fraktguiden';
-const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-woocommerce';
+const SRC_DIR = SELF_DIR + '/src';
+const RELEASE_DIR = SELF_DIR + '/release';
+const BUILD_DIR = SELF_DIR + '/temp';
+const TEMP_DIR = BUILD_DIR + '/woocommerce-bring-fraktguiden';
+const WP_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-woocommerce';
+
+var versionNumber = wp.getVersionNumber( SRC_DIR + '/readme.txt' );
 
 /**
  * Build targets
@@ -15,159 +20,119 @@ const WORDPRESS_REPO = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-
  *  node build <target-name>
  */
 target = {
+
     /**
      * Creates a release and pushes the version to wordpress.org
      */
     release: release,
+
     /**
      * Pushes the current source code to wordpress.org trunk
      */
     push: push,
+
     /**
      * Creates a zip file in the release directory
      */
     zip: zip,
+
     /**
      * Prints the current version number
      */
     version: function () {
-        echo( getVersionNumber() );
+        echo( versionNumber );
     },
+
     /**
      * Cleans the project
      */
     clean: function () {
-        clean( true );
+        cleanPropject( true );
     }
 };
 
 function release() {
-    push( getVersionNumber() );
+    push( versionNumber );
 }
 
 /**
  * Publishes the git repo to the wordpress.org svn repo.
- * @param version String if given, a new tag will be created in the svn repository.
+ * @param version String If given, a new tag will be created in the svn repository.
  */
 function push( version ) {
-    createTempSourceDir();
+    if ( !git.isClean() ) {
+        echo( 'Repo is not clean. Please add the files and commit or stash your changes.' );
+        cleanPropject();
+        exit( 1 );
+    }
+    createSourceCopy();
+
+    cd( RELEASE_DIR );
 
     var svnDir = 'wordpress.org';
 
-    cd( __dirname + '/' + RELEASE_DIR );
     if ( test( '-d', svnDir ) ) {
         rm( '-rf', svnDir );
     }
     mkdir( '-p', svnDir );
-
-    // Checkout the repo.
     cd( svnDir );
-    exec( 'svn co ' + WORDPRESS_REPO + ' .', {silent: true} );
 
-    if ( version && test( '-d', 'tags/' + version ) ) {
-        echo( version + ' exists. A new version should be created in readme.txt' );
-        exit( 1 );
-    }
-
-    // Remove all files from trunk in order to pick up deleted files changes.
-    rm( '-rf', 'trunk/*' );
-
-    // Copy changes to trunk.
-    cp( '-Rf', __dirname + '/' + TEMP_DIR + '/*', 'trunk' );
-
-    // Add and delete files from the repo based on svn-status.
-    var statusText = exec( 'svn status', {silent: true} ).output;
-    var statusLines = statusText.split( '\n' );
-    statusLines.forEach( function ( line ) {
-        if ( line.trim() != '' ) {
-            var parts = line.split( /\s+/ );
-            var status = parts[0];
-            var file = parts[1];
-            if ( status == '?' ) {
-                exec( 'svn add ' + file );
-            }
-            if ( status == '!' ) {
-                exec( 'svn delete ' + file );
-            }
-        }
-    } );
-
-    // Start committing the changes.
-    var gitRevision = exec( 'git rev-parse HEAD', {silent: true} ).output.replace( '\n', '' );
-    var commitMessage = 'Sync with git repository (' + gitRevision + ')';
-
-    // Create a new svn tag if version is given.
+    var commitMessage = 'Sync with git repository (' + git.getCurrentCommitHash() + ')';
     if ( version ) {
-        exec( 'svn cp trunk tags/' + version );
         commitMessage += ' - tagging version ' + version;
     }
 
-    echo( commitMessage );
+    wp.commitToWordPressOrg(
+        WP_REPO,
+        TEMP_DIR,
+        commitMessage,
+        version
+    );
 
-    // Commit.
-    exec( 'svn commit -m "' + commitMessage + '"' );
-
-    clean();
+    // Create git tag.
+    if ( version ) {
+        exec( 'git tag -a ' + version + ' -m "Tagging version ' + version + '"' );
+        echo( '\nRemember to push the new git tag (' + version + ')' );
+    }
+    cleanPropject();
 }
 
 function zip() {
-    createTempSourceDir();
+    createSourceCopy();
+    var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + createDateString( new Date() ) + '.zip';
+    var zipFile = RELEASE_DIR + '/' + fileName;
 
-    return;
-    cd( TEMP );
-    var versionNumber = getVersionNumber();
-    var dateString = createDateString( new Date() );
-    var fileName = PLUGIN_NAME + '-' + versionNumber + '-' + dateString + '.zip';
-    var destination = __dirname + '/' + RELEASE_DIR + '/' + fileName;
-    exec( 'zip -r ' + destination + ' ' + PLUGIN_NAME );
-
-    clean();
+    cd( BUILD_DIR );
+    exec( 'zip -r ' + zipFile + ' ' + PLUGIN_NAME );
+    cleanPropject();
 }
 
-function clean( all ) {
+function cleanPropject( all ) {
     cd( __dirname );
-    rm( '-rf', TEMP );
+    rm( '-rf', BUILD_DIR );
     if ( all ) {
         rm( '-rf', RELEASE_DIR );
     }
 }
 
-function createTempSourceDir() {
-    clean();
-    cd( __dirname );
+function createSourceCopy() {
+    cleanPropject();
 
-    var versionNumber = getVersionNumber();
-
+    // Create a temporary directory
     mkdir( '-p', TEMP_DIR );
+
+    // Create the release directory
     if ( !test( '-d', RELEASE_DIR ) ) mkdir( RELEASE_DIR );
 
+    // Copy the source to the temporary directory
     cp( '-R', SRC_DIR + '/', TEMP_DIR );
 
+    // Replace macros in the source copy
     ls( '-R', TEMP_DIR + '/*' ).forEach( function ( file ) {
         if ( !test( '-d', file ) ) {
             sed( '-i', /##VERSION##/g, versionNumber, file );
         }
     } );
-}
-
-function getVersionNumber() {
-    var readmeFile = __dirname + '/' + SRC_DIR + '/readme.txt';
-    var contents = cat( readmeFile );
-
-    var parts = contents.split( '== Changelog ==' );
-    if ( parts.length != 2 ) {
-        echo( 'Could not find "== Changelog ==" in ' + readmeFile + '. Aborting' );
-        exit( 1 );
-    }
-
-    var changeLog = parts[1];
-    var logs = changeLog.match( /^= \d\.\d\.\d(|[-|\s|\w]+) =/gm );
-    if ( !logs ) {
-        echo( 'Could not find a version number. Aborting.' );
-        exit( 1 );
-    }
-    var versionNumber = logs[0].replace( /=/g, '' ).trim();
-    return versionNumber;
 }
 
 function createDateString( d ) {
