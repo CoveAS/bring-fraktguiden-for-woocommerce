@@ -18,6 +18,8 @@ All standard shipping methods from Bring is bulit-in. Volume calculation based o
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
+If you want to contribute or file an issue, please go to: https://github.com/drivdigital/woocommerce-bring-fraktguiden
+
 == Installation ==
 
 = Prerequisites =
@@ -43,6 +45,10 @@ Q: Why do rates not show up on the cart page?
 A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
+
+= 1.1.1 =
+
+* Added git repo to readme file
 
 = 1.1.0 =
 
