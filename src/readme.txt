@@ -5,7 +5,7 @@ Contributors: drivdigital, Matt Gates
 Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 3.2.1
-Tested up to: 4.4.0
+Tested up to: 4.4.1
 Stable tag: ##VERSION##
 License: The MIT License
 License URI: http://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ If you want to contribute or file an issue, please go to: https://github.com/dri
 
 = Prerequisites =
 
-The plugin has been tested with WooCommerce version 2.4
+The plugin has been tested with WooCommerce version 2.5
 
 Make sure WooCommerce is configured with:
 
