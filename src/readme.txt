@@ -14,7 +14,7 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
-All standard shipping methods from Bring is bulit-in. Volume calculation based on product dimensions and weight.
+All standard shipping methods from Bring is built-in. Volume calculation based on product dimensions and weight.
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
