@@ -61,7 +61,7 @@ exports.commitToWordPressOrg = function ( repo, srcDir, commitMessage, version )
     }
 
     // Commit.
-    //exec( 'svn commit -m "' + commitMessage + '"' );
+    exec( 'svn commit -m "' + commitMessage + '"' );
 };
 
 
