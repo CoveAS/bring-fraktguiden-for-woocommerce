@@ -48,7 +48,8 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.1.1 =
 
-* Added git repo to readme file
+* Misc. text changes
+*
 
 = 1.1.0 =
 

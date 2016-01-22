@@ -14,7 +14,7 @@ Run `node build` with one of the following targets:
 
 `push`
 
-- (wordpress.org "committers" only) Commits the current source to wordpress.org trunk
+- (wordpress.org "committers" only) Commits the current source to wordpress.org trunk. This does not create a new release.
 
 `clean`
 
