@@ -48,8 +48,9 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.1.1 =
 
-* Misc. text changes
 *
+* Requests to the bring api is now logged if debug is enabled (see settings screen)
+* Misc. text changes
 
 = 1.1.0 =
 
