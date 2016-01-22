@@ -77,7 +77,7 @@ function push( version ) {
     mkdir( '-p', svnDir );
     cd( svnDir );
 
-    var commitMessage = 'Sync with git repository (' + git.getCurrentCommitHash() + ')';
+    var commitMessage = 'Sync with git repository (@' + git.getCurrentCommitHash() + ')';
     if ( version ) {
         commitMessage += ' - tagging version ' + version;
     }
