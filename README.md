@@ -4,4 +4,4 @@ See src/readme.txt
 
 ## Building
 
-See https://github.com/drivdigital/woocommerce-bring-fraktguiden-build
+See https://github.com/drivdigital/bring-fraktguiden-for-woocommerce

@@ -18,7 +18,7 @@ All standard shipping methods from Bring is built-in. Volume calculation based o
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
-If you want to contribute or file an issue, please go to: https://github.com/drivdigital/woocommerce-bring-fraktguiden
+If you want to contribute or file an issue, please go to: https://github.com/drivdigital/bring-fraktguiden-for-woocommerce
 
 == Installation ==
 
@@ -33,7 +33,7 @@ Make sure WooCommerce is configured with:
 
 In order to calculate shipping, products in the stock must have dimensions and weight.
 
-1. Upload `woocommerce-bring-fraktguiden` to the `/wp-content/plugins/` directory
+1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Navigate to wp-admin > WooCommerce > Settings > Shipping
 4. Enable and configure Bring Fraktguiden
@@ -46,9 +46,11 @@ A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
 
+= 1.1.2 =
+* Renamed plugin to bring-fraktguiden-for-woocommerce
+
 = 1.1.1 =
 
-*
 * Requests to the bring api is now logged if debug is enabled (see settings screen)
 * Misc. text changes
 
