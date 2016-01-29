@@ -30,7 +30,9 @@ class Bring_Fraktguiden {
     }
   }
 
-  // Include the shipping method
+  /**
+   * Includes the shipping method
+   */
   static function shipping_init() {
     include_once 'classes/class-wc-shipping-method-bring.php';
     // Add the method to WooCommerce.
@@ -38,7 +40,7 @@ class Bring_Fraktguiden {
   }
 
   /**
-   * add_bring_method function.
+   * Adds the Bring shipping method to WooCommerce
    *
    * @package  WooCommerce/Classes/Shipping
    * @access public

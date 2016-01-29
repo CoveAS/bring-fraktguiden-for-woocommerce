@@ -6,6 +6,8 @@ Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 3.2.1
 Tested up to: 4.4.1
+WC requires at least: 2.2
+WC tested up to: 2.5
 Stable tag: ##VERSION##
 License: The MIT License
 License URI: http://opensource.org/licenses/MIT
@@ -29,7 +31,7 @@ The plugin has been tested with WooCommerce version 2.5
 Make sure WooCommerce is configured with:
 
 * Dimension unit and weight unit (see WooCommerce > Settings > Products)
-* Currency (see WooCommerce > Settings > General)
+* Currency (see WooCommerce > Settings > General). The currency should be NOK.
 
 In order to calculate shipping, products in the stock must have dimensions and weight.
 

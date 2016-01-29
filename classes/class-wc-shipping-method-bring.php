@@ -74,6 +74,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
+   * Returns true if the required options are set
+   *
    * @return boolean
    */
   public function is_valid_for_use() {
