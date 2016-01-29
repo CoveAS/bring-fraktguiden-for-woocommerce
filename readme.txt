@@ -46,6 +46,10 @@ A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
 
+= x.x.x =
+
+* Improved the text on the settings page
+
 = 1.1.2 =
 * Renamed plugin to bring-fraktguiden-for-woocommerce
 

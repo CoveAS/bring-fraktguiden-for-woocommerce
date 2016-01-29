@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2015-11-27 21:38+0100\n"
-"PO-Revision-Date: 2015-12-01 16:24+0100\n"
+"POT-Creation-Date: 2016-01-29 13:14+0100\n"
+"PO-Revision-Date: 2016-01-29 13:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,119 +15,140 @@ msgstr ""
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class-wc-shipping-method-bring.php:27 class-wc-shipping-method-bring.php:127
+#: class-wc-shipping-method-bring.php:27 class-wc-shipping-method-bring.php:130
 msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
-#: class-wc-shipping-method-bring.php:118
+#: class-wc-shipping-method-bring.php:121
 msgid "Enable"
 msgstr "Enable"
 
-#: class-wc-shipping-method-bring.php:120
+#: class-wc-shipping-method-bring.php:123
 msgid "Enable Bring Fraktguiden"
 msgstr "Enable Bring Fraktguiden"
 
-#: class-wc-shipping-method-bring.php:124
+#: class-wc-shipping-method-bring.php:127
 msgid "Title"
 msgstr "Title"
 
-#: class-wc-shipping-method-bring.php:126
+#: class-wc-shipping-method-bring.php:129
 msgid "This controls the title which the user sees during checkout."
 msgstr "This controls the title which the user sees during checkout. 123"
 
-#: class-wc-shipping-method-bring.php:130
+#: class-wc-shipping-method-bring.php:133
 msgid "Delivery Fee"
 msgstr "Delivery Fee"
 
-#: class-wc-shipping-method-bring.php:132
-msgid "What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable."
-msgstr "What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable."
+#: class-wc-shipping-method-bring.php:135
+msgid ""
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
+msgstr ""
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
 
-#: class-wc-shipping-method-bring.php:136
+#: class-wc-shipping-method-bring.php:139
 msgid "Post office"
 msgstr "Post office"
 
-#: class-wc-shipping-method-bring.php:138
+#: class-wc-shipping-method-bring.php:141
 msgid "Shipping from post office"
 msgstr "Shipping from post office"
 
 #: class-wc-shipping-method-bring.php:142
+msgid ""
+"Flag that tells whether the parcel is delivered at a post office when it is "
+"shipped."
+msgstr ""
+"Flag that tells whether the parcel is delivered at a post office when it is "
+"shipped."
+
+#: class-wc-shipping-method-bring.php:146
 msgid "From zip"
 msgstr "From zip"
 
-#: class-wc-shipping-method-bring.php:144
-msgid "This is the zip code of where you deliver from. For example, the post office. Should be 4 digits."
-msgstr "This is the zip code of where you deliver from. For example, the post office. Should be 4 digits."
-
 #: class-wc-shipping-method-bring.php:148
+msgid ""
+"This is the zip code of where you deliver from. For example, the post "
+"office. Should be 4 digits."
+msgstr ""
+"This is the zip code of where you deliver from. For example, the post "
+"office. Should be 4 digits."
+
+#: class-wc-shipping-method-bring.php:152
 msgid "Display price"
 msgstr "Display price"
 
-#: class-wc-shipping-method-bring.php:150
+#: class-wc-shipping-method-bring.php:154
 msgid "How to calculate delivery charges"
 msgstr "How to calculate delivery charges"
 
-#: class-wc-shipping-method-bring.php:153
+#: class-wc-shipping-method-bring.php:157
 msgid "VAT included"
 msgstr "VAT included"
 
-#: class-wc-shipping-method-bring.php:154
+#: class-wc-shipping-method-bring.php:158
 msgid "VAT excluded"
 msgstr "VAT excluded"
 
-#: class-wc-shipping-method-bring.php:158
+#: class-wc-shipping-method-bring.php:162
 msgid "Method availability"
 msgstr "Method availability"
 
-#: class-wc-shipping-method-bring.php:163
+#: class-wc-shipping-method-bring.php:167
 msgid "All allowed countries"
 msgstr "All allowed countries"
 
-#: class-wc-shipping-method-bring.php:164 class-wc-shipping-method-bring.php:168
+#: class-wc-shipping-method-bring.php:168
+#: class-wc-shipping-method-bring.php:172
 msgid "Specific Countries"
 msgstr "Specific Countries"
 
-#: class-wc-shipping-method-bring.php:176
+#: class-wc-shipping-method-bring.php:180
 msgid "Services"
 msgstr "Services"
 
-#: class-wc-shipping-method-bring.php:184
+#: class-wc-shipping-method-bring.php:188
 msgid "Max products"
 msgstr "Max products"
 
-#: class-wc-shipping-method-bring.php:186
+#: class-wc-shipping-method-bring.php:190
 msgid "Maximum of products in the cart before offering a flat rate"
 msgstr "Maximum of products in the cart before offering a flat rate"
 
-#: class-wc-shipping-method-bring.php:190
+#: class-wc-shipping-method-bring.php:194
 msgid "Flat rate"
 msgstr "Flat rate"
 
-#: class-wc-shipping-method-bring.php:192
-msgid ""
-"Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions"
-msgstr ""
-"Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions"
-
 #: class-wc-shipping-method-bring.php:196
+msgid ""
+"Offer a flat rate if the cart reaches max products or a product in the cart "
+"does not have the required dimensions"
+msgstr ""
+"Offer a flat rate if the cart reaches max products or a product in the cart "
+"does not have the required dimensions"
+
+#: class-wc-shipping-method-bring.php:200
 msgid "Debug"
 msgstr "Debug"
 
-#: class-wc-shipping-method-bring.php:198
+#: class-wc-shipping-method-bring.php:202
 msgid "Enable debug logs"
 msgstr "Enable debug logs"
 
-#: class-wc-shipping-method-bring.php:199
+#: class-wc-shipping-method-bring.php:203
 msgid "These logs will be saved in <code>wc-logs/</code>"
 msgstr "These logs will be saved in <code>wc-logs/</code>"
 
-#: class-wc-shipping-method-bring.php:223
+#: class-wc-shipping-method-bring.php:227
 #, php-format
 msgid ""
-"Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the "
-"<a href=\"%s\">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
+"be enabled. Please enable them on the <a href=\"%s\">Catalog tab</a>. <br/> "
+"In addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=\"%s\">General tab</a>"
 msgstr ""
-"Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the "
-"<a href=“%s”>Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
+"be enabled. Please enable them on the <a href=“%s”>Catalog tab</a>. <br/> In "
+"addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=“%s”>General tab</a>"

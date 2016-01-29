@@ -135,13 +135,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
-        'post_office'   => array(
-            'title'   => __( 'Post office', self::TEXT_DOMAIN ),
-            'type'    => 'checkbox',
-            'label'   => __( 'Shipping from post office', self::TEXT_DOMAIN ),
-            'default' => 'no'
+        'post_office' => array(
+            'title'       => __( 'Post office', self::TEXT_DOMAIN ),
+            'type'        => 'checkbox',
+            'label'       => __( 'Shipping from post office', self::TEXT_DOMAIN ),
+            'description' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
+            'default'     => 'no'
         ),
-        'from_zip'      => array(
+        'from_zip'    => array(
             'title'       => __( 'From zip', self::TEXT_DOMAIN ),
             'type'        => 'text',
             'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', self::TEXT_DOMAIN ),
