@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Version:             ##VERSION##
  * Requires at least:   3.2.1
- * Tested up to:        4.0.1
+ * Tested up to:        4.4.1
  *
  * Text Domain:         bring-fraktguiden
  * Domain Path:         /languages
