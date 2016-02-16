@@ -311,9 +311,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Remove any empty elements.
       $params = array_filter( $params );
       // Create url.
-      $query = add_query_arg( $params, self::SERVICE_URL );
+      $url = add_query_arg( $params, self::SERVICE_URL );
+      // Add all the selected products to the URL
+      foreach ( $this->services as $product ) {
+        $url .= '&product='.$product;
+      }
       // Make the request.
-      $response = wp_remote_get( $query );
+      $response = wp_remote_get( $url );
       // If the request fails, just return.
       if ( is_wp_error( $response ) ) {
         return;
