@@ -393,13 +393,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function create_standard_url_params() {
     global $woocommerce;
-    return array(
+    return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
-    );
+    ) );
   }
 
 }
