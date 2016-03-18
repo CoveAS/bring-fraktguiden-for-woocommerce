@@ -1,45 +1,45 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2016-01-29 13:14+0100\n"
-"PO-Revision-Date: 2016-01-29 13:18+0100\n"
+"POT-Creation-Date: 2016-03-18 17:10+0100\n"
+"PO-Revision-Date: 2016-03-18 17:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-Basepath: ../classes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class-wc-shipping-method-bring.php:27 class-wc-shipping-method-bring.php:130
+#: class-wc-shipping-method-bring.php:30 class-wc-shipping-method-bring.php:136
 msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
-#: class-wc-shipping-method-bring.php:121
+#: class-wc-shipping-method-bring.php:127
 msgid "Enable"
 msgstr "Aktiver"
 
-#: class-wc-shipping-method-bring.php:123
+#: class-wc-shipping-method-bring.php:129
 msgid "Enable Bring Fraktguiden"
 msgstr "Aktiver Bring Fraktguiden"
 
-#: class-wc-shipping-method-bring.php:127
+#: class-wc-shipping-method-bring.php:133
 msgid "Title"
 msgstr "Tittel"
 
-#: class-wc-shipping-method-bring.php:129
+#: class-wc-shipping-method-bring.php:135
 msgid "This controls the title which the user sees during checkout."
 msgstr "Dette er tittelen som brukeren ser i kassen."
 
-#: class-wc-shipping-method-bring.php:133
+#: class-wc-shipping-method-bring.php:139
 msgid "Delivery Fee"
 msgstr "Leveringsgebyr"
 
-#: class-wc-shipping-method-bring.php:135
+#: class-wc-shipping-method-bring.php:141
 msgid ""
 "What fee do you want to charge for Bring, disregarded if you choose free. "
 "Leave blank to disable."
@@ -47,25 +47,25 @@ msgstr ""
 "Gebyr du ønsker å ta betalt for Bring. Blir ignorert dersom du velger "
 "gratis. La stå tomt for å deaktivere."
 
-#: class-wc-shipping-method-bring.php:139
+#: class-wc-shipping-method-bring.php:145
 msgid "Post office"
 msgstr "Postkontor"
 
-#: class-wc-shipping-method-bring.php:141
+#: class-wc-shipping-method-bring.php:147
 msgid "Shipping from post office"
 msgstr "Leveres fra postkontor"
 
-#: class-wc-shipping-method-bring.php:142
+#: class-wc-shipping-method-bring.php:148
 msgid ""
 "Flag that tells whether the parcel is delivered at a post office when it is "
 "shipped."
 msgstr "Kryss av om pakken blir levert til et postkontor ved sending."
 
-#: class-wc-shipping-method-bring.php:146
+#: class-wc-shipping-method-bring.php:152
 msgid "From zip"
 msgstr "Fra postnummer"
 
-#: class-wc-shipping-method-bring.php:148
+#: class-wc-shipping-method-bring.php:154
 msgid ""
 "This is the zip code of where you deliver from. For example, the post "
 "office. Should be 4 digits."
@@ -73,52 +73,72 @@ msgstr ""
 "Dette er postnummeret hvor du leverer fra. For eksempel postkontoret. Må "
 "være 4 siffer."
 
-#: class-wc-shipping-method-bring.php:152
+#: class-wc-shipping-method-bring.php:158
 msgid "Display price"
 msgstr "Visningspris"
 
-#: class-wc-shipping-method-bring.php:154
+#: class-wc-shipping-method-bring.php:160
 msgid "How to calculate delivery charges"
 msgstr "Hvordan leveringskostnader blir kalkulert"
 
-#: class-wc-shipping-method-bring.php:157
+#: class-wc-shipping-method-bring.php:163
 msgid "VAT included"
 msgstr "Med mva."
 
-#: class-wc-shipping-method-bring.php:158
+#: class-wc-shipping-method-bring.php:164
 msgid "VAT excluded"
 msgstr "Uten mva."
 
-#: class-wc-shipping-method-bring.php:162
+#: class-wc-shipping-method-bring.php:168
+msgid "Recipient notification"
+msgstr "Mottakervarsling"
+
+#: class-wc-shipping-method-bring.php:170
+msgid "Recipient notification over SMS or E-Mail"
+msgstr "Mottakervarsling på SMS eller Epost"
+
+#: class-wc-shipping-method-bring.php:171
+msgid ""
+"If not checked, Fraktguiden will add a fee for paper based recipient "
+"notification.<br/>If checked, the recipient will receive notification over "
+"SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, "
+"Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09"
+msgstr ""
+"Hvis ikke krysset av vil Fraktguiden legge til et gebyr for papirbasert "
+"mottakervarsling.<br/>Hvis krysset av vil mottakeren motta varsling via SMS "
+"eller e-post når pakken har ankommet. Gjelder Bedriftspakke , Kliman&oslash;"
+"ytral Servicepakke og Bedriftspakke Ekspress-Over Natten 09"
+
+#: class-wc-shipping-method-bring.php:175
 msgid "Method availability"
 msgstr "Tilgjengelighet"
 
-#: class-wc-shipping-method-bring.php:167
+#: class-wc-shipping-method-bring.php:180
 msgid "All allowed countries"
 msgstr "Alle tilatte land"
 
-#: class-wc-shipping-method-bring.php:168
-#: class-wc-shipping-method-bring.php:172
+#: class-wc-shipping-method-bring.php:181
+#: class-wc-shipping-method-bring.php:185
 msgid "Specific Countries"
 msgstr "Spesifikke land"
 
-#: class-wc-shipping-method-bring.php:180
+#: class-wc-shipping-method-bring.php:193
 msgid "Services"
 msgstr "Tjenester"
 
-#: class-wc-shipping-method-bring.php:188
+#: class-wc-shipping-method-bring.php:201
 msgid "Max products"
 msgstr "Maks produkter"
 
-#: class-wc-shipping-method-bring.php:190
+#: class-wc-shipping-method-bring.php:203
 msgid "Maximum of products in the cart before offering a flat rate"
 msgstr "Maks produkter som kan være i kassen før en tilbyr en fast sats"
 
-#: class-wc-shipping-method-bring.php:194
+#: class-wc-shipping-method-bring.php:207
 msgid "Flat rate"
 msgstr "Fast sats"
 
-#: class-wc-shipping-method-bring.php:196
+#: class-wc-shipping-method-bring.php:209
 msgid ""
 "Offer a flat rate if the cart reaches max products or a product in the cart "
 "does not have the required dimensions"
@@ -126,19 +146,19 @@ msgstr ""
 "Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
 "produkt som ikke har påkrevde dimensjoner"
 
-#: class-wc-shipping-method-bring.php:200
+#: class-wc-shipping-method-bring.php:213
 msgid "Debug"
 msgstr "Debug"
 
-#: class-wc-shipping-method-bring.php:202
+#: class-wc-shipping-method-bring.php:215
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
-#: class-wc-shipping-method-bring.php:203
+#: class-wc-shipping-method-bring.php:216
 msgid "These logs will be saved in <code>wc-logs/</code>"
 msgstr "Loggen vil bli lagret i <code>wc-logs/</code>"
 
-#: class-wc-shipping-method-bring.php:227
+#: class-wc-shipping-method-bring.php:240
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
