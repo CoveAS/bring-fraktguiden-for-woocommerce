@@ -2,6 +2,6 @@
 
 See src/readme.txt
 
-## Building
+## Build
 
 See https://github.com/drivdigital/bring-fraktguiden-for-woocommerce-build

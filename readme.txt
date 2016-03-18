@@ -50,9 +50,8 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.1.3 =
 
-* WBF-16: Fixed packaging issue: Shipping options would not be shown when one or more package weighted more than 240 grams
-* [FEATURE] @todo: Evin - dokumenter bring_fraktguiden_standard_url_params
-
+* WBF-16: Packaging issue: Shipping options is not shown if one or more package surpasses 240 grams
+* WBF-18: Add WP filter for modifying request params to Shipping Guide service
 
 = 1.1.2 =
 * Renamed plugin to bring-fraktguiden-for-woocommerce
