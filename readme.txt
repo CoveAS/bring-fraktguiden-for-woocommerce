@@ -50,8 +50,9 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.1.3 =
 
-* WBF-16: Packaging issue: Shipping options is not shown if one or more package surpasses 240 grams
-* WBF-18: Add WP filter for modifying request params to Shipping Guide service
+* WBF-16: Fixed packaging issue: Shipping options was not shown if one or more package surpassed 240 grams
+* WBF-17: Added support for recipient notification from Bring over SMS or E-Mail. After upgrading, please consult the admin option page for Fraktguiden.
+* WBF-18: Added WP filter for modifying the Fraktguiden request parameters. Developers only.
 
 = 1.1.2 =
 * Renamed plugin to bring-fraktguiden-for-woocommerce
