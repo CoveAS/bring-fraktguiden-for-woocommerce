@@ -169,7 +169,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'checkbox',
             'label'       => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
             'description' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br/>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', self::TEXT_DOMAIN ),
-            'default'     => 'yes'
+            'default'     => 'no'
         ),
         'availability'  => array(
             'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
