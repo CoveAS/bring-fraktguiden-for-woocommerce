@@ -316,6 +316,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       foreach ( $this->services as $product ) {
         $url .= '&product='.$product;
       }
+
       // Make the request.
       $response = wp_remote_get( $url );
       // If the request fails, just return.

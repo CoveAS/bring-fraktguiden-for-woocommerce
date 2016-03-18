@@ -115,9 +115,11 @@ class Fraktguiden_Packer {
       return true;
     }
 
-    // Create L x W x H array by removing the weight element.
+    // Create L x W x H array by removing the weight elements.
     $dimensions = $container_size;
     unset( $dimensions['weight_in_grams'] );
+    unset( $dimensions['weight'] );
+
     // Reverse sort the dimensions/L x W x H array.
     arsort( $dimensions );
     // The longest side should now be on the first element.
@@ -132,6 +134,7 @@ class Fraktguiden_Packer {
 
     // Add the longest side and add the other sides multiplied by 2.
     $longest_plus_circumference = $longest_side + ( $side2 * 2 ) + ( $side3 * 2 );
+
     if ( $longest_plus_circumference > 360 ) {
       return true;
     }
