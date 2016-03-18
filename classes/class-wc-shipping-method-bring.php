@@ -48,6 +48,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->from_zip     = $this->settings['from_zip'];
     $this->post_office  = $this->settings['post_office'];
     $this->vat          = $this->settings['vat'];
+    $this->evarsling    = $this->settings['evarsling'];
     $this->services     = $this->settings['services'];
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
@@ -162,6 +163,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'include' => __( 'VAT included', self::TEXT_DOMAIN ),
                 'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
             ),
+        ),
+        'evarsling' => array(
+            'title'       => __( 'Recipient notification', self::TEXT_DOMAIN ),
+            'type'        => 'checkbox',
+            'label'       => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
+            'description' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br>Applies to Bedriftspakke, Klimanøytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', self::TEXT_DOMAIN ),
+            'default'     => 'yes'
         ),
         'availability'  => array(
             'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
@@ -311,7 +319,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Remove any empty elements.
       $params = array_filter( $params );
       // Create url.
+
       $url = add_query_arg( $params, self::SERVICE_URL );
+
       // Add all the selected products to the URL
       foreach ( $this->services as $product ) {
         $url .= '&product='.$product;
@@ -400,6 +410,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
+        'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
     ) );
   }
 
