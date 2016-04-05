@@ -122,6 +122,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'COURIER_4H'                   => 'Bud 4 timer',
         'COURIER_6H'                   => 'Bud 6 timer',
     );
+
+    $wc_log_dir = '';
+    if ( defined( 'WC_LOG_DIR' ) ) {
+      $wc_log_dir = WC_LOG_DIR;
+    }
+
     $this->form_fields = array(
         'enabled'       => array(
             'title'   => __( 'Enable', self::TEXT_DOMAIN ),
@@ -213,7 +219,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'       => __( 'Debug', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
             'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
-            'description' => __( 'These logs will be saved in <code>wc-logs/</code>', self::TEXT_DOMAIN ),
+            'description' => __( 'These logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
         ),
     );

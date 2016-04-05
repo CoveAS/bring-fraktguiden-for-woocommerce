@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2016-03-18 17:10+0100\n"
-"PO-Revision-Date: 2016-03-18 17:16+0100\n"
+"POT-Creation-Date: 2016-04-05 12:03+0200\n"
+"PO-Revision-Date: 2016-04-05 12:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -155,8 +155,8 @@ msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
 #: class-wc-shipping-method-bring.php:216
-msgid "These logs will be saved in <code>wc-logs/</code>"
-msgstr "Loggen vil bli lagret i <code>wc-logs/</code>"
+msgid "These logs will be saved in"
+msgstr "Loggene vil bli lagret i"
 
 #: class-wc-shipping-method-bring.php:240
 #, php-format
@@ -170,3 +170,6 @@ msgstr ""
 "Sørg for at dette er satt opp under <a href=\"%s\">Generellt fanen</a>. <br/"
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
+
+#~ msgid "These logs will be saved in <code>wc-logs/</code>"
+#~ msgstr "Loggen vil bli lagret i <code>wc-logs/</code>"

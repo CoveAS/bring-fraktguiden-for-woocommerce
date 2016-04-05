@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2016-03-18 17:08+0100\n"
-"PO-Revision-Date: 2016-03-18 17:09+0100\n"
+"POT-Creation-Date: 2016-04-05 12:04+0200\n"
+"PO-Revision-Date: 2016-04-05 12:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -157,8 +157,8 @@ msgid "Enable debug logs"
 msgstr "Enable debug logs"
 
 #: class-wc-shipping-method-bring.php:216
-msgid "These logs will be saved in <code>wc-logs/</code>"
-msgstr "These logs will be saved in <code>wc-logs/</code>"
+msgid "These logs will be saved in"
+msgstr "These logs will be saved in"
 
 #: class-wc-shipping-method-bring.php:240
 #, php-format
@@ -172,6 +172,9 @@ msgstr ""
 "be enabled. Please enable them on the <a href=“%s”>Catalog tab</a>. <br/> In "
 "addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=“%s”>General tab</a>"
+
+#~ msgid "These logs will be saved in <code>wc-logs/</code>"
+#~ msgstr "These logs will be saved in <code>wc-logs/</code>"
 
 #~ msgid ""
 #~ "If not checked, Fraktguiden will add a fee for paper based recipient "
