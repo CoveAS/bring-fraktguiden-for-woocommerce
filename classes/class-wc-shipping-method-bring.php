@@ -354,7 +354,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
           $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
         }
 
-        $this->log->add( $this->id, 'Request url: ' . print_r( $query, true ) );
+        $this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
       }
 
       // Calculate rate.
