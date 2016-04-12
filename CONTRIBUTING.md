@@ -35,7 +35,7 @@ This section is for project maintainers only
 * Make sure you have SVN installed and have read/write access to the WordPress.org project
 * Install driv-cli
     * Add `git@bitbucket.org:drivdigital/driv-cli-wp.git` to your `${DRIV-CLI-HOME}/repositories.json`
-* Navigate to the project
-* Make sure the `build.json` has the correct version number
-* Type `driv wp plugin` (assuming you have created an alias named `driv`)
-* Choose `release`
+* Navigate to the project.
+* Make sure the `build.json` has the correct version number.
+* Type `driv wp plugin` (assuming you have created an alias named `driv`).
+* Choose `release` from the menu.
