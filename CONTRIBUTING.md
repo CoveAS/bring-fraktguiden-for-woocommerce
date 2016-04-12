@@ -11,7 +11,7 @@ Bring Fraktguiden for WooCommerce is 100% open source and we love pull requests 
 
 ## Make Changes
 
-* Fork the project.
+* [Fork](https://help.github.com/articles/fork-a-repo/) the project.
 * Create a topic branch from the master branch.
   * To quickly create a topic branch based on master; `git checkout -b
     fix/master/my-contribution master`. Please avoid working directly on the
@@ -23,19 +23,27 @@ Bring Fraktguiden for WooCommerce is 100% open source and we love pull requests 
 
 ````
 $ git commit -m "A brief summary of the commit
-> 
+>
 > A paragraph describing what changed and its impact."
 ````
 * Create a [pull request](https://help.github.com/articles/using-pull-requests/)
 
-## Creating a release
+## Create a Release
 
-This section is for project maintainers only
+This section is for project maintainers only.
+
+**Prerequsites:**
+
+* [Node.js](https://nodejs.org)
+* [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
+* [SVN](https://tortoisesvn.net/) (for commiting to Wordpress.org)
+
+**Procedure**
 
 * Make sure you have SVN installed and have read/write access to the WordPress.org project
-* Install driv-cli
+* Install [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
     * Add `git@bitbucket.org:drivdigital/driv-cli-wp.git` to your `${DRIV-CLI-HOME}/repositories.json`
-* Navigate to the project.
+* Navigate to `${PROJECT-HOME}`.
 * Make sure the `build.json` has the correct version number.
 * Type `driv wp plugin` (assuming you have created an alias named `driv`).
 * Choose `release` from the menu.
