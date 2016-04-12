@@ -14,7 +14,7 @@ Bring Fraktguiden for WooCommerce is 100% open source and we love pull requests 
 * Fork the project.
 * Create a topic branch from the master branch.
   * To quickly create a topic branch based on master; `git checkout -b
-    fix/master/my_contribution master`. Please avoid working directly on the
+    fix/master/my-contribution master`. Please avoid working directly on the
     `master` branch.
 * Make sure you have tested your changes.
 * Make commits of logical units.
@@ -27,3 +27,15 @@ $ git commit -m "A brief summary of the commit
 > A paragraph describing what changed and its impact."
 ````
 * Create a [pull request](https://help.github.com/articles/using-pull-requests/)
+
+## Creating a release
+
+This section is for project maintainers only
+
+* Make sure you have SVN installed and have read/write access to the WordPress.org project
+* Install driv-cli
+    * Add `git@bitbucket.org:drivdigital/driv-cli-wp.git` to your `${DRIV-CLI-HOME}/repositories.json`
+* Navigate to the project
+* Make sure the `build.json` has the correct version number
+* Type `driv wp plugin` (assuming you have created an alias named `driv`)
+* Choose `release`
