@@ -11,7 +11,7 @@ Bring Fraktguiden for WooCommerce is 100% open source and we love pull requests 
 
 ## Make Changes
 
-* Fork the project
+* Fork the project.
 * Create a topic branch from the master branch.
   * To quickly create a topic branch based on master; `git checkout -b
     fix/master/my_contribution master`. Please avoid working directly on the
