@@ -5,7 +5,7 @@ Contributors: drivdigital, Matt Gates
 Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 3.2
-Tested up to: 4.4
+Tested up to: 4.5
 WC requires at least: 2.2
 WC tested up to: 2.5
 Stable tag: ##VERSION##
