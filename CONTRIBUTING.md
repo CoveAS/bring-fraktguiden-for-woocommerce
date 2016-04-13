@@ -1,6 +1,6 @@
 # How to Contribute
 
-Bring Fraktguiden for WooCommerce is 100% open source and we love pull requests and feedback from anyone. By participating in this project, you agree to abide by the Covenant [code of conduct](http://contributor-covenant.org/version/1/4/)
+Bring Fraktguiden for WooCommerce is an open source project and we love pull requests and feedback from anyone. By participating in this project, you agree to abide by the Covenant [code of conduct](http://contributor-covenant.org/version/1/4/)
 
 ## Create a Ticket
 
@@ -38,7 +38,7 @@ This section is for project maintainers only.
 * [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
 * [SVN](https://tortoisesvn.net/) (for commiting to Wordpress.org)
 
-**Procedure**
+**Procedure:**
 
 * Make sure you have SVN installed and have read/write access to the WordPress.org project
 * Install [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
