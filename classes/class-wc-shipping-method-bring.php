@@ -102,28 +102,24 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'BPAKKE_DOR-DOR'               => 'Bedriftspakke',
         'EKSPRESS09'                   => 'Bedriftspakke Ekspress-Over natten 09',
         'MINIPAKKE'                    => 'Minipakken',
-        'A-POST'                       => 'A-Prioritert 1',
-        'B-POST'                       => 'B-Økonomi 2',
-        'QUICKPACK_SAMEDAY'            => 'QuickPack SameDay 3',
-        'QUICKPACK_OVER_NIGHT_0900'    => 'Quickpack Over Night 0900',
-        'QUICKPACK_OVER_NIGHT_1200'    => 'Quickpack Over Night 1200',
-        'QUICKPACK_DAY_CERTAIN'        => 'Quickpack Day Certain',
-        'QUICKPACK_EXPRESS_ECONOMY'    => 'Quickpack Express Economy',
+        'A-POST'                       => 'A-Prioritert',
+        'B-POST'                       => 'B-Økonomi',
+        'SMAAPAKKER_A-POST'            => 'Småpakke A-Post',
+        'SMAAPAKKER_B-POST'            => 'Småpakke B-Post',
+        'EXPRESS_NORDIC_SAME_DAY'      => 'Express Nordic Same Day',
+        'EXPRESS_INTERNATIONAL_0900'   => 'Express International 09:00',
+        'EXPRESS_INTERNATIONAL_1200'   => 'Express International 12:00',
+        'EXPRESS_INTERNATIONAL'        => 'Express International',
+        'EXPRESS_ECONOMY'              => 'Express Economy',
         'CARGO_GROUPAGE'               => 'Cargo',
-        'CARRYON BUSINESS NORWAY'      => 'CarryOn Business Norway',
-        'CARRYON BUSINESS SWEDEN'      => 'CarryOn Business Sweden',
-        'CARRYON BUSINESS DENMARK'     => 'CarryOn Business Denmark',
-        'CARRYON BUSINESS FINLAND'     => 'CarryOn Business Finland',
-        'CARRYON HOMESHOPPING NORWAY'  => 'CarryOn Homeshopping Norway',
-        'CARRYON HOMESHOPPING SWEDEN'  => 'CarryOn Homeshopping Sweden',
-        'CARRYON HOMESHOPPING DENMARK' => 'CarryOn Homeshopping Denmark',
-        'CARRYON HOMESHOPPING FINLAND' => 'CarryOn Homeshopping Finland',
-        'HOMEDELIVERY_CURBSIDE_DAG'    => 'HomeDelivery CurbSide',
+        'BUSINESS_PARCEL'              => 'Business Parcel',
+        'PICKUP_PARCEL'                => 'PickUp Parcel',
         'COURIER_VIP'                  => 'Bud VIP',
         'COURIER_1H'                   => 'Bud 1 time',
         'COURIER_2H'                   => 'Bud 2 timer',
         'COURIER_4H'                   => 'Bud 4 timer',
         'COURIER_6H'                   => 'Bud 6 timer',
+        'OIL_EXPRESS'                  => 'Oil Express',
     );
 
     $wc_log_dir = '';
@@ -231,7 +227,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'       => 'Add description after the service',
             'description' => 'Show service description after the name of the service',
             'default'     => 'no'
-        ),
+        ),                
         'max_products'  => array(
             'title'       => __( 'Max products', self::TEXT_DOMAIN ),
             'type'        => 'text',
@@ -374,7 +370,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
 
-      if ( $this->debug != 'no' ) {
+      if ( $this->debug != 'no' ) {     
         $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
 
         if ( $rates ) {
