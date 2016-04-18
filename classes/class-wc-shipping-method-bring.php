@@ -51,6 +51,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = $this->settings['vat'];
     $this->evarsling    = $this->settings['evarsling'];
     $this->services     = $this->settings['services'];
+    $this->display_rate = $this->settings['display_rate'];
+    $this->display_desc = $this->settings['display_desc'];
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
     if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
@@ -212,6 +214,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'css'     => 'width: 450px;',
             'default' => '',
             'options' => $services
+        ),
+        'display_rate' => array(
+            'title'       => 'Display Service As',
+            'type'        => 'select',
+            'description' => 'The information about the service displayed to the customer',
+            'default'     => 'DisplayName',
+            'options' => array(
+                'DisplayName'     => 'Display Name',
+                'ProductName'     => 'Product Name'
+            )
+        ),
+        'display_desc' => array(
+            'title'       => 'Display Description',
+            'type'        => 'checkbox',
+            'label'       => 'Add description after the service',
+            'description' => 'Show service description after the name of the service',
+            'default'     => 'no'
         ),
         'max_products'  => array(
             'title'       => __( 'Max products', self::TEXT_DOMAIN ),
@@ -405,7 +424,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
           'cost'  => round( $rate ) + (int)$this->fee,
-          'label' => $serviceDetails['GuiInformation']['DisplayName'],
+          'label' => $serviceDetails['GuiInformation'][$this->display_rate] . ( $this->display_desc == 'no' ? '' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
       );
 
       array_push( $rates, $rate );
