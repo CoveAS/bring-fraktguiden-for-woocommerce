@@ -84,7 +84,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $dimensions_unit = get_option( 'woocommerce_dimension_unit' );
     $weight_unit     = get_option( 'woocommerce_weight_unit' );
     $currency        = get_option( 'woocommerce_currency' );
-    return $weight_unit && $dimensions_unit && $currency == 'NOK';
+    return $weight_unit && $dimensions_unit && $currency;
   }
 
   /**
@@ -339,8 +339,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $url = add_query_arg( $params, self::SERVICE_URL );
 
       // Add all the selected products to the URL
-      foreach ( $this->services as $product ) {
-        $url .= '&product='.$product;
+      if ( $this->services && count( $this->services ) > 0 ) {
+        foreach ( $this->services as $product ) {
+          $url .= '&product=' . $product;
+        }
       }
 
       // Make the request.
@@ -434,7 +436,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   public function get_selected_from_country() {
     global $woocommerce;
-    return $this->from_country ? $this->from_country : $woocommerce->countries->get_base_country();
+    return isset( $this->from_country ) ? $this->from_country : $woocommerce->countries->get_base_country();
   }
 
   /**
