@@ -52,6 +52,11 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.2.0 =
 
+* WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
+* WBF-32: Fixed an issue where the checkout page would print a 'Invalid argument supplied for foreach.' message if no Fraktguiden services was provided by the shop (WP DEBUG MODE only)
+
+= 1.2.0 =
+
 * WBF-16: Fixed packaging issue: Shipping options was not shown if one or more package surpassed 240 grams.
 * WBF-17: Added support for recipient notification over SMS or E-Mail from Bring. Note that recipient notification needs to be activated after the upgrade (See: WooCommerce > settings > shipping > Bring Fraktguiden).
 * WBF-18: Added WP filter for modifying the Fraktguiden request parameters.
