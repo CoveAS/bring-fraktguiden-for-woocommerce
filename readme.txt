@@ -50,7 +50,7 @@ A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
 
-= 1.2.0 =
+= 1.2.1 =
 
 * WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
 * WBF-32: Fixed an issue where the checkout page would print a 'Invalid argument supplied for foreach.' message if no Fraktguiden services was provided by the shop (WP DEBUG MODE only)
