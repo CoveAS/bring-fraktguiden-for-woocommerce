@@ -45,6 +45,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->availability = $this->settings['availability'];
     $this->countries    = $this->settings['countries'];
     $this->fee          = $this->settings['handling_fee'];
+    $this->from_country = $this->settings['from_country'];
     $this->from_zip     = $this->settings['from_zip'];
     $this->post_office  = $this->settings['post_office'];
     $this->vat          = $this->settings['vat'];
@@ -83,7 +84,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $dimensions_unit = get_option( 'woocommerce_dimension_unit' );
     $weight_unit     = get_option( 'woocommerce_weight_unit' );
     $currency        = get_option( 'woocommerce_currency' );
-    return $weight_unit && $dimensions_unit && $currency == 'NOK';
+    return $weight_unit && $dimensions_unit && $currency;
   }
 
   /**
@@ -153,6 +154,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'       => __( 'Shipping from post office', self::TEXT_DOMAIN ),
             'description' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
             'default'     => 'no'
+        ),
+        'from_country'    => array(
+            'title'   => __( 'From country', self::TEXT_DOMAIN ),
+            'type'    => 'select',
+            'description' => __( 'This is the country of where you deliver from.', self::TEXT_DOMAIN ),
+            'class'   => 'chosen_select',
+            'css'     => 'width: 450px;',
+            'default' => $this->get_selected_from_country(),
+            'options' => $this->get_nordic_countries()
         ),
         'from_zip'    => array(
             'title'       => __( 'From zip', self::TEXT_DOMAIN ),
@@ -329,8 +339,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $url = add_query_arg( $params, self::SERVICE_URL );
 
       // Add all the selected products to the URL
-      foreach ( $this->services as $product ) {
-        $url .= '&product='.$product;
+      if ( $this->services && count( $this->services ) > 0 ) {
+        foreach ( $this->services as $product ) {
+          $url .= '&product=' . $product;
+        }
       }
 
       // Make the request.
@@ -413,11 +425,44 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
+        'fromCountry'         => $this->get_selected_from_country(),
         'to'                  => $woocommerce->customer->get_shipping_postcode(),
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
     ) );
+  }
+
+
+  public function get_selected_from_country() {
+    global $woocommerce;
+    return isset( $this->from_country ) ? $this->from_country : $woocommerce->countries->get_base_country();
+  }
+
+  /**
+   * Returns an array with nordic country codes
+   *
+   * @return array
+   */
+  public function get_nordic_countries() {
+    global $woocommerce;
+    $countries = array( 'NO', 'SE', 'DK', 'FI', 'IS' );
+    return $this->array_filter_key( $woocommerce->countries->countries, function ( $k ) use ( $countries ) {
+      return in_array( $k, $countries );
+    } );
+  }
+
+  /**
+   * Returns an array based on the filter in the callback function.
+   * Same as PHP's array_filter but uses the key instead of value.
+   *
+   * @param array $array
+   * @param callable $callback
+   * @return array
+   */
+  private function array_filter_key( $array, $callback ) {
+    $matched_keys = array_filter( array_keys( $array ), $callback );
+    return array_intersect_key( $array, array_flip( $matched_keys ) );
   }
 
 }

@@ -5,7 +5,7 @@ Contributors: drivdigital, Matt Gates
 Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 3.2
-Tested up to: 4.4
+Tested up to: 4.5
 WC requires at least: 2.2
 WC tested up to: 2.5
 Stable tag: ##VERSION##
@@ -17,6 +17,8 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 == Description ==
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 All standard shipping methods from Bring is built-in. Volume calculation based on product dimensions and weight.
+
+Please consult the installation section and changelog section before installing or upgrading.
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
@@ -47,6 +49,11 @@ Q: Why do rates not show up on the cart page?
 A: Rates are only shown when the customer has a valid zip code.
 
 == Changelog ==
+
+= 1.2.0 =
+
+* WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
+* WBF-32: Fixed an issue where the checkout page would print a 'Invalid argument supplied for foreach.' message if no Fraktguiden services was provided by the shop (WP DEBUG MODE only)
 
 = 1.2.0 =
 
