@@ -30,13 +30,14 @@ $ git commit -m "A brief summary of the commit
 
 ## Create a Release
 
-This section is for project maintainers only.
+This section applies to project maintainers only.
 
 **Prerequsites:**
 
 * [Node.js](https://nodejs.org)
 * [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
 * [SVN](https://tortoisesvn.net/) (for commiting to Wordpress.org)
+* Write access to the Wordpress.org SVN repository
 
 **Procedure:**
 
