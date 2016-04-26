@@ -18,7 +18,14 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 All standard shipping methods from Bring is built-in. Volume calculation based on product dimensions and weight.
 
-Please consult the installation section and changelog section before installing or upgrading.
+Please consult the installation section and the changelog section before installing or upgrading.
+
+New in 1.2.1
+
+* Fraktguiden services list is up-to-date with Fraktguiden. Please check your services configuration after updating.
+* Improved support for shipping from and to all Nordic countries. Based on WooCommerce's base location. It is possible to override this in Fraktguiden's configuration screen.
+* Option for using Display Name or Product Name when displaying the services to customers (Thanks to oakidoaki).
+* Bug fixes
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
@@ -52,8 +59,10 @@ A: Rates are only shown when the customer has a valid zip code.
 
 = 1.2.1 =
 
+* WBF-30: Update the Fraktguiden product list.
 * WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
 * WBF-32: Fixed an issue where the checkout page would print a 'Invalid argument supplied for foreach.' message if no Fraktguiden services was provided by the shop (WP DEBUG MODE only)
+* WBF-35: Option for using Product Name when displaying the services to customers
 
 = 1.2.0 =
 
