@@ -51,7 +51,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = $this->settings['vat'];
     $this->evarsling    = $this->settings['evarsling'];
     $this->services     = $this->settings['services'];
-    $this->display_rate = $this->settings['display_rate'];
+    $this->service_name = $this->settings['service_name'];
     $this->display_desc = $this->settings['display_desc'];
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
@@ -211,23 +211,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
-        'display_rate' => array(
-            'title'       => 'Display Service As',
+        'service_name'  => array(
+            'title'       => __( 'Display Service As', self::TEXT_DOMAIN ),
             'type'        => 'select',
-            'description' => 'The information about the service displayed to the customer',
+            'description' => __( 'The service name displayed to the customer', self::TEXT_DOMAIN ),
             'default'     => 'DisplayName',
             'options' => array(
                 'DisplayName'     => 'Display Name',
                 'ProductName'     => 'Product Name'
             )
         ),
-        'display_desc' => array(
-            'title'       => 'Display Description',
+        'display_desc'  => array(
+            'title'       => __( 'Display Description', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
-            'label'       => 'Add description after the service',
-            'description' => 'Show service description after the name of the service',
+            'label'       => __( 'Add description after the service', self::TEXT_DOMAIN ),
+            'description' => __( 'Show service description after the name of the service', self::TEXT_DOMAIN ),
             'default'     => 'no'
-        ),                
+        ),
         'max_products'  => array(
             'title'       => __( 'Max products', self::TEXT_DOMAIN ),
             'type'        => 'text',
@@ -372,7 +372,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
 
-      if ( $this->debug != 'no' ) {     
+      if ( $this->debug != 'no' ) {
         $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
 
         if ( $rates ) {
@@ -421,8 +421,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
-          'cost'  => round( $rate ) + (int)$this->fee,
-          'label' => $serviceDetails['GuiInformation'][$this->display_rate] . ( $this->display_desc == 'no' ? '' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
+          'cost'  => (float)$rate + (float)$this->fee,
+          'label' => $serviceDetails['GuiInformation'][$this->service_name] . ( $this->display_desc == 'no' ? '' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
       );
 
       array_push( $rates, $rate );
