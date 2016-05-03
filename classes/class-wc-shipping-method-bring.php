@@ -22,6 +22,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const DEFAULT_ALT_FLAT_RATE = 200;
 
+  private $from_country = '';
+  private $from_zip = '';
+  private $post_office = '';
+  private $vat = '';
+  private $evarsling = '';
+  private $services = array();
+  private $service_name = '';
+  private $display_desc = '';
+  private $max_products = '';
+  private $alt_flat_rate = '';
+
   /**
    * @constructor
    */
@@ -40,19 +51,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->log   = new WC_Logger();
 
     // Define user set variables
+
+    // WC_Shipping_Method
     $this->enabled      = $this->settings['enabled'];
     $this->title        = $this->settings['title'];
     $this->availability = $this->settings['availability'];
     $this->countries    = $this->settings['countries'];
     $this->fee          = $this->settings['handling_fee'];
-    $this->from_country = $this->settings['from_country'];
-    $this->from_zip     = $this->settings['from_zip'];
-    $this->post_office  = $this->settings['post_office'];
-    $this->vat          = $this->settings['vat'];
-    $this->evarsling    = $this->settings['evarsling'];
-    $this->services     = $this->settings['services'];
-    $this->service_name = $this->settings['service_name'];
-    $this->display_desc = $this->settings['display_desc'];
+
+    // WC_Shipping_Method_Bring
+    $this->from_country = array_key_exists( 'from_country', $this->settings ) ? $this->settings['from_country'] : '';
+    $this->from_zip     = array_key_exists( 'from_zip', $this->settings ) ? $this->settings['from_zip'] : '';
+    $this->post_office  = array_key_exists( 'post_office', $this->settings ) ? $this->settings['post_office'] : '';
+    $this->vat          = array_key_exists( 'vat', $this->settings ) ? $this->settings['vat'] : '';
+    $this->evarsling    = array_key_exists( 'evarsling', $this->settings ) ? $this->settings['evarsling'] : '';
+    $this->services     = array_key_exists( 'services', $this->settings ) ? $this->settings['services'] : '';
+    $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : '';
+    $this->display_desc = array_key_exists( 'display_desc', $this->settings ) ? $this->settings['display_desc'] : '';
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
     if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
@@ -96,30 +111,30 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function init_form_fields() {
     global $woocommerce;
-    $services          = array(
-        'SERVICEPAKKE'                 => 'Klimanøytral Servicepakke',
-        'PA_DOREN'                     => 'På Døren',
-        'BPAKKE_DOR-DOR'               => 'Bedriftspakke',
-        'EKSPRESS09'                   => 'Bedriftspakke Ekspress-Over natten 09',
-        'MINIPAKKE'                    => 'Minipakken',
-        'A-POST'                       => 'A-Prioritert',
-        'B-POST'                       => 'B-Økonomi',
-        'SMAAPAKKER_A-POST'            => 'Småpakke A-Post',
-        'SMAAPAKKER_B-POST'            => 'Småpakke B-Post',
-        'EXPRESS_NORDIC_SAME_DAY'      => 'Express Nordic Same Day',
-        'EXPRESS_INTERNATIONAL_0900'   => 'Express International 09:00',
-        'EXPRESS_INTERNATIONAL_1200'   => 'Express International 12:00',
-        'EXPRESS_INTERNATIONAL'        => 'Express International',
-        'EXPRESS_ECONOMY'              => 'Express Economy',
-        'CARGO_GROUPAGE'               => 'Cargo',
-        'BUSINESS_PARCEL'              => 'Business Parcel',
-        'PICKUP_PARCEL'                => 'PickUp Parcel',
-        'COURIER_VIP'                  => 'Bud VIP',
-        'COURIER_1H'                   => 'Bud 1 time',
-        'COURIER_2H'                   => 'Bud 2 timer',
-        'COURIER_4H'                   => 'Bud 4 timer',
-        'COURIER_6H'                   => 'Bud 6 timer',
-        'OIL_EXPRESS'                  => 'Oil Express',
+    $services = array(
+        'SERVICEPAKKE'               => 'Klimanøytral Servicepakke',
+        'PA_DOREN'                   => 'På Døren',
+        'BPAKKE_DOR-DOR'             => 'Bedriftspakke',
+        'EKSPRESS09'                 => 'Bedriftspakke Ekspress-Over natten 09',
+        'MINIPAKKE'                  => 'Minipakken',
+        'A-POST'                     => 'A-Prioritert',
+        'B-POST'                     => 'B-Økonomi',
+        'SMAAPAKKER_A-POST'          => 'Småpakke A-Post',
+        'SMAAPAKKER_B-POST'          => 'Småpakke B-Post',
+        'EXPRESS_NORDIC_SAME_DAY'    => 'Express Nordic Same Day',
+        'EXPRESS_INTERNATIONAL_0900' => 'Express International 09:00',
+        'EXPRESS_INTERNATIONAL_1200' => 'Express International 12:00',
+        'EXPRESS_INTERNATIONAL'      => 'Express International',
+        'EXPRESS_ECONOMY'            => 'Express Economy',
+        'CARGO_GROUPAGE'             => 'Cargo',
+        'BUSINESS_PARCEL'            => 'Business Parcel',
+        'PICKUP_PARCEL'              => 'PickUp Parcel',
+        'COURIER_VIP'                => 'Bud VIP',
+        'COURIER_1H'                 => 'Bud 1 time',
+        'COURIER_2H'                 => 'Bud 2 timer',
+        'COURIER_4H'                 => 'Bud 4 timer',
+        'COURIER_6H'                 => 'Bud 6 timer',
+        'OIL_EXPRESS'                => 'Oil Express',
     );
 
     $wc_log_dir = '';
@@ -146,27 +161,27 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
             'default'     => ''
         ),
-        'post_office' => array(
+        'post_office'   => array(
             'title'       => __( 'Post office', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
             'label'       => __( 'Shipping from post office', self::TEXT_DOMAIN ),
             'description' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
             'default'     => 'no'
         ),
-        'from_country'    => array(
-            'title'   => __( 'From country', self::TEXT_DOMAIN ),
-            'type'    => 'select',
-            'description' => __( 'This is the country of where you deliver from.', self::TEXT_DOMAIN ),
-            'class'   => 'chosen_select',
-            'css'     => 'width: 450px;',
-            'default' => $this->get_selected_from_country(),
-            'options' => $this->get_nordic_countries()
-        ),
-        'from_zip'    => array(
+        'from_zip'      => array(
             'title'       => __( 'From zip', self::TEXT_DOMAIN ),
             'type'        => 'text',
             'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', self::TEXT_DOMAIN ),
             'default'     => ''
+        ),
+        'from_country'  => array(
+            'title'       => __( 'From country', self::TEXT_DOMAIN ),
+            'type'        => 'select',
+            'description' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
+            'class'       => 'chosen_select',
+            'css'         => 'width: 450px;',
+            'default'     => $this->get_selected_from_country(),
+            'options'     => $this->get_nordic_countries()
         ),
         'vat'           => array(
             'title'       => __( 'Display price', self::TEXT_DOMAIN ),
@@ -178,7 +193,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
             ),
         ),
-        'evarsling' => array(
+        'evarsling'     => array(
             'title'       => __( 'Recipient notification', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
             'label'       => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
@@ -216,9 +231,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'select',
             'description' => __( 'The service name displayed to the customer', self::TEXT_DOMAIN ),
             'default'     => 'DisplayName',
-            'options' => array(
-                'DisplayName'     => 'Display Name',
-                'ProductName'     => 'Product Name'
+            'options'     => array(
+                'DisplayName' => __( 'Display Name', self::TEXT_DOMAIN ),
+                'ProductName' => __( 'Product Name', self::TEXT_DOMAIN ),
             )
         ),
         'display_desc'  => array(
@@ -377,7 +392,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
         if ( $rates ) {
           $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
-        } else {
+        }
+        else {
           $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
         }
 
