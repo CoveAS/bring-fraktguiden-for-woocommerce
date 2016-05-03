@@ -15,18 +15,18 @@ License URI: http://opensource.org/licenses/MIT
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
-Bring Fraktguiden provides shipping calculation based on rates from bring.no.
-All standard shipping methods from Bring is built-in. Volume calculation based on product dimensions and weight.
+Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no.
+All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
 
 Please consult the installation section and the changelog section before installing or upgrading.
 
 New in 1.2.1
 
 * Fraktguiden services list is up-to-date with Fraktguiden. Please check your services configuration after updating.
-* Improved support for shipping from and shipping to all Nordic countries.
+* Improved support for shipping from and to all Nordic countries.
 * Option for using Display Name or Product Name when displaying the services to customers (Thanks to oakidoaki).
 * Option for displaying the service's description (Thanks to oakidoaki).
-* Bug fixes
+* General bug fixes throughout
 
 Special thanks goes to Matt Gates for allowing us to use his code as a base for this plugin.
 
