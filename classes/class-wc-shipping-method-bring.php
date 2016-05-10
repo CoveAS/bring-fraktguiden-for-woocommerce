@@ -66,7 +66,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = array_key_exists( 'vat', $this->settings ) ? $this->settings['vat'] : '';
     $this->evarsling    = array_key_exists( 'evarsling', $this->settings ) ? $this->settings['evarsling'] : '';
     $this->services     = array_key_exists( 'services', $this->settings ) ? $this->settings['services'] : '';
-    $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : '';
+    $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : 'DisplayName';
     $this->display_desc = array_key_exists( 'display_desc', $this->settings ) ? $this->settings['display_desc'] : '';
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
     // Extra safety, in case shop owner blanks ('') the value.
