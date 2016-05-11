@@ -16,6 +16,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
 
+  const ID = 'bring_fraktguiden';
+
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
   const DEFAULT_MAX_PRODUCTS = 100;
@@ -37,7 +39,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @constructor
    */
   public function __construct() {
-    $this->id           = 'bring_fraktguiden';
+    $this->id           = self::ID;
     $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
 
     // Load the form fields.
@@ -142,7 +144,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $wc_log_dir = WC_LOG_DIR;
     }
 
-    $this->form_fields = array(
+    $this->form_fields = apply_filters( 'bring_fraktguiden_admin_form_fields', array(
         'enabled'       => array(
             'title'   => __( 'Enable', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
@@ -262,7 +264,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'These logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
         ),
-    );
+    ) );
+
   }
 
   /**

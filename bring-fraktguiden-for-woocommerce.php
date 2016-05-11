@@ -35,6 +35,12 @@ class Bring_Fraktguiden {
    */
   static function shipping_init() {
     include_once 'classes/class-wc-shipping-method-bring.php';
+
+    // Add pro features.
+    if ( file_exists( dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php' ) ) {
+        include_once dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php';
+    }
+
     // Add the method to WooCommerce.
     add_filter( 'woocommerce_shipping_methods', 'Bring_Fraktguiden::add_bring_method' );
   }
