@@ -6,6 +6,7 @@
     // The pickup point elements needs to be created each time the billing info, shipping info etc. changes.
     var user_selected = {
         postcode:        '',
+        country:         '',
         pickup_point_id: ''
     };
 
@@ -28,33 +29,43 @@
                 // Create pickup point html.
                 add_pickup_point_html();
                 // Load pickup points.
-                load_pickup_points( get_selected_woo_postcode() );
+                load_pickup_points( get_selected_woo_postcode(), get_selected_woo_country() );
             }
         }
     } );
 
     // When Fraktguiden postcode is updated.
-    $( document.body ).on( 'fraktguiden_updated_postcode', function ( evt, postcode ) {
+    $( document.body ).on( 'fraktguiden_updated_postcode', function ( evt, postcode, country ) {
         pickuppoint_select_elem().val( '' );
         user_selected.pickup_point_id = '';
-        update_info( '' );
+        update_info( null );
         var code = $.trim( postcode );
         if ( code == '' ) return;
         delay( function () {
-            load_pickup_points( code );
+            load_pickup_points( code, country );
         }, 700 );
     } );
 
     // When the Woo billing post code changes.
     woo_billing_postcode_elem().keyup( function ( evt ) {
         pickuppoint_postcode_elem().val( this.value );
-        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val()] );
+        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val(), get_selected_woo_country()] );
     } );
 
     // When the Woo shipping post code changes
     woo_shipping_postcode_elem().keyup( function ( evt ) {
         pickuppoint_postcode_elem().val( this.value );
-        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val()] );
+        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val(), get_selected_woo_country()] );
+    } );
+
+    // When the billing country selector changes.
+    woo_billing_country_elem().change( function () {
+        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val(), get_selected_woo_country()] );
+    } );
+
+    // When the shipping country selector changes.
+    woo_shipping_country_elem().change( function () {
+        $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickuppoint_postcode_elem().val(), get_selected_woo_country()] );
     } );
 
     /**
@@ -81,24 +92,28 @@
 
         // Add events to the postcode and inputs.
         pickuppoint_postcode_elem().keyup( function ( evt ) {
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [this.value] );
+            $( document.body ).trigger( 'fraktguiden_updated_postcode', [this.value], get_selected_woo_country() );
         } );
 
         pickuppoint_select_elem().change( function () {
             var selected_option = $( this.options[this.selectedIndex] );
-            update_info(selected_option.data('info'));
+            update_info( selected_option.data( 'info' ) );
             user_selected.pickup_point_id = this.value;
         } );
     }
 
     /**
      * @param postcode {String}
+     * @param country {String}
      */
-    function load_pickup_points( postcode ) {
+    function load_pickup_points( postcode, country ) {
+
         user_selected.postcode = postcode;
+        user_selected.country = country;
+
         $.ajax( {
             // @todo: should not load from root.
-            url:        '/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/proxy.php?url=https://api.bring.com/pickuppoint/api/pickuppoint/no/postalCode/' + postcode + '.json',
+            url:        '/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/proxy.php?url=https://api.bring.com/pickuppoint/api/pickuppoint/' + country + '/postalCode/' + postcode + '.json',
             dataType:   'json',
             beforeSend: function ( xhr ) {
 
@@ -153,13 +168,12 @@
     function update_info( info ) {
         // var html = '<p>Valgt hentested</p><div>' + info.name + '<br/>' + info.visitingAddress + '<br/>' + info.visitingPostalCode + ' ' + info.visitingCity + '</div><div>' + get_opening_hours( info ) + '</div>';
         // $( '#fraktguiden-pickuppoint-info' ).html( html );
+        if ( !info ) return;
 
-        $('#fpp-name').text(info.name);
-        $('#fpp-address').text(info.visitingAddress);
-        $('#fpp-postal').text(info.visitingPostalCode + ' ' + info.visitingCity);
-        $('#fpp-opening-hours').text(get_opening_hours( info ));
-
-
+        $( '#fpp-name' ).text( info.name );
+        $( '#fpp-address' ).text( info.visitingAddress );
+        $( '#fpp-postal' ).text( info.visitingPostalCode + ' ' + info.visitingCity );
+        $( '#fpp-opening-hours' ).text( get_opening_hours( info ) );
     }
 
     function woo_billing_postcode_elem() {
@@ -168,6 +182,14 @@
 
     function woo_shipping_postcode_elem() {
         return $( '[name=shipping_postcode]' );
+    }
+
+    function woo_billing_country_elem() {
+        return $( '[name=billing_country]' );
+    }
+
+    function woo_shipping_country_elem() {
+        return $( '[name=shipping_country]' );
     }
 
     function pickuppoint_postcode_elem() {
@@ -186,6 +208,10 @@
         return ship_to_different_address() ? woo_shipping_postcode_elem().val() : woo_billing_postcode_elem().val()
     }
 
+    function get_selected_woo_country() {
+        return ship_to_different_address() ? woo_shipping_country_elem().val() : woo_billing_country_elem().val()
+    }
+
     function get_wp_lang() {
         var lang = $( 'html' ).attr( 'lang' );
         if ( ! lang ) {
@@ -195,14 +221,14 @@
     }
 
     function get_opening_hours( pickup_point ) {
-        var country = get_wp_lang().split( '-' )[1];
+        var country = get_selected_woo_country();
         var lang = '';
         switch ( country ) {
-            case 'DA':
+            case 'DK':
                 lang = 'Danish';
                 break;
             case 'EN':
-                lang = 'Danish';
+                lang = 'English';
                 break;
             case 'FI':
                 lang = 'Finish';
