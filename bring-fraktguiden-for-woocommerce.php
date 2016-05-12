@@ -25,6 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Bring_Fraktguiden {
   static function init() {
     if ( class_exists( 'WooCommerce' ) ) {
+      include_once 'classes/class-wc-shipping-method-bring.php';
+
+      // Add pro features.
+      if ( file_exists( dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php' ) ) {
+        include_once dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php';
+      }
+
       load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
       add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
     }
@@ -34,13 +41,6 @@ class Bring_Fraktguiden {
    * Includes the shipping method
    */
   static function shipping_init() {
-    include_once 'classes/class-wc-shipping-method-bring.php';
-
-    // Add pro features.
-    if ( file_exists( dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php' ) ) {
-        include_once dirname( __FILE__ ) . '/pro/class-fraktguiden-pro.php';
-    }
-
     // Add the method to WooCommerce.
     add_filter( 'woocommerce_shipping_methods', 'Bring_Fraktguiden::add_bring_method' );
   }
