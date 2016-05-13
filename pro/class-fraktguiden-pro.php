@@ -1,10 +1,5 @@
 <?php
 
-
-//Notice: is_page was called incorrectly. Conditional query tags do not work before the query is run. Before then, they always return false. Please see Debugging in WordPress for more information. (This message was added in version 3.1.) in /vagrant/wpplugins.dev/wp-includes/functions.php on line 3792
-//Notice: wp_register_script was called incorrectly. Scripts and styles should not be registered or enqueued until the wp_enqueue_scripts, admin_enqueue_scripts, or login_enqueue_scripts hooks. Please see Debugging in WordPress for more information. (This message was added in version 3.3.) in /vagrant/wpplugins.dev/wp-includes/functions.php on line 3792
-//https://api.bring.com/pickuppoint/api/pickuppoint/{countryCode}/id/{id}.json
-
 Bring_Fraktguiden_Pro::init();
 
 class Bring_Fraktguiden_Pro {
@@ -16,16 +11,22 @@ class Bring_Fraktguiden_Pro {
     if ( self::get_woo_setting( 'pickup_point' ) == 'yes' ) {
 
       // Enqueue checkout Javascript.
-      add_action( 'wp_enqueue_scripts', 'Bring_Fraktguiden_Pro::enqueue_checkout_script' );
+      add_action( 'wp_enqueue_scripts', 'Bring_Fraktguiden_Pro::enqueue_checkout_javascript' );
+
+      // Enqueue admin Javascript.
+      add_action( 'admin_enqueue_scripts', 'Bring_Fraktguiden_Pro::enqueue_admin_javascript' );
+
+      // Ajax
+      add_action( 'wp_ajax_fg_get_pickup_point', 'Bring_Fraktguiden_Pro::ajax_get_pickup_point' );
+      add_action( 'wp_ajax_nopriv_fg_get_pickup_point', 'Bring_Fraktguiden_Pro::ajax_get_pickup_point' );
+      add_action( 'wp_ajax_fg_get_services', 'Bring_Fraktguiden_Pro::ajax_get_fraktguiden_services' );
+      add_action( 'wp_ajax_nopriv_fg_get_services', 'Bring_Fraktguiden_Pro::ajax_get_fraktguiden_services' );
 
       // Inject pickup point data to admin order page.
       add_action( 'admin_print_scripts', 'Bring_Fraktguiden_Pro::inline_pickup_point_data_to_admin_order' );
-      // Enqueue admin Javascript.
-      add_action( 'admin_enqueue_scripts', 'Bring_Fraktguiden_Pro::enqueue_admin_script' );
 
       // Update order with pickup point id.
       add_action( 'woocommerce_checkout_update_order_meta', 'Bring_Fraktguiden_Pro::checkout_update_order_meta' );
-
     }
   }
 
@@ -47,12 +48,10 @@ class Bring_Fraktguiden_Pro {
     return $fields;
   }
 
-  /**
-   * Enqueue javascript to the checkout page.
-   */
-  static function enqueue_checkout_script() {
+  static function enqueue_checkout_javascript() {
     if ( is_checkout() ) {
       wp_register_script( 'fraktguiden-pickup-point-checkout', plugins_url( 'js/pickup-point-checkout.js', __FILE__ ), array( 'jquery' ), '##VERSION##', true );
+      wp_localize_script( 'fraktguiden-pickup-point-checkout', '_fraktguiden_pickup_point', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
       wp_enqueue_script( 'fraktguiden-pickup-point-checkout' );
     }
   }
@@ -60,43 +59,51 @@ class Bring_Fraktguiden_Pro {
   /**
    * Enqueue javascript to the admin order page.
    */
-  static function enqueue_admin_script() {
+  static function enqueue_admin_javascript() {
     $screen = get_current_screen();
     if ( $screen->id == 'shop_order' ) {
       wp_register_script( 'fraktguiden-pickup-point-admin', plugins_url( 'js/pickup-point-admin.js', __FILE__ ), array( 'jquery' ), '##VERSION##', true );
+      wp_localize_script( 'fraktguiden-pickup-point-admin', '_fraktguiden_pickup_point', array(
+          'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+          'order_items' => self::get_pickup_points_for_order()
+
+      ) );
       wp_enqueue_script( 'fraktguiden-pickup-point-admin' );
     }
   }
 
-  static function inline_pickup_point_data_to_admin_order() {
+  static function get_pickup_points_for_order() {
     $screen = get_current_screen();
 
     if ( $screen->id == 'shop_order' ) {
       global $post;
 
+      $result = [ ];
+
       $order            = new WC_Order( $post->ID );
       $shipping_methods = $order->get_shipping_methods();
 
-      $json = [ ];
       foreach ( $shipping_methods as $id => $method_item ) {
         $pickup_point_id = wc_get_order_item_meta( $id, '_fraktguiden_pickup_point_id', true );
         if ( $pickup_point_id ) {
-          $res = wp_remote_get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $order->get_address()['country'] . '/id/' . $pickup_point_id . '.json' );
-          file_put_contents( '/vagrant/debug.log', print_r( $res, 1 ) . PHP_EOL, FILE_APPEND );
-          if ( ! is_wp_error( $res ) && $res['response']['code'] == 200 ) {
-            $json[] = [
+          $response = wp_remote_get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $order->get_address()['country'] . '/id/' . $pickup_point_id . '.json' );
+          file_put_contents( '/vagrant/debug.log', print_r( $response, 1 ) . PHP_EOL, FILE_APPEND );
+          if ( ! is_wp_error( $response ) && $response['response']['code'] == 200 ) {
+            $result[] = [
                 'item_id'      => $id,
-                'pickup_point' => json_decode( $res['body'] )->pickupPoint[0]
+                'pickup_point' => json_decode( $response['body'] )->pickupPoint[0]
             ];
           }
         }
       }
 
-      if ( ! empty( $json ) ) {
-        echo '<script>';
-        echo 'var _fraktguiden_order_items_data = ' . json_encode( $json );
-        echo '</script>';
-      }
+      return $result;
+
+//      if ( ! empty( $json ) ) {
+//        echo '<script>';
+//        echo 'var _fraktguiden_order_items_data = ' . json_encode( $json );
+//        echo '</script>';
+//      }
     }
   }
 
@@ -137,5 +144,27 @@ class Bring_Fraktguiden_Pro {
     $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
     return array_key_exists( $key, $options ) ? $options[$key] : false;
   }
+
+  static function ajax_get_available_services() {
+    //Bring_Fraktguiden_Services
+    die();
+  }
+
+  static function ajax_get_pickup_point() {
+    if ( isset( $_GET['country'] ) && $_GET['postcode'] ) {
+      self::get_pickup_point( $_GET['country'], $_GET['postcode'] );
+      die();
+    }
+  }
+
+  static function ajax_get_fraktguiden_services() {
+    echo json_encode( Bring_Fraktguiden_Services::get_available() );
+    die();
+  }
+
+  static function get_pickup_point( $country, $postcode ) {
+    echo( file_get_contents( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/postalCode/' . $postcode . '.json' ) );
+  }
+
 
 }

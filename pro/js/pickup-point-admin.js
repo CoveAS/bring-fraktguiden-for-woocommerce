@@ -1,9 +1,13 @@
+/* global _fraktguiden_pickup_point */
 // Admin
+
 (function () {
 
     // *************************************************************************
     // Setup
+
     var $ = jQuery;
+
     var mutation_observer = null;
 
     if ( $( '.order_data_column:nth-child(3) .address' ).find( 'p.none_set' ).length > 0 ) {
@@ -11,28 +15,15 @@
         return;
     }
 
-    if ( ! window._fraktguiden_order_items_data ) {
+    if ( ! (window._fraktguiden_pickup_point && window._fraktguiden_pickup_point.order_items) ) {
         return;
     }
-
-    //print_pickup_point_to_view( _fraktguiden_pickup_point );
-
-    // $('#order_shipping_line_items').find('.shipping' ).each(function(i, elem) {
-    //
-    //     var shipping_row = $(elem);
-    //
-    //     if (shipping_row.find('select[name^=shipping_method]').val().indexOf('bring_fraktguiden') > -1) {
-    //         new Pickup_Point_Item(shipping_row);
-    //     }
-    //
-    // });
 
     update_row_views();
 
     init_dom_mutation_observer();
 
     init_event_listeners();
-
 
     // *************************************************************************
     // Functions
@@ -45,7 +36,7 @@
     }
 
     function update_row_views() {
-        var items = window._fraktguiden_order_items_data;
+        var items = window. window._fraktguiden_pickup_point.order_items;
 
         for ( var key in items ) {
             if ( ! items.hasOwnProperty( key ) ) {
@@ -74,16 +65,24 @@
         var title_elem = get_shipping_method_title_elem( edit_row );
         title_elem.hide();
 
-        var service_selector = $( '<select style="width:200px" name="_fraktguiden_services"/>' );
-        service_selector.append( '<option>På posten</option>' );
-        service_selector.append( '<option>I postkassen (A-Prioritet)</option>' );
-        service_selector.append( '<option>I postkassen (B-Økonomi)</option>' );
-
-        title_elem.after( service_selector );
+        $.ajax( {
+            url:        _fraktguiden_pickup_point.ajaxurl,
+            data:       {'action': 'fg_get_services'},
+            dataType:   'json',
+            beforeSend: function ( xhr ) {
+            },
+            success:    function ( data, status ) {
+                var service_selector = $( '<select style="width:200px" name="_fraktguiden_services"/>' );
+                for ( var key in data ) {
+                    service_selector.append( '<option value="' + key + '">' + data[key] + '</option>' );
+                }
+                title_elem.after( service_selector );
+            }
+        } );
     }
 
     function destroy_pickup_point_ui( edit_row ) {
-        $('[name=_fraktguiden_services]', edit_row).remove();
+        $( '[name=_fraktguiden_services]', edit_row ).remove();
         get_shipping_method_title_elem( edit_row ).show();
     }
 

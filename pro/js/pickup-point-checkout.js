@@ -66,8 +66,8 @@
         user_selected.country = country;
 
         $.ajax( {
-            // @todo: should not load from root.
-            url:        '/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/proxy.php?url=https://api.bring.com/pickuppoint/api/pickuppoint/' + country + '/postalCode/' + postcode + '.json',
+            url : _fraktguiden_pickup_point.ajaxurl,
+            data: {'action': 'fg_get_pickup_point', 'country': country, 'postcode': postcode},
             dataType:   'json',
             beforeSend: function ( xhr ) {
             },
@@ -105,7 +105,6 @@
             pickup_point_selector.val( user_selected.pickup_point_id );
         }
     }
-
 
     function init_event_listeners() {
 
