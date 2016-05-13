@@ -25,6 +25,7 @@ class Bring_Fraktguiden_Pro {
 
       // Update order with pickup point id.
       add_action( 'woocommerce_checkout_update_order_meta', 'Bring_Fraktguiden_Pro::checkout_update_order_meta' );
+
     }
   }
 
@@ -73,33 +74,54 @@ class Bring_Fraktguiden_Pro {
     if ( $screen->id == 'shop_order' ) {
       global $post;
 
-      $pickup_point_id = get_post_meta( $post->ID, '_fraktguiden_pickuppoint_id', true );
+      $order            = new WC_Order( $post->ID );
+      $shipping_methods = $order->get_shipping_methods();
 
-      if ( $pickup_point_id ) {
-        $order = new WC_Order( $post->ID );
-
-        $res = wp_remote_get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $order->get_address()['country'] . '/id/' . $pickup_point_id . '.json' );
-
-        file_put_contents('/vagrant/debug.log', print_r($res,1) . PHP_EOL, FILE_APPEND);
-
-        if ( $res['response']['code'] == 200 ) {
-          echo '<script>';
-          echo 'var _fraktguiden_pickup_point = ' . $res['body'];
-          echo '</script>';
+      $json = [ ];
+      foreach ( $shipping_methods as $id => $method_item ) {
+        $pickup_point_id = wc_get_order_item_meta( $id, '_fraktguiden_pickup_point_id', true );
+        if ( $pickup_point_id ) {
+          $res = wp_remote_get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $order->get_address()['country'] . '/id/' . $pickup_point_id . '.json' );
+          file_put_contents( '/vagrant/debug.log', print_r( $res, 1 ) . PHP_EOL, FILE_APPEND );
+          if ( ! is_wp_error( $res ) && $res['response']['code'] == 200 ) {
+            $json[] = [
+                'item_id'      => $id,
+                'pickup_point' => json_decode( $res['body'] )->pickupPoint[0]
+            ];
+          }
         }
+      }
+
+      if ( ! empty( $json ) ) {
+        echo '<script>';
+        echo 'var _fraktguiden_order_items_data = ' . json_encode( $json );
+        echo '</script>';
       }
     }
   }
 
   /**
-   * Store the pickup point id on order checkout.
-   *
    * @param int $order_id
    */
   static function checkout_update_order_meta( $order_id ) {
-    if ( ! empty( $_POST['_fraktguiden_pickuppoint_id'] ) ) {
-      update_post_meta( $order_id, '_fraktguiden_pickuppoint_id', sanitize_text_field( $_POST['_fraktguiden_pickuppoint_id'] ) );
+
+    $order            = new WC_Order( $order_id );
+    $shipping_methods = $order->get_shipping_methods();
+
+    foreach ( $shipping_methods as $id => $method_item ) {
+      $method_id = wc_get_order_item_meta( $id, 'method_id', true );
+
+      if ( $method_id == 'bring_fraktguiden:servicepakke' ) {
+        // Assume it is only one shipping method in checkout for now.
+        if ( ! empty( $_POST['_fraktguiden_pickup_point_id'] ) ) {
+          wc_add_order_item_meta( $id, '_fraktguiden_pickup_point_id', $_POST['_fraktguiden_pickup_point_id'] );
+        }
+      }
     }
+
+//    if ( ! empty( $_POST['_fraktguiden_pickup_point_id'] ) ) {
+//      update_post_meta( $order_id, '_fraktguiden_pickup_point_id', sanitize_text_field( $_POST['_fraktguiden_pickup_point_id'] ) );
+//    }
   }
 
   /**
