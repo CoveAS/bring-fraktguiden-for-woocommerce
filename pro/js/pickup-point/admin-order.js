@@ -19,7 +19,7 @@
         return;
     }
 
-    update_row_views();
+    update_lines();
 
     init_dom_mutation_observer();
 
@@ -28,15 +28,15 @@
     // *************************************************************************
     // Functions
 
-    function begin_edit_shipping( edit_row ) {
-        var selector = get_shipping_method_selector( edit_row );
+    function begin_edit_shipping( edit_line ) {
+        var selector = get_shipping_method_selector( edit_line );
         if ( is_fraktguiden_selected( selector ) ) {
-            $( document.body ).trigger( 'fraktguiden_shipping_selected', [edit_row] );
+            $( document.body ).trigger( 'fraktguiden_shipping_selected', [edit_line] );
         }
     }
 
-    function update_row_views() {
-        var items = window. window._fraktguiden_pickup_point.items;
+    function update_lines() {
+        var items = window.window._fraktguiden_pickup_point.items;
 
         for ( var key in items ) {
             if ( ! items.hasOwnProperty( key ) ) {
@@ -44,25 +44,24 @@
             }
             var item = items[key];
 
-            var row = $( '[data-order_item_id=' + item.item_id + ']' );
-            // if ( ! has_fraktguiden_servicepakke( row ) ) {
-            //     return;
-            // }
+            var line_elem = $( '[data-order_item_id=' + item.item_id + ']' );
 
-            var pickup_point = item.pickup_point;
-            var name_elem = row.find( '.name .view' );
+            var pickup_point = item.info;
+            var name_elem = line_elem.find( '.name .view' );
             var name = pickup_point.name;
             var visiting_address = pickup_point.visitingAddress;
             var visiting_postcode = pickup_point.visitingPostalCode;
             var visiting_city = pickup_point.visitingCity;
             var info_html = '<div><b>Pickup point</b>: <br/>' + name + '<br/>' + visiting_address + '<br/>' + visiting_postcode + ', ' + visiting_city + '</div>';
 
+            console.log( item.postcode );
+
             name_elem.html( name_elem.text() + info_html );
         }
     }
 
-    function create_pickup_point_ui( edit_row ) {
-        var title_elem = get_shipping_method_title_elem( edit_row );
+    function create_pickup_point_ui( edit_line ) {
+        var title_elem = get_shipping_method_title_elem( edit_line );
         title_elem.hide();
 
         $.ajax( {
@@ -81,29 +80,25 @@
         } );
     }
 
-    function destroy_pickup_point_ui( edit_row ) {
-        $( '[name=_fraktguiden_services]', edit_row ).remove();
-        get_shipping_method_title_elem( edit_row ).show();
+    function destroy_pickup_point_ui( edit_line ) {
+        $( '[name=_fraktguiden_services]', edit_line ).remove();
+        get_shipping_method_title_elem( edit_line ).show();
     }
 
-    function get_shipping_method_selector( row ) {
-        return row.find( 'select[name^=shipping_method]' );
+    function get_shipping_method_selector( edit_line ) {
+        return edit_line.find( 'select[name^=shipping_method]' );
     }
 
-    function get_shipping_method_title_elem( edit_row ) {
-        return edit_row.find( 'input[name^=shipping_method_title]' );
+    function get_shipping_method_title_elem( edit_line ) {
+        return edit_line.find( 'input[name^=shipping_method_title]' );
     }
 
-    function is_fraktguiden_selected( select_elem ) {
-        return $( select_elem ).val().indexOf( 'fraktguiden' ) > - 1;
-    }
-
-    function has_fraktguiden_servicepakke( shipping_row ) {
-        return shipping_row.find( 'select[name^=shipping_method]' ).val().indexOf( 'bring_fraktguiden:servicepakke' ) > - 1;
+    function is_fraktguiden_selected( shipping_selector ) {
+        return shipping_selector.val().indexOf( 'fraktguiden' ) > - 1;
     }
 
     /**
-     * WooCommerce does not trigger a public 'order-items-saved' event.
+     * WooCommerce order screen does not trigger a public 'order-items-saved' event.
      * Listen to when the loading mask element is removed.
      */
     function init_dom_mutation_observer() {
@@ -123,32 +118,41 @@
         mutation_observer.observe( target, config );
     }
 
+    /**
+     * Set up listeners for changes in the UI
+     */
     function init_event_listeners() {
-        $( document.body ).on( 'fraktguiden_order_items_updated', update_row_views );
 
-        $( document.body ).on( 'fraktguiden_shipping_selected', function ( evt, edit_row ) {
-            console.log( 'on fraktguiden selected', edit_row );
-            create_pickup_point_ui( edit_row );
+        var shipping_line_items = $( '#order_shipping_line_items' );
+
+        // When the order items box is reloaded
+        $( document.body ).on( 'fraktguiden_order_items_updated', update_lines );
+
+        // When Fraktguiden is selected in the shipping method selector.
+        $( document.body ).on( 'fraktguiden_shipping_selected', function ( evt, edit_line ) {
+            console.log( 'on fraktguiden selected', edit_line );
+            create_pickup_point_ui( edit_line );
         } );
 
-        $( document.body ).on( 'fraktguiden_shipping_deselected', function ( evt, edit_row ) {
-            console.log( 'on fraktguiden deselected', edit_row );
-            destroy_pickup_point_ui( edit_row );
+        // When Fraktguiden is de selected in the shipping method selector.
+        $( document.body ).on( 'fraktguiden_shipping_deselected', function ( evt, edit_line ) {
+            console.log( 'on fraktguiden deselected', edit_line );
+            destroy_pickup_point_ui( edit_line );
         } );
 
-        var shipping_items = $( '#order_shipping_line_items' );
-
-        shipping_items.on( 'click', 'tr.shipping a.edit-order-item', function () {
+        // When the edit-shipping-item button is clicked.
+        shipping_line_items.on( 'click', 'tr.shipping a.edit-order-item', function () {
             begin_edit_shipping( $( this ).closest( 'tr' ) );
         } );
 
-        shipping_items.on( 'change', 'select[name^=shipping_method]', function () {
-            var edit_row = $( this ).parents( 'tr.shipping' );
+        // Listen for changes in the shipping method selector
+        shipping_line_items.on( 'change', 'select[name^=shipping_method]', function () {
+            var edit_line = $( this ).parents( 'tr.shipping' );
             if ( is_fraktguiden_selected( $( this ) ) ) {
-                $( document.body ).trigger( 'fraktguiden_shipping_selected', [edit_row] );
+                $( document.body ).trigger( 'fraktguiden_shipping_selected', [edit_line] );
             }
             else {
-                $( document.body ).trigger( 'fraktguiden_shipping_deselected', [edit_row] );
+                $( document.body ).trigger( 'fraktguiden_shipping_deselected', [edit_line] );
             }
         } );
     }
