@@ -46,6 +46,13 @@ class Bring_Fraktguiden_Pro {
         'description' => 'TODO: Description',
         'default'     => 'no'
     ];
+//    $fields['booking'] = [
+//        'title'       => 'Booking',
+//        'label'       => 'Activate booking',
+//        'type'        => 'checkbox',
+//        'description' => 'TODO: Description',
+//        'default'     => 'no'
+//    ];
     return $fields;
   }
 
@@ -69,19 +76,17 @@ class Bring_Fraktguiden_Pro {
 
       // Inject a JS object to the document.
       wp_localize_script( 'fraktguiden-pickup-point-admin', '_fraktguiden_pickup_point', array(
-          'ajaxurl'     => admin_url( 'admin-ajax.php' ),
-          'items' => self::get_pickup_points_for_order()
+          'ajaxurl' => admin_url( 'admin-ajax.php' ),
+          'items'   => self::get_pickup_point_info_for_order()
       ) );
     }
   }
 
-  static function get_pickup_points_for_order() {
+  static function get_pickup_point_info_for_order() {
+    $result = [ ];
     $screen = get_current_screen();
-
     if ( $screen->id == 'shop_order' ) {
       global $post;
-
-      $result = [ ];
 
       $order            = new WC_Order( $post->ID );
       $shipping_methods = $order->get_shipping_methods();
@@ -93,20 +98,15 @@ class Bring_Fraktguiden_Pro {
           if ( ! is_wp_error( $response ) && $response['response']['code'] == 200 ) {
             $result[] = [
                 'item_id'      => $id,
-                'pickup_point' => json_decode( $response['body'] )->pickupPoint[0]
+                'pickup_point' => json_decode( $response['body'] )->pickupPoint[0],
+                'pickup_point_postcode' => wc_get_order_item_meta($id, '_fraktguiden_pickup_point_postcode', true)
             ];
           }
         }
       }
 
-      return $result;
-
-//      if ( ! empty( $json ) ) {
-//        echo '<script>';
-//        echo 'var _fraktguiden_order_items_data = ' . json_encode( $json );
-//        echo '</script>';
-//      }
     }
+    return $result;
   }
 
   /**
@@ -121,16 +121,14 @@ class Bring_Fraktguiden_Pro {
       $method_id = wc_get_order_item_meta( $id, 'method_id', true );
 
       if ( $method_id == 'bring_fraktguiden:servicepakke' ) {
-        // Assume it is only one shipping method in checkout for now.
-        if ( ! empty( $_POST['_fraktguiden_pickup_point_id'] ) ) {
+        // Assume it is only one Fraktguiden shipping method in checkout for now.
+        if ( ! ( empty( $_POST['_fraktguiden_pickup_point_id'] ) && empty( $_POST['_fraktguiden_pickup_point_postcode'] ) ) ) {
           wc_add_order_item_meta( $id, '_fraktguiden_pickup_point_id', $_POST['_fraktguiden_pickup_point_id'] );
+          wc_add_order_item_meta( $id, '_fraktguiden_pickup_point_postcode', $_POST['_fraktguiden_pickup_point_postcode'] );
         }
       }
     }
 
-//    if ( ! empty( $_POST['_fraktguiden_pickup_point_id'] ) ) {
-//      update_post_meta( $order_id, '_fraktguiden_pickup_point_id', sanitize_text_field( $_POST['_fraktguiden_pickup_point_id'] ) );
-//    }
   }
 
   /**
@@ -141,7 +139,6 @@ class Bring_Fraktguiden_Pro {
    *
    * @param string $key
    * @return string|bool
-
    */
   static function get_woo_setting( $key ) {
     $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );

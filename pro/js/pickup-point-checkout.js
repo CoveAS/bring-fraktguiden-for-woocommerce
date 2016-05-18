@@ -30,7 +30,7 @@
         html.push( '    <th>Pickup point</th>' );
         html.push( '    <td>' );
         html.push( '         <label for="fraktguiden-pickup-point-postcode">Postcode</label>' );
-        html.push( '        <div><input type="text" name="fraktguiden_pickup-point_postcode" id="fraktguiden-pickup-point-postcode" class="input-text" value="' + postcode + '"/></div>' );
+        html.push( '        <div><input type="text" name="_fraktguiden_pickup_point_postcode" id="fraktguiden-pickup-point-postcode" class="input-text" value="' + postcode + '"/></div>' );
         html.push( '        <div>' );
         html.push( '            <select name="_fraktguiden_pickup_point_id" id="fraktguiden-pickup-point-select">' );
         html.push( '                <option id="fraktguiden-pickup-point-placeholder" value="">Select pickup point</option>' );
@@ -43,7 +43,7 @@
 
         // Add events to the postcode and inputs.
         pickup_point_postcode_elem().keyup( function ( evt ) {
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [this.value], get_shipping_country() );
+            $( document.body ).trigger( 'fraktguiden_postcode_updated', [this.value], get_shipping_country() );
         } );
 
         pickup_point_select_elem().change( function () {
@@ -115,13 +115,13 @@
                     // Create pickup point html.
                     add_pickup_point_html();
                     // Load pickup points.
-                    $( document.body ).trigger( 'fraktguiden_updated_postcode', [get_shipping_postcode(), get_shipping_country()] );
+                    $( document.body ).trigger( 'fraktguiden_postcode_updated', [get_shipping_postcode(), get_shipping_country()] );
                 }
             }
         } );
 
         // When Fraktguiden postcode is updated.
-        $( document.body ).on( 'fraktguiden_updated_postcode', function ( evt, postcode, country ) {
+        $( document.body ).on( 'fraktguiden_postcode_updated', function ( evt, postcode, country ) {
             pickup_point_select_elem().val( '' );
             user_selected.pickup_point_id = '';
             update_info( null );
@@ -135,23 +135,23 @@
         // When the Woo billing post code changes.
         woo_billing_postcode_elem().keyup( function ( evt ) {
             pickup_point_postcode_elem().val( this.value );
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickup_point_postcode_elem().val(), get_shipping_country()] );
+            $( document.body ).trigger( 'fraktguiden_postcode_updated', [pickup_point_postcode_elem().val(), get_shipping_country()] );
         } );
 
         // When the Woo shipping post code changes
         woo_shipping_postcode_elem().keyup( function ( evt ) {
             pickup_point_postcode_elem().val( this.value );
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickup_point_postcode_elem().val(), get_shipping_country()] );
+            $( document.body ).trigger( 'fraktguiden_postcode_updated', [pickup_point_postcode_elem().val(), get_shipping_country()] );
         } );
 
         // When the billing country selector changes.
         woo_billing_country_elem().change( function () {
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickup_point_postcode_elem().val(), get_shipping_country()] );
+            $( document.body ).trigger( 'fraktguiden_postcode_updated', [pickup_point_postcode_elem().val(), get_shipping_country()] );
         } );
 
         // When the shipping country selector changes.
         woo_shipping_country_elem().change( function () {
-            $( document.body ).trigger( 'fraktguiden_updated_postcode', [pickup_point_postcode_elem().val(), get_shipping_country()] );
+            $( document.body ).trigger( 'fraktguiden_postcode_updated', [pickup_point_postcode_elem().val(), get_shipping_country()] );
         } );
     }
 
