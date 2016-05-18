@@ -23,7 +23,7 @@ class Bring_Fraktguiden_Pro {
       add_action( 'wp_ajax_nopriv_fg_get_services', 'Bring_Fraktguiden_Pro::ajax_get_fraktguiden_services' );
 
       // Inject pickup point data to admin order page.
-      add_action( 'admin_print_scripts', 'Bring_Fraktguiden_Pro::inline_pickup_point_data_to_admin_order' );
+      add_action( 'admin_print_scripts', 'Bring_Fraktguiden_Pro::enqueue_admin_javascript' );
 
       // Update order with pickup point id.
       add_action( 'woocommerce_checkout_update_order_meta', 'Bring_Fraktguiden_Pro::checkout_update_order_meta' );
@@ -61,14 +61,16 @@ class Bring_Fraktguiden_Pro {
    */
   static function enqueue_admin_javascript() {
     $screen = get_current_screen();
+    // Only for order edit screen
     if ( $screen->id == 'shop_order' ) {
       wp_register_script( 'fraktguiden-pickup-point-admin', plugins_url( 'js/pickup-point-admin.js', __FILE__ ), array( 'jquery' ), '##VERSION##', true );
+      wp_enqueue_script( 'fraktguiden-pickup-point-admin' );
+
+      // Inject a JS object to the document.
       wp_localize_script( 'fraktguiden-pickup-point-admin', '_fraktguiden_pickup_point', array(
           'ajaxurl'     => admin_url( 'admin-ajax.php' ),
-          'order_items' => self::get_pickup_points_for_order()
-
+          'items' => self::get_pickup_points_for_order()
       ) );
-      wp_enqueue_script( 'fraktguiden-pickup-point-admin' );
     }
   }
 
@@ -87,7 +89,6 @@ class Bring_Fraktguiden_Pro {
         $pickup_point_id = wc_get_order_item_meta( $id, '_fraktguiden_pickup_point_id', true );
         if ( $pickup_point_id ) {
           $response = wp_remote_get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $order->get_address()['country'] . '/id/' . $pickup_point_id . '.json' );
-          file_put_contents( '/vagrant/debug.log', print_r( $response, 1 ) . PHP_EOL, FILE_APPEND );
           if ( ! is_wp_error( $response ) && $response['response']['code'] == 200 ) {
             $result[] = [
                 'item_id'      => $id,

@@ -15,7 +15,7 @@
         return;
     }
 
-    if ( ! (window._fraktguiden_pickup_point && window._fraktguiden_pickup_point.order_items) ) {
+    if ( ! (window._fraktguiden_pickup_point && window._fraktguiden_pickup_point.items) ) {
         return;
     }
 
@@ -36,7 +36,7 @@
     }
 
     function update_row_views() {
-        var items = window. window._fraktguiden_pickup_point.order_items;
+        var items = window. window._fraktguiden_pickup_point.items;
 
         for ( var key in items ) {
             if ( ! items.hasOwnProperty( key ) ) {
