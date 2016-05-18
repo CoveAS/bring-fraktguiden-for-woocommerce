@@ -33,18 +33,19 @@ class Bring_Fraktguiden_Pro {
   /**
    * Adds form options fields to the admin page.
    *
+   * @todo: translate
+   *
    * @param array $fields
    * @return array
    */
   static function add_admin_options( $fields ) {
-    //@todo: translate
-    $fields['pickup_point'] = array(
+    $fields['pickup_point'] = [
         'title'       => 'Pickup Point',
         'label'       => 'Activate pickup point',
         'type'        => 'checkbox',
         'description' => 'TODO: Description',
         'default'     => 'no'
-    );
+    ];
     return $fields;
   }
 
@@ -136,10 +137,11 @@ class Bring_Fraktguiden_Pro {
    * Gets a Woo admin setting by key
    * Returns false if key is not found.
    *
+   * @todo: There must be an API in woo for this. Investigate.
+   *
    * @param string $key
    * @return string|bool
-   *
-   * @todo: There must be an API in woo for this. Investigate.
+
    */
   static function get_woo_setting( $key ) {
     $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
