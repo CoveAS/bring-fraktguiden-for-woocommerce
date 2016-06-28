@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "381173e59acc424e88fc1386e8ab8cd0",
-    "content-hash": "42936aead53b47970ee6e199f9095a68",
+    "hash": "68f0b7398e1196bc61eaae2898e34951",
+    "content-hash": "cf5659865f68303637cf1410fdcf54f6",
     "packages": [
         {
             "name": "composer/installers",
@@ -113,13 +113,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:drivdigital/laff-pack.git",
-                "reference": "b535603f684c294fe8844700a18151fad9829532"
+                "reference": "39aef19619380d2b2e423d3debc891f4738ec1f6"
             },
             "require": {
                 "composer/installers": "*"
             },
             "type": "library",
-            "time": "2016-06-28 13:40:33"
+            "time": "2016-06-28 13:46:47"
         },
         {
             "name": "myokyawhtun/pdfmerger",

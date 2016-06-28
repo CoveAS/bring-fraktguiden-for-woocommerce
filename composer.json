@@ -13,7 +13,7 @@
     ],
     "require": {
         "composer/installers": "*",
-        "myokyawhtun/pdfmerger": "dev-master",
-        "drivdigital/laff-pack": "dev-master"
+        "myokyawhtun/pdfmerger": "dev-master@dev",
+        "drivdigital/laff-pack": "dev-master@dev"
     }
 }
