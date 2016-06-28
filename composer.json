@@ -1,19 +1,19 @@
 {
-    "name": "drivdigital/bring-fraktguiden-for-woocommerce",
-    "type": "wordpress-plugin",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://wpackagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "git@bitbucket.org:drivdigital/laff-pack.git"
-        }
-    ],
-    "require": {
-        "composer/installers": "*",
-        "myokyawhtun/pdfmerger": "dev-master",
-        "drivdigital/laff-pack": "dev-master"
+  "name": "drivdigital/bring-fraktguiden-for-woocommerce",
+  "type": "wordpress-plugin",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:drivdigital/laff-pack.git"
     }
+  ],
+  "require": {
+    "composer/installers": "*",
+    "myokyawhtun/pdfmerger": "dev-master",
+    "drivdigital/laff-pack": "dev-master"
+  }
 }
