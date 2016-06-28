@@ -15,7 +15,7 @@
         return $( document.body );
     }
 
-    events.CHECKOUT_UPDATED = 'updated_checkout';
+    events.CHECKOUT_REVIEW_UPDATED = 'updated_checkout';
     events.POST_CODE_UPDATED = 'postcode_updated.bring';
     events.PICKUP_POINT_CHANGED = 'pickup_point_updated.bring';
 
@@ -35,7 +35,7 @@
     add_order_review_event_handlers();
 
     if ( has_klarna_widget() ) {
-        events().trigger( events.CHECKOUT_UPDATED );
+        events().trigger( events.CHECKOUT_REVIEW_UPDATED );
 
         // Add change event handler for Fraktguiden shipping rates.
         $( 'body' ).on( 'change', 'input[type=radio][value^=bring_fraktguiden].shipping_method', function () {
@@ -43,7 +43,7 @@
                 $( '.fraktguiden-pickup-point' ).remove();
                 return;
             }
-            events().trigger( events.CHECKOUT_UPDATED );
+            events().trigger( events.CHECKOUT_REVIEW_UPDATED );
         } );
     }
 
@@ -164,13 +164,13 @@
             $( document ).ajaxSuccess( function ( event, xhr, settings ) {
                 var data = settings.data;
                 if ( data && (data.indexOf( 'action=kco_' ) > -1 || data.indexOf( 'action=klarna_' )) > -1 ) {
-                    events().trigger( events.CHECKOUT_UPDATED );
+                    events().trigger( events.CHECKOUT_REVIEW_UPDATED );
                 }
             } );
         }
 
         // Each time the order review box is updated.
-        events().on( events.CHECKOUT_UPDATED, function () {
+        events().on( events.CHECKOUT_REVIEW_UPDATED, function () {
             if ( has_bring_shipping_rates() ) {
                 if ( is_servicepakke_selected() ) {
                     // Create pickup point html.
@@ -203,6 +203,8 @@
         } );
 
         events().on( events.PICKUP_POINT_CHANGED, function ( evt, pickup_point_selector ) {
+            var selected_option = $( pickup_point_selector.options[pickup_point_selector.selectedIndex] );
+            update_display_info(selected_option.data( 'pickup_point' ));
             update_cookies();
         } );
 
@@ -212,8 +214,6 @@
         } );
 
         get_order_review_wrapper_elem().on( 'change', '.fraktguiden-pickup-point-select', function () {
-            var selected_option = $( this.options[this.selectedIndex] );
-            update_display_info( selected_option.data( 'pickup_point' ) );
             user_selected.pickup_point_id = this.value;
             events().trigger( events.PICKUP_POINT_CHANGED, [this] );
         } );
@@ -393,6 +393,11 @@
         return $( '.fraktguiden-pickup-point-select' );
     }
 
+    /**
+     * Returns Klarna CO wdiget element.
+     *
+     * @returns {jQuery}
+     */
     function get_klarna_checkout_widget_elem() {
         return $( '#klarna-checkout-widget' );
     }

@@ -143,9 +143,13 @@ class Fraktguiden_Pickup_Point {
             $_COOKIE['_fraktguiden_pickup_point_info_cached']
         );
 
-        unset( $_COOKIE['_fraktguiden_pickup_point_id'] );
-        unset( $_COOKIE['_fraktguiden_pickup_point_postcode'] );
-        unset( $_COOKIE['_fraktguiden_pickup_point_info_cached'] );
+        // Unset cookies.
+        // This does not work at the moment as headers has already been sent.
+        // @todo: Find an earlier hook
+        $expire = time() - 300;
+        setcookie('_fraktguiden_pickup_point_id', '', $expire);
+        setcookie('_fraktguiden_pickup_point_postcode', '', $expire);
+        setcookie('_fraktguiden_pickup_point_info_cached', '', $expire);
       }
 
       if ( $_SESSION['_fraktguiden_packages'] ) {
@@ -242,7 +246,6 @@ class Fraktguiden_Pickup_Point {
         'rate'     => null,
         'packages' => null,
     ];
-
 
     if ( isset( $_GET['post_id'] ) && isset( $_GET['service'] ) ) {
 
