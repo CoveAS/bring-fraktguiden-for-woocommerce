@@ -11,11 +11,9 @@
             "url": "git@bitbucket.org:drivdigital/laff-pack.git"
         }
     ],
-    "minimum-stability": "dev",
-
     "require": {
         "composer/installers": "*",
         "myokyawhtun/pdfmerger": "dev-master",
-        "drivdigital/laff-pack": "dev-master"
+        "drivdigital/laff-pack": "dev-master@dev"
     }
 }
