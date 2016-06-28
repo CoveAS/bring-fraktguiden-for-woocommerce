@@ -15,7 +15,7 @@ class Fraktguiden_Packer {
 
   public function __construct() {
 
-    include_once( FRAKTGUIDEN_PLUGIN_PATH .'/vendor/php-laff/laff-pack.php' );
+    include_once( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' );
 
     $this->laff_pack   = new LAFFPack();
     $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );

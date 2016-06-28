@@ -118,7 +118,8 @@ class Bring_Booking_Labels {
         }
       }
 
-      include_once 'vendor/PDFMerger/PDFMerger.php';
+      include_once( FRAKTGUIDEN_PLUGIN_PATH .'/vendor/myokyawhtun/pdfmerger/PDFMerger.php' );
+
       $merger = new PDFMerger();
       foreach ( $files_to_merge as $file ) {
         $merger->addPDF( $file );
