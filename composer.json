@@ -1,0 +1,7 @@
+{
+    "name": "drivdigital/bring-fraktguiden-for-woocommerce",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "*"
+    }
+}
