@@ -98,7 +98,7 @@ mark.bring-shipment:after {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
 }
 
 .bring-info-box > div:first-child {
