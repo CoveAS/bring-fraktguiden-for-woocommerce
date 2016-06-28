@@ -3,8 +3,15 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'Bring_Fraktguiden_Services' ) ) {
-  include 'class-bring-fraktguiden-services.php';
+if ( ! class_exists( 'WP_Bring_Request' ) ) {
+  include_once 'common/http/class-wp-bring-request.php';
+}
+if ( ! class_exists( 'Fraktguiden_Helper' ) ) {
+  include_once 'common/class-fraktguiden-helper.php';
+}
+
+if ( ! class_exists( 'Fraktguiden_Packer' ) ) {
+  include_once( 'common/class-fraktguiden-packer.php' );
 }
 
 /**
@@ -20,9 +27,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
 
-  const ID = 'bring_fraktguiden';
+  const ID = Fraktguiden_Helper::ID;
 
-  const TEXT_DOMAIN = 'bring-fraktguiden';
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
   const DEFAULT_MAX_PRODUCTS = 100;
 
@@ -34,10 +41,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $vat = '';
   private $evarsling = '';
   private $services = array();
+  private $services2 = array();
   private $service_name = '';
   private $display_desc = '';
   private $max_products = '';
   private $alt_flat_rate = '';
+
+  private $debug = '';
+
+  /** @var WC_Logger */
+  private $log;
+
+  /** @var array */
+  protected $packages_params = [ ];
 
   /**
    * @constructor
@@ -72,6 +88,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = array_key_exists( 'vat', $this->settings ) ? $this->settings['vat'] : '';
     $this->evarsling    = array_key_exists( 'evarsling', $this->settings ) ? $this->settings['evarsling'] : '';
     $this->services     = array_key_exists( 'services', $this->settings ) ? $this->settings['services'] : '';
+    $this->services2    = array_key_exists( 'services2', $this->settings ) ? $this->settings['services2'] : [ ];
     $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : 'DisplayName';
     $this->display_desc = array_key_exists( 'display_desc', $this->settings ) ? $this->settings['display_desc'] : 'no';
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
@@ -117,72 +134,77 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function init_form_fields() {
     global $woocommerce;
-    $services = Bring_Fraktguiden_Services::get_available();
+    $services = Fraktguiden_Helper::get_all_services();
 
+    // @todo
     $wc_log_dir = '';
     if ( defined( 'WC_LOG_DIR' ) ) {
       $wc_log_dir = WC_LOG_DIR;
     }
 
-    $this->form_fields = apply_filters( 'bring_fraktguiden_admin_form_fields', array(
-        'enabled'       => array(
+    $this->form_fields = [
+        'general_options_title' => [
+            'type'  => 'title',
+            'title' => __( 'Shipping Options', self::TEXT_DOMAIN ),
+        ],
+        'enabled'               => array(
             'title'   => __( 'Enable', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
             'label'   => __( 'Enable Bring Fraktguiden', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
-        'title'         => array(
-            'title'       => __( 'Title', self::TEXT_DOMAIN ),
-            'type'        => 'text',
-            'description' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
-            'default'     => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
+        'title'                 => array(
+            'title'    => __( 'Title', self::TEXT_DOMAIN ),
+            'type'     => 'text',
+            'desc_tip' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
+            'default'  => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
         ),
-        'handling_fee'  => array(
-            'title'       => __( 'Delivery Fee', self::TEXT_DOMAIN ),
-            'type'        => 'text',
-            'description' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
-            'default'     => ''
+        'handling_fee'          => array(
+            'title'    => __( 'Delivery Fee', self::TEXT_DOMAIN ),
+            'type'     => 'text',
+            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
+            'default'  => ''
         ),
-        'post_office'   => array(
-            'title'       => __( 'Post office', self::TEXT_DOMAIN ),
-            'type'        => 'checkbox',
-            'label'       => __( 'Shipping from post office', self::TEXT_DOMAIN ),
-            'description' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
-            'default'     => 'no'
+        'post_office'           => array(
+            'title'    => __( 'Post office', self::TEXT_DOMAIN ),
+            'type'     => 'checkbox',
+            'label'    => __( 'Shipping from post office', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
+            'default'  => 'no'
         ),
-        'from_zip'      => array(
-            'title'       => __( 'From zip', self::TEXT_DOMAIN ),
-            'type'        => 'text',
-            'description' => __( 'This is the zip code of where you deliver from. For example, the post office. Should be 4 digits.', self::TEXT_DOMAIN ),
-            'default'     => ''
+        'from_zip'              => array(
+            'title'    => __( 'From zip', self::TEXT_DOMAIN ),
+            'type'     => 'text',
+            'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', self::TEXT_DOMAIN ),
+            'default'  => ''
         ),
-        'from_country'  => array(
-            'title'       => __( 'From country', self::TEXT_DOMAIN ),
-            'type'        => 'select',
-            'description' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
-            'class'       => 'chosen_select',
-            'css'         => 'width: 450px;',
-            'default'     => $this->get_selected_from_country(),
-            'options'     => $this->get_nordic_countries()
+        'from_country'          => array(
+            'title'    => __( 'From country', self::TEXT_DOMAIN ),
+            'type'     => 'select',
+            'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
+            'class'    => 'chosen_select',
+            'css'      => 'width: 450px;',
+            'default'  => $this->get_selected_from_country(),
+            'options'  => Fraktguiden_Helper::get_nordic_countries()
         ),
-        'vat'           => array(
-            'title'       => __( 'Display price', self::TEXT_DOMAIN ),
-            'type'        => 'select',
-            'description' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
-            'default'     => 'include',
-            'options'     => array(
+        'vat'                   => array(
+            'title'    => __( 'Display price', self::TEXT_DOMAIN ),
+            'type'     => 'select',
+            'desc_tip' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
+            'default'  => 'include',
+            'options'  => array(
                 'include' => __( 'VAT included', self::TEXT_DOMAIN ),
                 'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
             ),
         ),
-        'evarsling'     => array(
-            'title'       => __( 'Recipient notification', self::TEXT_DOMAIN ),
-            'type'        => 'checkbox',
-            'label'       => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
-            'description' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br/>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', self::TEXT_DOMAIN ),
-            'default'     => 'no'
+        'evarsling'             => array(
+            'title'    => __( 'Recipient notification', self::TEXT_DOMAIN ),
+            'type'     => 'checkbox',
+            'label'    => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br/>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', self::TEXT_DOMAIN ),
+            'default'  => 'no'
         ),
-        'availability'  => array(
+        'availability'          => array(
             'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
             'type'    => 'select',
             'default' => 'all',
@@ -192,7 +214,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'specific' => __( 'Specific Countries', self::TEXT_DOMAIN )
             )
         ),
-        'countries'     => array(
+        'countries'             => array(
             'title'   => __( 'Specific Countries', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
@@ -200,7 +222,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $woocommerce->countries->countries
         ),
-        'services'      => array(
+        'services'              => array(
             'title'   => __( 'Services', self::TEXT_DOMAIN ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
@@ -208,34 +230,40 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
-        'service_name'  => array(
-            'title'       => __( 'Display Service As', self::TEXT_DOMAIN ),
-            'type'        => 'select',
-            'description' => __( 'The service name displayed to the customer', self::TEXT_DOMAIN ),
-            'default'     => 'DisplayName',
-            'options'     => array(
+
+        'service_name' => array(
+            'title'    => __( 'Display Service As', self::TEXT_DOMAIN ),
+            'type'     => 'select',
+            'desc_tip' => __( 'The service name displayed to the customer', self::TEXT_DOMAIN ),
+            'default'  => 'DisplayName',
+            'options'  => array(
                 'DisplayName' => __( 'Display Name', self::TEXT_DOMAIN ),
                 'ProductName' => __( 'Product Name', self::TEXT_DOMAIN ),
             )
         ),
+
+//        'services2' => array(
+//            'type' => 'services_table'
+//        ),
+
         'display_desc'  => array(
-            'title'       => __( 'Display Description', self::TEXT_DOMAIN ),
-            'type'        => 'checkbox',
-            'label'       => __( 'Add description after the service', self::TEXT_DOMAIN ),
-            'description' => __( 'Show service description after the name of the service', self::TEXT_DOMAIN ),
-            'default'     => 'no'
+            'title'    => __( 'Display Description', self::TEXT_DOMAIN ),
+            'type'     => 'checkbox',
+            'label'    => __( 'Add description after the service', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'Show service description after the name of the service', self::TEXT_DOMAIN ),
+            'default'  => 'no'
         ),
         'max_products'  => array(
-            'title'       => __( 'Max products', self::TEXT_DOMAIN ),
-            'type'        => 'text',
-            'description' => __( 'Maximum of products in the cart before offering a flat rate', self::TEXT_DOMAIN ),
-            'default'     => self::DEFAULT_MAX_PRODUCTS
+            'title'    => __( 'Max products', self::TEXT_DOMAIN ),
+            'type'     => 'text',
+            'desc_tip' => __( 'Maximum of products in the cart before offering a flat rate', self::TEXT_DOMAIN ),
+            'default'  => self::DEFAULT_MAX_PRODUCTS
         ),
         'alt_flat_rate' => array(
-            'title'       => __( 'Flat rate', self::TEXT_DOMAIN ),
-            'type'        => 'text',
-            'description' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
-            'default'     => self::DEFAULT_ALT_FLAT_RATE
+            'title'    => __( 'Flat rate', self::TEXT_DOMAIN ),
+            'type'     => 'text',
+            'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
+            'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
         'debug'         => array(
             'title'       => __( 'Debug', self::TEXT_DOMAIN ),
@@ -243,8 +271,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
             'description' => __( 'These logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
-        ),
-    ) );
+        )
+    ];
 
   }
 
@@ -258,6 +286,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     <h3><?php echo $this->method_title; ?></h3>
     <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
+    <p>
+      <a href="<?php echo admin_url(); ?>admin-ajax.php?action=bring_system_info"
+         target="_blank"><?php echo __( 'View system info', self::TEXT_DOMAIN ) ?></a>
+    </p>
 
     <table class="form-table">
 
@@ -273,13 +305,120 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     </table> <?php
   }
 
+  public function validate_services_table_field( $key, $value ) {
+    return isset( $value ) ? $value : array();
+  }
+
+  public function process_admin_options() {
+    parent::process_admin_options();
+
+    // Process services table
+    $services_field               = $this->get_field_key( 'services2' );
+    $services_custom_prices_field = $services_field . '_custom_prices';
+    $custom_prices                = [ ];
+    if ( isset( $_POST[$services_field] ) ) {
+      $checked_services = $_POST[$services_field];
+      foreach ( $checked_services as $key => $service ) {
+
+        if ( isset( $_POST[$services_custom_prices_field][$service] ) ) {
+          $custom_prices[$service] = $_POST[$services_custom_prices_field][$service];
+        }
+      }
+    }
+
+    update_option( $services_custom_prices_field, $custom_prices );
+  }
+
+
+  public function generate_services_table_html() {
+    $services      = Fraktguiden_Helper::get_services_data();
+    $selected      = $this->services2;
+    $field_key     = $this->get_field_key( 'services2' );
+    $custom_prices = get_option( $field_key . '_custom_prices' );
+
+    ob_start();
+    ?>
+
+    <tr valign="top">
+      <th scope="row" class="titledesc">
+        <label
+            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
+      </th>
+      <td class="forminp">
+        <table class="wc_shipping widefat fraktguiden-services-table">
+          <thead>
+          <tr>
+            <th class="fraktguiden-services-table-col-enabled">Enabled</th>
+            <th class="fraktguiden-services-table-col-service">Service</th>
+            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <?php
+          foreach ( $services as $key => $service ) {
+            $id               = $field_key . '_' . $key;
+            $prices_field_key = $field_key . '_custom_prices[' . $key . ']';
+            $custom_price     = isset( $custom_prices[$key] ) ? $custom_prices[$key] : '';
+            $checked          = in_array( $key, $selected );
+            ?>
+            <tr>
+              <td class="fraktguiden-services-table-col-enabled">
+                <label for="<?php echo $id; ?>"
+                       style="display:inline-block; width: 100%">
+                  <input type="checkbox" id="<?php echo $id; ?>"
+                         name="<?php echo $field_key; ?>[]"
+                         value="<?php echo $key; ?>" <?php echo( $checked ? 'checked' : '' ); ?> />
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-name">
+                <span data-tip="<?php echo $service['HelpText']; ?>"
+                      class="woocommerce-help-tip"></span>
+                <label class="fraktguiden-service" for="<?php echo $id; ?>"
+                       data-ProductName="<?php echo $service['ProductName']; ?>"
+                       data-DisplayName="<?php echo $service['DisplayName']; ?>">
+                  <?php echo $service[$this->service_name]; ?>
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-custom-price">
+                <input type="text" name="<?php echo $prices_field_key; ?>"
+                       value="<?php echo $custom_price; ?>"/>
+              </td>
+            </tr>
+          <?php } ?>
+          </tbody>
+        </table>
+        <script>
+          jQuery( document ).ready( function () {
+            var $ = jQuery;
+            $( '#woocommerce_bring_fraktguiden_service_name' ).change( function () {
+              console.log( 'change', this.value );
+              var val = this.value;
+              $( '.fraktguiden-services-table' ).find( 'label.fraktguiden-service' ).each( function ( i, elem ) {
+
+                var label = $( elem );
+                label.text( label.attr( 'data-' + val ) );
+              } );
+            } );
+
+          } );
+        </script>
+      </td>
+    </tr>
+
+    <?php
+    return ob_get_clean();
+  }
+
   /**
    * Calculate shipping costs.
+   *
+   * @todo: in 2.6, the package param was added. Investigate this!
    */
-  public function calculate_shipping() {
+  public function calculate_shipping( $package = array() ) {
     global $woocommerce;
 
-    include_once( __DIR__ . '/class-packer.php' );
+    //include_once( 'common/class-fraktguiden-packer.php' );
     $packer = new Fraktguiden_Packer();
 
     // Offer flat rate if the cart contents exceeds max product.
@@ -295,78 +434,95 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->add_rate( $rate );
     }
     else {
-      // Create an array of 'product boxes' (l,w,h,weight).
-      $product_boxes = array();
-      foreach ( $woocommerce->cart->get_cart() as $values ) {
-        $product = $values['data'];
-        if ( ! $product->needs_shipping() ) {
-          continue;
-        }
+      $c             = $woocommerce->cart->get_cart();
+      $product_boxes = $packer->create_boxes( $woocommerce->cart->get_cart() );
+//      // Create an array of 'product boxes' (l,w,h,weight).
+//      $product_boxes = array();
+//
+//      /** @var WC_Cart $cart */
+//      $cart = $woocommerce->cart;
+//      foreach ( $cart->get_cart() as $values ) {
+//
+//        /** @var WC_Product $product */
+//        $product = $values['data'];
+//
+//        if ( ! $product->needs_shipping() ) {
+//          continue;
+//        }
+//        $quantity = $values['quantity'];
+//        for ( $i = 0; $i < $quantity; $i++ ) {
+//          if ( ! $product->has_dimensions() ) {
+//            // If the product has no dimensions, assume the lowest unit 1x1x1 cm
+//            $dims = array( 0, 0, 0 );
+//          }
+//          else {
+//            $dims = array(
+//                $product->length,
+//                $product->width,
+//                $product->height
+//            );
+//          }
+//
+//          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+//          rsort( $dims );
+//
+//          $box = array(
+//              'length'          => $dims[0],
+//              'width'           => $dims[1],
+//              'height'          => $dims[2],
+//              'weight'          => $product->weight,
+//              'weight_in_grams' => $packer->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
+//          );
+//
+//          // Return if product is larger than available Bring packages.
+//          if ( $packer->exceeds_max_package_values( $box ) ) {
+//            return;
+//          }
+//
+//          $product_boxes[] = $box;
+//        }
+//      }
 
-        $quantity = $values['quantity'];
-        for ( $i = 0; $i < $quantity; $i++ ) {
-          if ( ! $product->has_dimensions() ) {
-            // If the product has no dimensions, assume the lowest unit 1x1x1 cm
-            $dims = array( 0, 0, 0 );
-          }
-          else {
-            $dims = array(
-                $product->length,
-                $product->width,
-                $product->height
-            );
-          }
-
-          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
-          rsort( $dims );
-
-          $box = array(
-              'length'          => $dims[0],
-              'width'           => $dims[1],
-              'height'          => $dims[2],
-              'weight'          => $product->weight,
-              'weight_in_grams' => $packer->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
-          );
-
-          // Return if product is larger than available Bring packages.
-          if ( $packer->exceeds_max_package_values( $box ) ) {
-            return;
-          }
-
-          $product_boxes[] = $box;
-        }
+      if ( ! $product_boxes ) {
+        return;
       }
 
       // Pack product boxes.
-
       $packer->pack( $product_boxes, true );
 
       // Create the url.
+      $this->packages_params = $packer->create_packages_params();
+
+
+      if ( is_checkout() && session_status() == PHP_SESSION_NONE ) {
+        session_start();
+        $_SESSION['_fraktguiden_packages'] = json_encode( $this->packages_params );
+      }
 
       // Request parameters.
-      $params = array_merge( $this->create_standard_url_params(), $packer->create_coli_params() );
+      $params = array_merge( $this->create_standard_url_params(), $this->packages_params );
       // Remove any empty elements.
       $params = array_filter( $params );
-      // Create url.
 
       $url = add_query_arg( $params, self::SERVICE_URL );
 
-      // Add all the selected products to the URL
+      // Add all the selected services to the URL
       if ( $this->services && count( $this->services ) > 0 ) {
-        foreach ( $this->services as $product ) {
-          $url .= '&product=' . $product;
+        foreach ( $this->services as $service ) {
+          $url .= '&product=' . $service;
         }
       }
 
       // Make the request.
-      $response = wp_remote_get( $url );
-      // If the request fails, just return.
-      if ( is_wp_error( $response ) ) {
+      $request  = new WP_Bring_Request();
+      $response = $request->get( $url );
+
+      if ( $response->status_code != 200 ) {
         return;
       }
 
       // Decode the JSON data from bring.
-      $json = json_decode( $response['body'], true );
+      $json = json_decode( $response->get_body(), true );
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
 
@@ -421,7 +577,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $rate = array(
           'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
           'cost'  => (float)$rate + (float)$this->fee,
-          'label' => $serviceDetails['GuiInformation'][$this->service_name] . ( $this->display_desc == 'no' ? '' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
+          'label' => $serviceDetails['GuiInformation'][$this->service_name]
+              . ( $this->display_desc == 'no' ?
+                  '' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
       );
 
       array_push( $rates, $rate );
@@ -447,36 +605,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     ) );
   }
 
-
   public function get_selected_from_country() {
     global $woocommerce;
-    return isset( $this->from_country ) ? $this->from_country : $woocommerce->countries->get_base_country();
-  }
-
-  /**
-   * Returns an array with nordic country codes
-   *
-   * @return array
-   */
-  public function get_nordic_countries() {
-    global $woocommerce;
-    $countries = array( 'NO', 'SE', 'DK', 'FI', 'IS' );
-    return $this->array_filter_key( $woocommerce->countries->countries, function ( $k ) use ( $countries ) {
-      return in_array( $k, $countries );
-    } );
-  }
-
-  /**
-   * Returns an array based on the filter in the callback function.
-   * Same as PHP's array_filter but uses the key instead of value.
-   *
-   * @param array $array
-   * @param callable $callback
-   * @return array
-   */
-  private function array_filter_key( $array, $callback ) {
-    $matched_keys = array_filter( array_keys( $array ), $callback );
-    return array_intersect_key( $array, array_flip( $matched_keys ) );
+    return isset( $this->from_country ) ?
+        $this->from_country : $woocommerce->countries->get_base_country();
   }
 
 }
+

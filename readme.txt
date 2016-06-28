@@ -9,8 +9,8 @@ Tested up to: 4.5
 WC requires at least: 2.2
 WC tested up to: 2.5
 Stable tag: ##VERSION##
-License: The MIT License
-License URI: http://opensource.org/licenses/MIT
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -36,19 +36,18 @@ If you want to contribute or file an issue, please go to: https://github.com/dri
 
 = Prerequisites =
 
-The plugin has been tested with WooCommerce version 2.5
-
 Make sure WooCommerce is configured with:
 
 * Dimension unit and weight unit (see WooCommerce > Settings > Products)
-* Currency (see WooCommerce > Settings > General). The currency should be NOK.
-
-In order to calculate shipping, products in the stock must have dimensions and weight.
+* Currency (see WooCommerce > Settings > General)
+* Products must have sizes and weights set – without this the calculation cannot be performed
 
 1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Navigate to wp-admin > WooCommerce > Settings > Shipping
-4. Enable and configure Bring Fraktguiden
+3. Go to wp-admin > WooCommerce > Settings > Shipping
+4. Select Bring Fraktguiden
+5. Enable and configure Bring Fraktguiden
+  * fisk
 
 == Frequently Asked Questions ==
 

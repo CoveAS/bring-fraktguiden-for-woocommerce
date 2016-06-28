@@ -13,9 +13,12 @@ Bring Fraktguiden for WooCommerce is an open source project and we love pull req
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) the project.
 * Create a topic branch from the master branch.
-  * To quickly create a topic branch based on master; `git checkout -b
+    * To quickly create a topic branch based on master; `git checkout -b
     fix/master/my-contribution master`. Please avoid working directly on the
     `master` branch.
+* Make changes to your forked repository
+    * Ensure you stick to the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
+    * Ensure you use LF line endings
 * Make sure you have tested your changes.
 * Make commits of logical units.
 * Check for unnecessary whitespace with `git diff --check` before committing.
