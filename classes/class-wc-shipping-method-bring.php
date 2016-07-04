@@ -184,7 +184,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
             'class'    => 'chosen_select',
             'css'      => 'width: 450px;',
-            'default'  => $this->get_selected_from_country(),
+            'default'  => $woocommerce->countries->get_base_country(),
             'options'  => Fraktguiden_Helper::get_nordic_countries()
         ),
         'vat'                   => array(
