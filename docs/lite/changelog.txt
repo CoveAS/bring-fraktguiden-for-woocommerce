@@ -2,6 +2,7 @@
 
 = 1.2.1 =
 
+* Use GPL license
 * Support WooCommerce 2.6
 * WBF-30: Update the Fraktguiden product list.
 * WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
