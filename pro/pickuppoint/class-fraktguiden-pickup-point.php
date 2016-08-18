@@ -136,7 +136,7 @@ class Fraktguiden_Pickup_Point {
         session_start();
       }
 
-      if ( $_COOKIE['_fraktguiden_pickup_point_id'] && $_COOKIE['_fraktguiden_pickup_point_postcode'] && $_COOKIE['_fraktguiden_pickup_point_info_cached'] ) {
+      if ( isset( $_COOKIE['_fraktguiden_pickup_point_id'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_postcode'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_info_cached'] ) ) {
         $order->checkout_update_pickup_point_data(
             $_COOKIE['_fraktguiden_pickup_point_id'],
             $_COOKIE['_fraktguiden_pickup_point_postcode'],
@@ -147,12 +147,12 @@ class Fraktguiden_Pickup_Point {
         // This does not work at the moment as headers has already been sent.
         // @todo: Find an earlier hook
         $expire = time() - 300;
-        setcookie('_fraktguiden_pickup_point_id', '', $expire);
-        setcookie('_fraktguiden_pickup_point_postcode', '', $expire);
-        setcookie('_fraktguiden_pickup_point_info_cached', '', $expire);
+        setcookie( '_fraktguiden_pickup_point_id', '', $expire );
+        setcookie( '_fraktguiden_pickup_point_postcode', '', $expire );
+        setcookie( '_fraktguiden_pickup_point_info_cached', '', $expire );
       }
 
-      if ( $_SESSION['_fraktguiden_packages'] ) {
+      if ( isset( $_SESSION['_fraktguiden_packages'] ) ) {
         $order->checkout_update_packages( $_SESSION['_fraktguiden_packages'] );
         unset( $_SESSION['_fraktguiden_packages'] );
       }
