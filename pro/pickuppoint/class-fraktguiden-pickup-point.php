@@ -43,6 +43,77 @@ class Fraktguiden_Pickup_Point {
     // Hide shipping meta data from order items (WooCommerce 2.6)
     // https://github.com/woothemes/woocommerce/issues/9094
     add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
+
+    // Klarna checkout specific html
+    add_action( 'kco_before_cart', array( __CLASS__, 'kco_post_code_html' ) );
+    add_action( 'kco_before_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
+  }
+
+  /**
+   * Klarna Checkout post code selector HTML
+   */
+  static function kco_post_code_html() {
+    $i18n = self::get_i18n();
+    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
+    ?>
+    <div class="bring-enter-postcode">
+      <form>
+        <label><?php echo $i18n['POSTCODE']; ?>
+          <input class="input-text" type="text" value="<?php echo $postcode; ?>">
+        </label>
+        <input class="button" type="submit" value="Lagre">
+      </form>
+    </div>
+    <?php
+  }
+
+  /**
+   * Klarna Checkout pickup point HTML
+   */
+  static function kco_pickuppoint_html() {
+    $i18n = self::get_i18n();
+    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
+
+    $options = '';
+    $postcodes = array(
+      '' => array(
+        'name' => '--- '. $i18n['ADD_POSTCODE'] .' ---',
+        'data' => '',
+      ),
+    );
+    if ( $postcode ) {
+      $response = self::get_pickup_points( $postcode, 'NO' );
+      if( $response->status_code == 200 ) {
+        $pickup_points = json_decode( $response->get_body() );
+        $postcodes = array(
+          '' => array(
+            'name' => '--- '. $i18n['PICKUP_POINT_PLACEHOLDER'] .' ---',
+            'data' => '',
+          ),
+        );
+        foreach ( $pickup_points->pickupPoint as $pickup_point ) {
+          $postcodes[$pickup_point->id] = [
+            'name' => esc_html( $pickup_point->name ),
+            'data' => esc_html( json_encode( $pickup_point ) ),
+          ];
+        }
+      }
+    }
+    foreach ( $postcodes as $key => $value ) {
+      $options .= sprintf( '<option value="%s" data-pickup_point="%s">%s</option>', $key, $value['data'], $value['name'] );
+    }
+    ?>
+    <div class="fraktguiden-pickup-point" style="display: none">
+      <div>
+        <select name="_fraktguiden_pickup_point_id" class="fraktguiden-pickup-point-select">
+          <?php echo $options; ?>
+        </select>
+      </div>
+      <div class="fraktguiden-selected-text"></div>
+      <div class="fraktguiden-pickup-point-display"></div>
+      <input type="hidden" name="_fraktguiden_pickup_point_info_cached"/>
+    </div>
+    <?php
   }
 
   /**
@@ -307,13 +378,16 @@ class Fraktguiden_Pickup_Point {
     die();
   }
 
+  static function get_pickup_points( $postcode, $country ) {
+    $request = new WP_Bring_Request();
+    return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
+  }
   /**
    * Prints pickup points json
    */
   static function wp_ajax_get_pickup_points() {
     if ( isset( $_GET['country'] ) && $_GET['postcode'] ) {
-      $request  = new WP_Bring_Request();
-      $response = $request->get( self::BASE_URL . '/' . $_GET['country'] . '/postalCode/' . $_GET['postcode'] . '.json' );
+      $response = self::get_pickup_points( $_GET['country'], $_GET['postcode'] );
 
       header( "Content-type: application/json" );
       status_header( $response->status_code );
@@ -324,7 +398,6 @@ class Fraktguiden_Pickup_Point {
       else {
         echo $response->get_body();
       }
-
     }
     die();
   }
