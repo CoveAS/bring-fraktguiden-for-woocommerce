@@ -52,8 +52,10 @@
             events().trigger( events.CHECKOUT_REVIEW_UPDATED );
         } );
 
-        // Hide the checkout itself
-        $( '.klarna_checkout' ).hide();
+        if ( ! has_bring_shipping_rates() ) {
+            // Hide the checkout itself
+            $( '.klarna_checkout' ).hide();
+        }
     }
 
     function post_kco_delivery_post_code( post_code ) {
@@ -196,7 +198,7 @@
                 events().trigger( events.POST_CODE_UPDATED, [user_selected.postcode, user_selected.country] );
             }
             if ( has_klarna_widget() ) {
-                if ( is_servicepakke_selected() ) {
+                if ( is_servicepakke_selected() && !pickup_point_select_elem().val() ) {
                     $( '.klarna_checkout' ).hide();
                 }
                 else{
@@ -237,7 +239,9 @@
 
         // Each time Pickup point postcode is updated.
         events().on( events.POST_CODE_UPDATED, function ( evt, postcode, country ) {
-            pickup_point_select_elem().val( '' );
+
+            var id = Bring_Common.read_cookie( '_fraktguiden_pickup_point_id' );
+            pickup_point_select_elem().val( id );
 
             update_cookies();
 
