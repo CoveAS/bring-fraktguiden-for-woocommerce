@@ -241,7 +241,6 @@
         events().on( events.POST_CODE_UPDATED, function ( evt, postcode, country ) {
 
             var id = Bring_Common.read_cookie( '_fraktguiden_pickup_point_id' );
-            pickup_point_select_elem().val( id );
 
             update_cookies();
 
@@ -253,7 +252,14 @@
 
             if ( ! has_klarna_widget() ) {
                 // When klarna is used then the pickup points are provided with the ajax for the widget html
+                pickup_point_select_elem().val( id );
                 update_pickup_point_selector( code, country );
+            }
+            else {
+                $( '#'+ id ).prop( 'checked', true );
+                setTimeout( function() {
+                    $( '#'+ id ).prop( 'checked', true );
+                }, 500 );
             }
 
             // delay( function () {
@@ -455,7 +461,7 @@
      * @returns {jQuery}
      */
     function pickup_point_select_elem() {
-        return $( '.fraktguiden-pickup-point-select' );
+        return $( '.fraktguiden-pickup-point-select, .fraktguiden-pickup-point-list input' );
     }
 
     /**
@@ -479,7 +485,14 @@
      * Updates cookies with the user's data.
      */
     function update_cookies() {
-        Bring_Common.create_cookie( '_fraktguiden_pickup_point_id', pickup_point_select_elem().val() );
+        var pickup_id;
+        if ( has_klarna_widget() ) {
+            pickup_id = pickup_point_select_elem().filter( ':checked' ).val();
+        }
+        else {
+            pickup_id = pickup_point_select_elem().val();
+        }
+        Bring_Common.create_cookie( '_fraktguiden_pickup_point_id', pickup_id );
         Bring_Common.create_cookie( '_fraktguiden_pickup_point_postcode', user_selected.postcode );
         Bring_Common.create_cookie( '_fraktguiden_pickup_point_info_cached', $( '[name=_fraktguiden_pickup_point_info_cached]' ).val() );
         // console.log( 'read cookie', Bring_Common.read_cookie( '_fraktguiden_pickup_point_id' ) );

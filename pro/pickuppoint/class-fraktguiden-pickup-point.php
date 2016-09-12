@@ -47,6 +47,18 @@ class Fraktguiden_Pickup_Point {
     // Klarna checkout specific html
     add_action( 'kco_before_cart', array( __CLASS__, 'kco_post_code_html' ) );
     add_action( 'kco_before_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
+    add_filter( 'kco_create_order', array( __CLASS__, 'set_kco_postal_code' ) );
+    add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
+  }
+
+  /**
+   * Set Klarna Checkout postal code
+   * @param array Klarna order data
+   */
+  static function set_kco_postal_code( $order ) {
+    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
+    $order['shipping_address']['postal_code'] = $postcode;
+    return $order;
   }
 
   /**
@@ -76,21 +88,11 @@ class Fraktguiden_Pickup_Point {
 
     $options = '';
     $postcodes = array(
-      '' => array(
-        'name' => '--- '. $i18n['ADD_POSTCODE'] .' ---',
-        'data' => '',
-      ),
     );
     if ( $postcode ) {
       $response = self::get_pickup_points( $postcode, 'NO' );
       if( $response->status_code == 200 ) {
         $pickup_points = json_decode( $response->get_body() );
-        $postcodes = array(
-          '' => array(
-            'name' => '--- '. $i18n['PICKUP_POINT_PLACEHOLDER'] .' ---',
-            'data' => '',
-          ),
-        );
         foreach ( $pickup_points->pickupPoint as $pickup_point ) {
           $postcodes[$pickup_point->id] = [
             'name' => esc_html( $pickup_point->name ),
@@ -100,15 +102,13 @@ class Fraktguiden_Pickup_Point {
       }
     }
     foreach ( $postcodes as $key => $value ) {
-      $options .= sprintf( '<option value="%s" data-pickup_point="%s">%s</option>', $key, $value['data'], $value['name'] );
+      $options .= sprintf( '<li><input name="bring_method" type="radio" value="%s" data-pickup_point="%s" id="%1$s"> <label for="%1$s">%s</label></li>', $key, $value['data'], $value['name'] );
     }
     ?>
     <div class="fraktguiden-pickup-point" style="display: none">
-      <div>
-        <select name="_fraktguiden_pickup_point_id" class="fraktguiden-pickup-point-select">
-          <?php echo $options; ?>
-        </select>
-      </div>
+      <ul class="fraktguiden-pickup-point-list">
+        <?php echo $options; ?>
+      </ul>
       <div class="fraktguiden-selected-text"></div>
       <div class="fraktguiden-pickup-point-display"></div>
       <input type="hidden" name="_fraktguiden_pickup_point_info_cached"/>
