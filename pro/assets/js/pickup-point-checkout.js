@@ -73,6 +73,12 @@
                 // Copy paste from klarna code
                 $( '#klarna-checkout-widget' ).html( response.data.widget_html );
                 check_shipping_rate_selection();
+                if ( window._klarnaCheckout ) {
+                    // Reload the klarna payment window
+                    window._klarnaCheckout( function ( api ) {
+                        api.resume();
+                    } );
+                }
             }
         );
     }
