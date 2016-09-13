@@ -87,14 +87,13 @@ class Fraktguiden_Pickup_Point {
     $postcode = esc_html( WC()->customer->get_shipping_postcode() );
 
     $options = '';
-    $postcodes = array(
-    );
+    $postcodes = array();
     if ( $postcode ) {
       $response = self::get_pickup_points( $postcode, 'NO' );
-      if( $response->status_code == 200 ) {
+      if ( 200 == $response->status_code ) {
         $pickup_points = json_decode( $response->get_body() );
         foreach ( $pickup_points->pickupPoint as $pickup_point ) {
-          $postcodes[$pickup_point->id] = [
+          $postcodes[ $pickup_point->id ] = [
             'name' => esc_html( $pickup_point->name ),
             'data' => esc_html( json_encode( $pickup_point ) ),
           ];
@@ -102,7 +101,17 @@ class Fraktguiden_Pickup_Point {
       }
     }
     foreach ( $postcodes as $key => $value ) {
-      $options .= sprintf( '<li><input name="bring_method" type="radio" value="%s" data-pickup_point="%s" id="%1$s"> <label for="%1$s">%s</label></li>', $key, $value['data'], $value['name'] );
+      $selected = '';
+      if ( @$_COOKIE['_fraktguiden_pickup_point_id'] == $key ) {
+        $selected = 'checked="checked"';
+      }
+      $options .= sprintf(
+        '<li><input name="bring_method" type="radio" value="%s" %s data-pickup_point="%s" id="%1$s"> <label for="%1$s">%s</label></li>',
+        $key,
+        $selected,
+        $value['data'],
+        $value['name']
+      );
     }
     ?>
     <div class="fraktguiden-pickup-point" style="display: none">
