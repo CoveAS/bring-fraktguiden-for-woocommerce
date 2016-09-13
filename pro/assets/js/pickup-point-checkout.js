@@ -498,7 +498,9 @@
         else {
             pickup_id = pickup_point_select_elem().val();
         }
-        Bring_Common.create_cookie( '_fraktguiden_pickup_point_id', pickup_id );
+        if ( pickup_id ) {
+            Bring_Common.create_cookie( '_fraktguiden_pickup_point_id', pickup_id );
+        }
         Bring_Common.create_cookie( '_fraktguiden_pickup_point_postcode', user_selected.postcode );
         Bring_Common.create_cookie( '_fraktguiden_pickup_point_info_cached', $( '[name=_fraktguiden_pickup_point_info_cached]' ).val() );
         // console.log( 'read cookie', Bring_Common.read_cookie( '_fraktguiden_pickup_point_id' ) );

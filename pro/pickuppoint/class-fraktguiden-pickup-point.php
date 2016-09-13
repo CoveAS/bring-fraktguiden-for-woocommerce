@@ -45,8 +45,8 @@ class Fraktguiden_Pickup_Point {
     add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
 
     // Klarna checkout specific html
-    add_action( 'kco_before_cart', array( __CLASS__, 'kco_post_code_html' ) );
-    add_action( 'kco_before_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
+    add_action( 'kco_after_cart', array( __CLASS__, 'kco_post_code_html' ) );
+    add_action( 'kco_after_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
     add_filter( 'kco_create_order', array( __CLASS__, 'set_kco_postal_code' ) );
     add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
   }
@@ -85,7 +85,7 @@ class Fraktguiden_Pickup_Point {
   static function kco_pickuppoint_html() {
     $i18n = self::get_i18n();
     $postcode = esc_html( WC()->customer->get_shipping_postcode() );
-
+    $selected_id = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
     $options = '';
     $postcodes = array();
     if ( $postcode ) {
@@ -93,6 +93,9 @@ class Fraktguiden_Pickup_Point {
       if ( 200 == $response->status_code ) {
         $pickup_points = json_decode( $response->get_body() );
         foreach ( $pickup_points->pickupPoint as $pickup_point ) {
+          if ( ! $selected_id || 'undefined' == $selected_id ) {
+            $selected_id = $pickup_point->id;
+          }
           $postcodes[ $pickup_point->id ] = [
             'name' => esc_html( $pickup_point->name ),
             'data' => esc_html( json_encode( $pickup_point ) ),
@@ -102,7 +105,7 @@ class Fraktguiden_Pickup_Point {
     }
     foreach ( $postcodes as $key => $value ) {
       $selected = '';
-      if ( @$_COOKIE['_fraktguiden_pickup_point_id'] == $key ) {
+      if ( $selected_id == $key ) {
         $selected = 'checked="checked"';
       }
       $options .= sprintf(
