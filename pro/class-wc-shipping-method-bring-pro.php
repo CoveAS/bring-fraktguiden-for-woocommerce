@@ -63,6 +63,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $this->booking_address_email          = array_key_exists( 'booking_address_email', $this->settings ) ? $this->settings['booking_address_email'] : '';
 
     $this->booking_test_mode = array_key_exists( 'booking_test_mode', $this->settings ) ? $this->settings['booking_test_mode'] : 'no';
+
+    add_filter( 'bring_shipping_rates', array( $this, 'filter_shipping_rates' ) );
   }
 
   public function init_form_fields() {
@@ -72,26 +74,44 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     parent::init_form_fields();
 
     // *************************************************************************
+    // Free Shipping
+    // *************************************************************************
+    // $this->form_fields['free_shipping_title'] = [
+    //     'type' => 'title',
+    //     'title' => __( 'Free Shipping', self::TEXT_DOMAIN ),
+    // ];
+    // $this->form_fields['free_shipping_settings'] = [
+    //     'type' => 'checkbox',
+    //     'title' => '',
+    //     'description' => $description,
+    // ];
+    //
+
+    $this->form_fields['services'] = array(
+       'type' => 'services_table'
+    );
+
+    // *************************************************************************
     // Pickup Point
     // *************************************************************************
 
     $this->form_fields['pickup_point_title'] = [
         'type'  => 'title',
-        'title' => __( 'Pickup Point Options', self::TEXT_DOMAIN )
+        'title' => __( 'Pickup Point Options', self::TEXT_DOMAIN ),
     ];
 
     $this->form_fields['pickup_point_enabled'] = [
         'title'   => __( 'Enable', self::TEXT_DOMAIN ),
         'type'    => 'checkbox',
         'label'   => __( 'Enable pickup point', self::TEXT_DOMAIN ),
-        'default' => 'no'
+        'default' => 'no',
     ];
 
     $this->form_fields['pickup_point_required'] = [
         'title'   => __( 'Required', self::TEXT_DOMAIN ),
         'type'    => 'checkbox',
         'label'   => __( 'Make pickup point required on checkout', self::TEXT_DOMAIN ),
-        'default' => 'no'
+        'default' => 'no',
     ];
 
     // *************************************************************************
@@ -217,4 +237,180 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     wp_enqueue_style( 'bfg-admin-css', $src, array(), '##VERSION##', false );
   }
 
+  public function validate_services_table_field( $key, $value ) {
+    return isset( $value ) ? $value : array();
+  }
+
+  public function process_admin_options() {
+    parent::process_admin_options();
+
+    // Process services table
+    $services  = Fraktguiden_Helper::get_services_data();
+    $field_key = $this->get_field_key( 'services' );
+    $vars = [
+      'custom_prices',
+      'free_shipping_checks',
+      'free_shipping_thresholds',
+    ];
+    foreach ( $vars as $var ) {
+      $$var = [];
+    }
+    // Only process options for enabled services
+    foreach ( $services as $key => $service ) {
+      foreach ( $vars as $var ) {
+        $data_key = "{$field_key}_{$var}";
+        if ( isset( $_POST[ $data_key ][ $key ] ) ) {
+          ${$var}[ $key ] = $_POST[ $data_key ][ $key ];
+        }
+      }
+    }
+    foreach ( $vars as $var ) {
+      $data_key = "{$field_key}_{$var}";
+      update_option( $data_key, $$var );
+    }
+
+  }
+  public function filter_shipping_rates( $rates ) {
+
+    $field_key                = $this->get_field_key( 'services' );
+    $custom_prices            = get_option( $field_key . '_custom_prices' );
+    $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
+    $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
+
+    $cart_total = WC()->cart->cart_contents_total;
+    foreach ( $rates as &$rate ) {
+      if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
+        continue;
+      }
+      $key = strtoupper( $matches[1] );
+      if ( isset( $custom_prices[ $key ] ) && ctype_digit( $custom_prices[ $key ] ) ) {
+        $rate['cost'] = floatval( $custom_prices[ $key ] );
+      }
+      if (
+        isset( $free_shipping_checks[ $key ] ) &&
+        'on' == $free_shipping_checks[ $key ] &&
+        isset( $free_shipping_thresholds[ $key ] )
+      ) {
+        // Free shipping is checked and threshold is defined
+        $threshold = $free_shipping_thresholds[ $key ];
+        if ( ! ctype_digit( $threshold ) || $cart_total >= $threshold ) {
+          // Threshold is not a number (ie. undefined) or
+          // cart total is more than or equal to the threshold
+          var_dump( $rate, $cart_total, $threshold );
+          $rate['cost'] = 0;
+        }
+      }
+    }
+    // ...
+    return $rates;
+  }
+
+  public function generate_services_table_html() {
+    $services                 = Fraktguiden_Helper::get_services_data();
+    $selected                 = $this->services;
+    $field_key                = $this->get_field_key( 'services' );
+    $custom_prices            = get_option( $field_key . '_custom_prices' );
+    $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
+    $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
+    ob_start();
+    ?>
+
+    <tr valign="top">
+      <th scope="row" class="titledesc">
+        <label
+            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
+      </th>
+      <td class="forminp">
+        <table class="wc_shipping widefat fraktguiden-services-table">
+          <thead>
+          <tr>
+            <th class="fraktguiden-services-table-col-enabled">Aktiv</th>
+            <th class="fraktguiden-services-table-col-service">Tjeneste</th>
+            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
+            <th class="fraktguiden-services-table-col-free-shipping">Gratis frakt</th>
+            <th class="fraktguiden-services-table-col-free-shipping-threshold">Fraktfri grense</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <?php
+          foreach ( $services as $key => $service ) {
+            $id = $field_key . '_' . $key;
+            $vars = [
+                'custom_price'             => 'custom_prices',
+                'free_shipping'            => 'free_shipping_checks',
+                'free_shipping_threshold'  => 'free_shipping_thresholds',
+            ];
+            // Extract variables from the settings data
+            foreach ( $vars as $var => $data_var ) {
+              // Eg.: ${custom_price_id} = 'woocommerce_bring_fraktguiden_services_custom_prices[SERVICEPAKKE]';
+              ${$var.'_id'} = "{$field_key}_{$data_var}[{$key}]";
+              $$var = '';
+              if ( isset( ${$data_var}[ $key ] ) ) {
+                // Eg.: $custom_price = $custom_prices['SERVICEPAKKE'];
+                $$var = esc_html( ${$data_var}[ $key ] );
+              }
+            }
+            $enabled = in_array( $key, $selected );
+            ?>
+            <tr>
+              <td class="fraktguiden-services-table-col-enabled">
+                <label for="<?php echo $id; ?>"
+                       style="display:inline-block; width: 100%">
+                  <input type="checkbox" id="<?php echo $id; ?>"
+                         name="<?php echo $field_key; ?>[]"
+                         value="<?php echo $key; ?>" <?php echo( $enabled ? 'checked' : '' ); ?> />
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-name">
+                <span data-tip="<?php echo $service['HelpText']; ?>"
+                      class="woocommerce-help-tip"></span>
+                <label class="fraktguiden-service" for="<?php echo $id; ?>"
+                       data-ProductName="<?php echo $service['ProductName']; ?>"
+                       data-DisplayName="<?php echo $service['DisplayName']; ?>">
+                  <?php echo $service[$this->service_name]; ?>
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-custom-price">
+                <input type="text" name="<?php echo $custom_price_id; ?>"
+                       value="<?php echo $custom_price; ?>"
+                       />
+              </td>
+              <td class="fraktguiden-services-table-col-free-shipping">
+                <label style="display:inline-block; width: 100%">
+                  <input type="checkbox" name="<?php echo $free_shipping_id; ?>"
+                    <?php echo $free_shipping ? 'checked' : ''; ?>>
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-free-shipping-threshold">
+                <input type="text" name="<?php echo $free_shipping_threshold_id; ?>"
+                       value="<?php echo $free_shipping_threshold; ?>"
+                       placeholder="0"
+                       />
+              </td>
+            </tr>
+          <?php } ?>
+          </tbody>
+        </table>
+        <script>
+          jQuery( document ).ready( function () {
+            var $ = jQuery;
+            $( '#woocommerce_bring_fraktguiden_service_name' ).change( function () {
+              console.log( 'change', this.value );
+              var val = this.value;
+              $( '.fraktguiden-services-table' ).find( 'label.fraktguiden-service' ).each( function ( i, elem ) {
+
+                var label = $( elem );
+                label.text( label.attr( 'data-' + val ) );
+              } );
+            } );
+
+          } );
+        </script>
+      </td>
+    </tr>
+
+    <?php
+    return ob_get_clean();
+  }
 }
