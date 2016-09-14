@@ -276,8 +276,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $custom_prices            = get_option( $field_key . '_custom_prices' );
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
-
-    $cart_total = WC()->cart->cart_contents_total;
+    $cart = WC()->cart;
+    if ( $cart->prices_include_tax ) {
+      $cart_total = $cart->cart_contents_total + $cart->tax_total;
+    }
+    else {
+      $cart_total = $cart->cart_contents_total;
+    }
     foreach ( $rates as &$rate ) {
       if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
         continue;
@@ -296,7 +301,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         if ( ! ctype_digit( $threshold ) || $cart_total >= $threshold ) {
           // Threshold is not a number (ie. undefined) or
           // cart total is more than or equal to the threshold
-          var_dump( $rate, $cart_total, $threshold );
           $rate['cost'] = 0;
         }
       }
