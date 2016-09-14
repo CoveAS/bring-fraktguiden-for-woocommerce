@@ -40,9 +40,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $post_office = '';
   private $vat = '';
   private $evarsling = '';
-  private $services = array();
-  private $services2 = array();
-  private $service_name = '';
+  protected $services = array();
+  protected $service_name = '';
   private $display_desc = '';
   private $max_products = '';
   private $alt_flat_rate = '';
@@ -88,7 +87,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->vat          = array_key_exists( 'vat', $this->settings ) ? $this->settings['vat'] : '';
     $this->evarsling    = array_key_exists( 'evarsling', $this->settings ) ? $this->settings['evarsling'] : '';
     $this->services     = array_key_exists( 'services', $this->settings ) ? $this->settings['services'] : '';
-    $this->services2    = array_key_exists( 'services2', $this->settings ) ? $this->settings['services2'] : [ ];
     $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : 'DisplayName';
     $this->display_desc = array_key_exists( 'display_desc', $this->settings ) ? $this->settings['display_desc'] : 'no';
     $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
@@ -242,10 +240,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             )
         ),
 
-//        'services2' => array(
-//            'type' => 'services_table'
-//        ),
-
         'display_desc'  => array(
             'title'    => __( 'Display Description', self::TEXT_DOMAIN ),
             'type'     => 'checkbox',
@@ -303,111 +297,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       <?php endif; ?>
 
     </table> <?php
-  }
-
-  public function validate_services_table_field( $key, $value ) {
-    return isset( $value ) ? $value : array();
-  }
-
-  public function process_admin_options() {
-    parent::process_admin_options();
-
-    // Process services table
-    $services_field               = $this->get_field_key( 'services2' );
-    $services_custom_prices_field = $services_field . '_custom_prices';
-    $custom_prices                = [ ];
-    if ( isset( $_POST[$services_field] ) ) {
-      $checked_services = $_POST[$services_field];
-      foreach ( $checked_services as $key => $service ) {
-
-        if ( isset( $_POST[$services_custom_prices_field][$service] ) ) {
-          $custom_prices[$service] = $_POST[$services_custom_prices_field][$service];
-        }
-      }
-    }
-
-    update_option( $services_custom_prices_field, $custom_prices );
-  }
-
-
-  public function generate_services_table_html() {
-    $services      = Fraktguiden_Helper::get_services_data();
-    $selected      = $this->services2;
-    $field_key     = $this->get_field_key( 'services2' );
-    $custom_prices = get_option( $field_key . '_custom_prices' );
-
-    ob_start();
-    ?>
-
-    <tr valign="top">
-      <th scope="row" class="titledesc">
-        <label
-            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
-      </th>
-      <td class="forminp">
-        <table class="wc_shipping widefat fraktguiden-services-table">
-          <thead>
-          <tr>
-            <th class="fraktguiden-services-table-col-enabled">Enabled</th>
-            <th class="fraktguiden-services-table-col-service">Service</th>
-            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
-          </tr>
-          </thead>
-          <tbody>
-
-          <?php
-          foreach ( $services as $key => $service ) {
-            $id               = $field_key . '_' . $key;
-            $prices_field_key = $field_key . '_custom_prices[' . $key . ']';
-            $custom_price     = isset( $custom_prices[$key] ) ? $custom_prices[$key] : '';
-            $checked          = in_array( $key, $selected );
-            ?>
-            <tr>
-              <td class="fraktguiden-services-table-col-enabled">
-                <label for="<?php echo $id; ?>"
-                       style="display:inline-block; width: 100%">
-                  <input type="checkbox" id="<?php echo $id; ?>"
-                         name="<?php echo $field_key; ?>[]"
-                         value="<?php echo $key; ?>" <?php echo( $checked ? 'checked' : '' ); ?> />
-                </label>
-              </td>
-              <td class="fraktguiden-services-table-col-name">
-                <span data-tip="<?php echo $service['HelpText']; ?>"
-                      class="woocommerce-help-tip"></span>
-                <label class="fraktguiden-service" for="<?php echo $id; ?>"
-                       data-ProductName="<?php echo $service['ProductName']; ?>"
-                       data-DisplayName="<?php echo $service['DisplayName']; ?>">
-                  <?php echo $service[$this->service_name]; ?>
-                </label>
-              </td>
-              <td class="fraktguiden-services-table-col-custom-price">
-                <input type="text" name="<?php echo $prices_field_key; ?>"
-                       value="<?php echo $custom_price; ?>"/>
-              </td>
-            </tr>
-          <?php } ?>
-          </tbody>
-        </table>
-        <script>
-          jQuery( document ).ready( function () {
-            var $ = jQuery;
-            $( '#woocommerce_bring_fraktguiden_service_name' ).change( function () {
-              console.log( 'change', this.value );
-              var val = this.value;
-              $( '.fraktguiden-services-table' ).find( 'label.fraktguiden-service' ).each( function ( i, elem ) {
-
-                var label = $( elem );
-                label.text( label.attr( 'data-' + val ) );
-              } );
-            } );
-
-          } );
-        </script>
-      </td>
-    </tr>
-
-    <?php
-    return ob_get_clean();
   }
 
   /**
@@ -507,8 +396,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $url = add_query_arg( $params, self::SERVICE_URL );
 
       // Add all the selected services to the URL
+      $service_count = 0;
       if ( $this->services && count( $this->services ) > 0 ) {
         foreach ( $this->services as $service ) {
+
           $url .= '&product=' . $service;
         }
       }
@@ -525,6 +416,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $json = json_decode( $response->get_body(), true );
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
+      $rates = apply_filters( 'bring_shipping_rates', $rates );
 
       if ( $this->debug != 'no' ) {
         $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );

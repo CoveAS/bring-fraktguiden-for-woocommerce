@@ -226,11 +226,13 @@ mark.bring-shipment:after {
 }
 
 .fraktguiden-services-table-col-enabled,
+.fraktguiden-services-table-col-free-shipping,
+.fraktguiden-services-table-col-free-shipping-threshold,
 .fraktguiden-services-table-col-custom-price {
     text-align: center !important;
     width: 1em !important;
 }
-
+.fraktguiden-services-table-col-free-shipping-threshold input,
 .fraktguiden-services-table-col-custom-price input {
     width: 4.5em;
 }
