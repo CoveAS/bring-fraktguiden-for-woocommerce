@@ -88,6 +88,8 @@ class Fraktguiden_Pickup_Point {
     $selected_id = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
     $options = '';
     $postcodes = array();
+    $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
+    $pickup_point_count = 0;
     if ( $postcode ) {
       $response = self::get_pickup_points( $postcode, 'NO' );
       if ( 200 == $response->status_code ) {
@@ -100,6 +102,9 @@ class Fraktguiden_Pickup_Point {
             'name' => esc_html( $pickup_point->name ),
             'data' => esc_html( json_encode( $pickup_point ) ),
           ];
+          if ( ++$pickup_point_count >= $pickup_point_limit ) {
+            break;
+          }
         }
       }
     }
