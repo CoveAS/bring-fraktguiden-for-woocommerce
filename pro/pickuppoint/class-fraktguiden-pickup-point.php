@@ -73,7 +73,7 @@ class Fraktguiden_Pickup_Point {
         <label><?php echo $i18n['POSTCODE']; ?>
           <input class="input-text" type="text" value="<?php echo $postcode; ?>">
         </label>
-        <input class="button" type="submit" value="Lagre">
+        <input class="button" type="submit" value="Hent Leveringsmetoder">
       </form>
     </div>
     <?php
