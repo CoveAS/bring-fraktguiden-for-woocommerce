@@ -108,7 +108,7 @@ class Bring_Booking_Orders_View {
 
             //@todo: does this need to be global?
             var modal = $( {} );
-            
+
             var form = $( 'form#posts-filter' );
 
             // Add input for form filter submit from modal.
@@ -164,9 +164,9 @@ class Bring_Booking_Orders_View {
               }
 
               if ( $( "select[name='action']" ).val() == 'bring_print_labels' ) {
-                var url = '<?php echo Bring_Booking_Labels::create_download_url(-1); ?>';
+                var url = '<?php echo Bring_Booking_Labels::create_download_url(''); ?>';
 
-                url = url.replace('-1', get_checked_order_ids().join(','));
+                url = url + get_checked_order_ids().join(',');
 
                 window.open(url);
                 evt.preventDefault();
