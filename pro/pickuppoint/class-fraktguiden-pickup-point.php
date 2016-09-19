@@ -220,8 +220,11 @@ class Fraktguiden_Pickup_Point {
 
       $order = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
 
-      if ( session_status() == PHP_SESSION_NONE ) {
-        session_start();
+      $expire = time() - 300;
+
+      if ( isset( $_COOKIE['_fraktguiden_packages'] ) ) {
+        $order->checkout_update_packages( $_COOKIE['_fraktguiden_packages'] );
+        setcookie( '_fraktguiden_packages', '', $expire );
       }
 
       if ( isset( $_COOKIE['_fraktguiden_pickup_point_id'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_postcode'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_info_cached'] ) ) {
@@ -234,17 +237,10 @@ class Fraktguiden_Pickup_Point {
         // Unset cookies.
         // This does not work at the moment as headers has already been sent.
         // @todo: Find an earlier hook
-        $expire = time() - 300;
         setcookie( '_fraktguiden_pickup_point_id', '', $expire );
         setcookie( '_fraktguiden_pickup_point_postcode', '', $expire );
         setcookie( '_fraktguiden_pickup_point_info_cached', '', $expire );
       }
-
-      if ( isset( $_SESSION['_fraktguiden_packages'] ) ) {
-        $order->checkout_update_packages( $_SESSION['_fraktguiden_packages'] );
-        unset( $_SESSION['_fraktguiden_packages'] );
-      }
-
     }
   }
 

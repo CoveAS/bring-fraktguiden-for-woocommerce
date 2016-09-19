@@ -382,10 +382,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Create the url.
       $this->packages_params = $packer->create_packages_params();
 
-
-      if ( is_checkout() && session_status() == PHP_SESSION_NONE ) {
-        session_start();
-        $_SESSION['_fraktguiden_packages'] = json_encode( $this->packages_params );
+      if ( is_checkout() ) {
+        $_COOKIE['_fraktguiden_packages'] = json_encode( $this->packages_params );
       }
 
       // Request parameters.
