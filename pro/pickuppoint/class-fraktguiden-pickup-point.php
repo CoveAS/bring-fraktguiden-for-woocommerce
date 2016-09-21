@@ -13,7 +13,6 @@ add_action( 'woocommerce_thankyou', array( 'Fraktguiden_Pickup_Point', 'checkout
 class Fraktguiden_Pickup_Point {
 
   const ID = Fraktguiden_Helper::ID;
-  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
   const BASE_URL = 'https://api.bring.com/pickuppoint/api/pickuppoint';
 
   static function init() {
@@ -203,7 +202,7 @@ class Fraktguiden_Pickup_Point {
   static function checkout_validate_pickup_point() {
     // Check if set, if its not set add an error.
     if ( ! $_COOKIE['_fraktguiden_pickup_point_id'] ) {
-      wc_add_notice( __( '<strong>Pickup point</strong> is a required field.', self::TEXT_DOMAIN ), 'error' );
+      wc_add_notice( __( '<strong>Pickup point</strong> is a required field.', 'bring-fraktguiden' ), 'error' );
     }
   }
 
@@ -281,25 +280,24 @@ class Fraktguiden_Pickup_Point {
    * @return array
    */
   static function get_i18n() {
-    $text_domain = self::TEXT_DOMAIN;
     return [
-        'PICKUP_POINT'               => __( 'Pickup point', $text_domain ),
-        'LOADING_TEXT'               => __( 'Please wait...', $text_domain ),
-        'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', $text_domain ),
-        'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', $text_domain ),
-        'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', $text_domain ),
-        'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', $text_domain ),
-        'SERVICE_PLACEHOLDER'        => __( 'Please select service', $text_domain ),
-        'POSTCODE'                   => __( 'Postcode', $text_domain ),
-        'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', $text_domain ),
-        'SELECTED_TEXT'              => __( 'Selected pickup point', $text_domain ),
-        'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', $text_domain ),
-        'GET_RATE'                   => __( 'Get Rate', $text_domain ),
-        'PLEASE_WAIT'                => __( 'Please wait', $text_domain ),
-        'SERVICE'                    => __( 'Service', $text_domain ),
-        'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', $text_domain ),
-        'REQUEST_FAILED'             => __( 'Request was not successful', $text_domain ),
-        'ADD_POSTCODE'               => __( 'Please add postal code', $text_domain ),
+        'PICKUP_POINT'               => __( 'Pickup point', 'bring-fraktguiden' ),
+        'LOADING_TEXT'               => __( 'Please wait...', 'bring-fraktguiden' ),
+        'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', 'bring-fraktguiden' ),
+        'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
+        'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
+        'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', 'bring-fraktguiden' ),
+        'SERVICE_PLACEHOLDER'        => __( 'Please select service', 'bring-fraktguiden' ),
+        'POSTCODE'                   => __( 'Postcode', 'bring-fraktguiden' ),
+        'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', 'bring-fraktguiden' ),
+        'SELECTED_TEXT'              => __( 'Selected pickup point', 'bring-fraktguiden' ),
+        'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', 'bring-fraktguiden' ),
+        'GET_RATE'                   => __( 'Get Rate', 'bring-fraktguiden' ),
+        'PLEASE_WAIT'                => __( 'Please wait', 'bring-fraktguiden' ),
+        'SERVICE'                    => __( 'Service', 'bring-fraktguiden' ),
+        'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', 'bring-fraktguiden' ),
+        'REQUEST_FAILED'             => __( 'Request was not successful', 'bring-fraktguiden' ),
+        'ADD_POSTCODE'               => __( 'Please add postal code', 'bring-fraktguiden' ),
     ];
   }
 

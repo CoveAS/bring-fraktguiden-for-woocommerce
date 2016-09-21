@@ -29,8 +29,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const ID = Fraktguiden_Helper::ID;
 
-  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
-
   const DEFAULT_MAX_PRODUCTS = 100;
 
   const DEFAULT_ALT_FLAT_RATE = 200;
@@ -59,7 +57,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function __construct() {
     $this->id           = self::ID;
-    $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
+    $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
 
     // Load the form fields.
     $this->init_form_fields();
@@ -143,77 +141,77 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->form_fields = [
         'general_options_title' => [
             'type'  => 'title',
-            'title' => __( 'Shipping Options', self::TEXT_DOMAIN ),
+            'title' => __( 'Shipping Options', 'bring-fraktguiden' ),
         ],
         'enabled'               => array(
-            'title'   => __( 'Enable', self::TEXT_DOMAIN ),
+            'title'   => __( 'Enable', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
-            'label'   => __( 'Enable Bring Fraktguiden', self::TEXT_DOMAIN ),
+            'label'   => __( 'Enable Bring Fraktguiden', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
         'title'                 => array(
-            'title'    => __( 'Title', self::TEXT_DOMAIN ),
+            'title'    => __( 'Title', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
-            'default'  => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
+            'desc_tip' => __( 'This controls the title which the user sees during checkout.', 'bring-fraktguiden' ),
+            'default'  => __( 'Bring Fraktguiden', 'bring-fraktguiden' )
         ),
         'handling_fee'          => array(
-            'title'    => __( 'Delivery Fee', self::TEXT_DOMAIN ),
+            'title'    => __( 'Delivery Fee', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
             'default'  => ''
         ),
         'post_office'           => array(
-            'title'    => __( 'Post office', self::TEXT_DOMAIN ),
+            'title'    => __( 'Post office', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Shipping from post office', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
+            'label'    => __( 'Shipping from post office', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
         'from_zip'              => array(
-            'title'    => __( 'From zip', self::TEXT_DOMAIN ),
+            'title'    => __( 'From zip', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', 'bring-fraktguiden' ),
             'default'  => ''
         ),
         'from_country'          => array(
-            'title'    => __( 'From country', self::TEXT_DOMAIN ),
+            'title'    => __( 'From country', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', 'bring-fraktguiden' ),
             'class'    => 'chosen_select',
             'css'      => 'width: 450px;',
             'default'  => $woocommerce->countries->get_base_country(),
             'options'  => Fraktguiden_Helper::get_nordic_countries()
         ),
         'vat'                   => array(
-            'title'    => __( 'Display price', self::TEXT_DOMAIN ),
+            'title'    => __( 'Display price', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'How to calculate delivery charges', 'bring-fraktguiden' ),
             'default'  => 'include',
             'options'  => array(
-                'include' => __( 'VAT included', self::TEXT_DOMAIN ),
-                'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
+                'include' => __( 'VAT included', 'bring-fraktguiden' ),
+                'exclude' => __( 'VAT excluded', 'bring-fraktguiden' )
             ),
         ),
         'evarsling'             => array(
-            'title'    => __( 'Recipient notification', self::TEXT_DOMAIN ),
+            'title'    => __( 'Recipient notification', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br/>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', self::TEXT_DOMAIN ),
+            'label'    => __( 'Recipient notification over SMS or E-Mail', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'If not checked, Fraktguiden will add a fee for paper based recipient notification.<br/>If checked, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
         'availability'          => array(
-            'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
+            'title'   => __( 'Method availability', 'bring-fraktguiden' ),
             'type'    => 'select',
             'default' => 'all',
             'class'   => 'availability',
             'options' => array(
-                'all'      => __( 'All allowed countries', self::TEXT_DOMAIN ),
-                'specific' => __( 'Specific Countries', self::TEXT_DOMAIN )
+                'all'      => __( 'All allowed countries', 'bring-fraktguiden' ),
+                'specific' => __( 'Specific Countries', 'bring-fraktguiden' )
             )
         ),
         'countries'             => array(
-            'title'   => __( 'Specific Countries', self::TEXT_DOMAIN ),
+            'title'   => __( 'Specific Countries', 'bring-fraktguiden' ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
             'css'     => 'width: 450px;',
@@ -221,7 +219,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'options' => $woocommerce->countries->countries
         ),
         'services'              => array(
-            'title'   => __( 'Services', self::TEXT_DOMAIN ),
+            'title'   => __( 'Services', 'bring-fraktguiden' ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
             'css'     => 'width: 450px;',
@@ -230,40 +228,40 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
         'service_name' => array(
-            'title'    => __( 'Display Service As', self::TEXT_DOMAIN ),
+            'title'    => __( 'Display Service As', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'The service name displayed to the customer', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'The service name displayed to the customer', 'bring-fraktguiden' ),
             'default'  => 'DisplayName',
             'options'  => array(
-                'DisplayName' => __( 'Display Name', self::TEXT_DOMAIN ),
-                'ProductName' => __( 'Product Name', self::TEXT_DOMAIN ),
+                'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
+                'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
             )
         ),
 
         'display_desc'  => array(
-            'title'    => __( 'Display Description', self::TEXT_DOMAIN ),
+            'title'    => __( 'Display Description', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Add description after the service', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Show service description after the name of the service', self::TEXT_DOMAIN ),
+            'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
         'max_products'  => array(
-            'title'    => __( 'Max products', self::TEXT_DOMAIN ),
+            'title'    => __( 'Max products', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'Maximum of products in the cart before offering a flat rate', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'Maximum of products in the cart before offering a flat rate', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_MAX_PRODUCTS
         ),
         'alt_flat_rate' => array(
-            'title'    => __( 'Flat rate', self::TEXT_DOMAIN ),
+            'title'    => __( 'Flat rate', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
         'debug'         => array(
-            'title'       => __( 'Debug', self::TEXT_DOMAIN ),
+            'title'       => __( 'Debug', 'bring-fraktguiden' ),
             'type'        => 'checkbox',
-            'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
-            'description' => __( 'These logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
+            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
+            'description' => __( 'These logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
         )
     ];
@@ -279,10 +277,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     global $woocommerce; ?>
 
     <h3><?php echo $this->method_title; ?></h3>
-    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
+    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
     <p>
       <a href="<?php echo admin_url(); ?>admin-ajax.php?action=bring_system_info"
-         target="_blank"><?php echo __( 'View system info', self::TEXT_DOMAIN ) ?></a>
+         target="_blank"><?php echo __( 'View system info', 'bring-fraktguiden' ) ?></a>
     </p>
 
     <table class="form-table">
@@ -291,8 +289,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $this->generate_settings_html();
       else : ?>
         <div class="inline error"><p>
-            <strong><?php _e( 'Gateway Disabled', self::TEXT_DOMAIN ); ?></strong>
-            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', self::TEXT_DOMAIN ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
+            <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
+            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', 'bring-fraktguiden' ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
           </p></div>
       <?php endif; ?>
 

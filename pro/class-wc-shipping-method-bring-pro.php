@@ -42,8 +42,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
     parent::__construct();
 
-    $this->title        = __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN );
-    $this->method_title = __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN );
+    $this->title        = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );
+    $this->method_title = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );
 
     $this->pickup_point_enabled  = array_key_exists( 'pickup_point_enabled', $this->settings ) ? $this->settings['pickup_point_enabled'] : 'no';
     $this->pickup_point_required = array_key_exists( 'pickup_point_required', $this->settings ) ? $this->settings['pickup_point_required'] : 'no';
@@ -78,7 +78,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     // *************************************************************************
     // $this->form_fields['free_shipping_title'] = [
     //     'type' => 'title',
-    //     'title' => __( 'Free Shipping', self::TEXT_DOMAIN ),
+    //     'title' => __( 'Free Shipping', 'bring-fraktguiden' ),
     // ];
     // $this->form_fields['free_shipping_settings'] = [
     //     'type' => 'checkbox',
@@ -97,20 +97,20 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
     $this->form_fields['pickup_point_title'] = [
         'type'  => 'title',
-        'title' => __( 'Pickup Point Options', self::TEXT_DOMAIN ),
+        'title' => __( 'Pickup Point Options', 'bring-fraktguiden' ),
     ];
 
     $this->form_fields['pickup_point_enabled'] = [
-        'title'   => __( 'Enable', self::TEXT_DOMAIN ),
+        'title'   => __( 'Enable', 'bring-fraktguiden' ),
         'type'    => 'checkbox',
-        'label'   => __( 'Enable pickup point', self::TEXT_DOMAIN ),
+        'label'   => __( 'Enable pickup point', 'bring-fraktguiden' ),
         'default' => 'no',
     ];
 
     $this->form_fields['pickup_point_required'] = [
-        'title'   => __( 'Required', self::TEXT_DOMAIN ),
+        'title'   => __( 'Required', 'bring-fraktguiden' ),
         'type'    => 'checkbox',
-        'label'   => __( 'Make pickup point required on checkout', self::TEXT_DOMAIN ),
+        'label'   => __( 'Make pickup point required on checkout', 'bring-fraktguiden' ),
         'default' => 'no',
     ];
 
@@ -120,27 +120,27 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
     $has_api_uid_and_key = Fraktguiden_Helper::get_option( 'mybring_api_uid' ) && Fraktguiden_Helper::get_option( 'mybring_api_key' );
 
-    $description = sprintf( __( 'In order to use Bring Booking you must be registered in <a href="%s" target="_blank">MyBring</a> and have an invoice agreement with Bring', self::TEXT_DOMAIN ), 'http://mybring.com/' );
+    $description = sprintf( __( 'In order to use Bring Booking you must be registered in <a href="%s" target="_blank">MyBring</a> and have an invoice agreement with Bring', 'bring-fraktguiden' ), 'http://mybring.com/' );
     if ( ! $has_api_uid_and_key ) {
-      $description .= '<p style="font-weight: bold;color: red">' . __( 'API User ID or API Key missing!', self::TEXT_DOMAIN ) . '</p>';
+      $description .= '<p style="font-weight: bold;color: red">' . __( 'API User ID or API Key missing!', 'bring-fraktguiden' ) . '</p>';
     }
 
     $this->form_fields['mybring_title'] = [
-        'title'       => __( 'MyBring Account', self::TEXT_DOMAIN ),
+        'title'       => __( 'MyBring Account', 'bring-fraktguiden' ),
         'description' => $description,
         'type'        => 'title'
     ];
 
     $this->form_fields['mybring_api_uid'] = [
-        'title' => __( 'API User ID', self::TEXT_DOMAIN ),
+        'title' => __( 'API User ID', 'bring-fraktguiden' ),
         'type'  => 'text',
-        'label' => __( 'API User ID', self::TEXT_DOMAIN ),
+        'label' => __( 'API User ID', 'bring-fraktguiden' ),
     ];
 
     $this->form_fields['mybring_api_key'] = [
-        'title' => __( 'API Key', self::TEXT_DOMAIN ),
+        'title' => __( 'API Key', 'bring-fraktguiden' ),
         'type'  => 'text',
-        'label' => __( 'API Key', self::TEXT_DOMAIN ),
+        'label' => __( 'API Key', 'bring-fraktguiden' ),
     ];
 
     // *************************************************************************
@@ -148,53 +148,53 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     // *************************************************************************
 
     $this->form_fields['booking_point_title'] = [
-        'title' => __( 'Booking Options', self::TEXT_DOMAIN ),
+        'title' => __( 'Booking Options', 'bring-fraktguiden' ),
         'type'  => 'title'
     ];
 
     $this->form_fields['booking_enabled'] = [
-        'title'   => __( 'Enable', self::TEXT_DOMAIN ),
+        'title'   => __( 'Enable', 'bring-fraktguiden' ),
         'type'    => 'checkbox',
-        'label'   => __( 'Enable booking', self::TEXT_DOMAIN ),
+        'label'   => __( 'Enable booking', 'bring-fraktguiden' ),
         'default' => 'no'
     ];
 
     $this->form_fields['booking_test_mode_enabled'] = [
-        'title'       => __( 'Testing', self::TEXT_DOMAIN ),
+        'title'       => __( 'Testing', 'bring-fraktguiden' ),
         'type'        => 'checkbox',
-        'label'       => __( 'Test mode', self::TEXT_DOMAIN ),
-        'description' => __( 'For testing. Bookings will not be invoiced', self::TEXT_DOMAIN ),
+        'label'       => __( 'Test mode', 'bring-fraktguiden' ),
+        'description' => __( 'For testing. Bookings will not be invoiced', 'bring-fraktguiden' ),
         'default'     => 'yes'
     ];
 
     $this->form_fields['booking_address_store_name'] = [
-        'title'   => __( 'Store Name', self::TEXT_DOMAIN ),
+        'title'   => __( 'Store Name', 'bring-fraktguiden' ),
         'type'    => 'text',
         'default' => get_bloginfo( 'name' )
     ];
 
     $this->form_fields['booking_address_street1'] = [
-        'title' => __( 'Street Address 1', self::TEXT_DOMAIN ),
+        'title' => __( 'Street Address 1', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_street2'] = [
-        'title' => __( 'Street Address 2', self::TEXT_DOMAIN ),
+        'title' => __( 'Street Address 2', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_postcode'] = [
-        'title' => __( 'Postcode', self::TEXT_DOMAIN ),
+        'title' => __( 'Postcode', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_city'] = [
-        'title' => __( 'City', self::TEXT_DOMAIN ),
+        'title' => __( 'City', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_country'] = [
-        'title'   => __( 'Country', self::TEXT_DOMAIN ),
+        'title'   => __( 'Country', 'bring-fraktguiden' ),
         'type'    => 'select',
         'class'   => 'chosen_select',
         'css'     => 'width: 450px;',
@@ -203,27 +203,27 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     ];
 
     $this->form_fields['booking_address_contact_person'] = [
-        'title' => __( 'Contact Person', self::TEXT_DOMAIN ),
+        'title' => __( 'Contact Person', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_phone'] = [
-        'title' => __( 'Phone', self::TEXT_DOMAIN ),
+        'title' => __( 'Phone', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['booking_address_email'] = [
-        'title' => __( 'Email', self::TEXT_DOMAIN ),
+        'title' => __( 'Email', 'bring-fraktguiden' ),
         'type'  => 'text',
     ];
 
     $this->form_fields['auto_set_status_after_booking_success'] = [
-        'title'       => __( 'Order status after booking', self::TEXT_DOMAIN ),
+        'title'       => __( 'Order status after booking', 'bring-fraktguiden' ),
         'type'        => 'select',
-        'description' => __( 'Order status to automatically set after successful booking', self::TEXT_DOMAIN ),
+        'description' => __( 'Order status to automatically set after successful booking', 'bring-fraktguiden' ),
         'class'       => 'chosen_select',
         'css'         => 'width: 450px;',
-        'options'     => array( 'none' => __( 'None', self::TEXT_DOMAIN ) ) + wc_get_order_statuses(),
+        'options'     => array( 'none' => __( 'None', 'bring-fraktguiden' ) ) + wc_get_order_statuses(),
         'default'     => 'none'
     ];
   }
@@ -322,7 +322,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     <tr valign="top">
       <th scope="row" class="titledesc">
         <label
-            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
+            for="<?php echo $field_key ?>"><?php _e( 'Services 2', 'bring-fraktguiden' ); ?></label>
       </th>
       <td class="forminp">
         <table class="wc_shipping widefat fraktguiden-services-table">

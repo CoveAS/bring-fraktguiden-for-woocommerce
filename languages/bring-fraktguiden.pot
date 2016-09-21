@@ -1,93 +1,96 @@
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Bring Fraktguiden\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
 "POT-Creation-Date: 2016-09-21 16:35+0200\n"
-"PO-Revision-Date: 2016-09-21 16:36+0200\n"
+"PO-Revision-Date: 2016-09-21 16:35+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
-"Language-Team: \n"
-"Language: nb\n"
+"Language-Team: Andrew Smith <andrew@drivdigital.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.9\n"
-"X-Poedit-Basepath: ../classes\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: bring-fraktguiden-for-woocommerce.php:84
 msgid "View Bring Fraktguiden Settings"
-msgstr "Vis bringe Fraktguiden innstillinger"
+msgstr ""
 
 #: bring-fraktguiden-for-woocommerce.php:84
 msgid "Settings"
-msgstr "Innstillinger"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:60
 #: classes/class-wc-shipping-method-bring.php:156
 msgid "Bring Fraktguiden"
-msgstr "Bring Fraktguiden"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:144
 msgid "Shipping Options"
-msgstr "Fraktalternativer"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:147
 #: pro/class-wc-shipping-method-bring-pro.php:104
 #: pro/class-wc-shipping-method-bring-pro.php:156
 msgid "Enable"
-msgstr "Aktiver"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:149
 msgid "Enable Bring Fraktguiden"
-msgstr "Aktiver Bring Fraktguiden"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:153
 msgid "Title"
-msgstr "Tittel"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:155
 msgid "This controls the title which the user sees during checkout."
-msgstr "Dette er tittelen som brukeren ser i kassen."
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:159
 msgid "Delivery Fee"
-msgstr "Leveringsgebyr"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:161
 msgid ""
 "What fee do you want to charge for Bring, disregarded if you choose free. "
 "Leave blank to disable."
 msgstr ""
-"Gebyr du ønsker å ta betalt for Bring. Blir ignorert dersom du velger "
-"gratis. La stå tomt for å deaktivere."
 
 #: classes/class-wc-shipping-method-bring.php:165
 msgid "Post office"
-msgstr "Postkontor"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:167
 msgid "Shipping from post office"
-msgstr "Leveres fra postkontor"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:168
 msgid ""
 "Flag that tells whether the parcel is delivered at a post office when it is "
 "shipped."
-msgstr "Kryss av om pakken blir levert til et postkontor ved sending."
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:172
 msgid "From zip"
-msgstr "Fra postnummer"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:174
 msgid ""
 "This is the zip code of where you deliver from. For example, the post office."
-msgstr "Plasser denne koden der du vil at widgeten skal vises"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:178
 msgid "From country"
-msgstr "Fra land"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:180
 msgid ""
@@ -95,32 +98,30 @@ msgid ""
 "WooCommerce's default location will be used. See WooCommerce - Settings - "
 "General)"
 msgstr ""
-"Dette er landet du sender fra (hvis ikke valgt benyttes WooCommerce sin "
-"standard lokasjon. Se WooCommerce - Innstillinger - Generelt)"
 
 #: classes/class-wc-shipping-method-bring.php:187
 msgid "Display price"
-msgstr "Visningspris"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:189
 msgid "How to calculate delivery charges"
-msgstr "Hvordan leveringskostnader blir kalkulert"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:192
 msgid "VAT included"
-msgstr "Med mva."
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:193
 msgid "VAT excluded"
-msgstr "Uten mva."
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:197
 msgid "Recipient notification"
-msgstr "Mottakervarsling"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:199
 msgid "Recipient notification over SMS or E-Mail"
-msgstr "Mottakervarsling på SMS eller Epost"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:200
 msgid ""
@@ -129,87 +130,81 @@ msgid ""
 "SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, "
 "Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09"
 msgstr ""
-"Hvis ikke krysset av vil Fraktguiden legge til et gebyr for papirbasert "
-"mottakervarsling.<br/>Hvis krysset av vil mottakeren motta varsling via SMS "
-"eller e-post når pakken har ankommet. Gjelder Bedriftspakke , Kliman&oslash;"
-"ytral Servicepakke og Bedriftspakke Ekspress-Over Natten 09"
 
 #: classes/class-wc-shipping-method-bring.php:204
 msgid "Method availability"
-msgstr "Tilgjengelighet"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:209
 msgid "All allowed countries"
-msgstr "Alle tilatte land"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:210
 #: classes/class-wc-shipping-method-bring.php:214
 msgid "Specific Countries"
-msgstr "Spesifikke land"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:222
 msgid "Services"
-msgstr "Tjenester"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:231
 msgid "Display Service As"
-msgstr "Vis tjeneste med"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:233
 msgid "The service name displayed to the customer"
-msgstr "Navnet på tjenesten som vises til kunden"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:236
 msgid "Display Name"
-msgstr "Visningsnavn"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:237
 msgid "Product Name"
-msgstr "Produktnavn"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:242
 msgid "Display Description"
-msgstr "Vis beskrivelse"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:244
 msgid "Add description after the service"
-msgstr "Legg til beskrivelse etter tjenesten"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:245
 msgid "Show service description after the name of the service"
-msgstr "Vis tjenestebeskrivelse etter navnet på tjenesten"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:249
 msgid "Max products"
-msgstr "Maks produkter"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:251
 msgid "Maximum of products in the cart before offering a flat rate"
-msgstr "Maks produkter som kan være i kassen før en tilbyr en fast sats"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:255
 msgid "Flat rate"
-msgstr "Fast sats"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:257
 msgid ""
 "Offer a flat rate if the cart reaches max products or a product in the cart "
 "does not have the required dimensions"
 msgstr ""
-"Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
-"produkt som ikke har påkrevde dimensjoner"
 
 #: classes/class-wc-shipping-method-bring.php:261
 msgid "Debug"
-msgstr "Debug"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:263
 msgid "Enable debug logs"
-msgstr "Aktiver debug-logging"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:264
 msgid "These logs will be saved in"
-msgstr "Loggene vil bli lagret i"
+msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:280
 msgid ""
@@ -232,10 +227,6 @@ msgid ""
 "In addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=\"%s\">General tab</a>"
 msgstr ""
-"Bring krever <strong>vekt &amp; dimensjoner</strong> for å kalkulere pris. "
-"Sørg for at dette er satt opp under <a href=\"%s\">Generellt fanen</a>. <br/"
-"> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
-"Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
 #: pro/booking/class-bring-booking.php:50
 #: pro/booking/class-bring-booking.php:55
@@ -422,33 +413,33 @@ msgstr ""
 #: pro/booking/views/class-bring-booking-order-view.php:431
 #: pro/booking/views/class-bring-booking-order-view.php:450
 msgid "Name"
-msgstr "Navn"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:432
 #: pro/class-wc-shipping-method-bring-pro.php:177
 msgid "Street Address 1"
-msgstr "Gateaddress 1"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:433
 #: pro/class-wc-shipping-method-bring-pro.php:182
 msgid "Street Address 2"
-msgstr "Gateadresse 2"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:434
 #: pro/class-wc-shipping-method-bring-pro.php:187
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:291
 msgid "Postcode"
-msgstr "Postnummer"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:435
 #: pro/class-wc-shipping-method-bring-pro.php:192
 msgid "City"
-msgstr "bekreft"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:436
 #: pro/class-wc-shipping-method-bring-pro.php:197
 msgid "Country"
-msgstr "Land"
+msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:438
 msgid "Reference"
@@ -683,25 +674,3 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Driv Digital"
 msgstr ""
-
-#~ msgid ""
-#~ "This is the zip code of where you deliver from. For example, the post "
-#~ "office. Should be 4 digits."
-#~ msgstr ""
-#~ "Dette er postnummeret hvor du leverer fra. For eksempel postkontoret. Må "
-#~ "være 4 siffer."
-
-#~ msgid ""
-#~ "This is the country of where you deliver from (If omitted WooCommerce's "
-#~ "base location will be used. See WooCommerce - Settings - General)"
-#~ msgstr ""
-#~ "Dette er landet du sender fra (Hvis ikke valgt benyttes WooCommerce’s "
-#~ "base lokasjon. Se WooCommerce - Innstillinger - Generelt)"
-
-#~ msgid "This is the country of where you deliver from."
-#~ msgstr ""
-#~ "Landet hvor du sender fra (Hvis ikke valgt brukes Woo Commerce sin base "
-#~ "lokasjon som standard. Se Woo Commerce - innstillinger - generelt)"
-
-#~ msgid "These logs will be saved in <code>wc-logs/</code>"
-#~ msgstr "Loggen vil bli lagret i <code>wc-logs/</code>"
