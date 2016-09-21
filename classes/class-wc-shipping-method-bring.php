@@ -329,7 +329,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     update_option( $services_custom_prices_field, $custom_prices );
   }
 
-
   public function generate_services_table_html() {
     $services      = Fraktguiden_Helper::get_services_data();
     $selected      = $this->services2;
@@ -410,32 +409,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     return ob_get_clean();
   }
 
-  /**
-   * Calculate shipping costs.
-   *
-   * @todo: in 2.6, the package param was added. Investigate this!
-   */
-  public function calculate_shipping( $package = array() ) {
-    global $woocommerce;
 
-    //include_once( 'common/class-fraktguiden-packer.php' );
-    $packer = new Fraktguiden_Packer();
+  public function pack_order( $cart ) {
 
-    // Offer flat rate if the cart contents exceeds max product.
-    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
-      if ( $this->alt_flat_rate == '' ) {
-        return;
-      }
-      $rate = array(
-          'id'    => $this->id . ':' . 'alt_flat_rate',
-          'cost'  => $this->alt_flat_rate,
-          'label' => $this->method_title . ' flat rate',
-      );
-      $this->add_rate( $rate );
-    }
-    else {
-      $c             = $woocommerce->cart->get_cart();
-      $product_boxes = $packer->create_boxes( $woocommerce->cart->get_cart() );
+      $packer = new Fraktguiden_Packer();
+
+      $product_boxes = $packer->create_boxes( $cart );
 //      // Create an array of 'product boxes' (l,w,h,weight).
 //      $product_boxes = array();
 //
@@ -484,14 +463,43 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 //      }
 
       if ( ! $product_boxes ) {
-        return;
+        return false;
       }
 
       // Pack product boxes.
       $packer->pack( $product_boxes, true );
 
       // Create the url.
-      $this->packages_params = $packer->create_packages_params();
+      return $packer->create_packages_params();
+  }
+  /**
+   * Calculate shipping costs.
+   *
+   * @todo: in 2.6, the package param was added. Investigate this!
+   */
+  public function calculate_shipping( $package = array() ) {
+    global $woocommerce;
+
+    //include_once( 'common/class-fraktguiden-packer.php' );
+
+    // Offer flat rate if the cart contents exceeds max product.
+    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
+      if ( $this->alt_flat_rate == '' ) {
+        return;
+      }
+      $rate = array(
+          'id'    => $this->id . ':' . 'alt_flat_rate',
+          'cost'  => $this->alt_flat_rate,
+          'label' => $this->method_title . ' flat rate',
+      );
+      $this->add_rate( $rate );
+    }
+    else {
+      $cart = $woocommerce->cart->get_cart();
+      $this->packages_params = $this->pack_order( $cart );
+      if ( ! $this->packages_params ) {
+        return;
+      }
 
 
       if ( is_checkout() && session_status() == PHP_SESSION_NONE ) {

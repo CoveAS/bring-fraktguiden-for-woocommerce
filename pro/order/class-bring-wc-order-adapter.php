@@ -25,7 +25,7 @@ class Bring_WC_Order_Adapter {
   public function is_booked() {
     return $this->has_booking_consignments();
   }
-  
+
   /**
    * Saves the booking response to the order.
    *
@@ -356,6 +356,26 @@ class Bring_WC_Order_Adapter {
     return $result;
   }
 
+  public function order_update_packages() {
+    $order    = $this;
+    $wc_order = $this->order;
+    $cart = [];
+    //build a cart like array
+    foreach ( $wc_order->get_items() as $item_id => $item ) {
+      if ( ! isset( $item['product_id'] ) ) {
+        continue;
+      }
+      $cart[] = [
+        'data' => get_product( $item['product_id'] ),
+        'quantity' => $item['qty'],
+      ];
+    }
+    // var_dump( get_class_methods( $wc_order ) );
+    $shipping_method = new WC_Shipping_Method_Bring;
+    $packages = $shipping_method->pack_order( $cart );
+    $order->checkout_update_packages( json_encode( $packages ) );
+  }
+
   /**
    * Returns all packages for the order 'Bring booking formatted'.
    *
@@ -368,6 +388,10 @@ class Bring_WC_Order_Adapter {
     $result = [ ];
 
     $order_items_packages = $this->get_packages( $item_id_to_find );
+    if ( ! $order_items_packages ) {
+      $this->order_update_packages();
+      $order_items_packages = $this->get_packages( $item_id_to_find );
+    }
     if ( ! $order_items_packages ) {
       return [ ];
     }
