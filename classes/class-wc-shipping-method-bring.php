@@ -299,32 +299,115 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     </table> <?php
   }
 
-  /**
-   * Calculate shipping costs.
-   *
-   * @todo: in 2.6, the package param was added. Investigate this!
-   */
-  public function calculate_shipping( $package = array() ) {
-    global $woocommerce;
+  public function validate_services_table_field( $key, $value ) {
+    return isset( $value ) ? $value : array();
+  }
 
-    //include_once( 'common/class-fraktguiden-packer.php' );
-    $packer = new Fraktguiden_Packer();
+  public function process_admin_options() {
+    parent::process_admin_options();
 
-    // Offer flat rate if the cart contents exceeds max product.
-    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
-      if ( $this->alt_flat_rate == '' ) {
-        return;
+    // Process services table
+    $services_field               = $this->get_field_key( 'services2' );
+    $services_custom_prices_field = $services_field . '_custom_prices';
+    $custom_prices                = [ ];
+    if ( isset( $_POST[$services_field] ) ) {
+      $checked_services = $_POST[$services_field];
+      foreach ( $checked_services as $key => $service ) {
+
+        if ( isset( $_POST[$services_custom_prices_field][$service] ) ) {
+          $custom_prices[$service] = $_POST[$services_custom_prices_field][$service];
+        }
       }
-      $rate = array(
-          'id'    => $this->id . ':' . 'alt_flat_rate',
-          'cost'  => $this->alt_flat_rate,
-          'label' => $this->method_title . ' flat rate',
-      );
-      $this->add_rate( $rate );
     }
-    else {
-      $c             = $woocommerce->cart->get_cart();
-      $product_boxes = $packer->create_boxes( $woocommerce->cart->get_cart() );
+
+    update_option( $services_custom_prices_field, $custom_prices );
+  }
+
+  public function generate_services_table_html() {
+    $services      = Fraktguiden_Helper::get_services_data();
+    $selected      = $this->services2;
+    $field_key     = $this->get_field_key( 'services2' );
+    $custom_prices = get_option( $field_key . '_custom_prices' );
+
+    ob_start();
+    ?>
+
+    <tr valign="top">
+      <th scope="row" class="titledesc">
+        <label
+            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
+      </th>
+      <td class="forminp">
+        <table class="wc_shipping widefat fraktguiden-services-table">
+          <thead>
+          <tr>
+            <th class="fraktguiden-services-table-col-enabled">Enabled</th>
+            <th class="fraktguiden-services-table-col-service">Service</th>
+            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <?php
+          foreach ( $services as $key => $service ) {
+            $id               = $field_key . '_' . $key;
+            $prices_field_key = $field_key . '_custom_prices[' . $key . ']';
+            $custom_price     = isset( $custom_prices[$key] ) ? $custom_prices[$key] : '';
+            $checked          = in_array( $key, $selected );
+            ?>
+            <tr>
+              <td class="fraktguiden-services-table-col-enabled">
+                <label for="<?php echo $id; ?>"
+                       style="display:inline-block; width: 100%">
+                  <input type="checkbox" id="<?php echo $id; ?>"
+                         name="<?php echo $field_key; ?>[]"
+                         value="<?php echo $key; ?>" <?php echo( $checked ? 'checked' : '' ); ?> />
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-name">
+                <span data-tip="<?php echo $service['HelpText']; ?>"
+                      class="woocommerce-help-tip"></span>
+                <label class="fraktguiden-service" for="<?php echo $id; ?>"
+                       data-ProductName="<?php echo $service['ProductName']; ?>"
+                       data-DisplayName="<?php echo $service['DisplayName']; ?>">
+                  <?php echo $service[$this->service_name]; ?>
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-custom-price">
+                <input type="text" name="<?php echo $prices_field_key; ?>"
+                       value="<?php echo $custom_price; ?>"/>
+              </td>
+            </tr>
+          <?php } ?>
+          </tbody>
+        </table>
+        <script>
+          jQuery( document ).ready( function () {
+            var $ = jQuery;
+            $( '#woocommerce_bring_fraktguiden_service_name' ).change( function () {
+              console.log( 'change', this.value );
+              var val = this.value;
+              $( '.fraktguiden-services-table' ).find( 'label.fraktguiden-service' ).each( function ( i, elem ) {
+
+                var label = $( elem );
+                label.text( label.attr( 'data-' + val ) );
+              } );
+            } );
+
+          } );
+        </script>
+      </td>
+    </tr>
+
+    <?php
+    return ob_get_clean();
+  }
+
+  public function pack_order( $cart ) {
+
+      $packer = new Fraktguiden_Packer();
+
+      $product_boxes = $packer->create_boxes( $cart );
 //      // Create an array of 'product boxes' (l,w,h,weight).
 //      $product_boxes = array();
 //
@@ -373,14 +456,43 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 //      }
 
       if ( ! $product_boxes ) {
-        return;
+        return false;
       }
 
       // Pack product boxes.
       $packer->pack( $product_boxes, true );
 
       // Create the url.
-      $this->packages_params = $packer->create_packages_params();
+      return $packer->create_packages_params();
+  }
+  /**
+   * Calculate shipping costs.
+   *
+   * @todo: in 2.6, the package param was added. Investigate this!
+   */
+  public function calculate_shipping( $package = array() ) {
+    global $woocommerce;
+
+    //include_once( 'common/class-fraktguiden-packer.php' );
+
+    // Offer flat rate if the cart contents exceeds max product.
+    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
+      if ( $this->alt_flat_rate == '' ) {
+        return;
+      }
+      $rate = array(
+          'id'    => $this->id . ':' . 'alt_flat_rate',
+          'cost'  => $this->alt_flat_rate,
+          'label' => $this->method_title . ' flat rate',
+      );
+      $this->add_rate( $rate );
+    }
+    else {
+      $cart = $woocommerce->cart->get_cart();
+      $this->packages_params = $this->pack_order( $cart );
+      if ( ! $this->packages_params ) {
+        return;
+      }
 
       if ( is_checkout() ) {
         $_COOKIE['_fraktguiden_packages'] = json_encode( $this->packages_params );
