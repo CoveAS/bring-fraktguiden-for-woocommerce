@@ -264,11 +264,13 @@ class Fraktguiden_Pickup_Point {
   static function checkout_order_shipping_to_display_shipped_via( $content, $wc_order ) {
     $shipping_methods = $wc_order->get_shipping_methods();
     foreach ( $shipping_methods as $id => $shipping_method ) {
-      if ( $shipping_method['method_id'] == self::ID . ':servicepakke' ) {
-        if ( key_exists( 'fraktguiden_pickup_point_info_cached', $shipping_method ) ) {
-          $info    = $shipping_method['fraktguiden_pickup_point_info_cached'];
-          $content = $content . '<div class="bring-order-details-pickup-point"><div class="bring-order-details-selected-text">' . self::get_i18n()['PICKUP_POINT'] . ':</div><div class="bring-order-details-info-text">' . str_replace( "|", '<br>', $info ) . '</div></div>';
-        }
+      if (
+        $shipping_method['method_id'] == self::ID . ':servicepakke' &&
+        key_exists( 'fraktguiden_pickup_point_info_cached', $shipping_method ) &&
+        $shipping_method['fraktguiden_pickup_point_info_cached']
+      ) {
+        $info    = $shipping_method['fraktguiden_pickup_point_info_cached'];
+        $content = $content . '<div class="bring-order-details-pickup-point"><div class="bring-order-details-selected-text">' . self::get_i18n()['PICKUP_POINT'] . ':</div><div class="bring-order-details-info-text">' . str_replace( "|", '<br>', $info ) . '</div></div>';
       }
     }
     return $content;
