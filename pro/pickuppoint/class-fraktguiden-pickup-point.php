@@ -391,7 +391,7 @@ class Fraktguiden_Pickup_Point {
     die();
   }
 
-  static function get_pickup_points( $postcode, $country ) {
+  static function get_pickup_points( $country, $postcode ) {
     $request = new WP_Bring_Request();
     return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
   }
