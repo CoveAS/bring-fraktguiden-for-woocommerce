@@ -355,7 +355,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
                 $$var = esc_html( ${$data_var}[ $key ] );
               }
             }
-            $enabled = in_array( $key, $selected );
+            $enabled = !empty($selected) ? in_array( $key, $selected ) : false;
             ?>
             <tr>
               <td class="fraktguiden-services-table-col-enabled">
