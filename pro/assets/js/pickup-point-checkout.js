@@ -12,13 +12,36 @@
     // *************************************************************************
     // Events
 
+    /**
+     * As the checkout is dynamic (ajax) events are delegated to the body element.
+     * in order to not
+     * @returns {jQuery}
+     */
     function events() {
         return $( document.body );
     }
 
+    /**
+     * Event name when the checkout review is updated.
+     * @static
+     * @type {string}
+     */
     events.CHECKOUT_REVIEW_UPDATED = 'updated_checkout';
+
+    /**
+     * Event name when the pickup point post code is updated.
+     * @static
+     * @type {string}
+     */
     events.POST_CODE_UPDATED = 'postcode_updated.bring';
-    events.PICKUP_POINT_CHANGED = 'pickup_point_updated.bring';
+
+
+    /**
+     * Event name when pickup point is updated.
+     * @static
+     * @type {string}
+     */
+    events.PICKUP_POINT_SELECTOR_CHANGED = 'pickup_point_updated.bring';
 
 
     // *************************************************************************
@@ -179,7 +202,7 @@
                 // Set value in the selector.
                 if ( user_selected.pickup_point_id ) {
                     pickup_point_selector.val( user_selected.pickup_point_id );
-                    events().trigger( events.PICKUP_POINT_CHANGED, [pickup_point_selector.get( 0 )] );
+                    events().trigger( events.PICKUP_POINT_SELECTOR_CHANGED, [pickup_point_selector.get( 0 )] );
                 }
                 else {
 
@@ -272,7 +295,7 @@
             // }, 700 );
         } );
 
-        events().on( events.PICKUP_POINT_CHANGED, function ( evt, pickup_point_selector ) {
+        events().on( events.PICKUP_POINT_SELECTOR_CHANGED, function ( evt, pickup_point_selector ) {
             if ( has_klarna_widget ) {
                 // Klarna uses radio buttons. Meaning the input is the data source
                 update_display_info( $( pickup_point_selector ).data( 'pickup_point' ) );
@@ -292,7 +315,7 @@
 
         get_order_review_wrapper_elem().on( 'change', '.fraktguiden-pickup-point-select, .fraktguiden-pickup-point-list input', function () {
             user_selected.pickup_point_id = this.value;
-            events().trigger( events.PICKUP_POINT_CHANGED, [this] );
+            events().trigger( events.PICKUP_POINT_SELECTOR_CHANGED, [this] );
         } );
     }
 
