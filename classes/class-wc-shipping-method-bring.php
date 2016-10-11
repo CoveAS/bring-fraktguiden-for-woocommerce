@@ -602,7 +602,22 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'toCountry'           => $woocommerce->customer->get_shipping_country(),
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
+        'language'            => $this->get_bring_language()
     ) );
+  }
+
+  public function get_bring_language() {
+    $language = substr(get_bloginfo ( 'language' ), 0, 2);
+
+    $languages = [
+        'dk' => 'da',
+        'fi' => 'fi',
+        'nb' => 'no',
+        'nn' => 'no',
+        'sv' => 'se'
+    ];
+
+    return array_key_exists($language, $languages) ? $languages[$language] : 'en';
   }
 
   public function get_selected_from_country() {
