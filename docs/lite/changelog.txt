@@ -3,6 +3,7 @@
 = 1.3.1 =
 
 * Improved support for WooCommerce 2.6 Shipping Zones
+* Uses the Wordpress' current language for Bring's reply messages, if available (thanks to oakidoaki)
 * Misc. bug fixes
 
 = 1.3.0 =
