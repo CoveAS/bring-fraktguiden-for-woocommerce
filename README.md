@@ -1,6 +1,6 @@
 ## Install
 
-See src/readme.txt
+See [readme.txt](readme.txt)
 
 ## Contributing
 

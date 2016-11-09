@@ -186,7 +186,7 @@ class Bring_Booking_Consignment_Creator {
             'services'           => $this->get_product_services(),
             'customsDeclaration' => null
         ],
-        'purchaseOrder'    => null,
+        'purchaseOrder'    => $this->get_purchase_order(),
         'correlationId'    => '',
         'packages'         => $this->get_packages()
     ];
