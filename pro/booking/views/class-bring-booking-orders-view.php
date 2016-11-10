@@ -184,7 +184,6 @@ class Bring_Booking_Orders_View {
             } );
 
             $( document.body ).on( 'wc_backbone_modal_response', function ( e ) {
-              console.log(123);
               customer_number.val( $( '[name=_bring-modal-customer-selector]' ).val() );
               shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
               shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
