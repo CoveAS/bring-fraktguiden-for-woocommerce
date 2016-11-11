@@ -33,10 +33,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     private $booking_address_postcode;
     private $booking_address_city;
     private $booking_address_country;
+    private $booking_address_reference;
     private $booking_address_contact_person;
     private $booking_address_phone;
     private $booking_address_email;
-    private $booking_address_reference;
     private $booking_test_mode;
 
     public function __construct() {
@@ -59,10 +59,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         $this->booking_address_postcode       = array_key_exists( 'booking_address_postcode', $this->settings ) ? $this->settings['booking_address_postcode'] : '';
         $this->booking_address_city           = array_key_exists( 'booking_address_city', $this->settings ) ? $this->settings['booking_address_city'] : '';
         $this->booking_address_country        = array_key_exists( 'booking_address_country', $this->settings ) ? $this->settings['booking_address_country'] : '';
+        $this->booking_address_reference              = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
         $this->booking_address_contact_person = array_key_exists( 'booking_address_contact_person', $this->settings ) ? $this->settings['booking_address_contact_person'] : '';
         $this->booking_address_phone          = array_key_exists( 'booking_address_phone', $this->settings ) ? $this->settings['booking_address_phone'] : '';
         $this->booking_address_email          = array_key_exists( 'booking_address_email', $this->settings ) ? $this->settings['booking_address_email'] : '';
-        $this->booking_address_reference              = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
 
         $this->booking_test_mode = array_key_exists( 'booking_test_mode', $this->settings ) ? $this->settings['booking_test_mode'] : 'no';
 
@@ -177,11 +177,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
         $this->form_fields['booking_address_street1'] = [
                 'title' => __( 'Street Address 1', 'bring-fraktguiden' ),
+                'custom_attributes' => array('maxlength'=>'35'),
                 'type'  => 'text',
         ];
 
         $this->form_fields['booking_address_street2'] = [
                 'title' => __( 'Street Address 2', 'bring-fraktguiden' ),
+                'custom_attributes' => array('maxlength'=>'35'),
                 'type'  => 'text',
         ];
 
@@ -204,6 +206,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
                 'options' => $woocommerce->countries->countries
         ];
 
+        $this->form_fields['booking_address_reference'] = [
+                'title' => __( 'Reference', 'bring-fraktguiden' ),
+                'type'  => 'text',
+                'custom_attributes' => array( 'maxlength' => '35' ),
+                'description' => __( 'Specify shipper or consignee reference. Available macros: {order_id}', 'bring-fraktguiden' )
+        ];
+
         $this->form_fields['booking_address_contact_person'] = [
                 'title' => __( 'Contact Person', 'bring-fraktguiden' ),
                 'type'  => 'text',
@@ -217,12 +226,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         $this->form_fields['booking_address_email'] = [
                 'title' => __( 'Email', 'bring-fraktguiden' ),
                 'type'  => 'text',
-        ];
-
-        $this->form_fields['booking_address_reference'] = [
-                'title' => __( 'Reference', 'bring-fraktguiden' ),
-                'type'  => 'text',
-                'description' => __( 'Available macros: {order_id}', 'bring-fraktguiden' )
         ];
 
         $this->form_fields['auto_set_status_after_booking_success'] = [

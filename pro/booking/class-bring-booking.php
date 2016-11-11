@@ -265,7 +265,7 @@ class Bring_Booking {
 
 
     // Load sender address data from options.
-    $result = [ ];
+    $result = [];
     foreach ( $form_fields as $field ) {
       $result[$field] = Fraktguiden_Helper::get_option( $field );
     }
@@ -277,7 +277,7 @@ class Bring_Booking {
         "postalCode"            => $result['booking_address_postcode'],
         "city"                  => $result['booking_address_city'],
         "countryCode"           => $result['booking_address_country'],
-        "reference"             => self::parse_sender_address_reference($result['booking_address_reference'], $wc_order),
+        "reference"             => self::parse_sender_address_reference( $result['booking_address_reference'], $wc_order ),
         "additionalAddressInfo" => $additional_info,
         "contact"               => [
             "name"        => $result['booking_address_contact_person'],
@@ -297,16 +297,18 @@ class Bring_Booking {
    *
    *   {order_id}
    *
-   * @param $reference
-   * @param $wc_order
+   * @param string $reference
+   * @param WC_Order $wc_order
    * @return mixed
    */
   static function parse_sender_address_reference( $reference, $wc_order ) {
+    $replacements = array(
+        '{order_id}' => $wc_order->id
+    );
     $result = $reference;
-    if ( preg_match( "/\{order_id\}/", $reference ) ) {
-      $result = preg_replace( "/(|.+)(\{order_id\})(.+)?/", "$1" . $wc_order->id . "$3", $reference );
+    foreach ( $replacements as $replacement => $value ) {
+      $result = preg_replace( "/" . preg_quote( $replacement ) . "/", $value, $result );
     }
-
     return $result;
   }
 
