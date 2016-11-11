@@ -100,7 +100,8 @@ class Bring_Booking {
       $additional_info = filter_var( $_REQUEST['_bring_additional_info'], FILTER_SANITIZE_STRING );
     }
 
-    $sender_address    = self::get_sender_address( $additional_info );
+    $sender_address    = self::get_sender_address( $additional_info, $wc_order );
+
     $recipient_address = $order->get_recipient_address_formatted();
 
     // One booking request per. order shipping item.
@@ -242,10 +243,13 @@ class Bring_Booking {
   }
 
   /**
+   * Return the sender's address formatted for Bring consignment
+   *
    * @param string $additional_info
+   * @param WC_Order $wc_order
    * @return array
    */
-  static function get_sender_address( $additional_info = '' ) {
+  static function get_sender_address( $additional_info = '', $wc_order ) {
     $form_fields = [
         'booking_address_store_name',
         'booking_address_street1',
@@ -256,8 +260,11 @@ class Bring_Booking {
         'booking_address_contact_person',
         'booking_address_phone',
         'booking_address_email',
+        'booking_address_reference',
     ];
 
+
+    // Load sender address data from options.
     $result = [ ];
     foreach ( $form_fields as $field ) {
       $result[$field] = Fraktguiden_Helper::get_option( $field );
@@ -270,7 +277,7 @@ class Bring_Booking {
         "postalCode"            => $result['booking_address_postcode'],
         "city"                  => $result['booking_address_city'],
         "countryCode"           => $result['booking_address_country'],
-        "reference"             => null,
+        "reference"             => self::parse_sender_address_reference($result['booking_address_reference'], $wc_order),
         "additionalAddressInfo" => $additional_info,
         "contact"               => [
             "name"        => $result['booking_address_contact_person'],
@@ -278,6 +285,29 @@ class Bring_Booking {
             "phoneNumber" => $result['booking_address_phone'],
         ]
     ];
+  }
+
+  /**
+   * Parses the sender address reference value.
+   * Supports simple template macro.
+   *
+   * Eg. {order_id} will be replaced with the order's ID
+   *
+   * Available macros:
+   *
+   *   {order_id}
+   *
+   * @param $reference
+   * @param $wc_order
+   * @return mixed
+   */
+  static function parse_sender_address_reference( $reference, $wc_order ) {
+    $result = $reference;
+    if ( preg_match( "/\{order_id\}/", $reference ) ) {
+      $result = preg_replace( "/(|.+)(\{order_id\})(.+)?/", "$1" . $wc_order->id . "$3", $reference );
+    }
+
+    return $result;
   }
 
 }
