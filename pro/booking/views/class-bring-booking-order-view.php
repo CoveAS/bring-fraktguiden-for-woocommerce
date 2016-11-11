@@ -333,7 +333,7 @@ class Bring_Booking_Order_View {
          style="display:none">
       <div>
         <h3><?php _e( 'Sender Address', 'bring-fraktguiden' ); ?></h3>
-        <?php self::render_address_table( Bring_Booking::get_sender_address() ); ?>
+        <?php self::render_address_table( Bring_Booking::get_sender_address( $order->order, '' ) ); ?>
       </div>
       <div>
         <h3><?php _e( 'Recipient Address', 'bring-fraktguiden' ); ?></h3>

@@ -100,7 +100,7 @@ class Bring_Booking {
       $additional_info = filter_var( $_REQUEST['_bring_additional_info'], FILTER_SANITIZE_STRING );
     }
 
-    $sender_address    = self::get_sender_address( $additional_info, $wc_order );
+    $sender_address    = self::get_sender_address( $wc_order, $additional_info );
 
     $recipient_address = $order->get_recipient_address_formatted();
 
@@ -245,11 +245,11 @@ class Bring_Booking {
   /**
    * Return the sender's address formatted for Bring consignment
    *
-   * @param string $additional_info
    * @param WC_Order $wc_order
+   * @param string $additional_info
    * @return array
    */
-  static function get_sender_address( $additional_info = '', $wc_order ) {
+  static function get_sender_address( $wc_order, $additional_info = '' ) {
     $form_fields = [
         'booking_address_store_name',
         'booking_address_street1',
