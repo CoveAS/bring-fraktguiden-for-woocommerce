@@ -59,7 +59,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         $this->booking_address_postcode       = array_key_exists( 'booking_address_postcode', $this->settings ) ? $this->settings['booking_address_postcode'] : '';
         $this->booking_address_city           = array_key_exists( 'booking_address_city', $this->settings ) ? $this->settings['booking_address_city'] : '';
         $this->booking_address_country        = array_key_exists( 'booking_address_country', $this->settings ) ? $this->settings['booking_address_country'] : '';
-        $this->booking_address_reference              = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
+        $this->booking_address_reference      = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
         $this->booking_address_contact_person = array_key_exists( 'booking_address_contact_person', $this->settings ) ? $this->settings['booking_address_contact_person'] : '';
         $this->booking_address_phone          = array_key_exists( 'booking_address_phone', $this->settings ) ? $this->settings['booking_address_phone'] : '';
         $this->booking_address_email          = array_key_exists( 'booking_address_email', $this->settings ) ? $this->settings['booking_address_email'] : '';
