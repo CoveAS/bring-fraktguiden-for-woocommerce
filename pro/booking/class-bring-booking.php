@@ -289,9 +289,9 @@ class Bring_Booking {
 
   /**
    * Parses the sender address reference value.
-   * Supports simple template macro.
+   * Supports simple template macros.
    *
-   * Eg. {order_id} will be replaced with the order's ID
+   * Eg. "Order: {order_id}" will be replace {order_id} with the order's ID
    *
    * Available macros:
    *
