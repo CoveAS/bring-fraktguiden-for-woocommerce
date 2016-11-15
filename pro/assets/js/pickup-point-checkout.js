@@ -43,6 +43,13 @@
      */
     events.PICKUP_POINT_SELECTOR_CHANGED = 'pickup_point_updated.bring';
 
+    /**
+     * Event name when pickup point <select> is updated.
+     * @static
+     * @type {string}
+     */
+    events.PICKUP_POINT_SELECT_UPDATED = 'pickup_point_select_updated.bring';
+
 
     // *************************************************************************
     // Init
@@ -209,6 +216,7 @@
                     pickup_point_select_elem().prop( 'selectedIndex', 0 );
                 }
                 pickup_point_select_elem().show();
+                events().trigger( events.PICKUP_POINT_SELECT_UPDATED );
             }
         };
 
