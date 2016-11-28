@@ -33,6 +33,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
   private $booking_address_postcode;
   private $booking_address_city;
   private $booking_address_country;
+  private $booking_address_reference;
   private $booking_address_contact_person;
   private $booking_address_phone;
   private $booking_address_email;
@@ -58,6 +59,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $this->booking_address_postcode       = array_key_exists( 'booking_address_postcode', $this->settings ) ? $this->settings['booking_address_postcode'] : '';
     $this->booking_address_city           = array_key_exists( 'booking_address_city', $this->settings ) ? $this->settings['booking_address_city'] : '';
     $this->booking_address_country        = array_key_exists( 'booking_address_country', $this->settings ) ? $this->settings['booking_address_country'] : '';
+    $this->booking_address_reference      = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
     $this->booking_address_contact_person = array_key_exists( 'booking_address_contact_person', $this->settings ) ? $this->settings['booking_address_contact_person'] : '';
     $this->booking_address_phone          = array_key_exists( 'booking_address_phone', $this->settings ) ? $this->settings['booking_address_phone'] : '';
     $this->booking_address_email          = array_key_exists( 'booking_address_email', $this->settings ) ? $this->settings['booking_address_email'] : '';
@@ -88,7 +90,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     //
 
     $this->form_fields['services'] = array(
-       'type' => 'services_table'
+        'type' => 'services_table'
     );
 
     // *************************************************************************
@@ -174,13 +176,15 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     ];
 
     $this->form_fields['booking_address_street1'] = [
-        'title' => __( 'Street Address 1', 'bring-fraktguiden' ),
-        'type'  => 'text',
+        'title'             => __( 'Street Address 1', 'bring-fraktguiden' ),
+        'custom_attributes' => array( 'maxlength' => '35' ),
+        'type'              => 'text',
     ];
 
     $this->form_fields['booking_address_street2'] = [
-        'title' => __( 'Street Address 2', 'bring-fraktguiden' ),
-        'type'  => 'text',
+        'title'             => __( 'Street Address 2', 'bring-fraktguiden' ),
+        'custom_attributes' => array( 'maxlength' => '35' ),
+        'type'              => 'text',
     ];
 
     $this->form_fields['booking_address_postcode'] = [
@@ -200,6 +204,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'css'     => 'width: 450px;',
         'default' => $woocommerce->countries->get_base_country(),
         'options' => $woocommerce->countries->countries
+    ];
+
+    $this->form_fields['booking_address_reference'] = [
+        'title'             => __( 'Reference', 'bring-fraktguiden' ),
+        'type'              => 'text',
+        'custom_attributes' => array( 'maxlength' => '35' ),
+        'description'       => __( 'Specify shipper or consignee reference. Available macros: {order_id}', 'bring-fraktguiden' )
     ];
 
     $this->form_fields['booking_address_contact_person'] = [
@@ -247,10 +258,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     // Process services table
     $services  = Fraktguiden_Helper::get_services_data();
     $field_key = $this->get_field_key( 'services' );
-    $vars = [
-      'custom_prices',
-      'free_shipping_checks',
-      'free_shipping_thresholds',
+    $vars      = [
+        'custom_prices',
+        'free_shipping_checks',
+        'free_shipping_thresholds',
     ];
     foreach ( $vars as $var ) {
       $$var = [];
@@ -259,8 +270,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     foreach ( $services as $key => $service ) {
       foreach ( $vars as $var ) {
         $data_key = "{$field_key}_{$var}";
-        if ( isset( $_POST[ $data_key ][ $key ] ) ) {
-          ${$var}[ $key ] = $_POST[ $data_key ][ $key ];
+        if ( isset( $_POST[$data_key][$key] ) ) {
+          ${$var}[$key] = $_POST[$data_key][$key];
         }
       }
     }
@@ -270,13 +281,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     }
 
   }
+
   public function filter_shipping_rates( $rates ) {
 
     $field_key                = $this->get_field_key( 'services' );
     $custom_prices            = get_option( $field_key . '_custom_prices' );
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
-    $cart = WC()->cart;
+    $cart                     = WC()->cart;
     if ( $cart->prices_include_tax ) {
       $cart_total = $cart->cart_contents_total + $cart->tax_total;
     }
@@ -288,16 +300,16 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         continue;
       }
       $key = strtoupper( $matches[1] );
-      if ( isset( $custom_prices[ $key ] ) && ctype_digit( $custom_prices[ $key ] ) ) {
-        $rate['cost'] = floatval( $custom_prices[ $key ] );
+      if ( isset( $custom_prices[$key] ) && ctype_digit( $custom_prices[$key] ) ) {
+        $rate['cost'] = floatval( $custom_prices[$key] );
       }
       if (
-        isset( $free_shipping_checks[ $key ] ) &&
-        'on' == $free_shipping_checks[ $key ] &&
-        isset( $free_shipping_thresholds[ $key ] )
+          isset( $free_shipping_checks[$key] ) &&
+          'on' == $free_shipping_checks[$key] &&
+          isset( $free_shipping_thresholds[$key] )
       ) {
         // Free shipping is checked and threshold is defined
-        $threshold = $free_shipping_thresholds[ $key ];
+        $threshold = $free_shipping_thresholds[$key];
         if ( ! ctype_digit( $threshold ) || $cart_total >= $threshold ) {
           // Threshold is not a number (ie. undefined) or
           // cart total is more than or equal to the threshold
@@ -328,40 +340,51 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         <table class="wc_shipping widefat fraktguiden-services-table">
           <thead>
           <tr>
-            <th class="fraktguiden-services-table-col-enabled">Aktiv</th>
-            <th class="fraktguiden-services-table-col-service">Tjeneste</th>
-            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
-            <th class="fraktguiden-services-table-col-free-shipping">Gratis frakt</th>
-            <th class="fraktguiden-services-table-col-free-shipping-threshold">Fraktfri grense</th>
+            <th class="fraktguiden-services-table-col-enabled">
+              Aktiv
+            </th>
+            <th class="fraktguiden-services-table-col-service">
+              Tjeneste
+            </th>
+            <th class="fraktguiden-services-table-col-custom-price">
+              Egendefinert pris
+            </th>
+            <th class="fraktguiden-services-table-col-free-shipping">
+              Gratis frakt
+            </th>
+            <th class="fraktguiden-services-table-col-free-shipping-threshold">
+              Fraktfri grense
+            </th>
           </tr>
           </thead>
           <tbody>
 
           <?php
           foreach ( $services as $key => $service ) {
-            $id = $field_key . '_' . $key;
+            $id   = $field_key . '_' . $key;
             $vars = [
-                'custom_price'             => 'custom_prices',
-                'free_shipping'            => 'free_shipping_checks',
-                'free_shipping_threshold'  => 'free_shipping_thresholds',
+                'custom_price'            => 'custom_prices',
+                'free_shipping'           => 'free_shipping_checks',
+                'free_shipping_threshold' => 'free_shipping_thresholds',
             ];
             // Extract variables from the settings data
             foreach ( $vars as $var => $data_var ) {
               // Eg.: ${custom_price_id} = 'woocommerce_bring_fraktguiden_services_custom_prices[SERVICEPAKKE]';
-              ${$var.'_id'} = "{$field_key}_{$data_var}[{$key}]";
-              $$var = '';
-              if ( isset( ${$data_var}[ $key ] ) ) {
+              ${$var . '_id'} = "{$field_key}_{$data_var}[{$key}]";
+              $$var           = '';
+              if ( isset( ${$data_var}[$key] ) ) {
                 // Eg.: $custom_price = $custom_prices['SERVICEPAKKE'];
-                $$var = esc_html( ${$data_var}[ $key ] );
+                $$var = esc_html( ${$data_var}[$key] );
               }
             }
-            $enabled = !empty($selected) ? in_array( $key, $selected ) : false;
+            $enabled = ! empty( $selected ) ? in_array( $key, $selected ) : false;
             ?>
             <tr>
               <td class="fraktguiden-services-table-col-enabled">
                 <label for="<?php echo $id; ?>"
                        style="display:inline-block; width: 100%">
-                  <input type="checkbox" id="<?php echo $id; ?>"
+                  <input type="checkbox"
+                         id="<?php echo $id; ?>"
                          name="<?php echo $field_key; ?>[]"
                          value="<?php echo $key; ?>" <?php echo( $enabled ? 'checked' : '' ); ?> />
                 </label>
@@ -369,28 +392,32 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
               <td class="fraktguiden-services-table-col-name">
                 <span data-tip="<?php echo $service['HelpText']; ?>"
                       class="woocommerce-help-tip"></span>
-                <label class="fraktguiden-service" for="<?php echo $id; ?>"
+                <label class="fraktguiden-service"
+                       for="<?php echo $id; ?>"
                        data-ProductName="<?php echo $service['ProductName']; ?>"
                        data-DisplayName="<?php echo $service['DisplayName']; ?>">
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
               <td class="fraktguiden-services-table-col-custom-price">
-                <input type="text" name="<?php echo $custom_price_id; ?>"
+                <input type="text"
+                       name="<?php echo $custom_price_id; ?>"
                        value="<?php echo $custom_price; ?>"
-                       />
+                />
               </td>
               <td class="fraktguiden-services-table-col-free-shipping">
                 <label style="display:inline-block; width: 100%">
-                  <input type="checkbox" name="<?php echo $free_shipping_id; ?>"
-                    <?php echo $free_shipping ? 'checked' : ''; ?>>
+                  <input type="checkbox"
+                         name="<?php echo $free_shipping_id; ?>"
+                      <?php echo $free_shipping ? 'checked' : ''; ?>>
                 </label>
               </td>
               <td class="fraktguiden-services-table-col-free-shipping-threshold">
-                <input type="text" name="<?php echo $free_shipping_threshold_id; ?>"
+                <input type="text"
+                       name="<?php echo $free_shipping_threshold_id; ?>"
                        value="<?php echo $free_shipping_threshold; ?>"
                        placeholder="0"
-                       />
+                />
               </td>
             </tr>
           <?php } ?>
