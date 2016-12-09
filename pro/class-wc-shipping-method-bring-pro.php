@@ -289,12 +289,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     $cart                     = WC()->cart;
-    if ( $cart->prices_include_tax ) {
+
+    if ( apply_filters( 'bring_shipping_rates_include_tax', $cart->prices_include_tax ) ) {
       $cart_total = $cart->cart_contents_total + $cart->tax_total;
     }
     else {
       $cart_total = $cart->cart_contents_total;
     }
+
     foreach ( $rates as &$rate ) {
       if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
         continue;
