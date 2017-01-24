@@ -82,15 +82,15 @@ class Fraktguiden_Pickup_Point {
    * Klarna Checkout pickup point HTML
    */
   static function kco_pickuppoint_html() {
-    $i18n = self::get_i18n();
-    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
-    $selected_id = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
-    $options = '';
-    $postcodes = array();
+    $i18n               = self::get_i18n();
+    $postcode           = esc_html( WC()->customer->get_shipping_postcode() );
+    $selected_id        = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
+    $options            = '';
+    $postcodes          = array();
     $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
     $pickup_point_count = 0;
     if ( $postcode ) {
-      $response = self::get_pickup_points( $postcode, 'NO' );
+      $response = self::get_pickup_points( 'NO', $postcode );
       if ( 200 == $response->status_code ) {
         $pickup_points = json_decode( $response->get_body() );
         foreach ( $pickup_points->pickupPoint as $pickup_point ) {
@@ -107,6 +107,7 @@ class Fraktguiden_Pickup_Point {
         }
       }
     }
+
     foreach ( $postcodes as $key => $value ) {
       $selected = '';
       if ( $selected_id == $key ) {

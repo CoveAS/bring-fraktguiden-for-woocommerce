@@ -13,7 +13,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author URI:          http://drivdigital.no
  * License:             MIT
  *
- * Version:             ##VERSION##
+ * Version:             2.2.2
  * Requires at least:   3.2.1
  * Tested up to:        4.4.1
  *
