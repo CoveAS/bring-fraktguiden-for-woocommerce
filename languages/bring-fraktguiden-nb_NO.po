@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "POT-Creation-Date: 2016-09-21 16:35+0200\n"
-"PO-Revision-Date: 2016-09-28 10:29+0100\n"
+"PO-Revision-Date: 2017-02-16 09:56+0100\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../classes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: bring-fraktguiden-for-woocommerce.php:84
 msgid "View Bring Fraktguiden Settings"
-msgstr "Vis bringe Fraktguiden innstillinger"
+msgstr "Vis Bring Fraktguiden innstillinger"
 
 #: bring-fraktguiden-for-woocommerce.php:84
 msgid "Settings"
@@ -215,14 +215,15 @@ msgstr "Loggene vil bli lagret i"
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
+"Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring"
 
 #: classes/class-wc-shipping-method-bring.php:283
 msgid "View system info"
-msgstr ""
+msgstr "Se systeminformasjon"
 
 #: classes/class-wc-shipping-method-bring.php:292
 msgid "Gateway Disabled"
-msgstr ""
+msgstr "Gateway Disabled"
 
 #: classes/class-wc-shipping-method-bring.php:293
 #, php-format
@@ -241,7 +242,7 @@ msgstr ""
 #: pro/booking/class-bring-booking.php:55
 #: pro/booking/class-bring-booking.php:71
 msgid "Awaiting Shipment"
-msgstr ""
+msgstr "Avventer frakt"
 
 #: pro/booking/class-bring-booking.php:55
 #, php-format
@@ -252,11 +253,13 @@ msgstr[1] ""
 
 #: pro/booking/class-bring-booking.php:175
 msgid "Booked with Bring\n"
-msgstr ""
+msgstr "Reservert hos Bring\n"
 
 #: pro/booking/class-bring-booking.php:180
 msgid "Booking errors. See the Bring Booking box for details.\n"
 msgstr ""
+"Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
+"detaljer.\n"
 
 #: pro/booking/views/class-bring-booking-my-order-view.php:24
 msgid "Your tracking number: "
@@ -264,160 +267,160 @@ msgstr "Sporingsnummer:"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:20
 msgid "hh"
-msgstr ""
+msgstr "tt"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:21
 msgid "mm"
-msgstr ""
+msgstr "min"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:25
 msgid "Bring - Submit Consignments"
-msgstr ""
+msgstr "Bring - Send"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:25
 msgid "Submit Consignment"
-msgstr ""
+msgstr "Send"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:48
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:54
 msgid "In progress"
-msgstr ""
+msgstr "Prosesserer"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:61
 msgid "Booked"
-msgstr ""
+msgstr "Booked"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:68
 msgid "Failed"
-msgstr ""
+msgstr "Feilet"
 
 #: pro/booking/views/class-bring-booking-order-view.php:48
 #: pro/booking/views/class-bring-booking-orders-view.php:55
 msgid "Bring Booking"
-msgstr ""
+msgstr "Bring Booking"
 
 #: pro/booking/views/class-bring-booking-order-view.php:109
 msgid "Press start to start booking"
-msgstr ""
+msgstr "Trykk start for å starte bestilling"
 
 #: pro/booking/views/class-bring-booking-order-view.php:115
 #, php-format
 msgid "Order status will be set to %s upon successful booking"
-msgstr ""
+msgstr "Ordrestatus vil bli satt til %s når en bestilling er fullført"
 
 #: pro/booking/views/class-bring-booking-order-view.php:139
 msgid "Note: Order is not completed"
-msgstr ""
+msgstr "Notat: Bestillingen er ikke fullført"
 
 #: pro/booking/views/class-bring-booking-order-view.php:143
 msgid "Consignments"
-msgstr ""
+msgstr "Forsendelser"
 
 #: pro/booking/views/class-bring-booking-order-view.php:184
 msgid "Earliest Pickup"
-msgstr ""
+msgstr "Tidligst henting"
 
 #: pro/booking/views/class-bring-booking-order-view.php:188
 msgid "Expected delivery"
-msgstr ""
+msgstr "Forventet levert"
 
 #: pro/booking/views/class-bring-booking-order-view.php:192
 msgid "Labels"
-msgstr ""
+msgstr "Etiketter"
 
 #: pro/booking/views/class-bring-booking-order-view.php:195
 msgid "Download"
-msgstr ""
+msgstr "Last ned"
 
 #: pro/booking/views/class-bring-booking-order-view.php:199
 msgid "Tracking"
-msgstr ""
+msgstr "Sporing"
 
 #: pro/booking/views/class-bring-booking-order-view.php:202
 msgid "View"
-msgstr ""
+msgstr "Se"
 
 #: pro/booking/views/class-bring-booking-order-view.php:208
 #: pro/booking/views/class-bring-booking-order-view.php:279
 msgid "Packages"
-msgstr ""
+msgstr "Pakker"
 
 #: pro/booking/views/class-bring-booking-order-view.php:242
 msgid "Customer Number"
-msgstr ""
+msgstr "Kundenummer"
 
 #: pro/booking/views/class-bring-booking-order-view.php:248
 #: pro/booking/views/class-bring-booking-orders-view.php:76
 msgid "Shipping Date"
-msgstr ""
+msgstr "Forsendelsesdato"
 
 #: pro/booking/views/class-bring-booking-order-view.php:271
 msgid "Additional Info"
-msgstr ""
+msgstr "Tilleggsinformasjon"
 
 #: pro/booking/views/class-bring-booking-order-view.php:296
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: pro/booking/views/class-bring-booking-order-view.php:299
 msgid "Update order and send consignment to Bring"
-msgstr ""
+msgstr "Oppdater bestilling og send forsendelse til Bring"
 
 #: pro/booking/views/class-bring-booking-order-view.php:306
 msgid "Update order and start booking"
-msgstr ""
+msgstr "Oppdater bestilling og start booking"
 
 #: pro/booking/views/class-bring-booking-order-view.php:307
 #: pro/booking/views/class-bring-booking-order-view.php:469
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: pro/booking/views/class-bring-booking-order-view.php:321
 msgid "Show Parties"
-msgstr ""
+msgstr "Vis parter"
 
 #: pro/booking/views/class-bring-booking-order-view.php:335
 msgid "Sender Address"
-msgstr ""
+msgstr "Senders adresse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:339
 msgid "Recipient Address"
-msgstr ""
+msgstr "Motaker adresse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:350
 msgid "Shipping item id"
-msgstr ""
+msgstr "Frakt ID"
 
 #: pro/booking/views/class-bring-booking-order-view.php:355
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: pro/booking/views/class-bring-booking-order-view.php:356
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #: pro/booking/views/class-bring-booking-order-view.php:357
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #: pro/booking/views/class-bring-booking-order-view.php:358
 msgid "Height"
-msgstr ""
+msgstr "Høyde"
 
 #: pro/booking/views/class-bring-booking-order-view.php:359
 msgid "Length"
-msgstr ""
+msgstr "Lengde"
 
 #: pro/booking/views/class-bring-booking-order-view.php:360
 msgid "Weight"
-msgstr ""
+msgstr "Vekt"
 
 #: pro/booking/views/class-bring-booking-order-view.php:381
 msgid "Pickup Point"
-msgstr ""
+msgstr "Hentested"
 
 #: pro/booking/views/class-bring-booking-order-view.php:431
 #: pro/booking/views/class-bring-booking-order-view.php:450
@@ -443,7 +446,7 @@ msgstr "Postnummer"
 #: pro/booking/views/class-bring-booking-order-view.php:435
 #: pro/class-wc-shipping-method-bring-pro.php:192
 msgid "City"
-msgstr "bekreft"
+msgstr "By"
 
 #: pro/booking/views/class-bring-booking-order-view.php:436
 #: pro/class-wc-shipping-method-bring-pro.php:197
@@ -452,82 +455,82 @@ msgstr "Land"
 
 #: pro/booking/views/class-bring-booking-order-view.php:438
 msgid "Reference"
-msgstr ""
+msgstr "Referanse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:441
 msgid "Additional Address Info"
-msgstr ""
+msgstr "Ekstra adresseinformasjon"
 
 #: pro/booking/views/class-bring-booking-order-view.php:446
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: pro/booking/views/class-bring-booking-order-view.php:451
 #: pro/class-wc-shipping-method-bring-pro.php:216
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 #: pro/booking/views/class-bring-booking-order-view.php:452
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonummer"
 
 #: pro/booking/views/class-bring-booking-order-view.php:470
 msgid "Create and submit consignment"
-msgstr ""
+msgstr "Lag og send forsendelse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:472
 msgid "Submitted"
-msgstr ""
+msgstr "Sent"
 
 #: pro/booking/views/class-bring-booking-order-view.php:493
 msgid "Previous booking request failed with the following errors:"
-msgstr ""
+msgstr "Forrige forespørsel feilet med følgende feilmeldinger"
 
 #: pro/booking/views/class-bring-booking-order-view.php:499
 msgid "Press Start to try again"
-msgstr ""
+msgstr "Trykk start for å forsøke igjen"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:20
 msgid "Booking"
-msgstr ""
+msgstr "Booking"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:63
 msgid "This will only book orders that has not been booked."
-msgstr ""
+msgstr "Gjelder kun besillinger som ikke er resevert"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:66
 msgid "Selected orders"
-msgstr ""
+msgstr "Velg bestillinger"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:71
 msgid "MyBring Customer"
-msgstr ""
+msgstr "MyBring kunde"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:104
 #: pro/booking/views/class-bring-booking-orders-view.php:105
 msgid "Bring - Print labels"
-msgstr ""
+msgstr "Bring - Etiketter"
 
 #: pro/class-wc-shipping-method-bring-pro.php:45
 #: pro/class-wc-shipping-method-bring-pro.php:46
 msgid "Bring Fraktguiden Pro"
-msgstr ""
+msgstr "Bring Fraktguiden Pro"
 
 #: pro/class-wc-shipping-method-bring-pro.php:100
 msgid "Pickup Point Options"
-msgstr ""
+msgstr "Hentested valg"
 
 #: pro/class-wc-shipping-method-bring-pro.php:106
 msgid "Enable pickup point"
-msgstr ""
+msgstr "Aktiver hentested"
 
 #: pro/class-wc-shipping-method-bring-pro.php:111
 msgid "Required"
-msgstr ""
+msgstr "Påkrevd"
 
 #: pro/class-wc-shipping-method-bring-pro.php:113
 msgid "Make pickup point required on checkout"
-msgstr ""
+msgstr "Gjør hentested påkrevd ved checkout"
 
 #: pro/class-wc-shipping-method-bring-pro.php:123
 #, php-format
@@ -535,154 +538,158 @@ msgid ""
 "In order to use Bring Booking you must be registered in <a href=\"%s\" "
 "target=\"_blank\">MyBring</a> and have an invoice agreement with Bring"
 msgstr ""
+"For å bruke Bring Booking må du være registrert hos <a href=\"%s\" target="
+"\"_blank\">MyBring</a> og ha en faktureringsavtale med Bring"
 
 #: pro/class-wc-shipping-method-bring-pro.php:125
 msgid "API User ID or API Key missing!"
-msgstr ""
+msgstr "API User ID / API Key mangler!"
 
 #: pro/class-wc-shipping-method-bring-pro.php:129
 msgid "MyBring Account"
-msgstr ""
+msgstr "MyBring konto"
 
 #: pro/class-wc-shipping-method-bring-pro.php:135
 #: pro/class-wc-shipping-method-bring-pro.php:137
 msgid "API User ID"
-msgstr ""
+msgstr "API User ID"
 
 #: pro/class-wc-shipping-method-bring-pro.php:141
 #: pro/class-wc-shipping-method-bring-pro.php:143
 msgid "API Key"
-msgstr ""
+msgstr "API Key"
 
 #: pro/class-wc-shipping-method-bring-pro.php:151
 msgid "Booking Options"
-msgstr ""
+msgstr "Booking valg"
 
 #: pro/class-wc-shipping-method-bring-pro.php:158
 msgid "Enable booking"
-msgstr ""
+msgstr "Aktiver Booking"
 
 #: pro/class-wc-shipping-method-bring-pro.php:163
 msgid "Testing"
-msgstr ""
+msgstr "Testing"
 
 #: pro/class-wc-shipping-method-bring-pro.php:165
 msgid "Test mode"
-msgstr ""
+msgstr "Test modus"
 
 #: pro/class-wc-shipping-method-bring-pro.php:166
 msgid "For testing. Bookings will not be invoiced"
-msgstr ""
+msgstr "For testing. Reserveringer hos Bring vil ikke bli fakturert"
 
 #: pro/class-wc-shipping-method-bring-pro.php:171
 msgid "Store Name"
-msgstr ""
+msgstr "Butikknavn"
 
 #: pro/class-wc-shipping-method-bring-pro.php:206
 msgid "Contact Person"
-msgstr ""
+msgstr "Kontaktperson"
 
 #: pro/class-wc-shipping-method-bring-pro.php:211
 msgid "Phone"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: pro/class-wc-shipping-method-bring-pro.php:221
 msgid "Order status after booking"
-msgstr ""
+msgstr "Bestillingsstatus etter reservering"
 
 #: pro/class-wc-shipping-method-bring-pro.php:223
 msgid "Order status to automatically set after successful booking"
-msgstr ""
+msgstr "Settes automatisk på bestillingen etter fullført reservering"
 
 #: pro/class-wc-shipping-method-bring-pro.php:226
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: pro/class-wc-shipping-method-bring-pro.php:325
 msgid "Services 2"
-msgstr ""
+msgstr "Tjenester 2"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:205
 msgid "<strong>Pickup point</strong> is a required field."
-msgstr ""
+msgstr "<strong>Hentested</strong> er et påkrevet felt"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:284
 msgid "Pickup point"
-msgstr ""
+msgstr "Hentested"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:285
 msgid "Please wait..."
-msgstr ""
+msgstr "Vennligst vent…"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:286
 msgid "Fraktguiden requires the following fields"
-msgstr ""
+msgstr "Fraktguiden krever følgende felter utfylt"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:287
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:288
 msgid "Valid shipping postcode"
-msgstr ""
+msgstr "Gyldig postnummer for frakt"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:289
 msgid "Please update the fields and save the order first"
-msgstr ""
+msgstr "Vennligst oppdater feltene og lagre orderen først"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:290
 msgid "Please select service"
-msgstr ""
+msgstr "Vennligst velg tjeneste"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:292
 msgid "Please select pickup point"
-msgstr ""
+msgstr "Vennligst velg hentested"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:293
 msgid "Selected pickup point"
-msgstr ""
+msgstr "Velg hentested"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:294
 msgid "No pickup points found for postcode"
-msgstr ""
+msgstr "Fant ingen hentesteder for dette postnummeret"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:295
 msgid "Get Rate"
-msgstr ""
+msgstr "Hent pris"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:296
 msgid "Please wait"
-msgstr ""
+msgstr "Vennligst vent"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:297
 msgid "Service"
-msgstr ""
+msgstr "Tjeneste"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:298
 msgid "Rate is not available for this order. Please try another service"
 msgstr ""
+"Pris er ikke tilgjengelig for denne orderen. Vennligst forsøk en annen "
+"tjeneste."
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:299
 msgid "Request was not successful"
-msgstr ""
+msgstr "Forespørselen feilet"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:300
 msgid "Please add postal code"
-msgstr ""
+msgstr "Vennligst legg til postnummer"
 
 #. Plugin Name of the plugin/theme
 msgid "Bring Fraktguiden for WooCommerce"
-msgstr ""
+msgstr "Bring Fraktguiden for WooCommerce"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
 msgid "http://drivdigital.no"
-msgstr ""
+msgstr "http://drivdigital.no"
 
 #. Description of the plugin/theme
 msgid "N/A"
-msgstr ""
+msgstr "Ikke tilgjengelig"
 
 #. Author of the plugin/theme
 msgid "Driv Digital"
-msgstr ""
+msgstr "Driv Digital"
 
 #~ msgid ""
 #~ "This is the zip code of where you deliver from. For example, the post "
