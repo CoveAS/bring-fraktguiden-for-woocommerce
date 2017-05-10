@@ -93,7 +93,7 @@ class Bring_Booking_Labels {
       }
 
       // Admins and managers can download all orders.
-      $can_download = in_array( 'manage_woocommerce', $current_user->roles ) || in_array( 'administrator', $current_user->roles ) || in_array( 'warehouseteam', $current_user->roles);
+      $can_download = in_array( 'manage_woocommerce', $current_user->roles ) || in_array( 'administrator', $current_user->roles ) || in_array( 'warehouse_team', $current_user->roles);
       if ( ! $can_download ) {
         exit;
       }
