@@ -80,8 +80,20 @@ class Fraktguiden_Helper {
     return $result;
   }
 
-  static function get_services_data() {
+    /**
+     * Available Fraktguiden services.
+     * Information is copied from the service's XML API
+     * @return array
+     */
+  static public function get_services_data() {
     return [
+        'NORGESPAKKE'               => [
+            'ProductCode'     => '3067',
+            'ProductName'     => 'Norgespakke egenemballert',
+            'DisplayName'     => 'På postkontor eller post i butikk (Norgespakke)',
+            'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
+            'HelpText'        => 'Sendingen er en Norgespakke som blir levert til mottakers postkontor/ post i butikk. Mottaker varsles om at sendingen er ankommet via hentemelding i postkassen. Transporttid er normalt 2-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
+        ],
         'SERVICEPAKKE'               => [
             'ProductCode'     => '1202',
             'ProductName'     => 'Klimanøytral Servicepakke',
