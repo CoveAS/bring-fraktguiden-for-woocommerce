@@ -288,7 +288,7 @@ class Fraktguiden_Packer {
             'length'          => $dims[0],
             'width'           => $dims[1],
             'height'          => $dims[2],
-            'weight'          => $product->weight,
+            'weight'          => $product->get_weight(),
             'weight_in_grams' => $this->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
         );
 
