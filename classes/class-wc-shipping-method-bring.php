@@ -65,6 +65,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->supports              = array(
       'shipping-zones',
       'settings',
+      // 'instance-settings', // @TODO - Settings per zone
+      // 'instance-settings-modal',
     );
     if ( $instance_id ) {
       parent::__construct( $instance_id );
