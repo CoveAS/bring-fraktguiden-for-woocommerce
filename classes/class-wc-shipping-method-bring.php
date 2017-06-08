@@ -33,6 +33,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const DEFAULT_ALT_FLAT_RATE = 200;
 
+  public $supports = [ 'shipping-zones', 'settings' ];
+
   private $from_country = '';
   private $from_zip = '';
   private $post_office = '';
@@ -54,8 +56,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /**
    * @constructor
+   *
+   * @param int $instance_id
    */
-  public function __construct() {
+  public function __construct( $instance_id = 0 ) {
+    parent::__construct( $instance_id );
+
     $this->id           = self::ID;
     $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
 
@@ -563,7 +569,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->add_rate( $rate );
     }
     else {
-      $cart = $woocommerce->cart->get_cart();
+      $cart = $package[ 'contents'];
       $this->packages_params = $this->pack_order( $cart );
       if ( ! $this->packages_params ) {
         return;
@@ -574,7 +580,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       }
 
       // Request parameters.
-      $params = array_merge( $this->create_standard_url_params(), $this->packages_params );
+      $params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
       // Remove any empty elements.
       $params = array_filter( $params );
 
@@ -667,16 +673,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   /**
    * Standard url params for the Bring http request.
    *
+   * @param $package
+   *
    * @return array
    */
-  public function create_standard_url_params() {
+  public function create_standard_url_params( $package ) {
     global $woocommerce;
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'fromCountry'         => $this->get_selected_from_country(),
-        'to'                  => $woocommerce->customer->get_shipping_postcode(),
-        'toCountry'           => $woocommerce->customer->get_shipping_country(),
+        'to'                  => $package[ 'destination' ][ 'postcode' ],
+        'toCountry'           => $package[ 'destination' ][ 'country' ],
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
         'language'            => $this->get_bring_language()

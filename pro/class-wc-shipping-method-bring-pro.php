@@ -39,9 +39,9 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
   private $booking_address_email;
   private $booking_test_mode;
 
-  public function __construct() {
+  public function __construct( $instance_id = 0 ) {
 
-    parent::__construct();
+    parent::__construct( $instance_id );
 
     $this->title        = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );
     $this->method_title = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );

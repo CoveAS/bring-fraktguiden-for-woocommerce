@@ -65,7 +65,7 @@ class Bring_Fraktguiden {
    * @return array
    */
   static function add_bring_method( $methods ) {
-    $methods[] = class_exists( 'WC_Shipping_Method_Bring_Pro' ) ? 'WC_Shipping_Method_Bring_Pro' : 'WC_Shipping_Method_Bring';
+    $methods['bring_fraktguiden'] = class_exists( 'WC_Shipping_Method_Bring_Pro' ) ? 'WC_Shipping_Method_Bring_Pro' : 'WC_Shipping_Method_Bring';
     return $methods;
   }
 
