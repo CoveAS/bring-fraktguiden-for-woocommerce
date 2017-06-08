@@ -295,14 +295,24 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   public function validate_services_table_field( $key, $value = null ) {
-    return isset( $value ) ? $value : array();
+    if ( isset( $value ) ) {
+      return $value;
+    }
+    $sanitized_services = [];
+    $field_key = $this->get_field_key( $key );
+    foreach ( $_POST[ $field_key ] as $service ) {
+      if ( preg_match( '/^[A-Za-z_\-]+$/', $service ) ) {
+        $sanitized_services[] = $service;
+      }
+    }
+    return $sanitized_services;
   }
 
   public function process_admin_options() {
     parent::process_admin_options();
 
     // Process services table
-    $services_field               = $this->get_field_key( 'services2' );
+    $services_field               = $this->get_field_key( 'services' );
     $services_custom_prices_field = $services_field . '_custom_prices';
     $custom_prices                = [ ];
     if ( isset( $_POST[$services_field] ) ) {
@@ -316,6 +326,31 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     update_option( $services_custom_prices_field, $custom_prices );
+
+    // Process services table
+    $services  = Fraktguiden_Helper::get_services_data();
+    $field_key = $this->get_field_key( 'services' );
+    $vars      = [
+        'custom_prices',
+        'free_shipping_checks',
+        'free_shipping_thresholds',
+    ];
+    foreach ( $vars as $var ) {
+      $$var = [];
+    }
+    // Only process options for enabled services
+    foreach ( $services as $key => $service ) {
+      foreach ( $vars as $var ) {
+        $data_key = "{$field_key}_{$var}";
+        if ( isset( $_POST[$data_key][$key] ) ) {
+          ${$var}[$key] = $_POST[$data_key][$key];
+        }
+      }
+    }
+    foreach ( $vars as $var ) {
+      $data_key = "{$field_key}_{$var}";
+      update_option( $data_key, $$var );
+    }
   }
 
   public function generate_services_table_html() {
@@ -325,6 +360,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $custom_prices            = get_option( $field_key . '_custom_prices' );
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
+
     ob_start();
     ?>
 

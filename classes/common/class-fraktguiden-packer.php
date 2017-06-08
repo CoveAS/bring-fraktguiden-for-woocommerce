@@ -12,17 +12,21 @@ class Fraktguiden_Packer {
 
   private $packages_to_ship;
   private $popped_product_boxes;
+  private $laff_pack;
 
   public function __construct() {
 
-    include_once( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' );
-
-    $this->laff_pack   = new LAFFPack();
     $this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
     $this->weight_unit = get_option( 'woocommerce_weight_unit' );
 
     $this->packages_to_ship     = array();
     $this->popped_product_boxes = array();
+    if ( ! file_exists( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' ) ) {
+      wc_add_notice( 'Warning! Bring dependencies has not been installed. Make sure you run composer install within the bring plugin!', 'error' );
+      return;
+    }
+    require_once( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' );
+    $this->laff_pack   = new LAFFPack();
   }
 
   /**
@@ -33,7 +37,9 @@ class Fraktguiden_Packer {
    * @param boolean $multi_pack
    */
   public function pack( $product_boxes, $multi_pack = false ) {
-
+    if ( ! $this->laff_pack ) {
+      return;
+    }
     // Calculate total weight of boxes.
     $total_weight = 0;
     foreach ( $product_boxes as $box ) {

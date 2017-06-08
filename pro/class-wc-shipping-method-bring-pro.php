@@ -230,36 +230,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     wp_enqueue_style( 'bfg-admin-css', $src, array(), '##VERSION##', false );
   }
 
-  public function process_admin_options() {
-    parent::process_admin_options();
-
-    // Process services table
-    $services  = Fraktguiden_Helper::get_services_data();
-    $field_key = $this->get_field_key( 'services' );
-    $vars      = [
-        'custom_prices',
-        'free_shipping_checks',
-        'free_shipping_thresholds',
-    ];
-    foreach ( $vars as $var ) {
-      $$var = [];
-    }
-    // Only process options for enabled services
-    foreach ( $services as $key => $service ) {
-      foreach ( $vars as $var ) {
-        $data_key = "{$field_key}_{$var}";
-        if ( isset( $_POST[$data_key][$key] ) ) {
-          ${$var}[$key] = $_POST[$data_key][$key];
-        }
-      }
-    }
-    foreach ( $vars as $var ) {
-      $data_key = "{$field_key}_{$var}";
-      update_option( $data_key, $$var );
-    }
-
-  }
-
   public function filter_shipping_rates( $rates ) {
 
     $field_key                = $this->get_field_key( 'services' );
