@@ -220,7 +220,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
         'services'              => array(
             'title'   => __( 'Services', 'bring-fraktguiden' ),
-            'type'    => 'multiselect',
+            'type'    => 'services_table',
             'class'   => 'chosen_select',
             'css'     => 'width: 450px;',
             'default' => '',
@@ -275,16 +275,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function admin_options() {
     global $woocommerce; ?>
-
     <h3><?php echo $this->method_title; ?></h3>
     <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
     <p>
       <a href="<?php echo admin_url(); ?>admin-ajax.php?action=bring_system_info"
          target="_blank"><?php echo __( 'View system info', 'bring-fraktguiden' ) ?></a>
     </p>
-
     <table class="form-table">
-
       <?php if ( $this->is_valid_for_use() ) :
         $this->generate_settings_html();
       else : ?>
@@ -297,7 +294,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     </table> <?php
   }
 
-  public function validate_services_table_field( $key, $value ) {
+  public function validate_services_table_field( $key, $value = null ) {
     return isset( $value ) ? $value : array();
   }
 
@@ -322,58 +319,102 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   public function generate_services_table_html() {
-    $services      = Fraktguiden_Helper::get_services_data();
-    $selected      = $this->services2;
-    $field_key     = $this->get_field_key( 'services2' );
-    $custom_prices = get_option( $field_key . '_custom_prices' );
-
+    $services                 = Fraktguiden_Helper::get_services_data();
+    $selected                 = $this->services;
+    $field_key                = $this->get_field_key( 'services' );
+    $custom_prices            = get_option( $field_key . '_custom_prices' );
+    $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
+    $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     ob_start();
     ?>
 
     <tr valign="top">
       <th scope="row" class="titledesc">
         <label
-            for="<?php echo $field_key ?>"><?php _e( 'Services 2', self::TEXT_DOMAIN ); ?></label>
+            for="<?php echo $field_key ?>"><?php _e( 'Services', 'bring-fraktguiden' ); ?></label>
       </th>
       <td class="forminp">
         <table class="wc_shipping widefat fraktguiden-services-table">
           <thead>
           <tr>
-            <th class="fraktguiden-services-table-col-enabled">Enabled</th>
-            <th class="fraktguiden-services-table-col-service">Service</th>
-            <th class="fraktguiden-services-table-col-custom-price">Egendefinert pris</th>
+            <th class="fraktguiden-services-table-col-enabled">
+              Aktiv
+            </th>
+            <th class="fraktguiden-services-table-col-service">
+              Tjeneste
+            </th>
+            <th class="fraktguiden-services-table-col-custom-price">
+              Egendefinert pris
+            </th>
+            <th class="fraktguiden-services-table-col-free-shipping">
+              Gratis frakt
+            </th>
+            <th class="fraktguiden-services-table-col-free-shipping-threshold">
+              Fraktfri grense
+            </th>
           </tr>
           </thead>
           <tbody>
 
           <?php
           foreach ( $services as $key => $service ) {
-            $id               = $field_key . '_' . $key;
-            $prices_field_key = $field_key . '_custom_prices[' . $key . ']';
-            $custom_price     = isset( $custom_prices[$key] ) ? $custom_prices[$key] : '';
-            $checked          = in_array( $key, $selected );
+            $id   = $field_key . '_' . $key;
+            $vars = [
+                'custom_price'            => 'custom_prices',
+                'free_shipping'           => 'free_shipping_checks',
+                'free_shipping_threshold' => 'free_shipping_thresholds',
+            ];
+            // Extract variables from the settings data
+            foreach ( $vars as $var => $data_var ) {
+              // Eg.: ${custom_price_id} = 'woocommerce_bring_fraktguiden_services_custom_prices[SERVICEPAKKE]';
+              ${$var . '_id'} = "{$field_key}_{$data_var}[{$key}]";
+              $$var           = '';
+              if ( isset( ${$data_var}[$key] ) ) {
+                // Eg.: $custom_price = $custom_prices['SERVICEPAKKE'];
+                $$var = esc_html( ${$data_var}[$key] );
+              }
+            }
+            $enabled = ! empty( $selected ) ? in_array( $key, $selected ) : false;
             ?>
             <tr>
               <td class="fraktguiden-services-table-col-enabled">
                 <label for="<?php echo $id; ?>"
                        style="display:inline-block; width: 100%">
-                  <input type="checkbox" id="<?php echo $id; ?>"
+                  <input type="checkbox"
+                         id="<?php echo $id; ?>"
                          name="<?php echo $field_key; ?>[]"
-                         value="<?php echo $key; ?>" <?php echo( $checked ? 'checked' : '' ); ?> />
+                         value="<?php echo $key; ?>" <?php echo( $enabled ? 'checked' : '' ); ?> />
                 </label>
               </td>
               <td class="fraktguiden-services-table-col-name">
                 <span data-tip="<?php echo $service['HelpText']; ?>"
                       class="woocommerce-help-tip"></span>
-                <label class="fraktguiden-service" for="<?php echo $id; ?>"
+                <label class="fraktguiden-service"
+                       for="<?php echo $id; ?>"
                        data-ProductName="<?php echo $service['ProductName']; ?>"
                        data-DisplayName="<?php echo $service['DisplayName']; ?>">
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
               <td class="fraktguiden-services-table-col-custom-price">
-                <input type="text" name="<?php echo $prices_field_key; ?>"
-                       value="<?php echo $custom_price; ?>"/>
+                <input type="text"
+                       name="<?php echo $custom_price_id; ?>"
+                       value="<?php echo $custom_price; ?>"
+                />
+              </td>
+              <td class="fraktguiden-services-table-col-free-shipping">
+                <label style="display:inline-block; width: 100%">
+                  <input type="checkbox"
+                         name="<?php echo $free_shipping_id; ?>"
+                      <?php echo $free_shipping ? 'checked' : ''; ?>>
+                </label>
+              </td>
+              <td class="fraktguiden-services-table-col-free-shipping-threshold">
+                <input type="text"
+                       name="<?php echo $free_shipping_threshold_id; ?>"
+                       value="<?php echo $free_shipping_threshold; ?>"
+                       placeholder="0"
+                />
               </td>
             </tr>
           <?php } ?>
