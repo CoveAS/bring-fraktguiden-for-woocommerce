@@ -289,7 +289,7 @@ class Fraktguiden_Packer {
             'width'           => $dims[1],
             'height'          => $dims[2],
             'weight'          => $product->get_weight(),
-            'weight_in_grams' => $this->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
+            'weight_in_grams' => $this->get_weight( $product->get_weight() ) // For $packer->exceeds_max_package_values only.
         );
 
         // Return if product is larger than available Bring packages.

@@ -33,7 +33,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const DEFAULT_ALT_FLAT_RATE = 200;
 
-  public $supports = [ 'shipping-zones', 'settings' ];
 
   private $from_country = '';
   private $from_zip = '';
@@ -60,12 +59,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @param int $instance_id
    */
   public function __construct( $instance_id = 0 ) {
-    if ( $instance_id ) {
-      parent::__construct( $instance_id );
-    }
 
     $this->id           = self::ID;
     $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+    $this->supports              = array(
+      'shipping-zones',
+      'settings',
+    );
+    if ( $instance_id ) {
+      parent::__construct( $instance_id );
+    }
 
     // Load the form fields.
     $this->init_form_fields();
@@ -502,6 +505,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // Create the url.
       return $packer->create_packages_params();
   }
+
   /**
    * Calculate shipping costs.
    *
@@ -513,6 +517,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     //include_once( 'common/class-fraktguiden-packer.php' );
 
     // Offer flat rate if the cart contents exceeds max product.
+    // @TODO: Use the package instead of the cart
     if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
       if ( $this->alt_flat_rate == '' ) {
         return;
@@ -546,7 +551,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $service_count = 0;
       if ( $this->services && count( $this->services ) > 0 ) {
         foreach ( $this->services as $service ) {
-
           $url .= '&product=' . $service;
         }
       }
@@ -561,6 +565,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
       // Decode the JSON data from bring.
       $json = json_decode( $response->get_body(), true );
+
       // Filter the response json to get only the selected services from the settings.
       $rates = $this->get_services_from_response( $json );
       $rates = apply_filters( 'bring_shipping_rates', $rates );
@@ -635,6 +640,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function create_standard_url_params( $package ) {
     global $woocommerce;
+    if ( ! $this->from_zip ) {
+      wc_add_notice( 'Bring requires a postal code from which packages are being sent. Please check the settings page.', 'error' );
+    }
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
