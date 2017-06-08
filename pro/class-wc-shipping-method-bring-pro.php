@@ -268,7 +268,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         }
       }
     }
-    // ...
     return $rates;
   }
 }

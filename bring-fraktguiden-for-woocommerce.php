@@ -32,7 +32,7 @@ class Bring_Fraktguiden {
 
       // Load pro version.
       if ( file_exists( dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php' ) ) {
-        // include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
+        include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
       }
 
       load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );

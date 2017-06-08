@@ -60,7 +60,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @param int $instance_id
    */
   public function __construct( $instance_id = 0 ) {
-    parent::__construct( $instance_id );
+    if ( $instance_id ) {
+      parent::__construct( $instance_id );
+    }
 
     $this->id           = self::ID;
     $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
@@ -489,52 +491,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $packer = new Fraktguiden_Packer();
 
       $product_boxes = $packer->create_boxes( $cart );
-//      // Create an array of 'product boxes' (l,w,h,weight).
-//      $product_boxes = array();
-//
-//      /** @var WC_Cart $cart */
-//      $cart = $woocommerce->cart;
-//      foreach ( $cart->get_cart() as $values ) {
-//
-//        /** @var WC_Product $product */
-//        $product = $values['data'];
-//
-//        if ( ! $product->needs_shipping() ) {
-//          continue;
-//        }
-//        $quantity = $values['quantity'];
-//        for ( $i = 0; $i < $quantity; $i++ ) {
-//          if ( ! $product->has_dimensions() ) {
-//            // If the product has no dimensions, assume the lowest unit 1x1x1 cm
-//            $dims = array( 0, 0, 0 );
-//          }
-//          else {
-//            $dims = array(
-//                $product->length,
-//                $product->width,
-//                $product->height
-//            );
-//          }
-//
-//          // Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
-//          rsort( $dims );
-//
-//          $box = array(
-//              'length'          => $dims[0],
-//              'width'           => $dims[1],
-//              'height'          => $dims[2],
-//              'weight'          => $product->weight,
-//              'weight_in_grams' => $packer->get_weight( $product->weight ) // For $packer->exceeds_max_package_values only.
-//          );
-//
-//          // Return if product is larger than available Bring packages.
-//          if ( $packer->exceeds_max_package_values( $box ) ) {
-//            return;
-//          }
-//
-//          $product_boxes[] = $box;
-//        }
-//      }
 
       if ( ! $product_boxes ) {
         return false;
@@ -569,7 +525,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->add_rate( $rate );
     }
     else {
-      $cart = $package[ 'contents'];
+      $cart = $package[ 'contents' ];
       $this->packages_params = $this->pack_order( $cart );
       if ( ! $this->packages_params ) {
         return;
