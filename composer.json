@@ -8,12 +8,12 @@
     },
     {
       "type": "vcs",
-      "url": "git@bitbucket.org:drivdigital/laff-pack.git"
+      "url": "git@github.com:drivdigital/php-laff.git"
     }
   ],
   "require": {
     "composer/installers": "*",
     "myokyawhtun/pdfmerger": "dev-master",
-    "drivdigital/laff-pack": "dev-master"
+    "drivdigital/php-laff": "dev-master"
   }
 }

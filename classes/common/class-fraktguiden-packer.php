@@ -21,11 +21,11 @@ class Fraktguiden_Packer {
 
     $this->packages_to_ship     = array();
     $this->popped_product_boxes = array();
-    if ( ! file_exists( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' ) ) {
+    if ( ! file_exists( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/php-laff/laff-pack.php' ) ) {
       wc_add_notice( 'Warning! Bring dependencies has not been installed. Make sure you run composer install within the bring plugin!', 'error' );
       return;
     }
-    require_once( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/laff-pack/laff-pack.php' );
+    require_once( FRAKTGUIDEN_PLUGIN_PATH .'vendor/drivdigital/php-laff/laff-pack.php' );
     $this->laff_pack   = new LAFFPack();
   }
 

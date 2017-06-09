@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "68f0b7398e1196bc61eaae2898e34951",
-    "content-hash": "cf5659865f68303637cf1410fdcf54f6",
+    "content-hash": "acf6264b178a0e5005ed7fef16cf4742",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.25",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e"
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
-                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
+                "url": "https://api.github.com/repos/composer/installers/zipball/79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045",
                 "shasum": ""
             },
             "require": {
@@ -60,32 +59,43 @@
             "keywords": [
                 "Craft",
                 "Dolibarr",
+                "Eliasis",
                 "Hurad",
                 "ImageCMS",
+                "Kanboard",
                 "MODX Evo",
                 "Mautic",
+                "Maya",
                 "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
                 "SMF",
                 "Thelia",
                 "WolfCMS",
                 "agl",
                 "aimeos",
                 "annotatecms",
+                "attogram",
                 "bitrix",
                 "cakephp",
                 "chef",
+                "cockpit",
                 "codeigniter",
                 "concrete5",
                 "croogo",
                 "dokuwiki",
                 "drupal",
                 "elgg",
+                "expressionengine",
                 "fuelphp",
                 "grav",
                 "installer",
+                "itop",
                 "joomla",
                 "kohana",
                 "laravel",
+                "lavalite",
                 "lithium",
                 "magento",
                 "mako",
@@ -96,30 +106,42 @@
                 "piwik",
                 "ppi",
                 "puppet",
+                "reindex",
                 "roundcube",
                 "shopware",
                 "silverstripe",
+                "sydes",
                 "symfony",
                 "typo3",
                 "wordpress",
+                "yawik",
                 "zend",
                 "zikula"
             ],
-            "time": "2016-04-13 19:46:30"
+            "time": "2017-04-24T06:37:16+00:00"
         },
         {
-            "name": "drivdigital/laff-pack",
+            "name": "drivdigital/php-laff",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:drivdigital/laff-pack.git",
-                "reference": "39aef19619380d2b2e423d3debc891f4738ec1f6"
+                "url": "https://github.com/drivdigital/php-laff.git",
+                "reference": "77f7b76a479819ccecc307eb0af6fb1ac7f98a13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drivdigital/php-laff/zipball/77f7b76a479819ccecc307eb0af6fb1ac7f98a13",
+                "reference": "77f7b76a479819ccecc307eb0af6fb1ac7f98a13",
+                "shasum": ""
             },
             "require": {
                 "composer/installers": "*"
             },
             "type": "library",
-            "time": "2016-06-28 13:46:47"
+            "support": {
+                "source": "https://github.com/drivdigital/php-laff/tree/master"
+            },
+            "time": "2017-06-09 12:49:54"
         },
         {
             "name": "myokyawhtun/pdfmerger",
@@ -127,12 +149,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myokyawhtun/PDFMerger.git",
-                "reference": "33f769e333de1af2ffacf95cd443d44ab9801b3e"
+                "reference": "03e5d674f95cc36330dab4d4b2bdcff684b59e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myokyawhtun/PDFMerger/zipball/33f769e333de1af2ffacf95cd443d44ab9801b3e",
-                "reference": "33f769e333de1af2ffacf95cd443d44ab9801b3e",
+                "url": "https://api.github.com/repos/myokyawhtun/PDFMerger/zipball/03e5d674f95cc36330dab4d4b2bdcff684b59e93",
+                "reference": "03e5d674f95cc36330dab4d4b2bdcff684b59e93",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +163,7 @@
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "PDFMerger for PHP (PHP5 Compatible) by Jarrod Nettles",
-            "time": "2015-12-04 16:40:06"
+            "time": "2017-03-18 08:49:38"
         }
     ],
     "packages-dev": [],
@@ -149,7 +171,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "myokyawhtun/pdfmerger": 20,
-        "drivdigital/laff-pack": 20
+        "drivdigital/php-laff": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

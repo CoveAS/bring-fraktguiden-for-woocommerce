@@ -491,19 +491,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     return ob_get_clean();
   }
 
-  public function pack_order( $cart ) {
-
+  /**
+   * Pack order
+   * @param  array      $contents Package contents
+   * @return bool|array           Parameters for each box on success
+   */
+  public function pack_order( $contents ) {
       $packer = new Fraktguiden_Packer();
-
-      $product_boxes = $packer->create_boxes( $cart );
-
+      $product_boxes = $packer->create_boxes( $contents );
       if ( ! $product_boxes ) {
         return false;
       }
-
       // Pack product boxes.
       $packer->pack( $product_boxes, true );
-
       // Create the url.
       return $packer->create_packages_params();
   }
