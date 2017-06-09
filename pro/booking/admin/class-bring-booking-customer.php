@@ -11,23 +11,7 @@ class Bring_Booking_Customer {
    * @return array
    */
   static function get_customer_numbers_formatted() {
-    $result   = [ ];
-    $response = self::request_customer_numbers();
-    if ( $response->has_errors() ) {
-      return $result;
-    }
 
-    $json = json_decode( $response->get_body() );
-    foreach ( $json->customers as $customer ) {
-      $result[$customer->customerNumber] = '[' . $customer->countryCode . '] ' . $customer->name;
-    }
-    return $result;
-  }
-
-  /**
-   * @return WP_Bring_Response
-   */
-  static function request_customer_numbers() {
     $args = [
         'headers' => [
             'Content-Type'       => 'application/json',
@@ -40,7 +24,16 @@ class Bring_Booking_Customer {
 
     $request  = new WP_Bring_Request();
     $response = $request->get( self::CUSTOMERS_URL, array(), $args );
-    return $response;
+
+    if ( $response->has_errors() ) {
+      throw new Exception( $response->get_body() );
+    }
+    $result = [];
+    $json = json_decode( $response->get_body() );
+    foreach ( $json->customers as $customer ) {
+      $result[$customer->customerNumber] = '[' . $customer->countryCode . '] ' . $customer->name;
+    }
+    return $result;
   }
 
 }

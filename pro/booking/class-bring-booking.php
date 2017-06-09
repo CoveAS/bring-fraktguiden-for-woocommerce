@@ -80,7 +80,7 @@ class Bring_Booking {
   static function send_booking( $wc_order ) {
     $order = new Bring_WC_Order_Adapter( $wc_order );
 
-    $order_id        = $wc_order->id;
+    $order_id        = $wc_order->get_id();
     $test_mode       = self::is_test_mode();
     $api_key         = self::get_api_key();
     $api_uid         = self::get_api_uid();
@@ -303,7 +303,7 @@ class Bring_Booking {
    */
   static function parse_sender_address_reference( $reference, $wc_order ) {
     $replacements = array(
-        '{order_id}' => $wc_order->id
+        '{order_id}' => $wc_order->get_id(),
     );
     $result = $reference;
     foreach ( $replacements as $replacement => $value ) {

@@ -34,7 +34,7 @@ class Bring_WC_Order_Adapter {
   public function update_booking_response( $response ) {
     // Create an array of the response for post meta.
     $response_as_array = $response->to_array();
-    update_post_meta( $this->order->id, '_bring_booking_response', $response_as_array );
+    update_post_meta( $this->order->get_id(), '_bring_booking_response', $response_as_array );
   }
 
   /**
@@ -43,7 +43,7 @@ class Bring_WC_Order_Adapter {
    * @return array
    */
   public function get_booking_response() {
-    return get_post_meta( $this->order->id, '_bring_booking_response', true );
+    return get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
   }
 
   /**
@@ -270,7 +270,7 @@ class Bring_WC_Order_Adapter {
   public function get_pickup_point_for_shipping_item_formatted( $item_id_to_find ) {
     $result = [ ];
 
-    $country_code = $this->order->shipping_country;
+    $country_code = $this->order->get_shipping_country();
 
     foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $shipping_item ) {
       $pickup_point_id = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', true );
@@ -366,7 +366,7 @@ class Bring_WC_Order_Adapter {
         continue;
       }
       $cart[] = [
-        'data' => get_product( $item['product_id'] ),
+        'data' => wc_get_product( $item['product_id'] ),
         'quantity' => $item['qty'],
       ];
     }
@@ -449,21 +449,21 @@ class Bring_WC_Order_Adapter {
    */
   public function get_recipient_address_formatted() {
     $order     = $this->order;
-    $full_name = $order->shipping_first_name . ' ' . $order->shipping_last_name;
-    $name      = $order->shipping_company ? $order->shipping_company : $full_name;
+    $full_name = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
+    $name      = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
     return [
         "name"                  => $name,
-        "addressLine"           => $order->shipping_address_1,
-        "addressLine2"          => $order->shipping_address_2,
-        "postalCode"            => $order->shipping_postcode,
-        "city"                  => $order->shipping_city,
-        "countryCode"           => $order->shipping_country,
+        "addressLine"           => $order->get_shipping_address_1(),
+        "addressLine2"          => $order->get_shipping_address_2(),
+        "postalCode"            => $order->get_shipping_postcode(),
+        "city"                  => $order->get_shipping_city(),
+        "countryCode"           => $order->get_shipping_country(),
         "reference"             => null,
-        "additionalAddressInfo" => $order->customer_note,
+        "additionalAddressInfo" => $order->get_customer_note(),
         "contact"               => [
             "name"        => $full_name,
-            "email"       => $order->billing_email,
-            "phoneNumber" => $order->billing_phone
+            "email"       => $order->get_billing_email(),
+            "phoneNumber" => $order->get_billing_phone(),
         ]
     ];
 

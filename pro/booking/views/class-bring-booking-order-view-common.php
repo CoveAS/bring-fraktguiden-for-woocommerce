@@ -6,7 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Bring_Booking_Common_View {
 
   static function render_customer_selector( $name = '_bring-customer-number' ) {
-    $customers = Bring_Booking_Customer::get_customer_numbers_formatted();
+    try {
+      $customers = Bring_Booking_Customer::get_customer_numbers_formatted();
+    }
+    catch ( Exception $e ) {
+      printf( '<p class="error">%s</p>', $e->getMessage() );
+      return;
+    }
     echo '<select name="' . $name . '" class="wc-enhanced-select" style="max-width:20em">';
     foreach ( $customers as $key => $val ) {
       echo '<option value="' . $key . '">' . $val . '</option>';

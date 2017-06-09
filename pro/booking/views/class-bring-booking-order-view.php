@@ -173,7 +173,7 @@ class Bring_Booking_Order_View {
           $earliest_pickup    = $date_and_times->earliestPickup ? date_i18n( wc_date_format(), $date_and_times->earliestPickup / 1000 ) : 'N/A';
           $expected_delivery  = $date_and_times->expectedDelivery ? date_i18n( wc_date_format(), $date_and_times->expectedDelivery / 1000 ) : 'N/A';
           $packages           = $confirmation->packages;
-          $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->id );
+          $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
           ?>
           <div>
             <table>
