@@ -48,6 +48,9 @@ class Fraktguiden_Pickup_Point {
     add_action( 'kco_after_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
     add_filter( 'kco_create_order', array( __CLASS__, 'set_kco_postal_code' ) );
     add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
+
+    // Pickup points
+    add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
   }
 
   /**
@@ -84,13 +87,14 @@ class Fraktguiden_Pickup_Point {
   static function kco_pickuppoint_html() {
     $i18n               = self::get_i18n();
     $postcode           = esc_html( WC()->customer->get_shipping_postcode() );
+    $country           = esc_html( WC()->customer->get_shipping_country() );
     $selected_id        = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
     $options            = '';
     $postcodes          = array();
     $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
     $pickup_point_count = 0;
     if ( $postcode ) {
-      $response = self::get_pickup_points( 'NO', $postcode );
+      $response = self::get_pickup_points( $country, $postcode );
       if ( 200 == $response->status_code ) {
         $pickup_points = json_decode( $response->get_body() );
         foreach ( $pickup_points->pickupPoint as $pickup_point ) {
@@ -396,39 +400,60 @@ class Fraktguiden_Pickup_Point {
     $request = new WP_Bring_Request();
     return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
   }
+
   /**
-   * Prints pickup points json
+   * Filter: Insert pickup points
+   * @hook bring_shipping_rates
    */
-  static function wp_ajax_get_pickup_points() {
-    if ( isset( $_GET['country'] ) && $_GET['postcode'] ) {
-      $response = self::get_pickup_points( $_GET['country'], $_GET['postcode'] );
-
-      header( "Content-type: application/json" );
-      status_header( $response->status_code );
-
-      if ( $response->status_code != 200 ) {
-        echo '{}';
-      }
-      else {
-        echo $response->get_body();
+  static function insert_pickup_points( $rates ) {
+    $rate_key = false;
+    $service_package = false;
+    foreach ( $rates as $key => $rate ) {
+      if ( $rate['id'] == 'bring_fraktguiden:servicepakke' ) {
+        // Service package identified
+        $service_package = $rate;
+        // Remove this package
+        $rate_key = $key;
+        break;
       }
     }
-    die();
-  }
 
-  /**
-   * Hide shipping meta data from order items (WooCommerce 2.6)
-   * https://github.com/woothemes/woocommerce/issues/9094
-   *
-   * @param array $hidden_items
-   * @return array
-   */
-  static function woocommerce_hidden_order_itemmeta( $hidden_items ) {
-    $hidden_items[] = '_fraktguiden_pickup_point_id';
-    $hidden_items[] = '_fraktguiden_pickup_point_postcode';
-    $hidden_items[] = '_fraktguiden_pickup_point_info_cached';
+    if ( ! $service_package ) {
+      // Service package is not available.
+      // That means it's the end of the line for pickup points
+      return;
+    }
 
-    return $hidden_items;
+    $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
+    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
+    $country  = esc_html( WC()->customer->get_shipping_country() );
+    $response = self::get_pickup_points( $country, $postcode );
+
+    if ( 200 != $response->status_code ) {
+      return $rates;
+    }
+    // Remove service package
+    unset( $rates[ $rate_key ] );
+
+    $pickup_point_count = 0;
+    $pickup_points = json_decode( $response->get_body(), 1 );
+    $new_rates = [];
+    foreach ( $pickup_points['pickupPoint'] as $pickup_point ) {
+      $rate = [
+          'id'    => 'bring_fraktguiden:servicepakke-'. $pickup_point['id'],
+          'cost'  => $service_package['cost'],
+          'label' => $pickup_point['name'],
+      ];
+      $new_rates[] = $rate;
+      if ( ++$pickup_point_count >= $pickup_point_limit ) {
+        break;
+      }
+    }
+    foreach ( $rates as $key => $rate ) {
+      $new_rates[] = $rate;
+    }
+
+    return $new_rates;
   }
 
 }

@@ -66,7 +66,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
     $this->booking_test_mode = array_key_exists( 'booking_test_mode', $this->settings ) ? $this->settings['booking_test_mode'] : 'no';
 
-    add_filter( 'bring_shipping_rates', array( $this, 'filter_shipping_rates' ) );
+    add_filter( 'bring_shipping_rates', [$this, 'filter_shipping_rates'] );
   }
 
   public function init_form_fields() {
@@ -230,7 +230,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     wp_enqueue_style( 'bfg-admin-css', $src, array(), '##VERSION##', false );
   }
 
-  public function filter_shipping_rates( $rates ) {
+  /**
+   * Filter shipping rates
+   * Calculate free shipping and so on
+   *
+   * @param  array $rates
+   * @return array
+   */
+  public static function filter_shipping_rates( $rates ) {
 
     $field_key                = $this->get_field_key( 'services' );
     $custom_prices            = get_option( $field_key . '_custom_prices' );
