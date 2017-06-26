@@ -102,9 +102,16 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     }
 
     $this->form_fields['mybring_title'] = [
-        'title'       => __( 'MyBring Account', 'bring-fraktguiden' ),
+        'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
         'description' => $description,
         'type'        => 'title'
+    ];
+
+    $this->form_fields['booking_enabled'] = [
+        'title'   => __( 'Enable', 'bring-fraktguiden' ),
+        'type'    => 'checkbox',
+        'label'   => __( 'Enable MyBring booking', 'bring-fraktguiden' ),
+        'default' => 'no'
     ];
 
     $this->form_fields['mybring_api_uid'] = [
@@ -119,22 +126,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'label' => __( 'API Key', 'bring-fraktguiden' ),
     ];
 
-    // *************************************************************************
-    // Booking
-    // *************************************************************************
-
-    $this->form_fields['booking_point_title'] = [
-        'title' => __( 'Booking Options', 'bring-fraktguiden' ),
-        'type'  => 'title'
-    ];
-
-    $this->form_fields['booking_enabled'] = [
-        'title'   => __( 'Enable', 'bring-fraktguiden' ),
-        'type'    => 'checkbox',
-        'label'   => __( 'Enable booking', 'bring-fraktguiden' ),
-        'default' => 'no'
-    ];
-
     $this->form_fields['booking_test_mode_enabled'] = [
         'title'       => __( 'Testing', 'bring-fraktguiden' ),
         'type'        => 'checkbox',
@@ -142,6 +133,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'description' => __( 'For testing. Bookings will not be invoiced', 'bring-fraktguiden' ),
         'default'     => 'yes'
     ];
+
+    // *************************************************************************
+    // Booking
+    // *************************************************************************
 
     $this->form_fields['booking_address_store_name'] = [
         'title'   => __( 'Store Name', 'bring-fraktguiden' ),
