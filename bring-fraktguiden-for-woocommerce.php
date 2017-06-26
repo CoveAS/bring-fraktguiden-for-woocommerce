@@ -31,7 +31,7 @@ class Bring_Fraktguiden {
       include_once 'classes/class-wc-shipping-method-bring.php';
 
       // Load pro version.
-      if ( file_exists( dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php' ) ) {
+      if ( Fraktguiden_Helper::pro_activated() && ( dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php' ) ) {
         include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
       }
 

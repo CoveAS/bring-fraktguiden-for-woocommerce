@@ -219,7 +219,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
   /**
    * Filter shipping rates
-   * Calculate free shipping and so on
+   * Calculate free shipping and fixed prices
    *
    * @param  array $rates
    * @return array

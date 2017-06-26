@@ -404,6 +404,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-service">
               Tjeneste
             </th>
+            <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
             <th class="fraktguiden-services-table-col-custom-price">
               Egendefinert pris
             </th>
@@ -413,6 +414,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-free-shipping-threshold">
               Fraktfri grense
             </th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -457,6 +459,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
+              <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
               <td class="fraktguiden-services-table-col-custom-price">
                 <input type="text"
                        name="<?php echo $custom_price_id; ?>"
@@ -477,6 +480,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                        placeholder="0"
                 />
               </td>
+              <?php endif; ?>
             </tr>
           <?php } ?>
           </tbody>

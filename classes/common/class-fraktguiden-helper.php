@@ -16,6 +16,10 @@ class Fraktguiden_Helper {
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  static function pro_activated() {
+    return !false;
+  }
+
   static function get_all_services() {
     $selected_service_name = Fraktguiden_Helper::get_option('service_name');
     $service_name = $selected_service_name ? $selected_service_name  : 'ProductName';
