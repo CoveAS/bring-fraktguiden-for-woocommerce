@@ -385,13 +385,18 @@ class Fraktguiden_Helper {
    * @param string $key
    * @return string|bool
    */
-  static function get_option( $key ) {
-    $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
-    if (empty($options)) {
+  static function get_option( $key, $default = false ) {
+    static $options;
+    if ( empty( $options ) ) {
+        $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
+    }
+    if ( empty( $options ) ) {
       return false;
     }
-
-    return array_key_exists( $key, $options ) ? $options[$key] : false;
+    if ( ! isset( $options[ $key ] ) ) {
+        return $default;
+    }
+    return $options[ $key ];
   }
 
   /**

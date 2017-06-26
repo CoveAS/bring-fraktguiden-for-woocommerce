@@ -313,6 +313,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
     $sanitized_services = [];
     $field_key = $this->get_field_key( $key );
+    if ( ! isset( $_POST[ $field_key ] ) ) {
+      return $sanitized_services;
+    }
     foreach ( $_POST[ $field_key ] as $service ) {
       if ( preg_match( '/^[A-Za-z_\-]+$/', $service ) ) {
         $sanitized_services[] = $service;

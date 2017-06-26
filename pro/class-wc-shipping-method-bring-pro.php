@@ -23,7 +23,6 @@ add_action( 'admin_enqueue_scripts', array( 'WC_Shipping_Method_Bring_Pro', 'loa
 class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
   private $pickup_point_enabled;
-  private $pickup_point_required;
   private $mybring_api_uid;
   private $mybring_api_key;
   private $booking_enabled;
@@ -43,30 +42,30 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
     parent::__construct( $instance_id );
 
-    $this->title        = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );
-    $this->method_title = __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' );
+    $this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+    $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
 
-    $this->pickup_point_enabled  = array_key_exists( 'pickup_point_enabled', $this->settings ) ? $this->settings['pickup_point_enabled'] : 'no';
-    $this->pickup_point_required = array_key_exists( 'pickup_point_required', $this->settings ) ? $this->settings['pickup_point_required'] : 'no';
-
-    $this->mybring_api_uid = array_key_exists( 'mybring_api_uid', $this->settings ) ? $this->settings['mybring_api_uid'] : '';
-    $this->mybring_api_key = array_key_exists( 'mybring_api_key', $this->settings ) ? $this->settings['mybring_api_key'] : '';
-
-    $this->booking_enabled                = array_key_exists( 'booking_enabled', $this->settings ) ? $this->settings['booking_enabled'] : 'no';
-    $this->booking_address_store_name     = array_key_exists( 'booking_address_store_name', $this->settings ) ? $this->settings['booking_address_store_name'] : get_bloginfo( 'name' );
-    $this->booking_address_street1        = array_key_exists( 'booking_address_street1', $this->settings ) ? $this->settings['booking_address_street1'] : '';
-    $this->booking_address_street2        = array_key_exists( 'booking_address_street2', $this->settings ) ? $this->settings['booking_address_street2'] : '';
-    $this->booking_address_postcode       = array_key_exists( 'booking_address_postcode', $this->settings ) ? $this->settings['booking_address_postcode'] : '';
-    $this->booking_address_city           = array_key_exists( 'booking_address_city', $this->settings ) ? $this->settings['booking_address_city'] : '';
-    $this->booking_address_country        = array_key_exists( 'booking_address_country', $this->settings ) ? $this->settings['booking_address_country'] : '';
-    $this->booking_address_reference      = array_key_exists( 'booking_address_reference', $this->settings ) ? $this->settings['booking_address_reference'] : '';
-    $this->booking_address_contact_person = array_key_exists( 'booking_address_contact_person', $this->settings ) ? $this->settings['booking_address_contact_person'] : '';
-    $this->booking_address_phone          = array_key_exists( 'booking_address_phone', $this->settings ) ? $this->settings['booking_address_phone'] : '';
-    $this->booking_address_email          = array_key_exists( 'booking_address_email', $this->settings ) ? $this->settings['booking_address_email'] : '';
-
-    $this->booking_test_mode = array_key_exists( 'booking_test_mode', $this->settings ) ? $this->settings['booking_test_mode'] : 'no';
+    $this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled', 'no' );
+    $this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
+    $this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
+    $this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
+    $this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name', get_bloginfo( 'name' ) );
+    $this->booking_address_street1        = $this->get_setting( 'booking_address_street1' );
+    $this->booking_address_street2        = $this->get_setting( 'booking_address_street2' );
+    $this->booking_address_postcode       = $this->get_setting( 'booking_address_postcode' );
+    $this->booking_address_city           = $this->get_setting( 'booking_address_city' );
+    $this->booking_address_country        = $this->get_setting( 'booking_address_country' );
+    $this->booking_address_reference      = $this->get_setting( 'booking_address_reference' );
+    $this->booking_address_contact_person = $this->get_setting( 'booking_address_contact_person' );
+    $this->booking_address_phone          = $this->get_setting( 'booking_address_phone' );
+    $this->booking_address_email          = $this->get_setting( 'booking_address_email' );
+    $this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
 
     add_filter( 'bring_shipping_rates', [$this, 'filter_shipping_rates'] );
+  }
+
+  public function get_setting( $key, $default = '' ) {
+    return array_key_exists(  $key, $this->settings ) ? $this->settings[ $key] : $default;
   }
 
   public function init_form_fields() {
@@ -88,13 +87,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'title'   => __( 'Enable', 'bring-fraktguiden' ),
         'type'    => 'checkbox',
         'label'   => __( 'Enable pickup point', 'bring-fraktguiden' ),
-        'default' => 'no',
-    ];
-
-    $this->form_fields['pickup_point_required'] = [
-        'title'   => __( 'Required', 'bring-fraktguiden' ),
-        'type'    => 'checkbox',
-        'label'   => __( 'Make pickup point required on checkout', 'bring-fraktguiden' ),
         'default' => 'no',
     ];
 
@@ -258,6 +250,9 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         continue;
       }
       $key = strtoupper( $matches[1] );
+      if ( 0 === strpos( $key, 'SERVICEPAKKE' ) ) {
+        $key = 'SERVICEPAKKE';
+      }
       if ( isset( $custom_prices[$key] ) && ctype_digit( $custom_prices[$key] ) ) {
         $rate['cost'] = floatval( $custom_prices[$key] );
       }

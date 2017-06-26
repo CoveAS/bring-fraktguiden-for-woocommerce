@@ -31,11 +31,6 @@ class Fraktguiden_Pickup_Point {
     add_action( 'wp_ajax_bring_shipping_info_var', array( __CLASS__, 'wp_ajax_get_bring_shipping_info_var' ) );
     add_action( 'wp_ajax_bring_get_rate', array( __CLASS__, 'wp_ajax_get_rate' ) );
 
-    // Validate pickup point.
-    if ( Fraktguiden_Helper::get_option( 'pickup_point_required' ) == 'yes' ) {
-      add_action( 'woocommerce_checkout_process', array( __CLASS__, 'checkout_validate_pickup_point' ) );
-    }
-
     // Display order received and mail.
     add_filter( 'woocommerce_order_shipping_to_display_shipped_via', array( __CLASS__, 'checkout_order_shipping_to_display_shipped_via' ), 1, 2 );
 
@@ -44,8 +39,7 @@ class Fraktguiden_Pickup_Point {
     add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
 
     // Klarna checkout specific html
-    add_action( 'kco_after_cart', array( __CLASS__, 'kco_post_code_html' ) );
-    add_action( 'kco_after_cart', array( __CLASS__, 'kco_pickuppoint_html' ), 11 );
+    add_action( 'kco_widget_after', array( __CLASS__, 'kco_post_code_html' ) );
     add_filter( 'kco_create_order', array( __CLASS__, 'set_kco_postal_code' ) );
     add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
 
@@ -79,60 +73,15 @@ class Fraktguiden_Pickup_Point {
       </form>
     </div>
     <?php
-  }
-
-  /**
-   * Klarna Checkout pickup point HTML
-   */
-  static function kco_pickuppoint_html() {
-    $i18n               = self::get_i18n();
-    $postcode           = esc_html( WC()->customer->get_shipping_postcode() );
-    $country           = esc_html( WC()->customer->get_shipping_country() );
-    $selected_id        = trim( @$_COOKIE['_fraktguiden_pickup_point_id'] );
-    $options            = '';
-    $postcodes          = array();
-    $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
-    $pickup_point_count = 0;
-    if ( $postcode ) {
-      $response = self::get_pickup_points( $country, $postcode );
-      if ( 200 == $response->status_code ) {
-        $pickup_points = json_decode( $response->get_body() );
-        foreach ( $pickup_points->pickupPoint as $pickup_point ) {
-          if ( ! $selected_id || 'undefined' == $selected_id ) {
-            $selected_id = $pickup_point->id;
-          }
-          $postcodes[ $pickup_point->id ] = [
-            'name' => esc_html( $pickup_point->name ),
-            'data' => esc_html( json_encode( $pickup_point ) ),
-          ];
-          if ( ++$pickup_point_count >= $pickup_point_limit ) {
-            break;
-          }
-        }
-      }
-    }
-
-    foreach ( $postcodes as $key => $value ) {
-      $selected = '';
-      if ( $selected_id == $key ) {
-        $selected = 'checked="checked"';
-      }
-      $options .= sprintf(
-        '<li><input name="bring_method" type="radio" value="%s" %s data-pickup_point="%s" id="%1$s"> <label for="%1$s">%s</label></li>',
-        $key,
-        $selected,
-        $value['data'],
-        $value['name']
-      );
+    // Check if
+    if ( 'yes' != apply_filters( 'bring_clone_shipping_methods', Fraktguiden_Helper::get_option( 'bring_clone_shipping_methods', 'yes' ) ) ) {
+      return;
     }
     ?>
-    <div class="fraktguiden-pickup-point" style="display: none">
-      <ul class="fraktguiden-pickup-point-list">
-        <?php echo $options; ?>
-      </ul>
-      <div class="fraktguiden-selected-text"></div>
-      <div class="fraktguiden-pickup-point-display"></div>
-      <input type="hidden" name="_fraktguiden_pickup_point_info_cached"/>
+    <div class="bring-select-shipping">
+      <h3>Velg leveringsmetode</h3>
+      <div class="bring-select-shipping--options">
+      </div>
     </div>
     <?php
   }
@@ -202,16 +151,6 @@ class Fraktguiden_Pickup_Point {
   }
 
   /**
-   * Validate pickup point on checkout submit.
-   */
-  static function checkout_validate_pickup_point() {
-    // Check if set, if its not set add an error.
-    if ( ! $_COOKIE['_fraktguiden_pickup_point_id'] ) {
-      wc_add_notice( __( '<strong>Pickup point</strong> is a required field.', 'bring-fraktguiden' ), 'error' );
-    }
-  }
-
-  /**
    * Add pickup point from shop/checkout
    *
    * This method now assumes that the system has only one shipping method per order in checkout.
@@ -271,7 +210,7 @@ class Fraktguiden_Pickup_Point {
     foreach ( $shipping_methods as $id => $shipping_method ) {
       if (
         $shipping_method['method_id'] == self::ID . ':servicepakke' &&
-        key_exists( 'fraktguiden_pickup_point_info_cached', $shipping_method ) &&
+        isset( $shipping_method['fraktguiden_pickup_point_info_cached'] ) &&
         $shipping_method['fraktguiden_pickup_point_info_cached']
       ) {
         $info    = $shipping_method['fraktguiden_pickup_point_info_cached'];
@@ -429,6 +368,10 @@ class Fraktguiden_Pickup_Point {
     $country  = esc_html( WC()->customer->get_shipping_country() );
     $response = self::get_pickup_points( $country, $postcode );
 
+    if ( 200 != $response->status_code ) {
+      sleep( 1 );
+      $response = self::get_pickup_points( $country, $postcode );
+    }
     if ( 200 != $response->status_code ) {
       return $rates;
     }
