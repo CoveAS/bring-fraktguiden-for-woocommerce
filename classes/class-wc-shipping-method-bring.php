@@ -85,7 +85,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Define user set variables
 
     // WC_Shipping_Method
-    $this->enabled      = $this->settings['enabled'];
+    if ( isset( $this->settings['enabled'] ) ) {
+      $this->enabled = $this->settings['enabled'];
+    } else {
+      // With shipping zones the method should always be enabled
+      $this->enabled = true;
+    }
     $this->title        = $this->settings['title'];
     $this->availability = $this->settings['availability'];
     $this->countries    = $this->settings['countries'];
@@ -278,6 +283,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default'     => 'no'
         )
     ];
+
+    if ( class_exists( 'WC_Shipping_Zones' ) ) {
+      unset( $this->form_fields['enabled'] );
+    }
 
   }
 
