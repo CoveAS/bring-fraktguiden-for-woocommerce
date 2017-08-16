@@ -431,10 +431,18 @@ class Fraktguiden_Helper {
 
   static function parse_shipping_method_id( $method_id ) {
     $parts = explode( ':', $method_id );
+    $service = count( $parts ) == 2 ? strtoupper( $parts[1] ) : '';
+    // Identify pickup_point_id as part of the service name
+    $pickup_point_id = false;
+    if ( preg_match( '/^(SERVICEPAKKE)-(\d+)$/', $service, $matches ) ) {
+      $service = $matches[1];
+      $pickup_point_id = $matches[2];
+    }
     //@todo: rename service > service_key
     return [
         'name'    => $parts[0],
-        'service' => count( $parts ) == 2 ? strtoupper( $parts[1] ) : '',
+        'service' => $service,
+        'pickup_point_id' => $pickup_point_id,
     ];
   }
 }

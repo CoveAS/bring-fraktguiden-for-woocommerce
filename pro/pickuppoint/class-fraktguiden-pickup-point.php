@@ -16,6 +16,7 @@ class Fraktguiden_Pickup_Point {
   const BASE_URL = 'https://api.bring.com/pickuppoint/api/pickuppoint';
 
   static function init() {
+    require_once __DIR__ .'/class-fraktguiden-pickup-point-depreceated.php';
     // Enqueue checkout Javascript.
     add_action( 'wp_enqueue_scripts', array( __CLASS__, 'checkout_load_javascript' ) );
     // Enqueue admin Javascript.
@@ -55,6 +56,13 @@ class Fraktguiden_Pickup_Point {
     $postcode = esc_html( WC()->customer->get_shipping_postcode() );
     $order['shipping_address']['postal_code'] = $postcode;
     return $order;
+  }
+
+  static function woocommerce_hidden_order_itemmeta( $fields ) {
+    $fields[] = '_fraktguiden_pickup_point_postcode';
+    $fields[] = '_fraktguiden_pickup_point_id';
+    $fields[] = '_fraktguiden_pickup_point_info_cached';
+    return $fields;
   }
 
   /**
@@ -169,20 +177,18 @@ class Fraktguiden_Pickup_Point {
         $order->checkout_update_packages( $_COOKIE['_fraktguiden_packages'] );
         setcookie( '_fraktguiden_packages', '', $expire );
       }
-
-      if ( isset( $_COOKIE['_fraktguiden_pickup_point_id'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_postcode'] ) && isset( $_COOKIE['_fraktguiden_pickup_point_info_cached'] ) ) {
-        $order->checkout_update_pickup_point_data(
-            $_COOKIE['_fraktguiden_pickup_point_id'],
-            $_COOKIE['_fraktguiden_pickup_point_postcode'],
-            $_COOKIE['_fraktguiden_pickup_point_info_cached']
-        );
-
-        // Unset cookies.
-        // This does not work at the moment as headers has already been sent.
-        // @todo: Find an earlier hook
-        setcookie( '_fraktguiden_pickup_point_id', '', $expire );
-        setcookie( '_fraktguiden_pickup_point_postcode', '', $expire );
-        setcookie( '_fraktguiden_pickup_point_info_cached', '', $expire );
+      Fraktguiden_Pickup_Point_Depreceated::checkout_save_pickup_point( $order );
+      $shipping_methods = $order->order->get_shipping_methods();
+      foreach ( $shipping_methods as $item_id => $method ) {
+        $method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
+        $method = Fraktguiden_Helper::parse_shipping_method_id( $method_id );
+        if ( $method['service'] == 'SERVICEPAKKE' && $method['pickup_point_id'] ) {
+          $order->checkout_update_pickup_point_data(
+              $method['pickup_point_id'],
+              ( isset( $_POST['postal_code'] ) ? $_POST['postal_code'] : false ),
+              false
+          );
+        }
       }
     }
   }

@@ -77,6 +77,12 @@
             // Hide the checkout itself
             $( '.klarna_checkout' ).hide();
         }
+
+        // Hide the options (picku points) target element
+        var options_target = $( '.bring-select-shipping--options' );
+        if ( options_target.length ) {
+          options_target.parent().hide();
+        }
     }
 
     function post_kco_delivery_post_code( post_code ) {
@@ -168,6 +174,7 @@
      * Move the shipping method options from their original container
      */
     function clone_shipping_methods( options_target ) {
+        // @TODO: Only if enabled
         if ( ! options_target.length ) {
             // Clone the original shipping rates
             return;
@@ -187,6 +194,7 @@
             $( '#' + id ).prop( 'checked', $( this ).prop( 'checked' ) ).trigger( 'change' );
         } );
         options_target.append( shipping_method_clone );
+        options_target.parent().show();
     }
 
     /**
