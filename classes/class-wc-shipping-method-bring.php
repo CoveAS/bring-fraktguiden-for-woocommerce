@@ -278,15 +278,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'  => 'title',
             'title' => __( 'Shipping Options', 'bring-fraktguiden' ),
         ],
-        'exception_handling'          => array(
-            'title'    => __( 'Heavy item handling', 'bring-fraktguiden' ),
-            'type'     => 'select',
-            'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden' ),
-            // 'class'    => '',
-            // 'css'      => 'width: 450px;',
-            'default'  => 'no_rates',
-            'options'  => [ 'no_rate' => 'No rate', 'flat_rate' => 'Flat rate']
-        ),
         'services'              => array(
             'title'   => __( 'Services', 'bring-fraktguiden' ),
             'type'    => 'services_table',
@@ -311,6 +302,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
             'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
+        ),
+        'exception_handling'          => array(
+            'title'    => __( 'Heavy item handling', 'bring-fraktguiden' ),
+            'type'     => 'select',
+            'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden' ),
+            'default'  => 'no_rates',
+            'options'  => [ 'no_rate' => 'No rate', 'flat_rate' => 'Flat rate']
         ),
         'exception_flat_rate_label'          => array(
             'title'    => __( 'Label for heavy item rate', 'bring-fraktguiden' ),
