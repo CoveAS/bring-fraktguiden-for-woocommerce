@@ -64,10 +64,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     add_filter( 'bring_shipping_rates', [$this, 'filter_shipping_rates'] );
   }
 
-  public function get_setting( $key, $default = '' ) {
-    return array_key_exists(  $key, $this->settings ) ? $this->settings[ $key] : $default;
-  }
-
   public function init_form_fields() {
 
     global $woocommerce;
@@ -239,7 +235,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
       $_product = $values['data'];
       $cart_total += $_product->get_price() * $values['quantity'];
     }
-
     foreach ( $rates as &$rate ) {
       if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
         continue;

@@ -445,4 +445,43 @@ class Fraktguiden_Helper {
         'pickup_point_id' => $pickup_point_id,
     ];
   }
+
+  static function get_pro_terms_link() {
+    $format = '<a href="%s">%s</a>';
+    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( 'Click here to buy a license or learn more about bring fraktguiden pro.', 'bring-fraktguiden' ) );
+  }
+
+  /**
+   * Get admin messages
+   * @param  integer $limit
+   * @param  boolean $refresh
+   * @return array
+   */
+  static function get_admin_messages( int $limit = 0, $refresh = false ) {
+    static $messages = [];
+    if ( empty( $messages ) || $refresh ) {
+      $messages = get_option( 'bring_fraktguiden_admin_messages' );
+    }
+    if ( ! is_array( $messages ) ) {
+      $messages = [];
+    }
+    if ( $limit > 0 ) {
+      return array_splice( $messages, 0, $limit );
+    }
+    return $messages;
+  }
+
+  /**
+   * Add admin messages
+   * @param ...$arguments Same as sprintf
+   */
+  static function add_admin_message( ...$arguments ) {
+    static $messages;
+    $message = call_user_func_array( 'sprintf', $arguments );
+    $messages = self::get_admin_messages();
+    if ( ! in_array( $message, $messages ) ) {
+      $messages[] = $message;
+    }
+    update_option( 'bring_fraktguiden_admin_messages', $messages, false );
+  }
 }
