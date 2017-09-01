@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "acf6264b178a0e5005ed7fef16cf4742",
+    "content-hash": "40a9f2c100cf7d09837edfb80ca0c7b6",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045"
+                "reference": "9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/79ad876c7498c0bbfe7eed065b8651c93bfd6045",
-                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "url": "https://api.github.com/repos/composer/installers/zipball/9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b",
+                "reference": "9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b",
                 "shasum": ""
             },
             "require": {
@@ -63,6 +63,7 @@
                 "Hurad",
                 "ImageCMS",
                 "Kanboard",
+                "Lan Management System",
                 "MODX Evo",
                 "Mautic",
                 "Maya",
@@ -86,6 +87,7 @@
                 "croogo",
                 "dokuwiki",
                 "drupal",
+                "eZ Platform",
                 "elgg",
                 "expressionengine",
                 "fuelphp",
@@ -102,6 +104,7 @@
                 "mediawiki",
                 "modulework",
                 "moodle",
+                "osclass",
                 "phpbb",
                 "piwik",
                 "ppi",
@@ -118,30 +121,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2017-04-24T06:37:16+00:00"
-        },
-        {
-            "name": "drivdigital/php-laff",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/drivdigital/php-laff.git",
-                "reference": "77f7b76a479819ccecc307eb0af6fb1ac7f98a13"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drivdigital/php-laff/zipball/77f7b76a479819ccecc307eb0af6fb1ac7f98a13",
-                "reference": "77f7b76a479819ccecc307eb0af6fb1ac7f98a13",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*"
-            },
-            "type": "library",
-            "support": {
-                "source": "https://github.com/drivdigital/php-laff/tree/master"
-            },
-            "time": "2017-06-09 12:49:54"
+            "time": "2017-08-09T07:53:48+00:00"
         },
         {
             "name": "myokyawhtun/pdfmerger",
@@ -163,15 +143,14 @@
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "PDFMerger for PHP (PHP5 Compatible) by Jarrod Nettles",
-            "time": "2017-03-18 08:49:38"
+            "time": "2017-03-18T08:49:38+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "myokyawhtun/pdfmerger": 20,
-        "drivdigital/php-laff": 20
+        "myokyawhtun/pdfmerger": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

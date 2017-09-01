@@ -28,6 +28,7 @@ class Bring_Fraktguiden {
   static function init() {
     if ( class_exists( 'WooCommerce' ) ) {
 
+      include_once 'includes/laff-pack.php';
       include_once 'classes/class-wc-shipping-method-bring.php';
 
       // Load pro version.
