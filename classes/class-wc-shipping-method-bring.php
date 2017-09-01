@@ -85,7 +85,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Define user set variables
 
     // WC_Shipping_Method
-    $this->enabled      = $this->settings['enabled'];
+    if ( isset( $this->settings['enabled'] ) ) {
+      $this->enabled = $this->settings['enabled'];
+    } else {
+      // With shipping zones the method should always be enabled
+      $this->enabled = true;
+    }
     $this->title        = $this->settings['title'];
     $this->availability = $this->settings['availability'];
     $this->countries    = $this->settings['countries'];
@@ -119,9 +124,20 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
+    add_action( 'admin_enqueue_scripts', __CLASS__ .'::admin_enqueue_scripts' );
+
     if ( ! $this->is_valid_for_use() ) {
       $this->enabled = false;
     }
+  }
+  /**
+   * Get setting
+   * @param  string $key
+   * @param  string|mixed $default
+   * @return mixed
+   */
+  public function get_setting( $key, $default = '' ) {
+    return array_key_exists(  $key, $this->settings ) ? $this->settings[ $key] : $default;
   }
 
   /**
@@ -152,14 +168,32 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     $this->form_fields = [
-        'general_options_title' => [
+        'plugin_settings' => [
             'type'  => 'title',
-            'title' => __( 'Shipping Options', 'bring-fraktguiden' ),
+            'title' => __( 'Bring Settings', 'bring-fraktguiden' ),
         ],
         'enabled'               => array(
             'title'   => __( 'Enable', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Enable Bring Fraktguiden', 'bring-fraktguiden' ),
+            'default' => 'no'
+        ),
+        'pro_enabled'               => array(
+            'title'   => __( 'Enable PRO', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Activate PRO features.', 'bring-fraktguiden' ),
+            'description' => Fraktguiden_Helper::get_pro_description(),
+        ),
+        'test_mode'               => array(
+            'title'   => __( 'Test mode', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
+            'default' => 'no'
+        ),
+        'disable_stylesheet'               => array(
+            'title'   => __( 'Disable stylesheet', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
         'title'                 => array(
@@ -170,8 +204,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
         'handling_fee'          => array(
             'title'    => __( 'Delivery Fee', 'bring-fraktguiden' ),
-            'type'     => 'text',
+            'type'     => 'number',
             'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
+            'css'      => 'width: 5rem;',
             'default'  => ''
         ),
         'post_office'           => array(
@@ -185,6 +220,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'    => __( 'From zip', 'bring-fraktguiden' ),
             'type'     => 'text',
             'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', 'bring-fraktguiden' ),
+            'css'      => 'width: 5rem;',
             'default'  => ''
         ),
         'from_country'          => array(
@@ -231,6 +267,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $woocommerce->countries->countries
         ),
+        'debug'         => array(
+            'title'       => __( 'Debug', 'bring-fraktguiden' ),
+            'type'        => 'checkbox',
+            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
+            'description' => __( 'These logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>',
+            'default'     => 'no'
+        ),
+        'general_options_title' => [
+            'type'  => 'title',
+            'title' => __( 'Shipping Options', 'bring-fraktguiden' ),
+        ],
         'services'              => array(
             'title'   => __( 'Services', 'bring-fraktguiden' ),
             'type'    => 'services_table',
@@ -239,7 +286,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
-
         'service_name' => array(
             'title'    => __( 'Display Service As', 'bring-fraktguiden' ),
             'type'     => 'select',
@@ -250,13 +296,30 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                 'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
             )
         ),
-
         'display_desc'  => array(
             'title'    => __( 'Display Description', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
             'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
             'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
+        ),
+        'exception_handling'          => array(
+            'title'    => __( 'Heavy item handling', 'bring-fraktguiden' ),
+            'type'     => 'select',
+            'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden' ),
+            'default'  => 'no_rates',
+            'options'  => [ 'no_rate' => 'No rate', 'flat_rate' => 'Flat rate']
+        ),
+        'exception_flat_rate_label'          => array(
+            'title'    => __( 'Label for heavy item rate', 'bring-fraktguiden' ),
+            'type'     => 'text',
+            'default'  => __( 'Shipping', 'bring-fraktguiden' ),
+        ),
+        'exception_flat_rate'          => array(
+            'title'    => __( 'Flat rate for heavy items', 'bring-fraktguiden' ),
+            'css'      => 'width: 5rem;',
+            'type'     => 'number',
+            'default'  => '0',
         ),
         'max_products'  => array(
             'title'    => __( 'Max products', 'bring-fraktguiden' ),
@@ -270,14 +333,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
-        'debug'         => array(
-            'title'       => __( 'Debug', 'bring-fraktguiden' ),
-            'type'        => 'checkbox',
-            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
-            'description' => __( 'These logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>',
-            'default'     => 'no'
-        )
     ];
+
+    if ( class_exists( 'WC_Shipping_Zones' ) ) {
+      unset( $this->form_fields['availability'] );
+      unset( $this->form_fields['enabled'] );
+      unset( $this->form_fields['countries'] );
+    }
 
   }
 
@@ -294,25 +356,111 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       <a href="<?php echo admin_url(); ?>admin-ajax.php?action=bring_system_info"
          target="_blank"><?php echo __( 'View system info', 'bring-fraktguiden' ) ?></a>
     </p>
+    <div class="hash-tabs fraktguiden-options" style="display:none;">
+      <article class="tab-container">
+        <nav class="tab-nav" role="tablist"><ul></ul><div style="clear:both;"></div></nav>
+        <div class="tab-pane-container"></div>
+      </article>
+    </div>
     <table class="form-table">
-      <?php if ( $this->is_valid_for_use() ) :
-        $this->generate_settings_html();
-      else : ?>
-        <div class="inline error"><p>
+      <?php if ( $this->is_valid_for_use() ) :?>
+        <?php $this->generate_settings_html();?>
+      <?php else : ?>
+        <tr><td><div class="inline error"><p>
             <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
             <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', 'bring-fraktguiden' ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
-          </p></div>
+          </p></div></td></tr>
       <?php endif; ?>
+    </table>
 
-    </table> <?php
+    <script>
+    jQuery( function( $ ) {
+      // Move settings into tabs
+      $( '.wc-settings-sub-title' ).each( function() {
+        var id = $( this ).attr('id');
+        var text = $( this ).text();
+        // Create a new tab/list item
+        var elem = $('<li>').append( $( '<a>' ).attr( {
+          'href': '#' + id
+        } ).text( text ) );
+        // Append it to the tab-navigation
+        $( '.hash-tabs .tab-nav ul' ).append( elem );
+
+        // Create a new tab-panel
+        elem = $( '<section>' ).attr( {
+          'id': id
+        } ).hide();
+
+        // Find the content for this panel
+        // It's always the next p's and <table>
+        var table = $( this ).next();
+        var description = [];
+
+        // Sometimes titles have descriptions which come before the table
+        while ( 'P' == table.prop( 'nodeName' ) ) {
+          description.push( table );
+          table = table.next();
+        }
+        // Remove the id from the title because we gave it to the tab instead
+        $( this ).removeAttr( 'id' );
+
+        // Put the content into the panel
+        elem.append( $( this ) );
+        for( var i = 0; i < description.length; i++ ) {
+          elem.append( description[i] );
+        }
+        elem.append( table );
+
+        // Place the panel in the panels container
+        $( '.hash-tabs .tab-pane-container' ).append( elem );
+      } );
+
+      // Make the tabs work
+      $( '.fraktguiden-options' ).hashTabs().show();
+    } );
+
+    jQuery( function( $ ) {
+      function toggle_test_mode() {
+        var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
+        $( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
+        // Toggle the menu items for pickup points and bring booking
+        $( '#2, #3' ).toggle( is_checked );
+      }
+      $( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
+      toggle_test_mode();
+    } );
+    </script>
+    <?php
   }
 
+  /**
+   * Admin enqueue script
+   * Add custom styling and javascript to the admin options
+   * @param  string $hook
+   */
+  static function admin_enqueue_scripts( $hook ) {
+    if ('woocommerce_page_wc-settings' !== $hook) {
+        return;
+    }
+    wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) .'/assets/js/jquery.hash-tabs.min.js', [], '1.0.4' );
+    wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden.css', [], '1.0.0' );
+  }
+
+  /**
+   * Validate the service table field
+   * @param  string $key
+   * @param  mixed $value
+   * @return array
+   */
   public function validate_services_table_field( $key, $value = null ) {
     if ( isset( $value ) ) {
       return $value;
     }
     $sanitized_services = [];
     $field_key = $this->get_field_key( $key );
+    if ( ! isset( $_POST[ $field_key ] ) ) {
+      return $sanitized_services;
+    }
     foreach ( $_POST[ $field_key ] as $service ) {
       if ( preg_match( '/^[A-Za-z_\-]+$/', $service ) ) {
         $sanitized_services[] = $service;
@@ -321,6 +469,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     return $sanitized_services;
   }
 
+  /**
+   * Process admin options
+   * Add custom processing to handle the services field
+   */
   public function process_admin_options() {
     parent::process_admin_options();
 
@@ -348,24 +500,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'free_shipping_checks',
         'free_shipping_thresholds',
     ];
-    foreach ( $vars as $var ) {
-      $$var = [];
-    }
     // Only process options for enabled services
     foreach ( $services as $key => $service ) {
       foreach ( $vars as $var ) {
         $data_key = "{$field_key}_{$var}";
         if ( isset( $_POST[$data_key][$key] ) ) {
-          ${$var}[$key] = $_POST[$data_key][$key];
+          update_option( $data_key, $_POST[$data_key][$key] );
         }
       }
     }
-    foreach ( $vars as $var ) {
-      $data_key = "{$field_key}_{$var}";
-      update_option( $data_key, $$var );
-    }
   }
 
+  /**
+   * Generate services field
+   * @return string html
+   */
   public function generate_services_table_html() {
     $services                 = Fraktguiden_Helper::get_services_data();
     $selected                 = $this->services;
@@ -392,6 +541,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-service">
               Tjeneste
             </th>
+            <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
             <th class="fraktguiden-services-table-col-custom-price">
               Egendefinert pris
             </th>
@@ -401,6 +551,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-free-shipping-threshold">
               Fraktfri grense
             </th>
+            <?php endif; ?>
           </tr>
           </thead>
           <tbody>
@@ -445,6 +596,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
+              <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
               <td class="fraktguiden-services-table-col-custom-price">
                 <input type="text"
                        name="<?php echo $custom_price_id; ?>"
@@ -465,6 +617,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                        placeholder="0"
                 />
               </td>
+              <?php endif; ?>
             </tr>
           <?php } ?>
           </tbody>
@@ -515,9 +668,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function calculate_shipping( $package = array() ) {
     global $woocommerce;
-
-    //include_once( 'common/class-fraktguiden-packer.php' );
-
+    // include_once( 'common/class-fraktguiden-packer.php' );
     // Offer flat rate if the cart contents exceeds max product.
     // @TODO: Use the package instead of the cart
     if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
@@ -533,7 +684,24 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
     else {
       $cart = $package[ 'contents' ];
-      $this->packages_params = $this->pack_order( $cart );
+      try {
+        $this->packages_params = $this->pack_order( $cart );
+      }
+      catch ( PackingException $e ) {
+        if ( $e->getMessage() == 'exceeds_max_package_values' ) {
+          $exception_handling = $this->get_setting( 'exception_handling' );
+          if ( 'flat_rate' == $exception_handling ) {
+            $rate = array(
+                'id'    => $this->id . ':' . 'exception_rate',
+                'cost'  => floatval( $this->get_setting('exception_flat_rate') ),
+                'label' => $this->get_setting( 'exception_flat_rate', __( 'Shipping', 'bring-fraktguiden' ) ),
+            );
+            $this->add_rate( $rate );
+          }
+        }
+        return;
+      }
+
       if ( ! $this->packages_params ) {
         return;
       }
@@ -678,4 +846,3 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
 }
-

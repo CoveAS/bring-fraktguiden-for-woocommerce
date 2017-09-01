@@ -3,6 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
+require_once __DIR__ .'/../exceptions/class-packing-exception.php';
+
 /**
  * Class Fraktguiden_Packaging
  *
@@ -114,10 +116,13 @@ class Fraktguiden_Packer {
    * @param array $container_size Array with container width/height/length/weight.
    * @return bool
    */
-  public function exceeds_max_package_values( $container_size ) {
+  public function exceeds_max_package_values( $container_size, $product = null ) {
 
     $weight = $container_size['weight_in_grams'];
     if ( $weight > 35000 ) {
+      if ( $product ) {
+        Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max weight of 35 Kg', $product->get_sku() );
+      }
       return true;
     }
 
@@ -131,6 +136,9 @@ class Fraktguiden_Packer {
     // The longest side should now be on the first element.
     $longest_side = current( $dimensions );
     if ( $longest_side > 240 ) {
+      if ( $product ) {
+        Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max length of 240 cm', $product->get_sku() );
+      }
       return true;
     }
 
@@ -142,6 +150,9 @@ class Fraktguiden_Packer {
     $longest_plus_circumference = $longest_side + ( $side2 * 2 ) + ( $side3 * 2 );
 
     if ( $longest_plus_circumference > 360 ) {
+      if ( $product ) {
+        Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max circumference of 360 cm', $product->get_sku() );
+      }
       return true;
     }
 
@@ -293,8 +304,8 @@ class Fraktguiden_Packer {
         );
 
         // Return if product is larger than available Bring packages.
-        if ( $this->exceeds_max_package_values( $box ) ) {
-          return false;
+        if ( $this->exceeds_max_package_values( $box, $product ) ) {
+          throw new PackingException( 'exceeds_max_package_values' );
         }
 
         $product_boxes[] = $box;
