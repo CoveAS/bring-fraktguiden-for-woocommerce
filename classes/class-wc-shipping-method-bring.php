@@ -182,18 +182,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'   => __( 'Enable PRO', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Activate PRO features.', 'bring-fraktguiden' ),
-            'description' => __( '
-              Pro features: <ol>
-                <li>Free shipping options. Set a threshold value for free shipping.</li>
-                <li>Pickup points. Let customers select their pickup point</li>
-                <li>MyBring Booking. Book directly with Bring</li>
-              </ol>
-              ' , 'bring-fraktguiden' ) .' '. Fraktguiden_Helper::get_pro_terms_link(),
+            'description' => Fraktguiden_Helper::get_pro_description(),
         ),
         'test_mode'               => array(
             'title'   => __( 'Test mode', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
+            'default' => 'no'
+        ),
+        'disable_stylesheet'               => array(
+            'title'   => __( 'Disable stylesheet', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
         'title'                 => array(
@@ -375,36 +375,69 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     <script>
     jQuery( function( $ ) {
-      // return;
-      // console.log( $( '.wc-settings-sub-title' ) );
+      // Move settings into tabs
       $( '.wc-settings-sub-title' ).each( function() {
         var id = $( this ).attr('id');
         var text = $( this ).text();
+        // Create a new tab/list item
         var elem = $('<li>').append( $( '<a>' ).attr( {
           'href': '#' + id
         } ).text( text ) );
+        // Append it to the tab-navigation
         $( '.hash-tabs .tab-nav ul' ).append( elem );
 
-        var table = $( this ).next();
-        var description = '';
-        // console.log( table.prop( 'nodeName' ) );
-        if ( 'P' == table.prop( 'nodeName' ) ) {
-          description = table;
-          table = table.next();
-        }
+        // Create a new tab-panel
         elem = $( '<section>' ).attr( {
           'id': id
         } ).hide();
-        elem.append( $( this ), table );
+
+        // Find the content for this panel
+        // It's always the next p's and <table>
+        var table = $( this ).next();
+        var description = [];
+
+        // Sometimes titles have descriptions which come before the table
+        while ( 'P' == table.prop( 'nodeName' ) ) {
+          description.push( table );
+          table = table.next();
+        }
+        // Remove the id from the title because we gave it to the tab instead
+        $( this ).removeAttr( 'id' );
+
+        // Put the content into the panel
+        elem.append( $( this ) );
+        for( var i = 0; i < description.length; i++ ) {
+          elem.append( description[i] );
+        }
+        elem.append( table );
+
+        // Place the panel in the panels container
         $( '.hash-tabs .tab-pane-container' ).append( elem );
       } );
 
+      // Make the tabs work
       $( '.fraktguiden-options' ).hashTabs().show();
+    } );
+
+    jQuery( function( $ ) {
+      function toggle_test_mode() {
+        var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
+        $( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
+        // Toggle the menu items for pickup points and bring booking
+        $( '#2, #3' ).toggle( is_checked );
+      }
+      $( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
+      toggle_test_mode();
     } );
     </script>
     <?php
   }
 
+  /**
+   * Admin enqueue script
+   * Add custom styling and javascript to the admin options
+   * @param  string $hook
+   */
   static function admin_enqueue_scripts( $hook ) {
     if ('woocommerce_page_wc-settings' !== $hook) {
         return;
@@ -413,6 +446,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden.css', [], '1.0.0' );
   }
 
+  /**
+   * Validate the service table field
+   * @param  string $key
+   * @param  mixed $value
+   * @return array
+   */
   public function validate_services_table_field( $key, $value = null ) {
     if ( isset( $value ) ) {
       return $value;
@@ -430,6 +469,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     return $sanitized_services;
   }
 
+  /**
+   * Process admin options
+   * Add custom processing to handle the services field
+   */
   public function process_admin_options() {
     parent::process_admin_options();
 
@@ -468,6 +511,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
   }
 
+  /**
+   * Generate services field
+   * @return string html
+   */
   public function generate_services_table_html() {
     $services                 = Fraktguiden_Helper::get_services_data();
     $selected                 = $this->services;

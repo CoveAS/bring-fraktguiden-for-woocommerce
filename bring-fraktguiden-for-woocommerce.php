@@ -29,11 +29,7 @@ class Bring_Fraktguiden {
     if ( class_exists( 'WooCommerce' ) ) {
 
       include_once 'classes/class-wc-shipping-method-bring.php';
-
-      // Load pro version.
-      if ( Fraktguiden_Helper::pro_activated() && ( dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php' ) ) {
-        include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
-      }
+      include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
 
       load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -65,7 +61,7 @@ class Bring_Fraktguiden {
    * @return array
    */
   static function add_bring_method( $methods ) {
-    $methods['bring_fraktguiden'] = class_exists( 'WC_Shipping_Method_Bring_Pro' ) ? 'WC_Shipping_Method_Bring_Pro' : 'WC_Shipping_Method_Bring';
+    $methods['bring_fraktguiden'] = Fraktguiden_Helper::pro_activated() ? 'WC_Shipping_Method_Bring_Pro' : 'WC_Shipping_Method_Bring';
     return $methods;
   }
 

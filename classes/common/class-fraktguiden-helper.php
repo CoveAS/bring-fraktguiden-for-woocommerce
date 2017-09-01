@@ -16,8 +16,31 @@ class Fraktguiden_Helper {
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  static function valid_license() {
+    return true;
+  }
   static function pro_activated() {
-    return !false;
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] );
+    }
+    return self::get_option( 'pro_enabled' ) == 'yes';
+  }
+
+  static function booking_enabled() {
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+      return isset( $_POST['woocommerce_bring_fraktguiden_booking_enabled'] );
+    }
+    return self::get_option( 'booking_enabled' ) == 'yes';
+  }
+
+  static function pro_test_mode() {
+    if ( ! self::pro_activated() ) {
+      return false;
+    }
+      if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+        return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
+      }
+      return self::get_option( 'test_mode' ) == 'yes';
   }
 
   static function get_all_services() {
@@ -446,9 +469,47 @@ class Fraktguiden_Helper {
     ];
   }
 
-  static function get_pro_terms_link() {
-    $format = '<a href="%s">%s</a>';
-    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( 'Click here to buy a license or learn more about bring fraktguiden pro.', 'bring-fraktguiden' ) );
+  static function get_pro_days_remaining() {
+    $start_date = self::get_option( 'pro_activated_on', false );
+    if ( ! $start_date ) {
+      $time = time();
+    } else {
+      $time = strtotime( $start_date );
+    }
+    $diff = $time + 86400 * 30 - time();
+    $time = floor( $diff / 86400 );
+    return $time;
+  }
+  static function get_pro_terms_link( $text = '' ) {
+    if ( ! $text ) {
+      $text = 'Click here to buy a license or learn more about bring fraktguiden pro.';
+    }
+    $format = '<a href="%s" target="_blank">%s</a>';
+    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, 'bring-fraktguiden' ) );
+  }
+
+  static function get_pro_description() {
+    if ( self::pro_test_mode() ) {
+      return __( 'Running in test-mode.', 'bring-fraktguiden' ) . ' '
+        . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+    }
+    if ( self::pro_activated() ) {
+      if ( self::valid_license() ) {
+        return '';
+      }
+      $days = self::get_pro_days_remaining();
+      return sprintf( __(
+        'The pro license has not yet activated. You have %s remaining before pro disables.'
+      ), "$days ". _n( 'day', 'days', $days, 'bring-fraktguiden' ), 'bring-fraktguiden' ). '<br>'
+      . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+    }
+    return __( '
+      Pro features: <ol>
+        <li>Free shipping options. Set a threshold value for free shipping.</li>
+        <li>Pickup points. Let customers select their pickup point</li>
+        <li>MyBring Booking. Book directly with Bring</li>
+      </ol>
+      ' , 'bring-fraktguiden' ) .' '. Fraktguiden_Helper::get_pro_terms_link();
   }
 
   /**

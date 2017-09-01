@@ -91,10 +91,13 @@
             {
                 action: 'kco_iframe_shipping_address_change_cb',
                 postal_code: post_code,
-                // country: 'NO',
+                country: 'NO',
                 nonce: kcoAjax.klarna_checkout_nonce
             },
             function( response ) {
+                if ( ! response.data ) {
+                  return;
+                }
                 // Copy paste from klarna code
                 $( '#klarna-checkout-widget' ).html( response.data.widget_html );
                 check_shipping_rate_selection();
