@@ -87,7 +87,12 @@ class Fraktguiden_Pickup_Point {
     }
     ?>
     <div class="bring-select-shipping">
-      <h3>Velg leveringsmetode</h3>
+      <h3>
+        <?php echo apply_filters(
+          'bring_fraktguiden_select_delivery_method_title',
+          __( 'Select shipping method', 'bring-fraktguiden' )
+        ); ?>
+      </h3>
       <div class="bring-select-shipping--options">
       </div>
     </div>
