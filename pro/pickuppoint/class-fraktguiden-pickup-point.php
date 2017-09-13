@@ -3,6 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
+// Load the depreceated methods
+require_once __DIR__ .'/class-fraktguiden-pickup-point-depreceated.php';
+
 // Only if Klarna is used
 add_action( 'klarna_after_kco_confirmation', array( 'Fraktguiden_Pickup_Point', 'checkout_save_pickup_point' ) );
 add_action( 'woocommerce_thankyou', array( 'Fraktguiden_Pickup_Point', 'checkout_save_pickup_point' ) );
@@ -16,7 +19,6 @@ class Fraktguiden_Pickup_Point {
   const BASE_URL = 'https://api.bring.com/pickuppoint/api/pickuppoint';
 
   static function init() {
-    require_once __DIR__ .'/class-fraktguiden-pickup-point-depreceated.php';
     // Enqueue checkout Javascript.
     add_action( 'wp_enqueue_scripts', array( __CLASS__, 'checkout_load_javascript' ) );
     // Enqueue admin Javascript.
