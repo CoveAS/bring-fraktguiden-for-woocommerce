@@ -500,14 +500,22 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'free_shipping_checks',
         'free_shipping_thresholds',
     ];
+    $options = [];
     // Only process options for enabled services
     foreach ( $services as $key => $service ) {
       foreach ( $vars as $var ) {
         $data_key = "{$field_key}_{$var}";
+        if ( ! isset( $options[$data_key] ) ) {
+          $options[$data_key] = [];
+        }
         if ( isset( $_POST[$data_key][$key] ) ) {
-          update_option( $data_key, $_POST[$data_key][$key] );
+          $options[$data_key][$key] = $_POST[$data_key][$key];
         }
       }
+    }
+
+    foreach ($options as $data_key => $value) {
+      update_option( $data_key, $value );
     }
   }
 
