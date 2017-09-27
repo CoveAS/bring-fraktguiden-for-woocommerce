@@ -89,7 +89,7 @@
         $.post(
             kcoAjax.ajaxurl,
             {
-                action: 'kco_iframe_shipping_address_change_cb',
+                action: 'kco_iframe_change_cb',
                 postal_code: post_code,
                 country: 'NO',
                 nonce: kcoAjax.klarna_checkout_nonce
