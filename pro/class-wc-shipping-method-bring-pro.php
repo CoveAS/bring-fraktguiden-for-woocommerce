@@ -209,8 +209,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
    */
   static function load_admin_css() {
     $src = plugins_url( 'assets/css/admin.css', __FILE__ );
-    wp_register_script( 'bfg-admin-css', $src, array(), '##VERSION##' );
-    wp_enqueue_style( 'bfg-admin-css', $src, array(), '##VERSION##', false );
+    wp_register_script( 'bfg-admin-css', $src, array(), Bring_Fraktguiden::VERSION );
+    wp_enqueue_style( 'bfg-admin-css', $src, array(), Bring_Fraktguiden::VERSION, false );
   }
 
   /**

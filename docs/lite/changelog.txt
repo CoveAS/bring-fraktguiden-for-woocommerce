@@ -1,5 +1,13 @@
 == Changelog ==
 
+= 1.3.2 =
+
+* Removed GPL License
+* Pro features are now bundled with the free version
+* Support for WooCommerce 3.x
+* Added license check as part of the PRO bundle
+* Better support for Klarna Checkout
+
 = 1.3.1 =
 
 * Improved support for WooCommerce 2.6 Shipping Zones

@@ -17,8 +17,6 @@ if ( ! class_exists( 'Fraktguiden_Packer' ) ) {
 /**
  * Bring class for calculating and adding rates.
  *
- * License: See license.txt
- *
  * @category    Shipping Method
  * @author      Driv Digital
  * @package     Woocommerce

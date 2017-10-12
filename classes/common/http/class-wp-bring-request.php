@@ -7,7 +7,7 @@ class WP_Bring_Request {
   /** @var array WP_HTTP args */
   protected $default_options = [
       'timeout'    => 15,
-      'user-agent' => 'bring-fraktguiden-for-woocommerce/##VERSION## (https://wordpress.org/plugins/bring-fraktguiden-for-woocommerce) PHP'
+      'user-agent' => 'bring-fraktguiden-for-woocommerce/'. Bring_Fraktguiden::VERSION .' (https://wordpress.org/plugins/bring-fraktguiden-for-woocommerce) PHP'
   ];
 
   public function __construct() {
