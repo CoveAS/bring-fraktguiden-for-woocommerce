@@ -49,12 +49,12 @@ class Fraktguiden_Packer {
     $package_size = $this->laff_pack->get_container_dimensions();
 
     // Get the sizes in cm.
-    $package = array(
+    $package = apply_filters( 'bring_fraktguiden_minimum_dimensions', array(
         'weight_in_grams' => $this->get_weight( $total_weight ),
         'length'          => $this->get_dimension( $package_size['length'] ),
         'width'           => $this->get_dimension( $package_size['width'] ),
         'height'          => $this->get_dimension( $package_size['height'] ),
-    );
+    ) );
 
     if ( $multi_pack ) {
       // Check if the container exceeds max values.

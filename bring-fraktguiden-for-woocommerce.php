@@ -28,25 +28,28 @@ class Bring_Fraktguiden {
   const VERSION = '1.3.2';
 
   static function init() {
-    if ( class_exists( 'WooCommerce' ) ) {
-
-      if ( ! class_exists( 'LAFFPack' ) ) {
-        include_once 'includes/laff-pack.php';
-      }
-      include_once 'classes/class-wc-shipping-method-bring.php';
-      include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
-
-      load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
-      add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
-
-      add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Bring_Fraktguiden::plugin_action_links' );
-
-      if ( is_admin() ) {
-        include_once 'system-info-page.php';
-        add_action( 'wp_ajax_bring_system_info', 'Fraktguiden_System_Info::generate' );
-      }
+    if ( ! class_exists( 'WooCommerce' ) ) {
+      return;
     }
+
+    if ( ! class_exists( 'LAFFPack' ) ) {
+      include_once 'includes/laff-pack.php';
+    }
+    include_once 'classes/class-wc-shipping-method-bring.php';
+    include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
+
+    load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+    add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
+
+    add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Bring_Fraktguiden::plugin_action_links' );
+
+    if ( is_admin() ) {
+      include_once 'system-info-page.php';
+      add_action( 'wp_ajax_bring_system_info', 'Fraktguiden_System_Info::generate' );
+    }
+
+    Fraktguiden_Minimum_Dimensions::setup();
   }
 
   /**

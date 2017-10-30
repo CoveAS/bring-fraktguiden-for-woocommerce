@@ -3,16 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WP_Bring_Request' ) ) {
-  include_once 'common/http/class-wp-bring-request.php';
-}
-if ( ! class_exists( 'Fraktguiden_Helper' ) ) {
-  include_once 'common/class-fraktguiden-helper.php';
-}
-
-if ( ! class_exists( 'Fraktguiden_Packer' ) ) {
-  include_once( 'common/class-fraktguiden-packer.php' );
-}
+require_once 'common/http/class-wp-bring-request.php';
+require_once 'common/class-fraktguiden-helper.php';
+require_once 'common/class-fraktguiden-packer.php';
+require_once 'common/class-fraktguiden-minimum-dimensions.php';
 
 /**
  * Bring class for calculating and adding rates.
@@ -300,6 +294,31 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
             'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
+        ),
+        //23x13x1
+        'minimum_length'  => array(
+            'title'    => __( 'Minimum length', 'bring-fraktguiden' ),
+            'type'     => 'number',
+            'label'    => __( 'The lowest length for a consignment', 'bring-fraktguiden' ),
+            'default'  => '23'
+        ),
+        'minimum_width'  => array(
+            'title'    => __( 'Minimum width', 'bring-fraktguiden' ),
+            'type'     => 'number',
+            'label'    => __( 'The lowest width for a consignment', 'bring-fraktguiden' ),
+            'default'  => '13'
+        ),
+        'minimum_height'  => array(
+            'title'    => __( 'Minimum height', 'bring-fraktguiden' ),
+            'type'     => 'number',
+            'label'    => __( 'The lowest height for a consignment', 'bring-fraktguiden' ),
+            'default'  => '1'
+        ),
+        'minimum_weight'  => array(
+            'title'    => __( 'Minimum weight', 'bring-fraktguiden' ),
+            'type'     => 'number',
+            'label'    => __( 'The lowest weight in kilograms for a consignment', 'bring-fraktguiden' ),
+            'default'  => '0.01'
         ),
         'no_connection_handling'          => array(
             'title'    => __( 'No API connection handling', 'bring-fraktguiden' ),
@@ -892,7 +911,5 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   public function get_service_id_options() {
     return Fraktguiden_Helper::get_all_services();
-
   }
-
 }
