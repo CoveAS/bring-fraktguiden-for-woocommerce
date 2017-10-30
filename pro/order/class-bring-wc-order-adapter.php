@@ -90,6 +90,11 @@ class Bring_WC_Order_Adapter {
     foreach ( $response['errors'] as $error ) {
       $result[] = $error;
     }
+    // Add any non-ok body to the error array because it contains the explanation
+    // eg. status_code = 400 has [ 'body' => string 'Authentication failed...' ]
+    if ( 200 != $response['status_code'] ) {
+      $result[] = $response['body'];
+    }
 
     return $result;
   }
@@ -217,11 +222,17 @@ class Bring_WC_Order_Adapter {
     if ( $shipping_methods ) {
       foreach ( $shipping_methods as $item_id => $shipping_method ) {
         if ( strpos( $shipping_method, Fraktguiden_Helper::ID ) !== false ) {
-          $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
+          $pickup_point_id = [];
+          if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
+            $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
+          }
 
-          $packages = $shipping_items['_fraktguiden_packages'][$item_id];
+          $packages = false;
+          if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
+            $shipping_items['_fraktguiden_packages'][$item_id];
+          }
           if ( $packages ) {
-            wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
+            // wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
           }
 
           if ( ! empty( $pickup_point_id ) ) {

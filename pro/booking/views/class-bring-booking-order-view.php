@@ -3,6 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
+add_action( 'wp_ajax_bring_update_packages',         'Bring_Booking_Order_View::ajax_update_packages' );
+add_action( 'wp_ajax_nopriv_bring_update_packages',  'Bring_Booking_Order_View::ajax_update_packages' );
 class Bring_Booking_Order_View {
 
   static function init() {
@@ -348,7 +350,11 @@ class Bring_Booking_Order_View {
    */
   static function render_packages( $order ) {
     $shipping_item_tip = __( 'Shipping item id', 'bring-fraktguiden' );
+    $all_services = Fraktguiden_Helper::get_all_services();
+    $order_item_ids = array_keys( $order->get_fraktguiden_shipping_items() );
     ?>
+    <form class="bring-booking-packages-form">
+    <input type="hidden" id="bring_order_id" name="bring_order_id" value="<?php echo $order->order->get_id(); ?>">
     <table class="bring-booking-packages">
       <thead>
       <tr>
@@ -358,6 +364,7 @@ class Bring_Booking_Order_View {
         <th><?php _e( 'Height', 'bring-fraktguiden' ); ?> (cm)</th>
         <th><?php _e( 'Length', 'bring-fraktguiden' ); ?> (cm)</th>
         <th><?php _e( 'Weight', 'bring-fraktguiden' ); ?> (kg)</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -365,41 +372,225 @@ class Bring_Booking_Order_View {
       foreach ( $order->get_packages_formatted( false, true ) as $key => $package ) { ?>
         <?php
         $shipping_item_id = $package['shipping_item_info']['item_id'];
-        $service_data     = Fraktguiden_Helper::get_service_data_for_key( $package['shipping_item_info']['shipping_method']['service'] ); ?>
+        $key              = $package['shipping_item_info']['shipping_method']['service'];
+        $service_data     = Fraktguiden_Helper::get_service_data_for_key( $key );
+        ?>
         <tr>
           <td title="<?php echo $shipping_item_tip; ?>">
-            <?php echo $shipping_item_id; ?>
+            <select class="order-item-id" name="order_item_id[]">
+              <?php foreach ( $order_item_ids as $id ): ?>
+                <?php if ( $id == $shipping_item_id ): ?>
+                  <option value="<?php echo $id; ?>" selected="selected"><?php echo $id; ?></option>
+                <?php else: ?>
+                  <option value="<?php echo $id; ?>"><?php echo $id; ?></option>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </select>
           </td>
           <td>
-            <?php echo $service_data[Fraktguiden_Helper::get_option( 'service_name' )]; ?>
-            <?php
-            $pickup_point = $order->get_pickup_point_for_shipping_item( $shipping_item_id );
-            if ( ! empty( $pickup_point ) ) {
-              ?>
-              <span class="tips"
-                    data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>">
-                [<?php _e( 'Pickup Point', 'bring-fraktguiden' ) ?>]
-              </span>
-              <?php
-            }
-            ?>
+            <?php $pickup_point = $order->get_pickup_point_for_shipping_item( $shipping_item_id ); ?>
+              <?php echo $service_data['ProductName']; ?>
+              <?php if ( ! empty( $pickup_point ) ): ?>
+                <span
+                  class="tips"
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
+                  >
+                   [pickup point]
+                </span>
+              <?php endif;?>
           </td>
           <td>
-            <?php echo $package['dimensions']['widthInCm']; ?>
+            <input name="width[]" class="dimension" type="text" value="<?php echo $package['dimensions']['widthInCm']; ?>">
           </td>
           <td>
-            <?php echo $package['dimensions']['heightInCm']; ?>
+            <input name="height[]" class="dimension" type="text" value="<?php echo $package['dimensions']['heightInCm']; ?>">
           </td>
           <td>
-            <?php echo $package['dimensions']['lengthInCm']; ?>
+            <input name="length[]" class="dimension" type="text" value="<?php echo $package['dimensions']['lengthInCm']; ?>">
           </td>
           <td>
-            <?php echo $package['weightInKg']; ?>
+            <input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
+          </td>
+          <td>
+            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
           </td>
         </tr>
       <?php } ?>
+        <tr class="bring-package-template" style="display: none">
+          <td title="<?php echo $shipping_item_tip; ?>">
+            <select class="order-item-id" name="order_item_id[]">
+              <?php foreach ( $order_item_ids as $id ): ?>
+                <option value="<?php echo $id; ?>"><?php echo $id; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </td>
+          <td>
+            <?php $pickup_point = $order->get_pickup_point_for_shipping_item( $shipping_item_id ); ?>
+              <?php echo $service_data['ProductName']; ?>
+              <?php if ( ! empty( $pickup_point ) ): ?>
+                <span
+                  class="tips"
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
+                  >
+                   [pickup point]
+                </span>
+              <?php endif;?>
+          </td>
+          <td>
+            <input name="width[]" class="dimension" type="text" value="0">
+          </td>
+          <td>
+            <input name="height[]" class="dimension" type="text" value="0">
+          </td>
+          <td>
+            <input name="length[]" class="dimension" type="text" value="0">
+          </td>
+          <td>
+            <input name="weight[]" class="dimension" type="text" value="0">
+          </td>
+          <td>
+            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
+          </td>
+        </tr>
+        <tr><td colspan="6"></td><td>
+            <span class="button add"><?php echo __( 'Add', 'bring-fraktguiden' ); ?></span>
+        </td></tr>
       </tbody>
     </table>
+    </form>
+    <script type="text/javascript">
+      jQuery( function( $ ) {
+
+
+        /**
+         * Debounce
+         * @param  function callback
+         * @param  int      timeout
+         * @param  string   id
+         * @return function
+         */
+        var _timers = {};
+        var debounce = function( callback, timeout, id ) {
+          return function() {
+            if ( _timers[id] ) {
+              clearTimeout( _timers[id] );
+            }
+            _timers[id] = setTimeout( callback, timeout );
+          };
+        };
+
+        /**
+         * Get val
+         * Helper functino to quickly find an element in the row
+         * @param  object row
+         * @param  string name
+         * @param  string default
+         * @return string
+         */
+        var get_val = function( row, name, _default ) {
+          var elem = row.find( '[name="'+ name +'[]"]' );
+          if ( ! elem.length ) {
+            return _default;
+          }
+          return elem.val();
+        };
+
+        /**
+         * Ajax Update
+         */
+        var ajax_update = function() {
+          var order_id = $( '#bring_order_id' ).val();
+          if ( ! order_id ) {
+            return;
+          }
+          var data = {
+            action   : 'bring_update_packages',
+            order_id : order_id,
+            packages : []
+          };
+          $( '.bring-booking-packages tr:visible' ).each( function() {
+            var row = $( this );
+            var order_item_id = get_val( row, 'order_item_id' );
+            if ( ! order_item_id ) {
+              return;
+            }
+            data.packages.push( {
+              order_item_id: order_item_id,
+              service_id:    get_val( row, 'service_id' ),
+              height:        get_val( row, 'height' ),
+              length:        get_val( row, 'length' ),
+              width:         get_val( row, 'width' ),
+              weight:        get_val( row, 'weight' ),
+            } );
+          } );
+
+          $.post( ajaxurl, data, function( result ) {
+            console.log( data );
+            console.log( 'Returned from AJAX:' );
+            console.log( result );
+          } );
+        }
+
+        /**
+         * Delete row
+         * Button handler
+         */
+        var delete_row = function() {
+          $( this ).closest( 'tr' ).remove();
+          debounce( ajax_update, 500, 'ajax_update' )();
+        };
+
+        /**
+         * Hook row
+         * For each row/tr run this function to hook buttons and changes
+         * @param  object
+         */
+        var hook_row = function( row ) {
+          row.find( '.delete' ).click( delete_row );
+          row.find( '.service-id, .order-item-id, .dimension' ).on(
+            'change keyup',
+            debounce( ajax_update, 500, 'ajax_update' )
+          );
+        };
+
+        /**
+         * Fix pickup point id options
+         * @param  object clone
+         */
+        var fix_pickup_point_id_options = function( clone ) {
+          var input_elems = clone.find('[name^="pickup_point_id"]');
+          input_elems.each( function () {
+            var elem = $( this );
+            var index = elem.closest( 'tr' ).index();
+            var li_index = elem.parent().index();
+            var name = 'pickup_point_id['+ ( index + 1 ) + ']';
+            elem.attr( 'name', name );
+            var id = 'pickup_point_id_' + ( index + 1 ) + '_' + li_index;
+            elem.attr( 'id', id );
+            elem.next().attr( 'for', id );
+          } );
+        };
+
+        // Button handler for "Add"
+        $( '.bring-booking-packages .add' ).click( function() {
+          var clone = $( '.bring-package-template' ).clone();
+          clone.removeClass( 'bring-package-template' );
+          clone.insertBefore( '.bring-package-template' );
+          fix_pickup_point_id_options( clone );
+          clone.show();
+          // Hook the new row
+          hook_row( clone );
+          // Trigger an ajax update
+          debounce( ajax_update, 500, 'ajax_update' )();
+        } );
+
+        // Hook all rows
+        $( '.bring-booking-packages tr' ).each( function() {
+          hook_row( $( this ) );
+        } );
+
+      } )
+    </script>
     <?php
   }
 
@@ -520,4 +711,64 @@ class Bring_Booking_Order_View {
     Bring_Booking::send_booking( $wc_order );
   }
 
+  static function ajax_update_packages() {
+    if ( ! isset( $_POST['order_id'] ) ) {
+      die( '{ "error": "Missing order id" }' );
+    }
+    if ( ! isset( $_POST['packages'] ) || ! is_array( $_POST['packages'] ) || empty( $_POST['packages'] ) ) {
+      die( '{ "error": "Empty packages" }' );
+    }
+    $packages = $_POST['packages'];
+    $expected_fields = [
+      'height', 'length', 'order_item_id', 'weight', 'width',
+    ];
+    foreach ( $packages as $package ) {
+      foreach ( $expected_fields as $key ) {
+        if ( ! isset( $package[ $key ] ) ) {
+          die( '{ "error": "Missing package field '. $key .'" }' );
+        }
+        if ( ! is_string( $package[ $key ] ) ) {
+          die( '{ "error": "Package field is not a string '. $key .'" }' );
+        }
+      }
+    }
+    $order_id = $_POST[ 'order_id' ];
+    if ( ! $order_id ) {
+      die( 'testing');
+    }
+
+    $wc_order = new WC_Order( $order_id );
+    $order    = new Bring_WC_Order_Adapter( $wc_order );
+    $shipping_methods = $order->order->get_shipping_methods();
+    $existing = [];
+    // Get the existing packages
+    foreach ( $shipping_methods as $item_id => $method ) {
+      $meta_packages = wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
+      $existing[ $item_id ] = $meta_packages;
+    }
+
+    $fields = [ 'weightInGrams', 'length', 'width', 'height' ];
+    $new_packages = [];
+    // Create the package array that bring needs
+    // with eg. [ length0 = 10, length1 = 10 ] etc..
+    foreach ( $packages as $index => $package ) {
+      $package['weightInGrams'] = $package['weight'] * 1000;
+      if ( ! isset( $new_packages[ $package['order_item_id'] ] ) ) {
+        $new_packages[ $package['order_item_id'] ] = [];
+      }
+      foreach ( $fields as $field ) {
+        // Assign the field + number as the key
+        // eg height0, height1, height2 etc...
+        $new_packages[ $package['order_item_id'] ][ $field . $index ] = $package[ $field ];
+      }
+    }
+
+    // Save the new fields
+    foreach ( $new_packages as $item_id => $new_package ) {
+      wc_update_order_item_meta( $item_id, '_fraktguiden_packages', $new_package );
+    }
+
+    // @TODO: with multiple shipping items, remove the metadata for items no longer used
+    die;
+  }
 }

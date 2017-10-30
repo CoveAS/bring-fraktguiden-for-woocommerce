@@ -301,6 +301,31 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
+        'no_connection_handling'          => array(
+            'title'    => __( 'No API connection handling', 'bring-fraktguiden' ),
+            'type'     => 'select',
+            'desc_tip' => __( 'What method should be used if no connection can be made to the bring API', 'bring-fraktguiden' ),
+            'default'  => 'no_rates',
+            'options'  => [ 'no_rate' => 'No rate', 'flat_rate' => 'Flat rate']
+        ),
+        'no_connection_flat_rate_label'          => array(
+            'title'    => __( 'Label for no connection rate', 'bring-fraktguiden' ),
+            'type'     => 'text',
+            'default'  => __( 'Shipping', 'bring-fraktguiden' ),
+        ),
+        'no_connection_flat_rate'          => array(
+            'title'    => __( 'Flat rate for no connections', 'bring-fraktguiden' ),
+            'css'      => 'width: 5rem;',
+            'type'     => 'number',
+            'default'  => '0',
+        ),
+        'no_connection_rate_id'          => array(
+            'title'    => __( 'Flat rate service', 'bring-fraktguiden' ),
+            'css'      => '',
+            'type'     => 'select',
+            'default'  => '0',
+            'options'  => $this->get_service_id_options(),
+        ),
         'exception_handling'          => array(
             'title'    => __( 'Heavy item handling', 'bring-fraktguiden' ),
             'type'     => 'select',
@@ -318,6 +343,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'css'      => 'width: 5rem;',
             'type'     => 'number',
             'default'  => '0',
+        ),
+        'exception_rate_id'          => array(
+            'title'    => __( 'Flat rate service', 'bring-fraktguiden' ),
+            'css'      => '',
+            'type'     => 'select',
+            'default'  => '0',
+            'options'  => $this->get_service_id_options(),
         ),
         'max_products'  => array(
             'title'    => __( 'Max products', 'bring-fraktguiden' ),
@@ -697,12 +729,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         if ( $e->getMessage() == 'exceeds_max_package_values' ) {
           $exception_handling = $this->get_setting( 'exception_handling' );
           if ( 'flat_rate' == $exception_handling ) {
-            $rate = array(
-                'id'    => $this->id . ':' . 'exception_rate',
-                'cost'  => floatval( $this->get_setting('exception_flat_rate') ),
-                'label' => $this->get_setting( 'exception_flat_rate', __( 'Shipping', 'bring-fraktguiden' ) ),
-            );
-            $this->add_rate( $rate );
+            $this->add_rate( [
+                'id'    => $this->id . ':' . $this->get_setting( 'exception_rate_id', 'servicepakke' ),
+                'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
+                'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+            ] );
           }
         }
         return;
@@ -736,6 +767,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $response = $request->get( $url );
 
       if ( $response->status_code != 200 ) {
+        $no_connection_handling = $this->get_setting( 'no_connection_handling' );
+        if ( 'flat_rate' == $no_connection_handling ) {
+          $this->add_rate( [
+              'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
+              'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
+              'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+          ] );
+        }
         return;
       }
 
@@ -849,6 +888,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     global $woocommerce;
     return isset( $this->from_country ) ?
         $this->from_country : $woocommerce->countries->get_base_country();
+  }
+
+  public function get_service_id_options() {
+    return Fraktguiden_Helper::get_all_services();
+
   }
 
 }

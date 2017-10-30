@@ -164,8 +164,11 @@ class Bring_Booking_Request {
         ],
         'body' => json_encode( $this->create_data() )
     ];
-
-    return $this->request->post( self::BOOKING_URL, array(), $args );
+    $response = $this->request->post( self::BOOKING_URL, array(), $args );
+    if( $response->get_status_code() != 200 ) {
+      var_dump( $response->get_body() );die;
+    }
+    return $response;
   }
 
   public function create_data() {

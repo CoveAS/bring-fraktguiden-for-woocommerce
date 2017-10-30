@@ -442,7 +442,7 @@
                     // Collect new pickup point ids so we can select the user selected pickup point later.
                     var ids = [];
                     for ( var key in pickup_points ) {
-                        if ( !pickup_points.hasOwnProperty( key ) ) {
+                        if ( ! pickup_points.hasOwnProperty( key ) ) {
                             continue;
                         }
 
@@ -476,7 +476,6 @@
                     self.on_pickup_point_changed();
                 }
             };
-
             Bring_Common.load_pickup_points( country, postcode, ajax_options );
         },
 

@@ -182,12 +182,7 @@ class Fraktguiden_Packer {
 
       /* Unknown weight unit */
       default :
-        $weight = false;
-    }
-
-    if ( 1 > $weight ) {
-      // Minimum 1 cm
-      $weight = 1;
+        $weight = 0;
     }
 
     return $weight;

@@ -89,6 +89,10 @@ mark.bring-shipment:after {
     color: #777;
 }
 
+.bring-form-field .pickup-point-id-options label {
+    display: inline;
+}
+
 .bring-flex-box {
     display: flex;
     flex-flow: row;
@@ -174,6 +178,23 @@ mark.bring-shipment:after {
 .bring-booking-packages {
     width: 100%;
     margin-bottom: 1em;
+}
+
+.bring-booking-packages input[type="text"].dimension {
+    width: 4rem;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border: 1px solid #fff;
+    transition: border 0.2s;
+    text-align: right;
+}
+.bring-booking-packages input[type="text"].dimension:focus,
+.bring-booking-packages tr:hover input[type="text"].dimension {
+    border: 1px solid #aaa;
+}
+
+.bring-booking-packages .button {
 }
 
 .bring-booking-packages th:not(:nth-child(2)) {
