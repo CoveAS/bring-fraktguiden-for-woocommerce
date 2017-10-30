@@ -28,8 +28,8 @@ class Fraktguiden_Pickup_Point {
     // Admin save order items.
     add_action( 'woocommerce_saved_order_items', array( __CLASS__, 'admin_saved_order_items' ), 1, 2 );
     // Ajax
-    add_action( 'wp_ajax_bring_get_pickup_points', array( __CLASS__, 'wp_ajax_get_pickup_points' ) );
-    add_action( 'wp_ajax_nopriv_bring_get_pickup_points', array( __CLASS__, 'wp_ajax_get_pickup_points' ) );
+    add_action( 'wp_ajax_bring_get_pickup_points',         __CLASS__. '::ajax_get_pickup_points' );
+    add_action( 'wp_ajax_nopriv_bring_get_pickup_points',  __CLASS__. '::ajax_get_pickup_points' );
 
     add_action( 'wp_ajax_bring_shipping_info_var', array( __CLASS__, 'wp_ajax_get_bring_shipping_info_var' ) );
     add_action( 'wp_ajax_bring_get_rate', array( __CLASS__, 'wp_ajax_get_rate' ) );
@@ -348,6 +348,14 @@ class Fraktguiden_Pickup_Point {
     die();
   }
 
+  static function ajax_get_pickup_points() {
+    $response = self::get_pickup_points( $_REQUEST['country'], $_REQUEST['postcode'] );
+    if ( 200 != $response->status_code ) {
+      die;
+    }
+    echo $response->get_body();
+    die;
+  }
   static function get_pickup_points( $country, $postcode ) {
     $request = new WP_Bring_Request();
     return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
