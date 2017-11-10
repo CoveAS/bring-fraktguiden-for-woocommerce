@@ -115,7 +115,7 @@ class Fraktguiden_Packer {
   public function exceeds_max_package_values( $container_size, $product = null ) {
 
     $weight = $container_size['weight_in_grams'];
-    if ( $weight > 35000 ) {
+    if ( $weight >= 35000 ) {
       if ( $product ) {
         Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max weight of 35 Kg', $product->get_sku() );
       }

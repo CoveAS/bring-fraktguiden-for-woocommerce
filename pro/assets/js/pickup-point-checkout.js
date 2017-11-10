@@ -182,6 +182,16 @@
             // Clone the original shipping rates
             return;
         }
+        // When there is only one option then it's just a hidden input field
+        var lone_option = $( '#shipping_method_0' );
+        if ( lone_option.length ) {
+            var elem = $( '<p>' ).addClass( 'only-one-shipping-option' );
+            elem.append( lone_option.parent().text() );
+            options_target.append( elem );
+            options_target.parent().show();
+            return;
+        }
+
         var shipping_method_clone = $( '#shipping_method' ).clone();
         shipping_method_clone.attr( 'id', 'shipping_method_clone' );
         // Hide the original
@@ -215,7 +225,7 @@
      * @returns {jQuery}
      */
     function get_bring_shipping_radio_buttons() {
-        return $( 'input[type=radio][value^=bring_fraktguiden].shipping_method' );
+        return $( 'input[type=radio][value^=bring_fraktguiden].shipping_method, .only-one-shipping-option' );
     }
 
     /**
