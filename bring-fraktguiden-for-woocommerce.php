@@ -12,7 +12,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author:              Driv Digital
  * Author URI:          http://drivdigital.no
  *
- * Version:             1.3.2
+ * Version:             1.3.3
  * Requires at least:   3.2.1
  * Tested up to:        4.4.1
  *
@@ -25,7 +25,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.3.2';
+  const VERSION = '1.3.3';
 
   static function init() {
     if ( ! class_exists( 'WooCommerce' ) ) {
