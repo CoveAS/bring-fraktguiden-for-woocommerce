@@ -17,7 +17,9 @@ class Fraktguiden_Helper {
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
   static function valid_license() {
-    return true;
+    require_once __DIR__ .'/class-fraktguiden-license.php';
+    $license = fraktguiden_license::get_instance();
+    return $license->valid();
   }
   static function pro_activated() {
     if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {

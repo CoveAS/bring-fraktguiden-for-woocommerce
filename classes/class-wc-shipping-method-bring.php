@@ -83,21 +83,22 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       // With shipping zones the method should always be enabled
       $this->enabled = true;
     }
-    $this->title        = $this->settings['title'];
-    $this->availability = $this->settings['availability'];
-    $this->countries    = $this->settings['countries'];
-    $this->fee          = $this->settings['handling_fee'];
+    $this->title        = $this->get_setting( 'title' );
+    $this->availability = $this->get_setting( 'availability' );
+    $this->countries    = $this->get_setting( 'countries' );
+    $this->fee          = $this->get_setting( 'handling_fee' );
 
     // WC_Shipping_Method_Bring
-    $this->from_country = array_key_exists( 'from_country', $this->settings ) ? $this->settings['from_country'] : '';
-    $this->from_zip     = array_key_exists( 'from_zip', $this->settings ) ? $this->settings['from_zip'] : '';
-    $this->post_office  = array_key_exists( 'post_office', $this->settings ) ? $this->settings['post_office'] : '';
-    $this->vat          = array_key_exists( 'vat', $this->settings ) ? $this->settings['vat'] : '';
-    $this->evarsling    = array_key_exists( 'evarsling', $this->settings ) ? $this->settings['evarsling'] : '';
-    $this->services     = array_key_exists( 'services', $this->settings ) ? $this->settings['services'] : '';
-    $this->service_name = array_key_exists( 'service_name', $this->settings ) ? $this->settings['service_name'] : 'DisplayName';
-    $this->display_desc = array_key_exists( 'display_desc', $this->settings ) ? $this->settings['display_desc'] : 'no';
-    $this->max_products = ! empty( $this->settings['max_products'] ) ? (int)$this->settings['max_products'] : self::DEFAULT_MAX_PRODUCTS;
+    $this->from_country = $this->get_setting( 'from_country' );
+    $this->from_zip     = $this->get_setting( 'from_zip' );
+    $this->post_office  = $this->get_setting( 'post_office' );
+    $this->vat          = $this->get_setting( 'vat' );
+    $this->evarsling    = $this->get_setting( 'evarsling' );
+    $this->services     = $this->get_setting( 'services' );
+    $this->service_name = $this->get_setting( 'service_name', 'DisplayName' );
+    $this->display_desc = $this->get_setting( 'display_desc', 'no' );
+    $this->max_products = (int) $this->get_setting( 'max_products', self::DEFAULT_MAX_PRODUCTS );
+    
     // Extra safety, in case shop owner blanks ('') the value.
     if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
       $this->alt_flat_rate = (int)$this->settings['alt_flat_rate'];
