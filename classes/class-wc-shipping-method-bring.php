@@ -54,10 +54,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     $this->id           = self::ID;
     $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+    $this->method_description    = __( 'Automatically calculate shipping rates using brings fraktguiden api.', 'bring-fraktguiden' );
     $this->supports              = array(
       'shipping-zones',
       'settings',
-      // 'instance-settings', // @TODO - Settings per zone
+      'instance-settings',
       // 'instance-settings-modal',
     );
     if ( $instance_id ) {
@@ -158,6 +159,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $wc_log_dir = '';
     if ( defined( 'WC_LOG_DIR' ) ) {
       $wc_log_dir = WC_LOG_DIR;
+    }
+
+    if ( $this->instance_id ) {
+        $this->init_instance_form_fields();
+        return;
     }
 
     $this->form_fields = [
@@ -384,13 +390,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
     ];
-
     if ( class_exists( 'WC_Shipping_Zones' ) ) {
       unset( $this->form_fields['availability'] );
       unset( $this->form_fields['enabled'] );
       unset( $this->form_fields['countries'] );
     }
+  }
 
+  public function init_instance_form_fields() {
+    $this->form_fields = [
+    ];
   }
 
   /**
@@ -525,6 +534,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function process_admin_options() {
     parent::process_admin_options();
+
+    if ( $this->instance_id ) {
+        $instance_key = $this->get_instance_option_key();
+    }
 
     // Process services table
     $services_field               = $this->get_field_key( 'services' );

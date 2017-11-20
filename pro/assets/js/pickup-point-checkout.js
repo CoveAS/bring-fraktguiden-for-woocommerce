@@ -86,13 +86,35 @@
     }
 
     function post_kco_delivery_post_code( post_code ) {
+        $.post( 
+            _fraktguiden_data.ajaxurl,
+            {
+                action: 'bring_post_code_validation',
+                post_code: post_code,
+                country: _fraktguiden_data.country,
+                nonce:   _fraktguiden_data.klarna_checkout_nonce
+            },
+            function( response ) {
+                if ( ! response.valid ) {
+                    $( '.bring-enter-postcode input' ).prop( 'disabled', false );
+                    $( '.bring-enter-postcode form' ).removeClass( 'loading' );
+                    $( '.bring-enter-postcode .input-text' ).addClass( 'error' );
+                    return false;
+                }
+                post_update_kco_delivery_post_code( post_code ); 
+            }
+        );
+        
+    }
+
+    function post_update_kco_delivery_post_code( post_code ) {
         $.post(
-            kcoAjax.ajaxurl,
+            _fraktguiden_data.ajaxurl,
             {
                 action: 'kco_iframe_change_cb',
                 postal_code: post_code,
-                country: 'NO',
-                nonce: kcoAjax.klarna_checkout_nonce
+                country: _fraktguiden_data.country,
+                nonce:   _fraktguiden_data.klarna_checkout_nonce
             },
             function( response ) {
                 if ( ! response.data ) {
@@ -147,10 +169,14 @@
         // Each time the order review box is updated.
         events().on( events.CHECKOUT_REVIEW_UPDATED, function () {
             if ( has_klarna_widget() ) {
+
+                $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
+                    $( this ).removeClass( 'error' );
+                } );
                 $( '.bring-enter-postcode form' ).submit( function( e ) {
                     e.preventDefault();
                     $( this ).addClass( 'loading' );
-                    $( this ).find( 'input' ).prop( 'disabled', true );
+                    $( this ).find( 'input' ).prop( 'disabled', true ).removeClass( 'error' );
                     post_kco_delivery_post_code( $( this ). find( '.input-text' ).val() );
                 } );
 
@@ -292,9 +318,9 @@
         // Country is not available when Klarna Checkout exists.
         // Get it from our _fraktguiden_data source which assumes WooCommerce base country is used.
         if ( has_klarna_widget() ) {
-            var country = _fraktguiden_data.from_country;
+            var country = _fraktguiden_data.country;
             // Should never happen.
-            if ( !country ) {
+            if ( ! country ) {
                 console.log( 'From country not set' );
             }
             return country;

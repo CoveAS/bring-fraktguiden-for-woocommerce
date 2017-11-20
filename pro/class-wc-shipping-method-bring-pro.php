@@ -86,6 +86,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'default' => 'no',
     ];
 
+    if ( $this->instance_id ) {
+      return;
+    }
+
     // *************************************************************************
     // MyBring
     // *************************************************************************

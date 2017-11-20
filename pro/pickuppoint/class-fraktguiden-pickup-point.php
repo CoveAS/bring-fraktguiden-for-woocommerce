@@ -28,8 +28,10 @@ class Fraktguiden_Pickup_Point {
     // Admin save order items.
     add_action( 'woocommerce_saved_order_items', array( __CLASS__, 'admin_saved_order_items' ), 1, 2 );
     // Ajax
-    add_action( 'wp_ajax_bring_get_pickup_points',         __CLASS__. '::ajax_get_pickup_points' );
-    add_action( 'wp_ajax_nopriv_bring_get_pickup_points',  __CLASS__. '::ajax_get_pickup_points' );
+    add_action( 'wp_ajax_bring_get_pickup_points',            __CLASS__. '::ajax_get_pickup_points' );
+    add_action( 'wp_ajax_nopriv_bring_get_pickup_points',     __CLASS__. '::ajax_get_pickup_points' );
+    add_action( 'wp_ajax_bring_post_code_validation',         __CLASS__. '::ajax_post_code_validation' );
+    add_action( 'wp_ajax_nopriv_bring_post_code_validation',  __CLASS__. '::ajax_post_code_validation' );
 
     add_action( 'wp_ajax_bring_shipping_info_var', array( __CLASS__, 'wp_ajax_get_bring_shipping_info_var' ) );
     add_action( 'wp_ajax_bring_get_rate', array( __CLASS__, 'wp_ajax_get_rate' ) );
@@ -110,9 +112,11 @@ class Fraktguiden_Pickup_Point {
       wp_register_script( 'fraktguiden-common', plugins_url( 'assets/js/pickup-point-common.js', dirname( __FILE__ ) ), array( 'jquery' ), Bring_Fraktguiden::VERSION, true );
       wp_register_script( 'fraktguiden-pickup-point-checkout', plugins_url( 'assets/js/pickup-point-checkout.js', dirname( __FILE__ ) ), array( 'jquery' ), Bring_Fraktguiden::VERSION, true );
       wp_localize_script( 'fraktguiden-pickup-point-checkout', '_fraktguiden_data', [
-          'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-          'i18n'         => self::get_i18n(),
-          'from_country' => Fraktguiden_Helper::get_option( 'from_country' )
+          'ajaxurl'               => admin_url( 'admin-ajax.php' ),
+          'i18n'                  => self::get_i18n(),
+          'country'               => Fraktguiden_Helper::get_option( 'from_country' ),
+          'klarna_checkout_nonce' => wp_create_nonce( 'klarna_checkout_nonce' ),
+          'nonce'                 => wp_create_nonce( 'bring_fraktguiden' ),
       ] );
 
       wp_enqueue_script( 'fraktguiden-common' );
@@ -346,6 +350,23 @@ class Fraktguiden_Pickup_Point {
     echo json_encode( $result );
 
     die();
+  }
+  static function ajax_post_code_validation() {
+    $params = http_build_query( [
+      'clientUrl' => get_site_url(),
+      'country'   => $_REQUEST['country'],
+      'pnr'       => $_REQUEST['post_code'],
+    ] );
+    $content = file_get_contents( 'https://api.bring.com/shippingguide/api/postalCode.json?' . $params );
+    if ( ! $content ) {
+      wp_send_json( '{ "error" : "Could not connect to api.bring.com" }' );
+    }
+    $data =  json_decode( $content );
+    if ( ! $data ) {
+      wp_send_json( '{ "error" : "Recieved invalid JSON from api.bring.com" }' );
+    }
+
+    return wp_send_json( $data );
   }
 
   static function ajax_get_pickup_points() {
