@@ -277,9 +277,9 @@ class Fraktguiden_Packer {
         }
         else {
           $dims = array(
-              $product->length,
-              $product->width,
-              $product->height
+              $product->get_length(),
+              $product->get_width(),
+              $product->get_height()
           );
         }
 
