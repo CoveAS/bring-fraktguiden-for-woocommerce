@@ -7,9 +7,7 @@ include_once 'order/class-bring-wc-order-adapter.php';
 include_once 'pickuppoint/class-fraktguiden-pickup-point.php';
 include_once 'booking/class-bring-booking.php';
 
-if ( Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) == 'yes' ) {
-  Fraktguiden_Pickup_Point::init();
-}
+Fraktguiden_Pickup_Point::init();
 
 if ( is_admin() ) {
   if ( Fraktguiden_Helper::get_option( 'booking_enabled' ) == 'yes' ) {

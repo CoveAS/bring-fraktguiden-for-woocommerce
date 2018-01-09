@@ -49,7 +49,9 @@ class Fraktguiden_Pickup_Point {
     add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
 
     // Pickup points
-    add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
+    if ( Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) == 'yes' ) {
+      add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
+    }
   }
 
   /**
