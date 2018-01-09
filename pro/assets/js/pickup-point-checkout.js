@@ -99,6 +99,8 @@
                     $( '.bring-enter-postcode input' ).prop( 'disabled', false );
                     $( '.bring-enter-postcode form' ).removeClass( 'loading' );
                     $( '.bring-enter-postcode .input-text' ).addClass( 'error' );
+                    $( '.bring-enter-postcode' ).addClass( 'validation-error' );
+                    $( '<div>' ).addClass( 'woocommerce-error' ).html( response.result ).appendTo( $( '.bring-enter-postcode label' ) );
                     return false;
                 }
                 post_update_kco_delivery_post_code( post_code ); 
@@ -172,6 +174,10 @@
 
                 $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
                     $( this ).removeClass( 'error' );
+                    $( '.bring-enter-postcode' ).removeClass( 'validation-error' );
+                    $( '.bring-enter-postcode label .woocommerce-error' ).fadeOut( 250, function () {
+                        $( this ).remove();
+                    });
                 } );
                 $( '.bring-enter-postcode form' ).submit( function( e ) {
                     e.preventDefault();
