@@ -73,13 +73,16 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     // *************************************************************************
 
     $this->form_fields['pickup_point_title'] = [
-        'type'  => 'title',
-        'title' => __( 'Pickup Point Options', 'bring-fraktguiden' ),
+        'type'        => 'title',
+        'title'       => __( 'Pickup Point Options', 'bring-fraktguiden' ),
+        'description' => __( 'Enable pickup points on the cart / checkout', 'bring-fraktguiden' ),
+        'class'       => 'separated_title_tab',
     ];
 
     $this->form_fields['pickup_point_enabled'] = [
         'title'   => __( 'Enable', 'bring-fraktguiden' ),
         'type'    => 'checkbox',
+        'desc_tip' => __( 'If not checked, default services will be shown', 'bring-fraktguiden' ),
         'label'   => __( 'Enable pickup point', 'bring-fraktguiden' ),
         'default' => 'no',
     ];
@@ -102,7 +105,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $this->form_fields['mybring_title'] = [
         'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
         'description' => $description,
-        'type'        => 'title'
+        'type'        => 'title',
+        'class'       => 'separated_title_tab',
     ];
 
     $this->form_fields['booking_enabled'] = [
