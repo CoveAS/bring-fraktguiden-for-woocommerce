@@ -173,16 +173,15 @@
             if ( has_klarna_widget() ) {
 
                 $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
-                    $( this ).removeClass( 'bring-error-input' );
                     $( '.bring-enter-postcode' ).removeClass( 'bring-error' );
-                    $( '.bring-error-message' ).fadeOut( 250, function () {
-                        $( this ).remove();
-                    });
+                    $( this ).removeClass( 'bring-error-input' );
+                    $( '.bring-error-message' ).remove();
                 } );
                 $( '.bring-enter-postcode form' ).submit( function( e ) {
                     e.preventDefault();
                     $( this ).addClass( 'loading' );
                     $( this ).find( 'input' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );
+                    $( '.bring-error-message' ).remove();
                     post_kco_delivery_post_code( $( this ). find( '.input-text' ).val() );
                 } );
 
