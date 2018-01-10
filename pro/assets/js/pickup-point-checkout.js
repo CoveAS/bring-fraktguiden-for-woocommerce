@@ -98,9 +98,9 @@
                 if ( ! response.valid ) {
                     $( '.bring-enter-postcode input' ).prop( 'disabled', false );
                     $( '.bring-enter-postcode form' ).removeClass( 'loading' );
-                    $( '.bring-enter-postcode .input-text' ).addClass( 'error' );
-                    $( '.bring-enter-postcode' ).addClass( 'validation-error' );
-                    $( '<div>' ).addClass( 'woocommerce-error' ).html( response.result ).appendTo( $( '.bring-enter-postcode label' ) );
+                    $( '.bring-enter-postcode .input-text' ).addClass( 'bring-error-input' );
+                    $( '.bring-enter-postcode' ).addClass( 'bring-error' );
+                    $( '<span>' ).addClass( 'bring-error-message' ).html( response.result ).appendTo( $( '.bring-enter-postcode label' ) );
                     return false;
                 }
                 post_update_kco_delivery_post_code( post_code ); 
@@ -173,16 +173,16 @@
             if ( has_klarna_widget() ) {
 
                 $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
-                    $( this ).removeClass( 'error' );
-                    $( '.bring-enter-postcode' ).removeClass( 'validation-error' );
-                    $( '.bring-enter-postcode label .woocommerce-error' ).fadeOut( 250, function () {
+                    $( this ).removeClass( 'bring-error-input' );
+                    $( '.bring-enter-postcode' ).removeClass( 'bring-error' );
+                    $( '.bring-error-message' ).fadeOut( 250, function () {
                         $( this ).remove();
                     });
                 } );
                 $( '.bring-enter-postcode form' ).submit( function( e ) {
                     e.preventDefault();
                     $( this ).addClass( 'loading' );
-                    $( this ).find( 'input' ).prop( 'disabled', true ).removeClass( 'error' );
+                    $( this ).find( 'input' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );
                     post_kco_delivery_post_code( $( this ). find( '.input-text' ).val() );
                 } );
 
