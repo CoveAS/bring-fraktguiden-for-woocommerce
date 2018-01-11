@@ -102,7 +102,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
       $description .= '<br><span style="font-weight: bold;color: red">' . __( 'API User ID or API Key missing!', 'bring-fraktguiden' ) . '</span>';
     }
 
-    $this->form_fields['mybring_title'] = [
+    $this->form_fields['booking_title'] = [
         'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
         'description' => $description,
         'type'        => 'title',
@@ -114,18 +114,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'type'    => 'checkbox',
         'label'   => __( 'Enable MyBring booking', 'bring-fraktguiden' ),
         'default' => 'no'
-    ];
-
-    $this->form_fields['mybring_api_uid'] = [
-        'title' => __( 'API User ID', 'bring-fraktguiden' ),
-        'type'  => 'text',
-        'label' => __( 'API User ID', 'bring-fraktguiden' ),
-    ];
-
-    $this->form_fields['mybring_api_key'] = [
-        'title' => __( 'API Key', 'bring-fraktguiden' ),
-        'type'  => 'text',
-        'label' => __( 'API Key', 'bring-fraktguiden' ),
     ];
 
     $this->form_fields['booking_test_mode_enabled'] = [

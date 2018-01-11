@@ -271,6 +271,29 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
+        'mybring_title' => [
+            'type'        => 'title',
+            'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
+            'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".' ),
+        ],
+        'mybring_api_uid' => [
+            'title' => __( 'API User ID', 'bring-fraktguiden' ),
+            'type'  => 'text',
+            'label' => __( 'API User ID', 'bring-fraktguiden' ),
+            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com' ),
+        ],
+        'mybring_api_key' => [
+            'title' => __( 'API Key', 'bring-fraktguiden' ),
+            'type'  => 'text',
+            'label' => __( 'API Key', 'bring-fraktguiden' ),
+            'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
+        ],
+        'mybring_customer_number' => [
+            'title' => __( 'Customer number', 'bring-fraktguiden' ),
+            'type'  => 'text',
+            'label' => __( 'Customer number', 'bring-fraktguiden' ),
+            'placeholder' => 'PARCELS_NORWAY-100########',
+        ],
 
 
         /**
@@ -294,8 +317,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
-
-
 
 
         /**
@@ -333,8 +354,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => '',
             'options' => $services
         ),
-
-
 
         /**
          * Sizing is important when packing products to ship.
@@ -434,8 +453,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'options'  => $this->get_service_id_options(),
         ),
 
-
-
         /**
          * Heavy items section
          */
@@ -476,7 +493,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'options'  => $this->get_service_id_options(),
         ),
 
-
         /**
          * Max products section
          */
@@ -501,11 +517,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
-
-
-
-
-
 
         /**
          * Developer settings
