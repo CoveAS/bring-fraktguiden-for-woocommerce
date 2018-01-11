@@ -183,6 +183,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => 'no'
         ),
 
+
+        /**
+         *  Required information
+         */
+
         'title'                 => array(
             'title'    => __( 'Title', 'bring-fraktguiden' ),
             'type'     => 'text',
@@ -190,9 +195,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default'  => __( 'Bring Fraktguiden', 'bring-fraktguiden' )
         ),
 
-        /**
-         *  Required information
-         */
         'post_office'           => array(
             'title'    => __( 'Post office', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
@@ -271,36 +273,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
 
-
         'disable_stylesheet'               => array(
             'title'   => __( 'Disable stylesheet', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
-        'mybring_title' => [
-            'type'        => 'title',
-            'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
-            'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".' ),
-        ],
-        'mybring_api_uid' => [
-            'title' => __( 'API User ID', 'bring-fraktguiden' ),
-            'type'  => 'text',
-            'label' => __( 'API User ID', 'bring-fraktguiden' ),
-            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com' ),
-        ],
-        'mybring_api_key' => [
-            'title' => __( 'API Key', 'bring-fraktguiden' ),
-            'type'  => 'text',
-            'label' => __( 'API Key', 'bring-fraktguiden' ),
-            'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
-        ],
-        'mybring_customer_number' => [
-            'title' => __( 'Customer number', 'bring-fraktguiden' ),
-            'type'  => 'text',
-            'label' => __( 'Customer number', 'bring-fraktguiden' ),
-            'placeholder' => 'PARCELS_NORWAY-100########',
-        ],
 
 
         /**
@@ -316,14 +294,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'   => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Enable PRO features to extend Bring Fraktguiden', 'bring-fraktguiden' ),
-            'description' => Fraktguiden_Helper::get_pro_description(),
         ),
+
         'test_mode'               => array(
             'title'   => __( 'Enable test mode', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
             'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
+
+
 
 
         /**
@@ -554,6 +534,37 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
 
+        /**
+         * Developer settings
+         */
+        'mybring_title' => [
+            'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
+            'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".', 'bring-fraktguiden' ),
+            'class'       => 'separated_title_tab',
+            'type'        => 'title',
+        ],
+        'mybring_api_uid' => [
+            'title'       => __( 'API User ID', 'bring-fraktguiden' ),
+            'type'        => 'text',
+            'label'       => __( 'API User ID', 'bring-fraktguiden' ),
+            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com', 'bring-fraktguiden' ),
+        ],
+        'mybring_api_key' => [
+            'title'       => __( 'API Key', 'bring-fraktguiden' ),
+            'type'        => 'text',
+            'label'       => __( 'API Key', 'bring-fraktguiden' ),
+            'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
+        ],
+        'mybring_customer_number' => [
+            'title'       => __( 'Customer number', 'bring-fraktguiden' ),
+            'type'        => 'text',
+            'label'       => __( 'Customer number', 'bring-fraktguiden' ),
+            'placeholder' => 'PARCELS_NORWAY-100########',
+        ],
+
+
+
+
     ];
 
 
@@ -641,7 +652,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
         $( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
         // Toggle the menu items for pickup points and bring booking
-        $( '#4, #5' ).toggle( is_checked );
+        $( '#5, #6' ).toggle( is_checked );
       }
       $( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
       toggle_test_mode();
