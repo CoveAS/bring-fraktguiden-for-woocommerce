@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2018-01-10 17:10+0100\n"
-"PO-Revision-Date: 2018-01-10 17:10+0100\n"
+"POT-Creation-Date: 2018-01-11 10:36+0100\n"
+"PO-Revision-Date: 2018-01-11 10:36+0100\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -292,8 +292,9 @@ msgstr ""
 
 #: class-wc-shipping-method-bring.php:407
 msgid ""
-"If Bring has any technical difficulties, the checkout will default to these "
-"settings."
+"If Bring has any technical difficulties, it won't be able to fetch prices "
+"from the bring server.<br>In these cases, shipping will default to these "
+"settings:"
 msgstr ""
 
 #: class-wc-shipping-method-bring.php:411
@@ -302,106 +303,106 @@ msgstr ""
 
 #: class-wc-shipping-method-bring.php:413
 msgid ""
-"What method should be used if no connection can be made to the bring API"
+"What pricing should be used if no connection can be made to the bring API"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:418
-msgid "Label for no connection rate"
+#: class-wc-shipping-method-bring.php:416
+#: class-wc-shipping-method-bring.php:457
+msgid "Do nothing"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:420
-#: class-wc-shipping-method-bring.php:462
-#: class-wc-shipping-method-bring.php:909
-#: class-wc-shipping-method-bring.php:949
-msgid "Shipping"
+#: class-wc-shipping-method-bring.php:417
+#: class-wc-shipping-method-bring.php:458
+msgid "Custom flat rate"
+msgstr ""
+
+#: class-wc-shipping-method-bring.php:421
+msgid "Shipping method Label to replace 'API Error'"
 msgstr ""
 
 #: class-wc-shipping-method-bring.php:423
-msgid "Flat rate for no connections"
+#: class-wc-shipping-method-bring.php:465
+#: class-wc-shipping-method-bring.php:913
+#: class-wc-shipping-method-bring.php:953
+msgid "Shipping"
 msgstr ""
 
 #: class-wc-shipping-method-bring.php:426
-#: class-wc-shipping-method-bring.php:468
-#: class-wc-shipping-method-bring.php:500
+msgid "Shipping method cost for 'API Error'"
+msgstr ""
+
+#: class-wc-shipping-method-bring.php:429
+#: class-wc-shipping-method-bring.php:471
 msgid "ie: 500"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:430
-msgid "Select flat rate service"
+#: class-wc-shipping-method-bring.php:433
+#: class-wc-shipping-method-bring.php:475
+msgid "Service to use for booking"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:444
+#: class-wc-shipping-method-bring.php:447
 msgid "Heavy and oversized items"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:445
+#: class-wc-shipping-method-bring.php:448
 msgid ""
 "Set a flat rate for packages that exceed the maximum measurements allowed by "
-"Bring"
+"Bring."
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:449
+#: class-wc-shipping-method-bring.php:452
 msgid "Heavy item handling"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:451
+#: class-wc-shipping-method-bring.php:454
 msgid ""
 "What method should be used to calculate post rates for items that exceeds "
 "the limits set by bring"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:454
-msgid "No rate"
+#: class-wc-shipping-method-bring.php:462
+msgid "Shipping method Label for Heavy Items"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:455
-msgid "Flat rate"
-msgstr "Fast sats"
-
-#: class-wc-shipping-method-bring.php:459
-msgid "Custom rate label"
-msgstr ""
-
-#: class-wc-shipping-method-bring.php:461
+#: class-wc-shipping-method-bring.php:464
 msgid "ie: Cargo shipping"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:465
-msgid "Flat rate for heavy items"
+#: class-wc-shipping-method-bring.php:468
+msgid "Shipping method cost for heavy items"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:472
-msgid "Flat rate service"
+#: class-wc-shipping-method-bring.php:488
+msgid "Product quantity limit for cart"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:485
-msgid "Maximum products allowed in cart"
-msgstr ""
-
-#: class-wc-shipping-method-bring.php:486
+#: class-wc-shipping-method-bring.php:489
 msgid ""
-"When a cart reaches this limit, you can enable this flat rate. <em>For "
-"example, when ordering in bulk, the price for a shipping container may be a "
-"flat rate</em>"
-msgstr ""
-
-#: class-wc-shipping-method-bring.php:490
-msgid "Maximum products in cart limit"
-msgstr ""
-
-#: class-wc-shipping-method-bring.php:492
-msgid "ie: 1500"
+"When a cart reaches this limit, you can enable this shipping method."
+"<br><em>For example, when ordering in bulk, the price for a shipping "
+"container may be a flat rate</em>"
 msgstr ""
 
 #: class-wc-shipping-method-bring.php:493
-msgid "Maximum of products in the cart before offering a flat rate"
-msgstr "Maks produkter som kan være i kassen før en tilbyr en fast sats"
+msgid "Maximum product limit"
+msgstr ""
+
+#: class-wc-shipping-method-bring.php:496
+#: class-wc-shipping-method-bring.php:504
+msgid "ie: 1500"
+msgstr ""
 
 #: class-wc-shipping-method-bring.php:497
-msgid "Flat rate when limit is reached"
+msgid ""
+"Maximum total quantity of products in the cart before offering a custom price"
 msgstr ""
 
 #: class-wc-shipping-method-bring.php:501
+msgid "Shipping method cost when limit is reached"
+msgstr ""
+
+#: class-wc-shipping-method-bring.php:505
 msgid ""
 "Offer a flat rate if the cart reaches max products or a product in the cart "
 "does not have the required dimensions"
@@ -409,44 +410,44 @@ msgstr ""
 "Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
 "produkt som ikke har påkrevde dimensjoner"
 
-#: class-wc-shipping-method-bring.php:515
+#: class-wc-shipping-method-bring.php:519
 msgid "Developer"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:516
+#: class-wc-shipping-method-bring.php:520
 msgid "For debugging and testing the plugin"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:521
+#: class-wc-shipping-method-bring.php:525
 msgid "Debug mode"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:523
-#: class-wc-shipping-method-bring.php:532
+#: class-wc-shipping-method-bring.php:527
+#: class-wc-shipping-method-bring.php:536
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
-#: class-wc-shipping-method-bring.php:524
+#: class-wc-shipping-method-bring.php:528
 msgid "Issues from the Bring API will be logged here"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:525
+#: class-wc-shipping-method-bring.php:529
 msgid "Bring Fraktguiden logs will be saved in"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:530
+#: class-wc-shipping-method-bring.php:534
 msgid "Debug System information"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:533
+#: class-wc-shipping-method-bring.php:537
 msgid "We may ask for this information if you require support"
 msgstr ""
 
-#: class-wc-shipping-method-bring.php:534
+#: class-wc-shipping-method-bring.php:538
 msgid "View system info"
 msgstr "Se systeminformasjon"
 
-#: class-wc-shipping-method-bring.php:578
+#: class-wc-shipping-method-bring.php:582
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -459,8 +460,8 @@ msgstr ""
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
-#: class-wc-shipping-method-bring.php:812
-#: class-wc-shipping-method-bring.php:826
+#: class-wc-shipping-method-bring.php:816
+#: class-wc-shipping-method-bring.php:830
 msgid "..."
 msgstr ""
 
@@ -491,6 +492,12 @@ msgid ""
 "      </ol>\n"
 "      "
 msgstr ""
+
+#~ msgid "Flat rate"
+#~ msgstr "Fast sats"
+
+#~ msgid "Maximum of products in the cart before offering a flat rate"
+#~ msgstr "Maks produkter som kan være i kassen før en tilbyr en fast sats"
 
 #~ msgid "View Bring Fraktguiden Settings"
 #~ msgstr "Vis Bring Fraktguiden innstillinger"
