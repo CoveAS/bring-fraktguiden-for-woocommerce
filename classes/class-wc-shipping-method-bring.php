@@ -221,7 +221,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'     => 'select',
             'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', 'bring-fraktguiden' ),
             'class'    => 'chosen_select',
-            'css'      => 'width: 450px;',
+            'css'      => 'width: 400px;',
             'default'  => $woocommerce->countries->get_base_country(),
             'options'  => Fraktguiden_Helper::get_nordic_countries()
         ),
@@ -258,7 +258,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'   => __( 'Specific Countries', 'bring-fraktguiden' ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
-            'css'     => 'width: 450px;',
+            'css'     => 'width: 400px;',
             'default' => '',
             'options' => $woocommerce->countries->countries
         ),
@@ -329,7 +329,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'   => __( 'Services', 'bring-fraktguiden' ),
             'type'    => 'services_table',
             'class'   => 'chosen_select',
-            'css'     => 'width: 450px;',
+            'css'     => 'width: 400px;',
             'default' => '',
             'options' => $services
         ),
@@ -404,30 +404,33 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'no_connection_title' => [
             'type'        => 'title',
             'title'       => __( 'Bring API offline / No connection', 'bring-fraktguiden' ),
-            'description' => __( 'If Bring has any technical difficulties, the checkout will default to these settings.', 'bring-fraktguiden' ),
+            'description' => __( 'If Bring has any technical difficulties, it won\'t be able to fetch prices from the bring server.<br>In these cases, shipping will default to these settings:', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'no_connection_handling'          => array(
             'title'       => __( 'No API connection handling', 'bring-fraktguiden' ),
             'type'        => 'select',
-            'desc_tip'    => __( 'What method should be used if no connection can be made to the bring API', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'What pricing should be used if no connection can be made to the bring API', 'bring-fraktguiden' ),
             'default'     => 'no_rates',
-            'options'     => [ 'no_rate' => 'No rate', 'flat_rate' => 'Flat rate']
+            'options'  => [
+              'no_rate'   => __( 'Do nothing', 'bring-fraktguiden' ),
+              'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden' )
+            ]
         ),
         'no_connection_flat_rate_label'          => array(
-            'title'    => __( 'Label for no connection rate', 'bring-fraktguiden' ),
+            'title'    => __( 'Shipping method Label to replace \'API Error\'', 'bring-fraktguiden' ),
             'type'     => 'text',
             'default'  => __( 'Shipping', 'bring-fraktguiden' ),
         ),
         'no_connection_flat_rate'          => array(
-            'title'    => __( 'Flat rate for no connections', 'bring-fraktguiden' ),
+            'title'    => __( 'Shipping method cost for \'API Error\'', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'type'     => 'number',
             'placeholder' => __( 'ie: 500', 'bring-fraktguiden' ),
             'default'  => '0',
         ),
         'no_connection_rate_id'          => array(
-            'title'    => __( 'Select flat rate service', 'bring-fraktguiden' ),
+            'title'    => __( 'Service to use for booking', 'bring-fraktguiden' ),
             'css'      => '',
             'type'     => 'select',
             'default'  => '0',
@@ -442,7 +445,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'exceptions_title' => [
             'type'        => 'title',
             'title'       => __( 'Heavy and oversized items', 'bring-fraktguiden' ),
-            'description' => __( 'Set a flat rate for packages that exceed the maximum measurements allowed by Bring', 'bring-fraktguiden' ),
+            'description' => __( 'Set a flat rate for packages that exceed the maximum measurements allowed by Bring.', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'exception_handling' => array(
@@ -451,25 +454,25 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden' ),
             'default'  => 'no_rates',
             'options'  => [
-              'no_rate'   => __( 'No rate', 'bring-fraktguiden' ),
-              'flat_rate' => __( 'Flat rate', 'bring-fraktguiden' )
+              'no_rate'   => __( 'Do nothing', 'bring-fraktguiden' ),
+              'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden' )
             ]
         ),
         'exception_flat_rate_label' => array(
-            'title'       => __( 'Custom rate label', 'bring-fraktguiden' ),
+            'title'       => __( 'Shipping method Label for Heavy Items', 'bring-fraktguiden' ),
             'type'        => 'text',
             'placeholder' => __( 'ie: Cargo shipping', 'bring-fraktguiden' ),
             'default'     => __( 'Shipping', 'bring-fraktguiden' ),
         ),
         'exception_flat_rate' => array(
-            'title'    => __( 'Flat rate for heavy items', 'bring-fraktguiden' ),
+            'title'    => __( 'Shipping method cost for heavy items', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'type'     => 'number',
             'placeholder' => __( 'ie: 500', 'bring-fraktguiden' ),
             'default'  => '0',
         ),
         'exception_rate_id' => array(
-            'title'    => __( 'Flat rate service', 'bring-fraktguiden' ),
+            'title'    => __( 'Service to use for booking', 'bring-fraktguiden' ),
             'css'      => '',
             'type'     => 'select',
             'default'  => '0',
@@ -482,22 +485,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'max_products_title' => [
             'type'        => 'title',
-            'title'       => __( 'Maximum products allowed in cart', 'bring-fraktguiden' ),
-            'description' => __( 'When a cart reaches this limit, you can enable this flat rate. <em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', 'bring-fraktguiden' ),
+            'title'       => __( 'Product quantity limit for cart', 'bring-fraktguiden' ),
+            'description' => __( 'When a cart reaches this limit, you can enable this shipping method.<br><em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'max_products'  => array(
-            'title'    => __( 'Maximum products in cart limit', 'bring-fraktguiden' ),
+            'title'    => __( 'Maximum product limit', 'bring-fraktguiden' ),
             'type'     => 'text',
+            'css'      => 'width: 8em;',
             'placeholder' => __( 'ie: 1500', 'bring-fraktguiden' ),
-            'desc_tip' => __( 'Maximum of products in the cart before offering a flat rate', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Maximum total quantity of products in the cart before offering a custom price', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_MAX_PRODUCTS
         ),
         'alt_flat_rate' => array(
-            'title'    => __( 'Flat rate when limit is reached', 'bring-fraktguiden' ),
+            'title'    => __( 'Shipping method cost when limit is reached', 'bring-fraktguiden' ),
             'type'     => 'text',
             'css'      => 'width: 8em;',
-            'placeholder' => __( 'ie: 500', 'bring-fraktguiden' ),
+            'placeholder' => __( 'ie: 1500', 'bring-fraktguiden' ),
             'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
