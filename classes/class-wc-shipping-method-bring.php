@@ -193,14 +193,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         /**
          *  Required information
          */
-        'handling_fee'          => array(
-            'title'    => __( 'Delivery Fee', 'bring-fraktguiden' ),
-            'type'     => 'number',
-            'placeholder' => __( '0', 'bring-fraktguiden' ),
-            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
-            'css'      => 'width: 8em;',
-            'default'  => ''
-        ),
         'post_office'           => array(
             'title'    => __( 'Post office', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
@@ -208,6 +200,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
+
         'from_zip'              => array(
             'title'    => __( 'From zip', 'bring-fraktguiden' ),
             'type'     => 'text',
@@ -216,6 +209,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'css'      => 'width: 8em;',
             'default'  => ''
         ),
+
         'from_country'          => array(
             'title'    => __( 'From country', 'bring-fraktguiden' ),
             'type'     => 'select',
@@ -225,6 +219,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default'  => $woocommerce->countries->get_base_country(),
             'options'  => Fraktguiden_Helper::get_nordic_countries()
         ),
+
+        'handling_fee'          => array(
+            'title'    => __( 'Delivery Fee', 'bring-fraktguiden' ),
+            'type'     => 'number',
+            'placeholder' => __( '0', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
+            'css'      => 'width: 8em;',
+            'default'  => '',
+            'custom_attributes'     => [
+              'min'       => '0'
+            ]
+        ),
+
         'vat'                   => array(
             'title'    => __( 'Display price', 'bring-fraktguiden' ),
             'type'     => 'select',
