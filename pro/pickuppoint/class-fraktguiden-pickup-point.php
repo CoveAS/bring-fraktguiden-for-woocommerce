@@ -17,6 +17,7 @@ class Fraktguiden_Pickup_Point {
 
   const ID = Fraktguiden_Helper::ID;
   const BASE_URL = 'https://api.bring.com/pickuppoint/api/pickuppoint';
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
   static function init() {
     // Enqueue checkout Javascript.
@@ -97,7 +98,7 @@ class Fraktguiden_Pickup_Point {
       <h3>
         <?php echo apply_filters(
           'bring_fraktguiden_select_delivery_method_title',
-          __( 'Select shipping method', 'bring-fraktguiden' )
+          __( 'Select shipping method', self::TEXT_DOMAIN )
         ); ?>
       </h3>
       <div class="bring-select-shipping--options">
@@ -247,23 +248,23 @@ class Fraktguiden_Pickup_Point {
    */
   static function get_i18n() {
     return [
-        'PICKUP_POINT'               => __( 'Pickup point', 'bring-fraktguiden' ),
-        'LOADING_TEXT'               => __( 'Please wait...', 'bring-fraktguiden' ),
-        'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', 'bring-fraktguiden' ),
-        'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
-        'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
-        'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', 'bring-fraktguiden' ),
-        'SERVICE_PLACEHOLDER'        => __( 'Please select service', 'bring-fraktguiden' ),
-        'POSTCODE'                   => __( 'Postcode', 'bring-fraktguiden' ),
-        'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', 'bring-fraktguiden' ),
-        'SELECTED_TEXT'              => __( 'Selected pickup point', 'bring-fraktguiden' ),
-        'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', 'bring-fraktguiden' ),
-        'GET_RATE'                   => __( 'Get Rate', 'bring-fraktguiden' ),
-        'PLEASE_WAIT'                => __( 'Please wait', 'bring-fraktguiden' ),
-        'SERVICE'                    => __( 'Service', 'bring-fraktguiden' ),
-        'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', 'bring-fraktguiden' ),
-        'REQUEST_FAILED'             => __( 'Request was not successful', 'bring-fraktguiden' ),
-        'ADD_POSTCODE'               => __( 'Please add postal code', 'bring-fraktguiden' ),
+        'PICKUP_POINT'               => __( 'Pickup point', self::TEXT_DOMAIN ),
+        'LOADING_TEXT'               => __( 'Please wait...', self::TEXT_DOMAIN ),
+        'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', self::TEXT_DOMAIN ),
+        'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', self::TEXT_DOMAIN ),
+        'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', self::TEXT_DOMAIN ),
+        'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', self::TEXT_DOMAIN ),
+        'SERVICE_PLACEHOLDER'        => __( 'Please select service', self::TEXT_DOMAIN ),
+        'POSTCODE'                   => __( 'Postcode', self::TEXT_DOMAIN ),
+        'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', self::TEXT_DOMAIN ),
+        'SELECTED_TEXT'              => __( 'Selected pickup point', self::TEXT_DOMAIN ),
+        'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', self::TEXT_DOMAIN ),
+        'GET_RATE'                   => __( 'Get Rate', self::TEXT_DOMAIN ),
+        'PLEASE_WAIT'                => __( 'Please wait', self::TEXT_DOMAIN ),
+        'SERVICE'                    => __( 'Service', self::TEXT_DOMAIN ),
+        'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', self::TEXT_DOMAIN ),
+        'REQUEST_FAILED'             => __( 'Request was not successful', self::TEXT_DOMAIN ),
+        'ADD_POSTCODE'               => __( 'Please add postal code', self::TEXT_DOMAIN ),
     ];
   }
 

@@ -27,6 +27,8 @@ class Bring_Fraktguiden {
 
   const VERSION = '1.3.2';
 
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
+
   static function init() {
     if ( ! class_exists( 'WooCommerce' ) ) {
       return;
@@ -38,7 +40,7 @@ class Bring_Fraktguiden {
     include_once 'classes/class-wc-shipping-method-bring.php';
     include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
 
-    load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
     add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
 
@@ -85,7 +87,7 @@ class Bring_Fraktguiden {
       $section .= '_pro';
     }
     $action_links = array(
-        'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . $section ) . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
+        'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . $section ) . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', self::TEXT_DOMAIN ) ) . '">' . __( 'Settings', self::TEXT_DOMAIN ) . '</a>',
     );
 
     return array_merge( $action_links, $links );

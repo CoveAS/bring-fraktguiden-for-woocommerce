@@ -201,26 +201,24 @@ class Fraktguiden_Helper {
   }
   static function get_pro_terms_link( $text = '' ) {
     if ( ! $text ) {
-      $text = 'Click here to buy a license or learn more about bring fraktguiden pro.';
+      $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', self::TEXT_DOMAIN );
     }
     $format = '<a href="%s" target="_blank">%s</a>';
-    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, 'bring-fraktguiden' ) );
+    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, self::TEXT_DOMAIN ) );
   }
 
   static function get_pro_description() {
     if ( self::pro_test_mode() ) {
-      return __( 'Running in test-mode.', 'bring-fraktguiden' ) . ' '
-        . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+      return __( 'Running in test-mode.', self::TEXT_DOMAIN ) . ' '
+        . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
     }
     if ( self::pro_activated() ) {
       if ( self::valid_license() ) {
         return '';
       }
       $days = self::get_pro_days_remaining();
-      return sprintf( __(
-        'The pro license has not yet activated. You have %s remaining before pro disables.'
-      ), "$days ". _n( 'day', 'days', $days, 'bring-fraktguiden' ), 'bring-fraktguiden' ). '<br>'
-      . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+      return sprintf( __( 'The pro license has not yet activated. You have %s remaining before pro disables.', self::TEXT_DOMAIN ), "$days " . _n( 'day', 'days', $days, self::TEXT_DOMAIN ) ). '<br>'
+      . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
     }
     return __( '
       Pro features: <ol>
@@ -228,7 +226,7 @@ class Fraktguiden_Helper {
         <li>Pickup points. Let customers select their pickup point</li>
         <li>MyBring Booking. Book directly with Bring</li>
       </ol>
-      ' , 'bring-fraktguiden' ) .' '. Fraktguiden_Helper::get_pro_terms_link();
+      ' , self::TEXT_DOMAIN ) .' '. Fraktguiden_Helper::get_pro_terms_link();
   }
 
   /**

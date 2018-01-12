@@ -7,6 +7,8 @@ add_action( 'wp_ajax_bring_update_packages',         'Bring_Booking_Order_View::
 add_action( 'wp_ajax_nopriv_bring_update_packages',  'Bring_Booking_Order_View::ajax_update_packages' );
 class Bring_Booking_Order_View {
 
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
+
   static function init() {
     add_action( 'add_meta_boxes', array( __CLASS__, 'add_booking_meta_box' ), 1, 2 );
     //add_action( 'woocommerce_order_actions', array( __CLASS__, 'add_order_meta_box_actions' ) );
@@ -47,7 +49,7 @@ class Bring_Booking_Order_View {
     }
     add_meta_box(
         'woocommerce-order-bring-booking',
-        __( 'Bring Booking', 'bring-fraktguiden' ),
+        __( 'Bring Booking', self::TEXT_DOMAIN ),
         array( __CLASS__, 'render_booking_meta_box' ),
         'shop_order',
         'normal',
@@ -108,13 +110,13 @@ class Bring_Booking_Order_View {
     if ( ! $order->has_booking_errors() ) {
       ?>
       <div>
-        <?php _e( 'Press start to start booking', 'bring-fraktguiden' ); ?>
+        <?php _e( 'Press start to start booking', self::TEXT_DOMAIN ); ?>
         <br>
         <?php
         $next_status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
         if ( $next_status != 'none' ) {
           $order_statuses = wc_get_order_statuses();
-          printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden' ), strtolower( $order_statuses[$next_status] ) );
+          printf( __( 'Order status will be set to %s upon successful booking', self::TEXT_DOMAIN ), strtolower( $order_statuses[$next_status] ) );
         }
         ?>
       </div>
@@ -138,11 +140,11 @@ class Bring_Booking_Order_View {
         ?>
         <h3><?php echo $status['text']; ?></h3>
         <div style="text-align:center;margin-bottom: 1em">
-          <?php _e( 'Note: Order is not completed', 'bring-fraktguiden' ); ?>
+          <?php _e( 'Note: Order is not completed', self::TEXT_DOMAIN ); ?>
         </div>
       </div>
       <div>
-        <h3 style="margin-top:0"><?php _e('Consignments', 'bring-fraktguiden'); ?></h3 style>
+        <h3 style="margin-top:0"><?php _e('Consignments', self::TEXT_DOMAIN); ?></h3 style>
         <?php
         self::render_consignments( $order );
         ?>
@@ -183,31 +185,31 @@ class Bring_Booking_Order_View {
                 <th colspan="2"><?php printf( 'NO: %s', $consignment_number ) ?></th>
               </tr>
               <tr>
-                <td><?php _e( 'Earliest Pickup', 'bring-fraktguiden' ); ?>:</td>
+                <td><?php _e( 'Earliest Pickup', self::TEXT_DOMAIN ); ?>:</td>
                 <td><?php echo $earliest_pickup; ?></td>
               </tr>
               <tr>
-                <td><?php _e( 'Expected delivery', 'bring-fraktguiden' ); ?>:</td>
+                <td><?php _e( 'Expected delivery', self::TEXT_DOMAIN ); ?>:</td>
                 <td><?php echo $expected_delivery; ?></td>
               </tr>
               <tr>
-                <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
+                <td><?php _e( 'Labels', self::TEXT_DOMAIN ); ?>:</td>
                 <td>
                   <a href="<?php echo $labels_url; ?>"
-                     target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?></a>
+                     target="_blank"><?php _e( 'Download', self::TEXT_DOMAIN ); ?></a>
                 </td>
               </tr>
               <tr>
-                <td><?php _e( 'Tracking', 'bring-fraktguiden' ); ?>:</td>
+                <td><?php _e( 'Tracking', self::TEXT_DOMAIN ); ?>:</td>
                 <td>
                   <a href="<?php echo $tracking; ?>"
-                     target="_blank"><?php _e( 'View', 'bring-fraktguiden' ); ?>
+                     target="_blank"><?php _e( 'View', self::TEXT_DOMAIN ); ?>
                     →</a>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
+                  <?php _e( 'Packages', self::TEXT_DOMAIN ); ?>:
                 </td>
                 <td>
                   <ul>
@@ -241,13 +243,13 @@ class Bring_Booking_Order_View {
   static function render_step2_screen( $order ) {
     ?>
     <div class="bring-form-field">
-      <label><?php _e( 'Customer Number', 'bring-fraktguiden' ); ?>:</label>
+      <label><?php _e( 'Customer Number', self::TEXT_DOMAIN ); ?>:</label>
       <?php Bring_Booking_Common_View::render_customer_selector(); ?>
     </div>
 
     <div class="bring-form-field">
       <label>
-        <?php _e( 'Shipping Date', 'bring-fraktguiden' ); ?>:
+        <?php _e( 'Shipping Date', self::TEXT_DOMAIN ); ?>:
       </label>
 
       <div>
@@ -270,7 +272,7 @@ class Bring_Booking_Order_View {
     <?php self::render_parties( $order ); ?>
     <div class="bring-form-field">
       <label
-          for="_bring_additional_info"><?php _e( 'Additional Info', 'bring-fraktguiden' ); ?>
+          for="_bring_additional_info"><?php _e( 'Additional Info', self::TEXT_DOMAIN ); ?>
         :</label>
       <textarea name="_bring_additional_info" id="_bring_additional_info"
                 style="width:20em"></textarea>
@@ -278,7 +280,7 @@ class Bring_Booking_Order_View {
 
     <div class="bring-form-field" style="margin-bottom:25px">
       <label>
-        <?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
+        <?php _e( 'Packages', self::TEXT_DOMAIN ); ?>:
       </label>
       <?php self::render_packages( $order ); ?>
     </div>
@@ -295,18 +297,18 @@ class Bring_Booking_Order_View {
         <!-- @todo: use a real link / not history back -->
         <button type="button" onclick="window.history.back()"
                 class="button"
-                style="margin-right:1em"><?php _e( 'Cancel', 'bring-fraktguiden' ); ?></button>
+                style="margin-right:1em"><?php _e( 'Cancel', self::TEXT_DOMAIN ); ?></button>
         <button type="submit" name="wc_order_action"
                 value="bring_book_with_bring"
-                data-tip="<?php _e( 'Update order and send consignment to Bring', 'bring-fraktguiden' ); ?>"
+                data-tip="<?php _e( 'Update order and send consignment to Bring', self::TEXT_DOMAIN ); ?>"
                 class="button button-primary tips">
           <?php echo Bring_Booking_Common_View::booking_label() ?>
         </button>
       <?php }
       else { ?>
         <button type="submit" name="_bring-start-booking"
-                data-tip="<?php _e( 'Update order and start booking', 'bring-fraktguiden' ); ?>"
-                class="button button-primary tips"><?php _e( 'Start', 'bring-fraktguiden' ); ?>
+                data-tip="<?php _e( 'Update order and start booking', self::TEXT_DOMAIN ); ?>"
+                class="button button-primary tips"><?php _e( 'Start', self::TEXT_DOMAIN ); ?>
           &gt;</button>
       <?php } ?>
     </div>
@@ -320,7 +322,7 @@ class Bring_Booking_Order_View {
     ?>
     <div class="bring-form-field">
       <a class="bring-show-parties"
-         href="#"><?php _e( 'Show Parties', 'bring-fraktguiden' ); ?></a>
+         href="#"><?php _e( 'Show Parties', self::TEXT_DOMAIN ); ?></a>
     </div>
     <script type="text/javascript">
       (function () {
@@ -334,11 +336,11 @@ class Bring_Booking_Order_View {
     <div class="bring-booking-parties bring-form-field bring-flex-box"
          style="display:none">
       <div>
-        <h3><?php _e( 'Sender Address', 'bring-fraktguiden' ); ?></h3>
+        <h3><?php _e( 'Sender Address', self::TEXT_DOMAIN ); ?></h3>
         <?php self::render_address_table( Bring_Booking::get_sender_address( $order->order ) ); ?>
       </div>
       <div>
-        <h3><?php _e( 'Recipient Address', 'bring-fraktguiden' ); ?></h3>
+        <h3><?php _e( 'Recipient Address', self::TEXT_DOMAIN ); ?></h3>
         <?php self::render_address_table( $order->get_recipient_address_formatted() ); ?>
       </div>
     </div>
@@ -349,7 +351,7 @@ class Bring_Booking_Order_View {
    * @param Bring_WC_Order_Adapter $order
    */
   static function render_packages( $order ) {
-    $shipping_item_tip = __( 'Shipping item id', 'bring-fraktguiden' );
+    $shipping_item_tip = __( 'Shipping item id', self::TEXT_DOMAIN );
     $all_services = Fraktguiden_Helper::get_all_services();
     $order_item_ids = array_keys( $order->get_fraktguiden_shipping_items() );
     ?>
@@ -358,12 +360,12 @@ class Bring_Booking_Order_View {
     <table class="bring-booking-packages">
       <thead>
       <tr>
-        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( '#', 'bring-fraktguiden' ); ?></th>
-        <th><?php _e( 'Product', 'bring-fraktguiden' ); ?></th>
-        <th><?php _e( 'Width', 'bring-fraktguiden' ); ?> (cm)</th>
-        <th><?php _e( 'Height', 'bring-fraktguiden' ); ?> (cm)</th>
-        <th><?php _e( 'Length', 'bring-fraktguiden' ); ?> (cm)</th>
-        <th><?php _e( 'Weight', 'bring-fraktguiden' ); ?> (kg)</th>
+        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( '#', self::TEXT_DOMAIN ); ?></th>
+        <th><?php _e( 'Product', self::TEXT_DOMAIN ); ?></th>
+        <th><?php _e( 'Width', self::TEXT_DOMAIN ); ?> (cm)</th>
+        <th><?php _e( 'Height', self::TEXT_DOMAIN ); ?> (cm)</th>
+        <th><?php _e( 'Length', self::TEXT_DOMAIN ); ?> (cm)</th>
+        <th><?php _e( 'Weight', self::TEXT_DOMAIN ); ?> (kg)</th>
         <th></th>
       </tr>
       </thead>
@@ -412,7 +414,7 @@ class Bring_Booking_Order_View {
             <input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
           </td>
           <td>
-            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
+            <span class="button delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
           </td>
         </tr>
       <?php } ?>
@@ -449,11 +451,11 @@ class Bring_Booking_Order_View {
             <input name="weight[]" class="dimension" type="text" value="0">
           </td>
           <td>
-            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
+            <span class="button delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
           </td>
         </tr>
         <tr><td colspan="6"></td><td>
-            <span class="button add"><?php echo __( 'Add', 'bring-fraktguiden' ); ?></span>
+            <span class="button add"><?php echo __( 'Add', self::TEXT_DOMAIN ); ?></span>
         </td></tr>
       </tbody>
     </table>
@@ -619,28 +621,28 @@ class Bring_Booking_Order_View {
     <table>
       <tbody>
       <?php
-      self::render_table_row( __( 'Name', 'bring-fraktguiden' ), $address['name'] );
-      self::render_table_row( __( 'Street Address 1', 'bring-fraktguiden' ), $address['addressLine'] );
-      self::render_table_row( __( 'Street Address 2', 'bring-fraktguiden' ), $address['addressLine2'] );
-      self::render_table_row( __( 'Postcode', 'bring-fraktguiden' ), $address['postalCode'] );
-      self::render_table_row( __( 'City', 'bring-fraktguiden' ), $address['city'] );
-      self::render_table_row( __( 'Country', 'bring-fraktguiden' ), $address['countryCode'] );
+      self::render_table_row( __( 'Name', self::TEXT_DOMAIN ), $address['name'] );
+      self::render_table_row( __( 'Street Address 1', self::TEXT_DOMAIN ), $address['addressLine'] );
+      self::render_table_row( __( 'Street Address 2', self::TEXT_DOMAIN ), $address['addressLine2'] );
+      self::render_table_row( __( 'Postcode', self::TEXT_DOMAIN ), $address['postalCode'] );
+      self::render_table_row( __( 'City', self::TEXT_DOMAIN ), $address['city'] );
+      self::render_table_row( __( 'Country', self::TEXT_DOMAIN ), $address['countryCode'] );
       if ( $address['reference'] ) {
-        self::render_table_row( __( 'Reference', 'bring-fraktguiden' ), $address['reference'] );
+        self::render_table_row( __( 'Reference', self::TEXT_DOMAIN ), $address['reference'] );
       }
       if ( $address['additionalAddressInfo'] ) {
-        self::render_table_row( __( 'Additional Address Info', 'bring-fraktguiden' ), $address['additionalAddressInfo'] );
+        self::render_table_row( __( 'Additional Address Info', self::TEXT_DOMAIN ), $address['additionalAddressInfo'] );
       }
       ?>
       <tr>
         <td colspan="2">
-          <h4><?php _e( 'Contact', 'bring-fraktguiden' ); ?></h4>
+          <h4><?php _e( 'Contact', self::TEXT_DOMAIN ); ?></h4>
         </td>
       </tr>
       <?php
-      self::render_table_row( __( 'Name', 'bring-fraktguiden' ), $address['contact']['name'] );
-      self::render_table_row( __( 'Email', 'bring-fraktguiden' ), $address['contact']['email'] );
-      self::render_table_row( __( 'Phone Number', 'bring-fraktguiden' ), $address['contact']['phoneNumber'] );
+      self::render_table_row( __( 'Name', self::TEXT_DOMAIN ), $address['contact']['name'] );
+      self::render_table_row( __( 'Email', self::TEXT_DOMAIN ), $address['contact']['email'] );
+      self::render_table_row( __( 'Phone Number', self::TEXT_DOMAIN ), $address['contact']['phoneNumber'] );
       ?>
       </tbody>
     </table>
@@ -657,10 +659,10 @@ class Bring_Booking_Order_View {
     <div class="bring-progress-tracker bring-flex-box">
 
       <span
-          class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">1 ) <?php _e( 'Start', 'bring-fraktguiden' ); ?></span>
-      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">2 ) <?php _e( 'Create and submit consignment', 'bring-fraktguiden' ); ?></span>
+          class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">1 ) <?php _e( 'Start', self::TEXT_DOMAIN ); ?></span>
+      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">2 ) <?php _e( 'Create and submit consignment', self::TEXT_DOMAIN ); ?></span>
       <span
-          class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">3 ) <?php _e( 'Submitted', 'bring-fraktguiden' ); ?></span>
+          class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">3 ) <?php _e( 'Submitted', self::TEXT_DOMAIN ); ?></span>
     </div>
     <?php
   }
@@ -681,13 +683,13 @@ class Bring_Booking_Order_View {
       </div>
 
       <div class="bring-booking-errors">
-        <div><?php _e( 'Previous booking request failed with the following errors:', 'bring-fraktguiden' ); ?></div>
+        <div><?php _e( 'Previous booking request failed with the following errors:', self::TEXT_DOMAIN ); ?></div>
         <ul>
           <?php foreach ( $errors as $error ) { ?>
             <li><?php echo $error; ?></li>
           <?php } ?>
         </ul>
-        <div><?php _e( 'Press Start to try again', 'bring-fraktguiden' ); ?></div>
+        <div><?php _e( 'Press Start to try again', self::TEXT_DOMAIN ); ?></div>
       </div>
     </div>
     <?php
