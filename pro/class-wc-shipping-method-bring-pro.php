@@ -87,6 +87,16 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'default' => 'no',
     ];
 
+    $this->form_fields['pickup_point_limit'] = [
+        'title'   => __( 'Pickup point limit', 'bring-fraktguiden' ),
+        'type'    => 'number',
+        'css'      => 'width: 8em;',
+        'description' => __( 'Leave blank to remove limit', 'bring-fraktguiden' ),
+        'custom_attributes' => array( 'min' => 1 ),
+        'desc_tip' => __( 'If set, it will be the maximum number of pickup points shown', 'bring-fraktguiden' ),
+        'default' => '',
+    ];
+
     if ( $this->instance_id ) {
       return;
     }

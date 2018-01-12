@@ -51,6 +51,7 @@ class Fraktguiden_Pickup_Point {
     // Pickup points
     if ( Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) == 'yes' ) {
       add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
+      add_filter( 'bring_pickup_point_limit', __CLASS__ .'::limit_pickup_points' );
     }
   }
 
@@ -382,6 +383,10 @@ class Fraktguiden_Pickup_Point {
   static function get_pickup_points( $country, $postcode ) {
     $request = new WP_Bring_Request();
     return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
+  }
+
+  public static function limit_pickup_points( $default_limit ) {
+    return Fraktguiden_Helper::get_option( 'pickup_point_limit' ) ?: $default_limit;
   }
 
   /**
