@@ -409,7 +409,7 @@ class Fraktguiden_Pickup_Point {
     if ( ! $service_package ) {
       // Service package is not available.
       // That means it's the end of the line for pickup points
-      return;
+      return $rates;
     }
 
     $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );

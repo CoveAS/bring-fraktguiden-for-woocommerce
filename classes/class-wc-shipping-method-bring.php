@@ -367,7 +367,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip'       => __( 'The lowest length for a consignment', 'bring-fraktguiden' ),
             'default'     => '23',
             'custom_attributes'     => [
-              'min'       => '23'
+              'min'       => '1'
             ]
         ),
         'minimum_width'  => array(
@@ -375,10 +375,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'number',
             'css'         => 'width: 8em;',
             'placeholder' => __( 'Must be at least 13cm', 'bring-fraktguiden' ),
-            'desc_tip'       => __( 'The lowest width for a consignment', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'The lowest width for a consignment', 'bring-fraktguiden' ),
             'default'     => '13',
             'custom_attributes'     => [
-              'min'     => '13'
+              'min'     => '1'
             ]
         ),
         'minimum_height'  => array(
@@ -386,7 +386,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'number',
             'css'         => 'width: 8em;',
             'placeholder' => __( 'Must be at least 1cm', 'bring-fraktguiden' ),
-            'desc_tip'       => __( 'The lowest height for a consignment', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'The lowest height for a consignment', 'bring-fraktguiden' ),
             'default'     => '1',
             'custom_attributes'     => [
               'min'       => '1'
@@ -396,11 +396,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'       => __( 'Minimum Weight in kg', 'bring-fraktguiden' ),
             'type'        => 'number',
             'css'         => 'width: 8em;',
-            'desc_tip'       => __( 'The lowest weight in kilograms for a consignment', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'The lowest weight in kilograms for a consignment', 'bring-fraktguiden' ),
             'default'     => '0.01',
-            'custom_attributes'     => [
-              'min'       => '0.01'
-            ]
         ),
 
 
@@ -963,23 +960,40 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
       // Add all the selected services to the URL
       $service_count = 0;
-      if ( $this->services && count( $this->services ) > 0 ) {
+      if ( ! empty( $this->services ) ) {
         foreach ( $this->services as $service ) {
           $url .= '&product=' . $service;
         }
       }
 
+      $customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+      if ( $customer_number ) {
+        $url .= '&customerNumber='. $customer_number;
+      }
+      $options = [
+        'headers' => [
+          'Content-Type'       => 'application/json',
+          'Accept'             => 'application/json',
+        ]
+      ];
+      $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
+      $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
+      if ( $mybring_api_key && $mybring_api_uid) {
+        $options['headers']['X-MyBring-API-Uid'] = $mybring_api_uid;
+        $options['headers']['X-MyBring-API-Key'] = $mybring_api_key;
+      }
+
       // Make the request.
       $request  = new WP_Bring_Request();
-      $response = $request->get( $url );
+      $response = $request->get( $url, [], $options );
 
       if ( $response->status_code != 200 ) {
         $no_connection_handling = $this->get_setting( 'no_connection_handling' );
         if ( 'flat_rate' == $no_connection_handling ) {
           $this->add_rate( [
-              'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
-              'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
-              'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+            'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
+            'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
+            'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
           ] );
         }
         return;
