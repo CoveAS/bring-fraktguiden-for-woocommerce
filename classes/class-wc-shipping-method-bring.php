@@ -953,6 +953,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $_COOKIE['_fraktguiden_packages'] = json_encode( $this->packages_params );
       }
 
+      if ( ! $package[ 'destination' ][ 'postcode' ] ) {
+        // Postcode must be specified
+        return;
+      }
+
       // Request parameters.
       $params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
       // Remove any empty elements.
