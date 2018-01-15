@@ -17,7 +17,12 @@ class fraktguiden_license {
 		return self::$instance;
 	}
 
-	public curl_request( $data ) {
+	/**
+	 * Curl request
+	 * @param  array $data GET parameters
+	 * @return boolean
+	 */
+	public function curl_request( $data ) {
 		$query_string = http_build_query( $data );
 		// Get cURL resource
 		$ch = curl_init();
@@ -37,7 +42,11 @@ class fraktguiden_license {
 		if ( $code !== 200 ) {
 			return false;
 		}
-		return $content;
+		$data = json_decode( $content, true );
+		if ( empty( $data ) ) {
+			return false;
+		}
+		return $data;
 	}
 	/**
 	 * Valid
@@ -59,17 +68,12 @@ class fraktguiden_license {
 			return true;
 		}
 
-		$json = $this->curl_request( [
+		$data = $this->curl_request( [
 			'action' => 'check_license',
 			'domain' => $url_info[ 'host' ],
 		] );
 
-		if ( ! $json ) {
-			return true;
-		}
-
-		$data = json_decode( $json, true );
-		if ( empty( $data ) ) {
+		if ( ! $data ) {
 			return true;
 		}
 
