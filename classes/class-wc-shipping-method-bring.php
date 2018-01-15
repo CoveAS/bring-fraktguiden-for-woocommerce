@@ -274,15 +274,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'options' => $woocommerce->countries->countries
         ),
 
-
-        'disable_stylesheet'               => array(
-            'title'   => __( 'Disable stylesheet', self::TEXT_DOMAIN ),
-            'type'    => 'checkbox',
-            'label'   => __( 'Remove fraktguiden styling from the checkout', self::TEXT_DOMAIN ),
-            'default' => 'no'
-        ),
-
-
         /**
          * Pro enabling
          */
@@ -304,9 +295,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'   => __( 'Use PRO in test-mode. Used for development', self::TEXT_DOMAIN ),
             'default' => 'no'
         ),
-
-
-
 
         /**
          * General options setting
@@ -401,7 +389,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip'    => __( 'The lowest weight in kilograms for a consignment', self::TEXT_DOMAIN ),
             'default'     => '0.01',
         ),
-
 
         /**
          * Lost / no connection section
@@ -517,7 +504,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'For debugging and testing the plugin', self::TEXT_DOMAIN ),
             'class'       => 'separated_title_tab',
         ],
-
+        'disable_stylesheet'               => array(
+            'title'   => __( 'Disable stylesheet', self::TEXT_DOMAIN ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Remove fraktguiden styling from the checkout', self::TEXT_DOMAIN ),
+            'default' => 'no'
+        ),
         'debug'         => array(
             'title'       => __( 'Debug mode', self::TEXT_DOMAIN ),
             'type'        => 'checkbox',
@@ -526,7 +518,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'Bring Fraktguiden logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
         ),
-
         'system_information'         => array(
             'title'       => __( 'Debug System information', self::TEXT_DOMAIN ),
             'type'        => 'hidden',
@@ -535,9 +526,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => sprintf( '<a href="%s" target="_blank">%s</a>', admin_url( 'admin-ajax.php?action=bring_system_info' ), __( 'View system info', self::TEXT_DOMAIN ) )
         ),
 
-
         /**
-         * Developer settings
+         * MyBring API settings
          */
         'mybring_title' => [
             'title'       => __( 'Mybring.com API', self::TEXT_DOMAIN ),
@@ -563,12 +553,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'       => __( 'Customer number', self::TEXT_DOMAIN ),
             'placeholder' => 'PARCELS_NORWAY-100########',
         ],
-
-
-
-
     ];
-
 
     if ( class_exists( 'WC_Shipping_Zones' ) ) {
       unset( $this->form_fields['availability'] );
