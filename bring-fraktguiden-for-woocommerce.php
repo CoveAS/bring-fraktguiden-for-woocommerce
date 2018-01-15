@@ -60,6 +60,9 @@ class Bring_Fraktguiden {
       wp_schedule_event( time(), 'daily', 'bring_fraktguiden_cron' );
     }
     add_action( 'bring_fraktguiden_cron', __CLASS__ .'::cron_task' );
+
+    add_action( 'woocommerce_before_checkout_form', __CLASS__ .'::checkout_message' );
+    add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
   }
 
   static function cron_task() {
@@ -111,6 +114,14 @@ class Bring_Fraktguiden {
    */
   static function plugin_deactivate() {
     do_action( 'bring_fraktguiden_plugin_deactivate' );
+  }
+
+  static function checkout_message() {
+    if ( ! Fraktguiden_Helper::pro_test_mode() ) {
+      return;
+    }
+    _e( "Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this message.", 'bring-fraktguiden' );
+
   }
 
 }
