@@ -102,17 +102,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->display_desc = $this->get_setting( 'display_desc', 'no' );
     $this->max_products = (int) $this->get_setting( 'max_products', self::DEFAULT_MAX_PRODUCTS );
 
-    // Extra safety, in case shop owner blanks ('') the value.
-    if ( ! empty( $this->settings['alt_flat_rate'] ) ) {
-      $this->alt_flat_rate = (int)$this->settings['alt_flat_rate'];
-    }
-    elseif ( empty( $this->settings['alt_flat_rate'] ) ) {
-      $this->alt_flat_rate = '';
-    }
-    else {
-      $this->alt_flat_rate = self::DEFAULT_ALT_FLAT_RATE;
-    }
-
     // The packer may make a lot of recursion when the cart contains many items.
     // Make sure xdebug max_nesting_level is raised.
     // See: http://stackoverflow.com/questions/4293775/increasing-nesting-functions-calls-limit
@@ -403,7 +392,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'       => __( 'No API connection handling', self::TEXT_DOMAIN ),
             'type'        => 'select',
             'desc_tip'    => __( 'What pricing should be used if no connection can be made to the bring API', self::TEXT_DOMAIN ),
-            'default'     => 'no_rates',
+            'default'     => 'no_rate',
             'options'  => [
               'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
               'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
@@ -442,7 +431,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'    => __( 'Heavy item handling', self::TEXT_DOMAIN ),
             'type'     => 'select',
             'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', self::TEXT_DOMAIN ),
-            'default'  => 'no_rates',
+            'default'  => 'no_rate',
             'options'  => [
               'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
               'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
@@ -478,6 +467,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => __( 'When a cart reaches this limit, you can enable this shipping method.<br><em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', self::TEXT_DOMAIN ),
             'class'       => 'bring-separate-admin-section',
         ],
+        'alt_handling' => array(
+            'title'    => __( 'Maximum product handling', self::TEXT_DOMAIN ),
+            'type'     => 'select',
+            'desc_tip' => __( 'We use a packing algorithm to pack items in three dimensions. This algorithm is computationally heavy and to prevent against DDoS attacks we\'ve implemented setting to control the maximum number of items that can be packed per order.', self::TEXT_DOMAIN ),
+            'default'  => 'no_rate',
+            'options'  => [
+              'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
+              'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
+            ]
+        ),
         'max_products'  => array(
             'title'    => __( 'Maximum product limit', self::TEXT_DOMAIN ),
             'type'     => 'text',
@@ -486,13 +485,26 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'Maximum total quantity of products in the cart before offering a custom price', self::TEXT_DOMAIN ),
             'default'  => self::DEFAULT_MAX_PRODUCTS
         ),
+        'alt_flat_rate_label' => array(
+            'title'       => __( 'Shipping method label', self::TEXT_DOMAIN ),
+            'type'        => 'text',
+            'placeholder' => __( 'ie: Cargo shipping', self::TEXT_DOMAIN ),
+            'default'     => __( 'Shipping', self::TEXT_DOMAIN ),
+        ),
         'alt_flat_rate' => array(
-            'title'    => __( 'Shipping method cost when limit is reached', self::TEXT_DOMAIN ),
+            'title'    => __( 'Shipping method cost', self::TEXT_DOMAIN ),
             'type'     => 'text',
             'css'      => 'width: 8em;',
             'placeholder' => __( 'ie: 1500', self::TEXT_DOMAIN ),
             'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
+        ),
+        'alt_flat_rate_id'          => array(
+            'title'    => __( 'Service to use for booking', self::TEXT_DOMAIN ),
+            'css'      => '',
+            'type'     => 'select',
+            'default'  => '0',
+            'options'  => $this->get_service_id_options(),
         ),
 
         /**
@@ -901,15 +913,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Offer flat rate if the cart contents exceeds max product.
     // @TODO: Use the package instead of the cart
     if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
-      if ( $this->alt_flat_rate == '' ) {
-        return;
-      }
-      $rate = array(
+      $alt_handling = $this->get_setting( 'alt_handling' );
+      if ( 'flat_rate' == $alt_handling ) {
+        $rate = array(
           'id'    => $this->id . ':' . 'alt_flat_rate',
-          'cost'  => $this->alt_flat_rate,
-          'label' => $this->method_title . ' flat rate',
-      );
-      $this->add_rate( $rate );
+          'cost'  => floatval( $this->get_setting( 'alt_flat_rate' ) ),
+          'label' => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', self::TEXT_DOMAIN ) ),
+        );
+        $this->add_rate( $rate );
+      }
+      return;
     }
     else {
       $cart = $package[ 'contents' ];
