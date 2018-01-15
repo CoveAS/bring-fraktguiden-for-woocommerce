@@ -16,15 +16,25 @@ class Fraktguiden_Helper {
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  static $options;
+
   static function valid_license() {
     $license = fraktguiden_license::get_instance();
     return $license->valid();
   }
-  static function pro_activated() {
+
+  /**
+   * Pro activated
+   * @param  boolean $ignore_license (default=false) Ignore the license check if true
+   * @return boolean                 True means that PRO mode is active
+   */
+  static function pro_activated( $ignore_license = false ) {
+    $days = self::get_pro_days_remaining();
+    $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
     if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] );
+      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
     }
-    return self::get_option( 'pro_enabled' ) == 'yes';
+    return self::get_option( 'pro_enabled' ) == 'yes' && $pro_allowed;
   }
 
   static function booking_enabled() {
@@ -35,7 +45,7 @@ class Fraktguiden_Helper {
   }
 
   static function pro_test_mode() {
-    if ( ! self::pro_activated() ) {
+    if ( ! self::pro_activated( true) ) {
       return false;
     }
       if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
@@ -131,17 +141,30 @@ class Fraktguiden_Helper {
    * @return string|bool
    */
   static function get_option( $key, $default = false ) {
-    static $options;
-    if ( empty( $options ) ) {
-        $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
+    if ( empty( self::$options ) ) {
+      self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
     }
-    if ( empty( $options ) ) {
-      return false;
+    if ( empty( self::$options ) ) {
+      return $default;
     }
-    if ( ! isset( $options[ $key ] ) ) {
-        return $default;
+    if ( ! isset( self::$options[ $key ] ) ) {
+      return $default;
     }
-    return $options[ $key ];
+    return self::$options[ $key ];
+  }
+
+  /**
+   * Updates a Woo admin setting by key
+   *
+   * @param string $key
+   * @return string|bool
+   */
+  static function update_option( $key, $data ) {
+    if ( empty( self::$options ) ) {
+      self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
+    }
+    self::$options[ $key ] = $data;
+    update_option( 'woocommerce_bring_fraktguiden_settings', self::$options, true );
   }
 
   /**
@@ -191,13 +214,15 @@ class Fraktguiden_Helper {
     $start_date = self::get_option( 'pro_activated_on', false );
     if ( ! $start_date ) {
       $time = time();
+      self::update_option( 'pro_activated_on', $time );
     } else {
-      $time = strtotime( $start_date );
+      $time = intval( $start_date );
     }
-    $diff = $time + 86400 * 30 - time();
+    $diff = $time + 86400 * 7 - time();
     $time = floor( $diff / 86400 );
     return $time;
   }
+
   static function get_pro_terms_link( $text = '' ) {
     if ( ! $text ) {
       $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', self::TEXT_DOMAIN );
@@ -211,11 +236,16 @@ class Fraktguiden_Helper {
       return __( 'Running in test-mode.', self::TEXT_DOMAIN ) . ' '
         . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
     }
-    if ( self::pro_activated() ) {
+    if ( self::pro_activated( true ) ) {
       if ( self::valid_license() ) {
         return '';
       }
       $days = self::get_pro_days_remaining();
+
+      if ( $days < 0 ) {
+        return __( 'Please ensure you have a valid license to continue using PRO.', self::TEXT_DOMAIN ). '<br>'
+        . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
+      }
       return sprintf( __( 'The pro license has not yet activated. You have %s remaining before pro disables.', self::TEXT_DOMAIN ), "$days " . _n( 'day', 'days', $days, self::TEXT_DOMAIN ) ). '<br>'
       . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
     }
@@ -237,7 +267,7 @@ class Fraktguiden_Helper {
   static function get_admin_messages( int $limit = 0, $refresh = false ) {
     static $messages = [];
     if ( empty( $messages ) || $refresh ) {
-      $messages = get_option( 'bring_fraktguiden_admin_messages' );
+      $messages = self::get_option( 'admin_messages' );
     }
     if ( ! is_array( $messages ) ) {
       $messages = [];
@@ -259,6 +289,6 @@ class Fraktguiden_Helper {
     if ( ! in_array( $message, $messages ) ) {
       $messages[] = $message;
     }
-    update_option( 'bring_fraktguiden_admin_messages', $messages, false );
+    self::update_option( 'admin_messages', $messages, false );
   }
 }
