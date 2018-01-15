@@ -307,9 +307,8 @@ class Bring_Booking_Order_View {
       <?php }
       else { ?>
         <button type="submit" name="_bring-start-booking"
-                data-tip="<?php _e( 'Update order and start booking', self::TEXT_DOMAIN ); ?>"
-                class="button button-primary tips"><?php _e( 'Start', self::TEXT_DOMAIN ); ?>
-          &gt;</button>
+                data-tip="<?php _e( 'Start creating a label to ship this order with MyBring', self::TEXT_DOMAIN ); ?>"
+                class="button button-primary tips"><?php _e( 'Start booking', self::TEXT_DOMAIN ); ?></button>
       <?php } ?>
     </div>
     <?php
@@ -321,7 +320,7 @@ class Bring_Booking_Order_View {
   static function render_parties( $order ) {
     ?>
     <div class="bring-form-field">
-      <a class="bring-show-parties"
+      <a class="bring-show-parties button"
          href="#"><?php _e( 'Show Parties', self::TEXT_DOMAIN ); ?></a>
     </div>
     <script type="text/javascript">
@@ -395,9 +394,8 @@ class Bring_Booking_Order_View {
               <?php if ( ! empty( $pickup_point ) ): ?>
                 <span
                   class="tips"
-                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
-                  >
-                   [pickup point]
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>">
+                   [<?php _e( 'Pickup point', self::TEXT_DOMAIN ); ?>]
                 </span>
               <?php endif;?>
           </td>
@@ -413,8 +411,8 @@ class Bring_Booking_Order_View {
           <td>
             <input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
           </td>
-          <td>
-            <span class="button delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
+          <td align="right">
+            <span class="button-link button-link-delete delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
           </td>
         </tr>
       <?php } ?>
@@ -434,7 +432,7 @@ class Bring_Booking_Order_View {
                   class="tips"
                   data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
                   >
-                   [pickup point]
+                   [<?php _e( 'Pickup point', self::TEXT_DOMAIN ); ?>]
                 </span>
               <?php endif;?>
           </td>
@@ -450,13 +448,16 @@ class Bring_Booking_Order_View {
           <td>
             <input name="weight[]" class="dimension" type="text" value="0">
           </td>
-          <td>
-            <span class="button delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
+          <td align="right">
+            <span class="button-link button-link-delete delete"><?php echo __( 'Delete', self::TEXT_DOMAIN ); ?></span>
           </td>
         </tr>
-        <tr><td colspan="6"></td><td>
+        <tr>
+          <td colspan="6"></td>
+          <td align="right">
             <span class="button add"><?php echo __( 'Add', self::TEXT_DOMAIN ); ?></span>
-        </td></tr>
+          </td>
+      </tr>
       </tbody>
     </table>
     </form>
@@ -657,12 +658,15 @@ class Bring_Booking_Order_View {
     $booked = $order->is_booked();
     ?>
     <div class="bring-progress-tracker bring-flex-box">
-
-      <span
-          class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">1 ) <?php _e( 'Start', self::TEXT_DOMAIN ); ?></span>
-      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">2 ) <?php _e( 'Create and submit consignment', self::TEXT_DOMAIN ); ?></span>
-      <span
-          class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">3 ) <?php _e( 'Submitted', self::TEXT_DOMAIN ); ?></span>
+      <span class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">
+        1. <?php _e( 'Create a new booking', self::TEXT_DOMAIN ); ?>
+      </span>
+      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">
+        2. <?php _e( 'Confirm and submit consignment', self::TEXT_DOMAIN ); ?>
+      </span>
+      <span class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">
+        3. <?php _e( 'Sucessfully booked', self::TEXT_DOMAIN ); ?>
+      </span>
     </div>
     <?php
   }

@@ -31,7 +31,7 @@ class Bring_Booking_Common_View {
 
   static function booking_label( $plural = false ) {
     $label = sprintf( '%s', ( $plural == true ) ? __( 'Bring - Submit Consignments', self::TEXT_DOMAIN ) : __( 'Submit Consignment', self::TEXT_DOMAIN ) );
-    return $label . ' (' . ( Bring_Booking::is_test_mode() ? 'Test Mode' : '' ) . ')';
+    return $label . ( Bring_Booking::is_test_mode() ? ' - '. __( 'Test mode', self::TEXT_DOMAIN ) : '' );
   }
 
   /**
