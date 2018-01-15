@@ -21,6 +21,18 @@ return [
     'DescriptionText' => 'Pakken leveres hjem til deg, sjåføren ringer 30 - 60 min. før ankomst',
     'HelpText'        => 'Sendingen leveres hjem til deg mellom klokken 17 og 21. Du varsles i god tid om forventet utleveringsdag på sms og/eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme kveld. Sjåfør ringer deg på mobiltelefon 30 - 60 minutter før levering. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk og du vil motta en varsel om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
   ],
+  'MAIL' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'Brev',
+    'DisplayName'     => 'Brev',
+    'DescriptionText' => '',
+    'HelpText'        => '',
+  ],
+
+  /**
+   * Pakke i postkassen
+   * A customer number is required for ordering Pakke i postkassen services. There is a minimum fee of 150,- for each order.
+   */
   'PAKKE_I_POSTKASSEN' => [
     'ProductCode'     => '3584',
     'ProductName'     => 'Pakke i postkassen',
@@ -29,6 +41,15 @@ return [
     'HelpText'        => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
     'ProductLink'     => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
   ],
+  'PAKKE_I_POSTKASSEN_SPORBAR' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'Pakke i postkassen (sporbar)',
+    'DisplayName'     => 'Pakke i postkassen (sporbar)',
+    'DescriptionText' => 'Pakken leveres i din postkasse innen 2 virkedager.',
+    'HelpText'        => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+    'ProductLink'     => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
+  ],
+
   'BPAKKE_DOR-DOR' => [
     'ProductCode'     => '1000',
     'ProductName'     => 'Bedriftspakke',
@@ -85,6 +106,11 @@ return [
     'DescriptionText' => 'N/A',
     'HelpText'        => 'N/A',
   ],
+
+  /**
+   * Business parcel
+   * Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.
+   */
   'BUSINESS_PARCEL' => [
     'ProductCode'     => '0330',
     'ProductName'     => 'CarryOn Business',
@@ -92,6 +118,12 @@ return [
     'DescriptionText' => 'Pakke til bedrifter i utlandet',
     'HelpText'        => 'CarryOn Business er en enkelt og effektiv måte å sende pakker til andre firmaer i Norden og til resten av verden. Pakker hentes i henhold til avtale, og leveres til mottaker mellom mandag- fredag i kontortiden. I enkelte land leveres pakkene på mottakers postkontor.',
   ],
+
+  /**
+   * PickUp Parcel
+   * Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.
+   * For shipments to Denmark, PICKUP_PARCEL needs to be ordered with the “PICKUP_POINT” additional service to send as a low-cost delivery from Bring’s parcel shops or parcel lockers. Otherwise the shipment will be sent as a more expensive home delivery.
+   */
   'PICKUP_PARCEL' => [
     'ProductCode'     => '0340',
     'ProductName'     => 'CarryOn HomeShopping',
@@ -99,6 +131,7 @@ return [
     'DescriptionText' => 'Hentes på mottakers lokale utleveringssted i butikk.',
     'HelpText'        => 'Sendingen blir levert til mottakers nærmeste utleveringssted. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
   ],
+
   'COURIER_VIP' => [
     'ProductCode'     => 'VIP25',
     'ProductName'     => 'Bud VIP',
@@ -134,11 +167,191 @@ return [
     'DescriptionText' => 'Leveres av bud til dør innen 6 timer.',
     'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 6 timer.',
   ],
+
+  /**
+   * Oil Express products can be shipped only in Norway and between certain postal codes.
+   */
   'OIL_EXPRESS' => [
     'ProductCode'     => '3050',
     'ProductName'     => 'OIL_EXPRESS',
     'DisplayName'     => 'Oil Express',
     'DescriptionText' => 'N/A',
+    'HelpText'        => 'Oil Express products can be shipped only in Norway and between certain postal codes.',
+  ],
+
+  /**
+   * Frigo
+   *
+   * Frigo products can be ordered only in Norway and requires a Frigo customer.
+   */
+  'FRIGO' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'FRIGO',
+    'DisplayName'     => 'Frigo',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'Frigo products can be ordered only in Norway and requires a Frigo customer.',
+  ],
+
+
+  /**
+   * Home Delivery Product List
+   * Lead time given is from first Bring terminal to the terminal delivering
+   * the goods. Local cut-off times are not accounted for, so the client should
+   * adjust for these. These products are only available when accessed with a
+   * PARCELS_NORWAY customer number tied to an appropriate agreement.
+   */
+  'SINGLE_INDOOR' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Single Indoor',
+    'DescriptionText' => 'N/A',
     'HelpText'        => 'N/A',
-  ]
+  ],
+  'CURBSIDE' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Curbside ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'CURBSIDE_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Curbside Express ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'CURBSIDE_WEEKEND' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Curbside Weekend ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'CURBSIDE_WEEKEND_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Curbside Weekend Express ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'CURBSIDE_EVENING' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Curbside Evening ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'INDOOR_LIGHT' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Indoor Light ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'SINGLE_INDOOR_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Single Indoor Express',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor Express',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'INDOOR_LIGHT_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Indoor Light Express ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'SINGLE_INDOOR_WEEKEND' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Single Indoor Weekend',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR_WEEKEND' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor Weekend',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'INDOOR_LIGHT_WEEKEND' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Indoor Light Weekend ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'SINGLE_INDOOR_WEEKEND_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Single Indoor Weekend Express',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR_WEEKEND_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor Weekend Express',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'INDOOR_LIGHT_WEEKEND_EXPRESS' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Indoor Light Weekend Express ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'HOME_DELIVERY_RETURN' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Return Home Delivery ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR_NO' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor (NO) ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'SINGLE_INDOOR_EVENING' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Single Indoor Evening',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'DOUBLE_INDOOR_EVENING' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Double Indoor Evening',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
+  'INDOOR_LIGHT_EVENING' => [
+    'ProductCode'     => '',
+    'ProductName'     => 'OIL_EXPRESS',
+    'DisplayName'     => 'Indoor Light Evening ',
+    'DescriptionText' => 'N/A',
+    'HelpText'        => 'N/A',
+  ],
 ];

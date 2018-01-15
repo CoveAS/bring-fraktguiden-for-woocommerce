@@ -17,7 +17,6 @@ class Fraktguiden_Helper {
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
   static function valid_license() {
-    require_once __DIR__ .'/class-fraktguiden-license.php';
     $license = fraktguiden_license::get_instance();
     return $license->valid();
   }

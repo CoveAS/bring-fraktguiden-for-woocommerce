@@ -4,12 +4,47 @@ class fraktguiden_license {
 	const BASE_URL = 'http://bring.driv.digital/';
 
 	protected static $instance;
+
+	/**
+	 * Get instance
+	 * Singleton helper. Get the current instance of the class
+	 * @return fraktguiden_license
+	 */
 	static function get_instance() {
 		if ( ! self::$instance ) {
 			self::$instance = new fraktguiden_license();
 		}
 		return self::$instance;
 	}
+
+	public curl_request( $data ) {
+		$query_string = http_build_query( $data );
+		// Get cURL resource
+		$ch = curl_init();
+		// Set some options - we are passing in a useragent too here
+		curl_setopt_array( $ch, [
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_URL            => self::BASE_URL .'?'. $query_string,
+			CURLOPT_USERAGENT      => 'Bring plugin @ '. get_site_url()
+		] );
+		// Send the request & save response to $resp
+		$content = curl_exec( $ch );
+		// Get the HTTP code
+		$code = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+		// Close request to clear up some resources
+		curl_close( $ch );
+		// handle error; error output
+		if ( $code !== 200 ) {
+			return false;
+		}
+		return $content;
+	}
+	/**
+	 * Valid
+	 *
+	 * Check if the bring license is valid or not
+	 * @return boolean
+	 */
 	public function valid() {
 		$valid = get_option( 'bring-fraktguiden-pro-valid-to' );
 		if ( $valid && $valid < time() ) {
@@ -18,36 +53,16 @@ class fraktguiden_license {
 
 		$url = get_site_url();
 		$url_info = parse_url( $url );
+
 		if ( ! $url_info ) {
-			$query_string = http_build_query( [
-				'action' => 'ping',
-				'domain' => $url,
-			] );
-		} else {
-			$query_string = http_build_query( [
-				'action' => 'check_license',
-				'domain' => $url_info[ 'host' ],
-			] );
-		}
-
-		// Get cURL resource
-		$ch = curl_init();
-		// Set some options - we are passing in a useragent too here
-		curl_setopt_array( $ch, [
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL => self::BASE_URL .'?'. $query_string,
-			CURLOPT_USERAGENT => 'Bring plugin @ '. get_site_url()
-		] );
-		// Send the request & save response to $resp
-		$json = curl_exec( $ch );
-		// Close request to clear up some resources
-
-		// handle error; error output
-		if( curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200 ) {
+			$this->ping();
 			return true;
 		}
 
-		curl_close( $ch );
+		$json = $this->curl_request( [
+			'action' => 'check_license',
+			'domain' => $url_info[ 'host' ],
+		] );
 
 		if ( ! $json ) {
 			return true;
@@ -66,5 +81,13 @@ class fraktguiden_license {
 		}
 
 		return false;
+	}
+
+	public function ping() {
+		$url = get_site_url();
+		$this->curl_request( [
+			'action' => 'ping',
+			'domain' => $url,
+		] );
 	}
 }

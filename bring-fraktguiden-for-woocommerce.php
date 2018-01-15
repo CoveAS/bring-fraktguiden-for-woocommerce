@@ -35,10 +35,11 @@ class Bring_Fraktguiden {
     }
 
     if ( ! class_exists( 'LAFFPack' ) ) {
-      include_once 'includes/laff-pack.php';
+      require_once 'includes/laff-pack.php';
     }
-    include_once 'classes/class-wc-shipping-method-bring.php';
-    include_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
+    require_once 'classes/class-wc-shipping-method-bring.php';
+    require_once 'classes/common/class-fraktguiden-license.php';
+    require_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
 
     load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -47,11 +48,23 @@ class Bring_Fraktguiden {
     add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Bring_Fraktguiden::plugin_action_links' );
 
     if ( is_admin() ) {
-      include_once 'system-info-page.php';
+      require_once 'system-info-page.php';
       add_action( 'wp_ajax_bring_system_info', 'Fraktguiden_System_Info::generate' );
     }
 
     Fraktguiden_Minimum_Dimensions::setup();
+
+    // Make sure this event hasn't been scheduled
+    if( ! wp_next_scheduled( 'bring_fraktguiden_cron' ) ) {
+      // Schedule the event
+      wp_schedule_event( time(), 'daily', 'bring_fraktguiden_cron' );
+    }
+    add_action( 'bring_fraktguiden_cron', __CLASS__ .'::cron_task' );
+  }
+
+  static function cron_task() {
+    $license = fraktguiden_license::get_instance();
+    $license->valid();
   }
 
   /**
