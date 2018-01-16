@@ -87,7 +87,11 @@ class Bring_Fraktguiden {
    * @return array
    */
   static function add_bring_method( $methods ) {
-    $methods['bring_fraktguiden'] = Fraktguiden_Helper::pro_activated() ? 'WC_Shipping_Method_Bring_Pro' : 'WC_Shipping_Method_Bring';
+    if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) {
+      $methods['bring_fraktguiden'] =  'WC_Shipping_Method_Bring_Pro';
+    } else {
+      $methods['bring_fraktguiden'] =  'WC_Shipping_Method_Bring';
+    }
     return $methods;
   }
 

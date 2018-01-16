@@ -780,7 +780,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-service">
               <?php _e( 'Service', self::TEXT_DOMAIN ); ?>
             </th>
-            <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
+            <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
             <th class="fraktguiden-services-table-col-custom-price">
               <?php _e( 'Custom price', self::TEXT_DOMAIN ); ?>
             </th>
@@ -835,7 +835,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
-              <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
+              <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
               <td class="fraktguiden-services-table-col-custom-price">
                 <input type="text"
                        placeholder="<?= __( '...', self::TEXT_DOMAIN );?>"
