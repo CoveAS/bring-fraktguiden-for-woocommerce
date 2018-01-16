@@ -33,7 +33,7 @@ class Fraktguiden_Admin_Notices {
       $days = Fraktguiden_Helper::get_pro_days_remaining();
       if ( $days < 0 ) {
         // If you've used up all your trial days
-        $message = __( 'You\'ve activated Bring Fraktguiden PRO. Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden' );
+        $message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden' );
       } else {
         // If you had a few days remaining
         $message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden' ) );
