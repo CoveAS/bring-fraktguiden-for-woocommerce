@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Bring_Booking_Orders_View {
 
-  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
-
   static function init() {
     add_action( 'admin_footer-edit.php', array( __CLASS__, 'add_bulk_admin_footer' ) );
     add_filter( 'manage_edit-shop_order_columns', array( __CLASS__, 'booking_status_column' ), 15 );
@@ -54,36 +52,31 @@ class Bring_Booking_Orders_View {
           <div class="wc-backbone-modal-content">
             <section class="wc-backbone-modal-main" role="main">
               <header class="wc-backbone-modal-header">
-                <h1 class="bgf-modal-header"><?php echo __( 'MyBring Booking', 'bring-fraktguiden' ); ?></h1>
-                <button
-                    class="modal-close modal-close-link dashicons dashicons-no-alt">
-                  <span class="screen-reader-text"><?php echo __( 'Close modal panel', 'bring-fraktguiden' ); ?></span>
+                <h1 class="bgf-modal-header"><?php _e( 'MyBring Booking', 'bring-fraktguiden' ); ?></h1>
+                <button class="modal-close modal-close-link dashicons dashicons-no-alt">
+                  <span class="screen-reader-text"><?php _e( 'Close modal panel', 'bring-fraktguiden' ); ?></span>
                 </button>
               </header>
               <article>
                 <div class="bring-form-field" style="margin-top:0">
-                  <?php echo __( 'This will only book orders that has not been booked.', 'bring-fraktguiden' ) ?>
+                  <?php _e( 'This will only book orders that has not been booked.', 'bring-fraktguiden' ) ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Selected orders', 'bring-fraktguiden' ) ?>
-                    :</label>
+                  <label><?php _e( 'Selected orders', 'bring-fraktguiden' ) ?>:</label>
                   <span class="bring-modal-selected-orders-list"></span>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'MyBring Customer', 'bring-fraktguiden' ); ?>
-                    :</label>
+                  <label><?php _e( 'MyBring Customer', 'bring-fraktguiden' ); ?>:</label>
                   <?php Bring_Booking_Common_View::render_customer_selector( '_bring-modal-customer-selector' ); ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Shipping Date', 'bring-fraktguiden' ); ?>
-                    :</label>
+                  <label><?php _e( 'Shipping Date', 'bring-fraktguiden' ); ?>:</label>
                   <?php Bring_Booking_Common_View::render_shipping_date_time( '_bring-modal-shipping-date' ); ?>
                 </div>
               </article>
               <footer>
                 <div class="inner">
-                  <button id="btn-ok"
-                          class="button button-primary button-large"><?php echo Bring_Booking_Common_View::booking_label( true ); ?></button>
+                  <button id="btn-ok" class="button button-primary button-large"><?php echo Bring_Booking_Common_View::booking_label( true ); ?></button>
                 </div>
               </footer>
             </section>

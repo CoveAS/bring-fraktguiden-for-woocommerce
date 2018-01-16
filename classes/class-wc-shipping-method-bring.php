@@ -21,8 +21,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const ID = Fraktguiden_Helper::ID;
 
-  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
-
   const DEFAULT_MAX_PRODUCTS = 100;
 
   const DEFAULT_ALT_FLAT_RATE = 200;
@@ -608,29 +606,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     <!-- -->
     <h3 class="bring-separate-admin-section"><?php echo $this->method_title; ?></h3>
     <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
-
-    <div class="pro-notice"><?= Fraktguiden_Helper::get_pro_description(); ?></div>
-
-    <style>
-      .pro-notice {
-        background-color: white;
-        padding: 1em;
-        border: 1px solid #eee;
-        z-index: 300;
-      }
-      @media ( min-width: 50em ) {
-        .pro-notice {
-          position: absolute;
-          right: 2em;
-          top: 20em;
-          width: 30em;
-        }
-      }
-    </style>
-    <!-- Above the settings -->
-
-
     <!-- -->
+
     <div class="hash-tabs fraktguiden-options" style="display:none;">
       <article class="tab-container">
         <nav class="tab-nav" role="tablist"><ul></ul><div style="clear:both;"></div></nav>
