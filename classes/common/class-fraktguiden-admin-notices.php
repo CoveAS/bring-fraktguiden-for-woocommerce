@@ -30,7 +30,7 @@ class Fraktguiden_Admin_Notices {
     } else if ( ! Fraktguiden_Helper::valid_license() ) {
       $days = Fraktguiden_Helper::get_pro_days_remaining();
       if ( $days < 0 ) {
-        $message = __( 'You\'ve activated Bring Fraktguiden PRO. Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden' );
+        $message = __( 'Bring Fraktguiden PRO features has been deactivated because you don\'t have a valid license.', 'bring-fraktguiden' );
       } else {
         $message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before pro disables.', 'bring-fraktguiden' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden' ) );
       }

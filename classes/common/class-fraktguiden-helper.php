@@ -59,10 +59,10 @@ class Fraktguiden_Helper {
     if ( ! self::pro_activated( true) ) {
       return false;
     }
-      if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-        return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
-      }
-      return self::get_option( 'test_mode' ) == 'yes';
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+      return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
+    }
+    return self::get_option( 'test_mode' ) == 'yes';
   }
 
   static function get_all_services() {
