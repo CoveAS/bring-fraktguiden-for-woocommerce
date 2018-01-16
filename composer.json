@@ -1,14 +1,4 @@
 {
   "name": "drivdigital/bring-fraktguiden-for-woocommerce",
   "type": "wordpress-plugin",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    }
-  ],
-  "require": {
-    "composer/installers": "*",
-    "myokyawhtun/pdfmerger": "dev-master"
-  }
 }
