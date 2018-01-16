@@ -239,7 +239,7 @@ class Fraktguiden_Helper {
       $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', 'bring-fraktguiden' );
     }
     $format = '<a href="%s" target="_blank">%s</a>';
-    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, 'bring-fraktguiden' ) );
+    return sprintf( $format, 'https://drivdigital.no/bring-fraktguiden-pro-woocommerce', __( $text, 'bring-fraktguiden' ) );
   }
 
   static function get_pro_description() {
