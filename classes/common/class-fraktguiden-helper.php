@@ -236,16 +236,16 @@ class Fraktguiden_Helper {
 
   static function get_pro_terms_link( $text = '' ) {
     if ( ! $text ) {
-      $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', self::TEXT_DOMAIN );
+      $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', 'bring-fraktguiden' );
     }
     $format = '<a href="%s" target="_blank">%s</a>';
-    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, self::TEXT_DOMAIN ) );
+    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, 'bring-fraktguiden' ) );
   }
 
   static function get_pro_description() {
     if ( self::pro_test_mode() ) {
-      return __( 'Running in test-mode.', self::TEXT_DOMAIN ) . ' '
-        . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
+      return __( 'Running in test-mode.', 'bring-fraktguiden' ) . ' '
+        . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
     }
     if ( self::pro_activated( true ) ) {
       if ( self::valid_license() ) {
@@ -254,11 +254,11 @@ class Fraktguiden_Helper {
       $days = self::get_pro_days_remaining();
 
       if ( $days < 0 ) {
-        return __( 'Please ensure you have a valid license to continue using PRO.', self::TEXT_DOMAIN ). '<br>'
-        . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
+        return __( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden' ). '<br>'
+        . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
       }
-      return sprintf( __( 'The pro license has not yet activated. You have %s remaining before pro disables.', self::TEXT_DOMAIN ), "$days " . _n( 'day', 'days', $days, self::TEXT_DOMAIN ) ). '<br>'
-      . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
+      return sprintf( __( 'The pro license has not yet activated. You have %s remaining before pro disables.', 'bring-fraktguiden' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden' ) ). '<br>'
+      . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
     }
     return sprintf(
       '<h3>%s</h3>
@@ -267,10 +267,10 @@ class Fraktguiden_Helper {
         <li>%s</li>
         <li>%s</li>
       </ol>',
-      _x( 'Bring Fraktguiden Pro features', 'Title for the features section', self::TEXT_DOMAIN ),
-      _x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', self::TEXT_DOMAIN ),
-      _x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', self::TEXT_DOMAIN ),
-      _x( 'MyBring Booking: Book orders directly from the order page with MyBring', 'Succinct explaination of feature', self::TEXT_DOMAIN )
+      _x( 'Bring Fraktguiden Pro features', 'Title for the features section', 'bring-fraktguiden' ),
+      _x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
+      _x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
+      _x( 'MyBring Booking: Book orders directly from the order page with MyBring', 'Succinct explaination of feature', 'bring-fraktguiden' )
     ) . ' ' . Fraktguiden_Helper::get_pro_terms_link();
   }
 

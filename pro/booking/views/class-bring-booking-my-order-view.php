@@ -22,7 +22,7 @@ class Bring_Booking_My_Order_View {
 
     if ( $order->is_booked() ) {
       $content .= '<div class="bring-order-details-booking">';
-      $content .= '<strong>' . __( 'Your tracking number: ', self::TEXT_DOMAIN ) . '</strong>';
+      $content .= '<strong>' . __( 'Your tracking number: ', 'bring-fraktguiden' ) . '</strong>';
       $content .= '<ul>';
       foreach ( $order->get_booking_consignments() as $consignment ) {
         $confirmation       = $consignment->confirmation;

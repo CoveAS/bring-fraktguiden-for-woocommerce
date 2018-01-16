@@ -19,7 +19,7 @@ class Bring_Booking_Orders_View {
    * @return mixed
    */
   static function booking_status_column( $columns ) {
-    $columns['bring_booking_status'] = __( 'Booking', self::TEXT_DOMAIN );
+    $columns['bring_booking_status'] = __( 'Booking', 'bring-fraktguiden' );
     return $columns;
   }
 
@@ -54,28 +54,28 @@ class Bring_Booking_Orders_View {
           <div class="wc-backbone-modal-content">
             <section class="wc-backbone-modal-main" role="main">
               <header class="wc-backbone-modal-header">
-                <h1 class="bgf-modal-header"><?php echo __( 'MyBring Booking', self::TEXT_DOMAIN ); ?></h1>
+                <h1 class="bgf-modal-header"><?php echo __( 'MyBring Booking', 'bring-fraktguiden' ); ?></h1>
                 <button
                     class="modal-close modal-close-link dashicons dashicons-no-alt">
-                  <span class="screen-reader-text"><?php echo __( 'Close modal panel', self::TEXT_DOMAIN ); ?></span>
+                  <span class="screen-reader-text"><?php echo __( 'Close modal panel', 'bring-fraktguiden' ); ?></span>
                 </button>
               </header>
               <article>
                 <div class="bring-form-field" style="margin-top:0">
-                  <?php echo __( 'This will only book orders that has not been booked.', self::TEXT_DOMAIN ) ?>
+                  <?php echo __( 'This will only book orders that has not been booked.', 'bring-fraktguiden' ) ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Selected orders', self::TEXT_DOMAIN ) ?>
+                  <label><?php echo __( 'Selected orders', 'bring-fraktguiden' ) ?>
                     :</label>
                   <span class="bring-modal-selected-orders-list"></span>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'MyBring Customer', self::TEXT_DOMAIN ); ?>
+                  <label><?php echo __( 'MyBring Customer', 'bring-fraktguiden' ); ?>
                     :</label>
                   <?php Bring_Booking_Common_View::render_customer_selector( '_bring-modal-customer-selector' ); ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Shipping Date', self::TEXT_DOMAIN ); ?>
+                  <label><?php echo __( 'Shipping Date', 'bring-fraktguiden' ); ?>
                     :</label>
                   <?php Bring_Booking_Common_View::render_shipping_date_time( '_bring-modal-shipping-date' ); ?>
                 </div>
@@ -103,8 +103,8 @@ class Bring_Booking_Orders_View {
             $( '<option>' ).val( 'bring_bulk_book' ).text( '<?php echo Bring_Booking_Common_View::booking_label( true );?>' ).appendTo( "select[name='action2']" );
 
             // Add bulk print to action selector
-            $( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', self::TEXT_DOMAIN ); ?>' ).appendTo( "select[name='action']" );
-            $( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', self::TEXT_DOMAIN ) ;?>' ).appendTo( "select[name='action2']" );
+            $( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden' ); ?>' ).appendTo( "select[name='action']" );
+            $( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden' ) ;?>' ).appendTo( "select[name='action2']" );
 
             //@todo: does this need to be global?
             var modal = $( {} );

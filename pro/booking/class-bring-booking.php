@@ -48,12 +48,12 @@ class Bring_Booking {
     // Be careful changing the post status name.
     // If orders has this status they will not be available in admin.
     register_post_status( 'wc-bring-shipment', array(
-        'label'                     => __( 'Awaiting Shipment', self::TEXT_DOMAIN ),
+        'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden' ),
         'public'                    => true,
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( __( 'Awaiting Shipment', self::TEXT_DOMAIN ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', self::TEXT_DOMAIN ) . ' <span class="count">(%s)</span>' )
+        'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>' )
     ) );
   }
 
@@ -69,7 +69,7 @@ class Bring_Booking {
     foreach ( $order_statuses as $key => $status ) {
       $new_order_statuses[$key] = $status;
       if ( 'wc-processing' === $key ) {
-        $new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', self::TEXT_DOMAIN );
+        $new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden' );
       }
     }
     return $new_order_statuses;
@@ -174,12 +174,12 @@ class Bring_Booking {
             // Set status back to the previous status
             $status = $original_order_status;
           }
-          $status_note = __( "Booked with Bring" . "\n", self::TEXT_DOMAIN );
+          $status_note = __( "Booked with Bring" . "\n", 'bring-fraktguiden' );
         }
         else {
           // If there are errors, set the status back to the original status.
           $status      = $original_order_status;
-          $status_note = __( "Booking errors. See the Bring Booking box for details." . "\n", self::TEXT_DOMAIN );
+          $status_note = __( "Booking errors. See the Bring Booking box for details." . "\n", 'bring-fraktguiden' );
         }
 
         // Update status.
