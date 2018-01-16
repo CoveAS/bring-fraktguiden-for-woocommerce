@@ -233,7 +233,7 @@ class Fraktguiden_Helper {
     } else {
       $time = intval( $start_date );
     }
-    $diff = $time + 86400 * 7 - time();
+    $diff = $time + 86400 * 8 - time() - 10;
     $time = floor( $diff / 86400 );
     return $time;
   }
@@ -274,14 +274,12 @@ class Fraktguiden_Helper {
       . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
     }
     return sprintf(
-      '<h3>%s</h3>
-      <ol>
+      '<ol>
         <li>%s</li>
         <li>%s</li>
         <li>%s</li>
         <li>%s</li>
       </ol>',
-      _x( 'Bring Fraktguiden Pro features', 'Title for the features section', 'bring-fraktguiden' ),
       _x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
       _x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
       _x( 'MyBring Booking: Book orders directly from the order page with MyBring', 'Succinct explaination of feature', 'bring-fraktguiden' ),

@@ -56,7 +56,6 @@ class fraktguiden_license {
 	 */
 	public function valid() {
 		$valid = get_option( 'bring_fraktguiden_pro_valid_to' );
-
 		if ( $valid && $valid > time() ) {
 			return true;
 		}

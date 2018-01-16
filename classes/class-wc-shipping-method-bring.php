@@ -654,9 +654,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $( '.hash-tabs .tab-pane-container' ).append( elem );
       } );
 
+      var targeted = location.hash;
 
       // Make the tabs work
-      $( '.fraktguiden-options' ).hashTabs().show();
+      $( '.fraktguiden-options' ).hashTabs();
+
+      if ( ! targeted ) {
+        window.scrollTo(0, 0);
+        setTimeout(function() {
+          window.scrollTo(0, 0);
+        }, 1);
+      }
+
+      $( '.fraktguiden-options' ).show();
 
       var save = $( 'p.submit');
       $( '.fraktguiden-options' ).after( save );
