@@ -166,7 +166,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'title',
             'title'       => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
             'description' => Fraktguiden_Helper::get_pro_description(),
-            'class'       => 'bring-separate-admin-section',
         ],
         'pro_enabled' => [
             'title'   => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
@@ -593,7 +592,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     </table>
 
     <!-- -->
-    <h3><?php echo $this->method_title; ?></h3>
+    <h3 class="bring-separate-admin-section"><?php echo $this->method_title; ?></h3>
     <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
 
     <div class="pro-notice"><?= Fraktguiden_Helper::get_pro_description(); ?></div>
