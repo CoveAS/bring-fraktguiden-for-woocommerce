@@ -670,6 +670,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         return;
     }
     wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) .'/assets/js/jquery.hash-tabs.min.js', [], '1.0.4' );
+    wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) .'/assets/js/bring-fraktguiden-admin.js', [], '1.0.0' );
+    wp_localize_script( 'bring-admin-js', 'bring_fraktguiden', [
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+    ] );
     wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden.css', [], '1.0.0' );
   }
 
@@ -1081,9 +1085,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function create_standard_url_params( $package ) {
     global $woocommerce;
-    if ( ! $this->from_zip ) {
-      wc_add_notice( 'Bring requires a postal code from which packages are being sent. Please check the settings page.', 'error' );
-    }
+
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,

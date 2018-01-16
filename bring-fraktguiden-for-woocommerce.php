@@ -39,7 +39,8 @@ class Bring_Fraktguiden {
     }
     require_once 'classes/class-wc-shipping-method-bring.php';
     require_once 'classes/common/class-fraktguiden-license.php';
-    require_once dirname( __FILE__ ) . '/pro/class-wc-shipping-method-bring-pro.php';
+    require_once 'classes/common/class-fraktguiden-admin-notices.php';
+    require_once 'pro/class-wc-shipping-method-bring-pro.php';
 
     load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -63,6 +64,8 @@ class Bring_Fraktguiden {
 
     add_action( 'woocommerce_before_checkout_form', __CLASS__ .'::checkout_message' );
     add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
+
+    Fraktguiden_Admin_Notices::init();
   }
 
   static function cron_task() {
@@ -102,12 +105,8 @@ class Bring_Fraktguiden {
    * @return array
    */
   static function plugin_action_links( $links ) {
-    $section = 'wc_shipping_method_bring';
-    if ( class_exists( 'WC_Shipping_Method_Bring_Pro' ) ) {
-      $section .= '_pro';
-    }
     $action_links = array(
-        'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . $section ) . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', self::TEXT_DOMAIN ) ) . '">' . __( 'Settings', self::TEXT_DOMAIN ) . '</a>',
+        'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', self::TEXT_DOMAIN ) ) . '">' . __( 'Settings', self::TEXT_DOMAIN ) . '</a>',
     );
 
     return array_merge( $action_links, $links );
