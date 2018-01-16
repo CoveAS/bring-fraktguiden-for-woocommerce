@@ -35,5 +35,21 @@
   /*border-left: 1px solid #ccc;*/
 }
 
-.fraktguiden-options .tab-pane-container {
+.fraktguiden-options .tab-pane-container {}
+
+/* Error messages on the checkout */
+.bring-enter-postcode.bring-error {
+
+}
+
+__error-color: #f05;
+
+.bring-error-input {
+  border: 1px solid var( __error-color, red );
+  border-bottom-width: 2px;
+}
+
+.bring-error-message {
+  font-size: 0.8em;
+  color: var( __error-color, red );
 }
