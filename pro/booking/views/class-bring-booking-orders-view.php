@@ -55,8 +55,7 @@ class Bring_Booking_Orders_View {
             <section class="wc-backbone-modal-main" role="main">
               <header class="wc-backbone-modal-header">
                 <h1 class="bgf-modal-header"><?php echo __( 'MyBring Booking', self::TEXT_DOMAIN ); ?></h1>
-                <button
-                    class="modal-close modal-close-link dashicons dashicons-no-alt">
+                <button class="modal-close modal-close-link dashicons dashicons-no-alt">
                   <span class="screen-reader-text"><?php echo __( 'Close modal panel', self::TEXT_DOMAIN ); ?></span>
                 </button>
               </header>
@@ -65,25 +64,21 @@ class Bring_Booking_Orders_View {
                   <?php echo __( 'This will only book orders that has not been booked.', self::TEXT_DOMAIN ) ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Selected orders', self::TEXT_DOMAIN ) ?>
-                    :</label>
+                  <label><?php echo __( 'Selected orders', self::TEXT_DOMAIN ) ?>:</label>
                   <span class="bring-modal-selected-orders-list"></span>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'MyBring Customer', self::TEXT_DOMAIN ); ?>
-                    :</label>
+                  <label><?php echo __( 'MyBring Customer', self::TEXT_DOMAIN ); ?>:</label>
                   <?php Bring_Booking_Common_View::render_customer_selector( '_bring-modal-customer-selector' ); ?>
                 </div>
                 <div class="bring-form-field">
-                  <label><?php echo __( 'Shipping Date', self::TEXT_DOMAIN ); ?>
-                    :</label>
+                  <label><?php echo __( 'Shipping Date', self::TEXT_DOMAIN ); ?>:</label>
                   <?php Bring_Booking_Common_View::render_shipping_date_time( '_bring-modal-shipping-date' ); ?>
                 </div>
               </article>
               <footer>
                 <div class="inner">
-                  <button id="btn-ok"
-                          class="button button-primary button-large"><?php echo Bring_Booking_Common_View::booking_label( true ); ?></button>
+                  <button id="btn-ok" class="button button-primary button-large"><?php echo Bring_Booking_Common_View::booking_label( true ); ?></button>
                 </div>
               </footer>
             </section>

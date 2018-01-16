@@ -587,29 +587,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function admin_options() {
     global $woocommerce; ?>
     <!-- -->
-    <h3><?php echo $this->method_title; ?></h3>
-    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
-
-    <div class="pro-notice"><?= Fraktguiden_Helper::get_pro_description(); ?></div>
-
-    <style>
-      .pro-notice {
-        background-color: white;
-        padding: 1em;
-        border: 1px solid #eee;
-        z-index: 300;
-      }
-      @media ( min-width: 50em ) {
-        .pro-notice {
-          position: absolute;
-          right: 2em;
-          top: 20em;
-          width: 30em;
-        }
-      }
-    </style>
-    <!-- Above the settings -->
-
+    <div>
+      <h3><?php echo $this->method_title; ?></h3>
+      <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
+    </div>
 
     <!-- -->
     <div class="hash-tabs fraktguiden-options" style="display:none;">
