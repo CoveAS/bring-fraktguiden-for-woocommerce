@@ -159,6 +159,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
 
     $this->pro_form_fields = [
+      'pro_mode_settings',
+      'pro_enabled',
+      'test_mode',
+    ];
+    $this->form_fields = [
         /**
          * Pro enabling
          */
@@ -178,8 +183,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
             'default' => 'no'
         ],
-    ];
-    $this->form_fields = [
 
         /**
          * Plugin settings
@@ -586,14 +589,20 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function admin_options() {
     global $woocommerce; ?>
+    <?php
+    $pro_form_fields = [];
+    $form_fields = [];
+    foreach ( $this->form_fields as $key => $field ) {
+      if ( in_array( $key, $this->pro_form_fields ) ) {
+        $pro_form_fields[$key] = $field;
+      } else {
+        $form_fields[$key] = $field;
+      }
+    }
+    ?>
 
     <table class="form-table">
-
-      <?php
-      $pro_form_fields = apply_filters( 'woocommerce_settings_api_form_fields_' . $this->id, array_map( array( $this, 'set_defaults' ), $this->pro_form_fields ) );
-      $this->generate_settings_html( $pro_form_fields );
-
-      ?>
+      <?php $this->generate_settings_html( $pro_form_fields ); ?>
     </table>
 
     <!-- -->
@@ -631,7 +640,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     <table class="form-table">
       <?php if ( $this->is_valid_for_use() ) :?>
-        <?php $this->generate_settings_html();?>
+        <?php $this->generate_settings_html( $form_fields );?>
       <?php else : ?>
         <tr><td><div class="inline error"><p>
             <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
