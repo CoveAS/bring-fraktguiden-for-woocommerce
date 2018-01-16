@@ -42,7 +42,7 @@ class Bring_Fraktguiden {
     require_once 'classes/common/class-fraktguiden-admin-notices.php';
     require_once 'pro/class-wc-shipping-method-bring-pro.php';
 
-    load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
     add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
 
@@ -106,7 +106,7 @@ class Bring_Fraktguiden {
    */
   static function plugin_action_links( $links ) {
     $action_links = array(
-        'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', self::TEXT_DOMAIN ) ) . '">' . __( 'Settings', self::TEXT_DOMAIN ) . '</a>',
+        'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
     );
 
     return array_merge( $action_links, $links );

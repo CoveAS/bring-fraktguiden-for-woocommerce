@@ -1,9 +1,5 @@
-console.log( 'yes!' );
 
 jQuery( function( $ ) {
-  console.log( 'Woo!' );
-
-// debugger;
   $( '.bring-notice.is-dismissible' ).each( function() {
     var notice_id = $( this ).data( 'notice_id' );
     $( this ).on( 'click', '.notice-dismiss', function( e ) {
@@ -14,5 +10,4 @@ jQuery( function( $ ) {
       } );
     } );
   } );
-
 } );

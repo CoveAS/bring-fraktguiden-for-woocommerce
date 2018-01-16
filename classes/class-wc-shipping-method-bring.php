@@ -21,8 +21,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const ID = Fraktguiden_Helper::ID;
 
-  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
-
   const DEFAULT_MAX_PRODUCTS = 100;
 
   const DEFAULT_ALT_FLAT_RATE = 200;
@@ -33,7 +31,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $post_office = '';
   private $vat = '';
   private $evarsling = '';
-  protected $services = array();
+  protected $services = [];
   protected $service_name = '';
   private $display_desc = '';
   private $max_products = '';
@@ -46,6 +44,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /** @var array */
   protected $packages_params = [ ];
+  protected $pro_form_fields = [];
 
   /**
    * @constructor
@@ -55,8 +54,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function __construct( $instance_id = 0 ) {
 
     $this->id           = self::ID;
-    $this->method_title = __( 'Bring Fraktguiden', self::TEXT_DOMAIN );
-    $this->method_description    = __( 'Automatically calculate shipping rates using brings fraktguiden api.', self::TEXT_DOMAIN );
+    $this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+    $this->method_description    = __( 'Automatically calculate shipping rates using brings fraktguiden api.', 'bring-fraktguiden' );
     $this->supports              = array(
       'shipping-zones',
       'settings',
@@ -157,6 +156,27 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         return;
     }
 
+    $this->pro_form_fields = [
+        /**
+         * Pro enabling
+         */
+        'pro_mode_settings' => [
+            'type'        => 'title',
+            'title'       => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
+            'description' => Fraktguiden_Helper::get_pro_description(),
+        ],
+        'pro_enabled' => [
+            'title'   => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Enable PRO features to extend Bring Fraktguiden', 'bring-fraktguiden' ),
+        ],
+        'test_mode' => [
+            'title'   => __( 'Enable test mode', 'bring-fraktguiden' ),
+            'type'    => 'checkbox',
+            'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
+            'default' => 'no'
+        ],
+    ];
     $this->form_fields = [
 
         /**
@@ -164,13 +184,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'plugin_settings' => [
             'type'  => 'title',
-            'title' => __( 'Bring Settings', self::TEXT_DOMAIN ),
+            'title' => __( 'Bring Settings', 'bring-fraktguiden' ),
             'class'       => 'separated_title_tab',
         ],
         'enabled'               => array(
-            'title'   => __( 'Enable', self::TEXT_DOMAIN ),
+            'title'   => __( 'Enable', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
-            'label'   => __( 'Enable Bring Fraktguiden', self::TEXT_DOMAIN ),
+            'label'   => __( 'Enable Bring Fraktguiden', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
 
@@ -180,33 +200,33 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
 
         'title'                 => array(
-            'title'    => __( 'Title', self::TEXT_DOMAIN ),
+            'title'    => __( 'Title', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'desc_tip' => __( 'This controls the title which the user sees during checkout.', self::TEXT_DOMAIN ),
-            'default'  => __( 'Bring Fraktguiden', self::TEXT_DOMAIN )
+            'desc_tip' => __( 'This controls the title which the user sees during checkout.', 'bring-fraktguiden' ),
+            'default'  => __( 'Bring Fraktguiden', 'bring-fraktguiden' )
         ),
 
         'post_office'           => array(
-            'title'    => __( 'Post office', self::TEXT_DOMAIN ),
+            'title'    => __( 'Post office', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Shipping from post office', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', self::TEXT_DOMAIN ),
+            'label'    => __( 'Shipping from post office', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
 
         'from_zip'              => array(
-            'title'    => __( 'From zip', self::TEXT_DOMAIN ),
+            'title'    => __( 'From zip', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'placeholder' => __( 'ie: 0159', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: 0159', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'This is the zip code of where you deliver from. For example, the post office.', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'default'  => ''
         ),
 
         'from_country'          => array(
-            'title'    => __( 'From country', self::TEXT_DOMAIN ),
+            'title'    => __( 'From country', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', 'bring-fraktguiden' ),
             'class'    => 'chosen_select',
             'css'      => 'width: 400px;',
             'default'  => $woocommerce->countries->get_base_country(),
@@ -214,10 +234,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
         'handling_fee'          => array(
-            'title'    => __( 'Delivery Fee', self::TEXT_DOMAIN ),
+            'title'    => __( 'Delivery Fee', 'bring-fraktguiden' ),
             'type'     => 'number',
-            'placeholder' => __( '0', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', self::TEXT_DOMAIN ),
+            'placeholder' => __( '0', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'default'  => '',
             'custom_attributes'     => [
@@ -226,36 +246,36 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
         'vat'                   => array(
-            'title'    => __( 'Display price', self::TEXT_DOMAIN ),
+            'title'    => __( 'Display price', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'How to calculate delivery charges', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'How to calculate delivery charges', 'bring-fraktguiden' ),
             'default'  => 'include',
             'options'  => array(
-                'include' => __( 'VAT included', self::TEXT_DOMAIN ),
-                'exclude' => __( 'VAT excluded', self::TEXT_DOMAIN )
+                'include' => __( 'VAT included', 'bring-fraktguiden' ),
+                'exclude' => __( 'VAT excluded', 'bring-fraktguiden' )
             ),
         ),
         'evarsling'             => array(
-            'title'    => __( 'Recipient notification', self::TEXT_DOMAIN ),
+            'title'    => __( 'Recipient notification', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Recipient notification over SMS or E-Mail', self::TEXT_DOMAIN ),
+            'label'    => __( 'Recipient notification over SMS or E-Mail', 'bring-fraktguiden' ),
             'description' => __( '<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper based recipient notification.<br/>
               If enabled, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>
-              This only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>', self::TEXT_DOMAIN ),
+              This only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
         'availability'          => array(
-            'title'   => __( 'Method availability', self::TEXT_DOMAIN ),
+            'title'   => __( 'Method availability', 'bring-fraktguiden' ),
             'type'    => 'select',
             'default' => 'all',
             'class'   => 'availability',
             'options' => array(
-                'all'      => __( 'All allowed countries', self::TEXT_DOMAIN ),
-                'specific' => __( 'Specific Countries', self::TEXT_DOMAIN )
+                'all'      => __( 'All allowed countries', 'bring-fraktguiden' ),
+                'specific' => __( 'Specific Countries', 'bring-fraktguiden' )
             )
         ),
         'countries'             => array(
-            'title'   => __( 'Specific Countries', self::TEXT_DOMAIN ),
+            'title'   => __( 'Specific Countries', 'bring-fraktguiden' ),
             'type'    => 'multiselect',
             'class'   => 'chosen_select',
             'css'     => 'width: 400px;',
@@ -264,56 +284,34 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ),
 
         /**
-         * Pro enabling
-         */
-        'pro_mode_settings' => [
-            'type'        => 'title',
-            'title'       => __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN ),
-            'description' => Fraktguiden_Helper::get_pro_description(),
-            'class'       => 'bring-separate-admin-section',
-        ],
-        'pro_enabled' => array(
-            'title'   => __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN ),
-            'type'    => 'checkbox',
-            'label'   => __( 'Enable PRO features to extend Bring Fraktguiden', self::TEXT_DOMAIN ),
-        ),
-
-        'test_mode' => array(
-            'title'   => __( 'Enable test mode', self::TEXT_DOMAIN ),
-            'type'    => 'checkbox',
-            'label'   => __( 'Use PRO in test-mode. Used for development', self::TEXT_DOMAIN ),
-            'default' => 'no'
-        ),
-
-        /**
          * General options setting
          */
         'general_options_title' => [
             'type'        => 'title',
-            'title'       => __( 'Shipping Options', self::TEXT_DOMAIN ),
-            'description' => __( 'Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service.', self::TEXT_DOMAIN ),
+            'title'       => __( 'Shipping Options', 'bring-fraktguiden' ),
+            'description' => __( 'Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service.', 'bring-fraktguiden' ),
             'class'       => 'separated_title_tab',
         ],
         'service_name' => array(
-            'title'       => __( 'Display Service As', self::TEXT_DOMAIN ),
+            'title'       => __( 'Display Service As', 'bring-fraktguiden' ),
             'type'        => 'select',
-            'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', self::TEXT_DOMAIN ),
-            'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', self::TEXT_DOMAIN ),
+            'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden' ),
+            'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden' ),
             'default'     => 'DisplayName',
             'options'     => array(
-                'DisplayName' => __( 'Display Name', self::TEXT_DOMAIN ),
-                'ProductName' => __( 'Product Name', self::TEXT_DOMAIN ),
+                'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
+                'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
             )
         ),
         'display_desc'  => array(
-            'title'    => __( 'Display Description', self::TEXT_DOMAIN ),
+            'title'    => __( 'Display Description', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
-            'label'    => __( 'Add description after the service', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Show service description after the name of the service', self::TEXT_DOMAIN ),
+            'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
             'default'  => 'no'
         ),
         'services'              => array(
-            'title'   => __( 'Services', self::TEXT_DOMAIN ),
+            'title'   => __( 'Services', 'bring-fraktguiden' ),
             'type'    => 'services_table',
             'class'   => 'chosen_select',
             'css'     => 'width: 400px;',
@@ -328,54 +326,54 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'fallback_options' => [
             'type'        => 'title',
-            'title'       => __( 'Fallback options', self::TEXT_DOMAIN ),
-            'description' => __( 'With scenarios that fall outside of what Bring can handle, you are able to set prices for cases such as oversized items, minimum sized items, how many items you allow in one shipment and what should happen if Bring is not accessible.', self::TEXT_DOMAIN ),
+            'title'       => __( 'Fallback options', 'bring-fraktguiden' ),
+            'description' => __( 'With scenarios that fall outside of what Bring can handle, you are able to set prices for cases such as oversized items, minimum sized items, how many items you allow in one shipment and what should happen if Bring is not accessible.', 'bring-fraktguiden' ),
             'class'       => 'separated_title_tab',
         ],
         'minimum_sizing_params' => [
             'type'        => 'title',
-            'title'       => __( 'Minimum shipping dimensions', self::TEXT_DOMAIN ),
-            'description' => __( 'Bring needs a default shipping size for when products do not contain any dimension information.', self::TEXT_DOMAIN ),
+            'title'       => __( 'Minimum shipping dimensions', 'bring-fraktguiden' ),
+            'description' => __( 'Bring needs a default shipping size for when products do not contain any dimension information.', 'bring-fraktguiden' ),
             'class'       => 'bring-section-started',
         ],
         'minimum_length'  => array(
-            'title'       => __( 'Minimum Length in cm', self::TEXT_DOMAIN ),
+            'title'       => __( 'Minimum Length in cm', 'bring-fraktguiden' ),
             'type'        => 'number',
             'css'         => 'width: 8em;',
-            'placeholder' => __( 'Must be at least 23cm', self::TEXT_DOMAIN ),
-            'desc_tip'       => __( 'The lowest length for a consignment', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'Must be at least 23cm', 'bring-fraktguiden' ),
+            'desc_tip'       => __( 'The lowest length for a consignment', 'bring-fraktguiden' ),
             'default'     => '23',
             'custom_attributes'     => [
               'min'       => '1'
             ]
         ),
         'minimum_width'  => array(
-            'title'       => __( 'Minimum Width in cm', self::TEXT_DOMAIN ),
+            'title'       => __( 'Minimum Width in cm', 'bring-fraktguiden' ),
             'type'        => 'number',
             'css'         => 'width: 8em;',
-            'placeholder' => __( 'Must be at least 13cm', self::TEXT_DOMAIN ),
-            'desc_tip'    => __( 'The lowest width for a consignment', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'Must be at least 13cm', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'The lowest width for a consignment', 'bring-fraktguiden' ),
             'default'     => '13',
             'custom_attributes'     => [
               'min'     => '1'
             ]
         ),
         'minimum_height'  => array(
-            'title'       => __( 'Minimum Height in cm', self::TEXT_DOMAIN ),
+            'title'       => __( 'Minimum Height in cm', 'bring-fraktguiden' ),
             'type'        => 'number',
             'css'         => 'width: 8em;',
-            'placeholder' => __( 'Must be at least 1cm', self::TEXT_DOMAIN ),
-            'desc_tip'    => __( 'The lowest height for a consignment', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'Must be at least 1cm', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'The lowest height for a consignment', 'bring-fraktguiden' ),
             'default'     => '1',
             'custom_attributes'     => [
               'min'       => '1'
             ]
         ),
         'minimum_weight'  => array(
-            'title'       => __( 'Minimum Weight in kg', self::TEXT_DOMAIN ),
+            'title'       => __( 'Minimum Weight in kg', 'bring-fraktguiden' ),
             'type'        => 'number',
             'css'         => 'width: 8em;',
-            'desc_tip'    => __( 'The lowest weight in kilograms for a consignment', self::TEXT_DOMAIN ),
+            'desc_tip'    => __( 'The lowest weight in kilograms for a consignment', 'bring-fraktguiden' ),
             'default'     => '0.01',
         ),
 
@@ -384,34 +382,34 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'no_connection_title' => [
             'type'        => 'title',
-            'title'       => __( 'Bring API offline / No connection', self::TEXT_DOMAIN ),
-            'description' => __( 'If Bring has any technical difficulties, it won\'t be able to fetch prices from the bring server.<br>In these cases, shipping will default to these settings:', self::TEXT_DOMAIN ),
+            'title'       => __( 'Bring API offline / No connection', 'bring-fraktguiden' ),
+            'description' => __( 'If Bring has any technical difficulties, it won\'t be able to fetch prices from the bring server.<br>In these cases, shipping will default to these settings:', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'no_connection_handling'          => array(
-            'title'       => __( 'No API connection handling', self::TEXT_DOMAIN ),
+            'title'       => __( 'No API connection handling', 'bring-fraktguiden' ),
             'type'        => 'select',
-            'desc_tip'    => __( 'What pricing should be used if no connection can be made to the bring API', self::TEXT_DOMAIN ),
+            'desc_tip'    => __( 'What pricing should be used if no connection can be made to the bring API', 'bring-fraktguiden' ),
             'default'     => 'no_rate',
             'options'  => [
-              'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
-              'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
+              'no_rate'   => __( 'Do nothing', 'bring-fraktguiden' ),
+              'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden' )
             ]
         ),
         'no_connection_flat_rate_label'          => array(
-            'title'    => __( 'Shipping method Label to replace \'API Error\'', self::TEXT_DOMAIN ),
+            'title'    => __( 'Shipping method Label to replace \'API Error\'', 'bring-fraktguiden' ),
             'type'     => 'text',
-            'default'  => __( 'Shipping', self::TEXT_DOMAIN ),
+            'default'  => __( 'Shipping', 'bring-fraktguiden' ),
         ),
         'no_connection_flat_rate'          => array(
-            'title'    => __( 'Shipping method cost for \'API Error\'', self::TEXT_DOMAIN ),
+            'title'    => __( 'Shipping method cost for \'API Error\'', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'type'     => 'number',
-            'placeholder' => __( 'ie: 500', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: 500', 'bring-fraktguiden' ),
             'default'  => '0',
         ),
         'no_connection_rate_id'          => array(
-            'title'    => __( 'Service to use for booking', self::TEXT_DOMAIN ),
+            'title'    => __( 'Service to use for booking', 'bring-fraktguiden' ),
             'css'      => '',
             'type'     => 'select',
             'default'  => '0',
@@ -423,35 +421,35 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'exceptions_title' => [
             'type'        => 'title',
-            'title'       => __( 'Heavy and oversized items', self::TEXT_DOMAIN ),
-            'description' => __( 'Set a flat rate for packages that exceed the maximum measurements allowed by Bring.', self::TEXT_DOMAIN ),
+            'title'       => __( 'Heavy and oversized items', 'bring-fraktguiden' ),
+            'description' => __( 'Set a flat rate for packages that exceed the maximum measurements allowed by Bring.', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'exception_handling' => array(
-            'title'    => __( 'Heavy item handling', self::TEXT_DOMAIN ),
+            'title'    => __( 'Heavy item handling', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden' ),
             'default'  => 'no_rate',
             'options'  => [
-              'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
-              'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
+              'no_rate'   => __( 'Do nothing', 'bring-fraktguiden' ),
+              'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden' )
             ]
         ),
         'exception_flat_rate_label' => array(
-            'title'       => __( 'Shipping method Label for Heavy Items', self::TEXT_DOMAIN ),
+            'title'       => __( 'Shipping method Label for Heavy Items', 'bring-fraktguiden' ),
             'type'        => 'text',
-            'placeholder' => __( 'ie: Cargo shipping', self::TEXT_DOMAIN ),
-            'default'     => __( 'Shipping', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: Cargo shipping', 'bring-fraktguiden' ),
+            'default'     => __( 'Shipping', 'bring-fraktguiden' ),
         ),
         'exception_flat_rate' => array(
-            'title'    => __( 'Shipping method cost for heavy items', self::TEXT_DOMAIN ),
+            'title'    => __( 'Shipping method cost for heavy items', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'type'     => 'number',
-            'placeholder' => __( 'ie: 500', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: 500', 'bring-fraktguiden' ),
             'default'  => '0',
         ),
         'exception_rate_id' => array(
-            'title'    => __( 'Service to use for booking', self::TEXT_DOMAIN ),
+            'title'    => __( 'Service to use for booking', 'bring-fraktguiden' ),
             'css'      => '',
             'type'     => 'select',
             'default'  => '0',
@@ -463,44 +461,44 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'max_products_title' => [
             'type'        => 'title',
-            'title'       => __( 'Product quantity limit for cart', self::TEXT_DOMAIN ),
-            'description' => __( 'When a cart reaches this limit, you can enable this shipping method.<br><em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', self::TEXT_DOMAIN ),
+            'title'       => __( 'Product quantity limit for cart', 'bring-fraktguiden' ),
+            'description' => __( 'When a cart reaches this limit, you can enable this shipping method.<br><em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', 'bring-fraktguiden' ),
             'class'       => 'bring-separate-admin-section',
         ],
         'alt_handling' => array(
-            'title'    => __( 'Maximum product handling', self::TEXT_DOMAIN ),
+            'title'    => __( 'Maximum product handling', 'bring-fraktguiden' ),
             'type'     => 'select',
-            'desc_tip' => __( 'We use a packing algorithm to pack items in three dimensions. This algorithm is computationally heavy and to prevent against DDoS attacks we\'ve implemented setting to control the maximum number of items that can be packed per order.', self::TEXT_DOMAIN ),
+            'desc_tip' => __( 'We use a packing algorithm to pack items in three dimensions. This algorithm is computationally heavy and to prevent against DDoS attacks we\'ve implemented setting to control the maximum number of items that can be packed per order.', 'bring-fraktguiden' ),
             'default'  => 'no_rate',
             'options'  => [
-              'no_rate'   => __( 'Do nothing', self::TEXT_DOMAIN ),
-              'flat_rate' => __( 'Custom flat rate', self::TEXT_DOMAIN )
+              'no_rate'   => __( 'Do nothing', 'bring-fraktguiden' ),
+              'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden' )
             ]
         ),
         'max_products'  => array(
-            'title'    => __( 'Maximum product limit', self::TEXT_DOMAIN ),
+            'title'    => __( 'Maximum product limit', 'bring-fraktguiden' ),
             'type'     => 'text',
             'css'      => 'width: 8em;',
-            'placeholder' => __( 'ie: 1500', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Maximum total quantity of products in the cart before offering a custom price', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: 1500', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Maximum total quantity of products in the cart before offering a custom price', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_MAX_PRODUCTS
         ),
         'alt_flat_rate_label' => array(
-            'title'       => __( 'Shipping method label', self::TEXT_DOMAIN ),
+            'title'       => __( 'Shipping method label', 'bring-fraktguiden' ),
             'type'        => 'text',
-            'placeholder' => __( 'ie: Cargo shipping', self::TEXT_DOMAIN ),
-            'default'     => __( 'Shipping', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: Cargo shipping', 'bring-fraktguiden' ),
+            'default'     => __( 'Shipping', 'bring-fraktguiden' ),
         ),
         'alt_flat_rate' => array(
-            'title'    => __( 'Shipping method cost', self::TEXT_DOMAIN ),
+            'title'    => __( 'Shipping method cost', 'bring-fraktguiden' ),
             'type'     => 'text',
             'css'      => 'width: 8em;',
-            'placeholder' => __( 'ie: 1500', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', self::TEXT_DOMAIN ),
+            'placeholder' => __( 'ie: 1500', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden' ),
             'default'  => self::DEFAULT_ALT_FLAT_RATE
         ),
         'alt_flat_rate_id'          => array(
-            'title'    => __( 'Service to use for booking', self::TEXT_DOMAIN ),
+            'title'    => __( 'Service to use for booking', 'bring-fraktguiden' ),
             'css'      => '',
             'type'     => 'select',
             'default'  => '0',
@@ -512,57 +510,57 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          */
         'developer_settings' => [
             'type'  => 'title',
-            'title' => __( 'Developer', self::TEXT_DOMAIN ),
-            'description' => __( 'For debugging and testing the plugin', self::TEXT_DOMAIN ),
+            'title' => __( 'Developer', 'bring-fraktguiden' ),
+            'description' => __( 'For debugging and testing the plugin', 'bring-fraktguiden' ),
             'class'       => 'separated_title_tab',
         ],
         'disable_stylesheet'               => array(
-            'title'   => __( 'Disable stylesheet', self::TEXT_DOMAIN ),
+            'title'   => __( 'Disable stylesheet', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
-            'label'   => __( 'Remove fraktguiden styling from the checkout', self::TEXT_DOMAIN ),
+            'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden' ),
             'default' => 'no'
         ),
         'debug'         => array(
-            'title'       => __( 'Debug mode', self::TEXT_DOMAIN ),
+            'title'       => __( 'Debug mode', 'bring-fraktguiden' ),
             'type'        => 'checkbox',
-            'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
-            'desc_tip'    => __( 'Issues from the Bring API will be logged here', self::TEXT_DOMAIN ),
-            'description' => __( 'Bring Fraktguiden logs will be saved in', self::TEXT_DOMAIN ) . ' <code>' . $wc_log_dir . '</code>',
+            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
+            'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden' ),
+            'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>',
             'default'     => 'no'
         ),
         'system_information'         => array(
-            'title'       => __( 'Debug System information', self::TEXT_DOMAIN ),
+            'title'       => __( 'Debug System information', 'bring-fraktguiden' ),
             'type'        => 'hidden',
-            'label'       => __( 'Enable debug logs', self::TEXT_DOMAIN ),
-            'desc_tip' => __( 'We may ask for this information if you require support', self::TEXT_DOMAIN ),
-            'description' => sprintf( '<a href="%s" target="_blank">%s</a>', admin_url( 'admin-ajax.php?action=bring_system_info' ), __( 'View system info', self::TEXT_DOMAIN ) )
+            'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
+            'desc_tip' => __( 'We may ask for this information if you require support', 'bring-fraktguiden' ),
+            'description' => sprintf( '<a href="%s" target="_blank">%s</a>', admin_url( 'admin-ajax.php?action=bring_system_info' ), __( 'View system info', 'bring-fraktguiden' ) )
         ),
 
         /**
          * MyBring API settings
          */
         'mybring_title' => [
-            'title'       => __( 'Mybring.com API', self::TEXT_DOMAIN ),
-            'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".', self::TEXT_DOMAIN ),
+            'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
+            'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".', 'bring-fraktguiden' ),
             'class'       => 'separated_title_tab',
             'type'        => 'title',
         ],
         'mybring_api_uid' => [
-            'title'       => __( 'API User ID', self::TEXT_DOMAIN ),
+            'title'       => __( 'API User ID', 'bring-fraktguiden' ),
             'type'        => 'text',
-            'label'       => __( 'API User ID', self::TEXT_DOMAIN ),
-            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com', self::TEXT_DOMAIN ),
+            'label'       => __( 'API User ID', 'bring-fraktguiden' ),
+            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com', 'bring-fraktguiden' ),
         ],
         'mybring_api_key' => [
-            'title'       => __( 'API Key', self::TEXT_DOMAIN ),
+            'title'       => __( 'API Key', 'bring-fraktguiden' ),
             'type'        => 'text',
-            'label'       => __( 'API Key', self::TEXT_DOMAIN ),
+            'label'       => __( 'API Key', 'bring-fraktguiden' ),
             'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
         ],
         'mybring_customer_number' => [
-            'title'       => __( 'Customer number', self::TEXT_DOMAIN ),
+            'title'       => __( 'Customer number', 'bring-fraktguiden' ),
             'type'        => 'text',
-            'label'       => __( 'Customer number', self::TEXT_DOMAIN ),
+            'label'       => __( 'Customer number', 'bring-fraktguiden' ),
             'placeholder' => 'PARCELS_NORWAY-100########',
         ],
     ];
@@ -586,13 +584,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function admin_options() {
     global $woocommerce; ?>
-    <!-- -->
-    <div>
-      <h3><?php echo $this->method_title; ?></h3>
-      <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
-    </div>
+
+    <table class="form-table">
+
+      <?php
+      $pro_form_fields = apply_filters( 'woocommerce_settings_api_form_fields_' . $this->id, array_map( array( $this, 'set_defaults' ), $this->pro_form_fields ) );
+      $this->generate_settings_html( $pro_form_fields );
+
+      ?>
+    </table>
 
     <!-- -->
+    <h3 class="bring-separate-admin-section"><?php echo $this->method_title; ?></h3>
+    <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden' ); ?></p>
+    <!-- -->
+
     <div class="hash-tabs fraktguiden-options" style="display:none;">
       <article class="tab-container">
         <nav class="tab-nav" role="tablist"><ul></ul><div style="clear:both;"></div></nav>
@@ -605,8 +611,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         <?php $this->generate_settings_html();?>
       <?php else : ?>
         <tr><td><div class="inline error"><p>
-            <strong><?php _e( 'Gateway Disabled', self::TEXT_DOMAIN ); ?></strong>
-            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', self::TEXT_DOMAIN ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
+            <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
+            <br/> <?php printf( __( 'Bring shipping method requires <strong>weight &amp; dimensions</strong> to be enabled. Please enable them on the <a href="%s">Catalog tab</a>. <br/> In addition, Bring also requires the <strong>Norweigian Krone</strong> currency. Choose that from the <a href="%s">General tab</a>', 'bring-fraktguiden' ), 'admin.php?page=woocommerce_settings&tab=catalog', 'admin.php?page=woocommerce_settings&tab=general' ); ?>
           </p></div></td></tr>
       <?php endif; ?>
     </table>
@@ -774,27 +780,27 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     <tr valign="top">
       <th scope="row" class="titledesc">
         <label
-            for="<?php echo $field_key ?>"><?php _e( 'Services', self::TEXT_DOMAIN ); ?></label>
+            for="<?php echo $field_key ?>"><?php _e( 'Services', 'bring-fraktguiden' ); ?></label>
       </th>
       <td class="forminp">
         <table class="wc_shipping widefat fraktguiden-services-table">
           <thead>
           <tr>
             <th class="fraktguiden-services-table-col-enabled">
-              <?php _e( 'Active', self::TEXT_DOMAIN ); ?>
+              <?php _e( 'Active', 'bring-fraktguiden' ); ?>
             </th>
             <th class="fraktguiden-services-table-col-service">
-              <?php _e( 'Service', self::TEXT_DOMAIN ); ?>
+              <?php _e( 'Service', 'bring-fraktguiden' ); ?>
             </th>
             <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
             <th class="fraktguiden-services-table-col-custom-price">
-              <?php _e( 'Custom price', self::TEXT_DOMAIN ); ?>
+              <?php _e( 'Custom price', 'bring-fraktguiden' ); ?>
             </th>
             <th class="fraktguiden-services-table-col-free-shipping">
-              <?php _e( 'Free shipping', self::TEXT_DOMAIN ); ?>
+              <?php _e( 'Free shipping', 'bring-fraktguiden' ); ?>
             </th>
             <th class="fraktguiden-services-table-col-free-shipping-threshold">
-              <?php _e( 'Free shipping limit', self::TEXT_DOMAIN ); ?>
+              <?php _e( 'Free shipping limit', 'bring-fraktguiden' ); ?>
             </th>
             <?php endif; ?>
           </tr>
@@ -844,7 +850,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
               <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
               <td class="fraktguiden-services-table-col-custom-price">
                 <input type="text"
-                       placeholder="<?= __( '...', self::TEXT_DOMAIN );?>"
+                       placeholder="<?= __( '...', 'bring-fraktguiden' );?>"
                        name="<?php echo $custom_price_id; ?>"
                        value="<?php echo $custom_price; ?>"
                 />
@@ -858,7 +864,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
               </td>
               <td class="fraktguiden-services-table-col-free-shipping-threshold">
                 <input type="text"
-                       placeholder="<?= __( '...', self::TEXT_DOMAIN );?>"
+                       placeholder="<?= __( '...', 'bring-fraktguiden' );?>"
                        name="<?php echo $free_shipping_threshold_id; ?>"
                        value="<?php echo $free_shipping_threshold; ?>"
                        placeholder="0"
@@ -913,7 +919,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    *
    * @todo: in 2.6, the package param was added. Investigate this!
    */
-  public function calculate_shipping( $package = array() ) {
+  public function calculate_shipping( $package = [] ) {
     global $woocommerce;
     // include_once( 'common/class-fraktguiden-packer.php' );
     // Offer flat rate if the cart contents exceeds max product.
@@ -924,7 +930,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $rate = array(
           'id'    => $this->id . ':' . 'alt_flat_rate',
           'cost'  => floatval( $this->get_setting( 'alt_flat_rate' ) ),
-          'label' => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', self::TEXT_DOMAIN ) ),
+          'label' => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
         );
         $this->add_rate( $rate );
       }
@@ -942,7 +948,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             $this->add_rate( [
                 'id'    => $this->id . ':' . $this->get_setting( 'exception_rate_id', 'servicepakke' ),
                 'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
-                'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', self::TEXT_DOMAIN ) ),
+                'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
             ] );
           }
         }
@@ -1004,7 +1010,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
           $this->add_rate( [
             'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
             'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
-            'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', self::TEXT_DOMAIN ) ),
+            'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
           ] );
         }
         return;
@@ -1048,7 +1054,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       return false;
     }
 
-    $rates = array();
+    $rates = [];
 
     // Fix for when only one service is found. It's not returned in an array :/
     if ( empty( $response['Product'][0] ) ) {
