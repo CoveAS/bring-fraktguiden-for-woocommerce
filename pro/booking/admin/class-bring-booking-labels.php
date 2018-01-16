@@ -140,7 +140,7 @@ class Bring_Booking_Labels {
     if ( count( $files_to_merge ) == 1 ) {
       $merge_result_file = reset( $files_to_merge );
     } else {
-      include_once( FRAKTGUIDEN_PLUGIN_PATH .'/vendor/myokyawhtun/pdfmerger/PDFMerger.php' );
+      include_once( FRAKTGUIDEN_PLUGIN_PATH .'/includes/pdfmerger/PDFMerger.php' );
       $merger = new PDFMerger();
       foreach ( $files_to_merge as $file ) {
         $merger->addPDF( $file );

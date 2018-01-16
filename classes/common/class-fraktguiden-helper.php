@@ -24,6 +24,17 @@ class Fraktguiden_Helper {
   }
 
   /**
+   * Get settings url
+   * @return string URL to the settings page
+   */
+  static function get_settings_url() {
+    $section = 'bring_fraktguiden';
+    // if ( class_exists( 'WC_Shipping_Method_Bring_Pro' ) ) {
+    //   $section .= '_pro';
+    // }
+    return admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . $section );
+  }
+  /**
    * Pro activated
    * @param  boolean $ignore_license (default=false) Ignore the license check if true
    * @return boolean                 True means that PRO mode is active

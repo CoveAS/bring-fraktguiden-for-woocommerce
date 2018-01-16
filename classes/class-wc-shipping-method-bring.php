@@ -691,6 +691,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         return;
     }
     wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) .'/assets/js/jquery.hash-tabs.min.js', [], '1.0.4' );
+    wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) .'/assets/js/bring-fraktguiden-admin.js', [], '1.0.0' );
+    wp_localize_script( 'bring-admin-js', 'bring_fraktguiden', [
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+    ] );
     wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden.css', [], '1.0.0' );
   }
 
@@ -801,7 +805,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             <th class="fraktguiden-services-table-col-service">
               <?php _e( 'Service', self::TEXT_DOMAIN ); ?>
             </th>
-            <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
+            <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
             <th class="fraktguiden-services-table-col-custom-price">
               <?php _e( 'Custom price', self::TEXT_DOMAIN ); ?>
             </th>
@@ -856,7 +860,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
                   <?php echo $service[$this->service_name]; ?>
                 </label>
               </td>
-              <?php if ( Fraktguiden_Helper::pro_activated() ) : ?>
+              <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
               <td class="fraktguiden-services-table-col-custom-price">
                 <input type="text"
                        placeholder="<?= __( '...', self::TEXT_DOMAIN );?>"
@@ -1102,9 +1106,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function create_standard_url_params( $package ) {
     global $woocommerce;
-    if ( ! $this->from_zip ) {
-      add_action( 'admin_notices', __CLASS__ . '::admin_notice_for_bring_settings' );
-    }
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
@@ -1115,14 +1116,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
         'language'            => $this->get_bring_language()
     ) );
-  }
-
-  static function admin_notice_for_bring_settings() {
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php __( 'Bring requires a postal code from which packages are being sent. Please check the settings page.', self::TEXT_DOMAIN ); ?></p>
-    </div>
-    <?php
   }
 
   public function get_bring_language() {
