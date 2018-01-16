@@ -67,7 +67,9 @@ class Bring_Fraktguiden {
 
     Fraktguiden_Admin_Notices::init();
 
-    add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
+    if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
+      add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
+    }
   }
 
   /**
