@@ -77,15 +77,14 @@ class Fraktguiden_Pickup_Point {
    * Klarna Checkout post code selector HTML
    */
   static function kco_post_code_html() {
-    $i18n = self::get_i18n();
     $postcode = esc_html( WC()->customer->get_shipping_postcode() );
     ?>
     <div class="bring-enter-postcode">
       <form>
-        <label><?php echo $i18n['POSTCODE']; ?>
-          <input class="input-text" type="text" value="<?php echo $postcode; ?>">
+        <label><?php _e( 'Postcode', 'bring-fraktguiden' ); ?>
+          <input class="bring-input input-text" type="text" value="<?php echo $postcode; ?>">
         </label>
-        <input class="button" type="submit" value="Hent Leveringsmetoder">
+        <input class="bring-button button" type="submit" value="<?php _e( 'Search', 'bring-fraktguiden' )?>">
       </form>
     </div>
     <?php

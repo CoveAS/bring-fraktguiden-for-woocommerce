@@ -31,10 +31,10 @@ class Bring_Booking_Orders_View {
       $order = new Bring_WC_Order_Adapter( $the_order );
       $info  = Bring_Booking_Common_View::get_booking_status_info( $order );
 
-      echo '<div>';
+      echo '<div clas="bring-area-icon">';
       echo Bring_Booking_Common_View::create_status_icon( $info, 16 );
       echo '</div>';
-      echo '<div>';
+      echo '<div class="bring-area-info">';
       echo $info['text'];
       echo '</div>';
     }

@@ -25,7 +25,7 @@ class Fraktguiden_Admin_Notices {
 
     if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
       // If PRO is available and you've not activated it yet
-      $message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to get PRO now!</a>', 'bring-fraktguiden' );
+      $message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden' );
       $message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
       self::add_notice( 'pro_available', $message );
     } else if ( ! Fraktguiden_Helper::valid_license() ) {

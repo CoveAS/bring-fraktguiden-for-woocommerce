@@ -171,14 +171,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'description' => Fraktguiden_Helper::get_pro_description(),
         ],
         'pro_enabled' => [
-            'title'   => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
+            'title'   => __( 'Activate PRO', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
-            'label'   => __( 'Enable PRO features to extend Bring Fraktguiden', 'bring-fraktguiden' ),
+            'label'   => '<em class="bring-toggle"></em>' . __( 'Enable/disable PRO features', 'bring-fraktguiden' ),
         ],
         'test_mode' => [
             'title'   => __( 'Enable test mode', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
-            'label'   => __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
+            'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden' ),
             'default' => 'no'
         ],
 
@@ -188,7 +188,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'plugin_settings' => [
             'type'  => 'title',
             'title' => __( 'Bring Settings', 'bring-fraktguiden' ),
-            'class'       => 'separated_title_tab',
+            'class' => 'separated_title_tab',
         ],
         'enabled'               => array(
             'title'   => __( 'Enable', 'bring-fraktguiden' ),

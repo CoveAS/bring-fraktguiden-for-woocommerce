@@ -1,17 +1,33 @@
-
-/* Error messages on the checkout */
-.bring-enter-postcode.bring-error {
-
-}
-
-__error-color: #f05;
-
-.bring-error-input {
-  border: 1px solid var( __error-color, red );
+/**
+ * Input errors
+ */
+input.bring-error-input.input-text {
+  border: 1px solid;
   border-bottom-width: 2px;
 }
 
-.bring-error-message {
+span.bring-error-message {
   font-size: 0.8em;
-  color: var( __error-color, red );
+}
+
+/**
+ * Setting up the colours for the errors
+ */
+[class*="bring-"] {
+  --error-color: #F44336;
+}
+
+@supports ((--variable : style)) {
+  .bring-enter-postcode.bring-error,
+  input.bring-error-input.input-text {
+    border-color: var( --error-color, red ) !important;
+  }
+
+  span.bring-error-message {
+    color: var( --error-color, red ) !important;
+  }
+
+  .bring-button::after {
+    content: "❗️";
+  }
 }
