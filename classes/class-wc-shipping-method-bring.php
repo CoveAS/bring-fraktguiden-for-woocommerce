@@ -701,7 +701,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     wp_localize_script( 'bring-admin-js', 'bring_fraktguiden', [
       'ajaxurl' => admin_url( 'admin-ajax.php' ),
     ] );
-    wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden.css', [], '1.0.0' );
+    wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) .'/assets/css/bring-fraktguiden-admin.css', [], '1.0.0' );
   }
 
   /**

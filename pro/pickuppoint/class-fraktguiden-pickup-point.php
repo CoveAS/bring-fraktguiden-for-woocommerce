@@ -296,17 +296,10 @@ class Fraktguiden_Pickup_Point {
         'packages' => null,
     ];
 
-    ?>
-    <script>console.log( 'Failed before isset' );</script>
-    <?php
 
     if ( isset( $_GET['post_id'] ) && isset( $_GET['service'] ) ) {
 
-    ?>
-    <script>console.log( 'Failed After isset' );</script>
-    <?php
-
-      $order = new WC_Order( $_GET['post_id'] );
+      $order = wc_get_order( $_GET['post_id'] );
       $items = $order->get_items();
 
       $fake_cart = [ ];
@@ -331,8 +324,8 @@ class Fraktguiden_Pickup_Point {
           'clientUrl'           => $_SERVER['HTTP_HOST'],
           'from'                => Fraktguiden_Helper::get_option( 'from_zip' ),
           'fromCountry'         => Fraktguiden_Helper::get_option( 'from_country' ),
-          'to'                  => $order->shipping_postcode,
-          'toCountry'           => $order->shipping_country,
+          'to'                  => $order->get_shipping_postcode(),
+          'toCountry'           => $order->get_shipping_country(),
           'postingAtPostOffice' => ( Fraktguiden_Helper::get_option( 'post_office' ) == 'no' ) ? 'false' : 'true',
           'additional'          => ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) ? 'evarsling' : '',
       );
@@ -356,6 +349,8 @@ class Fraktguiden_Pickup_Point {
         $result['success']  = true;
         $result['rate']     = $rate;
         $result['packages'] = json_encode( $package_params );
+      } else {
+        wp_send_json( $params );
       }
     }
 

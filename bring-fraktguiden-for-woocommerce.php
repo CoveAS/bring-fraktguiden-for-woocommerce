@@ -66,8 +66,21 @@ class Bring_Fraktguiden {
     add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
 
     Fraktguiden_Admin_Notices::init();
+
+    add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
   }
 
+  /**
+   * Enqueue styles
+   */
+  static function enqueue_styles() {
+    wp_register_style( 'bring-fraktguiden', plugins_url( basename(__DIR__) .'/assets/css/bring-fraktguiden.css' ) );
+    wp_enqueue_style( 'bring-fraktguiden' );
+  }
+
+  /**
+   * Cron task
+   */
   static function cron_task() {
     $license = fraktguiden_license::get_instance();
     $license->valid();

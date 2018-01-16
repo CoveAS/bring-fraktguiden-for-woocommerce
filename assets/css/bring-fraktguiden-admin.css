@@ -1,0 +1,38 @@
+.fraktguiden-options .tab-nav {
+  border-bottom: 1px solid #ccc;
+}
+.fraktguiden-options .tab-nav li {
+}
+.fraktguiden-options .tab-nav li a:hover {
+  background-color: #fff;
+  color: #444;
+}
+.fraktguiden-options .tab-nav li a.active:hover,
+.fraktguiden-options .tab-nav li a.active {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  color: #000;
+}
+/*.fraktguiden-options .tab-nav li a:focus {
+}*/
+.fraktguiden-options .tab-nav li a {
+  box-shadow: none;
+  background-color: #e5e5e5;
+  float: left;
+  display: block;
+  text-decoration: none;
+  color: #555;
+  font-weight: bold;
+  /*padding: 0.8rem 1rem 0.9rem;*/
+
+  margin-left: .5em;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  /*border-left: none;*/
+  margin-bottom: -1px;
+}
+.fraktguiden-options .tab-nav li:first-child a {
+  /*border-left: 1px solid #ccc;*/
+}
+
+.fraktguiden-options .tab-pane-container {}

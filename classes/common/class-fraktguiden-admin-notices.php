@@ -46,7 +46,7 @@ class Fraktguiden_Admin_Notices {
       // If you haven't set a default postcode for the origin of where packages are being sent
       $message = __( 'Bring requires a postcode to show where packages are being sent from. Please update your postcode on the <a href="%s">settings page.</a>', 'bring-fraktguiden' );
       $message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
-      self::add_notice( 'from_zip_error', $message, 'error' );
+      self::add_notice( 'from_zip_error', $message, 'error', false );
     }
   }
 
