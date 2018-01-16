@@ -588,7 +588,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     global $woocommerce; ?>
 
     <table class="form-table">
-      <?php $this->generate_settings_html( $this->pro_form_fields );?>
+
+      <?php
+      $pro_form_fields = apply_filters( 'woocommerce_settings_api_form_fields_' . $this->id, array_map( array( $this, 'set_defaults' ), $this->pro_form_fields ) );
+      $this->generate_settings_html( $pro_form_fields );
+
+      ?>
     </table>
 
     <!-- -->
