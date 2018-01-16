@@ -359,7 +359,7 @@ class Bring_Booking_Order_View {
     <table class="bring-booking-packages">
       <thead>
       <tr>
-        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( '#', self::TEXT_DOMAIN ); ?></th>
+        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( 'Order ID', self::TEXT_DOMAIN ); ?></th>
         <th><?php _e( 'Product', self::TEXT_DOMAIN ); ?></th>
         <th><?php _e( 'Width', self::TEXT_DOMAIN ); ?> (cm)</th>
         <th><?php _e( 'Height', self::TEXT_DOMAIN ); ?> (cm)</th>

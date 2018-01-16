@@ -54,10 +54,10 @@ class Bring_Booking_Orders_View {
           <div class="wc-backbone-modal-content">
             <section class="wc-backbone-modal-main" role="main">
               <header class="wc-backbone-modal-header">
-                <h1 class="bgf-modal-header"><?php echo __( 'Bring Booking', self::TEXT_DOMAIN ); ?></h1>
+                <h1 class="bgf-modal-header"><?php echo __( 'MyBring Booking', self::TEXT_DOMAIN ); ?></h1>
                 <button
                     class="modal-close modal-close-link dashicons dashicons-no-alt">
-                  <span class="screen-reader-text">Close modal panel</span>
+                  <span class="screen-reader-text"><?php echo __( 'Close modal panel', self::TEXT_DOMAIN ); ?></span>
                 </button>
               </header>
               <article>

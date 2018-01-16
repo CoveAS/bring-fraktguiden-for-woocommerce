@@ -267,18 +267,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          * Pro enabling
          */
         'pro_mode_settings' => [
-            'type'  => 'title',
-            'title' => __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN ),
+            'type'        => 'title',
+            'title'       => __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN ),
             'description' => Fraktguiden_Helper::get_pro_description(),
             'class'       => 'bring-separate-admin-section',
         ],
-        'pro_enabled'               => array(
+        'pro_enabled' => array(
             'title'   => __( 'Bring Fraktguiden Pro', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
             'label'   => __( 'Enable PRO features to extend Bring Fraktguiden', self::TEXT_DOMAIN ),
         ),
 
-        'test_mode'               => array(
+        'test_mode' => array(
             'title'   => __( 'Enable test mode', self::TEXT_DOMAIN ),
             'type'    => 'checkbox',
             'label'   => __( 'Use PRO in test-mode. Used for development', self::TEXT_DOMAIN ),
@@ -589,6 +589,27 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     <!-- -->
     <h3><?php echo $this->method_title; ?></h3>
     <p><?php _e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', self::TEXT_DOMAIN ); ?></p>
+
+    <div class="pro-notice"><?= Fraktguiden_Helper::get_pro_description(); ?></div>
+
+    <style>
+      .pro-notice {
+        background-color: white;
+        padding: 1em;
+        border: 1px solid #eee;
+        z-index: 300;
+      }
+      @media ( min-width: 50em ) {
+        .pro-notice {
+          position: absolute;
+          right: 2em;
+          top: 20em;
+          width: 30em;
+        }
+      }
+    </style>
+    <!-- Above the settings -->
+
 
     <!-- -->
     <div class="hash-tabs fraktguiden-options" style="display:none;">
@@ -1082,7 +1103,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function create_standard_url_params( $package ) {
     global $woocommerce;
     if ( ! $this->from_zip ) {
-      wc_add_notice( 'Bring requires a postal code from which packages are being sent. Please check the settings page.', 'error' );
+      add_action( 'admin_notices', __CLASS__ . '::admin_notice_for_bring_settings' );
     }
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
@@ -1094,6 +1115,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
         'language'            => $this->get_bring_language()
     ) );
+  }
+
+  static function admin_notice_for_bring_settings() {
+    ?>
+    <div class="notice notice-success is-dismissible">
+        <p><?php __( 'Bring requires a postal code from which packages are being sent. Please check the settings page.', self::TEXT_DOMAIN ); ?></p>
+    </div>
+    <?php
   }
 
   public function get_bring_language() {

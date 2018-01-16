@@ -249,13 +249,18 @@ class Fraktguiden_Helper {
       return sprintf( __( 'The pro license has not yet activated. You have %s remaining before pro disables.', self::TEXT_DOMAIN ), "$days " . _n( 'day', 'days', $days, self::TEXT_DOMAIN ) ). '<br>'
       . self::get_pro_terms_link( __( 'Click here to buy a license', self::TEXT_DOMAIN ) );
     }
-    return __( '
-      Pro features: <ol>
-        <li>Free shipping options. Set a threshold value for free shipping.</li>
-        <li>Pickup points. Let customers select their pickup point</li>
-        <li>MyBring Booking. Book directly with Bring</li>
-      </ol>
-      ' , self::TEXT_DOMAIN ) .' '. Fraktguiden_Helper::get_pro_terms_link();
+    return sprintf(
+      '<h3>%s</h3>
+      <ol>
+        <li>%s</li>
+        <li>%s</li>
+        <li>%s</li>
+      </ol>',
+      _x( 'Bring Fraktguiden Pro features', 'Title for the features section', self::TEXT_DOMAIN ),
+      _x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', self::TEXT_DOMAIN ),
+      _x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', self::TEXT_DOMAIN ),
+      _x( 'MyBring Booking: Book orders directly from the order page with MyBring', 'Succinct explaination of feature', self::TEXT_DOMAIN )
+    ) . ' ' . Fraktguiden_Helper::get_pro_terms_link();
   }
 
   /**

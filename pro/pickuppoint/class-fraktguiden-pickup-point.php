@@ -296,7 +296,15 @@ class Fraktguiden_Pickup_Point {
         'packages' => null,
     ];
 
+    ?>
+    <script>console.log( 'Failed before isset' );</script>
+    <?php
+
     if ( isset( $_GET['post_id'] ) && isset( $_GET['service'] ) ) {
+
+    ?>
+    <script>console.log( 'Failed After isset' );</script>
+    <?php
 
       $order = new WC_Order( $_GET['post_id'] );
       $items = $order->get_items();
