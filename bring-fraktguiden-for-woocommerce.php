@@ -7,25 +7,25 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Plugin Name:         Bring Fraktguiden for WooCommerce
- * Plugin URI:          http://drivdigital.no
- * Description:         N/A
- * Author:              Driv Digital
- * Author URI:          http://drivdigital.no
+ * Plugin URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
+ * Description:         Bring Fraktguiden for WooCommerce makes it easy for your customers to choose delivery methods from Bring.
+ * Author:              Driv Digital AS
+ * Author URI:          https://drivdigital.no/
  *
- * Version:             1.3.2
- * Requires at least:   3.2.1
- * Tested up to:        4.4.1
+ * Version:             1.4.0
+ * Requires at least:   4.9.1
+ * Tested up to:        4.9.2
  *
  * Text Domain:         bring-fraktguiden
  * Domain Path:         /languages
  *
  * @package             WooCommerce
  * @category            Shipping Method
- * @author              Driv Digital
+ * @author              Driv Digital AS
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.3.2';
+  const VERSION = '1.4.0';
 
   const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 

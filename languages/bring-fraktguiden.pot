@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2018-01-16 21:29+0100\n"
+"POT-Creation-Date: 2018-01-18 16:45+0100\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -1108,14 +1108,19 @@ msgid "Bring Fraktguiden for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "http://drivdigital.no"
+msgid "https://drivdigital.no/bring-fraktguiden-pro-woocommerce"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "N/A"
+msgid ""
+"Bring Fraktguiden for WooCommerce makes it easy for your customers to choose "
+"delivery methods from Bring."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Driv Digital"
+msgid "Driv Digital AS"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://drivdigital.no/"
 msgstr ""
