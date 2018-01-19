@@ -7,6 +7,8 @@ add_action( 'wp_ajax_bring_update_packages',         'Bring_Booking_Order_View::
 add_action( 'wp_ajax_nopriv_bring_update_packages',  'Bring_Booking_Order_View::ajax_update_packages' );
 class Bring_Booking_Order_View {
 
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
+
   static function init() {
     add_action( 'add_meta_boxes', array( __CLASS__, 'add_booking_meta_box' ), 1, 2 );
     //add_action( 'woocommerce_order_actions', array( __CLASS__, 'add_order_meta_box_actions' ) );
@@ -305,9 +307,8 @@ class Bring_Booking_Order_View {
       <?php }
       else { ?>
         <button type="submit" name="_bring-start-booking"
-                data-tip="<?php _e( 'Update order and start booking', 'bring-fraktguiden' ); ?>"
-                class="button button-primary tips"><?php _e( 'Start', 'bring-fraktguiden' ); ?>
-          &gt;</button>
+                data-tip="<?php _e( 'Start creating a label to ship this order with MyBring', 'bring-fraktguiden' ); ?>"
+                class="button button-primary tips"><?php _e( 'Start booking', 'bring-fraktguiden' ); ?></button>
       <?php } ?>
     </div>
     <?php
@@ -319,7 +320,7 @@ class Bring_Booking_Order_View {
   static function render_parties( $order ) {
     ?>
     <div class="bring-form-field">
-      <a class="bring-show-parties"
+      <a class="bring-show-parties button"
          href="#"><?php _e( 'Show Parties', 'bring-fraktguiden' ); ?></a>
     </div>
     <script type="text/javascript">
@@ -358,7 +359,7 @@ class Bring_Booking_Order_View {
     <table class="bring-booking-packages">
       <thead>
       <tr>
-        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( '#', 'bring-fraktguiden' ); ?></th>
+        <th title="<?php echo $shipping_item_tip; ?>"><?php _e( 'Order ID', 'bring-fraktguiden' ); ?></th>
         <th><?php _e( 'Product', 'bring-fraktguiden' ); ?></th>
         <th><?php _e( 'Width', 'bring-fraktguiden' ); ?> (cm)</th>
         <th><?php _e( 'Height', 'bring-fraktguiden' ); ?> (cm)</th>
@@ -393,9 +394,8 @@ class Bring_Booking_Order_View {
               <?php if ( ! empty( $pickup_point ) ): ?>
                 <span
                   class="tips"
-                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
-                  >
-                   [pickup point]
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>">
+                   [<?php _e( 'Pickup point', 'bring-fraktguiden' ); ?>]
                 </span>
               <?php endif;?>
           </td>
@@ -411,8 +411,8 @@ class Bring_Booking_Order_View {
           <td>
             <input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
           </td>
-          <td>
-            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
+          <td align="right">
+            <span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
           </td>
         </tr>
       <?php } ?>
@@ -432,7 +432,7 @@ class Bring_Booking_Order_View {
                   class="tips"
                   data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
                   >
-                   [pickup point]
+                   [<?php _e( 'Pickup point', 'bring-fraktguiden' ); ?>]
                 </span>
               <?php endif;?>
           </td>
@@ -448,13 +448,16 @@ class Bring_Booking_Order_View {
           <td>
             <input name="weight[]" class="dimension" type="text" value="0">
           </td>
-          <td>
-            <span class="button delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
+          <td align="right">
+            <span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
           </td>
         </tr>
-        <tr><td colspan="6"></td><td>
+        <tr>
+          <td colspan="6"></td>
+          <td align="right">
             <span class="button add"><?php echo __( 'Add', 'bring-fraktguiden' ); ?></span>
-        </td></tr>
+          </td>
+      </tr>
       </tbody>
     </table>
     </form>
@@ -655,12 +658,15 @@ class Bring_Booking_Order_View {
     $booked = $order->is_booked();
     ?>
     <div class="bring-progress-tracker bring-flex-box">
-
-      <span
-          class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">1 ) <?php _e( 'Start', 'bring-fraktguiden' ); ?></span>
-      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">2 ) <?php _e( 'Create and submit consignment', 'bring-fraktguiden' ); ?></span>
-      <span
-          class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">3 ) <?php _e( 'Submitted', 'bring-fraktguiden' ); ?></span>
+      <span class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">
+        1. <?php _e( 'Create a new booking', 'bring-fraktguiden' ); ?>
+      </span>
+      <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">
+        2. <?php _e( 'Confirm and submit consignment', 'bring-fraktguiden' ); ?>
+      </span>
+      <span class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">
+        3. <?php _e( 'Sucessfully booked', 'bring-fraktguiden' ); ?>
+      </span>
     </div>
     <?php
   }

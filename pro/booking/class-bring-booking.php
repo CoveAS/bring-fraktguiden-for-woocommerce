@@ -23,6 +23,7 @@ add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' )
 class Bring_Booking {
 
   const ID = Fraktguiden_Helper::ID;
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
   static function init() {
     if ( self::is_valid_for_use() ) {

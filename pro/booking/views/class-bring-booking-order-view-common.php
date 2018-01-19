@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Bring_Booking_Common_View {
 
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
+
   static function render_customer_selector( $name = '_bring-customer-number' ) {
     try {
       $customers = Bring_Booking_Customer::get_customer_numbers_formatted();
@@ -29,7 +31,7 @@ class Bring_Booking_Common_View {
 
   static function booking_label( $plural = false ) {
     $label = sprintf( '%s', ( $plural == true ) ? __( 'Bring - Submit Consignments', 'bring-fraktguiden' ) : __( 'Submit Consignment', 'bring-fraktguiden' ) );
-    return $label . ' (' . ( Bring_Booking::is_test_mode() ? 'Test Mode' : '' ) . ')';
+    return $label . ( Bring_Booking::is_test_mode() ? ' - '. __( 'Test mode', 'bring-fraktguiden' ) : '' );
   }
 
   /**

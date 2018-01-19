@@ -8,6 +8,7 @@ add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_Vie
 class Bring_Booking_My_Order_View {
 
   const ID = Fraktguiden_Helper::ID;
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
   /**
    * Display tracking on Order/Mail etc.

@@ -1,5 +1,20 @@
 == Changelog ==
 
+= 1.4.0 =
+
+* Added support to Klarna Checkout
+* Improved the settings UI
+* Updated Services based on the new 2018 Services from Bring
+* Plugin has been made fully translatable finally
+* Improved support for Woocommerce 3.2
+* Additional options for end-user 
+* PRO version now contains Bring fallback methods for when the API can't be accessed
+* Added more descriptions to services and features to help minimise the support you need to request.
+* MyBring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
+* Added a stylesheet for styles. Those styles are used. Mostly for validation and error notifications when the postcode is wrong / invalid.
+* Added the ability to disable the previously mentioned stylesheet, because you've already taken the styling issue into your own hands.
+* Had a baby just before release of this version
+
 = 1.3.2 =
 
 * Removed GPL License

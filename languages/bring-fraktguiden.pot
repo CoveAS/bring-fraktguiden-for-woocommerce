@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2016-09-21 16:35+0200\n"
-"PO-Revision-Date: 2016-09-21 16:35+0200\n"
-"Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
-"Language-Team: Andrew Smith <andrew@drivdigital.no>\n"
+"POT-Creation-Date: 2018-01-18 16:45+0100\n"
+"PO-Revision-Date: 2018-01-16 21:29+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -20,206 +20,514 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: bring-fraktguiden-for-woocommerce.php:84
+#: bring-fraktguiden-for-woocommerce.php:124
 msgid "View Bring Fraktguiden Settings"
 msgstr ""
 
-#: bring-fraktguiden-for-woocommerce.php:84
+#: bring-fraktguiden-for-woocommerce.php:124
 msgid "Settings"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:60
-#: classes/class-wc-shipping-method-bring.php:156
+#: bring-fraktguiden-for-woocommerce.php:141
+msgid ""
+"Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this "
+"message."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:57
+#: classes/class-wc-shipping-method-bring.php:209
+#: pro/class-wc-shipping-method-bring-pro.php:45
+#: pro/class-wc-shipping-method-bring-pro.php:46
 msgid "Bring Fraktguiden"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:144
-msgid "Shipping Options"
+#: classes/class-wc-shipping-method-bring.php:58
+msgid "Automatically calculate shipping rates using brings fraktguiden api."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:147
-#: pro/class-wc-shipping-method-bring-pro.php:104
-#: pro/class-wc-shipping-method-bring-pro.php:156
+#: classes/class-wc-shipping-method-bring.php:170
+msgid "Bring Fraktguiden Pro"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:174
+msgid "Activate PRO"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:176
+msgid "Enable/disable PRO features"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:179
+msgid "Enable test mode"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:181
+msgid "Use PRO in test-mode. Used for development"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:190
+msgid "Bring Settings"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:194
+#: pro/class-wc-shipping-method-bring-pro.php:85
+#: pro/class-wc-shipping-method-bring-pro.php:125
 msgid "Enable"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:149
+#: classes/class-wc-shipping-method-bring.php:196
 msgid "Enable Bring Fraktguiden"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:153
+#: classes/class-wc-shipping-method-bring.php:206
 msgid "Title"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:155
+#: classes/class-wc-shipping-method-bring.php:208
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:159
-msgid "Delivery Fee"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:161
-msgid ""
-"What fee do you want to charge for Bring, disregarded if you choose free. "
-"Leave blank to disable."
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:165
+#: classes/class-wc-shipping-method-bring.php:213
 msgid "Post office"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:167
+#: classes/class-wc-shipping-method-bring.php:215
 msgid "Shipping from post office"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:168
+#: classes/class-wc-shipping-method-bring.php:216
 msgid ""
 "Flag that tells whether the parcel is delivered at a post office when it is "
 "shipped."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:172
+#: classes/class-wc-shipping-method-bring.php:221
 msgid "From zip"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:174
+#: classes/class-wc-shipping-method-bring.php:223
+msgid "ie: 0159"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:224
 msgid ""
 "This is the zip code of where you deliver from. For example, the post office."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:178
+#: classes/class-wc-shipping-method-bring.php:230
 msgid "From country"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:180
+#: classes/class-wc-shipping-method-bring.php:232
 msgid ""
 "This is the country of origin where you deliver from (If omitted "
 "WooCommerce's default location will be used. See WooCommerce - Settings - "
 "General)"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:187
-msgid "Display price"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:189
-msgid "How to calculate delivery charges"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:192
-msgid "VAT included"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:193
-msgid "VAT excluded"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:197
-msgid "Recipient notification"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:199
-msgid "Recipient notification over SMS or E-Mail"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:200
-msgid ""
-"If not checked, Fraktguiden will add a fee for paper based recipient "
-"notification.<br/>If checked, the recipient will receive notification over "
-"SMS or E-mail when the parcel has arrived.<br/>Applies to Bedriftspakke, "
-"Kliman&oslash;ytral Servicepakke and Bedriftspakke Ekspress-Over natten 09"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:204
-msgid "Method availability"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:209
-msgid "All allowed countries"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:210
-#: classes/class-wc-shipping-method-bring.php:214
-msgid "Specific Countries"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:222
-msgid "Services"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:231
-msgid "Display Service As"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:233
-msgid "The service name displayed to the customer"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:236
-msgid "Display Name"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:237
-msgid "Product Name"
+#: classes/class-wc-shipping-method-bring.php:240
+msgid "Delivery Fee"
 msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:242
-msgid "Display Description"
+msgid "0"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:244
-msgid "Add description after the service"
+#: classes/class-wc-shipping-method-bring.php:243
+msgid ""
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:245
-msgid "Show service description after the name of the service"
+#: classes/class-wc-shipping-method-bring.php:252
+msgid "Display price"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:249
-msgid "Max products"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:251
-msgid "Maximum of products in the cart before offering a flat rate"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:255
-msgid "Flat rate"
+#: classes/class-wc-shipping-method-bring.php:254
+msgid "How to calculate delivery charges"
 msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:257
+msgid "VAT included"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:258
+msgid "VAT excluded"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:262
+msgid "Recipient notification"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:264
+msgid "Recipient notification over SMS or E-Mail"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:265
+msgid ""
+"<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper "
+"based recipient notification.<br/>\n"
+"              If enabled, the recipient will receive notification over SMS "
+"or E-mail when the parcel has arrived.<br/>\n"
+"              This only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;"
+"ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:271
+msgid "Method availability"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:276
+msgid "All allowed countries"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:277
+#: classes/class-wc-shipping-method-bring.php:281
+msgid "Specific Countries"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:294
+msgid "Shipping Options"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:295
+msgid ""
+"Set the default prices for shipping rates and allow free shipping options on "
+"those services. You can also set the free shipping limit for each shipping "
+"service."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:299
+msgid "Display Service As"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:301
+msgid "The service name displayed to the customer on the cart / checkout"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:302
+msgid ""
+"Display name: <strong>\"At the post office\"</strong>,<br/>Product name: "
+"<strong>\"Climate Neutral Service Pack\"</strong>"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:305
+msgid "Display Name"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:306
+msgid "Product Name"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:310
+msgid "Display Description"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:312
+msgid "Add description after the service"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:313
+msgid "Show service description after the name of the service"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:317
+#: classes/class-wc-shipping-method-bring.php:802
+msgid "Services"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:332
+msgid "Fallback options"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:333
+msgid ""
+"With scenarios that fall outside of what Bring can handle, you are able to "
+"set prices for cases such as oversized items, minimum sized items, how many "
+"items you allow in one shipment and what should happen if Bring is not "
+"accessible."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:338
+msgid "Minimum shipping dimensions"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:339
+msgid ""
+"Bring needs a default shipping size for when products do not contain any "
+"dimension information."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:343
+msgid "Minimum Length in cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:346
+msgid "Must be at least 23cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:347
+msgid "The lowest length for a consignment"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:354
+msgid "Minimum Width in cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:357
+msgid "Must be at least 13cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:358
+msgid "The lowest width for a consignment"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:365
+msgid "Minimum Height in cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:368
+msgid "Must be at least 1cm"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:369
+msgid "The lowest height for a consignment"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:376
+msgid "Minimum Weight in kg"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:379
+msgid "The lowest weight in kilograms for a consignment"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:388
+msgid "Bring API offline / No connection"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:389
+msgid ""
+"If Bring has any technical difficulties, it won't be able to fetch prices "
+"from the bring server.<br>In these cases, shipping will default to these "
+"settings:"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:393
+msgid "No API connection handling"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:395
+msgid ""
+"What pricing should be used if no connection can be made to the bring API"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:398
+#: classes/class-wc-shipping-method-bring.php:437
+#: classes/class-wc-shipping-method-bring.php:477
+msgid "Do nothing"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:399
+#: classes/class-wc-shipping-method-bring.php:438
+#: classes/class-wc-shipping-method-bring.php:478
+msgid "Custom flat rate"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:403
+msgid "Shipping method Label to replace 'API Error'"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:405
+#: classes/class-wc-shipping-method-bring.php:445
+#: classes/class-wc-shipping-method-bring.php:493
+#: classes/class-wc-shipping-method-bring.php:952
+#: classes/class-wc-shipping-method-bring.php:970
+#: classes/class-wc-shipping-method-bring.php:1032
+msgid "Shipping"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:408
+msgid "Shipping method cost for 'API Error'"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:411
+#: classes/class-wc-shipping-method-bring.php:451
+msgid "ie: 500"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:415
+#: classes/class-wc-shipping-method-bring.php:455
+#: classes/class-wc-shipping-method-bring.php:504
+msgid "Service to use for booking"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:427
+msgid "Heavy and oversized items"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:428
+msgid ""
+"Set a flat rate for packages that exceed the maximum measurements allowed by "
+"Bring."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:432
+msgid "Heavy item handling"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:434
+msgid ""
+"What method should be used to calculate post rates for items that exceeds "
+"the limits set by bring"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:442
+msgid "Shipping method Label for Heavy Items"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:444
+#: classes/class-wc-shipping-method-bring.php:492
+msgid "ie: Cargo shipping"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:448
+msgid "Shipping method cost for heavy items"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:467
+msgid "Product quantity limit for cart"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:468
+msgid ""
+"When a cart reaches this limit, you can enable this shipping method."
+"<br><em>For example, when ordering in bulk, the price for a shipping "
+"container may be a flat rate</em>"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:472
+msgid "Maximum product handling"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:474
+msgid ""
+"We use a packing algorithm to pack items in three dimensions. This algorithm "
+"is computationally heavy and to prevent against DDoS attacks we've "
+"implemented setting to control the maximum number of items that can be "
+"packed per order."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:482
+msgid "Maximum product limit"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:485
+#: classes/class-wc-shipping-method-bring.php:499
+msgid "ie: 1500"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:486
+msgid ""
+"Maximum total quantity of products in the cart before offering a custom price"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:490
+msgid "Shipping method label"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:496
+msgid "Shipping method cost"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:500
 msgid ""
 "Offer a flat rate if the cart reaches max products or a product in the cart "
 "does not have the required dimensions"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:261
-msgid "Debug"
+#: classes/class-wc-shipping-method-bring.php:516
+msgid "Developer"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:263
+#: classes/class-wc-shipping-method-bring.php:517
+msgid "For debugging and testing the plugin"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:521
+msgid "Disable stylesheet"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:523
+msgid "Remove fraktguiden styling from the checkout"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:527
+msgid "Debug mode"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:529
+#: classes/class-wc-shipping-method-bring.php:537
 msgid "Enable debug logs"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:264
-msgid "These logs will be saved in"
+#: classes/class-wc-shipping-method-bring.php:530
+msgid "Issues from the Bring API will be logged here"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:280
+#: classes/class-wc-shipping-method-bring.php:531
+msgid "Bring Fraktguiden logs will be saved in"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:535
+msgid "Debug System information"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:538
+msgid "We may ask for this information if you require support"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:539
+msgid "View system info"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:546
+msgid "Mybring.com API"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:547
+msgid ""
+"If you are a Mybring user you can enter your API credentials for additional "
+"features. API authentication is required for some services such as \"Package "
+"in mailbox (PAKKE_I_POSTKASSEN)\"."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:552
+#: classes/class-wc-shipping-method-bring.php:554
+#: classes/class-wc-shipping-method-bring.php:555
+msgid "API User ID"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:558
+#: classes/class-wc-shipping-method-bring.php:560
+msgid "API Key"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:564
+#: classes/class-wc-shipping-method-bring.php:566
+msgid "Customer number"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:608
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:283
-msgid "View system info"
-msgstr ""
-
-#: classes/class-wc-shipping-method-bring.php:292
+#: classes/class-wc-shipping-method-bring.php:623
 msgid "Gateway Disabled"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:293
+#: classes/class-wc-shipping-method-bring.php:624
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -228,253 +536,379 @@ msgid ""
 "currency. Choose that from the <a href=\"%s\">General tab</a>"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:50
-#: pro/booking/class-bring-booking.php:55
-#: pro/booking/class-bring-booking.php:71
+#: classes/class-wc-shipping-method-bring.php:809
+msgid "Active"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:812
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:263
+msgid "Service"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:816
+msgid "Custom price"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:819
+msgid "Free shipping"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:822
+msgid "Free shipping limit"
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:872
+#: classes/class-wc-shipping-method-bring.php:886
+msgid "..."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:28
+#, php-format
+msgid ""
+"Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
+"to PRO.</a>"
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:36
+msgid "Bring Fraktguiden PRO features have been deactivated."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:39
+#, php-format
+msgid ""
+"The Bring Fraktguiden PRO license has not yet been activated. You have %s "
+"remaining before PRO features are disabled."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:39
+#: classes/common/class-fraktguiden-helper.php:273
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:41
+#: classes/common/class-fraktguiden-helper.php:261
+#: classes/common/class-fraktguiden-helper.php:271
+#: classes/common/class-fraktguiden-helper.php:274
+msgid "Click here to buy a license"
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:47
+#, php-format
+msgid ""
+"Bring requires a postcode to show where packages are being sent from. Please "
+"update your postcode on the <a href=\"%s\">settings page.</a>"
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:248
+msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:260
+msgid "Running in test-mode."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:270
+msgid "Please ensure you have a valid license to continue using PRO."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:273
+#, php-format
+msgid ""
+"Bring Fraktguiden PRO license has not yet been activated. You have %s "
+"remaining before PRO features are disabled."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:283
+msgctxt "Succinct explaination of feature"
+msgid "Free shipping limits: Set cart thresholds to enable free shipping."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:284
+msgctxt "Succinct explaination of feature"
+msgid ""
+"Local pickup points: Let customers select their own pickup point based on "
+"their location."
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:285
+msgctxt "Succinct explaination of feature"
+msgid "MyBring Booking: Book orders directly from the order page with MyBring"
+msgstr ""
+
+#: classes/common/class-fraktguiden-helper.php:286
+msgctxt "Succinct explaination of feature"
+msgid "Fixed shipping prices: Define your set price for each freight option"
+msgstr ""
+
+#: pro/booking/class-bring-booking.php:51
+#: pro/booking/class-bring-booking.php:56
+#: pro/booking/class-bring-booking.php:72
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:55
+#: pro/booking/class-bring-booking.php:56
 #, php-format
 msgid " <span class=\"count\">(%s)</span>"
 msgid_plural " <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: pro/booking/class-bring-booking.php:175
+#: pro/booking/class-bring-booking.php:177
 msgid "Booked with Bring\n"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:180
+#: pro/booking/class-bring-booking.php:182
 msgid "Booking errors. See the Bring Booking box for details.\n"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-my-order-view.php:24
+#: pro/booking/views/class-bring-booking-my-order-view.php:25
 msgid "Your tracking number: "
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:20
+#: pro/booking/views/class-bring-booking-order-view-common.php:28
 msgid "hh"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:21
+#: pro/booking/views/class-bring-booking-order-view-common.php:29
 msgid "mm"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:25
+#: pro/booking/views/class-bring-booking-order-view-common.php:33
 msgid "Bring - Submit Consignments"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:25
+#: pro/booking/views/class-bring-booking-order-view-common.php:33
 msgid "Submit Consignment"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:48
+#: pro/booking/views/class-bring-booking-order-view-common.php:34
+#: pro/class-wc-shipping-method-bring-pro.php:132
+msgid "Test mode"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-order-view-common.php:56
 msgid "No"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:54
+#: pro/booking/views/class-bring-booking-order-view-common.php:62
 msgid "In progress"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:61
+#: pro/booking/views/class-bring-booking-order-view-common.php:69
 msgid "Booked"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view-common.php:68
+#: pro/booking/views/class-bring-booking-order-view-common.php:76
 msgid "Failed"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:48
-#: pro/booking/views/class-bring-booking-orders-view.php:55
+#: pro/booking/views/class-bring-booking-order-view.php:52
 msgid "Bring Booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:109
+#: pro/booking/views/class-bring-booking-order-view.php:113
 msgid "Press start to start booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:115
+#: pro/booking/views/class-bring-booking-order-view.php:119
 #, php-format
 msgid "Order status will be set to %s upon successful booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:139
+#: pro/booking/views/class-bring-booking-order-view.php:143
 msgid "Note: Order is not completed"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:143
+#: pro/booking/views/class-bring-booking-order-view.php:147
 msgid "Consignments"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:184
+#: pro/booking/views/class-bring-booking-order-view.php:188
 msgid "Earliest Pickup"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:188
+#: pro/booking/views/class-bring-booking-order-view.php:192
 msgid "Expected delivery"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:192
+#: pro/booking/views/class-bring-booking-order-view.php:196
 msgid "Labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:195
+#: pro/booking/views/class-bring-booking-order-view.php:199
 msgid "Download"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:199
+#: pro/booking/views/class-bring-booking-order-view.php:203
 msgid "Tracking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:202
+#: pro/booking/views/class-bring-booking-order-view.php:206
 msgid "View"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:208
-#: pro/booking/views/class-bring-booking-order-view.php:279
+#: pro/booking/views/class-bring-booking-order-view.php:212
+#: pro/booking/views/class-bring-booking-order-view.php:283
 msgid "Packages"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:242
+#: pro/booking/views/class-bring-booking-order-view.php:246
 msgid "Customer Number"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:248
-#: pro/booking/views/class-bring-booking-orders-view.php:76
+#: pro/booking/views/class-bring-booking-order-view.php:252
+#: pro/booking/views/class-bring-booking-orders-view.php:73
 msgid "Shipping Date"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:271
+#: pro/booking/views/class-bring-booking-order-view.php:275
 msgid "Additional Info"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:296
+#: pro/booking/views/class-bring-booking-order-view.php:300
 msgid "Cancel"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:299
+#: pro/booking/views/class-bring-booking-order-view.php:303
 msgid "Update order and send consignment to Bring"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:306
-msgid "Update order and start booking"
+#: pro/booking/views/class-bring-booking-order-view.php:310
+msgid "Start creating a label to ship this order with MyBring"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:307
-#: pro/booking/views/class-bring-booking-order-view.php:469
-msgid "Start"
+#: pro/booking/views/class-bring-booking-order-view.php:311
+msgid "Start booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:321
+#: pro/booking/views/class-bring-booking-order-view.php:324
 msgid "Show Parties"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:335
+#: pro/booking/views/class-bring-booking-order-view.php:338
 msgid "Sender Address"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:339
+#: pro/booking/views/class-bring-booking-order-view.php:342
 msgid "Recipient Address"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:350
+#: pro/booking/views/class-bring-booking-order-view.php:353
 msgid "Shipping item id"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:355
-msgid "#"
+#: pro/booking/views/class-bring-booking-order-view.php:362
+msgid "Order ID"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:356
+#: pro/booking/views/class-bring-booking-order-view.php:363
 msgid "Product"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:357
+#: pro/booking/views/class-bring-booking-order-view.php:364
 msgid "Width"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:358
+#: pro/booking/views/class-bring-booking-order-view.php:365
 msgid "Height"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:359
+#: pro/booking/views/class-bring-booking-order-view.php:366
 msgid "Length"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:360
+#: pro/booking/views/class-bring-booking-order-view.php:367
 msgid "Weight"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:381
-msgid "Pickup Point"
+#: pro/booking/views/class-bring-booking-order-view.php:398
+#: pro/booking/views/class-bring-booking-order-view.php:435
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:250
+msgid "Pickup point"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:431
-#: pro/booking/views/class-bring-booking-order-view.php:450
+#: pro/booking/views/class-bring-booking-order-view.php:415
+#: pro/booking/views/class-bring-booking-order-view.php:452
+msgid "Delete"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-order-view.php:458
+msgid "Add"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-order-view.php:625
+#: pro/booking/views/class-bring-booking-order-view.php:644
 msgid "Name"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:432
-#: pro/class-wc-shipping-method-bring-pro.php:177
+#: pro/booking/views/class-bring-booking-order-view.php:626
+#: pro/class-wc-shipping-method-bring-pro.php:175
 msgid "Street Address 1"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:433
-#: pro/class-wc-shipping-method-bring-pro.php:182
+#: pro/booking/views/class-bring-booking-order-view.php:627
+#: pro/class-wc-shipping-method-bring-pro.php:181
 msgid "Street Address 2"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:434
+#: pro/booking/views/class-bring-booking-order-view.php:628
 #: pro/class-wc-shipping-method-bring-pro.php:187
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:291
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:84
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:257
 msgid "Postcode"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:435
+#: pro/booking/views/class-bring-booking-order-view.php:629
 #: pro/class-wc-shipping-method-bring-pro.php:192
 msgid "City"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:436
+#: pro/booking/views/class-bring-booking-order-view.php:630
 #: pro/class-wc-shipping-method-bring-pro.php:197
 msgid "Country"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:438
+#: pro/booking/views/class-bring-booking-order-view.php:632
+#: pro/class-wc-shipping-method-bring-pro.php:206
 msgid "Reference"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:441
+#: pro/booking/views/class-bring-booking-order-view.php:635
 msgid "Additional Address Info"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:446
+#: pro/booking/views/class-bring-booking-order-view.php:640
 msgid "Contact"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:451
-#: pro/class-wc-shipping-method-bring-pro.php:216
+#: pro/booking/views/class-bring-booking-order-view.php:645
+#: pro/class-wc-shipping-method-bring-pro.php:223
 msgid "Email"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:452
+#: pro/booking/views/class-bring-booking-order-view.php:646
 msgid "Phone Number"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:470
-msgid "Create and submit consignment"
+#: pro/booking/views/class-bring-booking-order-view.php:662
+msgid "Create a new booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:472
-msgid "Submitted"
+#: pro/booking/views/class-bring-booking-order-view.php:665
+msgid "Confirm and submit consignment"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:493
+#: pro/booking/views/class-bring-booking-order-view.php:668
+msgid "Sucessfully booked"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-order-view.php:690
 msgid "Previous booking request failed with the following errors:"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-order-view.php:499
+#: pro/booking/views/class-bring-booking-order-view.php:696
 msgid "Press Start to try again"
 msgstr ""
 
@@ -482,179 +916,190 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:63
+#: pro/booking/views/class-bring-booking-orders-view.php:55
+#: pro/class-wc-shipping-method-bring-pro.php:118
+msgid "MyBring Booking"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-orders-view.php:57
+msgid "Close modal panel"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-orders-view.php:62
 msgid "This will only book orders that has not been booked."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:66
+#: pro/booking/views/class-bring-booking-orders-view.php:65
 msgid "Selected orders"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:71
+#: pro/booking/views/class-bring-booking-orders-view.php:69
 msgid "MyBring Customer"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:104
-#: pro/booking/views/class-bring-booking-orders-view.php:105
+#: pro/booking/views/class-bring-booking-orders-view.php:99
+#: pro/booking/views/class-bring-booking-orders-view.php:100
 msgid "Bring - Print labels"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:45
-#: pro/class-wc-shipping-method-bring-pro.php:46
-msgid "Bring Fraktguiden Pro"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:100
+#: pro/class-wc-shipping-method-bring-pro.php:79
 msgid "Pickup Point Options"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:106
+#: pro/class-wc-shipping-method-bring-pro.php:80
+msgid ""
+"Enable pickup points on the cart / checkout. If disabled, Bring will show "
+"the names of shipment methods. <em>ie: <strong>\"Climate Neutral Service Pack"
+"\"</strong></em>"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:87
+msgid "If not checked, default services will be shown"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:88
 msgid "Enable pickup point"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:111
-msgid "Required"
+#: pro/class-wc-shipping-method-bring-pro.php:93
+msgid "Pickup point limit"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:113
-msgid "Make pickup point required on checkout"
+#: pro/class-wc-shipping-method-bring-pro.php:96
+msgid "Leave blank to remove limit"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:123
+#: pro/class-wc-shipping-method-bring-pro.php:98
+msgid "If set, it will be the maximum number of pickup points shown"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:112
 #, php-format
 msgid ""
 "In order to use Bring Booking you must be registered in <a href=\"%s\" "
 "target=\"_blank\">MyBring</a> and have an invoice agreement with Bring"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:125
+#: pro/class-wc-shipping-method-bring-pro.php:114
 msgid "API User ID or API Key missing!"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:129
-msgid "MyBring Account"
+#: pro/class-wc-shipping-method-bring-pro.php:127
+msgid "Enable MyBring booking"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:134
+msgid "Enable test mode for MyBring booking"
 msgstr ""
 
 #: pro/class-wc-shipping-method-bring-pro.php:135
-#: pro/class-wc-shipping-method-bring-pro.php:137
-msgid "API User ID"
+msgid "When enabled, Bookings will not be invoiced or fulfilled by Bring"
 msgstr ""
 
 #: pro/class-wc-shipping-method-bring-pro.php:141
-#: pro/class-wc-shipping-method-bring-pro.php:143
-msgid "API Key"
+msgid "After booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:151
-msgid "Booking Options"
+#: pro/class-wc-shipping-method-bring-pro.php:142
+msgid "Once an order is booked, it will be assigned the following status:"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:158
-msgid "Enable booking"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:163
-msgid "Testing"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:165
-msgid "Test mode"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:166
-msgid "For testing. Bookings will not be invoiced"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:171
-msgid "Store Name"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:206
-msgid "Contact Person"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:211
-msgid "Phone"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:221
+#: pro/class-wc-shipping-method-bring-pro.php:147
 msgid "Order status after booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:223
-msgid "Order status to automatically set after successful booking"
+#: pro/class-wc-shipping-method-bring-pro.php:149
+msgid "Order status will be automatically set when successfully booked"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:226
+#: pro/class-wc-shipping-method-bring-pro.php:152
 msgid "None"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:325
-msgid "Services 2"
+#: pro/class-wc-shipping-method-bring-pro.php:162
+msgid "Store address and contact information"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:205
-msgid "<strong>Pickup point</strong> is a required field."
+#: pro/class-wc-shipping-method-bring-pro.php:163
+msgid ""
+"This address will be your 'from' address and will populate the details given "
+"to Bring during the booking process"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:284
-msgid "Pickup point"
+#: pro/class-wc-shipping-method-bring-pro.php:168
+msgid "Store Name"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:285
+#: pro/class-wc-shipping-method-bring-pro.php:209
+msgid "Specify shipper or consignee reference. Available macros: {order_id}"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:213
+msgid "Contact Person"
+msgstr ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:218
+msgid "Phone"
+msgstr ""
+
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:87
+msgid "Search"
+msgstr ""
+
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:100
+msgid "Select shipping method"
+msgstr ""
+
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:251
 msgid "Please wait..."
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:286
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:252
 msgid "Fraktguiden requires the following fields"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:287
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:288
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:253
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:254
 msgid "Valid shipping postcode"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:289
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:255
 msgid "Please update the fields and save the order first"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:290
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:256
 msgid "Please select service"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:292
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:258
 msgid "Please select pickup point"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:293
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:259
 msgid "Selected pickup point"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:294
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:260
 msgid "No pickup points found for postcode"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:295
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:261
 msgid "Get Rate"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:296
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:262
 msgid "Please wait"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:297
-msgid "Service"
-msgstr ""
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:298
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:264
 msgid "Rate is not available for this order. Please try another service"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:299
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:265
 msgid "Request was not successful"
 msgstr ""
 
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:300
+#: pro/pickuppoint/class-fraktguiden-pickup-point.php:266
 msgid "Please add postal code"
 msgstr ""
 
@@ -663,14 +1108,19 @@ msgid "Bring Fraktguiden for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "http://drivdigital.no"
+msgid "https://drivdigital.no/bring-fraktguiden-pro-woocommerce"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "N/A"
+msgid ""
+"Bring Fraktguiden for WooCommerce makes it easy for your customers to choose "
+"delivery methods from Bring."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Driv Digital"
+msgid "Driv Digital AS"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://drivdigital.no/"
 msgstr ""

@@ -16,16 +16,36 @@ class Fraktguiden_Helper {
 
   const TEXT_DOMAIN = 'bring-fraktguiden';
 
+  static $options;
+
   static function valid_license() {
-    require_once __DIR__ .'/class-fraktguiden-license.php';
     $license = fraktguiden_license::get_instance();
     return $license->valid();
   }
-  static function pro_activated() {
+
+  /**
+   * Get settings url
+   * @return string URL to the settings page
+   */
+  static function get_settings_url() {
+    $section = 'bring_fraktguiden';
+    // if ( class_exists( 'WC_Shipping_Method_Bring_Pro' ) ) {
+    //   $section .= '_pro';
+    // }
+    return admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . $section );
+  }
+  /**
+   * Pro activated
+   * @param  boolean $ignore_license (default=false) Ignore the license check if true
+   * @return boolean                 True means that PRO mode is active
+   */
+  static function pro_activated( $ignore_license = false ) {
+    $days = self::get_pro_days_remaining();
+    $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
     if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] );
+      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
     }
-    return self::get_option( 'pro_enabled' ) == 'yes';
+    return self::get_option( 'pro_enabled' ) == 'yes' && $pro_allowed;
   }
 
   static function booking_enabled() {
@@ -36,13 +56,13 @@ class Fraktguiden_Helper {
   }
 
   static function pro_test_mode() {
-    if ( ! self::pro_activated() ) {
+    if ( ! self::pro_activated( true) ) {
       return false;
     }
-      if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-        return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
-      }
-      return self::get_option( 'test_mode' ) == 'yes';
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+      return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
+    }
+    return self::get_option( 'test_mode' ) == 'yes';
   }
 
   static function get_all_services() {
@@ -115,294 +135,11 @@ class Fraktguiden_Helper {
      * @return array
      */
   static public function get_services_data() {
-    return [
-        'NORGESPAKKE'               => [
-            'ProductCode'     => '3067',
-            'ProductName'     => 'Norgespakke egenemballert',
-            'DisplayName'     => 'På postkontor eller post i butikk (Norgespakke)',
-            'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
-            'HelpText'        => 'Sendingen er en Norgespakke som blir levert til mottakers postkontor/ post i butikk. Mottaker varsles om at sendingen er ankommet via hentemelding i postkassen. Transporttid er normalt 2-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'SERVICEPAKKE'               => [
-            'ProductCode'     => '1202',
-            'ProductName'     => 'Klimanøytral Servicepakke',
-            'DisplayName'     => 'På posten',
-            'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
-            'HelpText'        => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'PA_DOREN'                   => [
-            'ProductCode'     => '1736',
-            'ProductName'     => 'På Døren',
-            'DisplayName'     => 'Hjem på kvelden, 17-21',
-            'DescriptionText' => 'Pakken leveres hjem til deg, sjåføren ringer 30 - 60 min. før ankomst',
-            'HelpText'        => 'Sendingen leveres hjem til deg mellom klokken 17 og 21. Du varsles i god tid om forventet utleveringsdag på sms og/eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme kveld. Sjåfør ringer deg på mobiltelefon 30 - 60 minutter før levering. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk og du vil motta en varsel om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'BPAKKE_DOR-DOR'             => [
-            'ProductCode'     => '1000',
-            'ProductName'     => 'Bedriftspakke',
-            'DisplayName'     => 'På jobben, 08-16',
-            'DescriptionText' => 'Leveres uten at sjåføren ringer først',
-            'HelpText'        => 'Sendingen er en Bedriftspakke som leveres til mottakers arbeidssted mellom klokken 08 og 16. Bestiller du varsling, vil mottaker varsles når sendingen er lastet på bil for uttkjøring, via SMS og/eller e-post. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk. Mottaker varsles om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingssnummeret.',
-        ],
-        'EKSPRESS09'                 => [
-            'ProductCode'     => '1002',
-            'ProductName'     => 'Bedriftspakke Ekspress-Over natten',
-            'DisplayName'     => 'Ekspress over natten',
-            'DescriptionText' => 'Levering på dør vil skje påfølgende dag innen kl 1600 for dette postnummeret.',
-            'HelpText'        => 'Levering hjem på dør før kl 0900 (til mindre steder normalt før kl 1600). Du kan varsles ved SMS/e-post, forutsatt at du har oppgitt telefonnummer/epostadresse ved bestilling. Sendingen kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'MINIPAKKE'                  => [
-            'ProductCode'     => '3110',
-            'ProductName'     => 'Minipakke',
-            'DisplayName'     => 'I postkassen (sporbar)',
-            'DescriptionText' => 'Leveres innen 1-5 dager',
-            'HelpText'        => 'Pakken leveres i mottakers postkasse, og er egnet for små og forholdsvis lette sendinger (maksimalt 2 kg). Mottaker varsles om at pakken ankommer, via SMS og/eller e-post. For at pakken skal kunne leveres i postkassen, må de innvendige målene på postkassen være minst 31 x 21 x 6 cm. Postkassen kan ikke være rør-/sylinderformet, og lokk må være ulåst ved levering. Dersom postkassen er låst eller full slik at pakken ikke kan leveres, vil den bli sendt til mottakers postkontontor/ post i butikk (hentefrist 14 dager). Mottaker får beskjed om dette via SMS og/eller e-post. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Pakken kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'A-POST'                     => [
-            'ProductCode'     => 'N/A',
-            'ProductName'     => 'A-Prioritert',
-            'DisplayName'     => 'I postkassen (A-Prioritert)',
-            'DescriptionText' => 'Sendingene får plass i en vanlig postkasse',
-            'HelpText'        => 'Brev leveres direkte i mottakerens postkasse. Hvis brevet er for stort, må det hentes på mottakers lokale postkontor/ post i butikk innen 2 uker. Mottaker får beskjed om dette via hentemelding i postkassen. Sendingen blir sendt som A-Prioritert, og normal transporttid er 1 virkedag. Brev kan ikke spores.',
-        ],
-        'B-POST'                     => [
-            'ProductCode'     => 'N/A',
-            'ProductName'     => 'B-Økonomi',
-            'DisplayName'     => 'I postkassen (B-Økonomi)',
-            'DescriptionText' => 'Sendingene får plass i en vanlig postkasse',
-            'HelpText'        => 'Brev leveres direkte i mottakerens postkasse. Hvis brevet er for stort, må det hentes på mottakers lokale postkontor/ post i butikk innen 2 uker. Mottaker får beskjed om dette via hentemelding i postkassen. Sendingen blir sendt som B-Økonomi, og normal transporttid er 3-5 virkedager. Brev kan ikke spores.',
-        ],
-        'SMAAPAKKER_A-POST'          => [
-            'ProductCode'     => 'N/A',
-            'ProductName'     => 'Småpakker A-Post',
-            'DisplayName'     => 'I postkassen (A: haster)',
-            'DescriptionText' => 'Leveres innen 1-2 dager, ikke sporbar',
-            'HelpText'        => 'Pakken leveres direkte i mottakerens postkasse. Hvis pakken er for stor, må den hentes på mottakers lokale postkontor/ post i butikk innen 2 uker. Mottaker får beskjed om dette via hentemelding i postkassen. Pakken blir sendt som A-Prioritert, og normal transporttid er 1 virkedag. Pakken kan ikke spores.',
-        ],
-        'SMAAPAKKER_B-POST'          => [
-            'ProductCode'     => 'N/A',
-            'ProductName'     => 'Småpakker B-Post',
-            'DisplayName'     => 'I postkassen (B-Økonomi)',
-            'DescriptionText' => 'Leveres innen 3-5 dager, ikke sporbar',
-            'HelpText'        => 'Pakken leveres direkte i mottakerens postkasse. Hvis pakken er for stor, må den hentes på mottakers lokale postkontor/ post i butikk innen 2 uker. Mottaker får beskjed om dette via hentemelding i postkassen. Pakken blir sendt som B-Økonomi, og normal transporttid er 3 virkedager. Pakken kan ikke spores.',
-        ],
-        'EXPRESS_NORDIC_SAME_DAY'    => [
-            'ProductCode'     => '3336',
-            'ProductName'     => 'Quickpack SameDay',
-            'DisplayName'     => 'Omgående levering, dagtid og kveldstid',
-            'DescriptionText' => 'Bud henter og leverer omgående til dør.',
-            'HelpText'        => 'Når du trenger raskest mulig budlevering. Bring henter pakken omgående hos avsender og flyr den med første fly til mottaker. Innenfor Norden inkluderer produktet også forsikring av forsendelsen som dekker inntil NOK 100 000,- per sending.',
-        ],
-        'EXPRESS_INTERNATIONAL_0900' => [
-            'ProductCode'     => '3337',
-            'ProductName'     => 'Quickpack Over Night 0900',
-            'DisplayName'     => 'Levering neste dag innen kl. 9',
-            'DescriptionText' => 'Bud henter og leverer til dør.',
-            'HelpText'        => 'Når du trenger raskest mulig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
-        ],
-        'EXPRESS_INTERNATIONAL_1200' => [
-            'ProductCode'     => '3338',
-            'ProductName'     => 'Quickpack Over Night 1200',
-            'DisplayName'     => 'Levering neste dag innen kl. 12',
-            'DescriptionText' => 'Bud henter og leverer til dør.',
-            'HelpText'        => 'Når du trenger rask budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
-        ],
-        'EXPRESS_INTERNATIONAL'      => [
-            'ProductCode'     => '3339',
-            'ProductName'     => 'Quickpack Day Certain',
-            'DisplayName'     => 'Levering neste dag',
-            'DescriptionText' => 'Bud henter og leverer til dør.',
-            'HelpText'        => 'Når du trenger en rask og rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
-        ],
-        'EXPRESS_ECONOMY'            => [
-            'ProductCode'     => '3340',
-            'ProductName'     => 'Quickpack Express Economy',
-            'DisplayName'     => 'Levering tidligst neste dag kl. 17',
-            'DescriptionText' => 'Bud henter og leverer til dør.',
-            'HelpText'        => 'Når du trenger rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
-        ],
-        'CARGO_GROUPAGE'             => [
-            'ProductCode'     => '3050',
-            'ProductName'     => 'Cargo',
-            'DisplayName'     => 'Cargo',
-            'DescriptionText' => 'N/A',
-            'HelpText'        => 'N/A',
-        ],
-        'BUSINESS_PARCEL'            => [
-            'ProductCode'     => '0330',
-            'ProductName'     => 'CarryOn Business',
-            'DisplayName'     => 'Til mottakers dør',
-            'DescriptionText' => 'Pakke til bedrifter i utlandet',
-            'HelpText'        => 'CarryOn Business er en enkelt og effektiv måte å sende pakker til andre firmaer i Norden og til resten av verden. Pakker hentes i henhold til avtale, og leveres til mottaker mellom mandag- fredag i kontortiden. I enkelte land leveres pakkene på mottakers postkontor.',
-        ],
-        'PICKUP_PARCEL'              => [
-            'ProductCode'     => '0340',
-            'ProductName'     => 'CarryOn HomeShopping',
-            'DisplayName'     => 'Till utlämningsställe',
-            'DescriptionText' => 'Hentes på mottakers lokale utleveringssted i butikk.',
-            'HelpText'        => 'Sendingen blir levert til mottakers nærmeste utleveringssted. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
-        ],
-        'COURIER_VIP'                => [
-            'ProductCode'     => 'VIP25',
-            'ProductName'     => 'Bud VIP',
-            'DisplayName'     => 'Omgående levering',
-            'DescriptionText' => 'Leveres omgående av bud til dør.',
-            'HelpText'        => 'Sending hentes hos avsender innen 10 minutter og leveres direkte til mottaker.',
-        ],
-        'COURIER_1H'                 => [
-            'ProductCode'     => '1H25',
-            'ProductName'     => 'Bud 1 time',
-            'DisplayName'     => 'Levering innen 1 time',
-            'DescriptionText' => 'Leveres innen 1 time av bud til dør.',
-            'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 1 time.',
-        ],
-        'COURIER_2H'                 => [
-            'ProductCode'     => '2H25',
-            'ProductName'     => 'Bud 2 timer',
-            'DisplayName'     => 'Levering innen 2 timer',
-            'DescriptionText' => 'Leveres av bud til dør innen 2 timer.',
-            'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 2 timer.',
-        ],
-        'COURIER_4H'                 => [
-            'ProductCode'     => '4H25',
-            'ProductName'     => 'Bud 4 timer',
-            'DisplayName'     => 'Levering innen 4 timer',
-            'DescriptionText' => 'Leveres av bud til dør innen 4 timer.',
-            'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 4 timer.',
-        ],
-        'COURIER_6H'                 => [
-            'ProductCode'     => '6H25',
-            'ProductName'     => 'Bud 6 timer',
-            'DisplayName'     => 'Levering innen 6 timer',
-            'DescriptionText' => 'Leveres av bud til dør innen 6 timer.',
-            'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 6 timer.',
-        ],
-        'OIL_EXPRESS'                => [
-            'ProductCode'     => '3050',
-            'ProductName'     => 'OIL_EXPRESS',
-            'DisplayName'     => 'Oil Express',
-            'DescriptionText' => 'N/A',
-            'HelpText'        => 'N/A',
-        ]
-    ];
+    return require dirname( dirname( __DIR__ ) ) .'/config/services.php';
   }
 
   static function get_customer_types_data() {
-    return [
-        'Bring Parcels, Norway'     => [
-            'BPAKKE_DOR-DOR',
-            'BPAKKE_DOR-DOR_RETURSERVICE',
-            'BUSINESS_PALLET',
-            'BUSINESS_PARCEL',
-            'BUSINESS_PARCEL_BULK',
-            'BUSINESS_PARCEL_HALFPALLET',
-            'BUSINESS_PARCEL_QUARTERPALLET',
-            'EKSPRESS09',
-            'EKSPRESS09_RETURSERVICE',
-            'EXPRESS_NORDIC_0900_BULK',
-            'HOME_DELIVERY_MAILBOX',
-            'HOME_DELIVERY_PARCEL',
-            'MINIPAKKE',
-            'PA_DOREN',
-            'PICKUP_PARCEL',
-            'PICKUP_PARCEL_BULK',
-            'SERVICEPAKKE',
-            'SERVICEPAKKE_RETURSERVICE',
-        ],
-        'Bring Parcels, Denmark'    => [
-            'BUSINESS_PALLET',
-            'BUSINESS_PARCEL',
-            'BUSINESS_PARCEL_BULK',
-            'BUSINESS_PARCEL_HALFPALLET',
-            'BUSINESS_PARCEL_QUARTERPALLET',
-            'EXPRESS_NORDIC_0900_BULK',
-            'HOME_DELIVERY_MAILBOX',
-            'HOME_DELIVERY_PARCEL',
-            'PICKUP_PARCEL',
-            'PICKUP_PARCEL_BULK',
-        ],
-        'Bring Parcels, Sweden'     => [
-            'BUSINESS_PALLET',
-            'BUSINESS_PARCEL',
-            'BUSINESS_PARCEL_BULK',
-            'BUSINESS_PARCEL_HALFPALLET',
-            'BUSINESS_PARCEL_QUARTERPALLET',
-            'EXPRESS_NORDIC_0900_BULK',
-            'HOME_DELIVERY_MAILBOX',
-            'HOME_DELIVERY_PARCEL',
-            'PICKUP_PARCEL',
-            'PICKUP_PARCEL_BULK',
-        ],
-        'Bring Parcels, Finland'    => [
-            'BUSINESS_PALLET',
-            'BUSINESS_PARCEL',
-            'BUSINESS_PARCEL_BULK',
-            'BUSINESS_PARCEL_HALFPALLET',
-            'BUSINESS_PARCEL_QUARTERPALLET',
-            'EXPRESS_NORDIC_0900_BULK',
-            'HOME_DELIVERY_MAILBOX',
-            'HOME_DELIVERY_PARCEL',
-            'PICKUP_PARCEL',
-            'PICKUP_PARCEL_BULK',
-        ],
-        'Bring Cargo, Norway'       => [
-            'CARGO',
-            'CARGO_GROUPAGE',
-        ],
-        'Bring Express, Norway'     => [
-            'COURIER_1H',
-            'COURIER_2H',
-            'COURIER_4H',
-            'COURIER_BICYCLE_1H',
-            'COURIER_BICYCLE_2H',
-            'COURIER_BICYCLE_4H',
-            'COURIER_BICYCLE_VIP',
-            'COURIER_LONG_DISTANCE',
-            'COURIER_VIP',
-            'EXPRESS_ECONOMY',
-            'EXPRESS_INTERNATIONAL',
-            'EXPRESS_INTERNATIONAL_0900',
-            'EXPRESS_INTERNATIONAL_1200',
-            'EXPRESS_NORDIC_SAME_DAY',
-        ],
-        'Bring Express, Denmark'    => [
-            'COURIER_1H',
-            'COURIER_2H',
-            'COURIER_4H',
-            'COURIER_6H',
-            'COURIER_BICYCLE_1H',
-            'COURIER_BICYCLE_2H',
-            'COURIER_BICYCLE_4H',
-            'COURIER_BICYCLE_VIP',
-            'COURIER_LONG_DISTANCE',
-            'COURIER_VIP',
-            'EXPRESS_ECONOMY',
-            'EXPRESS_INTERNATIONAL',
-            'EXPRESS_INTERNATIONAL_0900',
-            'EXPRESS_INTERNATIONAL_1200',
-            'EXPRESS_NORDIC_SAME_DAY',
-        ],
-        'Bring Express, Sweden'     => [
-            'COURIER_1H',
-            'COURIER_2H',
-            'COURIER_4H',
-            'COURIER_6H',
-            'COURIER_BICYCLE_1H',
-            'COURIER_BICYCLE_2H',
-            'COURIER_BICYCLE_4H',
-            'COURIER_BICYCLE_VIP',
-            'COURIER_LONG_DISTANCE',
-            'COURIER_VIP',
-            'EXPRESS_ECONOMY',
-            'EXPRESS_INTERNATIONAL',
-            'EXPRESS_INTERNATIONAL_0900',
-            'EXPRESS_INTERNATIONAL_1200',
-            'EXPRESS_NORDIC_SAME_DAY',
-        ],
-        'Bring Oil Express, Norway' => [
-            'OIL_EXPRESS'
-        ]
-    ];
+    return require dirname( dirname( __DIR__ ) ) .'/config/customer-types.php';
   }
 
   /**
@@ -415,17 +152,30 @@ class Fraktguiden_Helper {
    * @return string|bool
    */
   static function get_option( $key, $default = false ) {
-    static $options;
-    if ( empty( $options ) ) {
-        $options = get_option( 'woocommerce_' . WC_Shipping_Method_Bring::ID . '_settings' );
+    if ( empty( self::$options ) ) {
+      self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
     }
-    if ( empty( $options ) ) {
-      return false;
+    if ( empty( self::$options ) ) {
+      return $default;
     }
-    if ( ! isset( $options[ $key ] ) ) {
-        return $default;
+    if ( ! isset( self::$options[ $key ] ) ) {
+      return $default;
     }
-    return $options[ $key ];
+    return self::$options[ $key ];
+  }
+
+  /**
+   * Updates a Woo admin setting by key
+   *
+   * @param string $key
+   * @return string|bool
+   */
+  static function update_option( $key, $data ) {
+    if ( empty( self::$options ) ) {
+      self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
+    }
+    self::$options[ $key ] = $data;
+    update_option( 'woocommerce_bring_fraktguiden_settings', self::$options, true );
   }
 
   /**
@@ -471,47 +221,70 @@ class Fraktguiden_Helper {
     ];
   }
 
+  /**
+   * get_pro_days_remaining calculates how many days are remaining.
+   * @return [string] [Returns amount of time since plugin was activated]
+   */
   static function get_pro_days_remaining() {
     $start_date = self::get_option( 'pro_activated_on', false );
     if ( ! $start_date ) {
       $time = time();
+      self::update_option( 'pro_activated_on', $time );
     } else {
-      $time = strtotime( $start_date );
+      $time = intval( $start_date );
     }
-    $diff = $time + 86400 * 30 - time();
+    $diff = $time + 86400 * 8 - time() - 10;
     $time = floor( $diff / 86400 );
     return $time;
   }
+
+  /**
+   * get_pro_terms_link
+   * @param  string $text Description
+   * @return string       Link to BRING PRO page
+   */
   static function get_pro_terms_link( $text = '' ) {
     if ( ! $text ) {
-      $text = 'Click here to buy a license or learn more about bring fraktguiden pro.';
+      $text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', 'bring-fraktguiden' );
     }
     $format = '<a href="%s" target="_blank">%s</a>';
-    return sprintf( $format, 'https://drivdigital.no/bring-pro', __( $text, 'bring-fraktguiden' ) );
+    return sprintf( $format, 'https://drivdigital.no/bring-fraktguiden-pro-woocommerce', __( $text, 'bring-fraktguiden' ) );
   }
 
+  /**
+   * [get_pro_description description]
+   * @return [type] [description]
+   */
   static function get_pro_description() {
     if ( self::pro_test_mode() ) {
       return __( 'Running in test-mode.', 'bring-fraktguiden' ) . ' '
         . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
     }
-    if ( self::pro_activated() ) {
+    if ( self::pro_activated( true ) ) {
       if ( self::valid_license() ) {
         return '';
       }
       $days = self::get_pro_days_remaining();
-      return sprintf( __(
-        'The pro license has not yet activated. You have %s remaining before pro disables.'
-      ), "$days ". _n( 'day', 'days', $days, 'bring-fraktguiden' ), 'bring-fraktguiden' ). '<br>'
+
+      if ( $days < 0 ) {
+        return __( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden' ). '<br>'
+        . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+      }
+      return sprintf( __( 'Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden' ) ). '<br>'
       . self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
     }
-    return __( '
-      Pro features: <ol>
-        <li>Free shipping options. Set a threshold value for free shipping.</li>
-        <li>Pickup points. Let customers select their pickup point</li>
-        <li>MyBring Booking. Book directly with Bring</li>
-      </ol>
-      ' , 'bring-fraktguiden' ) .' '. Fraktguiden_Helper::get_pro_terms_link();
+    return sprintf(
+      '<ol>
+        <li>%s</li>
+        <li>%s</li>
+        <li>%s</li>
+        <li>%s</li>
+      </ol>',
+      _x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
+      _x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', 'bring-fraktguiden' ),
+      _x( 'MyBring Booking: Book orders directly from the order page with MyBring', 'Succinct explaination of feature', 'bring-fraktguiden' ),
+      _x( 'Fixed shipping prices: Define your set price for each freight option', 'Succinct explaination of feature', 'bring-fraktguiden' )
+    ) . ' ' . Fraktguiden_Helper::get_pro_terms_link();
   }
 
   /**
@@ -520,10 +293,10 @@ class Fraktguiden_Helper {
    * @param  boolean $refresh
    * @return array
    */
-  static function get_admin_messages( int $limit = 0, $refresh = false ) {
+  static function get_admin_messages( $limit = 0, $refresh = false ) {
     static $messages = [];
     if ( empty( $messages ) || $refresh ) {
-      $messages = get_option( 'bring_fraktguiden_admin_messages' );
+      $messages = self::get_option( 'admin_messages' );
     }
     if ( ! is_array( $messages ) ) {
       $messages = [];
@@ -545,6 +318,6 @@ class Fraktguiden_Helper {
     if ( ! in_array( $message, $messages ) ) {
       $messages[] = $message;
     }
-    update_option( 'bring_fraktguiden_admin_messages', $messages, false );
+    self::update_option( 'admin_messages', $messages, false );
   }
 }

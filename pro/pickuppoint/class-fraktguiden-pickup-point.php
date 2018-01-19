@@ -17,6 +17,7 @@ class Fraktguiden_Pickup_Point {
 
   const ID = Fraktguiden_Helper::ID;
   const BASE_URL = 'https://api.bring.com/pickuppoint/api/pickuppoint';
+  const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
   static function init() {
     // Enqueue checkout Javascript.
@@ -51,6 +52,7 @@ class Fraktguiden_Pickup_Point {
     // Pickup points
     if ( Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) == 'yes' ) {
       add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
+      add_filter( 'bring_pickup_point_limit', __CLASS__ .'::limit_pickup_points' );
     }
   }
 
@@ -75,15 +77,14 @@ class Fraktguiden_Pickup_Point {
    * Klarna Checkout post code selector HTML
    */
   static function kco_post_code_html() {
-    $i18n = self::get_i18n();
     $postcode = esc_html( WC()->customer->get_shipping_postcode() );
     ?>
     <div class="bring-enter-postcode">
       <form>
-        <label><?php echo $i18n['POSTCODE']; ?>
-          <input class="input-text" type="text" value="<?php echo $postcode; ?>">
+        <label><?php _e( 'Postcode', 'bring-fraktguiden' ); ?>
+          <input class="bring-input input-text" type="text" value="<?php echo $postcode; ?>">
         </label>
-        <input class="button" type="submit" value="Hent Leveringsmetoder">
+        <input class="bring-button button" type="submit" value="<?php _e( 'Search', 'bring-fraktguiden' )?>">
       </form>
     </div>
     <?php
@@ -294,9 +295,10 @@ class Fraktguiden_Pickup_Point {
         'packages' => null,
     ];
 
+
     if ( isset( $_GET['post_id'] ) && isset( $_GET['service'] ) ) {
 
-      $order = new WC_Order( $_GET['post_id'] );
+      $order = wc_get_order( $_GET['post_id'] );
       $items = $order->get_items();
 
       $fake_cart = [ ];
@@ -321,8 +323,8 @@ class Fraktguiden_Pickup_Point {
           'clientUrl'           => $_SERVER['HTTP_HOST'],
           'from'                => Fraktguiden_Helper::get_option( 'from_zip' ),
           'fromCountry'         => Fraktguiden_Helper::get_option( 'from_country' ),
-          'to'                  => $order->shipping_postcode,
-          'toCountry'           => $order->shipping_country,
+          'to'                  => $order->get_shipping_postcode(),
+          'toCountry'           => $order->get_shipping_country(),
           'postingAtPostOffice' => ( Fraktguiden_Helper::get_option( 'post_office' ) == 'no' ) ? 'false' : 'true',
           'additional'          => ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) ? 'evarsling' : '',
       );
@@ -346,6 +348,8 @@ class Fraktguiden_Pickup_Point {
         $result['success']  = true;
         $result['rate']     = $rate;
         $result['packages'] = json_encode( $package_params );
+      } else {
+        wp_send_json( $params );
       }
     }
 
@@ -384,6 +388,10 @@ class Fraktguiden_Pickup_Point {
     return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
   }
 
+  public static function limit_pickup_points( $default_limit ) {
+    return Fraktguiden_Helper::get_option( 'pickup_point_limit' ) ?: $default_limit;
+  }
+
   /**
    * Filter: Insert pickup points
    * @hook bring_shipping_rates
@@ -404,7 +412,7 @@ class Fraktguiden_Pickup_Point {
     if ( ! $service_package ) {
       // Service package is not available.
       // That means it's the end of the line for pickup points
-      return;
+      return $rates;
     }
 
     $pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
