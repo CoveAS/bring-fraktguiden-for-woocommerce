@@ -8,7 +8,7 @@ Requires at least: 4.5
 Tested up to: 4.9.1
 WC requires at least: 3.1
 WC tested up to: 3.2.1
-Stable tag: 1.4.0.1
+Stable tag: 1.4.0.2
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -37,11 +37,11 @@ When you install bring, you need to head to the settings page to start configuri
 
 To ensure Bring will work correctly, you must set the following:
 
-1. **Dimension and weight units** 
+1. **Dimension and weight units**
     * WooCommerce > Settings > Products
 2. **Currency**
     * WooCommerce > Settings > General
-3. **Product dimentions** 
+3. **Product dimentions**
     * Woocommerce > Products > Products
 
 == Frequently Asked Questions ==
@@ -54,6 +54,14 @@ A: Check your dimensions are set to the right unit values. Often, products are m
 
 == Changelog ==
 
+= 1.4.0.2 =
+
+* Fixed a bug affecting installations using php 5.6
+
+= 1.4.0.1 =
+
+* Fixed an issue where not all files were pushed to the SVN repo
+
 = 1.4.0 =
 
 * Added support to Klarna Checkout
@@ -61,7 +69,7 @@ A: Check your dimensions are set to the right unit values. Often, products are m
 * Updated Services based on the new 2018 Services from Bring
 * Plugin has been made fully translatable finally
 * Improved support for Woocommerce 3.2
-* Additional options for end-user 
+* Additional options for end-user
 * PRO version now contains Bring fallback methods for when the API can't be accessed
 * Added more descriptions to services and features to help minimise the support you need to request.
 * MyBring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
