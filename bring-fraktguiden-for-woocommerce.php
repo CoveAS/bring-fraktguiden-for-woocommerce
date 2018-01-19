@@ -25,7 +25,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.4.0.1';
+  const VERSION = '1.4.0.2';
 
   const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
