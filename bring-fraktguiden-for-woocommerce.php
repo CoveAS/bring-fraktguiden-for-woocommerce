@@ -12,7 +12,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/
  *
- * Version:             1.4.0.1
+ * Version:             1.4.0.2
  * Requires at least:   4.9.1
  * Tested up to:        4.9.2
  *

@@ -293,7 +293,7 @@ class Fraktguiden_Helper {
    * @param  boolean $refresh
    * @return array
    */
-  static function get_admin_messages( int $limit = 0, $refresh = false ) {
+  static function get_admin_messages( $limit = 0, $refresh = false ) {
     static $messages = [];
     if ( empty( $messages ) || $refresh ) {
       $messages = self::get_option( 'admin_messages' );
