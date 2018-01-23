@@ -552,7 +552,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'       => __( 'API User ID', 'bring-fraktguiden' ),
             'type'        => 'text',
             'label'       => __( 'API User ID', 'bring-fraktguiden' ),
-            'placeholder' => __( 'API User ID', 'Email address, eg: post@example.com', 'bring-fraktguiden' ),
+            'placeholder' => 'bring@example.com',
         ],
         'mybring_api_key' => [
             'title'       => __( 'API Key', 'bring-fraktguiden' ),
