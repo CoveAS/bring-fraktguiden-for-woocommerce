@@ -24,11 +24,11 @@ When you install bring, you need to head to the settings page to start configuri
 
 To ensure Bring is working correctly, you must set the following:
 
-1. **Dimension and weight units** 
+1. **Dimension and weight units**
 	* WooCommerce > Settings > Products
 2. **Currency**
 	* WooCommerce > Settings > General
-3. **Product dimentions** 
+3. **Product dimentions**
 	* Woocommerce > Products > Product
 
 ## Frequently Asked Questions
@@ -79,24 +79,3 @@ $ git commit -m "A brief summary of the commit
 > A paragraph describing what changed and its impact."
 ````
 * Create a [pull request](https://help.github.com/articles/using-pull-requests/)
-
-### Create a Release
-
-This section applies to project maintainers only.
-
-**Prerequsites:**
-
-* [Node.js](https://nodejs.org)
-* [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
-* [SVN](https://tortoisesvn.net/) (for commiting to Wordpress.org)
-* Write access to the Wordpress.org SVN repository
-
-**Procedure:**
-
-* Make sure you have SVN installed and have read/write access to the WordPress.org project
-* Install [driv-cli](https://bitbucket.org/drivdigital/driv-cli)
-    * Add `git@bitbucket.org:drivdigital/driv-cli-wp.git` to your `${DRIV-CLI-HOME}/repositories.json`
-* Navigate to `${PROJECT-HOME}`.
-* Make sure the `build.json` has the correct version number.
-* Type `driv wp plugin` (assuming you have created an alias named `driv`).
-* Choose `release` from the menu.

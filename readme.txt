@@ -8,7 +8,7 @@ Requires at least: 4.5
 Tested up to: 4.9.1
 WC requires at least: 3.1
 WC tested up to: 3.2.1
-Stable tag: 1.4.0.2
+Stable tag: 1.4.0.3
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -22,6 +22,11 @@ Please consult the installation section and the changelog section before install
 > Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
 
 If you'd like to contribute or report an issue, head over to: https://github.com/drivdigital/bring-fraktguiden-for-woocommerce
+
+== Update notice ==
+
+If you're updating the plugin from version 1.3.0 please note that it is now required to set up Shipping Zones for the shipping
+calculation to work. See WooCommerce's documentation of Shipping Zones here: https://docs.woocommerce.com/document/setting-up-shipping-zones/
 
 == Installation ==
 
@@ -54,12 +59,10 @@ A: Check your dimensions are set to the right unit values. Often, products are m
 
 == Changelog ==
 
-= 1.4.0.2 =
+= 1.4.0.3 =
 
+* Added an update notice to the description
 * Fixed a bug affecting installations using php 5.6
-
-= 1.4.0.1 =
-
 * Fixed an issue where not all files were pushed to the SVN repo
 
 = 1.4.0 =
