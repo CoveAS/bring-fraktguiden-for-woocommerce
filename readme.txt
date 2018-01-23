@@ -80,11 +80,10 @@ Yes, yes we do. m[Bring Github](https://github.com/drivdigital/bring-fraktguiden
 == Changelog ==
 
 = 1.4.0.4 =
-
-= 1.4.0.3 =
-
+* Added Mybring.com API authentication check when saving settings
+* Fixed an issue where no shipping rates would show up if the max_products setting was empty
 * Added an update notice to the description
-* Fixed a bug affecting installations using php 5.6
+* Fixed code that was incompatible with php 5.6
 * Fixed an issue where not all files were pushed to the SVN repo
 
 = 1.4.0 =
