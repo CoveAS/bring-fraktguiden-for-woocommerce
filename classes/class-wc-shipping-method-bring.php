@@ -729,6 +729,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   /**
    * Process admin options
+   *
+   * Note: do not use `Fraktguiden_Helper::update_option` within the process option. It will override the $_POST data!
+   *
    * Add custom processing to handle the services field
    */
   public function process_admin_options() {
@@ -771,7 +774,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       return;
     }
 
-    $key = $this->get_setting( 'mybring_authenticated_key' );
+    $key = get_option( 'mybring_authenticated_key' );
     $hash = md5( $api_uid . $api_key . $customer_number );
 
     if ( $key == $hash ) {
@@ -788,7 +791,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $this->mybring_error( $response->body );
       return;
     }
-    Fraktguiden_Helper::update_option( 'mybring_authenticated_key', $hash );
+    update_option( 'mybring_authenticated_key', $hash, true );
   }
 
   public function mybring_error( $message ) {

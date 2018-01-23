@@ -67,12 +67,26 @@ class WP_Bring_Request {
   }
 
   /**
+   * Get Var
+   * Get the field value from either the POST or the saved value
+   * @param  string $key
+   * @return string
+   */
+  protected function get_var( $key ) {
+    if ( isset( $_POST[ 'woocommerce_bring_fraktguiden_'. $key ] ) ) {
+      return $_POST[ 'woocommerce_bring_fraktguiden_'. $key ];
+    }
+    return Fraktguiden_Helper::get_option( $key );
+  }
+
+  /**
    * Add Authentication
    * @param @array $options
    */
   protected function add_authentication( $options ) {
-    $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
-    $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
+    $mybring_api_uid = $this->get_var( 'mybring_api_uid' );
+    $mybring_api_key = $this->get_var( 'mybring_api_key' );
+
     if ( $mybring_api_key && $mybring_api_uid ) {
       $options['headers']['X-MyBring-API-Uid']  = $mybring_api_uid;
       $options['headers']['X-MyBring-API-Key']  = $mybring_api_key;
@@ -86,9 +100,9 @@ class WP_Bring_Request {
    * @param @array $options [description]
    */
   protected function add_customer_number( $url ) {
-    $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
-    $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
-    $customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+    $mybring_api_uid = $this->get_var( 'mybring_api_uid' );
+    $mybring_api_key = $this->get_var( 'mybring_api_key' );
+    $customer_number = $this->get_var( 'mybring_customer_number' );
     if ( $mybring_api_key && $mybring_api_uid && $customer_number ) {
       $url .= '&customerNumber='. $customer_number;
     }
