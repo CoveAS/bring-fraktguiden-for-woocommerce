@@ -71,7 +71,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->init_settings();
 
     // Debug configuration
-    $this->debug = $this->settings['debug'];
+    $this->debug = $this->get_setting( 'debug' );
     $this->log   = new WC_Logger();
 
     // Define user set variables
@@ -760,6 +760,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       'customer_number',
     ];
 
+
+    if ( ! $api_uid && ! $api_key && ! $customer_number ) {
+      // No credentials provided
+      return;
+    }
 
     if ( $api_uid && ! $api_key  ) {
       $this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden' ) );
