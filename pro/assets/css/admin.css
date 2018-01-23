@@ -179,8 +179,6 @@ mark.bring-shipment:after {
 
 .bring-consignments ul {
   margin-top: 0;
-  list-style: square;
-  padding-left: 20px;
 }
 
 .bring-booking-packages {
@@ -228,19 +226,32 @@ mark.bring-shipment:after {
 
 .bring-booking-status-icon {
   background-color: #42a2ce;
-  border-radius: 50%;
+  border: 5px solid #50b1d8;
+  border-radius: 20rem;
   color: #fff;
-  display: inline;
+  display: inline-block;
+}
+
+.bring-booking-status-icon::before {
+  display: inline-block;
+}
+.bring-booking-status-icon.dashicons-yes::before {
+  position: relative;
+  left: -3px;
+  top: 3px;
 }
 
 .bring-booking-status-icon.dashicons-warning {
   background-color: #ff645c;
-  border-radius: 0;
+  border: 5px solid #f44336;
+  border-radius: 3px;
+  box-shadow:0 20px 20px -22px #000;
 }
 
 .bring-booking-status-icon.dashicons-minus {
   color: #7BC144;
   background-color: transparent;
+  border: 5px solid;
 }
 
 .manage-column.column-bring_booking_status,
@@ -273,10 +284,19 @@ mark.bring-shipment:after {
  * Separate admin sections require separation
  */
 
+.bring-list-tracking-numbers {
+  list-style: none;
+  margin: 0;
+}
+
+.bring-list-tracking-numbers li:only-child {
+  margin-bottom: 0;
+}
+
 .bring-separate-admin-section {
-margin-top: 1em;
-padding-top: 1em;
-border-top: 1px solid #ccc;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #ccc;
 }
 
 @media ( min-width: 50em ) {
