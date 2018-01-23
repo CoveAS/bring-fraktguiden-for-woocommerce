@@ -66,8 +66,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
   public function init_form_fields() {
 
-    global $woocommerce;
-
     parent::init_form_fields();
 
     // *************************************************************************
@@ -194,12 +192,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     ];
 
     $this->form_fields['booking_address_country'] = [
-        'title'   => __( 'Country', 'bring-fraktguiden' ),
-        'type'    => 'select',
-        'class'   => 'chosen_select',
-        'css'     => 'width: 400px;',
-        'default' => $woocommerce->countries->get_base_country(),
-        'options' => $woocommerce->countries->countries
+        'title'    => __( 'Country', 'bring-fraktguiden' ),
+        'class'    => 'chosen_select',
+        'css'      => 'width: 400px;',
+        'type'     => 'select',
+        'options'  => WC()->countries->get_countries(),
+        'default'  => WC()->countries->get_base_country(),
     ];
 
     $this->form_fields['booking_address_reference'] = [
@@ -224,6 +222,17 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         'type'  => 'text',
     ];
 
+  }
+
+  /**
+   * Init Settings
+   */
+  public function init_settings() {
+    parent::init_settings();
+    // Remove settings for empty fields so that WooCommerce can populate them with default values
+    if ( ! $this->settings['booking_address_country'] ) {
+      unset( $this->settings['booking_address_country'] );
+    }
   }
 
   /**
