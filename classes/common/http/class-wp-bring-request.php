@@ -21,10 +21,12 @@ class WP_Bring_Request {
    * @return WP_Bring_Response
    */
   public function get( $url, $params = [ ], $options = [ ] ) {
-    $u    = $this->build_url( $url, $params );
-    $opts = $this->merge_options( $options );
-    $res  = wp_remote_get( $u, $opts );
-    return new WP_Bring_Response( $res );
+    $url     = $this->build_url( $url, $params );
+    $options = $this->merge_options( $options );
+    $options = $this->add_authentication( $options );
+    $url     = $this->add_customer_number( $url );
+    $result  = wp_remote_get( $url, $options );
+    return new WP_Bring_Response( $result );
   }
 
   /**
@@ -34,10 +36,12 @@ class WP_Bring_Request {
    * @return WP_Bring_Response
    */
   public function post( $url, $params = [ ], $options = [ ] ) {
-    $u    = $this->build_url( $url, $params );
-    $opts = $this->merge_options( $options );
-    $res  = wp_remote_post( $u, $opts );
-    return new WP_Bring_Response( $res );
+    $url     = $this->build_url( $url, $params );
+    $options = $this->merge_options( $options );
+    $options = $this->add_authentication( $options );
+    $url     = $this->add_customer_number( $url );
+    $result  = wp_remote_post( $url, $options );
+    return new WP_Bring_Response( $result );
   }
 
   /**
@@ -62,4 +66,32 @@ class WP_Bring_Request {
     return array_merge( $this->default_options, $options );
   }
 
+  /**
+   * Add Authentication
+   * @param @array $options
+   */
+  protected function add_authentication( $options ) {
+    $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
+    $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
+    if ( $mybring_api_key && $mybring_api_uid ) {
+      $options['headers']['X-MyBring-API-Uid']  = $mybring_api_uid;
+      $options['headers']['X-MyBring-API-Key']  = $mybring_api_key;
+      $options['headers']['X-Bring-Client-URL'] = $_SERVER['HTTP_HOST'];
+    }
+    return $options;
+  }
+
+  /**
+   * Add Customer Number
+   * @param @array $options [description]
+   */
+  protected function add_customer_number( $url ) {
+    $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
+    $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
+    $customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+    if ( $mybring_api_key && $mybring_api_uid && $customer_number ) {
+      $url .= '&customerNumber='. $customer_number;
+    }
+    return $url;
+  }
 }

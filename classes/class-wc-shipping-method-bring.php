@@ -734,9 +734,77 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function process_admin_options() {
     parent::process_admin_options();
 
+    $instance_key = null;
     if ( $this->instance_id ) {
         $instance_key = $this->get_instance_option_key();
     }
+    $this->process_services_field( $instance_key );
+
+    $this->process_mybring_api_credentials( $instance_key );
+  }
+  public function process_mybring_api_credentials( $instance_key ) {
+    $api_uid_key         = $this->get_field_key( 'mybring_api_uid' );
+    $api_key_key         = $this->get_field_key( 'mybring_api_key' );
+    $customer_number_key = $this->get_field_key( 'mybring_customer_number' );
+
+    $api_uid = $_POST[ $api_uid_key ];
+    $api_key = $_POST[ $api_key_key ];
+    $customer_number = $_POST[ $customer_number_key ];
+
+    $fields = [
+      'api_uid',
+      'api_key',
+      'customer_number',
+    ];
+
+
+    if ( $api_uid && ! $api_key  ) {
+      $this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden' ) );
+      return;
+    }
+    if ( $api_key && ! $api_uid  ) {
+      $this->mybring_error( __( 'You need to enter a API User ID', 'bring-fraktguiden' ) );
+      return;
+    }
+    if ( $customer_number && ( ! $api_uid || ! $api_key ) ) {
+      $this->mybring_error( __( 'You cannot use a Customer number without entering API credentials', 'bring-fraktguiden' ) );
+      return;
+    }
+
+    $key = $this->get_setting( 'mybring_authenticated_key' );
+    $hash = md5( $api_uid . $api_key . $customer_number );
+
+    if ( $key == $hash ) {
+      // We already tried this combination, skip this for re-saves
+      return;
+    }
+
+    // Try to atuhenticate
+    $request  = new WP_Bring_Request();
+    $params = $this->create_standard_url_params();
+    $params['weightInGrams'] = 100;
+    $response = $request->get( self::SERVICE_URL, $params );
+    if ( 200 != $response->status_code ) {
+      $this->mybring_error( $response->body );
+      return;
+    }
+    Fraktguiden_Helper::update_option( 'mybring_authenticated_key', $hash );
+  }
+
+  public function mybring_error( $message ) {
+    if ( strpos( $message, 'Authentication failed.') === 0 ) {
+      $message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden' ) );
+    }
+
+    Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
+  }
+
+  /**
+   * Process services field
+   * @param  string|null $instance_key
+   */
+  public function process_services_field( $instance_key ) {
+    // @TODO: Use instance key to have per-zone settings
 
     // Process services table
     $services_field               = $this->get_field_key( 'services' );
@@ -1002,22 +1070,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         }
       }
 
-      $customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
-      if ( $customer_number ) {
-        $url .= '&customerNumber='. $customer_number;
-      }
       $options = [
         'headers' => [
           'Content-Type'       => 'application/json',
           'Accept'             => 'application/json',
         ]
       ];
-      $mybring_api_uid = Fraktguiden_Helper::get_option( 'mybring_api_uid' );
-      $mybring_api_key = Fraktguiden_Helper::get_option( 'mybring_api_key' );
-      if ( $mybring_api_key && $mybring_api_uid) {
-        $options['headers']['X-MyBring-API-Uid'] = $mybring_api_uid;
-        $options['headers']['X-MyBring-API-Key'] = $mybring_api_key;
-      }
 
       // Make the request.
       $request  = new WP_Bring_Request();
@@ -1110,8 +1168,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    *
    * @return array
    */
-  public function create_standard_url_params( $package ) {
+  public function create_standard_url_params( $package = null ) {
     global $woocommerce;
+    if ( null === $package ) {
+      $package = [
+        'destination' => [
+          'postcode' => $this->from_zip,
+          'country' => $this->get_selected_from_country(),
+        ],
+      ];
+    }
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
