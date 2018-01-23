@@ -21,8 +21,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   const ID = Fraktguiden_Helper::ID;
 
-  const DEFAULT_MAX_PRODUCTS = 100;
-
   const DEFAULT_ALT_FLAT_RATE = 200;
 
 
@@ -99,7 +97,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->services     = $this->get_setting( 'services' );
     $this->service_name = $this->get_setting( 'service_name', 'DisplayName' );
     $this->display_desc = $this->get_setting( 'display_desc', 'no' );
-    $this->max_products = (int) $this->get_setting( 'max_products', self::DEFAULT_MAX_PRODUCTS );
+    $max_products = (int) $this->get_setting( 'max_products', 1000 );
+    $this->max_products = $max_products ? $max_products : 1000;
 
     // The packer may make a lot of recursion when the cart contains many items.
     // Make sure xdebug max_nesting_level is raised.
@@ -482,9 +481,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'title'    => __( 'Maximum product limit', 'bring-fraktguiden' ),
             'type'     => 'text',
             'css'      => 'width: 8em;',
-            'placeholder' => __( 'ie: 1500', 'bring-fraktguiden' ),
+            'placeholder' => 1000,
             'desc_tip' => __( 'Maximum total quantity of products in the cart before offering a custom price', 'bring-fraktguiden' ),
-            'default'  => self::DEFAULT_MAX_PRODUCTS
+            'default'  => 1000,
         ),
         'alt_flat_rate_label' => array(
             'title'       => __( 'Shipping method label', 'bring-fraktguiden' ),
@@ -528,8 +527,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'type'        => 'checkbox',
             'label'       => __( 'Enable debug logs', 'bring-fraktguiden' ),
             'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden' ),
-            'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>',
-            'default'     => 'no'
+            'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden' ) . ' <code>' . $wc_log_dir . '</code>'
+                           . '<a href="'. admin_url( 'admin.php?page=wc-status&tab=logs' ) .'">'. __( 'Click here to see the logs' ) .'</a>',
+            'default'     => 'no',
         ),
         'system_information'         => array(
             'title'       => __( 'Debug System information', 'bring-fraktguiden' ),
@@ -785,12 +785,37 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Try to atuhenticate
     $request  = new WP_Bring_Request();
     $params = $this->create_standard_url_params();
+    $params['product'] = 'SERVICEPAKKE';
     $params['weightInGrams'] = 100;
     $response = $request->get( self::SERVICE_URL, $params );
     if ( 200 != $response->status_code ) {
       $this->mybring_error( $response->body );
       return;
     }
+
+    $result = json_decode( $response->body, true );
+
+    // Check for customer_number authentication error
+    // May the programming gods have mercy. Bring does not have a authentication endpoint
+    // and authentication credentials has to be passed on every request. The shipping API is
+    // simply the easiest api to test against, but only certain products actually require
+    // auth. I've picked "Servicepakke" because it seems to be the most reliable (hasn't
+    // change the last year). Now I wouldn't normally rant like this, I mean it would be
+    // fine if the API just threw a 400 error if you half authenticate, but NO, it just
+    // silently fails and doesn't give the rates. UGH! Here's a hacky workaround. I'm
+    // reading the TraceMessage for all the results to see if the customer_number was
+    // authenticated.
+    if ( isset( $result['TraceMessages'] ) ) {
+      foreach ( $result['TraceMessages'] as $message ) {
+        if ( false === strpos( $message, 'does not have access to customer' ) ) {
+          continue;
+        }
+        $this->mybring_error( $message );
+        return;
+      }
+    }
+
+    // Success. All authentication methods have passed
     update_option( 'mybring_authenticated_key', $hash, true );
   }
 

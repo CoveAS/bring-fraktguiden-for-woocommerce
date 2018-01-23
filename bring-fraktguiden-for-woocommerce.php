@@ -16,6 +16,9 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Requires at least:   4.9.1
  * Tested up to:        4.9.2
  *
+ * WC requires at least: 3.2.4
+ * WC tested up to: 3.2.6
+ *
  * Text Domain:         bring-fraktguiden
  * Domain Path:         /languages
  *
