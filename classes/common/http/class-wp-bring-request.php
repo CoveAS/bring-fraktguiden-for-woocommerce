@@ -2,6 +2,11 @@
 
 include_once 'class-wp-bring-response.php';
 
+/**
+ * Bring Request
+ *
+ * @todo make Bring_Booking_Request extend this class
+ */
 class WP_Bring_Request {
 
   /** @var array WP_HTTP args */
@@ -15,6 +20,8 @@ class WP_Bring_Request {
   }
 
   /**
+   * Get
+   *
    * @param string $url The url
    * @param array $params Associative array representing url parameters
    * @param array $options WP_HTTP args
@@ -30,6 +37,10 @@ class WP_Bring_Request {
   }
 
   /**
+   * Post
+   *
+   * Looks like this is never used. @TODO: deprecate this function
+   *
    * @param string $url The url
    * @param array $params Associative array representing url parameters
    * @param array $options WP_HTTP args
