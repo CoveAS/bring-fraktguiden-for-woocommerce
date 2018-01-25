@@ -226,24 +226,32 @@ mark.bring-shipment:after {
 
 .bring-booking-status-icon {
   background-color: #42a2ce;
-  border: 5px solid #50b1d8;
   border-radius: 20rem;
   color: #fff;
   display: inline-block;
 }
 
+.bring-info-box .bring-booking-status-icon {
+  border: 5px solid #50b1d8;
+}
+
 .bring-booking-status-icon::before {
   display: inline-block;
-}
-.bring-booking-status-icon.dashicons-yes::before {
   position: relative;
+}
+
+.bring-booking-status-icon.dashicons-yes::before {
+  left: -1px;
+}
+
+.bring-info-box .bring-booking-status-icon.dashicons-yes::before {
   left: -3px;
   top: 3px;
 }
 
 .bring-booking-status-icon.dashicons-warning {
   background-color: #ff645c;
-  border: 5px solid #f44336;
+  border-color: #f44336;
   border-radius: 3px;
   box-shadow:0 20px 20px -22px #000;
 }
@@ -251,7 +259,7 @@ mark.bring-shipment:after {
 .bring-booking-status-icon.dashicons-minus {
   color: #7BC144;
   background-color: transparent;
-  border: 5px solid;
+  border: 2px solid;
 }
 
 .manage-column.column-bring_booking_status,

@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-  exit; // Exit if accessed directly
+  die; // Exit if accessed directly
 }
 
 // Create a menu item for PDF download.
@@ -40,7 +40,7 @@ class Bring_Booking_Labels {
    * @return string
    */
   static function create_download_url( $order_ids ) {
-    return admin_url( 'page=bring_labels&order_ids=' . $order_ids );
+    return admin_url( '?page=bring_labels&order_ids=' . $order_ids );
   }
 
   /**
@@ -68,13 +68,18 @@ class Bring_Booking_Labels {
       $consignment_number = $consignment->confirmation->consignmentNumber;
       $source             = $consignment->confirmation->links->labels;
       $destination        = self::get_file_path( $order->order->get_id(), $consignment_number );
+      $desitnation_dir    = dirname( $destination );
 
-      $desitnation_dir = dirname( $destination );
+      $error =  new WP_Error();
+      $permission_message = __( 'Please check write permissions for yor uploads folder.', 'bring-fraktguiden' );
+      $error->add( 'existence', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'.", "bring-fraktguiden" ), $permission_message ) );
+      $error->add( 'unwritable', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'.", "bring-fraktguiden" ), $permission_message ) ) ;
+
       if ( ! file_exists( $desitnation_dir ) ) {
-        throw new Exception( 'The bring uploads directory has not been initialised. Please check write permissions for your uploads folder' );
+        wp_die( $error->get_error_message( 'existence' ) );
       }
       if ( ! is_writable( $desitnation_dir ) ) {
-        throw new Exception( 'The bring uploads is not writable. Please check write permissions for your uploads folder' );
+        wp_die( $error->get_error_message( 'unwritable' ) );
       }
 
       $request = new WP_Bring_Request();
@@ -90,22 +95,47 @@ class Bring_Booking_Labels {
     add_submenu_page( null, 'Download', 'Download', 'manage_woocommerce', 'bring_labels', __CLASS__.'::merge_pdfs' );
   }
 
+  /**
+   * Check if current user role can
+   * access Bring labels
+   */
+  static function check_cap() {
+    $current_user = wp_get_current_user();
+
+    // ID 0 is a not an user.
+    if ( $current_user->ID == 0 ) {
+      return false;
+    }
+
+    $required_caps = apply_filters( 'bring_booking_capabilities' , [
+      'administrator',
+      'manage_woocommerce',
+      'warehouse_team',
+      'bring_labels'
+    ]);
+
+    // Check user against required roles/caps
+    foreach ( $required_caps as $cap ) {
+      if ( user_can( $current_user->ID, $cap ) ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static function merge_pdfs() {
     if ( ! isset( $_GET['order_ids'] ) || $_GET['order_ids'] == '' ) {
       return;
     }
 
-    $current_user = wp_get_current_user();
-
-    // ID 0 is a not an user.
-    if ( $current_user->ID == 0 ) {
-      exit;
-    }
-
-    // Admins and managers can download all orders.
-    $can_download = in_array( 'manage_woocommerce', $current_user->roles ) || in_array( 'administrator', $current_user->roles ) || in_array( 'warehouse_team', $current_user->roles );
-    if ( ! $can_download ) {
-      exit;
+    // Check if user can see the labels
+    if ( ! self::check_cap() ) {
+      wp_die(
+        sprintf(
+          '<div class="notice error"><p><strong>%s</strong></p></div>',
+          __( "Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access.", 'bring-fraktguiden' ) ),
+        __( 'Insufficient permissions', 'bring-fraktguiden' )
+      );
     }
 
     $order_ids      = explode( ',', $_GET['order_ids'] );
@@ -134,7 +164,7 @@ class Bring_Booking_Labels {
 
     if ( empty( $files_to_merge ) ) {
       echo "No files to merge";
-      exit;
+      die;
     }
 
     if ( count( $files_to_merge ) == 1 ) {
@@ -158,6 +188,6 @@ class Bring_Booking_Labels {
     ob_clean();
     flush();
     readfile($merge_result_file);
-    exit;
+    die;
   }
 }
