@@ -75,6 +75,9 @@ Bring revealed that in 2018, A-mail and B-mail have been merged into a new servi
 **My products have dimensions, but they're being classified as heavy, why?**
 Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
 
+**I created a custom user role to manage Bring shippments, but they can't access the PDFs?**
+Shipping information such as PDFs are private, so we limit those to only certain user roles. Those roles/capabilities are: `administrator`, `manage_woocommerce` and a custom capability named `warehouse_team`. If you create a new role and only want them to access your orders, ensure they have the `warehouse_team` capability.
+
 **I activate the plugin and everything goes white!**
 A rare occasion, but when this happens, it means that your server is running an old version of PHP – You can find out what version of PHP you're using by heading to **Woocommerce -> Status**, this will let you know if you're running out-of-date software. The best way to recover from this [WSOD](https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death) is to use the FileEditor, PHPMyadmin, sFTP or SSH to rename the plugin, thus disabling it in wordpress. You should then consider upgrading your PHP version by contacting your Host provider.
 
