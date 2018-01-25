@@ -8,7 +8,7 @@ Requires at least: 4.5
 Tested up to: 4.9.1
 WC requires at least: 3.1
 WC tested up to: 3.2.1
-Stable tag: 1.4.0.4
+Stable tag: 1.4.0.5
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -24,11 +24,13 @@ Please consult the installation section and the changelog section before install
 == Shipping Zones ==
 
 Please note that it is **now required** to set up [Shipping Zones](https://docs.woocommerce.com/document/setting-up-shipping-zones/) for the shipping
-calculation to work. When creating a shipping zone, you can select Bring Fraktguiden as the method available.
+calculation to work.
+
+When creating a shipping zone, select **Bring Fraktguiden** as the method available.
 
 == Installation ==
 
-When you install bring, you need to head to the settings page to start configuring Bring to your specifications.
+When you install Bring, you need to head to the settings page to start configuring Bring to your specifications.
 
 1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory or install through Wordpress
 2. Activate the plugin
@@ -52,32 +54,42 @@ To ensure Bring will work correctly, you must set the following:
 == Frequently Asked Questions ==
 
 **Why do rates not show up on the cart page?**
-Rates are only shown when the customer has a valid postcode/zip code.
+Bring rates are only shown when the customer has entered a valid postcode. Commonly customers have either entered the wrong postcode or live outside of your Bring postcode settings.
 
-**But the postcode is valid and the rate still isn't showing**
-If you've entered your MyBring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect.
+**But the postcode is valid and the rate still isn't showing?**
+If you've entered any MyBring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
 
 **What do I get from Bring Pro that I can't from the Free version?**
-Good question! Bring Pro enables you to customise your customers Bring experience – You can customise the price of each shipping method, you can set targets that enable free shipping if your customers reach them ( For example, Free shipping when you spend 1000 ). You also
+Good question! Bring Pro enables you to customise your customers Bring experience:
+    - You can customise the price of each shipping method
+    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
+    - You can book your shippment through MyBring directly on your orders page.
+    - You can change the services offered to customers to their nearest collection point
 
 **'Minipakke' and 'Småpakke' are no longer available? What happened?**
 These have been replaced with new and exciting shipping option called 'Pakke i postkassen'! You can read more about it here: https://www.bring.no/radgivning/netthandel/pakkeipostkassen. In essence, it's  a streamlined version of the previous options available.
 
 **Where are 'A-Mail' and 'B-Mail' options?**
-Bring has revealed that in 2018, A-mail and B-mail have been merged into a new service called "Brev". The idea is that we just don't post as much as we used to due to the digitalisation of mail. Combining A & B Mail means that daily flights to deliver post goes from 10 flights per day, to 2.
+Bring revealed that in 2018, A-mail and B-mail have been merged into a new service called "Brev". The idea is that we just don't post as much as we used to due to the digitalisation of mail. Combining A & B Mail means that daily flights to deliver post goes from 10 flights per day to 2 flights. Pretty neat right?
 
 **My products have dimensions, but they're being classified as heavy, why?**
 Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
 
+**I activate the plugin and everything goes white!**
+A rare occasion, but when this happens, it means that your server is running an old version of PHP – You can find out what version of PHP you're using by heading to **Woocommerce -> Status**, this will let you know if you're running out-of-date software. The best way to recover from this [WSOD](https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death) is to use the FileEditor, PHPMyadmin, sFTP or SSH to rename the plugin, thus disabling it in wordpress. You should then consider upgrading your PHP version by contacting your Host provider.
+
 **What kind of support do you provide?**
-We monitor the Support forum of this plugin frequently to assist you in running your shop smoothly. You can visit the [Support](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce) section to read about any ongoing issue, or you can [Submit a new issue](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce#new-post) if you've discovered a problem.
+We monitor the Support forum of this plugin frequently to assist you in running your shop smoothly. You can visit the [Support](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce) section to read about any ongoing issues, or you can [Submit a new issue](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce#new-post) if you've discovered a problem.
 
 **Do you have a github where I can contribute?**
-Yes, yes we do. m[Bring Github](https://github.com/drivdigital/bring-fraktguiden-for-woocommerce)
+Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-for-woocommerce). Please make pull requests to the Develop branch. Pull the develop branch, make any changes you see fit & create a PR.
 
 
 
 == Changelog ==
+
+= 1.4.0.5 =
+* Finished writing the readme, updating the FAQ
 
 = 1.4.0.4 =
 * Added Mybring.com API authentication check when saving settings

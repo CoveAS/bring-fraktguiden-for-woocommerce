@@ -33,13 +33,114 @@ To ensure Bring is working correctly, you must set the following:
 
 ## Frequently Asked Questions
 
-**Q: Why do rates not show up on the cart page?**
+**Why do rates not show up on the cart page?**
+Bring rates are only shown when the customer has entered a valid postcode. Commonly customers have either entered the wrong postcode or live outside of your Bring postcode settings.
 
-A: Rates are only shown when the customer has a valid postcode/zip code.
+**But the postcode is valid and the rate still isn't showing?**
+If you've entered any MyBring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
 
-**Q: My products have dimensions, but they're being classified as heavy, why?**
+**What do I get from Bring Pro that I can't from the Free version?**
+Good question! Bring Pro enables you to customise your customers Bring experience:
+    - You can customise the price of each shipping method
+    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
+    - You can book your shippment through MyBring directly on your orders page.
+    - You can change the services offered to customers to their nearest collection point
 
-A: Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
+**'Minipakke' and 'Småpakke' are no longer available? What happened?**
+These have been replaced with new and exciting shipping option called 'Pakke i postkassen'! You can read more about it here: https://www.bring.no/radgivning/netthandel/pakkeipostkassen. In essence, it's  a streamlined version of the previous options available.
+
+**Where are 'A-Mail' and 'B-Mail' options?**
+Bring revealed that in 2018, A-mail and B-mail have been merged into a new service called "Brev". The idea is that we just don't post as much as we used to due to the digitalisation of mail. Combining A & B Mail means that daily flights to deliver post goes from 10 flights per day to 2 flights. Pretty neat right?
+
+**My products have dimensions, but they're being classified as heavy, why?**
+Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
+
+**I activate the plugin and everything goes white!**
+A rare occasion, but when this happens, it means that your server is running an old version of PHP – You can find out what version of PHP you're using by heading to **Woocommerce -> Status**, this will let you know if you're running out-of-date software. The best way to recover from this [WSOD](https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death) is to use the FileEditor, PHPMyadmin, sFTP or SSH to rename the plugin, thus disabling it in wordpress. You should then consider upgrading your PHP version by contacting your Host provider.
+
+**What kind of support do you provide?**
+We monitor the Support forum of this plugin frequently to assist you in running your shop smoothly. You can visit the [Support](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce) section to read about any ongoing issues, or you can [Submit a new issue](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce#new-post) if you've discovered a problem.
+
+**Do you have a github where I can contribute?**
+Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-for-woocommerce). Please make pull requests to the Develop branch. Pull the develop branch, make any changes you see fit & create a PR.
+
+
+### Changelog
+
+= 1.4.0.5 =
+* Finished writing the readme, updating the FAQ
+
+= 1.4.0.4 =
+* Added Mybring.com API authentication check when saving settings
+* Fixed an issue where no shipping rates would show up if the max_products setting was empty
+* Added an update notice to the description
+* Fixed code that was incompatible with php 5.6
+* Fixed an issue where not all files were pushed to the SVN repo
+
+= 1.4.0 =
+
+* Added support to Klarna Checkout
+* Improved the settings UI
+* Updated Services based on the new 2018 Services from Bring
+* Plugin has been made fully translatable finally
+* Improved support for Woocommerce 3.2
+* Additional options for end-user
+* PRO version now contains Bring fallback methods for when the API can't be accessed
+* Added more descriptions to services and features to help minimise the support you need to request.
+* MyBring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
+* Added a stylesheet for styles. Those styles are used. Mostly for validation and error notifications when the postcode is wrong / invalid.
+* Added the ability to disable the previously mentioned stylesheet, because you've already taken the styling issue into your own hands.
+* Had a baby just before release of this version
+
+= 1.3.2 =
+
+* Removed GPL License
+* Pro features are now bundled with the free version
+* Support for WooCommerce 3.x
+* Added license check as part of the PRO bundle
+* Better support for Klarna Checkout
+
+= 1.3.1 =
+
+* Improved support for WooCommerce 2.6 Shipping Zones
+* Uses the Wordpress' current language for Bring's reply messages, if available (thanks to oakidoaki)
+* Misc. bug fixes
+
+= 1.3.0 =
+
+* Use GPL license
+* Support WooCommerce 2.6
+* WBF-30: Update the Fraktguiden product list.
+* WBF-33: Improve support for sending to other countries - The support for sending from and to all Nordic countries has been improved.
+* WBF-32: Fixed an issue where the checkout page would print a 'Invalid argument supplied for foreach.' message if no Fraktguiden services was provided by the shop (WP DEBUG MODE only)
+* WBF-35: Option for using Product Name when displaying the services to customers
+* WBF-37: Option for displaying the service description to customers
+
+= 1.2.0 =
+
+* WBF-16: Fixed packaging issue: Shipping options was not shown if one or more package surpassed 240 grams.
+* WBF-17: Added support for recipient notification over SMS or E-Mail from Bring. Note that recipient notification needs to be activated after the upgrade (See: WooCommerce > settings > shipping > Bring Fraktguiden).
+* WBF-18: Added WP filter for modifying the Fraktguiden request parameters.
+* WBF-22: Added path to Woo Commerce logs in the plugin's options page.
+* WBF-23: Fixed undefined variable bug when logging is enabled.
+
+= 1.1.2 =
+
+* Renamed plugin to bring-fraktguiden-for-woocommerce
+
+= 1.1.1 =
+
+* Requests to the bring api is now logged if debug is enabled (see settings screen)
+* Misc. text changes
+
+= 1.1.0 =
+
+* Improved support for multi packaging.
+* Fixed so fee is added to the rate.
+
+= 1.0.0 =
+
+* Initial release.
 
 ---
 
