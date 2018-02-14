@@ -1,29 +1,29 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2018-01-25 15:42+0100\n"
-"PO-Revision-Date: 2018-01-25 15:42+0100\n"
+"POT-Creation-Date: 2018-02-14 15:52+0100\n"
+"PO-Revision-Date: 2018-02-14 16:01+0100\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-Basepath: ../classes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bring-fraktguiden-for-woocommerce.php:127
+#: bring-fraktguiden-for-woocommerce.php:132
 msgid "View Bring Fraktguiden Settings"
 msgstr "Vis Bring Fraktguiden innstillinger"
 
-#: bring-fraktguiden-for-woocommerce.php:127
+#: bring-fraktguiden-for-woocommerce.php:132
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: bring-fraktguiden-for-woocommerce.php:144
+#: bring-fraktguiden-for-woocommerce.php:149
 msgid ""
 "Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this "
 "message."
@@ -31,92 +31,92 @@ msgstr ""
 "Bring Fraktguiden PRO tekstmodus. Kjøp en lisens for å deaktivere denne "
 "meldingen."
 
-#: classes/class-wc-shipping-method-bring.php:55
-#: classes/class-wc-shipping-method-bring.php:208
+#: classes/class-wc-shipping-method-bring.php:57
+#: classes/class-wc-shipping-method-bring.php:210
 #: pro/class-wc-shipping-method-bring-pro.php:45
 #: pro/class-wc-shipping-method-bring-pro.php:46
 msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
-#: classes/class-wc-shipping-method-bring.php:56
+#: classes/class-wc-shipping-method-bring.php:58
 msgid "Automatically calculate shipping rates using brings fraktguiden api."
 msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
 
-#: classes/class-wc-shipping-method-bring.php:169
+#: classes/class-wc-shipping-method-bring.php:171
 msgid "Bring Fraktguiden Pro"
 msgstr "Bring Fraktguiden Pro"
 
-#: classes/class-wc-shipping-method-bring.php:173
+#: classes/class-wc-shipping-method-bring.php:175
 msgid "Activate PRO"
 msgstr "Aktivere PRO"
 
-#: classes/class-wc-shipping-method-bring.php:175
+#: classes/class-wc-shipping-method-bring.php:177
 msgid "Enable/disable PRO features"
 msgstr "Aktiver/deaktiver PRO-funksjonene"
 
-#: classes/class-wc-shipping-method-bring.php:178
+#: classes/class-wc-shipping-method-bring.php:180
 msgid "Enable test mode"
 msgstr "Aktiver testmodus"
 
-#: classes/class-wc-shipping-method-bring.php:180
+#: classes/class-wc-shipping-method-bring.php:182
 msgid "Use PRO in test-mode. Used for development"
 msgstr "Bruk PRO i testmodus. Brukes til utvikling"
 
-#: classes/class-wc-shipping-method-bring.php:189
+#: classes/class-wc-shipping-method-bring.php:191
 msgid "Bring Settings"
 msgstr "Bring instillinger"
 
-#: classes/class-wc-shipping-method-bring.php:193
+#: classes/class-wc-shipping-method-bring.php:195
 #: pro/class-wc-shipping-method-bring-pro.php:83
 #: pro/class-wc-shipping-method-bring-pro.php:123
 msgid "Enable"
 msgstr "Aktiver"
 
-#: classes/class-wc-shipping-method-bring.php:195
+#: classes/class-wc-shipping-method-bring.php:197
 msgid "Enable Bring Fraktguiden"
 msgstr "Aktiver Bring Fraktguiden"
 
-#: classes/class-wc-shipping-method-bring.php:205
+#: classes/class-wc-shipping-method-bring.php:207
 msgid "Title"
 msgstr "Tittel"
 
-#: classes/class-wc-shipping-method-bring.php:207
+#: classes/class-wc-shipping-method-bring.php:209
 msgid "This controls the title which the user sees during checkout."
 msgstr "Dette er tittelen som brukeren ser i kassen."
 
-#: classes/class-wc-shipping-method-bring.php:212
+#: classes/class-wc-shipping-method-bring.php:214
 msgid "Post office"
 msgstr "Postkontor"
 
-#: classes/class-wc-shipping-method-bring.php:214
+#: classes/class-wc-shipping-method-bring.php:216
 msgid "Shipping from post office"
 msgstr "Leveres fra postkontor"
 
-#: classes/class-wc-shipping-method-bring.php:215
+#: classes/class-wc-shipping-method-bring.php:217
 msgid ""
 "Flag that tells whether the parcel is delivered at a post office when it is "
 "shipped."
 msgstr "Kryss av om pakken blir levert til et postkontor ved sending."
 
-#: classes/class-wc-shipping-method-bring.php:220
+#: classes/class-wc-shipping-method-bring.php:222
 msgid "From zip"
 msgstr "Fra postnummer"
 
-#: classes/class-wc-shipping-method-bring.php:222
+#: classes/class-wc-shipping-method-bring.php:224
 msgid "ie: 0159"
 msgstr "f.eks. 0159"
 
-#: classes/class-wc-shipping-method-bring.php:223
+#: classes/class-wc-shipping-method-bring.php:225
 msgid ""
 "This is the zip code of where you deliver from. For example, the post office."
 msgstr ""
 "Dette er postnummeret hvor du sender varen fra. F.eks. ditt postkontor."
 
-#: classes/class-wc-shipping-method-bring.php:229
+#: classes/class-wc-shipping-method-bring.php:231
 msgid "From country"
 msgstr "Fra land"
 
-#: classes/class-wc-shipping-method-bring.php:231
+#: classes/class-wc-shipping-method-bring.php:233
 msgid ""
 "This is the country of origin where you deliver from (If omitted "
 "WooCommerce's default location will be used. See WooCommerce - Settings - "
@@ -125,15 +125,15 @@ msgstr ""
 "Dette er landet du sender fra (hvis ikke valgt benyttes WooCommerce sin "
 "standard lokasjon. Se WooCommerce - Innstillinger - Generelt)"
 
-#: classes/class-wc-shipping-method-bring.php:239
+#: classes/class-wc-shipping-method-bring.php:241
 msgid "Delivery Fee"
 msgstr "Leveringsgebyr"
 
-#: classes/class-wc-shipping-method-bring.php:241
+#: classes/class-wc-shipping-method-bring.php:243
 msgid "0"
 msgstr "0"
 
-#: classes/class-wc-shipping-method-bring.php:242
+#: classes/class-wc-shipping-method-bring.php:244
 msgid ""
 "What fee do you want to charge for Bring, disregarded if you choose free. "
 "Leave blank to disable."
@@ -141,31 +141,31 @@ msgstr ""
 "Gebyr du ønsker å ta betalt for Bring. Blir ignorert dersom du velger "
 "gratis. La stå tomt for å deaktivere."
 
-#: classes/class-wc-shipping-method-bring.php:251
+#: classes/class-wc-shipping-method-bring.php:253
 msgid "Display price"
 msgstr "Visningspris"
 
-#: classes/class-wc-shipping-method-bring.php:253
+#: classes/class-wc-shipping-method-bring.php:255
 msgid "How to calculate delivery charges"
 msgstr "Hvordan leveringskostnader blir kalkulert"
 
-#: classes/class-wc-shipping-method-bring.php:256
+#: classes/class-wc-shipping-method-bring.php:258
 msgid "VAT included"
 msgstr "Med mva."
 
-#: classes/class-wc-shipping-method-bring.php:257
+#: classes/class-wc-shipping-method-bring.php:259
 msgid "VAT excluded"
 msgstr "Uten mva."
 
-#: classes/class-wc-shipping-method-bring.php:261
+#: classes/class-wc-shipping-method-bring.php:263
 msgid "Recipient notification"
 msgstr "Mottakervarsling"
 
-#: classes/class-wc-shipping-method-bring.php:263
+#: classes/class-wc-shipping-method-bring.php:265
 msgid "Recipient notification over SMS or E-Mail"
 msgstr "Mottakervarsling på SMS eller Epost"
 
-#: classes/class-wc-shipping-method-bring.php:264
+#: classes/class-wc-shipping-method-bring.php:266
 msgid ""
 "<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper "
 "based recipient notification.<br/>\n"
@@ -181,24 +181,24 @@ msgstr ""
 "              Dette gjelder bare for <u>Bedriftspakke</u>, <u>Kliman&oslash;"
 "ytral Servicepakke</u> og <u>Bedriftspakke Ekspress-Over natten 09</u>"
 
-#: classes/class-wc-shipping-method-bring.php:270
+#: classes/class-wc-shipping-method-bring.php:272
 msgid "Method availability"
 msgstr "Tilgjengelighet"
 
-#: classes/class-wc-shipping-method-bring.php:275
+#: classes/class-wc-shipping-method-bring.php:277
 msgid "All allowed countries"
 msgstr "Alle tilatte land"
 
-#: classes/class-wc-shipping-method-bring.php:276
-#: classes/class-wc-shipping-method-bring.php:280
+#: classes/class-wc-shipping-method-bring.php:278
+#: classes/class-wc-shipping-method-bring.php:282
 msgid "Specific Countries"
 msgstr "Spesifikke land"
 
-#: classes/class-wc-shipping-method-bring.php:293
+#: classes/class-wc-shipping-method-bring.php:295
 msgid "Shipping Options"
 msgstr "Fraktalternativer"
 
-#: classes/class-wc-shipping-method-bring.php:294
+#: classes/class-wc-shipping-method-bring.php:296
 msgid ""
 "Set the default prices for shipping rates and allow free shipping options on "
 "those services. You can also set the free shipping limit for each shipping "
@@ -208,16 +208,40 @@ msgstr ""
 "under hver tjeneste. Du kan også sette fraktfri grense under hver av "
 "tjenestene."
 
-#: classes/class-wc-shipping-method-bring.php:298
+#: classes/class-wc-shipping-method-bring.php:300
+msgid "Enable multipack"
+msgstr "Aktiver multipack"
+
+#: classes/class-wc-shipping-method-bring.php:301
+msgid "Automatically pack items into several consignments"
+msgstr "Pakk varer i flere forsendelser automatisk"
+
+#: classes/class-wc-shipping-method-bring.php:304
+msgid ""
+"Use multipack when shipping many small items. This setting is highly "
+"recommended for SERVICEPAKKE. This will automatically divide shipped items "
+"into boxes with sides no longer than 240 cm and weigh less than 35kg and a "
+"circumference less than 360cm. If you're shipping a mix of small and big "
+"items you should disable this setting. Eg. if you're using both SERVICEPAKKE "
+"and CARGO you should disable this."
+msgstr ""
+"Bruk Multipack når du sender mange små varer. Denne innstillingen anbefales "
+"for SERVICEPAKKE. Dette vil automatisk dele varer i bokser med sider kortere "
+"enn 240 cm og som veier mindre enn 35kg og med en omkrets mindre enn 360cm. "
+"Hvis du sender en blanding av store og små varer bør du deaktivere denne "
+"innstillingen. F.eks. Hvis du bruker både SERVICEPAKKE og CARGO bør du "
+"deaktivere denne instillingen."
+
+#: classes/class-wc-shipping-method-bring.php:307
 msgid "Display Service As"
 msgstr "Vis tjeneste med"
 
-#: classes/class-wc-shipping-method-bring.php:300
+#: classes/class-wc-shipping-method-bring.php:309
 msgid "The service name displayed to the customer on the cart / checkout"
 msgstr ""
 "Velg hvilken måte kunden skal få vist frakttjenesten på i handlekurven/kassen"
 
-#: classes/class-wc-shipping-method-bring.php:301
+#: classes/class-wc-shipping-method-bring.php:310
 msgid ""
 "Display name: <strong>\"At the post office\"</strong>,<br/>Product name: "
 "<strong>\"Climate Neutral Service Pack\"</strong>"
@@ -225,36 +249,36 @@ msgstr ""
 "Visningsnavn: <strong>”På posten”</strong>,<br/>Produktnavn: "
 "<strong>”Klimanøytral servicepakke”</strong>"
 
-#: classes/class-wc-shipping-method-bring.php:304
+#: classes/class-wc-shipping-method-bring.php:313
 msgid "Display Name"
 msgstr "Visningsnavn"
 
-#: classes/class-wc-shipping-method-bring.php:305
+#: classes/class-wc-shipping-method-bring.php:314
 msgid "Product Name"
 msgstr "Produktnavn"
 
-#: classes/class-wc-shipping-method-bring.php:309
+#: classes/class-wc-shipping-method-bring.php:318
 msgid "Display Description"
 msgstr "Vis beskrivelse"
 
-#: classes/class-wc-shipping-method-bring.php:311
+#: classes/class-wc-shipping-method-bring.php:320
 msgid "Add description after the service"
 msgstr "Legg til beskrivelse etter tjenesten"
 
-#: classes/class-wc-shipping-method-bring.php:312
+#: classes/class-wc-shipping-method-bring.php:321
 msgid "Show service description after the name of the service"
 msgstr "Vis tjenestebeskrivelse etter navnet på tjenesten"
 
-#: classes/class-wc-shipping-method-bring.php:316
-#: classes/class-wc-shipping-method-bring.php:903
+#: classes/class-wc-shipping-method-bring.php:325
+#: classes/class-wc-shipping-method-bring.php:912
 msgid "Services"
 msgstr "Tjenester"
 
-#: classes/class-wc-shipping-method-bring.php:331
+#: classes/class-wc-shipping-method-bring.php:340
 msgid "Fallback options"
 msgstr "Fallback alternativer"
 
-#: classes/class-wc-shipping-method-bring.php:332
+#: classes/class-wc-shipping-method-bring.php:341
 msgid ""
 "With scenarios that fall outside of what Bring can handle, you are able to "
 "set prices for cases such as oversized items, minimum sized items, how many "
@@ -266,66 +290,66 @@ msgstr ""
 "pakkestørrelse og hvor mange enheter det er mulig å ha med i en forsendelse "
 "- og hva som skal skje hvis Bring API ikke er tilgjengelig."
 
-#: classes/class-wc-shipping-method-bring.php:337
+#: classes/class-wc-shipping-method-bring.php:346
 msgid "Minimum shipping dimensions"
 msgstr "Minimumsmål"
 
-#: classes/class-wc-shipping-method-bring.php:338
+#: classes/class-wc-shipping-method-bring.php:347
 msgid ""
 "Bring needs a default shipping size for when products do not contain any "
 "dimension information."
 msgstr ""
 "Bring trenger et standardmål når produkter ikke inneholder dimensjoner."
 
-#: classes/class-wc-shipping-method-bring.php:342
+#: classes/class-wc-shipping-method-bring.php:351
 msgid "Minimum Length in cm"
 msgstr "Minimum lengde i cm"
 
-#: classes/class-wc-shipping-method-bring.php:345
+#: classes/class-wc-shipping-method-bring.php:354
 msgid "Must be at least 23cm"
 msgstr "Må være minst 23 cm"
 
-#: classes/class-wc-shipping-method-bring.php:346
+#: classes/class-wc-shipping-method-bring.php:355
 msgid "The lowest length for a consignment"
 msgstr "Den korteste lengde for en forsendelse"
 
-#: classes/class-wc-shipping-method-bring.php:353
+#: classes/class-wc-shipping-method-bring.php:362
 msgid "Minimum Width in cm"
 msgstr "Minimum bredde i cm"
 
-#: classes/class-wc-shipping-method-bring.php:356
+#: classes/class-wc-shipping-method-bring.php:365
 msgid "Must be at least 13cm"
 msgstr "Må være minst 13 cm"
 
-#: classes/class-wc-shipping-method-bring.php:357
+#: classes/class-wc-shipping-method-bring.php:366
 msgid "The lowest width for a consignment"
 msgstr "Den minste bredde for en forsendelse"
 
-#: classes/class-wc-shipping-method-bring.php:364
+#: classes/class-wc-shipping-method-bring.php:373
 msgid "Minimum Height in cm"
 msgstr "Minimum høyde i cm"
 
-#: classes/class-wc-shipping-method-bring.php:367
+#: classes/class-wc-shipping-method-bring.php:376
 msgid "Must be at least 1cm"
 msgstr "Må være minst 1 cm"
 
-#: classes/class-wc-shipping-method-bring.php:368
+#: classes/class-wc-shipping-method-bring.php:377
 msgid "The lowest height for a consignment"
 msgstr "Den laveste høyde for en forsendelse"
 
-#: classes/class-wc-shipping-method-bring.php:375
+#: classes/class-wc-shipping-method-bring.php:384
 msgid "Minimum Weight in kg"
 msgstr "Minimumsvekt i kg"
 
-#: classes/class-wc-shipping-method-bring.php:378
+#: classes/class-wc-shipping-method-bring.php:387
 msgid "The lowest weight in kilograms for a consignment"
 msgstr "Den laveste vekt i kg for en forsendelse"
 
-#: classes/class-wc-shipping-method-bring.php:387
+#: classes/class-wc-shipping-method-bring.php:396
 msgid "Bring API offline / No connection"
 msgstr "Bring API er offline / Ingen forbindelse"
 
-#: classes/class-wc-shipping-method-bring.php:388
+#: classes/class-wc-shipping-method-bring.php:397
 msgid ""
 "If Bring has any technical difficulties, it won't be able to fetch prices "
 "from the bring server.<br>In these cases, shipping will default to these "
@@ -335,72 +359,72 @@ msgstr ""
 "Bring-serveren. <br> I disse tilfeller vil frakten settes til disse "
 "innstillingene:"
 
-#: classes/class-wc-shipping-method-bring.php:392
+#: classes/class-wc-shipping-method-bring.php:401
 msgid "No API connection handling"
 msgstr "Ingen API tilkobling håndtering"
 
-#: classes/class-wc-shipping-method-bring.php:394
+#: classes/class-wc-shipping-method-bring.php:403
 msgid ""
 "What pricing should be used if no connection can be made to the bring API"
 msgstr ""
 "Hvilken prising bør brukes hvis det ikke kan gjøres forbindelse til bring-API"
 
-#: classes/class-wc-shipping-method-bring.php:397
-#: classes/class-wc-shipping-method-bring.php:436
-#: classes/class-wc-shipping-method-bring.php:476
+#: classes/class-wc-shipping-method-bring.php:406
+#: classes/class-wc-shipping-method-bring.php:445
+#: classes/class-wc-shipping-method-bring.php:485
 msgid "Do nothing"
 msgstr "Gjør ingenting"
 
-#: classes/class-wc-shipping-method-bring.php:398
-#: classes/class-wc-shipping-method-bring.php:437
-#: classes/class-wc-shipping-method-bring.php:477
+#: classes/class-wc-shipping-method-bring.php:407
+#: classes/class-wc-shipping-method-bring.php:446
+#: classes/class-wc-shipping-method-bring.php:486
 msgid "Custom flat rate"
 msgstr "Tilpasset fast pris"
 
-#: classes/class-wc-shipping-method-bring.php:402
+#: classes/class-wc-shipping-method-bring.php:411
 msgid "Shipping method Label to replace 'API Error'"
 msgstr "Fraktmetode Etikett til erstatning av ‘API Error’"
 
-#: classes/class-wc-shipping-method-bring.php:404
-#: classes/class-wc-shipping-method-bring.php:444
-#: classes/class-wc-shipping-method-bring.php:492
-#: classes/class-wc-shipping-method-bring.php:1053
-#: classes/class-wc-shipping-method-bring.php:1071
-#: classes/class-wc-shipping-method-bring.php:1123
+#: classes/class-wc-shipping-method-bring.php:413
+#: classes/class-wc-shipping-method-bring.php:453
+#: classes/class-wc-shipping-method-bring.php:501
+#: classes/class-wc-shipping-method-bring.php:1063
+#: classes/class-wc-shipping-method-bring.php:1117
+#: classes/class-wc-shipping-method-bring.php:1138
 msgid "Shipping"
 msgstr "Frakt"
 
-#: classes/class-wc-shipping-method-bring.php:407
+#: classes/class-wc-shipping-method-bring.php:416
 msgid "Shipping method cost for 'API Error'"
 msgstr "Fraktmetode kost for ‘API Error’"
 
-#: classes/class-wc-shipping-method-bring.php:410
-#: classes/class-wc-shipping-method-bring.php:450
+#: classes/class-wc-shipping-method-bring.php:419
+#: classes/class-wc-shipping-method-bring.php:459
 msgid "ie: 500"
 msgstr "f.eks. 500"
 
-#: classes/class-wc-shipping-method-bring.php:414
-#: classes/class-wc-shipping-method-bring.php:454
-#: classes/class-wc-shipping-method-bring.php:503
+#: classes/class-wc-shipping-method-bring.php:423
+#: classes/class-wc-shipping-method-bring.php:463
+#: classes/class-wc-shipping-method-bring.php:512
 msgid "Service to use for booking"
 msgstr "Service som brukes til booking"
 
-#: classes/class-wc-shipping-method-bring.php:426
+#: classes/class-wc-shipping-method-bring.php:435
 msgid "Heavy and oversized items"
 msgstr "Tunge og overdimensjonerte varer"
 
-#: classes/class-wc-shipping-method-bring.php:427
+#: classes/class-wc-shipping-method-bring.php:436
 msgid ""
 "Set a flat rate for packages that exceed the maximum measurements allowed by "
 "Bring."
 msgstr ""
 "Sett en fast pris på pakker som går over maksimale mål som støttes av Bring."
 
-#: classes/class-wc-shipping-method-bring.php:431
+#: classes/class-wc-shipping-method-bring.php:440
 msgid "Heavy item handling"
 msgstr "Håndtering av tunge varer"
 
-#: classes/class-wc-shipping-method-bring.php:433
+#: classes/class-wc-shipping-method-bring.php:442
 msgid ""
 "What method should be used to calculate post rates for items that exceeds "
 "the limits set by bring"
@@ -408,24 +432,24 @@ msgstr ""
 "Hvilken metode skal brukes for å kalkulere fraktprisen for varer som går "
 "over grensen satt av Bring"
 
-#: classes/class-wc-shipping-method-bring.php:441
+#: classes/class-wc-shipping-method-bring.php:450
 msgid "Shipping method Label for Heavy Items"
 msgstr "Fraktmetode-etikett for tunge varer"
 
-#: classes/class-wc-shipping-method-bring.php:443
-#: classes/class-wc-shipping-method-bring.php:491
+#: classes/class-wc-shipping-method-bring.php:452
+#: classes/class-wc-shipping-method-bring.php:500
 msgid "ie: Cargo shipping"
 msgstr "f.eks. Fraktgods"
 
-#: classes/class-wc-shipping-method-bring.php:447
+#: classes/class-wc-shipping-method-bring.php:456
 msgid "Shipping method cost for heavy items"
 msgstr "Fraktpris for tunge varer"
 
-#: classes/class-wc-shipping-method-bring.php:466
+#: classes/class-wc-shipping-method-bring.php:475
 msgid "Product quantity limit for cart"
 msgstr "Grense for antall produkter i kassen"
 
-#: classes/class-wc-shipping-method-bring.php:467
+#: classes/class-wc-shipping-method-bring.php:476
 msgid ""
 "When a cart reaches this limit, you can enable this shipping method."
 "<br><em>For example, when ordering in bulk, the price for a shipping "
@@ -434,11 +458,11 @@ msgstr ""
 "Når en handlekurv når grensen, kan denne fraktmetoden aktiveres.<br><em>For "
 "eksempel ved bulkbestilling, prisen på fraktgods kan være en fast pris</em>"
 
-#: classes/class-wc-shipping-method-bring.php:471
+#: classes/class-wc-shipping-method-bring.php:480
 msgid "Maximum product handling"
 msgstr "Maksimalt produktantall"
 
-#: classes/class-wc-shipping-method-bring.php:473
+#: classes/class-wc-shipping-method-bring.php:482
 msgid ""
 "We use a packing algorithm to pack items in three dimensions. This algorithm "
 "is computationally heavy and to prevent against DDoS attacks we've "
@@ -450,28 +474,28 @@ msgstr ""
 "har vi implementert en innstilling for å kontrollere et maksimalt antall "
 "produkter som kan pakkes per ordre."
 
-#: classes/class-wc-shipping-method-bring.php:481
+#: classes/class-wc-shipping-method-bring.php:490
 msgid "Maximum product limit"
 msgstr "Maksimalt produktantall"
 
-#: classes/class-wc-shipping-method-bring.php:485
+#: classes/class-wc-shipping-method-bring.php:494
 msgid ""
 "Maximum total quantity of products in the cart before offering a custom price"
 msgstr "Maksimalt antall produkter i handlekurven før det tilbys en fast pris"
 
-#: classes/class-wc-shipping-method-bring.php:489
+#: classes/class-wc-shipping-method-bring.php:498
 msgid "Shipping method label"
 msgstr "Fraktmetode-etikett"
 
-#: classes/class-wc-shipping-method-bring.php:495
+#: classes/class-wc-shipping-method-bring.php:504
 msgid "Shipping method cost"
 msgstr "Fraktmetodekostnad"
 
-#: classes/class-wc-shipping-method-bring.php:498
+#: classes/class-wc-shipping-method-bring.php:507
 msgid "ie: 1500"
 msgstr "f.eks. 1500"
 
-#: classes/class-wc-shipping-method-bring.php:499
+#: classes/class-wc-shipping-method-bring.php:508
 msgid ""
 "Offer a flat rate if the cart reaches max products or a product in the cart "
 "does not have the required dimensions"
@@ -479,60 +503,60 @@ msgstr ""
 "Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
 "produkt som ikke har påkrevde dimensjoner"
 
-#: classes/class-wc-shipping-method-bring.php:515
+#: classes/class-wc-shipping-method-bring.php:524
 msgid "Developer"
 msgstr "Utvikler"
 
-#: classes/class-wc-shipping-method-bring.php:516
+#: classes/class-wc-shipping-method-bring.php:525
 msgid "For debugging and testing the plugin"
 msgstr "For debugging og testing av pluginen"
 
-#: classes/class-wc-shipping-method-bring.php:520
+#: classes/class-wc-shipping-method-bring.php:529
 msgid "Disable stylesheet"
 msgstr "Deaktiver stylesheets"
 
-#: classes/class-wc-shipping-method-bring.php:522
+#: classes/class-wc-shipping-method-bring.php:531
 msgid "Remove fraktguiden styling from the checkout"
 msgstr "Fjern Fraktguiden styling fra kassen"
 
-#: classes/class-wc-shipping-method-bring.php:526
+#: classes/class-wc-shipping-method-bring.php:535
 msgid "Debug mode"
 msgstr "Debug modus"
 
-#: classes/class-wc-shipping-method-bring.php:528
 #: classes/class-wc-shipping-method-bring.php:537
+#: classes/class-wc-shipping-method-bring.php:546
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
-#: classes/class-wc-shipping-method-bring.php:529
+#: classes/class-wc-shipping-method-bring.php:538
 msgid "Issues from the Bring API will be logged here"
 msgstr "Problemer med Bring API blir logget her"
 
-#: classes/class-wc-shipping-method-bring.php:530
+#: classes/class-wc-shipping-method-bring.php:539
 msgid "Bring Fraktguiden logs will be saved in"
 msgstr "Bring Fraktguiden logg vil bli lagret i"
 
-#: classes/class-wc-shipping-method-bring.php:531
+#: classes/class-wc-shipping-method-bring.php:540
 msgid "Click here to see the logs"
 msgstr "Klikk her for å se loggene"
 
-#: classes/class-wc-shipping-method-bring.php:535
+#: classes/class-wc-shipping-method-bring.php:544
 msgid "Debug System information"
 msgstr "Debug systeminformasjon"
 
-#: classes/class-wc-shipping-method-bring.php:538
+#: classes/class-wc-shipping-method-bring.php:547
 msgid "We may ask for this information if you require support"
 msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
 
-#: classes/class-wc-shipping-method-bring.php:539
+#: classes/class-wc-shipping-method-bring.php:548
 msgid "View system info"
 msgstr "Se systeminformasjon"
 
-#: classes/class-wc-shipping-method-bring.php:546
+#: classes/class-wc-shipping-method-bring.php:555
 msgid "Mybring.com API"
 msgstr "Mybring.com API"
 
-#: classes/class-wc-shipping-method-bring.php:547
+#: classes/class-wc-shipping-method-bring.php:556
 msgid ""
 "If you are a Mybring user you can enter your API credentials for additional "
 "features. API authentication is required for some services such as \"Package "
@@ -542,32 +566,32 @@ msgstr ""
 "flere funksjoner. API autentisering er pålagt for noen tjenester som «Pakke "
 "i Postkassen (PAKKE_I_POSTKASSEN)»."
 
-#: classes/class-wc-shipping-method-bring.php:552
-#: classes/class-wc-shipping-method-bring.php:554
+#: classes/class-wc-shipping-method-bring.php:561
+#: classes/class-wc-shipping-method-bring.php:563
 msgid "API User ID"
 msgstr "API User ID"
 
-#: classes/class-wc-shipping-method-bring.php:558
-#: classes/class-wc-shipping-method-bring.php:560
+#: classes/class-wc-shipping-method-bring.php:567
+#: classes/class-wc-shipping-method-bring.php:569
 msgid "API Key"
 msgstr "API Key"
 
-#: classes/class-wc-shipping-method-bring.php:564
-#: classes/class-wc-shipping-method-bring.php:566
+#: classes/class-wc-shipping-method-bring.php:573
+#: classes/class-wc-shipping-method-bring.php:575
 msgid "Customer number"
 msgstr "Kundenummer"
 
-#: classes/class-wc-shipping-method-bring.php:608
+#: classes/class-wc-shipping-method-bring.php:617
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 "Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring"
 
-#: classes/class-wc-shipping-method-bring.php:623
+#: classes/class-wc-shipping-method-bring.php:632
 msgid "Gateway Disabled"
 msgstr "Gateway Disabled"
 
-#: classes/class-wc-shipping-method-bring.php:624
+#: classes/class-wc-shipping-method-bring.php:633
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -580,23 +604,23 @@ msgstr ""
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
-#: classes/class-wc-shipping-method-bring.php:770
+#: classes/class-wc-shipping-method-bring.php:779
 msgid "You need to enter a API Key"
 msgstr "Du må angi en API-nøkkel"
 
-#: classes/class-wc-shipping-method-bring.php:774
+#: classes/class-wc-shipping-method-bring.php:783
 msgid "You need to enter a API User ID"
 msgstr "Du må fylle inn en API bruker ID"
 
-#: classes/class-wc-shipping-method-bring.php:778
+#: classes/class-wc-shipping-method-bring.php:787
 msgid "You cannot use a Customer number without entering API credentials"
 msgstr "Du kan ikke bruke Kundenummer uten å fylle inn API detaljer"
 
-#: classes/class-wc-shipping-method-bring.php:829
+#: classes/class-wc-shipping-method-bring.php:838
 msgid "MyBring Authentication failed"
 msgstr "MyBring autentisering mislyktes"
 
-#: classes/class-wc-shipping-method-bring.php:829
+#: classes/class-wc-shipping-method-bring.php:838
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
@@ -604,29 +628,29 @@ msgstr ""
 "Kunne ikke koble til Bring med påloggingsinformasjonen. Kontroller at de er "
 "riktige"
 
-#: classes/class-wc-shipping-method-bring.php:910
+#: classes/class-wc-shipping-method-bring.php:919
 msgid "Active"
 msgstr "Aktive"
 
-#: classes/class-wc-shipping-method-bring.php:913
+#: classes/class-wc-shipping-method-bring.php:922
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:263
 msgid "Service"
 msgstr "Tjeneste"
 
-#: classes/class-wc-shipping-method-bring.php:917
+#: classes/class-wc-shipping-method-bring.php:926
 msgid "Custom price"
 msgstr "Tilpasset fast pris"
 
-#: classes/class-wc-shipping-method-bring.php:920
+#: classes/class-wc-shipping-method-bring.php:929
 msgid "Free shipping"
 msgstr "Gratis frakt"
 
-#: classes/class-wc-shipping-method-bring.php:923
+#: classes/class-wc-shipping-method-bring.php:932
 msgid "Free shipping limit"
 msgstr "Gratis fraktgrense"
 
-#: classes/class-wc-shipping-method-bring.php:973
-#: classes/class-wc-shipping-method-bring.php:987
+#: classes/class-wc-shipping-method-bring.php:982
+#: classes/class-wc-shipping-method-bring.php:996
 msgid "..."
 msgstr "..."
 
@@ -726,18 +750,37 @@ msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
 
+#: classes/common/class-fraktguiden-product-tester.php:31
+msgid "Can this product be shipped with bring?"
+msgstr "Kan dette produktet sendes med bring?"
+
 #: pro/booking/admin/class-bring-booking-labels.php:74
 msgid "Please check write permissions for yor uploads folder."
-msgstr ""
+msgstr "Kontroller om nettsiden har skrivetilgang til opplastingsmappen."
 
 #: pro/booking/admin/class-bring-booking-labels.php:75
 msgid ""
 "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'."
 msgstr ""
+"Bring Fraktguiden kunne ikke lage mappen ‘uploads/bring_booking_labels’."
 
 #: pro/booking/admin/class-bring-booking-labels.php:76
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
+"Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
+"bring_booking_labels’."
+
+#: pro/booking/admin/class-bring-booking-labels.php:136
+msgid ""
+"Sorry, Labels are only available for Administrators, Warehouse Teams and "
+"Store Managers. Please contact the administrator to enable access."
+msgstr ""
+"Etiketter er kun tilgjengelig for Administratorer, Lagermedarbeidere og "
+"Butikksjefer. Kontakt en administrator for å få tilgang."
+
+#: pro/booking/admin/class-bring-booking-labels.php:137
+msgid "Insufficient permissions"
+msgstr "Ikke tilstrekkelig tilgang"
 
 #: pro/booking/class-bring-booking.php:51
 #: pro/booking/class-bring-booking.php:56
