@@ -296,6 +296,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
           'description' => __( 'Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service.', 'bring-fraktguiden' ),
           'class'       => 'separated_title_tab',
         ],
+        'calculate_by_weight' => [
+          'title'       => __( 'Ignore product dimensions', 'bring-fraktguiden' ),
+          'label'       => __( 'Calculate shipping costs based on weight only', 'bring-fraktguiden' ),
+          'default'     => 'yes',
+          'type'        => 'checkbox',
+          'description' => __( 'The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.', 'bring-fraktguiden' )
+        ],
         'enable_multipack' => [
           'title'       => __( 'Enable multipack', 'bring-fraktguiden' ),
           'label'       => __( 'Automatically pack items into several consignments', 'bring-fraktguiden' ),
