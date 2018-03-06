@@ -258,6 +258,7 @@ class Fraktguiden_Packer {
   public function create_boxes( $cart ) {
     // Create an array of 'product boxes' (l,w,h,weight).
     $product_boxes = array();
+    $ignore_dimensions = Fraktguiden_Helper::get_option( 'calculate_by_weight' ) == 'yes';
 
     /** @var WC_Cart $cart */
     foreach ( $cart as $values ) {
@@ -270,7 +271,7 @@ class Fraktguiden_Packer {
       }
       $quantity = $values['quantity'];
       for ( $i = 0; $i < $quantity; $i++ ) {
-        if ( ! $product->has_dimensions() ) {
+        if ( ! $product->has_dimensions() || $ignore_dimensions ) {
           // If the product has no dimensions, assume the lowest unit 1x1x1 cm
           $dims = array( 0, 0, 0 );
         }

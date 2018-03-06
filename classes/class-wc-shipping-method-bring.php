@@ -299,7 +299,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         'calculate_by_weight' => [
           'title'       => __( 'Ignore product dimensions', 'bring-fraktguiden' ),
           'label'       => __( 'Calculate shipping costs based on weight only', 'bring-fraktguiden' ),
-          'default'     => 'yes',
+          'default'     => 'no',
           'type'        => 'checkbox',
           'description' => __( 'The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.', 'bring-fraktguiden' )
         ],
@@ -1271,6 +1271,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   public function set_trace_messages( $messages ) {
     if ( isset( $messages['Message'] ) ) {
       $messages = $messages['Message'];
+    }
+    if ( ! is_array( $messages ) ) {
+      $messages = [];
     }
     $this->trace_messages = $messages;
     return $this;
