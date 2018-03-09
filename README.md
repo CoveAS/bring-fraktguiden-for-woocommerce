@@ -67,10 +67,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
-= 1.4.0.5 =
+= 1.4.0.6 =
+* Fixed an issue with multipacking that affected cargo and heavy items
+* Additional capabilities added when accessing Bring Labels
 * Finished writing the readme, updating the FAQ
-
-= 1.4.0.4 =
 * Added Mybring.com API authentication check when saving settings
 * Fixed an issue where no shipping rates would show up if the max_products setting was empty
 * Added an update notice to the description

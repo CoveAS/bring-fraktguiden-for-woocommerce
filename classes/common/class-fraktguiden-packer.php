@@ -56,29 +56,37 @@ class Fraktguiden_Packer {
         'height'          => $this->get_dimension( $package_size['height'] ),
     ) );
 
-    if ( $multi_pack ) {
-      // Check if the container exceeds max values.
-      // Note: This only works for SERVICEPAKKE.
-      if ( $this->exceeds_max_package_values( $package ) ) {
-        // Move one item to the popped cache and run again.
-        $this->popped_product_boxes[] = array_pop( $product_boxes );
-        $this->pack( $product_boxes, true );
-      }
-      else {
-        // The container size is within max values, save it to the cache.
-        $this->packages_to_ship[] = $package;
-        // Check the remaining boxes.
-        if ( count( $this->popped_product_boxes ) > 0 ) {
-          $popped = $this->popped_product_boxes;
-          unset( $this->popped_product_boxes );
-          $this->popped_product_boxes = array();
-          $this->pack( $popped, true );
-        }
-      }
+    if ( ! $multi_pack ) {
+      $this->packages_to_ship[] = $package;
+      return;
     }
-    else {
+
+    // Check if the container exceeds max values.
+    // Note: This only works for SERVICEPAKKE.
+    if ( $this->exceeds_max_package_values( $package ) ) {
+      // Move one item to the popped cache and run again.
+      $popped = array_pop( $product_boxes );
+      if ( ! empty( $product_boxes ) ) {
+        // There are still boxes in the package
+        $this->popped_product_boxes[] = $popped;
+        $this->pack( $product_boxes, true );
+        return;
+      }
+      // $popped is too big to ship
+      // Pack it without multipack
+      $this->pack( [ $popped ] );
+    } else {
+      // The package is ok to ship
       $this->packages_to_ship[] = $package;
     }
+
+    if ( ! empty( $this->popped_product_boxes ) ) {
+      // Check the remaining boxes.
+      $popped = $this->popped_product_boxes;
+      $this->popped_product_boxes = [];
+      $this->pack( $popped, true );
+    }
+
   }
 
   /**
@@ -95,15 +103,6 @@ class Fraktguiden_Packer {
       $params['weightInGrams' . $i] = $this->packages_to_ship[$i]['weight_in_grams'];
     }
     return $params;
-  }
-
-  public function validate( $product_boxes ) {
-    foreach ( $product_boxes as $box ) {
-      if ( $this->get_weight( $box['weight'] ) > 35000 ) {
-        return false;
-      }
-    }
-    return true;
   }
 
   /**
@@ -259,6 +258,7 @@ class Fraktguiden_Packer {
   public function create_boxes( $cart ) {
     // Create an array of 'product boxes' (l,w,h,weight).
     $product_boxes = array();
+    $ignore_dimensions = Fraktguiden_Helper::get_option( 'calculate_by_weight' ) == 'yes';
 
     /** @var WC_Cart $cart */
     foreach ( $cart as $values ) {
@@ -271,7 +271,7 @@ class Fraktguiden_Packer {
       }
       $quantity = $values['quantity'];
       for ( $i = 0; $i < $quantity; $i++ ) {
-        if ( ! $product->has_dimensions() ) {
+        if ( ! $product->has_dimensions() || $ignore_dimensions ) {
           // If the product has no dimensions, assume the lowest unit 1x1x1 cm
           $dims = array( 0, 0, 0 );
         }
@@ -293,11 +293,6 @@ class Fraktguiden_Packer {
             'weight'          => $product->get_weight(),
             'weight_in_grams' => $this->get_weight( $product->get_weight() ) // For $packer->exceeds_max_package_values only.
         );
-
-        // Return if product is larger than available Bring packages.
-        if ( $this->exceeds_max_package_values( $box, $product ) ) {
-          throw new PackingException( 'exceeds_max_package_values' );
-        }
 
         $product_boxes[] = $box;
       }

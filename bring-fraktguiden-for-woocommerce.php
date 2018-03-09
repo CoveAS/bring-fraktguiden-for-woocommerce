@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
+
+
 /**
  * Plugin Name:         Bring Fraktguiden for WooCommerce
  * Plugin URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
@@ -12,7 +14,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/
  *
- * Version:             1.4.0.4
+ * Version:             1.4.0.6
  * Requires at least:   4.9.1
  * Tested up to:        4.9.2
  *
@@ -28,7 +30,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.4.0.4';
+  const VERSION = '1.4.0.6';
 
   const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -43,6 +45,7 @@ class Bring_Fraktguiden {
     require_once 'classes/class-wc-shipping-method-bring.php';
     require_once 'classes/common/class-fraktguiden-license.php';
     require_once 'classes/common/class-fraktguiden-admin-notices.php';
+    require_once 'classes/common/class-fraktguiden-product-tester.php';
     require_once 'pro/class-wc-shipping-method-bring-pro.php';
 
     load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -69,6 +72,8 @@ class Bring_Fraktguiden {
     add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
 
     Fraktguiden_Admin_Notices::init();
+    // Disabled for now
+    // Fraktguiden_Product_Tester::setup();
 
     if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
       add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );

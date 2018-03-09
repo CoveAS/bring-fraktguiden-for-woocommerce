@@ -258,7 +258,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     $cart                     = WC()->cart;
 
-    $cart_items               = $cart->get_cart();
+
+    $cart_items               = $cart ? $cart->get_cart() : [];
     $cart_total               = 0;
 
     foreach ( $cart_items as $cart_item_key => $values ) {

@@ -24,6 +24,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   const DEFAULT_ALT_FLAT_RATE = 200;
 
 
+  private $trace_messages = [];
+
   private $from_country = '';
   private $from_zip = '';
   private $post_office = '';
@@ -289,22 +291,36 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
          * General options setting
          */
         'general_options_title' => [
-            'type'        => 'title',
-            'title'       => __( 'Shipping Options', 'bring-fraktguiden' ),
-            'description' => __( 'Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service.', 'bring-fraktguiden' ),
-            'class'       => 'separated_title_tab',
+          'type'        => 'title',
+          'title'       => __( 'Shipping Options', 'bring-fraktguiden' ),
+          'description' => __( 'Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service.', 'bring-fraktguiden' ),
+          'class'       => 'separated_title_tab',
         ],
-        'service_name' => array(
-            'title'       => __( 'Display Service As', 'bring-fraktguiden' ),
-            'type'        => 'select',
-            'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden' ),
-            'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden' ),
-            'default'     => 'DisplayName',
-            'options'     => array(
-                'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
-                'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
-            )
-        ),
+        'calculate_by_weight' => [
+          'title'       => __( 'Ignore product dimensions', 'bring-fraktguiden' ),
+          'label'       => __( 'Calculate shipping costs based on weight only', 'bring-fraktguiden' ),
+          'default'     => 'no',
+          'type'        => 'checkbox',
+          'description' => __( 'The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.', 'bring-fraktguiden' )
+        ],
+        'enable_multipack' => [
+          'title'       => __( 'Enable multipack', 'bring-fraktguiden' ),
+          'label'       => __( 'Automatically pack items into several consignments', 'bring-fraktguiden' ),
+          'default'     => 'yes',
+          'type'        => 'checkbox',
+          'description' => __( 'Use multipack when shipping many small items. This setting is highly recommended for SERVICEPAKKE. This will automatically divide shipped items into boxes with sides no longer than 240 cm and weigh less than 35kg and a circumference less than 360cm. If you\'re shipping a mix of small and big items you should disable this setting. Eg. if you\'re using both SERVICEPAKKE and CARGO you should disable this.', 'bring-fraktguiden' )
+        ],
+        'service_name' => [
+          'title'       => __( 'Display Service As', 'bring-fraktguiden' ),
+          'type'        => 'select',
+          'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden' ),
+          'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden' ),
+          'default'     => 'DisplayName',
+          'options'     => [
+            'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
+            'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
+          ]
+        ],
         'display_desc'  => array(
             'title'    => __( 'Display Description', 'bring-fraktguiden' ),
             'type'     => 'checkbox',
@@ -1028,8 +1044,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       if ( ! $product_boxes ) {
         return false;
       }
+      $multipack = $this->get_setting( 'enable_multipack', 'yes' ) == 'yes';
       // Pack product boxes.
-      $packer->pack( $product_boxes, true );
+      $packer->pack( $product_boxes, $multipack );
       // Create the url.
       return $packer->create_packages_params();
   }
@@ -1040,11 +1057,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    * @todo: in 2.6, the package param was added. Investigate this!
    */
   public function calculate_shipping( $package = [] ) {
-    global $woocommerce;
+    $this->trace_messages = [];
     // include_once( 'common/class-fraktguiden-packer.php' );
     // Offer flat rate if the cart contents exceeds max product.
     // @TODO: Use the package instead of the cart
-    if ( $woocommerce->cart->get_cart_contents_count() > $this->max_products ) {
+    if ( WC()->cart && WC()->cart->get_cart_contents_count() > $this->max_products ) {
       $alt_handling = $this->get_setting( 'alt_handling' );
       if ( 'flat_rate' == $alt_handling ) {
         $rate = array(
@@ -1056,101 +1073,103 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       }
       return;
     }
-    else {
-      $cart = $package[ 'contents' ];
-      try {
-        $this->packages_params = $this->pack_order( $cart );
+
+    $cart = $package[ 'contents' ];
+    $this->packages_params = $this->pack_order( $cart );
+    if ( ! $this->packages_params ) {
+      return;
+    }
+
+    if ( is_checkout() ) {
+      $_COOKIE['_fraktguiden_packages'] = json_encode( $this->packages_params );
+    }
+
+    if ( ! $package[ 'destination' ][ 'postcode' ] ) {
+      // Postcode must be specified
+      return;
+    }
+
+    // Request parameters.
+    $params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
+    // Remove any empty elements.
+    $params = array_filter( $params );
+
+    $url = add_query_arg( $params, self::SERVICE_URL );
+
+    // Add all the selected services to the URL
+    $service_count = 0;
+    if ( ! empty( $this->services ) ) {
+      foreach ( $this->services as $service ) {
+        $url .= '&product=' . $service;
       }
-      catch ( PackingException $e ) {
-        if ( $e->getMessage() == 'exceeds_max_package_values' ) {
-          $exception_handling = $this->get_setting( 'exception_handling' );
-          if ( 'flat_rate' == $exception_handling ) {
-            $this->add_rate( [
-                'id'    => $this->id . ':' . $this->get_setting( 'exception_rate_id', 'servicepakke' ),
-                'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
-                'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
-            ] );
-          }
-        }
-        return;
+    }
+
+    $options = [
+      'headers' => [
+        'Content-Type'       => 'application/json',
+        'Accept'             => 'application/json',
+      ]
+    ];
+
+    // Make the request.
+    $request  = new WP_Bring_Request();
+    $response = $request->get( $url, [], $options );
+
+    if ( $response->status_code != 200 ) {
+      $no_connection_handling = $this->get_setting( 'no_connection_handling' );
+      if ( 'flat_rate' == $no_connection_handling ) {
+        $this->add_rate( [
+          'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
+          'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
+          'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+        ] );
       }
+      return;
+    }
 
-      if ( ! $this->packages_params ) {
-        return;
-      }
+    // Decode the JSON data from bring.
+    $json = json_decode( $response->get_body(), true );
+    if ( isset( $json['TraceMessages' ] ) ) {
+      $this->set_trace_messages( $json['TraceMessages' ] );
+    }
+    $exception_handling = $this->get_setting( 'exception_handling' );
 
-      if ( is_checkout() ) {
-        $_COOKIE['_fraktguiden_packages'] = json_encode( $this->packages_params );
-      }
-
-      if ( ! $package[ 'destination' ][ 'postcode' ] ) {
-        // Postcode must be specified
-        return;
-      }
-
-      // Request parameters.
-      $params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
-      // Remove any empty elements.
-      $params = array_filter( $params );
-
-      $url = add_query_arg( $params, self::SERVICE_URL );
-
-      // Add all the selected services to the URL
-      $service_count = 0;
-      if ( ! empty( $this->services ) ) {
-        foreach ( $this->services as $service ) {
-          $url .= '&product=' . $service;
-        }
-      }
-
-      $options = [
-        'headers' => [
-          'Content-Type'       => 'application/json',
-          'Accept'             => 'application/json',
-        ]
-      ];
-
-      // Make the request.
-      $request  = new WP_Bring_Request();
-      $response = $request->get( $url, [], $options );
-
-      if ( $response->status_code != 200 ) {
-        $no_connection_handling = $this->get_setting( 'no_connection_handling' );
-        if ( 'flat_rate' == $no_connection_handling ) {
+    if ( 'flat_rate' == $exception_handling ) {
+      // Check if any package exeeds the max settings
+      $messages = $this->get_trace_messages();
+      foreach ( $messages as $message ) {
+        if ( false !== strpos( $message, 'Package exceed maximum measurements for product' ) ) {
           $this->add_rate( [
-            'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
-            'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
-            'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+              'id'    => $this->id . ':' . $this->get_setting( 'exception_rate_id', 'servicepakke' ),
+              'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
+              'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
           ] );
+          break;
         }
-        return;
       }
+    }
 
-      // Decode the JSON data from bring.
-      $json = json_decode( $response->get_body(), true );
+    // Filter the response json to get only the selected services from the settings.
+    $rates = $this->get_services_from_response( $json );
+    $rates = apply_filters( 'bring_shipping_rates', $rates );
 
-      // Filter the response json to get only the selected services from the settings.
-      $rates = $this->get_services_from_response( $json );
-      $rates = apply_filters( 'bring_shipping_rates', $rates );
+    if ( $this->debug != 'no' ) {
+      $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
 
-      if ( $this->debug != 'no' ) {
-        $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
-
-        if ( $rates ) {
-          $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
-        }
-        else {
-          $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
-        }
-
-        $this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
-      }
-
-      // Calculate rate.
       if ( $rates ) {
-        foreach ( $rates as $rate ) {
-          $this->add_rate( $rate );
-        }
+        $this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
+      }
+      else {
+        $this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
+      }
+
+      $this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
+    }
+
+    // Calculate rate.
+    if ( $rates ) {
+      foreach ( $rates as $rate ) {
+        $this->add_rate( $rate );
       }
     }
   }
@@ -1235,6 +1254,29 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     ];
 
     return array_key_exists($language, $languages) ? $languages[$language] : 'en';
+  }
+
+  /**
+   * Get Trace Messages
+   * @return array
+   */
+  public function get_trace_messages() {
+    return $this->trace_messages;
+  }
+
+  /**
+   * Set Trace Messages
+   * @return array
+   */
+  public function set_trace_messages( $messages ) {
+    if ( isset( $messages['Message'] ) ) {
+      $messages = $messages['Message'];
+    }
+    if ( ! is_array( $messages ) ) {
+      $messages = [];
+    }
+    $this->trace_messages = $messages;
+    return $this;
   }
 
   public function get_selected_from_country() {

@@ -6,9 +6,10 @@ Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 4.5
 Tested up to: 4.9.1
+Requires PHP: 5.6
 WC requires at least: 3.1
 WC tested up to: 3.2.1
-Stable tag: 1.4.0.5
+Stable tag: 1.4.0.6
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -62,7 +63,7 @@ If you've entered any MyBring details, try removing them. If Bring shows up on t
 **What do I get from Bring Pro that I can't from the Free version?**
 Good question! Bring Pro enables you to customise your customers Bring experience:
     - You can customise the price of each shipping method
-    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
+    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ).
     - You can book your shippment through MyBring directly on your orders page.
     - You can change the services offered to customers to their nearest collection point
 
@@ -74,6 +75,9 @@ Bring revealed that in 2018, A-mail and B-mail have been merged into a new servi
 
 **My products have dimensions, but they're being classified as heavy, why?**
 Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
+
+**I created a custom user role to manage Bring shippments, but they can't access the PDFs?**
+Shipping information such as PDFs are private, so we limit those to only certain user roles. Those roles/capabilities are: `administrator`, `manage_woocommerce`, `warehouse_team` and a custom capability called `bring_labels`. If you create a new role and only want them to access your orders, create a roll called `warehouse_team`. If you already have a role created, give them the `bring_labels` capability.
 
 **I activate the plugin and everything goes white!**
 A rare occasion, but when this happens, it means that your server is running an old version of PHP – You can find out what version of PHP you're using by heading to **Woocommerce -> Status**, this will let you know if you're running out-of-date software. The best way to recover from this [WSOD](https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death) is to use the FileEditor, PHPMyadmin, sFTP or SSH to rename the plugin, thus disabling it in wordpress. You should then consider upgrading your PHP version by contacting your Host provider.
@@ -88,10 +92,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 == Changelog ==
 
-= 1.4.0.5 =
+= 1.4.0.6 =
+* Fixed an issue with multipacking that affected cargo and heavy items
+* Additional capabilities added when accessing Bring Labels
 * Finished writing the readme, updating the FAQ
-
-= 1.4.0.4 =
 * Added Mybring.com API authentication check when saving settings
 * Fixed an issue where no shipping rates would show up if the max_products setting was empty
 * Added an update notice to the description
