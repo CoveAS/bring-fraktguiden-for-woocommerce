@@ -58,7 +58,40 @@ class Bring_WC_Order_Adapter {
       return [ ];
     }
     $body = json_decode( $response['body'] );
+
     return $body->consignments;
+  }
+
+  /**
+   * Returns the consignments json decoded from the stored MyBring response.
+   * If the saved response has errors, return empty array.
+   *
+   * @return array
+   */
+  public function get_mailbox_consignments() {
+    $response = $this->get_booking_response();
+    if ( ! $response || $this->has_booking_errors() ) {
+      return [ ];
+    }
+    $body = json_decode( $response['body'] );
+
+    return $body->data;
+  }
+
+  /**
+   * Returns the consignments json decoded from the stored MyBring response.
+   * If the saved response has errors, return empty array.
+   *
+   * @return array
+   */
+  public function get_consignment_type() {
+    $response = $this->get_booking_response();
+    if ( ! $response || $this->has_booking_errors() ) {
+      return '';
+    }
+    $body = json_decode( $response['body'] );
+
+    return property_exists( $body, 'data' ) ? 'mailbox' : 'booking';
   }
 
   /**
@@ -105,7 +138,11 @@ class Bring_WC_Order_Adapter {
    * @return bool
    */
   public function has_booking_consignments() {
-    return count( $this->get_booking_consignments() ) > 0;
+    if ( 'mailbox' == $this->get_consignment_type() ) {
+      return count( $this->get_mailbox_consignments() ) > 0;
+    } else {
+      return count( $this->get_booking_consignments() ) > 0;
+    }
   }
 
   /**
@@ -118,7 +155,7 @@ class Bring_WC_Order_Adapter {
     if ( ! $response ) {
       return false;
     }
-    if ( $response['status_code'] != 200 ) {
+    if ( ! in_array( $response['status_code'],  [200, 201, 202, 203, 204] ) ) {
       return true;
     }
 
@@ -291,31 +328,6 @@ class Bring_WC_Order_Adapter {
 
 
   /**
-   * Returns pickup point for given shipping item id.
-   * If not found an empty array is found.
-   *
-   * @param $item_id_to_find
-   * @return array
-   */
-  public function get_pickup_point_for_shipping_item_formatted( $item_id_to_find ) {
-    $result = [ ];
-
-    $country_code = $this->order->get_shipping_country();
-
-    foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $shipping_item ) {
-      $pickup_point_id = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', true );
-      if ( $pickup_point_id && $item_id_to_find == $item_id ) {
-        $result = [
-            'id'          => $pickup_point_id,
-            'countryCode' => $country_code,
-        ];
-        break;
-      }
-    }
-    return $result;
-  }
-
-  /**
    * Returns pickup point information for shipping item.
    *
    * @param int $item_id
@@ -334,6 +346,8 @@ class Bring_WC_Order_Adapter {
 
   /**
    * Returns Fraktguiden shipping method items.
+   *
+   * Same as wc_order->get_shipping_methods() except that non-bring methods are filtered away.
    *
    * @return array
    */
@@ -358,145 +372,5 @@ class Bring_WC_Order_Adapter {
     return wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
   }
 
-  /**
-   * Returns all packages for the order.
-   * An order can in theory have multiple shipping items.
-   * A shipping item can have multiple packages.
-   *
-   * @param int|boolean $item_id_to_find
-   * @return array
-   */
-  public function get_packages( $item_id_to_find = false ) {
-    $result = [ ];
-    foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $shipping_method ) {
-      $packages_array = $this->get_packages_for_order_item( $item_id );
-      if ( $item_id_to_find && $item_id_to_find == $item_id ) {
-        if ( $packages_array ) {
-          $result[$item_id] = $packages_array;
-        }
-        return $result;
-      }
-      else {
-        if ( $packages_array ) {
-          $result[$item_id] = $packages_array;
-        }
-      }
-
-    }
-    return $result;
-  }
-
-  public function order_update_packages() {
-    $order    = $this;
-    $wc_order = $this->order;
-    $cart = [];
-    //build a cart like array
-    foreach ( $wc_order->get_items() as $item_id => $item ) {
-      if ( ! isset( $item['product_id'] ) ) {
-        continue;
-      }
-      $cart[] = [
-        'data' => wc_get_product( $item['product_id'] ),
-        'quantity' => $item['qty'],
-      ];
-    }
-    // var_dump( get_class_methods( $wc_order ) );
-    $shipping_method = new WC_Shipping_Method_Bring;
-    $packages = $shipping_method->pack_order( $cart );
-    $order->checkout_update_packages( json_encode( $packages ) );
-  }
-
-  /**
-   * Returns all packages for the order 'Bring booking formatted'.
-   *
-   * @param int|boolean $item_id_to_find
-   * @param boolean $include_info
-   *
-   * @return array
-   */
-  public function get_packages_formatted( $item_id_to_find = false, $include_info = false ) {
-    $result = [ ];
-
-    $order_items_packages = $this->get_packages( $item_id_to_find );
-    if ( ! $order_items_packages ) {
-      $this->order_update_packages();
-      $order_items_packages = $this->get_packages( $item_id_to_find );
-    }
-    if ( ! $order_items_packages ) {
-      return [ ];
-    }
-
-    $elements = [ 'width', 'height', 'length', 'weightInGrams' ];
-
-    $elements_count = count( $elements );
-    foreach ( $order_items_packages as $item_id => $package ) {
-      $package_count = count( $package ) / $elements_count;
-      for ( $i = 0; $i < $package_count; $i++ ) {
-        $weight_in_kg = (int)$package['weightInGrams' . $i] / 1000;
-
-        $data = [
-
-            'weightInKg'       => $weight_in_kg,
-            'goodsDescription' => null,
-            'dimensions'       => [
-                'widthInCm'  => $package['width' . $i],
-                'heightInCm' => $package['height' . $i],
-                'lengthInCm' => $package['length' . $i],
-            ],
-            'containerId'      => null,
-            'packageType'      => null,
-            'numberOfItems'    => null,
-            'correlationId'    => null,
-        ];
-
-        if ( $include_info ) {
-          $shipping_method  = '';
-          $shipping_methods = $this->get_fraktguiden_shipping_items();
-          foreach ( $shipping_methods as $id => $shipping_method ) {
-            if ( $id == $item_id ) {
-              $shipping_method = Fraktguiden_Helper::parse_shipping_method_id( $shipping_method['method_id'] );
-              break;
-            }
-          }
-
-          $data['shipping_item_info'] = [
-              'item_id'         => $item_id,
-              'shipping_method' => $shipping_method
-          ];
-        }
-
-        $result[] = $data;
-
-      }
-    }
-    return $result;
-  }
-
-  /**
-   * Returns the recipient (order/shipping address)
-   *
-   * @return array
-   */
-  public function get_recipient_address_formatted() {
-    $order     = $this->order;
-    $full_name = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
-    $name      = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
-    return [
-        "name"                  => $name,
-        "addressLine"           => $order->get_shipping_address_1(),
-        "addressLine2"          => $order->get_shipping_address_2(),
-        "postalCode"            => $order->get_shipping_postcode(),
-        "city"                  => $order->get_shipping_city(),
-        "countryCode"           => $order->get_shipping_country(),
-        "reference"             => null,
-        "additionalAddressInfo" => $order->get_customer_note(),
-        "contact"               => [
-            "name"        => $full_name,
-            "email"       => $order->get_billing_email(),
-            "phoneNumber" => $order->get_billing_phone(),
-        ]
-    ];
-
-  }
 
 }

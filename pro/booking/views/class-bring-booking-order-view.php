@@ -158,73 +158,22 @@ class Bring_Booking_Order_View {
    * @param Bring_WC_Order_Adapter $order
    */
   static function render_consignments( $order ) {
-    $consignments = $order->get_booking_consignments();
-    if ( $consignments ) {
-      ?>
-      <div class="bring-consignments">
-        <?php
-
-        foreach ( $consignments as $consignment ) {
-          //$correlation_id     = $consignment->correlationId;
-          $errors             = $consignment->errors;
-          $confirmation       = $consignment->confirmation;
-          $consignment_number = $confirmation->consignmentNumber;
-          $links              = $confirmation->links;
-          $tracking           = $links->tracking;
-          $date_and_times     = $confirmation->dateAndTimes;
-          $earliest_pickup    = $date_and_times->earliestPickup ? date_i18n( wc_date_format(), $date_and_times->earliestPickup / 1000 ) : 'N/A';
-          $expected_delivery  = $date_and_times->expectedDelivery ? date_i18n( wc_date_format(), $date_and_times->expectedDelivery / 1000 ) : 'N/A';
-          $packages           = $confirmation->packages;
-          $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
-          ?>
-          <div>
-            <table>
-              <tr>
-                <th colspan="2"><?php printf( 'NO: %s', $consignment_number ) ?></th>
-              </tr>
-              <tr>
-                <td><?php _e( 'Earliest Pickup', 'bring-fraktguiden' ); ?>:</td>
-                <td><?php echo $earliest_pickup; ?></td>
-              </tr>
-              <tr>
-                <td><?php _e( 'Expected delivery', 'bring-fraktguiden' ); ?>:</td>
-                <td><?php echo $expected_delivery; ?></td>
-              </tr>
-              <tr>
-                <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
-                <td>
-                  <a class="button button-small button-primary" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
-                </td>
-              </tr>
-              <tr>
-                <td><?php _e( 'Tracking', 'bring-fraktguiden' ); ?>:</td>
-                <td>
-                  <a class="button button-small" href="<?php echo $tracking; ?>" target="_blank"><?php _e( 'View', 'bring-fraktguiden' ); ?> &rarr;</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
-                </td>
-                <td valign="center">
-                  <ul class="bring-list-tracking-numbers">
-                    <?php
-                    foreach ( $packages as $package ) {
-                      //$correlation_id = property_exists( $package, 'correlationId' ) ? $package->correlationId : 'N/A';
-                      ?>
-                      <li><?php printf( 'NO: %s', $package->packageNumber ); ?></li>
-                    <?php } ?>
-                  </ul>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <?php
-        }
-        ?>
-      </div>
+    $type = $order->get_consignment_type();
+    ?>
+    <div class="bring-consignments">
       <?php
-    }
+      if ( 'mailbox' == $type ) {
+        $consignments = $order->get_mailbox_consignments();
+        require dirname( __DIR__ ) .'/templates/consignment-table-'. $type .'.php';
+      } else {
+        $consignments = $order->get_booking_consignments();
+        foreach ( $consignments as $consignment ) {
+          require dirname( __DIR__ ) .'/templates/consignment-table-'. $type .'.php';
+        }
+      }
+      ?>
+    </div>
+    <?php
   }
 
   /**
@@ -259,7 +208,16 @@ class Bring_Booking_Order_View {
     </div>
 
 
-    <?php self::render_parties( $order ); ?>
+    <?php
+
+    $shipping_items = $order->get_fraktguiden_shipping_items();
+    if ( empty( $shipping_items ) ) {
+      return;
+    }
+    $shipping_item = reset( $shipping_items );
+    $consignment = new Bring_Booking_Consignment( $shipping_item );
+    self::render_parties( $consignment );
+    ?>
     <div class="bring-form-field">
       <label
           for="_bring_additional_info"><?php _e( 'Additional Info', 'bring-fraktguiden' ); ?>
@@ -307,7 +265,7 @@ class Bring_Booking_Order_View {
   /**
    * @param Bring_WC_Order_Adapter $order
    */
-  static function render_parties( $order ) {
+  static function render_parties( $consignment ) {
     ?>
     <div class="bring-form-field">
       <a class="bring-show-parties button"
@@ -326,11 +284,11 @@ class Bring_Booking_Order_View {
          style="display:none">
       <div>
         <h3><?php _e( 'Sender Address', 'bring-fraktguiden' ); ?></h3>
-        <?php self::render_address_table( Bring_Booking::get_sender_address( $order->order ) ); ?>
+        <?php self::render_address_table( $consignment->get_sender_address() ); ?>
       </div>
       <div>
         <h3><?php _e( 'Recipient Address', 'bring-fraktguiden' ); ?></h3>
-        <?php self::render_address_table( $order->get_recipient_address_formatted() ); ?>
+        <?php self::render_address_table( $consignment->get_recipient_address() ); ?>
       </div>
     </div>
     <?php
@@ -360,7 +318,15 @@ class Bring_Booking_Order_View {
       </thead>
       <tbody>
       <?php
-      foreach ( $order->get_packages_formatted( false, true ) as $key => $package ) { ?>
+      // YO! This shit breaks NOW!
+      //
+      foreach ( $order->get_fraktguiden_shipping_items() as $item_id => $shipping_method ) {
+
+      // 1. Create Booking Consignment
+      $consignment = new Bring_Booking_Consignment( $shipping_method );
+
+      // 2. Get packages from that consignment
+      foreach ( $consignment->create_packages( true ) as $key => $package ) { ?>
         <?php
         $shipping_item_id = $package['shipping_item_info']['item_id'];
         $key              = $package['shipping_item_info']['shipping_method']['service'];
@@ -405,7 +371,7 @@ class Bring_Booking_Order_View {
             <span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden' ); ?></span>
           </td>
         </tr>
-      <?php } ?>
+      <?php } } ?>
         <tr class="bring-package-template" style="display: none">
           <td title="<?php echo $shipping_item_tip; ?>">
             <select class="order-item-id" name="order_item_id[]">
