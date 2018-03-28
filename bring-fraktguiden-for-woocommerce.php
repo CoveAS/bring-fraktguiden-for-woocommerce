@@ -38,7 +38,6 @@ class Bring_Fraktguiden {
     if ( ! class_exists( 'WooCommerce' ) ) {
       return;
     }
-
     if ( ! class_exists( 'LAFFPack' ) ) {
       require_once 'includes/laff-pack.php';
     }
@@ -78,6 +77,12 @@ class Bring_Fraktguiden {
     if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
       add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
     }
+
+    // Check the license when pro is activated
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) ) {
+      $license = fraktguiden_license::get_instance();
+      $license->check_license();
+    }
   }
 
   /**
@@ -93,7 +98,7 @@ class Bring_Fraktguiden {
    */
   static function cron_task() {
     $license = fraktguiden_license::get_instance();
-    $license->valid();
+    $license->check_license();
   }
 
   /**

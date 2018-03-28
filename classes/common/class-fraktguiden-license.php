@@ -48,6 +48,7 @@ class fraktguiden_license {
 		}
 		return $data;
 	}
+
 	/**
 	 * Valid
 	 *
@@ -56,42 +57,39 @@ class fraktguiden_license {
 	 */
 	public function valid() {
 		$valid = get_option( 'bring_fraktguiden_pro_valid_to' );
-		if ( $valid && $valid > time() ) {
-			return true;
+		if ( $valid && $valid < time() ) {
+			return false;
 		}
+		return true;
+	}
 
+	/**
+	 * Check License
+	 */
+	public function check_license() {
 		$url = get_site_url();
 		$url_info = parse_url( $url );
-
 		if ( ! $url_info ) {
 			$this->ping();
-			return true;
+			return;
 		}
-
 		$data = $this->curl_request( [
 			'action' => 'check_license',
 			'domain' => $url_info[ 'host' ],
 		] );
-
 		if ( ! $data ) {
-			return true;
+			return;
 		}
-
 		$valid = (int) @$data['data']['license']['valid_to'];
-
 		if ( $valid && $valid > time() ) {
 			update_option( 'bring_fraktguiden_pro_valid_to', $valid );
-			return true;
 		}
-
-		return false;
 	}
 
 	public function ping() {
 		$url = get_site_url();
 		$this->curl_request( [
-			'action' => 'ping',
-			'domain' => $url,
+			'action' => 'ping'
 		] );
 	}
 }
