@@ -40,10 +40,14 @@ class Fraktguiden_Helper {
    * @return boolean                 True means that PRO mode is active
    */
   static function pro_activated( $ignore_license = false ) {
-    $days = self::get_pro_days_remaining();
-    $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
-    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
+    if ( $ignore_license ) {
+      $pro_allowed = true;
+    } else {
+      $days = self::get_pro_days_remaining();
+      $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
+      if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+        return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
+      }
     }
     return self::get_option( 'pro_enabled' ) == 'yes' && $pro_allowed;
   }
@@ -227,12 +231,14 @@ class Fraktguiden_Helper {
    */
   static function get_pro_days_remaining() {
     $start_date = self::get_option( 'pro_activated_on', false );
-    if ( ! $start_date ) {
+    $time = intval( $start_date );
+    // I made a mistake in the license check here.
+    // Any activation time before now (as of writing) should count as a reset for the 7 day trial.
+    if ( $time < 1522249027 ) {
       $time = time();
       self::update_option( 'pro_activated_on', $time );
-    } else {
-      $time = intval( $start_date );
     }
+    $time = intval( $start_date );
     $diff = $time + 86400 * 8 - time() - 10;
     $time = floor( $diff / 86400 );
     return $time;

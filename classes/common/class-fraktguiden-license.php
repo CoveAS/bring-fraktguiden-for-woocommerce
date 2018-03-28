@@ -1,6 +1,7 @@
 <?php
 
 class fraktguiden_license {
+
 	const BASE_URL = 'http://bring.driv.digital/';
 
 	protected static $instance;
@@ -81,7 +82,7 @@ class fraktguiden_license {
 			return;
 		}
 		$valid = (int) @$data['data']['license']['valid_to'];
-		if ( $valid && $valid > time() ) {
+		if ( $valid && $valid > 0 ) {
 			update_option( 'bring_fraktguiden_pro_valid_to', $valid );
 		}
 	}
