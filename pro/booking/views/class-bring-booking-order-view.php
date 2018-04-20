@@ -162,14 +162,9 @@ class Bring_Booking_Order_View {
     ?>
     <div class="bring-consignments">
       <?php
-      if ( 'mailbox' == $type ) {
-        $consignments = $order->get_mailbox_consignments();
+      $consignments = $order->get_booking_consignments();
+      foreach ( $consignments as $consignment ) {
         require dirname( __DIR__ ) .'/templates/consignment-table-'. $type .'.php';
-      } else {
-        $consignments = $order->get_booking_consignments();
-        foreach ( $consignments as $consignment ) {
-          require dirname( __DIR__ ) .'/templates/consignment-table-'. $type .'.php';
-        }
       }
       ?>
     </div>
@@ -215,7 +210,7 @@ class Bring_Booking_Order_View {
       return;
     }
     $shipping_item = reset( $shipping_items );
-    $consignment = new Bring_Booking_Consignment( $shipping_item );
+    $consignment = new Bring_Booking_Consignment_Request( $shipping_item );
     self::render_parties( $consignment );
     ?>
     <div class="bring-form-field">
@@ -323,7 +318,7 @@ class Bring_Booking_Order_View {
       foreach ( $order->get_fraktguiden_shipping_items() as $item_id => $shipping_method ) {
 
       // 1. Create Booking Consignment
-      $consignment = new Bring_Booking_Consignment( $shipping_method );
+      $consignment = new Bring_Booking_Consignment_Request( $shipping_method );
 
       // 2. Get packages from that consignment
       foreach ( $consignment->create_packages( true ) as $key => $package ) { ?>

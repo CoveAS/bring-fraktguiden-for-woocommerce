@@ -53,13 +53,9 @@ class Bring_WC_Order_Adapter {
    * @return array
    */
   public function get_booking_consignments() {
+    $consignments = [];
     $response = $this->get_booking_response();
-    if ( ! $response || $this->has_booking_errors() ) {
-      return [ ];
-    }
-    $body = json_decode( $response['body'] );
-
-    return $body->consignments;
+    return Bring_Consignment::create_from_response( $response, $this->order->get_id() );
   }
 
   /**

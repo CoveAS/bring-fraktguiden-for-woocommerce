@@ -3,15 +3,29 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
+// Frontend views
 include_once 'views/class-bring-booking-my-order-view.php';
 
+// Consignment
+include_once 'classes/consignment/class-bring-consignment.php';
+include_once 'classes/consignment/class-bring-mailbox-consignment.php';
+include_once 'classes/consignment/class-bring-booking-consignment.php';
+
+
+// Consignment request
+include_once 'classes/consignment-request/class-bring-consignment-request.php';
+include_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
+include_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
+
+// Classes
+include_once 'classes/class-bring-booking-file.php';
+include_once 'classes/class-bring-booking-customer.php';
+include_once 'classes/class-bring-booking-request.php';
+
 if ( is_admin() ) {
-  include_once 'admin/class-bring-booking-customer.php';
-  include_once 'admin/class-bring-consignment.php';
-  include_once 'admin/class-bring-booking-consignment.php';
-  include_once 'admin/class-bring-mailbox-consignment.php';
-  include_once 'admin/class-bring-booking-request.php';
-  include_once 'admin/class-bring-booking-labels.php';
+  // Views
+  include_once 'views/class-bring-booking-labels.php';
+  include_once 'views/class-bring-booking-waybills.php';
   include_once 'views/class-bring-booking-order-view-common.php';
   include_once 'views/class-bring-booking-orders-view.php';
   include_once 'views/class-bring-booking-order-view.php';
@@ -86,76 +100,52 @@ class Bring_Booking {
     // One booking request per. order shipping item.
     foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
 
-      $service_id      = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
       // service_id    = POST_I_POSTKASSE_SPORBAR
       // shipping_item = WC_Order_Item_Shipping
       // adapter       = Bring_WC_Order_Adapter
 
-      // Select the correct consignment type
-      if ( preg_match( '/^PAKKE_I_POSTKASSEN/', strtoupper( $service_id ) ) ) {
-        $consignment = new Bring_Mailbox_Consignment( $shipping_item );
-      } else {
-        $consignment = new Bring_Booking_Consignment( $shipping_item );
-      }
-
-      $consignment->fill( [
+      // Create the consignment
+      $consignment_request = Bring_Consignment_Request::create( $shipping_item );
+      $consignment_request->fill( [
         'shipping_date_time' => self::get_shipping_date_time(),
         'customer_number'    => isset( $_REQUEST['_bring-customer-number'] ) ? $_REQUEST['_bring-customer-number'] : '',
       ] );
-
       $original_order_status = $wc_order->get_status();
-
       // Set order status to awaiting shipping.
       $wc_order->update_status( 'wc-bring-shipment' );
 
-      // Set data
-      $request = new WP_Bring_Request();
-      $request_data = [
-        'headers' => [
-            'Content-Type'       => 'application/json',
-            'Accept'             => 'application/json',
-            'X-MyBring-API-Uid'  => self::get_api_uid(),
-            'X-MyBring-API-Key'  => self::get_api_key(),
-            'X-Bring-Client-URL' => self::get_client_url(),
-          ],
-          'body' => json_encode( $consignment->create_data() )
-      ];
-
       // Send the booking.
-      $response = $request->post( $consignment->get_endpoint_url(), array(), $request_data );
+      $response = $consignment_request->post();
+
       if( ! in_array( $response->get_status_code(),  [200, 201, 202, 203, 204] ) ) {
         //@TODO: Error message
         // wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
       }
-      // $response = $booking_request->send();
 
       // Save the response json to the order.
       $adapter->update_booking_response( $response );
-
       // Download labels pdf
-      if ( ! $adapter->has_booking_errors() ) {
-        Bring_Booking_Labels::download_to_local( $adapter );
-      }
-
-      // Create new status and order note.
-      if ( ! $adapter->has_booking_errors() ) {
-        // Check if the plugin has been configured to set a specific order status after success.
-        $status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
-        if ( $status == 'none' ) {
-          // Set status back to the previous status
-          $status = $original_order_status;
-        }
-        $status_note = __( "Booked with Bring" . "\n", 'bring-fraktguiden' );
-      }
-      else {
+      if ( $adapter->has_booking_errors() ) {
         // If there are errors, set the status back to the original status.
         $status      = $original_order_status;
         $status_note = __( "Booking errors. See the Bring Booking box for details." . "\n", 'bring-fraktguiden' );
+        $wc_order->update_status( $status, $status_note );
+        continue;
       }
-
+      // Download the labels
+      $consigments = Bring_Consignment::create_from_response( $response, $wc_order->get_id() );
+      foreach ( $consigments as $consignment ) {
+        $consignment->download_label();
+      }
+      // Create new status and order note.
+      $status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
+      if ( $status == 'none' ) {
+        // Set status back to the previous status
+        $status = $original_order_status;
+      }
+      $status_note = __( "Booked with Bring" . "\n", 'bring-fraktguiden' );
       // Update status.
       $wc_order->update_status( $status, $status_note );
-
     }
   }
 

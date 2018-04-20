@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-abstract class Bring_Consignment {
+abstract class Bring_Consignment_Request {
   public $service_id;
   public $shipping_item;
   public $shipping_date_time;
@@ -11,8 +11,21 @@ abstract class Bring_Consignment {
 
   function __construct( $shipping_item ) {
     $this->shipping_item = $shipping_item;
-    $service_id      = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
-    $this->service_id = $service_id;
+    $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+  }
+
+  /**
+   * Create
+   * @param  strgin $service_id
+   * @param  array $shipping_item
+   * @return Bring_Consignment
+   */
+  static function create( $shipping_item ) {
+    $service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    if ( preg_match( '/^PAKKE_I_POSTKASSEN/', strtoupper( $service_id ) ) ) {
+      return new Bring_Mailbox_Consignment_Request( $shipping_item );
+    }
+    return new Bring_Booking_Consignment_Request( $shipping_item );
   }
 
   public function fill( $args ) {
@@ -82,4 +95,47 @@ abstract class Bring_Consignment {
   }
 
   abstract public function get_endpoint_url();
+  abstract public function create_data();
+
+  /**
+   * Post
+   * @return WP_Bring_Response
+   */
+  public function post() {
+    $request_data = [
+      'headers' => [
+        'Content-Type'       => 'application/json',
+        'Accept'             => 'application/json',
+        'X-MyBring-API-Uid'  => Fraktguiden_Helper::get_option( 'mybring_api_uid' ),
+        'X-MyBring-API-Key'  => Fraktguiden_Helper::get_option( 'mybring_api_key' ),
+        'X-Bring-Client-URL' => $_SERVER['HTTP_HOST'],
+      ],
+      'body' => json_encode( $this->create_data() )
+    ];
+    // var_dump( $request_data );die;
+    $request = new WP_Bring_Request();
+    return $request->post( $this->get_endpoint_url(), [], $request_data );
+  }
+
+
+  public function order_update_packages() {
+    $wc_order = $this->shipping_item->get_order();
+    $adapter  = new Bring_WC_Order_Adapter( $wc_order );
+    $cart = [];
+    //build a cart like array
+    foreach ( $wc_order->get_items() as $item_id => $item ) {
+      if ( ! isset( $item['product_id'] ) ) {
+        continue;
+      }
+      $cart[] = [
+        'data' => wc_get_product( $item['product_id'] ),
+        'quantity' => $item['qty'],
+      ];
+    }
+
+    $shipping_method = new WC_Shipping_Method_Bring;
+    $packages = $shipping_method->pack_order( $cart );
+
+    $adapter->checkout_update_packages( json_encode( $packages ) );
+  }
 }

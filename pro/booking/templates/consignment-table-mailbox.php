@@ -1,8 +1,6 @@
 <?php
 
-// var_dump(  );die;
-
-$consignment = $consignments;
+$consignment = reset( $consignments );
 // $errors             = $consignment->errors;
 // $confirmation       = $consignment->confirmation;
 // $consignment_number = $confirmation->consignmentNumber;
@@ -13,12 +11,17 @@ $tracking_url = 'https://tracking.bring.com/tracking.html?q=';
 // $expected_delivery  = $date_and_times->expectedDelivery ? date_i18n( wc_date_format(), $date_and_times->expectedDelivery / 1000 ) : 'N/A';
 // $packages           = $confirmation->packages;
 $labels_url  = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
-$waybill_url = Bring_Booking_Labels::create_download_url( $order->order->get_id().'&type=waybill' );
+
+$order_id = $order->order->get_id();
+
+$waybill = get_attached_media( 'waybill', $order_id );
+
+
 ?>
 <div>
   <table>
     <tr>
-      <th colspan="2"><?php printf( 'NO: %s', $consignment->id ) ?></th>
+      <th colspan="2"><?php printf( 'NO: %s', $consignment->get_consignment_number() ) ?></th>
     </tr>
     <tr>
       <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
@@ -29,7 +32,8 @@ $waybill_url = Bring_Booking_Labels::create_download_url( $order->order->get_id(
     <tr>
       <td><?php _e( 'Waybill', 'bring-fraktguiden' ); ?>:</td>
       <td>
-        <a class="button button-small button-primary" href="<?php echo $waybill_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
+
+        <a class="button button-small button-primary" href="<?php echo ''; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
       </td>
     </tr>
     <tr>
@@ -39,10 +43,10 @@ $waybill_url = Bring_Booking_Labels::create_download_url( $order->order->get_id(
       <td valign="center">
         <ul class="bring-list-tracking-numbers">
           <?php
-          foreach ( $consignment->attributes->packages as $package ) {
-            //$correlation_id = property_exists( $package, 'correlationId' ) ? $package->correlationId : 'N/A';
+          foreach ( $consignments as $_consignment ) {
+            //$correlation_id = property_exists( $_consignment, 'correlationId' ) ? $_consignment->correlationId : 'N/A';
             ?>
-            <li><?php printf( '<a href="%s%s" target="_blank">NO: %2$s</a>', $tracking_url, $package->shipmentNumber ); ?></li>
+            <li><?php printf( '<a href="%s%s" target="_blank">NO: %2$s</a>', $tracking_url, $_consignment->get_tracking_code() ); ?></li>
           <?php } ?>
         </ul>
       </td>

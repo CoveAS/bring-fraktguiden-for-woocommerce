@@ -3,14 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-class Bring_Mailbox_Consignment extends Bring_Consignment {
+class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 
   /**
    * Get Endpoint URL
    * @return string
    */
   public function get_endpoint_url() {
-    return 'https://api.bring.com/order/to-mailbox';
+    return 'https://api.bring.com/order/to-mailbox/labels';
   }
 
   /**
@@ -24,16 +24,17 @@ class Bring_Mailbox_Consignment extends Bring_Consignment {
     $name      = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
 
     $tracking = preg_match( '/SPORBAR$/', $this->service_id );
+
     $phone_number = $order->get_billing_phone();
     $phone_number = Fraktguiden_Helper::phone_i18n( $phone_number, $order->get_billing_country() );
     return [
-      "rfid"          => false,//$tracking,
-      "weight"        => $package['weightInGrams0'],
-      "recipientName" => $name,
-      "postalCode"    => $order->get_shipping_postcode(),
-      "streetAddress" => $order->get_shipping_address_1(),
-      "phoneNumber"   => $phone_number,
-      "email"         => $order->get_billing_email()
+      'rfid'          => $tracking,
+      'weight'        => $package['weightInGrams0'],
+      'recipientName' => $name,
+      'postalCode'    => $order->get_shipping_postcode(),
+      'streetAddress' => $order->get_shipping_address_1(),
+      'phoneNumber'   => $phone_number,
+      'email'         => $order->get_billing_email()
     ];
   }
 
@@ -63,20 +64,21 @@ class Bring_Mailbox_Consignment extends Bring_Consignment {
   public function create_data() {
     $sender = $this->get_sender();
     return [
-      "data" => [
-        "type" => "orders",
-        "attributes" => [
-          "customerNumber" => $this->customer_number,
-          "senderName"     => $sender['booking_address_store_name'],
-          "postalCode"     => $sender['booking_address_postcode'],
-          "streetAddress"  => $sender['booking_address_street1'],
-          "senderEmail"    => $sender['booking_address_email'],
-          "reference"      => $this->get_reference(),
-          "testIndicator"  => true,
-          "packages"       => $this->create_packages(),
+      'data' => [
+        'type' => 'labels',
+        'attributes' => [
+          'customerNumber' => $this->customer_number,
+          'senderName'     => $sender['booking_address_store_name'],
+          'postalCode'     => $sender['booking_address_postcode'],
+          'streetAddress'  => $sender['booking_address_street1'],
+          'senderEmail'    => $sender['booking_address_email'],
+          'reference'      => $this->get_reference(),
+          'testIndicator'  => false,
+          'packages'       => $this->create_packages(),
         ]
       ]
     ];
   }
+
 
 }

@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-class Bring_Booking_Consignment extends Bring_Consignment {
+class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
   /**
    * Get Endpoint URL
@@ -25,7 +25,7 @@ class Bring_Booking_Consignment extends Bring_Consignment {
       $order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
     }
     if ( ! $order_items_packages ) {
-      return [ ];
+      return [];
     }
     $elements = [ 'width', 'height', 'length', 'weightInGrams' ];
     $elements_count = count( $elements );
@@ -179,25 +179,5 @@ class Bring_Booking_Consignment extends Bring_Consignment {
       ];
     }
     return $data;
-  }
-
-  public function order_update_packages() {
-    $order    = $this;
-    $wc_order = $this->order;
-    $cart = [];
-    //build a cart like array
-    foreach ( $wc_order->get_items() as $item_id => $item ) {
-      if ( ! isset( $item['product_id'] ) ) {
-        continue;
-      }
-      $cart[] = [
-        'data' => wc_get_product( $item['product_id'] ),
-        'quantity' => $item['qty'],
-      ];
-    }
-    // var_dump( get_class_methods( $wc_order ) );
-    $shipping_method = new WC_Shipping_Method_Bring;
-    $packages = $shipping_method->pack_order( $cart );
-    $order->checkout_update_packages( json_encode( $packages ) );
   }
 }
