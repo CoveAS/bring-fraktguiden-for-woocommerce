@@ -45,6 +45,3 @@
 } -->
 </pre>
 <?php endif; ?>
-
-
-<?php var_dump( $data ); ?>

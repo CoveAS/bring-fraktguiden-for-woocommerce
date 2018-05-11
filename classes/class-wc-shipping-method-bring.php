@@ -244,8 +244,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'desc_tip' => __( 'What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.', 'bring-fraktguiden' ),
             'css'      => 'width: 8em;',
             'default'  => '',
-            'custom_attributes'     => [
-              'min'       => '0'
+            'custom_attributes' => [
+              'min' => '0'
             ]
         ),
 
@@ -361,9 +361,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'placeholder' => __( 'Must be at least 23cm', 'bring-fraktguiden' ),
             'desc_tip'       => __( 'The lowest length for a consignment', 'bring-fraktguiden' ),
             'default'     => '23',
-            'custom_attributes'     => [
-              'min'       => '1'
-            ]
+            'custom_attributes' => [
+              'min' => '1',
+            ],
         ),
         'minimum_width'  => array(
             'title'       => __( 'Minimum Width in cm', 'bring-fraktguiden' ),
@@ -372,9 +372,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'placeholder' => __( 'Must be at least 13cm', 'bring-fraktguiden' ),
             'desc_tip'    => __( 'The lowest width for a consignment', 'bring-fraktguiden' ),
             'default'     => '13',
-            'custom_attributes'     => [
-              'min'     => '1'
-            ]
+            'custom_attributes' => [
+              'min' => '1',
+            ],
         ),
         'minimum_height'  => array(
             'title'       => __( 'Minimum Height in cm', 'bring-fraktguiden' ),
@@ -383,9 +383,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'placeholder' => __( 'Must be at least 1cm', 'bring-fraktguiden' ),
             'desc_tip'    => __( 'The lowest height for a consignment', 'bring-fraktguiden' ),
             'default'     => '1',
-            'custom_attributes'     => [
-              'min'       => '1'
-            ]
+            'custom_attributes' => [
+              'min' => '1',
+            ],
         ),
         'minimum_weight'  => array(
             'title'       => __( 'Minimum Weight in kg', 'bring-fraktguiden' ),
@@ -393,6 +393,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'css'         => 'width: 8em;',
             'desc_tip'    => __( 'The lowest weight in kilograms for a consignment', 'bring-fraktguiden' ),
             'default'     => '0.01',
+            'custom_attributes' => [
+              'step' => '0.01',
+              'min'  => '0.01',
+            ],
         ),
 
         /**
