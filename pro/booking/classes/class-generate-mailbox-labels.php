@@ -66,4 +66,12 @@ class Generate_Mailbox_Labels {
     update_post_meta( $id, '_test_mode', ( $consignment->get_test_indicator() ? 'yes' : 'no' ) );
     return $id;
   }
+
+  /**
+   * Trash old labels
+   * Labels older than 120 hours should be deleted.
+   */
+  static function cleanup() {
+    // Delete old labels
+  }
 }
