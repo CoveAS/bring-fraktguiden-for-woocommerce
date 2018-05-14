@@ -3,47 +3,18 @@ if ( ! defined( 'ABSPATH' ) ) {
   die; // Exit if accessed directly
 }
 
-// Create a menu item for PDF download.
-add_action( 'admin_menu', 'Bring_Booking_Waybills::add_menu_page' );
-// Process waybill orders
-add_action( 'admin_init', 'Bring_Booking_Waybills::process_waybill_order' );
+Bring_Booking_Waybills::setup();
 
 class Bring_Booking_Waybills {
 
-  static $responses = [];
+  static function setup() {
+    // Process waybill orders
+    add_action( 'admin_init', __CLASS__ .'::process_waybill_order' );
+    add_filter( 'bulk_actions-edit-waybill', __CLASS__ .'::register_bulk_actions' );
+    add_filter( 'handle_bulk_actions-edit-waybill', __CLASS__ .'::bulk_action_handler', 10, 3 );
+    add_action( 'admin_notices', __CLASS__ .'::bulk_action_admin_notice' );
 
-  /**
-   * Add menu page
-   */
-  static function add_menu_page() {
-    add_menu_page( 'Waybills', 'Waybills', 'manage_woocommerce', 'bring_waybills', __CLASS__.'::waybills_page', 'dashicons-chart-pie', 57 );
   }
-
-  /**
-   * Waybills page
-   */
-  static function waybills_page() {
-
-    foreach ( self::$responses as $response_data ) {
-      $request  = $response_data['request'];
-      $response = $response_data['response'];
-      $data     = json_decode( $response->body, 1 );
-      require dirname( __DIR__ ) .'/templates/waybills-messages.php';
-    }
-
-    // List labels ready to order
-    echo "Labels:";
-    // checkbox | consignment_number | order_id | price |  date/time | download link
-    $consignments = self::get_unbooked_consignments();
-    require dirname( __DIR__ ) .'/templates/waybills-table-labels.php';
-    // Book selected shipments | Book all shipments
-
-    // List waybills
-    echo "waybills:";
-    // id | reference | date/time | download link
-    self::get_waybills();
-  }
-
   /**
    * Process response
    */
@@ -51,53 +22,68 @@ class Bring_Booking_Waybills {
     if ( ! isset( $_POST['consignment_numbers'] ) ) {
       return;
     }
-    require_once dirname( __DIR__ ).'/classes/class-bring-mailbox-waybill-request.php';
     $consignment_numbers = $_POST['consignment_numbers'];
     foreach ( $consignment_numbers as $customer_number => $consigments ) {
-      $request  = new Bring_Mailbox_Waybill_Request( $customer_number, array_keys( $consigments ) );
-      $response = $request->post();
-      $waybill  = null;
 
-      // Save the waybill
-      if ( 201 == $response->status ) {
-        $data = json_decode( $response->body, 1 );
-        $waybill = new Bring_Waybill( $data );
-        $waybill->save();
-      }
-
-      // Store the data for later display
-      self::$responses[] = [
-        'request'  => $request,
-        'response' => $response,
-        'waybill'  => $waybill,
-      ];
     }
   }
 
-  /**
-   * Get unbooked consignments
-   * @return array
-   */
-  static function get_unbooked_consignments() {
-    $posts = get_posts([
-      'post_type'      => 'shop_order',
-      'post_status'    => 'any',
-      'posts_per_page' => -1,
-      'fields'         => 'ids',
-    ]);
-    $consignments = [];
-    foreach ( $posts as $post_id ) {
-      $wc_order = wc_get_order( $post_id );
-      $adapter = new Bring_WC_Order_Adapter( $wc_order );
-      $order_consignments = $adapter->get_booking_consignments();
-      foreach ( $order_consignments as $consignment ) {
-        $consignments[] = $consignment;
-      }
+  static function book_mailbox_consignment( $customer_number, $consignments ) {
+    require_once dirname( __DIR__ ).'/classes/class-bring-mailbox-waybill-request.php';
+    // Waybill booking does not have a test option
+    $request  = new Bring_Mailbox_Waybill_Request( $customer_number, array_keys( $consigments ) );
+    $response = $request->post();
+    $waybill  = null;
+
+    // Save the waybill
+    if ( property_exists( $response, 'status' ) && 201 == $response->status ) {
+      $data = json_decode( $response->body, 1 );
+      $waybill = new Bring_Waybill( $data );
+      $waybill->save();
     }
-    return $consignments;
+
+    // Store the data for later display
+    var_dump( [
+      'request'  => $request,
+      'response' => $response,
+      'waybill'  => $waybill,
+    ] );
+    die;
   }
 
-  static function get_waybills() {
 
+  static function register_bulk_actions($bulk_actions) {
+    $bulk_actions['book_mailbox_consignments'] = __( 'Book consignments', 'book_mailbox_consignments');
+    return $bulk_actions;
+  }
+
+
+  static function bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
+    if ( $doaction !== 'book_mailbox_consignments' ) {
+      return $redirect_to;
+    }
+    foreach ( $post_ids as $post_id ) {
+      echo "$post_id\n";
+
+      $consignment_number = get_post_meta( $post_id, '_consignment_number', true );
+      $customer_number = get_post_meta( $post_id, '_customer_number', true );
+
+      self::book_mailbox_consignment( $customer_number, $consignment_number );
+    }
+    die;
+    $redirect_to = add_query_arg( 'waybills_booked', count( $post_ids ), $redirect_to );
+    return $redirect_to;
+  }
+
+  static function bulk_action_admin_notice() {
+    if ( ! empty( $_REQUEST['waybills_booked'] ) ) {
+      $emailed_count = intval( $_REQUEST['waybills_booked'] );
+      printf( '<div id="message" class="updated fade">' .
+        _n( 'Booked %s mailbox parcels.',
+          'Booked %s mailbox parcels.',
+          $emailed_count,
+          'book_mailbox_consignments'
+        ) . '</div>', $emailed_count );
+    }
   }
 }

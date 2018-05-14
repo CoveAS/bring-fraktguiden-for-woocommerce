@@ -14,7 +14,7 @@ class Bring_Mailbox_Waybill_Request {
    */
   function __construct( $customer_number, $package_numbers ) {
     $this->customer_number = $customer_number;
-    $this->package_numbers = $package_numbers;
+    $this->package_numbers = array_values( $package_numbers );
   }
 
   /**

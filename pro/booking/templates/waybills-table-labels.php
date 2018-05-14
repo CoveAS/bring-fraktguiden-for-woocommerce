@@ -1,37 +1,84 @@
-<form method="post">
-  <table>
+<style type="text/css">
+  .mailbox-labels {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .mailbox-labels p {
+    margin: 0;
+  }
+  .mailbox-labels th,
+  .mailbox-labels td {
+    padding: 0.25rem;
+  }
+  .mailbox-labels th {
+    text-align: left;
+    background-color: #eee;
+  }
+  .mailbox-labels tr:nth-of-type(even) {
+    background-color: #eee;
+  }
+
+  .inactive strong {
+    color: #999;
+  }
+</style>
+<?php foreach ( $consignments as $customer_number => $customer_consignments ): ?>
+  <h3><?php echo $customer_number; ?></h3>
+  <table class="mailbox-labels">
     <thead>
       <tr>
-        <th>Select all</th>
-        <th>Customer number</th>
-        <th>Consignment number</th>
-        <th>Order id</th>
-        <th>Date/time</th>
-        <th>Download link</th>
+        <th><?php _e( 'Customer number', 'bring-fraktguiden' ); ?></th>
+        <th><?php _e( 'Consignment number', 'bring-fraktguiden' ); ?></th>
       </tr>
     </thead>
     <tbody>
-      <?php foreach ( $consignments as $consignment ): ?>
-      <tr>
+      <?php foreach ( $customer_consignments as $mailbox_label_id => $consignment ): ?>
+        <?php
+        $active = ! in_array(
+          $consignment->get_consignment_number(),
+          $inactive_consignment_numbers
+        );
+        ?>
+      <tr class="<?php echo $active ? 'active' : 'inactive'; ?>">
         <td>
-          <input type="checkbox" name="consignment_numbers[<?php echo $consignment->get_customer_number(); ?>][<?php echo $consignment->get_consignment_number(); ?>]">
+          <?php if ( $new || $errors ): ?>
+          <label>
+            <input type="checkbox" <?php echo ( $new ? '' : 'checked="checked"' ); ?> value="<?php echo $consignment->get_consignment_number(); ?>" name="consignment_numbers[<?php echo $consignment->get_customer_number(); ?>][<?php echo $mailbox_label_id; ?>]">
+            <strong><?php echo $consignment->get_consignment_number(); ?></strong>
+          </label>
+          <?php else: ?>
+            <strong><?php echo $consignment->get_consignment_number(); ?></strong>
+          <?php endif; ?>
+          <br>
+          <small><?php _e( 'Date' ); ?>: <?php echo $consignment->get_date_time(); ?></small>
         </td>
-        <td><?php echo $consignment->get_customer_number(); ?></td>
-        <td><?php echo $consignment->get_consignment_number(); ?></td>
-        <td><?php echo $consignment->order_id; ?></td>
-        <td><?php echo $consignment->get_date_time(); ?></td>
-        <td><?php echo $consignment->get_label_file()->get_download_link(); ?></td>
+        <td>
+          <p><a href="<?php echo $consignment->get_label_file()->get_download_url(); ?>" target="_blank">
+            <?php _e( 'Download label', 'bring-fraktguiden' ) ?>
+          </a></p>
+          <small><?php _e( 'Order ID', 'bring-fraktguiden' ); ?>: <a href="<?php admin_url('edit.php?post_id='.$consignment->order_id );?>">
+             <?php echo $consignment->order_id; ?>
+          </a></small>
+        </td>
       </tr>
       <?php endforeach; ?>
-      <tfoot>
-        <tr>
-          <td colspan="4"></td>
-          <td colspan="2">
-            <input type="submit" name="book" value="Book selected labels">
-            <input type="submit" name="book_all" value="Book all labels">
-          </td>
-        </tr>
-      </tfoot>
     </tbody>
   </table>
-</form>
+<?php endforeach; ?>
+<div style="text-align: right;">
+  <?php if ( ! empty( $consignments ) && $new ): ?>
+    <a class="wp-core-ui button button-large bring-select-all" href="#"><?php _e( 'Select all', 'bring-fraktguiden' ); ?></a>
+    <script type="text/javascript">
+      jQuery( '.bring-select-all' ).click( function( e ) {
+        e.preventDefault();
+        jQuery( '.mailbox-labels input' ).prop( 'checked', 'checked' );
+      })
+    </script>
+  <?php endif; ?>
+  <?php if ( ! empty( $errors ) ): ?>
+      <input type="submit" class="wp-core-ui button button-large button-primary" checked="checked" value="<?php _e( 'Retry booking', 'bring-fraktguiden' ); ?>" name="retry_request">
+  <?php endif; ?>
+</div>
+<?php if ( empty( $consignments ) ): ?>
+  <h3><?php _e( 'No labels available', 'bring-fraktguiden' ); ?></h3>
+<?php endif; ?>

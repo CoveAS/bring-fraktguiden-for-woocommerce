@@ -1,23 +1,6 @@
-
-<?php if ( 422 == $response->status_code ): ?>
-  <ul class="error-messages">
-  <?php foreach ( $data['errors'] as $error ): ?>
-    <?php var_dump( $error ); ?>
-
-    <li class="error-message">
-      <span class="error-code">
-        <?php echo $error['code']; ?>
-      </span>
-      <span class="error-title">
-        <?php echo $error['title']; ?>
-      </span>
-
-    </li>
-  <?php endforeach; ?>
-  </ul>
-<?php elseif ( 201 == $response->status_code ): ?>
+<?php if ( 0 ): ?>
 <pre>
-  <?php print_r( $data ); ?>
+  <?php print_r( $waybill_data ); ?>
 <!-- {
   "data":{
     "attributes":{
@@ -44,4 +27,32 @@
   }
 } -->
 </pre>
+<?php endif; ?>
+<style type="text/css">
+  .mailbox-waybill-errors {
+    width: 100%;
+  }
+  .mailbox-waybill-errors__title {
+    margin-bottom: 0.5rem;
+    color: #C00;
+  }
+  .mailbox-waybill-errors__message {
+    padding: 0.25rem;
+    color: #900;
+    background-color: #FFEEEE;
+    margin-top: 0;
+  }
+</style>
+
+<?php if ( ! empty( $errors ) ): ?>
+  <div class="mailbox-waybill-errors">
+    <?php foreach ( $errors as $customer_number => $error_messages ): ?>
+      <h3 class="mailbox-waybill-errors__title"><?php echo $customer_number; ?></h3>
+      <ul class="mailbox-waybill-errors__messages">
+        <?php foreach ( $error_messages as $error ): ?>
+          <li class="mailbox-waybill-errors__message"><?php echo $error; ?></li>
+        <?php endforeach; ?>
+      </ul>
+    <?php endforeach; ?>
+  </div>
 <?php endif; ?>
