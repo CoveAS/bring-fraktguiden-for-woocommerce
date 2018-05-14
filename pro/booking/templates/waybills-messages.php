@@ -32,5 +32,5 @@
     <?php endforeach; ?>
   </div>
 <?php elseif ( ! $new ): ?>
-  <h3 class="mailbox-waybill-success"><?php _e( 'Booking completed', 'bring-fraktguiden' ); ?></h3>
+  <h3 class="mailbox-waybill-success"><?php _e( 'Waybill completed', 'bring-fraktguiden' ); ?></h3>
 <?php endif; ?>

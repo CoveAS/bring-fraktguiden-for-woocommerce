@@ -62,6 +62,22 @@ class Bring_Waybill_View {
       }
     }
     update_post_meta( $post_id, '_waybill_request_data', self::$request_data );
+
+    $order_ids = [];
+    $suffix = '';
+    foreach ( self::$request_data as $customer_data ) {
+      if ( ! $customer_data['waybill'] ) {
+        continue;
+      }
+      $order_ids[] = $customer_data['waybill']['data']['id'];
+    }
+    if ( ! empty( $order_ids ) ) {
+      $suffix = ' ' . implode( ',', $order_ids );
+    }
+    wp_update_post( [
+      'ID' => $post_id,
+      'post_title' => __( 'Waybill', 'bring-fraktguiden' ) . $suffix,
+    ] );
   }
 
   /**

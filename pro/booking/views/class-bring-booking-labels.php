@@ -77,6 +77,7 @@ class Bring_Booking_Labels {
     $order_ids      = explode( ',', $_GET['order_ids'] );
     $zpls          = [];
     $pdfs_to_merge = [];
+    $orders_to_merge = [];
 
     foreach ( $order_ids as $order_id ) {
       $adapter = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
@@ -95,6 +96,9 @@ class Bring_Booking_Labels {
         }
         // Add the file path to the list of pdf's
         $pdfs_to_merge[] = $file;
+        if ( ! in_array( $order_id, $orders_to_merge ) ) {
+          $orders_to_merge[] = $order_id;
+        }
       }
     }
 
@@ -103,16 +107,7 @@ class Bring_Booking_Labels {
       return;
     }
 
-    // If there are more than 1 ZPL file or a combination of zpl and pdf
-    if ( ! empty( $zpls ) && ! empty( $pdfs_to_merge ) || count( $zpls ) > 1 ) {
-      foreach ( $zpls as $order_id => $zpl ) {
-        self::render_download_link( [ $order_id ], $zpl->get_name() );
-      }
-      if ( $merge_result_file ) {
-        self::render_download_link( array_keys( $pdfs_to_merge ), __( 'Merged PDF labels', 'bring-fraktguiden' ) );
-      }
-      return;
-    }
+    // Merge the pdfs
     if ( ! empty( $pdfs_to_merge ) ) {
       if ( count( $pdfs_to_merge ) == 1 ) {
         $merge_result_file = $pdfs_to_merge[0]->get_path();
@@ -125,6 +120,20 @@ class Bring_Booking_Labels {
         $merge_result_file = $file->get_dir(). '/labels-merged.pdf';
         $merger->merge( 'file', $merge_result_file );
       }
+    }
+    // If there are more than 1 ZPL file or a combination of zpl and pdf
+    if ( ! empty( $zpls ) && ! empty( $pdfs_to_merge ) || count( $zpls ) > 1 ) {
+      echo '<h3>'.__('Downloads', 'bring-fraktguiden') .'</h3><ul>';
+      foreach ( $zpls as $order_id => $zpl ) {
+        self::render_download_link( [ $order_id ], $zpl->get_name() );
+      }
+      if ( ! empty( $orders_to_merge ) ) {
+        self::render_download_link( $orders_to_merge, __( 'Merged PDF labels', 'bring-fraktguiden' ) );
+      }
+      echo '</ul>';
+      return;
+    }
+    if ( ! empty( $pdfs_to_merge ) ) {
       static::render_file_content( $merge_result_file );
     }
     else if ( ! empty( $zpls ) ) {
@@ -162,7 +171,7 @@ class Bring_Booking_Labels {
    */
   static function render_download_link( $order_ids, $name ) {
     printf(
-      '<a href="%s" target="_blank">%s</a>',
+      '<li><a href="%s" target="_blank">%s</a></li>',
       static::create_download_url( $order_ids ),
       $name
     );

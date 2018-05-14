@@ -5,8 +5,13 @@ class Generate_Mailbox_Labels {
   static function setup() {
     add_action( 'current_screen', __CLASS__ .'::generate' );
   }
+
+  /**
+   * Generate labels
+   * @param  string $screen
+   */
   static function generate( $screen ) {
-    if ( $screen->post_type !== 'mailbox_label' ) {
+    if ( $screen->post_type !== 'mailbox_waybill' ) {
       return;
     }
     $posts = get_posts([
@@ -36,6 +41,7 @@ class Generate_Mailbox_Labels {
         if ( 'Bring_Mailbox_Consignment' !== get_class( $consignment ) ) {
           continue;
         }
+        // @TODO: Move this to when booking is complete
         $label_ids[] = self::create_label( $consignment );
       }
       update_post_meta( $post_id, '_mailbox_label_ids', $label_ids );

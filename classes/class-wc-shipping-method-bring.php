@@ -753,7 +753,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       'customer_number',
     ];
 
-
     if ( ! $api_uid && ! $api_key && ! $customer_number ) {
       // No credentials provided
       return;
