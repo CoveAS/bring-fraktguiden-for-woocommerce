@@ -1,19 +1,25 @@
 <style type="text/css">
+  .mailbox-waybills,
   .mailbox-labels {
     width: 100%;
     border-collapse: collapse;
   }
+  .mailbox-waybills p,
   .mailbox-labels p {
     margin: 0;
   }
+  .mailbox-waybills th,
+  .mailbox-waybills td,
   .mailbox-labels th,
   .mailbox-labels td {
     padding: 0.25rem;
   }
+  .mailbox-waybills th,
   .mailbox-labels th {
     text-align: left;
     background-color: #eee;
   }
+  .mailbox-waybills tr:nth-of-type(even),
   .mailbox-labels tr:nth-of-type(even) {
     background-color: #eee;
   }
@@ -76,7 +82,7 @@
     </script>
   <?php endif; ?>
   <?php if ( ! empty( $errors ) ): ?>
-      <input type="submit" class="wp-core-ui button button-large button-primary" checked="checked" value="<?php _e( 'Retry booking', 'bring-fraktguiden' ); ?>" name="retry_request">
+      <input type="submit" class="wp-core-ui button button-large button-primary" value="<?php _e( 'Retry booking', 'bring-fraktguiden' ); ?>" name="retry_request">
   <?php endif; ?>
 </div>
 <?php if ( empty( $consignments ) ): ?>

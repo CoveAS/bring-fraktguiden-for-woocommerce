@@ -26,14 +26,14 @@ $waybill = get_attached_media( 'waybill', $order_id );
     <tr>
       <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
       <td>
-        <a class="button button-small button-primary" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
+        <a class="button button-small button-alt" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
       </td>
     </tr>
     <tr>
       <td><?php _e( 'Waybill', 'bring-fraktguiden' ); ?>:</td>
       <td>
 
-        <a class="button button-small button-primary" href="<?php echo ''; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
+        <a class="button button-small button-primary" href="<?php echo admin_url('post-new.php?post_type=mailbox_waybill'); ?>" target="_blank"><?php _e( 'Create waybill', 'bring-fraktguiden' ); ?></a>
       </td>
     </tr>
     <tr>

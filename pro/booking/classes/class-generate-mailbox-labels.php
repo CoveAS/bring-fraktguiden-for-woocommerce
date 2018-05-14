@@ -57,6 +57,7 @@ class Generate_Mailbox_Labels {
     update_post_meta( $id, '_label_url', $consignment->get_label_url() );
     update_post_meta( $id, '_consignment_number', $consignment->get_consignment_number() );
     update_post_meta( $id, '_customer_number', $consignment->get_customer_number() );
+    update_post_meta( $id, '_test_mode', ( $consignment->get_test_indicator() ? 'yes' : 'no' ) );
     return $id;
   }
 }

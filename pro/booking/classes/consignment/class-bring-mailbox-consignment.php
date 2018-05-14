@@ -41,6 +41,14 @@ class Bring_Mailbox_Consignment extends Bring_Consignment {
   }
 
   /**
+   * Get test indicator
+   * @return boolean
+   */
+  public function get_test_indicator() {
+    return $this->data['attributes']['testIndicator'];
+  }
+
+  /**
    * Get label URL
    * @return string
    */

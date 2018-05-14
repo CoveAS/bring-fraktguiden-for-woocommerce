@@ -1,33 +1,3 @@
-<?php if ( 0 ): ?>
-<pre>
-  <?php print_r( $waybill_data ); ?>
-<!-- {
-  "data":{
-    "attributes":{
-      "id":16856,
-      "customerName":"DRIVDIGITAL AS",
-      "customerOrganizationNumber":"916020473",
-      "customerNumber":"PARCELS_NORWAY-10030342439",
-      "senderName":"Test",
-      "streetAddress":"Test",
-      "postalCode":"4844",
-      "postalPlace":"ARENDAL",
-      "email":"landa@drivdigital.no",
-      "reference":"113",
-      "packages":[{"priority":"",
-      "rfid":true,
-      "recipientName":"1267890",
-      "streetAddress":"Blødekjær 20",
-      "postalCode":"4838",
-      "postalPlace":"ARENDAL",
-      "phoneNumber":"+47 90103720",
-      "email":"test@example.com",
-      "weight":1080,
-    }
-  }
-} -->
-</pre>
-<?php endif; ?>
 <style type="text/css">
   .mailbox-waybill-errors {
     width: 100%;
@@ -42,12 +12,18 @@
     background-color: #FFEEEE;
     margin-top: 0;
   }
+  .mailbox-waybill-success {
+    color: #060;
+    background-color: #EEFFEE;
+    padding: 0.5rem;
+    border: 1px solid #9C9;
+  }
 </style>
 
 <?php if ( ! empty( $errors ) ): ?>
   <div class="mailbox-waybill-errors">
     <?php foreach ( $errors as $customer_number => $error_messages ): ?>
-      <h3 class="mailbox-waybill-errors__title"><?php echo $customer_number; ?></h3>
+      <h3 class="mailbox-waybill-errors__title"><?php echo __( 'Error' ) .' '. $customer_number; ?></h3>
       <ul class="mailbox-waybill-errors__messages">
         <?php foreach ( $error_messages as $error ): ?>
           <li class="mailbox-waybill-errors__message"><?php echo $error; ?></li>
@@ -55,4 +31,6 @@
       </ul>
     <?php endforeach; ?>
   </div>
+<?php elseif ( ! $new ): ?>
+  <h3 class="mailbox-waybill-success"><?php _e( 'Booking completed', 'bring-fraktguiden' ); ?></h3>
 <?php endif; ?>

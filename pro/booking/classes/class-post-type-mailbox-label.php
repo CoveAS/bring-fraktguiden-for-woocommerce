@@ -98,12 +98,12 @@ class Post_Type_Mailbox_Label {
       if ( ! $role ) {
         continue;
       }
-      $role->add_cap( 'edit_mailbox_label' );
       $role->add_cap( 'read_mailbox_label' );
-      $role->add_cap( 'edit_mailbox_labels' );
       $role->add_cap( 'delete_mailbox_label' );
       $role->add_cap( 'delete_mailbox_labels' );
-      $role->add_cap( 'publish_mailbox_labels' );
+      $role->remove_cap( 'publish_mailbox_labels' );
+      $role->add_cap( 'edit_mailbox_labels' );
+      $role->remove_cap( 'edit_mailbox_label' );
       $role->add_cap( 'read_private_mailbox_labels' );
     }
   }

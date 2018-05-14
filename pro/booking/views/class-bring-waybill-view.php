@@ -112,7 +112,7 @@ class Bring_Waybill_View {
     // Parse the response data
     $errors = $response->errors;
     $waybill_data = null;
-    if ( property_exists( $response, 'status' ) && 201 == $response->status ) {
+    if ( property_exists( $response, 'status_code' ) && 201 == $response->status_code ) {
       $waybill_data = json_decode( $response->body, 1 );
     } else {
       $data = json_decode( $response->body, 1 );
@@ -155,6 +155,7 @@ class Bring_Waybill_View {
   static function render_booking_meta_box( $post ) {
     $new = 'auto-draft' == $post->post_status;
     $inactive_consignment_numbers = [];
+    $waybills = [];
     if ( $new ) {
       $consignments = self::get_unbooked_consignments();
     } else {
@@ -162,7 +163,10 @@ class Bring_Waybill_View {
       $consignments = self::get_consignments( $waybill_data );
       $errors = [];
       foreach ( $waybill_data as $customer_number => $customer_data ) {
-        $errors[$customer_number] = $customer_data['errors'];
+        $waybills[ $customer_number ] = $customer_data['waybill'];
+        if ( ! empty( $customer_data['errors'] ) ) {
+          $errors[$customer_number] = $customer_data['errors'];
+        }
         if ( ! isset( $customer_data['inactive_consignment_numbers'] ) ) {
           continue;
         }
@@ -174,6 +178,7 @@ class Bring_Waybill_View {
     }
 
     require dirname( __DIR__ ). '/templates/waybills-table-labels.php';
+    require dirname( __DIR__ ). '/templates/waybills-waybill.php';
   }
 
   /**
@@ -200,6 +205,7 @@ class Bring_Waybill_View {
    * @return array
    */
   static function get_unbooked_consignments() {
+    $test_mode = Fraktguiden_Helper::get_option( 'booking_test_mode' );
     // Get all labels that have no waybill id
     $posts = get_posts([
       'post_type'      => 'mailbox_label',
@@ -211,6 +217,10 @@ class Bring_Waybill_View {
         'booking_clause' => [
           'key'     => '_mailbox_waybill_id',
           'compare' => 'NOT EXISTS',
+        ],
+        'test_clause' => [
+          'key'   => '_test_mode',
+          'value' => ( $test_mode ? 'yes' : 'no' ),
         ],
       ]
     ] );
