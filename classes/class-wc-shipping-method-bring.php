@@ -43,8 +43,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $log;
 
   /** @var array */
-  protected $packages_params = [ ];
-  protected $pro_form_fields = [];
+  protected $packages_params = [];
+
+  public $validation_messages;
 
   /**
    * @constructor
@@ -157,19 +158,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         return;
     }
 
-    $this->pro_form_fields = [
-      'pro_mode_settings',
-      'pro_enabled',
-      'test_mode',
-    ];
     $this->form_fields = [
         /**
-         * Pro enabling
+         * Plugin settings
          */
-        'pro_mode_settings' => [
-            'type'        => 'title',
-            'title'       => __( 'Bring Fraktguiden Pro', 'bring-fraktguiden' ),
-            'description' => Fraktguiden_Helper::get_pro_description(),
+        'plugin_settings' => [
+            'type'  => 'title',
+            'title' => __( 'Bring Settings', 'bring-fraktguiden' ),
+            'class' => 'separated_title_tab',
         ],
         'pro_enabled' => [
             'title'   => __( 'Activate PRO', 'bring-fraktguiden' ),
@@ -183,14 +179,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'default' => 'no'
         ],
 
-        /**
-         * Plugin settings
-         */
-        'plugin_settings' => [
-            'type'  => 'title',
-            'title' => __( 'Bring Settings', 'bring-fraktguiden' ),
-            'class' => 'separated_title_tab',
-        ],
         'enabled'               => array(
             'title'   => __( 'Enable', 'bring-fraktguiden' ),
             'type'    => 'checkbox',
@@ -607,21 +595,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   public function admin_options() {
     global $woocommerce; ?>
-    <?php
-    $pro_form_fields = [];
-    $form_fields = [];
-    foreach ( $this->form_fields as $key => $field ) {
-      if ( in_array( $key, $this->pro_form_fields ) ) {
-        $pro_form_fields[$key] = $field;
-      } else {
-        $form_fields[$key] = $field;
-      }
-    }
-    ?>
-
-    <table class="form-table">
-      <?php $this->generate_settings_html( $pro_form_fields ); ?>
-    </table>
 
     <!-- -->
     <h3 class="bring-separate-admin-section"><?php echo $this->method_title; ?></h3>
@@ -637,7 +610,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     <table class="form-table">
       <?php if ( $this->is_valid_for_use() ) :?>
-        <?php $this->generate_settings_html( $form_fields );?>
+        <?php $this->generate_settings_html( $this->form_fields );?>
       <?php else : ?>
         <tr><td><div class="inline error"><p>
             <strong><?php _e( 'Gateway Disabled', 'bring-fraktguiden' ); ?></strong>
@@ -831,12 +804,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // reading the TraceMessage for all the results to see if the customer_number was
     // authenticated.
     if ( isset( $result['TraceMessages'] ) ) {
-      foreach ( $result['TraceMessages'] as $message ) {
-        if ( false === strpos( $message, 'does not have access to customer' ) ) {
-          continue;
+      foreach ( $result['TraceMessages'] as $messages ) {
+        if ( ! is_array( $messages ) ) {
+          $messages[] = $messages;
         }
-        $this->mybring_error( $message );
-        return;
+        foreach ( $messages as $message ) {
+          if ( false === strpos( $message, 'does not have access to customer' ) ) {
+            continue;
+          }
+          $this->mybring_error( $message );
+          $this->validation_messages = sprintf( '<p class="error-message">%s</p>', $message );
+          return;
+        }
       }
     }
 
@@ -848,7 +827,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( strpos( $message, 'Authentication failed.') === 0 ) {
       $message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden' ) );
     }
-
     Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
   }
 

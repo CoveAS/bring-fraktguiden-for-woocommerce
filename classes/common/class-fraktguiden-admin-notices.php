@@ -150,9 +150,12 @@ class Fraktguiden_Admin_Notices {
       if ( $notice['dismissable'] && in_array( $key, $dismissed ) ) {
         continue;
       }
-      $message     = $notice['message'];
+      $messages    = $notice['message'];
       $type        = $notice['type'];
       $dismissable = $notice['dismissable'];
+      if ( is_string( $messages ) ) {
+        $messages = [ $messages ];
+      }
       require FRAKTGUIDEN_PLUGIN_PATH .'/includes/admin/pro-notices.php';
     }
   }
