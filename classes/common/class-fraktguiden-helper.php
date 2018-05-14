@@ -145,6 +145,33 @@ class Fraktguiden_Helper {
   static function get_customer_types_data() {
     return require dirname( dirname( __DIR__ ) ) .'/config/customer-types.php';
   }
+  static function get_phone_i18n() {
+    return require dirname( dirname( __DIR__ ) ) .'/config/phone-i18n.php';
+  }
+
+  /**
+   * Phone i18n
+   * @param  string $phone_number
+   * @param  string $country
+   * @return string
+   */
+  static function phone_i18n( $phone_number, $country ) {
+    static $map;
+    // Check for existing + in the beginning of the phone number
+    $phone_number = trim( $phone_number );
+    if ( preg_match( '/^\+/', $phone_number ) ) {
+      return $phone_number;
+    }
+    if ( ! $map ) {
+      $map = self::get_phone_i18n();
+    }
+    // The customer country is not found
+    if ( ! isset( $map[ $country ] ) ) {
+      return $phone_number;
+    }
+    // Return the i18n-ed phone number
+    return '+'.$map[ $country ] .' '. $phone_number;
+  }
 
   /**
    * Gets a Woo admin setting by key
