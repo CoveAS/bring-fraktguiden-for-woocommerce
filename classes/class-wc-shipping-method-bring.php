@@ -7,6 +7,8 @@ require_once 'common/http/class-wp-bring-request.php';
 require_once 'common/class-fraktguiden-helper.php';
 require_once 'common/class-fraktguiden-packer.php';
 require_once 'common/class-fraktguiden-minimum-dimensions.php';
+require_once 'common/class-fraktguiden-service-table.php';
+require_once 'common/class-fraktguiden-service.php';
 
 /**
  * Bring class for calculating and adding rates.
@@ -31,8 +33,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $post_office = '';
   private $vat = '';
   private $evarsling = '';
-  protected $services = [];
-  protected $service_name = '';
+  public $services = [];
+  public $service_name = '';
   private $display_desc = '';
   private $max_products = '';
   private $alt_flat_rate = '';
@@ -115,6 +117,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( ! $this->is_valid_for_use() ) {
       $this->enabled = false;
     }
+
+    $this->service_table = new Fraktguiden_Service_Table( $this );
   }
   /**
    * Get setting
@@ -698,29 +702,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
-   * Validate the service table field
-   * @param  string $key
-   * @param  mixed $value
-   * @return array
-   */
-  public function validate_services_table_field( $key, $value = null ) {
-    if ( isset( $value ) ) {
-      return $value;
-    }
-    $sanitized_services = [];
-    $field_key = $this->get_field_key( $key );
-    if ( ! isset( $_POST[ $field_key ] ) ) {
-      return $sanitized_services;
-    }
-    foreach ( $_POST[ $field_key ] as $service ) {
-      if ( preg_match( '/^[A-Za-z_\-]+$/', $service ) ) {
-        $sanitized_services[] = $service;
-      }
-    }
-    return $sanitized_services;
-  }
-
-  /**
    * Process admin options
    *
    * Note: do not use `Fraktguiden_Helper::update_option` within the process option. It will override the $_POST data!
@@ -734,10 +715,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( $this->instance_id ) {
         $instance_key = $this->get_instance_option_key();
     }
-    $this->process_services_field( $instance_key );
-
+    $this->service_table->process_services_field( $instance_key );
     $this->process_mybring_api_credentials( $instance_key );
   }
+
   public function process_mybring_api_credentials( $instance_key ) {
     $api_uid_key         = $this->get_field_key( 'mybring_api_uid' );
     $api_key_key         = $this->get_field_key( 'mybring_api_key' );
@@ -827,191 +808,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden' ) );
     }
     Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
-  }
-
-  /**
-   * Process services field
-   * @param  string|null $instance_key
-   */
-  public function process_services_field( $instance_key ) {
-    // @TODO: Use instance key to have per-zone settings
-
-    // Process services table
-    $services_field               = $this->get_field_key( 'services' );
-    $services_custom_prices_field = $services_field . '_custom_prices';
-    $custom_prices                = [ ];
-    if ( isset( $_POST[$services_field] ) ) {
-      $checked_services = $_POST[$services_field];
-      foreach ( $checked_services as $key => $service ) {
-
-        if ( isset( $_POST[$services_custom_prices_field][$service] ) ) {
-          $custom_prices[$service] = $_POST[$services_custom_prices_field][$service];
-        }
-      }
-    }
-
-    update_option( $services_custom_prices_field, $custom_prices );
-
-    // Process services table
-    $services  = Fraktguiden_Helper::get_services_data();
-    $field_key = $this->get_field_key( 'services' );
-    $vars      = [
-        'custom_prices',
-        'free_shipping_checks',
-        'free_shipping_thresholds',
-    ];
-    $options = [];
-    // Only process options for enabled services
-    foreach ( $services as $key => $service ) {
-      foreach ( $vars as $var ) {
-        $data_key = "{$field_key}_{$var}";
-        if ( ! isset( $options[$data_key] ) ) {
-          $options[$data_key] = [];
-        }
-        if ( isset( $_POST[$data_key][$key] ) ) {
-          $options[$data_key][$key] = $_POST[$data_key][$key];
-        }
-      }
-    }
-
-    foreach ($options as $data_key => $value) {
-      update_option( $data_key, $value );
-    }
-  }
-
-  /**
-   * Generate services field
-   * @return string html
-   */
-  public function generate_services_table_html() {
-    $services                 = Fraktguiden_Helper::get_services_data();
-    $selected                 = $this->services;
-    $field_key                = $this->get_field_key( 'services' );
-    $custom_prices            = get_option( $field_key . '_custom_prices' );
-    $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
-    $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
-
-    ob_start();
-    ?>
-
-    <tr valign="top">
-      <th scope="row" class="titledesc">
-        <label
-            for="<?php echo $field_key ?>"><?php _e( 'Services', 'bring-fraktguiden' ); ?></label>
-      </th>
-      <td class="forminp">
-        <table class="wc_shipping widefat fraktguiden-services-table">
-          <thead>
-          <tr>
-            <th class="fraktguiden-services-table-col-enabled">
-              <?php _e( 'Active', 'bring-fraktguiden' ); ?>
-            </th>
-            <th class="fraktguiden-services-table-col-service">
-              <?php _e( 'Service', 'bring-fraktguiden' ); ?>
-            </th>
-            <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
-            <th class="fraktguiden-services-table-col-custom-price">
-              <?php _e( 'Custom price', 'bring-fraktguiden' ); ?>
-            </th>
-            <th class="fraktguiden-services-table-col-free-shipping">
-              <?php _e( 'Free shipping', 'bring-fraktguiden' ); ?>
-            </th>
-            <th class="fraktguiden-services-table-col-free-shipping-threshold">
-              <?php _e( 'Free shipping limit', 'bring-fraktguiden' ); ?>
-            </th>
-            <?php endif; ?>
-          </tr>
-          </thead>
-          <tbody>
-
-          <?php
-          foreach ( $services as $key => $service ) {
-            $id   = $field_key . '_' . $key;
-            $vars = [
-                'custom_price'            => 'custom_prices',
-                'free_shipping'           => 'free_shipping_checks',
-                'free_shipping_threshold' => 'free_shipping_thresholds',
-            ];
-            // Extract variables from the settings data
-            foreach ( $vars as $var => $data_var ) {
-              // Eg.: ${custom_price_id} = 'woocommerce_bring_fraktguiden_services_custom_prices[SERVICEPAKKE]';
-              ${$var . '_id'} = "{$field_key}_{$data_var}[{$key}]";
-              $$var           = '';
-              if ( isset( ${$data_var}[$key] ) ) {
-                // Eg.: $custom_price = $custom_prices['SERVICEPAKKE'];
-                $$var = esc_html( ${$data_var}[$key] );
-              }
-            }
-            $enabled = ! empty( $selected ) ? in_array( $key, $selected ) : false;
-            ?>
-            <tr>
-              <td class="fraktguiden-services-table-col-enabled">
-                <label for="<?php echo $id; ?>"
-                       style="display:inline-block; width: 100%">
-                  <input type="checkbox"
-                         id="<?php echo $id; ?>"
-                         name="<?php echo $field_key; ?>[]"
-                         value="<?php echo $key; ?>" <?php echo( $enabled ? 'checked' : '' ); ?> />
-                </label>
-              </td>
-              <td class="fraktguiden-services-table-col-name">
-                <span data-tip="<?php echo $service['HelpText']; ?>"
-                      class="woocommerce-help-tip"></span>
-                <label class="fraktguiden-service"
-                       for="<?php echo $id; ?>"
-                       data-ProductName="<?php echo $service['ProductName']; ?>"
-                       data-DisplayName="<?php echo $service['DisplayName']; ?>">
-                  <?php echo $service[$this->service_name]; ?>
-                </label>
-              </td>
-              <?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
-              <td class="fraktguiden-services-table-col-custom-price">
-                <input type="text"
-                       placeholder="<?= __( '...', 'bring-fraktguiden' );?>"
-                       name="<?php echo $custom_price_id; ?>"
-                       value="<?php echo $custom_price; ?>"
-                />
-              </td>
-              <td class="fraktguiden-services-table-col-free-shipping">
-                <label style="display:inline-block; width: 100%">
-                  <input type="checkbox"
-                         name="<?php echo $free_shipping_id; ?>"
-                      <?php echo $free_shipping ? 'checked' : ''; ?>>
-                </label>
-              </td>
-              <td class="fraktguiden-services-table-col-free-shipping-threshold">
-                <input type="text"
-                       placeholder="<?= __( '...', 'bring-fraktguiden' );?>"
-                       name="<?php echo $free_shipping_threshold_id; ?>"
-                       value="<?php echo $free_shipping_threshold; ?>"
-                       placeholder="0"
-                />
-              </td>
-              <?php endif; ?>
-            </tr>
-          <?php } ?>
-          </tbody>
-        </table>
-        <script>
-          jQuery( document ).ready( function () {
-            var $ = jQuery;
-            $( '#woocommerce_bring_fraktguiden_service_name' ).change( function () {
-              console.log( 'change', this.value );
-              var val = this.value;
-              $( '.fraktguiden-services-table' ).find( 'label.fraktguiden-service' ).each( function ( i, elem ) {
-
-                var label = $( elem );
-                label.text( label.attr( 'data-' + val ) );
-              } );
-            } );
-
-          } );
-        </script>
-      </td>
-    </tr>
-
-    <?php
-    return ob_get_clean();
   }
 
   /**
@@ -1268,5 +1064,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
   public function get_service_id_options() {
     return Fraktguiden_Helper::get_all_services();
+  }
+
+  public function validate_services_table_field( $key, $value = null ) {
+    return $this->service_table->validate_services_table_field( $key, $value );
+  }
+
+  public function generate_services_table_html() {
+    return $this->service_table->generate_services_table_html();
   }
 }

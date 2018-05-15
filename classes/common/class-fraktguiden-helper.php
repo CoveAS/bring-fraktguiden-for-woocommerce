@@ -74,8 +74,10 @@ class Fraktguiden_Helper {
     $service_name = $selected_service_name ? $selected_service_name  : 'ProductName';
     $services = self::get_services_data();
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      $result[$key] = $service[$service_name];
+    foreach ( $services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        $result[$key] = $service[$service_name];
+      }
     }
     return $result;
   }
@@ -87,9 +89,11 @@ class Fraktguiden_Helper {
     $services = self::get_services_data();
     $selected = self::get_option( 'services' );
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      if ( in_array( $key, $selected ) ) {
-        $result[$key] = $service[$service_name];
+    foreach ( $services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        if ( in_array( $key, $selected ) ) {
+          $result[$key] = $service[$service_name];
+        }
       }
     }
     return $result;
@@ -99,12 +103,14 @@ class Fraktguiden_Helper {
     $result = [ ];
 
     $all_services = self::get_services_data();
-    foreach ( $all_services as $key => $service ) {
-      if ( $key == $key_to_find ) {
-        $result = $service;
-        break;
-      }
 
+    foreach ( $all_services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        if ( $key == $key_to_find ) {
+          $result = $service;
+          break;
+        }
+      }
     }
     return $result;
   }
@@ -112,9 +118,11 @@ class Fraktguiden_Helper {
   static function get_all_services_with_customer_types() {
     $services = self::get_services_data();
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      $service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
-      $result[$key]             = $service;
+    foreach ( $services as $group => $service_group ) {
+        foreach ( $service_group['services'] as $key => $service ) {
+        $service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
+        $result[$key]             = $service;
+      }
     }
     return $result;
   }
