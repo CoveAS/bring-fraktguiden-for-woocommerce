@@ -45,7 +45,10 @@ class Bring_Fraktguiden {
     require_once 'classes/common/class-fraktguiden-license.php';
     require_once 'classes/common/class-fraktguiden-admin-notices.php';
     require_once 'classes/common/class-fraktguiden-product-tester.php';
+    require_once 'classes/common/class-fraktguiden-kco-support.php';
     require_once 'pro/class-wc-shipping-method-bring-pro.php';
+
+    Fraktguiden_KCO_Support::setup();
 
     load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
