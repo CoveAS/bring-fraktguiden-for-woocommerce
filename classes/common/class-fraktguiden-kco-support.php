@@ -59,7 +59,7 @@ class Fraktguiden_KCO_Support {
     // Set the billing and shipping code
     WC()->customer->set_shipping_postcode( $_REQUEST['post_code'] );
     WC()->customer->set_billing_postcode( $_REQUEST['post_code'] );
-    WC()->customer->set_billing_country( $_REQUEST['country'] );
+    WC()->customer->set_shipping_country( $_REQUEST['country'] );
     wp_send_json( $data );
   }
 
