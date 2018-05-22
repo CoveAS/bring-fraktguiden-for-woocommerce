@@ -67,7 +67,11 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
-= 1.4.0.6 =
+= 1.4.1-rc1 =
+* Added support for Mailbox / Pakke i postkassen
+* Added compability with KCO
+
+= 1.4.0.8 =
 * Fixed an issue with multipacking that affected cargo and heavy items
 * Additional capabilities added when accessing Bring Labels
 * Finished writing the readme, updating the FAQ
