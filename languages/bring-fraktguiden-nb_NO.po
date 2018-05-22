@@ -25,10 +25,10 @@ msgstr "Innstillinger"
 
 #: bring-fraktguiden-for-woocommerce.php:149
 msgid ""
-"Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this "
+"Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message."
 "message."
 msgstr ""
-"Bring Fraktguiden PRO tekstmodus. Kjøp en lisens for å deaktivere denne "
+"Bring Fraktguiden PRO er i testmodus. Deaktiver testmodus for å fjerne denne meldingen."
 "meldingen."
 
 #: classes/class-wc-shipping-method-bring.php:57

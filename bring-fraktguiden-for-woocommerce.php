@@ -154,7 +154,7 @@ class Bring_Fraktguiden {
     if ( ! Fraktguiden_Helper::pro_test_mode() ) {
       return;
     }
-    _e( "Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this message.", 'bring-fraktguiden' );
+    _e( "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.", 'bring-fraktguiden' );
 
   }
 
