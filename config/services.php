@@ -44,7 +44,7 @@ return [
   ],
   'mailbox' => [
     'title' => 'Mailbox',
-    'description' => 'Packages up to 2 kg. <strong style="color:#C00">Mailbox with tracking is only supported by the Zebra R410 and Zebra 500R printer.</strong>',
+    'description' => 'Packages up to 2 kg. <strong style="color:#C00">Please note that mailbox with tracking is only supported by the Zebra R410 and Zebra 500R printer.</strong>',
     'expanded' => true,
     'services' => [
       /**
