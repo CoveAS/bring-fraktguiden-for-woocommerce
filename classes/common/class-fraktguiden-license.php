@@ -2,7 +2,7 @@
 
 class fraktguiden_license {
 
-	const BASE_URL = 'http://bring.driv.digital/';
+	const BASE_URL = 'https://bring.driv.digital/';
 
 	protected static $instance;
 
@@ -30,6 +30,7 @@ class fraktguiden_license {
 		// Set some options - we are passing in a useragent too here
 		curl_setopt_array( $ch, [
 			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_URL            => self::BASE_URL .'?'. $query_string,
 			CURLOPT_USERAGENT      => 'Bring plugin @ '. get_site_url()
 		] );
