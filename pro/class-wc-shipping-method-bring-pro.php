@@ -66,8 +66,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
   public function init_form_fields() {
 
-    global $woocommerce;
-
     parent::init_form_fields();
 
     // *************************************************************************
@@ -194,12 +192,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     ];
 
     $this->form_fields['booking_address_country'] = [
-        'title'   => __( 'Country', 'bring-fraktguiden' ),
-        'type'    => 'select',
-        'class'   => 'chosen_select',
-        'css'     => 'width: 400px;',
-        'default' => $woocommerce->countries->get_base_country(),
-        'options' => $woocommerce->countries->countries
+        'title'    => __( 'Country', 'bring-fraktguiden' ),
+        'class'    => 'chosen_select',
+        'css'      => 'width: 400px;',
+        'type'     => 'select',
+        'options'  => WC()->countries->get_countries(),
+        'default'  => WC()->countries->get_base_country(),
     ];
 
     $this->form_fields['booking_address_reference'] = [
@@ -227,6 +225,17 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
   }
 
   /**
+   * Init Settings
+   */
+  public function init_settings() {
+    parent::init_settings();
+    // Remove settings for empty fields so that WooCommerce can populate them with default values
+    if ( ! $this->settings['booking_address_country'] ) {
+      unset( $this->settings['booking_address_country'] );
+    }
+  }
+
+  /**
    * Load admin css
    */
   static function load_admin_css() {
@@ -242,14 +251,15 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
    * @param  array $rates
    * @return array
    */
-  public static function filter_shipping_rates( $rates ) {
+  public function filter_shipping_rates( $rates ) {
     $field_key                = $this->get_field_key( 'services' );
     $custom_prices            = get_option( $field_key . '_custom_prices' );
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     $cart                     = WC()->cart;
 
-    $cart_items               = $cart->get_cart();
+
+    $cart_items               = $cart ? $cart->get_cart() : [];
     $cart_total               = 0;
 
     foreach ( $cart_items as $cart_item_key => $values ) {

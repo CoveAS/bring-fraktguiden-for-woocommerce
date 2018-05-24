@@ -40,7 +40,7 @@ class Bring_Booking_Common_View {
    * @return string
    */
   static function create_status_icon( $status, $size = 96 ) {
-    return '<span class="dashicons ' . $status['icon'] . ' bring-booking-status-icon" style="padding: 1px; font-size: ' . $size . 'px;width: ' . $size . 'px;height: ' . $size . 'px"></span>';
+    return '<span class="dashicons ' . $status['icon'] . ' bring-booking-status-icon" style="font-size: ' . $size . 'px; width: ' . $size . 'px; height: ' . $size . 'px"></span>';
   }
 
   static function is_step2() {

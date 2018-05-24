@@ -139,20 +139,18 @@ class Bring_Booking_Order_View {
         echo Bring_Booking_Common_View::create_status_icon( $status, 90 );
         ?>
         <h3><?php echo $status['text']; ?></h3>
-        <div style="text-align:center;margin-bottom: 1em">
-          <?php _e( 'Note: Order is not completed', 'bring-fraktguiden' ); ?>
-        </div>
+        <?php if ( $order->order->get_status() != 'completed' ) { ?>
+          <div style="text-align:center;margin-bottom: 1em">
+            <?php _e( 'Note: Order is not completed', 'bring-fraktguiden' ); ?>
+          </div>
+        <?php } ?>
       </div>
       <div>
         <h3 style="margin-top:0"><?php _e('Consignments', 'bring-fraktguiden'); ?></h3 style>
-        <?php
-        self::render_consignments( $order );
-        ?>
+        <?php self::render_consignments( $order ); ?>
       </div>
 
     </div>
-    <?php if ( $order->order->get_status() != 'completed' ) { ?>
-    <?php } ?>
     <?php
   }
 
@@ -195,34 +193,26 @@ class Bring_Booking_Order_View {
               <tr>
                 <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
                 <td>
-                  <a href="<?php echo $labels_url; ?>"
-                     target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?></a>
+                  <a class="button button-small button-primary" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
                 </td>
               </tr>
               <tr>
                 <td><?php _e( 'Tracking', 'bring-fraktguiden' ); ?>:</td>
                 <td>
-                  <a href="<?php echo $tracking; ?>"
-                     target="_blank"><?php _e( 'View', 'bring-fraktguiden' ); ?>
-                    →</a>
+                  <a class="button button-small" href="<?php echo $tracking; ?>" target="_blank"><?php _e( 'View', 'bring-fraktguiden' ); ?> &rarr;</a>
                 </td>
               </tr>
               <tr>
                 <td>
                   <?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
                 </td>
-                <td>
-                  <ul>
+                <td valign="center">
+                  <ul class="bring-list-tracking-numbers">
                     <?php
                     foreach ( $packages as $package ) {
                       //$correlation_id = property_exists( $package, 'correlationId' ) ? $package->correlationId : 'N/A';
                       ?>
-                      <li style="position: relative">
-                        <span class="bring-package"></span>
-                        <?php
-                        printf( 'NO: %s', $package->packageNumber );
-                        ?>
-                      </li>
+                      <li><?php printf( 'NO: %s', $package->packageNumber ); ?></li>
                     <?php } ?>
                   </ul>
                 </td>
