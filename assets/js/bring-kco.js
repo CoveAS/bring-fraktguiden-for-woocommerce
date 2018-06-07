@@ -42,6 +42,9 @@ jQuery( function( $ ) {
   } );
 
   $( document.body ).on( 'updated_checkout', function () {
+    if ( ! $( '.bring-enter-postcode .input-text' ).length ) {
+      return;
+    }
     $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
       $( '.bring-enter-postcode' ).removeClass( 'bring-error' );
       $( this ).removeClass( 'bring-error-input' );
