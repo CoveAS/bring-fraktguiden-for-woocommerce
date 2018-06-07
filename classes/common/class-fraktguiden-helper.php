@@ -40,10 +40,14 @@ class Fraktguiden_Helper {
    * @return boolean                 True means that PRO mode is active
    */
   static function pro_activated( $ignore_license = false ) {
-    $days = self::get_pro_days_remaining();
-    $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
-    if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-      return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
+    if ( $ignore_license ) {
+      $pro_allowed = true;
+    } else {
+      $days = self::get_pro_days_remaining();
+      $pro_allowed =  ( $days >= 0 ) || self::valid_license() || $ignore_license;
+      if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+        return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
+      }
     }
     return self::get_option( 'pro_enabled' ) == 'yes' && $pro_allowed;
   }
@@ -70,8 +74,10 @@ class Fraktguiden_Helper {
     $service_name = $selected_service_name ? $selected_service_name  : 'ProductName';
     $services = self::get_services_data();
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      $result[$key] = $service[$service_name];
+    foreach ( $services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        $result[$key] = $service[$service_name];
+      }
     }
     return $result;
   }
@@ -83,9 +89,11 @@ class Fraktguiden_Helper {
     $services = self::get_services_data();
     $selected = self::get_option( 'services' );
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      if ( in_array( $key, $selected ) ) {
-        $result[$key] = $service[$service_name];
+    foreach ( $services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        if ( in_array( $key, $selected ) ) {
+          $result[$key] = $service[$service_name];
+        }
       }
     }
     return $result;
@@ -95,12 +103,14 @@ class Fraktguiden_Helper {
     $result = [ ];
 
     $all_services = self::get_services_data();
-    foreach ( $all_services as $key => $service ) {
-      if ( $key == $key_to_find ) {
-        $result = $service;
-        break;
-      }
 
+    foreach ( $all_services as $group => $service_group ) {
+      foreach ( $service_group['services'] as $key => $service ) {
+        if ( $key == $key_to_find ) {
+          $result = $service;
+          break;
+        }
+      }
     }
     return $result;
   }
@@ -108,9 +118,11 @@ class Fraktguiden_Helper {
   static function get_all_services_with_customer_types() {
     $services = self::get_services_data();
     $result   = [ ];
-    foreach ( $services as $key => $service ) {
-      $service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
-      $result[$key]             = $service;
+    foreach ( $services as $group => $service_group ) {
+        foreach ( $service_group['services'] as $key => $service ) {
+        $service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
+        $result[$key]             = $service;
+      }
     }
     return $result;
   }
@@ -140,6 +152,33 @@ class Fraktguiden_Helper {
 
   static function get_customer_types_data() {
     return require dirname( dirname( __DIR__ ) ) .'/config/customer-types.php';
+  }
+  static function get_phone_i18n() {
+    return require dirname( dirname( __DIR__ ) ) .'/config/phone-i18n.php';
+  }
+
+  /**
+   * Phone i18n
+   * @param  string $phone_number
+   * @param  string $country
+   * @return string
+   */
+  static function phone_i18n( $phone_number, $country ) {
+    static $map;
+    // Check for existing + in the beginning of the phone number
+    $phone_number = trim( $phone_number );
+    if ( preg_match( '/^\+/', $phone_number ) ) {
+      return $phone_number;
+    }
+    if ( ! $map ) {
+      $map = self::get_phone_i18n();
+    }
+    // The customer country is not found
+    if ( ! isset( $map[ $country ] ) ) {
+      return $phone_number;
+    }
+    // Return the i18n-ed phone number
+    return '+'.$map[ $country ] .' '. $phone_number;
   }
 
   /**
@@ -227,12 +266,14 @@ class Fraktguiden_Helper {
    */
   static function get_pro_days_remaining() {
     $start_date = self::get_option( 'pro_activated_on', false );
-    if ( ! $start_date ) {
+    $time = intval( $start_date );
+    // I made a mistake in the license check here.
+    // Any activation time before now (as of writing) should count as a reset for the 7 day trial.
+    if ( $time < 1522249027 ) {
       $time = time();
       self::update_option( 'pro_activated_on', $time );
-    } else {
-      $time = intval( $start_date );
     }
+    $time = intval( $start_date );
     $diff = $time + 86400 * 8 - time() - 10;
     $time = floor( $diff / 86400 );
     return $time;

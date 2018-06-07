@@ -266,6 +266,9 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
       $_product = $values['data'];
       $cart_total += $_product->get_price() * $values['quantity'];
     }
+    if ( empty( $rates )  ) {
+      return $rates;
+    }
     foreach ( $rates as &$rate ) {
       if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
         continue;

@@ -24,7 +24,7 @@ class Bring_Booking_Request {
   /** @var string */
   private $client_url;
   /** @var array */
-  private $consignment_data = [ ];
+  private $data = [ ];
 
   /**
    * Bring_Booking_Request constructor.
@@ -114,6 +114,23 @@ class Bring_Booking_Request {
     return $this->api_key;
   }
 
+
+  /**
+   * @param string $api_key
+   * @return $this
+   */
+  public function set_data( $data ) {
+    $this->data = $data;
+    return $this;
+  }
+
+  /**
+   * @return string
+   */
+  public function get_data() {
+    return $this->data;
+  }
+
   /**
    * @param string $client_url
    * @return $this
@@ -128,18 +145,6 @@ class Bring_Booking_Request {
    */
   public function get_client_url() {
     return $this->client_url;
-  }
-
-  /**
-   * @return int
-   */
-  public function get_consignment_data() {
-    return $this->consignment_data;
-  }
-
-  public function add_consignment_data( $data ) {
-    $this->consignment_data[] = $data;
-    return $this;
   }
 
   /**
@@ -162,21 +167,13 @@ class Bring_Booking_Request {
             'X-MyBring-API-Key'  => $this->get_api_key(),
             'X-Bring-Client-URL' => $this->get_client_url(),
         ],
-        'body' => json_encode( $this->create_data() )
+        'body' => json_encode( $this->get_data() )
     ];
     $response = $this->request->post( self::BOOKING_URL, array(), $args );
     if( $response->get_status_code() != 200 ) {
       // var_dump( $response->get_body() );die;
     }
     return $response;
-  }
-
-  public function create_data() {
-    return [
-        'testIndicator' => $this->get_test_mode(),
-        'schemaVersion' => self::SCHEMA_VERSION,
-        'consignments'  => $this->get_consignment_data()
-    ];
   }
 
 }

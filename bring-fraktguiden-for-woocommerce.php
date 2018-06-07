@@ -14,7 +14,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/
  *
- * Version:             1.4.0.6
+ * Version:             1.4.0.8-rc1
  * Requires at least:   4.9.1
  * Tested up to:        4.9.2
  *
@@ -30,7 +30,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.4.0.6';
+  const VERSION = '1.4.0.8-rc1';
 
   const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -38,7 +38,6 @@ class Bring_Fraktguiden {
     if ( ! class_exists( 'WooCommerce' ) ) {
       return;
     }
-
     if ( ! class_exists( 'LAFFPack' ) ) {
       require_once 'includes/laff-pack.php';
     }
@@ -46,7 +45,10 @@ class Bring_Fraktguiden {
     require_once 'classes/common/class-fraktguiden-license.php';
     require_once 'classes/common/class-fraktguiden-admin-notices.php';
     require_once 'classes/common/class-fraktguiden-product-tester.php';
+    require_once 'classes/common/class-fraktguiden-kco-support.php';
     require_once 'pro/class-wc-shipping-method-bring-pro.php';
+
+    Fraktguiden_KCO_Support::setup();
 
     load_plugin_textdomain( 'bring-fraktguiden', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -78,6 +80,12 @@ class Bring_Fraktguiden {
     if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
       add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
     }
+
+    // Check the license when pro is activated
+    if ( isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) ) {
+      $license = fraktguiden_license::get_instance();
+      $license->check_license();
+    }
   }
 
   /**
@@ -93,7 +101,7 @@ class Bring_Fraktguiden {
    */
   static function cron_task() {
     $license = fraktguiden_license::get_instance();
-    $license->valid();
+    $license->check_license();
   }
 
   /**
@@ -146,7 +154,7 @@ class Bring_Fraktguiden {
     if ( ! Fraktguiden_Helper::pro_test_mode() ) {
       return;
     }
-    _e( "Bring Fraktguiden PRO test-mode. Purchase a license to deactivate this message.", 'bring-fraktguiden' );
+    _e( "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.", 'bring-fraktguiden' );
 
   }
 

@@ -31,8 +31,6 @@ class Fraktguiden_Pickup_Point {
     // Ajax
     add_action( 'wp_ajax_bring_get_pickup_points',            __CLASS__. '::ajax_get_pickup_points' );
     add_action( 'wp_ajax_nopriv_bring_get_pickup_points',     __CLASS__. '::ajax_get_pickup_points' );
-    add_action( 'wp_ajax_bring_post_code_validation',         __CLASS__. '::ajax_post_code_validation' );
-    add_action( 'wp_ajax_nopriv_bring_post_code_validation',  __CLASS__. '::ajax_post_code_validation' );
 
     add_action( 'wp_ajax_bring_shipping_info_var', array( __CLASS__, 'wp_ajax_get_bring_shipping_info_var' ) );
     add_action( 'wp_ajax_bring_get_rate', array( __CLASS__, 'wp_ajax_get_rate' ) );
@@ -44,11 +42,6 @@ class Fraktguiden_Pickup_Point {
     // https://github.com/woothemes/woocommerce/issues/9094
     add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
 
-    // Klarna checkout specific html
-    add_action( 'kco_widget_after', array( __CLASS__, 'kco_post_code_html' ) );
-    add_filter( 'kco_create_order', array( __CLASS__, 'set_kco_postal_code' ) );
-    add_filter( 'kco_update_order', array( __CLASS__, 'set_kco_postal_code' ) );
-
     // Pickup points
     if ( Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) == 'yes' ) {
       add_filter( 'bring_shipping_rates', __CLASS__ .'::insert_pickup_points' );
@@ -56,54 +49,11 @@ class Fraktguiden_Pickup_Point {
     }
   }
 
-  /**
-   * Set Klarna Checkout postal code
-   * @param array Klarna order data
-   */
-  static function set_kco_postal_code( $order ) {
-    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
-    $order['shipping_address']['postal_code'] = $postcode;
-    return $order;
-  }
-
   static function woocommerce_hidden_order_itemmeta( $fields ) {
     $fields[] = '_fraktguiden_pickup_point_postcode';
     $fields[] = '_fraktguiden_pickup_point_id';
     $fields[] = '_fraktguiden_pickup_point_info_cached';
     return $fields;
-  }
-
-  /**
-   * Klarna Checkout post code selector HTML
-   */
-  static function kco_post_code_html() {
-    $postcode = esc_html( WC()->customer->get_shipping_postcode() );
-    ?>
-    <div class="bring-enter-postcode">
-      <form>
-        <label><?php _e( 'Postcode', 'bring-fraktguiden' ); ?>
-          <input class="bring-input input-text" type="text" value="<?php echo $postcode; ?>">
-        </label>
-        <input class="bring-button button" type="submit" value="<?php _e( 'Search', 'bring-fraktguiden' )?>">
-      </form>
-    </div>
-    <?php
-    // Check if
-    if ( 'yes' != apply_filters( 'bring_clone_shipping_methods', Fraktguiden_Helper::get_option( 'bring_clone_shipping_methods', 'yes' ) ) ) {
-      return;
-    }
-    ?>
-    <div class="bring-select-shipping">
-      <h3>
-        <?php echo apply_filters(
-          'bring_fraktguiden_select_delivery_method_title',
-          __( 'Select shipping method', 'bring-fraktguiden' )
-        ); ?>
-      </h3>
-      <div class="bring-select-shipping--options">
-      </div>
-    </div>
-    <?php
   }
 
   /**
@@ -356,23 +306,6 @@ class Fraktguiden_Pickup_Point {
     echo json_encode( $result );
 
     die();
-  }
-  static function ajax_post_code_validation() {
-    $params = http_build_query( [
-      'clientUrl' => get_site_url(),
-      'country'   => $_REQUEST['country'],
-      'pnr'       => $_REQUEST['post_code'],
-    ] );
-    $content = file_get_contents( 'https://api.bring.com/shippingguide/api/postalCode.json?' . $params );
-    if ( ! $content ) {
-      wp_send_json( '{ "error" : "Could not connect to api.bring.com" }' );
-    }
-    $data =  json_decode( $content );
-    if ( ! $data ) {
-      wp_send_json( '{ "error" : "Recieved invalid JSON from api.bring.com" }' );
-    }
-
-    return wp_send_json( $data );
   }
 
   static function ajax_get_pickup_points() {
