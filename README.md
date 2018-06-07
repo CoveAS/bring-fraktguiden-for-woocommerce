@@ -67,6 +67,11 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.0
+* Fixed: BOOK-INPUT-020: Invalid product ID
+* Fixed: Pickup point country fixes
+* Translations: Updated language files
+
 = 1.4.1-rc1 =
 * Added support for Mailbox / Pakke i postkassen
 * Added compability with KCO
