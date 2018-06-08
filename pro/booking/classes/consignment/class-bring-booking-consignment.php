@@ -30,4 +30,14 @@ class Bring_Booking_Consignment extends Bring_Consignment {
   public function get_label_url() {
     return $this->item['confirmation']['links']['labels'];
   }
+
+  public function get_links() {
+    return $this->item['confirmation']['links'];
+  }
+  public function get_dates() {
+    return $this->item['confirmation']['dateAndTimes'];
+  }
+  public function get_packages() {
+    return $this->item['confirmation']['packages'];
+  }
 }

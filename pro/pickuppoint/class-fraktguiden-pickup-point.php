@@ -294,7 +294,7 @@ class Fraktguiden_Pickup_Point {
     $rate_key = false;
     $service_package = false;
     foreach ( $rates as $key => $rate ) {
-      if ( $rate['id'] == 'bring_fraktguiden:servicepakke' ) {
+      if ( $rate['bring_product'] == 'servicepakke' ) {
         // Service package identified
         $service_package = $rate;
         // Remove this package
@@ -329,9 +329,14 @@ class Fraktguiden_Pickup_Point {
     $new_rates = [];
     foreach ( $pickup_points['pickupPoint'] as $pickup_point ) {
       $rate = [
-          'id'    => 'bring_fraktguiden:servicepakke-'. $pickup_point['id'],
-          'cost'  => $service_package['cost'],
-          'label' => $pickup_point['name'],
+          'id'            => 'bring_fraktguiden:servicepakke-'.$pickup_point['id'],
+          'bring_product' => 'servicepakke',
+          'cost'          => $service_package['cost'],
+          'label'         => $pickup_point['name'],
+          'meta_data'     => [
+            'pickup_point_id'   => $pickup_point['id'],
+            'pickup_point_data' => $pickup_point,
+          ],
       ];
       $new_rates[] = $rate;
       if ( ++$pickup_point_count >= $pickup_point_limit ) {

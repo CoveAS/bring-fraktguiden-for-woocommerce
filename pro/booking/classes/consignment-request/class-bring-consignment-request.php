@@ -13,12 +13,7 @@ abstract class Bring_Consignment_Request {
   function __construct( $shipping_item ) {
     $this->shipping_item = $shipping_item;
     $this->adapter  = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
-    foreach ( $shipping_item->get_meta_data() as $meta ) {
-      if ( 'bring_product' != $meta->key ) {
-        continue;
-      }
-      $this->service_id = $meta->value;
-    }
+    $this->service_id = $shipping_item->get_meta( 'bring_product' );
     if ( ! $this->service_id ) {
       // Fallback for older version
       $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];

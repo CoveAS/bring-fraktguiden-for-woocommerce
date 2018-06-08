@@ -245,7 +245,7 @@ class Fraktguiden_Helper {
   }
 
   static function parse_shipping_method_id( $method_id ) {
-    throw new Exception( "Deprecated method, please use get_shipping_method_data instead" );
+    trigger_error( "Deprecated method, please use get_shipping_method_data instead" );
     $parts = explode( ':', $method_id );
     $service = count( $parts ) == 2 ? strtoupper( $parts[1] ) : '';
     // Identify pickup_point_id as part of the service name

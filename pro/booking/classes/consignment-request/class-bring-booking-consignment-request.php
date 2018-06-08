@@ -132,37 +132,54 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
   public function create_data() {
     $recipient_address = $this->get_recipient_address();
 
-    $data = [
+    $consignments = [
       'shippingDateTime' => $this->shipping_date_time,
       // Sender and recipient
       'parties' => [
         'sender'      => $this->get_sender_address(),
         'recipient'   => $recipient_address,
-        'pickupPoint' => [
-          'id'          => $this->shipping_item->get_meta( 'pickup_point_id' ),
-          'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
-        ],
       ],
       // Product / Service
       'product' => [
-        'id'                 => $this->service_id,
+        'id'                 => strtoupper($this->service_id),
         'customerNumber'     => $this->customer_number,
-        'services'           => [],
+        'services'           => null,
         'customsDeclaration' => null
       ],
-      'purchaseOrder' => $this->shipping_item->get_order_id(),
-      'correlationId' => '',
+      'purchaseOrder' => null,
+      'correlationId' => null,
       // Packages
-      'packages' => $this->create_packages( true )
+      'packages' => $this->create_packages()
     ];
     if ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) {
-      $data['product']['services'] = [
+      $consignments['product']['services'] = [
         'recipientNotification' => [
           'email'  => $recipient_address['contact']['email'],
           'mobile' => $recipient_address['contact']['phoneNumber'],
         ],
       ];
     }
+    // Add pickup point
+    $pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+    if ( $pickup_point_id ) {
+      $consignments['parties']['pickupPoint'] = [
+        'id'          => $pickup_point_id,
+        'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
+      ];
+    }
+    if ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) {
+      $consignments['product']['services'] = [
+        'recipientNotification' => [
+          'email'  => $recipient_address['contact']['email'],
+          'mobile' => $recipient_address['contact']['phoneNumber'],
+        ]
+      ];
+    }
+    $data = [
+      'testIndicator' => ( Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) == 'yes' ),
+      'schemaVersion' => 1,
+      'consignments'  => [ $consignments ],
+    ];
     return $data;
   }
 }

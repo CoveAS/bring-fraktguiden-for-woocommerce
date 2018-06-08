@@ -1,14 +1,13 @@
 <?php
 //$correlation_id     = $consignment->correlationId;
-$errors             = $consignment->errors;
-$confirmation       = $consignment->confirmation;
-$consignment_number = $confirmation->consignmentNumber;
-$links              = $confirmation->links;
-$tracking           = $links->tracking;
-$date_and_times     = $confirmation->dateAndTimes;
-$earliest_pickup    = $date_and_times->earliestPickup ? date_i18n( wc_date_format(), $date_and_times->earliestPickup / 1000 ) : 'N/A';
-$expected_delivery  = $date_and_times->expectedDelivery ? date_i18n( wc_date_format(), $date_and_times->expectedDelivery / 1000 ) : 'N/A';
-$packages           = $confirmation->packages;
+// $errors             = $consignment->errors;
+$consignment_number = $consignment->get_consignment_number();
+$links              = $consignment->get_links();
+$tracking           = $links['tracking'];
+$date_and_times     = $consignment->get_dates();
+$earliest_pickup    = $date_and_times['earliestPickup'] ? date_i18n( wc_date_format(), $date_and_times['earliestPickup'] / 1000 ) : 'N/A';
+$expected_delivery  = $date_and_times['expectedDelivery'] ? date_i18n( wc_date_format(), $date_and_times['expectedDelivery'] / 1000 ) : 'N/A';
+$packages           = $consignment->get_packages();
 $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
 ?>
 <div>
@@ -46,7 +45,7 @@ $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->
           foreach ( $packages as $package ) {
             //$correlation_id = property_exists( $package, 'correlationId' ) ? $package->correlationId : 'N/A';
             ?>
-            <li><?php printf( 'NO: %s', $package->packageNumber ); ?></li>
+            <li><?php printf( 'NO: %s', $package['packageNumber'] ); ?></li>
           <?php } ?>
         </ul>
       </td>

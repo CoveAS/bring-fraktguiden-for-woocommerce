@@ -120,6 +120,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
     $this->service_table = new Fraktguiden_Service_Table( $this );
   }
+
   /**
    * Get setting
    * @param  string $key
@@ -829,6 +830,29 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
+   * Push rate
+   * Validate and add
+   * @param  array $args
+   */
+  public function push_rate( $args ) {
+    $required_fields = [ 'id', 'bring_product', 'cost', 'label' ];
+    foreach ( $required_fields as $field ) {
+      if ( ! isset( $args[ $field ] ) ) {
+        throw new Exception( "Missing $field on the shipping rate" );
+      }
+    }
+    if ( strpos( $args['id'], ':' ) == false ) {
+      $args['id'] .= ":{$args['bring_product']}";
+    }
+    if ( ! isset( $args['meta_data'] ) ) {
+      $args['meta_data'] = [];
+    }
+    $args['meta_data']['bring_product'] = $args['bring_product'];
+    unset( $args['bring_product'] );
+    $this->add_rate( $args );
+  }
+
+  /**
    * Calculate shipping costs.
    *
    * @todo: in 2.6, the package param was added. Investigate this!
@@ -842,11 +866,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $alt_handling = $this->get_setting( 'alt_handling' );
       if ( 'flat_rate' == $alt_handling ) {
         $rate = array(
-          'id'    => $this->id . ':' . 'alt_flat_rate',
-          'cost'  => floatval( $this->get_setting( 'alt_flat_rate' ) ),
-          'label' => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+          'id'            => $this->id,
+          'bring_product' => $this->get_setting( 'alt_flat_rate_id' ),
+          'cost'          => floatval( $this->get_setting( 'alt_flat_rate' ) ),
+          'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
         );
-        $this->add_rate( $rate );
+        $this->push_rate( $rate );
       }
       return;
     }
@@ -895,10 +920,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( $response->status_code != 200 ) {
       $no_connection_handling = $this->get_setting( 'no_connection_handling' );
       if ( 'flat_rate' == $no_connection_handling ) {
-        $this->add_rate( [
-          'id'    => $this->id . ':' . $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
-          'cost'  => floatval( $this->get_setting('no_connection_flat_rate') ),
-          'label' => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+        $this->push_rate( [
+          'id'            => $this->id,
+          'bring_product' => $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
+          'cost'          => floatval( $this->get_setting('no_connection_flat_rate') ),
+          'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
         ] );
       }
       return;
@@ -916,10 +942,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $messages = $this->get_trace_messages();
       foreach ( $messages as $message ) {
         if ( false !== strpos( $message, 'Package exceed maximum measurements for product' ) ) {
-          $this->add_rate( [
-              'id'    => $this->id . ':' . $this->get_setting( 'exception_rate_id', 'servicepakke' ),
-              'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
-              'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+          $this->push_rate( [
+            'id'    => $this->id,
+            'bring_product' => $this->get_setting( 'exception_rate_id', 'servicepakke' ),
+            'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
+            'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
           ] );
           break;
         }
@@ -946,7 +973,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Calculate rate.
     if ( $rates ) {
       foreach ( $rates as $rate ) {
-        $this->add_rate( $rate );
+        $this->push_rate( $rate );
       }
     }
   }
@@ -978,7 +1005,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       $rate    = $this->vat == 'exclude' ? $service['AmountWithoutVAT'] : $service['AmountWithVAT'];
 
       $rate = array(
-          'id'    => $this->id . ':' . sanitize_title( $serviceDetails['ProductId'] ),
+          'id'    => $this->id,
+          'bring_product' => sanitize_title( $serviceDetails['ProductId'] ),
           'cost'  => (float)$rate + (float)$this->fee,
           'label' => $serviceDetails['GuiInformation'][$this->service_name]
               . ( $this->display_desc == 'no' ?
