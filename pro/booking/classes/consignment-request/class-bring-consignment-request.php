@@ -41,6 +41,7 @@ abstract class Bring_Consignment_Request {
       if ( $pickup_point_id ) {
         $this->shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
       }
+      $this->shipping_item->save_meta_data();
     }
     return $bring_product;
   }
