@@ -8,10 +8,42 @@ abstract class Bring_Consignment_Request {
   public $shipping_item;
   public $shipping_date_time;
   public $customer_number;
+  public $adapter;
 
   function __construct( $shipping_item ) {
     $this->shipping_item = $shipping_item;
-    $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    $this->adapter  = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
+    $this->service_id = $this->get_service_id();
+  }
+
+  /**
+   * Get Service ID
+   * Includes a fallback for older versions of bring
+   * @param  boolean $force
+   * @return string
+   */
+  public function get_service_id( $force = false ) {
+    if ( $this->service_id && $force ) {
+      return $this->service_id;
+    }
+    $bring_product = $this->shipping_item->get_meta( 'bring_product' );
+    if ( ! $bring_product ) {
+      if ( ! empty( $bring_product ) && ! is_array( $bring_product ) ) {
+        return $bring_product;
+      }
+      $method_id = $this->shipping_item->get_method_id();
+      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(\-\d+)$/', $method_id, $matches ) ) {
+        return $bring_product;
+      }
+      $bring_product = $matches[1];
+      $pickup_point_id = substr( $matches[2], 1 );
+      $this->shipping_item->update_meta_data( 'bring_product', $bring_product );
+      if ( $pickup_point_id ) {
+        $this->shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
+      }
+      $this->shipping_item->save_meta_data();
+    }
+    return $bring_product;
   }
 
   /**
@@ -21,7 +53,10 @@ abstract class Bring_Consignment_Request {
    * @return Bring_Consignment
    */
   static function create( $shipping_item ) {
-    $service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    $service_id = $shipping_item->get_meta( 'bring_product' );
+    if ( ! $service_id ) {
+      throw new Exception( "No bring product was found on the shipping method" );
+    }
     if ( preg_match( '/^PAKKE_I_POSTKASSEN/', strtoupper( $service_id ) ) ) {
       return new Bring_Mailbox_Consignment_Request( $shipping_item );
     }
@@ -112,7 +147,6 @@ abstract class Bring_Consignment_Request {
       ],
       'body' => json_encode( $this->create_data() )
     ];
-    // var_dump( $request_data );die;
     $request = new WP_Bring_Request();
     return $request->post( $this->get_endpoint_url(), [], $request_data );
   }
@@ -120,7 +154,6 @@ abstract class Bring_Consignment_Request {
 
   public function order_update_packages() {
     $wc_order = $this->shipping_item->get_order();
-    $adapter  = new Bring_WC_Order_Adapter( $wc_order );
     $cart = [];
     //build a cart like array
     foreach ( $wc_order->get_items() as $item_id => $item ) {
@@ -135,7 +168,12 @@ abstract class Bring_Consignment_Request {
 
     $shipping_method = new WC_Shipping_Method_Bring;
     $packages = $shipping_method->pack_order( $cart );
-
-    $adapter->checkout_update_packages( json_encode( $packages ) );
+    if ( ! $packages ) {
+      return;
+    }
+    $shipping_methods = $wc_order->get_shipping_methods();
+    $this->shipping_item->update_meta_data( '_fraktguiden_packages', $packages, 1 );
+    $this->shipping_item->save_meta_data();
+    return $packages;
   }
 }

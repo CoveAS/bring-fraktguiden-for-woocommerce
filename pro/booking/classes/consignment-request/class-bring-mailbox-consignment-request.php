@@ -49,9 +49,7 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
       $order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
     }
     $packages = [];
-    // var_dump( $order_items_packages );
     foreach ( $order_items_packages as $package ) {
-      // var_dump( $package );
       $packages[] = $this->create_package( $package );
     }
     return $packages;

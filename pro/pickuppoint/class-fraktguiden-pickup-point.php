@@ -3,13 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-// Load the depreceated methods
-require_once __DIR__ .'/class-fraktguiden-pickup-point-depreceated.php';
-
-// Only if Klarna is used
-add_action( 'klarna_after_kco_confirmation', array( 'Fraktguiden_Pickup_Point', 'checkout_save_pickup_point' ) );
-add_action( 'woocommerce_thankyou', array( 'Fraktguiden_Pickup_Point', 'checkout_save_pickup_point' ) );
-
 /**
  * Process the checkout
  */
@@ -24,8 +17,6 @@ class Fraktguiden_Pickup_Point {
     add_action( 'wp_enqueue_scripts', array( __CLASS__, 'checkout_load_javascript' ) );
     // Enqueue admin Javascript.
     add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_load_javascript' ) );
-    // Checkout update order meta.
-    add_action( 'woocommerce_checkout_update_order_meta', array( __CLASS__, 'checkout_save_pickup_point' ) );
     // Admin save order items.
     add_action( 'woocommerce_saved_order_items', array( __CLASS__, 'admin_saved_order_items' ), 1, 2 );
     // Ajax
@@ -53,6 +44,8 @@ class Fraktguiden_Pickup_Point {
     $fields[] = '_fraktguiden_pickup_point_postcode';
     $fields[] = '_fraktguiden_pickup_point_id';
     $fields[] = '_fraktguiden_pickup_point_info_cached';
+    $fields[] = 'pickup_point_id';
+    $fields[] = 'bring_product';
     return $fields;
   }
 
@@ -120,41 +113,6 @@ class Fraktguiden_Pickup_Point {
       $result  = $order->get_shipping_data();
     }
     return $result;
-  }
-
-  /**
-   * Add pickup point from shop/checkout
-   *
-   * This method now assumes that the system has only one shipping method per order in checkout.
-   *
-   * @param int $order_id
-   */
-  static function checkout_save_pickup_point( $order_id ) {
-
-    if ( $order_id ) {
-
-      $order = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
-
-      $expire = time() - 300;
-
-      if ( isset( $_COOKIE['_fraktguiden_packages'] ) ) {
-        $order->checkout_update_packages( $_COOKIE['_fraktguiden_packages'] );
-        setcookie( '_fraktguiden_packages', '', $expire );
-      }
-      Fraktguiden_Pickup_Point_Depreceated::checkout_save_pickup_point( $order );
-      $shipping_methods = $order->order->get_shipping_methods();
-      foreach ( $shipping_methods as $item_id => $method ) {
-        $method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
-        $method = Fraktguiden_Helper::parse_shipping_method_id( $method_id );
-        if ( $method['service'] == 'SERVICEPAKKE' && $method['pickup_point_id'] ) {
-          $order->checkout_update_pickup_point_data(
-              $method['pickup_point_id'],
-              ( isset( $_POST['postal_code'] ) ? $_POST['postal_code'] : false ),
-              false
-          );
-        }
-      }
-    }
   }
 
   /**
@@ -333,7 +291,7 @@ class Fraktguiden_Pickup_Point {
     $rate_key = false;
     $service_package = false;
     foreach ( $rates as $key => $rate ) {
-      if ( $rate['id'] == 'bring_fraktguiden:servicepakke' ) {
+      if ( $rate['bring_product'] == 'servicepakke' ) {
         // Service package identified
         $service_package = $rate;
         // Remove this package
@@ -368,9 +326,14 @@ class Fraktguiden_Pickup_Point {
     $new_rates = [];
     foreach ( $pickup_points['pickupPoint'] as $pickup_point ) {
       $rate = [
-          'id'    => 'bring_fraktguiden:servicepakke-'. $pickup_point['id'],
-          'cost'  => $service_package['cost'],
-          'label' => $pickup_point['name'],
+          'id'            => 'bring_fraktguiden:servicepakke-'.$pickup_point['id'],
+          'bring_product' => 'servicepakke',
+          'cost'          => $service_package['cost'],
+          'label'         => $pickup_point['name'],
+          'meta_data'     => [
+            'pickup_point_id'   => $pickup_point['id'],
+            'pickup_point_data' => $pickup_point,
+          ],
       ];
       $new_rates[] = $rate;
       if ( ++$pickup_point_count >= $pickup_point_limit ) {

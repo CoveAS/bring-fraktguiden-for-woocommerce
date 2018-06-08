@@ -115,7 +115,10 @@ class WP_Bring_Request {
     $mybring_api_key = $this->get_var( 'mybring_api_key' );
     $customer_number = $this->get_var( 'mybring_customer_number' );
     if ( $mybring_api_key && $mybring_api_uid && $customer_number ) {
-      $url .= '&customerNumber='. $customer_number;
+      if ( '?' != substr( $url, -1 ) ) {
+        $url .= '&';
+      }
+      $url .= 'customerNumber='. $customer_number;
     }
     return $url;
   }
