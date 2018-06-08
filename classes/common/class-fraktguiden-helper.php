@@ -100,6 +100,7 @@ class Fraktguiden_Helper {
   }
 
   static function get_service_data_for_key( $key_to_find ) {
+    $key_to_find = strtoupper( $key_to_find );
     $result = [ ];
 
     $all_services = self::get_services_data();
@@ -244,6 +245,7 @@ class Fraktguiden_Helper {
   }
 
   static function parse_shipping_method_id( $method_id ) {
+    throw new Exception( "Deprecated method, please use get_shipping_method_data instead" );
     $parts = explode( ':', $method_id );
     $service = count( $parts ) == 2 ? strtoupper( $parts[1] ) : '';
     // Identify pickup_point_id as part of the service name
@@ -254,9 +256,9 @@ class Fraktguiden_Helper {
     }
     //@todo: rename service > service_key
     return [
-        'name'    => $parts[0],
-        'service' => $service,
-        'pickup_point_id' => $pickup_point_id,
+      'name'            => $parts[0],
+      'service'         => $service,
+      'pickup_point_id' => $pickup_point_id,
     ];
   }
 

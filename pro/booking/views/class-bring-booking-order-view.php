@@ -326,6 +326,7 @@ class Bring_Booking_Order_View {
         $shipping_item_id = $package['shipping_item_info']['item_id'];
         $key              = $package['shipping_item_info']['shipping_method']['service'];
         $service_data     = Fraktguiden_Helper::get_service_data_for_key( $key );
+        $pickup_point     = $package['shipping_item_info']['shipping_method']['pickup_point_id'];
         ?>
         <tr>
           <td title="<?php echo $shipping_item_tip; ?>">
@@ -340,12 +341,11 @@ class Bring_Booking_Order_View {
             </select>
           </td>
           <td>
-            <?php $pickup_point = $order->get_pickup_point_for_shipping_item( $shipping_item_id ); ?>
               <?php echo $service_data['ProductName']; ?>
               <?php if ( ! empty( $pickup_point ) ): ?>
                 <span
                   class="tips"
-                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>">
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point ); ?>">
                    [<?php _e( 'Pickup point', 'bring-fraktguiden' ); ?>]
                 </span>
               <?php endif;?>
@@ -376,12 +376,11 @@ class Bring_Booking_Order_View {
             </select>
           </td>
           <td>
-            <?php $pickup_point = $order->get_pickup_point_for_shipping_item( $shipping_item_id ); ?>
               <?php echo $service_data['ProductName']; ?>
               <?php if ( ! empty( $pickup_point ) ): ?>
                 <span
                   class="tips"
-                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point['cached'] ); ?>"
+                  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point ); ?>"
                   >
                    [<?php _e( 'Pickup point', 'bring-fraktguiden' ); ?>]
                 </span>

@@ -19,10 +19,14 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
    * @return array
    */
   public function create_packages( $include_info = false) {
-    $order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
+    $order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
     if ( ! $order_items_packages ) {
       $this->order_update_packages();
-      $order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
+      $order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
+    }
+    // Make sure packages is an array of arrays
+    if ( isset( $order_items_packages['length0'] ) ) {
+      $order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
     }
     if ( ! $order_items_packages ) {
       return [];
@@ -47,9 +51,14 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
           'correlationId'    => null,
         ];
         if ( $include_info ) {
+          $info = [];
           $data['shipping_item_info'] = [
             'item_id'         => $item_id,
-            'shipping_method' => Fraktguiden_Helper::parse_shipping_method_id( $this->shipping_item['method_id'] ),
+            'shipping_method' => [
+              'name'            => $this->shipping_item['method_id'],
+              'service'         => $this->shipping_item->get_meta( 'bring_product' ),
+              'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
+            ],
           ];
         }
         $result[] = $data;
@@ -57,33 +66,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
     }
     return $result;
   }
-
-
-  /**
-   * Returns pickup point for given shipping item id.
-   * If not found an empty array is found.
-   *
-   * @param $item_id_to_find
-   * @return array
-   */
-  public function get_pickup_point() {
-    $result = [ ];
-
-    $country_code = $shipping_item->get_order->get_shipping_country();
-
-    if ( ! array_key_exists( $shipping_item->get_id(), $adapter->get_fraktguiden_shipping_items() ) ) {
-      return [];
-    }
-    $pickup_point_id = wc_get_order_item_meta( $shipping_item->get_id(), '_fraktguiden_pickup_point_id', true );
-    if ( ! $pickup_point_id ) {
-      return [];
-    }
-    return [
-      'id'          => $pickup_point_id,
-      'countryCode' => $country_code,
-    ];
-  }
-
 
   /**
    * Return the sender's address formatted for Bring consignment
@@ -156,7 +138,10 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
       'parties' => [
         'sender'      => $this->get_sender_address(),
         'recipient'   => $recipient_address,
-        'pickupPoint' => $this->get_pickup_point()
+        'pickupPoint' => [
+          'id'          => $this->shipping_item->get_meta( 'pickup_point_id' ),
+          'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
+        ],
       ],
       // Product / Service
       'product' => [
@@ -165,10 +150,10 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
         'services'           => [],
         'customsDeclaration' => null
       ],
-      'purchaseOrder' => $this->adapter->get_id(),
+      'purchaseOrder' => $this->shipping_item->get_order_id(),
       'correlationId' => '',
       // Packages
-      'packages' => $this->create_packages()
+      'packages' => $this->create_packages( true )
     ];
     if ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) {
       $data['product']['services'] = [

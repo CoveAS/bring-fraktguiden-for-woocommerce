@@ -223,29 +223,10 @@ class Bring_WC_Order_Adapter {
     }
     $shipping_methods = $this->order->get_shipping_methods();
     foreach ( $shipping_methods as $item_id => $method ) {
-      wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
+      $method->update_meta_data( '_fraktguiden_packages', json_decode( stripslashes( $packages ), 1 ) );
+      $method->save_meta_data();
     }
   }
-
-//  /**
-//   * @todo: refactor
-//   */
-//  public function checkout_add_pickup_point() {
-//    $shipping_methods = $this->order->get_shipping_methods();
-//    foreach ( $shipping_methods as $item_id => $method ) {
-//      $method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
-//
-//      if ( $method_id == Fraktguiden_Helper::ID . ':servicepakke' ) {
-//        // Right now the checkout only supports 1 shipping method per order.
-//        if ( ! ( empty( $_POST['_fraktguiden_pickup_point_id'] ) ) ) {
-//          wc_add_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', $_POST['_fraktguiden_pickup_point_id'] );
-//          wc_add_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode', $_POST['_fraktguiden_pickup_point_postcode'] );
-//          wc_add_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached', $_POST['_fraktguiden_pickup_point_info_cached'] );
-//          wc_add_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $_POST['_fraktguiden_packages'] ), true ) );
-//        }
-//      }
-//    }
-//  }
 
   /**
    * @param array $shipping_items Order items to save
@@ -295,7 +276,7 @@ class Bring_WC_Order_Adapter {
     $data = [ ];
 
     foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $method ) {
-      $pickup_point_id       = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', true );
+      $pickup_point_id       = $method->get_meta( 'pickup_point_id' );
       $pickup_point          = null;
       $pickup_point_cached   = null;
       $pickup_point_postcode = null;
@@ -306,16 +287,14 @@ class Bring_WC_Order_Adapter {
         $response = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $shipping_address['country'] . '/id/' . $pickup_point_id . '.json' );
 
         $pickup_point          = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
-        $pickup_point_cached   = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_cached', true );
-        $pickup_point_postcode = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode', true );
+        // $pickup_point_cached   = $method->get_meta( '_fraktguiden_pickup_point_cached' );
+        // $pickup_point_postcode = $method->get_meta( '_fraktguiden_pickup_point_postcode' );
 
       }
       $data[] = [
           'item_id'                  => $item_id,
           'pickup_point'             => $pickup_point,
-          'pickup_point_info_cached' => $pickup_point_cached,
-          'postcode'                 => $pickup_point_postcode,
-          'packages'                 => json_encode( $this->get_packages_for_order_item( $item_id ) )
+          'packages'                 => json_encode( $method->get_meta( '_fraktguiden_packages' ) )
       ];
 
     }
@@ -331,12 +310,11 @@ class Bring_WC_Order_Adapter {
    */
   public function get_pickup_point_for_shipping_item( $item_id ) {
     $result          = [ ];
-    $pickup_point_id = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', true );
+    $pickup_point_id = wc_get_order_item_meta( $item_id, 'pickup_point_id', true );
     if ( $pickup_point_id ) {
-      $result['id']        = $pickup_point_id;
-      $result['post_code'] = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode', true );
-      $result['cached']    = wc_get_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached', true );
+      $result['id'] = $pickup_point_id;
     }
+    var_dump( $result );
     return $result;
   }
 
@@ -360,14 +338,5 @@ class Bring_WC_Order_Adapter {
     }
     return $result;
   }
-
-  /**
-   * @param $item_id
-   * @return array
-   */
-  public function get_packages_for_order_item( $item_id ) {
-    return wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
-  }
-
 
 }

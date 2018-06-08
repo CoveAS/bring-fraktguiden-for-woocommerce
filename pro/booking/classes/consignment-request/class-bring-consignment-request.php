@@ -8,10 +8,21 @@ abstract class Bring_Consignment_Request {
   public $shipping_item;
   public $shipping_date_time;
   public $customer_number;
+  public $adapter;
 
   function __construct( $shipping_item ) {
     $this->shipping_item = $shipping_item;
-    $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    $this->adapter  = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
+    foreach ( $shipping_item->get_meta_data() as $meta ) {
+      if ( 'bring_product' != $meta->key ) {
+        continue;
+      }
+      $this->service_id = $meta->value;
+    }
+    if ( ! $this->service_id ) {
+      // Fallback for older version
+      $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    }
   }
 
   /**
@@ -21,7 +32,14 @@ abstract class Bring_Consignment_Request {
    * @return Bring_Consignment
    */
   static function create( $shipping_item ) {
-    $service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    $service_id = $shipping_item->get_meta( 'bring_product' );
+    if ( ! $service_id ) {
+      // Fallback for older version
+      $service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
+    }
+    if ( ! $service_id ) {
+      throw new Exception( "No bring product was found on the shipping method" );
+    }
     if ( preg_match( '/^PAKKE_I_POSTKASSEN/', strtoupper( $service_id ) ) ) {
       return new Bring_Mailbox_Consignment_Request( $shipping_item );
     }
@@ -112,7 +130,6 @@ abstract class Bring_Consignment_Request {
       ],
       'body' => json_encode( $this->create_data() )
     ];
-    // var_dump( $request_data );die;
     $request = new WP_Bring_Request();
     return $request->post( $this->get_endpoint_url(), [], $request_data );
   }
@@ -120,7 +137,6 @@ abstract class Bring_Consignment_Request {
 
   public function order_update_packages() {
     $wc_order = $this->shipping_item->get_order();
-    $adapter  = new Bring_WC_Order_Adapter( $wc_order );
     $cart = [];
     //build a cart like array
     foreach ( $wc_order->get_items() as $item_id => $item ) {
@@ -136,6 +152,6 @@ abstract class Bring_Consignment_Request {
     $shipping_method = new WC_Shipping_Method_Bring;
     $packages = $shipping_method->pack_order( $cart );
 
-    $adapter->checkout_update_packages( json_encode( $packages ) );
+    $this->adapter->checkout_update_packages( json_encode( $packages ) );
   }
 }
