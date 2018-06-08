@@ -55,7 +55,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
             'item_id'         => $item_id,
             'shipping_method' => [
               'name'            => $this->shipping_item['method_id'],
-              'service'         => $this->shipping_item->get_meta( 'bring_product' ),
+              'service'         => $this->service_id,
               'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
             ],
           ];

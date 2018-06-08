@@ -13,7 +13,36 @@ abstract class Bring_Consignment_Request {
   function __construct( $shipping_item ) {
     $this->shipping_item = $shipping_item;
     $this->adapter  = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
-    $this->service_id = $shipping_item->get_meta( 'bring_product' );
+    $this->service_id = $this->get_service_id();
+  }
+
+  /**
+   * Get Service ID
+   * Includes a fallback for older versions of bring
+   * @param  boolean $force
+   * @return string
+   */
+  public function get_service_id( $force = false ) {
+    if ( $this->service_id && $force ) {
+      return $this->service_id;
+    }
+    $bring_product = $this->shipping_item->get_meta( 'bring_product' );
+    if ( ! $bring_product ) {
+      if ( ! empty( $bring_product ) && ! is_array( $bring_product ) ) {
+        return $bring_product;
+      }
+      $method_id = $this->shipping_item->get_method_id();
+      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(\-\d+)$/', $method_id, $matches ) ) {
+        return $bring_product;
+      }
+      $bring_product = $matches[1];
+      $pickup_point_id = substr( $matches[2], 1 );
+      $this->shipping_item->update_meta_data( 'bring_product', $bring_product );
+      if ( $pickup_point_id ) {
+        $this->shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
+      }
+    }
+    return $bring_product;
   }
 
   /**

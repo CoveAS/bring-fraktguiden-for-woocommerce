@@ -48,7 +48,6 @@ add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
 # Add awaiting shipping to existing order statuses.
 add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' );
 
-
 class Bring_Booking {
 
   const ID = Fraktguiden_Helper::ID;
