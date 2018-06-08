@@ -175,35 +175,6 @@ class Bring_WC_Order_Adapter {
     return count( $this->get_fraktguiden_shipping_items() ) > 0;
   }
 
-  /**
-   * Save pickup point information on checkout.
-   *
-   * @param int $pickup_point_id
-   * @param int $post_code
-   * @param string $cached Pickup point information (name, address etc)
-   * @param string $packages JSON string representation of packages.
-   */
-  public function checkout_update_pickup_point_data( $pickup_point_id, $post_code, $cached ) {
-    $shipping_methods = $this->order->get_shipping_methods();
-    foreach ( $shipping_methods as $item_id => $method ) {
-      $method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
-      $method = Fraktguiden_Helper::parse_shipping_method_id( $method_id );
-      if ( $method['service'] == 'SERVICEPAKKE' ) {
-        // Right now the checkout only supports 1 shipping method per order.
-        if ( ! ( empty( $pickup_point_id ) ) ) {
-          $meta_data  = get_metadata( 'order_item', $item_id );
-          wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', $pickup_point_id );
-          if ( ! self::check_meta_key( $meta_data, '_fraktguiden_pickup_point_postcode' ) ) {
-            wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode', $post_code );
-          }
-          if ( ! self::check_meta_key( $meta_data, '_fraktguiden_pickup_point_info_cached' ) ) {
-            wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached', $cached );
-          }
-        }
-      }
-    }
-  }
-
   static function check_meta_key( $array, $key ) {
     if ( ! isset( $array[$key] ) ) {
       return false;

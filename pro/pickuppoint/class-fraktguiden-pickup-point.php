@@ -3,9 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-// Load the depreceated methods
-require_once __DIR__ .'/class-fraktguiden-pickup-point-depreceated.php';
-
 /**
  * Process the checkout
  */

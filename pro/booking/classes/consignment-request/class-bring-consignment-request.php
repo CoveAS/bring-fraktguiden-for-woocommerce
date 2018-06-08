@@ -14,10 +14,6 @@ abstract class Bring_Consignment_Request {
     $this->shipping_item = $shipping_item;
     $this->adapter  = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
     $this->service_id = $shipping_item->get_meta( 'bring_product' );
-    if ( ! $this->service_id ) {
-      // Fallback for older version
-      $this->service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
-    }
   }
 
   /**
@@ -28,10 +24,6 @@ abstract class Bring_Consignment_Request {
    */
   static function create( $shipping_item ) {
     $service_id = $shipping_item->get_meta( 'bring_product' );
-    if ( ! $service_id ) {
-      // Fallback for older version
-      $service_id = Fraktguiden_Helper::parse_shipping_method_id( $shipping_item['method_id'] )['service'];
-    }
     if ( ! $service_id ) {
       throw new Exception( "No bring product was found on the shipping method" );
     }
