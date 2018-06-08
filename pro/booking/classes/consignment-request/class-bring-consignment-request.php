@@ -138,7 +138,12 @@ abstract class Bring_Consignment_Request {
 
     $shipping_method = new WC_Shipping_Method_Bring;
     $packages = $shipping_method->pack_order( $cart );
-
-    $this->adapter->checkout_update_packages( json_encode( $packages ) );
+    if ( ! $packages ) {
+      return;
+    }
+    $shipping_methods = $wc_order->get_shipping_methods();
+    $this->shipping_item->update_meta_data( '_fraktguiden_packages', $packages, 1 );
+    $this->shipping_item->save_meta_data();
+    return $packages;
   }
 }

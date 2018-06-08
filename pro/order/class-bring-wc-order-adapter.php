@@ -188,17 +188,6 @@ class Bring_WC_Order_Adapter {
     return true;
   }
 
-  public function checkout_update_packages( $packages ) {
-    if ( ! $packages ) {
-      return;
-    }
-    $shipping_methods = $this->order->get_shipping_methods();
-    foreach ( $shipping_methods as $item_id => $method ) {
-      $method->update_meta_data( '_fraktguiden_packages', json_decode( stripslashes( $packages ), 1 ) );
-      $method->save_meta_data();
-    }
-  }
-
   /**
    * @param array $shipping_items Order items to save
    */
