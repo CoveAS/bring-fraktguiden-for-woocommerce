@@ -896,6 +896,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     // Remove any empty elements.
     $params = array_filter( $params );
 
+    if ( Fraktguiden_Helper::get_option( 'calculate_by_weight' ) == 'yes' ) {
+      // Calculate packages based on weight
+      foreach ( $params as $key => $value ) {
+        // Remove dimensions
+        if ( preg_match('/^(?:length|width|height)\d+$/', $key ) ) {
+          unset( $params[ $key ] );
+        }
+      }
+    }
+
     $url = add_query_arg( $params, self::SERVICE_URL );
 
     // Add all the selected services to the URL

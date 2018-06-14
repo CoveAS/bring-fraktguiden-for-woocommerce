@@ -160,8 +160,13 @@ abstract class Bring_Consignment_Request {
       if ( ! isset( $item['product_id'] ) ) {
         continue;
       }
+      if ( isset( $item['variation_id'] ) && $item['variation_id'] ) {
+        $product = wc_get_product( $item['variation_id'] );
+      } else {
+        $product = wc_get_product( $item['product_id'] );
+      }
       $cart[] = [
-        'data' => wc_get_product( $item['product_id'] ),
+        'data' => $product,
         'quantity' => $item['qty'],
       ];
     }
