@@ -102,7 +102,7 @@
      */
     function clone_shipping_methods( options_target ) {
         // @TODO: Only if enabled
-        if ( ! options_target.length ) {
+        if ( options_target.length ) {
             // Clone the original shipping rates
             return;
         }
