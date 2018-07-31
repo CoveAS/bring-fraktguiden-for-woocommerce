@@ -55,7 +55,6 @@ jQuery( function( $ ) {
       }
     } );
     $( '.bring-enter-postcode form' ).submit( function( e ) {
-      console.log( 'triggered' );
       e.preventDefault();
       e.stopPropagation();
 
