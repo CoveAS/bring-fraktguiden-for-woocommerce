@@ -258,7 +258,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     $cart                     = WC()->cart;
 
-
     $cart_items               = $cart ? $cart->get_cart() : [];
     $cart_total               = 0;
 
@@ -270,10 +269,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
       return $rates;
     }
     foreach ( $rates as &$rate ) {
-      if ( ! preg_match( '/^bring_fraktguiden:(.+)$/', $rate['id'], $matches ) ) {
+      if ( ! preg_match( '/^bring_fraktguiden/', $rate['id'] ) ) {
         continue;
       }
-      $key = strtoupper( $matches[1] );
+      $key = strtoupper( $rate['bring_product'] );
       if ( 0 === strpos( $key, 'SERVICEPAKKE' ) ) {
         $key = 'SERVICEPAKKE';
       }
