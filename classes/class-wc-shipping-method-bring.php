@@ -31,7 +31,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   private $from_country = '';
   private $from_zip = '';
   private $post_office = '';
-  private $vat = '';
   private $evarsling = '';
   public $services = [];
   public $service_name = '';
@@ -97,7 +96,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     $this->from_country = $this->get_setting( 'from_country' );
     $this->from_zip     = $this->get_setting( 'from_zip' );
     $this->post_office  = $this->get_setting( 'post_office' );
-    $this->vat          = $this->get_setting( 'vat' );
     $this->evarsling    = $this->get_setting( 'evarsling' );
     $this->services     = $this->get_setting( 'services' );
     $this->service_name = $this->get_setting( 'service_name', 'DisplayName' );
@@ -240,17 +238,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
             'custom_attributes' => [
               'min' => '0'
             ]
-        ),
-
-        'vat'                   => array(
-            'title'    => __( 'Display price', 'bring-fraktguiden' ),
-            'type'     => 'select',
-            'desc_tip' => __( 'How to calculate delivery charges', 'bring-fraktguiden' ),
-            'default'  => 'include',
-            'options'  => array(
-                'include' => __( 'VAT included', 'bring-fraktguiden' ),
-                'exclude' => __( 'VAT excluded', 'bring-fraktguiden' )
-            ),
         ),
         'evarsling'             => array(
             'title'    => __( 'Recipient notification', 'bring-fraktguiden' ),
@@ -1012,7 +999,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
       }
 
       $service = $serviceDetails['Price']['PackagePriceWithoutAdditionalServices'];
-      $rate    = $this->vat == 'exclude' ? $service['AmountWithoutVAT'] : $service['AmountWithVAT'];
+      $rate    = $service['AmountWithoutVAT'];
 
       $rate = array(
           'id'    => $this->id,
