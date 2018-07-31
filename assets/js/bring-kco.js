@@ -14,7 +14,7 @@ jQuery( function( $ ) {
           $( '.bring-enter-postcode input' ).prop( 'disabled', false );
           $( '.bring-enter-postcode .input-text' ).addClass( 'bring-error-input' );
           $( '.bring-enter-postcode' ).addClass( 'bring-error' ).removeClass( 'loading' );
-          $( '<p>' ).addClass( 'bring-error-message' ).html( response.result ).appendTo( $( '.bring-enter-postcode' ) );
+          $( '<p>' ).addClass( 'bring-error-message' ).html( response.result ).appendTo( $( '.bring-search-box' ) );
           return false;
         }
         location.href = location.href;
@@ -45,15 +45,19 @@ jQuery( function( $ ) {
     if ( ! $( '.bring-enter-postcode .input-text' ).length ) {
       return;
     }
-    $( '.bring-enter-postcode .input-text' ).on( 'keydown', function() {
+    $( '.bring-enter-postcode .input-text' ).on( 'keydown', function( event ) {
       $( '.bring-enter-postcode' ).removeClass( 'bring-error' );
       $( this ).removeClass( 'bring-error-input' );
       $( '.bring-error-message' ).remove();
+      // Klarna block
+      if (event.keyCode == 13) {
+        $( '.bring-enter-postcode form' ).submit();
+      }
     } );
-    $( '.checkout' ).unbind( 'submit' );
-    $( '.checkout' ).submit( function( e ) {
+    $( '.bring-enter-postcode form' ).submit( function( e ) {
       e.preventDefault();
       e.stopPropagation();
+
       // console.log( 'submitted' );
       $( this ).addClass( 'loading' );
       $( this ).find( '.bring-enter-postcode .input-text' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );

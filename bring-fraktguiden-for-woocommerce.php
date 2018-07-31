@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-
-
 /**
  * Plugin Name:         Bring Fraktguiden for WooCommerce
  * Plugin URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce

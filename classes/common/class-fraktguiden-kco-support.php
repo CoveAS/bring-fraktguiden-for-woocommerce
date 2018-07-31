@@ -7,7 +7,7 @@ class Fraktguiden_KCO_Support {
     if ( ! class_exists( 'Klarna_Checkout_For_WooCommerce' ) ) {
       return;
     }
-    add_action( 'kco_wc_before_snippet', __CLASS__ .'::before_kco' );
+    add_action( 'woocommerce_review_order_before_shipping', __CLASS__ .'::before_kco', 50 );
     add_action( 'wp_ajax_bring_post_code_validation',         __CLASS__. '::ajax_post_code_validation' );
     add_action( 'wp_ajax_nopriv_bring_post_code_validation',  __CLASS__. '::ajax_post_code_validation' );
     add_action( 'wp_enqueue_scripts', array( __CLASS__, 'checkout_load_javascript' ) );
@@ -78,29 +78,35 @@ class Fraktguiden_KCO_Support {
     $countries = WC()->countries->get_shipping_countries();
     $country =  WC()->customer->get_shipping_country();
     ?>
-    <div class="bring-enter-postcode">
-      <form>
-        <?php if ( count( $countries ) > 1 ): ?>
-          <label for="bring-country"><?php _e( 'Country', 'woocommerce' ); ?></label>
+    <tr class="bring-enter-postcode">
+      <td colspan="4">
+        <div>
+          <form>
+          <?php do_action( 'bring_fraktguiden_before_kco_postcode' ); ?>
+          <?php if ( count( $countries ) > 1 ): ?>
+            <label for="bring-country"><?php _e( 'Country', 'woocommerce' ); ?></label>
+            <div class="bring-search-box">
+                <select id="bring-country" name="bring-country">
+                <?php foreach ( $countries as $key => $_country ): ?>
+                  <option value="<?php echo $key; ?>" <?php echo ( $country == $key ) ? 'selected="selected"':''; ?>>
+                    <?php echo $_country; ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php else: ?>
+            <input type="hidden" id="bring-country" name="bring-country" value="<?php echo key( $countries ); ?>">
+          <?php endif; ?>
+          <label for="bring-post-code"><?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?></label>
           <div class="bring-search-box">
-              <select id="bring-country" name="bring-country">
-              <?php foreach ( $countries as $key => $_country ): ?>
-                <option value="<?php echo $key; ?>" <?php echo ( $country == $key ) ? 'selected="selected"':''; ?>>
-                  <?php echo $_country; ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
+            <input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
+            <input class="bring-button button" type="submit" value="<?php _e( 'Get delivery methods', 'bring-fraktguiden' ); ?>">
           </div>
-        <?php else: ?>
-          <input type="hidden" id="bring-country" name="bring-country" value="<?php echo key( $countries ); ?>">
-        <?php endif; ?>
-        <label for="bring-post-code"><?php _e( 'Postcode', 'woocommerce' ); ?></label>
-        <div class="bring-search-box">
-          <input id="bring-post-code" class="bring-input input-text" type="text" name="bring-post-code" value="<?php echo $postcode; ?>">
-          <input class="bring-button button" type="submit" value="<?php _e( 'Search', 'bring-fraktguiden' )?>">
-        </div>
-      </form>
-    </div>
+          <?php do_action( 'bring_fraktguiden_after_kco_postcode' ); ?>
+        </form>
+      </div>
+    </td>
+  </tr>
     <?php
   }
 }
