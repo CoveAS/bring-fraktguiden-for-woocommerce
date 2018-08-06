@@ -286,6 +286,26 @@ class Bring_Booking_Order_View {
 	}
 
 	/**
+	 * Render Service Select
+	 *
+	 * @param string $key Bring product key.
+	 */
+	public static function render_service_select( $key ) {
+		$services = Fraktguiden_Helper::get_all_services();
+		echo '<select class=\"select2\" name="service_id[]">';
+		foreach ( $services as $service => $product_name ) {
+			$format = '<option value="%s">';
+			if ( strtoupper( $service ) === strtoupper( $key ) ) {
+				$format = '<option value="%s" selected="selected">';
+			}
+			printf( $format, esc_html( $service ) );
+			echo esc_html( $product_name );
+			echo '</option>';
+		}
+		echo '</select>';
+	}
+
+	/**
 	 * @param Bring_WC_Order_Adapter $order
 	 */
 	public static function render_packages( $order ) {
@@ -321,7 +341,6 @@ class Bring_Booking_Order_View {
 				<?php
 				$shipping_item_id = $package['shipping_item_info']['item_id'];
 				$key              = $package['shipping_item_info']['shipping_method']['service'];
-				$service_data     = Fraktguiden_Helper::get_service_data_for_key( $key );
 				$pickup_point     = $package['shipping_item_info']['shipping_method']['pickup_point_id'];
 				?>
 				<tr>
@@ -337,7 +356,7 @@ class Bring_Booking_Order_View {
 						</select>
 					</td>
 					<td>
-							<?php echo $service_data['ProductName']; ?>
+							<?php self::render_service_select( $key ); ?>
 							<?php if ( ! empty( $pickup_point ) ): ?>
 								<span
 									class="tips"
@@ -372,7 +391,7 @@ class Bring_Booking_Order_View {
 						</select>
 					</td>
 					<td>
-							<?php echo $service_data['ProductName']; ?>
+							<?php self::render_service_select( $key ); ?>
 							<?php if ( ! empty( $pickup_point ) ): ?>
 								<span
 									class="tips"
@@ -672,7 +691,7 @@ class Bring_Booking_Order_View {
 		}
 		$packages = $_POST['packages'];
 		$expected_fields = [
-			'height', 'length', 'order_item_id', 'weight', 'width',
+			'service_id', 'height', 'length', 'order_item_id', 'weight', 'width',
 		];
 		foreach ( $packages as $package ) {
 			foreach ( $expected_fields as $key ) {
@@ -694,9 +713,17 @@ class Bring_Booking_Order_View {
 		$shipping_methods = $order->order->get_shipping_methods();
 		$existing = [];
 		// Get the existing packages
+		$index = 0;
 		foreach ( $shipping_methods as $item_id => $method ) {
-			$meta_packages = wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
+			$meta_packages = $method->get_meta( '_fraktguiden_packages' );
 			$existing[ $item_id ] = $meta_packages;
+
+			if ( isset( $packages[ $index ]['service_id'] ) ) {
+				$bring_product = strtolower( $packages[ $index ]['service_id'] );
+				$method->update_meta_data( 'bring_product', $bring_product );
+				$method->save();
+			}
+			$index++;
 		}
 
 		$fields = [ 'weightInGrams', 'length', 'width', 'height' ];
