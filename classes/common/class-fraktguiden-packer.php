@@ -161,6 +161,9 @@ class Fraktguiden_Packer {
    * @return float
    */
   public function get_weight( $weight ) {
+    if ( is_string( $weight ) ) {
+      $weight = floatval( $weight );
+    }
     switch ( $this->weight_unit ) {
 
       case 'g' :

@@ -32,7 +32,7 @@ abstract class Bring_Consignment_Request {
         return $bring_product;
       }
       $method_id = $this->shipping_item->get_method_id();
-      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(\-\d+)$/', $method_id, $matches ) ) {
+      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(\-\d+)?$/', $method_id, $matches ) ) {
         return $bring_product;
       }
       $bring_product = $matches[1];

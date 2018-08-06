@@ -70,8 +70,7 @@ class Bring_WC_Order_Adapter {
       return [ ];
     }
     $body = json_decode( $response['body'] );
-
-    return $body->data;
+    return @$body->data->attributes->packages;
   }
 
   /**
@@ -158,7 +157,7 @@ class Bring_WC_Order_Adapter {
     $body = json_decode( $response['body'] );
     if ( property_exists( $body, 'consignments' ) ) {
       foreach ( $body->consignments as $consignment ) {
-        if ( count( $consignment->errors ) > 0 ) {
+        if ( $consignment->errors && count( $consignment->errors ) > 0 ) {
           return true;
         }
       }
