@@ -774,7 +774,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     if ( isset( $result['TraceMessages'] ) ) {
       foreach ( $result['TraceMessages'] as $messages ) {
         if ( ! is_array( $messages ) ) {
-          $messages[] = $messages;
+          $messages = [$messages];
         }
         foreach ( $messages as $message ) {
           if ( false === strpos( $message, 'does not have access to customer' ) ) {
