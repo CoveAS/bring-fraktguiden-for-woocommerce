@@ -1032,12 +1032,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         ],
       ];
     }
+    // WBF-106 Fixed shipping rates when sending to Svalbard and Jan Mayen
+    $country = $package[ 'destination' ][ 'country' ];
+    if ( 'SJ' == $package[ 'destination' ][ 'country' ] ) {
+      $country = 'NO';
+    }
     return apply_filters( 'bring_fraktguiden_standard_url_params', array(
         'clientUrl'           => $_SERVER['HTTP_HOST'],
         'from'                => $this->from_zip,
         'fromCountry'         => $this->get_selected_from_country(),
         'to'                  => $package[ 'destination' ][ 'postcode' ],
-        'toCountry'           => $package[ 'destination' ][ 'country' ],
+        'toCountry'           => $country,
         'postingAtPostOffice' => ( $this->post_office == 'no' ) ? 'false' : 'true',
         'additional'          => ( $this->evarsling == 'yes' ) ? 'evarsling' : '',
         'language'            => $this->get_bring_language()

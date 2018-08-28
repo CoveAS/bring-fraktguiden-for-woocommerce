@@ -41,7 +41,7 @@ class Fraktguiden_Packer {
     // Calculate total weight of boxes.
     $total_weight = 0;
     foreach ( $product_boxes as $box ) {
-      $total_weight += $box['weight'];
+      $total_weight += floatval( $box['weight'] );
     }
 
     // Pack the boxes in a container.
@@ -161,6 +161,7 @@ class Fraktguiden_Packer {
    * @return float
    */
   public function get_weight( $weight ) {
+    $weight = floatval( $weight );
     switch ( $this->weight_unit ) {
 
       case 'g' :
