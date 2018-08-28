@@ -956,7 +956,12 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
     }
     $exception_handling = $this->get_setting( 'exception_handling' );
 
-    if ( 'flat_rate' == $exception_handling ) {
+    // Filter the response json to get only the selected services from the settings.
+    $rates = $this->get_services_from_response( $json );
+    $rates = apply_filters( 'bring_shipping_rates', $rates );
+
+    // Only push the heavy rate when there are no other bring rates
+    if ( 'flat_rate' == $exception_handling && empty( $rates ) ) {
       // Check if any package exeeds the max settings
       $messages = $this->get_trace_messages();
       foreach ( $messages as $message ) {
@@ -971,10 +976,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         }
       }
     }
-
-    // Filter the response json to get only the selected services from the settings.
-    $rates = $this->get_services_from_response( $json );
-    $rates = apply_filters( 'bring_shipping_rates', $rates );
 
     if ( $this->debug != 'no' ) {
       $this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
