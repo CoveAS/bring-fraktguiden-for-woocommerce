@@ -130,6 +130,28 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
   }
 
   /**
+   * Get Price Setting
+   *
+   * @param  string $key
+   * @param  string|mixed $default
+   * @return float
+   */
+  public function get_price_setting( $key, $default = '' ) {
+    $price = floatval( $this->get_setting( $key, $default ) );
+    $price = $this->calculate_excl_vat( $price );
+    return $price;
+  }
+
+  public function calculate_excl_vat( $line_price ) {
+    if ( wc_prices_include_tax() ) {
+      $tax_rates      = WC_Tax::get_shipping_tax_rates();
+      $remove_taxes   = WC_Tax::calc_tax( $line_price, $tax_rates, true );
+      return $line_price - array_sum( $remove_taxes );;
+    }
+    return $line_price;
+  }
+
+  /**
    * Returns true if the required options are set
    *
    * @return boolean
@@ -855,7 +877,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $rate = array(
           'id'            => $this->id,
           'bring_product' => $this->get_setting( 'alt_flat_rate_id' ),
-          'cost'          => floatval( $this->get_setting( 'alt_flat_rate' ) ),
+          'cost'          => $this->get_price_setting( 'alt_flat_rate' ),
           'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
         );
         $this->push_rate( $rate );
@@ -920,7 +942,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
         $this->push_rate( [
           'id'            => $this->id,
           'bring_product' => $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
-          'cost'          => floatval( $this->get_setting('no_connection_flat_rate') ),
+          'cost'          => $this->get_price_setting('no_connection_flat_rate'),
           'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
         ] );
       }
@@ -942,7 +964,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
           $this->push_rate( [
             'id'    => $this->id,
             'bring_product' => $this->get_setting( 'exception_rate_id', 'servicepakke' ),
-            'cost'  => floatval( $this->get_setting( 'exception_flat_rate' ) ),
+            'cost'  => $this->get_price_setting( 'exception_flat_rate' ),
             'label' => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
           ] );
           break;

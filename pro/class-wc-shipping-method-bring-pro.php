@@ -277,7 +277,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
         $key = 'SERVICEPAKKE';
       }
       if ( isset( $custom_prices[$key] ) && ctype_digit( $custom_prices[$key] ) ) {
-        $rate['cost'] = floatval( $custom_prices[$key] );
+        $rate['cost'] = $this->calculate_excl_vat( $custom_prices[$key] );
       }
       if (
           isset( $free_shipping_checks[$key] ) &&
