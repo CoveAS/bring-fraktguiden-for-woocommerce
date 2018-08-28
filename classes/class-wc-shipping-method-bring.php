@@ -981,7 +981,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
    */
   private function get_services_from_response( $response ) {
     if ( ! $response || ( is_array( $response ) && count( $response ) == 0 ) || empty( $response['Product'] ) ) {
-      return false;
+      return [];
     }
 
     $rates = [];
