@@ -12,12 +12,12 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/
  *
- * Version:             1.5.2
+ * Version:             1.5.3
  * Requires at least:   4.9.1
  * Tested up to:        4.9.2
  *
  * WC requires at least: 3.4.0
- * WC tested up to: 3.4.2
+ * WC tested up to: 3.4.4
  *
  * Text Domain:         bring-fraktguiden
  * Domain Path:         /languages
@@ -28,7 +28,7 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  */
 class Bring_Fraktguiden {
 
-  const VERSION = '1.5.2';
+  const VERSION = '1.5.3';
 
   const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
