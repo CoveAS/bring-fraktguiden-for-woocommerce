@@ -72,6 +72,8 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 * Fixed free shipping
 * Removed VAT setting
 * Fixed some minor php 7.x issues
+* Fixed tax calculation for fixed prices
+* Fixed logic for heavy items
 
 = 1.5.2 =
 
