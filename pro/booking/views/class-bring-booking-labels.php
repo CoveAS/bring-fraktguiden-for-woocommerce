@@ -147,14 +147,18 @@ class Bring_Booking_Labels {
    * @param  string $file
    */
   static function render_file_content( $file ) {
+    $filename = $file;
+    if ( '.' === substr( $filename, -1 ) ) {
+      $filename .= 'pdf';
+    }
     // $mime = mime_content_type( $file );
     header('Content-Length: ' . filesize ( $file ) );
-    if ( preg_match('/\.pdf$/', $file ) ) {
+    if ( preg_match('/\.pdf$/', $filename ) ) {
       header( 'Content-type: application/pdf' );
     } else {
       header( 'Content-type: application/octet-stream' );
     }
-    header('Content-disposition: inline; filename='.basename( $file ));
+    header('Content-disposition: inline; filename='.basename( $filename ));
     header('Expires: 0');
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     // Workaround for Chrome's inline pdf viewer

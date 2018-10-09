@@ -48,11 +48,18 @@ class Bring_Booking_File {
    * @return string
    */
   public function get_path() {
-    return sprintf(
+    $path = sprintf(
       '%s/%s',
       $this->get_dir(),
       $this->get_name()
     );
+    if ( '.' !== substr( $path, -1 ) ) {
+      return $path;
+    }
+    if ( ! file_exists( $path ) ) {
+      return "{$path}pdf";
+    }
+    return $path;
   }
 
   /**
