@@ -389,9 +389,7 @@
             }
             else {
                 postcode = get_shipping_address_postcode();
-                console.log( 'postcode', postcode );
                 postcode_input.val( postcode );
-                console.log( 'elem postcode_input', postcode_input.val() );
             }
 
             this.populate_pickup_point_selector( postcode );

@@ -195,46 +195,57 @@ class Bring_WC_Order_Adapter {
     $shipping_methods = $shipping_items['shipping_method'];
     if ( $shipping_methods ) {
       foreach ( $shipping_methods as $item_id => $shipping_method ) {
-        if ( strpos( $shipping_method, Fraktguiden_Helper::ID ) !== false ) {
-          $pickup_point_id = [];
-          if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
-            $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
+        // Get the shipping item
+        $items = $this->order->get_items( 'shipping' );
+        $shipping_item = false;
+        foreach ( $items as $shipping_item_id => $item ) {
+          if ( $item_id == $shipping_item_id ) {
+            $shipping_item = $item;
           }
+        }
+        if ( ! $shipping_item ) {
+          continue;
+        }
+        if ( strpos( $shipping_method, Fraktguiden_Helper::ID ) === false ) {
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
+          $shipping_item->save_meta_data();
+          continue;
+        }
+        $pickup_point_id = [];
+        if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
+          $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
+        }
 
-          $packages = false;
-          if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
-            $shipping_items['_fraktguiden_packages'][$item_id];
-          }
-          if ( $packages ) {
-            // wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
-          }
+        $packages = false;
+        if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
+          $shipping_items['_fraktguiden_packages'][$item_id];
+        }
+        if ( $packages ) {
+          // wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
+        }
 
-          if ( ! empty( $pickup_point_id ) ) {
-            $pickup_point_postcode = $shipping_items['_fraktguiden_pickup_point_postcode'][$item_id];
-            $pickup_point_info     = $shipping_items['_fraktguiden_pickup_point_info_cached'][$item_id];
-
-            wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_id', $pickup_point_id );
-            wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode', $pickup_point_postcode );
-            wc_update_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached', $pickup_point_info );
-          }
-          else {
-            wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode' );
-            wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_id' );
-            wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached' );
-          }
+        if ( ! empty( $pickup_point_id ) ) {
+          $pickup_point_postcode = $shipping_items['_fraktguiden_pickup_point_postcode'][$item_id];
+          $pickup_point_info     = $shipping_items['_fraktguiden_pickup_point_info_cached'][$item_id];
+          $shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
+          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_id', $pickup_point_id );
+          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_postcode', $pickup_point_postcode );
+          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_info_cached', $pickup_point_info );
         }
         else {
-          wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_postcode' );
-          wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_id' );
-          wc_delete_order_item_meta( $item_id, '_fraktguiden_pickup_point_info_cached' );
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
+          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
         }
+        $shipping_item->save_meta_data();
       }
     }
   }
 
   public function get_shipping_data() {
     $data = [ ];
-
     foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $method ) {
       $pickup_point_id       = $method->get_meta( 'pickup_point_id' );
       $pickup_point          = null;
@@ -242,40 +253,17 @@ class Bring_WC_Order_Adapter {
       $pickup_point_postcode = null;
       if ( $pickup_point_id ) {
         $shipping_address = $this->order->get_address( 'shipping' );
-
-        $request  = new WP_Bring_Request();
-        $response = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $shipping_address['country'] . '/id/' . $pickup_point_id . '.json' );
-
-        $pickup_point          = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
-        // $pickup_point_cached   = $method->get_meta( '_fraktguiden_pickup_point_cached' );
-        // $pickup_point_postcode = $method->get_meta( '_fraktguiden_pickup_point_postcode' );
-
+        $request          = new WP_Bring_Request();
+        $response         = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $shipping_address['country'] . '/id/' . $pickup_point_id . '.json' );
+        $pickup_point     = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
       }
       $data[] = [
           'item_id'                  => $item_id,
           'pickup_point'             => $pickup_point,
           'packages'                 => json_encode( $method->get_meta( '_fraktguiden_packages' ) )
       ];
-
     }
     return $data;
-  }
-
-
-  /**
-   * Returns pickup point information for shipping item.
-   *
-   * @param int $item_id
-   * @return array
-   */
-  public function get_pickup_point_for_shipping_item( $item_id ) {
-    $result          = [ ];
-    $pickup_point_id = wc_get_order_item_meta( $item_id, 'pickup_point_id', true );
-    if ( $pickup_point_id ) {
-      $result['id'] = $pickup_point_id;
-    }
-    var_dump( $result );
-    return $result;
   }
 
   /**
