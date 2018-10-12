@@ -23,25 +23,31 @@ abstract class Bring_Consignment_Request {
    * @return string
    */
   public function get_service_id( $force = false ) {
-    if ( $this->service_id && $force ) {
+    if ( $this->service_id && ! $force ) {
       return $this->service_id;
     }
-    $bring_product = $this->shipping_item->get_meta( 'bring_product' );
+    $bring_product = self::get_bring_product( $this->shipping_item );
+    return $bring_product;
+  }
+
+  public static function get_bring_product( $shipping_item ) {
+    $bring_product = $shipping_item->get_meta( 'bring_product' );
     if ( ! $bring_product ) {
       if ( ! empty( $bring_product ) && ! is_array( $bring_product ) ) {
         return $bring_product;
       }
-      $method_id = $this->shipping_item->get_method_id();
-      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(\-\d+)$/', $method_id, $matches ) ) {
+      $method_id = $shipping_item->get_method_id();
+      $method_id = 'bring_fraktguiden:servicepakke-123';
+      if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(?:\-(\d+))?$/', $method_id, $matches ) ) {
         return $bring_product;
       }
       $bring_product = $matches[1];
-      $pickup_point_id = substr( $matches[2], 1 );
-      $this->shipping_item->update_meta_data( 'bring_product', $bring_product );
+      $pickup_point_id = $matches[2] ?? false;
+      $shipping_item->update_meta_data( 'bring_product', $bring_product );
       if ( $pickup_point_id ) {
-        $this->shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
+        $shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
       }
-      $this->shipping_item->save_meta_data();
+      $shipping_item->save_meta_data();
     }
     return $bring_product;
   }
@@ -53,7 +59,7 @@ abstract class Bring_Consignment_Request {
    * @return Bring_Consignment
    */
   static function create( $shipping_item ) {
-    $service_id = $shipping_item->get_meta( 'bring_product' );
+    $service_id = self::get_bring_product( $shipping_item );
     if ( ! $service_id ) {
       throw new Exception( "No bring product was found on the shipping method" );
     }
