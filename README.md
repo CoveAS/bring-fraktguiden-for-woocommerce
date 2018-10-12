@@ -67,6 +67,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.5 =
+
+* Fixed editing pickup point on orders in wp-admin
+
 = 1.5.4 =
 
 * Fixed issue with label downloads
