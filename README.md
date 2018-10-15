@@ -67,6 +67,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.7 =
+
+* Fixed a 500 caused by php 7.0 syntax on older php versions
+
 = 1.5.6 =
 
 * Fixed a 500 error when trying to book with bring with shipping items that were not added through checkout
