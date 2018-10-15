@@ -37,12 +37,11 @@ abstract class Bring_Consignment_Request {
         return $bring_product;
       }
       $method_id = $shipping_item->get_method_id();
-      $method_id = 'bring_fraktguiden:servicepakke-123';
       if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(?:\-(\d+))?$/', $method_id, $matches ) ) {
         return $bring_product;
       }
-      $bring_product = $matches[1];
-      $pickup_point_id = $matches[2] ?? false;
+      $bring_product   = $matches[1];
+      $pickup_point_id = isset( $matches[2] ) ? $matches[2] : false;
       $shipping_item->update_meta_data( 'bring_product', $bring_product );
       if ( $pickup_point_id ) {
         $shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
