@@ -67,6 +67,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.8 =
+
+* Improved adding shipping items to orders from admin
+
 = 1.5.7 =
 
 * Fixed a 500 caused by php 7.0 syntax on older php versions
