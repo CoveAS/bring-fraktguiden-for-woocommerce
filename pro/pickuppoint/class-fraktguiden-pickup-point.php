@@ -207,6 +207,16 @@ class Fraktguiden_Pickup_Point {
     if ( isset( $_GET['post_id'] ) && isset( $_GET['service'] ) ) {
 
       $order = wc_get_order( $_GET['post_id'] );
+      if ( isset( $_GET['country'] ) ) {
+        $country = $_GET['country'];
+      } else {
+        $country = $order->get_shipping_country();
+      }
+      if ( isset( $_GET['postcode'] ) ) {
+        $postcode = $_GET['postcode'];
+      } else {
+        $postcode = $order->get_shipping_postcode();
+      }
       $items = $order->get_items();
 
       $fake_cart = [ ];
@@ -231,8 +241,8 @@ class Fraktguiden_Pickup_Point {
           'clientUrl'           => $_SERVER['HTTP_HOST'],
           'from'                => Fraktguiden_Helper::get_option( 'from_zip' ),
           'fromCountry'         => Fraktguiden_Helper::get_option( 'from_country' ),
-          'to'                  => $order->get_shipping_postcode(),
-          'toCountry'           => $order->get_shipping_country(),
+          'to'                  => $postcode,
+          'toCountry'           => $country,
           'postingAtPostOffice' => ( Fraktguiden_Helper::get_option( 'post_office' ) == 'no' ) ? 'false' : 'true',
           'additional'          => ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) ? 'evarsling' : '',
       );

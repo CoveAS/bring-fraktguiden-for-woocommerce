@@ -217,15 +217,9 @@ class Bring_WC_Order_Adapter {
         if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
           $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
         }
-
-        $packages = false;
         if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
           $shipping_items['_fraktguiden_packages'][$item_id];
         }
-        if ( $packages ) {
-          // wc_update_order_item_meta( $item_id, '_fraktguiden_packages', json_decode( stripslashes( $packages ), true ) );
-        }
-
         if ( ! empty( $pickup_point_id ) ) {
           $pickup_point_postcode = $shipping_items['_fraktguiden_pickup_point_postcode'][$item_id];
           $pickup_point_info     = $shipping_items['_fraktguiden_pickup_point_info_cached'][$item_id];

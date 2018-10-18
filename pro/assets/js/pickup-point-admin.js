@@ -59,9 +59,11 @@
             $.ajax( {
                 url: self.ajax_url(),
                 data: {
-                    'action': 'bring_get_rate',
-                    'post_id': $( '#post_ID' ).val(),
-                    'service': service
+                    'action'  : 'bring_get_rate',
+                    'post_id' : $( '#post_ID' ).val(),
+                    'country' : get_shipping_address_country(),
+                    'postcode': get_shipping_address_postcode(),
+                    'service' : service
                 },
                 dataType: 'json',
                 success: callback
