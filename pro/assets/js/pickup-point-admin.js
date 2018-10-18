@@ -37,6 +37,8 @@
                 url: self.ajax_url(),
                 data: {
                     'action': 'bring_shipping_info_var',
+                    'country' : get_shipping_address_country(),
+                    'postcode': get_shipping_address_postcode(),
                     'post_id': $( '#post_ID' ).val()
                 },
                 dataType: 'json',
