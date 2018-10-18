@@ -41,7 +41,6 @@
                 },
                 dataType: 'json',
                 success: function ( response, status ) {
-                    console.log( 'Update > success', response );
                     self.set_shipping_order_data( response.bring_shipping_info );
                     $( document.body ).trigger( 'bring_info_loaded.bring' );
                 }
@@ -499,7 +498,6 @@
 
                     self.row.unblock();
 
-                    console.log( response );
 
                     if ( status == 'success' ) {
                         var rate = response.rate;
@@ -577,8 +575,6 @@
             var pickup_point_id = info && info.pickup_point ? info.pickup_point.id : '';
             var pickup_point_info_cached = info && info.pickup_point ? Bring_Common.br2pipe( Bring_Common.create_pickup_point_display_html( info.pickup_point, get_shipping_address_country() ) ) : '';
             var packages = info ? info.packages : '';
-
-            console.log('append fraktguiden ui');
 
             editor.append(
                 '<div class="fraktguiden-ui" style="display:none">' +
