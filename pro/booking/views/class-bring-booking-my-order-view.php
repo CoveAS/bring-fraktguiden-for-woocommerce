@@ -25,9 +25,13 @@ class Bring_Booking_My_Order_View {
       $content .= '<strong>' . __( 'Your tracking number: ', 'bring-fraktguiden' ) . '</strong>';
       $content .= '<ul>';
       foreach ( $order->get_booking_consignments() as $consignment ) {
-        $confirmation       = $consignment->confirmation;
-        $consignment_number = $confirmation->consignmentNumber;
-        $content .= '<li><a href="' . $confirmation->links->tracking . '">' . $consignment_number . '</a></li>';
+        $consignment_number = $consignment->get_consignment_number();
+        $links = $consignment->get_links();
+        $content .= sprintf(
+          '<li><a href="%s">%s</a></li>',
+          $links['tracking'],
+          $consignment_number
+        );
       }
       $content .= '</ul>';
       $content .= '</div>';

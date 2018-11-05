@@ -22,7 +22,7 @@ abstract class Bring_Consignment {
       // Build the booking consignments
       foreach ( $body['consignments'] as $item ) {
         // Check for errors
-        if ( count( $item['errors'] ) > 0 ) {
+        if ( ! empty( $item['errors'] ) ) {
           // Return empty if any errors are found
           return [];
         }

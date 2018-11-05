@@ -135,9 +135,9 @@ class Bring_WC_Order_Adapter {
    */
   public function has_booking_consignments() {
     if ( 'mailbox' == $this->get_consignment_type() ) {
-      return count( $this->get_mailbox_consignments() ) > 0;
+      return ! empty( $this->get_mailbox_consignments() );
     } else {
-      return count( $this->get_booking_consignments() ) > 0;
+      return ! empty( $this->get_booking_consignments() );
     }
   }
 
@@ -158,7 +158,7 @@ class Bring_WC_Order_Adapter {
     $body = json_decode( $response['body'] );
     if ( property_exists( $body, 'consignments' ) ) {
       foreach ( $body->consignments as $consignment ) {
-        if ( count( $consignment->errors ) > 0 ) {
+        if ( ! empty( $consignment->errors ) ) {
           return true;
         }
       }
@@ -172,7 +172,7 @@ class Bring_WC_Order_Adapter {
    * @return bool
    */
   public function has_bring_shipping_methods() {
-    return count( $this->get_fraktguiden_shipping_items() ) > 0;
+    return ! empty( $this->get_fraktguiden_shipping_items() );
   }
 
   static function check_meta_key( $array, $key ) {
