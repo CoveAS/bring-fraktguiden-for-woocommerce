@@ -67,6 +67,12 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.9 =
+
+* Fixed an issue with changing the shipping item for booking in admin
+* Fixed tracking number not showing in emails
+* Fixed some php 7.2 warnings
+
 = 1.5.8 =
 
 * Improved adding shipping items to orders from admin
