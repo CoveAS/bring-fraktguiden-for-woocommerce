@@ -214,6 +214,9 @@ class Bring_WC_Order_Adapter {
           continue;
         }
         $pickup_point_id = [];
+        if ( isset( $shipping_items['_fraktguiden_services'][$item_id] ) ) {
+          $shipping_item->update_meta_data( 'bring_product', $shipping_items['_fraktguiden_services'][$item_id] );
+        }
         if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
           $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
         }
