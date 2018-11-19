@@ -313,8 +313,6 @@ class Bring_Booking_Order_View {
       </thead>
       <tbody>
       <?php
-      // YO! This shit breaks NOW!
-      //
       foreach ( $order->get_fraktguiden_shipping_items() as $item_id => $shipping_method ) {
 
       // 1. Create Booking Consignment

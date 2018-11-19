@@ -23,7 +23,7 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
     $full_name = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
     $name      = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
 
-    $tracking = preg_match( '/SPORBAR$/', $this->service_id );
+    $tracking = preg_match( '/sporbar$/', $this->get_service_id() );
 
     $phone_number = $order->get_billing_phone();
     $phone_number = Fraktguiden_Helper::phone_i18n( $phone_number, $order->get_billing_country() );

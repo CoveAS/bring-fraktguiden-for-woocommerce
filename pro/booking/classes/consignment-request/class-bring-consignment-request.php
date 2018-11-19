@@ -34,11 +34,11 @@ abstract class Bring_Consignment_Request {
     $bring_product = $shipping_item->get_meta( 'bring_product' );
     if ( ! $bring_product ) {
       if ( ! empty( $bring_product ) && ! is_array( $bring_product ) ) {
-        return $bring_product;
+        return strtolower($bring_product);
       }
       $method_id = $shipping_item->get_method_id();
       if ( ! preg_match('/^bring_fraktguiden:([a-z\d_]+)(?:\-(\d+))?$/', $method_id, $matches ) ) {
-        return $bring_product;
+        return strtolower($bring_product);
       }
       $bring_product   = $matches[1];
       $pickup_point_id = isset( $matches[2] ) ? $matches[2] : false;
@@ -48,7 +48,7 @@ abstract class Bring_Consignment_Request {
       }
       $shipping_item->save_meta_data();
     }
-    return $bring_product;
+    return strtolower($bring_product);
   }
 
   /**

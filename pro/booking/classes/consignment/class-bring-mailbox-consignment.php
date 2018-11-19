@@ -58,6 +58,11 @@ class Bring_Mailbox_Consignment extends Bring_Consignment {
     }
     return $this->data['attributes']['labelUri'];
   }
+  public function get_links() {
+    return [
+      'tracking' => '',
+    ];
+  }
 
   /**
    * Get date time
