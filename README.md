@@ -67,6 +67,9 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.10 =
+* Fixed an issue with not being able to book with mailbox
+
 = 1.5.9 =
 
 * Fixed an issue with changing the shipping item for booking in admin
