@@ -2,8 +2,7 @@
 //$correlation_id     = $consignment->correlationId;
 // $errors             = $consignment->errors;
 $consignment_number = $consignment->get_consignment_number();
-$links              = $consignment->get_links();
-$tracking           = $links['tracking'];
+$tracking           = $consignment->get_tracking_link();
 $date_and_times     = $consignment->get_dates();
 $earliest_pickup    = $date_and_times['earliestPickup'] ? date_i18n( wc_date_format(), $date_and_times['earliestPickup'] / 1000 ) : 'N/A';
 $expected_delivery  = $date_and_times['expectedDelivery'] ? date_i18n( wc_date_format(), $date_and_times['expectedDelivery'] / 1000 ) : 'N/A';

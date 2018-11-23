@@ -26,10 +26,9 @@ class Bring_Booking_My_Order_View {
       $content .= '<ul>';
       foreach ( $order->get_booking_consignments() as $consignment ) {
         $consignment_number = $consignment->get_consignment_number();
-        $links = $consignment->get_links();
         $content .= sprintf(
           '<li><a href="%s">%s</a></li>',
-          $links['tracking'],
+          $consignment->get_tracking_link(),
           $consignment_number
         );
       }

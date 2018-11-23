@@ -5,8 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Bring_Booking_Request {
   const SCHEMA_VERSION = 1;
-  // const BOOKING_URL = 'http://drivdi-1551.rask3.raskesider.no/_public/fraktguiden/test-mybring-booking.php';
-  // const BOOKING_URL = 'http://drivdi-1551.rask3.raskesider.no/_public/fraktguiden/test-mybring-booking-errors.php';
+
   const BOOKING_URL = 'https://api.bring.com/booking/api/booking';
 
   /** @var WP_Bring_Request */

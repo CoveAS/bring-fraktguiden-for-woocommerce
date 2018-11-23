@@ -116,7 +116,7 @@ class Bring_Booking_Order_View {
         $next_status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
         if ( $next_status != 'none' ) {
           $order_statuses = wc_get_order_statuses();
-          printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden' ), strtolower( $order_statuses[$next_status] ) );
+          printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden' ), mb_strtolower( $order_statuses[$next_status] ) );
         }
         ?>
       </div>
