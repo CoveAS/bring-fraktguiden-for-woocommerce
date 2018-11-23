@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Fraktguiden Product Tester
+ * Fraktguiden Product Debug
  */
-class Fraktguiden_Product_Tester
+class Fraktguiden_Product_Debug
 {
   static function setup() {
     add_action( 'add_meta_boxes', __CLASS__.'::add_events_metaboxes' );
@@ -22,8 +22,7 @@ class Fraktguiden_Product_Tester
 
 
   static function layout_of_meta_box_content() {
-
-  ?>
+    ?>
 
     <div style="display: grid; grid-template-columns: 2fr 1fr;">
 
@@ -39,14 +38,15 @@ class Fraktguiden_Product_Tester
         <?php printf( '<a class="button button-primary button-large" href="%s">%s</a>', '#test', 'Test bring' ); ?>
       </div>
     </div>
-
-  <?php
-
+    <?php
   }
 
 
   static function render() {
-
+    WC()->frontend_includes();
+    $session_class = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' );
+    WC()->session = new $session_class();
+    WC()->customer = new WC_Customer( get_current_user_id(), false );
     $post = get_post();
     // $cart_id = $this->generate_cart_id( $product_id, $variation_id, $variation, $cart_item_data );
     $product = wc_get_product( $post->ID );

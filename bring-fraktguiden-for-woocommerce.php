@@ -42,7 +42,6 @@ class Bring_Fraktguiden {
     require_once 'classes/class-wc-shipping-method-bring.php';
     require_once 'classes/common/class-fraktguiden-license.php';
     require_once 'classes/common/class-fraktguiden-admin-notices.php';
-    require_once 'classes/common/class-fraktguiden-product-tester.php';
     require_once 'classes/common/class-fraktguiden-kco-support.php';
     require_once 'pro/class-wc-shipping-method-bring-pro.php';
 
@@ -72,8 +71,13 @@ class Bring_Fraktguiden {
     add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
 
     Fraktguiden_Admin_Notices::init();
-    // Disabled for now
-    // Fraktguiden_Product_Tester::setup();
+
+    if ( 'yes' == Fraktguiden_Helper::get_option( 'debug' ) ) {
+      require_once 'classes/debug/class-fraktguiden-product-debug.php';
+      require_once 'classes/debug/class-fraktguiden-order-debug.php';
+      Fraktguiden_Product_Debug::setup();
+      Fraktguiden_Order_Debug::setup();
+    }
 
     if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
       add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
@@ -119,11 +123,7 @@ class Bring_Fraktguiden {
    * @return array
    */
   static function add_bring_method( $methods ) {
-    if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) {
-      $methods['bring_fraktguiden'] =  'WC_Shipping_Method_Bring_Pro';
-    } else {
-      $methods['bring_fraktguiden'] =  'WC_Shipping_Method_Bring';
-    }
+    $methods['bring_fraktguiden'] = 'WC_Shipping_Method_Bring_Pro';
     return $methods;
   }
 
