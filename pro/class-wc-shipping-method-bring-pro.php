@@ -4,10 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 include_once 'order/class-bring-wc-order-adapter.php';
-include_once 'pickuppoint/class-fraktguiden-pickup-point.php';
 include_once 'booking/class-bring-booking.php';
+include_once 'pickuppoint/class-fraktguiden-pickup-point.php';
 
-Fraktguiden_Pickup_Point::init();
+if ( Fraktguiden_Helper::pro_activated() ) {
+  Fraktguiden_Pickup_Point::init();
+}
 
 if ( is_admin() ) {
   if ( Fraktguiden_Helper::get_option( 'booking_enabled' ) == 'yes' ) {
@@ -165,7 +167,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $this->form_fields['booking_address_store_name'] = [
         'title'       => __( 'Store Name', 'bring-fraktguiden' ),
         'type'        => 'text',
-        'placeholder' => get_bloginfo( 'name' ),
         'default'     => get_bloginfo( 'name' )
     ];
 
