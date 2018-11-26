@@ -67,7 +67,15 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.11 =
+
+* Fixed mailbox tracking code url
+* Fixed an issue causing settings to be lost when turning off PRO
+* Made some text changes
+* Added a redirect to the settings page when there are empty store address fields when booking
+
 = 1.5.10 =
+
 * Fixed an issue with not being able to book with mailbox
 
 = 1.5.9 =
