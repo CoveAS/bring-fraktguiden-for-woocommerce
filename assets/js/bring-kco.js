@@ -23,8 +23,9 @@ jQuery( function( $ ) {
   }
 
   function toggle_checkout() {
+    var shipping_method = $( '#shipping_method' ).length;
     var shipping_opts = $( 'input[name^="shipping_method"]' ).length;
-    if ( shipping_opts ) {
+    if ( shipping_opts || ! shipping_method ) {
       $( '.bring-enter-postcode' ).hide();
       $( '#klarna-checkout-container' ).show();
     } else {
@@ -58,7 +59,6 @@ jQuery( function( $ ) {
       e.preventDefault();
       e.stopPropagation();
 
-      // console.log( 'submitted' );
       $( this ).addClass( 'loading' );
       $( this ).find( '.bring-enter-postcode .input-text' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );
       $( '.bring-error-message' ).remove();
