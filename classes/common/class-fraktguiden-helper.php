@@ -24,6 +24,17 @@ class Fraktguiden_Helper {
   }
 
   /**
+   * Get KCO Support default
+   *
+   * @return string 'yes' or 'no'.
+   */
+	static function get_kco_support_default() {
+		$is_old = defined( 'KCO_WC_VERSION' ) && 0 > version_compare( KCO_WC_VERSION, '1.8.0' );
+		return $is_old ? 'yes' : 'no';
+	}
+
+
+  /**
    * Get settings url
    * @return string URL to the settings page
    */

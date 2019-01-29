@@ -10,12 +10,11 @@ class Fraktguiden_KCO_Support {
 		if ( ! class_exists( 'Klarna_Checkout_For_WooCommerce' ) ) {
 			return;
 		}
-		add_action( 'woocommerce_review_order_before_shipping', __CLASS__ .'::before_kco', 50 );
-		add_action( 'wp_ajax_bring_post_code_validation',         __CLASS__. '::ajax_post_code_validation' );
-		add_action( 'wp_ajax_nopriv_bring_post_code_validation',  __CLASS__. '::ajax_post_code_validation' );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'checkout_load_javascript' ) );
+		add_action( 'woocommerce_review_order_before_shipping', __CLASS__ . '::before_kco', 50 );
+		add_action( 'wp_ajax_bring_post_code_validation', __CLASS__ . '::ajax_post_code_validation' );
+		add_action( 'wp_ajax_nopriv_bring_post_code_validation', __CLASS__ . '::ajax_post_code_validation' );
+		add_action( 'wp_enqueue_scripts', __CLASS__ . '::checkout_load_javascript' );
 	}
-
 
 	/**
 	 * Load checkout javascript
@@ -30,9 +29,12 @@ class Fraktguiden_KCO_Support {
 				true
 			);
 			wp_enqueue_script( 'fraktguiden-kco' );
+			wp_localize_script( 'fraktguiden-kco', '_fraktguiden_kco', [
+				'ajaxurl'               => admin_url( 'admin-ajax.php' ),
+				'klarna_checkout_nonce' => wp_create_nonce( 'klarna_checkout_nonce' ),
+			] );
 		}
 	}
-
 
 	/**
 	 * Ajax post code validation
