@@ -9,7 +9,7 @@ Tested up to: 4.9.1
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.4.2
-Stable tag: 1.5.11
+Stable tag: 1.5.12
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -91,6 +91,12 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 
 == Changelog ==
+
+= 1.5.12 =
+
+* Fixed a problem where the KCO support script used data from the pickupoint API
+* Disabled enhanced KCO support by default for newer versions of KCO
+* Fixed a bug where tracking code would appear on order confirmation emails even if there was no tracking on the order
 
 = 1.5.11 =
 
