@@ -214,16 +214,34 @@ class Bring_Booking_Order_View {
     self::render_parties( $consignment );
     ?>
     <div class="bring-form-field">
-      <label
-          for="_bring_additional_info"><?php _e( 'Additional Info', 'bring-fraktguiden' ); ?>
-        :</label>
-      <textarea name="_bring_additional_info" id="_bring_additional_info"
-                style="width:20em"></textarea>
+      <label for="_bring_additional_info_sender">
+        <?php esc_html_e( 'Additional Info', 'bring-fraktguiden' ); ?>
+        (<?php esc_html_e( 'Sender', 'bring-fraktguiden' ); ?>)
+      </label>
+      <textarea name="_bring_additional_info_sender" id="_bring_additional_info_sender"></textarea>
+    </div>
+    <div class="bring-form-field">
+      <label for="_bring_additional_info_recipient">
+        <?php esc_html_e( 'Additional Info', 'bring-fraktguiden' ); ?>
+        (<?php esc_html_e( 'Recipient', 'bring-fraktguiden' ); ?>)
+      </label>
+      <textarea 
+        name="_bring_additional_info_recipient"
+        id="_bring_additional_info_recipient"
+        ></textarea>
+    </div>
+    <div class="bring-customer-note">
+      <span class="bring-customer-note__label">
+        <?php esc_html_e( 'Customer note from the order', 'bring-fraktguiden' ); ?>:
+      </span>
+      <span class="bring-customer-note__value">
+        <?php echo esc_html( $order->order->get_customer_note() ); ?>
+      </span>
     </div>
 
     <div class="bring-form-field" style="margin-bottom:25px">
       <label>
-        <?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
+        <?php esc_html_e( 'Packages', 'bring-fraktguiden' ); ?>:
       </label>
       <?php self::render_packages( $order ); ?>
     </div>

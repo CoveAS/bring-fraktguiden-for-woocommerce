@@ -231,7 +231,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
   public function init_settings() {
     parent::init_settings();
     // Remove settings for empty fields so that WooCommerce can populate them with default values
-    if ( ! $this->settings['booking_address_country'] ) {
+    if ( isset( $this->settings['booking_address_country'] ) && ! $this->settings['booking_address_country'] ) {
       unset( $this->settings['booking_address_country'] );
     }
   }

@@ -76,8 +76,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
   public function get_sender_address() {
     $wc_order = $this->shipping_item->get_order();
     $additional_info = '';
-    if ( isset( $_REQUEST['_bring_additional_info'] ) ) {
-      $additional_info = filter_var( $_REQUEST['_bring_additional_info'], FILTER_SANITIZE_STRING );
+    if ( isset( $_POST['_bring_additional_info_sender'] ) ) {
+      $additional_info = filter_var( $_POST['_bring_additional_info_sender'], FILTER_SANITIZE_STRING );
     }
     $sender = $this->get_sender();
 
@@ -107,6 +107,10 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
     $order     = $this->shipping_item->get_order();
     $full_name = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
     $name      = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
+    $additional_info = '';
+    if ( isset( $_POST['_bring_additional_info_recipient'] ) ) {
+      $additional_info = filter_var( $_POST['_bring_additional_info_recipient'], FILTER_SANITIZE_STRING );
+    }
     return [
       "name"                  => $name,
       "addressLine"           => $order->get_shipping_address_1(),
@@ -115,7 +119,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
       "city"                  => $order->get_shipping_city(),
       "countryCode"           => $order->get_shipping_country(),
       "reference"             => null,
-      "additionalAddressInfo" => $order->get_customer_note(),
+      "additionalAddressInfo" => null,
       "contact"               => [
         "name"        => $full_name,
         "email"       => $order->get_billing_email(),

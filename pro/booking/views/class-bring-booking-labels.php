@@ -17,7 +17,7 @@ class Bring_Booking_Labels {
     if ( is_array( $order_ids ) ) {
       $order_ids = implode( ',', $order_ids );
     }
-    return admin_url( '?page=bring_download&order_ids=' . $order_ids );
+    return admin_url( 'admin.php?page=bring_download&order_ids=' . $order_ids );
   }
 
   /**
