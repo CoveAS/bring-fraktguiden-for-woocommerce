@@ -30,7 +30,7 @@ class Bring_Booking_File {
     if ( $this->external_url ) {
       $urlinfo = parse_url( $this->external_url );
       $pathinfo = pathinfo( $urlinfo['path'] );
-      return $pathinfo['extension'];
+      return isset( $pathinfo['extension'] ) ? $pathinfo['extension'] : '';
     }
     return $ext;
   }
