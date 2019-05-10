@@ -967,7 +967,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Filter the response json to get only the selected services from the settings.
 		$rates = $this->get_services_from_response( $json );
-		$rates = apply_filters( 'bring_shipping_rates', $rates );
+		$rates = apply_filters( 'bring_shipping_rates', $rates, $this );
 
 		// Only push the heavy rate when there are no other bring rates
 		if ( 'flat_rate' == $exception_handling && empty( $rates ) ) {
@@ -1025,21 +1025,26 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$response['Product'][] = $cache;
 		}
 
-		foreach ( $response['Product'] as $serviceDetails ) {
-			if ( ! empty( $this->services ) && ! in_array( $serviceDetails['ProductId'], $this->services ) ) {
+		foreach ( $response['Product'] as $service_details ) {
+			if ( ! empty( $this->services ) && ! in_array( $service_details['ProductId'], $this->services ) ) {
 				continue;
 			}
 
-			$service = $serviceDetails['Price']['PackagePriceWithoutAdditionalServices'];
+			$service = $service_details['Price']['PackagePriceWithoutAdditionalServices'];
 			$rate    = $service['AmountWithoutVAT'];
 
+			if ( 'CustomName' == $this->service_name ) {
+				$label = $service_details['GuiInformation']['ProductName'];
+			} else {
+				$label = $service_details['GuiInformation'][$this->service_name];
+			}
 			$rate = array(
 					'id'    => $this->id,
-					'bring_product' => sanitize_title( $serviceDetails['ProductId'] ),
+					'bring_product' => sanitize_title( $service_details['ProductId'] ),
 					'cost'  => (float)$rate + (float)$this->fee,
-					'label' => $serviceDetails['GuiInformation'][$this->service_name]
+					'label' => $label
 							. ( $this->display_desc == 'no' ?
-									'' : ': ' . $serviceDetails['GuiInformation']['DescriptionText'] ),
+									'' : ': ' . $service_details['GuiInformation']['DescriptionText'] ),
 			);
 
 			array_push( $rates, $rate );

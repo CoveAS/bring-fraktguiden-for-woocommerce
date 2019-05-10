@@ -63,7 +63,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
     $this->booking_address_email          = $this->get_setting( 'booking_address_email' );
     $this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
 
-    add_filter( 'bring_shipping_rates', [$this, 'filter_shipping_rates'] );
+    add_filter( 'bring_shipping_rates', [$this, 'filter_shipping_rates'], 10, 2 );
   }
 
   public function init_form_fields() {
@@ -252,22 +252,22 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
    * @param  array $rates
    * @return array
    */
-  public function filter_shipping_rates( $rates ) {
+  public function filter_shipping_rates( $rates, $shipping_method ) {
     $field_key                = $this->get_field_key( 'services' );
+    $custom_names             = get_option( $field_key . '_custom_names' );
     $custom_prices            = get_option( $field_key . '_custom_prices' );
     $free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
     $free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
     $cart                     = WC()->cart;
-
     $cart_items               = $cart ? $cart->get_cart() : [];
     $cart_total               = 0;
 
+    if ( empty( $rates )  ) {
+      return $rates;
+    }
     foreach ( $cart_items as $cart_item_key => $values ) {
       $_product = $values['data'];
       $cart_total += $_product->get_price() * $values['quantity'];
-    }
-    if ( empty( $rates )  ) {
-      return $rates;
     }
     foreach ( $rates as &$rate ) {
       if ( ! preg_match( '/^bring_fraktguiden/', $rate['id'] ) ) {
@@ -276,6 +276,9 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
       $key = strtoupper( $rate['bring_product'] );
       if ( 0 === strpos( $key, 'SERVICEPAKKE' ) ) {
         $key = 'SERVICEPAKKE';
+      }
+      if ( 'CustomName' == $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
+      	$rate['label'] = $custom_names[ $key ];
       }
       if ( isset( $custom_prices[$key] ) && ctype_digit( $custom_prices[$key] ) ) {
         $rate['cost'] = $this->calculate_excl_vat( $custom_prices[$key] );
