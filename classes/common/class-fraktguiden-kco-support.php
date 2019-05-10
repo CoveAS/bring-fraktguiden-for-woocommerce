@@ -82,8 +82,12 @@ class Fraktguiden_KCO_Support {
 		$postcode = esc_html( WC()->customer->get_shipping_postcode() );
 		$countries = WC()->countries->get_shipping_countries();
 		$country =  WC()->customer->get_shipping_country();
+		$classes = "bring-enter-postcode";
+		if ( ! $postcode && WC()->cart->needs_shipping() ) {
+			$classes.= " bring-required";
+		}
 		?>
-		<tr class="bring-enter-postcode">
+		<tr class="<?php echo $classes; ?>">
 			<td colspan="4">
 				<div>
 					<form>
@@ -104,7 +108,7 @@ class Fraktguiden_KCO_Support {
 					<?php endif; ?>
 					<label for="bring-post-code"><?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?></label>
 					<div class="bring-search-box">
-						<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
+						<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( '0000', 'bring-fraktguiden' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
 						<input class="bring-button button" type="submit" value="<?php _e( 'Get delivery methods', 'bring-fraktguiden' ); ?>">
 					</div>
 					<?php do_action( 'bring_fraktguiden_after_kco_postcode' ); ?>

@@ -75,14 +75,14 @@ class Post_Type_Mailbox_Label {
       'woocommerce',
       __( 'Mailbox labels' ),
       __( 'Mailbox labels' ),
-      'administrator',
+      'read_mailbox_label',
       'edit.php?post_type=mailbox_label'
     );
     add_submenu_page(
       'woocommerce',
       __( 'Mailbox waybills' ),
       __( 'Mailbox waybills' ),
-      'administrator',
+      'read_mailbox_waybill',
       'edit.php?post_type=mailbox_waybill'
     );
     // var_dump( $submenu['woocommerce'] );die;

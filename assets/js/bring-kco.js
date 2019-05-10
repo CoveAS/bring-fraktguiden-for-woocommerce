@@ -23,14 +23,15 @@ jQuery( function( $ ) {
 	}
 
 	function toggle_checkout() {
-		var shipping_method = $( '#shipping_method, .woocommerce-shipping-totals' ).length;
-		var shipping_opts = $( 'input[name^="shipping_method"]' ).length;
-		if ( shipping_opts || ! shipping_method ) {
-			$( '.bring-enter-postcode' ).hide();
-			$( '#klarna-checkout-container' ).show();
-		} else {
+		var elem = $( '.bring-enter-postcode' );
+		// var shipping_method = $( '#shipping_method, .woocommerce-shipping-totals' ).length;
+		// var shipping_opts = $( 'input[name^="shipping_method"]' ).length;
+		if ( elem.length && elem.hasClass('bring-required') ) {
 			$( '.bring-enter-postcode' ).show();
 			$( '#klarna-checkout-container' ).hide();
+		} else {
+			$( '.bring-enter-postcode' ).hide();
+			$( '#klarna-checkout-container' ).show();
 		}
 	}
 
