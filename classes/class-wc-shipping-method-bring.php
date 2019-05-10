@@ -321,6 +321,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'options'     => [
 						'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
 						'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
+						'CustomName'  => __( 'Custom Name', 'bring-fraktguiden' ),
 					]
 				],
 				'display_desc'  => array(

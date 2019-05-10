@@ -21,6 +21,13 @@
 	>
 		<?php echo $service->service_data[ $this->shipping_method->service_name ]; ?>
 	</label>
+	<input
+		class="fraktguiden-service-custom-name"
+		style="display: none"
+		placeholder="<?php echo $service->service_data['ProductName']; ?>"
+		name="<?php echo $service->custom_name_id; ?>"
+		value="<?php echo $service->custom_name; ?>"
+	/>
 	</td>
 	<?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
 	<td class="fraktguiden-services-table-col-custom-price">

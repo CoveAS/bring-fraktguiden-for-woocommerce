@@ -40,32 +40,18 @@ class Fraktguiden_Service_Table {
 	public function process_services_field( $instance_key ) {
 
 		$field_key = $this->shipping_method->get_field_key( 'services' );
-		// @TODO: Use instance key to have per-zone settings
-		// Process services table
-		$services_custom_prices_field = $field_key . '_custom_prices';
-		$custom_prices                = [];
-		if ( isset( $_POST[ $field_key ] ) ) {
-			$checked_services = $_POST[ $field_key ];
-			foreach ( $checked_services as $key => $service ) {
-
-				if ( isset( $_POST[ $services_custom_prices_field ][ $service ] ) ) {
-					$custom_prices[ $service ] = $_POST[ $services_custom_prices_field ][ $service ];
-				}
-			}
-		}
-
-		update_option( $services_custom_prices_field, $custom_prices );
 
 		// Process services table.
 		$services  = Fraktguiden_Helper::get_services_data();
 		$field_key = $field_key;
 		$vars      = [
 			'custom_prices',
+			'custom_names',
 			'free_shipping_checks',
 			'free_shipping_thresholds',
 		];
 		$options   = [];
-		// Only process options for enabled services
+		// Only process options for enabled services.
 		foreach ( $services as $group => $service_group ) {
 			foreach ( $service_group['services'] as $key => $service ) {
 				foreach ( $vars as $var ) {
@@ -96,6 +82,7 @@ class Fraktguiden_Service_Table {
 		$service_options = [
 			'field_key'                => $field_key,
 			'selected'                 => $this->shipping_method->services,
+			'custom_names'            => get_option( $field_key . '_custom_names' ),
 			'custom_prices'            => get_option( $field_key . '_custom_prices' ),
 			'free_shipping_checks'     => get_option( $field_key . '_free_shipping_checks' ),
 			'free_shipping_thresholds' => get_option( $field_key . '_free_shipping_thresholds' ),
