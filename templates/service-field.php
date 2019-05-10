@@ -19,6 +19,14 @@ foreach ( $services as $group => $service_group ):
 	<td colspan="2">
 		<script>
 			jQuery( function ( $ ) {
+				<?php if ( ! Fraktguiden_Helper::pro_activated() ) : ?>
+					var elem = $('#woocommerce_bring_fraktguiden_service_name [value="CustomName"]');
+					var label = elem.text();
+					label += " <?php esc_html_e( '(PRO only)' ); ?>";
+					elem
+						.text( label )
+						.attr( 'disabled', 'disabled' );
+				<?php endif; ?>
 				function service_name_handler() {
 					var val = this.value;
 					if ('CustomName' == val) {

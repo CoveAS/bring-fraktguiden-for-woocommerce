@@ -80,20 +80,28 @@ class Fraktguiden_Helper {
     return self::get_option( 'test_mode' ) == 'yes';
   }
 
-  static function get_all_services() {
+  static function get_all_services( $id = false ) {
     $selected_service_name = Fraktguiden_Helper::get_option('service_name');
     $service_name = $selected_service_name ? $selected_service_name  : 'ProductName';
     $services = self::get_services_data();
     $result   = [ ];
     foreach ( $services as $group => $service_group ) {
       foreach ( $service_group['services'] as $key => $service ) {
-        $result[$key] = $service[$service_name];
+      	if ( 'CustomName' == $service_name ) {
+      		if ( empty( $id ) ) {
+	      		$result[$key] = $service['ProductName'];
+      		} else {
+	      		$result[$key] = '@TODO';
+      		}
+      	} else {
+	        $result[$key] = $service[$service_name];
+	      }
       }
     }
     return $result;
   }
 
-  static function get_all_selected_services() {
+  static function get_all_selected_services( $id = false ) {
     $selected_service_name = Fraktguiden_Helper::get_option('service_name');
     $service_name = $selected_service_name ? $selected_service_name  : 'ProductName';
 
@@ -103,7 +111,15 @@ class Fraktguiden_Helper {
     foreach ( $services as $group => $service_group ) {
       foreach ( $service_group['services'] as $key => $service ) {
         if ( in_array( $key, $selected ) ) {
-          $result[$key] = $service[$service_name];
+	      	if ( 'CustomName' == $service_name ) {
+	      		if ( empty( $id ) ) {
+		      		$result[$key] = $service['ProductName'];
+	      		} else {
+		      		$result[$key] = '@TODO';
+	      		}
+	      	} else {
+		        $result[$key] = $service[$service_name];
+		      }
         }
       }
     }
