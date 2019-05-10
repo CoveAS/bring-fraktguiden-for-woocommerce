@@ -22,10 +22,21 @@ jQuery( function( $ ) {
 		);
 	}
 
+	function submit_handler( e ) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$( this ).addClass( 'loading' );
+		$( this ).find( '.bring-enter-postcode .input-text' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );
+		$( '.bring-error-message' ).remove();
+		post_kco_delivery_post_code(
+			$( '#bring-post-code' ).val(),
+			$( '#bring-country' ).val()
+		);
+	}
+
 	function toggle_checkout() {
 		var elem = $( '.bring-enter-postcode' );
-		// var shipping_method = $( '#shipping_method, .woocommerce-shipping-totals' ).length;
-		// var shipping_opts = $( 'input[name^="shipping_method"]' ).length;
 		if ( elem.length && elem.hasClass('bring-required') ) {
 			$( '.bring-enter-postcode' ).show();
 			$( '#klarna-checkout-container' ).hide();
@@ -56,18 +67,8 @@ jQuery( function( $ ) {
 				$( '.bring-enter-postcode form' ).submit();
 			}
 		} );
-		$( '.bring-enter-postcode form' ).submit( function( e ) {
-			e.preventDefault();
-			e.stopPropagation();
-
-			$( this ).addClass( 'loading' );
-			$( this ).find( '.bring-enter-postcode .input-text' ).prop( 'disabled', true ).removeClass( 'bring-error-input' );
-			$( '.bring-error-message' ).remove();
-			post_kco_delivery_post_code(
-				$( '#bring-post-code' ).val(),
-				$( '#bring-country' ).val()
-			);
-		} );
+		$( '.bring-button' ).on( 'click submit', submit_handler );
+		$( '.bring-enter-postcode .input-text' ).submit( submit_handler );
 		toggle_checkout();
 	} );
 
