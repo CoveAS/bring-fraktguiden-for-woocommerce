@@ -67,6 +67,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.5.13 =
+
+* Fixed not allowed to access this page issue when creating labels
+
 = 1.5.12 =
 
 * Fixed a problem where the KCO support script used data from the pickupoint API
