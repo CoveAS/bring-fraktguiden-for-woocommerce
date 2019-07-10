@@ -1,10 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
 /**
  * Plugin Name:         Bring Fraktguiden for WooCommerce
  * Plugin URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
@@ -26,13 +20,26 @@ define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
  * @category            Shipping Method
  * @author              Driv Digital AS
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+
+/**
+ * Bring_Fraktguiden is a main class
+ */
 class Bring_Fraktguiden {
 
 	const VERSION = '1.5.13';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
-	static function init() {
+	/**
+	 * Initialize the plugin
+	 */
+	public static function init() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
@@ -63,30 +70,30 @@ class Bring_Fraktguiden {
 
 		Fraktguiden_Minimum_Dimensions::setup();
 
-		// Make sure this event hasn't been scheduled
-		if( ! wp_next_scheduled( 'bring_fraktguiden_cron' ) ) {
-			// Schedule the event
+		// Make sure this event hasn't been scheduled.
+		if ( ! wp_next_scheduled( 'bring_fraktguiden_cron' ) ) {
+			// Schedule the event.
 			wp_schedule_event( time(), 'daily', 'bring_fraktguiden_cron' );
 		}
-		add_action( 'bring_fraktguiden_cron', __CLASS__ .'::cron_task' );
+		add_action( 'bring_fraktguiden_cron', __CLASS__ . '::cron_task' );
 
-		add_action( 'woocommerce_before_checkout_form', __CLASS__ .'::checkout_message' );
-		add_action( 'klarna_before_kco_checkout', __CLASS__ .'::checkout_message' );
+		add_action( 'woocommerce_before_checkout_form', __CLASS__ . '::checkout_message' );
+		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
 
 		Fraktguiden_Admin_Notices::init();
 
-		if ( 'yes' == Fraktguiden_Helper::get_option( 'debug' ) ) {
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
 			require_once 'classes/debug/class-fraktguiden-product-debug.php';
 			require_once 'classes/debug/class-fraktguiden-order-debug.php';
 			Fraktguiden_Product_Debug::setup();
 			Fraktguiden_Order_Debug::setup();
 		}
 
-		if ( 'yes' != Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
-			add_action( 'wp_enqueue_scripts', __CLASS__ .'::enqueue_styles' );
+		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
+			add_action( 'wp_enqueue_scripts', __CLASS__ . '::enqueue_styles' );
 		}
 
-		// Check the license when pro is activated
+		// Check the license when PRO version is activated.
 		if ( isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) ) {
 			$license = fraktguiden_license::get_instance();
 			$license->check_license();
@@ -96,67 +103,70 @@ class Bring_Fraktguiden {
 	/**
 	 * Enqueue styles
 	 */
-	static function enqueue_styles() {
-		wp_register_style( 'bring-fraktguiden', plugins_url( basename(__DIR__) .'/assets/css/bring-fraktguiden.css' ) );
+	public static function enqueue_styles() {
+		wp_register_style( 'bring-fraktguiden', plugins_url( basename( __DIR__ ) . '/assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
 		wp_enqueue_style( 'bring-fraktguiden' );
 	}
 
 	/**
-	 * Cron task
+	 * Set up a cron task for license check
 	 */
-	static function cron_task() {
+	public static function cron_task() {
 		$license = fraktguiden_license::get_instance();
 		$license->check_license();
 	}
 
 	/**
-	 * Includes the shipping method
+	 * Include Bring shipping method
 	 */
-	static function shipping_init() {
+	public static function shipping_init() {
 		// Add the method to WooCommerce.
 		add_filter( 'woocommerce_shipping_methods', 'Bring_Fraktguiden::add_bring_method' );
 	}
 
 	/**
-	 * Adds the Bring shipping method to WooCommerce
+	 * Add Bring shipping method to WooCommerce
 	 *
 	 * @package  WooCommerce/Classes/Shipping
 	 * @access public
-	 * @param array $methods
+	 * @param array $methods A list of shipping methods.
 	 * @return array
 	 */
-	static function add_bring_method( $methods ) {
+	public static function add_bring_method( $methods ) {
 		$methods['bring_fraktguiden'] = 'WC_Shipping_Method_Bring_Pro';
 		return $methods;
 	}
 
 	/**
-	 * Show action links on the plugin screen.
+	 * Show action links on the plugin screen
 	 *
-	 * @param array $links
+	 * @param array $links The action links displayed for each plugin in the Plugins list table.
 	 * @return array
 	 */
-	static function plugin_action_links( $links ) {
+	public static function plugin_action_links( $links ) {
 		$action_links = array(
-				'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
+			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );
 	}
 
 	/**
-	 * Called when plugin is deactivated.
+	 * Add action to call when the plugin is deactivated
 	 */
-	static function plugin_deactivate() {
+	public static function plugin_deactivate() {
 		do_action( 'bring_fraktguiden_plugin_deactivate' );
 	}
 
-	static function checkout_message() {
+	/**
+	 * Display a notification that the PRO version of the plugin runs in a test mode
+	 */
+	public static function checkout_message() {
 		if ( ! Fraktguiden_Helper::pro_test_mode() ) {
 			return;
 		}
-		_e( "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.", 'bring-fraktguiden' );
 
+		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden' );
 	}
 
 }
