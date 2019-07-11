@@ -4,23 +4,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Frontend views
-include_once 'views/class-bring-booking-my-order-view.php';
+require_once 'views/class-bring-booking-my-order-view.php';
 add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_View::order_display_tracking_info', 5, 2 );
 
 // Consignment
-include_once 'classes/consignment/class-bring-consignment.php';
-include_once 'classes/consignment/class-bring-mailbox-consignment.php';
-include_once 'classes/consignment/class-bring-booking-consignment.php';
+require_once 'classes/consignment/class-bring-consignment.php';
+require_once 'classes/consignment/class-bring-mailbox-consignment.php';
+require_once 'classes/consignment/class-bring-booking-consignment.php';
 
 // Consignment request
-include_once 'classes/consignment-request/class-bring-consignment-request.php';
-include_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
-include_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
+require_once 'classes/consignment-request/class-bring-consignment-request.php';
+require_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
+require_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
 
 // Classes
-include_once 'classes/class-bring-booking-file.php';
-include_once 'classes/class-bring-booking-customer.php';
-include_once 'classes/class-bring-booking-request.php';
+require_once 'classes/class-bring-booking-file.php';
+require_once 'classes/class-bring-booking-customer.php';
+require_once 'classes/class-bring-booking-request.php';
 
 
 if ( is_admin() ) {
@@ -43,14 +43,14 @@ if ( Fraktguiden_Helper::booking_enabled() && Fraktguiden_Helper::pro_activated(
 	Generate_Mailbox_Labels::setup();
 }
 
-# Register awaiting shipment status.
+// Register awaiting shipment status.
 add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
-# Add awaiting shipping to existing order statuses.
+// Add awaiting shipping to existing order statuses.
 add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' );
 
 class Bring_Booking {
 
-	const ID = Fraktguiden_Helper::ID;
+	const ID          = Fraktguiden_Helper::ID;
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
 	static function init() {
@@ -75,14 +75,17 @@ class Bring_Booking {
 	static function register_awaiting_shipment_order_status() {
 		// Be careful changing the post status name.
 		// If orders has this status they will not be available in admin.
-		register_post_status( 'wc-bring-shipment', array(
+		register_post_status(
+			'wc-bring-shipment',
+			array(
 				'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden' ),
 				'public'                    => true,
 				'exclude_from_search'       => false,
 				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => true,
-				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>' )
-		) );
+				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>' ),
+			)
+		);
 	}
 
 	/**
@@ -95,7 +98,7 @@ class Bring_Booking {
 		$new_order_statuses = array();
 		// Add the order status after processing
 		foreach ( $order_statuses as $key => $status ) {
-			$new_order_statuses[$key] = $status;
+			$new_order_statuses[ $key ] = $status;
 			if ( 'wc-processing' === $key ) {
 				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden' );
 			}
@@ -118,10 +121,12 @@ class Bring_Booking {
 
 			// Create the consignment
 			$consignment_request = Bring_Consignment_Request::create( $shipping_item );
-			$consignment_request->fill( [
-				'shipping_date_time' => self::get_shipping_date_time(),
-				'customer_number'    => isset( $_REQUEST['_bring-customer-number'] ) ? $_REQUEST['_bring-customer-number'] : '',
-			] );
+			$consignment_request->fill(
+				[
+					'shipping_date_time' => self::get_shipping_date_time(),
+					'customer_number'    => isset( $_REQUEST['_bring-customer-number'] ) ? $_REQUEST['_bring-customer-number'] : '',
+				]
+			);
 			$original_order_status = $wc_order->get_status();
 			// Set order status to awaiting shipping.
 			$wc_order->update_status( 'wc-bring-shipment' );
@@ -129,8 +134,8 @@ class Bring_Booking {
 			// Send the booking.
 			$response = $consignment_request->post();
 
-			if( ! in_array( $response->get_status_code(),  [200, 201, 202, 203, 204] ) ) {
-				//@TODO: Error message
+			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ] ) ) {
+				// @TODO: Error message
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
 			}
 
@@ -140,7 +145,7 @@ class Bring_Booking {
 			if ( $adapter->has_booking_errors() ) {
 				// If there are errors, set the status back to the original status.
 				$status      = $original_order_status;
-				$status_note = __( "Booking errors. See the Bring Booking box for details." . "\n", 'bring-fraktguiden' );
+				$status_note = __( 'Booking errors. See the Bring Booking box for details.' . "\n", 'bring-fraktguiden' );
 				$wc_order->update_status( $status, $status_note );
 				continue;
 			}
@@ -155,7 +160,7 @@ class Bring_Booking {
 				// Set status back to the previous status
 				$status = $original_order_status;
 			}
-			$status_note = __( "Booked with Bring" . "\n", 'bring-fraktguiden' );
+			$status_note = __( 'Booked with Bring' . "\n", 'bring-fraktguiden' );
 			// Update status.
 			$wc_order->update_status( $status, $status_note );
 		}
@@ -163,9 +168,9 @@ class Bring_Booking {
 
 	static function create_shipping_date() {
 		return array(
-				'date'   => date_i18n( 'Y-m-d' ),
-				'hour'   => date_i18n( 'H', strtotime( '+1 hour', current_time( 'timestamp' ) ) ),
-				'minute' => date_i18n( 'i' ),
+			'date'   => date_i18n( 'Y-m-d' ),
+			'hour'   => date_i18n( 'H', strtotime( '+1 hour', current_time( 'timestamp' ) ) ),
+			'minute' => date_i18n( 'i' ),
 		);
 	}
 
@@ -174,8 +179,8 @@ class Bring_Booking {
 		if ( isset( $_REQUEST['_bring-shipping-date'] ) && isset( $_REQUEST['_bring-shipping-date-hour'] ) && isset( $_REQUEST['_bring-shipping-date-minutes'] ) ) {
 			return $_REQUEST['_bring-shipping-date'] . 'T' . $_REQUEST['_bring-shipping-date-hour'] . ':' . $_REQUEST['_bring-shipping-date-minutes'] . ':00';
 		}
-		$shipping_date      = self::create_shipping_date();
-		return $shipping_date['date'] . "T" . $shipping_date['hour'] . ":" . $shipping_date['minute'] . ":00";
+		$shipping_date = self::create_shipping_date();
+		return $shipping_date['date'] . 'T' . $shipping_date['hour'] . ':' . $shipping_date['minute'] . ':00';
 	}
 
 	/**

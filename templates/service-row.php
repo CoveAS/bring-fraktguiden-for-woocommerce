@@ -1,4 +1,3 @@
-
 <tr>
 	<td class="fraktguiden-services-table-col-enabled">
 	<label for="<?php echo $service->id; ?>"

@@ -271,7 +271,8 @@ class Fraktguiden_Helper {
 		global $woocommerce;
 		$countries = array( 'NO', 'SE', 'DK', 'FI', 'IS' );
 		return self::array_filter_key(
-			$woocommerce->countries->countries, function ( $k ) use ( $countries ) {
+			$woocommerce->countries->countries,
+			function ( $k ) use ( $countries ) {
 				return in_array( $k, $countries );
 			}
 		);
