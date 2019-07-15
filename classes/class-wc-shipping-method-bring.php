@@ -848,17 +848,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			// No credentials provided.
 			return;
 		}
-
-		if ( $api_uid && ! $api_key ) {
+		if ( ! $api_key ) {
 			$this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden' ) );
 			return;
 		}
-		if ( $api_key && ! $api_uid ) {
+		if ( ! $api_uid ) {
 			$this->mybring_error( __( 'You need to enter a API User ID', 'bring-fraktguiden' ) );
 			return;
 		}
-		if ( $customer_number && ( ! $api_uid || ! $api_key ) ) {
-			$this->mybring_error( __( 'You cannot use a Customer number without entering API credentials', 'bring-fraktguiden' ) );
+		if ( ! $customer_number ) {
+			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden' ) );
 			return;
 		}
 
