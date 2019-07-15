@@ -41,10 +41,10 @@ If you've entered any MyBring details, try removing them. If Bring shows up on t
 
 **What do I get from Bring Pro that I can't from the Free version?**
 Good question! Bring Pro enables you to customise your customers Bring experience:
-    - You can customise the price of each shipping method
-    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
-    - You can book your shippment through MyBring directly on your orders page.
-    - You can change the services offered to customers to their nearest collection point
+	- You can customise the price of each shipping method
+	- You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
+	- You can book your shippment through MyBring directly on your orders page.
+	- You can change the services offered to customers to their nearest collection point
 
 **'Minipakke' and 'Småpakke' are no longer available? What happened?**
 These have been replaced with new and exciting shipping option called 'Pakke i postkassen'! You can read more about it here: https://www.bring.no/radgivning/netthandel/pakkeipostkassen. In essence, it's  a streamlined version of the previous options available.
@@ -67,22 +67,81 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
-= 1.5.2
+= 1.5.13 =
+
+* Fixed not allowed to access this page issue when creating labels
+
+= 1.5.12 =
+
+* Fixed a problem where the KCO support script used data from the pickupoint API
+* Disabled enhanced KCO support by default for newer versions of KCO
+* Fixed a bug where tracking code would appear on order confirmation emails even if there was no tracking on the order
+
+= 1.5.11 =
+
+* Fixed mailbox tracking code url
+* Fixed an issue causing settings to be lost when turning off PRO
+* Made some text changes
+* Added a redirect to the settings page when there are empty store address fields when booking
+
+= 1.5.10 =
+
+* Fixed an issue with not being able to book with mailbox
+
+= 1.5.9 =
+
+* Fixed an issue with changing the shipping item for booking in admin
+* Fixed tracking number not showing in emails
+* Fixed some php 7.2 warnings
+
+= 1.5.8 =
+
+* Improved adding shipping items to orders from admin
+
+= 1.5.7 =
+
+* Fixed a 500 caused by php 7.0 syntax on older php versions
+
+= 1.5.6 =
+
+* Fixed a 500 error when trying to book with bring with shipping items that were not added through checkout
+
+= 1.5.5 =
+
+* Fixed editing pickup point on orders in wp-admin
+
+= 1.5.4 =
+
+* Fixed issue with label downloads
+
+= 1.5.3 =
+
+* Fixed free shipping
+* Removed VAT setting
+* Fixed some minor php 7.x issues
+* Fixed tax calculation for fixed prices
+* Fixed logic for heavy items
+
+= 1.5.2 =
+
 * Added compability with WooCommerce 3.4.x
 * Fixed bring booking issue after integrating mailbox packages
 * Fixed the calculate by weight option
 * Fixed shipping calculation for variations
 
-= 1.5.0
+= 1.5.0 =
+
 * Fixed: BOOK-INPUT-020: Invalid product ID
 * Fixed: Pickup point country fixes
 * Translations: Updated language files
 
 = 1.4.1-rc1 =
+
 * Added support for Mailbox / Pakke i postkassen
 * Added compability with KCO
 
 = 1.4.0.8 =
+
 * Fixed an issue with multipacking that affected cargo and heavy items
 * Additional capabilities added when accessing Bring Labels
 * Finished writing the readme, updating the FAQ
@@ -178,12 +237,12 @@ Bring Fraktguiden for WooCommerce is an open source project and we love pull req
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) the project.
 * Create a topic branch from the master branch.
-    * To quickly create a topic branch based on master; `git checkout -b
-    fix/master/my-contribution master`. Please avoid working directly on the
-    `master` branch.
+	* To quickly create a topic branch based on master; `git checkout -b
+	fix/master/my-contribution master`. Please avoid working directly on the
+	`master` branch.
 * Make changes to your forked repository
-    * Ensure you stick to the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
-    * Ensure you use LF line endings
+	* Ensure you stick to the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
+	* Ensure you use LF line endings
 * Make sure you have tested your changes.
 * Make commits of logical units.
 * Check for unnecessary whitespace with `git diff --check` before committing.

@@ -9,6 +9,7 @@ class fraktguiden_license {
 	/**
 	 * Get instance
 	 * Singleton helper. Get the current instance of the class
+	 *
 	 * @return fraktguiden_license
 	 */
 	static function get_instance() {
@@ -20,6 +21,7 @@ class fraktguiden_license {
 
 	/**
 	 * Curl request
+	 *
 	 * @param  array $data GET parameters
 	 * @return boolean
 	 */
@@ -28,12 +30,15 @@ class fraktguiden_license {
 		// Get cURL resource
 		$ch = curl_init();
 		// Set some options - we are passing in a useragent too here
-		curl_setopt_array( $ch, [
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_URL            => self::BASE_URL .'?'. $query_string,
-			CURLOPT_USERAGENT      => 'Bring plugin @ '. get_site_url()
-		] );
+		curl_setopt_array(
+			$ch,
+			[
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_URL            => self::BASE_URL . '?' . $query_string,
+				CURLOPT_USERAGENT      => 'Bring plugin @ ' . get_site_url(),
+			]
+		);
 		// Send the request & save response to $resp
 		$content = curl_exec( $ch );
 		// Get the HTTP code
@@ -55,6 +60,7 @@ class fraktguiden_license {
 	 * Valid
 	 *
 	 * Check if the bring license is valid or not
+	 *
 	 * @return boolean
 	 */
 	public function valid() {
@@ -69,16 +75,18 @@ class fraktguiden_license {
 	 * Check License
 	 */
 	public function check_license() {
-		$url = get_site_url();
+		$url      = get_site_url();
 		$url_info = parse_url( $url );
 		if ( ! $url_info ) {
 			$this->ping();
 			return;
 		}
-		$data = $this->curl_request( [
-			'action' => 'check_license',
-			'domain' => $url_info[ 'host' ],
-		] );
+		$data = $this->curl_request(
+			[
+				'action' => 'check_license',
+				'domain' => $url_info['host'],
+			]
+		);
 		if ( ! $data ) {
 			return;
 		}
@@ -90,8 +98,10 @@ class fraktguiden_license {
 
 	public function ping() {
 		$url = get_site_url();
-		$this->curl_request( [
-			'action' => 'ping'
-		] );
+		$this->curl_request(
+			[
+				'action' => 'ping',
+			]
+		);
 	}
 }

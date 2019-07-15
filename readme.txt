@@ -5,11 +5,11 @@ Contributors: drivdigital, Matt Gates, oakidoaki
 Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 4.5
-Tested up to: 5.2
-Requires PHP: 7.0
+Tested up to: 5.2.2
+Requires PHP: 5.6
 WC requires at least: 3.4.0
-WC tested up to: 3.6.2
-Stable tag: 1.5.2
+WC tested up to: 3.6.5
+Stable tag: 1.5.13
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -92,22 +92,81 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 == Changelog ==
 
-= 1.5.2
+= 1.5.13 =
+
+* Fixed not allowed to access this page issue when creating labels
+
+= 1.5.12 =
+
+* Fixed a problem where the KCO support script used data from the pickupoint API
+* Disabled enhanced KCO support by default for newer versions of KCO
+* Fixed a bug where tracking code would appear on order confirmation emails even if there was no tracking on the order
+
+= 1.5.11 =
+
+* Fixed mailbox tracking code url
+* Fixed an issue causing settings to be lost when turning off PRO
+* Made some text changes
+* Added a redirect to the settings page when there are empty store address fields when booking
+
+= 1.5.10 =
+
+* Fixed an issue with not being able to book with mailbox
+
+= 1.5.9 =
+
+* Fixed an issue with changing the shipping item for booking in admin
+* Fixed tracking number not showing in emails
+* Fixed some php 7.2 warnings
+
+= 1.5.8 =
+
+* Improved adding shipping items to orders from admin
+
+= 1.5.7 =
+
+* Fixed a 500 caused by php 7.0 syntax on older php versions
+
+= 1.5.6 =
+
+* Fixed a 500 error when trying to book with bring with shipping items that were not added through checkout
+
+= 1.5.5 =
+
+* Fixed editing pickup point on orders in wp-admin
+
+= 1.5.4 =
+
+* Fixed issue with label downloads
+
+= 1.5.3 =
+
+* Fixed free shipping
+* Removed VAT setting
+* Fixed some minor php 7.x issues
+* Fixed tax calculation for fixed prices
+* Fixed logic for heavy items
+
+= 1.5.2 =
+
 * Added compability with WooCommerce 3.4.x
 * Fixed bring booking issue after integrating mailbox packages
 * Fixed the calculate by weight option
 * Fixed shipping calculation for variations
 
-= 1.5.0
+= 1.5.0 =
+
 * Fixed: BOOK-INPUT-020: Invalid product ID
 * Fixed: Pickup point country fixes
 * Translations: Updated language files
 
 = 1.4.1-rc1 =
+
 * Added support for Mailbox / Pakke i postkassen
 * Added compability with KCO
 
 = 1.4.0.8 =
+
 * Fixed an issue with multipacking that affected cargo and heavy items
 * Additional capabilities added when accessing Bring Labels
 * Finished writing the readme, updating the FAQ
