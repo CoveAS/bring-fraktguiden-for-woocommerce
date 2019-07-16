@@ -270,7 +270,7 @@ class Fraktguiden_Pickup_Point {
 
 				$json = json_decode( $response->get_body(), true );
 
-				$service = $json['Product']['Price']['PackagePriceWithoutAdditionalServices'];
+				$service = $json['Product']['price']['PackagePriceWithoutAdditionalServices'];
 				$rate    = Fraktguiden_Helper::get_option( 'vat' ) == 'exclude' ? $service['AmountWithoutVAT'] : $service['AmountWithVAT'];
 
 				$result['success']  = true;

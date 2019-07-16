@@ -24,7 +24,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 	use Bring_Fraktguiden\Settings;
 
-	const SERVICE_URL = 'https://api.bring.com/shippingguide/products/all.json';
+	const SERVICE_URL = 'https://api.bring.com/shippingguide/v2/products';
 
 	const ID = Fraktguiden_Helper::ID;
 
@@ -169,8 +169,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->post_office  = $this->get_setting( 'post_office' );
 		$this->evarsling    = $this->get_setting( 'evarsling' );
 		$field_key          = $this->get_field_key( 'services' );
-		$this->services     = \Fraktguiden_Service::all( $field_key );
-		$this->service_name = $this->get_setting( 'service_name', 'DisplayName' );
+		$this->services     = $this->get_setting( 'services' ); //\Fraktguiden_Service::all( $field_key );
+		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
 		$max_products       = (int) $this->get_setting( 'max_products', 1000 );
 		$this->max_products = $max_products ? $max_products : 1000;
@@ -363,8 +363,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Add all the selected services to the URL.
 		$service_count = 0;
-		if ( ! empty( $this->services ) ) {
-			foreach ( $this->services as $service ) {
+		$field_key     = $this->get_field_key( 'services' );
+		$services      = \Fraktguiden_Service::all( $field_key, true );
+		if ( ! empty( $services ) ) {
+			foreach ( $services as $service ) {
 				$url .= '&product=' . $service;
 			}
 		}
@@ -379,6 +381,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Make the request.
 		$request  = new WP_Bring_Request();
 		$response = $request->get( $url, [], $options );
+
 
 		if ( 200 != $response->status_code ) {
 			$no_connection_handling = $this->get_setting( 'no_connection_handling' );
@@ -397,8 +400,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Decode the JSON data from bring.
 		$json = json_decode( $response->get_body(), true );
-		if ( isset( $json['TraceMessages'] ) ) {
-			$this->set_trace_messages( $json['TraceMessages'] );
+
+		if ( isset( $json['traceMessages'] ) ) {
+			$this->set_trace_messages( $json['traceMessages'] );
 		}
 		$exception_handling = $this->get_setting( 'exception_handling' );
 
@@ -450,41 +454,47 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return array|boolean
 	 */
 	private function get_services_from_response( $response ) {
-		if ( ! $response || ( is_array( $response ) && count( $response ) === 0 ) || empty( $response['Product'] ) ) {
+
+		if ( ! $response || ( is_array( $response ) && count( $response ) === 0 ) || empty( $response['consignments'] ) ) {
 			return [];
 		}
 
 		$rates = [];
 
-		// Fix for when only one service is found. It's not returned in an array.
-		if ( empty( $response['Product'][0] ) ) {
-			$cache = $response['Product'];
-			unset( $response['Product'] );
-			$response['Product'][] = $cache;
-		}
-
-		foreach ( $response['Product'] as $service_details ) {
-			if ( ! empty( $this->services ) && ! in_array( $service_details['ProductId'], $this->services ) ) {
+		foreach ( $response['consignments'][0]['products'] as $service_details ) {
+			if ( ! empty( $this->services ) && ! in_array( $service_details['id'], $this->services ) ) {
 				continue;
 			}
 
-			$service = $service_details['Price']['PackagePriceWithoutAdditionalServices'];
-			$rate    = $service['AmountWithoutVAT'];
+			if ( ! empty( $service_details['errors'] ) ) {
+				// Most likely an error.
+				$this->add_trace_messages( $service_details['errors'] );
+				continue;
+			}
+			if ( ! empty( $service_details['price']['netPrice']['priceWithoutAdditionalServices'] ) ) {
+				$service = $service_details['price']['netPrice']['priceWithoutAdditionalServices'];
+			} elseif ( ! empty( $service_details['price']['listPrice']['priceWithoutAdditionalServices'] ) ) {
+				$service = $service_details['price']['listPrice']['priceWithoutAdditionalServices'];
+			} else {
+				$this->add_trace_messages( [ 'No price provided for ' . $service_details['id'], $service_details ] );
+				continue;
+			}
+			$rate = $service['amountWithoutVAT'];
 
-			$label = $service_details['GuiInformation']['ProductName'];
+			$label = $service_details['guiInformation']['productName'];
 
-			if ( 'CustomName' !== $this->service_name ) {
-				$label = $service_details['GuiInformation'][ $this->service_name ];
+			if ( 'displayname' === strtolower($this->service_name) ) {
+				$label = $service_details['guiInformation']['displayName'];
 			}
 
 			$rate = array(
 				'id'            => $this->id,
-				'bring_product' => sanitize_title( $service_details['ProductId'] ),
+				'bring_product' => sanitize_title( $service_details['id'] ),
 				'cost'          => (float) $rate + (float) $this->fee,
-				'label'         => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['GuiInformation']['DescriptionText'] ),
+				'label'         => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
 			);
 
-			array_push( $rates, $rate );
+			$rates[] = $rate;
 		}
 
 		return $rates;
@@ -520,16 +530,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
-			array(
+			[
 				'clientUrl'           => $client_url,
-				'from'                => $this->from_zip,
-				'fromCountry'         => $this->get_selected_from_country(),
-				'to'                  => $package['destination']['postcode'],
-				'toCountry'           => $country,
-				'postingAtPostOffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
-				'additional'          => ( 'yes' === $this->evarsling ) ? 'evarsling' : '',
+				'frompostalcode'      => $this->from_zip,
+				'fromcountry'         => $this->get_selected_from_country(),
+				'topostalcode'        => $package['destination']['postcode'],
+				'tocountry'           => $country,
+				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
+				'additionalservice'   => ( 'yes' === $this->evarsling ) ? 'EVARSLING' : '',
 				'language'            => $this->get_bring_language(),
-			)
+			]
 		);
 	}
 
@@ -568,14 +578,33 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return array
 	 */
 	public function set_trace_messages( $messages ) {
+		$this->trace_messages = [];
+		$this->add_trace_messages( $messages );
+		return $this;
+	}
+
+	/**
+	 * Add Trace Messages
+	 *
+	 * @param array $messages Bring trace messages.
+	 * @return array
+	 */
+	public function add_trace_messages( $messages ) {
 		if ( isset( $messages['Message'] ) ) {
 			$messages = $messages['Message'];
 		}
 		if ( ! is_array( $messages ) ) {
 			$messages = [];
 		}
-		$this->trace_messages = $messages;
-		return $this;
+		foreach ($messages as &$message) {
+			if ( empty( $message['code'] ) ) {
+				continue;
+			}
+
+			$message = "{$message['code']}: {$message['description']}";
+
+		}
+		$this->trace_messages = array_merge( $this->trace_messages, $messages );
 	}
 
 	/**

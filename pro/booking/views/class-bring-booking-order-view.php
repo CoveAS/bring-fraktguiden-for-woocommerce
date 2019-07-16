@@ -225,7 +225,7 @@ class Bring_Booking_Order_View {
 		<?php esc_html_e( 'Additional Info', 'bring-fraktguiden' ); ?>
 		(<?php esc_html_e( 'Recipient', 'bring-fraktguiden' ); ?>)
 	  </label>
-	  <textarea 
+	  <textarea
 		name="_bring_additional_info_recipient"
 		id="_bring_additional_info_recipient"
 		></textarea>
@@ -378,7 +378,7 @@ class Bring_Booking_Order_View {
 			</select>
 		  </td>
 		  <td>
-				<?php echo $service_data['ProductName']; ?>
+				<?php echo $service_data['productName']; ?>
 				<?php if ( ! empty( $pickup_point ) ) : ?>
 				<span
 				  class="tips"
@@ -416,7 +416,7 @@ class Bring_Booking_Order_View {
 			</select>
 		  </td>
 		  <td>
-			  <?php echo $service_data['ProductName']; ?>
+			  <?php echo $service_data['productName']; ?>
 			  <?php if ( ! empty( $pickup_point ) ) : ?>
 				<span
 				  class="tips"
