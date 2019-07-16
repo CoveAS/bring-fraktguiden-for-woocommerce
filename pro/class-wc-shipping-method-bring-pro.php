@@ -252,6 +252,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	public function filter_shipping_rates( $rates, $shipping_method ) {
 		$field_key                = $this->get_field_key( 'services' );
 		$custom_names             = get_option( $field_key . '_custom_names' );
+		$customer_numbers         = get_option( $field_key . '_customer_numbers' );
 		$custom_prices            = get_option( $field_key . '_custom_prices' );
 		$free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
 		$free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
