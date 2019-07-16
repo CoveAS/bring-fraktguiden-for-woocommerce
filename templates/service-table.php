@@ -12,6 +12,9 @@
 			<th class="fraktguiden-services-table-col-custom-price">
 				<?php esc_html_e( 'Custom price', 'bring-fraktguiden' ); ?>
 			</th>
+			<th class="fraktguiden-services-table-col-customer-number">
+				<?php esc_html_e( 'Customer Number', 'bring-fraktguiden' ); ?>
+			</th>
 			<th class="fraktguiden-services-table-col-free-shipping">
 				<?php esc_html_e( 'Free shipping', 'bring-fraktguiden' ); ?>
 			</th>
