@@ -615,7 +615,7 @@ trait Settings {
 		}
 
 		// Try to atuhenticate.
-		$request                 = new WP_Bring_Request();
+		$request                 = new \WP_Bring_Request();
 		$params                  = $this->create_standard_url_params();
 		$params['product']       = 'SERVICEPAKKE';
 		$params['weightInGrams'] = 100;
@@ -669,7 +669,7 @@ trait Settings {
 		if ( strpos( $message, 'Authentication failed.' ) === 0 ) {
 			$message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden' ) );
 		}
-		Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
+		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
 	}
 
 	/**
