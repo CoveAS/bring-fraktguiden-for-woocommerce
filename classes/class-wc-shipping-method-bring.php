@@ -168,7 +168,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->from_zip     = $this->get_setting( 'from_zip' );
 		$this->post_office  = $this->get_setting( 'post_office' );
 		$this->evarsling    = $this->get_setting( 'evarsling' );
-		$this->services     = $this->get_setting( 'services' );
+		$field_key          = $this->get_field_key( 'services' );
+		$this->services     = \Fraktguiden_Service::all( $field_key );
 		$this->service_name = $this->get_setting( 'service_name', 'DisplayName' );
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
 		$max_products       = (int) $this->get_setting( 'max_products', 1000 );

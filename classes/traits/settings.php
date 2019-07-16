@@ -35,7 +35,6 @@ trait Settings {
 	 */
 	public function init_form_fields() {
 		global $woocommerce;
-		$services = \Fraktguiden_Helper::get_all_services();
 
 		// @todo
 		$wc_log_dir = '';
@@ -204,7 +203,7 @@ trait Settings {
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
 				'default' => '',
-				'options' => $services,
+				'options' => \Fraktguiden_Helper::get_all_services(),
 			),
 
 			/**
