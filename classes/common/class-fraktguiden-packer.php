@@ -99,12 +99,13 @@ class Fraktguiden_Packer {
 	 * @return array
 	 */
 	public function create_packages_params() {
-		$params = array();
-		for ( $i = 0; $i < count( $this->packages_to_ship ); $i++ ) {
-			$params[ 'length' . $i ]        = $this->packages_to_ship[ $i ]['length'];
-			$params[ 'width' . $i ]         = $this->packages_to_ship[ $i ]['width'];
-			$params[ 'height' . $i ]        = $this->packages_to_ship[ $i ]['height'];
-			$params[ 'weightInGrams' . $i ] = $this->packages_to_ship[ $i ]['weight_in_grams'];
+		$params = [];
+		$len    = count( $this->packages_to_ship );
+		for ( $i = 0; $i < $len; $i++ ) {
+			$params[ 'length' . $i ] = $this->packages_to_ship[ $i ]['length'];
+			$params[ 'width' . $i ]  = $this->packages_to_ship[ $i ]['width'];
+			$params[ 'height' . $i ] = $this->packages_to_ship[ $i ]['height'];
+			$params[ 'weight' . $i ] = $this->packages_to_ship[ $i ]['weight_in_grams'];
 		}
 		return $params;
 	}

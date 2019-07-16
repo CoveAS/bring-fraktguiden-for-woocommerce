@@ -12,15 +12,15 @@
 				class="woocommerce-help-tip"></span>
 		<label class="fraktguiden-service"
 			for="<?php echo esc_attr( $service->id ); ?>"
-			data-ProductName="<?php echo esc_attr( $service->service_data['ProductName'] ); ?>"
-			data-DisplayName="<?php echo esc_attr( $service->service_data['DisplayName'] ); ?>"
+			data-productName="<?php echo esc_attr( $service->service_data['productName'] ); ?>"
+			data-displayName="<?php echo esc_attr( $service->service_data['displayName'] ); ?>"
 		>
 			<?php echo esc_attr( $service->service_data[ $this->shipping_method->service_name ] ); ?>
 		</label>
 		<input
 			class="fraktguiden-service-custom-name"
 			style="display: none"
-			placeholder="<?php echo esc_attr( $service->service_data['ProductName'] ); ?>"
+			placeholder="<?php echo esc_attr( $service->service_data['productName'] ); ?>"
 			name="<?php echo esc_attr( $service->custom_name_id ); ?>"
 			value="<?php echo esc_attr( $service->custom_name ); ?>"
 		/>

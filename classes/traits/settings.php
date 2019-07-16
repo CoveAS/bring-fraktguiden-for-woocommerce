@@ -183,10 +183,10 @@ trait Settings {
 				'type'        => 'select',
 				'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden' ),
 				'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden' ),
-				'default'     => 'DisplayName',
+				'default'     => 'displayName',
 				'options'     => [
-					'DisplayName' => __( 'Display Name', 'bring-fraktguiden' ),
-					'ProductName' => __( 'Product Name', 'bring-fraktguiden' ),
+					'displayName' => __( 'Display Name', 'bring-fraktguiden' ),
+					'productName' => __( 'Product Name', 'bring-fraktguiden' ),
 					'CustomName'  => __( 'Custom Name', 'bring-fraktguiden' ),
 				],
 			],
