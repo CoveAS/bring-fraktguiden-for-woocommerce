@@ -615,11 +615,11 @@ trait Settings {
 		}
 
 		// Try to atuhenticate.
-		$request                 = new \WP_Bring_Request();
-		$params                  = $this->create_standard_url_params();
-		$params['product']       = 'SERVICEPAKKE';
-		$params['weightInGrams'] = 100;
-		$response                = $request->get( self::SERVICE_URL, $params );
+		$request           = new \WP_Bring_Request();
+		$params            = $this->create_standard_url_params();
+		$params['product'] = 'SERVICEPAKKE';
+		$params['weight']  = 100;
+		$response          = $request->get( self::SERVICE_URL, $params );
 		if ( 200 != $response->status_code ) {
 			$this->mybring_error( $response->body );
 			return;
@@ -639,8 +639,8 @@ trait Settings {
 		reading the TraceMessage for all the results to see if the customer_number was
 		authenticated.
 		*/
-		if ( isset( $result['TraceMessages'] ) ) {
-			foreach ( $result['TraceMessages'] as $messages ) {
+		if ( isset( $result['traceMessages'] ) ) {
+			foreach ( $result['traceMessages'] as $messages ) {
 				if ( ! is_array( $messages ) ) {
 					$messages = [ $messages ];
 				}
