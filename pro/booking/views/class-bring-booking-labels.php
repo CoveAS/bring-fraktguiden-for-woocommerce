@@ -64,6 +64,11 @@ class Bring_Booking_Labels {
 	 * Download page
 	 */
 	static function download_page() {
+		// Require classes.
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-label-collection.php';
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-pdf-collection.php';
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-zpl-collection.php';
+
 		if ( ! isset( $_GET['order_ids'] ) || $_GET['order_ids'] == '' ) {
 			return;
 		}
@@ -84,6 +89,9 @@ class Bring_Booking_Labels {
 		$pdfs_to_merge   = [];
 		$orders_to_merge = [];
 
+		$zpl_collection = new Bring_Zpl_Collection();
+		$pdf_collection = new Bring_Pdf_Collection();
+
 		foreach ( $order_ids as $order_id ) {
 			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
 			// Get the booking consignments from the adapter
@@ -96,53 +104,34 @@ class Bring_Booking_Labels {
 					continue;
 				}
 				if ( 'zpl' == $file->get_ext() ) {
-					$zpls[ $order_id ] = $file;
-					continue;
-				}
-				// Add the file path to the list of pdf's
-				$pdfs_to_merge[] = $file;
-				if ( ! in_array( $order_id, $orders_to_merge ) ) {
-					$orders_to_merge[] = $order_id;
+					$zpl_collection->add( $order_id, $file );
+				} else {
+					$pdf_collection->add( $order_id, $file );
 				}
 			}
 		}
 
-		if ( empty( $pdfs_to_merge ) && empty( $zpls ) ) {
-			echo 'No files to download';
+		if ( $pdf_collection->is_empty() && $zpl_collection->is_empty() ) {
+			echo "No files to download";
 			return;
-		}
-
-		// Merge the pdfs
-		if ( ! empty( $pdfs_to_merge ) ) {
-			if ( count( $pdfs_to_merge ) == 1 ) {
-				$merge_result_file = $pdfs_to_merge[0]->get_path();
-			} else {
-				include_once FRAKTGUIDEN_PLUGIN_PATH . '/includes/pdfmerger/PDFMerger.php';
-				$merger = new PDFMerger();
-				foreach ( $pdfs_to_merge as $file ) {
-					$merger->addPDF( $file->get_path() );
-				}
-				$merge_result_file = $file->get_dir() . '/labels-merged.pdf';
-				$merger->merge( 'file', $merge_result_file );
-			}
 		}
 		// If there are more than 1 ZPL file or a combination of zpl and pdf
-		if ( ! empty( $zpls ) && ! empty( $pdfs_to_merge ) || count( $zpls ) > 1 ) {
-			echo '<h3>' . __( 'Downloads', 'bring-fraktguiden' ) . '</h3><ul>';
-			foreach ( $zpls as $order_id => $zpl ) {
-				self::render_download_link( [ $order_id ], $zpl->get_name() );
-			}
-			if ( ! empty( $orders_to_merge ) ) {
-				self::render_download_link( $orders_to_merge, __( 'Merged PDF labels', 'bring-fraktguiden' ) );
-			}
-			echo '</ul>';
-			return;
+		if ( ! $pdf_collection->is_empty() && ! $zpl_collection->is_empty() ) {
+			echo '<h3>'.__('Downloads', 'bring-fraktguiden') .'</h3><ul><li>';
+			self::render_download_link( $zpl_collection->get_order_ids(), __( 'Merged ZPL labels', 'bring-fraktguiden' ));
+			echo '</li><li>';
+			self::render_download_link( $pdf_collection->get_order_ids(), __( 'Merged PDF labels', 'bring-fraktguiden' ) );
+			echo '</li></ul>';
 		}
-		if ( ! empty( $pdfs_to_merge ) ) {
-			static::render_file_content( $merge_result_file );
-		} elseif ( ! empty( $zpls ) ) {
-			$zpl = reset( $zpls );
-			static::render_file_content( $zpl->get_path() );
+
+		else if ( ! $pdf_collection->is_empty() ) {
+			$merge_file = $pdf_collection->merge();
+			static::render_file_content( $merge_file );
+		}
+
+		else if ( ! $zpl_collection->is_empty() ) {
+			$merge_file = $zpl_collection->merge();
+			static::render_file_content( $merge_file );
 		}
 	}
 
@@ -156,7 +145,6 @@ class Bring_Booking_Labels {
 		if ( '.' === substr( $filename, -1 ) ) {
 			$filename .= 'pdf';
 		}
-		// $mime = mime_content_type( $file );
 		header( 'Content-Length: ' . filesize( $file ) );
 		if ( preg_match( '/\.pdf$/', $filename ) ) {
 			header( 'Content-type: application/pdf' );
