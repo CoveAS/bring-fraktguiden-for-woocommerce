@@ -63,6 +63,8 @@ class Bring_Fraktguiden {
 			$license = fraktguiden_license::get_instance();
 			$license->check_license();
 		}
+		require_once 'common/class-postcode-validation.php';
+		Bring_Fraktguiden\Postcode_Validation::setup();
 	}
 
 	/**

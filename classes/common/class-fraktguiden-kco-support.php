@@ -1,5 +1,6 @@
 <?php
 
+use Bring_Fraktguiden\Postcode_Validation;
 
 class Fraktguiden_KCO_Support {
 
@@ -49,21 +50,19 @@ class Fraktguiden_KCO_Support {
 	 * Ajax post code validation
 	 */
 	public static function ajax_post_code_validation() {
-		$params  = http_build_query(
-			[
-				'clientUrl' => get_site_url(),
-				'country'   => $_REQUEST['country'],
-				'pnr'       => $_REQUEST['post_code'],
-			]
-		);
-		$content = file_get_contents( 'https://api.bring.com/shippingguide/api/postalCode.json?' . $params );
-		if ( ! $content ) {
-			wp_send_json( '{ "error" : "Could not connect to api.bring.com" }' );
+		$response = Postcode_Validation::get_postcode_information( $_REQUEST['post_code'], $_REQUEST['country'] );
+		if ( is_wp_error( $response ) ) {
+			wp_send_json( [
+				'error' => implode( "\n", $response->errors ),
+			] );
 		}
-		$data = json_decode( $content );
-		if ( ! $data ) {
-			wp_send_json( '{ "error" : "Recieved invalid JSON from api.bring.com" }' );
+		if ( empty( $response['response']['code'] ) ||  empty( $response['body'] ) ) {
+			wp_send_json( [ 'error' => 'The bring API gave an empty response.' ] );
 		}
+		if ( 200 !== $response['response']['code'] ) {
+			wp_send_json( [ 'error' => 'Connection to the bring API failed. HTTP code: ' . $response['response']['code']  ] );
+		}
+		$data = json_decode( $response['body'], true );
 		if ( WC()->session->get( 'bring_fraktguiden_reset_kco' ) ) {
 			// We have to forget the order because klarna does not allow changes to an existing order.
 			WC()->session->set( 'kco_wc_order_id', null );
