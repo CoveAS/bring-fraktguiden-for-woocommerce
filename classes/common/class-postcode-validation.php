@@ -5,7 +5,7 @@ namespace Bring_Fraktguiden;
 class Postcode_Validation {
 
 	/**
-	 * Setup
+	 * Setup.
 	 */
 	public static function setup() {
 		add_filter( 'woocommerce_validate_postcode' , __CLASS__ . '::validate_postcode', 10, 3 );
@@ -13,7 +13,8 @@ class Postcode_Validation {
 	}
 
 	/**
-	 * Get postcode information
+	 * Get postcode information.
+	 * https://developer.bring.com/api/postal-code/
 	 *
 	 * @param  string          $postcode Postcode.
 	 * @param  string          $country  ISO2 country code.
@@ -31,7 +32,7 @@ class Postcode_Validation {
 	}
 
 	/**
-	 * Validate postcode
+	 * Validate postcode.
 	 *
 	 * @param  boolean $valid    Valid postcode.
 	 * @param  string  $postcode Postcode.
@@ -39,8 +40,19 @@ class Postcode_Validation {
 	 * @return boolean           Valid postcode.
 	 */
 	public static function validate_postcode( $valid, $postcode, $country ) {
-		$data = self::get_postcode_information( $postcode, $country );
-		if ( $valid && 'NO' == $country ) {
+		$valid_countries = [
+			'NO', // Norway
+			'DK', // Denmark
+			'SE', // Sweden
+			'FI', // Finland
+			'NL', // Netherlands
+			'DE', // Germany
+			'US', // United States
+			'BE', // Belgium
+			'FO', // Faroe Islands
+			'GL', // Greenland
+		];
+		if ( $valid && in_array( $country, $valid_countries ) ) {
 			$response = self::get_postcode_information( $postcode, $country );
 			if ( is_wp_error( $response ) ) {
 				return preg_match( '/^\d{1,4}$/', $postcode );
