@@ -1,6 +1,7 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 require_once __DIR__ . '/../exceptions/class-packing-exception.php';
@@ -24,7 +25,7 @@ class Fraktguiden_Packer {
 		$this->packages_to_ship     = array();
 		$this->popped_product_boxes = array();
 
-		$this->laff_pack = new LAFFPack();
+		$this->laff_pack = new \Cloudstek\PhpLaff\Packer();
 	}
 
 	/**
@@ -288,7 +289,7 @@ class Fraktguiden_Packer {
 					);
 				}
 
-				// Workaround weird LAFFPack issue where the dimensions are expected in reverse order.
+				// Workaround weird Cloudstek\PhpLaff\Packer issue where the dimensions are expected in reverse order.
 				rsort( $dims );
 
 				$box = array(

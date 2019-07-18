@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file contains Fraktguiden_System_Info class
+ *
+ * @package Bring_Fraktguiden\Fraktguiden_System_Info
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -8,9 +13,17 @@ if ( ! class_exists( 'Fraktguiden_Helper' ) ) {
 	include_once 'classes/common/class-fraktguiden-helper.php';
 }
 
+/**
+ *  Fraktguiden_System_Info class
+ */
 class Fraktguiden_System_Info {
 
-	static function generate() {
+	/**
+	 * Generate
+	 *
+	 * @return void
+	 */
+	public static function generate() {
 		global $woocommerce, $wp_version;
 		?>
 		<html>
@@ -103,21 +116,40 @@ class Fraktguiden_System_Info {
 		die();
 	}
 
+	/**
+	 * Create header
+	 *
+	 * @param  string $header_text Header text.
+	 * @return void
+	 */
 	private static function create_header( $header_text ) {
 		echo '<thead>';
 		echo '<tr>';
-		echo '<th colspan="2">' . $header_text . '</th>';
+		echo '<th colspan="2">' . esc_html( $header_text ) . '</th>';
 		echo '</tr>';
 		echo '</thead>';
 	}
 
+	/**
+	 * Create row
+	 *
+	 * @param  string|int $key Key.
+	 * @param  string|int $val Value.
+	 * @return void
+	 */
 	private static function create_row( $key, $val ) {
 		echo '<tr>';
-		echo '<td>' . $key . '</td>';
-		echo '<td>' . $val . '</td>';
+		echo '<td>' . esc_html( $key ) . '</td>';
+		echo '<td>' . esc_html( $val ) . '</td>';
 		echo '</tr>';
 	}
 
+	/**
+	 * Generate fraktguiden options
+	 *
+	 * @param  array $options Options.
+	 * @return void
+	 */
 	private static function generate_fraktguiden_options( $options ) {
 		$is_pro = class_exists( 'WC_Shipping_Method_Bring_Pro' );
 		self::create_row( 'pro', ( $is_pro ? 'yes' : 'no' ) );
@@ -134,7 +166,7 @@ class Fraktguiden_System_Info {
 				$val = $option;
 			}
 
-			if ( $key == 'mybring_api_key' ) {
+			if ( 'mybring_api_key' === $key ) {
 				$val = '*******';
 			}
 
@@ -145,6 +177,11 @@ class Fraktguiden_System_Info {
 		}
 	}
 
+	/**
+	 * Create active plugin info
+	 *
+	 * @return string
+	 */
 	private static function create_active_plugins_info() {
 		$plugins_text = '<ul>';
 		$plugins      = get_plugins();
@@ -157,27 +194,36 @@ class Fraktguiden_System_Info {
 		return $plugins_text;
 	}
 
+	/**
+	 * Create shipping countries
+	 *
+	 * @param  array $countries Countries.
+	 * @return string
+	 */
 	private static function create_shipping_countries( $countries ) {
 		$html  = '<div class="shipping-countries">';
 		$html .= '<div>';
 
 		$i = 0;
 		foreach ( $countries as $country ) {
-			if ( $i == 0 ) {
+			if ( 0 === $i ) {
 				$html .= '<ul>';
 			}
+
 			if ( $i < 5 ) {
 				$html .= '<li>' . $country . '</li>';
 			}
-			if ( $i == 5 ) {
+
+			if ( 5 === $i ) {
 				$html .= '</ul>';
 				$html .= '<ul class="js-hidden" style="display: none">';
 			}
+
 			if ( $i > 5 ) {
 				$html .= '<li>' . $country . '</li>';
 			}
 
-			if ( $i == count( $countries ) ) {
+			if ( count( $countries ) === $i ) {
 				$html .= '</ul>';
 			}
 
@@ -191,11 +237,18 @@ class Fraktguiden_System_Info {
 		return $html;
 	}
 
+	/**
+	 * Generate fraktguiden services info
+	 *
+	 * @param  array $all_services All services.
+	 * @param  array $bfg_options  BFG options.
+	 * @return void
+	 */
 	private static function generate_fraktguiden_services_info( $all_services, $bfg_options ) {
 		foreach ( $all_services as $key => $service ) {
 			$info_table = '<table class="properties">';
 			foreach ( $service as $k => $v ) {
-				if ( gettype( $v ) == 'array' ) {
+				if ( gettype( $v ) === 'array' ) {
 					$val_html = '';
 					foreach ( $v as $n ) {
 						$val_html .= '<li>' . $n . '</li>';
@@ -223,6 +276,11 @@ class Fraktguiden_System_Info {
 		}
 	}
 
+	/**
+	 * Generate script
+	 *
+	 * @return void
+	 */
 	private static function generate_script() {
 		?>
 		<script>

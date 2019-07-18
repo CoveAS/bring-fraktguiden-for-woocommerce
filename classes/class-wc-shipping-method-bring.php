@@ -362,9 +362,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$url = add_query_arg( $params, self::SERVICE_URL );
 
 		// Add all the selected services to the URL.
-		$service_count = 0;
-		$field_key     = $this->get_field_key( 'services' );
-		$services      = \Fraktguiden_Service::all( $field_key, true );
+		$field_key = $this->get_field_key( 'services' );
+		$services  = \Fraktguiden_Service::all( $field_key, true );
 		if ( ! empty( $services ) ) {
 			foreach ( $services as $service ) {
 				$url .= '&product=' . $service;
@@ -381,7 +380,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Make the request.
 		$request  = new WP_Bring_Request();
 		$response = $request->get( $url, [], $options );
-
 
 		if ( 200 != $response->status_code ) {
 			$no_connection_handling = $this->get_setting( 'no_connection_handling' );
@@ -483,7 +481,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 			$label = $service_details['guiInformation']['productName'];
 
-			if ( 'displayname' === strtolower($this->service_name) ) {
+			if ( 'displayname' === strtolower( $this->service_name ) ) {
 				$label = $service_details['guiInformation']['displayName'];
 			}
 
@@ -522,16 +520,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$country = 'NO';
 		}
 
-		$client_url = null;
-
-		if ( isset( $_SERVER['HTTP_HOST'] ) ) {
-			$client_url = wp_unslash( $_SERVER['HTTP_HOST'] );
-		}
-
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
 			[
-				'clientUrl'           => $client_url,
+				'clientUrl'           => filter_input( INPUT_SERVER, 'HTTP_HOST' ),
 				'frompostalcode'      => $this->from_zip,
 				'fromcountry'         => $this->get_selected_from_country(),
 				'topostalcode'        => $package['destination']['postcode'],
@@ -587,16 +579,18 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * Add Trace Messages
 	 *
 	 * @param array $messages Bring trace messages.
-	 * @return array
+	 * @return void
 	 */
 	public function add_trace_messages( $messages ) {
 		if ( isset( $messages['Message'] ) ) {
 			$messages = $messages['Message'];
 		}
+
 		if ( ! is_array( $messages ) ) {
 			$messages = [];
 		}
-		foreach ($messages as &$message) {
+
+		foreach ( $messages as &$message ) {
 			if ( empty( $message['code'] ) ) {
 				continue;
 			}
