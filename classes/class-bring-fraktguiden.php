@@ -22,8 +22,8 @@ class Bring_Fraktguiden {
 			return;
 		}
 
-		if ( ! class_exists( 'LAFFPack' ) ) {
-			require_once FRAKTGUIDEN_PLUGIN_PATH . 'includes/laff-pack.php';
+		if ( ! class_exists( 'Packer' ) ) {
+			require_once FRAKTGUIDEN_PLUGIN_PATH . 'includes/php-laff/src/Packer.php';
 		}
 
 		require_once 'class-wc-shipping-method-bring.php';
