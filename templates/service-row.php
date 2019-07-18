@@ -15,7 +15,7 @@
 			data-productName="<?php echo esc_attr( $service->service_data['productName'] ); ?>"
 			data-displayName="<?php echo esc_attr( $service->service_data['displayName'] ); ?>"
 		>
-			<?php echo esc_attr( $service->service_data[ $this->shipping_method->service_name ] ); ?>
+			<?php echo esc_attr( $service->get_name_by_index( $this->shipping_method->service_name ) ); ?>
 		</label>
 		<input
 			class="fraktguiden-service-custom-name"

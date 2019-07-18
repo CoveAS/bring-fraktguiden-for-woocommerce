@@ -76,4 +76,19 @@ class Fraktguiden_Service {
 		// echo "<pre>";var_dump( $services);die;
 		return $services;
 	}
+
+	/**
+	 * Get name by index
+	 *
+	 * @param string|int $index Index.
+	 * @return string
+	 */
+	public function get_name_by_index( $index = '' ) {
+		if ( isset( $this->service_data[ $index ] ) ) {
+			return $this->service_data[ $index ];
+		}
+
+		// Return default name as fallback.
+		return $this->service_data['productName'];
+	}
 }
