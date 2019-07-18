@@ -37,7 +37,12 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		foreach ( $order_items_packages as $item_id => $package ) {
 			$package_count = count( $package ) / $elements_count;
 			for ( $i = 0; $i < $package_count; $i++ ) {
-				$weight_in_kg = (int) $package[ 'weightInGrams' . $i ] / 1000;
+				if ( isset( $package[ 'weightInGrams' . $i ] ) ) {
+					$weight = $package[ 'weightInGrams' . $i ];
+				} else {
+					$weight = $package[ 'weight' . $i ];
+				}
+				$weight_in_kg = (int) $weight / 1000;
 				$data         = [
 					'weightInKg'       => $weight_in_kg,
 					'goodsDescription' => null,

@@ -249,14 +249,14 @@ class Bring_WC_Order_Adapter {
 			$pickup_point_cached   = null;
 			$pickup_point_postcode = null;
 			if ( $pickup_point_id ) {
-				$country = $shipping_address['country'];
+				$shipping_address = $this->order->get_address( 'shipping' );
+				$country          = $shipping_address['country'];
 				if ( ! empty( $_GET['country'] ) ) {
 					$country = $_GET['country'];
 				}
-				$shipping_address = $this->order->get_address( 'shipping' );
-				$request          = new WP_Bring_Request();
-				$response         = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/id/' . $pickup_point_id . '.json' );
-				$pickup_point     = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
+				$request      = new WP_Bring_Request();
+				$response     = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/id/' . $pickup_point_id . '.json' );
+				$pickup_point = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
 			}
 			$data[] = [
 				'item_id'      => $item_id,

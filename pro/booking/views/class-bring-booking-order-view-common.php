@@ -26,7 +26,11 @@ class Bring_Booking_Common_View {
 	public static function render_customer_selector( $name = '_bring-customer-number', $adapter = null ) {
 		$customer_number = null;
 
-		$shipping_items = $adapter->get_fraktguiden_shipping_items();
+		$shipping_items = [];
+
+		if ( ! empty( $adapter ) ) {
+			$adapter->get_fraktguiden_shipping_items();
+		}
 
 		if ( ! empty( $shipping_items ) ) {
 			$shipping_item   = reset( $shipping_items );

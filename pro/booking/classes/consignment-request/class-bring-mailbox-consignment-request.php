@@ -31,7 +31,7 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 		$phone_number = Fraktguiden_Helper::phone_i18n( $phone_number, $order->get_billing_country() );
 		return [
 			'rfid'          => $tracking,
-			'weight'        => $package['weightInGrams0'],
+			'weight'        => empty( $package['weightInGrams0'] ) ? $package['weight0'] : $package['weightInGrams0'],
 			'recipientName' => $name,
 			'postalCode'    => $order->get_shipping_postcode(),
 			'streetAddress' => $order->get_shipping_address_1(),

@@ -247,14 +247,16 @@ class Bring_Booking_Order_View {
 		id="_bring_additional_info_recipient"
 		></textarea>
 	</div>
-	<div class="bring-customer-note">
-	  <span class="bring-customer-note__label">
-		<?php esc_html_e( 'Customer note from the order', 'bring-fraktguiden' ); ?>:
-	  </span>
-	  <span class="bring-customer-note__value">
-		<?php echo esc_html( $order->order->get_customer_note() ); ?>
-	  </span>
-	</div>
+	<?php if ( $order->order->get_customer_note() ) : ?>
+		<div class="bring-customer-note">
+		  <span class="bring-customer-note__label">
+			<?php esc_html_e( 'Customer note from the order', 'bring-fraktguiden' ); ?>:
+		  </span>
+		  <span class="bring-customer-note__value">
+			<?php echo esc_html( $order->order->get_customer_note() ); ?>
+		  </span>
+		</div>
+	<?php endif; ?>
 
 	<div class="bring-form-field" style="margin-bottom:25px">
 	  <label>
