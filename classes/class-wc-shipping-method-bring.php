@@ -451,7 +451,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @param array $response The JSON response from Bring.
 	 * @return array|boolean
 	 */
-	private function get_services_from_response( $response ) {
+	public function get_services_from_response( $response ) {
 
 		if ( ! $response || ( is_array( $response ) && count( $response ) === 0 ) || empty( $response['consignments'] ) ) {
 			return [];

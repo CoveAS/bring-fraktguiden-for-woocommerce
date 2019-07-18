@@ -274,8 +274,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			$key = strtoupper( $rate['bring_product'] );
 			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) ) {
 				$key = 'SERVICEPAKKE';
-			}
-			if ( 'CustomName' == $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
+			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
+				// Any rate except SERVICEPAKKE can have a custom name.
 				$rate['label'] = $custom_names[ $key ];
 			}
 			if ( isset( $custom_prices[ $key ] ) && ctype_digit( $custom_prices[ $key ] ) ) {
