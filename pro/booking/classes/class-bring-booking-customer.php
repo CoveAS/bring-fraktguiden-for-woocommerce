@@ -1,16 +1,28 @@
 <?php
+/**
+ * This file contains Bring_Booking_Customer class
+ *
+ * @package Bring_Fraktguiden\Bring_Booking_Customer
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Booking_Customer class
+ */
 class Bring_Booking_Customer {
-	// const CUSTOMERS_URL = 'http://drivdi-1551.rask3.raskesider.no/_public/fraktguiden/test-mybring-customers.php';
+
 	const CUSTOMERS_URL = 'https://api.bring.com/booking/api/customers.json';
 
 	/**
+	 * Get customer numbers formatted
+	 *
+	 * @throws Exception Exception.
 	 * @return array
 	 */
-	static function get_customer_numbers_formatted() {
+	public static function get_customer_numbers_formatted() {
 
 		$args = [
 			'headers' => [
@@ -28,12 +40,14 @@ class Bring_Booking_Customer {
 		if ( $response->has_errors() ) {
 			throw new Exception( $response->get_body() );
 		}
+
 		$result = [];
 		$json   = json_decode( $response->get_body() );
+
 		foreach ( $json->customers as $customer ) {
-			$result[ $customer->customerNumber ] = '[' . $customer->countryCode . '] ' . $customer->name;
+			$result[ $customer->customerNumber ] = '[' . $customer->countryCode . '] ' . $customer->name; // phpcs:ignore
 		}
+
 		return $result;
 	}
-
 }

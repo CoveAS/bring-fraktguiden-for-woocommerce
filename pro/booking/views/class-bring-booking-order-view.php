@@ -1,15 +1,22 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 add_action( 'wp_ajax_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
 add_action( 'wp_ajax_nopriv_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
+
 class Bring_Booking_Order_View {
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
-	static function init() {
+	/**
+	 * Initialize
+	 *
+	 * @return void
+	 */
+	public static function init() {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_booking_meta_box' ), 1, 2 );
 		// add_action( 'woocommerce_order_actions', array( __CLASS__, 'add_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_bring_book_with_bring', array( __CLASS__, 'send_booking' ) );
@@ -35,13 +42,16 @@ class Bring_Booking_Order_View {
 	// }
 
 	/**
-	 * @param string  $post_type
-	 * @param WP_Post $post
+	 * Add booking meta box
+	 *
+	 * @param string  $post_type Post type.
+	 * @param WP_Post $post      Post.
 	 */
-	static function add_booking_meta_box( $post_type, $post ) {
-		if ( $post_type != 'shop_order' ) {
+	public static function add_booking_meta_box( $post_type, $post ) {
+		if ( 'shop_order' !== $post_type ) {
 			return;
 		}
+
 		// Do not show if the order does not use fraktguiden shipping.
 		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
 		if ( ! $order->has_bring_shipping_methods() ) {
@@ -58,9 +68,11 @@ class Bring_Booking_Order_View {
 	}
 
 	/**
-	 * @param WP_Post $post
+	 * Render booking meta box
+	 *
+	 * @param WP_Post $post Post.
 	 */
-	static function render_booking_meta_box( $post ) {
+	public static function render_booking_meta_box( $post ) {
 		$wc_order = new WC_Order( $post->ID );
 		$order    = new Bring_WC_Order_Adapter( $wc_order );
 		$step2    = Bring_Booking_Common_View::is_step2();
@@ -73,7 +85,7 @@ class Bring_Booking_Order_View {
 		}
 
 		?>
-	  <div class="bring-booking-meta-box-content-body">
+		<div class="bring-booking-meta-box-content-body">
 		<?php
 		if ( $order->has_booking_errors() && ! $step2 ) {
 			self::render_errors( $order );
@@ -96,30 +108,32 @@ class Bring_Booking_Order_View {
 		}
 		?>
 
-	  </div>
+		</div>
 	</div>
 		<?php
 	}
 
 	/**
-	 * @param Bring_WC_Order_Adapter $order
+	 * Render start
+	 *
+	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
-	static function render_start( $order ) {
+	public static function render_start( $order ) {
 		?>
 		<?php
 		if ( ! $order->has_booking_errors() ) {
 			?>
-	  <div>
-			<?php _e( 'Press start to start booking', 'bring-fraktguiden' ); ?>
-		<br>
+		<div>
+			<?php esc_html_e( 'Press start to start booking', 'bring-fraktguiden' ); ?>
+			<br>
 			<?php
 			$next_status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
-			if ( $next_status != 'none' ) {
+			if ( 'none' !== $next_status ) {
 				$order_statuses = wc_get_order_statuses();
 				printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden' ), mb_strtolower( $order_statuses[ $next_status ] ) );
 			}
 			?>
-	  </div>
+		</div>
 			<?php
 		}
 		?>
@@ -128,18 +142,20 @@ class Bring_Booking_Order_View {
 	}
 
 	/**
-	 * @param Bring_WC_Order_Adapter $order
+	 * Render booking success screen
+	 *
+	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
-	static function render_booking_success_screen( $order ) {
+	public static function render_booking_success_screen( $order ) {
 		?>
 	<div class="bring-info-box">
-	  <div>
+		<div>
 		<?php
 		$status = Bring_Booking_Common_View::get_booking_status_info( $order );
 		echo Bring_Booking_Common_View::create_status_icon( $status, 90 );
 		?>
 		<h3><?php echo $status['text']; ?></h3>
-		<?php if ( $order->order->get_status() != 'completed' ) { ?>
+		<?php if ( 'completed' !== $order->order->get_status() ) { ?>
 		  <div style="text-align:center;margin-bottom: 1em">
 			<?php _e( 'Note: Order is not completed', 'bring-fraktguiden' ); ?>
 		  </div>
@@ -155,9 +171,11 @@ class Bring_Booking_Order_View {
 	}
 
 	/**
-	 * @param Bring_WC_Order_Adapter $order
+	 * Render consignments
+	 *
+	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
-	static function render_consignments( $order ) {
+	public static function render_consignments( $order ) {
 		$type = $order->get_consignment_type();
 		?>
 	<div class="bring-consignments">
@@ -172,36 +190,35 @@ class Bring_Booking_Order_View {
 	}
 
 	/**
-	 * @param Bring_WC_Order_Adapter $order
+	 * Render step 2 screen
+	 *
+	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
-	static function render_step2_screen( $order ) {
+	public static function render_step2_screen( $order ) {
 		?>
-	<div class="bring-form-field">
-	  <label><?php _e( 'Customer Number', 'bring-fraktguiden' ); ?>:</label>
-		<?php Bring_Booking_Common_View::render_customer_selector(); ?>
-	</div>
+		<div class="bring-form-field">
+			<label><?php esc_html_e( 'Customer Number', 'bring-fraktguiden' ); ?>:</label>
+			<?php Bring_Booking_Common_View::render_customer_selector( '_bring-customer-number', $order ); ?>
+		</div>
 
-	<div class="bring-form-field">
-	  <label>
-		<?php _e( 'Shipping Date', 'bring-fraktguiden' ); ?>:
-	  </label>
+		<div class="bring-form-field">
+			<label><?php esc_html_e( 'Shipping Date', 'bring-fraktguiden' ); ?>:</label>
 
-	  <div>
-		<?php Bring_Booking_Common_View::render_shipping_date_time(); ?>
-	  </div>
+			<div>
+				<?php Bring_Booking_Common_View::render_shipping_date_time(); ?>
+			</div>
 
-	  <script type="text/javascript">
-		jQuery( document ).ready( function () {
-		  jQuery( function () {
-			jQuery( "[name=_bring-shipping-date]" ).datepicker( {
-			  minDate: 0,
-			  dateFormat: 'yy-mm-dd'
+			<script>
+			jQuery( document ).ready( function () {
+				jQuery( function () {
+					jQuery( "[name=_bring-shipping-date]" ).datepicker( {
+						minDate: 0,
+						dateFormat: 'yy-mm-dd'
+					} );
+				} );
 			} );
-		  } );
-		} );
-	  </script>
+			</script>
 	</div>
-
 
 		<?php
 

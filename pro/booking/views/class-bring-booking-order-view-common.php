@@ -19,21 +19,46 @@ class Bring_Booking_Common_View {
 	/**
 	 * Render customer selector
 	 *
-	 * @param  string $name Select field name.
+	 * @param  string                 $name    Select field name.
+	 * @param  Bring_WC_Order_Adapter $adapter Order adapter.
 	 * @return void
 	 */
-	public static function render_customer_selector( $name = '_bring-customer-number' ) {
+	public static function render_customer_selector( $name = '_bring-customer-number', $adapter = null ) {
+		$customer_number = null;
+
+		$shipping_items = $adapter->get_fraktguiden_shipping_items();
+
+		if ( ! empty( $shipping_items ) ) {
+			$shipping_item   = reset( $shipping_items );
+			$method          = new WC_Shipping_Method_Bring_Pro( $shipping_item->get_instance_id() );
+			$customer_number = $method->get_option( 'mybring_customer_number' );
+		}
+
 		try {
 			$customers = Bring_Booking_Customer::get_customer_numbers_formatted();
 		} catch ( Exception $e ) {
 			printf( '<p class="error">%s</p>', $e->getMessage() );
 			return;
 		}
-		echo '<select name="' . esc_attr( $name ) . '" class="wc-enhanced-select" style="max-width:20em">';
-		foreach ( $customers as $key => $val ) {
-			echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $val ) . '</option>';
+
+		echo '<div>';
+
+		// Set default customer number as fallback in case shipping item is missing or no match with customers.
+		if ( ! array_key_exists( $customer_number, $customers ) ) {
+			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
 		}
-		echo '</select>';
+
+		foreach ( $customers as $key => $val ) {
+			$checked_attr = '';
+
+			if ( $customer_number === $key ) {
+				$checked_attr = ' checked="checked"';
+			}
+
+			echo '<label><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $key ) . '"' . $checked_attr . '>' . esc_html( $val ) . '</label>'; // phpcs:ignore
+		}
+
+		echo '</div>';
 	}
 
 	/**
