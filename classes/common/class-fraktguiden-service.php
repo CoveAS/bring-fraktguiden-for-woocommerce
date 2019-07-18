@@ -84,11 +84,10 @@ class Fraktguiden_Service {
 	 * @return string
 	 */
 	public function get_name_by_index( $index = '' ) {
-		if ( isset( $this->service_data[ $index ] ) ) {
-			return $this->service_data[ $index ];
+		if ( empty( $this->service_data[ $index ] ) ) {
+			// Return default name as fallback.
+			return $this->service_data['productName'];
 		}
-
-		// Return default name as fallback.
-		return $this->service_data['productName'];
+		return $this->service_data[ $index ];
 	}
 }
