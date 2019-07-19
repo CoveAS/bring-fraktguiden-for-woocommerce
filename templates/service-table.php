@@ -1,4 +1,3 @@
-
 <table class="wc_shipping widefat fraktguiden-services-table">
 	<thead>
 		<tr>

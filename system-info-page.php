@@ -153,9 +153,11 @@ class Fraktguiden_System_Info {
 	private static function generate_fraktguiden_options( $options ) {
 		$is_pro = class_exists( 'WC_Shipping_Method_Bring_Pro' );
 		self::create_row( 'pro', ( $is_pro ? 'yes' : 'no' ) );
+
 		foreach ( $options as $key => $option ) {
 			$val = '';
-			if ( gettype( $option ) == 'array' ) {
+
+			if ( 'array' === gettype( $option ) ) {
 				$val .= '<ul>';
 
 				foreach ( $option as $o ) {
@@ -172,6 +174,7 @@ class Fraktguiden_System_Info {
 
 			self::create_row( $key, $val );
 		}
+
 		if ( $is_pro ) {
 			self::create_row( 'labels_directory', Bring_Booking_Labels::get_local_dir() );
 		}
@@ -185,12 +188,15 @@ class Fraktguiden_System_Info {
 	private static function create_active_plugins_info() {
 		$plugins_text = '<ul>';
 		$plugins      = get_plugins();
+
 		foreach ( $plugins as $key => $plugin ) {
 			if ( is_plugin_active( $key ) ) {
 				$plugins_text .= '<li>' . $plugin['Name'] . ' ' . $plugin['Version'] . '</li>';
 			}
 		}
+
 		$plugins_text .= '</ul>';
+
 		return $plugins_text;
 	}
 
@@ -205,6 +211,7 @@ class Fraktguiden_System_Info {
 		$html .= '<div>';
 
 		$i = 0;
+
 		foreach ( $countries as $country ) {
 			if ( 0 === $i ) {
 				$html .= '<ul>';
@@ -229,6 +236,7 @@ class Fraktguiden_System_Info {
 
 			$i++;
 		}
+
 		$html .= '</div>';
 		$html .= '<div><a href="#" class="js-more">More...</a></div>';
 
@@ -247,8 +255,9 @@ class Fraktguiden_System_Info {
 	private static function generate_fraktguiden_services_info( $all_services, $bfg_options ) {
 		foreach ( $all_services as $key => $service ) {
 			$info_table = '<table class="properties">';
+
 			foreach ( $service as $k => $v ) {
-				if ( gettype( $v ) === 'array' ) {
+				if ( 'array' === gettype( $v ) ) {
 					$val_html = '';
 					foreach ( $v as $n ) {
 						$val_html .= '<li>' . $n . '</li>';
@@ -257,15 +266,18 @@ class Fraktguiden_System_Info {
 				} else {
 					$val_html = $v;
 				}
+
 				$info_table .= "
 				<tr>
 					<td>$k</td>
 					<td>$val_html</td>
 				</tr>";
 			}
+
 			$info_table .= '</table>';
 
 			$text = $key;
+
 			foreach ( $bfg_options['services'] as $k => $selected_service ) {
 				if ( $key == $selected_service ) {
 					$text .= ' (selected)';
