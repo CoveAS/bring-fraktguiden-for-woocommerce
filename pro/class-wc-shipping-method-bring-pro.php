@@ -402,10 +402,11 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 			$key = strtoupper( $rate['bring_product'] );
 
-			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) ) {
+			// custom_name for SERVICEPAKKE will also rename the pickup points
+			// SERVICEPAKKE's custom_name is ignored if 'pickup_point_enabled' is enabled.
+			if ( 0 === strpos( $key, 'SERVICEPAKKE' )  && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' )  ) {
 				$key = 'SERVICEPAKKE';
 			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
-				// Any rate except SERVICEPAKKE can have a custom name.
 				$rate['label'] = $custom_names[ $key ];
 			}
 
