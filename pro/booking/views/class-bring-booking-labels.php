@@ -26,7 +26,7 @@ class Bring_Booking_Labels {
 	 * @return [type] [description]
 	 */
 	static function open_pdfs() {
-		add_dashboard_page( null, null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
+		add_dashboard_page( __( 'Print booking label', 'bring-fraktguiden' ), null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
 	}
 
 	/**

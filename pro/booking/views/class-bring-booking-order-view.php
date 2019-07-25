@@ -299,8 +299,8 @@ class Bring_Booking_Order_View {
 		</button>
 		<?php } elseif ( Fraktguiden_Helper::pro_activated() && $missing_params ) { ?>
 		<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>#woocommerce_bring_fraktguiden_booking_title"
-		   data-tip="<?php _e( 'You have empty fields for the store address that needs to be filled in.', 'bring-fraktguiden' ); ?>"
-		   class="button button-primary tips"><?php _e( 'Fill in store information', 'bring-fraktguiden' ); ?></a>
+		   data-tip="<?php _e( 'Update your store address.', 'bring-fraktguiden' ); ?>"
+		   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden' ); ?></a>
 		<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
 		<button type="submit" name="_bring-start-booking"
 				data-tip="<?php _e( 'Start creating a label to ship this order with MyBring', 'bring-fraktguiden' ); ?>"

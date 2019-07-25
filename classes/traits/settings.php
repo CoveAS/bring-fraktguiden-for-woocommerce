@@ -422,8 +422,8 @@ trait Settings {
 			'enable_kco_support'            => array(
 				'title'       => __( 'Klarna checkout support', 'bring-fraktguiden' ),
 				'type'        => 'checkbox',
-				'label'       => __( 'Enable enhanced KCO support', 'bring-fraktguiden' ),
-				'desc_tip'    => __( 'Enables additional javascript on the checkout page to enhance KCO support.', 'bring-fraktguiden' ),
+				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden' ),
+				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden' ),
 				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden' ) . '</a>',
 				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
 			),
