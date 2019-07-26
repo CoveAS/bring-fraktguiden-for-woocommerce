@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-07-24 16:43+0200\n"
-"PO-Revision-Date: 2019-07-24 17:24+0200\n"
+"POT-Creation-Date: 2019-07-26 12:57+0200\n"
+"PO-Revision-Date: 2019-07-26 13:10+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ../classes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
@@ -166,7 +166,7 @@ msgstr "Hent leveringsmetoder"
 
 #: classes/debug/class-fraktguiden-order-debug.php:131
 msgid "Missing metadata on the waybill."
-msgstr ""
+msgstr "Metadata på Waybill mangler."
 
 #: classes/debug/class-fraktguiden-product-debug.php:48
 msgid "Loading."
@@ -177,7 +177,6 @@ msgid "Can this product be shipped with bring?"
 msgstr "Kan dette produktet sendes med bring?"
 
 #: classes/debug/class-fraktguiden-product-debug.php:60
-#, fuzzy
 msgid "Here's some information about your product"
 msgstr "Her er litt informasjon om produktet ditt"
 
@@ -187,15 +186,12 @@ msgid "API response"
 msgstr "API-svar"
 
 #: classes/debug/class-fraktguiden-product-debug.php:146
-#, fuzzy
 msgid "No problems detected"
 msgstr "Ingen problemer oppdaget"
 
 #: classes/debug/class-fraktguiden-product-debug.php:231
-#, fuzzy
-#| msgid "Sender Address"
 msgid "Address"
-msgstr "Senders adresse"
+msgstr "Adresse"
 
 #: classes/debug/class-fraktguiden-product-debug.php:232
 msgid "Post code"
@@ -222,7 +218,7 @@ msgstr "Fylke"
 #: classes/debug/class-fraktguiden-product-debug.php:237
 #, fuzzy
 msgid "Visiting address"
-msgstr "Gyldig adresse for frakt"
+msgstr "Besøksadresse"
 
 #: classes/debug/class-fraktguiden-product-debug.php:238
 msgid "Visiting post code"
@@ -231,7 +227,7 @@ msgstr "Gyldig postnummer for frakt"
 #: classes/debug/class-fraktguiden-product-debug.php:239
 #, fuzzy
 msgid "Visiting city"
-msgstr "Gyldig by for frakt"
+msgstr "Besøksbyen"
 
 #: classes/traits/settings.php:56
 msgid "Bring Settings"
@@ -402,7 +398,7 @@ msgid ""
 "accurate price. Use this option to disable calculation based on dimensions."
 msgstr ""
 "Normalt blir fraktkostnader kalkulert med en kombinasjon av vekt og "
-"dimensjoner for å regne ut riktig pris og  sendinger "
+"dimensjoner for å regne ut riktig pris og sendinger."
 
 #: classes/traits/settings.php:175
 msgid "Enable multipack"
@@ -454,10 +450,8 @@ msgid "Product Name"
 msgstr "Produktnavn"
 
 #: classes/traits/settings.php:190
-#, fuzzy
-#| msgid "Customer Number"
 msgid "Custom Name"
-msgstr "Kundenummer"
+msgstr "Tilpasset navn"
 
 #: classes/traits/settings.php:194
 msgid "Display Description"
@@ -727,7 +721,6 @@ msgid "Click here to see the logs"
 msgstr "Klikk her for å se loggene"
 
 #: classes/traits/settings.php:423
-#, fuzzy
 msgid "Klarna checkout support"
 msgstr "Støtte for Klarna checkout"
 
@@ -792,7 +785,7 @@ msgstr "Kundenummer"
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
-"Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring"
+"Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
 
 #: classes/traits/settings.php:505
 msgid "Gateway Disabled"
@@ -825,10 +818,8 @@ msgid "You need to enter a API User ID"
 msgstr "Du må fylle inn en API bruker ID"
 
 #: classes/traits/settings.php:605
-#, fuzzy
-#| msgid "You need to enter a API User ID"
 msgid "You need to enter a customer number"
-msgstr "Du må fylle inn en API bruker ID"
+msgstr "Du må fylle inn et kundenummer"
 
 #: classes/traits/settings.php:670
 msgid "MyBring Authentication failed"
@@ -842,26 +833,26 @@ msgstr ""
 "Kunne ikke koble til Bring med påloggingsinformasjonen. Kontroller at de er "
 "riktige"
 
-#: pro/booking/class-bring-booking.php:81
-#: pro/booking/class-bring-booking.php:86
-#: pro/booking/class-bring-booking.php:103
+#: pro/booking/class-bring-booking.php:95
+#: pro/booking/class-bring-booking.php:100
+#: pro/booking/class-bring-booking.php:119
 msgid "Awaiting Shipment"
 msgstr "Avventer frakt"
 
-#: pro/booking/class-bring-booking.php:86
+#: pro/booking/class-bring-booking.php:100
 #, php-format
 msgid " <span class=\"count\">(%s)</span>"
 msgid_plural " <span class=\"count\">(%s)</span>"
 msgstr[0] " <span class=\"count\">(%s)</span>"
 msgstr[1] " <span class=\"count\">(%s)</span>"
 
-#: pro/booking/class-bring-booking.php:148
+#: pro/booking/class-bring-booking.php:165
 msgid "Booking errors. See the Bring Booking box for details.\n"
 msgstr ""
 "Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
 "detaljer.\n"
 
-#: pro/booking/class-bring-booking.php:163
+#: pro/booking/class-bring-booking.php:180
 msgid "Booked with Bring\n"
 msgstr "Reservert hos Bring\n"
 
@@ -1224,17 +1215,15 @@ msgid "Downloads"
 msgstr "Nedlastinger"
 
 #: pro/booking/views/class-bring-booking-labels.php:121
-#, fuzzy
-#| msgid "Merged PDF labels"
 msgid "Merged ZPL labels"
-msgstr "Sammenslåtte PDF etiketter"
+msgstr "Sammenslåtte ZPL etiketter"
 
 #: pro/booking/views/class-bring-booking-labels.php:123
 msgid "Merged PDF labels"
 msgstr "Sammenslåtte PDF etiketter"
 
 #: pro/booking/views/class-bring-booking-my-order-view.php:36
-msgid "Your tracking number: "
+msgid "Your tracking number:"
 msgstr "Sporingsnummer:"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:77
@@ -1294,8 +1283,6 @@ msgstr "Forsendelser"
 
 #: pro/booking/views/class-bring-booking-order-view.php:200
 #: templates/service-table.php:15
-#, fuzzy
-#| msgid "Customer number"
 msgid "Customer Number"
 msgstr "Kundenummer"
 
@@ -1332,10 +1319,8 @@ msgid "Update your store address."
 msgstr "Oppdater butikkadressen din."
 
 #: pro/booking/views/class-bring-booking-order-view.php:303
-#, fuzzy
-#| msgid "Debug System information"
 msgid "Update store information"
-msgstr "Debug systeminformasjon"
+msgstr "Oppdater butikkinformasjon"
 
 #: pro/booking/views/class-bring-booking-order-view.php:306
 msgid "Start creating a label to ship this order with MyBring"
@@ -1422,8 +1407,6 @@ msgstr "Gateadresse 2"
 #: pro/booking/views/class-bring-booking-order-view.php:637
 #: pro/class-wc-shipping-method-bring-pro.php:310
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:211
-#, fuzzy
-#| msgid "Postcode"
 msgid "Postcode"
 msgstr "Postnummer"
 
@@ -1459,7 +1442,7 @@ msgstr "Booking bekreftet"
 
 #: pro/booking/views/class-bring-booking-order-view.php:700
 msgid "Previous booking request failed with the following errors:"
-msgstr "Forrige forespørsel feilet med følgende feilmeldinger"
+msgstr "Forrige forespørsel feilet med følgende feilmeldinger:"
 
 #: pro/booking/views/class-bring-booking-order-view.php:706
 msgid "Press Start to try again"
@@ -1480,7 +1463,7 @@ msgstr "Lukk dialogvindu"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:63
 msgid "This will only book orders that has not been booked."
-msgstr "Gjelder kun besillinger som ikke er resevert"
+msgstr "Gjelder kun bestillinger som ikke er reservert."
 
 #: pro/booking/views/class-bring-booking-orders-view.php:66
 msgid "Selected orders"
@@ -1628,8 +1611,6 @@ msgstr "Fraktguiden krever følgende felter utfylt"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:207
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:208
-#, fuzzy
-#| msgid "Valid shipping postcode"
 msgid "Valid shipping postcode"
 msgstr "Gyldig postnummer for frakt"
 
@@ -1723,140 +1704,3 @@ msgstr "Driv Digital AS"
 #. Author URI of the plugin/theme
 msgid "https://drivdigital.no/"
 msgstr "http://drivdigital.no/"
-
-#~ msgid "Display price"
-#~ msgstr "Visningspris"
-
-#~ msgid "How to calculate delivery charges"
-#~ msgstr "Hvordan leveringskostnader blir kalkulert"
-
-#~ msgid "VAT included"
-#~ msgstr "Med mva."
-
-#~ msgid "VAT excluded"
-#~ msgstr "Uten mva."
-
-#~ msgid "You cannot use a Customer number without entering API credentials"
-#~ msgstr "Du kan ikke bruke Kundenummer uten å fylle inn API detaljer"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid ""
-#~ "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
-#~ "this message.message."
-#~ msgstr ""
-#~ "Bring Fraktguiden PRO er i testmodus. Deaktiver testmodus for å fjerne "
-#~ "denne meldingen.meldingen."
-
-#~ msgid "Bring Fraktguiden Pro"
-#~ msgstr "Bring Fraktguiden Pro"
-
-#~ msgid "Select shipping method"
-#~ msgstr "Velg fraktmetode"
-
-#~ msgid "N/A"
-#~ msgstr "Ikke tilgjengelig"
-
-#~ msgid "Enable PRO features to extend Bring Fraktguiden"
-#~ msgstr "Aktiver PRO for å utvide til flere funksjoner i Bring Fraktguiden"
-
-#~ msgid "Flat rate"
-#~ msgstr "Fast sats"
-
-#~ msgid "Maximum of products in the cart before offering a flat rate"
-#~ msgstr "Maks produkter som kan være i kassen før en tilbyr en fast sats"
-
-#~ msgid ""
-#~ "If not checked, Fraktguiden will add a fee for paper based recipient "
-#~ "notification.<br/>If checked, the recipient will receive notification "
-#~ "over SMS or E-mail when the parcel has arrived.<br/>Applies to "
-#~ "Bedriftspakke, Kliman&oslash;ytral Servicepakke and Bedriftspakke "
-#~ "Ekspress-Over natten 09"
-#~ msgstr ""
-#~ "Hvis ikke krysset av vil Fraktguiden legge til et gebyr for papirbasert "
-#~ "mottakervarsling.<br/>Hvis krysset av vil mottakeren motta varsling via "
-#~ "SMS eller e-post når pakken har ankommet. Gjelder Bedriftspakke , "
-#~ "Kliman&oslash;ytral Servicepakke og Bedriftspakke Ekspress-Over Natten 09"
-
-#~ msgid "The service name displayed to the customer"
-#~ msgstr "Navnet på tjenesten som vises til kunden"
-
-#~ msgid "Max products"
-#~ msgstr "Maks produkter"
-
-#~ msgid "Debug"
-#~ msgstr "Debug"
-
-#~ msgid "These logs will be saved in"
-#~ msgstr "Loggene vil bli lagret i"
-
-#~ msgid "Update order and start booking"
-#~ msgstr "Oppdater bestilling og start booking"
-
-#~ msgid "Start"
-#~ msgstr "Start"
-
-#~ msgid "#"
-#~ msgstr "#"
-
-#~ msgid "Pickup Point"
-#~ msgstr "Hentested"
-
-#~ msgid "Create and submit consignment"
-#~ msgstr "Lag og send forsendelse"
-
-#~ msgid "Submitted"
-#~ msgstr "Sent"
-
-#~ msgid "Required"
-#~ msgstr "Påkrevd"
-
-#~ msgid "Make pickup point required on checkout"
-#~ msgstr "Gjør hentested påkrevd ved checkout"
-
-#~ msgid "MyBring Account"
-#~ msgstr "MyBring konto"
-
-#~ msgid "Booking Options"
-#~ msgstr "Booking valg"
-
-#~ msgid "Enable booking"
-#~ msgstr "Aktiver Booking"
-
-#~ msgid "Testing"
-#~ msgstr "Testing"
-
-#~ msgid "For testing. Bookings will not be invoiced"
-#~ msgstr "For testing. Reserveringer hos Bring vil ikke bli fakturert"
-
-#~ msgid "Order status to automatically set after successful booking"
-#~ msgstr "Settes automatisk på bestillingen etter fullført reservering"
-
-#~ msgid "Services 2"
-#~ msgstr "Tjenester 2"
-
-#~ msgid "<strong>Pickup point</strong> is a required field."
-#~ msgstr "<strong>Hentested</strong> er et påkrevet felt"
-
-#~ msgid ""
-#~ "This is the zip code of where you deliver from. For example, the post "
-#~ "office. Should be 4 digits."
-#~ msgstr ""
-#~ "Dette er postnummeret hvor du leverer fra. For eksempel postkontoret. Må "
-#~ "være 4 siffer."
-
-#~ msgid ""
-#~ "This is the country of where you deliver from (If omitted WooCommerce's "
-#~ "base location will be used. See WooCommerce - Settings - General)"
-#~ msgstr ""
-#~ "Dette er landet du sender fra (Hvis ikke valgt benyttes WooCommerce’s "
-#~ "base lokasjon. Se WooCommerce - Innstillinger - Generelt)"
-
-#~ msgid "This is the country of where you deliver from."
-#~ msgstr ""
-#~ "Landet hvor du sender fra (Hvis ikke valgt brukes Woo Commerce sin base "
-#~ "lokasjon som standard. Se Woo Commerce - innstillinger - generelt)"
-
-#~ msgid "These logs will be saved in <code>wc-logs/</code>"
-#~ msgstr "Loggen vil bli lagret i <code>wc-logs/</code>"

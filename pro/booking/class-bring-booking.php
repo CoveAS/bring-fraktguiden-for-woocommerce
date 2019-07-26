@@ -1,30 +1,31 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
-// Frontend views
+// Frontend views.
 require_once 'views/class-bring-booking-my-order-view.php';
 add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_View::order_display_tracking_info', 5, 2 );
 
-// Consignment
+// Consignment.
 require_once 'classes/consignment/class-bring-consignment.php';
 require_once 'classes/consignment/class-bring-mailbox-consignment.php';
 require_once 'classes/consignment/class-bring-booking-consignment.php';
 
-// Consignment request
+// Consignment request.
 require_once 'classes/consignment-request/class-bring-consignment-request.php';
 require_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
 require_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
 
-// Classes
+// Classes.
 require_once 'classes/class-bring-booking-file.php';
 require_once 'classes/class-bring-booking-customer.php';
 require_once 'classes/class-bring-booking-request.php';
 
 
 if ( is_admin() ) {
-	// Views
+	// Views.
 	include_once 'views/class-bring-booking-labels.php';
 	include_once 'views/class-bring-booking-waybills.php';
 	include_once 'views/class-bring-booking-order-view-common.php';
@@ -48,31 +49,44 @@ add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
 // Add awaiting shipping to existing order statuses.
 add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' );
 
+/**
+ * Bring_Booking class
+ */
 class Bring_Booking {
 
 	const ID          = Fraktguiden_Helper::ID;
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
-	static function init() {
-		if ( self::is_valid_for_use() ) {
-			Bring_Booking_Orders_View::init();
-			Bring_Booking_Order_View::init();
+	/**
+	 * Initialize
+	 *
+	 * @return void
+	 */
+	public static function init() {
+		if ( ! self::is_valid_for_use() ) {
+			return;
 		}
+
+		Bring_Booking_Orders_View::init();
+		Bring_Booking_Order_View::init();
 	}
 
 	/**
+	 * Check if API UID and key are valid
+	 *
 	 * @return bool
 	 */
-	static function is_valid_for_use() {
+	public static function is_valid_for_use() {
 		$api_uid = self::get_api_uid();
 		$api_key = self::get_api_key();
+
 		return $api_uid && $api_key;
 	}
 
 	/**
 	 * Register awaiting shipment order status.
 	 */
-	static function register_awaiting_shipment_order_status() {
+	public static function register_awaiting_shipment_order_status() {
 		// Be careful changing the post status name.
 		// If orders has this status they will not be available in admin.
 		register_post_status(
@@ -91,18 +105,21 @@ class Bring_Booking {
 	/**
 	 * Add awaiting shipment to order statuses.
 	 *
-	 * @param array $order_statuses
+	 * @param array $order_statuses Order statuses.
 	 * @return array
 	 */
-	static function add_awaiting_shipment_status( $order_statuses ) {
+	public static function add_awaiting_shipment_status( $order_statuses ) {
 		$new_order_statuses = array();
-		// Add the order status after processing
+
+		// Add the order status after processing.
 		foreach ( $order_statuses as $key => $status ) {
 			$new_order_statuses[ $key ] = $status;
+
 			if ( 'wc-processing' === $key ) {
 				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden' );
 			}
 		}
+
 		return $new_order_statuses;
 	}
 
