@@ -193,8 +193,8 @@ trait Settings {
 			'display_desc'                  => array(
 				'title'    => __( 'Display Description', 'bring-fraktguiden' ),
 				'type'     => 'checkbox',
-				'label'    => __( 'Add description after the service', 'bring-fraktguiden' ),
-				'desc_tip' => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
+				'label'    => __( 'Show service description after the name of the service', 'bring-fraktguiden' ),
+				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden' ),
 				'default'  => 'no',
 			),
 			'services'                      => array(

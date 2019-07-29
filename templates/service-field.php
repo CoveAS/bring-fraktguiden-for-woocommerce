@@ -10,7 +10,7 @@ foreach ( $services as $group => $service_group ) :
 		<td class="forminp">
 			<?php if ( $service_group['description'] ) : ?>
 				<?php // Service description may contain HTML. ?>
-				<p><?php _e( $service_group['description'], 'bring-fraktguiden' ); // phpcs:ignore ?></p>
+				<p style="padding-bottom: 1rem;"><?php _e( $service_group['description'], 'bring-fraktguiden' ); // phpcs:ignore ?></p>
 			<?php endif; ?>
 			<?php require __DIR__ . '/service-table.php'; ?>
 		</td>

@@ -11,8 +11,6 @@
 		</label>
 	</td>
 	<td class="fraktguiden-services-table-col-name">
-		<span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"
-				class="woocommerce-help-tip"></span>
 		<label class="fraktguiden-service"
 			for="<?php echo esc_attr( $service->id ); ?>"
 			data-productName="<?php echo esc_attr( $service->service_data['productName'] ); ?>"
@@ -31,15 +29,13 @@
 	<?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
 	<td class="fraktguiden-services-table-col-custom-price">
 		<input type="text"
-			placeholder="<?php _e( '', 'bring-fraktguiden' ) ?>"
+			placeholder="0.00"
 			name="<?php echo esc_attr( $service->custom_price_id ); ?>"
 			value="<?php echo esc_attr( $service->custom_price ); ?>"
 		/>
 	</td>
 
 	<td class="fraktguiden-services-table-col-customer-numbers">
-		<span data-tip="<?php _e( 'Allows you to offer different shipping options from different shipping accounts. Useful for when allowing international and cargo shipping options', 'bring-fraktguiden' ); ?>" class="woocommerce-help-tip"></span>
-
 		<label for="toggle_separate_customer_number_id_<?php echo esc_attr( $service->free_shipping_id ); ?>">
 			<input type="checkbox" class="bring-toggle-checkbox enable_free_shipping_limit"
 				id="toggle_separate_customer_number_id_<?php echo esc_attr( $service->free_shipping_id ); ?>"
@@ -56,8 +52,6 @@
 		/>
 	</td>
 	<td class="fraktguiden-services-table-col-free-shipping-threshold">
-		<span data-tip="<?php _e( 'Allows you to enable free shipping when the customers cart reached this value', 'bring-fraktguiden' ); ?>" class="woocommerce-help-tip"></span>
-
 		<label for="<?php echo esc_attr( $service->free_shipping_id ); ?>">
 			<input type="checkbox" class="bring-toggle-checkbox enable_free_shipping_limit"
 				id="<?php echo esc_attr( $service->free_shipping_id ); ?>"
@@ -70,7 +64,7 @@
 		<input type="text" class="free_shipping_limit" disabled
 			name="<?php echo esc_attr( $service->free_shipping_threshold_id ); ?>"
 			value="<?php echo esc_attr( $service->free_shipping_threshold ); ?>"
-			placeholder=""
+			placeholder="0.00"
 		/>
 	</td>
 	<?php endif; ?>

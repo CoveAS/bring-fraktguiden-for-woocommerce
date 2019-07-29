@@ -71,7 +71,7 @@ return [
 	],
 	'other'   => [
 		'title'       => 'Other services',
-		'description' => '',
+		'description' => '<strong style="color:#C00">Cargo services do not have unique <em>Product names</em>. Switch the \'<u>Display Service</u>\' to <em>Display names</em> to ensure customers can see the correct service</strong>',
 		'expanded'    => false,
 		'services'    => [
 			'BPAKKE_DOR-DOR'                => [
