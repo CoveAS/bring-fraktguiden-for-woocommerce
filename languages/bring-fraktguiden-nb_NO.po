@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-07-24 16:43+0200\n"
-"PO-Revision-Date: 2019-07-24 17:24+0200\n"
+"POT-Creation-Date: 2019-07-29 16:24+0200\n"
+"PO-Revision-Date: 2019-07-29 16:26+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -464,12 +464,16 @@ msgid "Display Description"
 msgstr "Vis beskrivelse"
 
 #: classes/traits/settings.php:196
-msgid "Add description after the service"
-msgstr "Legg til beskrivelse etter tjenesten"
-
-#: classes/traits/settings.php:197
 msgid "Show service description after the name of the service"
 msgstr "Vis tjenestebeskrivelse etter navnet på tjenesten"
+
+#: classes/traits/settings.php:197
+msgid ""
+"To help customers, the service description will help explain how the "
+"services differ from each other"
+msgstr ""
+"For å hjelpe kunder vil tjenestebeskrivelsen forklare hvordan tjenestene "
+"skiller seg fra hverandre"
 
 #: classes/traits/settings.php:201
 msgid "Services"
@@ -1293,7 +1297,6 @@ msgid "Consignments"
 msgstr "Forsendelser"
 
 #: pro/booking/views/class-bring-booking-order-view.php:200
-#: templates/service-table.php:15
 #, fuzzy
 #| msgid "Customer number"
 msgid "Customer Number"
@@ -1662,7 +1665,7 @@ msgid "Please wait"
 msgstr "Vennligst vent"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:217
-#: templates/service-table.php:8
+#: templates/service-table.php:7
 msgid "Service"
 msgstr "Tjeneste"
 
@@ -1688,17 +1691,37 @@ msgstr "(Bare PRO)"
 msgid "Active"
 msgstr "Aktive"
 
-#: templates/service-table.php:12
-msgid "Custom price"
-msgstr "Tilpasset fast pris"
+#: templates/service-table.php:9
+#, fuzzy
+msgid "Fixed price override"
+msgstr "Overstyring av fast pris"
 
-#: templates/service-table.php:18
-msgid "Free shipping"
+#: templates/service-table.php:11
+#, fuzzy
+#| msgid "You need to enter a API User ID"
+msgid "Alternative customer number"
+msgstr "Du må fylle inn en API bruker ID"
+
+#: templates/service-table.php:12
+#, fuzzy
+msgid ""
+"Allows you to offer different shipping options from different shipping "
+"accounts. Useful for when allowing international and cargo shipping options"
+msgstr ""
+"Lar deg tilby forskjellige fraktalternativer fra forskjellige fraktkontoer. "
+"Nyttig når du tillater internasjonale og fraktalternativer"
+
+#: templates/service-table.php:15
+#, fuzzy
+#| msgid "Free shipping"
+msgid "Free shipping threshold"
 msgstr "Gratis frakt"
 
-#: templates/service-table.php:21
-msgid "Free shipping limit"
-msgstr "Gratis fraktgrense"
+#: templates/service-table.php:16
+#, fuzzy
+msgid ""
+"Allows you to enable free shipping when the customers cart reached this value"
+msgstr "Lar deg aktivere gratis frakt når kundekurven nådde denne verdien"
 
 #. Plugin Name of the plugin/theme
 msgid "Bring Fraktguiden for WooCommerce"
@@ -1723,6 +1746,15 @@ msgstr "Driv Digital AS"
 #. Author URI of the plugin/theme
 msgid "https://drivdigital.no/"
 msgstr "http://drivdigital.no/"
+
+#~ msgid "Add description after the service"
+#~ msgstr "Legg til beskrivelse etter tjenesten"
+
+#~ msgid "Custom price"
+#~ msgstr "Tilpasset fast pris"
+
+#~ msgid "Free shipping limit"
+#~ msgstr "Gratis fraktgrense"
 
 #~ msgid "Display price"
 #~ msgstr "Visningspris"

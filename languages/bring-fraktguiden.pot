@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-07-24 16:43+0200\n"
+"POT-Creation-Date: 2019-07-29 16:24+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -409,11 +409,13 @@ msgid "Display Description"
 msgstr ""
 
 #: classes/traits/settings.php:196
-msgid "Add description after the service"
+msgid "Show service description after the name of the service"
 msgstr ""
 
 #: classes/traits/settings.php:197
-msgid "Show service description after the name of the service"
+msgid ""
+"To help customers, the service description will help explain how the "
+"services differ from each other"
 msgstr ""
 
 #: classes/traits/settings.php:201
@@ -1165,7 +1167,6 @@ msgid "Consignments"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:200
-#: templates/service-table.php:15
 msgid "Customer Number"
 msgstr ""
 
@@ -1512,7 +1513,7 @@ msgid "Please wait"
 msgstr ""
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:217
-#: templates/service-table.php:8
+#: templates/service-table.php:7
 msgid "Service"
 msgstr ""
 
@@ -1536,16 +1537,27 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: templates/service-table.php:9
+msgid "Fixed price override"
+msgstr ""
+
+#: templates/service-table.php:11
+msgid "Alternative customer number"
+msgstr ""
+
 #: templates/service-table.php:12
-msgid "Custom price"
+msgid ""
+"Allows you to offer different shipping options from different shipping "
+"accounts. Useful for when allowing international and cargo shipping options"
 msgstr ""
 
-#: templates/service-table.php:18
-msgid "Free shipping"
+#: templates/service-table.php:15
+msgid "Free shipping threshold"
 msgstr ""
 
-#: templates/service-table.php:21
-msgid "Free shipping limit"
+#: templates/service-table.php:16
+msgid ""
+"Allows you to enable free shipping when the customers cart reached this value"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
