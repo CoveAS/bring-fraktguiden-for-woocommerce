@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.6.5
-Stable tag: 1.5.13
+Stable tag: 1.6.0
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
