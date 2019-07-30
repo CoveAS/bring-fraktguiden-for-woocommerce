@@ -36,11 +36,12 @@
 	</td>
 
 	<td class="fraktguiden-services-table-col-customer-numbers">
-		<label for="toggle_separate_customer_number_id_<?php echo esc_attr( $service->free_shipping_id ); ?>">
-			<input type="checkbox" class="bring-toggle-checkbox enable_free_shipping_limit"
-				id="toggle_separate_customer_number_id_<?php echo esc_attr( $service->free_shipping_id ); ?>"
-				name="toggle_separate_customer_number_id_<?php echo esc_attr( $service->free_shipping_id ); ?>"
-				<?php echo esc_attr( $service->free_shipping ? 'checked="checked"' : '' ); ?>
+		<?php // @todo — allow customer_number_toggle_id to save / load like free_shipping_id ?>
+		<label for="<?php echo esc_attr( $service->customer_number_toggle_id ); ?>">
+			<input type="checkbox" class="bring-toggle-checkbox enable_customer_number"
+				id="<?php echo esc_attr( $service->customer_number_toggle_id ); ?>"
+				name="<?php echo esc_attr( $service->customer_number_toggle_id ); ?>"
+				<?php echo esc_attr( $service->customer_number_enabled ? 'checked="checked"' : '' ); ?>
 			/>
 			<em class="bring-toggle-alt"></em>
 		</label>

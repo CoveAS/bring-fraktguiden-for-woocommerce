@@ -29,7 +29,7 @@
 </table>
 
 <script>
-	// hasty jQuery to disable text fields based on
+	// @todo - hasty jQuery to disable text fields based on
 	// if the previous checkbox is toggled on or off (checked)
 	jQuery(document).ready( function($) {
 		// Customer number toggle
