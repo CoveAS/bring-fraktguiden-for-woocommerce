@@ -47,6 +47,7 @@ class Fraktguiden_Service_Table {
 		$vars      = [
 			'custom_prices',
 			'custom_names',
+			'customer_numbers',
 			'free_shipping_checks',
 			'free_shipping_thresholds',
 		];
@@ -65,7 +66,6 @@ class Fraktguiden_Service_Table {
 				}
 			}
 		}
-
 		foreach ( $options as $data_key => $value ) {
 			update_option( $data_key, $value );
 		}
@@ -82,7 +82,8 @@ class Fraktguiden_Service_Table {
 		$service_options = [
 			'field_key'                => $field_key,
 			'selected'                 => $this->shipping_method->services,
-			'custom_names'            => get_option( $field_key . '_custom_names' ),
+			'custom_names'             => get_option( $field_key . '_custom_names' ),
+			'customer_numbers'         => get_option( $field_key . '_customer_numbers' ),
 			'custom_prices'            => get_option( $field_key . '_custom_prices' ),
 			'free_shipping_checks'     => get_option( $field_key . '_free_shipping_checks' ),
 			'free_shipping_thresholds' => get_option( $field_key . '_free_shipping_thresholds' ),

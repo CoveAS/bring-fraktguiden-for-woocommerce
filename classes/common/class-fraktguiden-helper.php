@@ -84,19 +84,18 @@ class Fraktguiden_Helper {
 
 	static function get_all_services( $id = false ) {
 		$selected_service_name = self::get_option( 'service_name' );
-		$service_name          = $selected_service_name ? $selected_service_name : 'ProductName';
+		$service_name          = $selected_service_name ? $selected_service_name : 'productName';
 		$services              = self::get_services_data();
 		$result                = [];
 		foreach ( $services as $group => $service_group ) {
 			foreach ( $service_group['services'] as $key => $service ) {
-				if ( 'CustomName' == $service_name ) {
-					if ( empty( $id ) ) {
-						$result[ $key ] = $service['ProductName'];
-					} else {
+				$result[ $key ] = $service['productName'];
+				if ( 'CustomName' === $service_name ) {
+					if ( !empty( $id ) ) {
 						$result[ $key ] = '@TODO';
 					}
-				} else {
-					$result[ $key ] = $service[ $service_name ];
+				} elseif ( 'displayname' === strtolower( $service_name ) ) {
+					$result[ $key ] = $service['displayName'];
 				}
 			}
 		}
@@ -105,7 +104,7 @@ class Fraktguiden_Helper {
 
 	static function get_all_selected_services( $id = false ) {
 		$selected_service_name = self::get_option( 'service_name' );
-		$service_name          = $selected_service_name ? $selected_service_name : 'ProductName';
+		$service_name          = $selected_service_name ? $selected_service_name : 'productName';
 
 		$services = self::get_services_data();
 		$selected = self::get_option( 'services' );
@@ -115,7 +114,7 @@ class Fraktguiden_Helper {
 				if ( in_array( $key, $selected ) ) {
 					if ( 'CustomName' == $service_name ) {
 						if ( empty( $id ) ) {
-							$result[ $key ] = $service['ProductName'];
+							$result[ $key ] = $service['productName'];
 						} else {
 							$result[ $key ] = '@TODO';
 						}
@@ -271,7 +270,8 @@ class Fraktguiden_Helper {
 		global $woocommerce;
 		$countries = array( 'NO', 'SE', 'DK', 'FI', 'IS' );
 		return self::array_filter_key(
-			$woocommerce->countries->countries, function ( $k ) use ( $countries ) {
+			$woocommerce->countries->countries,
+			function ( $k ) use ( $countries ) {
 				return in_array( $k, $countries );
 			}
 		);

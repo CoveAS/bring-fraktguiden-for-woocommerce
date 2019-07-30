@@ -2,11 +2,11 @@
 
 
 class Bring_Consignment_Service {
-  public function queue_consignment() {
+	public function queue_consignment() {
 
-  }
+	}
 
-  public function book_consignments() {
+	public function book_consignments() {
 
-  }
+	}
 }

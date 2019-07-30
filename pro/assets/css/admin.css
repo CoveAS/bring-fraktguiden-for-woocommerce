@@ -309,8 +309,8 @@ mark.bring-shipment:after {
 
 @media ( min-width: 50em ) {
   .bring-separate-admin-section {
-    margin-top: 3em;
-    padding-top: 3em;
+	margin-top: 3em;
+	padding-top: 3em;
   }
 }
 

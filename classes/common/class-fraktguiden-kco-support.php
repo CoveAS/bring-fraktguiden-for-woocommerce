@@ -1,5 +1,6 @@
 <?php
 
+use Bring_Fraktguiden\Postcode_Validation;
 
 class Fraktguiden_KCO_Support {
 
@@ -11,7 +12,7 @@ class Fraktguiden_KCO_Support {
 			return;
 		}
 
-		$kco_settings = get_option('woocommerce_kco_settings');
+		$kco_settings = get_option( 'woocommerce_kco_settings' );
 		if ( empty( $kco_settings ) || 'yes' !== $kco_settings['shipping_methods_in_iframe'] ) {
 			add_action( 'woocommerce_review_order_before_shipping', __CLASS__ . '::before_kco_shipping', 50 );
 		}
@@ -34,10 +35,14 @@ class Fraktguiden_KCO_Support {
 				true
 			);
 			wp_enqueue_script( 'fraktguiden-kco' );
-			wp_localize_script( 'fraktguiden-kco', '_fraktguiden_kco', [
-				'ajaxurl'               => admin_url( 'admin-ajax.php' ),
-				'klarna_checkout_nonce' => wp_create_nonce( 'klarna_checkout_nonce' ),
-			] );
+			wp_localize_script(
+				'fraktguiden-kco',
+				'_fraktguiden_kco',
+				[
+					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
+					'klarna_checkout_nonce' => wp_create_nonce( 'klarna_checkout_nonce' ),
+				]
+			);
 		}
 	}
 
@@ -45,19 +50,19 @@ class Fraktguiden_KCO_Support {
 	 * Ajax post code validation
 	 */
 	public static function ajax_post_code_validation() {
-		$params = http_build_query( [
-			'clientUrl' => get_site_url(),
-			'country'   => $_REQUEST['country'],
-			'pnr'       => $_REQUEST['post_code'],
-		] );
-		$content = file_get_contents( 'https://api.bring.com/shippingguide/api/postalCode.json?' . $params );
-		if ( ! $content ) {
-			wp_send_json( '{ "error" : "Could not connect to api.bring.com" }' );
+		$response = Postcode_Validation::get_postcode_information( $_REQUEST['post_code'], $_REQUEST['country'] );
+		if ( is_wp_error( $response ) ) {
+			wp_send_json( [
+				'error' => implode( "\n", $response->errors ),
+			] );
 		}
-		$data =  json_decode( $content );
-		if ( ! $data ) {
-			wp_send_json( '{ "error" : "Recieved invalid JSON from api.bring.com" }' );
+		if ( empty( $response['response']['code'] ) ||  empty( $response['body'] ) ) {
+			wp_send_json( [ 'error' => 'The bring API gave an empty response.' ] );
 		}
+		if ( 200 !== $response['response']['code'] ) {
+			wp_send_json( [ 'error' => 'Connection to the bring API failed. HTTP code: ' . $response['response']['code']  ] );
+		}
+		$data = json_decode( $response['body'], true );
 		if ( WC()->session->get( 'bring_fraktguiden_reset_kco' ) ) {
 			// We have to forget the order because klarna does not allow changes to an existing order.
 			WC()->session->set( 'kco_wc_order_id', null );
@@ -80,7 +85,7 @@ class Fraktguiden_KCO_Support {
 	 */
 	public static function get_classes() {
 		$postcode = esc_html( WC()->customer->get_shipping_postcode() );
-		$classes = 'bring-enter-postcode';
+		$classes  = 'bring-enter-postcode';
 		// var_dump( $postcode ); die;
 		if ( ! $postcode && WC()->cart->needs_shipping() ) {
 			$classes .= ' bring-required';
@@ -123,17 +128,17 @@ class Fraktguiden_KCO_Support {
 	 * Klarna Checkout post code selector HTML
 	 */
 	public static function kco_post_code_html() {
-		$postcode     = esc_html( WC()->customer->get_shipping_postcode() );
-		$countries    = WC()->countries->get_shipping_countries();
-		$country      =  WC()->customer->get_shipping_country();
+		$postcode  = esc_html( WC()->customer->get_shipping_postcode() );
+		$countries = WC()->countries->get_shipping_countries();
+		$country   = WC()->customer->get_shipping_country();
 		?>
 		<?php do_action( 'bring_fraktguiden_before_kco_postcode' ); ?>
 		<?php if ( count( $countries ) > 1 ) : ?>
 			<label for="bring-country"><?php _e( 'Country', 'woocommerce' ); ?></label>
 			<div class="bring-search-box">
 				<select id="bring-country" name="bring-country">
-					<?php foreach ( $countries as $key => $_country ): ?>
-						<option value="<?php echo $key; ?>" <?php echo ( $country == $key ) ? 'selected="selected"':''; ?>>
+					<?php foreach ( $countries as $key => $_country ) : ?>
+						<option value="<?php echo $key; ?>" <?php echo ( $country == $key ) ? 'selected="selected"' : ''; ?>>
 							<?php echo esc_html( $_country ); ?>
 						</option>
 					<?php endforeach; ?>

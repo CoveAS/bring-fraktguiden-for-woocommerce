@@ -1,19 +1,20 @@
 <?php
-foreach ( $services as $group => $service_group ):
-?>
-<tr valign="top">
-	<th scope="row" class="titledesc">
-		<label for="<?php echo $field_key ?>">
-			<?php _e( $service_group['title'], 'bring-fraktguiden' ); ?>
-		</label>
-	</th>
-	<td class="forminp">
-		<?php if ( $service_group['description'] ): ?>
-			<p><?php _e( $service_group['description'], 'bring-fraktguiden' ); ?></p>
-		<?php endif; ?>
-		<?php require __DIR__ .'/service-table.php'; ?>
-	</td>
-</tr>
+foreach ( $services as $group => $service_group ) :
+	?>
+	<tr valign="top">
+		<th scope="row" class="titledesc">
+			<label for="<?php echo esc_attr( $field_key ); ?>">
+				<?php esc_html_e( $service_group['title'], 'bring-fraktguiden' ); ?>
+			</label>
+		</th>
+		<td class="forminp">
+			<?php if ( $service_group['description'] ) : ?>
+				<?php // Service description may contain HTML. ?>
+				<p><?php _e( $service_group['description'], 'bring-fraktguiden' ); // phpcs:ignore ?></p>
+			<?php endif; ?>
+			<?php require __DIR__ . '/service-table.php'; ?>
+		</td>
+	</tr>
 <?php endforeach; ?>
 <tr>
 	<td colspan="2">

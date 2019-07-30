@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.6.5
-Stable tag: 1.5.13
+Stable tag: 1.6.0
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -91,6 +91,16 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 
 == Changelog ==
+
+= 1.6.0 =
+
+* Added support for multiple Customer Number support
+* Added Customer Number selection when booking orders
+* Added additional postcode validation for Norway
+* Added support for additional language translations
+* Updated php-laff from 1.0 to 1.1
+* Updated Bring API version
+* Updated formatting to align with coding standards
 
 = 1.5.13 =
 

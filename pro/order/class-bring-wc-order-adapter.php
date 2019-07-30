@@ -1,291 +1,353 @@
 <?php
+/**
+ * This file contains Bring_WC_Order_Adapter class
+ *
+ * @package Bring_Fraktguiden\Bring_WC_Order_Adapter
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-  exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 /**
- * Class Bring_WC_Order_Adapter
+ * Bring_WC_Order_Adapter class
  *
  * Wraps an WC_Order and adds Bring related methods
  */
 class Bring_WC_Order_Adapter {
 
-  /** @var WC_Order */
-  public $order = null;
+	/**
+	 * Order
+	 *
+	 * @var WC_Order|null
+	 */
+	public $order = null;
 
-  public function __construct( $order ) {
-    $this->order = $order;
-  }
+	/**
+	 * Construct
+	 *
+	 * @param WC_Order $order Order.
+	 */
+	public function __construct( $order ) {
+		$this->order = $order;
+	}
 
-  /**
-   * Returns true if the order is booked.
-   *
-   * @return bool
-   */
-  public function is_booked() {
-    return $this->has_booking_consignments();
-  }
+	/**
+	 * Returns true if the order is booked.
+	 *
+	 * @return bool
+	 */
+	public function is_booked() {
+		return $this->has_booking_consignments();
+	}
 
-  /**
-   * Saves the booking response to the order.
-   *
-   * @param WP_Bring_Response $response
-   */
-  public function update_booking_response( $response ) {
-    // Create an array of the response for post meta.
-    $response_as_array = $response->to_array();
-    update_post_meta( $this->order->get_id(), '_bring_booking_response', $response_as_array );
-  }
+	/**
+	 * Saves the booking response to the order.
+	 *
+	 * @param WP_Bring_Response $response Bring response.
+	 */
+	public function update_booking_response( $response ) {
+		// Create an array of the response for post meta.
+		$response_as_array = $response->to_array();
+		update_post_meta( $this->order->get_id(), '_bring_booking_response', $response_as_array );
+	}
 
-  /**
-   * Returns the saved booking response array.
-   *
-   * @return array
-   */
-  public function get_booking_response() {
-    return get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
-  }
+	/**
+	 * Returns the saved booking response array.
+	 *
+	 * @return array
+	 */
+	public function get_booking_response() {
+		return get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
+	}
 
-  /**
-   * Returns the consignments json decoded from the stored MyBring response.
-   * If the saved response has errors, return empty array.
-   *
-   * @return array
-   */
-  public function get_booking_consignments() {
-    $consignments = [];
-    $response = $this->get_booking_response();
-    return Bring_Consignment::create_from_response( $response, $this->order->get_id() );
-  }
+	/**
+	 * Returns the consignments json decoded from the stored MyBring response.
+	 * If the saved response has errors, return empty array.
+	 *
+	 * @return array
+	 */
+	public function get_booking_consignments() {
+		$response = $this->get_booking_response();
 
-  /**
-   * Returns the consignments json decoded from the stored MyBring response.
-   * If the saved response has errors, return empty array.
-   *
-   * @return array
-   */
-  public function get_mailbox_consignments() {
-    $response = $this->get_booking_response();
-    if ( ! $response || $this->has_booking_errors() ) {
-      return [ ];
-    }
-    $body = json_decode( $response['body'] );
+		return Bring_Consignment::create_from_response( $response, $this->order->get_id() );
+	}
 
-    return $body->data;
-  }
+	/**
+	 * Returns the consignments json decoded from the stored MyBring response.
+	 * If the saved response has errors, return empty array.
+	 *
+	 * @return array
+	 */
+	public function get_mailbox_consignments() {
+		$response = $this->get_booking_response();
 
-  /**
-   * Returns the consignments json decoded from the stored MyBring response.
-   * If the saved response has errors, return empty array.
-   *
-   * @return array
-   */
-  public function get_consignment_type() {
-    $response = $this->get_booking_response();
-    if ( ! $response || $this->has_booking_errors() ) {
-      return '';
-    }
-    $body = json_decode( $response['body'] );
+		if ( ! $response || $this->has_booking_errors() ) {
+			return [];
+		}
 
-    return property_exists( $body, 'data' ) ? 'mailbox' : 'booking';
-  }
+		$body = json_decode( $response['body'] );
 
-  /**
-   * Creates an array of all errors from a response.
-   *
-   * @return array
-   */
-  public function get_booking_errors() {
-    $result = [ ];
+		return $body->data;
+	}
 
-    $response = $this->get_booking_response();
+	/**
+	 * Returns the consignments json decoded from the stored MyBring response.
+	 * If the saved response has errors, return empty array.
+	 *
+	 * @return array
+	 */
+	public function get_consignment_type() {
+		$response = $this->get_booking_response();
 
-    // Add bring specific errors
-    $body = json_decode( $response['body'] );
-    if ( $body && property_exists( $body, 'consignments' ) ) {
-      foreach ( $body->consignments as $consignment ) {
-        if ( property_exists( $consignment, 'errors' ) ) {
-          foreach ( $consignment->errors as $error ) {
-            $code = $error->code;
-            foreach ( $error->messages as $message ) {
-              $result[] = $code . ': ' . $message->message;
-            }
-          }
-        }
-      }
-    }
+		if ( ! $response || $this->has_booking_errors() ) {
+			return '';
+		}
 
-    // Add errors from the response errors array.
-    foreach ( $response['errors'] as $error ) {
-      $result[] = $error;
-    }
-    // Add any non-ok body to the error array because it contains the explanation
-    // eg. status_code = 400 has [ 'body' => string 'Authentication failed...' ]
-    if ( 200 != $response['status_code'] ) {
-      $result[] = $response['body'];
-    }
+		$body = json_decode( $response['body'] );
 
-    return $result;
-  }
+		return property_exists( $body, 'data' ) ? 'mailbox' : 'booking';
+	}
 
-  /**
-   * Returns true if the order has booking consignments.
-   *
-   * @return bool
-   */
-  public function has_booking_consignments() {
-    if ( 'mailbox' == $this->get_consignment_type() ) {
-      return ! empty( $this->get_mailbox_consignments() );
-    } else {
-      return ! empty( $this->get_booking_consignments() );
-    }
-  }
+	/**
+	 * Creates an array of all errors from a response.
+	 *
+	 * @return array
+	 */
+	public function get_booking_errors() {
+		$result = [];
 
-  /**
-   * Returns true if there are any errors in the booking response.
-   *
-   * @return bool
-   */
-  public function has_booking_errors() {
-    $response = $this->get_booking_response();
-    if ( ! $response ) {
-      return false;
-    }
-    if ( ! in_array( $response['status_code'],  [200, 201, 202, 203, 204] ) ) {
-      return true;
-    }
+		$response = $this->get_booking_response();
 
-    $body = json_decode( $response['body'] );
-    if ( property_exists( $body, 'consignments' ) ) {
-      foreach ( $body->consignments as $consignment ) {
-        if ( ! empty( $consignment->errors ) ) {
-          return true;
-        }
-      }
-    }
+		// Add bring specific errors.
+		$body = json_decode( $response['body'] );
 
-    return false;
-  }
+		if ( $body && property_exists( $body, 'consignments' ) ) {
+			foreach ( $body->consignments as $consignment ) {
+				if ( ! property_exists( $consignment, 'errors' ) ) {
+					continue;
+				}
 
-  /**
-   * Returns true if the order has Bring shipping methods.
-   * @return bool
-   */
-  public function has_bring_shipping_methods() {
-    return ! empty( $this->get_fraktguiden_shipping_items() );
-  }
+				foreach ( $consignment->errors as $error ) {
+					$code = $error->code;
 
-  static function check_meta_key( $array, $key ) {
-    if ( ! isset( $array[$key] ) ) {
-      return false;
-    }
-    if ( empty( $array[$key] ) ) {
-      return false;
-    }
-    if ( ! $array[$key][0] ) {
-      return false;
-    }
-    return true;
-  }
+					foreach ( $error->messages as $message ) {
+						$result[] = $code . ': ' . $message->message;
+					}
+				}
+			}
+		}
 
-  /**
-   * @param array $shipping_items Order items to save
-   */
-  public function admin_update_pickup_point( $shipping_items ) {
-    $shipping_methods = $shipping_items['shipping_method'];
-    if ( $shipping_methods ) {
-      foreach ( $shipping_methods as $item_id => $shipping_method ) {
-        // Get the shipping item
-        $items = $this->order->get_items( 'shipping' );
-        $shipping_item = false;
-        foreach ( $items as $shipping_item_id => $item ) {
-          if ( $item_id == $shipping_item_id ) {
-            $shipping_item = $item;
-          }
-        }
-        if ( ! $shipping_item ) {
-          continue;
-        }
-        if ( strpos( $shipping_method, Fraktguiden_Helper::ID ) === false ) {
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
-          $shipping_item->save_meta_data();
-          continue;
-        }
-        $pickup_point_id = [];
-        if ( ! empty( $shipping_items['_fraktguiden_services'][$item_id] ) ) {
-          $shipping_item->update_meta_data( 'bring_product', $shipping_items['_fraktguiden_services'][$item_id] );
-        }
-        if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
-          $pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][$item_id];
-        }
-        if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
-          $shipping_items['_fraktguiden_packages'][$item_id];
-        }
-        if ( ! empty( $pickup_point_id ) ) {
-          $pickup_point_postcode = $shipping_items['_fraktguiden_pickup_point_postcode'][$item_id];
-          $pickup_point_info     = $shipping_items['_fraktguiden_pickup_point_info_cached'][$item_id];
-          $shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
-          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_id', $pickup_point_id );
-          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_postcode', $pickup_point_postcode );
-          $shipping_item->update_meta_data( '_fraktguiden_pickup_point_info_cached', $pickup_point_info );
-        }
-        else {
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
-          $shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
-        }
-        $shipping_item->save_meta_data();
-      }
-    }
-  }
+		// Add errors from the response errors array.
+		foreach ( $response['errors'] as $error ) {
+			$result[] = $error;
+		}
 
-  public function get_shipping_data() {
-    $data = [ ];
-    foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $method ) {
-      $pickup_point_id       = $method->get_meta( 'pickup_point_id' );
-      $pickup_point          = null;
-      $pickup_point_cached   = null;
-      $pickup_point_postcode = null;
-      if ( $pickup_point_id ) {
-        $country = $shipping_address['country'];
-        if ( ! empty( $_GET['country'] ) ) {
-          $country = $_GET['country'];
-        }
-        $shipping_address = $this->order->get_address( 'shipping' );
-        $request          = new WP_Bring_Request();
-        $response         = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/id/' . $pickup_point_id . '.json' );
-        $pickup_point     = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
-      }
-      $data[] = [
-          'item_id'                  => $item_id,
-          'pickup_point'             => $pickup_point,
-          'packages'                 => json_encode( $method->get_meta( '_fraktguiden_packages' ) )
-      ];
-    }
-    return $data;
-  }
+		// Add any non-ok body to the error array because it contains the explanation
+		// eg. status_code = 400 has [ 'body' => string 'Authentication failed...' ].
+		if ( 200 != $response['status_code'] ) {
+			$result[] = $response['body'];
+		}
 
-  /**
-   * Returns Fraktguiden shipping method items.
-   *
-   * Same as wc_order->get_shipping_methods() except that non-bring methods are filtered away.
-   *
-   * @return array
-   */
-  public function get_fraktguiden_shipping_items() {
-    $result = [ ];
+		return $result;
+	}
 
-    $shipping_methods = $this->order->get_shipping_methods();
-    foreach ( $shipping_methods as $item_id => $shipping_method ) {
-      $method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
-      if ( strpos( $method_id, Fraktguiden_Helper::ID ) !== false ) {
-        $shipping_method['method_id'] = $method_id;
-        $result[$item_id] = $shipping_method;
-      }
-    }
-    return $result;
-  }
+	/**
+	 * Returns true if the order has booking consignments.
+	 *
+	 * @return bool
+	 */
+	public function has_booking_consignments() {
+		if ( 'mailbox' === $this->get_consignment_type() ) {
+			return ! empty( $this->get_mailbox_consignments() );
+		}
+
+		return ! empty( $this->get_booking_consignments() );
+	}
+
+	/**
+	 * Returns true if there are any errors in the booking response.
+	 *
+	 * @return bool
+	 */
+	public function has_booking_errors() {
+		$response = $this->get_booking_response();
+
+		if ( ! $response ) {
+			return false;
+		}
+
+		if ( ! in_array( $response['status_code'], [ 200, 201, 202, 203, 204 ] ) ) {
+			return true;
+		}
+
+		$body = json_decode( $response['body'] );
+
+		if ( property_exists( $body, 'consignments' ) ) {
+			foreach ( $body->consignments as $consignment ) {
+				if ( ! empty( $consignment->errors ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns true if the order has Bring shipping methods.
+	 *
+	 * @return bool
+	 */
+	public function has_bring_shipping_methods() {
+		return ! empty( $this->get_fraktguiden_shipping_items() );
+	}
+
+	/**
+	 * Check meta key
+	 *
+	 * @param  array      $array Array.
+	 * @param  string|int $key   Key.
+	 *
+	 * @return bool
+	 */
+	public static function check_meta_key( $array, $key ) {
+		if ( empty( $array[ $key ] ) ) {
+			return false;
+		}
+
+		if ( ! $array[ $key ][0] ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Admin update pickup point
+	 *
+	 * @param array $shipping_items Order items to save.
+	 */
+	public function admin_update_pickup_point( $shipping_items ) {
+		$shipping_methods = $shipping_items['shipping_method'];
+
+		if ( ! $shipping_methods ) {
+			return;
+		}
+
+		foreach ( $shipping_methods as $item_id => $shipping_method ) {
+			// Get the shipping item.
+			$items         = $this->order->get_items( 'shipping' );
+			$shipping_item = false;
+
+			foreach ( $items as $shipping_item_id => $item ) {
+				if ( $item_id == $shipping_item_id ) {
+					$shipping_item = $item;
+				}
+			}
+
+			if ( ! $shipping_item ) {
+				continue;
+			}
+
+			if ( strpos( $shipping_method, Fraktguiden_Helper::ID ) === false ) {
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
+				$shipping_item->save_meta_data();
+
+				continue;
+			}
+
+			$pickup_point_id = [];
+
+			if ( ! empty( $shipping_items['_fraktguiden_services'][ $item_id ] ) ) {
+				$shipping_item->update_meta_data( 'bring_product', $shipping_items['_fraktguiden_services'][ $item_id ] );
+			}
+
+			if ( isset( $shipping_items['_fraktguiden_pickup_point_id'] ) ) {
+				$pickup_point_id = $shipping_items['_fraktguiden_pickup_point_id'][ $item_id ];
+			}
+
+			if ( isset( $shipping_items['_fraktguiden_packages'] ) ) {
+				$shipping_items['_fraktguiden_packages'][ $item_id ];
+			}
+
+			if ( ! empty( $pickup_point_id ) ) {
+				$pickup_point_postcode = $shipping_items['_fraktguiden_pickup_point_postcode'][ $item_id ];
+				$pickup_point_info     = $shipping_items['_fraktguiden_pickup_point_info_cached'][ $item_id ];
+				$shipping_item->update_meta_data( 'pickup_point_id', $pickup_point_id );
+				$shipping_item->update_meta_data( '_fraktguiden_pickup_point_id', $pickup_point_id );
+				$shipping_item->update_meta_data( '_fraktguiden_pickup_point_postcode', $pickup_point_postcode );
+				$shipping_item->update_meta_data( '_fraktguiden_pickup_point_info_cached', $pickup_point_info );
+			} else {
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_postcode' );
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_id' );
+				$shipping_item->delete_meta_data( '_fraktguiden_pickup_point_info_cached' );
+			}
+
+			$shipping_item->save_meta_data();
+		}
+	}
+
+	/**
+	 * Get shipping data
+	 *
+	 * @return array
+	 */
+	public function get_shipping_data() {
+		$data = [];
+
+		foreach ( $this->get_fraktguiden_shipping_items() as $item_id => $method ) {
+			$pickup_point_id = $method->get_meta( 'pickup_point_id' );
+			$pickup_point    = null;
+
+			if ( $pickup_point_id ) {
+				$shipping_address = $this->order->get_address( 'shipping' );
+
+				$country = filter_input( INPUT_GET, 'country' );
+
+				if ( empty( $country ) ) {
+					$country = $shipping_address['country'];
+				}
+
+				$request      = new WP_Bring_Request();
+				$response     = $request->get( 'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/id/' . $pickup_point_id . '.json' );
+				$pickup_point = $response->has_errors() ? null : json_decode( $response->get_body() )->pickupPoint[0];
+			}
+
+			$data[] = [
+				'item_id'      => $item_id,
+				'pickup_point' => $pickup_point,
+				'packages'     => wp_json_encode( $method->get_meta( '_fraktguiden_packages' ) ),
+			];
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Returns Fraktguiden shipping method items.
+	 *
+	 * Same as wc_order->get_shipping_methods() except that non-bring methods are filtered away.
+	 *
+	 * @return array
+	 */
+	public function get_fraktguiden_shipping_items() {
+		$result = [];
+
+		$shipping_methods = $this->order->get_shipping_methods();
+
+		foreach ( $shipping_methods as $item_id => $shipping_method ) {
+			$method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
+
+			if ( strpos( $method_id, Fraktguiden_Helper::ID ) !== false ) {
+				$shipping_method['method_id'] = $method_id;
+				$result[ $item_id ]           = $shipping_method;
+			}
+		}
+
+		return $result;
+	}
 
 }
