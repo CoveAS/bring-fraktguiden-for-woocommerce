@@ -15,28 +15,28 @@ $labels_url         = Bring_Booking_Labels::create_download_url( $order->order->
 	  <th colspan="2"><?php printf( 'NO: %s', $consignment_number ); ?></th>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Earliest Pickup', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Earliest Pickup', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td><?php echo $earliest_pickup; ?></td>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Expected delivery', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Expected delivery', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td><?php echo $expected_delivery; ?></td>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Labels', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td>
-		<a class="button button-small button-primary" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
+		<a class="button button-small button-primary" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden-for-woocommerce' ); ?> &darr;</a>
 	  </td>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Tracking', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Tracking', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td>
-		<a class="button button-small" href="<?php echo $tracking; ?>" target="_blank"><?php _e( 'View', 'bring-fraktguiden' ); ?> &rarr;</a>
+		<a class="button button-small" href="<?php echo $tracking; ?>" target="_blank"><?php _e( 'View', 'bring-fraktguiden-for-woocommerce' ); ?> &rarr;</a>
 	  </td>
 	</tr>
 	<tr>
 	  <td>
-		<?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
+		<?php _e( 'Packages', 'bring-fraktguiden-for-woocommerce' ); ?>:
 	  </td>
 	  <td valign="center">
 		<ul class="bring-list-tracking-numbers">

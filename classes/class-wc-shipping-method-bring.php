@@ -127,8 +127,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function __construct( $instance_id = 0 ) {
 
 		$this->id                 = self::ID;
-		$this->method_title       = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
-		$this->method_description = __( 'Automatically calculate shipping rates using brings fraktguiden api.', 'bring-fraktguiden' );
+		$this->method_title       = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
+		$this->method_description = __( 'Automatically calculate shipping rates using brings fraktguiden api.', 'bring-fraktguiden-for-woocommerce' );
 		$this->supports           = array(
 			'shipping-zones',
 			'settings',
@@ -322,7 +322,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'id'            => $this->id,
 					'bring_product' => $this->get_setting( 'alt_flat_rate_id' ),
 					'cost'          => $this->get_price_setting( 'alt_flat_rate' ),
-					'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+					'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 				);
 				$this->push_rate( $rate );
 			}
@@ -389,7 +389,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 						'id'            => $this->id,
 						'bring_product' => $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
 						'cost'          => $this->get_price_setting( 'no_connection_flat_rate' ),
-						'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+						'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 					]
 				);
 			}
@@ -419,7 +419,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 							'id'            => $this->id,
 							'bring_product' => $this->get_setting( 'exception_rate_id', 'servicepakke' ),
 							'cost'          => $this->get_price_setting( 'exception_flat_rate' ),
-							'label'         => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+							'label'         => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 						]
 					);
 					break;

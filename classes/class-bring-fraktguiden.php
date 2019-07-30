@@ -31,7 +31,7 @@ class Bring_Fraktguiden {
 		require_once 'common/class-fraktguiden-admin-notices.php';
 		require_once FRAKTGUIDEN_PLUGIN_PATH . 'pro/class-wc-shipping-method-bring-pro.php';
 
-		load_plugin_textdomain( 'bring-fraktguiden', false, basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/languages/' );
+		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/languages/' );
 
 		add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
 
@@ -94,8 +94,8 @@ class Bring_Fraktguiden {
 	 * Enqueue styles
 	 */
 	public static function enqueue_styles() {
-		wp_register_style( 'bring-fraktguiden', plugins_url( FRAKTGUIDEN_PLUGIN_PATH . 'assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
-		wp_enqueue_style( 'bring-fraktguiden' );
+		wp_register_style( 'bring-fraktguiden-for-woocommerce', plugins_url( FRAKTGUIDEN_PLUGIN_PATH . 'assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
+		wp_enqueue_style( 'bring-fraktguiden-for-woocommerce' );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class Bring_Fraktguiden {
 	 */
 	public static function plugin_action_links( $links ) {
 		$action_links = array(
-			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
+			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden-for-woocommerce' ) ) . '">' . __( 'Settings', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );
@@ -156,6 +156,6 @@ class Bring_Fraktguiden {
 			return;
 		}
 
-		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden' );
+		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden-for-woocommerce' );
 	}
 }

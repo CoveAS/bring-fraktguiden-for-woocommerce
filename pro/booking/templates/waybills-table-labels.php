@@ -33,8 +33,8 @@
   <table class="mailbox-labels">
 	<thead>
 	  <tr>
-		<th><?php _e( 'Customer number', 'bring-fraktguiden' ); ?></th>
-		<th><?php _e( 'Consignment number', 'bring-fraktguiden' ); ?></th>
+		<th><?php _e( 'Customer number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+		<th><?php _e( 'Consignment number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -60,9 +60,9 @@
 		</td>
 		<td>
 		  <p><a href="<?php echo $consignment->get_label_file()->get_download_url(); ?>" target="_blank">
-			<?php _e( 'Download label', 'bring-fraktguiden' ); ?>
+			<?php _e( 'Download label', 'bring-fraktguiden-for-woocommerce' ); ?>
 		  </a></p>
-		  <small><?php _e( 'Order ID', 'bring-fraktguiden' ); ?>: <a href="<?php admin_url( 'edit.php?post_id=' . $consignment->order_id ); ?>">
+		  <small><?php _e( 'Order ID', 'bring-fraktguiden-for-woocommerce' ); ?>: <a href="<?php admin_url( 'edit.php?post_id=' . $consignment->order_id ); ?>">
 			 <?php echo $consignment->order_id; ?>
 		  </a></small>
 		</td>
@@ -73,7 +73,7 @@
 <?php endforeach; ?>
 <div style="text-align: right;">
 	<?php if ( ! empty( $consignments ) && $new ) : ?>
-	<a class="wp-core-ui button button-large bring-select-all" href="#"><?php _e( 'Select all', 'bring-fraktguiden' ); ?></a>
+	<a class="wp-core-ui button button-large bring-select-all" href="#"><?php _e( 'Select all', 'bring-fraktguiden-for-woocommerce' ); ?></a>
 	<script type="text/javascript">
 	  jQuery( '.bring-select-all' ).click( function( e ) {
 		e.preventDefault();
@@ -82,9 +82,9 @@
 	</script>
 	<?php endif; ?>
 	<?php if ( ! empty( $errors ) ) : ?>
-	  <input type="submit" class="wp-core-ui button button-large button-primary" value="<?php _e( 'Retry booking', 'bring-fraktguiden' ); ?>" name="retry_request">
+	  <input type="submit" class="wp-core-ui button button-large button-primary" value="<?php _e( 'Retry booking', 'bring-fraktguiden-for-woocommerce' ); ?>" name="retry_request">
 	<?php endif; ?>
 </div>
 <?php if ( empty( $consignments ) ) : ?>
-  <h3><?php _e( 'No labels available', 'bring-fraktguiden' ); ?></h3>
+  <h3><?php _e( 'No labels available', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
 <?php endif; ?>

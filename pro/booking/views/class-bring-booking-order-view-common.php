@@ -74,8 +74,8 @@ class Bring_Booking_Common_View {
 	public static function render_shipping_date_time( $name = '_bring-shipping-date' ) {
 		$shipping_date = Bring_Booking::create_shipping_date();
 		echo '<input type="text" name="' . esc_attr( $name ) . '" value="' . esc_attr( $shipping_date['date'] ) . '"  maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" style="width:12.5em">@';
-		echo '<input type="text" name="' . esc_attr( $name ) . '-hour" value="' . esc_attr( $shipping_date['hour'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'hh', 'bring-fraktguiden' ) ) . '" style="width:3em;text-align:center">:';
-		echo '<input type="text" name="' . esc_attr( $name ) . '-minutes" value="' . esc_attr( $shipping_date['minute'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'mm', 'bring-fraktguiden' ) ) . '" style="width:3em;text-align:center">';
+		echo '<input type="text" name="' . esc_attr( $name ) . '-hour" value="' . esc_attr( $shipping_date['hour'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'hh', 'bring-fraktguiden-for-woocommerce' ) ) . '" style="width:3em;text-align:center">:';
+		echo '<input type="text" name="' . esc_attr( $name ) . '-minutes" value="' . esc_attr( $shipping_date['minute'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'mm', 'bring-fraktguiden-for-woocommerce' ) ) . '" style="width:3em;text-align:center">';
 	}
 
 	/**
@@ -85,8 +85,8 @@ class Bring_Booking_Common_View {
 	 * @return string
 	 */
 	public static function booking_label( $plural = false ) {
-		$label = sprintf( '%s', ( true === $plural ) ? __( 'Bring - Submit Consignments', 'bring-fraktguiden' ) : __( 'Submit Consignment', 'bring-fraktguiden' ) );
-		return $label . ( Bring_Booking::is_test_mode() ? ' - ' . __( 'Test mode', 'bring-fraktguiden' ) : '' );
+		$label = sprintf( '%s', ( true === $plural ) ? __( 'Bring - Submit Consignments', 'bring-fraktguiden-for-woocommerce' ) : __( 'Submit Consignment', 'bring-fraktguiden-for-woocommerce' ) );
+		return $label . ( Bring_Booking::is_test_mode() ? ' - ' . __( 'Test mode', 'bring-fraktguiden-for-woocommerce' ) : '' );
 	}
 
 	/**
@@ -117,27 +117,27 @@ class Bring_Booking_Common_View {
 	 */
 	public static function get_booking_status_info( $order ) {
 		$result = [
-			'text' => __( 'No', 'bring-fraktguiden' ),
+			'text' => __( 'No', 'bring-fraktguiden-for-woocommerce' ),
 			'icon' => 'dashicons-minus',
 		];
 
 		if ( self::is_step2() ) {
 			$result = [
-				'text' => __( 'In progress', 'bring-fraktguiden' ),
+				'text' => __( 'In progress', 'bring-fraktguiden-for-woocommerce' ),
 				'icon' => '',
 			];
 		}
 
 		if ( $order->is_booked() ) {
 			$result = [
-				'text' => __( 'Booked', 'bring-fraktguiden' ),
+				'text' => __( 'Booked', 'bring-fraktguiden-for-woocommerce' ),
 				'icon' => 'dashicons-yes',
 			];
 		}
 
 		if ( $order->has_booking_errors() ) {
 			$result = [
-				'text' => __( 'Failed', 'bring-fraktguiden' ),
+				'text' => __( 'Failed', 'bring-fraktguiden-for-woocommerce' ),
 				'icon' => 'dashicons-warning',
 			];
 		}

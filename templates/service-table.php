@@ -2,18 +2,18 @@
 	<thead>
 		<tr>
 			<th class="fraktguiden-services-table-col-enabled">
-			<?php esc_html_e( 'Active', 'bring-fraktguiden' ); ?>
+			<?php esc_html_e( 'Active', 'bring-fraktguiden-for-woocommerce' ); ?>
 			</th>
-			<th class="fraktguiden-services-table-col-service"><?php esc_html_e( 'Service', 'bring-fraktguiden' ); ?><span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"class="woocommerce-help-tip"></span></th>
+			<th class="fraktguiden-services-table-col-service"><?php esc_html_e( 'Service', 'bring-fraktguiden-for-woocommerce' ); ?><span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"class="woocommerce-help-tip"></span></th>
 			<?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
-			<th class="fraktguiden-services-table-col-custom-price"><?php esc_html_e( 'Fixed price override', 'bring-fraktguiden' ); ?></th>
+			<th class="fraktguiden-services-table-col-custom-price"><?php esc_html_e( 'Fixed price override', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 			<th class="fraktguiden-services-table-col-customer-number">
-				<?php esc_html_e( 'Alternative customer number', 'bring-fraktguiden' ); ?>
-				<span data-tip="<?php _e( 'Allows you to offer different shipping options from different shipping accounts. Useful for when allowing international and cargo shipping options', 'bring-fraktguiden' ); ?>" class="woocommerce-help-tip"></span>
+				<?php esc_html_e( 'Alternative customer number', 'bring-fraktguiden-for-woocommerce' ); ?>
+				<span data-tip="<?php _e( 'Allows you to offer different shipping options from different shipping accounts. Useful for when allowing international and cargo shipping options', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
 			</th>
 			<th class="fraktguiden-services-table-col-free-shipping-threshold">
-				<?php esc_html_e( 'Free shipping threshold', 'bring-fraktguiden' ); ?>
-				<span data-tip="<?php _e( 'Allows you to enable free shipping when the customers cart reached this value', 'bring-fraktguiden' ); ?>" class="woocommerce-help-tip"></span>
+				<?php esc_html_e( 'Free shipping threshold', 'bring-fraktguiden-for-woocommerce' ); ?>
+				<span data-tip="<?php _e( 'Allows you to enable free shipping when the customers cart reached this value', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
 			</th>
 			<?php endif; ?>
 		</tr>

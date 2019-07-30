@@ -92,12 +92,12 @@ class Bring_Booking {
 		register_post_status(
 			'wc-bring-shipment',
 			array(
-				'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden' ),
+				'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ),
 				'public'                    => true,
 				'exclude_from_search'       => false,
 				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => true,
-				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>' ),
+				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ) . ' <span class="count">(%s)</span>' ),
 			)
 		);
 	}
@@ -116,7 +116,7 @@ class Bring_Booking {
 			$new_order_statuses[ $key ] = $status;
 
 			if ( 'wc-processing' === $key ) {
-				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden' );
+				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' );
 			}
 		}
 
@@ -162,7 +162,7 @@ class Bring_Booking {
 			if ( $adapter->has_booking_errors() ) {
 				// If there are errors, set the status back to the original status.
 				$status      = $original_order_status;
-				$status_note = __( 'Booking errors. See the Bring Booking box for details.' . "\n", 'bring-fraktguiden' );
+				$status_note = __( 'Booking errors. See the Bring Booking box for details.' . "\n", 'bring-fraktguiden-for-woocommerce' );
 				$wc_order->update_status( $status, $status_note );
 				continue;
 			}
@@ -177,7 +177,7 @@ class Bring_Booking {
 				// Set status back to the previous status
 				$status = $original_order_status;
 			}
-			$status_note = __( 'Booked with Bring' . "\n", 'bring-fraktguiden' );
+			$status_note = __( 'Booked with Bring' . "\n", 'bring-fraktguiden-for-woocommerce' );
 			// Update status.
 			$wc_order->update_status( $status, $status_note );
 		}
