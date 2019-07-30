@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-07-29 16:24+0200\n"
-"PO-Revision-Date: 2019-07-29 16:26+0200\n"
+"POT-Creation-Date: 2019-07-30 14:53+0200\n"
+"PO-Revision-Date: 2019-07-30 15:28+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ../classes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
@@ -181,9 +181,8 @@ msgid "Here's some information about your product"
 msgstr "Her er litt informasjon om produktet ditt"
 
 #: classes/debug/class-fraktguiden-product-debug.php:62
-#, fuzzy
 msgid "API response"
-msgstr "API-svar"
+msgstr "API svar"
 
 #: classes/debug/class-fraktguiden-product-debug.php:146
 msgid "No problems detected"
@@ -216,7 +215,6 @@ msgid "County"
 msgstr "Fylke"
 
 #: classes/debug/class-fraktguiden-product-debug.php:237
-#, fuzzy
 msgid "Visiting address"
 msgstr "Besøksadresse"
 
@@ -225,7 +223,6 @@ msgid "Visiting post code"
 msgstr "Gyldig postnummer for frakt"
 
 #: classes/debug/class-fraktguiden-product-debug.php:239
-#, fuzzy
 msgid "Visiting city"
 msgstr "Besøksbyen"
 
@@ -334,14 +331,6 @@ msgid "Recipient notification over SMS or E-Mail"
 msgstr "Mottakervarsling på SMS eller Epost"
 
 #: classes/traits/settings.php:132
-#, fuzzy
-#| msgid ""
-#| "<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for "
-#| "paper based recipient notification.<br/>\n"
-#| "              If enabled, the recipient will receive notification over "
-#| "SMS or E-mail when the parcel has arrived.<br/>\n"
-#| "              This only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;"
-#| "ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>"
 msgid ""
 "<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper "
 "based recipient notification.<br/>\n"
@@ -737,7 +726,6 @@ msgid "Loads additional JavaScript on the checkout."
 msgstr "Laster inn ekstra JavaScript i kassen."
 
 #: classes/traits/settings.php:427
-#, fuzzy
 msgid ""
 "Bring Fraktguiden will hide Klarna Checkout until a shipping method is "
 "selected in order to ensure that a shipping method has been selected before "
@@ -796,12 +784,7 @@ msgid "Gateway Disabled"
 msgstr "Gateway Disabled"
 
 #: classes/traits/settings.php:506
-#, fuzzy, php-format
-#| msgid ""
-#| "Bring shipping method requires <strong>weight &amp; dimensions</strong> "
-#| "to be enabled. Please enable them on the <a href=\"%s\">Catalog tab</a>. "
-#| "<br/> In addition, Bring also requires the <strong>Norweigian Krone</"
-#| "strong> currency. Choose that from the <a href=\"%s\">General tab</a>"
+#, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
 "be enabled. Please enable them on the <a href=\"%1$s\">Catalog tab</a>. <br/"
@@ -878,10 +861,8 @@ msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:78
 #: pro/booking/classes/class-post-type-mailbox-label.php:79
-#, fuzzy
-#| msgid "Mailbox waybills"
 msgid "Mailbox labels"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:85
 #: pro/booking/classes/class-post-type-mailbox-label.php:86
@@ -889,187 +870,213 @@ msgid "Mailbox waybills"
 msgstr "Pakke i postkasse fraktbrev"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:118
-#, fuzzy
-#| msgid "Mailbox waybills"
 msgctxt "Post Type General Name"
 msgid "Mailbox Labels"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:119
-#, fuzzy
-#| msgctxt "Post Type Singular Name"
-#| msgid "Mailbox Waybill"
 msgctxt "Post Type Singular Name"
 msgid "Mailbox Label"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:120
-#, fuzzy
-#| msgid "Mailbox waybills"
 msgid "Mailbox Labels"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:121
 #: pro/booking/classes/class-post-type-mailbox-label.php:147
-#, fuzzy
-#| msgid "Mailbox Waybill"
 msgid "Mailbox Label"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postboksetikett"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:122
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:41
-msgid "Item Archives"
-msgstr ""
+msgid "Mailbox Label Archives"
+msgstr "Postboks etikettarkiver"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:123
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:42
-msgid "Item Attributes"
-msgstr ""
+msgid "Mailbox Label Attributes"
+msgstr "Attributter for postkasseetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:124
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:43
-msgid "Parent Item:"
-msgstr ""
+msgid "Parent Mailbox Label:"
+msgstr "Overordnet postkassemerke:"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:125
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:44
-msgid "All Items"
-msgstr ""
+msgid "All Mailbox Labels"
+msgstr "Alle postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:126
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:45
-msgid "Add New Item"
-msgstr ""
+msgid "Add New Mailbox Label"
+msgstr "Legg til ny postkassemerke"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:127
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:46
 msgid "Add New"
-msgstr ""
+msgstr "Legg til ny"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:128
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:47
-msgid "New Item"
-msgstr ""
+msgid "New Mailbox Label"
+msgstr "Ny postkassemerke"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:129
-msgid "Edit Item"
-msgstr ""
+msgid "Edit Mailbox Label"
+msgstr "Rediger postkassemerke"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:130
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:49
-msgid "Update Item"
-msgstr ""
+msgid "Update Mailbox Label"
+msgstr "Oppdater postkasselabel"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:131
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:50
-#, fuzzy
-#| msgid "View system info"
-msgid "View Item"
-msgstr "Se systeminformasjon"
+msgid "View Mailbox Label"
+msgstr "Vis postkassemerke"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:132
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:51
-#, fuzzy
-#| msgid "View system info"
-msgid "View Items"
-msgstr "Se systeminformasjon"
+msgid "View Mailbox Labels"
+msgstr "Vis postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:133
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
-#, fuzzy
-#| msgid "Search"
-msgid "Search Item"
-msgstr "Søk"
+msgid "Search Mailbox Label"
+msgstr "Søk på postkassemerke"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:134
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:53
 msgid "Not found"
-msgstr ""
+msgstr "Ikke funnet"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:135
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:54
 msgid "Not found in Trash"
-msgstr ""
+msgstr "Ikke funnet i søppel"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:136
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:55
 msgid "Featured Image"
-msgstr ""
+msgstr "Fremhevet bilde"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:137
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:56
 msgid "Set featured image"
-msgstr ""
+msgstr "Sett kjennetegnet bilde"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:138
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:57
 msgid "Remove featured image"
-msgstr ""
+msgstr "Fjern Fraktguiden styling fra kassen"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:139
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:58
 msgid "Use as featured image"
-msgstr ""
+msgstr "Service som brukes til booking"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:140
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
-msgid "Insert into item"
-msgstr ""
+msgid "Insert into Mailbox Label"
+msgstr "Sett inn i postboksetiketten"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:141
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
-msgid "Uploaded to this item"
-msgstr ""
+msgid "Uploaded to this Mailbox Label"
+msgstr "Lastet opp til denne postboksetiketten"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:142
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
-msgid "Items list"
-msgstr ""
+msgid "Mailbox Labels list"
+msgstr "Postkasselabelsliste"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:143
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
-msgid "Items list navigation"
-msgstr ""
+msgid "Mailbox Labels list navigation"
+msgstr "Navigering av postboksetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:144
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
-msgid "Filter items list"
-msgstr ""
+msgid "Filter Mailbox Labels list"
+msgstr "Filtrer listen over postkassetiketter"
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:148
-#, fuzzy
-#| msgid "Mailbox Waybill information page."
 msgid "Mailbox Label information page."
-msgstr "Pakke i postkasse fraktbrev informasjonside"
+msgstr "Informasjonsside for postkasseetikett."
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:37
-#, fuzzy
-#| msgid "Mailbox Waybills"
 msgctxt "Post Type General Name"
 msgid "Mailbox Waybills"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Fraktbrev for postkasse"
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:38
 msgctxt "Post Type Singular Name"
 msgid "Mailbox Waybill"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postkasse fraktbrev"
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:39
 msgid "Mailbox Waybills"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Fraktbrev for postkasse"
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:40
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:66
 msgid "Mailbox Waybill"
-msgstr "Pakke i postkasse fraktbrev"
+msgstr "Postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:41
+msgid "Mailbox Waybill Archives"
+msgstr "Postboks-arkiv"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:42
+msgid "Mailbox Waybill Attributes"
+msgstr "Postboks-arkiv"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:43
+msgid "Parent Mailbox Waybill:"
+msgstr "Foreldrepostkasse Waybill:"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:44
+msgid "All Mailbox Waybills"
+msgstr "Alle postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:45
+msgid "Add New Mailbox Waybill"
+msgstr "Legg til ny postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:47
+msgid "New Mailbox Waybill"
+msgstr "Ny postkasse fraktbrev"
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:48
 msgid "Edit Waybill"
 msgstr "Rediger fraktbrev"
 
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:49
+msgid "Update Mailbox Waybill"
+msgstr "Oppdater postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:50
+msgid "View Mailbox Waybill"
+msgstr "Vis postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:51
+msgid "View Mailbox Waybills"
+msgstr "Vis postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
+msgid "Search Mailbox Waybill"
+msgstr "Søk etter postkasse fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
+msgid "Insert into Mailbox Waybills"
+msgstr "Sett inn i postkassen fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
+msgid "Uploaded to this Mailbox Waybill"
+msgstr "Last opp til postkassen fraktbrev"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
+msgid "Mailbox Waybills list"
+msgstr "Postkasse fraktbrevliste"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
+msgid "Mailbox Waybills list navigation"
+msgstr "Postkasse fraktbrev liste navigasjon"
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
+msgid "Filter Mailbox Waybills list"
+msgstr "Filtrer postkasse fraktbrevliste"
+
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:67
 msgid "Mailbox Waybill information page."
-msgstr "Pakke i postkasse fraktbrev informasjonside"
+msgstr "Postkasse fraktbrev informasjonside."
 
 #: pro/booking/templates/consignment-table-booking.php:18
 msgid "Earliest Pickup"
@@ -1197,10 +1204,8 @@ msgid "Dowload waybill"
 msgstr "Last ned fraktbrev"
 
 #: pro/booking/views/class-bring-booking-labels.php:29
-#, fuzzy
-#| msgid "Start booking"
 msgid "Print booking label"
-msgstr "Start booking"
+msgstr "Skriv ut bestillingsetiketten"
 
 #: pro/booking/views/class-bring-booking-labels.php:81
 msgid ""
@@ -1286,8 +1291,6 @@ msgid "Consignments"
 msgstr "Forsendelser"
 
 #: pro/booking/views/class-bring-booking-order-view.php:200
-#, fuzzy
-#| msgid "Customer number"
 msgid "Customer Number"
 msgstr "Kundenummer"
 
@@ -1306,10 +1309,8 @@ msgid "Sender"
 msgstr "Avsender"
 
 #: pro/booking/views/class-bring-booking-order-view.php:253
-#, fuzzy
-#| msgid "Customer number"
 msgid "Customer note from the order"
-msgstr "Kundenummer"
+msgstr "Kundenotat fra bestillingen"
 
 #: pro/booking/views/class-bring-booking-order-view.php:293
 msgid "Cancel"
@@ -1344,16 +1345,12 @@ msgid "Show Parties"
 msgstr "Vis parter"
 
 #: pro/booking/views/class-bring-booking-order-view.php:338
-#, fuzzy
-#| msgid "Street Address 1"
 msgid "Sender Address"
-msgstr "Gateaddress 1"
+msgstr "Avsender adresse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:342
-#, fuzzy
-#| msgid "Recipient"
 msgid "Recipient Address"
-msgstr "Mottaker"
+msgstr "Mottakeradresse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:353
 msgid "Shipping item id"
@@ -1656,7 +1653,7 @@ msgstr "Tjeneste"
 msgid "Rate is not available for this order. Please try another service"
 msgstr ""
 "Pris er ikke tilgjengelig for denne orderen. Vennligst forsøk en annen "
-"tjeneste."
+"tjeneste"
 
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:219
 msgid "Request was not successful"
@@ -1675,18 +1672,14 @@ msgid "Active"
 msgstr "Aktive"
 
 #: templates/service-table.php:9
-#, fuzzy
 msgid "Fixed price override"
 msgstr "Overstyring av fast pris"
 
 #: templates/service-table.php:11
-#, fuzzy
-#| msgid "You need to enter a API User ID"
 msgid "Alternative customer number"
-msgstr "Du må fylle inn en API bruker ID"
+msgstr "Alternativt kundenummer"
 
 #: templates/service-table.php:12
-#, fuzzy
 msgid ""
 "Allows you to offer different shipping options from different shipping "
 "accounts. Useful for when allowing international and cargo shipping options"
@@ -1695,13 +1688,10 @@ msgstr ""
 "Nyttig når du tillater internasjonale og fraktalternativer"
 
 #: templates/service-table.php:15
-#, fuzzy
-#| msgid "Free shipping"
 msgid "Free shipping threshold"
-msgstr "Gratis frakt"
+msgstr "Gratis fraktgrense"
 
 #: templates/service-table.php:16
-#, fuzzy
 msgid ""
 "Allows you to enable free shipping when the customers cart reached this value"
 msgstr "Lar deg aktivere gratis frakt når kundekurven nådde denne verdien"
@@ -1729,6 +1719,27 @@ msgstr "Driv Digital AS"
 #. Author URI of the plugin/theme
 msgid "https://drivdigital.no/"
 msgstr "http://drivdigital.no/"
+
+#, fuzzy
+#~| msgid "View system info"
+#~ msgid "View Item"
+#~ msgstr "Se systeminformasjon"
+
+#, fuzzy
+#~| msgid "View system info"
+#~ msgid "View Items"
+#~ msgstr "Se systeminformasjon"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search Item"
+#~ msgstr "Søk"
+
+#~ msgid "Insert into item"
+#~ msgstr "Håndtering av tunge varer"
+
+#~ msgid "Items list"
+#~ msgstr "Tunge og overdimensjonerte varer"
 
 #~ msgid "Add description after the service"
 #~ msgstr "Legg til beskrivelse etter tjenesten"

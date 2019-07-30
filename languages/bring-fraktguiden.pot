@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-07-29 16:24+0200\n"
+"POT-Creation-Date: 2019-07-30 14:53+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -812,28 +812,23 @@ msgid "Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:122
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:41
-msgid "Item Archives"
+msgid "Mailbox Label Archives"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:123
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:42
-msgid "Item Attributes"
+msgid "Mailbox Label Attributes"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:124
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:43
-msgid "Parent Item:"
+msgid "Parent Mailbox Label:"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:125
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:44
-msgid "All Items"
+msgid "All Mailbox Labels"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:126
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:45
-msgid "Add New Item"
+msgid "Add New Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:127
@@ -842,32 +837,27 @@ msgid "Add New"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:128
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:47
-msgid "New Item"
+msgid "New Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:129
-msgid "Edit Item"
+msgid "Edit Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:130
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:49
-msgid "Update Item"
+msgid "Update Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:131
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:50
-msgid "View Item"
+msgid "View Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:132
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:51
-msgid "View Items"
+msgid "View Mailbox Labels"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:133
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
-msgid "Search Item"
+msgid "Search Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:134
@@ -901,28 +891,23 @@ msgid "Use as featured image"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:140
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
-msgid "Insert into item"
+msgid "Insert into Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:141
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
-msgid "Uploaded to this item"
+msgid "Uploaded to this Mailbox Label"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:142
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
-msgid "Items list"
+msgid "Mailbox Labels list"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:143
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
-msgid "Items list navigation"
+msgid "Mailbox Labels list navigation"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:144
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
-msgid "Filter items list"
+msgid "Filter Mailbox Labels list"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-label.php:148
@@ -948,8 +933,68 @@ msgstr ""
 msgid "Mailbox Waybill"
 msgstr ""
 
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:41
+msgid "Mailbox Waybill Archives"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:42
+msgid "Mailbox Waybill Attributes"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:43
+msgid "Parent Mailbox Waybill:"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:44
+msgid "All Mailbox Waybills"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:45
+msgid "Add New Mailbox Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:47
+msgid "New Mailbox Waybill"
+msgstr ""
+
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:48
 msgid "Edit Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:49
+msgid "Update Mailbox Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:50
+msgid "View Mailbox Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:51
+msgid "View Mailbox Waybills"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
+msgid "Search Mailbox Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
+msgid "Insert into Mailbox Waybills"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
+msgid "Uploaded to this Mailbox Waybill"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
+msgid "Mailbox Waybills list"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
+msgid "Mailbox Waybills list navigation"
+msgstr ""
+
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
+msgid "Filter Mailbox Waybills list"
 msgstr ""
 
 #: pro/booking/classes/class-post-type-mailbox-waybill.php:67
