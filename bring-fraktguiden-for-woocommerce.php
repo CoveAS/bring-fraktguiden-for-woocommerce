@@ -13,7 +13,7 @@
  * WC requires at least: 3.4.0
  * WC tested up to: 3.6.5
  *
- * Text Domain:         bring-fraktguiden
+ * Text Domain:         bring-fraktguiden-for-woocommerce
  * Domain Path:         /languages
  *
  * @package             WooCommerce

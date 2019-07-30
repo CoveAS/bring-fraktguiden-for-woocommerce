@@ -26,7 +26,7 @@ class Bring_Booking_Labels {
 	 * @return [type] [description]
 	 */
 	static function open_pdfs() {
-		add_dashboard_page( __( 'Print booking label', 'bring-fraktguiden' ), null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
+		add_dashboard_page( __( 'Print booking label', 'bring-fraktguiden-for-woocommerce' ), null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
 	}
 
 	/**
@@ -78,9 +78,9 @@ class Bring_Booking_Labels {
 			wp_die(
 				sprintf(
 					'<div class="notice error"><p><strong>%s</strong></p></div>',
-					__( 'Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access.', 'bring-fraktguiden' )
+					__( 'Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access.', 'bring-fraktguiden-for-woocommerce' )
 				),
-				__( 'Insufficient permissions', 'bring-fraktguiden' )
+				__( 'Insufficient permissions', 'bring-fraktguiden-for-woocommerce' )
 			);
 		}
 
@@ -117,10 +117,10 @@ class Bring_Booking_Labels {
 		}
 		// If there are more than 1 ZPL file or a combination of zpl and pdf
 		if ( ! $pdf_collection->is_empty() && ! $zpl_collection->is_empty() ) {
-			echo '<h3>'.__('Downloads', 'bring-fraktguiden') .'</h3><ul><li>';
-			self::render_download_link( $zpl_collection->get_order_ids(), __( 'Merged ZPL labels', 'bring-fraktguiden' ));
+			echo '<h3>'.__( 'Downloads', 'bring-fraktguiden-for-woocommerce' ) .'</h3><ul><li>';
+			self::render_download_link( $zpl_collection->get_order_ids(), __( 'Merged ZPL labels', 'bring-fraktguiden-for-woocommerce' ));
 			echo '</li><li>';
-			self::render_download_link( $pdf_collection->get_order_ids(), __( 'Merged PDF labels', 'bring-fraktguiden' ) );
+			self::render_download_link( $pdf_collection->get_order_ids(), __( 'Merged PDF labels', 'bring-fraktguiden-for-woocommerce' ) );
 			echo '</li></ul>';
 		}
 

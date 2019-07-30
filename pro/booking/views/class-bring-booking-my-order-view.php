@@ -33,7 +33,7 @@ class Bring_Booking_My_Order_View {
 			return $content;
 		}
 		$content .= '<div class="bring-order-details-booking">';
-		$content .= '<strong>' . __( 'Your tracking number:', 'bring-fraktguiden' ) . '</strong>';
+		$content .= '<strong>' . __( 'Your tracking number:', 'bring-fraktguiden-for-woocommerce' ) . '</strong>';
 		$content .= '<ul>';
 		foreach ( $consignments as $consignment ) {
 			$consignment_number = $consignment->get_consignment_number();

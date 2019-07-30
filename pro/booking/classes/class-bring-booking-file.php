@@ -156,9 +156,9 @@ class Bring_Booking_File {
 	 */
 	static function validate_dir( $dir ) {
 		$error              = new WP_Error();
-		$permission_message = __( 'Please check write permissions for yor uploads folder.', 'bring-fraktguiden' );
-		$error->add( 'existence', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'.", 'bring-fraktguiden' ), $permission_message ) );
-		$error->add( 'unwritable', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'.", 'bring-fraktguiden' ), $permission_message ) );
+		$permission_message = __( 'Please check write permissions for yor uploads folder.', 'bring-fraktguiden-for-woocommerce' );
+		$error->add( 'existence', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'.", 'bring-fraktguiden-for-woocommerce' ), $permission_message ) );
+		$error->add( 'unwritable', sprintf( '<div class="notice error"><p><strong>%s</strong><br/>%s</p></div>', __( "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'.", 'bring-fraktguiden-for-woocommerce' ), $permission_message ) );
 		if ( ! file_exists( $dir ) ) {
 			wp_die( $error->get_error_message( 'existence' ) );
 		}

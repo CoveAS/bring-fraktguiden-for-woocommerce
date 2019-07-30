@@ -147,10 +147,10 @@ class Fraktguiden_KCO_Support {
 		<?php else : ?>
 			<input type="hidden" id="bring-country" name="bring-country" value="<?php echo key( $countries ); ?>">
 		<?php endif; ?>
-		<label for="bring-post-code"><?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?></label>
+		<label for="bring-post-code"><?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden-for-woocommerce' ); ?></label>
 		<div class="bring-search-box">
-			<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( '0000', 'bring-fraktguiden' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
-			<input class="bring-button button" type="submit" value="<?php _e( 'Get delivery methods', 'bring-fraktguiden' ); ?>">
+			<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( '0000', 'bring-fraktguiden-for-woocommerce' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
+			<input class="bring-button button" type="submit" value="<?php _e( 'Get delivery methods', 'bring-fraktguiden-for-woocommerce' ); ?>">
 		</div>
 		<?php do_action( 'bring_fraktguiden_after_kco_postcode' ); ?>
 		<?php

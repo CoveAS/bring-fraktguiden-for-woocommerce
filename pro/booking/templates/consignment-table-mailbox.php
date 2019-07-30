@@ -24,21 +24,21 @@ $waybill = get_attached_media( 'waybill', $order_id );
 	  <th colspan="2"><?php printf( 'NO: %s', $consignment->get_consignment_number() ); ?></th>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Labels', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Labels', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td>
-		<a class="button button-small button-alt" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden' ); ?> &darr;</a>
+		<a class="button button-small button-alt" href="<?php echo $labels_url; ?>" target="_blank"><?php _e( 'Download', 'bring-fraktguiden-for-woocommerce' ); ?> &darr;</a>
 	  </td>
 	</tr>
 	<tr>
-	  <td><?php _e( 'Waybill', 'bring-fraktguiden' ); ?>:</td>
+	  <td><?php _e( 'Waybill', 'bring-fraktguiden-for-woocommerce' ); ?>:</td>
 	  <td>
 
-		<a class="button button-small button-primary" href="<?php echo admin_url( 'post-new.php?post_type=mailbox_waybill' ); ?>" target="_blank"><?php _e( 'Create waybill', 'bring-fraktguiden' ); ?></a>
+		<a class="button button-small button-primary" href="<?php echo admin_url( 'post-new.php?post_type=mailbox_waybill' ); ?>" target="_blank"><?php _e( 'Create waybill', 'bring-fraktguiden-for-woocommerce' ); ?></a>
 	  </td>
 	</tr>
 	<tr>
 	  <td>
-		<?php _e( 'Packages', 'bring-fraktguiden' ); ?>:
+		<?php _e( 'Packages', 'bring-fraktguiden-for-woocommerce' ); ?>:
 	  </td>
 	  <td valign="center">
 		<ul class="bring-list-tracking-numbers">

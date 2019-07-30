@@ -5,11 +5,11 @@
   </h3>
   <table class="mailbox-waybills">
 	<thead>
-	  <th><?php _e( 'Package number', 'bring-fraktguiden' ); ?></th>
-	  <th><?php _e( 'Recipient', 'bring-fraktguiden' ); ?></th>
-	  <th><?php _e( 'Information', 'bring-fraktguiden' ); ?></th>
-	  <th><?php _e( 'Contact', 'bring-fraktguiden' ); ?></th>
-	  <th><?php _e( 'Tracking code', 'bring-fraktguiden' ); ?></th>
+	  <th><?php _e( 'Package number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+	  <th><?php _e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+	  <th><?php _e( 'Information', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+	  <th><?php _e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+	  <th><?php _e( 'Tracking code', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 	</thead>
 	<tbody>
 	<?php foreach ( $waybill['data']['attributes']['packages'] as $package ) : ?>
@@ -24,8 +24,8 @@
 		  <?php echo $package['postalCode']; ?>
 		</td>
 		<td>
-		  <?php _e( 'RFID:', 'bring-fraktguiden' ); ?> <?php echo $package['rfid'] ? __( 'Yes' ) : __( 'No' ); ?><br>
-		  <?php _e( 'Weight:', 'bring-fraktguiden' ); ?> <?php echo $package['weight']; ?>
+		  <?php _e( 'RFID:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo $package['rfid'] ? __( 'Yes' ) : __( 'No' ); ?><br>
+		  <?php _e( 'Weight:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo $package['weight']; ?>
 		</td>
 		<td><?php echo $package['email']; ?><br><?php echo $package['phoneNumber']; ?></td>
 		<td><?php echo $package['shipmentNumber']; ?></td>
@@ -36,7 +36,7 @@
   </table>
   <div style="text-align: right;">
 	<a class="wp-core-ui button button-large button-alt" href="<?php echo( $waybill['data']['attributes']['waybillUri'] ); ?>" target="_blank">
-	  <?php _e( 'Dowload waybill', 'bring-fraktguiden' ); ?>  &darr;
+	  <?php _e( 'Dowload waybill', 'bring-fraktguiden-for-woocommerce' ); ?>  &darr;
 	</a>
   </div>
 <?php endforeach; ?>

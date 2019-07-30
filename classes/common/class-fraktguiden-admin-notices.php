@@ -25,7 +25,7 @@ class Fraktguiden_Admin_Notices {
 
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
 			// If PRO is available and you've not activated it yet
-			$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden' );
+			$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden-for-woocommerce' );
 			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
 			self::add_notice( 'pro_available', $message );
 		} elseif ( ! Fraktguiden_Helper::valid_license() ) {
@@ -33,18 +33,18 @@ class Fraktguiden_Admin_Notices {
 			$days = Fraktguiden_Helper::get_pro_days_remaining();
 			if ( $days < 0 ) {
 				// If you've used up all your trial days
-				$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden' );
+				$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden-for-woocommerce' );
 			} else {
 				// If you had a few days remaining
-				$message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden' ) );
+				$message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) );
 			}
-			$message = $message . '<br>' . Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden' ) );
+			$message = $message . '<br>' . Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 			self::add_notice( 'pro_available', $message, 'warning', ( $days >= 0 ) );
 		}
 
 		if ( ! Fraktguiden_Helper::get_option( 'from_zip' ) ) {
 			// If you haven't set a default postcode for the origin of where packages are being sent
-			$message = __( 'Bring requires a postcode to show where packages are being sent from. Please update your postcode on the <a href="%s">settings page.</a>', 'bring-fraktguiden' );
+			$message = __( 'Bring requires a postcode to show where packages are being sent from. Please update your postcode on the <a href="%s">settings page.</a>', 'bring-fraktguiden-for-woocommerce' );
 			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
 			self::add_notice( 'from_zip_error', $message, 'error', false );
 		}

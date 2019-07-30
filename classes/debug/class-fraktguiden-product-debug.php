@@ -45,7 +45,7 @@ class Fraktguiden_Product_Debug {
 			[
 				'ajaxurl'         => admin_url( 'admin-ajax.php' ),
 				'id'              => get_the_ID(),
-				'loading_message' => esc_html( __( 'Loading.', 'bring-fraktguiden' ) ),
+				'loading_message' => esc_html( __( 'Loading.', 'bring-fraktguiden-for-woocommerce' ) ),
 			]
 		);
 	}
@@ -56,10 +56,10 @@ class Fraktguiden_Product_Debug {
 	<div class="bring-debug">
 
 	  <div class="test-plane">
-		<h4><?php esc_html_e( __( 'Can this product be shipped with bring?', 'bring-fraktguiden' ) ); ?></h4>
-		<p><?php esc_html_e( __( 'Here\'s some information about your product', 'bring-fraktguiden' ) ); ?></p>
+		<h4><?php esc_html_e( __( 'Can this product be shipped with bring?', 'bring-fraktguiden-for-woocommerce' ) ); ?></h4>
+		<p><?php esc_html_e( __( 'Here\'s some information about your product', 'bring-fraktguiden-for-woocommerce' ) ); ?></p>
 		<?php self::render(); ?>
-		<h4><?php esc_html_e( __( 'API response', 'bring-fraktguiden' ) ); ?></h4>
+		<h4><?php esc_html_e( __( 'API response', 'bring-fraktguiden-for-woocommerce' ) ); ?></h4>
 		<div class="bring-debug__rates"></div>
 	  </div>
 
@@ -143,7 +143,7 @@ class Fraktguiden_Product_Debug {
 			return;
 		}
 
-		esc_html_e( __( 'No problems detected', 'bring-fraktguiden' ) );
+		esc_html_e( __( 'No problems detected', 'bring-fraktguiden-for-woocommerce' ) );
 	}
 
 	public static function get_package( $product, $country = false, $post_code = false ) {
@@ -228,15 +228,15 @@ class Fraktguiden_Product_Debug {
 		$html = '';
 
 		$fields = [
-			'address'            => __( 'Address', 'bring-fraktguiden' ),
-			'postalCode'         => __( 'Post code', 'bring-fraktguiden' ),
-			'city'               => __( 'City', 'bring-fraktguiden' ),
-			'countryCode'        => __( 'Country code', 'bring-fraktguiden' ),
-			'municipality'       => __( 'Municipality', 'bring-fraktguiden' ),
-			'county'             => __( 'County', 'bring-fraktguiden' ),
-			'visitingAddress'    => __( 'Visiting address', 'bring-fraktguiden' ),
-			'visitingPostalCode' => __( 'Visiting post code', 'bring-fraktguiden' ),
-			'visitingCity'       => __( 'Visiting city', 'bring-fraktguiden' ),
+			'address'            => __( 'Address', 'bring-fraktguiden-for-woocommerce' ),
+			'postalCode'         => __( 'Post code', 'bring-fraktguiden-for-woocommerce' ),
+			'city'               => __( 'City', 'bring-fraktguiden-for-woocommerce' ),
+			'countryCode'        => __( 'Country code', 'bring-fraktguiden-for-woocommerce' ),
+			'municipality'       => __( 'Municipality', 'bring-fraktguiden-for-woocommerce' ),
+			'county'             => __( 'County', 'bring-fraktguiden-for-woocommerce' ),
+			'visitingAddress'    => __( 'Visiting address', 'bring-fraktguiden-for-woocommerce' ),
+			'visitingPostalCode' => __( 'Visiting post code', 'bring-fraktguiden-for-woocommerce' ),
+			'visitingCity'       => __( 'Visiting city', 'bring-fraktguiden-for-woocommerce' ),
 		];
 		foreach ( $fields as $field => $label ) {
 			$html .= sprintf(

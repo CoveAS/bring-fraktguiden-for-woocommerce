@@ -80,7 +80,7 @@ class Bring_Waybill_View {
 		wp_update_post(
 			[
 				'ID'         => $post_id,
-				'post_title' => __( 'Waybill', 'bring-fraktguiden' ) . $suffix,
+				'post_title' => __( 'Waybill', 'bring-fraktguiden-for-woocommerce' ) . $suffix,
 			]
 		);
 	}
@@ -164,7 +164,7 @@ class Bring_Waybill_View {
 		}
 		add_meta_box(
 			'woocommerce-order-bring-booking',
-			__( 'Bring Booking', 'bring-fraktguiden' ),
+			__( 'Bring Booking', 'bring-fraktguiden-for-woocommerce' ),
 			__CLASS__ . '::render_booking_meta_box',
 			'mailbox_waybill',
 			'normal',
