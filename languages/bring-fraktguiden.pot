@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -748,24 +748,24 @@ msgid ""
 "are correct"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:81
-#: pro/booking/class-bring-booking.php:86
-#: pro/booking/class-bring-booking.php:103
+#: pro/booking/class-bring-booking.php:95
+#: pro/booking/class-bring-booking.php:100
+#: pro/booking/class-bring-booking.php:119
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:86
+#: pro/booking/class-bring-booking.php:100
 #, php-format
 msgid " <span class=\"count\">(%s)</span>"
 msgid_plural " <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: pro/booking/class-bring-booking.php:148
+#: pro/booking/class-bring-booking.php:165
 msgid "Booking errors. See the Bring Booking box for details.\n"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:163
+#: pro/booking/class-bring-booking.php:180
 msgid "Booked with Bring\n"
 msgstr ""
 
@@ -1108,7 +1108,7 @@ msgid "Merged PDF labels"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-my-order-view.php:36
-msgid "Your tracking number: "
+msgid "Your tracking number:"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:77

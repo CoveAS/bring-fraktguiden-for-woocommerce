@@ -69,6 +69,16 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.6.0 =
+
+* Added support for multiple Customer Number support
+* Added Customer Number selection when booking orders
+* Added additional postcode validation for Norway
+* Added support for additional language translations
+* Updated php-laff from 1.0 to 1.1
+* Updated Bring API version
+* Updated formatting to align with coding standards
+
 = 1.5.13 =
 
 * Fixed not allowed to access this page issue when creating labels
