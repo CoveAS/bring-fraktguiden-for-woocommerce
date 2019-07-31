@@ -405,12 +405,6 @@ trait Settings {
 				'description' => __( 'For debugging and testing the plugin', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'separated_title_tab',
 			],
-			'disable_stylesheet'            => array(
-				'title'   => __( 'Disable stylesheet', 'bring-fraktguiden-for-woocommerce' ),
-				'type'    => 'checkbox',
-				'label'   => __( 'Remove fraktguiden styling from the checkout', 'bring-fraktguiden-for-woocommerce' ),
-				'default' => 'no',
-			),
 			'debug'                         => array(
 				'title'       => __( 'Debug mode', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'checkbox',
@@ -418,6 +412,13 @@ trait Settings {
 				'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs' ) . '</a>',
 				'default'     => 'no',
+			),
+			'disable_stylesheet'            => array(
+				'type'   	  => 'checkbox',
+				'title'  	  => __( 'Disable stylesheet', 'bring-fraktguiden-for-woocommerce' ),
+				'label'  	  => __( 'Remove all plugin styles from the checkout page', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Disable loading the default stylesheet from the Bring Fraktguiden plugin to allow custom styling by the theme', 'bring-fraktguiden-for-woocommerce' ),
+				'default' 	  => 'no',
 			),
 			'enable_kco_support'            => array(
 				'title'       => __( 'Klarna checkout support', 'bring-fraktguiden-for-woocommerce' ),

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-07-30 15:47+0200\n"
-"PO-Revision-Date: 2019-07-30 15:47+0200\n"
+"POT-Creation-Date: 2019-07-31 13:03+0200\n"
+"PO-Revision-Date: 2019-07-31 13:03+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -686,46 +686,54 @@ msgid "For debugging and testing the plugin"
 msgstr "For debugging og testing av pluginen"
 
 #: classes/traits/settings.php:409
-msgid "Disable stylesheet"
-msgstr "Deaktiver stylesheets"
-
-#: classes/traits/settings.php:411
-msgid "Remove fraktguiden styling from the checkout"
-msgstr "Fjern Fraktguiden styling fra kassen"
-
-#: classes/traits/settings.php:415
 msgid "Debug mode"
 msgstr "Debug modus"
 
-#: classes/traits/settings.php:417 classes/traits/settings.php:433
+#: classes/traits/settings.php:411 classes/traits/settings.php:434
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
-#: classes/traits/settings.php:418
+#: classes/traits/settings.php:412
 msgid "Issues from the Bring API will be logged here"
 msgstr "Problemer med Bring API blir logget her"
 
-#: classes/traits/settings.php:419
+#: classes/traits/settings.php:413
 msgid "Bring Fraktguiden logs will be saved in"
 msgstr "Bring Fraktguiden logg vil bli lagret i"
 
-#: classes/traits/settings.php:419
+#: classes/traits/settings.php:413
 msgid "Click here to see the logs"
 msgstr "Klikk her for å se loggene"
 
-#: classes/traits/settings.php:423
+#: classes/traits/settings.php:418
+msgid "Disable stylesheet"
+msgstr "Deaktiver stylesheets"
+
+#: classes/traits/settings.php:419
+msgid "Remove all plugin styles from the checkout page"
+msgstr "Fjern alle plugin stiler fra kassa siden"
+
+#: classes/traits/settings.php:420
+msgid ""
+"Disable loading the default stylesheet from the Bring Fraktguiden plugin to "
+"allow custom styling by the theme"
+msgstr ""
+"Deaktiver lasting standardstil arket fra Bring Fraktguiden plugin for å "
+"tillate tilpasset styling av temaet"
+
+#: classes/traits/settings.php:424
 msgid "Klarna checkout support"
 msgstr "Støtte for Klarna checkout"
 
-#: classes/traits/settings.php:425
+#: classes/traits/settings.php:426
 msgid "Enable legacy Klarna support"
 msgstr "Aktiver eldre støtte for Klarna"
 
-#: classes/traits/settings.php:426
+#: classes/traits/settings.php:427
 msgid "Loads additional JavaScript on the checkout."
 msgstr "Laster inn ekstra JavaScript i kassen."
 
-#: classes/traits/settings.php:427
+#: classes/traits/settings.php:428
 msgid ""
 "Bring Fraktguiden will hide Klarna Checkout until a shipping method is "
 "selected in order to ensure that a shipping method has been selected before "
@@ -734,23 +742,23 @@ msgstr ""
 "Bring Fraktguiden vil skjule Klarna Checkout til en forsendelsesmetode er "
 "valgt for å sikre at en forsendelsesmetode er valgt før betaling utføres."
 
-#: classes/traits/settings.php:431
+#: classes/traits/settings.php:432
 msgid "Debug System information"
 msgstr "Debug systeminformasjon"
 
-#: classes/traits/settings.php:434
+#: classes/traits/settings.php:435
 msgid "We may ask for this information if you require support"
 msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
 
-#: classes/traits/settings.php:435
+#: classes/traits/settings.php:436
 msgid "View system info"
 msgstr "Se systeminformasjon"
 
-#: classes/traits/settings.php:442
+#: classes/traits/settings.php:443
 msgid "Mybring.com API"
 msgstr "Mybring.com API"
 
-#: classes/traits/settings.php:443
+#: classes/traits/settings.php:444
 msgid ""
 "If you are a Mybring user you can enter your API credentials for additional "
 "features. API authentication is required for some services such as \"Package "
@@ -760,30 +768,30 @@ msgstr ""
 "flere funksjoner. API autentisering er pålagt for noen tjenester som «Pakke "
 "i Postkassen (PAKKE_I_POSTKASSEN)»."
 
-#: classes/traits/settings.php:448 classes/traits/settings.php:450
+#: classes/traits/settings.php:449 classes/traits/settings.php:451
 msgid "API User ID"
 msgstr "API User ID"
 
-#: classes/traits/settings.php:454 classes/traits/settings.php:456
+#: classes/traits/settings.php:455 classes/traits/settings.php:457
 msgid "API Key"
 msgstr "API Key"
 
-#: classes/traits/settings.php:460 classes/traits/settings.php:462
+#: classes/traits/settings.php:461 classes/traits/settings.php:463
 #: pro/booking/templates/waybills-table-labels.php:36
 msgid "Customer number"
 msgstr "Kundenummer"
 
-#: classes/traits/settings.php:490
+#: classes/traits/settings.php:491
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 "Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
 
-#: classes/traits/settings.php:505
+#: classes/traits/settings.php:506
 msgid "Gateway Disabled"
 msgstr "Gateway Disabled"
 
-#: classes/traits/settings.php:506
+#: classes/traits/settings.php:507
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -796,23 +804,23 @@ msgstr ""
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
-#: classes/traits/settings.php:597
+#: classes/traits/settings.php:598
 msgid "You need to enter a API Key"
 msgstr "Du må angi en API-nøkkel"
 
-#: classes/traits/settings.php:601
+#: classes/traits/settings.php:602
 msgid "You need to enter a API User ID"
 msgstr "Du må fylle inn en API bruker ID"
 
-#: classes/traits/settings.php:605
+#: classes/traits/settings.php:606
 msgid "You need to enter a customer number"
 msgstr "Du må fylle inn et kundenummer"
 
-#: classes/traits/settings.php:670
+#: classes/traits/settings.php:671
 msgid "MyBring Authentication failed"
 msgstr "MyBring autentisering mislyktes"
 
-#: classes/traits/settings.php:670
+#: classes/traits/settings.php:671
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
