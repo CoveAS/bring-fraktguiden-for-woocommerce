@@ -92,6 +92,9 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 == Changelog ==
 
+* Dev - Updated plugin URL to be relevant to Bring Fraktguiden
+* Fix - fixed filter stopping settings link from showing on plugin list
+
 = 1.6.0 =
 
 * Added support for multiple Customer Number support
