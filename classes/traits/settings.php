@@ -488,10 +488,8 @@ trait Settings {
 	 */
 	public function admin_options() {
 		?>
-		<!-- -->
-		<h3 class="bring-separate-admin-section"><?php esc_html( $this->method_title ); ?></h3>
+		<h3 class="bring-title-admin-section"><?php echo esc_html( $this->method_title ); ?></h3>
 		<p><?php esc_html_e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden-for-woocommerce' ); ?></p>
-		<!-- -->
 
 		<div class="hash-tabs fraktguiden-options" style="display:none;">
 			<article class="tab-container">
