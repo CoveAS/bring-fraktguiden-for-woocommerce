@@ -58,13 +58,13 @@ To ensure Bring will work correctly, you must set the following:
 Bring rates are only shown when the customer has entered a valid postcode. Commonly customers have either entered the wrong postcode or live outside of your Bring postcode settings.
 
 **But the postcode is valid and the rate still isn't showing?**
-If you've entered any MyBring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
+If you've entered any Mybring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
 
 **What do I get from Bring Pro that I can't from the Free version?**
 Good question! Bring Pro enables you to customise your customers Bring experience:
     - You can customise the price of each shipping method
     - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ).
-    - You can book your shippment through MyBring directly on your orders page.
+    - You can book your shippment through Mybring directly on your orders page.
     - You can change the services offered to customers to their nearest collection point
 
 **'Minipakke' and 'Småpakke' are no longer available? What happened?**
@@ -199,7 +199,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 * Additional options for end-user
 * PRO version now contains Bring fallback methods for when the API can't be accessed
 * Added more descriptions to services and features to help minimise the support you need to request.
-* MyBring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
+* Mybring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
 * Added a stylesheet for styles. Those styles are used. Mostly for validation and error notifications when the postcode is wrong / invalid.
 * Added the ability to disable the previously mentioned stylesheet, because you've already taken the styling issue into your own hands.
 * Had a baby just before release of this version
