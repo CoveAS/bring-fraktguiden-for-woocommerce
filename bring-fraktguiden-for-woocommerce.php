@@ -4,7 +4,7 @@
  * Plugin URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
  * Description:         Bring Fraktguiden for WooCommerce makes it easy for your customers to choose delivery methods from Bring.
  * Author:              Driv Digital AS
- * Author URI:          https://drivdigital.no/
+ * Author URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
  *
  * Version:             1.6.0
  * Requires at least:   4.9.1

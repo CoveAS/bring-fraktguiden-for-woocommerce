@@ -35,7 +35,7 @@ class Bring_Fraktguiden {
 
 		add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
 
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Bring_Fraktguiden::plugin_action_links' );
+		add_filter( 'plugin_action_links_' . basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/bring-fraktguiden-for-woocommerce.php', __CLASS__ . '::plugin_action_links' );
 
 		if ( is_admin() ) {
 			require_once FRAKTGUIDEN_PLUGIN_PATH . 'system-info-page.php';
@@ -134,6 +134,7 @@ class Bring_Fraktguiden {
 	 * @return array
 	 */
 	public static function plugin_action_links( $links ) {
+
 		$action_links = array(
 			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden-for-woocommerce' ) ) . '">' . __( 'Settings', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
 		);

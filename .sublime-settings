@@ -1,5 +1,4 @@
 {
-	"SublimeLinter.linters.phpcs.standard":  "WordPress",
-	"SublimeLinter.linters.phpmd.args": "phpmd.xml",
-	"SublimeLinter.linters.phpmd.rulesets": "cleancode,codesize,controversial,design,naming,unusedcode"
+	"SublimeLinter.linters.phpcs.args": "--standard=WordPress",
+	"SublimeLinter.linters.phpmd.args": "phpmd.xml"
 }
