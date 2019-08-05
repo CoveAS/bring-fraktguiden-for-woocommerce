@@ -1,10 +1,19 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	die; // Exit if accessed directly
+	die; // Exit if accessed directly.
 }
 
 Bring_Booking_Waybills::setup();
 
+/**
+ * Bring_Booking_Waybills class
+ */
 class Bring_Booking_Waybills {
 
 	static function setup() {

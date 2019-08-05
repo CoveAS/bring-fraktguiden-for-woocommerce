@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -7,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'wp_ajax_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
 add_action( 'wp_ajax_nopriv_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
 
+/**
+ * Bring_Booking_Order_View class
+ */
 class Bring_Booking_Order_View {
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
@@ -18,28 +26,9 @@ class Bring_Booking_Order_View {
 	 */
 	public static function init() {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_booking_meta_box' ), 1, 2 );
-		// add_action( 'woocommerce_order_actions', array( __CLASS__, 'add_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_bring_book_with_bring', array( __CLASS__, 'send_booking' ) );
 		add_action( 'save_post', array( __CLASS__, 'redirect_page' ) );
 	}
-
-	/**
-	 * @param array $actions
-	 * @return array
-	 */
-	// static function add_order_meta_box_actions( $actions ) {
-	// ** @var WP_Post */
-	// global $post;
-	// if ( $post && $post->post_type == 'shop_order' ) {
-	// $order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
-	// if ( ! $order->is_booked() ) {
-	// if ( ! Bring_Booking_Common_View::is_step2() ) {
-	// $actions['bring_book_with_bring'] = Bring_Booking_Common_View::booking_label();
-	// }
-	// }
-	// }
-	// return $actions;
-	// }
 
 	/**
 	 * Add booking meta box
@@ -156,16 +145,15 @@ class Bring_Booking_Order_View {
 		?>
 		<h3><?php echo $status['text']; ?></h3>
 		<?php if ( 'completed' !== $order->order->get_status() ) { ?>
-		  <div style="text-align:center;margin-bottom: 1em">
-			<?php _e( 'Note: Order is not completed', 'bring-fraktguiden-for-woocommerce' ); ?>
-		  </div>
+			<div style="text-align:center;margin-bottom:1em;">
+				<?php esc_html_e( 'Note: Order is not completed', 'bring-fraktguiden-for-woocommerce' ); ?>
+			</div>
 		<?php } ?>
-	  </div>
-	  <div>
-		<h3 style="margin-top:0"><?php _e( 'Consignments', 'bring-fraktguiden-for-woocommerce' ); ?></h3 style>
-		<?php self::render_consignments( $order ); ?>
-	  </div>
-
+		</div>
+		<div>
+			<h3 style="margin-top:0"><?php esc_html_e( 'Consignments', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
+			<?php self::render_consignments( $order ); ?>
+		</div>
 	</div>
 		<?php
 	}
@@ -270,7 +258,7 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param bool $is_step2
 	 */
-	static function render_footer( $is_step2 ) {
+	public static function render_footer( $is_step2 ) {
 		$missing_params  = false;
 		$required_params = [
 			'booking_address_store_name',
@@ -303,7 +291,7 @@ class Bring_Booking_Order_View {
 		   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden-for-woocommerce' ); ?></a>
 		<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
 		<button type="submit" name="_bring-start-booking"
-				data-tip="<?php _e( 'Start creating a label to ship this order with MyBring', 'bring-fraktguiden-for-woocommerce' ); ?>"
+				data-tip="<?php _e( 'Start creating a label to ship this order with Mybring', 'bring-fraktguiden-for-woocommerce' ); ?>"
 				class="button button-primary tips"><?php _e( 'Start booking', 'bring-fraktguiden-for-woocommerce' ); ?></button>
 		<?php } else { ?>
 		<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>"
@@ -349,7 +337,7 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param Bring_WC_Order_Adapter $order
 	 */
-	static function render_packages( $order ) {
+	public static function render_packages( $order ) {
 		$shipping_item_tip = __( 'Shipping item id', 'bring-fraktguiden-for-woocommerce' );
 		$all_services      = Fraktguiden_Helper::get_all_services();
 		$order_item_ids    = array_keys( $order->get_fraktguiden_shipping_items() );
@@ -470,9 +458,8 @@ class Bring_Booking_Order_View {
 	  </tbody>
 	</table>
 	</form>
-	<script type="text/javascript">
+	<script>
 	  jQuery( function( $ ) {
-
 
 		/**
 		 * Debounce
@@ -610,7 +597,7 @@ class Bring_Booking_Order_View {
 	 * @param string $label
 	 * @param string $value
 	 */
-	static function render_table_row( $label, $value ) {
+	public static function render_table_row( $label, $value ) {
 		?>
 	<tr>
 	  <td>
@@ -626,7 +613,7 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param array $address
 	 */
-	static function render_address_table( $address ) {
+	public static function render_address_table( $address ) {
 		?>
 	<table>
 	  <tbody>
@@ -662,7 +649,7 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param Bring_WC_Order_Adapter $order
 	 */
-	static function render_progress_tracker( $order ) {
+	public static function render_progress_tracker( $order ) {
 		$step2  = Bring_Booking_Common_View::is_step2();
 		$booked = $order->is_booked();
 		?>
@@ -684,7 +671,7 @@ class Bring_Booking_Order_View {
 	 * @param Bring_WC_Order_Adapter $order
 	 * @return string
 	 */
-	static function render_errors( $order ) {
+	public static function render_errors( $order ) {
 		$errors = $order->get_booking_errors();
 		?>
 	<div class="bring-info-box">
@@ -709,7 +696,7 @@ class Bring_Booking_Order_View {
 		<?php
 	}
 
-	static function redirect_page() {
+	public static function redirect_page() {
 		global $post_ID;
 		$type = get_post_type();
 
@@ -723,11 +710,11 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param WC_Order $wc_order
 	 */
-	static function send_booking( $wc_order ) {
+	public static function send_booking( $wc_order ) {
 		Bring_Booking::send_booking( $wc_order );
 	}
 
-	static function ajax_update_packages() {
+	public static function ajax_update_packages() {
 		if ( ! isset( $_POST['order_id'] ) ) {
 			die( '{ "error": "Missing order id" }' );
 		}

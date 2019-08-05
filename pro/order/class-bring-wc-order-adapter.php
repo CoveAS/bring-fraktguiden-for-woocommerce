@@ -62,7 +62,7 @@ class Bring_WC_Order_Adapter {
 	}
 
 	/**
-	 * Returns the consignments json decoded from the stored MyBring response.
+	 * Returns the consignments json decoded from the stored Mybring response.
 	 * If the saved response has errors, return empty array.
 	 *
 	 * @return array
@@ -74,7 +74,7 @@ class Bring_WC_Order_Adapter {
 	}
 
 	/**
-	 * Returns the consignments json decoded from the stored MyBring response.
+	 * Returns the consignments json decoded from the stored Mybring response.
 	 * If the saved response has errors, return empty array.
 	 *
 	 * @return array
@@ -92,7 +92,7 @@ class Bring_WC_Order_Adapter {
 	}
 
 	/**
-	 * Returns the consignments json decoded from the stored MyBring response.
+	 * Returns the consignments json decoded from the stored Mybring response.
 	 * If the saved response has errors, return empty array.
 	 *
 	 * @return array

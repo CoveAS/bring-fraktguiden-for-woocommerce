@@ -1,6 +1,12 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 /**
@@ -8,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Bring_Waybill_View {
 
-	static $request_data = [];
+	public static $request_data = [];
 
-	static function setup() {
+	public static function setup() {
 		add_action( 'add_meta_boxes', __CLASS__ . '::add_meta_box', 10, 2 );
 		add_action( 'save_post_mailbox_waybill', __CLASS__ . '::save_waybill', 10, 2 );
 	}
@@ -21,7 +27,7 @@ class Bring_Waybill_View {
 	 * @param  integer $post_id
 	 * @param  WP_Post $post
 	 */
-	static function save_waybill( $post_id, $post ) {
+	public static function save_waybill( $post_id, $post ) {
 		if ( ! isset( $_POST['consignment_numbers'] ) ) {
 			return;
 		}
@@ -91,7 +97,7 @@ class Bring_Waybill_View {
 	 * @param integer $customer_number
 	 * @param array   $customer_data
 	 */
-	static function set_request_data( $customer_number, $customer_data ) {
+	public static function set_request_data( $customer_number, $customer_data ) {
 		if ( ! isset( self::$request_data[ $customer_number ] ) ) {
 			$customer_data['inactive_consignment_numbers'] = [];
 			self::$request_data[ $customer_number ]        = $customer_data;
@@ -126,7 +132,7 @@ class Bring_Waybill_View {
 	 * @param  array   $consignment_numbers
 	 * @return array
 	 */
-	static function book_mailbox_consignment( $customer_number, $consignment_numbers ) {
+	public static function book_mailbox_consignment( $customer_number, $consignment_numbers ) {
 		require_once dirname( __DIR__ ) . '/classes/class-bring-mailbox-waybill-request.php';
 		// Waybill booking does not have a test option
 		$request  = new Bring_Mailbox_Waybill_Request( $customer_number, $consignment_numbers );
@@ -158,7 +164,7 @@ class Bring_Waybill_View {
 	 * @param string  $post_type
 	 * @param WP_Post $post
 	 */
-	static function add_meta_box( $post_type, $post ) {
+	public static function add_meta_box( $post_type, $post ) {
 		if ( $post_type != 'mailbox_waybill' ) {
 			return;
 		}
@@ -175,7 +181,7 @@ class Bring_Waybill_View {
 	/**
 	 * Render Booking Meta Box
 	 */
-	static function render_booking_meta_box( $post ) {
+	public static function render_booking_meta_box( $post ) {
 		$new                          = 'auto-draft' == $post->post_status;
 		$inactive_consignment_numbers = [];
 		$waybills                     = [];
@@ -209,7 +215,7 @@ class Bring_Waybill_View {
 	 *
 	 * @return array
 	 */
-	static function get_consignments( $waybill_data ) {
+	public static function get_consignments( $waybill_data ) {
 		$consignments = [];
 		foreach ( $waybill_data as $customer_number => $request_data ) {
 			$consignment_numbers = $request_data['consignment_numbers'];
@@ -229,7 +235,7 @@ class Bring_Waybill_View {
 	 *
 	 * @return array
 	 */
-	static function get_unbooked_consignments() {
+	public static function get_unbooked_consignments() {
 		$test_mode = Fraktguiden_Helper::get_option( 'booking_test_mode' );
 		// Get all labels that have no waybill id
 		$posts        = get_posts(
@@ -269,7 +275,7 @@ class Bring_Waybill_View {
 	 * @param  integer $post_id
 	 * @return Bring_Mailbox_Consignment
 	 */
-	static function get_label_consignment( $post_id ) {
+	public static function get_label_consignment( $post_id ) {
 		$order_id           = get_post_meta( $post_id, '_order_id', true );
 		$consignment_number = get_post_meta( $post_id, '_consignment_number', true );
 		$wc_order           = wc_get_order( $order_id );

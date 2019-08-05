@@ -229,14 +229,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$has_api_uid_and_key = Fraktguiden_Helper::get_option( 'mybring_api_uid' ) && Fraktguiden_Helper::get_option( 'mybring_api_key' );
 
 		/* translators: %s: Mybring URL */
-		$description = sprintf( __( 'In order to use Bring Booking you must be registered in <a href="%s" target="_blank">MyBring</a> and have an invoice agreement with Bring', 'bring-fraktguiden-for-woocommerce' ), 'https://www.mybring.com' );
+		$description = sprintf( __( 'In order to use Bring Booking you must be registered in <a href="%s" target="_blank">Mybring</a> and have an invoice agreement with Bring', 'bring-fraktguiden-for-woocommerce' ), 'https://www.mybring.com' );
 
 		if ( ! $has_api_uid_and_key && Fraktguiden_Helper::booking_enabled() ) {
 			$description .= '<br><span style="font-weight: bold;color: red">' . __( 'API User ID or API Key missing!', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		}
 
 		$this->form_fields['booking_title'] = [
-			'title'       => __( 'MyBring Booking', 'bring-fraktguiden-for-woocommerce' ),
+			'title'       => __( 'Mybring Booking', 'bring-fraktguiden-for-woocommerce' ),
 			'description' => $description,
 			'type'        => 'title',
 			'class'       => 'separated_title_tab',
@@ -245,14 +245,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->form_fields['booking_enabled'] = [
 			'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'checkbox',
-			'label'   => __( 'Enable MyBring booking', 'bring-fraktguiden-for-woocommerce' ),
+			'label'   => __( 'Enable Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
 			'default' => 'no',
 		];
 
 		$this->form_fields['booking_test_mode_enabled'] = [
 			'title'       => __( 'Test mode', 'bring-fraktguiden-for-woocommerce' ),
 			'type'        => 'checkbox',
-			'label'       => __( 'Enable test mode for MyBring booking', 'bring-fraktguiden-for-woocommerce' ),
+			'label'       => __( 'Enable test mode for Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
 			'description' => __( 'When enabled, Bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce' ),
 			'default'     => 'yes',
 		];
@@ -404,7 +404,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 			// custom_name for SERVICEPAKKE will also rename the pickup points
 			// SERVICEPAKKE's custom_name is ignored if 'pickup_point_enabled' is enabled.
-			if ( 0 === strpos( $key, 'SERVICEPAKKE' )  && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' )  ) {
+			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
 				$key = 'SERVICEPAKKE';
 			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
 				$rate['label'] = $custom_names[ $key ];

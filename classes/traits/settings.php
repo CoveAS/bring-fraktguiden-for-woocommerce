@@ -438,7 +438,7 @@ trait Settings {
 			],
 
 			/**
-			 * MyBring API settings
+			 * Mybring API settings
 			 */
 			'mybring_title'                 => [
 				'title'       => __( 'Mybring.com API', 'bring-fraktguiden-for-woocommerce' ),
@@ -575,7 +575,7 @@ trait Settings {
 	}
 
 	/**
-	 * Process MyBring API credentials
+	 * Process Mybring API credentials
 	 *
 	 * @return void
 	 */
@@ -667,7 +667,7 @@ trait Settings {
 	}
 
 	/**
-	 * Add MyBring error
+	 * Add Mybring error
 	 *
 	 * @param  string $message Error message.
 	 *
@@ -675,7 +675,7 @@ trait Settings {
 	 */
 	public function mybring_error( $message ) {
 		if ( strpos( $message, 'Authentication failed.' ) === 0 ) {
-			$message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden-for-woocommerce' ) );
+			$message = sprintf( '<strong>%s:</strong> %s.', __( 'Mybring Authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( "Couldn't connect to Bring with your API credentials. Please check that they are correct", 'bring-fraktguiden-for-woocommerce' ) );
 		}
 
 		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
