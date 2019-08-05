@@ -1,3 +1,12 @@
+<?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+?>
+
 <tr>
 	<td class="fraktguiden-services-table-col-enabled">
 		<input type="checkbox"
@@ -8,8 +17,6 @@
 		/>
 	</td>
 	<td class="fraktguiden-services-table-col-name">
-		<span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"
-				class="woocommerce-help-tip"></span>
 		<label class="fraktguiden-service"
 			for="<?php echo esc_attr( $service->id ); ?>"
 			data-productName="<?php echo esc_attr( $service->service_data['productName'] ); ?>"
@@ -17,6 +24,10 @@
 		>
 			<?php echo esc_attr( $service->get_name_by_index( $this->shipping_method->service_name ) ); ?>
 		</label>
+		<?php if ( ! empty( $service->service_data['HelpText'] ) ) : ?>
+		<span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"
+				class="woocommerce-help-tip"></span>
+		<?php endif; ?>
 		<input
 			class="fraktguiden-service-custom-name"
 			style="display: none"
@@ -40,14 +51,17 @@
 			placeholder="..."
 		/>
 	</td>
-	<td class="fraktguiden-services-table-col-free-shipping">
-		<input type="checkbox"
-			name="<?php echo esc_attr( $service->free_shipping_id ); ?>"
-			<?php echo esc_attr( $service->free_shipping ? 'checked="checked"' : '' ); ?>
-		/>
-	</td>
 	<td class="fraktguiden-services-table-col-free-shipping-threshold">
-		<input type="text"
+		<label for="<?php echo esc_attr( $service->free_shipping_id ); ?>">
+			<input type="checkbox" class="bring-toggle-checkbox enable_free_shipping_limit"
+				id="<?php echo esc_attr( $service->free_shipping_id ); ?>"
+				name="<?php echo esc_attr( $service->free_shipping_id ); ?>"
+				<?php echo esc_attr( $service->free_shipping ? 'checked="checked"' : '' ); ?>
+			/>
+			<em class="bring-toggle-alt"></em>
+		</label>
+
+		<input type="text" class="free_shipping_limit"
 			name="<?php echo esc_attr( $service->free_shipping_threshold_id ); ?>"
 			value="<?php echo esc_attr( $service->free_shipping_threshold ); ?>"
 			placeholder="..."

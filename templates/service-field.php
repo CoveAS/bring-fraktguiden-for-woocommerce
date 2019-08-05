@@ -1,10 +1,16 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 foreach ( $services as $group => $service_group ) :
 	?>
 	<tr valign="top">
 		<th scope="row" class="titledesc">
 			<label for="<?php echo esc_attr( $field_key ); ?>">
-				<?php esc_html_e( $service_group['title'], 'bring-fraktguiden-for-woocommerce' ); ?>
+				<?php esc_html_e( $service_group['title'], 'bring-fraktguiden-for-woocommerce' ); // phpcs:ignore ?>
 			</label>
 		</th>
 		<td class="forminp">
