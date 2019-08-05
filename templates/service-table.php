@@ -1,3 +1,12 @@
+<?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+?>
+
 <table class="wc_shipping widefat fraktguiden-services-table">
 	<thead>
 		<tr>
@@ -9,11 +18,11 @@
 			<th class="fraktguiden-services-table-col-custom-price"><?php esc_html_e( 'Fixed price override', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 			<th class="fraktguiden-services-table-col-customer-number">
 				<?php esc_html_e( 'Alternative customer number', 'bring-fraktguiden-for-woocommerce' ); ?>
-				<span data-tip="<?php _e( 'Allows you to offer different shipping options from different shipping accounts. Useful for when allowing international and cargo shipping options', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
+				<span data-tip="<?php esc_attr_e( 'Allows you to offer different shipping options from different shipping accounts. Useful for when allowing international and cargo shipping options', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
 			</th>
 			<th class="fraktguiden-services-table-col-free-shipping-threshold">
 				<?php esc_html_e( 'Free shipping threshold', 'bring-fraktguiden-for-woocommerce' ); ?>
-				<span data-tip="<?php _e( 'Allows you to enable free shipping when the customers cart reached this value', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
+				<span data-tip="<?php esc_attr_e( 'Allows you to enable free shipping when the customers cart reached this value', 'bring-fraktguiden-for-woocommerce' ); ?>" class="woocommerce-help-tip"></span>
 			</th>
 			<?php endif; ?>
 		</tr>

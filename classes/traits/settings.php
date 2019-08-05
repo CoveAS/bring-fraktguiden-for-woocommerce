@@ -1,15 +1,20 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 namespace Bring_Fraktguiden;
 
 trait Settings {
 
-
 	/**
 	 * Get setting
 	 *
-	 * @param  string       $key
-	 * @param  string|mixed $default
+	 * @param string       $key     Key.
+	 * @param string|mixed $default Default.
+	 *
 	 * @return mixed
 	 */
 	public function get_setting( $key, $default = '' ) {
@@ -19,15 +24,17 @@ trait Settings {
 	/**
 	 * Get Price Setting
 	 *
-	 * @param  string       $key
-	 * @param  string|mixed $default
+	 * @param string       $key     Key.
+	 * @param string|mixed $default Default.
 	 * @return float
 	 */
 	public function get_price_setting( $key, $default = '' ) {
 		$price = floatval( $this->get_setting( $key, $default ) );
 		$price = $this->calculate_excl_vat( $price );
+
 		return $price;
 	}
+
 	/**
 	 * Default settings.
 	 *
@@ -67,43 +74,38 @@ trait Settings {
 				'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden-for-woocommerce' ),
 				'default' => 'no',
 			],
-
-			'enabled'                       => array(
+			'enabled'                       => [
 				'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' ),
 				'default' => 'no',
-			),
+			],
 
 			/**
 			 *  Required information
 			 */
-
-			'title'                         => array(
+			'title'                         => [
 				'title'    => __( 'Title', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'text',
 				'desc_tip' => __( 'This controls the title which the user sees during checkout.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' ),
-			),
-
-			'post_office'                   => array(
+			],
+			'post_office'                   => [
 				'title'    => __( 'Post office', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'label'    => __( 'Shipping from post office', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip' => __( 'Flag that tells whether the parcel is delivered at a post office when it is shipped.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
-			),
-
-			'from_zip'                      => array(
+			],
+			'from_zip'                      => [
 				'title'       => __( 'From zip', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'placeholder' => __( 'ie: 0159', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'This is the zip code of where you deliver from. For example, the post office.', 'bring-fraktguiden-for-woocommerce' ),
 				'css'         => 'width: 8em;',
 				'default'     => '',
-			),
-
-			'from_country'                  => array(
+			],
+			'from_country'                  => [
 				'title'    => __( 'From country', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'select',
 				'desc_tip' => __( 'This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)', 'bring-fraktguiden-for-woocommerce' ),
@@ -111,9 +113,8 @@ trait Settings {
 				'css'      => 'width: 400px;',
 				'default'  => $woocommerce->countries->get_base_country(),
 				'options'  => \Fraktguiden_Helper::get_nordic_countries(),
-			),
-
-			'handling_fee'                  => array(
+			],
+			'handling_fee'                  => [
 				'title'             => __( 'Delivery Fee', 'bring-fraktguiden-for-woocommerce' ),
 				'type'              => 'number',
 				'placeholder'       => __( '0', 'bring-fraktguiden-for-woocommerce' ),
@@ -123,8 +124,8 @@ trait Settings {
 				'custom_attributes' => [
 					'min' => '0',
 				],
-			),
-			'evarsling'                     => array(
+			],
+			'evarsling'                     => [
 				'title'       => __( 'Recipient notification', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Recipient notification over SMS or E-Mail', 'bring-fraktguiden-for-woocommerce' ),
@@ -135,25 +136,25 @@ trait Settings {
 					'bring-fraktguiden-for-woocommerce'
 				),
 				'default'     => 'no',
-			),
-			'availability'                  => array(
+			],
+			'availability'                  => [
 				'title'   => __( 'Method availability', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'select',
 				'default' => 'all',
 				'class'   => 'availability',
-				'options' => array(
+				'options' => [
 					'all'      => __( 'All allowed countries', 'bring-fraktguiden-for-woocommerce' ),
 					'specific' => __( 'Specific Countries', 'bring-fraktguiden-for-woocommerce' ),
-				),
-			),
-			'countries'                     => array(
+				],
+			],
+			'countries'                     => [
 				'title'   => __( 'Specific Countries', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'multiselect',
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
 				'default' => '',
 				'options' => $woocommerce->countries->countries,
-			),
+			],
 
 			/**
 			 * General options setting
@@ -190,21 +191,21 @@ trait Settings {
 					'CustomName'  => __( 'Custom Name', 'bring-fraktguiden-for-woocommerce' ),
 				],
 			],
-			'display_desc'                  => array(
+			'display_desc'                  => [
 				'title'    => __( 'Display Description', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'label'    => __( 'Show service description after the name of the service', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
-			),
-			'services'                      => array(
+			],
+			'services'                      => [
 				'title'   => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'services_table',
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
 				'default' => '',
 				'options' => \Fraktguiden_Helper::get_all_services(),
-			),
+			],
 
 			/**
 			 * Sizing is important when packing products to ship.
@@ -223,7 +224,7 @@ trait Settings {
 				'description' => __( 'Bring needs a default shipping size for when products do not contain any dimension information.', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'bring-section-started',
 			],
-			'minimum_length'                => array(
+			'minimum_length'                => [
 				'title'             => __( 'Minimum Length in cm', 'bring-fraktguiden-for-woocommerce' ),
 				'type'              => 'number',
 				'css'               => 'width: 8em;',
@@ -233,8 +234,8 @@ trait Settings {
 				'custom_attributes' => [
 					'min' => '1',
 				],
-			),
-			'minimum_width'                 => array(
+			],
+			'minimum_width'                 => [
 				'title'             => __( 'Minimum Width in cm', 'bring-fraktguiden-for-woocommerce' ),
 				'type'              => 'number',
 				'css'               => 'width: 8em;',
@@ -244,8 +245,8 @@ trait Settings {
 				'custom_attributes' => [
 					'min' => '1',
 				],
-			),
-			'minimum_height'                => array(
+			],
+			'minimum_height'                => [
 				'title'             => __( 'Minimum Height in cm', 'bring-fraktguiden-for-woocommerce' ),
 				'type'              => 'number',
 				'css'               => 'width: 8em;',
@@ -255,8 +256,8 @@ trait Settings {
 				'custom_attributes' => [
 					'min' => '1',
 				],
-			),
-			'minimum_weight'                => array(
+			],
+			'minimum_weight'                => [
 				'title'             => __( 'Minimum Weight in kg', 'bring-fraktguiden-for-woocommerce' ),
 				'type'              => 'number',
 				'css'               => 'width: 8em;',
@@ -266,7 +267,7 @@ trait Settings {
 					'step' => '0.01',
 					'min'  => '0.01',
 				],
-			),
+			],
 
 			/**
 			 * Lost / no connection section
@@ -277,7 +278,7 @@ trait Settings {
 				'description' => __( 'If Bring has any technical difficulties, it won\'t be able to fetch prices from the bring server.<br>In these cases, shipping will default to these settings:', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'bring-separate-admin-section',
 			],
-			'no_connection_handling'        => array(
+			'no_connection_handling'        => [
 				'title'    => __( 'No API connection handling', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'select',
 				'desc_tip' => __( 'What pricing should be used if no connection can be made to the bring API', 'bring-fraktguiden-for-woocommerce' ),
@@ -286,26 +287,26 @@ trait Settings {
 					'no_rate'   => __( 'Do nothing', 'bring-fraktguiden-for-woocommerce' ),
 					'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden-for-woocommerce' ),
 				],
-			),
-			'no_connection_flat_rate_label' => array(
+			],
+			'no_connection_flat_rate_label' => [
 				'title'   => __( 'Shipping method Label to replace \'API Error\'', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'text',
 				'default' => __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ),
-			),
-			'no_connection_flat_rate'       => array(
+			],
+			'no_connection_flat_rate'       => [
 				'title'       => __( 'Shipping method cost for \'API Error\'', 'bring-fraktguiden-for-woocommerce' ),
 				'css'         => 'width: 8em;',
 				'type'        => 'number',
 				'placeholder' => __( 'ie: 500', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '0',
-			),
-			'no_connection_rate_id'         => array(
+			],
+			'no_connection_rate_id'         => [
 				'title'   => __( 'Service to use for booking', 'bring-fraktguiden-for-woocommerce' ),
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
 				'options' => \Fraktguiden_Helper::get_all_services(),
-			),
+			],
 
 			/**
 			 * Heavy items section
@@ -316,7 +317,7 @@ trait Settings {
 				'description' => __( 'Set a flat rate for packages that exceed the maximum measurements allowed by Bring.', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'bring-separate-admin-section',
 			],
-			'exception_handling'            => array(
+			'exception_handling'            => [
 				'title'    => __( 'Heavy item handling', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'select',
 				'desc_tip' => __( 'What method should be used to calculate post rates for items that exceeds the limits set by bring', 'bring-fraktguiden-for-woocommerce' ),
@@ -325,27 +326,27 @@ trait Settings {
 					'no_rate'   => __( 'Do nothing', 'bring-fraktguiden-for-woocommerce' ),
 					'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden-for-woocommerce' ),
 				],
-			),
-			'exception_flat_rate_label'     => array(
+			],
+			'exception_flat_rate_label'     => [
 				'title'       => __( 'Shipping method Label for Heavy Items', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'placeholder' => __( 'ie: Cargo shipping', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ),
-			),
-			'exception_flat_rate'           => array(
+			],
+			'exception_flat_rate'           => [
 				'title'       => __( 'Shipping method cost for heavy items', 'bring-fraktguiden-for-woocommerce' ),
 				'css'         => 'width: 8em;',
 				'type'        => 'number',
 				'placeholder' => __( 'ie: 500', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '0',
-			),
-			'exception_rate_id'             => array(
+			],
+			'exception_rate_id'             => [
 				'title'   => __( 'Service to use for booking', 'bring-fraktguiden-for-woocommerce' ),
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
 				'options' => \Fraktguiden_Helper::get_all_services(),
-			),
+			],
 
 			/**
 			 * Max products section
@@ -356,7 +357,7 @@ trait Settings {
 				'description' => __( 'When a cart reaches this limit, you can enable this shipping method.<br><em>For example, when ordering in bulk, the price for a shipping container may be a flat rate</em>', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'bring-separate-admin-section',
 			],
-			'alt_handling'                  => array(
+			'alt_handling'                  => [
 				'title'    => __( 'Maximum product handling', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'select',
 				'desc_tip' => __( 'We use a packing algorithm to pack items in three dimensions. This algorithm is computationally heavy and to prevent against DDoS attacks we\'ve implemented setting to control the maximum number of items that can be packed per order.', 'bring-fraktguiden-for-woocommerce' ),
@@ -365,36 +366,36 @@ trait Settings {
 					'no_rate'   => __( 'Do nothing', 'bring-fraktguiden-for-woocommerce' ),
 					'flat_rate' => __( 'Custom flat rate', 'bring-fraktguiden-for-woocommerce' ),
 				],
-			),
-			'max_products'                  => array(
+			],
+			'max_products'                  => [
 				'title'       => __( 'Maximum product limit', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'css'         => 'width: 8em;',
 				'placeholder' => 1000,
 				'desc_tip'    => __( 'Maximum total quantity of products in the cart before offering a custom price', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 1000,
-			),
-			'alt_flat_rate_label'           => array(
+			],
+			'alt_flat_rate_label'           => [
 				'title'       => __( 'Shipping method label', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'placeholder' => __( 'ie: Cargo shipping', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ),
-			),
-			'alt_flat_rate'                 => array(
+			],
+			'alt_flat_rate'                 => [
 				'title'       => __( 'Shipping method cost', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'css'         => 'width: 8em;',
 				'placeholder' => __( 'ie: 1500', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Offer a flat rate if the cart reaches max products or a product in the cart does not have the required dimensions', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 200,
-			),
-			'alt_flat_rate_id'              => array(
+			],
+			'alt_flat_rate_id'              => [
 				'title'   => __( 'Service to use for booking', 'bring-fraktguiden-for-woocommerce' ),
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
 				'options' => \Fraktguiden_Helper::get_all_services(),
-			),
+			],
 
 			/**
 			 * Developer settings
@@ -405,36 +406,36 @@ trait Settings {
 				'description' => __( 'For debugging and testing the plugin', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'separated_title_tab',
 			],
-			'debug'                         => array(
+			'debug'                         => [
 				'title'       => __( 'Debug mode', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable debug logs', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs' ) . '</a>',
 				'default'     => 'no',
-			),
-			'disable_stylesheet'            => array(
-				'type'   	  => 'checkbox',
-				'title'  	  => __( 'Disable stylesheet', 'bring-fraktguiden-for-woocommerce' ),
-				'label'  	  => __( 'Remove all plugin styles from the checkout page', 'bring-fraktguiden-for-woocommerce' ),
+			],
+			'disable_stylesheet'            => [
+				'type'        => 'checkbox',
+				'title'       => __( 'Disable stylesheet', 'bring-fraktguiden-for-woocommerce' ),
+				'label'       => __( 'Remove all plugin styles from the checkout page', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => __( 'Disable loading the default stylesheet from the Bring Fraktguiden plugin to allow custom styling by the theme', 'bring-fraktguiden-for-woocommerce' ),
-				'default' 	  => 'no',
-			),
-			'enable_kco_support'            => array(
+				'default'     => 'no',
+			],
+			'enable_kco_support'            => [
 				'title'       => __( 'Klarna checkout support', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
 				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
-			),
-			'system_information'            => array(
+			],
+			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'hidden',
 				'label'       => __( 'Enable debug logs', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'We may ask for this information if you require support', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => sprintf( '<a href="%s" target="_blank">%s</a>', admin_url( 'admin-ajax.php?action=bring_system_info' ), __( 'View system info', 'bring-fraktguiden-for-woocommerce' ) ),
-			),
+			],
 
 			/**
 			 * MyBring API settings
@@ -474,6 +475,8 @@ trait Settings {
 
 	/**
 	 * Initialize form fields
+	 *
+	 * @return void
 	 */
 	public function init_instance_form_fields() {
 		$this->form_fields = [];
@@ -486,10 +489,8 @@ trait Settings {
 	 */
 	public function admin_options() {
 		?>
-		<!-- -->
-		<h3 class="bring-separate-admin-section"><?php esc_html( $this->method_title ); ?></h3>
+		<h3 class="bring-title-admin-section"><?php echo esc_html( $this->method_title ); ?></h3>
 		<p><?php esc_html_e( 'Bring Fraktguiden is a shipping method using Bring.com to calculate rates.', 'bring-fraktguiden-for-woocommerce' ); ?></p>
-		<!-- -->
 
 		<div class="hash-tabs fraktguiden-options" style="display:none;">
 			<article class="tab-container">
@@ -511,58 +512,61 @@ trait Settings {
 
 		<script>
 		jQuery( function( $ ) {
-			// Move settings into tabs
-			$( '.separated_title_tab' ).each( function() {
-				var id = $( this ).attr('id');
+			// Move settings into tabs.
+			$( '.separated_title_tab' ).each( function () {
+				var id = $( this ).attr( 'id' );
 				var text = $( this ).text();
-				// Create a new tab/list item
-				var elem = $('<li>').append( $( '<a>' ).attr( {
+
+				// Create a new tab/list item.
+				var elem = $( '<li>' ).append( $( '<a>' ).attr( {
 					'href': '#' + id
 				} ).text( text ) );
-				// Append it to the tab-navigation
+
+				// Append it to the tab-navigation.
 				$( '.hash-tabs .tab-nav ul' ).append( elem );
 
-				// Create a new tab-panel
+				// Create a new tab-panel.
 				elem = $( '<section>' ).attr( {
 					'id': id
 				} ).hide();
 
 
-				// Find the content for this panel
-				// It's always the next p's and <table>
+				// Find the content for this panel.
+				// It's always the next p's and <table>.
 				var content = $( this ).nextUntil( '.separated_title_tab' );
-				elem.append( $(this), content );
+				elem.append( $( this ), content );
 
-				// Place the panel in the panels container
+				// Place the panel in the panels container.
 				$( '.hash-tabs .tab-pane-container' ).append( elem );
 			} );
 
 			var targeted = location.hash;
 
-			// Make the tabs work
+			// Make the tabs work.
 			$( '.fraktguiden-options' ).hashTabs();
 
 			if ( ! targeted ) {
-				window.scrollTo(0, 0);
-				setTimeout(function() {
-					window.scrollTo(0, 0);
-				}, 1);
+				window.scrollTo( 0, 0 );
+				setTimeout( function () {
+					window.scrollTo( 0, 0 );
+				}, 1 );
 			}
 
 			$( '.fraktguiden-options' ).show();
 
-			var save = $( 'p.submit');
+			var save = $( 'p.submit' );
 			$( '.fraktguiden-options' ).after( save );
-
 		} );
 
 		jQuery( function( $ ) {
 			function toggle_test_mode() {
 				var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
 				$( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
-				// Toggle the menu items for pickup points and bring booking
+
+				// Toggle the menu items for pickup points and bring booking.
 				$( '#5, #6' ).toggle( is_checked );
 			}
+
 			$( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
 			toggle_test_mode();
 		} );
@@ -580,28 +584,25 @@ trait Settings {
 		$api_key_key         = $this->get_field_key( 'mybring_api_key' );
 		$customer_number_key = $this->get_field_key( 'mybring_customer_number' );
 
-		$api_uid         = $_POST[ $api_uid_key ];
-		$api_key         = $_POST[ $api_key_key ];
-		$customer_number = $_POST[ $customer_number_key ];
-
-		$fields = [
-			'api_uid',
-			'api_key',
-			'customer_number',
-		];
+		$api_uid         = filter_input( INPUT_POST, $api_uid_key );
+		$api_key         = filter_input( INPUT_POST, $api_key_key );
+		$customer_number = filter_input( INPUT_POST, $customer_number_key );
 
 		if ( ! $api_uid && ! $api_key && ! $customer_number ) {
 			// No credentials provided.
 			return;
 		}
+
 		if ( ! $api_key ) {
 			$this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden-for-woocommerce' ) );
 			return;
 		}
+
 		if ( ! $api_uid ) {
 			$this->mybring_error( __( 'You need to enter a API User ID', 'bring-fraktguiden-for-woocommerce' ) );
 			return;
 		}
+
 		if ( ! $customer_number ) {
 			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden-for-woocommerce' ) );
 			return;
@@ -615,14 +616,16 @@ trait Settings {
 			return;
 		}
 
-		// Try to atuhenticate.
+		// Try to authenticate.
 		$request           = new \WP_Bring_Request();
 		$params            = $this->create_standard_url_params();
 		$params['product'] = 'SERVICEPAKKE';
 		$params['weight']  = 100;
 		$response          = $request->get( self::SERVICE_URL, $params );
-		if ( 200 != $response->status_code ) {
+
+		if ( 200 !== $response->status_code ) {
 			$this->mybring_error( $response->body );
+
 			return;
 		}
 
@@ -645,12 +648,15 @@ trait Settings {
 				if ( ! is_array( $messages ) ) {
 					$messages = [ $messages ];
 				}
+
 				foreach ( $messages as $message ) {
 					if ( false === strpos( $message, 'does not have access to customer' ) ) {
 						continue;
 					}
+
 					$this->mybring_error( $message );
 					$this->validation_messages = sprintf( '<p class="error-message">%s</p>', $message );
+
 					return;
 				}
 			}
@@ -664,20 +670,24 @@ trait Settings {
 	 * Add MyBring error
 	 *
 	 * @param  string $message Error message.
+	 *
 	 * @return void
 	 */
 	public function mybring_error( $message ) {
 		if ( strpos( $message, 'Authentication failed.' ) === 0 ) {
 			$message = sprintf( '<strong>%s:</strong> %s.', __( 'MyBring Authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( 'Couldn\'t connect to Bring with your API credentials. Please check that they are correct', 'bring-fraktguiden-for-woocommerce' ) );
 		}
+
 		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
 	}
 
 	/**
 	 * Validate services table field
 	 *
-	 * @param string      $key Key.
+	 * @param string      $key   Key.
 	 * @param string|null $value Value.
+	 *
+	 * @return array
 	 */
 	public function validate_services_table_field( $key, $value = null ) {
 		return $this->service_table->validate_services_table_field( $key, $value );
@@ -685,6 +695,8 @@ trait Settings {
 
 	/**
 	 * Generate services table HTML
+	 *
+	 * @return string
 	 */
 	public function generate_services_table_html() {
 		return $this->service_table->generate_services_table_html();
