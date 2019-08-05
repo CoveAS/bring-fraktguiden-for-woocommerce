@@ -1,3 +1,12 @@
+<?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+?>
+
 <tr>
 	<td class="fraktguiden-services-table-col-enabled">
 		<label for="<?php echo esc_attr( $service->id ); ?>">
@@ -18,6 +27,10 @@
 		>
 			<?php echo esc_attr( $service->get_name_by_index( $this->shipping_method->service_name ) ); ?>
 		</label>
+		<?php if ( ! empty( $service->service_data['HelpText'] ) ) : ?>
+		<span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"
+				class="woocommerce-help-tip"></span>
+		<?php endif; ?>
 		<input
 			class="fraktguiden-service-custom-name"
 			style="display: none"

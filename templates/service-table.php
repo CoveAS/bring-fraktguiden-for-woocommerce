@@ -13,7 +13,7 @@
 			<th class="fraktguiden-services-table-col-enabled">
 			<?php esc_html_e( 'Active', 'bring-fraktguiden-for-woocommerce' ); ?>
 			</th>
-			<th class="fraktguiden-services-table-col-service"><?php esc_html_e( 'Service', 'bring-fraktguiden-for-woocommerce' ); ?><span data-tip="<?php echo esc_attr( $service->service_data['HelpText'] ); ?>"class="woocommerce-help-tip"></span></th>
+			<th class="fraktguiden-services-table-col-service"><?php esc_html_e( 'Service', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 			<?php if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) : ?>
 			<th class="fraktguiden-services-table-col-custom-price"><?php esc_html_e( 'Fixed price override', 'bring-fraktguiden-for-woocommerce' ); ?></th>
 			<th class="fraktguiden-services-table-col-customer-number">
