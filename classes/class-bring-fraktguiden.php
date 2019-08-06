@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_Fraktguiden class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_Fraktguiden
+ * @package Bring_Fraktguiden
  */
 
 /**
@@ -59,10 +59,11 @@ class Bring_Fraktguiden {
 		Fraktguiden_Admin_Notices::init();
 
 		// Check the license when PRO version is activated.
-		if ( isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) ) {
-			$license = fraktguiden_license::get_instance();
+		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_pro_enabled' ) ) {
+			$license = Fraktguiden_License::get_instance();
 			$license->check_license();
 		}
+
 		require_once 'common/class-postcode-validation.php';
 		Bring_Fraktguiden\Postcode_Validation::setup();
 	}
@@ -102,7 +103,7 @@ class Bring_Fraktguiden {
 	 * Set up a cron task for license check
 	 */
 	public static function cron_task() {
-		$license = fraktguiden_license::get_instance();
+		$license = Fraktguiden_License::get_instance();
 		$license->check_license();
 	}
 

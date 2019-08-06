@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains WC_Shipping_Method_Bring_Pro class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\WC_Shipping_Method_Bring_Pro
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

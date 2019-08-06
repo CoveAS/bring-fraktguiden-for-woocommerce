@@ -219,7 +219,7 @@ class Bring_Booking_Orders_View {
 	 * @return void
 	 */
 	public static function bulk_send_booking() {
-		$post = filter_input( INPUT_REQUEST, 'post' );
+		$post = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post' );
 
 		if ( empty( $post ) || ! is_array( $post ) ) {
 			return;

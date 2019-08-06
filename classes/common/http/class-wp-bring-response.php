@@ -1,5 +1,13 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
+/**
+ * WP_Bring_Response class
+ */
 class WP_Bring_Response {
 
 	const HTTP_STATUS_OK                   = 200;
@@ -10,22 +18,45 @@ class WP_Bring_Response {
 	const HTTP_STATUS_NOT_FOUND            = 404;
 	const HTTP_STATUS_UNPROCESSABLE_ENTITY = 422;
 
-	/** @var array|WP_Error */
+	/**
+	 * Response
+	 *
+	 * @var array|WP_Error
+	 */
 	private $response;
 
-	/** @var  int */
+	/**
+	 * Status code
+	 *
+	 * @var int
+	 */
 	public $status_code;
-	/** @var  array */
+
+	/**
+	 * Headers
+	 *
+	 * @var array
+	 */
 	public $headers;
-	/** @var  string */
+
+	/**
+	 * Body
+	 *
+	 * @var string
+	 */
 	public $body;
-	/** @var  bool|string */
+
+	/**
+	 * Errors
+	 *
+	 * @var array
+	 */
 	public $errors = [];
 
 	/**
-	 * WC_Bring_Response constructor.
+	 * WC_Bring_Response constructor
 	 *
-	 * @param array|WP_Error $response
+	 * @param array|WP_Error $response Response.
 	 */
 	public function __construct( $response ) {
 		$this->response = $response;
@@ -33,6 +64,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Get status code
+	 *
 	 * @return int
 	 */
 	public function get_status_code() {
@@ -40,6 +73,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Get headers
+	 *
 	 * @return array
 	 */
 	public function get_headers() {
@@ -47,6 +82,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Get body
+	 *
 	 * @return string
 	 */
 	public function get_body() {
@@ -54,6 +91,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Convert to array
+	 *
 	 * @return string
 	 */
 	public function to_array() {
@@ -66,6 +105,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Get errors
+	 *
 	 * @return bool|array
 	 */
 	public function get_errors() {
@@ -73,6 +114,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Check if there are any errors
+	 *
 	 * @return bool
 	 */
 	public function has_errors() {
@@ -80,6 +123,8 @@ class WP_Bring_Response {
 	}
 
 	/**
+	 * Process
+	 *
 	 * @return array
 	 */
 	protected function process() {
@@ -110,7 +155,9 @@ class WP_Bring_Response {
 	}
 
 	/**
-	 * @return array
+	 * Handle response
+	 *
+	 * @return void
 	 */
 	protected function handle_response() {
 		$this->status_code = wp_remote_retrieve_response_code( $this->response );
@@ -119,7 +166,9 @@ class WP_Bring_Response {
 	}
 
 	/**
-	 * @return array
+	 * Handle error response
+	 *
+	 * @return void
 	 */
 	protected function handle_error_response() {
 		$this->handle_response();
@@ -130,8 +179,9 @@ class WP_Bring_Response {
 			}
 		}
 
-		// Add HTTP code name
+		// Add HTTP code name.
 		$class = new ReflectionClass( __CLASS__ );
+
 		foreach ( $class->getConstants() as $key => $val ) {
 			if ( $val == $this->status_code ) {
 				$this->errors[] = 'HTTP ' . $val . ': ' . $key;

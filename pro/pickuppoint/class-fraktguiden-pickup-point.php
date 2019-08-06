@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Fraktguiden_Pickup_Point class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Fraktguiden_Pickup_Point
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -114,7 +114,7 @@ class Fraktguiden_Pickup_Point {
 
 		$make_items_editable = ! $order->order->is_editable();
 
-		if ( isset( $_GET['booking_step'] ) ) {
+		if ( ! is_null( filter_input( INPUT_GET, 'booking_step' ) ) ) {
 			$make_items_editable = false;
 		}
 

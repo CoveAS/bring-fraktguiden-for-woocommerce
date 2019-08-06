@@ -1,10 +1,13 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
-require_once __DIR__ . '/../exceptions/class-packing-exception.php';
 
 /**
  * Class Fraktguiden_Packaging
@@ -13,17 +16,39 @@ require_once __DIR__ . '/../exceptions/class-packing-exception.php';
  */
 class Fraktguiden_Packer {
 
+	/**
+	 * Packages to ship
+	 *
+	 * @var array
+	 */
 	private $packages_to_ship;
+
+	/**
+	 * Popped product boxes
+	 *
+	 * @var array
+	 */
 	private $popped_product_boxes;
+
+	/**
+	 * LAFF pack
+	 *
+	 * @var array
+	 */
 	private $laff_pack;
 
+	/**
+	 * Construct
+	 *
+	 * @return void
+	 */
 	public function __construct() {
 
 		$this->dim_unit    = get_option( 'woocommerce_dimension_unit' );
 		$this->weight_unit = get_option( 'woocommerce_weight_unit' );
 
-		$this->packages_to_ship     = array();
-		$this->popped_product_boxes = array();
+		$this->packages_to_ship     = [];
+		$this->popped_product_boxes = [];
 
 		$this->laff_pack = new \Cloudstek\PhpLaff\Packer();
 	}
@@ -33,15 +58,17 @@ class Fraktguiden_Packer {
 	 *
 	 * @recursive
 	 *
-	 * @param array   $product_boxes Array product boxes dimensions. Each 'box' contains an array of { length, width, height, weight }
-	 * @param boolean $multi_pack
+	 * @param array   $product_boxes Product boxes dimensions. Each box contains an array of { length, width, height, weight }.
+	 * @param boolean $multi_pack Multi pack.
 	 */
 	public function pack( $product_boxes, $multi_pack = false ) {
 		if ( ! $this->laff_pack ) {
 			return;
 		}
+
 		// Calculate total weight of boxes.
 		$total_weight = 0;
+
 		foreach ( $product_boxes as $box ) {
 			$total_weight += floatval( $box['weight'] );
 		}
@@ -71,17 +98,20 @@ class Fraktguiden_Packer {
 		if ( $this->exceeds_max_package_values( $package ) ) {
 			// Move one item to the popped cache and run again.
 			$popped = array_pop( $product_boxes );
+
 			if ( ! empty( $product_boxes ) ) {
-				// There are still boxes in the package
+				// There are still boxes in the package.
 				$this->popped_product_boxes[] = $popped;
 				$this->pack( $product_boxes, true );
+
 				return;
 			}
+
 			// $popped is too big to ship
-			// Pack it without multipack
+			// Pack it without multipack.
 			$this->pack( [ $popped ] );
 		} else {
-			// The package is ok to ship
+			// The package is ok to ship.
 			$this->packages_to_ship[] = $package;
 		}
 
@@ -114,16 +144,20 @@ class Fraktguiden_Packer {
 	/**
 	 * Checks if the given package size qualifies for package splitting.
 	 *
-	 * @param array $container_size Array with container width/height/length/weight.
-	 * @return bool
+	 * @param array       $container_size Array with container width/height/length/weight.
+	 * @param object|null $product WP Product.
+	 *
+	 * @return boolean
 	 */
 	public function exceeds_max_package_values( $container_size, $product = null ) {
 
 		$weight = $container_size['weight_in_grams'];
+
 		if ( $weight >= 35000 ) {
 			if ( $product ) {
 				Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max weight of 35 Kg', $product->get_sku() );
 			}
+
 			return true;
 		}
 
@@ -134,12 +168,15 @@ class Fraktguiden_Packer {
 
 		// Reverse sort the dimensions/L x W x H array.
 		arsort( $dimensions );
+
 		// The longest side should now be on the first element.
 		$longest_side = current( $dimensions );
+
 		if ( $longest_side > 240 ) {
 			if ( $product ) {
 				Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max length of 240 cm', $product->get_sku() );
 			}
+
 			return true;
 		}
 
@@ -161,9 +198,10 @@ class Fraktguiden_Packer {
 	}
 
 	/**
-	 * Return weight in grams.
+	 * Return weight in grams
 	 *
-	 * @param float $weight
+	 * @param float $weight Weight.
+	 *
 	 * @return float
 	 */
 	public function get_weight( $weight ) {
@@ -195,9 +233,10 @@ class Fraktguiden_Packer {
 	}
 
 	/**
-	 * Return dimension in centimeters.
+	 * Return dimension in centimeters
 	 *
-	 * @param float $dimension
+	 * @param float $dimension Dimension.
+	 *
 	 * @return float
 	 */
 	public function get_dimension( $dimension ) {
@@ -225,7 +264,7 @@ class Fraktguiden_Packer {
 		}
 
 		if ( 1 > $dimension ) {
-			// Minimum 1 cm
+			// Minimum 1 cm.
 			$dimension = 1;
 		}
 
@@ -233,9 +272,10 @@ class Fraktguiden_Packer {
 	}
 
 	/**
-	 * Return volume in dm.
+	 * Return volume in dm
 	 *
-	 * @param $dimension
+	 * @param int $dimension Dimension.
+	 *
 	 * @return float
 	 */
 	public function get_volume( $dimension ) {
@@ -262,50 +302,54 @@ class Fraktguiden_Packer {
 		}
 	}
 
+	/**
+	 * Create boxes
+	 *
+	 * @param object $cart WC_Cart.
+	 *
+	 * @return array
+	 */
 	public function create_boxes( $cart ) {
 		// Create an array of 'product boxes' (l,w,h,weight).
-		$product_boxes     = array();
-		$ignore_dimensions = Fraktguiden_Helper::get_option( 'calculate_by_weight' ) == 'yes';
+		$product_boxes     = [];
+		$ignore_dimensions = 'yes' === Fraktguiden_Helper::get_option( 'calculate_by_weight' );
 
-		/** @var WC_Cart $cart */
 		foreach ( $cart as $values ) {
-
-			/** @var WC_Product $product */
-			$product = $values['data'];
+			$product = $values['data']; // WC_Product.
 
 			if ( ! $product->needs_shipping() ) {
 				continue;
 			}
+
 			$quantity = $values['quantity'];
+
 			for ( $i = 0; $i < $quantity; $i++ ) {
-				if ( ! $product->has_dimensions() || $ignore_dimensions ) {
-					// If the product has no dimensions, assume the lowest unit 1x1x1 cm
-					$dims = array( 0, 0, 0 );
-				} else {
-					$dims = array(
+				// Assign product the lowest unit dimensions (1x1x1cm) by default.
+				$dims = [ 0, 0, 0 ];
+
+				if ( $product->has_dimensions() && ! $ignore_dimensions ) {
+					$dims = [
 						$product->get_length(),
 						$product->get_width(),
 						$product->get_height(),
-					);
+					];
 				}
 
 				// Workaround weird Cloudstek\PhpLaff\Packer issue where the dimensions are expected in reverse order.
 				rsort( $dims );
 
-				$box = array(
+				$box = [
 					'length'          => $dims[0],
 					'width'           => $dims[1],
 					'height'          => $dims[2],
 					'weight'          => $product->get_weight(),
 					'weight_in_grams' => $this->get_weight( $product->get_weight() ), // For $packer->exceeds_max_package_values only.
-				);
+				];
 
 				$product_boxes[] = $box;
 			}
 		}
 
 		return $product_boxes;
-
 	}
-
 }

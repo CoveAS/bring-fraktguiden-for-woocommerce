@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_Pick_Up_Point_Enhancements class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_Pick_Up_Point_Enhancements
+ * @package Bring_Fraktguiden
  */
 
 /**

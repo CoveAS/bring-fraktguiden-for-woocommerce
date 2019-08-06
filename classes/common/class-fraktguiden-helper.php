@@ -35,7 +35,7 @@ class Fraktguiden_Helper {
 	 * @return boolean
 	 */
 	public static function valid_license() {
-		$license = fraktguiden_license::get_instance();
+		$license = Fraktguiden_License::get_instance();
 
 		return $license->valid();
 	}
@@ -388,62 +388,71 @@ class Fraktguiden_Helper {
 	public static function get_pro_days_remaining() {
 		$start_date = self::get_option( 'pro_activated_on', false );
 		$time       = intval( $start_date );
+
 		// I made a mistake in the license check here.
 		// Any activation time before now (as of writing) should count as a reset for the 7 day trial.
 		if ( $time < 1522249027 ) {
 			$time = time();
 			self::update_option( 'pro_activated_on', $time );
 		}
+
 		$time = intval( $start_date );
 		$diff = $time + 86400 * 8 - time() - 10;
 		$time = floor( $diff / 86400 );
+
 		return $time;
 	}
 
 	/**
-	 * get_pro_terms_link
+	 * Get PRO terms link
 	 *
-	 * @param  string $text Description
-	 * @return string       Link to BRING PRO page
+	 * @param  string $text Description.
+	 *
+	 * @return string Link to BRING PRO page.
 	 */
-	static function get_pro_terms_link( $text = '' ) {
+	public static function get_pro_terms_link( $text = '' ) {
 		if ( ! $text ) {
 			$text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', 'bring-fraktguiden-for-woocommerce' );
 		}
-		$format = '<a href="%s" target="_blank">%s</a>';
-		return sprintf( $format, 'https://drivdigital.no/bring-fraktguiden-pro-woocommerce', __( $text, 'bring-fraktguiden-for-woocommerce' ) );
+
+		return sprintf( '<a href="%s" target="_blank">%s</a>', 'https://drivdigital.no/bring-fraktguiden-pro-woocommerce', esc_html( $text ) );
 	}
 
 	/**
-	 * [get_pro_description description]
+	 * Get PRO description
 	 *
-	 * @return [type] [description]
+	 * @return string
 	 */
-	static function get_pro_description() {
+	public static function get_pro_description() {
 		if ( self::pro_test_mode() ) {
 			return __( 'Running in test-mode.', 'bring-fraktguiden-for-woocommerce' ) . ' '
 			. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 		}
+
 		if ( self::pro_activated( true ) ) {
 			if ( self::valid_license() ) {
 				return '';
 			}
+
 			$days = self::get_pro_days_remaining();
 
 			if ( $days < 0 ) {
 				return __( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden-for-woocommerce' ) . '<br>'
 				. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 			}
+
+			/* translators: %s: Number of days */
 			return sprintf( __( 'Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) ) . '<br>'
 			. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 		}
+
 		return sprintf(
 			'<ol>
-        <li>%s</li>
-        <li>%s</li>
-        <li>%s</li>
-        <li>%s</li>
-      </ol>',
+				<li>%s</li>
+				<li>%s</li>
+				<li>%s</li>
+				<li>%s</li>
+			</ol>',
 			_x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
 			_x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
 			_x( 'Mybring Booking: Book orders directly from the order page with Mybring', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
@@ -454,36 +463,53 @@ class Fraktguiden_Helper {
 	/**
 	 * Get admin messages
 	 *
-	 * @param  integer $limit
-	 * @param  boolean $refresh
+	 * @param integer $limit   Limit.
+	 * @param boolean $refresh Refresh.
+	 *
 	 * @return array
 	 */
-	static function get_admin_messages( $limit = 0, $refresh = false ) {
+	public static function get_admin_messages( $limit = 0, $refresh = false ) {
 		static $messages = [];
+
 		if ( empty( $messages ) || $refresh ) {
 			$messages = self::get_option( 'admin_messages' );
 		}
+
 		if ( ! is_array( $messages ) ) {
 			$messages = [];
 		}
+
 		if ( $limit > 0 ) {
 			return array_splice( $messages, 0, $limit );
 		}
+
 		return $messages;
 	}
 
 	/**
 	 * Add admin messages
 	 *
-	 * @param ...$arguments Same as sprintf
+	 * @param mixed ...$arguments Same as sprintf.
 	 */
-	static function add_admin_message( ...$arguments ) {
+	public static function add_admin_message( ...$arguments ) {
 		static $messages;
+
 		$message  = call_user_func_array( 'sprintf', $arguments );
 		$messages = self::get_admin_messages();
-		if ( ! in_array( $message, $messages ) ) {
+
+		if ( ! in_array( $message, $messages, true ) ) {
 			$messages[] = $message;
 		}
+
 		self::update_option( 'admin_messages', $messages, false );
+	}
+
+	/**
+	 * Get input request method
+	 *
+	 * @return int
+	 */
+	public static function get_input_request_method() {
+		return constant( 'INPUT_' . filter_input( INPUT_SERVER, 'REQUEST_METHOD' ) );
 	}
 }

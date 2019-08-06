@@ -1,5 +1,11 @@
 <?php
-// From http://country.io/phone.json
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+// Source: http://country.io/phone.json webpage.
 return [
 	'BD' => '880',
 	'BE' => '32',

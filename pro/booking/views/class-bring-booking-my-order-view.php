@@ -1,5 +1,11 @@
 <?php
 /**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+/**
  * Bring Booking - My order view
  */
 class Bring_Booking_My_Order_View {
@@ -10,31 +16,38 @@ class Bring_Booking_My_Order_View {
 	/**
 	 * Display tracking on Order/Mail etc.
 	 *
-	 * @param string   $content
-	 * @param WC_Order $order
+	 * @param string   $content Content.
+	 * @param WC_Order $order   Order.
+	 *
 	 * @return string
 	 */
-	static function order_display_tracking_info( $content, $order ) {
+	public static function order_display_tracking_info( $content, $order ) {
 		$adapter = new Bring_WC_Order_Adapter( $order );
+
 		// The order must be booked.
 		if ( ! $adapter->is_booked() ) {
 			return $content;
 		}
+
 		$consignments = $adapter->get_booking_consignments();
 		$tracking     = false;
+
 		foreach ( $consignments as $consignment ) {
 			$tracking_link = $consignment->get_tracking_link();
 			if ( $tracking_link ) {
 				$tracking = true;
 			}
 		}
+
 		// There has to be tracking to continue.
 		if ( ! $tracking ) {
 			return $content;
 		}
+
 		$content .= '<div class="bring-order-details-booking">';
 		$content .= '<strong>' . __( 'Your tracking number:', 'bring-fraktguiden-for-woocommerce' ) . '</strong>';
 		$content .= '<ul>';
+
 		foreach ( $consignments as $consignment ) {
 			$consignment_number = $consignment->get_consignment_number();
 			$content           .= sprintf(
@@ -43,8 +56,10 @@ class Bring_Booking_My_Order_View {
 				$consignment_number
 			);
 		}
+
 		$content .= '</ul>';
 		$content .= '</div>';
+
 		return $content;
 	}
 }
