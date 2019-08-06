@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_Booking_Common_View class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_Booking_Common_View
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,7 +41,7 @@ class Bring_Booking_Common_View {
 		try {
 			$customers = Bring_Booking_Customer::get_customer_numbers_formatted();
 		} catch ( Exception $e ) {
-			printf( '<p class="error">%s</p>', $e->getMessage() );
+			printf( '<p class="error">%s</p>', esc_html( $e->getMessage() ) );
 			return;
 		}
 

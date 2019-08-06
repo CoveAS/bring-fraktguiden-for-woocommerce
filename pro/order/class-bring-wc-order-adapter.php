@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_WC_Order_Adapter class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_WC_Order_Adapter
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

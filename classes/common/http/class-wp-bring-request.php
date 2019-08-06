@@ -1,5 +1,11 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
+// Load WP_Bring_Response class.
 require_once 'class-wp-bring-response.php';
 
 /**
@@ -22,9 +28,10 @@ class WP_Bring_Request {
 	/**
 	 * Get
 	 *
-	 * @param string $url The url
-	 * @param array  $params Associative array representing url parameters
-	 * @param array  $options WP_HTTP args
+	 * @param string $url     The url.
+	 * @param array  $params  Associative array representing url parameters.
+	 * @param array  $options WP_HTTP args.
+	 *
 	 * @return WP_Bring_Response
 	 */
 	public function get( $url, $params = [], $options = [] ) {
@@ -41,9 +48,10 @@ class WP_Bring_Request {
 	 *
 	 * Looks like this is never used. @TODO: deprecate this function
 	 *
-	 * @param string $url The url
-	 * @param array  $params Associative array representing url parameters
-	 * @param array  $options WP_HTTP args
+	 * @param string $url     The url.
+	 * @param array  $params  Associative array representing url parameters.
+	 * @param array  $options WP_HTTP args.
+	 *
 	 * @return WP_Bring_Response
 	 */
 	public function post( $url, $params = [], $options = [] ) {
@@ -56,8 +64,11 @@ class WP_Bring_Request {
 	}
 
 	/**
-	 * @param string $url
-	 * @param array  $params
+	 * Build URL
+	 *
+	 * @param string $url    URL.
+	 * @param array  $params Parameters.
+	 *
 	 * @return string
 	 */
 	protected function build_url( $url, $params = [] ) {
@@ -70,7 +81,10 @@ class WP_Bring_Request {
 	}
 
 	/**
-	 * @param array $options WP_HTTP args
+	 * Merge options
+	 *
+	 * @param array $options WP_HTTP args.
+	 *
 	 * @return array
 	 */
 	protected function merge_options( $options ) {
@@ -81,20 +95,26 @@ class WP_Bring_Request {
 	 * Get Var
 	 * Get the field value from either the POST or the saved value
 	 *
-	 * @param  string $key
+	 * @param  string $key Key.
+	 *
 	 * @return string
 	 */
 	protected function get_var( $key ) {
-		if ( isset( $_POST[ 'woocommerce_bring_fraktguiden_' . $key ] ) ) {
-			return $_POST[ 'woocommerce_bring_fraktguiden_' . $key ];
+		$woocommerce_bring_fraktguiden = filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_' . $key );
+
+		if ( ! is_null( $woocommerce_bring_fraktguiden ) ) {
+			return $woocommerce_bring_fraktguiden;
 		}
+
 		return Fraktguiden_Helper::get_option( $key );
 	}
 
 	/**
 	 * Add Authentication
 	 *
-	 * @param @array $options
+	 * @param array $options Options.
+	 *
+	 * @return array
 	 */
 	protected function add_authentication( $options ) {
 		$mybring_api_uid = $this->get_var( 'mybring_api_uid' );
@@ -103,26 +123,32 @@ class WP_Bring_Request {
 		if ( $mybring_api_key && $mybring_api_uid ) {
 			$options['headers']['X-MyBring-API-Uid']  = $mybring_api_uid;
 			$options['headers']['X-MyBring-API-Key']  = $mybring_api_key;
-			$options['headers']['X-Bring-Client-URL'] = $_SERVER['HTTP_HOST'];
+			$options['headers']['X-Bring-Client-URL'] = filter_input( INPUT_SERVER, 'HTTP_HOST' );
 		}
+
 		return $options;
 	}
 
 	/**
 	 * Add Customer Number
 	 *
-	 * @param @array $options [description]
+	 * @param string $url URL.
+	 *
+	 * @return string
 	 */
 	protected function add_customer_number( $url ) {
 		$mybring_api_uid = $this->get_var( 'mybring_api_uid' );
 		$mybring_api_key = $this->get_var( 'mybring_api_key' );
 		$customer_number = $this->get_var( 'mybring_customer_number' );
+
 		if ( $mybring_api_key && $mybring_api_uid && $customer_number ) {
-			if ( '?' != substr( $url, -1 ) ) {
+			if ( '?' !== substr( $url, -1 ) ) {
 				$url .= '&';
 			}
+
 			$url .= 'customerNumber=' . $customer_number;
 		}
+
 		return $url;
 	}
 }

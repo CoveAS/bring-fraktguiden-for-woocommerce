@@ -1,31 +1,43 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	die; // Exit if accessed directly
+	die; // Exit if accessed directly.
 }
 
 // Create a menu item for PDF download.
 add_action( 'admin_menu', 'Bring_Booking_Labels::open_pdfs' );
 
+/**
+ * Bring_Booking_Labels class
+ */
 class Bring_Booking_Labels {
 
 	/**
+	 * Create download URL
+	 *
 	 * @param string $order_ids Comma separated string with order ids.
 	 *
 	 * @return string
 	 */
-	static function create_download_url( $order_ids ) {
+	public static function create_download_url( $order_ids ) {
 		if ( is_array( $order_ids ) ) {
 			$order_ids = implode( ',', $order_ids );
 		}
+
 		return admin_url( 'admin.php?page=bring_download&order_ids=' . $order_ids );
 	}
 
 	/**
 	 * Open PDF's
 	 *
-	 * @return [type] [description]
+	 * @return void
 	 */
-	static function open_pdfs() {
+	public static function open_pdfs() {
 		add_dashboard_page( __( 'Print booking label', 'bring-fraktguiden-for-woocommerce' ), null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
 	}
 
@@ -33,11 +45,11 @@ class Bring_Booking_Labels {
 	 * Check if current user role can
 	 * access Bring labels
 	 */
-	static function check_cap() {
+	public static function check_cap() {
 		$current_user = wp_get_current_user();
 
 		// ID 0 is a not an user.
-		if ( $current_user->ID == 0 ) {
+		if ( 0 == $current_user->ID ) {
 			return false;
 		}
 
@@ -51,29 +63,32 @@ class Bring_Booking_Labels {
 			]
 		);
 
-		// Check user against required roles/caps
+		// Check user against required roles/caps.
 		foreach ( $required_caps as $cap ) {
 			if ( user_can( $current_user->ID, $cap ) ) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
 	/**
 	 * Download page
 	 */
-	static function download_page() {
+	public static function download_page() {
 		// Require classes.
 		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-label-collection.php';
 		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-pdf-collection.php';
 		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-zpl-collection.php';
 
-		if ( ! isset( $_GET['order_ids'] ) || $_GET['order_ids'] == '' ) {
+		$order_ids = filter_input( INPUT_GET, 'order_ids' );
+
+		if ( empty( $order_ids ) || ! is_array( $order_ids ) ) {
 			return;
 		}
 
-		// Check if user can see the labels
+		// Check if user can see the labels.
 		if ( ! self::check_cap() ) {
 			wp_die(
 				sprintf(
@@ -84,7 +99,7 @@ class Bring_Booking_Labels {
 			);
 		}
 
-		$order_ids       = explode( ',', $_GET['order_ids'] );
+		$order_ids       = explode( ',', $order_ids );
 		$zpls            = [];
 		$pdfs_to_merge   = [];
 		$orders_to_merge = [];
@@ -94,16 +109,20 @@ class Bring_Booking_Labels {
 
 		foreach ( $order_ids as $order_id ) {
 			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
-			// Get the booking consignments from the adapter
+
+			// Get the booking consignments from the adapter.
 			$consignments = $adapter->get_booking_consignments();
+
 			foreach ( $consignments as $consignment ) {
-				// Get the label file
+				// Get the label file.
 				$file = $consignment->get_label_file();
-				// Try to download the file if it doesn't exist
+
+				// Try to download the file if it doesn't exist.
 				if ( ! $file->exists() && ! $file->download() ) {
 					continue;
 				}
-				if ( 'zpl' == $file->get_ext() ) {
+
+				if ( 'zpl' === $file->get_ext() ) {
 					$zpl_collection->add( $order_id, $file );
 				} else {
 					$pdf_collection->add( $order_id, $file );
@@ -112,24 +131,22 @@ class Bring_Booking_Labels {
 		}
 
 		if ( $pdf_collection->is_empty() && $zpl_collection->is_empty() ) {
-			echo "No files to download";
+			esc_html_e( 'No files to download', 'bring-fraktguiden-for-woocommerce' );
+
 			return;
 		}
-		// If there are more than 1 ZPL file or a combination of zpl and pdf
+
+		// If there are more than 1 ZPL file or a combination of zpl and pdf.
 		if ( ! $pdf_collection->is_empty() && ! $zpl_collection->is_empty() ) {
-			echo '<h3>'.__( 'Downloads', 'bring-fraktguiden-for-woocommerce' ) .'</h3><ul><li>';
-			self::render_download_link( $zpl_collection->get_order_ids(), __( 'Merged ZPL labels', 'bring-fraktguiden-for-woocommerce' ));
+			echo '<h3>' . esc_html( __( 'Downloads', 'bring-fraktguiden-for-woocommerce' ) ) . '</h3><ul><li>';
+			self::render_download_link( $zpl_collection->get_order_ids(), __( 'Merged ZPL labels', 'bring-fraktguiden-for-woocommerce' ) );
 			echo '</li><li>';
 			self::render_download_link( $pdf_collection->get_order_ids(), __( 'Merged PDF labels', 'bring-fraktguiden-for-woocommerce' ) );
 			echo '</li></ul>';
-		}
-
-		else if ( ! $pdf_collection->is_empty() ) {
+		} elseif ( ! $pdf_collection->is_empty() ) {
 			$merge_file = $pdf_collection->merge();
 			static::render_file_content( $merge_file );
-		}
-
-		else if ( ! $zpl_collection->is_empty() ) {
+		} elseif ( ! $zpl_collection->is_empty() ) {
 			$merge_file = $zpl_collection->merge();
 			static::render_file_content( $merge_file );
 		}
@@ -138,23 +155,29 @@ class Bring_Booking_Labels {
 	/**
 	 * Render file content
 	 *
-	 * @param  string $file
+	 * @param string $file File.
 	 */
-	static function render_file_content( $file ) {
+	public static function render_file_content( $file ) {
 		$filename = $file;
+
 		if ( '.' === substr( $filename, -1 ) ) {
 			$filename .= 'pdf';
 		}
+
 		header( 'Content-Length: ' . filesize( $file ) );
+
+		$content_type = 'Content-type: application/octet-stream';
+
 		if ( preg_match( '/\.pdf$/', $filename ) ) {
-			header( 'Content-type: application/pdf' );
-		} else {
-			header( 'Content-type: application/octet-stream' );
+			$content_type = 'Content-type: application/pdf';
 		}
+
+		header( $content_type );
 		header( 'Content-disposition: inline; filename=' . basename( $filename ) );
 		header( 'Expires: 0' );
 		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-		// Workaround for Chrome's inline pdf viewer
+
+		// Workaround for Chrome's inline pdf viewer.
 		ob_clean();
 		flush();
 		readfile( $file );
@@ -164,14 +187,14 @@ class Bring_Booking_Labels {
 	/**
 	 * Render download link
 	 *
-	 * @param  array  $order_ids
-	 * @param  string $name
+	 * @param array  $order_ids Order IDs.
+	 * @param string $name      Name.
 	 */
-	static function render_download_link( $order_ids, $name ) {
+	public static function render_download_link( $order_ids, $name ) {
 		printf(
 			'<li><a href="%s" target="_blank">%s</a></li>',
-			static::create_download_url( $order_ids ),
-			$name
+			esc_attr( static::create_download_url( $order_ids ) ),
+			esc_html( $name )
 		);
 	}
 }
