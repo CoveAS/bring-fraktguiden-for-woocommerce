@@ -67,7 +67,7 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_api_credentials_notice() {
 		$messages   = [];
-		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API user ID/API key is missing.', 'bring-fraktguiden' ) . '</span>';
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden Email / API key is missing.', 'bring-fraktguiden' ) . '</span>';
 		$messages[] = __( 'Bring updated their API. All users now need a Mybring account in order to calculate freight.', 'bring-fraktguiden' );
 		/* translators: %s: Mybring external URL */
 		$messages[] = sprintf( __( 'If you do not have a Mybring account, create your account <a href="%s" target="_blank">here</a>.', 'bring-fraktguiden' ), 'https://www.mybring.com' );
