@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.6.5
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -17,6 +17,8 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no
 
 All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
+
+**Bring Fraktguiden now requires you to have a [Mybring.com](https://mybring.com) account linked to your store. If updating from 1.5, please note that your shipping options won't show until you enter your email and API key into the Bring Fraktguiden settings.**
 
 Please consult the installation section and the changelog section before installing or upgrading.
 
