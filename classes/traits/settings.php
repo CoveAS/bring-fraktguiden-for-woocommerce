@@ -588,23 +588,15 @@ trait Settings {
 		$api_key         = filter_input( INPUT_POST, $api_key_key );
 		$customer_number = filter_input( INPUT_POST, $customer_number_key );
 
-		if ( ! $api_uid && ! $api_key && ! $customer_number ) {
-			// No credentials provided.
+		if ( ! $api_uid || ! $api_key ) {
+			\Fraktguiden_Admin_Notices::add_missing_api_credentials_notice();
 			return;
 		}
 
-		if ( ! $api_key ) {
-			$this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden-for-woocommerce' ) );
-			return;
-		}
+		\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
 
-		if ( ! $api_uid ) {
-			$this->mybring_error( __( 'You need to enter a API User ID', 'bring-fraktguiden-for-woocommerce' ) );
-			return;
-		}
-
-		if ( ! $customer_number ) {
-			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden-for-woocommerce' ) );
+		if ( ! $customer_number && \Fraktguiden_Helper::booking_enabled() ) {
+			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden' ) );
 			return;
 		}
 
