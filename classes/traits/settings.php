@@ -598,7 +598,7 @@ trait Settings {
 			\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
 		}
 
-		if ( ! $customer_number && \Fraktguiden_Helper::booking_enabled() ) {
+		if ( ! $customer_number && \Fraktguiden_Helper::pro_activated() && \Fraktguiden_Helper::booking_enabled() ) {
 			\Fraktguiden_Admin_Notices::add_missing_api_customer_number_notice();
 			$is_credential_missing = true;
 		} else {
