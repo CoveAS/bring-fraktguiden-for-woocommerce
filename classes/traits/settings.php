@@ -441,27 +441,27 @@ trait Settings {
 			 * Mybring API settings
 			 */
 			'mybring_title'                 => [
-				'title'       => __( 'Mybring.com API', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'If you are a Mybring user you can enter your API credentials for additional features. API authentication is required for some services such as "Package in mailbox (PAKKE_I_POSTKASSEN)".', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
+				'description' => __( 'Enter your API credentials. API authentication is required.', 'bring-fraktguiden' ),
 				'class'       => 'separated_title_tab',
 				'type'        => 'title',
 			],
 			'mybring_api_uid'               => [
-				'title'       => __( 'API User ID', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'API user ID', 'bring-fraktguiden' ),
 				'type'        => 'text',
-				'label'       => __( 'API User ID', 'bring-fraktguiden-for-woocommerce' ),
+				'label'       => __( 'API user ID', 'bring-fraktguiden' ),
 				'placeholder' => 'bring@example.com',
 			],
 			'mybring_api_key'               => [
-				'title'       => __( 'API Key', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'API key', 'bring-fraktguiden' ),
 				'type'        => 'text',
-				'label'       => __( 'API Key', 'bring-fraktguiden-for-woocommerce' ),
+				'label'       => __( 'API key', 'bring-fraktguiden' ),
 				'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
 			],
 			'mybring_customer_number'       => [
-				'title'       => __( 'Customer number', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'API customer number', 'bring-fraktguiden' ),
 				'type'        => 'text',
-				'label'       => __( 'Customer number', 'bring-fraktguiden-for-woocommerce' ),
+				'label'       => __( 'API customer number', 'bring-fraktguiden' ),
 				'placeholder' => 'PARCELS_NORWAY-100########',
 			],
 		];
@@ -588,15 +588,23 @@ trait Settings {
 		$api_key         = filter_input( INPUT_POST, $api_key_key );
 		$customer_number = filter_input( INPUT_POST, $customer_number_key );
 
+		$is_credential_missing = false;
+
 		if ( ! $api_uid || ! $api_key ) {
 			\Fraktguiden_Admin_Notices::add_missing_api_credentials_notice();
-			return;
+			$is_credential_missing = true;
+		} else {
+			\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
 		}
 
-		\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
-
 		if ( ! $customer_number && \Fraktguiden_Helper::booking_enabled() ) {
-			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden' ) );
+			\Fraktguiden_Admin_Notices::add_missing_api_customer_number_notice();
+			$is_credential_missing = true;
+		} else {
+			\Fraktguiden_Admin_Notices::remove_missing_api_customer_number_notice();
+		}
+
+		if ( $is_credential_missing ) {
 			return;
 		}
 

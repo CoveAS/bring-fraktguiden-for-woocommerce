@@ -70,11 +70,15 @@ class Fraktguiden_Admin_Notices {
 
 		if ( ! Fraktguiden_Helper::get_option( 'mybring_api_uid' ) || ! Fraktguiden_Helper::get_option( 'mybring_api_key' ) ) {
 			self::add_missing_api_credentials_notice();
-
-			return;
+		} else {
+			self::remove_missing_api_credentials_notice();
 		}
 
-		self::remove_missing_api_credentials_notice();
+		if ( ! Fraktguiden_Helper::get_option( 'mybring_customer_number' ) && Fraktguiden_Helper::booking_enabled() ) {
+			self::add_missing_api_customer_number_notice();
+		} else {
+			self::remove_missing_api_customer_number_notice();
+		}
 	}
 
 	/**
@@ -82,7 +86,7 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_api_credentials_notice() {
 		$messages   = [];
-		$messages[] = '<span style="font-weight: bold;color: red">' . __( 'Bring Fraktguiden API User ID/API Key is missing.', 'bring-fraktguiden' ) . '</span>';
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API user ID/API key is missing.', 'bring-fraktguiden' ) . '</span>';
 		$messages[] = __( 'Bring updated their API. All users now need a Mybring account in order to calculate freight.', 'bring-fraktguiden' );
 		/* translators: %s: Mybring external URL */
 		$messages[] = sprintf( __( 'If you do not have a Mybring account, create your account <a href="%s" target="_blank">here</a>.', 'bring-fraktguiden' ), 'https://www.mybring.com' );
@@ -104,6 +108,32 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function remove_missing_api_credentials_notice() {
 		return self::remove_notice( 'bring_api_uid_or_key_missing' );
+	}
+
+	/**
+	 * Generate missing API customer number notice
+	 */
+	public static function generate_missing_api_customer_number_notice() {
+		$messages   = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden' ) . '</span>';
+		$messages[] = __( 'Mybring Booking requires an API customer number.', 'bring-fraktguiden' );
+		$messages[] = sprintf( __( 'Enter your API customer number <a href="%s">here</a>.', 'bring-fraktguiden' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_mybring_title' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	 * Add missing API customer number notice
+	 */
+	public static function add_missing_api_customer_number_notice() {
+		return self::add_notice( 'bring_api_customer_number_missing', self::generate_missing_api_customer_number_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing API customer number notice
+	 */
+	public static function remove_missing_api_customer_number_notice() {
+		return self::remove_notice( 'bring_api_customer_number_missing' );
 	}
 
 	/**
