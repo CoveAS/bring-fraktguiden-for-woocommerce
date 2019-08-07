@@ -447,9 +447,9 @@ trait Settings {
 				'type'        => 'title',
 			],
 			'mybring_api_uid'               => [
-				'title'       => __( 'API user ID', 'bring-fraktguiden' ),
+				'title'       => __( 'Email', 'bring-fraktguiden' ),
 				'type'        => 'text',
-				'label'       => __( 'API user ID', 'bring-fraktguiden' ),
+				'label'       => __( 'Email', 'bring-fraktguiden' ),
 				'placeholder' => 'bring@example.com',
 			],
 			'mybring_api_key'               => [
