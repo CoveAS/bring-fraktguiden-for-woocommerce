@@ -6,7 +6,7 @@
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/
  *
- * Version:             1.6.0
+ * Version:             1.6.1
  * Requires at least:   4.9.1
  * Tested up to:        5.2.2
  *

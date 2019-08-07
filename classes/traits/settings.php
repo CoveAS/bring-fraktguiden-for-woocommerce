@@ -589,19 +589,14 @@ trait Settings {
 			'customer_number',
 		];
 
-		if ( ! $api_uid && ! $api_key && ! $customer_number ) {
-			// No credentials provided.
+		if ( ! $api_uid || ! $api_key ) {
+			\Fraktguiden_Admin_Notices::add_missing_api_credentials_notice();
 			return;
 		}
-		if ( ! $api_key ) {
-			$this->mybring_error( __( 'You need to enter a API Key', 'bring-fraktguiden' ) );
-			return;
-		}
-		if ( ! $api_uid ) {
-			$this->mybring_error( __( 'You need to enter a API User ID', 'bring-fraktguiden' ) );
-			return;
-		}
-		if ( ! $customer_number ) {
+
+		\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
+
+		if ( ! $customer_number && \Fraktguiden_Helper::booking_enabled() ) {
 			$this->mybring_error( __( 'You need to enter a customer number', 'bring-fraktguiden' ) );
 			return;
 		}

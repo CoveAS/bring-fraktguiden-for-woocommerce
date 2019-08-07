@@ -69,6 +69,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.6.1 =
+
+* Added admin notice for required Mybring API credentials
+
 = 1.6.0 =
 
 * Added support for multiple Customer Number support
