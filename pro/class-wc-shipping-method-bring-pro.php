@@ -226,18 +226,9 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 * @return void
 	 */
 	public function init_form_fields_for_mybring() {
-		$has_api_uid_and_key = Fraktguiden_Helper::get_option( 'mybring_api_uid' ) && Fraktguiden_Helper::get_option( 'mybring_api_key' );
-
-		/* translators: %s: Mybring URL */
-		$description = sprintf( __( 'In order to use Bring Booking you must be registered in <a href="%s" target="_blank">MyBring</a> and have an invoice agreement with Bring', 'bring-fraktguiden' ), 'https://www.mybring.com' );
-
-		if ( ! $has_api_uid_and_key && Fraktguiden_Helper::booking_enabled() ) {
-			$description .= '<br><span style="font-weight: bold;color: red">' . __( 'API User ID or API Key missing!', 'bring-fraktguiden' ) . '</span>';
-		}
-
 		$this->form_fields['booking_title'] = [
 			'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
-			'description' => $description,
+			'description' => '',
 			'type'        => 'title',
 			'class'       => 'separated_title_tab',
 		];
