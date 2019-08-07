@@ -227,7 +227,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 */
 	public function init_form_fields_for_mybring() {
 		$this->form_fields['booking_title'] = [
-			'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
+			'title'       => __( 'Mybring Booking', 'bring-fraktguiden' ),
 			'description' => '',
 			'type'        => 'title',
 			'class'       => 'separated_title_tab',
