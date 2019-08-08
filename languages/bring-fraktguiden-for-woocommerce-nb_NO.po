@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-08 12:38+0200\n"
-"PO-Revision-Date: 2019-08-08 12:45+0200\n"
+"POT-Creation-Date: 2019-08-08 14:02+0200\n"
+"PO-Revision-Date: 2019-08-08 14:02+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -215,8 +215,8 @@ msgid "Loading."
 msgstr "Laster."
 
 #: classes/debug/class-fraktguiden-product-debug.php:81
-msgid "Can this product be shipped with bring?"
-msgstr "Kan dette produktet sendes med bring?"
+msgid "Can this product be shipped with Bring?"
+msgstr "Kan dette produktet sendes med Bring?"
 
 #: classes/debug/class-fraktguiden-product-debug.php:82
 msgid "Here's some information about your product"
@@ -1244,7 +1244,7 @@ msgstr "Last ned fraktbrev"
 msgid "Print booking label"
 msgstr "Skriv ut bestillingsetiketten"
 
-#: pro/booking/views/class-bring-booking-labels.php:96
+#: pro/booking/views/class-bring-booking-labels.php:85
 msgid ""
 "Sorry, Labels are only available for Administrators, Warehouse Teams and "
 "Store Managers. Please contact the administrator to enable access."
@@ -1252,23 +1252,27 @@ msgstr ""
 "Etiketter er kun tilgjengelig for Administratorer, Lagermedarbeidere og "
 "Butikksjefer. Kontakt en administrator for å få tilgang."
 
-#: pro/booking/views/class-bring-booking-labels.php:98
+#: pro/booking/views/class-bring-booking-labels.php:87
 msgid "Insufficient permissions"
 msgstr "Ikke tilstrekkelig tilgang"
 
-#: pro/booking/views/class-bring-booking-labels.php:131
-msgid "No files to download"
-msgstr "Ingen filer å laste ned"
+#: pro/booking/views/class-bring-booking-labels.php:94
+msgid "Order ID is missing."
+msgstr "Ordre-ID mangler."
 
-#: pro/booking/views/class-bring-booking-labels.php:138
+#: pro/booking/views/class-bring-booking-labels.php:133
+msgid "No files to download."
+msgstr "Ingen filer å laste ned."
+
+#: pro/booking/views/class-bring-booking-labels.php:140
 msgid "Downloads"
 msgstr "Nedlastinger"
 
-#: pro/booking/views/class-bring-booking-labels.php:139
+#: pro/booking/views/class-bring-booking-labels.php:141
 msgid "Merged ZPL labels"
 msgstr "Sammenslåtte ZPL etiketter"
 
-#: pro/booking/views/class-bring-booking-labels.php:141
+#: pro/booking/views/class-bring-booking-labels.php:143
 msgid "Merged PDF labels"
 msgstr "Sammenslåtte PDF etiketter"
 

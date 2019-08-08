@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-08 12:45+0200\n"
+"POT-Creation-Date: 2019-08-08 14:02+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1162,29 +1162,33 @@ msgstr ""
 msgid "Print booking label"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:96
+#: pro/booking/views/class-bring-booking-labels.php:85
 msgid ""
 "Sorry, Labels are only available for Administrators, Warehouse Teams and "
 "Store Managers. Please contact the administrator to enable access."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:98
+#: pro/booking/views/class-bring-booking-labels.php:87
 msgid "Insufficient permissions"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:131
-msgid "No files to download"
+#: pro/booking/views/class-bring-booking-labels.php:94
+msgid "Order ID is missing."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:138
+#: pro/booking/views/class-bring-booking-labels.php:133
+msgid "No files to download."
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-labels.php:140
 msgid "Downloads"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:139
+#: pro/booking/views/class-bring-booking-labels.php:141
 msgid "Merged ZPL labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:141
+#: pro/booking/views/class-bring-booking-labels.php:143
 msgid "Merged PDF labels"
 msgstr ""
 
