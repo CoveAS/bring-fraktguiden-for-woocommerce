@@ -77,17 +77,6 @@ class Bring_Booking_Labels {
 	 * Download page
 	 */
 	public static function download_page() {
-		// Require classes.
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-label-collection.php';
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-pdf-collection.php';
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-zpl-collection.php';
-
-		$order_ids = filter_input( INPUT_GET, 'order_ids' );
-
-		if ( empty( $order_ids ) || ! is_array( $order_ids ) ) {
-			return;
-		}
-
 		// Check if user can see the labels.
 		if ( ! self::check_cap() ) {
 			wp_die(
@@ -98,6 +87,19 @@ class Bring_Booking_Labels {
 				esc_html( __( 'Insufficient permissions', 'bring-fraktguiden-for-woocommerce' ) )
 			);
 		}
+
+		$order_ids = filter_input( INPUT_GET, 'order_ids' );
+
+		if ( empty( $order_ids ) ) {
+			esc_html_e( 'Order ID is missing.', 'bring-fraktguiden-for-woocommerce' );
+
+			return;
+		}
+
+		// Require classes.
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-label-collection.php';
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-pdf-collection.php';
+		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-zpl-collection.php';
 
 		$order_ids = explode( ',', $order_ids );
 
@@ -128,7 +130,7 @@ class Bring_Booking_Labels {
 		}
 
 		if ( $pdf_collection->is_empty() && $zpl_collection->is_empty() ) {
-			esc_html_e( 'No files to download', 'bring-fraktguiden-for-woocommerce' );
+			esc_html_e( 'No files to download.', 'bring-fraktguiden-for-woocommerce' );
 
 			return;
 		}

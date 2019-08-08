@@ -94,8 +94,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 == Changelog ==
 
-* Dev - Updated plugin URL to be relevant to Bring Fraktguiden
-* Fix - fixed filter stopping settings link from showing on plugin list
+* Updated translations
+* Updated PDFMerger from 1.0 to 2.0
+* Updated plugin URL to be relevant to Bring Fraktguiden
+* Fixed filter stopping settings link from showing on plugin list
 
 = 1.6.1 =
 
@@ -103,7 +105,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 = 1.6.0 =
 
-* Added support for multiple Customer Number support
+* Added support for multiple Customer Number
 * Added Customer Number selection when booking orders
 * Added additional postcode validation for Norway
 * Added support for additional language translations
