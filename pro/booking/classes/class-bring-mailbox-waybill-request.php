@@ -1,18 +1,40 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Mailbox_Waybill_Request class
+ */
 class Bring_Mailbox_Waybill_Request {
 
+	/**
+	 * Customer number
+	 *
+	 * @var string
+	 */
 	public $customer_number;
+
+	/**
+	 * Package numbers
+	 *
+	 * @var array
+	 */
 	public $package_numbers;
 
 	/**
-	 * @param $customer_number
-	 * @param $package_numbers
+	 * Construct
+	 *
+	 * @param string $customer_number Customer number.
+	 * @param array  $package_numbers Package numbers.
 	 */
-	function __construct( $customer_number, $package_numbers ) {
+	public function __construct( $customer_number, $package_numbers ) {
 		$this->customer_number = $customer_number;
 		$this->package_numbers = array_values( $package_numbers );
 	}
@@ -38,7 +60,7 @@ class Bring_Mailbox_Waybill_Request {
 				'Content-Type' => 'application/json',
 				'Accept'       => 'application/json',
 			],
-			'body'    => json_encode(
+			'body'    => wp_json_encode(
 				[
 					'data' => [
 						'type'       => 'label_orders',
@@ -51,7 +73,9 @@ class Bring_Mailbox_Waybill_Request {
 				]
 			),
 		];
-		$request      = new WP_Bring_Request();
+
+		$request = new WP_Bring_Request();
+
 		return $request->post( $this->get_endpoint_url(), [], $request_data );
 	}
 }

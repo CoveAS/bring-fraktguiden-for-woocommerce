@@ -1,42 +1,49 @@
-<?php foreach ( $waybills as $customer_number => $waybill ) : ?>
-  <h3>
-	<?php echo __( 'Bring order id:' ) . ' ' . $waybill['data']['id']; ?>,
-	<?php echo $customer_number; ?>
-  </h3>
-  <table class="mailbox-waybills">
-	<thead>
-	  <th><?php _e( 'Package number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-	  <th><?php _e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-	  <th><?php _e( 'Information', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-	  <th><?php _e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-	  <th><?php _e( 'Tracking code', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-	</thead>
-	<tbody>
-	<?php foreach ( $waybill['data']['attributes']['packages'] as $package ) : ?>
-	  <tr>
-		<td>
-		  <?php echo $package['packageNumber']; ?>
-		</td>
-		<td>
-		  <?php echo $package['recipientName']; ?><br>
-		  <?php echo $package['streetAddress']; ?><br>
-		  <?php echo $package['postalPlace']; ?>
-		  <?php echo $package['postalCode']; ?>
-		</td>
-		<td>
-		  <?php _e( 'RFID:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo $package['rfid'] ? __( 'Yes' ) : __( 'No' ); ?><br>
-		  <?php _e( 'Weight:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo $package['weight']; ?>
-		</td>
-		<td><?php echo $package['email']; ?><br><?php echo $package['phoneNumber']; ?></td>
-		<td><?php echo $package['shipmentNumber']; ?></td>
-	  </tr>
-	<?php endforeach; ?>
-	</tbody>
+<?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
-  </table>
-  <div style="text-align: right;">
-	<a class="wp-core-ui button button-large button-alt" href="<?php echo( $waybill['data']['attributes']['waybillUri'] ); ?>" target="_blank">
-	  <?php _e( 'Dowload waybill', 'bring-fraktguiden-for-woocommerce' ); ?>  &darr;
-	</a>
-  </div>
+foreach ( $waybills as $customer_number => $waybill ) : ?>
+	<h3>
+		<?php esc_html_e( 'Bring order ID:', 'bring-fraktguiden-for-woocommerce' ) . ' ' . $waybill['data']['id']; ?>,
+		<?php echo esc_html( $customer_number ); ?>
+	</h3>
+	<table class="mailbox-waybills">
+		<thead>
+			<th><?php esc_html_e( 'Package number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Information', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Tracking code', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+		</thead>
+		<tbody>
+			<?php foreach ( $waybill['data']['attributes']['packages'] as $package ) : ?>
+			<tr>
+				<td>
+					<?php echo esc_html( $package['packageNumber'] ); ?>
+				</td>
+				<td>
+					<?php echo esc_html( $package['recipientName'] ); ?><br>
+					<?php echo esc_html( $package['streetAddress'] ); ?><br>
+					<?php echo esc_html( $package['postalPlace'] ); ?>
+					<?php echo esc_html( $package['postalCode'] ); ?>
+				</td>
+				<td>
+					<?php esc_html_e( 'RFID:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo $package['rfid'] ? esc_html( __( 'Yes', 'bring-fraktguiden-for-woocommerce' ) ) : esc_html( __( 'No', 'bring-fraktguiden-for-woocommerce' ) ); ?><br>
+					<?php esc_html_e( 'Weight:', 'bring-fraktguiden-for-woocommerce' ); ?> <?php echo esc_html( $package['weight'] ); ?>
+				</td>
+				<td><?php echo esc_html( $package['email'] ); ?><br><?php echo esc_html( $package['phoneNumber'] ); ?></td>
+				<td><?php echo esc_html( $package['shipmentNumber'] ); ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+
+	</table>
+	<div style="text-align: right;">
+		<a class="wp-core-ui button button-large button-alt" href="<?php echo esc_attr( $waybill['data']['attributes']['waybillUri'] ); ?>" target="_blank">
+			<?php esc_html_e( 'Dowload waybill', 'bring-fraktguiden-for-woocommerce' ); ?>  &darr;
+		</a>
+	</div>
 <?php endforeach; ?>

@@ -49,7 +49,7 @@ class Bring_Booking_Labels {
 		$current_user = wp_get_current_user();
 
 		// ID 0 is a not an user.
-		if ( 0 == $current_user->ID ) {
+		if ( 0 === $current_user->ID ) {
 			return false;
 		}
 
@@ -93,16 +93,13 @@ class Bring_Booking_Labels {
 			wp_die(
 				sprintf(
 					'<div class="notice error"><p><strong>%s</strong></p></div>',
-					__( 'Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access.', 'bring-fraktguiden-for-woocommerce' )
+					esc_html( __( 'Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access.', 'bring-fraktguiden-for-woocommerce' ) )
 				),
-				__( 'Insufficient permissions', 'bring-fraktguiden-for-woocommerce' )
+				esc_html( __( 'Insufficient permissions', 'bring-fraktguiden-for-woocommerce' ) )
 			);
 		}
 
-		$order_ids       = explode( ',', $order_ids );
-		$zpls            = [];
-		$pdfs_to_merge   = [];
-		$orders_to_merge = [];
+		$order_ids = explode( ',', $order_ids );
 
 		$zpl_collection = new Bring_Zpl_Collection();
 		$pdf_collection = new Bring_Pdf_Collection();

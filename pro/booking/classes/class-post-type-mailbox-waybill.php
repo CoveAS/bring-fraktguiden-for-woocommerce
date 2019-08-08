@@ -1,9 +1,21 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
-
+/**
+ * Post_Type_Mailbox_Waybill class
+ */
 class Post_Type_Mailbox_Waybill {
 
-	static function setup() {
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
+	public static function setup() {
 		add_action( 'init', __CLASS__ . '::waybill_capabilities', 0 );
 		add_action( 'init', __CLASS__ . '::waybill_post_type', 1 );
 	}
@@ -12,13 +24,16 @@ class Post_Type_Mailbox_Waybill {
 	 * Waybill capabilities
 	 * Enables administrators and shop managers to edit waybills
 	 */
-	static function waybill_capabilities() {
+	public static function waybill_capabilities() {
 		$allowed_roles = [ 'administrator', 'shop_manager' ];
+
 		foreach ( $allowed_roles as $role_name ) {
 			$role = get_role( $role_name );
+
 			if ( ! $role ) {
 				continue;
 			}
+
 			$role->add_cap( 'edit_mailbox_waybill' );
 			$role->add_cap( 'read_mailbox_waybill' );
 			$role->add_cap( 'edit_mailbox_waybills' );
@@ -32,8 +47,8 @@ class Post_Type_Mailbox_Waybill {
 	/**
 	 * Waybill post type
 	 */
-	static function waybill_post_type() {
-		$labels = array(
+	public static function waybill_post_type() {
+		$labels = [
 			'name'                  => _x( 'Mailbox Waybills', 'Post Type General Name', 'bring-fraktgiden' ),
 			'singular_name'         => _x( 'Mailbox Waybill', 'Post Type Singular Name', 'bring-fraktgiden' ),
 			'menu_name'             => __( 'Mailbox Waybills', 'bring-fraktgiden' ),
@@ -61,13 +76,14 @@ class Post_Type_Mailbox_Waybill {
 			'items_list'            => __( 'Mailbox Waybills list', 'bring-fraktgiden' ),
 			'items_list_navigation' => __( 'Mailbox Waybills list navigation', 'bring-fraktgiden' ),
 			'filter_items_list'     => __( 'Filter Mailbox Waybills list', 'bring-fraktgiden' ),
-		);
-		$args   = array(
+		];
+
+		$args = [
 			'label'               => __( 'Mailbox Waybill', 'bring-fraktgiden' ),
 			'description'         => __( 'Mailbox Waybill information page.', 'bring-fraktgiden' ),
 			'labels'              => $labels,
-			'supports'            => array(),
-			'taxonomies'          => array(),
+			'supports'            => [],
+			'taxonomies'          => [],
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
@@ -91,7 +107,8 @@ class Post_Type_Mailbox_Waybill {
 				'read_private_posts' => 'read_private_mailbox_waybills',
 				'delete_posts'       => 'delete_mailbox_waybills',
 			],
-		);
+		];
+
 		register_post_type( 'mailbox_waybill', $args );
 		remove_post_type_support( 'mailbox_waybill', 'title' );
 		remove_post_type_support( 'mailbox_waybill', 'editor' );

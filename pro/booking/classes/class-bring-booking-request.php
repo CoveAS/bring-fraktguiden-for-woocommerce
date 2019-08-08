@@ -1,57 +1,115 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Booking_Request class
+ */
 class Bring_Booking_Request {
+
 	const SCHEMA_VERSION = 1;
 
 	const BOOKING_URL = 'https://api.bring.com/booking/api/booking';
 
-	/** @var WP_Bring_Request */
+	/**
+	 * Request
+	 *
+	 * @var WP_Bring_Request
+	 */
 	private $request;
-	/** @var bool */
+
+	/**
+	 * Test mode
+	 *
+	 * @var boolean
+	 */
 	private $test_mode;
-	/** @var string */
+
+	/**
+	 * Content type
+	 *
+	 * @var string
+	 */
 	private $content_type;
-	/** @var string */
+
+	/**
+	 * Accept
+	 *
+	 * @var string
+	 */
 	private $accept;
-	/** @var string */
+
+	/**
+	 * API UID
+	 *
+	 * @var string
+	 */
 	private $api_uid;
-	/** @var string */
+
+	/**
+	 * API Key
+	 *
+	 * @var string
+	 */
 	private $api_key;
-	/** @var string */
+
+	/**
+	 * Client URL
+	 *
+	 * @var string
+	 */
 	private $client_url;
-	/** @var array */
+
+	/**
+	 * Data
+	 *
+	 * @var array
+	 */
 	private $data = [];
 
 	/**
 	 * Bring_Booking_Request constructor.
 	 *
-	 * @param WP_Bring_Request $request
+	 * @param WP_Bring_Request $request WP Bring Request.
 	 */
 	public function __construct( $request ) {
 		$this->request = $request;
 	}
 
 	/**
-	 * @param bool $test_mode
+	 * Set test mode
+	 *
+	 * @param boolean $test_mode Test mode.
+	 *
 	 * @return $this
 	 */
 	public function set_test_mode( $test_mode ) {
 		$this->test_mode = $test_mode;
+
 		return $this;
 	}
 
 	/**
-	 * @return bool
+	 * Get test mode
+	 *
+	 * @return boolean
 	 */
 	public function get_test_mode() {
 		return $this->test_mode;
 	}
 
 	/**
-	 * @param string $content_type
+	 * Set content type
+	 *
+	 * @param string $content_type Content type.
+	 *
 	 * @return $this
 	 */
 	public function set_content_type( $content_type ) {
@@ -60,6 +118,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get content type.
+	 *
 	 * @return string
 	 */
 	public function get_content_type() {
@@ -67,7 +127,10 @@ class Bring_Booking_Request {
 	}
 
 	/**
-	 * @param string $accept
+	 * Set accept
+	 *
+	 * @param string $accept Accept.
+	 *
 	 * @return $this
 	 */
 	public function set_accept( $accept ) {
@@ -76,6 +139,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get accept
+	 *
 	 * @return string
 	 */
 	public function get_accept() {
@@ -83,7 +148,10 @@ class Bring_Booking_Request {
 	}
 
 	/**
-	 * @param string $api_uid
+	 * Set API UID
+	 *
+	 * @param string $api_uid API UID.
+	 *
 	 * @return $this
 	 */
 	public function set_api_uid( $api_uid ) {
@@ -92,6 +160,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get API UID
+	 *
 	 * @return string
 	 */
 	public function get_api_uid() {
@@ -99,7 +169,10 @@ class Bring_Booking_Request {
 	}
 
 	/**
-	 * @param string $api_key
+	 * Set API Key
+	 *
+	 * @param string $api_key API Key.
+	 *
 	 * @return $this
 	 */
 	public function set_api_key( $api_key ) {
@@ -108,6 +181,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get API Key
+	 *
 	 * @return string
 	 */
 	public function get_api_key() {
@@ -116,7 +191,10 @@ class Bring_Booking_Request {
 
 
 	/**
-	 * @param string $api_key
+	 * Set data
+	 *
+	 * @param string $data Data.
+	 *
 	 * @return $this
 	 */
 	public function set_data( $data ) {
@@ -125,6 +203,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get data
+	 *
 	 * @return string
 	 */
 	public function get_data() {
@@ -132,7 +212,10 @@ class Bring_Booking_Request {
 	}
 
 	/**
-	 * @param string $client_url
+	 * Set client URL
+	 *
+	 * @param string $client_url Client URL.
+	 *
 	 * @return $this
 	 */
 	public function set_client_url( $client_url ) {
@@ -141,6 +224,8 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Get Client URL
+	 *
 	 * @return string
 	 */
 	public function get_client_url() {
@@ -148,18 +233,23 @@ class Bring_Booking_Request {
 	}
 
 	/**
+	 * Is valid
+	 *
 	 * @todo
-	 * @return bool
+	 *
+	 * @return boolean
 	 */
 	public function is_valid() {
 		return true;
 	}
 
 	/**
+	 * Send
+	 *
 	 * @return WP_Bring_Response
 	 */
 	public function send() {
-		$args     = [
+		$args = [
 			'headers' => [
 				'Content-Type'       => $this->get_content_type(),
 				'Accept'             => $this->get_accept(),
@@ -167,12 +257,15 @@ class Bring_Booking_Request {
 				'X-MyBring-API-Key'  => $this->get_api_key(),
 				'X-Bring-Client-URL' => $this->get_client_url(),
 			],
-			'body'    => json_encode( $this->get_data() ),
+			'body'    => wp_json_encode( $this->get_data() ),
 		];
+
 		$response = $this->request->post( self::BOOKING_URL, array(), $args );
-		if ( $response->get_status_code() != 200 ) {
+
+		if ( 200 !== $response->get_status_code() ) {
 			// var_dump( $response->get_body() );die;
 		}
+
 		return $response;
 	}
 

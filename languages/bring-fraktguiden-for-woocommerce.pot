@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-08 09:22+0200\n"
+"POT-Creation-Date: 2019-08-08 12:45+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -196,7 +196,7 @@ msgid "Loading."
 msgstr ""
 
 #: classes/debug/class-fraktguiden-product-debug.php:81
-msgid "Can this product be shipped with bring?"
+msgid "Can this product be shipped with Bring?"
 msgstr ""
 
 #: classes/debug/class-fraktguiden-product-debug.php:82
@@ -767,7 +767,7 @@ msgid ""
 msgstr ""
 
 #: classes/traits/settings.php:678
-msgid "Mybring Authentication failed"
+msgid "Mybring authentication failed"
 msgstr ""
 
 #: classes/traits/settings.php:678
@@ -797,364 +797,364 @@ msgstr ""
 msgid "Booked with Bring"
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:159
+#: pro/booking/classes/class-bring-booking-file.php:223
 msgid "Please check write permissions for yor uploads folder."
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:160
+#: pro/booking/classes/class-bring-booking-file.php:225
 msgid ""
 "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:161
+#: pro/booking/classes/class-bring-booking-file.php:226
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:78
-#: pro/booking/classes/class-post-type-mailbox-label.php:79
+#: pro/booking/classes/class-post-type-mailbox-label.php:110
+#: pro/booking/classes/class-post-type-mailbox-label.php:111
 msgid "Mailbox labels"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:85
-#: pro/booking/classes/class-post-type-mailbox-label.php:86
+#: pro/booking/classes/class-post-type-mailbox-label.php:118
+#: pro/booking/classes/class-post-type-mailbox-label.php:119
 msgid "Mailbox waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:118
+#: pro/booking/classes/class-post-type-mailbox-label.php:154
 msgctxt "Post Type General Name"
 msgid "Mailbox Labels"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:119
+#: pro/booking/classes/class-post-type-mailbox-label.php:155
 msgctxt "Post Type Singular Name"
 msgid "Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:120
+#: pro/booking/classes/class-post-type-mailbox-label.php:156
 msgid "Mailbox Labels"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:121
-#: pro/booking/classes/class-post-type-mailbox-label.php:147
+#: pro/booking/classes/class-post-type-mailbox-label.php:157
+#: pro/booking/classes/class-post-type-mailbox-label.php:184
 msgid "Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:122
+#: pro/booking/classes/class-post-type-mailbox-label.php:158
 msgid "Mailbox Label Archives"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:123
+#: pro/booking/classes/class-post-type-mailbox-label.php:159
 msgid "Mailbox Label Attributes"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:124
+#: pro/booking/classes/class-post-type-mailbox-label.php:160
 msgid "Parent Mailbox Label:"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:125
+#: pro/booking/classes/class-post-type-mailbox-label.php:161
 msgid "All Mailbox Labels"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:126
+#: pro/booking/classes/class-post-type-mailbox-label.php:162
 msgid "Add New Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:127
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:46
+#: pro/booking/classes/class-post-type-mailbox-label.php:163
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
 msgid "Add New"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:128
+#: pro/booking/classes/class-post-type-mailbox-label.php:164
 msgid "New Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:129
+#: pro/booking/classes/class-post-type-mailbox-label.php:165
 msgid "Edit Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:130
+#: pro/booking/classes/class-post-type-mailbox-label.php:166
 msgid "Update Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:131
+#: pro/booking/classes/class-post-type-mailbox-label.php:167
 msgid "View Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:132
+#: pro/booking/classes/class-post-type-mailbox-label.php:168
 msgid "View Mailbox Labels"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:133
+#: pro/booking/classes/class-post-type-mailbox-label.php:169
 msgid "Search Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:134
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:53
+#: pro/booking/classes/class-post-type-mailbox-label.php:170
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:68
 msgid "Not found"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:135
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:54
+#: pro/booking/classes/class-post-type-mailbox-label.php:171
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:69
 msgid "Not found in Trash"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:136
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:55
+#: pro/booking/classes/class-post-type-mailbox-label.php:172
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:70
 msgid "Featured Image"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:137
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:56
+#: pro/booking/classes/class-post-type-mailbox-label.php:173
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:71
 msgid "Set featured image"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:138
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:57
+#: pro/booking/classes/class-post-type-mailbox-label.php:174
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:72
 msgid "Remove featured image"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:139
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:58
+#: pro/booking/classes/class-post-type-mailbox-label.php:175
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:73
 msgid "Use as featured image"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:140
+#: pro/booking/classes/class-post-type-mailbox-label.php:176
 msgid "Insert into Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:141
+#: pro/booking/classes/class-post-type-mailbox-label.php:177
 msgid "Uploaded to this Mailbox Label"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:142
+#: pro/booking/classes/class-post-type-mailbox-label.php:178
 msgid "Mailbox Labels list"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:143
+#: pro/booking/classes/class-post-type-mailbox-label.php:179
 msgid "Mailbox Labels list navigation"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:144
+#: pro/booking/classes/class-post-type-mailbox-label.php:180
 msgid "Filter Mailbox Labels list"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-label.php:148
+#: pro/booking/classes/class-post-type-mailbox-label.php:185
 msgid "Mailbox Label information page."
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:37
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
 msgctxt "Post Type General Name"
 msgid "Mailbox Waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:38
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:53
 msgctxt "Post Type Singular Name"
 msgid "Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:39
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:54
 msgid "Mailbox Waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:40
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:66
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:55
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:82
 msgid "Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:41
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:56
 msgid "Mailbox Waybill Archives"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:42
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:57
 msgid "Mailbox Waybill Attributes"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:43
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:58
 msgid "Parent Mailbox Waybill:"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:44
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
 msgid "All Mailbox Waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:45
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
 msgid "Add New Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:47
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
 msgid "New Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:48
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
 msgid "Edit Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:49
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:64
 msgid "Update Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:50
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:65
 msgid "View Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:51
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:66
 msgid "View Mailbox Waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:52
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:67
 msgid "Search Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:59
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:74
 msgid "Insert into Mailbox Waybills"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:60
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:75
 msgid "Uploaded to this Mailbox Waybill"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:61
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:76
 msgid "Mailbox Waybills list"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:62
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:77
 msgid "Mailbox Waybills list navigation"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:63
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:78
 msgid "Filter Mailbox Waybills list"
 msgstr ""
 
-#: pro/booking/classes/class-post-type-mailbox-waybill.php:67
+#: pro/booking/classes/class-post-type-mailbox-waybill.php:83
 msgid "Mailbox Waybill information page."
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:18
+#: pro/booking/templates/consignment-table-booking.php:23
 msgid "Earliest Pickup"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:22
+#: pro/booking/templates/consignment-table-booking.php:27
 msgid "Expected delivery"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:26
-#: pro/booking/templates/consignment-table-mailbox.php:27
+#: pro/booking/templates/consignment-table-booking.php:31
+#: pro/booking/templates/consignment-table-mailbox.php:31
 msgid "Labels"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:28
-#: pro/booking/templates/consignment-table-mailbox.php:29
+#: pro/booking/templates/consignment-table-booking.php:33
+#: pro/booking/templates/consignment-table-mailbox.php:33
 msgid "Download"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:32
+#: pro/booking/templates/consignment-table-booking.php:37
 msgid "Tracking"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:34
+#: pro/booking/templates/consignment-table-booking.php:39
 msgid "View"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-booking.php:39
-#: pro/booking/templates/consignment-table-mailbox.php:41
+#: pro/booking/templates/consignment-table-booking.php:44
+#: pro/booking/templates/consignment-table-mailbox.php:44
 #: pro/booking/views/class-bring-booking-order-view.php:251
 msgid "Packages"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-mailbox.php:33
+#: pro/booking/templates/consignment-table-mailbox.php:37
 #: pro/booking/views/class-bring-waybill-view.php:111
 msgid "Waybill"
 msgstr ""
 
-#: pro/booking/templates/consignment-table-mailbox.php:36
+#: pro/booking/templates/consignment-table-mailbox.php:39
 msgid "Create waybill"
 msgstr ""
 
-#: pro/booking/templates/waybills-messages.php:26
+#: pro/booking/templates/waybills-messages.php:35
 msgid "Error"
 msgstr ""
 
-#: pro/booking/templates/waybills-messages.php:35
+#: pro/booking/templates/waybills-messages.php:44
 msgid "Waybill completed"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:36
+#: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:37
+#: pro/booking/templates/waybills-table-labels.php:47
 msgid "Consignment number"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:59
+#: pro/booking/templates/waybills-table-labels.php:66
 msgid "Date"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:63
+#: pro/booking/templates/waybills-table-labels.php:71
 msgid "Download label"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:65
+#: pro/booking/templates/waybills-table-labels.php:74
 #: pro/booking/views/class-bring-booking-order-view.php:350
 msgid "Order ID"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:76
+#: pro/booking/templates/waybills-table-labels.php:86
 msgid "Select all"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:85
+#: pro/booking/templates/waybills-table-labels.php:96
 msgid "Retry booking"
 msgstr ""
 
-#: pro/booking/templates/waybills-table-labels.php:89
+#: pro/booking/templates/waybills-table-labels.php:101
 msgid "No labels available"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:3
-msgid "Bring order id:"
+#: pro/booking/templates/waybills-waybill.php:10
+msgid "Bring order ID:"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:8
+#: pro/booking/templates/waybills-waybill.php:15
 msgid "Package number"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:9
+#: pro/booking/templates/waybills-waybill.php:16
 #: pro/booking/views/class-bring-booking-order-view.php:231
 msgid "Recipient"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:10
+#: pro/booking/templates/waybills-waybill.php:17
 msgid "Information"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:11
+#: pro/booking/templates/waybills-waybill.php:18
 #: pro/booking/views/class-bring-booking-order-view.php:636
 msgid "Contact"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:12
+#: pro/booking/templates/waybills-waybill.php:19
 msgid "Tracking code"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:27
+#: pro/booking/templates/waybills-waybill.php:34
 msgid "RFID:"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:27
+#: pro/booking/templates/waybills-waybill.php:34
 msgid "Yes"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:27
+#: pro/booking/templates/waybills-waybill.php:34
 #: pro/booking/views/class-bring-booking-order-view-common.php:120
 msgid "No"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:28
+#: pro/booking/templates/waybills-waybill.php:35
 msgid "Weight:"
 msgstr ""
 
-#: pro/booking/templates/waybills-waybill.php:39
+#: pro/booking/templates/waybills-waybill.php:46
 msgid "Dowload waybill"
 msgstr ""
 
@@ -1172,19 +1172,19 @@ msgstr ""
 msgid "Insufficient permissions"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:134
+#: pro/booking/views/class-bring-booking-labels.php:131
 msgid "No files to download"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:141
+#: pro/booking/views/class-bring-booking-labels.php:138
 msgid "Downloads"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:142
+#: pro/booking/views/class-bring-booking-labels.php:139
 msgid "Merged ZPL labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:144
+#: pro/booking/views/class-bring-booking-labels.php:141
 msgid "Merged PDF labels"
 msgstr ""
 

@@ -1,8 +1,17 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Mailbox_Consignment_Request class
+ */
 class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 
 	/**
@@ -17,7 +26,8 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 	/**
 	 * Create package
 	 *
-	 * @param  array $package
+	 * @param array $package Package.
+	 *
 	 * @return array
 	 */
 	public function create_package( $package ) {
@@ -29,6 +39,7 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 
 		$phone_number = $order->get_billing_phone();
 		$phone_number = Fraktguiden_Helper::phone_i18n( $phone_number, $order->get_billing_country() );
+
 		return [
 			'rfid'          => $tracking,
 			'weight'        => empty( $package['weightInGrams0'] ) ? $package['weight0'] : $package['weightInGrams0'],
@@ -47,14 +58,18 @@ class Bring_Mailbox_Consignment_Request extends Bring_Consignment_Request {
 	 */
 	public function create_packages() {
 		$order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
+
 		if ( ! $order_items_packages ) {
 			$this->order_update_packages();
 			$order_items_packages = wc_get_order_item_meta( $this->shipping_item->get_id(), '_fraktguiden_packages', false );
 		}
+
 		$packages = [];
+
 		foreach ( $order_items_packages as $package ) {
 			$packages[] = $this->create_package( $package );
 		}
+
 		return $packages;
 	}
 
