@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-06 17:09+0200\n"
+"POT-Creation-Date: 2019-08-08 09:22+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgid "Bring Fraktguiden"
 msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:131
-msgid "Automatically calculate shipping rates using brings fraktguiden api."
+msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:325
@@ -92,6 +92,42 @@ msgid ""
 "update your postcode on the <a href=\"%s\">settings page.</a>"
 msgstr ""
 
+#: classes/common/class-fraktguiden-admin-notices.php:89
+msgid "Bring Fraktguiden Email / API key is missing."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:90
+msgid ""
+"Bring updated their API. All users now need a Mybring account in order to "
+"calculate freight."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:92
+#, php-format
+msgid ""
+"If you do not have a Mybring account, create your account <a href=\"%s\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:94
+#, php-format
+msgid ""
+"Already have an account? Enter your Mybring details <a href=\"%s\">here</a>."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:118
+msgid "Bring Fraktguiden API Customer Number is missing."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:119
+msgid "Mybring Booking requires an API customer number."
+msgstr ""
+
+#: classes/common/class-fraktguiden-admin-notices.php:121
+#, php-format
+msgid "Enter your API customer number <a href=\"%s\">here</a>."
+msgstr ""
+
 #: classes/common/class-fraktguiden-helper.php:415
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
@@ -135,7 +171,7 @@ msgstr ""
 
 #: classes/common/class-fraktguiden-kco-support.php:158
 #: pro/booking/views/class-bring-booking-order-view.php:626
-#: pro/class-wc-shipping-method-bring-pro.php:320
+#: pro/class-wc-shipping-method-bring-pro.php:311
 msgid "Country"
 msgstr ""
 
@@ -185,7 +221,7 @@ msgstr ""
 
 #: classes/debug/class-fraktguiden-product-debug.php:301
 #: pro/booking/views/class-bring-booking-order-view.php:625
-#: pro/class-wc-shipping-method-bring-pro.php:315
+#: pro/class-wc-shipping-method-bring-pro.php:306
 msgid "City"
 msgstr ""
 
@@ -236,7 +272,7 @@ msgstr ""
 
 #: classes/traits/settings.php:78
 #: pro/class-wc-shipping-method-bring-pro.php:205
-#: pro/class-wc-shipping-method-bring-pro.php:246
+#: pro/class-wc-shipping-method-bring-pro.php:237
 msgid "Enable"
 msgstr ""
 
@@ -695,23 +731,21 @@ msgid "Mybring.com API"
 msgstr ""
 
 #: classes/traits/settings.php:445
-msgid ""
-"If you are a Mybring user you can enter your API credentials for additional "
-"features. API authentication is required for some services such as \"Package "
-"in mailbox (PAKKE_I_POSTKASSEN)\"."
+msgid "Enter your API credentials. API authentication is required."
 msgstr ""
 
 #: classes/traits/settings.php:450 classes/traits/settings.php:452
-msgid "API User ID"
+#: pro/booking/views/class-bring-booking-order-view.php:641
+#: pro/class-wc-shipping-method-bring-pro.php:337
+msgid "Email"
 msgstr ""
 
 #: classes/traits/settings.php:456 classes/traits/settings.php:458
-msgid "API Key"
+msgid "API key"
 msgstr ""
 
 #: classes/traits/settings.php:462 classes/traits/settings.php:464
-#: pro/booking/templates/waybills-table-labels.php:36
-msgid "Customer number"
+msgid "API customer number"
 msgstr ""
 
 #: classes/traits/settings.php:493
@@ -730,18 +764,6 @@ msgid ""
 "be enabled. Please enable them on the <a href=\"%1$s\">Catalog tab</a>. <br/"
 "> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
 "currency. Choose that from the <a href=\"%2$s\">General tab</a>"
-msgstr ""
-
-#: classes/traits/settings.php:597
-msgid "You need to enter a API Key"
-msgstr ""
-
-#: classes/traits/settings.php:602
-msgid "You need to enter a API User ID"
-msgstr ""
-
-#: classes/traits/settings.php:607
-msgid "You need to enter a customer number"
 msgstr ""
 
 #: classes/traits/settings.php:678
@@ -1056,6 +1078,10 @@ msgstr ""
 msgid "Waybill completed"
 msgstr ""
 
+#: pro/booking/templates/waybills-table-labels.php:36
+msgid "Customer number"
+msgstr ""
+
 #: pro/booking/templates/waybills-table-labels.php:37
 msgid "Consignment number"
 msgstr ""
@@ -1183,7 +1209,7 @@ msgid "Submit Consignment"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:89
-#: pro/class-wc-shipping-method-bring-pro.php:253
+#: pro/class-wc-shipping-method-bring-pro.php:244
 msgid "Test mode"
 msgstr ""
 
@@ -1328,33 +1354,28 @@ msgid "Name"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:622
-#: pro/class-wc-shipping-method-bring-pro.php:298
+#: pro/class-wc-shipping-method-bring-pro.php:289
 msgid "Street Address 1"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:623
-#: pro/class-wc-shipping-method-bring-pro.php:304
+#: pro/class-wc-shipping-method-bring-pro.php:295
 msgid "Street Address 2"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:624
-#: pro/class-wc-shipping-method-bring-pro.php:310
+#: pro/class-wc-shipping-method-bring-pro.php:301
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:211
 msgid "Postcode"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:628
-#: pro/class-wc-shipping-method-bring-pro.php:329
+#: pro/class-wc-shipping-method-bring-pro.php:320
 msgid "Reference"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:631
 msgid "Additional Address Info"
-msgstr ""
-
-#: pro/booking/views/class-bring-booking-order-view.php:641
-#: pro/class-wc-shipping-method-bring-pro.php:346
-msgid "Email"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:642
@@ -1386,7 +1407,7 @@ msgid "Booking"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-orders-view.php:75
-#: pro/class-wc-shipping-method-bring-pro.php:239
+#: pro/class-wc-shipping-method-bring-pro.php:230
 msgid "Mybring Booking"
 msgstr ""
 
@@ -1453,72 +1474,61 @@ msgstr ""
 msgid "If set, it will be the maximum number of pickup points shown"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:232
-#, php-format
-msgid ""
-"In order to use Bring Booking you must be registered in <a href=\"%s\" "
-"target=\"_blank\">Mybring</a> and have an invoice agreement with Bring"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:235
-msgid "API User ID or API Key missing!"
-msgstr ""
-
-#: pro/class-wc-shipping-method-bring-pro.php:248
+#: pro/class-wc-shipping-method-bring-pro.php:239
 msgid "Enable Mybring booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:255
+#: pro/class-wc-shipping-method-bring-pro.php:246
 msgid "Enable test mode for Mybring booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:256
+#: pro/class-wc-shipping-method-bring-pro.php:247
 msgid "When enabled, Bookings will not be invoiced or fulfilled by Bring"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:262
+#: pro/class-wc-shipping-method-bring-pro.php:253
 msgid "After booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:263
+#: pro/class-wc-shipping-method-bring-pro.php:254
 msgid "Once an order is booked, it will be assigned the following status:"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:268
+#: pro/class-wc-shipping-method-bring-pro.php:259
 msgid "Order status after booking"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:270
+#: pro/class-wc-shipping-method-bring-pro.php:261
 msgid "Order status will be automatically set when successfully booked"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:273
+#: pro/class-wc-shipping-method-bring-pro.php:264
 msgid "None"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:286
+#: pro/class-wc-shipping-method-bring-pro.php:277
 msgid "Store address and contact information"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:287
+#: pro/class-wc-shipping-method-bring-pro.php:278
 msgid ""
 "This address will be your 'from' address and will populate the details given "
 "to Bring during the booking process"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:292
+#: pro/class-wc-shipping-method-bring-pro.php:283
 msgid "Store Name"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:332
+#: pro/class-wc-shipping-method-bring-pro.php:323
 msgid "Specify shipper or consignee reference. Available macros: {order_id}"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:336
+#: pro/class-wc-shipping-method-bring-pro.php:327
 msgid "Contact Person"
 msgstr ""
 
-#: pro/class-wc-shipping-method-bring-pro.php:341
+#: pro/class-wc-shipping-method-bring-pro.php:332
 msgid "Phone"
 msgstr ""
 

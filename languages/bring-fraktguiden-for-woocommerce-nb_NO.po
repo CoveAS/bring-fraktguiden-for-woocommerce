@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-06 17:09+0200\n"
-"PO-Revision-Date: 2019-08-06 17:11+0200\n"
+"POT-Creation-Date: 2019-08-08 09:22+0200\n"
+"PO-Revision-Date: 2019-08-08 09:23+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -39,7 +39,7 @@ msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
 #: classes/class-wc-shipping-method-bring.php:131
-msgid "Automatically calculate shipping rates using brings fraktguiden api."
+msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
 
 #: classes/class-wc-shipping-method-bring.php:325
@@ -93,7 +93,49 @@ msgid ""
 "update your postcode on the <a href=\"%s\">settings page.</a>"
 msgstr ""
 "Bring krever postnummer for å vise hvor pakkene blir sendt fra. Vennligst "
-"oppdater ditt postnummer på <a href=“%s”>innstillingssiden.</a>"
+"oppdater ditt postnummer på <a href="%s">innstillingssiden.</a>"
+
+#: classes/common/class-fraktguiden-admin-notices.php:89
+msgid "Bring Fraktguiden Email / API key is missing."
+msgstr "Bring Fraktguiden epost / API Key mangler."
+
+#: classes/common/class-fraktguiden-admin-notices.php:90
+msgid ""
+"Bring updated their API. All users now need a Mybring account in order to "
+"calculate freight."
+msgstr ""
+"Bring har oppdatert sitt API. Alle brukere må ha en Mybring-konto for å "
+"kalkulere frakt."
+
+#: classes/common/class-fraktguiden-admin-notices.php:92
+#, php-format
+msgid ""
+"If you do not have a Mybring account, create your account <a href=\"%s\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+"Hvis du ikke har en Mybring-konto, lag en konto <a href=\"%s\" target="
+"\"_blank\">her</a>."
+
+#: classes/common/class-fraktguiden-admin-notices.php:94
+#, php-format
+msgid ""
+"Already have an account? Enter your Mybring details <a href=\"%s\">here</a>."
+msgstr ""
+"Har du allerede en konto? Fyll inn dine Mybring-detaljer <a href=\"%s\">her</"
+"a>."
+
+#: classes/common/class-fraktguiden-admin-notices.php:118
+msgid "Bring Fraktguiden API Customer Number is missing."
+msgstr "Bring Fraktguiden API-kundenummer mangler."
+
+#: classes/common/class-fraktguiden-admin-notices.php:119
+msgid "Mybring Booking requires an API customer number."
+msgstr "Mybring Booking krever API-kundenummer."
+
+#: classes/common/class-fraktguiden-admin-notices.php:121
+#, php-format
+msgid "Enter your API customer number <a href=\"%s\">here</a>."
+msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
 
 #: classes/common/class-fraktguiden-helper.php:415
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
@@ -148,7 +190,7 @@ msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
 
 #: classes/common/class-fraktguiden-kco-support.php:158
 #: pro/booking/views/class-bring-booking-order-view.php:626
-#: pro/class-wc-shipping-method-bring-pro.php:320
+#: pro/class-wc-shipping-method-bring-pro.php:311
 msgid "Country"
 msgstr "Land"
 
@@ -198,7 +240,7 @@ msgstr "Postnummer"
 
 #: classes/debug/class-fraktguiden-product-debug.php:301
 #: pro/booking/views/class-bring-booking-order-view.php:625
-#: pro/class-wc-shipping-method-bring-pro.php:315
+#: pro/class-wc-shipping-method-bring-pro.php:306
 msgid "City"
 msgstr "By"
 
@@ -249,7 +291,7 @@ msgstr "Bruk PRO i testmodus. Brukes til utvikling"
 
 #: classes/traits/settings.php:78
 #: pro/class-wc-shipping-method-bring-pro.php:205
-#: pro/class-wc-shipping-method-bring-pro.php:246
+#: pro/class-wc-shipping-method-bring-pro.php:237
 msgid "Enable"
 msgstr "Aktiver"
 
@@ -759,27 +801,22 @@ msgid "Mybring.com API"
 msgstr "Mybring.com API"
 
 #: classes/traits/settings.php:445
-msgid ""
-"If you are a Mybring user you can enter your API credentials for additional "
-"features. API authentication is required for some services such as \"Package "
-"in mailbox (PAKKE_I_POSTKASSEN)\"."
-msgstr ""
-"Hvis du er en Mybring bruker, kan du legge inn din API legitimasjon for enda "
-"flere funksjoner. API autentisering er pålagt for noen tjenester som «Pakke "
-"i Postkassen (PAKKE_I_POSTKASSEN)»."
+msgid "Enter your API credentials. API authentication is required."
+msgstr "Legg inn din API legitimasjon. API autentisering er pålagt."
 
 #: classes/traits/settings.php:450 classes/traits/settings.php:452
-msgid "API User ID"
-msgstr "API User ID"
+#: pro/booking/views/class-bring-booking-order-view.php:641
+#: pro/class-wc-shipping-method-bring-pro.php:337
+msgid "Email"
+msgstr "Epost"
 
 #: classes/traits/settings.php:456 classes/traits/settings.php:458
-msgid "API Key"
-msgstr "API Key"
+msgid "API key"
+msgstr "API-nøkkel"
 
 #: classes/traits/settings.php:462 classes/traits/settings.php:464
-#: pro/booking/templates/waybills-table-labels.php:36
-msgid "Customer number"
-msgstr "Kundenummer"
+msgid "API customer number"
+msgstr "API-kundenummer"
 
 #: classes/traits/settings.php:493
 msgid ""
@@ -803,18 +840,6 @@ msgstr ""
 "Sørg for at dette er satt opp under <a href=\"%s\">Generellt fanen</a>. <br/"
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
-
-#: classes/traits/settings.php:597
-msgid "You need to enter a API Key"
-msgstr "Du må angi en API-nøkkel"
-
-#: classes/traits/settings.php:602
-msgid "You need to enter a API User ID"
-msgstr "Du må fylle inn en API bruker ID"
-
-#: classes/traits/settings.php:607
-msgid "You need to enter a customer number"
-msgstr "Du må fylle inn et kundenummer"
 
 #: classes/traits/settings.php:678
 msgid "Mybring Authentication failed"
@@ -1135,6 +1160,10 @@ msgstr "Feil"
 msgid "Waybill completed"
 msgstr "Fraktbrev fullført"
 
+#: pro/booking/templates/waybills-table-labels.php:36
+msgid "Customer number"
+msgstr "Kundenummer"
+
 #: pro/booking/templates/waybills-table-labels.php:37
 msgid "Consignment number"
 msgstr "Sendingsnummer"
@@ -1264,7 +1293,7 @@ msgid "Submit Consignment"
 msgstr "Send"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:89
-#: pro/class-wc-shipping-method-bring-pro.php:253
+#: pro/class-wc-shipping-method-bring-pro.php:244
 msgid "Test mode"
 msgstr "Test modus"
 
@@ -1409,34 +1438,29 @@ msgid "Name"
 msgstr "Navn"
 
 #: pro/booking/views/class-bring-booking-order-view.php:622
-#: pro/class-wc-shipping-method-bring-pro.php:298
+#: pro/class-wc-shipping-method-bring-pro.php:289
 msgid "Street Address 1"
 msgstr "Gateaddress 1"
 
 #: pro/booking/views/class-bring-booking-order-view.php:623
-#: pro/class-wc-shipping-method-bring-pro.php:304
+#: pro/class-wc-shipping-method-bring-pro.php:295
 msgid "Street Address 2"
 msgstr "Gateadresse 2"
 
 #: pro/booking/views/class-bring-booking-order-view.php:624
-#: pro/class-wc-shipping-method-bring-pro.php:310
+#: pro/class-wc-shipping-method-bring-pro.php:301
 #: pro/pickuppoint/class-fraktguiden-pickup-point.php:211
 msgid "Postcode"
 msgstr "Postnummer"
 
 #: pro/booking/views/class-bring-booking-order-view.php:628
-#: pro/class-wc-shipping-method-bring-pro.php:329
+#: pro/class-wc-shipping-method-bring-pro.php:320
 msgid "Reference"
 msgstr "Referanse"
 
 #: pro/booking/views/class-bring-booking-order-view.php:631
 msgid "Additional Address Info"
 msgstr "Ekstra adresseinformasjon"
-
-#: pro/booking/views/class-bring-booking-order-view.php:641
-#: pro/class-wc-shipping-method-bring-pro.php:346
-msgid "Email"
-msgstr "E-post"
 
 #: pro/booking/views/class-bring-booking-order-view.php:642
 msgid "Phone Number"
@@ -1467,7 +1491,7 @@ msgid "Booking"
 msgstr "Booking"
 
 #: pro/booking/views/class-bring-booking-orders-view.php:75
-#: pro/class-wc-shipping-method-bring-pro.php:239
+#: pro/class-wc-shipping-method-bring-pro.php:230
 msgid "Mybring Booking"
 msgstr "Mybring Booking"
 
@@ -1537,56 +1561,43 @@ msgstr "La være tom for ingen grense"
 msgid "If set, it will be the maximum number of pickup points shown"
 msgstr "Hvis det er satt, blir det maksimalt antall hentested vist"
 
-#: pro/class-wc-shipping-method-bring-pro.php:232
-#, php-format
-msgid ""
-"In order to use Bring Booking you must be registered in <a href=\"%s\" "
-"target=\"_blank\">Mybring</a> and have an invoice agreement with Bring"
-msgstr ""
-"For å bruke Bring Booking må du være registrert hos <a href=\"%s\" target="
-"\"_blank\">Mybring</a> og ha en faktureringsavtale med Bring"
-
-#: pro/class-wc-shipping-method-bring-pro.php:235
-msgid "API User ID or API Key missing!"
-msgstr "API User ID / API Key mangler!"
-
-#: pro/class-wc-shipping-method-bring-pro.php:248
+#: pro/class-wc-shipping-method-bring-pro.php:239
 msgid "Enable Mybring booking"
 msgstr "Aktiver Mybring Booking"
 
-#: pro/class-wc-shipping-method-bring-pro.php:255
+#: pro/class-wc-shipping-method-bring-pro.php:246
 msgid "Enable test mode for Mybring booking"
 msgstr "Aktiver testmodus for Mybring booking"
 
-#: pro/class-wc-shipping-method-bring-pro.php:256
+#: pro/class-wc-shipping-method-bring-pro.php:247
 msgid "When enabled, Bookings will not be invoiced or fulfilled by Bring"
 msgstr "Når aktivert, blir bestillinger ikke fakturert eller oppfylt av Bring"
 
-#: pro/class-wc-shipping-method-bring-pro.php:262
+#: pro/class-wc-shipping-method-bring-pro.php:253
 msgid "After booking"
 msgstr "Etter booking"
 
-#: pro/class-wc-shipping-method-bring-pro.php:263
+#: pro/class-wc-shipping-method-bring-pro.php:254
 msgid "Once an order is booked, it will be assigned the following status:"
 msgstr "Når en bestilling er bestilt, blir den tildelt følgende status:"
 
-#: pro/class-wc-shipping-method-bring-pro.php:268
+#: pro/class-wc-shipping-method-bring-pro.php:259
 msgid "Order status after booking"
 msgstr "Bestillingsstatus etter reservering"
 
-#: pro/class-wc-shipping-method-bring-pro.php:270
+#: pro/class-wc-shipping-method-bring-pro.php:261
 msgid "Order status will be automatically set when successfully booked"
 msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
 
-#: pro/class-wc-shipping-method-bring-pro.php:273
+#: pro/class-wc-shipping-method-bring-pro.php:264
 msgid "None"
 msgstr "Ingen"
 
-#: pro/class-wc-shipping-method-bring-pro.php:286
+#: pro/class-wc-shipping-method-bring-pro.php:277
 msgid "Store address and contact information"
 msgstr "Butikkadresse og kontaktinformasjon"
 
-#: pro/class-wc-shipping-method-bring-pro.php:287
+#: pro/class-wc-shipping-method-bring-pro.php:278
 msgid ""
 "This address will be your 'from' address and will populate the details given "
 "to Bring during the booking process"
@@ -1594,20 +1605,20 @@ msgstr ""
 "Denne adressen vil være din fra-adresse og vil fylle ut disse detaljene gitt "
 "til Bring under bookingprosessen"
 
-#: pro/class-wc-shipping-method-bring-pro.php:292
+#: pro/class-wc-shipping-method-bring-pro.php:283
 msgid "Store Name"
 msgstr "Butikknavn"
 
-#: pro/class-wc-shipping-method-bring-pro.php:332
+#: pro/class-wc-shipping-method-bring-pro.php:323
 msgid "Specify shipper or consignee reference. Available macros: {order_id}"
 msgstr ""
 "Angi avsender eller mottakerreferanse. Tilgjengelige makroer: {order_id}"
 
-#: pro/class-wc-shipping-method-bring-pro.php:336
+#: pro/class-wc-shipping-method-bring-pro.php:327
 msgid "Contact Person"
 msgstr "Kontaktperson"
 
-#: pro/class-wc-shipping-method-bring-pro.php:341
+#: pro/class-wc-shipping-method-bring-pro.php:332
 msgid "Phone"
 msgstr "Telefonnummer"
 
