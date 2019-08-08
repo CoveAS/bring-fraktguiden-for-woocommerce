@@ -117,6 +117,7 @@ class Fraktguiden_Admin_Notices {
 		$messages   = [];
 		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = __( 'Mybring Booking requires an API customer number.', 'bring-fraktguiden-for-woocommerce' );
+		/* translators: %s: Mybring settings tab URL */
 		$messages[] = sprintf( __( 'Enter your API customer number <a href="%s">here</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_mybring_title' );
 
 		return implode( '<br>', $messages );

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-07 17:09+0200\n"
-"PO-Revision-Date: 2019-08-07 17:10+0200\n"
+"POT-Creation-Date: 2019-08-08 09:22+0200\n"
+"PO-Revision-Date: 2019-08-08 09:23+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -39,7 +39,7 @@ msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
 #: classes/class-wc-shipping-method-bring.php:131
-msgid "Automatically calculate shipping rates using brings fraktguiden api."
+msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
 
 #: classes/class-wc-shipping-method-bring.php:325
@@ -93,7 +93,7 @@ msgid ""
 "update your postcode on the <a href=\"%s\">settings page.</a>"
 msgstr ""
 "Bring krever postnummer for å vise hvor pakkene blir sendt fra. Vennligst "
-"oppdater ditt postnummer på <a href=“%s”>innstillingssiden.</a>"
+"oppdater ditt postnummer på <a href="%s">innstillingssiden.</a>"
 
 #: classes/common/class-fraktguiden-admin-notices.php:89
 msgid "Bring Fraktguiden Email / API key is missing."
@@ -132,10 +132,10 @@ msgstr "Bring Fraktguiden API-kundenummer mangler."
 msgid "Mybring Booking requires an API customer number."
 msgstr "Mybring Booking krever API-kundenummer."
 
-#: classes/common/class-fraktguiden-admin-notices.php:120
+#: classes/common/class-fraktguiden-admin-notices.php:121
 #, php-format
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
-msgstr "Fyll inn din API-kundenummer <a href=\"%s\">her</a>."
+msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
 
 #: classes/common/class-fraktguiden-helper.php:415
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
