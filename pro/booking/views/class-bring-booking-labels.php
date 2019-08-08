@@ -84,7 +84,7 @@ class Bring_Booking_Labels {
 
 		$order_ids = filter_input( INPUT_GET, 'order_ids' );
 
-		if ( empty( $order_ids ) || ! is_array( $order_ids ) ) {
+		if ( empty( $order_ids ) ) {
 			return;
 		}
 
