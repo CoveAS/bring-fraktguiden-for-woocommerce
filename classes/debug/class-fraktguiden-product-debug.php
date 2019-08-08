@@ -78,7 +78,7 @@ class Fraktguiden_Product_Debug {
 		?>
 		<div class="bring-debug">
 			<div class="test-plane">
-				<h4><?php esc_html_e( 'Can this product be shipped with bring?', 'bring-fraktguiden-for-woocommerce' ); ?></h4>
+				<h4><?php esc_html_e( 'Can this product be shipped with Bring?', 'bring-fraktguiden-for-woocommerce' ); ?></h4>
 				<p><?php esc_html_e( "Here's some information about your product", 'bring-fraktguiden-for-woocommerce' ); ?></p>
 				<?php self::render(); ?>
 				<h4><?php esc_html_e( 'API response', 'bring-fraktguiden-for-woocommerce' ); ?></h4>

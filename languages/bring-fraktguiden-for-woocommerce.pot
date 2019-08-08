@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-08 12:17+0200\n"
+"POT-Creation-Date: 2019-08-08 12:45+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -196,7 +196,7 @@ msgid "Loading."
 msgstr ""
 
 #: classes/debug/class-fraktguiden-product-debug.php:81
-msgid "Can this product be shipped with bring?"
+msgid "Can this product be shipped with Bring?"
 msgstr ""
 
 #: classes/debug/class-fraktguiden-product-debug.php:82
@@ -767,7 +767,7 @@ msgid ""
 msgstr ""
 
 #: classes/traits/settings.php:678
-msgid "Mybring Authentication failed"
+msgid "Mybring authentication failed"
 msgstr ""
 
 #: classes/traits/settings.php:678

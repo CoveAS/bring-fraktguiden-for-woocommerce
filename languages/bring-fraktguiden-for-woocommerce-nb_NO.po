@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-08 12:17+0200\n"
-"PO-Revision-Date: 2019-08-08 12:18+0200\n"
+"POT-Creation-Date: 2019-08-08 12:38+0200\n"
+"PO-Revision-Date: 2019-08-08 12:45+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -97,7 +97,7 @@ msgstr ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:89
 msgid "Bring Fraktguiden Email / API key is missing."
-msgstr "Bring Fraktguiden Epost / API Key mangler."
+msgstr "Bring Fraktguiden Epost / API-nøkkel mangler."
 
 #: classes/common/class-fraktguiden-admin-notices.php:90
 msgid ""
@@ -842,7 +842,7 @@ msgstr ""
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
 #: classes/traits/settings.php:678
-msgid "Mybring Authentication failed"
+msgid "Mybring authentication failed"
 msgstr "Mybring autentisering mislyktes"
 
 #: classes/traits/settings.php:678
@@ -1282,7 +1282,7 @@ msgstr "tt"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:78
 msgid "mm"
-msgstr "min"
+msgstr "mm"
 
 #: pro/booking/views/class-bring-booking-order-view-common.php:88
 msgid "Bring - Submit Consignments"
