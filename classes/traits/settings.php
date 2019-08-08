@@ -441,27 +441,27 @@ trait Settings {
 			 * Mybring API settings
 			 */
 			'mybring_title'                 => [
-				'title'       => __( 'Mybring.com API', 'bring-fraktguiden' ),
-				'description' => __( 'Enter your API credentials. API authentication is required.', 'bring-fraktguiden' ),
+				'title'       => __( 'Mybring.com API', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Enter your API credentials. API authentication is required.', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'separated_title_tab',
 				'type'        => 'title',
 			],
 			'mybring_api_uid'               => [
-				'title'       => __( 'Email', 'bring-fraktguiden' ),
+				'title'       => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
-				'label'       => __( 'Email', 'bring-fraktguiden' ),
+				'label'       => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => 'bring@example.com',
 			],
 			'mybring_api_key'               => [
-				'title'       => __( 'API key', 'bring-fraktguiden' ),
+				'title'       => __( 'API key', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
-				'label'       => __( 'API key', 'bring-fraktguiden' ),
+				'label'       => __( 'API key', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
 			],
 			'mybring_customer_number'       => [
-				'title'       => __( 'API customer number', 'bring-fraktguiden' ),
+				'title'       => __( 'API customer number', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
-				'label'       => __( 'API customer number', 'bring-fraktguiden' ),
+				'label'       => __( 'API customer number', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => 'PARCELS_NORWAY-100########',
 			],
 		];
