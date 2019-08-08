@@ -16,6 +16,7 @@ $classes[] = 'bring-notice-' . $key;
 
 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-notice_id="<?php echo esc_attr( $key ); ?>">
 	<?php foreach ( $messages as $message ) : ?>
-	<p><?php echo esc_html( $message ); ?></p>
+		<?php // A message may contain HTML code. ?>
+		<p><?php echo $message; // phpcs:ignore ?></p>
 	<?php endforeach; ?>
 </div>
