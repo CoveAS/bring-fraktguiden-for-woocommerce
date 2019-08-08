@@ -1,21 +1,35 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
+/**
+ * Generate_Mailbox_Labels class
+ */
 class Generate_Mailbox_Labels {
 
-	static function setup() {
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
+	public static function setup() {
 		add_action( 'current_screen', __CLASS__ . '::generate' );
 	}
 
 	/**
 	 * Generate labels
 	 *
-	 * @param  string $screen
+	 * @param string $screen Screen.
 	 */
-	static function generate( $screen ) {
-		if ( $screen->post_type !== 'mailbox_waybill' ) {
+	public static function generate( $screen ) {
+		if ( 'mailbox_waybill' !== $screen->post_type ) {
 			return;
 		}
-		$posts        = get_posts(
+
+		$posts = get_posts(
 			[
 				'post_type'      => 'shop_order',
 				'post_status'    => 'any',
@@ -34,19 +48,22 @@ class Generate_Mailbox_Labels {
 				],
 			]
 		);
-		$consignments = [];
+
 		foreach ( $posts as $post_id ) {
 			$wc_order           = wc_get_order( $post_id );
 			$adapter            = new Bring_WC_Order_Adapter( $wc_order );
 			$order_consignments = $adapter->get_booking_consignments();
 			$label_ids          = [];
+
 			foreach ( $order_consignments as $consignment ) {
 				if ( 'Bring_Mailbox_Consignment' !== get_class( $consignment ) ) {
 					continue;
 				}
+
 				// @TODO: Move this to when booking is complete
 				$label_ids[] = self::create_label( $consignment );
 			}
+
 			update_post_meta( $post_id, '_mailbox_label_ids', $label_ids );
 		}
 	}
@@ -54,20 +71,23 @@ class Generate_Mailbox_Labels {
 	/**
 	 * Create Label
 	 *
-	 * @param  Bring_Mailbox_Consignment $consignment
+	 * @param Bring_Mailbox_Consignment $consignment Consignment.
 	 */
-	static function create_label( $consignment ) {
+	public static function create_label( $consignment ) {
 		$new_post = [
 			'post_title'  => $consignment->get_consignment_number(),
 			'post_type'   => 'mailbox_label',
 			'post_status' => 'draft',
 		];
-		$id       = wp_insert_post( $new_post );
+
+		$id = wp_insert_post( $new_post );
+
 		update_post_meta( $id, '_order_id', $consignment->order_id );
 		update_post_meta( $id, '_label_url', $consignment->get_label_url() );
 		update_post_meta( $id, '_consignment_number', $consignment->get_consignment_number() );
 		update_post_meta( $id, '_customer_number', $consignment->get_customer_number() );
 		update_post_meta( $id, '_test_mode', ( $consignment->get_test_indicator() ? 'yes' : 'no' ) );
+
 		return $id;
 	}
 
@@ -75,7 +95,7 @@ class Generate_Mailbox_Labels {
 	 * Trash old labels
 	 * Labels older than 120 hours should be deleted.
 	 */
-	static function cleanup() {
-		// Delete old labels
+	public static function cleanup() {
+		// Delete old labels.
 	}
 }

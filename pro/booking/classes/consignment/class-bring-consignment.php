@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_Booking_Customer class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_Booking_Customer
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
