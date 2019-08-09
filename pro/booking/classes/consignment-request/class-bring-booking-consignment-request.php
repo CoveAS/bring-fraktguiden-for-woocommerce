@@ -53,7 +53,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$package_count = count( $package ) / $elements_count;
 
 			for ( $i = 0; $i < $package_count; $i++ ) {
-				$weight = $package[ 'weight' . $i ];
+				$weight = 0;
+
+				if ( isset( $package[ 'weight' . $i ] ) ) {
+					$weight = $package[ 'weight' . $i ];
+				}
 
 				if ( isset( $package[ 'weightInGrams' . $i ] ) ) {
 					$weight = $package[ 'weightInGrams' . $i ];
