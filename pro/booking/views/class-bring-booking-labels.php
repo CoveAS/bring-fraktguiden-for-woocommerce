@@ -107,7 +107,13 @@ class Bring_Booking_Labels {
 		$pdf_collection = new Bring_Pdf_Collection();
 
 		foreach ( $order_ids as $order_id ) {
-			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $order_id ) );
+			$order = wc_get_order( $order_id );
+
+			if ( ! $order ) {
+				continue;
+			}
+
+			$adapter = new Bring_WC_Order_Adapter( $order );
 
 			// Get the booking consignments from the adapter.
 			$consignments = $adapter->get_booking_consignments();
