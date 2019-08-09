@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	die; // Exit if accessed directly.
+	exit; // Exit if accessed directly.
 }
 
 // Create a menu item for PDF download.

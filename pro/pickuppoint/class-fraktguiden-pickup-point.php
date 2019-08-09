@@ -340,7 +340,7 @@ class Fraktguiden_Pickup_Point {
 		);
 
 		if ( 200 !== $response->status_code ) {
-			die;
+			wp_die();
 		}
 
 		wp_send_json( json_decode( $response->get_body(), true ) );
@@ -379,6 +379,7 @@ class Fraktguiden_Pickup_Point {
 	public static function insert_pickup_points( $rates ) {
 		$rate_key        = false;
 		$service_package = false;
+
 		foreach ( $rates as $key => $rate ) {
 			if ( 'servicepakke' === $rate['bring_product'] ) {
 				// Service package identified.
@@ -400,12 +401,12 @@ class Fraktguiden_Pickup_Point {
 		$country            = esc_html( WC()->customer->get_shipping_country() );
 		$response           = self::get_pickup_points( $country, $postcode );
 
-		if ( 200 != $response->status_code ) {
+		if ( 200 !== $response->status_code ) {
 			sleep( 1 );
 			$response = self::get_pickup_points( $country, $postcode );
 		}
 
-		if ( 200 != $response->status_code ) {
+		if ( 200 !== $response->status_code ) {
 			return $rates;
 		}
 

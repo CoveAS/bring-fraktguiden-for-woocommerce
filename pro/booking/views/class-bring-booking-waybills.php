@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	die; // Exit if accessed directly.
+	exit; // Exit if accessed directly.
 }
 
 Bring_Booking_Waybills::setup();

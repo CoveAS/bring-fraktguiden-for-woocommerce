@@ -40,6 +40,7 @@ class WP_Bring_Request {
 		$options = $this->add_authentication( $options );
 		$url     = $this->add_customer_number( $url );
 		$result  = wp_remote_get( $url, $options );
+
 		return new WP_Bring_Response( $result );
 	}
 
@@ -60,6 +61,7 @@ class WP_Bring_Request {
 		$options = $this->add_authentication( $options );
 		$url     = $this->add_customer_number( $url );
 		$result  = wp_remote_post( $url, $options );
+
 		return new WP_Bring_Response( $result );
 	}
 
