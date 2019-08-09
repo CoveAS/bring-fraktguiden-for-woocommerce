@@ -90,7 +90,7 @@ class Bring_Pick_Up_Point_Enhancements {
 		$data = self::get_data( $method, $index );
 
 		if ( isset( $data['openingHoursNorwegian'] ) ) {
-			echo apply_filters( 'bring_pick_up_point_opening_hours', '<span class="bring_pickup_meta_block bring_pick_up_point_opening_hours">' . $data['openingHoursNorwegian'] . '</span>' );
+			echo apply_filters( 'bring_pick_up_point_opening_hours', '<span class="bring_pickup_meta_block bring_pick_up_point_opening_hours">' . esc_html( $data['openingHoursNorwegian'] ) . '</span>' ); // phpcs:ignore
 		}
 	}
 
@@ -105,8 +105,8 @@ class Bring_Pick_Up_Point_Enhancements {
 		$data = self::get_data( $method, $index );
 
 		if ( isset( $data['visitingAddress'], $data['visitingPostalCode'], $data['visitingCity'] ) ) {
-			$address = sprintf( '<span class="bring_pickup_meta_block bring_pick_up_point_address">%1$s, %2$s, %3$s</span>', $data['visitingAddress'], $data['visitingPostalCode'], $data['visitingCity'] );
-			echo apply_filters( 'bring_pick_up_point_address', $address );
+			$address = sprintf( '<span class="bring_pickup_meta_block bring_pick_up_point_address">%1$s, %2$s, %3$s</span>', esc_html( $data['visitingAddress'] ), esc_html( $data['visitingPostalCode'] ), esc_html( $data['visitingCity'] ) );
+			echo apply_filters( 'bring_pick_up_point_address', $address ); // phpcs:ignore
 		}
 	}
 
@@ -121,8 +121,8 @@ class Bring_Pick_Up_Point_Enhancements {
 		$data = self::get_data( $method, $index );
 
 		if ( isset( $data['googleMapsLink'] ) ) {
-			$google_maps_link = sprintf( '<a class="bring_pickup_meta_block bring_pick_up_point_googlemap_link" ref="noopener" target="_blank" href="%1$s">%2$s</a>', $data['googleMapsLink'], __( 'View on map', 'bring_fraktguiden_pro' ) );
-			echo apply_filters( 'bring_pick_up_point_googlemap_link', $google_maps_link );
+			$google_maps_link = sprintf( '<a class="bring_pickup_meta_block bring_pick_up_point_googlemap_link" ref="noopener" target="_blank" href="%1$s">%2$s</a>', esc_attr( $data['googleMapsLink'] ), esc_html( __( 'View on map', 'bring-fraktguiden-for-woocommerce' ) ) );
+			echo apply_filters( 'bring_pick_up_point_googlemap_link', $google_maps_link ); // phpcs:ignore
 		}
 	}
 
@@ -135,8 +135,9 @@ class Bring_Pick_Up_Point_Enhancements {
 	 */
 	public static function distance_away( $method, $index ) {
 		$data = self::get_data( $method, $index );
+
 		if ( isset( $data['distanceInKm'] ) ) {
-			echo apply_filters( 'bring_pick_up_point_distance_away', '<span class="bring_pickup_meta_block bring_pick_up_point_distance_away">' . $data['distanceInKm'] . 'km</span>' );
+			echo apply_filters( 'bring_pick_up_point_distance_away', '<span class="bring_pickup_meta_block bring_pick_up_point_distance_away">' . esc_html( $data['distanceInKm'] ) . 'km</span>' ); // phpcs:ignore
 		}
 	}
 
@@ -148,7 +149,7 @@ class Bring_Pick_Up_Point_Enhancements {
 	 * @return void
 	 */
 	public static function pickup_point_meta_opening( $method, $index ) {
-		printf( '<label class="bring_pickup_meta_label" for="shipping_method_%1$d_%2$s">', $index, sanitize_title( $method->id ) );
+		printf( '<label class="bring_pickup_meta_label" for="shipping_method_%1$d_%2$s">', esc_attr( $index ), esc_attr( sanitize_title( $method->id ) ) );
 	}
 
 	/**
