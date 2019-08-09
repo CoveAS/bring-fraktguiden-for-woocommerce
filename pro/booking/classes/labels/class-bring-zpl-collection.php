@@ -6,7 +6,7 @@
  */
 
 /**
- * Bring_Pdf_Collection class
+ * Bring_Zpl_Collection class
  */
 class Bring_Zpl_Collection extends Bring_Label_Collection {
 
@@ -16,26 +16,28 @@ class Bring_Zpl_Collection extends Bring_Label_Collection {
 	 * @return string
 	 */
 	public function merge() {
-		$file       = reset( $this->files );
-		$merge_file = $file['file']->get_path();
 
-		if ( 1 !== count( $this->files ) ) {
-			$merge_file = $file['file']->get_dir() . '/labels-merged.zpl';
-			$merge_fh   = fopen( $merge_file, 'w' );
+		// Initialize WP Filesystem.
+		WP_Filesystem();
+		global $wp_filesystem;
 
-			foreach ( $this->files as $file ) {
-				$fh = fopen( $file['file']->get_path(), 'r' );
+		$file      = reset( $this->files );
+		$file_path = $file['file']->get_path();
 
-				while( ( $line = fgets( $fh ) ) !== false ) {
-					fputs( $merge_fh, $line );
-				}
-
-				fclose( $fh );
-			}
-
-			fclose( $merge_fh );
+		// Do not merge if this is a single file.
+		if ( 1 === count( $this->files ) ) {
+			return $file_path;
 		}
 
-		return $merge_file;
+		// Set a path to a new file where multiple files will be merged.
+		$merged_file_path = $file['file']->get_dir() . '/labels-merged.zpl';
+
+		// Go through all the files and merge them into one.
+		foreach ( $this->files as $file ) {
+			$fh = $wp_filesystem->get_contents( $file_path );
+			$wp_filesystem->put_contents( $merged_file_path, $fh, FS_CHMOD_FILE );
+		}
+
+		return $merged_file_path;
 	}
 }
