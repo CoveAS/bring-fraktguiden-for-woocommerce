@@ -252,9 +252,8 @@ class Fraktguiden_Product_Debug {
 		$messages  = $bring->get_trace_messages();
 
 		echo '<ul >';
-
 		foreach ( $messages as $message ) {
-			printf( '<li class="bring-debug__trace-message">%s</li>', esc_html( $message ) );
+			printf( '<li class="bring-debug__trace-message">%s</li>', $message );
 		}
 
 		if ( empty( $rates ) ) {
@@ -269,8 +268,8 @@ class Fraktguiden_Product_Debug {
 			printf(
 				'<div class="bring-debug__rate"><strong>%s</strong> <span>%s</span><div class="bring-debug__pickup-point">%s</div></div>',
 				esc_html( $rate->get_label() ),
-				esc_html( wc_price( $rate->get_cost() ) ),
-				esc_html( self::get_pickup_point_meta( $rate ) )
+				wc_price( $rate->get_cost() ),
+				self::get_pickup_point_meta( $rate )
 			);
 		}
 
