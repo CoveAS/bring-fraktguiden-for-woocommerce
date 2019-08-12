@@ -16,22 +16,31 @@ class Bring_Pdf_Collection extends Bring_Label_Collection {
 	 * @return string
 	 */
 	public function merge() {
-		$file       = reset( $this->files );
-		$merge_file = $file['file']->get_path();
 
-		if ( 1 !== count( $this->files ) ) {
-			require_once FRAKTGUIDEN_PLUGIN_PATH . '/includes/pdfmerger/PDFMerger.php';
+		$file      = reset( $this->files );
+		$file_path = $file['file']->get_path();
 
-			$merge_file = $file['file']->get_dir() . '/labels-merged.pdf';
-			$merger     = new PDFMerger();
-
-			foreach ( $this->files as $file ) {
-				$merger->addPDF( $file['file']->get_path() );
-			}
-
-			$merger->merge( 'file', $merge_file );
+		// Do not try to merge if this is a single file.
+		if ( 1 === count( $this->files ) ) {
+			return $file_path;
 		}
 
-		return $merge_file;
+		// Set a path to a new file where multiple files will be merged.
+		$merged_file_path = $file['file']->get_dir() . '/labels-merged.pdf';
+
+		// Load PDF merging library.
+		require FRAKTGUIDEN_PLUGIN_PATH . 'includes/pdfmerger/PDFMerger.php';
+
+		// Initialize merging object.
+		$merger = new \PDFMerger\PDFMerger();
+
+		// Go through all the files and merge them into one.
+		foreach ( $this->files as $file ) {
+			$merger->addPDF( $file_path );
+		}
+
+		$merger->merge( 'file', $merged_file_path );
+
+		return $merged_file_path;
 	}
 }
