@@ -38,25 +38,13 @@
 </table>
 
 <script>
-	// @todo - hasty jQuery to disable text fields based on
-	// if the previous checkbox is toggled on or off (checked)
-	jQuery(document).ready( function($) {
-		// Customer number toggle
-		$(document).on('change', '.enable_customer_number_overwrite', function () {
-		    $(this)
-		    .parent().parent()
-		    .find( 'input[type="text"]' )
-		    .prop( 'disabled', ! this.checked )
-		    .prop( 'required', this.checked );
-		});
-
-		// Free shipping toggle
-		$(document).on('change', '.enable_free_shipping_limit', function () {
-		    $(this)
-		    .parent().parent()
-		    .find( 'input[type="text"]' )
-		    .prop( 'disabled', ! this.checked )
-		    .prop( 'required', this.checked );
-		});
+jQuery( document ).ready( function ($) {
+	$( document ).on( 'change', '.bring-toggle-checkbox', function () {
+		$( this )
+		.closest( 'td' )
+		.find( '> input' )
+		.prop( 'readonly', ! this.checked )
+		.prop( 'required', this.checked );
 	});
+});
 </script>
