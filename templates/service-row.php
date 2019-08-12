@@ -50,7 +50,9 @@
 
 	<td class="fraktguiden-services-table-col-custom-price">
 		<input
-			type="text"
+			type="number"
+			step=".01"
+			min="0"
 			placeholder="0.00"
 			name="<?php echo esc_attr( $service->custom_price_id ); ?>"
 			value="<?php echo esc_attr( $service->custom_price ); ?>"
@@ -82,10 +84,11 @@
 		<input
 			type="number"
 			step=".01"
+			min="0"
+			placeholder="0.00"
 			class="free_shipping_limit"
 			name="<?php echo esc_attr( $service->free_shipping_threshold_id ); ?>"
 			value="<?php echo esc_attr( $service->free_shipping_threshold ); ?>"
-			placeholder="0.00"
 			<?php echo esc_attr( $service->free_shipping ? '' : 'readonly="readonly"' ); ?>
 		>
 	</td>

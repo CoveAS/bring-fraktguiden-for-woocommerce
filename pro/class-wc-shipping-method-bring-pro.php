@@ -401,7 +401,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 				$rate['label'] = $custom_names[ $key ];
 			}
 
-			if ( isset( $custom_prices[ $key ] ) && ctype_digit( $custom_prices[ $key ] ) ) {
+			if ( isset( $custom_prices[ $key ] ) && is_numeric( $custom_prices[ $key ] ) ) {
 				$rate['cost'] = $this->calculate_excl_vat( $custom_prices[ $key ] );
 			}
 
