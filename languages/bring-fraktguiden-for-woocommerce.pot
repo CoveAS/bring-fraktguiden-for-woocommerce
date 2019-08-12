@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-08 14:02+0200\n"
+"POT-Creation-Date: 2019-08-12 13:45+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1176,19 +1176,19 @@ msgstr ""
 msgid "Order ID is missing."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:133
+#: pro/booking/views/class-bring-booking-labels.php:139
 msgid "No files to download."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:140
+#: pro/booking/views/class-bring-booking-labels.php:146
 msgid "Downloads"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:141
+#: pro/booking/views/class-bring-booking-labels.php:147
 msgid "Merged ZPL labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:143
+#: pro/booking/views/class-bring-booking-labels.php:149
 msgid "Merged PDF labels"
 msgstr ""
 

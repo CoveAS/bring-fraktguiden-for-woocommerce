@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-08 14:02+0200\n"
-"PO-Revision-Date: 2019-08-08 14:02+0200\n"
+"POT-Creation-Date: 2019-08-12 13:45+0200\n"
+"PO-Revision-Date: 2019-08-12 13:45+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -1260,19 +1260,19 @@ msgstr "Ikke tilstrekkelig tilgang"
 msgid "Order ID is missing."
 msgstr "Ordre-ID mangler."
 
-#: pro/booking/views/class-bring-booking-labels.php:133
+#: pro/booking/views/class-bring-booking-labels.php:139
 msgid "No files to download."
 msgstr "Ingen filer å laste ned."
 
-#: pro/booking/views/class-bring-booking-labels.php:140
+#: pro/booking/views/class-bring-booking-labels.php:146
 msgid "Downloads"
 msgstr "Nedlastinger"
 
-#: pro/booking/views/class-bring-booking-labels.php:141
+#: pro/booking/views/class-bring-booking-labels.php:147
 msgid "Merged ZPL labels"
 msgstr "Sammenslåtte ZPL etiketter"
 
-#: pro/booking/views/class-bring-booking-labels.php:143
+#: pro/booking/views/class-bring-booking-labels.php:149
 msgid "Merged PDF labels"
 msgstr "Sammenslåtte PDF etiketter"
 
