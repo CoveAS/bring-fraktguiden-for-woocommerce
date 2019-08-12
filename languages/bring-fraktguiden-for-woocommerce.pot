@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-12 13:45+0200\n"
+"POT-Creation-Date: 2019-08-12 16:15+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,9 +45,9 @@ msgstr ""
 msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:325
-#: classes/class-wc-shipping-method-bring.php:392
-#: classes/class-wc-shipping-method-bring.php:422
+#: classes/class-wc-shipping-method-bring.php:326
+#: classes/class-wc-shipping-method-bring.php:397
+#: classes/class-wc-shipping-method-bring.php:426
 #: classes/traits/settings.php:294 classes/traits/settings.php:334
 #: classes/traits/settings.php:382
 msgid "Shipping"
@@ -211,41 +211,41 @@ msgstr ""
 msgid "No problems detected"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:299
+#: classes/debug/class-fraktguiden-product-debug.php:298
 msgid "Address"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:300
+#: classes/debug/class-fraktguiden-product-debug.php:299
 msgid "Post code"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:301
+#: classes/debug/class-fraktguiden-product-debug.php:300
 #: pro/booking/views/class-bring-booking-order-view.php:625
 #: pro/class-wc-shipping-method-bring-pro.php:306
 msgid "City"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:302
+#: classes/debug/class-fraktguiden-product-debug.php:301
 msgid "Country code"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:303
+#: classes/debug/class-fraktguiden-product-debug.php:302
 msgid "Municipality"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:304
+#: classes/debug/class-fraktguiden-product-debug.php:303
 msgid "County"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:305
+#: classes/debug/class-fraktguiden-product-debug.php:304
 msgid "Visiting address"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:306
+#: classes/debug/class-fraktguiden-product-debug.php:305
 msgid "Visiting post code"
 msgstr ""
 
-#: classes/debug/class-fraktguiden-product-debug.php:307
+#: classes/debug/class-fraktguiden-product-debug.php:306
 msgid "Visiting city"
 msgstr ""
 
@@ -774,6 +774,27 @@ msgstr ""
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
+msgstr ""
+
+#: config/services.php:53
+msgid "Packages up to 2 kg."
+msgstr ""
+
+#: config/services.php:53
+msgid ""
+"Please note in order to use mailbox with tracking you need a RFID printer."
+msgstr ""
+
+#: config/services.php:81
+#, php-format
+msgid "Cargo services do not have unique %1$sProduct names%2$s."
+msgstr ""
+
+#: config/services.php:81
+#, php-format
+msgid ""
+"Switch the %1$sDisplay Service As%2$s to %3$sDisplay names%4$s to ensure "
+"customers can see the correct service."
 msgstr ""
 
 #: pro/booking/class-bring-booking.php:101

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-12 13:45+0200\n"
-"PO-Revision-Date: 2019-08-12 13:45+0200\n"
+"POT-Creation-Date: 2019-08-12 16:15+0200\n"
+"PO-Revision-Date: 2019-08-12 16:15+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -42,9 +42,9 @@ msgstr "Bring Fraktguiden"
 msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
 
-#: classes/class-wc-shipping-method-bring.php:325
-#: classes/class-wc-shipping-method-bring.php:392
-#: classes/class-wc-shipping-method-bring.php:422
+#: classes/class-wc-shipping-method-bring.php:326
+#: classes/class-wc-shipping-method-bring.php:397
+#: classes/class-wc-shipping-method-bring.php:426
 #: classes/traits/settings.php:294 classes/traits/settings.php:334
 #: classes/traits/settings.php:382
 msgid "Shipping"
@@ -230,41 +230,41 @@ msgstr "API svar"
 msgid "No problems detected"
 msgstr "Ingen problemer oppdaget"
 
-#: classes/debug/class-fraktguiden-product-debug.php:299
+#: classes/debug/class-fraktguiden-product-debug.php:298
 msgid "Address"
 msgstr "Adresse"
 
-#: classes/debug/class-fraktguiden-product-debug.php:300
+#: classes/debug/class-fraktguiden-product-debug.php:299
 msgid "Post code"
 msgstr "Postnummer"
 
-#: classes/debug/class-fraktguiden-product-debug.php:301
+#: classes/debug/class-fraktguiden-product-debug.php:300
 #: pro/booking/views/class-bring-booking-order-view.php:625
 #: pro/class-wc-shipping-method-bring-pro.php:306
 msgid "City"
 msgstr "By"
 
-#: classes/debug/class-fraktguiden-product-debug.php:302
+#: classes/debug/class-fraktguiden-product-debug.php:301
 msgid "Country code"
 msgstr "Landkode"
 
-#: classes/debug/class-fraktguiden-product-debug.php:303
+#: classes/debug/class-fraktguiden-product-debug.php:302
 msgid "Municipality"
 msgstr "Kommune"
 
-#: classes/debug/class-fraktguiden-product-debug.php:304
+#: classes/debug/class-fraktguiden-product-debug.php:303
 msgid "County"
 msgstr "Fylke"
 
-#: classes/debug/class-fraktguiden-product-debug.php:305
+#: classes/debug/class-fraktguiden-product-debug.php:304
 msgid "Visiting address"
 msgstr "Besøksadresse"
 
-#: classes/debug/class-fraktguiden-product-debug.php:306
+#: classes/debug/class-fraktguiden-product-debug.php:305
 msgid "Visiting post code"
 msgstr "Gyldig postnummer for frakt"
 
-#: classes/debug/class-fraktguiden-product-debug.php:307
+#: classes/debug/class-fraktguiden-product-debug.php:306
 msgid "Visiting city"
 msgstr "Besøksbyen"
 
@@ -852,6 +852,30 @@ msgid ""
 msgstr ""
 "Kunne ikke koble til Bring med påloggingsinformasjonen. Kontroller at de er "
 "riktige"
+
+#: config/services.php:53
+msgid "Packages up to 2 kg."
+msgstr "Pakker opp til 2 kg."
+
+#: config/services.php:53
+msgid ""
+"Please note in order to use mailbox with tracking you need a RFID printer."
+msgstr ""
+"NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
+
+#: config/services.php:81
+#, php-format
+msgid "Cargo services do not have unique %1$sProduct names%2$s."
+msgstr "Cargo tjenester har ikke unike %1$sProduktnavn%2$s."
+
+#: config/services.php:81
+#, php-format
+msgid ""
+"Switch the %1$sDisplay Service As%2$s to %3$sDisplay names%4$s to ensure "
+"customers can see the correct service."
+msgstr ""
+"Bytt %1$sVis tjeneste med%2$s til %3$sVisningsnavn%4$s for å være sikker på "
+"at kundene kan se riktig tjeneste."
 
 #: pro/booking/class-bring-booking.php:101
 #: pro/booking/class-bring-booking.php:107

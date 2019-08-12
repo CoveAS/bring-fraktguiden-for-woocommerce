@@ -50,7 +50,7 @@ return [
 	],
 	'mailbox' => [
 		'title'       => 'Mailbox',
-		'description' => 'Packages up to 2 kg. <strong style="color:#C00">Please note in order to use mailbox with tracking you need a RFID printer.</strong>',
+		'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL . '<strong style="color:#C00">' . __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ) . '</strong>',
 		'expanded'    => true,
 		'services'    => [
 			/**
@@ -77,7 +77,8 @@ return [
 	],
 	'other'   => [
 		'title'       => 'Other services',
-		'description' => '<strong style="color:#C00">Cargo services do not have unique <em>Product names</em>. Switch the \'<u>Display Service</u>\' to <em>Display names</em> to ensure customers can see the correct service</strong>',
+		/* translators: %s: HTML tags */
+		'description' => '<strong style="color:#C00">' . sprintf( __( 'Cargo services do not have unique %1$sProduct names%2$s.', 'bring-fraktguiden-for-woocommerce' ), '<em>', '</em>' ) . PHP_EOL . sprintf( __( 'Switch the %1$sDisplay Service As%2$s to %3$sDisplay names%4$s to ensure customers can see the correct service.', 'bring-fraktguiden-for-woocommerce' ), '<u>', '</u>', '<em>', '</em>' ) . '</strong>',
 		'expanded'    => false,
 		'services'    => [
 			'BPAKKE_DOR-DOR'                => [
