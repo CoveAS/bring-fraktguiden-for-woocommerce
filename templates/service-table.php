@@ -36,3 +36,15 @@
 		?>
 	</tbody>
 </table>
+
+<script>
+jQuery( document ).ready( function ($) {
+	$( document ).on( 'change', '.bring-toggle-checkbox', function () {
+		$( this )
+		.closest( 'td' )
+		.find( '> input' )
+		.prop( 'readonly', ! this.checked )
+		.prop( 'required', this.checked );
+	});
+});
+</script>

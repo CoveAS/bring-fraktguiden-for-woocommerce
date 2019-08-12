@@ -409,7 +409,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 				// Free shipping is checked and threshold is defined.
 				$threshold = $free_shipping_thresholds[ $key ];
 
-				if ( ! ctype_digit( $threshold ) || $cart_total >= $threshold ) {
+				if ( ! is_numeric( $threshold ) || $cart_total >= $threshold ) {
 					// Threshold is not a number (ie. undefined) or
 					// cart total is more than or equal to the threshold.
 					$rate['cost'] = 0;

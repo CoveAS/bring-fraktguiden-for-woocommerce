@@ -69,10 +69,15 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.6.2 =
+
+* Updated UI
+* Updated textdomain to match plugin slug
 * Updated translations
 * Updated PDFMerger from 1.0 to 2.0
 * Updated plugin URL to be relevant to Bring Fraktguiden
 * Fixed filter stopping settings link from showing on plugin list
+* Fixed issue where free shipping limit containing decimals would default to zero
 
 = 1.6.1 =
 
