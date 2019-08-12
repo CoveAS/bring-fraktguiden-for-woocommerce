@@ -9,8 +9,6 @@ All standard shipping methods from Bring are built-in. Volume calculations based
 
 Please consult the installation section and the changelog section before installing or upgrading.
 
-> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
-
 ## Installation guide
 
 When you install bring, you need to head to the settings page to start configuring Bring to your specifications.
@@ -277,3 +275,6 @@ $ git commit -m "A brief summary of the commit
 > A paragraph describing what changed and its impact."
 ````
 * Create a [pull request](https://help.github.com/articles/using-pull-requests/)
+
+
+> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.

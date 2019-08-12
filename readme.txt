@@ -22,8 +22,6 @@ All standard shipping methods from Bring are built-in. Volume calculations based
 
 Please consult the installation section and the changelog section before installing or upgrading.
 
-> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
-
 == Shipping Zones ==
 
 Please note that it is **now required** to set up [Shipping Zones](https://docs.woocommerce.com/document/setting-up-shipping-zones/) for the shipping
@@ -261,3 +259,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 = 1.0.0 =
 
 * Initial release.
+
+---
+
+> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
