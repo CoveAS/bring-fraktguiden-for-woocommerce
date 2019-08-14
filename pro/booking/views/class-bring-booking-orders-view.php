@@ -20,10 +20,24 @@ class Bring_Booking_Orders_View {
 	 * @return void
 	 */
 	public static function init() {
-		add_action( 'admin_footer-edit.php', array( __CLASS__, 'add_bulk_admin_footer' ) );
-		add_filter( 'manage_edit-shop_order_columns', array( __CLASS__, 'booking_status_column' ), 15 );
-		add_action( 'manage_shop_order_posts_custom_column', array( __CLASS__, 'booking_column_value' ), 10, 2 );
-		add_action( 'admin_action_bring_bulk_book', array( __CLASS__, 'bulk_send_booking' ) );
+		add_action( 'admin_footer-edit.php', [ __CLASS__, 'add_bulk_admin_footer' ] );
+		add_filter( 'manage_edit-shop_order_columns', [ __CLASS__, 'booking_status_column' ], 15 );
+		add_action( 'manage_shop_order_posts_custom_column', [ __CLASS__, 'booking_column_value' ], 10, 2 );
+		add_action( 'admin_action_bring_bulk_book', [ __CLASS__, 'bulk_send_booking' ] );
+		add_filter( 'bulk_actions-edit-shop_order', [ __CLASS__, 'add_bring_bulk_actions' ] );
+	}
+
+	/**
+	 * Add bulk booking and printing to actions selector
+	 *
+	 * @param  array $actions Actions.
+	 * @return array
+	 */
+	public static function add_bring_bulk_actions( $actions ) {
+		$actions['bring_bulk_book']  = Bring_Booking_Common_View::booking_label( true );
+		$actions['bring_bulk_print'] = __( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' );
+
+		return $actions;
 	}
 
 	/**
@@ -50,13 +64,17 @@ class Bring_Booking_Orders_View {
 		if ( 'bring_booking_status' === $column ) {
 			$order = new Bring_WC_Order_Adapter( $the_order );
 			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
+			?>
 
-			echo '<div clas="bring-area-icon">';
-			echo Bring_Booking_Common_View::create_status_icon( $info, 16 );
-			echo '</div>';
-			echo '<div class="bring-area-info">';
-			echo $info['text'];
-			echo '</div>';
+			<div clas="bring-area-icon">
+				<?php echo Bring_Booking_Common_View::create_status_icon( $info, 16 ); ?>
+			</div>
+
+			<div class="bring-area-info">
+				<?php echo $info['text']; ?>
+			</div>
+
+			<?php
 		}
 	}
 
@@ -65,8 +83,10 @@ class Bring_Booking_Orders_View {
 	 */
 	public static function add_bulk_admin_footer() {
 		global $post_type;
+
 		if ( 'shop_order' === $post_type ) {
 			?>
+
 	  <script type="text/template" id="tmpl-bring-modal-bulk">
 		<div class="wc-backbone-modal">
 		  <div class="wc-backbone-modal-content">
@@ -110,14 +130,6 @@ class Bring_Booking_Orders_View {
 		  var $ = jQuery;
 
 		  $( document ).ready( function () {
-
-			// Add bulk booking to action selector
-			$( '<option>' ).val( 'bring_bulk_book' ).text( '<?php echo Bring_Booking_Common_View::booking_label( true ); ?>' ).appendTo( "select[name='action']" );
-			$( '<option>' ).val( 'bring_bulk_book' ).text( '<?php echo Bring_Booking_Common_View::booking_label( true ); ?>' ).appendTo( "select[name='action2']" );
-
-			// Add bulk print to action selector
-			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' ); ?>' ).appendTo( "select[name='action']" );
-			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' ); ?>' ).appendTo( "select[name='action2']" );
 
 			//@todo: does this need to be global?
 			var modal = $( {} );
@@ -169,33 +181,24 @@ class Bring_Booking_Orders_View {
 			  $( '.bring-modal-selected-orders-list' ).text( order_ids.join( ' - ' ) );
 			}
 
+			// Run bulk booking or printing actions when selected and clicked
+			$( '#doaction, #doaction2' ).on( 'click', function ( evt ) {
 
-			$( '#doaction' ).click( function ( evt ) {
-			  if ( $( "select[name='action']" ).val() == 'bring_bulk_book' ) {
-				show_bulk_book_dialog();
-				evt.preventDefault();
-			  }
+				var selected = $(this).closest( '.bulkactions' ).find( 'select[name^="action"]' ).val();
 
-			  if ( $( "select[name='action']" ).val() == 'bring_print_labels' ) {
-				var url = '<?php echo Bring_Booking_Labels::create_download_url( '' ); ?>';
+				if ( 'bring_bulk_book' === selected ) {
+					show_bulk_book_dialog();
+					evt.preventDefault();
+				}
 
-				url = url + get_checked_order_ids().join(',');
+				if ( 'bring_bulk_print' === selected ) {
+					var url = '<?php echo Bring_Booking_Labels::create_download_url( '' ); ?>';
 
-				window.open(url);
-				evt.preventDefault();
-			  }
-			} );
+					url = url + get_checked_order_ids().join(',');
 
-
-			$( '#doaction2' ).click( function ( evt ) {
-			  if ( $( "select[name='action2']" ).val() == 'bring_bulk_book' ) {
-				show_bulk_book_dialog();
-				evt.preventDefault();
-			  }
-
-			  if ( $( "select[name='action']" ).val() == 'bring_print_labels' ) {
-				evt.preventDefault();
-			  }
+					window.open(url);
+					evt.preventDefault();
+				}
 			} );
 
 			$( document.body ).on( 'wc_backbone_modal_response', function ( e ) {
