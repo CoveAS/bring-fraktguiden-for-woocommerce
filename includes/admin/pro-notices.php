@@ -1,9 +1,22 @@
-<div class="notice notice-<?php echo $type; ?> <?php
-if ( $dismissable ) {
-	echo 'is-dismissible '; }
+<?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
+$classes = [];
+
+$classes[] = 'notice';
+$classes[] = 'notice-' . $type;
+$classes[] = $dismissable ? 'is-dismissible' : '';
+$classes[] = 'bring-notice';
+$classes[] = 'bring-notice-' . $key;
 ?>
-bring-notice bring-notice-<?php echo $key; ?>" data-notice_id="<?php echo $key; ?>">
+
+<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-notice_id="<?php echo esc_attr( $key ); ?>">
 	<?php foreach ( $messages as $message ) : ?>
-	<p><?php echo $message; ?></p>
+		<?php // A message may contain HTML code. ?>
+		<p><?php echo $message; // phpcs:ignore ?></p>
 	<?php endforeach; ?>
 </div>

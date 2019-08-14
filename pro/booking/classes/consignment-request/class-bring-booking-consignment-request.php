@@ -1,8 +1,17 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Booking_Consignment_Request class
+ */
 class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 	/**
@@ -17,31 +26,43 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	/**
 	 * Create packages
 	 *
-	 * @param  boolean $include_info
+	 * @param boolean $include_info Include info.
+	 *
 	 * @return array
 	 */
 	public function create_packages( $include_info = false ) {
 		$order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
+
 		if ( ! $order_items_packages ) {
 			$order_items_packages = $this->order_update_packages();
 		}
-		// Make sure packages is an array of arrays
+
+		// Make sure packages is an array of arrays.
 		if ( isset( $order_items_packages['length0'] ) ) {
 			$order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
 		}
+
 		if ( ! $order_items_packages ) {
 			return [];
 		}
+
 		$elements       = [ 'width', 'height', 'length', 'weightInGrams' ];
 		$elements_count = count( $elements );
+
 		foreach ( $order_items_packages as $item_id => $package ) {
 			$package_count = count( $package ) / $elements_count;
+
 			for ( $i = 0; $i < $package_count; $i++ ) {
-				if ( isset( $package[ 'weightInGrams' . $i ] ) ) {
-					$weight = $package[ 'weightInGrams' . $i ];
-				} else {
+				$weight = 0;
+
+				if ( isset( $package[ 'weight' . $i ] ) ) {
 					$weight = $package[ 'weight' . $i ];
 				}
+
+				if ( isset( $package[ 'weightInGrams' . $i ] ) ) {
+					$weight = $package[ 'weightInGrams' . $i ];
+				}
+
 				$weight_in_kg = (int) $weight / 1000;
 				$data         = [
 					'weightInKg'       => $weight_in_kg,
@@ -56,8 +77,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 					'numberOfItems'    => null,
 					'correlationId'    => null,
 				];
+
 				if ( $include_info ) {
-					$info                       = [];
 					$data['shipping_item_info'] = [
 						'item_id'         => $item_id,
 						'shipping_method' => [
@@ -67,25 +88,29 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 						],
 					];
 				}
+
 				$result[] = $data;
 			}
 		}
+
 		return $result;
 	}
 
 	/**
 	 * Return the sender's address formatted for Bring consignment
 	 *
-	 * @param WC_Order $wc_order
-	 * @param string   $additional_info
 	 * @return array
 	 */
 	public function get_sender_address() {
 		$wc_order        = $this->shipping_item->get_order();
 		$additional_info = '';
-		if ( isset( $_POST['_bring_additional_info_sender'] ) ) {
-			$additional_info = filter_var( $_POST['_bring_additional_info_sender'], FILTER_SANITIZE_STRING );
+
+		$bring_additional_info_sender = filter_input( INPUT_POST, '_bring_additional_info_sender', FILTER_SANITIZE_STRING );
+
+		if ( ! is_null( $bring_additional_info_sender ) ) {
+			$additional_info = $bring_additional_info_sender;
 		}
+
 		$sender = $this->get_sender();
 
 		return [
@@ -115,9 +140,13 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$full_name       = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
 		$name            = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
 		$additional_info = '';
-		if ( isset( $_POST['_bring_additional_info_recipient'] ) ) {
-			$additional_info = filter_var( $_POST['_bring_additional_info_recipient'], FILTER_SANITIZE_STRING );
+
+		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_SANITIZE_STRING );
+
+		if ( ! is_null( $bring_additional_info_recipient ) ) {
+			$additional_info = $bring_additional_info_recipient;
 		}
+
 		return [
 			'name'                  => $name,
 			'addressLine'           => $order->get_shipping_address_1(),
@@ -145,12 +174,12 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		$consignments = [
 			'shippingDateTime' => $this->shipping_date_time,
-			// Sender and recipient
+			// Sender and recipient.
 			'parties'          => [
 				'sender'    => $this->get_sender_address(),
 				'recipient' => $recipient_address,
 			],
-			// Product / Service
+			// Product / Service.
 			'product'          => [
 				'id'                 => strtoupper( $this->service_id ),
 				'customerNumber'     => $this->customer_number,
@@ -159,10 +188,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			],
 			'purchaseOrder'    => null,
 			'correlationId'    => null,
-			// Packages
+			// Packages.
 			'packages'         => $this->create_packages(),
 		];
-		if ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) {
+
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
 			$consignments['product']['services'] = [
 				'recipientNotification' => [
 					'email'  => $recipient_address['contact']['email'],
@@ -170,15 +200,18 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				],
 			];
 		}
-		// Add pickup point
+
+		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+
 		if ( $pickup_point_id ) {
 			$consignments['parties']['pickupPoint'] = [
 				'id'          => $pickup_point_id,
 				'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
 			];
 		}
-		if ( Fraktguiden_Helper::get_option( 'evarsling' ) == 'yes' ) {
+
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
 			$consignments['product']['services'] = [
 				'recipientNotification' => [
 					'email'  => $recipient_address['contact']['email'],
@@ -186,11 +219,13 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				],
 			];
 		}
+
 		$data = [
-			'testIndicator' => ( Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) == 'yes' ),
+			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
 			'schemaVersion' => 1,
 			'consignments'  => [ $consignments ],
 		];
+
 		return $data;
 	}
 }

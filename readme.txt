@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.6.5
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -18,11 +18,9 @@ Bring Fraktguiden provides shipping calculations based on shipping rates from br
 
 All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
 
-**Bring Fraktguiden now requires you to have a [Mybring.com](https://mybring.com) account linked to your store. If updating from 1.5, please note that your shipping options won't show until you enter your email and API key into the Bring Fraktguiden settings.**
+**Bring Fraktguiden now requires you to have a [Mybring.com](https://www.mybring.com) account linked to your store. If updating from 1.5, please note that your shipping options won't show until you enter your email and API key into the Bring Fraktguiden settings.**
 
 Please consult the installation section and the changelog section before installing or upgrading.
-
-> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
 
 == Shipping Zones ==
 
@@ -60,13 +58,13 @@ To ensure Bring will work correctly, you must set the following:
 Bring rates are only shown when the customer has entered a valid postcode. Commonly customers have either entered the wrong postcode or live outside of your Bring postcode settings.
 
 **But the postcode is valid and the rate still isn't showing?**
-If you've entered any MyBring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
+If you've entered any Mybring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
 
 **What do I get from Bring Pro that I can't from the Free version?**
 Good question! Bring Pro enables you to customise your customers Bring experience:
     - You can customise the price of each shipping method
     - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ).
-    - You can book your shippment through MyBring directly on your orders page.
+    - You can book your shippment through Mybring directly on your orders page.
     - You can change the services offered to customers to their nearest collection point
 
 **'Minipakke' and 'Småpakke' are no longer available? What happened?**
@@ -94,13 +92,23 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 == Changelog ==
 
+= 1.6.2 =
+
+* Updated UI
+* Updated textdomain to match plugin slug
+* Updated translations
+* Updated PDFMerger from 1.0 to 2.0
+* Updated plugin URL to be relevant to Bring Fraktguiden
+* Fixed filter stopping settings link from showing on plugin list
+* Fixed issue where free shipping limit containing decimals would default to zero
+
 = 1.6.1 =
 
 * Added admin notice for required Mybring API credentials
 
 = 1.6.0 =
 
-* Added support for multiple Customer Number support
+* Added support for multiple Customer Number
 * Added Customer Number selection when booking orders
 * Added additional postcode validation for Norway
 * Added support for additional language translations
@@ -202,7 +210,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 * Additional options for end-user
 * PRO version now contains Bring fallback methods for when the API can't be accessed
 * Added more descriptions to services and features to help minimise the support you need to request.
-* MyBring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
+* Mybring Booking has been added to the PRO version, which allows you to now book your orders with Bring directly on the order page.
 * Added a stylesheet for styles. Those styles are used. Mostly for validation and error notifications when the postcode is wrong / invalid.
 * Added the ability to disable the previously mentioned stylesheet, because you've already taken the styling issue into your own hands.
 * Had a baby just before release of this version
@@ -256,3 +264,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 = 1.0.0 =
 
 * Initial release.
+
+---
+
+> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.

@@ -1,12 +1,25 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Bring_Booking_Orders_View class
+ */
 class Bring_Booking_Orders_View {
 
-	static function init() {
+	/**
+	 * Initialize
+	 *
+	 * @return void
+	 */
+	public static function init() {
 		add_action( 'admin_footer-edit.php', array( __CLASS__, 'add_bulk_admin_footer' ) );
 		add_filter( 'manage_edit-shop_order_columns', array( __CLASS__, 'booking_status_column' ), 15 );
 		add_action( 'manage_shop_order_posts_custom_column', array( __CLASS__, 'booking_column_value' ), 10, 2 );
@@ -14,21 +27,27 @@ class Bring_Booking_Orders_View {
 	}
 
 	/**
-	 * @param $columns
+	 * Get booking status column
+	 *
+	 * @param array $columns Columns.
+	 *
 	 * @return mixed
 	 */
-	static function booking_status_column( $columns ) {
-		$columns['bring_booking_status'] = __( 'Booking', 'bring-fraktguiden' );
+	public static function booking_status_column( $columns ) {
+		$columns['bring_booking_status'] = __( 'Booking', 'bring-fraktguiden-for-woocommerce' );
+
 		return $columns;
 	}
 
 	/**
-	 * @param $column
+	 * Get booking column value
+	 *
+	 * @param string $column Column.
 	 */
-	static function booking_column_value( $column ) {
+	public static function booking_column_value( $column ) {
 		global $the_order;
 
-		if ( $column == 'bring_booking_status' ) {
+		if ( 'bring_booking_status' === $column ) {
 			$order = new Bring_WC_Order_Adapter( $the_order );
 			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
 
@@ -42,36 +61,36 @@ class Bring_Booking_Orders_View {
 	}
 
 	/**
-	 *
+	 * Add bulk admin footer
 	 */
-	static function add_bulk_admin_footer() {
+	public static function add_bulk_admin_footer() {
 		global $post_type;
-		if ( $post_type == 'shop_order' ) {
+		if ( 'shop_order' === $post_type ) {
 			?>
 	  <script type="text/template" id="tmpl-bring-modal-bulk">
 		<div class="wc-backbone-modal">
 		  <div class="wc-backbone-modal-content">
 			<section class="wc-backbone-modal-main" role="main">
 			  <header class="wc-backbone-modal-header">
-				<h1 class="bgf-modal-header"><?php _e( 'MyBring Booking', 'bring-fraktguiden' ); ?></h1>
+				<h1 class="bgf-modal-header"><?php _e( 'Mybring Booking', 'bring-fraktguiden-for-woocommerce' ); ?></h1>
 				<button class="modal-close modal-close-link dashicons dashicons-no-alt">
-				  <span class="screen-reader-text"><?php _e( 'Close modal panel', 'bring-fraktguiden' ); ?></span>
+				  <span class="screen-reader-text"><?php _e( 'Close modal panel', 'bring-fraktguiden-for-woocommerce' ); ?></span>
 				</button>
 			  </header>
 			  <article>
 				<div class="bring-form-field" style="margin-top:0">
-				  <?php _e( 'This will only book orders that has not been booked.', 'bring-fraktguiden' ); ?>
+				  <?php _e( 'This will only book orders that has not been booked.', 'bring-fraktguiden-for-woocommerce' ); ?>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'Selected orders', 'bring-fraktguiden' ); ?>:</label>
+				  <label><?php _e( 'Selected orders', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <span class="bring-modal-selected-orders-list"></span>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'MyBring Customer', 'bring-fraktguiden' ); ?>:</label>
+				  <label><?php _e( 'Mybring Customer', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <?php Bring_Booking_Common_View::render_customer_selector( '_bring-modal-customer-selector' ); ?>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'Shipping Date', 'bring-fraktguiden' ); ?>:</label>
+				  <label><?php _e( 'Shipping Date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <?php Bring_Booking_Common_View::render_shipping_date_time( '_bring-modal-shipping-date' ); ?>
 				</div>
 			  </article>
@@ -86,7 +105,7 @@ class Bring_Booking_Orders_View {
 		<div class="wc-backbone-modal-backdrop modal-close"></div>
 	  </script>
 
-	  <script type="text/javascript">
+	  <script>
 		(function () {
 		  var $ = jQuery;
 
@@ -97,8 +116,8 @@ class Bring_Booking_Orders_View {
 			$( '<option>' ).val( 'bring_bulk_book' ).text( '<?php echo Bring_Booking_Common_View::booking_label( true ); ?>' ).appendTo( "select[name='action2']" );
 
 			// Add bulk print to action selector
-			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden' ); ?>' ).appendTo( "select[name='action']" );
-			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden' ); ?>' ).appendTo( "select[name='action2']" );
+			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' ); ?>' ).appendTo( "select[name='action']" );
+			$( '<option>' ).val( 'bring_print_labels' ).text( '<?php _e( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' ); ?>' ).appendTo( "select[name='action2']" );
 
 			//@todo: does this need to be global?
 			var modal = $( {} );
@@ -194,10 +213,18 @@ class Bring_Booking_Orders_View {
 		}
 	}
 
-	static function bulk_send_booking() {
-		if ( isset( $_REQUEST['post'] ) ) {
-			Bring_Booking::bulk_send_booking( $_REQUEST['post'] );
-		}
-	}
+	/**
+	 * Send booking in bulk
+	 *
+	 * @return void
+	 */
+	public static function bulk_send_booking() {
+		$post = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post' );
 
+		if ( empty( $post ) || ! is_array( $post ) ) {
+			return;
+		}
+
+		Bring_Booking::bulk_send_booking( $post );
+	}
 }

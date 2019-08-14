@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains WC_Shipping_Method_Bring_Pro class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\WC_Shipping_Method_Bring_Pro
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -147,8 +147,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 		parent::__construct( $instance_id );
 
-		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
-		$this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
+		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
+		$this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
 
 		$this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled', 'no' );
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
@@ -196,26 +196,26 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	public function init_form_fields_for_pickup_point() {
 		$this->form_fields['pickup_point_title'] = [
 			'type'        => 'title',
-			'title'       => __( 'Pickup Point Options', 'bring-fraktguiden' ),
-			'description' => __( 'Enable pickup points on the cart / checkout. If disabled, Bring will show the names of shipment methods. <em>ie: <strong>"Climate Neutral Service Pack"</strong></em>', 'bring-fraktguiden' ),
+			'title'       => __( 'Pickup Point Options', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'Enable pickup points on the cart / checkout. If disabled, Bring will show the names of shipment methods. <em>ie: <strong>"Climate Neutral Service Pack"</strong></em>', 'bring-fraktguiden-for-woocommerce' ),
 			'class'       => 'separated_title_tab',
 		];
 
 		$this->form_fields['pickup_point_enabled'] = [
-			'title'    => __( 'Enable', 'bring-fraktguiden' ),
+			'title'    => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
 			'type'     => 'checkbox',
-			'desc_tip' => __( 'If not checked, default services will be shown', 'bring-fraktguiden' ),
-			'label'    => __( 'Enable pickup point', 'bring-fraktguiden' ),
+			'desc_tip' => __( 'If not checked, default services will be shown', 'bring-fraktguiden-for-woocommerce' ),
+			'label'    => __( 'Enable pickup point', 'bring-fraktguiden-for-woocommerce' ),
 			'default'  => 'no',
 		];
 
 		$this->form_fields['pickup_point_limit'] = [
-			'title'             => __( 'Pickup point limit', 'bring-fraktguiden' ),
+			'title'             => __( 'Pickup point limit', 'bring-fraktguiden-for-woocommerce' ),
 			'type'              => 'number',
 			'css'               => 'width: 8em;',
-			'description'       => __( 'Leave blank to remove limit', 'bring-fraktguiden' ),
+			'description'       => __( 'Leave blank to remove limit', 'bring-fraktguiden-for-woocommerce' ),
 			'custom_attributes' => array( 'min' => 1 ),
-			'desc_tip'          => __( 'If set, it will be the maximum number of pickup points shown', 'bring-fraktguiden' ),
+			'desc_tip'          => __( 'If set, it will be the maximum number of pickup points shown', 'bring-fraktguiden-for-woocommerce' ),
 			'default'           => '',
 		];
 	}
@@ -227,41 +227,41 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 */
 	public function init_form_fields_for_mybring() {
 		$this->form_fields['booking_title'] = [
-			'title'       => __( 'MyBring Booking', 'bring-fraktguiden' ),
+			'title'       => __( 'Mybring Booking', 'bring-fraktguiden-for-woocommerce' ),
 			'description' => '',
 			'type'        => 'title',
 			'class'       => 'separated_title_tab',
 		];
 
 		$this->form_fields['booking_enabled'] = [
-			'title'   => __( 'Enable', 'bring-fraktguiden' ),
+			'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'checkbox',
-			'label'   => __( 'Enable MyBring booking', 'bring-fraktguiden' ),
+			'label'   => __( 'Enable Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
 			'default' => 'no',
 		];
 
 		$this->form_fields['booking_test_mode_enabled'] = [
-			'title'       => __( 'Test mode', 'bring-fraktguiden' ),
+			'title'       => __( 'Test mode', 'bring-fraktguiden-for-woocommerce' ),
 			'type'        => 'checkbox',
-			'label'       => __( 'Enable test mode for MyBring booking', 'bring-fraktguiden' ),
-			'description' => __( 'When enabled, Bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden' ),
+			'label'       => __( 'Enable test mode for Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'When enabled, Bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce' ),
 			'default'     => 'yes',
 		];
 
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
-			'title'       => __( 'After booking', 'bring-fraktguiden' ),
-			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden' ),
+			'title'       => __( 'After booking', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden-for-woocommerce' ),
 			'class'       => 'bring-separate-admin-section',
 		];
 
 		$this->form_fields['auto_set_status_after_booking_success'] = [
-			'title'    => __( 'Order status after booking', 'bring-fraktguiden' ),
+			'title'    => __( 'Order status after booking', 'bring-fraktguiden-for-woocommerce' ),
 			'type'     => 'select',
-			'desc_tip' => __( 'Order status will be automatically set when successfully booked', 'bring-fraktguiden' ),
+			'desc_tip' => __( 'Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce' ),
 			'class'    => 'chosen_select',
 			'css'      => 'width: 400px;',
-			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden' ) ) + wc_get_order_statuses(),
+			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
 			'default'  => 'none',
 		];
 	}
@@ -274,41 +274,41 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	public function init_form_fields_for_booking() {
 		$this->form_fields['booking_address_section_title'] = [
 			'type'        => 'title',
-			'title'       => __( 'Store address and contact information', 'bring-fraktguiden' ),
-			'description' => __( 'This address will be your \'from\' address and will populate the details given to Bring during the booking process', 'bring-fraktguiden' ),
+			'title'       => __( 'Store address and contact information', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'This address will be your \'from\' address and will populate the details given to Bring during the booking process', 'bring-fraktguiden-for-woocommerce' ),
 			'class'       => 'bring-separate-admin-section',
 		];
 
 		$this->form_fields['booking_address_store_name'] = [
-			'title'   => __( 'Store Name', 'bring-fraktguiden' ),
+			'title'   => __( 'Store Name', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'text',
 			'default' => get_bloginfo( 'name' ),
 		];
 
 		$this->form_fields['booking_address_street1'] = [
-			'title'             => __( 'Street Address 1', 'bring-fraktguiden' ),
+			'title'             => __( 'Street Address 1', 'bring-fraktguiden-for-woocommerce' ),
 			'custom_attributes' => array( 'maxlength' => '35' ),
 			'type'              => 'text',
 		];
 
 		$this->form_fields['booking_address_street2'] = [
-			'title'             => __( 'Street Address 2', 'bring-fraktguiden' ),
+			'title'             => __( 'Street Address 2', 'bring-fraktguiden-for-woocommerce' ),
 			'custom_attributes' => array( 'maxlength' => '35' ),
 			'type'              => 'text',
 		];
 
 		$this->form_fields['booking_address_postcode'] = [
-			'title' => __( 'Postcode', 'bring-fraktguiden' ),
+			'title' => __( 'Postcode', 'bring-fraktguiden-for-woocommerce' ),
 			'type'  => 'text',
 		];
 
 		$this->form_fields['booking_address_city'] = [
-			'title' => __( 'City', 'bring-fraktguiden' ),
+			'title' => __( 'City', 'bring-fraktguiden-for-woocommerce' ),
 			'type'  => 'text',
 		];
 
 		$this->form_fields['booking_address_country'] = [
-			'title'   => __( 'Country', 'bring-fraktguiden' ),
+			'title'   => __( 'Country', 'bring-fraktguiden-for-woocommerce' ),
 			'class'   => 'chosen_select',
 			'css'     => 'width: 400px;',
 			'type'    => 'select',
@@ -317,24 +317,24 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		];
 
 		$this->form_fields['booking_address_reference'] = [
-			'title'             => __( 'Reference', 'bring-fraktguiden' ),
+			'title'             => __( 'Reference', 'bring-fraktguiden-for-woocommerce' ),
 			'type'              => 'text',
 			'custom_attributes' => array( 'maxlength' => '35' ),
-			'description'       => __( 'Specify shipper or consignee reference. Available macros: {order_id}', 'bring-fraktguiden' ),
+			'description'       => __( 'Specify shipper or consignee reference. Available macros: {order_id}', 'bring-fraktguiden-for-woocommerce' ),
 		];
 
 		$this->form_fields['booking_address_contact_person'] = [
-			'title' => __( 'Contact Person', 'bring-fraktguiden' ),
+			'title' => __( 'Contact Person', 'bring-fraktguiden-for-woocommerce' ),
 			'type'  => 'text',
 		];
 
 		$this->form_fields['booking_address_phone'] = [
-			'title' => __( 'Phone', 'bring-fraktguiden' ),
+			'title' => __( 'Phone', 'bring-fraktguiden-for-woocommerce' ),
 			'type'  => 'text',
 		];
 
 		$this->form_fields['booking_address_email'] = [
-			'title' => __( 'Email', 'bring-fraktguiden' ),
+			'title' => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
 			'type'  => 'text',
 		];
 	}
@@ -395,13 +395,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 			// custom_name for SERVICEPAKKE will also rename the pickup points
 			// SERVICEPAKKE's custom_name is ignored if 'pickup_point_enabled' is enabled.
-			if ( 0 === strpos( $key, 'SERVICEPAKKE' )  && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' )  ) {
+			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
 				$key = 'SERVICEPAKKE';
 			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
 				$rate['label'] = $custom_names[ $key ];
 			}
 
-			if ( isset( $custom_prices[ $key ] ) && ctype_digit( $custom_prices[ $key ] ) ) {
+			if ( isset( $custom_prices[ $key ] ) && is_numeric( $custom_prices[ $key ] ) ) {
 				$rate['cost'] = $this->calculate_excl_vat( $custom_prices[ $key ] );
 			}
 
@@ -409,7 +409,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 				// Free shipping is checked and threshold is defined.
 				$threshold = $free_shipping_thresholds[ $key ];
 
-				if ( ! ctype_digit( $threshold ) || $cart_total >= $threshold ) {
+				if ( ! is_numeric( $threshold ) || $cart_total >= $threshold ) {
 					// Threshold is not a number (ie. undefined) or
 					// cart total is more than or equal to the threshold.
 					$rate['cost'] = 0;

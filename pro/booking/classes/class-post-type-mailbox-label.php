@@ -1,9 +1,21 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
-
+/**
+ * Post_Type_Mailbox_Label class
+ */
 class Post_Type_Mailbox_Label {
 
-	static function setup() {
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
+	public static function setup() {
 		add_filter( 'user_has_cap', __CLASS__ . '::disallow_new_post_button', 10, 2 );
 		add_filter( 'user_has_cap', __CLASS__ . '::disallow_new_post_page', 10, 2 );
 		add_action( 'admin_menu', __CLASS__ . '::admin_menu', 100 );
@@ -15,19 +27,26 @@ class Post_Type_Mailbox_Label {
 	 * Disallow New Post Page
 	 * Prevents users from accessing the "add new label" page
 	 *
+	 * @param array $allcaps All caps.
+	 * @param array $caps    Caps.
+	 *
 	 * @return array
 	 */
-	static function disallow_new_post_page( $allcaps, $caps ) {
+	public static function disallow_new_post_page( $allcaps, $caps ) {
 		if ( ! did_action( 'admin_init' ) ) {
 			return $allcaps;
 		}
+
 		$screen = get_current_screen();
+
 		if ( ! $screen ) {
 			return $allcaps;
 		}
-		if ( $screen->id == 'mailbox_label' && $screen->action == 'add' ) {
+
+		if ( 'mailbox_label' === $screen->id && 'add' === $screen->action ) {
 			return [];
 		}
+
 		return $allcaps;
 	}
 
@@ -35,25 +54,35 @@ class Post_Type_Mailbox_Label {
 	 * Disallow New Post Button
 	 * Removes the "add new" button on the listing page
 	 *
+	 * @param array $allcaps All caps.
+	 * @param array $caps    Caps.
+	 *
 	 * @return array
 	 */
-	static function disallow_new_post_button( $allcaps, $caps ) {
+	public static function disallow_new_post_button( $allcaps, $caps ) {
 		if ( ! did_action( 'all_admin_notices' ) ) {
 			return $allcaps;
 		}
+
 		$screen = get_current_screen();
-		if ( 'edit-mailbox_label' != $screen->id ) {
+
+		if ( 'edit-mailbox_label' !== $screen->id ) {
 			return $allcaps;
 		}
+
 		$cap = reset( $caps );
+
 		if ( 'edit_mailbox_labels' !== $cap ) {
 			return $allcaps;
 		}
+
 		if ( isset( $allcaps[ $cap ] ) ) {
 			$allcaps[ $cap ] = false;
 		}
-		// Remove this filter
+
+		// Remove this filter.
 		remove_filter( 'user_has_cap', __CLASS__ . '::disallow_new_post_button', 10 );
+
 		return $allcaps;
 	}
 
@@ -61,8 +90,9 @@ class Post_Type_Mailbox_Label {
 	 * Admin menu
 	 * removes the "add new label" link from the admin menu
 	 */
-	static function admin_menu() {
+	public static function admin_menu() {
 		global $submenu;
+
 		// if ( ! isset( $submenu['edit.php?post_type=mailbox_label'] ) ) {
 		// return;
 		// }
@@ -70,9 +100,11 @@ class Post_Type_Mailbox_Label {
 		// edit.php?post_type=mailbox_label
 		//
 		// var_dump( $submenu );die;
+
 		if ( ! isset( $submenu['woocommerce'] ) ) {
 			return;
 		}
+
 		add_submenu_page(
 			'woocommerce',
 			__( 'Mailbox labels' ),
@@ -80,6 +112,7 @@ class Post_Type_Mailbox_Label {
 			'read_mailbox_label',
 			'edit.php?post_type=mailbox_label'
 		);
+
 		add_submenu_page(
 			'woocommerce',
 			__( 'Mailbox waybills' ),
@@ -87,19 +120,22 @@ class Post_Type_Mailbox_Label {
 			'read_mailbox_waybill',
 			'edit.php?post_type=mailbox_waybill'
 		);
-		// var_dump( $submenu['woocommerce'] );die;
 	}
+
 	/**
 	 * Mailbox Label capabilities
 	 * Enables administrators and shop managers to edit labels
 	 */
-	static function label_capabilities() {
+	public static function label_capabilities() {
 		$allowed_roles = [ 'administrator', 'shop_manager' ];
+
 		foreach ( $allowed_roles as $role_name ) {
 			$role = get_role( $role_name );
+
 			if ( ! $role ) {
 				continue;
 			}
+
 			$role->add_cap( 'read_mailbox_label' );
 			$role->add_cap( 'delete_mailbox_label' );
 			$role->add_cap( 'delete_mailbox_labels' );
@@ -113,42 +149,43 @@ class Post_Type_Mailbox_Label {
 	/**
 	 * Mailbox Label post type
 	 */
-	static function label_post_type() {
-		$labels = array(
-			'name'                  => _x( 'Mailbox Labels', 'Post Type General Name', 'bring-fraktguiden' ),
-			'singular_name'         => _x( 'Mailbox Label', 'Post Type Singular Name', 'bring-fraktguiden' ),
-			'menu_name'             => __( 'Mailbox Labels', 'bring-fraktguiden' ),
-			'name_admin_bar'        => __( 'Mailbox Label', 'bring-fraktguiden' ),
-			'archives'              => __( 'Item Archives', 'bring-fraktguiden' ),
-			'attributes'            => __( 'Item Attributes', 'bring-fraktguiden' ),
-			'parent_item_colon'     => __( 'Parent Item:', 'bring-fraktguiden' ),
-			'all_items'             => __( 'All Items', 'bring-fraktguiden' ),
-			'add_new_item'          => __( 'Add New Item', 'bring-fraktguiden' ),
-			'add_new'               => __( 'Add New', 'bring-fraktguiden' ),
-			'new_item'              => __( 'New Item', 'bring-fraktguiden' ),
-			'edit_item'             => __( 'Edit Item', 'bring-fraktguiden' ),
-			'update_item'           => __( 'Update Item', 'bring-fraktguiden' ),
-			'view_item'             => __( 'View Item', 'bring-fraktguiden' ),
-			'view_items'            => __( 'View Items', 'bring-fraktguiden' ),
-			'search_items'          => __( 'Search Item', 'bring-fraktguiden' ),
-			'not_found'             => __( 'Not found', 'bring-fraktguiden' ),
-			'not_found_in_trash'    => __( 'Not found in Trash', 'bring-fraktguiden' ),
-			'featured_image'        => __( 'Featured Image', 'bring-fraktguiden' ),
-			'set_featured_image'    => __( 'Set featured image', 'bring-fraktguiden' ),
-			'remove_featured_image' => __( 'Remove featured image', 'bring-fraktguiden' ),
-			'use_featured_image'    => __( 'Use as featured image', 'bring-fraktguiden' ),
-			'insert_into_item'      => __( 'Insert into item', 'bring-fraktguiden' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this item', 'bring-fraktguiden' ),
-			'items_list'            => __( 'Items list', 'bring-fraktguiden' ),
-			'items_list_navigation' => __( 'Items list navigation', 'bring-fraktguiden' ),
-			'filter_items_list'     => __( 'Filter items list', 'bring-fraktguiden' ),
-		);
-		$args   = array(
-			'label'               => __( 'Mailbox Label', 'bring-fraktguiden' ),
-			'description'         => __( 'Mailbox Label information page.', 'bring-fraktguiden' ),
+	public static function label_post_type() {
+		$labels = [
+			'name'                  => _x( 'Mailbox Labels', 'Post Type General Name', 'bring-fraktguiden-for-woocommerce' ),
+			'singular_name'         => _x( 'Mailbox Label', 'Post Type Singular Name', 'bring-fraktguiden-for-woocommerce' ),
+			'menu_name'             => __( 'Mailbox Labels', 'bring-fraktguiden-for-woocommerce' ),
+			'name_admin_bar'        => __( 'Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'archives'              => __( 'Mailbox Label Archives', 'bring-fraktguiden-for-woocommerce' ),
+			'attributes'            => __( 'Mailbox Label Attributes', 'bring-fraktguiden-for-woocommerce' ),
+			'parent_item_colon'     => __( 'Parent Mailbox Label:', 'bring-fraktguiden-for-woocommerce' ),
+			'all_items'             => __( 'All Mailbox Labels', 'bring-fraktguiden-for-woocommerce' ),
+			'add_new_item'          => __( 'Add New Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'add_new'               => __( 'Add New', 'bring-fraktguiden-for-woocommerce' ),
+			'new_item'              => __( 'New Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'edit_item'             => __( 'Edit Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'update_item'           => __( 'Update Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'view_item'             => __( 'View Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'view_items'            => __( 'View Mailbox Labels', 'bring-fraktguiden-for-woocommerce' ),
+			'search_items'          => __( 'Search Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'not_found'             => __( 'Not found', 'bring-fraktguiden-for-woocommerce' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'bring-fraktguiden-for-woocommerce' ),
+			'featured_image'        => __( 'Featured Image', 'bring-fraktguiden-for-woocommerce' ),
+			'set_featured_image'    => __( 'Set featured image', 'bring-fraktguiden-for-woocommerce' ),
+			'remove_featured_image' => __( 'Remove featured image', 'bring-fraktguiden-for-woocommerce' ),
+			'use_featured_image'    => __( 'Use as featured image', 'bring-fraktguiden-for-woocommerce' ),
+			'insert_into_item'      => __( 'Insert into Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'items_list'            => __( 'Mailbox Labels list', 'bring-fraktguiden-for-woocommerce' ),
+			'items_list_navigation' => __( 'Mailbox Labels list navigation', 'bring-fraktguiden-for-woocommerce' ),
+			'filter_items_list'     => __( 'Filter Mailbox Labels list', 'bring-fraktguiden-for-woocommerce' ),
+		];
+
+		$args = [
+			'label'               => __( 'Mailbox Label', 'bring-fraktguiden-for-woocommerce' ),
+			'description'         => __( 'Mailbox Label information page.', 'bring-fraktguiden-for-woocommerce' ),
 			'labels'              => $labels,
-			'supports'            => array(),
-			'taxonomies'          => array(),
+			'supports'            => [],
+			'taxonomies'          => [],
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
@@ -172,7 +209,8 @@ class Post_Type_Mailbox_Label {
 				'read_private_posts' => 'read_private_mailbox_labels',
 				'delete_posts'       => 'delete_mailbox_labels',
 			],
-		);
+		];
+
 		register_post_type( 'mailbox_label', $args );
 		remove_post_type_support( 'mailbox_label', 'title' );
 		remove_post_type_support( 'mailbox_label', 'editor' );

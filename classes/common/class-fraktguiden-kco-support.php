@@ -1,7 +1,15 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 use Bring_Fraktguiden\Postcode_Validation;
 
+/**
+ * Fraktguiden_KCO_Support class
+ */
 class Fraktguiden_KCO_Support {
 
 	/**
@@ -50,31 +58,42 @@ class Fraktguiden_KCO_Support {
 	 * Ajax post code validation
 	 */
 	public static function ajax_post_code_validation() {
-		$response = Postcode_Validation::get_postcode_information( $_REQUEST['post_code'], $_REQUEST['country'] );
+		$post_code = filter_input( INPUT_POST, 'post_code' );
+		$country   = filter_input( INPUT_POST, 'country' );
+
+		$response = Postcode_Validation::get_postcode_information( $post_code, $country );
+
 		if ( is_wp_error( $response ) ) {
-			wp_send_json( [
-				'error' => implode( "\n", $response->errors ),
-			] );
+			wp_send_json(
+				[
+					'error' => implode( PHP_EOL, $response->errors ),
+				]
+			);
 		}
-		if ( empty( $response['response']['code'] ) ||  empty( $response['body'] ) ) {
+
+		if ( empty( $response['response']['code'] ) || empty( $response['body'] ) ) {
 			wp_send_json( [ 'error' => 'The bring API gave an empty response.' ] );
 		}
+
 		if ( 200 !== $response['response']['code'] ) {
-			wp_send_json( [ 'error' => 'Connection to the bring API failed. HTTP code: ' . $response['response']['code']  ] );
+			wp_send_json( [ 'error' => 'Connection to the bring API failed. HTTP code: ' . $response['response']['code'] ] );
 		}
+
 		$data = json_decode( $response['body'], true );
+
 		if ( WC()->session->get( 'bring_fraktguiden_reset_kco' ) ) {
 			// We have to forget the order because klarna does not allow changes to an existing order.
 			WC()->session->set( 'kco_wc_order_id', null );
 		} else {
 			// On a blank session the order has not been changed by the user yet
-			// Only reset it on subsequent requests
+			// Only reset it on subsequent requests.
 			WC()->session->set( 'bring_fraktguiden_reset_kco', true );
 		}
-		// Set the billing and shipping code
-		WC()->customer->set_shipping_postcode( $_REQUEST['post_code'] );
-		WC()->customer->set_billing_postcode( $_REQUEST['post_code'] );
-		WC()->customer->set_shipping_country( $_REQUEST['country'] );
+
+		// Set the billing and shipping code.
+		WC()->customer->set_shipping_postcode( $post_code );
+		WC()->customer->set_billing_postcode( $post_code );
+		WC()->customer->set_shipping_country( $country );
 		wp_send_json( $data );
 	}
 
@@ -86,10 +105,11 @@ class Fraktguiden_KCO_Support {
 	public static function get_classes() {
 		$postcode = esc_html( WC()->customer->get_shipping_postcode() );
 		$classes  = 'bring-enter-postcode';
-		// var_dump( $postcode ); die;
+
 		if ( ! $postcode && WC()->cart->needs_shipping() ) {
 			$classes .= ' bring-required';
 		}
+
 		return $classes;
 	}
 
@@ -100,6 +120,7 @@ class Fraktguiden_KCO_Support {
 		if ( did_action( 'woocommerce_review_order_before_shipping' ) ) {
 			return;
 		}
+
 		$classes = self::get_classes();
 		?>
 		<tr class="<?php echo esc_html( $classes ); ?>">
@@ -134,23 +155,23 @@ class Fraktguiden_KCO_Support {
 		?>
 		<?php do_action( 'bring_fraktguiden_before_kco_postcode' ); ?>
 		<?php if ( count( $countries ) > 1 ) : ?>
-			<label for="bring-country"><?php _e( 'Country', 'woocommerce' ); ?></label>
+			<label for="bring-country"><?php esc_html_e( 'Country', 'woocommerce' ); ?></label>
 			<div class="bring-search-box">
 				<select id="bring-country" name="bring-country">
 					<?php foreach ( $countries as $key => $_country ) : ?>
-						<option value="<?php echo $key; ?>" <?php echo ( $country == $key ) ? 'selected="selected"' : ''; ?>>
+						<option value="<?php echo $key; ?>" <?php echo ( $country === $key ) ? 'selected="selected"' : ''; // phpcs:ignore ?>>
 							<?php echo esc_html( $_country ); ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 		<?php else : ?>
-			<input type="hidden" id="bring-country" name="bring-country" value="<?php echo key( $countries ); ?>">
+			<input type="hidden" id="bring-country" name="bring-country" value="<?php echo esc_attr( key( $countries ) ); ?>">
 		<?php endif; ?>
-		<label for="bring-post-code"><?php _e( 'Enter postcode (4 digits)', 'bring-fraktguiden' ); ?></label>
+		<label for="bring-post-code"><?php esc_html_e( 'Enter postcode (4 digits)', 'bring-fraktguiden-for-woocommerce' ); ?></label>
 		<div class="bring-search-box">
-			<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php _e( '0000', 'bring-fraktguiden' ); ?>"  name="bring-post-code" value="<?php echo $postcode; ?>">
-			<input class="bring-button button" type="submit" value="<?php _e( 'Get delivery methods', 'bring-fraktguiden' ); ?>">
+			<input id="bring-post-code" class="bring-input input-text" type="text" placeholder="<?php esc_attr_e( '0000', 'bring-fraktguiden-for-woocommerce' ); ?>"  name="bring-post-code" value="<?php echo esc_attr( $postcode ); ?>">
+			<input class="bring-button button" type="submit" value="<?php esc_attr_e( 'Get delivery methods', 'bring-fraktguiden-for-woocommerce' ); ?>">
 		</div>
 		<?php do_action( 'bring_fraktguiden_after_kco_postcode' ); ?>
 		<?php

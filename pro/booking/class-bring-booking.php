@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -46,6 +51,7 @@ if ( Fraktguiden_Helper::booking_enabled() && Fraktguiden_Helper::pro_activated(
 
 // Register awaiting shipment status.
 add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
+
 // Add awaiting shipping to existing order statuses.
 add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' );
 
@@ -92,12 +98,13 @@ class Bring_Booking {
 		register_post_status(
 			'wc-bring-shipment',
 			array(
-				'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden' ),
+				'label'                     => __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ),
 				'public'                    => true,
 				'exclude_from_search'       => false,
 				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => true,
-				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden' ) . ' <span class="count">(%s)</span>' ),
+				/* translators: %s: Number of awaiting shipments */
+				'label_count'               => _n_noop( __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ) . ' <span class="count">(%s)</span>', __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' ) . ' <span class="count">(%s)</span>' ),
 			)
 		);
 	}
@@ -109,14 +116,14 @@ class Bring_Booking {
 	 * @return array
 	 */
 	public static function add_awaiting_shipment_status( $order_statuses ) {
-		$new_order_statuses = array();
+		$new_order_statuses = [];
 
 		// Add the order status after processing.
 		foreach ( $order_statuses as $key => $status ) {
 			$new_order_statuses[ $key ] = $status;
 
 			if ( 'wc-processing' === $key ) {
-				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden' );
+				$new_order_statuses['wc-bring-shipment'] = __( 'Awaiting Shipment', 'bring-fraktguiden-for-woocommerce' );
 			}
 		}
 
@@ -124,66 +131,77 @@ class Bring_Booking {
 	}
 
 	/**
-	 * @param WC_Order $wc_order
+	 * Send booking
+	 *
+	 * @param WC_Order $wc_order WooCommerce order.
 	 */
-	static function send_booking( $wc_order ) {
+	public static function send_booking( $wc_order ) {
+		// Bring_WC_Order_Adapter.
 		$adapter = new Bring_WC_Order_Adapter( $wc_order );
 
-		// One booking request per. order shipping item.
+		// One booking request per order shipping item (WC_Order_Item_Shipping).
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
-
-			// service_id    = POST_I_POSTKASSE_SPORBAR
-			// shipping_item = WC_Order_Item_Shipping
-			// adapter       = Bring_WC_Order_Adapter
-
-			// Create the consignment
+			// Create the consignment.
 			$consignment_request = Bring_Consignment_Request::create( $shipping_item );
 			$consignment_request->fill(
 				[
 					'shipping_date_time' => self::get_shipping_date_time(),
-					'customer_number'    => isset( $_REQUEST['_bring-customer-number'] ) ? $_REQUEST['_bring-customer-number'] : '',
+					'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
 				]
 			);
+
 			$original_order_status = $wc_order->get_status();
+
 			// Set order status to awaiting shipping.
 			$wc_order->update_status( 'wc-bring-shipment' );
 
 			// Send the booking.
 			$response = $consignment_request->post();
 
-			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ] ) ) {
+			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
 				// @TODO: Error message
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
 			}
 
 			// Save the response json to the order.
 			$adapter->update_booking_response( $response );
-			// Download labels pdf
+
+			// Download labels pdf.
 			if ( $adapter->has_booking_errors() ) {
 				// If there are errors, set the status back to the original status.
 				$status      = $original_order_status;
-				$status_note = __( 'Booking errors. See the Bring Booking box for details.' . "\n", 'bring-fraktguiden' );
+				$status_note = __( 'Booking errors. See the Bring Booking box for details.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL;
 				$wc_order->update_status( $status, $status_note );
+
 				continue;
 			}
-			// Download the labels
+
+			// Download the labels.
 			$consigments = Bring_Consignment::create_from_response( $response, $wc_order->get_id() );
 			foreach ( $consigments as $consignment ) {
 				$consignment->download_label();
 			}
+
 			// Create new status and order note.
 			$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
-			if ( $status == 'none' ) {
-				// Set status back to the previous status
+			if ( 'none' === $status ) {
+				// Set status back to the previous status.
 				$status = $original_order_status;
 			}
-			$status_note = __( 'Booked with Bring' . "\n", 'bring-fraktguiden' );
+
+			$status_note = __( 'Booked with Bring', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL;
+
 			// Update status.
 			$wc_order->update_status( $status, $status_note );
 		}
 	}
 
-	static function create_shipping_date() {
+	/**
+	 * Create a shipping date
+	 *
+	 * @return array
+	 */
+	public static function create_shipping_date() {
 		return array(
 			'date'   => date_i18n( 'Y-m-d' ),
 			'hour'   => date_i18n( 'H', strtotime( '+1 hour', current_time( 'timestamp' ) ) ),
@@ -191,21 +209,34 @@ class Bring_Booking {
 		);
 	}
 
-	static function get_shipping_date_time() {
-		// Get the shipping date
-		if ( isset( $_REQUEST['_bring-shipping-date'] ) && isset( $_REQUEST['_bring-shipping-date-hour'] ) && isset( $_REQUEST['_bring-shipping-date-minutes'] ) ) {
-			return $_REQUEST['_bring-shipping-date'] . 'T' . $_REQUEST['_bring-shipping-date-hour'] . ':' . $_REQUEST['_bring-shipping-date-minutes'] . ':00';
+	/**
+	 * Get a shipping date time
+	 *
+	 * @return array
+	 */
+	public static function get_shipping_date_time() {
+		$input_request = Fraktguiden_Helper::get_input_request_method();
+
+		$date         = filter_input( $input_request, '_bring-shipping-date' );
+		$date_hour    = filter_input( $input_request, '_bring-shipping-date-hour' );
+		$date_minutes = filter_input( $input_request, '_bring-shipping-date-minutes' );
+
+		// Get the shipping date.
+		if ( $date && $date_hour && $date_minutes ) {
+			return $date . 'T' . $date_hour . ':' . $date_minutes . ':00';
 		}
+
 		$shipping_date = self::create_shipping_date();
+
 		return $shipping_date['date'] . 'T' . $shipping_date['hour'] . ':' . $shipping_date['minute'] . ':00';
 	}
 
 	/**
-	 * Bulk booking requests.
+	 * Bulk booking requests
 	 *
-	 * @param array $post_ids Array of WC_Order ID's
+	 * @param array $post_ids Array of WC_Order IDs.
 	 */
-	static function bulk_send_booking( $post_ids ) {
+	public static function bulk_send_booking( $post_ids ) {
 		foreach ( $post_ids as $post_id ) {
 			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
 			if ( ! $order->has_booking_consignments() ) {
@@ -215,31 +246,40 @@ class Bring_Booking {
 	}
 
 	/**
-	 * @return bool
+	 * Check if the plugin works in a test mode
+	 *
+	 * @return boolean
 	 */
-	static function is_test_mode() {
-		return Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) == 'yes';
+	public static function is_test_mode() {
+		return 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' );
 	}
 
 	/**
+	 * Get API UID
+	 *
 	 * @return bool|string
 	 */
-	static function get_api_uid() {
+	public static function get_api_uid() {
 		return Fraktguiden_Helper::get_option( 'mybring_api_uid' );
 	}
 
 	/**
+	 * Get API key
+	 *
 	 * @return bool|string
 	 */
-	static function get_api_key() {
+	public static function get_api_key() {
 		return Fraktguiden_Helper::get_option( 'mybring_api_key' );
 	}
 
 	/**
+	 * Get client URL
+	 *
 	 * @todo: create setting.
+	 *
 	 * @return bool|string
 	 */
-	static function get_client_url() {
-		return $_SERVER['HTTP_HOST'];
+	public static function get_client_url() {
+		return filter_input( INPUT_SERVER, 'HTTP_HOST' );
 	}
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Fraktguiden_Pickup_Point class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Fraktguiden_Pickup_Point
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -114,7 +114,7 @@ class Fraktguiden_Pickup_Point {
 
 		$make_items_editable = ! $order->order->is_editable();
 
-		if ( isset( $_GET['booking_step'] ) ) {
+		if ( ! is_null( filter_input( INPUT_GET, 'booking_step' ) ) ) {
 			$make_items_editable = false;
 		}
 
@@ -201,23 +201,23 @@ class Fraktguiden_Pickup_Point {
 	 */
 	public static function get_i18n() {
 		return [
-			'PICKUP_POINT'               => __( 'Pickup point', 'bring-fraktguiden' ),
-			'LOADING_TEXT'               => __( 'Please wait...', 'bring-fraktguiden' ),
-			'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', 'bring-fraktguiden' ),
-			'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
-			'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', 'bring-fraktguiden' ),
-			'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', 'bring-fraktguiden' ),
-			'SERVICE_PLACEHOLDER'        => __( 'Please select service', 'bring-fraktguiden' ),
-			'POSTCODE'                   => __( 'Postcode', 'bring-fraktguiden' ),
-			'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', 'bring-fraktguiden' ),
-			'SELECTED_TEXT'              => __( 'Selected pickup point', 'bring-fraktguiden' ),
-			'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', 'bring-fraktguiden' ),
-			'GET_RATE'                   => __( 'Get Rate', 'bring-fraktguiden' ),
-			'PLEASE_WAIT'                => __( 'Please wait', 'bring-fraktguiden' ),
-			'SERVICE'                    => __( 'Service', 'bring-fraktguiden' ),
-			'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', 'bring-fraktguiden' ),
-			'REQUEST_FAILED'             => __( 'Request was not successful', 'bring-fraktguiden' ),
-			'ADD_POSTCODE'               => __( 'Please add postal code', 'bring-fraktguiden' ),
+			'PICKUP_POINT'               => __( 'Pickup point', 'bring-fraktguiden-for-woocommerce' ),
+			'LOADING_TEXT'               => __( 'Please wait...', 'bring-fraktguiden-for-woocommerce' ),
+			'VALIDATE_SHIPPING1'         => __( 'Fraktguiden requires the following fields', 'bring-fraktguiden-for-woocommerce' ),
+			'VALIDATE_SHIPPING_POSTCODE' => __( 'Valid shipping postcode', 'bring-fraktguiden-for-woocommerce' ),
+			'VALIDATE_SHIPPING_COUNTRY'  => __( 'Valid shipping postcode', 'bring-fraktguiden-for-woocommerce' ),
+			'VALIDATE_SHIPPING2'         => __( 'Please update the fields and save the order first', 'bring-fraktguiden-for-woocommerce' ),
+			'SERVICE_PLACEHOLDER'        => __( 'Please select service', 'bring-fraktguiden-for-woocommerce' ),
+			'POSTCODE'                   => __( 'Postcode', 'bring-fraktguiden-for-woocommerce' ),
+			'PICKUP_POINT_PLACEHOLDER'   => __( 'Please select pickup point', 'bring-fraktguiden-for-woocommerce' ),
+			'SELECTED_TEXT'              => __( 'Selected pickup point', 'bring-fraktguiden-for-woocommerce' ),
+			'PICKUP_POINT_NOT_FOUND'     => __( 'No pickup points found for postcode', 'bring-fraktguiden-for-woocommerce' ),
+			'GET_RATE'                   => __( 'Get Rate', 'bring-fraktguiden-for-woocommerce' ),
+			'PLEASE_WAIT'                => __( 'Please wait', 'bring-fraktguiden-for-woocommerce' ),
+			'SERVICE'                    => __( 'Service', 'bring-fraktguiden-for-woocommerce' ),
+			'RATE_NOT_AVAILABLE'         => __( 'Rate is not available for this order. Please try another service', 'bring-fraktguiden-for-woocommerce' ),
+			'REQUEST_FAILED'             => __( 'Request was not successful', 'bring-fraktguiden-for-woocommerce' ),
+			'ADD_POSTCODE'               => __( 'Please add postal code', 'bring-fraktguiden-for-woocommerce' ),
 		];
 	}
 
@@ -340,7 +340,7 @@ class Fraktguiden_Pickup_Point {
 		);
 
 		if ( 200 !== $response->status_code ) {
-			die;
+			wp_die();
 		}
 
 		wp_send_json( json_decode( $response->get_body(), true ) );
@@ -379,6 +379,7 @@ class Fraktguiden_Pickup_Point {
 	public static function insert_pickup_points( $rates ) {
 		$rate_key        = false;
 		$service_package = false;
+
 		foreach ( $rates as $key => $rate ) {
 			if ( 'servicepakke' === $rate['bring_product'] ) {
 				// Service package identified.
@@ -400,12 +401,12 @@ class Fraktguiden_Pickup_Point {
 		$country            = esc_html( WC()->customer->get_shipping_country() );
 		$response           = self::get_pickup_points( $country, $postcode );
 
-		if ( 200 != $response->status_code ) {
+		if ( 200 !== $response->status_code ) {
 			sleep( 1 );
 			$response = self::get_pickup_points( $country, $postcode );
 		}
 
-		if ( 200 != $response->status_code ) {
+		if ( 200 !== $response->status_code ) {
 			return $rates;
 		}
 

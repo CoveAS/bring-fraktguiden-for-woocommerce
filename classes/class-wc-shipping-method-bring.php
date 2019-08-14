@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains WC_Shipping_Method_Bring class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\WC_Shipping_Method_Bring
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -127,8 +127,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function __construct( $instance_id = 0 ) {
 
 		$this->id                 = self::ID;
-		$this->method_title       = __( 'Bring Fraktguiden', 'bring-fraktguiden' );
-		$this->method_description = __( 'Automatically calculate shipping rates using brings fraktguiden api.', 'bring-fraktguiden' );
+		$this->method_title       = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
+		$this->method_description = __( 'Automatically calculate shipping rates using Bring Fraktguiden API.', 'bring-fraktguiden-for-woocommerce' );
 		$this->supports           = array(
 			'shipping-zones',
 			'settings',
@@ -266,16 +266,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return bool|array      Parameters for each box on success
 	 */
 	public function pack_order( $contents ) {
-			$packer        = new Fraktguiden_Packer();
-			$product_boxes = $packer->create_boxes( $contents );
+		$packer        = new Fraktguiden_Packer();
+		$product_boxes = $packer->create_boxes( $contents );
 		if ( ! $product_boxes ) {
 			return false;
 		}
-			$multipack = $this->get_setting( 'enable_multipack', 'yes' ) === 'yes';
-			// Pack product boxes.
-			$packer->pack( $product_boxes, $multipack );
-			// Create the url.
-			return $packer->create_packages_params();
+		$multipack = $this->get_setting( 'enable_multipack', 'yes' ) === 'yes';
+		// Pack product boxes.
+		$packer->pack( $product_boxes, $multipack );
+
+		// Create the url.
+		return $packer->create_packages_params();
 	}
 
 	/**
@@ -322,7 +323,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'id'            => $this->id,
 					'bring_product' => $this->get_setting( 'alt_flat_rate_id' ),
 					'cost'          => $this->get_price_setting( 'alt_flat_rate' ),
-					'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+					'label'         => $this->get_setting( 'alt_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 				);
 				$this->push_rate( $rate );
 			}
@@ -381,6 +382,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$request  = new WP_Bring_Request();
 		$response = $request->get( $url, [], $options );
 
+		if ( 400 == $response->status_code ) {
+			$json = json_decode( $response->get_body(), true );
+			$this->set_trace_messages( $json['fieldErrors'] );
+		}
 		if ( 200 != $response->status_code ) {
 			$no_connection_handling = $this->get_setting( 'no_connection_handling' );
 			if ( 'flat_rate' === $no_connection_handling ) {
@@ -389,7 +394,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 						'id'            => $this->id,
 						'bring_product' => $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
 						'cost'          => $this->get_price_setting( 'no_connection_flat_rate' ),
-						'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+						'label'         => $this->get_setting( 'no_connection_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 					]
 				);
 			}
@@ -398,7 +403,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Decode the JSON data from bring.
 		$json = json_decode( $response->get_body(), true );
-
 		if ( isset( $json['traceMessages'] ) ) {
 			$this->set_trace_messages( $json['traceMessages'] );
 		}
@@ -419,7 +423,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 							'id'            => $this->id,
 							'bring_product' => $this->get_setting( 'exception_rate_id', 'servicepakke' ),
 							'cost'          => $this->get_price_setting( 'exception_flat_rate' ),
-							'label'         => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden' ) ),
+							'label'         => $this->get_setting( 'exception_flat_rate_label', __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
 						]
 					);
 					break;
@@ -594,8 +598,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			if ( empty( $message['code'] ) ) {
 				continue;
 			}
+			$description = '';
+			if ( ! empty( $message['description'] ) ) {
+				$description = $message['description'];
+			} elseif ( ! empty( $message['message'] ) && ! empty( $message['field'] ) ) {
+				$description = "<strong>{$message['field']}</strong> {$message['message']}";
+			}
 
-			$message = "{$message['code']}: {$message['description']}";
+			$message = "{$message['code']}: {$description}";
 
 		}
 		$this->trace_messages = array_merge( $this->trace_messages, $messages );

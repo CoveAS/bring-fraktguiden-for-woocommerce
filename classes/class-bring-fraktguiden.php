@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Bring_Fraktguiden class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Bring_Fraktguiden
+ * @package Bring_Fraktguiden
  */
 
 /**
@@ -10,7 +10,7 @@
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.6.1';
+	const VERSION = '1.6.2';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -31,11 +31,11 @@ class Bring_Fraktguiden {
 		require_once 'common/class-fraktguiden-admin-notices.php';
 		require_once FRAKTGUIDEN_PLUGIN_PATH . 'pro/class-wc-shipping-method-bring-pro.php';
 
-		load_plugin_textdomain( 'bring-fraktguiden', false, basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/languages/' );
+		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/languages/' );
 
 		add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
 
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Bring_Fraktguiden::plugin_action_links' );
+		add_filter( 'plugin_action_links_' . basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/bring-fraktguiden-for-woocommerce.php', __CLASS__ . '::plugin_action_links' );
 
 		if ( is_admin() ) {
 			require_once FRAKTGUIDEN_PLUGIN_PATH . 'system-info-page.php';
@@ -59,10 +59,11 @@ class Bring_Fraktguiden {
 		Fraktguiden_Admin_Notices::init();
 
 		// Check the license when PRO version is activated.
-		if ( isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) ) {
-			$license = fraktguiden_license::get_instance();
+		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_pro_enabled' ) ) {
+			$license = Fraktguiden_License::get_instance();
 			$license->check_license();
 		}
+
 		require_once 'common/class-postcode-validation.php';
 		Bring_Fraktguiden\Postcode_Validation::setup();
 	}
@@ -94,15 +95,15 @@ class Bring_Fraktguiden {
 	 * Enqueue styles
 	 */
 	public static function enqueue_styles() {
-		wp_register_style( 'bring-fraktguiden', plugins_url( FRAKTGUIDEN_PLUGIN_PATH . 'assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
-		wp_enqueue_style( 'bring-fraktguiden' );
+		wp_register_style( 'bring-fraktguiden-for-woocommerce', plugins_url( FRAKTGUIDEN_PLUGIN_PATH . 'assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
+		wp_enqueue_style( 'bring-fraktguiden-for-woocommerce' );
 	}
 
 	/**
 	 * Set up a cron task for license check
 	 */
 	public static function cron_task() {
-		$license = fraktguiden_license::get_instance();
+		$license = Fraktguiden_License::get_instance();
 		$license->check_license();
 	}
 
@@ -134,8 +135,9 @@ class Bring_Fraktguiden {
 	 * @return array
 	 */
 	public static function plugin_action_links( $links ) {
+
 		$action_links = array(
-			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden' ) ) . '">' . __( 'Settings', 'bring-fraktguiden' ) . '</a>',
+			'settings' => '<a href="' . Fraktguiden_Helper::get_settings_url() . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden-for-woocommerce' ) ) . '">' . __( 'Settings', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );
@@ -156,6 +158,6 @@ class Bring_Fraktguiden {
 			return;
 		}
 
-		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden' );
+		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden-for-woocommerce' );
 	}
 }

@@ -1,21 +1,43 @@
 <?php
+/**
+ * This file is part of Bring Fraktguiden for WooCommerce.
+ *
+ * @package Bring_Fraktguiden
+ */
 
+/**
+ * Bring_Zpl_Collection class
+ */
 class Bring_Zpl_Collection extends Bring_Label_Collection {
+
+	/**
+	 * Merge
+	 *
+	 * @return string
+	 */
 	public function merge() {
-		$file = reset( $this->files );
-		$merge_file = $file['file']->get_path();
-		if ( 1 !== count( $this->files ) ) {
-			$merge_file = $file['file']->get_dir() . '/labels-merged.zpl';
-			$merge_fh   = fopen( $merge_file, 'w' );
-			foreach ( $this->files as $file ) {
-				$fh = fopen( $file['file']->get_path(), 'r' );
-				while( ( $line = fgets( $fh ) ) !== false ) {
-					fputs( $merge_fh, $line );
-				}
-				fclose( $fh );
-			}
-			fclose( $merge_fh );
+
+		$file      = reset( $this->files );
+		$file_path = $file['file']->get_path();
+
+		// Do not try to merge if this is a single file.
+		if ( 1 === count( $this->files ) ) {
+			return $file_path;
 		}
-		return $merge_file;
+
+		// Set a path to a new file where multiple files will be merged.
+		$merged_file_path = $file['file']->get_dir() . '/labels-merged.zpl';
+
+		// Initialize WP Filesystem.
+		WP_Filesystem();
+		global $wp_filesystem;
+
+		// Go through all the files and merge them into one.
+		foreach ( $this->files as $file ) {
+			$file_content = $wp_filesystem->get_contents( $file_path );
+			$wp_filesystem->put_contents( $merged_file_path, $file_content, FS_CHMOD_FILE );
+		}
+
+		return $merged_file_path;
 	}
 }

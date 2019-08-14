@@ -1,8 +1,8 @@
 <?php
 /**
- * This file contains Fraktguiden_System_Info class
+ * This file is part of Bring Fraktguiden for WooCommerce.
  *
- * @package Bring_Fraktguiden\Fraktguiden_System_Info
+ * @package Bring_Fraktguiden
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -155,17 +155,16 @@ class Fraktguiden_System_Info {
 		self::create_row( 'pro', ( $is_pro ? 'yes' : 'no' ) );
 
 		foreach ( $options as $key => $option ) {
-			$val = '';
+			$val = $option;
 
 			if ( 'array' === gettype( $option ) ) {
-				$val .= '<ul>';
+				$val = '<ul>';
 
-				foreach ( $option as $o ) {
-					$val .= '<li>' . $o . '</li>';
+				foreach ( $option as $opt ) {
+					$val .= '<li>' . $opt . '</li>';
 				}
+
 				$val .= '</ul>';
-			} else {
-				$val = $option;
 			}
 
 			if ( 'mybring_api_key' === $key ) {
@@ -257,14 +256,16 @@ class Fraktguiden_System_Info {
 			$info_table = '<table class="properties">';
 
 			foreach ( $service as $k => $v ) {
+				$val_html = $v;
+
 				if ( 'array' === gettype( $v ) ) {
 					$val_html = '';
+
 					foreach ( $v as $n ) {
 						$val_html .= '<li>' . $n . '</li>';
 					}
+
 					$val_html .= '</ul>';
-				} else {
-					$val_html = $v;
 				}
 
 				$info_table .= "
