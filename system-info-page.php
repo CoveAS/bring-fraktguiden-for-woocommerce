@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'Fraktguiden_Helper' ) ) {
-	include_once 'classes/common/class-fraktguiden-helper.php';
+	require_once 'classes/common/class-fraktguiden-helper.php';
 }
 
 /**
@@ -108,7 +108,7 @@ class Fraktguiden_System_Info {
 			</table>
 		</div>
 
-			<?php self::generate_script(); ?>
+		<?php self::generate_script(); ?>
 
 		</body>
 		</html>
@@ -123,11 +123,13 @@ class Fraktguiden_System_Info {
 	 * @return void
 	 */
 	private static function create_header( $header_text ) {
-		echo '<thead>';
-		echo '<tr>';
-		echo '<th colspan="2">' . esc_html( $header_text ) . '</th>';
-		echo '</tr>';
-		echo '</thead>';
+		?>
+		<thead>
+			<tr>
+				<th colspan="2"><?php echo esc_html( $header_text ); ?></th>
+			</tr>
+		</thead>
+		<?php
 	}
 
 	/**
@@ -138,10 +140,13 @@ class Fraktguiden_System_Info {
 	 * @return void
 	 */
 	private static function create_row( $key, $val ) {
-		echo '<tr>';
-		echo '<td>' . esc_html( $key ) . '</td>';
-		echo '<td>' . esc_html( $val ) . '</td>';
-		echo '</tr>';
+		?>
+		<tr>
+			<td><?php echo esc_html( $key ); ?></td>
+			<?php // The value may contain HTML code. ?>
+			<td><?php echo $val; // phpcs:ignore ?></td>
+		</tr>
+		<?php
 	}
 
 	/**
@@ -175,7 +180,7 @@ class Fraktguiden_System_Info {
 		}
 
 		if ( $is_pro ) {
-			self::create_row( 'labels_directory', Bring_Booking_Labels::get_local_dir() );
+			self::create_row( 'labels_directory', '' ); // TODO.
 		}
 	}
 
@@ -297,18 +302,16 @@ class Fraktguiden_System_Info {
 	private static function generate_script() {
 		?>
 		<script>
+		window.addEventListener( 'load', function () {
 			var more_elem = document.querySelector( '.js-more' );
-			var shipping_countries_elem = document.querySelector( '.shipping-countries' );
 			var hidden_elem = document.querySelector( '.js-hidden' );
 
-			shipping_countries_elem.addEventListener( 'click', function ( evt ) {
-				hidden_elem.style.display = hidden_elem.style.display == 'none' ? '' : 'none';
-				more_elem.textContent = hidden_elem.style.display == 'none' ? 'More...' : 'Less';
-			} );
-
 			more_elem.addEventListener( 'click', function ( evt ) {
+				hidden_elem.style.display = hidden_elem.style.display === 'none' ? '' : 'none';
+				more_elem.textContent = hidden_elem.style.display === 'none' ? 'More...' : 'Less';
 				evt.preventDefault();
 			} );
+		})
 		</script>
 		<?php
 	}
