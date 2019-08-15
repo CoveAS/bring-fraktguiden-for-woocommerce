@@ -69,6 +69,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.6.4 =
+
+* Fixed input filtering of array
+
 = 1.6.3 =
 
 * Fixed compability with INPUT_SERVER for servers using FASTCGI
