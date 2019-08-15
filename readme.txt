@@ -8,12 +8,13 @@ Requires at least: 4.5
 Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
-WC tested up to: 3.6.5
+WC tested up to: 3.7.0
 Stable tag: 1.6.2
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
+
 Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no
 
 All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
@@ -91,6 +92,15 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 
 == Changelog ==
+
+= 1.6.3 =
+
+* Fixed compability with INPUT_SERVER for servers using FASTCGI
+* Fixed issue where Bring System Info page requested a method that didn't exist
+* Fixed issue with bulk actions on orders archive
+* Fixed Bring System Info page is no longer required by default
+* Added helper links in Mybring API tab
+* Added missing translations for service descriptions
 
 = 1.6.2 =
 
@@ -264,7 +274,3 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 = 1.0.0 =
 
 * Initial release.
-
----
-
-> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
