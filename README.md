@@ -69,6 +69,15 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.6.3 =
+
+* Fixed compability with INPUT_SERVER for servers using FASTCGI
+* Fixed issue where Bring System Info page requested a method that didn't exist
+* Fixed issue with bulk actions on orders archive
+* Fixed Bring System Info page is no longer required by default
+* Added helper links in Mybring API tab
+* Added missing translations for service descriptions
+
 = 1.6.2 =
 
 * Updated UI
@@ -280,6 +289,3 @@ $ git commit -m "A brief summary of the commit
 > A paragraph describing what changed and its impact."
 ````
 * Create a [pull request](https://help.github.com/articles/using-pull-requests/)
-
-
-> Special thanks goes to out to **Matt Gates** for starting this project and allowing us to build upon his original codebase.
