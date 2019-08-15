@@ -290,7 +290,7 @@ class Fraktguiden_Pickup_Point {
 
 		// @todo: share / filter
 		$standard_params = array(
-			'clientUrl'           => filter_input( INPUT_SERVER, 'HTTP_HOST' ),
+			'clientUrl'           => Fraktguiden_Helper::get_client_url(),
 			'frompostalcode'      => Fraktguiden_Helper::get_option( 'from_zip' ),
 			'fromcountry'         => Fraktguiden_Helper::get_option( 'from_country' ),
 			'topostalcode'        => $postcode,

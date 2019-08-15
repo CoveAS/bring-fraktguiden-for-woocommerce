@@ -527,7 +527,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
 			[
-				'clientUrl'           => filter_input( INPUT_SERVER, 'HTTP_HOST' ),
+				'clientUrl'           => Fraktguiden_Helper::get_client_url(),
 				'frompostalcode'      => $this->from_zip,
 				'fromcountry'         => $this->get_selected_from_country(),
 				'topostalcode'        => $package['destination']['postcode'],

@@ -271,15 +271,4 @@ class Bring_Booking {
 	public static function get_api_key() {
 		return Fraktguiden_Helper::get_option( 'mybring_api_key' );
 	}
-
-	/**
-	 * Get client URL
-	 *
-	 * @todo: create setting.
-	 *
-	 * @return bool|string
-	 */
-	public static function get_client_url() {
-		return filter_input( INPUT_SERVER, 'HTTP_HOST' );
-	}
 }

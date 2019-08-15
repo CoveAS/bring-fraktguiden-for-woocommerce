@@ -6,12 +6,12 @@
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
  *
- * Version:             1.6.2
+ * Version:             1.6.3
  * Requires at least:   4.9.1
  * Tested up to:        5.2.2
  *
  * WC requires at least: 3.4.0
- * WC tested up to: 3.6.5
+ * WC tested up to: 3.7.0
  *
  * Text Domain:         bring-fraktguiden-for-woocommerce
  * Domain Path:         /languages

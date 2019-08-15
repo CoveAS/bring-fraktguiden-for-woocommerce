@@ -30,7 +30,7 @@ class Bring_Booking_Customer {
 				'Accept'             => 'application/json',
 				'X-MyBring-API-Uid'  => Bring_Booking::get_api_uid(),
 				'X-MyBring-API-Key'  => Bring_Booking::get_api_key(),
-				'X-Bring-Client-URL' => Bring_Booking::get_client_url(),
+				'X-Bring-Client-URL' => Fraktguiden_Helper::get_client_url(),
 			],
 		];
 

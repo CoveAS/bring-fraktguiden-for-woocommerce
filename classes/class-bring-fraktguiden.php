@@ -10,7 +10,7 @@
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.6.2';
+	const VERSION = '1.6.3';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -38,8 +38,7 @@ class Bring_Fraktguiden {
 		add_filter( 'plugin_action_links_' . basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/bring-fraktguiden-for-woocommerce.php', __CLASS__ . '::plugin_action_links' );
 
 		if ( is_admin() ) {
-			require_once FRAKTGUIDEN_PLUGIN_PATH . 'system-info-page.php';
-			add_action( 'wp_ajax_bring_system_info', 'Fraktguiden_System_Info::generate' );
+			add_action( 'wp_ajax_bring_system_info', [ __CLASS__, 'get_system_info_page' ] );
 		}
 
 		Fraktguiden_Minimum_Dimensions::setup();
@@ -66,6 +65,15 @@ class Bring_Fraktguiden {
 
 		require_once 'common/class-postcode-validation.php';
 		Bring_Fraktguiden\Postcode_Validation::setup();
+	}
+
+	/**
+	 * Get system info page
+	 */
+	public static function get_system_info_page() {
+		require_once FRAKTGUIDEN_PLUGIN_PATH . 'system-info-page.php';
+
+		return Fraktguiden_System_Info::generate();
 	}
 
 	/**

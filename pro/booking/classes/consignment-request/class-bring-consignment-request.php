@@ -242,7 +242,7 @@ abstract class Bring_Consignment_Request {
 				'Accept'             => 'application/json',
 				'X-MyBring-API-Uid'  => Fraktguiden_Helper::get_option( 'mybring_api_uid' ),
 				'X-MyBring-API-Key'  => Fraktguiden_Helper::get_option( 'mybring_api_key' ),
-				'X-Bring-Client-URL' => filter_input( INPUT_SERVER, 'HTTP_HOST' ),
+				'X-Bring-Client-URL' => Fraktguiden_Helper::get_client_url(),
 			],
 			'body'    => wp_json_encode( $this->create_data() ),
 		];

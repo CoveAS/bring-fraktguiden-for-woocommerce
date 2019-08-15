@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-08-12 16:15+0200\n"
+"POT-Creation-Date: 2019-08-15 12:56+0200\n"
 "PO-Revision-Date: 2018-01-16 21:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -740,24 +740,39 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: classes/traits/settings.php:456 classes/traits/settings.php:458
+#: classes/traits/settings.php:455
+#, php-format
+msgid "Find your Email %1$shere%2$s."
+msgstr ""
+
+#: classes/traits/settings.php:458 classes/traits/settings.php:460
 msgid "API key"
 msgstr ""
 
-#: classes/traits/settings.php:462 classes/traits/settings.php:464
+#: classes/traits/settings.php:463
+#, php-format
+msgid "Find your API key %1$shere%2$s."
+msgstr ""
+
+#: classes/traits/settings.php:466 classes/traits/settings.php:468
 msgid "API customer number"
 msgstr ""
 
-#: classes/traits/settings.php:493
+#: classes/traits/settings.php:471
+#, php-format
+msgid "Find your API customer number %1$shere%2$s."
+msgstr ""
+
+#: classes/traits/settings.php:499
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 
-#: classes/traits/settings.php:507
+#: classes/traits/settings.php:513
 msgid "Gateway Disabled"
 msgstr ""
 
-#: classes/traits/settings.php:508
+#: classes/traits/settings.php:514
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -766,11 +781,11 @@ msgid ""
 "currency. Choose that from the <a href=\"%2$s\">General tab</a>"
 msgstr ""
 
-#: classes/traits/settings.php:678
+#: classes/traits/settings.php:684
 msgid "Mybring authentication failed"
 msgstr ""
 
-#: classes/traits/settings.php:678
+#: classes/traits/settings.php:684
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
@@ -1277,7 +1292,7 @@ msgid "Customer Number"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-order-view.php:193
-#: pro/booking/views/class-bring-booking-orders-view.php:93
+#: pro/booking/views/class-bring-booking-orders-view.php:113
 msgid "Shipping Date"
 msgstr ""
 
@@ -1427,34 +1442,33 @@ msgstr ""
 msgid "Press Start to try again"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:37
+#: pro/booking/views/class-bring-booking-orders-view.php:38
+msgid "Bring - Print labels"
+msgstr ""
+
+#: pro/booking/views/class-bring-booking-orders-view.php:51
 msgid "Booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:75
+#: pro/booking/views/class-bring-booking-orders-view.php:95
 #: pro/class-wc-shipping-method-bring-pro.php:230
 msgid "Mybring Booking"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:77
+#: pro/booking/views/class-bring-booking-orders-view.php:97
 msgid "Close modal panel"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:82
+#: pro/booking/views/class-bring-booking-orders-view.php:102
 msgid "This will only book orders that has not been booked."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:85
+#: pro/booking/views/class-bring-booking-orders-view.php:105
 msgid "Selected orders"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:89
+#: pro/booking/views/class-bring-booking-orders-view.php:109
 msgid "Mybring Customer"
-msgstr ""
-
-#: pro/booking/views/class-bring-booking-orders-view.php:119
-#: pro/booking/views/class-bring-booking-orders-view.php:120
-msgid "Bring - Print labels"
 msgstr ""
 
 #: pro/booking/views/class-bring-booking-waybills.php:91

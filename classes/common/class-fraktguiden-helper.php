@@ -510,6 +510,32 @@ class Fraktguiden_Helper {
 	 * @return int
 	 */
 	public static function get_input_request_method() {
-		return constant( 'INPUT_' . filter_input( INPUT_SERVER, 'REQUEST_METHOD' ) );
+		$request_method = 'GET';
+
+		if ( ! empty( $_SERVER['REQUEST_METHOD'] ) ) {
+			$request_method = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) );
+		}
+
+		return constant( 'INPUT_' . $request_method );
+	}
+
+	/**
+	 * Get client URL
+	 *
+	 * @todo: create setting.
+	 *
+	 * @return bool|string
+	 */
+	public static function get_client_url() {
+		$client_url = filter_input( INPUT_SERVER, 'HTTP_HOST' );
+
+		if ( ! empty( $client_url ) ) {
+			return $client_url;
+		}
+
+		// Fallback for not supported INPUT_SERVER when using FASTCGI.
+		$home_url = wp_parse_url( get_home_url() );
+
+		return $home_url['host'];
 	}
 }
