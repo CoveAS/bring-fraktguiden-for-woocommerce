@@ -451,18 +451,24 @@ trait Settings {
 				'type'        => 'text',
 				'label'       => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => 'bring@example.com',
+				/* translators: %s: Mybring profile page URL */
+				'description' => sprintf( __( 'Find your Email %1$shere%2$s.', 'bring-fraktguiden-for-woocommerce' ), '<a href="https://www.mybring.com/useradmin/account/profile" target="_blank">', '</a>' ),
 			],
 			'mybring_api_key'               => [
 				'title'       => __( 'API key', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'label'       => __( 'API key', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => '4abcdef1-4a60-4444-b9c7-9876543219bf',
+				/* translators: %s: Mybring API settings page URL */
+				'description' => sprintf( __( 'Find your API key %1$shere%2$s.', 'bring-fraktguiden-for-woocommerce' ), '<a href="https://www.mybring.com/useradmin/account/settings/api" target="_blank">', '</a>' ),
 			],
 			'mybring_customer_number'       => [
 				'title'       => __( 'API customer number', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'text',
 				'label'       => __( 'API customer number', 'bring-fraktguiden-for-woocommerce' ),
 				'placeholder' => 'PARCELS_NORWAY-100########',
+				/* translators: %s: Mybring API settings page URL */
+				'description' => sprintf( __( 'Find your API customer number %1$shere%2$s.', 'bring-fraktguiden-for-woocommerce' ), '<a href="https://www.mybring.com/useradmin/account/settings/api" target="_blank">', '</a>' ),
 			],
 		];
 

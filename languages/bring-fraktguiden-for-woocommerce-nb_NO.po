@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2019-08-12 16:15+0200\n"
-"PO-Revision-Date: 2019-08-12 16:15+0200\n"
+"POT-Creation-Date: 2019-08-15 12:56+0200\n"
+"PO-Revision-Date: 2019-08-15 12:59+0200\n"
 "Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -810,25 +810,40 @@ msgstr "Legg inn din API legitimasjon. API autentisering er pålagt."
 msgid "Email"
 msgstr "Epost"
 
-#: classes/traits/settings.php:456 classes/traits/settings.php:458
+#: classes/traits/settings.php:455
+#, php-format
+msgid "Find your Email %1$shere%2$s."
+msgstr "Finn din Epost %1$sher%2$s."
+
+#: classes/traits/settings.php:458 classes/traits/settings.php:460
 msgid "API key"
 msgstr "API-nøkkel"
 
-#: classes/traits/settings.php:462 classes/traits/settings.php:464
+#: classes/traits/settings.php:463
+#, php-format
+msgid "Find your API key %1$shere%2$s."
+msgstr "Finn din API-nøkkel %1$sher%2$s."
+
+#: classes/traits/settings.php:466 classes/traits/settings.php:468
 msgid "API customer number"
 msgstr "API-kundenummer"
 
-#: classes/traits/settings.php:493
+#: classes/traits/settings.php:471
+#, php-format
+msgid "Find your API customer number %1$shere%2$s."
+msgstr "Finn ditt API-kundenummer %1$sher%2$s."
+
+#: classes/traits/settings.php:499
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 "Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
 
-#: classes/traits/settings.php:507
+#: classes/traits/settings.php:513
 msgid "Gateway Disabled"
 msgstr "Gateway Disabled"
 
-#: classes/traits/settings.php:508
+#: classes/traits/settings.php:514
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -841,11 +856,11 @@ msgstr ""
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
-#: classes/traits/settings.php:678
+#: classes/traits/settings.php:684
 msgid "Mybring authentication failed"
 msgstr "Mybring autentisering mislyktes"
 
-#: classes/traits/settings.php:678
+#: classes/traits/settings.php:684
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
@@ -1364,7 +1379,7 @@ msgid "Customer Number"
 msgstr "Kundenummer"
 
 #: pro/booking/views/class-bring-booking-order-view.php:193
-#: pro/booking/views/class-bring-booking-orders-view.php:93
+#: pro/booking/views/class-bring-booking-orders-view.php:113
 msgid "Shipping Date"
 msgstr "Forsendelsesdato"
 
@@ -1514,35 +1529,34 @@ msgstr "Forrige forespørsel feilet med følgende feilmeldinger:"
 msgid "Press Start to try again"
 msgstr "Trykk start for å forsøke igjen"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:37
+#: pro/booking/views/class-bring-booking-orders-view.php:38
+msgid "Bring - Print labels"
+msgstr "Bring - Etiketter"
+
+#: pro/booking/views/class-bring-booking-orders-view.php:51
 msgid "Booking"
 msgstr "Booking"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:75
+#: pro/booking/views/class-bring-booking-orders-view.php:95
 #: pro/class-wc-shipping-method-bring-pro.php:230
 msgid "Mybring Booking"
 msgstr "Mybring Booking"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:77
+#: pro/booking/views/class-bring-booking-orders-view.php:97
 msgid "Close modal panel"
 msgstr "Lukk dialogvindu"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:82
+#: pro/booking/views/class-bring-booking-orders-view.php:102
 msgid "This will only book orders that has not been booked."
 msgstr "Gjelder kun bestillinger som ikke er reservert."
 
-#: pro/booking/views/class-bring-booking-orders-view.php:85
+#: pro/booking/views/class-bring-booking-orders-view.php:105
 msgid "Selected orders"
 msgstr "Velg bestillinger"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:89
+#: pro/booking/views/class-bring-booking-orders-view.php:109
 msgid "Mybring Customer"
 msgstr "Mybring kunde"
-
-#: pro/booking/views/class-bring-booking-orders-view.php:119
-#: pro/booking/views/class-bring-booking-orders-view.php:120
-msgid "Bring - Print labels"
-msgstr "Bring - Etiketter"
 
 #: pro/booking/views/class-bring-booking-waybills.php:91
 msgid "Book consignments"
