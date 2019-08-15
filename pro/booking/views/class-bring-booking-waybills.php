@@ -23,27 +23,9 @@ class Bring_Booking_Waybills {
 	 */
 	public static function setup() {
 		// Process waybill orders.
-		add_action( 'admin_init', __CLASS__ . '::process_waybill_order' );
 		add_filter( 'bulk_actions-edit-waybill', __CLASS__ . '::register_bulk_actions' );
 		add_filter( 'handle_bulk_actions-edit-waybill', __CLASS__ . '::bulk_action_handler', 10, 3 );
 		add_action( 'admin_notices', __CLASS__ . '::bulk_action_admin_notice' );
-	}
-
-	/**
-	 * Process response
-	 *
-	 * @return void
-	 */
-	public static function process_waybill_order() {
-		$consignment_numbers = filter_input( INPUT_POST, 'consignment_numbers' );
-
-		if ( ! is_array( $consignment_numbers ) ) {
-			return;
-		}
-
-		foreach ( $consignment_numbers as $customer_number => $consigments ) {
-
-		}
 	}
 
 	/**

@@ -42,9 +42,9 @@ class Fraktguiden_Service_Table {
 		$sanitized_services = [];
 		$field_key          = $this->shipping_method->get_field_key( 'services' );
 
-		$services = filter_input( INPUT_POST, $field_key );
+		$services = filter_input( INPUT_POST, $field_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
-		if ( ! is_array( $services ) ) {
+		if ( empty( $services ) ) {
 			return $sanitized_services;
 		}
 

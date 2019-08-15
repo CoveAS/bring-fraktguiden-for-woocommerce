@@ -39,6 +39,7 @@ class Bring_Waybill_View {
 	 */
 	public static function save_waybill( $post_id, $post ) {
 		$consignment_numbers = filter_input( INPUT_POST, 'consignment_numbers', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
 		if ( empty( $consignment_numbers ) ) {
 			return;
 		}
