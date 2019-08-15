@@ -38,15 +38,14 @@ class Bring_Waybill_View {
 	 * @param WP_Post $post    Post.
 	 */
 	public static function save_waybill( $post_id, $post ) {
-		$consignment_numbers = filter_input( INPUT_POST, 'consignment_numbers' );
-
-		if ( empty( $consignment_numbers ) || ! is_array( $consignment_numbers ) ) {
+		$consignment_numbers = filter_input( INPUT_POST, 'consignment_numbers', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( empty( $consignment_numbers ) ) {
 			return;
 		}
 
 		self::$request_data  = get_post_meta( $post_id, '_waybill_request_data', true );
 
-		$retry_request = filter_input( INPUT_POST, 'retry_request' );
+		$retry_request = filter_input( INPUT_GET, 'retry_request' );
 
 		// Return early if retry request is not pressed.
 		if ( self::$request_data && ! $retry_request ) {
