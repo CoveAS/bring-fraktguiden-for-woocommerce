@@ -125,7 +125,7 @@ class WP_Bring_Request {
 		if ( $mybring_api_key && $mybring_api_uid ) {
 			$options['headers']['X-MyBring-API-Uid']  = $mybring_api_uid;
 			$options['headers']['X-MyBring-API-Key']  = $mybring_api_key;
-			$options['headers']['X-Bring-Client-URL'] = filter_input( INPUT_SERVER, 'HTTP_HOST' );
+			$options['headers']['X-Bring-Client-URL'] = Fraktguiden_Helper::get_client_url();
 		}
 
 		return $options;
