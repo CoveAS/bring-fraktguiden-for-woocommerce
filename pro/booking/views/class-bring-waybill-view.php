@@ -45,7 +45,7 @@ class Bring_Waybill_View {
 
 		self::$request_data  = get_post_meta( $post_id, '_waybill_request_data', true );
 
-		$retry_request = filter_input( INPUT_GET, 'retry_request' );
+		$retry_request = filter_input( INPUT_POST, 'retry_request' );
 
 		// Return early if retry request is not pressed.
 		if ( self::$request_data && ! $retry_request ) {
