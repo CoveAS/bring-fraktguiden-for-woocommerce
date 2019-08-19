@@ -36,6 +36,7 @@ class Bring_Pdf_Collection extends Bring_Label_Collection {
 
 		// Go through all the files and merge them into one.
 		foreach ( $this->files as $file ) {
+			$file_path = $file['file']->get_path();
 			$merger->addPDF( $file_path );
 		}
 
