@@ -186,7 +186,7 @@ class Fraktguiden_Product_Debug {
 	 */
 	public static function get_package( $product, $country = false, $post_code = false ) {
 		if ( false === $country ) {
-			$country = WC()->countries->get_base_postcode();
+			$country = WC()->countries->get_base_country();
 		}
 
 		if ( false === $post_code ) {
@@ -248,8 +248,12 @@ class Fraktguiden_Product_Debug {
 		$package   = self::get_package( $product, $country, $post_code );
 		$zone      = wc_get_shipping_zone( $package );
 		$bring     = self::get_bring( $zone );
-		$rates     = $bring->get_rates_for_package( $package );
-		$messages  = $bring->get_trace_messages();
+		if ( ! $bring ) {
+			printf( '<p>%s</p>', esc_html__( 'Bring is not configured for the selected zone', 'bring-fraktguiden-for-woocommerce' ) );
+			die;
+		}
+		$rates    = $bring->get_rates_for_package( $package );
+		$messages = $bring->get_trace_messages();
 
 		echo '<ul >';
 		foreach ( $messages as $message ) {
@@ -258,8 +262,8 @@ class Fraktguiden_Product_Debug {
 
 		if ( empty( $rates ) ) {
 			echo '<li class="bring-debug__trace-message">Bring did not return any shipping rates.</li>' . PHP_EOL;
-
-			return;
+			echo '</ul>';
+			die;
 		}
 
 		echo '</ul>';
