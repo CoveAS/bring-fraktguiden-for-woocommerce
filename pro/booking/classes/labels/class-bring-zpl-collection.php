@@ -17,12 +17,11 @@ class Bring_Zpl_Collection extends Bring_Label_Collection {
 	 */
 	public function merge() {
 
-		$file      = reset( $this->files );
-		$file_path = $file['file']->get_path();
+		$file = reset( $this->files );
 
 		// Do not try to merge if this is a single file.
 		if ( 1 === count( $this->files ) ) {
-			return $file_path;
+			return $file['file']->get_path();
 		}
 
 		// Set a path to a new file where multiple files will be merged.
@@ -34,7 +33,7 @@ class Bring_Zpl_Collection extends Bring_Label_Collection {
 
 		// Go through all the files and merge them into one.
 		foreach ( $this->files as $file ) {
-			$file_content = $wp_filesystem->get_contents( $file_path );
+			$file_content = $wp_filesystem->get_contents( $file['file']->get_path() );
 			$wp_filesystem->put_contents( $merged_file_path, $file_content, FS_CHMOD_FILE );
 		}
 
