@@ -17,12 +17,11 @@ class Bring_Pdf_Collection extends Bring_Label_Collection {
 	 */
 	public function merge() {
 
-		$file      = reset( $this->files );
-		$file_path = $file['file']->get_path();
+		$file = reset( $this->files );
 
 		// Do not try to merge if this is a single file.
 		if ( 1 === count( $this->files ) ) {
-			return $file_path;
+			return $file['file']->get_path();
 		}
 
 		// Set a path to a new file where multiple files will be merged.
@@ -36,8 +35,7 @@ class Bring_Pdf_Collection extends Bring_Label_Collection {
 
 		// Go through all the files and merge them into one.
 		foreach ( $this->files as $file ) {
-			$file_path = $file['file']->get_path();
-			$merger->addPDF( $file_path );
+			$merger->addPDF( $file['file']->get_path() );
 		}
 
 		$merger->merge( 'file', $merged_file_path );
