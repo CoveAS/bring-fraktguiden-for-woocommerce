@@ -68,7 +68,7 @@ class Fraktguiden_Service_Table {
 
 		// Process services table.
 		$services  = Fraktguiden_Helper::get_services_data();
-		$field_key = $field_key;
+
 		$vars      = [
 			'custom_prices',
 			'custom_names',
@@ -76,6 +76,7 @@ class Fraktguiden_Service_Table {
 			'free_shipping_checks',
 			'free_shipping_thresholds',
 		];
+
 		$options   = [];
 
 		// Only process options for enabled services.
