@@ -7,7 +7,7 @@ input.bring-error-input.input-text {
 }
 
 span.bring-error-message {
-	font-size: 0.8em;
+	font-size: .8em;
 }
 
 /**
@@ -36,7 +36,7 @@ span.bring-error-message {
 	margin-right: 1rem;
 }
 
-@supports ((--variable : style)) {
+@supports ((--variable: style)) {
 	.bring-enter-postcode.bring-error,
 	input.bring-error-input.input-text {
 		border-color: var( --error-color, red ) !important;
@@ -49,4 +49,13 @@ span.bring-error-message {
 	.bring-button::after {
 		content: "❗️";
 	}
+}
+
+/**
+ * Pick-up points
+ */
+.bring_pickup_point {
+	font-size: small;
+	display: inline-block;
+	width: 100%;
 }
