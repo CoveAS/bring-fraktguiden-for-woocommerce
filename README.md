@@ -69,8 +69,16 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
-= 1.6.4 =
+= 1.6.6 =
 
+* Added new meta data for pick up points
+* Fixed issue with bulk printing ZPL labels
+* Fixed path when registering styles
+* Changed the style to only load when Bring is on the page
+
+= 1.6.5 =
+
+* Fixed bug with bulk printing shipping labels
 * Fixed input filtering of array
 
 = 1.6.3 =

@@ -67,12 +67,14 @@ trait Settings {
 				'title' => __( 'Activate PRO', 'bring-fraktguiden-for-woocommerce' ),
 				'type'  => 'checkbox',
 				'label' => '<em class="bring-toggle"></em>' . __( 'Enable/disable PRO features', 'bring-fraktguiden-for-woocommerce' ),
+				'class' => 'bring-toggle-checkbox',
 			],
 			'test_mode'                     => [
 				'title'   => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'checkbox',
 				'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden-for-woocommerce' ),
 				'default' => 'no',
+				'class'   => 'bring-toggle-checkbox',
 			],
 			'enabled'                       => [
 				'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
@@ -192,9 +194,9 @@ trait Settings {
 				],
 			],
 			'display_desc'                  => [
-				'title'    => __( 'Display Description', 'bring-fraktguiden-for-woocommerce' ),
+				'title'    => __( 'Enhanced descriptions', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',
-				'label'    => __( 'Show service description after the name of the service', 'bring-fraktguiden-for-woocommerce' ),
+				'label'    => __( 'Display detailed description and additional information for shipping methods in cart totals.', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
 			],
