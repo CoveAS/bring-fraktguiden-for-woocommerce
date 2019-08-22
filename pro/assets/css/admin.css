@@ -189,7 +189,6 @@ mark.bring-shipment:after {
 .bring-booking-packages input[type="text"].dimension {
   width: 4rem;
   outline: none;
-  border: none;
   box-shadow: none;
   border: 1px solid #fff;
   transition: border 0.2s;
