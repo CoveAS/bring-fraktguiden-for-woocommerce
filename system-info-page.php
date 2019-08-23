@@ -26,6 +26,7 @@ class Fraktguiden_System_Info {
 	public static function generate() {
 		global $woocommerce, $wp_version;
 		?>
+		<!DOCTYPE html>
 		<html>
 		<head>
 			<meta charset="utf-8">

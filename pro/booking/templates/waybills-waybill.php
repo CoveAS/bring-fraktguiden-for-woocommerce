@@ -6,6 +6,11 @@
  */
 
 foreach ( $waybills as $customer_number => $waybill ) : ?>
+	<?php
+	if ( empty( $waybill ) ) {
+		continue;
+	}
+	?>
 	<h3>
 		<?php esc_html_e( 'Bring order ID:', 'bring-fraktguiden-for-woocommerce' ) . ' ' . $waybill['data']['id']; ?>,
 		<?php echo esc_html( $customer_number ); ?>

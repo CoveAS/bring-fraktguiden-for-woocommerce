@@ -58,6 +58,10 @@ class Bring_WC_Order_Adapter {
 	 * @return array
 	 */
 	public function get_booking_response() {
+		if ( empty( $this->order ) ) {
+			return false;
+		}
+
 		return get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
 	}
 
@@ -69,6 +73,10 @@ class Bring_WC_Order_Adapter {
 	 */
 	public function get_booking_consignments() {
 		$response = $this->get_booking_response();
+
+		if ( empty( $response ) ) {
+			return [];
+		}
 
 		return Bring_Consignment::create_from_response( $response, $this->order->get_id() );
 	}

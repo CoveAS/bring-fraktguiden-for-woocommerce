@@ -206,10 +206,10 @@ class Fraktguiden_Packer {
 	 */
 	public function get_weight( $weight ) {
 		$weight = floatval( $weight );
+
 		switch ( $this->weight_unit ) {
 
 			case 'g':
-				$weight = $weight;
 				break;
 
 			case 'kg':
@@ -242,7 +242,6 @@ class Fraktguiden_Packer {
 	public function get_dimension( $dimension ) {
 
 		switch ( $this->dim_unit ) {
-
 			case 'mm':
 				$dimension = $dimension / 10.000;
 				break;
@@ -253,12 +252,11 @@ class Fraktguiden_Packer {
 				$dimension = $dimension / 0.010936;
 				break;
 			case 'cm':
-				$dimension = $dimension;
 				break;
 			case 'm':
 				$dimension = $dimension / 0.010000;
 				break;
-			/* Unknown dimension unit */
+			// Unknown dimension unit.
 			default:
 				return false;
 		}

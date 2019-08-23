@@ -50,7 +50,11 @@
 		<tbody>
 			<?php
 			foreach ( $customer_consignments as $mailbox_label_id => $consignment ) :
-				$active = ! in_array( $consignment->get_consignment_number(), $inactive_consignment_numbers );
+				if ( empty( $consignment ) ) {
+					continue;
+				}
+
+				$active = ! in_array( $consignment->get_consignment_number(), $inactive_consignment_numbers, true );
 				?>
 				<tr class="<?php echo $active ? 'active' : 'inactive'; ?>">
 					<td>
