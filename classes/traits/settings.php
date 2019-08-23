@@ -413,7 +413,7 @@ trait Settings {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable debug logs', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs' ) . '</a>',
+				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><p><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs', 'bring-fraktguiden-for-woocommerce' ) . '</a></p>',
 				'default'     => 'no',
 			],
 			'disable_stylesheet'            => [
