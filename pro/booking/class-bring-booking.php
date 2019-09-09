@@ -26,8 +26,6 @@ require_once 'classes/consignment-request/class-bring-mailbox-consignment-reques
 // Classes.
 require_once 'classes/class-bring-booking-file.php';
 require_once 'classes/class-bring-booking-customer.php';
-require_once 'classes/class-bring-booking-request.php';
-
 
 if ( is_admin() ) {
 	// Views.

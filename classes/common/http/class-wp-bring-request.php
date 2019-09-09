@@ -10,8 +10,6 @@ require_once 'class-wp-bring-response.php';
 
 /**
  * Bring Request
- *
- * @todo make Bring_Booking_Request extend this class
  */
 class WP_Bring_Request {
 

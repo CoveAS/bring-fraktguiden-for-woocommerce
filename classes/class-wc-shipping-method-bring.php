@@ -171,7 +171,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$field_key          = $this->get_field_key( 'services' );
 		$this->services     = $this->get_setting( 'services' ); //\Fraktguiden_Service::all( $field_key );
 		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
+
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
+
+		if ( filter_var( $this->display_desc, FILTER_VALIDATE_BOOLEAN ) ) {
+			// Replace a default WooCommerce's cart/cart-shipping.php template.
+			add_filter( 'wc_get_template', [ $this, 'get_enhanced_shipping_information_template' ], 10, 2 );
+		}
+
 		$max_products       = (int) $this->get_setting( 'max_products', 1000 );
 		$this->max_products = $max_products ? $max_products : 1000;
 
@@ -620,5 +627,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		global $woocommerce;
 
 		return isset( $this->from_country ) ? $this->from_country : $woocommerce->countries->get_base_country();
+	}
+
+	/**
+	 * Get enhanced shipping information template
+	 *
+	 * @param string $template      Template path.
+	 * @param string $template_name Template name.
+	 *
+	 * @return string
+	 */
+	public function get_enhanced_shipping_information_template( $template, $template_name ) {
+		if ( 'cart/cart-shipping.php' !== $template_name ) {
+			return $template;
+		}
+
+		return FRAKTGUIDEN_PLUGIN_PATH . 'templates/woocommerce/cart-shipping.php';
 	}
 }

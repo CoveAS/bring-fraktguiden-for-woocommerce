@@ -67,12 +67,14 @@ trait Settings {
 				'title' => __( 'Activate PRO', 'bring-fraktguiden-for-woocommerce' ),
 				'type'  => 'checkbox',
 				'label' => '<em class="bring-toggle"></em>' . __( 'Enable/disable PRO features', 'bring-fraktguiden-for-woocommerce' ),
+				'class' => 'bring-toggle-checkbox',
 			],
 			'test_mode'                     => [
 				'title'   => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'checkbox',
 				'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden-for-woocommerce' ),
 				'default' => 'no',
+				'class'   => 'bring-toggle-checkbox',
 			],
 			'enabled'                       => [
 				'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
@@ -192,9 +194,9 @@ trait Settings {
 				],
 			],
 			'display_desc'                  => [
-				'title'    => __( 'Display Description', 'bring-fraktguiden-for-woocommerce' ),
+				'title'    => __( 'Enhanced descriptions', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',
-				'label'    => __( 'Show service description after the name of the service', 'bring-fraktguiden-for-woocommerce' ),
+				'label'    => __( 'Display detailed description and additional information for shipping methods in cart totals.', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
 			],
@@ -411,7 +413,7 @@ trait Settings {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable debug logs', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Issues from the Bring API will be logged here', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs' ) . '</a>',
+				'description' => __( 'Bring Fraktguiden logs will be saved in', 'bring-fraktguiden-for-woocommerce' ) . ' <code>' . $wc_log_dir . '</code><p><a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' . __( 'Click here to see the logs', 'bring-fraktguiden-for-woocommerce' ) . '</a></p>',
 				'default'     => 'no',
 			],
 			'disable_stylesheet'            => [

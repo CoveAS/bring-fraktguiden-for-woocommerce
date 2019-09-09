@@ -10,7 +10,7 @@
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.6.4';
+	const VERSION = '1.6.6';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -29,7 +29,14 @@ class Bring_Fraktguiden {
 		require_once 'class-wc-shipping-method-bring.php';
 		require_once 'common/class-fraktguiden-license.php';
 		require_once 'common/class-fraktguiden-admin-notices.php';
+
 		require_once FRAKTGUIDEN_PLUGIN_PATH . 'pro/class-wc-shipping-method-bring-pro.php';
+
+		// Enable enhanced descriptions if the option is ticked.
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
+			require_once FRAKTGUIDEN_PLUGIN_PATH . 'pro/pickuppoint/class-fraktguiden-pick-up-point-enhancement.php';
+			Fraktguiden_Pick_Up_Point_Enhancement::setup();
+		}
 
 		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/languages/' );
 
@@ -103,7 +110,12 @@ class Bring_Fraktguiden {
 	 * Enqueue styles
 	 */
 	public static function enqueue_styles() {
-		wp_register_style( 'bring-fraktguiden-for-woocommerce', plugins_url( FRAKTGUIDEN_PLUGIN_PATH . 'assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
+		// Do not load styles on any page except cart and checkout.
+		if ( ! is_cart() && ! is_checkout() ) {
+			return;
+		}
+
+		wp_register_style( 'bring-fraktguiden-for-woocommerce', plugins_url( basename( FRAKTGUIDEN_PLUGIN_PATH ) . '/assets/css/bring-fraktguiden.css' ), array(), self::VERSION );
 		wp_enqueue_style( 'bring-fraktguiden-for-woocommerce' );
 	}
 

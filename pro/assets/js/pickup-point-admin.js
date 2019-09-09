@@ -796,22 +796,24 @@
 			text: ''
 		};
 
-		return result;
-
 		var postcode = get_shipping_address_postcode();
 		var country  = get_shipping_address_country();
+
 		if ( ! country || ! postcode ) {
 			result.status = false;
 			result.text  += lang.VALIDATE_SHIPPING1 + ':\n\n';
+
 			if ( ! postcode ) {
 				result.text += '  * ' + lang.VALIDATE_SHIPPING_POSTCODE;
 			}
+
 			if ( ! country ) {
 				result.text += '\n  * ' + lang.VALIDATE_SHIPPING_COUNTRY;
 			}
-			result.text += '\n\n' + lang.VALIDATE_SHIPPING2;
 
+			result.text += '\n\n' + lang.VALIDATE_SHIPPING2;
 		}
+
 		return result;
 	}
 
