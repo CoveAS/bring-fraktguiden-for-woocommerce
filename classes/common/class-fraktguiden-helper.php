@@ -251,7 +251,12 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	public static function get_services_data() {
-		return require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		$groups = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		foreach ( $groups as &$group ) {
+			$group['services'] = array_change_key_case( $group['services'] );
+		}
+		unset( $group );
+		return $groups;
 	}
 
 	/**

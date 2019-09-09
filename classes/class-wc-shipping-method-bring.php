@@ -169,7 +169,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->post_office  = $this->get_setting( 'post_office' );
 		$this->evarsling    = $this->get_setting( 'evarsling' );
 		$field_key          = $this->get_field_key( 'services' );
-		$this->services     = $this->get_setting( 'services' ); //\Fraktguiden_Service::all( $field_key );
+		$this->services     = $this->get_services();
 		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
 
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
@@ -196,6 +196,29 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		$this->service_table = new Fraktguiden_Service_Table( $this );
+	}
+
+	/**
+	 * Get services
+	 *
+	 * @return array Services.
+	 */
+	public function get_services() {
+		$services = $this->get_setting( 'services' );
+		$services = array_map( 'strtolower', $services );
+		if ( in_array( 'pa_doren', $services, true ) ) {
+			$services[] = '5600';
+		}
+		if ( in_array( 'servicepakke', $services, true ) ) {
+			$services[] = '5800';
+		}
+		if ( in_array( 'bpakke_dor-dor', $services, true ) ) {
+			$services[] = '5000';
+		}
+		if ( in_array( 'ekspress09', $services, true ) ) {
+			$services[] = '4850';
+		}
+		return $services;
 	}
 
 	/**

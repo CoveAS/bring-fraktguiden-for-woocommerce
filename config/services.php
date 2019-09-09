@@ -25,6 +25,14 @@ return [
 				'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
 				'HelpText'        => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
 			],
+			'5800'           => [
+				'ProductCode'     => '5800',
+				'displayName'     => 'Pakke til hentested',
+				'productName'     => 'Pakke til hentested',
+				'DescriptionText' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
+				'HelpText'        => 'Pakke til hentested leveres til mottakers lokale hentested (postkontor eller Post i Butikk). Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'ShortName'       => 'Pakke til hentested',
+			],
 			'PA_DOREN'       => [
 				'ProductCode'     => '1736',
 				'productName'     => 'På Døren',

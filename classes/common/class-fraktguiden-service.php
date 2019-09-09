@@ -145,10 +145,10 @@ class Fraktguiden_Service {
 	 */
 	public function __toString() {
 		if ( $this->customer_number ) {
-			return $this->key . ':' . $this->customer_number;
+			return "{$this->key}:{$this->customer_number}";
 		}
 
-		return $this->key;
+		return "{$this->key}";
 	}
 
 	/**

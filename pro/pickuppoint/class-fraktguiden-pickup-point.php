@@ -379,11 +379,13 @@ class Fraktguiden_Pickup_Point {
 	public static function insert_pickup_points( $rates ) {
 		$rate_key        = false;
 		$service_package = false;
+		$bring_product   = false;
 
 		foreach ( $rates as $key => $rate ) {
-			if ( 'servicepakke' === $rate['bring_product'] ) {
+			if ( 'servicepakke' === $rate['bring_product'] || '5800' === $rate['bring_product'] ) {
 				// Service package identified.
 				$service_package = $rate;
+				$bring_product   = $rate['bring_product'];
 				// Remove this package.
 				$rate_key = $key;
 				break;
@@ -419,8 +421,8 @@ class Fraktguiden_Pickup_Point {
 
 		foreach ( $pickup_points['pickupPoint'] as $pickup_point ) {
 			$rate = [
-				'id'            => 'bring_fraktguiden:servicepakke-' . $pickup_point['id'],
-				'bring_product' => 'servicepakke',
+				'id'            => "bring_fraktguiden:{$bring_product}-{$pickup_point['id']}",
+				'bring_product' => $bring_product,
 				'cost'          => $service_package['cost'],
 				'label'         => $pickup_point['name'],
 				'meta_data'     => [
