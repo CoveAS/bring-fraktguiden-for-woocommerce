@@ -17,6 +17,7 @@ return [
 				'displayName'     => 'På postkontor eller post i butikk (Norgespakke)',
 				'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
 				'HelpText'        => 'Sendingen er en Norgespakke som blir levert til mottakers postkontor/ post i butikk. Mottaker varsles om at sendingen er ankommet via hentemelding i postkassen. Transporttid er normalt 2-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'depreceated'     => false,
 			],
 			'SERVICEPAKKE'   => [
 				'ProductCode'     => '1202',
@@ -24,14 +25,7 @@ return [
 				'displayName'     => 'På posten',
 				'DescriptionText' => 'Hentes på mottakers lokale postkontor/post i butikk.',
 				'HelpText'        => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-			],
-			'5800'           => [
-				'ProductCode'     => '5800',
-				'displayName'     => 'Pakke til hentested',
-				'productName'     => 'Pakke til hentested',
-				'DescriptionText' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
-				'HelpText'        => 'Pakke til hentested leveres til mottakers lokale hentested (postkontor eller Post i Butikk). Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
-				'ShortName'       => 'Pakke til hentested',
+				'depreceated'     => false,
 			],
 			'PA_DOREN'       => [
 				'ProductCode'     => '1736',
@@ -39,6 +33,7 @@ return [
 				'displayName'     => 'Hjem på kvelden, 17-21',
 				'DescriptionText' => 'Pakken leveres hjem til deg, sjåføren ringer 30 - 60 min. før ankomst',
 				'HelpText'        => 'Sendingen leveres hjem til deg mellom klokken 17 og 21. Du varsles i god tid om forventet utleveringsdag på sms og/eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme kveld. Sjåfør ringer deg på mobiltelefon 30 - 60 minutter før levering. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk og du vil motta en varsel om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'depreceated'     => false,
 			],
 			'MAIL'           => [
 				'ProductCode'     => '',
@@ -46,6 +41,7 @@ return [
 				'displayName'     => 'Brev',
 				'DescriptionText' => '',
 				'HelpText'        => '',
+				'depreceated'     => false,
 			],
 			'CARGO_GROUPAGE' => [
 				'ProductCode'     => '3050',
@@ -53,6 +49,7 @@ return [
 				'displayName'     => 'Cargo',
 				'DescriptionText' => '',
 				'HelpText'        => '',
+				'depreceated'     => false,
 			],
 		],
 	],
@@ -71,6 +68,7 @@ return [
 				'displayName'     => 'Pakke i postkassen',
 				'DescriptionText' => 'Pakken leveres i din postkasse innen 2 virkedager.',
 				'HelpText'        => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+				'depreceated'     => false,
 				'ProductLink'     => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 			],
 			'PAKKE_I_POSTKASSEN_SPORBAR' => [
@@ -79,6 +77,7 @@ return [
 				'displayName'     => 'Pakke i postkassen (sporbar)',
 				'DescriptionText' => 'Pakken leveres i din postkasse innen 2 virkedager.',
 				'HelpText'        => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+				'depreceated'     => false,
 				'ProductLink'     => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 			],
 		],
@@ -95,6 +94,7 @@ return [
 				'displayName'     => 'På jobben, 08-16',
 				'DescriptionText' => 'Leveres uten at sjåføren ringer først',
 				'HelpText'        => 'Sendingen er en Bedriftspakke som leveres til mottakers arbeidssted mellom klokken 08 og 16. Bestiller du varsling, vil mottaker varsles når sendingen er lastet på bil for uttkjøring, via SMS og/eller e-post. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk. Mottaker varsles om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingssnummeret.',
+				'depreceated'     => false,
 			],
 			'EKSPRESS09'                    => [
 				'ProductCode'     => '1002',
@@ -102,6 +102,7 @@ return [
 				'displayName'     => 'Ekspress over natten',
 				'DescriptionText' => 'Levering på dør vil skje påfølgende dag innen kl 1600 for dette postnummeret.',
 				'HelpText'        => 'Levering hjem på dør før kl 0900 (til mindre steder normalt før kl 1600). Du kan varsles ved SMS/e-post, forutsatt at du har oppgitt telefonnummer/epostadresse ved bestilling. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'depreceated'     => false,
 			],
 			'EXPRESS_NORDIC_SAME_DAY'       => [
 				'ProductCode'     => '3336',
@@ -109,6 +110,7 @@ return [
 				'displayName'     => 'Omgående levering, dagtid og kveldstid',
 				'DescriptionText' => 'Bud henter og leverer omgående til dør.',
 				'HelpText'        => 'Når du trenger raskest mulig budlevering. Bring henter pakken omgående hos avsender og flyr den med første fly til mottaker. Innenfor Norden inkluderer produktet også forsikring av forsendelsen som dekker inntil NOK 100 000,- per sending.',
+				'depreceated'     => true,
 			],
 			'EXPRESS_INTERNATIONAL_0900'    => [
 				'ProductCode'     => '3337',
@@ -116,6 +118,7 @@ return [
 				'displayName'     => 'Levering neste dag innen kl. 9',
 				'DescriptionText' => 'Bud henter og leverer til dør.',
 				'HelpText'        => 'Når du trenger raskest mulig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
+				'depreceated'     => true,
 			],
 			'EXPRESS_INTERNATIONAL_1200'    => [
 				'ProductCode'     => '3338',
@@ -123,6 +126,7 @@ return [
 				'displayName'     => 'Levering neste dag innen kl. 12',
 				'DescriptionText' => 'Bud henter og leverer til dør.',
 				'HelpText'        => 'Når du trenger rask budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
+				'depreceated'     => true,
 			],
 			'EXPRESS_INTERNATIONAL'         => [
 				'ProductCode'     => '3339',
@@ -130,6 +134,7 @@ return [
 				'displayName'     => 'Levering neste dag',
 				'DescriptionText' => 'Bud henter og leverer til dør.',
 				'HelpText'        => 'Når du trenger en rask og rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
+				'depreceated'     => true,
 			],
 			'EXPRESS_ECONOMY'               => [
 				'ProductCode'     => '3340',
@@ -137,6 +142,7 @@ return [
 				'displayName'     => 'Levering tidligst neste dag kl. 17',
 				'DescriptionText' => 'Bud henter og leverer til dør.',
 				'HelpText'        => 'Når du trenger rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
+				'depreceated'     => true,
 			],
 
 			/**
@@ -149,6 +155,7 @@ return [
 				'displayName'     => 'Til mottakers dør',
 				'DescriptionText' => 'Pakke til bedrifter i utlandet',
 				'HelpText'        => 'CarryOn Business er en enkelt og effektiv måte å sende pakker til andre firmaer i Norden og til resten av verden. Pakker hentes i henhold til avtale, og leveres til mottaker mellom mandag- fredag i kontortiden. I enkelte land leveres pakkene på mottakers postkontor.',
+				'depreceated'     => false,
 			],
 
 			/**
@@ -162,6 +169,7 @@ return [
 				'displayName'     => 'Till utlämningsställe',
 				'DescriptionText' => 'Hentes på mottakers lokale utleveringssted i butikk.',
 				'HelpText'        => 'Sendingen blir levert til mottakers nærmeste utleveringssted. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'depreceated'     => false,
 			],
 
 			'COURIER_VIP'                   => [
@@ -170,6 +178,7 @@ return [
 				'displayName'     => 'Omgående levering',
 				'DescriptionText' => 'Leveres omgående av bud til dør.',
 				'HelpText'        => 'Sending hentes hos avsender innen 10 minutter og leveres direkte til mottaker.',
+				'depreceated'     => false,
 			],
 			'COURIER_1H'                    => [
 				'ProductCode'     => '1H25',
@@ -177,6 +186,7 @@ return [
 				'displayName'     => 'Levering innen 1 time',
 				'DescriptionText' => 'Leveres innen 1 time av bud til dør.',
 				'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 1 time.',
+				'depreceated'     => false,
 			],
 			'COURIER_2H'                    => [
 				'ProductCode'     => '2H25',
@@ -184,6 +194,7 @@ return [
 				'displayName'     => 'Levering innen 2 timer',
 				'DescriptionText' => 'Leveres av bud til dør innen 2 timer.',
 				'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 2 timer.',
+				'depreceated'     => false,
 			],
 			'COURIER_4H'                    => [
 				'ProductCode'     => '4H25',
@@ -191,6 +202,7 @@ return [
 				'displayName'     => 'Levering innen 4 timer',
 				'DescriptionText' => 'Leveres av bud til dør innen 4 timer.',
 				'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 4 timer.',
+				'depreceated'     => false,
 			],
 			'COURIER_6H'                    => [
 				'ProductCode'     => '6H25',
@@ -198,6 +210,7 @@ return [
 				'displayName'     => 'Levering innen 6 timer',
 				'DescriptionText' => 'Leveres av bud til dør innen 6 timer.',
 				'HelpText'        => 'Sending hentes hos avsender og leveres til mottaker innen 6 timer.',
+				'depreceated'     => false,
 			],
 
 			/**
@@ -209,6 +222,7 @@ return [
 				'displayName'     => 'Oil Express',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => 'Oil Express products can be shipped only in Norway and between certain postal codes.',
+				'depreceated'     => true,
 			],
 
 			/**
@@ -222,6 +236,7 @@ return [
 				'displayName'     => 'Frigo',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => 'Frigo products can be ordered only in Norway and requires a Frigo customer.',
+				'depreceated'     => true,
 			],
 
 
@@ -238,6 +253,7 @@ return [
 				'displayName'     => 'Single Indoor',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'CURBSIDE'                      => [
 				'ProductCode'     => '',
@@ -245,6 +261,7 @@ return [
 				'displayName'     => 'Curbside ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'CURBSIDE_EXPRESS'              => [
 				'ProductCode'     => '',
@@ -252,6 +269,7 @@ return [
 				'displayName'     => 'Curbside Express ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'CURBSIDE_WEEKEND'              => [
 				'ProductCode'     => '',
@@ -259,6 +277,7 @@ return [
 				'displayName'     => 'Curbside Weekend ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'CURBSIDE_WEEKEND_EXPRESS'      => [
 				'ProductCode'     => '',
@@ -266,6 +285,7 @@ return [
 				'displayName'     => 'Curbside Weekend Express ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'CURBSIDE_EVENING'              => [
 				'ProductCode'     => '',
@@ -273,6 +293,7 @@ return [
 				'displayName'     => 'Curbside Evening ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR'                 => [
 				'ProductCode'     => '',
@@ -280,6 +301,7 @@ return [
 				'displayName'     => 'Double Indoor',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'INDOOR_LIGHT'                  => [
 				'ProductCode'     => '',
@@ -287,6 +309,7 @@ return [
 				'displayName'     => 'Indoor Light ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'SINGLE_INDOOR_EXPRESS'         => [
 				'ProductCode'     => '',
@@ -294,6 +317,7 @@ return [
 				'displayName'     => 'Single Indoor Express',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR_EXPRESS'         => [
 				'ProductCode'     => '',
@@ -301,6 +325,7 @@ return [
 				'displayName'     => 'Double Indoor Express',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'INDOOR_LIGHT_EXPRESS'          => [
 				'ProductCode'     => '',
@@ -308,6 +333,7 @@ return [
 				'displayName'     => 'Indoor Light Express ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'SINGLE_INDOOR_WEEKEND'         => [
 				'ProductCode'     => '',
@@ -315,6 +341,7 @@ return [
 				'displayName'     => 'Single Indoor Weekend',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR_WEEKEND'         => [
 				'ProductCode'     => '',
@@ -322,6 +349,7 @@ return [
 				'displayName'     => 'Double Indoor Weekend',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'INDOOR_LIGHT_WEEKEND'          => [
 				'ProductCode'     => '',
@@ -329,6 +357,7 @@ return [
 				'displayName'     => 'Indoor Light Weekend ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'SINGLE_INDOOR_WEEKEND_EXPRESS' => [
 				'ProductCode'     => '',
@@ -336,6 +365,7 @@ return [
 				'displayName'     => 'Single Indoor Weekend Express',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR_WEEKEND_EXPRESS' => [
 				'ProductCode'     => '',
@@ -343,6 +373,7 @@ return [
 				'displayName'     => 'Double Indoor Weekend Express',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'INDOOR_LIGHT_WEEKEND_EXPRESS'  => [
 				'ProductCode'     => '',
@@ -350,6 +381,7 @@ return [
 				'displayName'     => 'Indoor Light Weekend Express ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'HOME_DELIVERY_RETURN'          => [
 				'ProductCode'     => '',
@@ -357,6 +389,7 @@ return [
 				'displayName'     => 'Return Home Delivery ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR_NO'              => [
 				'ProductCode'     => '',
@@ -364,6 +397,7 @@ return [
 				'displayName'     => 'Double Indoor (NO) ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'SINGLE_INDOOR_EVENING'         => [
 				'ProductCode'     => '',
@@ -371,6 +405,7 @@ return [
 				'displayName'     => 'Single Indoor Evening',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'DOUBLE_INDOOR_EVENING'         => [
 				'ProductCode'     => '',
@@ -378,6 +413,7 @@ return [
 				'displayName'     => 'Double Indoor Evening',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 			'INDOOR_LIGHT_EVENING'          => [
 				'ProductCode'     => '',
@@ -385,6 +421,7 @@ return [
 				'displayName'     => 'Indoor Light Evening ',
 				'DescriptionText' => 'N/A',
 				'HelpText'        => '',
+				'depreceated'     => true,
 			],
 		],
 	],
