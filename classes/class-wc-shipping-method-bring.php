@@ -204,18 +204,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return array Services.
 	 */
 	public function get_services() {
-		$services = $this->get_setting( 'services' );
-		$services = array_map( 'strtolower', $services );
-		if ( in_array( 'pa_doren', $services, true ) ) {
+		$services = array_map( 'strtoupper', $this->get_setting( 'services' ) );
+		if ( in_array( 'PA_DOREN', $services, true ) ) {
 			$services[] = '5600';
 		}
-		if ( in_array( 'servicepakke', $services, true ) ) {
+		if ( in_array( 'SERVICEPAKKE', $services, true ) ) {
 			$services[] = '5800';
 		}
-		if ( in_array( 'bpakke_dor-dor', $services, true ) ) {
+		if ( in_array( 'BPAKKE_DOR-DOR', $services, true ) ) {
 			$services[] = '5000';
 		}
-		if ( in_array( 'ekspress09', $services, true ) ) {
+		if ( in_array( 'EKSPRESS09', $services, true ) ) {
 			$services[] = '4850';
 		}
 		return $services;
