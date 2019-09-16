@@ -43,7 +43,7 @@ If you've entered any Mybring details, try removing them. If Bring shows up on t
 Good question! Bring Pro enables you to customise your customers Bring experience:
 
 - You can customise the price of each shipping method
-- You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ). 
+- You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ).
 - You can book your shippment through Mybring directly on your orders page.
 - You can change the services offered to customers to their nearest collection point
 
@@ -68,6 +68,10 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 ---
 
 ### Changelog
+
+= 1.6.7 =
+
+* Added support for new bring products "Pakke til hentested", "Pakke levert hjem", "Pakke til bedrift" and "Ekspress neste dag"
 
 = 1.6.6 =
 
