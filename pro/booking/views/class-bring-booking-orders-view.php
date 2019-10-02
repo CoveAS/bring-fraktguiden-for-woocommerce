@@ -66,7 +66,7 @@ class Bring_Booking_Orders_View {
 			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
 			?>
 
-			<div clas="bring-area-icon">
+			<div class="bring-area-icon">
 				<?php echo Bring_Booking_Common_View::create_status_icon( $info, 16 ); ?>
 			</div>
 
@@ -202,11 +202,40 @@ class Bring_Booking_Orders_View {
 			} );
 
 			$( document.body ).on( 'wc_backbone_modal_response', function ( e ) {
-			  customer_number.val( $( '[name=_bring-modal-customer-selector]' ).val() );
-			  shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
-			  shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
-			  shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
-			  form.submit();
+				form.block(
+					{
+						message: '',
+						css: {
+							border: 'none'
+						},
+						overlayCSS: {
+							backgroundColor: '#f9f9f9'
+						},
+					}
+				);
+				customer_number.val( $( '[name=_bring-modal-customer-selector]' ).val() );
+				shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
+				shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
+				shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
+
+				var url = location.origin + location.pathname;
+				$.get( url + '?' + form.serialize(), function( data ) {
+					form.unblock();
+					if ( ! data.booked ) {
+						return;
+					}
+					$.each( data.booked, function( id, status ) {
+						var elem = $( '#post-' + id );
+						if ( ! elem.length ) {
+							return;
+						}
+						elem.find( '.bring-area-icon span' )
+							.removeClass( 'dashicons-minus dashicons-yes dashicons-warning' )
+							.addClass( status.icon );
+						elem.find( '.bring-area-info' )
+							.text( status.text );
+					} );
+				} );
 			} );
 
 		  } );
@@ -222,12 +251,20 @@ class Bring_Booking_Orders_View {
 	 * @return void
 	 */
 	public static function bulk_send_booking() {
-		$post = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$post_ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
-		if ( empty( $post ) ) {
+		if ( empty( $post_ids ) ) {
 			return;
 		}
 
-		Bring_Booking::bulk_send_booking( $post );
+		Bring_Booking::bulk_send_booking( $post_ids );
+
+		$status = [];
+		foreach ( $post_ids as $post_id ) {
+			$wc_order         = wc_get_order( $post_id );
+			$adapter          = new Bring_WC_Order_Adapter( $wc_order );
+			$status[$post_id] = Bring_Booking_Common_View::get_booking_status_info( $adapter );
+		}
+		wp_send_json( [ 'booked' => $status ] );
 	}
 }
