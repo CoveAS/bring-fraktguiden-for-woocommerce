@@ -156,7 +156,9 @@ class Bring_Booking {
 			// Send the booking.
 			$response = $consignment_request->post();
 
+
 			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
+
 				// @TODO: Error message
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
 			}
@@ -235,12 +237,29 @@ class Bring_Booking {
 	 * @param array $post_ids Array of WC_Order IDs.
 	 */
 	public static function bulk_send_booking( $post_ids ) {
+		$report = [];
 		foreach ( $post_ids as $post_id ) {
 			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
-			if ( ! $order->has_booking_consignments() ) {
-				self::send_booking( $order->order );
+			try {
+				if ( ! $order->has_booking_consignments() ) {
+					self::send_booking( $order->order );
+				}
+			} catch ( Exception $e ) {
+				$report[ $post_id ] = [
+					'status'  => 'error',
+					'message' => $e->getMessage(),
+					'url'     => get_edit_post_link( $post_id ),
+				];
+				continue;
 			}
+			$report[ $post_id ] = [
+				'status'  => 'ok',
+				'message' => '',
+				'url'     => get_edit_post_link( $post_id, 'edit' ),
+			];
 		}
+
+		return $report;
 	}
 
 	/**
