@@ -92,25 +92,25 @@ class Bring_Booking_Orders_View {
 		  <div class="wc-backbone-modal-content">
 			<section class="wc-backbone-modal-main" role="main">
 			  <header class="wc-backbone-modal-header">
-				<h1 class="bgf-modal-header"><?php _e( 'Mybring Booking', 'bring-fraktguiden-for-woocommerce' ); ?></h1>
+				<h1 class="bgf-modal-header"><?php esc_html_e( 'Mybring Booking', 'bring-fraktguiden-for-woocommerce' ); ?></h1>
 				<button class="modal-close modal-close-link dashicons dashicons-no-alt">
-				  <span class="screen-reader-text"><?php _e( 'Close modal panel', 'bring-fraktguiden-for-woocommerce' ); ?></span>
+				  <span class="screen-reader-text"><?php esc_html_e( 'Close modal panel', 'bring-fraktguiden-for-woocommerce' ); ?></span>
 				</button>
 			  </header>
 			  <article>
 				<div class="bring-form-field" style="margin-top:0">
-				  <?php _e( 'This will only book orders that has not been booked.', 'bring-fraktguiden-for-woocommerce' ); ?>
+				  <?php esc_html_e( 'This will only book orders that has not been booked.', 'bring-fraktguiden-for-woocommerce' ); ?>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'Selected orders', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+				  <label><?php esc_html_e( 'Selected orders', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <span class="bring-modal-selected-orders-list"></span>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'Mybring Customer', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+				  <label><?php esc_html_e( 'Mybring Customer', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <?php Bring_Booking_Common_View::render_customer_selector( '_bring-modal-customer-selector' ); ?>
 				</div>
 				<div class="bring-form-field">
-				  <label><?php _e( 'Shipping Date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+				  <label><?php esc_html_e( 'Shipping Date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 				  <?php Bring_Booking_Common_View::render_shipping_date_time( '_bring-modal-shipping-date' ); ?>
 				</div>
 			  </article>
@@ -121,6 +121,32 @@ class Bring_Booking_Orders_View {
 			  </footer>
 			</section>
 		  </div>
+		</div>
+		<div class="wc-backbone-modal-backdrop modal-close"></div>
+	  </script>
+
+	  <script type="text/template" id="tmpl-bring-modal-bulk-errors">
+		<div class="wc-backbone-modal">
+			<div class="wc-backbone-modal-content">
+				<section class="wc-backbone-modal-main" role="main">
+					<header class="wc-backbone-modal-header">
+						<h1 class="bgf-modal-header"><?php esc_html_e( 'Mybring Booking errors', 'bring-fraktguiden-for-woocommerce' ); ?></h1>
+						<button class="modal-close modal-close-link dashicons dashicons-no-alt">
+							<span class="screen-reader-text"><?php esc_html_e( 'Close modal panel', 'bring-fraktguiden-for-woocommerce' ); ?></span>
+						</button>
+					</header>
+					<article id="bring-error-modal-content">
+						<ul>
+							<li>Error</li>
+						</ul>
+					</article>
+					<footer>
+						<div class="inner">
+							<button class="modal-close button button-primary button-large"><?php esc_html_e( 'Close modal panel', 'bring-fraktguiden-for-woocommerce' ) ?></button>
+						</div>
+					</footer>
+				</section>
+			</div>
 		</div>
 		<div class="wc-backbone-modal-backdrop modal-close"></div>
 	  </script>
@@ -181,6 +207,12 @@ class Bring_Booking_Orders_View {
 			  $( '.bring-modal-selected-orders-list' ).text( order_ids.join( ' - ' ) );
 			}
 
+			var display_errors = function() {
+			  modal.WCBackboneModal( {
+				template: 'bring-modal-bulk-errors'
+			  } );
+			}
+
 			// Run bulk booking or printing actions when selected and clicked
 			$( '#doaction, #doaction2' ).on( 'click', function ( evt ) {
 
@@ -218,23 +250,53 @@ class Bring_Booking_Orders_View {
 				shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
 				shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
 
+					console.log('yoyoyoy');
 				var url = location.origin + location.pathname;
-				$.get( url + '?' + form.serialize(), function( data ) {
+				$.get( url + '?json=true&' + form.serialize(), function( data ) {
 					form.unblock();
-					if ( ! data.booked ) {
+					if ( ! data.bring_column ) {
 						return;
 					}
-					$.each( data.booked, function( id, status ) {
+					var error_messages = [];
+					$.each( data.report, function( id, record ) {
+						if ( record.status === 'ok' ) {
+							return;
+						}
+						error_messages.push( record.message );
+					} );
+					$.each( data.bring_column, function( id, column_item ) {
 						var elem = $( '#post-' + id );
 						if ( ! elem.length ) {
 							return;
 						}
 						elem.find( '.bring-area-icon span' )
 							.removeClass( 'dashicons-minus dashicons-yes dashicons-warning' )
-							.addClass( status.icon );
+							.addClass( column_item.icon );
 						elem.find( '.bring-area-info' )
-							.text( status.text );
+							.text( column_item.text );
 					} );
+					var error_list = $( '<ul>' );
+					$.each( data.report, function( id, record ) {
+						if ( 'error' !== record.status ) {
+							return;
+						}
+						error_list.append(
+							$( '<li>' ).append(
+								$( '<a>' ).addClass( 'error-post-id' )
+									.attr( 'href', record.url.replace( '&amp;', '&' ) )
+									.text( '#' + id ),
+								' ',
+								$( '<span>' ).addClass( 'error-post-message' ).text( record.message )
+							)
+						);
+
+					} );
+					if ( error_list.children().length ) {
+						modal.WCBackboneModal( {
+							template: 'bring-modal-bulk-errors'
+						} );
+						$( '#bring-error-modal-content' ).html( error_list );
+					}
 				} );
 			} );
 
@@ -251,20 +313,26 @@ class Bring_Booking_Orders_View {
 	 * @return void
 	 */
 	public static function bulk_send_booking() {
+		$json     = filter_input( Fraktguiden_Helper::get_input_request_method(), 'json' );
 		$post_ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
 		if ( empty( $post_ids ) ) {
 			return;
 		}
 
-		Bring_Booking::bulk_send_booking( $post_ids );
+		$report = Bring_Booking::bulk_send_booking( $post_ids );
 
-		$status = [];
+		$column_data = [];
 		foreach ( $post_ids as $post_id ) {
-			$wc_order         = wc_get_order( $post_id );
-			$adapter          = new Bring_WC_Order_Adapter( $wc_order );
-			$status[$post_id] = Bring_Booking_Common_View::get_booking_status_info( $adapter );
+			$wc_order                = wc_get_order( $post_id );
+			$adapter                 = new Bring_WC_Order_Adapter( $wc_order );
+			$column_data[ $post_id ] = Bring_Booking_Common_View::get_booking_status_info( $adapter );
 		}
-		wp_send_json( [ 'booked' => $status ] );
+		if ( $json ) {
+			wp_send_json( [
+				'bring_column' => $column_data,
+				'report'       => $report,
+			] );
+		}
 	}
 }
