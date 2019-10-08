@@ -119,6 +119,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	public $validation_messages;
 
+
+	/**
+	 * Field key
+	 *
+	 * @var string
+	 */
+	static public $field_key;
+
 	/**
 	 * Initialize the instance
 	 *
@@ -168,7 +176,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->from_zip     = $this->get_setting( 'from_zip' );
 		$this->post_office  = $this->get_setting( 'post_office' );
 		$this->evarsling    = $this->get_setting( 'evarsling' );
-		$field_key          = $this->get_field_key( 'services' );
+		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
 		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
 
@@ -258,8 +266,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( 'woocommerce_page_wc-settings' !== $hook ) {
 				return;
 		}
-		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [], '1.0.4' );
-		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], '1.0.0' );
+		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-settings-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-settings.js', [], Bring_Fraktguiden::VERSION, true );
 		wp_localize_script(
 			'bring-admin-js',
 			'bring_fraktguiden',
@@ -267,7 +276,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			]
 		);
-		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], '1.0.0' );
+		wp_localize_script(
+			'bring-settings-js',
+			'bring_fraktguiden_settings',
+			[
+				'services_data'    => Fraktguiden_Helper::get_services_data(),
+				'services'         => Fraktguiden_Service::all( self::$field_key ),
+				'services_enabled' => array_keys( Fraktguiden_Service::all( self::$field_key, true ) ),
+			]
+		);
+		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
 	}
 
 	/**
