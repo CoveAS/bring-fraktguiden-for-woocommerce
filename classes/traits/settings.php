@@ -686,7 +686,7 @@ trait Settings {
 			$message = sprintf( '<strong>%s:</strong> %s.', __( 'Mybring authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( "Couldn't connect to Bring with your API credentials. Please check that they are correct", 'bring-fraktguiden-for-woocommerce' ) );
 		}
 
-		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
+		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error', false );
 	}
 
 	/**
