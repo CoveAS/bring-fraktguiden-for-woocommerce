@@ -268,6 +268,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['enabled', 'bring_product', 'option_key', 'custom_name', 'custom_price', 'custom_price_cb', 'customer_number', 'customer_number_cb', 'free_shipping', 'free_shipping_cb', 'service_data', 'id'],
@@ -332,7 +333,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  min-width: 50%;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 auto;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    flex-wrap: wrap;\n}\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 15rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 

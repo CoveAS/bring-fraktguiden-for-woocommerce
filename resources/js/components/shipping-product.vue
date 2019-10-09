@@ -70,18 +70,19 @@
 		flex-wrap: wrap;
 		padding: 0.5rem;
 		label {
-			min-width: 50%;
+			min-width: 25rem;
 			max-width: 100%;
 			padding: 0.5rem;
 			display: flex;
-			flex: 1 0 auto;
+			flex: 1 0 50%;
 		    align-items: center;
 		    @media (max-width: 32em) {
+				min-width: 15rem;
 			    flex-wrap: wrap;
 		    }
 		}
 		span {
-			flex: 0 0 15rem;
+			flex: 0 0 14rem;
 		}
 		#shipping_services & {
 			input[type="number"],
