@@ -181,18 +181,6 @@ trait Settings {
 				'type'        => 'checkbox',
 				'description' => __( 'Use multipack when shipping many small items. This setting is highly recommended for SERVICEPAKKE. This will automatically divide shipped items into boxes with sides no longer than 240 cm and weigh less than 35kg and a circumference less than 360cm. If you\'re shipping a mix of small and big items you should disable this setting. Eg. if you\'re using both SERVICEPAKKE and CARGO you should disable this.', 'bring-fraktguiden-for-woocommerce' ),
 			],
-			'service_name'                  => [
-				'title'       => __( 'Display Service As', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'select',
-				'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden-for-woocommerce' ),
-				'default'     => 'displayName',
-				'options'     => [
-					'displayName' => __( 'Display Name', 'bring-fraktguiden-for-woocommerce' ),
-					'productName' => __( 'Product Name', 'bring-fraktguiden-for-woocommerce' ),
-					'CustomName'  => __( 'Custom Name', 'bring-fraktguiden-for-woocommerce' ),
-				],
-			],
 			'display_desc'                  => [
 				'title'    => __( 'Enhanced descriptions', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',

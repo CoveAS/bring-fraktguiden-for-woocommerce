@@ -71,13 +71,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public $services = [];
 
 	/**
-	 * The service name displayed to the customer on the cart / checkout
-	 *
-	 * @var string
-	 */
-	public $service_name = '';
-
-	/**
 	 * Switch for showing a service description after the name of the service
 	 *
 	 * @var string
@@ -178,7 +171,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->evarsling    = $this->get_setting( 'evarsling' );
 		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
-		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
 
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
 
@@ -533,10 +525,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$rate = $service['amountWithoutVAT'];
 
 			$label = $service_details['guiInformation']['productName'];
-
-			if ( 'displayname' === strtolower( $this->service_name ) ) {
-				$label = $service_details['guiInformation']['displayName'];
-			}
 
 			$rate = array(
 				'id'            => $this->id,

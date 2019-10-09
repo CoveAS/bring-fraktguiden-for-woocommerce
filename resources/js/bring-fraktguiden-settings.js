@@ -13,8 +13,8 @@ var settings = new Vue( {
 	computed: {
 		services: function() {
 			var services = [];
-			for (var i = 0; i < selected.length; i++) {
-				var id = selected[i];
+			for (var i = 0; i < this.selected.length; i++) {
+				var id = this.selected[i];
 				var service = bring_fraktguiden_settings.services[id];
 				services.push( service );
 			}

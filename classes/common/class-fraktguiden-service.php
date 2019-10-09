@@ -173,12 +173,11 @@ class Fraktguiden_Service {
 		];
 
 		foreach ( $services_data as $service_group ) {
-			foreach ( $service_group['services'] as $key => $service_data ) {
-				if ( $selected && ! in_array( $key, $service_options['selected'] ) ) {
+			foreach ( $service_group['services'] as $bring_product => $service_data ) {
+				if ( $selected && ! in_array( $bring_product, $service_options['selected'] ) ) {
 					continue;
 				}
-
-				$services[ $key ] = new Fraktguiden_Service( $key, $service_data, $service_options );
+				$services[ $bring_product ] = new Fraktguiden_Service( $bring_product, $service_data, $service_options );
 			}
 		}
 
