@@ -368,14 +368,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 * @return array
 	 */
 	public function filter_shipping_rates( $rates, $shipping_method ) {
-		$field_key                = $this->get_field_key( 'services' );
-		$custom_names             = get_option( $field_key . '_custom_names' );
-		$custom_prices            = get_option( $field_key . '_custom_prices' );
-		$free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
-		$free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
-		$cart                     = WC()->cart;
-		$cart_items               = $cart ? $cart->get_cart() : [];
-		$cart_total               = 0;
+		$field_key            = $this->get_field_key( 'services' );
+		$services             = \Fraktguiden_Service::all( $field_key );
+		$cart                 = WC()->cart;
+		$cart_items           = $cart ? $cart->get_cart() : [];
+		$cart_total           = 0;
+		$pickup_point_enabled = ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) );
 
 		if ( empty( $rates ) ) {
 			return $rates;
@@ -406,20 +404,26 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			}
 			// custom_name for SERVICEPAKKE will also rename the pickup points
 			// SERVICEPAKKE's custom_name is ignored if 'pickup_point_enabled' is enabled.
-			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
+			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) && $pickup_point_enabled ) {
 				$key = 'SERVICEPAKKE';
-			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
-				$rate['label'] = $custom_names[ $key ];
 			}
 
-			if ( isset( $custom_prices[ $key ] ) && is_numeric( $custom_prices[ $key ] ) ) {
-				$rate['cost'] = $this->calculate_excl_vat( $custom_prices[ $key ] );
+			if ( empty( $services[ $key ] ) ) {
+				continue;
 			}
 
-			if ( isset( $free_shipping_checks[ $key ] ) && 'on' === $free_shipping_checks[ $key ] && isset( $free_shipping_thresholds[ $key ] ) ) {
+			$service = $services[ $key ];
+			if ( ! empty( $service->custom_name ) && ( ! $pickup_point_enabled || 'SERVICEPAKKE' !== $key ) ) {
+				$rate['label'] = $service->custom_name;
+			}
+
+			if ( $service->custom_price_cb ) {
+				$rate['cost'] = $this->calculate_excl_vat( $service->custom_price );
+			}
+
+			if ( $service->free_shipping_cb ) {
 				// Free shipping is checked and threshold is defined.
-				$threshold = $free_shipping_thresholds[ $key ];
-
+				$threshold = $service->free_shipping;
 				if ( ! is_numeric( $threshold ) || $cart_total >= $threshold ) {
 					// Threshold is not a number (ie. undefined) or
 					// cart total is more than or equal to the threshold.
