@@ -11,39 +11,40 @@
 					:placeholder="service_data.productName"
 					type="text"
 					v-model="custom_name"
-					:name="custom_name_id"
+					:name="name_prefix + '[custom_name]'"
 				>
 			</label>
 			<overridetoggle
-				:checkbox_id="custom_price_cb_id"
+				field_id="custom_price"
 				:checkbox_val="custom_price_cb"
 				input_type="number"
-				:field_id="custom_price_id"
 				:field_val="custom_price"
+				:name_prefix="name_prefix"
 			>
 				Fixed price override:
 			</overridetoggle>
 			<overridetoggle
-				:checkbox_id="customer_number_cb_id"
+				field_id="customer_number"
 				:checkbox_val="customer_number_cb"
 				input_type="text"
-				:field_id="customer_number_id"
 				:field_val="customer_number"
+				:name_prefix="name_prefix"
 			>
 				Alternative customer number:
 			</overridetoggle>
 			<overridetoggle
-				:checkbox_id="free_shipping_id"
-				:checkbox_val="free_shipping"
+				field_id="free_shipping"
+				:checkbox_val="free_shipping_cb"
 				input_type="number"
-				:field_id="free_shipping_threshold_id"
-				:field_val="free_shipping_threshold"
+				:field_val="free_shipping"
+				:name_prefix="name_prefix"
 			>
-				Free shipping override:
+				Free shipping activated at:
 			</overridetoggle>
 		</div>
 	</div>
 </template>
+
 <style lang="scss">
 .fraktguiden-product {
 	&,* {
@@ -74,38 +75,43 @@
 			padding: 0.5rem;
 			display: flex;
 			flex: 1 0 auto;
-		    align-items: center
+		    align-items: center;
+		    @media (max-width: 32em) {
+			    flex-wrap: wrap;
+		    }
 		}
 		span {
-			flex: 0 0 10rem;
+			flex: 0 0 15rem;
 		}
 		#shipping_services & {
+			input[type="number"],
 			input[type="text"] {
-				max-width: 20rem;
+			    width: 100%;
+			}
+			input[type="text"] {
 			}
 			input[type="number"] {
-				max-width: 100%;
 				text-align: right;
 			}
 		}
 	}
 }
 </style>
+
 <script>
 import OverrideToggle from './override-toggle';
 export default {
 	props: [
 		'enabled',
+		'bring_product',
+		'option_key',
 		'custom_name',
-		'custom_name_id',
 		'custom_price',
-		'custom_price_id',
+		'custom_price_cb',
 		'customer_number',
-		'customer_number_id',
+		'customer_number_cb',
 		'free_shipping',
-		'free_shipping_id',
-		'free_shipping_threshold',
-		'free_shipping_threshold_id',
+		'free_shipping_cb',
 		'service_data',
 		'id',
 	],
@@ -122,6 +128,9 @@ export default {
 			}
 			return this.service_data.class;
 		},
+		name_prefix: function() {
+			return this.option_key + '[' + this.bring_product + ']';
+		}
 	},
 	components: {
 		overridetoggle: OverrideToggle

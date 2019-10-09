@@ -152,11 +152,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['checkbox_id', 'checkbox_val', 'input_type', 'field_id', 'field_val']
+  props: ['name_prefix', 'field_id', 'field_val', 'checkbox_val', 'input_type']
 });
 
 /***/ }),
@@ -264,9 +261,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['enabled', 'custom_name', 'custom_name_id', 'custom_price', 'custom_price_id', 'customer_number', 'customer_number_id', 'free_shipping', 'free_shipping_id', 'free_shipping_threshold', 'free_shipping_threshold_id', 'service_data', 'id'],
+  props: ['enabled', 'bring_product', 'option_key', 'custom_name', 'custom_price', 'custom_price_cb', 'customer_number', 'customer_number_cb', 'free_shipping', 'free_shipping_cb', 'service_data', 'id'],
   data: function data() {
     return {
       custom_price_cb: false,
@@ -280,6 +284,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return this.service_data["class"];
+    },
+    name_prefix: function name_prefix() {
+      return this.option_key + '[' + this.bring_product + ']';
     }
   },
   components: {
@@ -306,7 +313,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".togglererer {\n  position: relative;\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  max-width: 20rem;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #aaa;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 22px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}", ""]);
+exports.push([module.i, ".togglererer {\n  position: relative;\n  width: 100%;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #aaa;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 22px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}", ""]);
 
 // exports
 
@@ -325,7 +332,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  min-width: 50%;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 auto;\n  align-items: center;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 10rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  max-width: 20rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  max-width: 100%;\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  min-width: 50%;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 auto;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    flex-wrap: wrap;\n}\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 15rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -1485,7 +1492,10 @@ var render = function() {
           }
         ],
         staticClass: "bring-toggle-checkbox enable_free_shipping_limit",
-        attrs: { type: "checkbox", name: "checkbox_id" },
+        attrs: {
+          type: "checkbox",
+          name: _vm.name_prefix + "[" + _vm.field_id + "_cb]"
+        },
         domProps: {
           checked: Array.isArray(_vm.checkbox_val)
             ? _vm._i(_vm.checkbox_val, null) > -1
@@ -1531,7 +1541,7 @@ var render = function() {
               step: ".01",
               min: "0",
               placeholder: "0.00",
-              name: _vm.field_id,
+              name: _vm.name_prefix + "[" + _vm.field_id + "]",
               readonly: !_vm.checkbox_val
             },
             domProps: { value: _vm.field_val },
@@ -1555,7 +1565,7 @@ var render = function() {
             ],
             attrs: {
               type: "text",
-              name: _vm.field_id,
+              name: _vm.name_prefix + "[" + _vm.field_id + "]",
               readonly: !_vm.checkbox_val
             },
             domProps: { value: _vm.field_val },
@@ -1625,7 +1635,7 @@ var render = function() {
             attrs: {
               placeholder: _vm.service_data.productName,
               type: "text",
-              name: _vm.custom_name_id
+              name: _vm.name_prefix + "[custom_name]"
             },
             domProps: { value: _vm.custom_name },
             on: {
@@ -1643,11 +1653,11 @@ var render = function() {
           "overridetoggle",
           {
             attrs: {
-              checkbox_id: _vm.custom_price_cb_id,
+              field_id: "custom_price",
               checkbox_val: _vm.custom_price_cb,
               input_type: "number",
-              field_id: _vm.custom_price_id,
-              field_val: _vm.custom_price
+              field_val: _vm.custom_price,
+              name_prefix: _vm.name_prefix
             }
           },
           [_vm._v("\n\t\t\tFixed price override:\n\t\t")]
@@ -1657,11 +1667,11 @@ var render = function() {
           "overridetoggle",
           {
             attrs: {
-              checkbox_id: _vm.customer_number_cb_id,
+              field_id: "customer_number",
               checkbox_val: _vm.customer_number_cb,
               input_type: "text",
-              field_id: _vm.customer_number_id,
-              field_val: _vm.customer_number
+              field_val: _vm.customer_number,
+              name_prefix: _vm.name_prefix
             }
           },
           [_vm._v("\n\t\t\tAlternative customer number:\n\t\t")]
@@ -1671,14 +1681,14 @@ var render = function() {
           "overridetoggle",
           {
             attrs: {
-              checkbox_id: _vm.free_shipping_id,
-              checkbox_val: _vm.free_shipping,
+              field_id: "free_shipping",
+              checkbox_val: _vm.free_shipping_cb,
               input_type: "number",
-              field_id: _vm.free_shipping_threshold_id,
-              field_val: _vm.free_shipping_threshold
+              field_val: _vm.free_shipping,
+              name_prefix: _vm.name_prefix
             }
           },
-          [_vm._v("\n\t\t\tFree shipping override:\n\t\t")]
+          [_vm._v("\n\t\t\tFree shipping activated at:\n\t\t")]
         )
       ],
       1

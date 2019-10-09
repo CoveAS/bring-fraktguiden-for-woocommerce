@@ -5,7 +5,7 @@
 			<input
 				type="checkbox"
 				class="bring-toggle-checkbox enable_free_shipping_limit"
-				name="checkbox_id"
+				:name="name_prefix + '[' + field_id + '_cb]'"
 				v-model="checkbox_val"
 			>
 			<em class="bring-toggle-alt"></em>
@@ -16,14 +16,14 @@
 				min="0"
 				placeholder="0.00"
 				v-model="field_val"
-				:name="field_id"
+				:name="name_prefix + '[' + field_id + ']'"
 				:readonly="! checkbox_val"
 			>
 			<input
 				v-else
 				type="text"
 				v-model="field_val"
-				:name="field_id"
+				:name="name_prefix + '[' + field_id + ']'"
 				:readonly="! checkbox_val"
 			>
 		</div>
@@ -33,10 +33,7 @@
 <style lang="scss">
 .togglererer {
 	position: relative;
-	display: flex;
-	justify-content: space-between;
 	width: 100%;
-	max-width: 20rem;
 	.bring-toggle-alt {
 		position: absolute;
 		border-radius: 0;
@@ -61,11 +58,11 @@
 <script>
 export default {
 	props: [
-		'checkbox_id',
-		'checkbox_val',
-		'input_type',
+		'name_prefix',
 		'field_id',
 		'field_val',
+		'checkbox_val',
+		'input_type',
 	]
 }
 </script>

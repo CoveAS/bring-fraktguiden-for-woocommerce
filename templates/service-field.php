@@ -13,7 +13,7 @@
 		</th>
 		<td class="forminp">
 			<div id="shipping_services">
-				<select class="select2" v-model="selected" multiple="multiple">
+				<select class="select2" v-model="selected" multiple="multiple" name="<?php echo esc_attr( $field_key ); ?>[]">
 					<optgroup v-for="optgroup in services_data" :label="optgroup.title">
 						<option v-for="(option, option_id) in optgroup.services" :value="option_id">
 							{{option.productName}}

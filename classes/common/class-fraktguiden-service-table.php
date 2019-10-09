@@ -64,41 +64,21 @@ class Fraktguiden_Service_Table {
 	 */
 	public function process_services_field( $instance_key ) {
 
-		$field_key = $this->shipping_method->get_field_key( 'services' );
+		$service_key = $this->shipping_method->get_field_key( 'services' );
 
 		// Process services table.
-		$services  = Fraktguiden_Helper::get_services_data();
-
-		$vars      = [
-			'custom_prices',
-			'custom_names',
-			'customer_numbers',
-			'free_shipping_checks',
-			'free_shipping_thresholds',
-		];
+		$services  = Fraktguiden_Service::all( $service_key );
 
 		$options   = [];
 
+		$service_options = [];
 		// Only process options for enabled services.
-		foreach ( $services as $service_group ) {
-			foreach ( $service_group['services'] as $key => $service ) {
-				foreach ( $vars as $var ) {
-					$data_key = "{$field_key}_{$var}";
-
-					if ( ! isset( $options[ $data_key ] ) ) {
-						$options[ $data_key ] = [];
-					}
-
-					if ( isset( $_POST[ $data_key ][ $key ] ) ) {
-						$options[ $data_key ][ $key ] = $_POST[ $data_key ][ $key ];
-					}
-				}
-			}
+		foreach ( $services as $bring_product => $service ) {
+			$service_options[ $bring_product ] = $service->process_post_data();
 		}
+		$service_options = array_filter( $service_options );
 
-		foreach ( $options as $data_key => $value ) {
-			update_option( $data_key, $value );
-		}
+		update_option( $service_key . '_options', $service_options );
 	}
 
 	/**
