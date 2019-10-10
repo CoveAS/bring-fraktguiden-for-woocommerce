@@ -102,9 +102,6 @@ class Fraktguiden_System_Info {
 
 				self::create_header( $bfg_plugin_data['Name'] . ' ' . $bfg_plugin_data['Version'] );
 				self::generate_fraktguiden_options( $bfg_options );
-
-				self::create_header( 'Bring Fraktguiden Services' );
-				self::generate_fraktguiden_services_info( Fraktguiden_Helper::get_all_services_with_customer_types(), $bfg_options );
 				?>
 			</table>
 		</div>
@@ -248,51 +245,6 @@ class Fraktguiden_System_Info {
 		$html .= '</div>';
 
 		return $html;
-	}
-
-	/**
-	 * Generate fraktguiden services info
-	 *
-	 * @param  array $all_services All services.
-	 * @param  array $bfg_options  BFG options.
-	 * @return void
-	 */
-	private static function generate_fraktguiden_services_info( $all_services, $bfg_options ) {
-		foreach ( $all_services as $key => $service ) {
-			$info_table = '<table class="properties">';
-
-			foreach ( $service as $k => $v ) {
-				$val_html = $v;
-
-				if ( 'array' === gettype( $v ) ) {
-					$val_html = '';
-
-					foreach ( $v as $n ) {
-						$val_html .= '<li>' . $n . '</li>';
-					}
-
-					$val_html .= '</ul>';
-				}
-
-				$info_table .= "
-				<tr>
-					<td>$k</td>
-					<td>$val_html</td>
-				</tr>";
-			}
-
-			$info_table .= '</table>';
-
-			$text = $key;
-
-			foreach ( $bfg_options['services'] as $k => $selected_service ) {
-				if ( $key == $selected_service ) {
-					$text .= ' (selected)';
-				}
-			}
-
-			self::create_row( $text, $info_table );
-		}
 	}
 
 	/**

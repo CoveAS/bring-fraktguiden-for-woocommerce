@@ -186,47 +186,6 @@ class Fraktguiden_Helper {
 	}
 
 	/**
-	 * Get all services with customer types
-	 *
-	 * @return array
-	 */
-	public static function get_all_services_with_customer_types() {
-		$services = self::get_services_data();
-		$result   = [];
-
-		foreach ( $services as $service_group ) {
-			foreach ( $service_group['services'] as $key => $service ) {
-				$service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
-				$result[ $key ]           = $service;
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Get all services
-	 *
-	 * @param int|string $service_id Service ID.
-	 *
-	 * @return array
-	 */
-	private static function get_customer_types_for_service_id( $service_id ) {
-		$customer_types = self::get_customer_types_data();
-		$result         = [];
-
-		foreach ( $customer_types as $k => $v ) {
-			foreach ( $v as $item ) {
-				if ( $item == $service_id ) {
-					$result[] = $k;
-				}
-			}
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Available Fraktguiden services.
 	 * Information is copied from the service's XML API
 	 *
@@ -234,15 +193,6 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_services_data() {
 		return require dirname( dirname( __DIR__ ) ) . '/config/services.php';
-	}
-
-	/**
-	 * Get customer types data
-	 *
-	 * @return array
-	 */
-	public static function get_customer_types_data() {
-		return require dirname( dirname( __DIR__ ) ) . '/config/customer-types.php';
 	}
 
 	/**

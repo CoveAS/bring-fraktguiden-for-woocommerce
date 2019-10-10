@@ -138,6 +138,7 @@ class Fraktguiden_Service {
 		}
 		foreach ( $services_data as $service_group ) {
 			foreach ( $service_group['services'] as $bring_product => $service_data ) {
+				$bring_product = (string) $bring_product;
 				if ( $only_selected && ! in_array( $bring_product, $selected, true ) ) {
 					continue;
 				}
