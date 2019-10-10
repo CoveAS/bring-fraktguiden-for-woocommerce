@@ -74,11 +74,25 @@ class Fraktguiden_Service {
 	public $free_shipping;
 
 	/**
-	 * Free shipping treshold
+	 * Free shipping checkbox
 	 *
 	 * @var string
 	 */
 	public $free_shipping_cb;
+
+	/**
+	 * Additional fee
+	 *
+	 * @var string
+	 */
+	public $additional_fee;
+
+	/**
+	 * Additional fee checkbox
+	 *
+	 * @var string
+	 */
+	public $additional_fee_cb;
 
 	/**
 	 * Construct
@@ -101,6 +115,8 @@ class Fraktguiden_Service {
 		$this->customer_number_cb = esc_html( $service_option['customer_number_cb'] ?? '' );
 		$this->free_shipping      = esc_html( $service_option['free_shipping'] ?? '' );
 		$this->free_shipping_cb   = esc_html( $service_option['free_shipping_cb'] ?? '' );
+		$this->additional_fee     = esc_html( $service_option['additional_fee'] ?? '' );
+		$this->additional_fee_cb  = esc_html( $service_option['additional_fee_cb'] ?? '' );
 	}
 
 	/**
@@ -232,6 +248,8 @@ class Fraktguiden_Service {
 			'customer_number_cb',
 			'free_shipping',
 			'free_shipping_cb',
+			'additional_fee',
+			'additional_fee_cb',
 		];
 		foreach ( $post_fields as $post_field ) {
 			$post_data = filter_input( INPUT_POST, $this->option_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );

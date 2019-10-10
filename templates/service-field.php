@@ -12,7 +12,7 @@
 			</label>
 		</th>
 		<td class="forminp">
-			<div id="shipping_services">
+			<div id="shipping_services" class="pro-<?php echo Fraktguiden_Helper::pro_activated() ? 'enabled' : 'disabled'; ?>">
 				<select class="select2" v-model="selected" multiple="multiple" name="<?php echo esc_attr( $field_key ); ?>[]">
 					<optgroup v-for="optgroup in services_data" :label="optgroup.title">
 						<option v-for="(option, option_id) in optgroup.services" :value="option_id">
@@ -20,7 +20,13 @@
 						</option>
 					</optgroup>
 				</select>
-				<shippingproduct v-for="service in services" v-bind="service" v-bind:key="service.id"></shippingproducts>
+				<shippingproduct
+					v-for="service in services"
+					:id="service.id"
+					:service_data="service.service_data"
+					:service="service"
+					v-bind:key="service.id"
+				></shippingproducts>
 			</div>
 		</td>
 	</tr>

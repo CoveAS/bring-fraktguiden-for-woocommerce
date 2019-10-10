@@ -7,6 +7,7 @@
 				class="bring-toggle-checkbox enable_free_shipping_limit"
 				:name="name_prefix + '[' + field_id + '_cb]'"
 				v-model="checkbox_val"
+				:readonly="! pro_activated"
 			>
 			<em class="bring-toggle-alt"></em>
 			<input
@@ -17,14 +18,16 @@
 				placeholder="0.00"
 				v-model="field_val"
 				:name="name_prefix + '[' + field_id + ']'"
-				:readonly="! checkbox_val"
+				:pattern="pattern"
+				:readonly="! checkbox_val || ! pro_activated"
 			>
 			<input
 				v-else
 				type="text"
 				v-model="field_val"
 				:name="name_prefix + '[' + field_id + ']'"
-				:readonly="! checkbox_val"
+				:pattern="pattern"
+				:readonly="! checkbox_val || ! pro_activated"
 			>
 		</div>
 	</label>
@@ -60,9 +63,20 @@ export default {
 	props: [
 		'name_prefix',
 		'field_id',
-		'field_val',
-		'checkbox_val',
+		'obj',
 		'input_type',
-	]
-}
+		'pattern',
+	],
+	data: function() {
+		return {
+			field_val: this.obj[ this.field_id ],
+			checkbox_val: this.obj[ this.field_id + '_cb' ],
+		};
+	},
+	computed: {
+		pro_activated: function() {
+			return this.$root.pro_activated;
+		},
+	},
+};
 </script>

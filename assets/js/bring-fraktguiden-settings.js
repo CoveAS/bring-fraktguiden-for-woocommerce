@@ -152,8 +152,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name_prefix', 'field_id', 'field_val', 'checkbox_val', 'input_type']
+  props: ['name_prefix', 'field_id', 'obj', 'input_type', 'pattern'],
+  data: function data() {
+    return {
+      field_val: this.obj[this.field_id],
+      checkbox_val: this.obj[this.field_id + '_cb']
+    };
+  },
+  computed: {
+    pro_activated: function pro_activated() {
+      return this.$root.pro_activated;
+    }
+  }
 });
 
 /***/ }),
@@ -269,13 +283,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['enabled', 'bring_product', 'option_key', 'custom_name', 'custom_price', 'custom_price_cb', 'customer_number', 'customer_number_cb', 'free_shipping', 'free_shipping_cb', 'service_data', 'id'],
+  props: ['service', 'service_data', 'id'],
   data: function data() {
     return {
-      custom_price_cb: false,
-      custom_price_cb_id: false
+      custom_name: this.service.custom_name,
+      custom_price: this.service.custom_price,
+      custom_price_cb: this.service.custom_price_cb,
+      customer_number: this.service.customer_number,
+      customer_number_cb: this.service.customer_number_cb,
+      free_shipping: this.service.free_shipping,
+      free_shipping_cb: this.service.free_shipping_cb,
+      additional_fee: this.service.additional_fee,
+      additional_fee_cb: this.service.additional_fee_cb,
+      name_prefix: this.service.option_key + '[' + this.service.bring_product + ']'
     };
   },
   computed: {
@@ -286,18 +333,14 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.service_data["class"];
     },
-    name_prefix: function name_prefix() {
-      return this.option_key + '[' + this.bring_product + ']';
+    pro_activated: function pro_activated() {
+      return this.$root.pro_activated;
     }
   },
   components: {
     overridetoggle: _override_toggle__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {
-    if (this.custom_price) {
-      this.custom_price_cb = true;
-    }
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -333,7 +376,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -1495,7 +1538,8 @@ var render = function() {
         staticClass: "bring-toggle-checkbox enable_free_shipping_limit",
         attrs: {
           type: "checkbox",
-          name: _vm.name_prefix + "[" + _vm.field_id + "_cb]"
+          name: _vm.name_prefix + "[" + _vm.field_id + "_cb]",
+          readonly: !_vm.pro_activated
         },
         domProps: {
           checked: Array.isArray(_vm.checkbox_val)
@@ -1543,7 +1587,8 @@ var render = function() {
               min: "0",
               placeholder: "0.00",
               name: _vm.name_prefix + "[" + _vm.field_id + "]",
-              readonly: !_vm.checkbox_val
+              pattern: _vm.pattern,
+              readonly: !_vm.checkbox_val || !_vm.pro_activated
             },
             domProps: { value: _vm.field_val },
             on: {
@@ -1567,7 +1612,8 @@ var render = function() {
             attrs: {
               type: "text",
               name: _vm.name_prefix + "[" + _vm.field_id + "]",
-              readonly: !_vm.checkbox_val
+              pattern: _vm.pattern,
+              readonly: !_vm.checkbox_val || !_vm.pro_activated
             },
             domProps: { value: _vm.field_val },
             on: {
@@ -1610,6 +1656,13 @@ var render = function() {
         domProps: { innerHTML: _vm._s(_vm.service_data.productName) }
       }),
       _vm._v(" "),
+      _vm.service_data.warning
+        ? _c("p", {
+            staticClass: "warning",
+            domProps: { innerHTML: _vm._s(_vm.service_data.warning) }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _vm.service_data.description
         ? _c("p", {
             domProps: { innerHTML: _vm._s(_vm.service_data.description) }
@@ -1636,7 +1689,8 @@ var render = function() {
             attrs: {
               placeholder: _vm.service_data.productName,
               type: "text",
-              name: _vm.name_prefix + "[custom_name]"
+              name: _vm.name_prefix + "[custom_name]",
+              readonly: !_vm.pro_activated
             },
             domProps: { value: _vm.custom_name },
             on: {
@@ -1655,9 +1709,8 @@ var render = function() {
           {
             attrs: {
               field_id: "custom_price",
-              checkbox_val: _vm.custom_price_cb,
+              obj: this,
               input_type: "number",
-              field_val: _vm.custom_price,
               name_prefix: _vm.name_prefix
             }
           },
@@ -1669,9 +1722,8 @@ var render = function() {
           {
             attrs: {
               field_id: "customer_number",
-              checkbox_val: _vm.customer_number_cb,
+              obj: this,
               input_type: "text",
-              field_val: _vm.customer_number,
               name_prefix: _vm.name_prefix
             }
           },
@@ -1683,13 +1735,25 @@ var render = function() {
           {
             attrs: {
               field_id: "free_shipping",
-              checkbox_val: _vm.free_shipping_cb,
+              obj: this,
               input_type: "number",
-              field_val: _vm.free_shipping,
               name_prefix: _vm.name_prefix
             }
           },
           [_vm._v("\n\t\t\tFree shipping activated at:\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c(
+          "overridetoggle",
+          {
+            attrs: {
+              field_id: "additional_fee",
+              obj: this,
+              input_type: "number",
+              name_prefix: _vm.name_prefix
+            }
+          },
+          [_vm._v("\n\t\t\tAdditional fee:\n\t\t")]
         )
       ],
       1
@@ -13819,12 +13883,12 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 var selected = bring_fraktguiden_settings.services_enabled;
-console.log('');
 var settings = new Vue({
   el: '#shipping_services',
   data: {
     selected: selected,
-    services_data: bring_fraktguiden_settings.services_data
+    services_data: bring_fraktguiden_settings.services_data,
+    pro_activated: bring_fraktguiden_settings.pro_activated
   },
   computed: {
     services: function services() {
@@ -13841,6 +13905,14 @@ var settings = new Vue({
   },
   components: {
     shippingproduct: _components_shipping_product__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+Object.defineProperty(bring_fraktguiden_settings, 'pro_activated', {
+  get: function get() {
+    return settings.$root.pro_activated;
+  },
+  set: function set(val) {
+    settings.$root.pro_activated = val;
   }
 });
 jQuery(function ($) {

@@ -2,6 +2,7 @@
 	<div class="fraktguiden-product">
 		<header :class="classes">
 			<h3 v-html="service_data.productName"></h3>
+			<p class="warning" v-if="service_data.warning" v-html="service_data.warning"></p>
 			<p v-if="service_data.description" v-html="service_data.description"></p>
 		</header>
 		<div class="fraktguiden-product__fields">
@@ -12,34 +13,40 @@
 					type="text"
 					v-model="custom_name"
 					:name="name_prefix + '[custom_name]'"
+					:readonly="! pro_activated"
 				>
 			</label>
 			<overridetoggle
 				field_id="custom_price"
-				:checkbox_val="custom_price_cb"
+				:obj="this"
 				input_type="number"
-				:field_val="custom_price"
 				:name_prefix="name_prefix"
 			>
 				Fixed price override:
 			</overridetoggle>
 			<overridetoggle
 				field_id="customer_number"
-				:checkbox_val="customer_number_cb"
+				:obj="this"
 				input_type="text"
-				:field_val="customer_number"
 				:name_prefix="name_prefix"
 			>
 				Alternative customer number:
 			</overridetoggle>
 			<overridetoggle
 				field_id="free_shipping"
-				:checkbox_val="free_shipping_cb"
+				:obj="this"
 				input_type="number"
-				:field_val="free_shipping"
 				:name_prefix="name_prefix"
 			>
 				Free shipping activated at:
+			</overridetoggle>
+			<overridetoggle
+				field_id="additional_fee"
+				:obj="this"
+				input_type="number"
+				:name_prefix="name_prefix"
+			>
+				Additional fee:
 			</overridetoggle>
 		</div>
 	</div>
@@ -65,11 +72,16 @@
 			margin: 0;
 		}
 	}
+	p.warning {
+		font-weight: 600;
+		color: #d20e0e;
+	}
 	&__fields {
 		display: flex;
 		flex-wrap: wrap;
 		padding: 0.5rem;
 		label {
+			position: relative;
 			min-width: 25rem;
 			max-width: 100%;
 			padding: 0.5rem;
@@ -80,6 +92,19 @@
 				min-width: 15rem;
 			    flex-wrap: wrap;
 		    }
+
+			.pro-disabled &::after {
+				content: 'Pro only';
+				position: absolute;
+				display: block;
+				top: 0;
+				right: 0;
+				color: #C00;
+				background-color: #fff;
+				border-radius: 5px;
+				padding: 0.25rem 0.5rem;
+				opacity: 0.8;
+			}
 		}
 		span {
 			flex: 0 0 14rem;
@@ -103,23 +128,22 @@
 import OverrideToggle from './override-toggle';
 export default {
 	props: [
-		'enabled',
-		'bring_product',
-		'option_key',
-		'custom_name',
-		'custom_price',
-		'custom_price_cb',
-		'customer_number',
-		'customer_number_cb',
-		'free_shipping',
-		'free_shipping_cb',
+		'service',
 		'service_data',
 		'id',
 	],
 	data: function() {
 		return {
-			custom_price_cb: false,
-			custom_price_cb_id: false,
+			custom_name        : this.service.custom_name,
+			custom_price       : this.service.custom_price,
+			custom_price_cb    : this.service.custom_price_cb,
+			customer_number    : this.service.customer_number,
+			customer_number_cb : this.service.customer_number_cb,
+			free_shipping      : this.service.free_shipping,
+			free_shipping_cb   : this.service.free_shipping_cb,
+			additional_fee     : this.service.additional_fee,
+			additional_fee_cb  : this.service.additional_fee_cb,
+			name_prefix        : this.service.option_key + '[' + this.service.bring_product + ']',
 		};
 	},
 	computed: {
@@ -129,17 +153,14 @@ export default {
 			}
 			return this.service_data.class;
 		},
-		name_prefix: function() {
-			return this.option_key + '[' + this.bring_product + ']';
-		}
+		pro_activated: function() {
+			return this.$root.pro_activated;
+		},
 	},
 	components: {
 		overridetoggle: OverrideToggle
 	},
 	mounted: function() {
-		if ( this.custom_price ) {
-			this.custom_price_cb = true;
-		}
 	}
 };
 </script>

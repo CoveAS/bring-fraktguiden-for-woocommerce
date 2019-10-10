@@ -3,12 +3,12 @@ window.Vue = require( 'vue' );
 
 var selected = bring_fraktguiden_settings.services_enabled;
 
-console.log('')
 var settings = new Vue( {
 	el: '#shipping_services',
 	data: {
 		selected: selected,
 		services_data: bring_fraktguiden_settings.services_data,
+		pro_activated: bring_fraktguiden_settings.pro_activated,
 	},
 	computed: {
 		services: function() {
@@ -26,6 +26,18 @@ var settings = new Vue( {
 	},
 } );
 
+Object.defineProperty(
+	bring_fraktguiden_settings,
+	'pro_activated',
+	{
+		get: function() {
+			return settings.$root.pro_activated;
+		},
+		set: function( val ) {
+			settings.$root.pro_activated = val;
+		}
+	}
+);
 
 jQuery( function( $ ) {
 	$( '#shipping_services .select2' ).select2().on( 'change select2:clear', function( e ) {

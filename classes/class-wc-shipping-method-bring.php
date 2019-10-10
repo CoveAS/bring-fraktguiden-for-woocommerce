@@ -275,6 +275,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'services_data'    => Fraktguiden_Helper::get_services_data(),
 				'services'         => Fraktguiden_Service::all( self::$field_key ),
 				'services_enabled' => array_keys( Fraktguiden_Service::all( self::$field_key, true ) ),
+				'pro_activated'    => Fraktguiden_Helper::pro_activated(),
 			]
 		);
 		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );

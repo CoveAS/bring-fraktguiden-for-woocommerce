@@ -90,13 +90,8 @@ class Fraktguiden_Service_Table {
 		$field_key       = $this->shipping_method->get_field_key( 'services' );
 		$services        = Fraktguiden_Helper::get_services_data();
 		$service_options = [
-			'field_key'                => $field_key,
-			'selected'                 => $this->shipping_method->services,
-			'custom_names'             => get_option( $field_key . '_custom_names' ),
-			'customer_numbers'         => get_option( $field_key . '_customer_numbers' ),
-			'custom_prices'            => get_option( $field_key . '_custom_prices' ),
-			'free_shipping_checks'     => get_option( $field_key . '_free_shipping_checks' ),
-			'free_shipping_thresholds' => get_option( $field_key . '_free_shipping_thresholds' ),
+			'field_key' => $field_key,
+			'selected'  => $this->shipping_method->services,
 		];
 
 		ob_start();
