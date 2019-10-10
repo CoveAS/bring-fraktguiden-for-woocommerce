@@ -292,7 +292,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		$instance_key = null;
 		if ( $this->instance_id ) {
-				$instance_key = $this->get_instance_option_key();
+			$instance_key = $this->get_instance_option_key();
 		}
 		$this->service_table->process_services_field( $instance_key );
 		$this->process_mybring_api_credentials();
@@ -561,13 +561,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$country = 'NO';
 		}
 
+		// Remove spaces in post code.
+		$postcode = preg_replace( '/\s/', '', $package['destination']['postcode'] );
+
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
 			[
 				'clientUrl'           => Fraktguiden_Helper::get_client_url(),
 				'frompostalcode'      => $this->from_zip,
 				'fromcountry'         => $this->get_selected_from_country(),
-				'topostalcode'        => $package['destination']['postcode'],
+				'topostalcode'        => $postcode,
 				'tocountry'           => $country,
 				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
 				'additionalservice'   => ( 'yes' === $this->evarsling ) ? 'EVARSLING' : '',
