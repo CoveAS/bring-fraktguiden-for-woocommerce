@@ -155,18 +155,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+var validation = function validation() {
+  if (this.validation && !this.validation(this.field_val, this.checkbox_val)) {
+    this.classes = 'validation-error';
+  } else {
+    this.classes = '';
+  }
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name_prefix', 'field_id', 'obj', 'input_type', 'pattern'],
+  props: ['name_prefix', 'field_id', 'obj', 'input_type', 'validation', 'label'],
   data: function data() {
     return {
       field_val: this.obj[this.field_id],
-      checkbox_val: this.obj[this.field_id + '_cb']
+      checkbox_val: this.obj[this.field_id + '_cb'],
+      classes: ''
     };
   },
   computed: {
     pro_activated: function pro_activated() {
       return this.$root.pro_activated;
     }
+  },
+  watch: {
+    checkbox_val: validation,
+    field_val: validation
   }
 });
 
@@ -308,11 +326,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['service', 'service_data', 'id'],
   data: function data() {
     return {
+      i18n: bring_fraktguiden_settings.i18n,
       custom_name: this.service.custom_name,
       custom_price: this.service.custom_price,
       custom_price_cb: this.service.custom_price_cb,
@@ -322,7 +361,8 @@ __webpack_require__.r(__webpack_exports__);
       free_shipping_cb: this.service.free_shipping_cb,
       additional_fee: this.service.additional_fee,
       additional_fee_cb: this.service.additional_fee_cb,
-      name_prefix: this.service.option_key + '[' + this.service.bring_product + ']'
+      name_prefix: this.service.option_key + '[' + this.service.bring_product + ']',
+      validation_errors: []
     };
   },
   computed: {
@@ -337,10 +377,35 @@ __webpack_require__.r(__webpack_exports__);
       return this.$root.pro_activated;
     }
   },
+  methods: {
+    validate_customer_number: function validate_customer_number(value, checkbox_value) {
+      for (var i = 0; i < this.validation_errors.length; i++) {
+        if (this.validation_errors[i] && 'customer_number' === this.validation_errors[i].id) {
+          this.validation_errors.splice(i, 1);
+        }
+      }
+
+      if (typeof checkbox_value !== 'undefined' && !checkbox_value) {
+        return true;
+      }
+
+      if (value && !value.match(/^[A-Za-z_]+\-\d+$/)) {
+        this.validation_errors.push({
+          id: 'customer_number',
+          message: "Warning: Could not validate the customer number. Customer numbers should be text and underscores followed by a dash and a number."
+        });
+        return false;
+      }
+
+      return true;
+    }
+  },
   components: {
     overridetoggle: _override_toggle__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.validate_customer_number(this.customer_number, this.customer_number_cb);
+  }
 });
 
 /***/ }),
@@ -357,7 +422,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".togglererer {\n  position: relative;\n  width: 100%;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #aaa;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 22px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}", ""]);
+exports.push([module.i, ".togglererer {\n  position: relative;\n  width: 100%;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #aaa;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 22px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}\n.validation-error input[type=number],\n.validation-error input[type=text] {\n  border-color: #CC0000;\n  box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);\n}", ""]);
 
 // exports
 
@@ -376,7 +441,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -1522,8 +1587,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("label", [
-    _c("span", [_vm._t("default")], 2),
+  return _c("label", { class: _vm.classes }, [
+    _c("span", { domProps: { innerHTML: _vm._s(_vm.label) } }),
     _vm._v(" "),
     _c("div", { staticClass: "togglererer" }, [
       _c("input", {
@@ -1587,7 +1652,6 @@ var render = function() {
               min: "0",
               placeholder: "0.00",
               name: _vm.name_prefix + "[" + _vm.field_id + "]",
-              pattern: _vm.pattern,
               readonly: !_vm.checkbox_val || !_vm.pro_activated
             },
             domProps: { value: _vm.field_val },
@@ -1612,7 +1676,6 @@ var render = function() {
             attrs: {
               type: "text",
               name: _vm.name_prefix + "[" + _vm.field_id + "]",
-              pattern: _vm.pattern,
               readonly: !_vm.checkbox_val || !_vm.pro_activated
             },
             domProps: { value: _vm.field_val },
@@ -1675,7 +1738,9 @@ var render = function() {
       { staticClass: "fraktguiden-product__fields" },
       [
         _c("label", [
-          _c("span", [_vm._v("Shipping name:")]),
+          _c("span", {
+            domProps: { innerHTML: _vm._s(_vm.i18n.shipping_name) }
+          }),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -1704,60 +1769,73 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c(
-          "overridetoggle",
-          {
-            attrs: {
-              field_id: "custom_price",
-              obj: this,
-              input_type: "number",
-              name_prefix: _vm.name_prefix
-            }
-          },
-          [_vm._v("\n\t\t\tFixed price override:\n\t\t")]
-        ),
+        _c("overridetoggle", {
+          attrs: {
+            label: _vm.i18n.fixed_price_override,
+            field_id: "custom_price",
+            obj: this,
+            input_type: "number",
+            name_prefix: _vm.name_prefix
+          }
+        }),
         _vm._v(" "),
-        _c(
-          "overridetoggle",
-          {
-            attrs: {
-              field_id: "customer_number",
-              obj: this,
-              input_type: "text",
-              name_prefix: _vm.name_prefix
-            }
-          },
-          [_vm._v("\n\t\t\tAlternative customer number:\n\t\t")]
-        ),
+        _c("overridetoggle", {
+          attrs: {
+            field_id: "customer_number",
+            label: _vm.i18n.alternative_customer_number,
+            obj: this,
+            input_type: "text",
+            name_prefix: _vm.name_prefix,
+            validation: _vm.validate_customer_number
+          }
+        }),
         _vm._v(" "),
-        _c(
-          "overridetoggle",
-          {
-            attrs: {
-              field_id: "free_shipping",
-              obj: this,
-              input_type: "number",
-              name_prefix: _vm.name_prefix
-            }
-          },
-          [_vm._v("\n\t\t\tFree shipping activated at:\n\t\t")]
-        ),
+        _c("overridetoggle", {
+          attrs: {
+            label: _vm.i18n.free_shipping_activated_at,
+            field_id: "free_shipping",
+            obj: this,
+            input_type: "number",
+            name_prefix: _vm.name_prefix
+          }
+        }),
         _vm._v(" "),
-        _c(
-          "overridetoggle",
-          {
-            attrs: {
-              field_id: "additional_fee",
-              obj: this,
-              input_type: "number",
-              name_prefix: _vm.name_prefix
-            }
-          },
-          [_vm._v("\n\t\t\tAdditional fee:\n\t\t")]
-        )
+        _c("overridetoggle", {
+          attrs: {
+            label: _vm.i18n.additional_fee,
+            field_id: "additional_fee",
+            obj: this,
+            input_type: "number",
+            name_prefix: _vm.name_prefix
+          }
+        })
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _c("footer", [
+      _c(
+        "ul",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.validation_errors.length,
+              expression: "validation_errors.length"
+            }
+          ],
+          staticClass: "validation-errors"
+        },
+        _vm._l(_vm.validation_errors, function(validation_error) {
+          return _c("li", {
+            staticClass: "validation-errors__error",
+            domProps: { innerHTML: _vm._s(validation_error.message) }
+          })
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []

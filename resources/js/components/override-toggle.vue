@@ -1,6 +1,6 @@
 <template>
-	<label>
-		<span><slot></slot></span>
+	<label :class="classes">
+		<span v-html="label"></span>
 		<div class="togglererer">
 			<input
 				type="checkbox"
@@ -18,7 +18,6 @@
 				placeholder="0.00"
 				v-model="field_val"
 				:name="name_prefix + '[' + field_id + ']'"
-				:pattern="pattern"
 				:readonly="! checkbox_val || ! pro_activated"
 			>
 			<input
@@ -26,7 +25,6 @@
 				type="text"
 				v-model="field_val"
 				:name="name_prefix + '[' + field_id + ']'"
-				:pattern="pattern"
 				:readonly="! checkbox_val || ! pro_activated"
 			>
 		</div>
@@ -57,26 +55,46 @@
 		}
 	}
 }
+.validation-error {
+		input[type="number"],
+		input[type="text"] {
+		    border-color: #CC0000;
+		    box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);
+		}
+}
 </style>
 <script>
+var validation = function() {
+	if ( this.validation && ! this.validation( this.field_val, this.checkbox_val ) ) {
+		this.classes = 'validation-error';
+	} else {
+		this.classes = '';
+	}
+};
 export default {
 	props: [
 		'name_prefix',
 		'field_id',
 		'obj',
 		'input_type',
-		'pattern',
+		'validation',
+		'label',
 	],
 	data: function() {
 		return {
 			field_val: this.obj[ this.field_id ],
 			checkbox_val: this.obj[ this.field_id + '_cb' ],
+			classes: '',
 		};
 	},
 	computed: {
 		pro_activated: function() {
 			return this.$root.pro_activated;
 		},
+	},
+	watch: {
+		checkbox_val: validation,
+		field_val: validation,
 	},
 };
 </script>

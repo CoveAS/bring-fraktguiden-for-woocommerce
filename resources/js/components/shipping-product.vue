@@ -7,7 +7,7 @@
 		</header>
 		<div class="fraktguiden-product__fields">
 			<label>
-				<span>Shipping name:</span>
+				<span v-html="i18n.shipping_name"></span>
 				<input
 					:placeholder="service_data.productName"
 					type="text"
@@ -17,43 +17,63 @@
 				>
 			</label>
 			<overridetoggle
+				:label="i18n.fixed_price_override"
 				field_id="custom_price"
 				:obj="this"
 				input_type="number"
 				:name_prefix="name_prefix"
 			>
-				Fixed price override:
 			</overridetoggle>
 			<overridetoggle
 				field_id="customer_number"
+				:label="i18n.alternative_customer_number"
 				:obj="this"
 				input_type="text"
 				:name_prefix="name_prefix"
+				:validation="validate_customer_number"
 			>
-				Alternative customer number:
 			</overridetoggle>
 			<overridetoggle
+				:label="i18n.free_shipping_activated_at"
 				field_id="free_shipping"
 				:obj="this"
 				input_type="number"
 				:name_prefix="name_prefix"
 			>
-				Free shipping activated at:
 			</overridetoggle>
 			<overridetoggle
+				:label="i18n.additional_fee"
 				field_id="additional_fee"
 				:obj="this"
 				input_type="number"
 				:name_prefix="name_prefix"
 			>
-				Additional fee:
 			</overridetoggle>
 		</div>
+		<footer>
+			<ul class="validation-errors" v-show="validation_errors.length">
+				<li
+					class="validation-errors__error"
+					v-for="validation_error in validation_errors"
+					v-html="validation_error.message"
+				></li>
+			</ul>
+		</footer>
 	</div>
 </template>
 
 <style lang="scss">
 .fraktguiden-product {
+	.validation-errors {
+		margin: 0;
+		background-color: #ffecc8;
+		color: darken(#ffecc8, 60%);
+		padding: 1rem;
+		border-top: 1px solid #e1e1e1;
+		&__error {
+			margin: 0;
+		}
+	}
 	&,* {
 		box-sizing: border-box;
 	}
@@ -134,6 +154,7 @@ export default {
 	],
 	data: function() {
 		return {
+			i18n               : bring_fraktguiden_settings.i18n,
 			custom_name        : this.service.custom_name,
 			custom_price       : this.service.custom_price,
 			custom_price_cb    : this.service.custom_price_cb,
@@ -144,6 +165,7 @@ export default {
 			additional_fee     : this.service.additional_fee,
 			additional_fee_cb  : this.service.additional_fee_cb,
 			name_prefix        : this.service.option_key + '[' + this.service.bring_product + ']',
+			validation_errors  : [],
 		};
 	},
 	computed: {
@@ -157,10 +179,31 @@ export default {
 			return this.$root.pro_activated;
 		},
 	},
+	methods: {
+		validate_customer_number: function( value, checkbox_value ) {
+			for (var i = 0; i < this.validation_errors.length; i++) {
+				if ( this.validation_errors[i] && 'customer_number' === this.validation_errors[i].id ) {
+					this.validation_errors.splice( i, 1 );
+				}
+			}
+			if ( typeof checkbox_value !== 'undefined' && ! checkbox_value ) {
+				return true;
+			}
+			if ( value && ! value.match( /^[A-Za-z_]+\-\d+$/ ) ) {
+				this.validation_errors.push( {
+					id: 'customer_number',
+					message: "Warning: Could not validate the customer number. Customer numbers should be text and underscores followed by a dash and a number.",
+				} );
+				return false;
+			}
+			return true;
+		}
+	},
 	components: {
 		overridetoggle: OverrideToggle
 	},
 	mounted: function() {
+		this.validate_customer_number( this.customer_number, this.customer_number_cb );
 	}
 };
 </script>

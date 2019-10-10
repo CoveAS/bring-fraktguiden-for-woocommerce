@@ -276,6 +276,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'services'         => Fraktguiden_Service::all( self::$field_key ),
 				'services_enabled' => array_keys( Fraktguiden_Service::all( self::$field_key, true ) ),
 				'pro_activated'    => Fraktguiden_Helper::pro_activated(),
+				'i18n'             => [
+					'shipping_name'               => esc_html__( 'Shipping name:', 'bring-fraktguiden-for-woocommerce' ),
+					'fixed_price_override'        => esc_html__( 'Fixed price override:', 'bring-fraktguiden-for-woocommerce' ),
+					'alternative_customer_number' => esc_html__( 'Alternative customer number:', 'bring-fraktguiden-for-woocommerce' ),
+					'free_shipping_activated_at'  => esc_html__( 'Free shipping activated at:', 'bring-fraktguiden-for-woocommerce' ),
+					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
+				],
 			]
 		);
 		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
