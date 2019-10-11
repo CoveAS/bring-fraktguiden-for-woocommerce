@@ -282,6 +282,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'alternative_customer_number' => esc_html__( 'Alternative customer number:', 'bring-fraktguiden-for-woocommerce' ),
 					'free_shipping_activated_at'  => esc_html__( 'Free shipping activated at:', 'bring-fraktguiden-for-woocommerce' ),
 					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_uid'               => esc_html__( 'The api email should be a valid email address.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_customer_number'       => esc_html__( 'Customer numbers should be letters (A-Z) and underscores followed by a dash and a number.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_key'               => esc_html__( 'The api key should only contain letters (a-z), numbers and dashes.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_space'                 => esc_html__( 'Spaces are not allowed in the', 'bring_fraktguiden-for-woocommerce' ),
+					'API email'                   => esc_html__( 'API email', 'bring_fraktguiden-for-woocommerce' ),
+					'API key'                     => esc_html__( 'API key', 'bring_fraktguiden-for-woocommerce' ),
+					'customer number'             => esc_html__( 'customer number', 'bring_fraktguiden-for-woocommerce' ),
 				],
 			]
 		);

@@ -392,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
       if (value && !value.match(/^[A-Za-z_]+\-\d+$/)) {
         this.validation_errors.push({
           id: 'customer_number',
-          message: "Warning: Could not validate the customer number. Customer numbers should be text and underscores followed by a dash and a number."
+          message: this.i18n.error_customer_number
         });
         return false;
       }
@@ -434,28 +434,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       id: '',
       value: '',
+      type: '',
       name: '',
-      placeholder: ''
+      placeholder: '',
+      error_messages: [],
+      valid: true
     };
   },
   props: ['original_el', 'validator'],
-  computed: {
-    valid: function valid() {
-      if (this.validator && !this.validator()) {
-        return false;
-      }
+  watch: {
+    value: function value(new_value) {
+      if (this.validator) {
+        this.error_messages.length = 0;
+        var error_messages = this.validator(new_value);
 
-      return true;
+        for (var i = 0; i < error_messages.length; i++) {
+          this.error_messages.push(error_messages[i]);
+        }
+
+        this.valid = !this.error_messages.length;
+      }
     }
   },
   mounted: function mounted() {
     this.id = this.original_el.id;
     this.value = this.original_el.value;
+    this.type = this.original_el.type;
     this.name = this.original_el.name;
     this.placeholder = this.original_el.placeholder;
   }
@@ -495,6 +513,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".text-validator__errors {\n  color: #C00;\n}", ""]);
 
 // exports
 
@@ -1020,6 +1057,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../node_modules/vue-loader/lib??vue-loader-options!./shipping-product.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/shipping-product.vue?vue&type=style&index=0&lang=scss&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../node_modules/vue-loader/lib??vue-loader-options!./text-validator.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1920,11 +1987,117 @@ var render = function() {
       class: _vm.valid ? "" : "validation-error"
     },
     [
-      _c("input", {
-        staticClass: "input-text regular-input",
-        attrs: { id: _vm.id, name: _vm.name, placeholder: _vm.placeholder },
-        domProps: { value: _vm.value }
-      })
+      _vm.type === "checkbox"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass: "input-text regular-input",
+            attrs: {
+              id: _vm.id,
+              name: _vm.name,
+              placeholder: _vm.placeholder,
+              type: "checkbox"
+            },
+            domProps: {
+              checked: Array.isArray(_vm.value)
+                ? _vm._i(_vm.value, null) > -1
+                : _vm.value
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.value,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.value = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.value = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.value = $$c
+                }
+              }
+            }
+          })
+        : _vm.type === "radio"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass: "input-text regular-input",
+            attrs: {
+              id: _vm.id,
+              name: _vm.name,
+              placeholder: _vm.placeholder,
+              type: "radio"
+            },
+            domProps: { checked: _vm._q(_vm.value, null) },
+            on: {
+              change: function($event) {
+                _vm.value = null
+              }
+            }
+          })
+        : _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass: "input-text regular-input",
+            attrs: {
+              id: _vm.id,
+              name: _vm.name,
+              placeholder: _vm.placeholder,
+              type: _vm.type
+            },
+            domProps: { value: _vm.value },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.value = $event.target.value
+              }
+            }
+          }),
+      _vm._v(" "),
+      _c(
+        "ul",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.valid,
+              expression: "! valid"
+            }
+          ],
+          staticClass: "text-validator__errors"
+        },
+        _vm._l(_vm.error_messages, function(error_message) {
+          return _c("li", { domProps: { innerHTML: _vm._s(error_message) } })
+        }),
+        0
+      )
     ]
   )
 }
@@ -14048,12 +14221,10 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_shipping_product__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/shipping-product */ "./resources/js/components/shipping-product.vue");
-/* harmony import */ var _components_text_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/text-validator */ "./resources/js/components/text-validator.vue");
 
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
-if (window.shipping_services) {
+if (window.shipping_services && window.bring_fraktguiden_settings) {
+  window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
   var selected = bring_fraktguiden_settings.services_enabled;
   var settings = new Vue({
     el: '#shipping_services',
@@ -14079,18 +14250,9 @@ if (window.shipping_services) {
       shippingproduct: _components_shipping_product__WEBPACK_IMPORTED_MODULE_0__["default"]
     }
   });
-  var api_key = new Vue({
-    el: '#woocommerce_bring_fraktguiden_mybring_api_key',
-    render: function render(createElement) {
-      var elem = createElement(_components_text_validator__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        props: {
-          original_el: this.$el,
-          validator: function validator() {}
-        }
-      });
-      return elem;
-    }
-  });
+
+  __webpack_require__(/*! ./mybring-api-validation.js */ "./resources/js/mybring-api-validation.js");
+
   Object.defineProperty(bring_fraktguiden_settings, 'pro_activated', {
     get: function get() {
       return settings.$root.pro_activated;
@@ -14302,7 +14464,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _text_validator_vue_vue_type_template_id_b3673686___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-validator.vue?vue&type=template&id=b3673686& */ "./resources/js/components/text-validator.vue?vue&type=template&id=b3673686&");
 /* harmony import */ var _text_validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text-validator.vue?vue&type=script&lang=js& */ "./resources/js/components/text-validator.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text-validator.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -14310,7 +14474,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _text_validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _text_validator_vue_vue_type_template_id_b3673686___WEBPACK_IMPORTED_MODULE_0__["render"],
   _text_validator_vue_vue_type_template_id_b3673686___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -14342,6 +14506,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../node_modules/vue-loader/lib??vue-loader-options!./text-validator.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/text-validator.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./resources/js/components/text-validator.vue?vue&type=template&id=b3673686&":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/text-validator.vue?vue&type=template&id=b3673686& ***!
@@ -14357,6 +14537,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_text_validator_vue_vue_type_template_id_b3673686___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/mybring-api-validation.js":
+/*!************************************************!*\
+  !*** ./resources/js/mybring-api-validation.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_text_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/text-validator */ "./resources/js/components/text-validator.vue");
+
+
+var create_text_validator = function create_text_validator(callback) {
+  return function (createElement) {
+    return createElement(_components_text_validator__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      props: {
+        original_el: this.$el,
+        validator: callback
+      }
+    });
+  };
+};
+
+var validate_email = function validate_email(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
+var i18n = bring_fraktguiden_settings.i18n;
+var api_uid = new Vue({
+  el: '#woocommerce_bring_fraktguiden_mybring_api_uid',
+  render: create_text_validator(function (value) {
+    var error_messages = [];
+
+    if (value.match(/\s/)) {
+      error_messages.push(i18n.error_spaces + ' ' + api_email);
+      return error_messages;
+    }
+
+    if (!validate_email(value)) {
+      error_messages.push(i18n.error_api_uid);
+    }
+
+    return error_messages;
+  })
+});
+var api_key = new Vue({
+  el: '#woocommerce_bring_fraktguiden_mybring_api_key',
+  render: create_text_validator(function (value) {
+    var error_messages = [];
+
+    if (value.match(/\s/)) {
+      error_messages.push(i18n.error_spaces + ' ' + api_key);
+      return error_messages;
+    }
+
+    if (!value.match(/^[A-Za-z\-\d]*$/)) {
+      error_messages.push(i18n.error_api_key);
+    }
+
+    return error_messages;
+  })
+});
+var api_customer_number = new Vue({
+  el: '#woocommerce_bring_fraktguiden_mybring_customer_number',
+  render: create_text_validator(function (value) {
+    var error_messages = [];
+
+    if (value.match(/\s/)) {
+      error_messages.push(i18n.error_spaces + ' ' + customer_number);
+      return error_messages;
+    }
+
+    if (!value.match(/^[A-Za-z_]+\-\d+$/)) {
+      error_messages.push(i18n.error_customer_number);
+    }
+
+    return error_messages;
+  })
+});
 
 /***/ }),
 
@@ -14400,10 +14663,10 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/eivinlanda/Workspace/packages/drivdigital/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
-__webpack_require__(/*! /Users/eivinlanda/Workspace/packages/drivdigital/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
-__webpack_require__(/*! /Users/eivinlanda/Workspace/packages/drivdigital/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
-module.exports = __webpack_require__(/*! /Users/eivinlanda/Workspace/packages/drivdigital/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
+__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
+__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
+__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
+module.exports = __webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
 
 
 /***/ })

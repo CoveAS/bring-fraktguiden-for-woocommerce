@@ -192,7 +192,7 @@ export default {
 			if ( value && ! value.match( /^[A-Za-z_]+\-\d+$/ ) ) {
 				this.validation_errors.push( {
 					id: 'customer_number',
-					message: "Warning: Could not validate the customer number. Customer numbers should be text and underscores followed by a dash and a number.",
+					message: this.i18n.error_customer_number,
 				} );
 				return false;
 			}

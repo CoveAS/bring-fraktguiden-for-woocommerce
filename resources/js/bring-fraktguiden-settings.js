@@ -1,9 +1,8 @@
 import ShippingProduct from './components/shipping-product';
-import TextValidator from './components/text-validator';
-window.Vue = require( 'vue' );
 
+if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 
-if ( window.shipping_services ) {
+	window.Vue = require( 'vue' );
 
 	var selected = bring_fraktguiden_settings.services_enabled;
 
@@ -30,20 +29,7 @@ if ( window.shipping_services ) {
 		},
 	} );
 
-	var api_key = new Vue( {
-		el: '#woocommerce_bring_fraktguiden_mybring_api_key',
-		render: function( createElement ) {
-			var elem = createElement( TextValidator, {
-				props: {
-					original_el: this.$el,
-					validator: function() {
-
-					}
-				}
-			} );
-			return elem;
-		},
-	} );
+	require( './mybring-api-validation.js' );
 
 	Object.defineProperty(
 		bring_fraktguiden_settings,
