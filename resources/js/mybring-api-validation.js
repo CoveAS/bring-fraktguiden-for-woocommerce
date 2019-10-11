@@ -23,7 +23,7 @@ var api_uid = new Vue( {
 	render: create_text_validator( function( value ) {
 		var error_messages = [];
 		if ( value.match( /\s/ ) ) {
-			error_messages.push( i18n.error_spaces + ' ' + api_email );
+			error_messages.push( i18n.error_spaces + ' ' + i18n.api_email );
 			return error_messages;
 		}
 		if ( ! validate_email( value ) ) {
@@ -38,7 +38,7 @@ var api_key = new Vue( {
 	render: create_text_validator( function( value ) {
 		var error_messages = [];
 		if ( value.match( /\s/ ) ) {
-			error_messages.push( i18n.error_spaces + ' ' + api_key );
+			error_messages.push( i18n.error_spaces + ' ' + i18n.api_key );
 			return error_messages;
 		}
 		if ( ! value.match( /^[A-Za-z\-\d]*$/ ) ) {
@@ -53,7 +53,7 @@ var api_customer_number = new Vue( {
 	render: create_text_validator( function( value ) {
 		var error_messages = [];
 		if ( value.match( /\s/ ) ) {
-			error_messages.push( i18n.error_spaces + ' ' + customer_number );
+			error_messages.push( i18n.error_spaces + ' ' + i18n.customer_number );
 			return error_messages;
 		}
 		if ( ! value.match( /^[A-Za-z_]+\-\d+$/ ) ) {
