@@ -25,6 +25,7 @@
 					:id="service.id"
 					:service_data="service.service_data"
 					:service="service"
+					:vas="service.vas"
 					v-bind:key="service.id"
 				></shippingproducts>
 			</div>

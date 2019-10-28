@@ -47,7 +47,7 @@ if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 	jQuery( function( $ ) {
 		$( '#shipping_services .select2' ).select2().on( 'change select2:clear', function( e ) {
 			var values = $(this).val();
-			selected.length = 0;
+			while(selected.length > 0) {selected.pop();}
 			if (! values) {
 				return;
 			}

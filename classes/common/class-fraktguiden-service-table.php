@@ -74,7 +74,7 @@ class Fraktguiden_Service_Table {
 		$service_options = [];
 		// Only process options for enabled services.
 		foreach ( $services as $bring_product => $service ) {
-			$service_options[ $bring_product ] = $service->process_post_data();
+			$service_options[ $bring_product ] = $service->process_post_data()->get_settings_array();
 		}
 		$service_options = array_filter( $service_options );
 

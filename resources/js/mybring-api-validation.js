@@ -56,7 +56,7 @@ var api_customer_number = new Vue( {
 			error_messages.push( i18n.error_spaces + ' ' + i18n.customer_number );
 			return error_messages;
 		}
-		if ( ! value.match( /^[A-Za-z_]+\-\d+$/ ) ) {
+		if ( ! value.match( /^[A-Za-z_]+\-\d+$/ ) && ! value.match( /^\d{6,}$/ ) ) {
 			error_messages.push( i18n.error_customer_number );
 		}
 		return error_messages;

@@ -81,6 +81,11 @@
 	} );
 
 	$( document.body ).on( 'wc_backbone_modal_response', function ( e ) {
+		customer_number.val( $( '[name=_bring-modal-customer-selector]:checked' ).val() );
+		shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
+		shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
+		shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
+
 		form.block(
 			{
 				message: '',
@@ -92,10 +97,6 @@
 				},
 			}
 		);
-		customer_number.val( $( '[name=_bring-modal-customer-selector]' ).val() );
-		shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
-		shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
-		shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
 
 		var url = location.origin + location.pathname;
 		$.get( url + '?json=true&' + form.serialize(), function( data ) {

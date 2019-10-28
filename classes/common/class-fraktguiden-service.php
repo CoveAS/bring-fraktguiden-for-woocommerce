@@ -18,6 +18,13 @@ class Fraktguiden_Service {
 	public $key;
 
 	/**
+	 * Key
+	 *
+	 * @var string
+	 */
+	public $enabled = false;
+
+	/**
 	 * ID
 	 *
 	 * @var string
@@ -32,67 +39,18 @@ class Fraktguiden_Service {
 	public $service_data;
 
 	/**
-	 * Custom price
+	 * Service options
 	 *
 	 * @var string
 	 */
-	public $custom_price;
+	public $settings = [];
 
 	/**
-	 * Custom price
+	 * Value Added Services
 	 *
-	 * @var string
+	 * @var Fraktguiden_VAS
 	 */
-	public $custom_price_cb;
-
-	/**
-	 * Custom name
-	 *
-	 * @var string
-	 */
-	public $custom_name;
-
-	/**
-	 * Customer number
-	 *
-	 * @var string
-	 */
-	public $customer_number;
-
-	/**
-	 * Customer number
-	 *
-	 * @var string
-	 */
-	public $customer_number_cb;
-
-	/**
-	 * Free shipping
-	 *
-	 * @var string
-	 */
-	public $free_shipping;
-
-	/**
-	 * Free shipping checkbox
-	 *
-	 * @var string
-	 */
-	public $free_shipping_cb;
-
-	/**
-	 * Additional fee
-	 *
-	 * @var string
-	 */
-	public $additional_fee;
-
-	/**
-	 * Additional fee checkbox
-	 *
-	 * @var string
-	 */
-	public $additional_fee_cb;
+	public $vas = null;
 
 	/**
 	 * Construct
@@ -103,20 +61,27 @@ class Fraktguiden_Service {
 	 * @param array  $service_option Service option.
 	 */
 	public function __construct( $service_key, $bring_product, $service_data, $service_option ) {
-		$this->option_key         = "{$service_key}_options";
-		$this->bring_product      = $bring_product;
-		$this->service_data       = $service_data;
-		$selected                 = Fraktguiden_Helper::get_option( 'services' );
-		$this->enabled            = ! empty( $selected ) ? in_array( $bring_product, $selected, true ) : false;
-		$this->custom_name        = esc_html( $service_option['custom_name'] ?? '' );
-		$this->custom_price       = esc_html( $service_option['custom_price'] ?? '' );
-		$this->custom_price_cb    = esc_html( $service_option['custom_price_cb'] ?? '' );
-		$this->customer_number    = esc_html( $service_option['customer_number'] ?? '' );
-		$this->customer_number_cb = esc_html( $service_option['customer_number_cb'] ?? '' );
-		$this->free_shipping      = esc_html( $service_option['free_shipping'] ?? '' );
-		$this->free_shipping_cb   = esc_html( $service_option['free_shipping_cb'] ?? '' );
-		$this->additional_fee     = esc_html( $service_option['additional_fee'] ?? '' );
-		$this->additional_fee_cb  = esc_html( $service_option['additional_fee_cb'] ?? '' );
+		$this->option_key    = "{$service_key}_options";
+		$this->bring_product = $bring_product;
+		$this->service_data  = $service_data;
+		$selected            = Fraktguiden_Helper::get_option( 'services' );
+		$this->enabled       = ! empty( $selected ) ? in_array( $bring_product, $selected, true ) : false;
+		$this->vas           = Bring_Fraktguiden\VAS::create_collection( $bring_product, $service_option );
+
+		if ( $service_data['pickuppoint'] ) {
+			$this->settings['pickup_point']    = esc_html( $service_option['pickup_point'] ?? '' );
+			$this->settings['pickup_point_cb'] = esc_html( $service_option['pickup_point_cb'] ?? '' );
+		}
+
+		$this->settings['custom_name']        = esc_html( $service_option['custom_name'] ?? '' );
+		$this->settings['custom_price']       = esc_html( $service_option['custom_price'] ?? '' );
+		$this->settings['custom_price_cb']    = esc_html( $service_option['custom_price_cb'] ?? '' );
+		$this->settings['customer_number']    = esc_html( $service_option['customer_number'] ?? '' );
+		$this->settings['customer_number_cb'] = esc_html( $service_option['customer_number_cb'] ?? '' );
+		$this->settings['free_shipping']      = esc_html( $service_option['free_shipping'] ?? '' );
+		$this->settings['free_shipping_cb']   = esc_html( $service_option['free_shipping_cb'] ?? '' );
+		$this->settings['additional_fee']     = esc_html( $service_option['additional_fee'] ?? '' );
+		$this->settings['additional_fee_cb']  = esc_html( $service_option['additional_fee_cb'] ?? '' );
 	}
 
 	/**
@@ -125,7 +90,7 @@ class Fraktguiden_Service {
 	 * @return string
 	 */
 	public function __toString() {
-		if ( $this->customer_number_cb && $this->customer_number ) {
+		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
 			return "{$this->bring_product}:{$this->customer_number}";
 		}
 
@@ -240,7 +205,31 @@ class Fraktguiden_Service {
 	 */
 	public function process_post_data() {
 		$result      = [];
+		$post_fields = $this->get_setting_fields();
+		$post_data = filter_input( INPUT_POST, $this->option_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		foreach ( $post_fields as $post_field ) {
+			if ( ! isset( $post_data[ $this->bring_product ][ $post_field ] ) ) {
+				if ( preg_match( '/_cb$/', $post_field ) && ! empty( $post_data[ $this->bring_product ] ) ) {
+					// Checkboxes are not set when they are empty.
+					unset( $this->settings[ $post_field ] );
+					continue;
+				}
+				if ( ! empty( $this->settings[ $post_field ] ) ) {
+					// Keep existing data.
+					$result[ $post_field ] = $this->settings[ $post_field ];
+				}
+				continue;
+			}
+			$this->settings[ $post_field ] = $post_data[ $this->bring_product ][ $post_field ];
+		}
+
+		return $this;
+	}
+
+	public function get_setting_fields() {
 		$post_fields = [
+			'pickup_point',
+			'pickup_point_cb',
 			'custom_name',
 			'custom_price',
 			'custom_price_cb',
@@ -251,24 +240,36 @@ class Fraktguiden_Service {
 			'additional_fee',
 			'additional_fee_cb',
 		];
+		foreach ( $this->vas as $vas_service ) {
+			$post_fields[] = "vas_{$vas_service->code}";
+		}
+		return $post_fields;
+	}
+
+	/**
+	 * Get name by index
+	 *
+	 * @param string|int $index Index.
+	 *
+	 * @return string
+	 */
+	public function get_settings_array() {
+		$result      = [];
+		$post_fields = $this->get_setting_fields();
 		foreach ( $post_fields as $post_field ) {
-			$post_data = filter_input( INPUT_POST, $this->option_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-			if ( ! isset( $post_data[ $this->bring_product ][ $post_field ] ) ) {
-				if ( preg_match( '/_cb$/', $post_field ) && ! empty( $post_data[ $this->bring_product ] ) ) {
-					// Checkboxes are not set when they are empty.
-					continue;
-				}
-				if ( ! empty( $this->{$post_field} ) ) {
-					// Keep existing data.
-					$result[ $post_field ] = $this->{$post_field};
-				}
-				continue;
+			if ( ! empty( $this->settings[ $post_field ] ) ) {
+				$result[ $post_field ] = $this->settings[ $post_field ];
 			}
-			$this->{$post_field}   = $post_data[ $this->bring_product ][ $post_field ];
-			$result[ $post_field ] = $this->{$post_field};
+		}
+		return $result;
+	}
+
+	public function getUrlParam() {
+		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
+			return "&product={$this->bring_product}:{$this->customer_number}";
 		}
 
-		return $result;
+		return "&product={$this->bring_product}";
 	}
 
 	/**

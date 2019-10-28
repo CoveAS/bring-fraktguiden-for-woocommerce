@@ -4,7 +4,7 @@
 		<div class="togglererer">
 			<input
 				type="checkbox"
-				class="bring-toggle-checkbox enable_free_shipping_limit"
+				class="bring-toggle-checkbox"
 				:name="name_prefix + '[' + field_id + '_cb]'"
 				v-model="checkbox_val"
 				:readonly="! pro_activated"
@@ -13,9 +13,9 @@
 			<input
 				v-if="'number' === input_type"
 				type="number"
-				step=".01"
+				:step="step"
 				min="0"
-				placeholder="0.00"
+				:placeholder="placeholder"
 				v-model="field_val"
 				:name="name_prefix + '[' + field_id + ']'"
 				:readonly="! checkbox_val || ! pro_activated"
@@ -72,14 +72,20 @@ var validation = function() {
 	}
 };
 export default {
-	props: [
-		'name_prefix',
-		'field_id',
-		'obj',
-		'input_type',
-		'validation',
-		'label',
-	],
+	props: {
+		'name_prefix' : {},
+		'field_id' : {},
+		'obj' : {},
+		'input_type' : {},
+		'validation' : {},
+		'label' : {},
+		'step' : {
+			default: '0.01',
+		},
+		'placeholder' : {
+			default: '0.00',
+		},
+	},
 	data: function() {
 		return {
 			field_val: this.obj[ this.field_id ],

@@ -86,6 +86,53 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/checkbox.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/checkbox.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'code': {},
+    'settings': {},
+    'label': {},
+    'enabled': {},
+    'checked': {},
+    'name_prefix': {}
+  },
+  computed: {
+    pro_activated: function pro_activated() {
+      return this.$root.pro_activated;
+    }
+  },
+  data: function data() {
+    return {
+      checkbox_val: this.checked
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/override-toggle.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/override-toggle.vue?vue&type=script&lang=js& ***!
@@ -169,7 +216,20 @@ var validation = function validation() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name_prefix', 'field_id', 'obj', 'input_type', 'validation', 'label'],
+  props: {
+    'name_prefix': {},
+    'field_id': {},
+    'obj': {},
+    'input_type': {},
+    'validation': {},
+    'label': {},
+    'step': {
+      "default": '0.01'
+    },
+    'placeholder': {
+      "default": '0.00'
+    }
+  },
   data: function data() {
     return {
       field_val: this.obj[this.field_id],
@@ -200,6 +260,45 @@ var validation = function validation() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _override_toggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./override-toggle */ "./resources/js/components/override-toggle.vue");
+/* harmony import */ var _checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkbox */ "./resources/js/components/checkbox.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -347,20 +446,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['service', 'service_data', 'id'],
+  props: ['vas', 'service', 'service_data', 'id'],
   data: function data() {
     return {
       i18n: bring_fraktguiden_settings.i18n,
-      custom_name: this.service.custom_name,
-      custom_price: this.service.custom_price,
-      custom_price_cb: this.service.custom_price_cb,
-      customer_number: this.service.customer_number,
-      customer_number_cb: this.service.customer_number_cb,
-      free_shipping: this.service.free_shipping,
-      free_shipping_cb: this.service.free_shipping_cb,
-      additional_fee: this.service.additional_fee,
-      additional_fee_cb: this.service.additional_fee_cb,
+      pickup_point: this.service.settings.pickup_point,
+      pickup_point_cb: this.service.settings.pickup_point_cb,
+      custom_name: this.service.settings.custom_name,
+      custom_price: this.service.settings.custom_price,
+      custom_price_cb: this.service.settings.custom_price_cb,
+      customer_number: this.service.settings.customer_number,
+      customer_number_cb: this.service.settings.customer_number_cb,
+      free_shipping: this.service.settings.free_shipping,
+      free_shipping_cb: this.service.settings.free_shipping_cb,
+      additional_fee: this.service.settings.additional_fee,
+      additional_fee_cb: this.service.settings.additional_fee_cb,
       name_prefix: this.service.option_key + '[' + this.service.bring_product + ']',
       validation_errors: []
     };
@@ -389,7 +491,7 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
 
-      if (value && !value.match(/^[A-Za-z_]+\-\d+$/)) {
+      if (value && !value.match(/^[A-Za-z_]+\-\d+$/) && !value.match(/^\d{6,}$/)) {
         this.validation_errors.push({
           id: 'customer_number',
           message: this.i18n.error_customer_number
@@ -401,7 +503,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    overridetoggle: _override_toggle__WEBPACK_IMPORTED_MODULE_0__["default"]
+    overridetoggle: _override_toggle__WEBPACK_IMPORTED_MODULE_0__["default"],
+    checkbox: _checkbox__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {
     this.validate_customer_number(this.customer_number, this.customer_number_cb);
@@ -512,7 +615,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product header h3 {\n  margin: 0;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product h4, .fraktguiden-product h3 {\n  margin: 0;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__vas {\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product__vas h4 {\n  padding: 1rem 1rem 0.5rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes {\n  padding: 0 1rem 1rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes .checkbox {\n  margin-right: 0.5rem;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -1692,6 +1795,74 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("label", { staticClass: "checkbox" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.checkbox_val,
+          expression: "checkbox_val"
+        }
+      ],
+      staticClass: "bring-checkbox",
+      attrs: {
+        type: "checkbox",
+        name: _vm.name_prefix + "[vas_" + _vm.code + "]"
+      },
+      domProps: {
+        checked: Array.isArray(_vm.checkbox_val)
+          ? _vm._i(_vm.checkbox_val, null) > -1
+          : _vm.checkbox_val
+      },
+      on: {
+        change: function($event) {
+          var $$a = _vm.checkbox_val,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false
+          if (Array.isArray($$a)) {
+            var $$v = null,
+              $$i = _vm._i($$a, $$v)
+            if ($$el.checked) {
+              $$i < 0 && (_vm.checkbox_val = $$a.concat([$$v]))
+            } else {
+              $$i > -1 &&
+                (_vm.checkbox_val = $$a
+                  .slice(0, $$i)
+                  .concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.checkbox_val = $$c
+          }
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("span", { domProps: { innerHTML: _vm._s(_vm.label) } })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/override-toggle.vue?vue&type=template&id=482e6e7a&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/override-toggle.vue?vue&type=template&id=482e6e7a& ***!
@@ -1720,7 +1891,7 @@ var render = function() {
             expression: "checkbox_val"
           }
         ],
-        staticClass: "bring-toggle-checkbox enable_free_shipping_limit",
+        staticClass: "bring-toggle-checkbox",
         attrs: {
           type: "checkbox",
           name: _vm.name_prefix + "[" + _vm.field_id + "_cb]",
@@ -1768,9 +1939,9 @@ var render = function() {
             ],
             attrs: {
               type: "number",
-              step: ".01",
+              step: _vm.step,
               min: "0",
-              placeholder: "0.00",
+              placeholder: _vm.placeholder,
               name: _vm.name_prefix + "[" + _vm.field_id + "]",
               readonly: !_vm.checkbox_val || !_vm.pro_activated
             },
@@ -1928,10 +2099,51 @@ var render = function() {
             input_type: "number",
             name_prefix: _vm.name_prefix
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.service_data.pickuppoint
+          ? _c("overridetoggle", {
+              attrs: {
+                label: _vm.i18n.pickup_point,
+                field_id: "pickup_point",
+                placeholder: "0",
+                step: "1",
+                obj: this,
+                input_type: "number",
+                name_prefix: _vm.name_prefix
+              }
+            })
+          : _vm._e()
       ],
       1
     ),
+    _vm._v(" "),
+    _vm.vas.length
+      ? _c("div", { staticClass: "fraktguiden-product__vas" }, [
+          _c("h4", {
+            domProps: { innerHTML: _vm._s(_vm.i18n.value_added_services) }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "vas-checkboxes" },
+            _vm._l(_vm.vas, function(service) {
+              return _c(service.vue_component, {
+                key: service.code,
+                tag: "component",
+                attrs: {
+                  name_prefix: _vm.name_prefix,
+                  label: service.name,
+                  code: service.code,
+                  enabled: service.enabled,
+                  checked: service.value
+                }
+              })
+            }),
+            1
+          )
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("footer", [
       _c(
@@ -14264,7 +14476,10 @@ if (window.shipping_services && window.bring_fraktguiden_settings) {
   jQuery(function ($) {
     $('#shipping_services .select2').select2().on('change select2:clear', function (e) {
       var values = $(this).val();
-      selected.length = 0;
+
+      while (selected.length > 0) {
+        selected.pop();
+      }
 
       if (!values) {
         return;
@@ -14276,6 +14491,75 @@ if (window.shipping_services && window.bring_fraktguiden_settings) {
     });
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/checkbox.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/checkbox.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkbox.vue?vue&type=template&id=a44578e4& */ "./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4&");
+/* harmony import */ var _checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkbox.vue?vue&type=script&lang=js& */ "./resources/js/components/checkbox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/checkbox.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/checkbox.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/checkbox.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./checkbox.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/checkbox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./checkbox.vue?vue&type=template&id=a44578e4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/checkbox.vue?vue&type=template&id=a44578e4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_a44578e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -14613,7 +14897,7 @@ var api_customer_number = new Vue({
       return error_messages;
     }
 
-    if (!value.match(/^[A-Za-z_]+\-\d+$/)) {
+    if (!value.match(/^[A-Za-z_]+\-\d+$/) && !value.match(/^\d{6,}$/)) {
       error_messages.push(i18n.error_customer_number);
     }
 
@@ -14663,10 +14947,10 @@ var api_customer_number = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
-__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
-__webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
-module.exports = __webpack_require__(/*! /Users/forsvunnet/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
+__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
+__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
+__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
+module.exports = __webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
 
 
 /***/ })

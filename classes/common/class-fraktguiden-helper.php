@@ -192,7 +192,38 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	public static function get_services_data() {
-		return require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		if ( new DateTime() < new DateTime( '2020-01-13' ) ) {
+			// Enable mailbox on the 13th of January
+			unset( $services_data['common']['services']['3570'] );
+			unset( $services_data['common']['services']['3584'] );
+		}
+		$customer_number = self::get_option( 'mybring_customer_number' );
+
+		$warning = __( 'You\'re using an outdated Customer Number, %s - The latest services from Bring require you to update your customer number.' );
+
+		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+			foreach ( $services_data['common']['services'] as &$service_data ) {
+				if ( empty( $service_data['warning'] ) ) {
+					$service_data['warning'] = $warning;
+				} else {
+					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
+				}
+			}
+		}
+
+		return $services_data;
+	}
+
+	/**
+	 * Value added services
+	 * https://developer.bring.com/api/services/
+	 * https://developer.bring.com/api/services/revisedservice/
+	 *
+	 * @return array
+	 */
+	public static function get_vas_data() {
+		return require dirname( dirname( __DIR__ ) ) . '/config/value-added-services.php';
 	}
 
 	/**

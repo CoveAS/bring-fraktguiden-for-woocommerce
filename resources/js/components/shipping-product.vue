@@ -49,6 +49,32 @@
 				:name_prefix="name_prefix"
 			>
 			</overridetoggle>
+			<overridetoggle
+				v-if="service_data.pickuppoint"
+				:label="i18n.pickup_point"
+				field_id="pickup_point"
+				placeholder="0"
+				step="1"
+				:obj="this"
+				input_type="number"
+				:name_prefix="name_prefix"
+			>
+			</overridetoggle>
+		</div>
+		<div class="fraktguiden-product__vas" v-if="vas.length">
+			<h4 v-html="i18n.value_added_services"></h4>
+			<div class="vas-checkboxes">
+				<component
+					:is="service.vue_component"
+					:name_prefix="name_prefix"
+					:label="service.name"
+					:code="service.code"
+					:enabled="service.enabled"
+					:checked="service.value"
+					v-for="service in vas"
+					:key="service.code"
+				></component>
+			</div>
 		</div>
 		<footer>
 			<ul class="validation-errors" v-show="validation_errors.length">
@@ -81,6 +107,9 @@
 	background-color: #f9f9f9;
 	margin-bottom: 1rem;
 	margin-top: 1rem;
+	h4, h3 {
+		margin: 0;
+	}
 	header {
 		&.warning {
 			border-left: 3px solid #c00;
@@ -88,13 +117,22 @@
 		background-color: #fff;
 		padding: 1rem;
 		border-bottom: 1px solid #e1e1e1;
-		h3 {
-			margin: 0;
-		}
 	}
 	p.warning {
 		font-weight: 600;
 		color: #d20e0e;
+	}
+	&__vas {
+		border-top: 1px solid #e1e1e1;
+		h4 {
+			padding: 1rem 1rem 0.5rem 1rem;
+		}
+	}
+	.vas-checkboxes {
+		padding: 0 1rem 1rem 1rem;
+		.checkbox {
+			margin-right: 0.5rem;
+		}
 	}
 	&__fields {
 		display: flex;
@@ -146,8 +184,10 @@
 
 <script>
 import OverrideToggle from './override-toggle';
+import Checkbox from './checkbox';
 export default {
 	props: [
+		'vas',
 		'service',
 		'service_data',
 		'id',
@@ -155,15 +195,17 @@ export default {
 	data: function() {
 		return {
 			i18n               : bring_fraktguiden_settings.i18n,
-			custom_name        : this.service.custom_name,
-			custom_price       : this.service.custom_price,
-			custom_price_cb    : this.service.custom_price_cb,
-			customer_number    : this.service.customer_number,
-			customer_number_cb : this.service.customer_number_cb,
-			free_shipping      : this.service.free_shipping,
-			free_shipping_cb   : this.service.free_shipping_cb,
-			additional_fee     : this.service.additional_fee,
-			additional_fee_cb  : this.service.additional_fee_cb,
+			pickup_point       : this.service.settings.pickup_point,
+			pickup_point_cb    : this.service.settings.pickup_point_cb,
+			custom_name        : this.service.settings.custom_name,
+			custom_price       : this.service.settings.custom_price,
+			custom_price_cb    : this.service.settings.custom_price_cb,
+			customer_number    : this.service.settings.customer_number,
+			customer_number_cb : this.service.settings.customer_number_cb,
+			free_shipping      : this.service.settings.free_shipping,
+			free_shipping_cb   : this.service.settings.free_shipping_cb,
+			additional_fee     : this.service.settings.additional_fee,
+			additional_fee_cb  : this.service.settings.additional_fee_cb,
 			name_prefix        : this.service.option_key + '[' + this.service.bring_product + ']',
 			validation_errors  : [],
 		};
@@ -189,7 +231,7 @@ export default {
 			if ( typeof checkbox_value !== 'undefined' && ! checkbox_value ) {
 				return true;
 			}
-			if ( value && ! value.match( /^[A-Za-z_]+\-\d+$/ ) ) {
+			if ( value && ! value.match( /^[A-Za-z_]+\-\d+$/ ) && ! value.match( /^\d{6,}$/ ) ) {
 				this.validation_errors.push( {
 					id: 'customer_number',
 					message: this.i18n.error_customer_number,
@@ -200,7 +242,8 @@ export default {
 		}
 	},
 	components: {
-		overridetoggle: OverrideToggle
+		overridetoggle: OverrideToggle,
+		checkbox: Checkbox
 	},
 	mounted: function() {
 		this.validate_customer_number( this.customer_number, this.customer_number_cb );

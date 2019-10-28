@@ -16,6 +16,12 @@ require_once 'common/class-fraktguiden-packer.php';
 require_once 'common/class-fraktguiden-minimum-dimensions.php';
 require_once 'common/class-fraktguiden-service-table.php';
 require_once 'common/class-fraktguiden-service.php';
+require_once 'common/class-updater.php';
+
+// Value Added Services classes.
+require_once 'vas/class-vas.php';
+require_once 'vas/class-vas-checkbox.php';
+
 
 /**
  * Bring class for calculating and adding rates
@@ -112,7 +118,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	public $validation_messages;
 
-
 	/**
 	 * Field key
 	 *
@@ -196,6 +201,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		$this->service_table = new Fraktguiden_Service_Table( $this );
+
+		$field_key = $this->get_field_key( 'services' );
+		Bring_Fraktguiden\updater::setup( $field_key );
 	}
 
 	/**
@@ -204,7 +212,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return array Services.
 	 */
 	public function get_services() {
-		$services = array_map( 'strtoupper', $this->get_setting( 'services' ) );
+		$services = $this->get_setting( 'services' );
+		if ( ! is_array( $services ) ) {
+			$services = [];
+		}
+		$services = array_map( 'strtoupper', $services );
 		if ( in_array( 'PA_DOREN', $services, true ) ) {
 			$services[] = '5600';
 		}
@@ -282,6 +294,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'alternative_customer_number' => esc_html__( 'Alternative customer number:', 'bring-fraktguiden-for-woocommerce' ),
 					'free_shipping_activated_at'  => esc_html__( 'Free shipping activated at:', 'bring-fraktguiden-for-woocommerce' ),
 					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
+					'value_added_services'        => esc_html__( 'Value added services', 'bring-fraktguiden-for-woocommerce' ),
+					'pickup_point'                => esc_html__( 'Pickup points', 'bring-fraktguiden-for-woocommerce' ),
 					'error_api_uid'               => esc_html__( 'The api email should be a valid email address.', 'bring-fraktguiden-for-woocommerce' ),
 					'error_customer_number'       => esc_html__( 'Customer numbers should be letters (A-Z) and underscores followed by a dash and a number.', 'bring-fraktguiden-for-woocommerce' ),
 					'error_api_key'               => esc_html__( 'The api key should only contain letters (a-z), numbers and dashes.', 'bring-fraktguiden-for-woocommerce' ),
@@ -423,7 +437,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$services  = \Fraktguiden_Service::all( $field_key, true );
 		if ( ! empty( $services ) ) {
 			foreach ( $services as $service ) {
-				$url .= '&product=' . $service;
+				$url .= $service->getUrlParam();
 			}
 		}
 

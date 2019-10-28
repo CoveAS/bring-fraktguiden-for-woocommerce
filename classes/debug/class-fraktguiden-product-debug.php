@@ -242,6 +242,8 @@ class Fraktguiden_Product_Debug {
 	 * Get rates via AJAX
 	 */
 	public static function ajax_get_rates() {
+		add_filter( 'bring_pickup_point_postcode', __CLASS__ . '::filter_pp_postcode' );
+		add_filter( 'bring_pickup_point_country', __CLASS__ . '::filter_pp_country' );
 		$product   = wc_get_product( filter_input( INPUT_GET, 'id' ) );
 		$country   = sanitize_text_field( filter_input( INPUT_GET, 'country' ) );
 		$post_code = sanitize_text_field( filter_input( INPUT_GET, 'post_code' ) );
@@ -278,6 +280,20 @@ class Fraktguiden_Product_Debug {
 		}
 
 		die;
+	}
+
+	/**
+	 * Filter pickup point postcode
+	 */
+	public function filter_pp_postcode( $post_code ) {
+		return sanitize_text_field( filter_input( INPUT_GET, 'post_code' ) );
+	}
+
+	/**
+	 * Filter pickup point country
+	 */
+	public function filter_pp_country( $post_code ) {
+		return sanitize_text_field( filter_input( INPUT_GET, 'country' ) );
 	}
 
 	/**
