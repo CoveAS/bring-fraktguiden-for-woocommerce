@@ -562,11 +562,29 @@ trait Settings {
 				$( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
 
 				// Toggle the menu items for pickup points and bring booking.
-				$( '#5, #6' ).toggle( is_checked );
+				$( '#5' ).toggle( is_checked );
 			}
 
 			$( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
 			toggle_test_mode();
+		} );
+		jQuery( function( $ ) {
+			var api_fields = [
+				'#woocommerce_bring_fraktguiden_mybring_api_uid',
+				'#woocommerce_bring_fraktguiden_mybring_api_key',
+				'#woocommerce_bring_fraktguiden_mybring_customer_number',
+			];
+
+			for (var i = 0; i < api_fields.length; i++) {
+				var elem = $( api_fields[i] );
+				if ( ! elem.val() ) {
+					// Hide everything except Mybring API credentials.
+					$( '#0, #1, #2, #3, #5' ).hide();
+					$( '#4' ).click();
+					return;
+				}
+			}
+
 		} );
 		</script>
 		<?php
