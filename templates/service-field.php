@@ -8,7 +8,7 @@
 	<tr valign="top">
 		<th scope="row" class="titledesc">
 			<label for="<?php echo esc_attr( $field_key ); ?>">
-				<?php esc_html_e( 'Services', 'bring-fraktguiden-for-woocommerce' ); // phpcs:ignore ?>
+				<?php echo esc_html( $title ); // phpcs:ignore ?>
 			</label>
 		</th>
 		<td class="forminp">
