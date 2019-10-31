@@ -410,7 +410,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 				$rate['cost'] = $this->calculate_excl_vat( $service->settings['custom_price'] );
 			}
 			if ( $service->settings['additional_fee_cb'] ) {
-				$rate['cost'] += $service->settings['additional_fee'];
+				$rate['cost'] += $this->calculate_excl_vat( $service->settings['additional_fee'] );
 			}
 			if ( $service->settings['free_shipping_cb'] ) {
 				// Free shipping is checked and threshold is defined.
