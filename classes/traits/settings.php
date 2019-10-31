@@ -188,8 +188,20 @@ trait Settings {
 				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
 			],
+			'service_sorting'                      => [
+				'title'   => __( 'Sorting', 'bring-fraktguiden-for-woocommerce' ),
+				'type'    => 'select',
+				'css'     => 'width: 400px;',
+				'default' => 'price',
+				'desc_tip' => __( 'The order in which shipping options should be displayed.', 'bring-fraktguiden-for-woocommerce' ),
+				'options' => [
+					'price'      => __( 'Price, low to high', 'bring-fraktguiden-for-woocommerce' ),
+					'price_desc' => __( 'Price, high to low', 'bring-fraktguiden-for-woocommerce' ),
+					'none'       => __( 'No sorting', 'bring-fraktguiden-for-woocommerce' ),
+				],
+			],
 			'services'                      => [
-				'title'   => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
+				'title'   => __( 'Bring products', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'services_table',
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
