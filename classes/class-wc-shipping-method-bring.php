@@ -216,19 +216,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( ! is_array( $services ) ) {
 			$services = [];
 		}
-		$services = array_map( 'strtoupper', $services );
-		if ( in_array( 'PA_DOREN', $services, true ) ) {
-			$services[] = '5600';
-		}
-		if ( in_array( 'SERVICEPAKKE', $services, true ) ) {
-			$services[] = '5800';
-		}
-		if ( in_array( 'BPAKKE_DOR-DOR', $services, true ) ) {
-			$services[] = '5000';
-		}
-		if ( in_array( 'EKSPRESS09', $services, true ) ) {
-			$services[] = '4850';
-		}
 		return $services;
 	}
 
@@ -501,14 +488,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			}
 		}
 
-		if ( 'no' !== $this->debug ) {
-			$this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
+		if ( 'yes' === $this->debug ) {
+			$this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
+			$this->log->add( $this->id, 'Parameters: ' . PHP_EOL . print_r( $params, true ) );
+			$this->log->add( $this->id, 'Response: ' . PHP_EOL . json_encode( $json, JSON_PRETTY_PRINT ) );
 			if ( $rates ) {
 				$this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
 			} else {
-				$this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
+				$this->log->add( $this->id, 'No rates found for params' );
 			}
-			$this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
 		}
 
 		// Calculate rate.
@@ -532,9 +520,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		$rates = [];
+		$services  = \Fraktguiden_Service::all( self::$field_key );
 
 		foreach ( $response['consignments'][0]['products'] as $service_details ) {
-			if ( ! empty( $this->services ) && ! in_array( $service_details['id'], $this->services ) ) {
+
+			$bring_product = $service_details['id'];
+			if ( empty( $services[ $bring_product ] ) ) {
+				if ( 'yes' === $this->debug ) {
+					$this->log->add( $this->id, 'Unidentified bring product: ' . $bring_product );
+				}
 				continue;
 			}
 
