@@ -90,6 +90,11 @@ class Bring_Booking_Labels {
 
 		$order_ids = filter_input( INPUT_GET, 'order_ids' );
 
+		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
+		if ( empty( $printed_orders ) ) {
+			$printed_orders = [];
+		}
+
 		if ( empty( $order_ids ) ) {
 			esc_html_e( 'Order ID is missing.', 'bring-fraktguiden-for-woocommerce' );
 
@@ -113,6 +118,8 @@ class Bring_Booking_Labels {
 				continue;
 			}
 
+			$printed_orders[] = $order_id;
+
 			$adapter = new Bring_WC_Order_Adapter( $order );
 
 			// Get the booking consignments from the adapter.
@@ -135,9 +142,10 @@ class Bring_Booking_Labels {
 			}
 		}
 
+		Fraktguiden_Helper::update_option( 'printed_orders', $printed_orders );
+
 		if ( $pdf_collection->is_empty() && $zpl_collection->is_empty() ) {
 			esc_html_e( 'No files to download.', 'bring-fraktguiden-for-woocommerce' );
-
 			return;
 		}
 

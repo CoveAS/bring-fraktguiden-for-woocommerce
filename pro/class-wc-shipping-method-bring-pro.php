@@ -248,7 +248,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
-			'title'       => __( 'After booking', 'bring-fraktguiden-for-woocommerce' ),
+			'title'       => __( 'Processing', 'bring-fraktguiden-for-woocommerce' ),
 			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden-for-woocommerce' ),
 			'class'       => 'bring-separate-admin-section',
 		];
@@ -257,6 +257,15 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'title'    => __( 'Order status after booking', 'bring-fraktguiden-for-woocommerce' ),
 			'type'     => 'select',
 			'desc_tip' => __( 'Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce' ),
+			'class'    => 'chosen_select',
+			'css'      => 'width: 400px;',
+			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
+			'default'  => 'none',
+		];
+		$this->form_fields['auto_set_status_after_print_label_success'] = [
+			'title'    => __( 'Order status after printing', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'select',
+			'desc_tip' => __( 'Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce' ),
 			'class'    => 'chosen_select',
 			'css'      => 'width: 400px;',
 			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),

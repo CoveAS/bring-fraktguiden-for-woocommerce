@@ -73,6 +73,9 @@ class Bring_Booking {
 
 		Bring_Booking_Orders_View::init();
 		Bring_Booking_Order_View::init();
+
+		// Update status on printed orders
+		add_action( 'init', __CLASS__ . '::update_printed_orders' );
 	}
 
 	/**
@@ -85,6 +88,33 @@ class Bring_Booking {
 		$api_key = self::get_api_key();
 
 		return $api_uid && $api_key;
+	}
+	/**
+	 * Change the status on printed orders
+	 */
+	public static function update_printed_orders() {
+		// Create new status and order note.
+		$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_print_label_success' );
+		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
+		if ( empty( $printed_orders ) ) {
+			return;
+		}
+		foreach ($printed_orders as $order_id) {
+			$order = wc_get_order( $order_id );
+			if ( ! $order || is_wp_error( $order ) ) {
+				continue;
+			}
+			if ( 'none' === $status || $status === $order->get_status() ) {
+				continue;
+			}
+
+			// Update status.
+			$order->update_status(
+				$status,
+				__( 'Changing status because the label was downloaded.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL
+			);
+		}
+		Fraktguiden_Helper::update_option( 'printed_orders', [] );
 	}
 
 	/**
