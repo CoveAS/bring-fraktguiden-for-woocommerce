@@ -200,7 +200,10 @@ class Fraktguiden_Helper {
 		}
 		$customer_number = self::get_option( 'mybring_customer_number' );
 
-		$warning = __( 'You\'re using an outdated Customer Number, %s - The latest services from Bring require you to update your customer number.' );
+		$warning = sprintf(
+			__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
+			$customer_number
+		);
 
 		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
 			foreach ( $services_data['common']['services'] as &$service_data ) {
