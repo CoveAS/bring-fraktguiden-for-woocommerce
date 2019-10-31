@@ -388,12 +388,12 @@ trait Settings {
 			],
 
 			/**
-			 * Developer settings
+			 * Advanced settings
 			 */
-			'developer_settings'            => [
+			'advanced_settings'            => [
 				'type'        => 'title',
-				'title'       => __( 'Developer', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'For debugging and testing the plugin', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'Advanced', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Advanced configuration and debugging.', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'separated_title_tab',
 			],
 			'debug'                         => [
@@ -604,6 +604,11 @@ trait Settings {
 		$api_key         = filter_input( INPUT_POST, $api_key_key );
 		$customer_number = filter_input( INPUT_POST, $customer_number_key );
 
+		$mybring_authentication = [
+			'message' => '',
+			'authenticated' => false,
+		];
+
 		$is_credential_missing = false;
 
 		if ( ! $api_uid || ! $api_key ) {
@@ -621,6 +626,9 @@ trait Settings {
 		}
 
 		if ( $is_credential_missing ) {
+			$mybring_authentication['message'] = __( 'Missing credentials', 'bring-fraktguiden-for-woocommerce' );
+			update_option( 'mybring_authentication', $mybring_authentication );
+			update_option( 'mybring_authenticated_key', '', true );
 			return;
 		}
 
@@ -641,7 +649,9 @@ trait Settings {
 
 		if ( 200 !== $response->status_code ) {
 			$this->mybring_error( $response->body );
-
+			$mybring_authentication['message'] = 'Mybring error: ' . $response->body;
+			update_option( 'mybring_authentication', $mybring_authentication );
+			update_option( 'mybring_authenticated_key', '', true );
 			return;
 		}
 
@@ -672,13 +682,18 @@ trait Settings {
 
 					$this->mybring_error( $message );
 					$this->validation_messages = sprintf( '<p class="error-message">%s</p>', $message );
-
+					update_option( 'mybring_authentication', $mybring_authentication );
+					update_option( 'mybring_authenticated_key', '', true );
 					return;
 				}
 			}
 		}
 
+		$mybring_authentication['message'] = __( 'Successfully authenticated', 'bring-fraktguiden-for-woocommerce' );
+		$mybring_authentication['authenticated'] = true;
+
 		// Success. All authentication methods have passed.
+		update_option( 'mybring_authentication', $mybring_authentication );
 		update_option( 'mybring_authenticated_key', $hash, true );
 	}
 
