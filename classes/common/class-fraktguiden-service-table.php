@@ -17,13 +17,24 @@ class Fraktguiden_Service_Table {
 	 */
 	protected $shipping_method;
 
+
+	/**
+	 * Title
+	 *
+	 * @var string
+	 */
+	protected $title;
+
 	/**
 	 * Construct
 	 *
 	 * @param string $shipping_method Shipping method.
 	 */
-	public function __construct( $shipping_method ) {
+	public function __construct( $shipping_method, $option ) {
 		$this->shipping_method = $shipping_method;
+		if ( ! empty( $shipping_method->form_fields[ $option ] ) ) {
+			$this->title = $shipping_method->form_fields[ $option ]['title'];
+		}
 	}
 
 	/**
@@ -93,7 +104,7 @@ class Fraktguiden_Service_Table {
 			'field_key' => $field_key,
 			'selected'  => $this->shipping_method->services,
 		];
-
+		$title = $this->title;
 		ob_start();
 		require dirname( dirname( __DIR__ ) ) . '/templates/service-field.php';
 		return ob_get_clean();
