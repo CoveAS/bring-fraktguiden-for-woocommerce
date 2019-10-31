@@ -200,7 +200,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$this->enabled = false;
 		}
 
-		$this->service_table = new Fraktguiden_Service_Table( $this );
+		$this->service_table = new Fraktguiden_Service_Table( $this, 'services' );
 
 		$field_key = $this->get_field_key( 'services' );
 		Bring_Fraktguiden\updater::setup( $field_key );
