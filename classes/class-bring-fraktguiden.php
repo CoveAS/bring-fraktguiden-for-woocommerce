@@ -96,9 +96,9 @@ class Bring_Fraktguiden {
 
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
 			require_once 'debug/class-fraktguiden-product-debug.php';
-			require_once 'debug/class-fraktguiden-order-debug.php';
 			Fraktguiden_Product_Debug::setup();
-			Fraktguiden_Order_Debug::setup();
+			// require_once 'debug/class-fraktguiden-order-debug.php';
+			// Fraktguiden_Order_Debug::setup();
 		}
 
 		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
