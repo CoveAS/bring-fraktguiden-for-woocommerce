@@ -1,0 +1,137 @@
+$color_1: #444;
+$color_2: #000;
+$color_3: #555;
+$background_color_1: #fff;
+$background_color_2: #f1f1f1;
+$background_color_3: #e5e5e5;
+$background_color_4: #ccc;
+$background_color_5: #ffffff;
+$background_color_6: #8bc34a;
+
+/*.fraktguiden-options .tab-nav li a:focus {
+}*/
+/**
+ * Toggle
+ */
+.fraktguiden-options {
+	.tab-nav {
+		border-bottom: 1px solid #ccc;
+		li {
+			a {
+				&:hover {
+					background-color: $background_color_1;
+					color: $color_1;
+				}
+				box-shadow: none;
+				background-color: $background_color_3;
+				float: left;
+				display: block;
+				text-decoration: none;
+				color: $color_3;
+				font-weight: bold;
+				margin-left: .5em;
+				padding: 5px 10px;
+				border: 1px solid #ccc;
+				margin-bottom: -1px;
+			}
+			a.active {
+				&:hover {
+					background-color: $background_color_2;
+					border-bottom: 1px solid #f1f1f1;
+					color: $color_2;
+				}
+				background-color: $background_color_2;
+				border-bottom: 1px solid #f1f1f1;
+				color: $color_2;
+			}
+		}
+	}
+}
+.bring-toggle-checkbox {
+	height: 0 !important;
+	min-height: 0 !important;
+	width: 0 !important;
+	min-width: 0 !important;
+	border: 0 !important;
+	margin: 0 !important;
+	float: left !important;
+	visibility: hidden !important;
+}
+.bring-toggle-alt {
+	width: 3.75em;
+	height: 1.875em;
+	border-radius: 1.875em;
+	margin-right: 0.625em;
+	cursor: pointer;
+	text-indent: -9999px;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	background-color: $background_color_4;
+	box-shadow: inset 0 0 1.25em -0.3125em rgba(0,0,0,0.25);
+	&::after {
+		content: "";
+		width: 1.25em;
+		height: 1.25em;
+		border-radius: 1.25em;
+		position: absolute;
+		top: 0.3125em;
+		left: 0.3125em;
+		background-color: $background_color_5;
+		transition: 0.3s;
+		box-shadow: 0px 1px 7px rgba(0,0,0,0.25);
+	}
+	&:active {
+		&:after {
+			width: 1.875em;
+		}
+	}
+}
+.bring-toggle {
+	width: 3.75em;
+	height: 1.875em;
+	border-radius: 1.875em;
+	margin-right: 0.625em;
+	cursor: pointer;
+	text-indent: -9999px;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	background-color: $background_color_4;
+	box-shadow: inset 0 0 1.25em -0.3125em rgba(0,0,0,0.25);
+	&::after {
+		content: "";
+		width: 1.25em;
+		height: 1.25em;
+		border-radius: 1.25em;
+		position: absolute;
+		top: 0.3125em;
+		left: 0.3125em;
+		background-color: $background_color_5;
+		transition: 0.3s;
+		box-shadow: 0px 1px 7px rgba(0,0,0,0.25);
+	}
+	&:active {
+		&:after {
+			width: 1.875em;
+		}
+	}
+}
+input {
+	&:checked {
+		&+.bring-toggle-alt {
+			background-color: $background_color_6;
+			&::after {
+				left: calc( 100% - 0.3125em );
+				transform: translateX( -100% );
+			}
+		}
+		&+.bring-toggle {
+			background-color: $background_color_6;
+			&:after {
+				left: calc( 100% - 0.3125em );
+				transform: translateX( -100% );
+			}
+		}
+	}
+}

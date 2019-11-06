@@ -73,6 +73,9 @@ class Bring_Booking {
 
 		Bring_Booking_Orders_View::init();
 		Bring_Booking_Order_View::init();
+
+		// Update status on printed orders
+		add_action( 'init', __CLASS__ . '::update_printed_orders' );
 	}
 
 	/**
@@ -85,6 +88,33 @@ class Bring_Booking {
 		$api_key = self::get_api_key();
 
 		return $api_uid && $api_key;
+	}
+	/**
+	 * Change the status on printed orders
+	 */
+	public static function update_printed_orders() {
+		// Create new status and order note.
+		$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_print_label_success' );
+		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
+		if ( empty( $printed_orders ) ) {
+			return;
+		}
+		foreach ($printed_orders as $order_id) {
+			$order = wc_get_order( $order_id );
+			if ( ! $order || is_wp_error( $order ) ) {
+				continue;
+			}
+			if ( 'none' === $status || $status === $order->get_status() ) {
+				continue;
+			}
+
+			// Update status.
+			$order->update_status(
+				$status,
+				__( 'Changing status because the label was downloaded.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL
+			);
+		}
+		Fraktguiden_Helper::update_option( 'printed_orders', [] );
 	}
 
 	/**
@@ -134,6 +164,15 @@ class Bring_Booking {
 	 * @param WC_Order $wc_order WooCommerce order.
 	 */
 	public static function send_booking( $wc_order ) {
+		// Get booking count
+		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
+		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
+		$date_now = (int) $date_utc->format( 'Ymd' );
+
+		if ( ! is_array( $count ) ) {
+			$count = [];
+		}
+
 		// Bring_WC_Order_Adapter.
 		$adapter = new Bring_WC_Order_Adapter( $wc_order );
 
@@ -161,6 +200,10 @@ class Bring_Booking {
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
 			}
 
+			if ( empty( $count[ $date_now ] ) ) {
+				$count[ $date_now ] = 0;
+			}
+
 			// Save the response json to the order.
 			$adapter->update_booking_response( $response );
 
@@ -173,6 +216,8 @@ class Bring_Booking {
 
 				continue;
 			}
+
+			$count[ $date_now ]++;
 
 			// Download the labels.
 			$consigments = Bring_Consignment::create_from_response( $response, $wc_order->get_id() );
@@ -192,6 +237,8 @@ class Bring_Booking {
 			// Update status.
 			$wc_order->update_status( $status, $status_note );
 		}
+
+		update_option( 'bring_fraktguiden_booking_count', $count, false );
 	}
 
 	/**
@@ -235,12 +282,29 @@ class Bring_Booking {
 	 * @param array $post_ids Array of WC_Order IDs.
 	 */
 	public static function bulk_send_booking( $post_ids ) {
+		$report = [];
 		foreach ( $post_ids as $post_id ) {
 			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
-			if ( ! $order->has_booking_consignments() ) {
-				self::send_booking( $order->order );
+			try {
+				if ( ! $order->has_booking_consignments() ) {
+					self::send_booking( $order->order );
+				}
+			} catch ( Exception $e ) {
+				$report[ $post_id ] = [
+					'status'  => 'error',
+					'message' => $e->getMessage(),
+					'url'     => get_edit_post_link( $post_id ),
+				];
+				continue;
 			}
+			$report[ $post_id ] = [
+				'status'  => 'ok',
+				'message' => '',
+				'url'     => get_edit_post_link( $post_id, 'edit' ),
+			];
 		}
+
+		return $report;
 	}
 
 	/**

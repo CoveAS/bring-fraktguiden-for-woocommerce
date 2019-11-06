@@ -80,6 +80,34 @@ class Fraktguiden_System_Info {
 					margin: 0;
 					padding: 0 15px;
 				}
+				dl {
+					margin: 0;
+					display: grid;
+					grid-template-columns: auto 1fr;
+
+					padding: 2px 4px;
+					border: 1px solid #ddd;
+					background: #f9f9f9;
+					margin-bottom: 0.5rem;
+					border-radius: 3px;
+				}
+				dt {
+					/*font-weight: 600;*/
+					color: #999;
+				}
+				dd {
+					margin-left: 0.5rem;
+				}
+				.shippping-zone__location-name {
+					color: #666;
+				    font-weight: 400;
+				}
+				.success {
+					color: #090;
+				}
+				.error {
+					color: #900;
+				}
 			</style>
 		</head>
 		<body>
@@ -99,12 +127,11 @@ class Fraktguiden_System_Info {
 				self::create_row( 'woocommerce_weight_unit', get_option( 'woocommerce_weight_unit' ) );
 				self::create_row( 'woocommerce_currency', get_option( 'woocommerce_currency' ) );
 				self::create_row( 'shipping_countries', self::create_shipping_countries( $woocommerce->countries->get_shipping_countries() ) );
+				self::create_row( 'shipping_zones', self::create_shipping_zones() );
+				self::create_row( 'mybring_authentication', self::create_authenication() );
 
 				self::create_header( $bfg_plugin_data['Name'] . ' ' . $bfg_plugin_data['Version'] );
 				self::generate_fraktguiden_options( $bfg_options );
-
-				self::create_header( 'Bring Fraktguiden Services' );
-				self::generate_fraktguiden_services_info( Fraktguiden_Helper::get_all_services_with_customer_types(), $bfg_options );
 				?>
 			</table>
 		</div>
@@ -131,6 +158,27 @@ class Fraktguiden_System_Info {
 			</tr>
 		</thead>
 		<?php
+	}
+
+
+	/**
+	 * Create header
+	 *
+	 * @param  string $header_text Header text.
+	 * @return void
+	 */
+	private static function create_authenication() {
+		$mybring_authentication = get_option( 'mybring_authentication' );
+		var_dump($mybring_authentication);
+		if ( empty( $mybring_authentication ) ) {
+			return esc_html__( 'No authentication data', 'bring-fraktguiden-for-woocommerce' );
+		}
+		$format = '<span class="mybring_authentication %s">%s</span>';
+		return sprintf(
+			$format,
+			$mybring_authentication['authenticated'] ? 'success' : 'error',
+			esc_html( $mybring_authentication['message'] )
+		);
 	}
 
 	/**
@@ -251,48 +299,24 @@ class Fraktguiden_System_Info {
 	}
 
 	/**
-	 * Generate fraktguiden services info
+	 * Create shipping zones
 	 *
-	 * @param  array $all_services All services.
-	 * @param  array $bfg_options  BFG options.
-	 * @return void
+	 * @return string
 	 */
-	private static function generate_fraktguiden_services_info( $all_services, $bfg_options ) {
-		foreach ( $all_services as $key => $service ) {
-			$info_table = '<table class="properties">';
+	private static function create_shipping_zones() {
+		$html  = '<div class="shipping-zones">';
 
-			foreach ( $service as $k => $v ) {
-				$val_html = $v;
+		$zones = WC_Shipping_Zones::get_zones();
 
-				if ( 'array' === gettype( $v ) ) {
-					$val_html = '';
-
-					foreach ( $v as $n ) {
-						$val_html .= '<li>' . $n . '</li>';
-					}
-
-					$val_html .= '</ul>';
-				}
-
-				$info_table .= "
-				<tr>
-					<td>$k</td>
-					<td>$val_html</td>
-				</tr>";
-			}
-
-			$info_table .= '</table>';
-
-			$text = $key;
-
-			foreach ( $bfg_options['services'] as $k => $selected_service ) {
-				if ( $key == $selected_service ) {
-					$text .= ' (selected)';
-				}
-			}
-
-			self::create_row( $text, $info_table );
+		foreach ( $zones as $zone ) {
+			ob_start();
+			require __DIR__ . '/templates/system-info/shipping-zones.php';
+			$html = ob_get_clean();
 		}
+
+		$html .= '</div>';
+
+		return $html;
 	}
 
 	/**

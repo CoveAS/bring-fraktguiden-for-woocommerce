@@ -16,6 +16,12 @@ require_once 'common/class-fraktguiden-packer.php';
 require_once 'common/class-fraktguiden-minimum-dimensions.php';
 require_once 'common/class-fraktguiden-service-table.php';
 require_once 'common/class-fraktguiden-service.php';
+require_once 'common/class-updater.php';
+
+// Value Added Services classes.
+require_once 'vas/class-vas.php';
+require_once 'vas/class-vas-checkbox.php';
+
 
 /**
  * Bring class for calculating and adding rates
@@ -71,13 +77,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public $services = [];
 
 	/**
-	 * The service name displayed to the customer on the cart / checkout
-	 *
-	 * @var string
-	 */
-	public $service_name = '';
-
-	/**
 	 * Switch for showing a service description after the name of the service
 	 *
 	 * @var string
@@ -118,6 +117,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @var string
 	 */
 	public $validation_messages;
+
+	/**
+	 * Field key
+	 *
+	 * @var string
+	 */
+	static public $field_key;
 
 	/**
 	 * Initialize the instance
@@ -168,9 +174,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->from_zip     = $this->get_setting( 'from_zip' );
 		$this->post_office  = $this->get_setting( 'post_office' );
 		$this->evarsling    = $this->get_setting( 'evarsling' );
-		$field_key          = $this->get_field_key( 'services' );
-		$this->services     = $this->get_setting( 'services' ); //\Fraktguiden_Service::all( $field_key );
-		$this->service_name = $this->get_setting( 'service_name', 'displayName' );
+		self::$field_key    = $this->get_field_key( 'services' );
+		$this->services     = $this->get_services();
 
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
 
@@ -195,7 +200,23 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$this->enabled = false;
 		}
 
-		$this->service_table = new Fraktguiden_Service_Table( $this );
+		$this->service_table = new Fraktguiden_Service_Table( $this, 'services' );
+
+		$field_key = $this->get_field_key( 'services' );
+		Bring_Fraktguiden\updater::setup( $field_key );
+	}
+
+	/**
+	 * Get services
+	 *
+	 * @return array Services.
+	 */
+	public function get_services() {
+		$services = $this->get_setting( 'services' );
+		if ( ! is_array( $services ) ) {
+			$services = [];
+		}
+		return $services;
 	}
 
 	/**
@@ -236,8 +257,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( 'woocommerce_page_wc-settings' !== $hook ) {
 				return;
 		}
-		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [], '1.0.4' );
-		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], '1.0.0' );
+		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-settings-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-settings.js', [], Bring_Fraktguiden::VERSION, true );
 		wp_localize_script(
 			'bring-admin-js',
 			'bring_fraktguiden',
@@ -245,7 +267,33 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			]
 		);
-		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], '1.0.0' );
+		wp_localize_script(
+			'bring-settings-js',
+			'bring_fraktguiden_settings',
+			[
+				'services_data'    => Fraktguiden_Helper::get_services_data(),
+				'services'         => Fraktguiden_Service::all( self::$field_key ),
+				'services_enabled' => array_keys( Fraktguiden_Service::all( self::$field_key, true ) ),
+				'pro_activated'    => Fraktguiden_Helper::pro_activated(),
+				'i18n'             => [
+					'shipping_name'               => esc_html__( 'Shipping name:', 'bring-fraktguiden-for-woocommerce' ),
+					'fixed_price_override'        => esc_html__( 'Fixed price override:', 'bring-fraktguiden-for-woocommerce' ),
+					'alternative_customer_number' => esc_html__( 'Alternative customer number:', 'bring-fraktguiden-for-woocommerce' ),
+					'free_shipping_activated_at'  => esc_html__( 'Free shipping activated at:', 'bring-fraktguiden-for-woocommerce' ),
+					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
+					'value_added_services'        => esc_html__( 'Value added services', 'bring-fraktguiden-for-woocommerce' ),
+					'pickup_point'                => esc_html__( 'Pickup points', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_uid'               => esc_html__( 'The api email should be a valid email address.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_customer_number'       => esc_html__( 'Customer numbers should be letters (A-Z) and underscores followed by a dash and a number.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_key'               => esc_html__( 'The api key should only contain letters (a-z), numbers and dashes.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_spaces'                => esc_html__( 'Spaces are not allowed in the', 'bring_fraktguiden-for-woocommerce' ),
+					'api_email'                   => esc_html__( 'API email', 'bring_fraktguiden-for-woocommerce' ),
+					'api_key'                     => esc_html__( 'API key', 'bring_fraktguiden-for-woocommerce' ),
+					'customer_number'             => esc_html__( 'customer number', 'bring_fraktguiden-for-woocommerce' ),
+				],
+			]
+		);
+		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
 	}
 
 	/**
@@ -260,7 +308,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		$instance_key = null;
 		if ( $this->instance_id ) {
-				$instance_key = $this->get_instance_option_key();
+			$instance_key = $this->get_instance_option_key();
 		}
 		$this->service_table->process_services_field( $instance_key );
 		$this->process_mybring_api_credentials();
@@ -355,7 +403,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Request parameters.
 		$params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
 		// Remove any empty elements.
-		$params = array_filter( $params );
+		$params =  array_filter( $params );
 
 		if ( Fraktguiden_Helper::get_option( 'calculate_by_weight' ) === 'yes' ) {
 			// Calculate packages based on weight.
@@ -367,6 +415,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			}
 		}
 
+		$params = apply_filters( 'bring_fraktguiden_api_parameters', $params, $this );
+
 		$url = add_query_arg( $params, self::SERVICE_URL );
 
 		// Add all the selected services to the URL.
@@ -374,7 +424,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$services  = \Fraktguiden_Service::all( $field_key, true );
 		if ( ! empty( $services ) ) {
 			foreach ( $services as $service ) {
-				$url .= '&product=' . $service;
+				$url .= $service->getUrlParam();
 			}
 		}
 
@@ -438,14 +488,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			}
 		}
 
-		if ( 'no' !== $this->debug ) {
-			$this->log->add( $this->id, 'params: ' . print_r( $params, true ) );
+		if ( 'yes' === $this->debug ) {
+			$this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
+			$this->log->add( $this->id, 'Parameters: ' . PHP_EOL . print_r( $params, true ) );
+			$this->log->add( $this->id, 'Response: ' . PHP_EOL . json_encode( $json, JSON_PRETTY_PRINT ) );
 			if ( $rates ) {
 				$this->log->add( $this->id, 'Rates found: ' . print_r( $rates, true ) );
 			} else {
-				$this->log->add( $this->id, 'No rates found for params: ' . print_r( $params, true ) );
+				$this->log->add( $this->id, 'No rates found for params' );
 			}
-			$this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
 		}
 
 		// Calculate rate.
@@ -469,9 +520,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		$rates = [];
+		$services  = \Fraktguiden_Service::all( self::$field_key );
 
 		foreach ( $response['consignments'][0]['products'] as $service_details ) {
-			if ( ! empty( $this->services ) && ! in_array( $service_details['id'], $this->services ) ) {
+
+			$bring_product = $service_details['id'];
+			if ( empty( $services[ $bring_product ] ) ) {
+				if ( 'yes' === $this->debug ) {
+					$this->log->add( $this->id, 'Unidentified bring product: ' . $bring_product );
+				}
 				continue;
 			}
 
@@ -491,10 +548,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$rate = $service['amountWithoutVAT'];
 
 			$label = $service_details['guiInformation']['productName'];
-
-			if ( 'displayname' === strtolower( $this->service_name ) ) {
-				$label = $service_details['guiInformation']['displayName'];
-			}
 
 			$rate = array(
 				'id'            => $this->id,
@@ -531,13 +584,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$country = 'NO';
 		}
 
+		// Remove spaces in post code.
+		$postcode = preg_replace( '/\s/', '', $package['destination']['postcode'] );
+
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
 			[
 				'clientUrl'           => Fraktguiden_Helper::get_client_url(),
 				'frompostalcode'      => $this->from_zip,
 				'fromcountry'         => $this->get_selected_from_country(),
-				'topostalcode'        => $package['destination']['postcode'],
+				'topostalcode'        => $postcode,
 				'tocountry'           => $country,
 				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
 				'additionalservice'   => ( 'yes' === $this->evarsling ) ? 'EVARSLING' : '',

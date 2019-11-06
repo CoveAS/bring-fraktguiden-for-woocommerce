@@ -109,11 +109,32 @@ class Fraktguiden_License {
 			$this->ping();
 			return;
 		}
+		$date_utc = new \DateTime( '-2 months', new \DateTimeZone( 'UTC' ) );
+		$date_then = (int) $date_utc->format( 'Ymd' );
+
+		$count = get_option( 'bring_fraktguiden_booking_count', [] );
+
+		if ( ! is_array( $count ) ) {
+			$count = [];
+		}
+
+		$changed = false;
+		foreach ( $count as $date => $amount ) {
+			if ( $date_then > $date ) {
+				$changed = true;
+				unset( $count[ $date ]);
+			}
+		}
+
+		if ( $changed ) {
+			update_option( 'bring_fraktguiden_booking_count', $count, false );
+		}
 
 		$data = $this->curl_request(
 			[
-				'action' => 'check_license',
-				'domain' => $url_info['host'],
+				'action'        => 'check_license',
+				'domain'        => $url_info['host'],
+				'booking_count' => $count,
 			]
 		);
 

@@ -181,18 +181,6 @@ trait Settings {
 				'type'        => 'checkbox',
 				'description' => __( 'Use multipack when shipping many small items. This setting is highly recommended for SERVICEPAKKE. This will automatically divide shipped items into boxes with sides no longer than 240 cm and weigh less than 35kg and a circumference less than 360cm. If you\'re shipping a mix of small and big items you should disable this setting. Eg. if you\'re using both SERVICEPAKKE and CARGO you should disable this.', 'bring-fraktguiden-for-woocommerce' ),
 			],
-			'service_name'                  => [
-				'title'       => __( 'Display Service As', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'select',
-				'desc_tip'    => __( 'The service name displayed to the customer on the cart / checkout', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Display name: <strong>"At the post office"</strong>,<br/>Product name: <strong>"Climate Neutral Service Pack"</strong>', 'bring-fraktguiden-for-woocommerce' ),
-				'default'     => 'displayName',
-				'options'     => [
-					'displayName' => __( 'Display Name', 'bring-fraktguiden-for-woocommerce' ),
-					'productName' => __( 'Product Name', 'bring-fraktguiden-for-woocommerce' ),
-					'CustomName'  => __( 'Custom Name', 'bring-fraktguiden-for-woocommerce' ),
-				],
-			],
 			'display_desc'                  => [
 				'title'    => __( 'Enhanced descriptions', 'bring-fraktguiden-for-woocommerce' ),
 				'type'     => 'checkbox',
@@ -200,8 +188,20 @@ trait Settings {
 				'desc_tip' => __( 'To help customers, the service description will help explain how the services differ from each other', 'bring-fraktguiden-for-woocommerce' ),
 				'default'  => 'no',
 			],
+			'service_sorting'                      => [
+				'title'   => __( 'Sorting', 'bring-fraktguiden-for-woocommerce' ),
+				'type'    => 'select',
+				'css'     => 'width: 400px;',
+				'default' => 'price',
+				'desc_tip' => __( 'The order in which shipping options should be displayed.', 'bring-fraktguiden-for-woocommerce' ),
+				'options' => [
+					'price'      => __( 'Price, low to high', 'bring-fraktguiden-for-woocommerce' ),
+					'price_desc' => __( 'Price, high to low', 'bring-fraktguiden-for-woocommerce' ),
+					'none'       => __( 'No sorting', 'bring-fraktguiden-for-woocommerce' ),
+				],
+			],
 			'services'                      => [
-				'title'   => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
+				'title'   => __( 'Bring products', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'services_table',
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
@@ -400,12 +400,12 @@ trait Settings {
 			],
 
 			/**
-			 * Developer settings
+			 * Advanced settings
 			 */
-			'developer_settings'            => [
+			'advanced_settings'            => [
 				'type'        => 'title',
-				'title'       => __( 'Developer', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'For debugging and testing the plugin', 'bring-fraktguiden-for-woocommerce' ),
+				'title'       => __( 'Advanced', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Advanced configuration and debugging.', 'bring-fraktguiden-for-woocommerce' ),
 				'class'       => 'separated_title_tab',
 			],
 			'debug'                         => [
@@ -569,14 +569,34 @@ trait Settings {
 		jQuery( function( $ ) {
 			function toggle_test_mode() {
 				var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
+				bring_fraktguiden_settings.pro_activated = is_checked;
+				$( '#shipping_services' ).attr('class', is_checked ? 'pro-enabled' : 'pro-disabled' );
 				$( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
 
 				// Toggle the menu items for pickup points and bring booking.
-				$( '#5, #6' ).toggle( is_checked );
+				$( '#5' ).toggle( is_checked );
 			}
 
 			$( '#woocommerce_bring_fraktguiden_pro_enabled' ).change( toggle_test_mode );
 			toggle_test_mode();
+		} );
+		jQuery( function( $ ) {
+			var api_fields = [
+				'#woocommerce_bring_fraktguiden_mybring_api_uid',
+				'#woocommerce_bring_fraktguiden_mybring_api_key',
+				'#woocommerce_bring_fraktguiden_mybring_customer_number',
+			];
+
+			for (var i = 0; i < api_fields.length; i++) {
+				var elem = $( api_fields[i] );
+				if ( ! elem.val() ) {
+					// Hide everything except Mybring API credentials.
+					$( '#0, #1, #2, #3, #5' ).hide();
+					$( '#4' ).click();
+					return;
+				}
+			}
+
 		} );
 		</script>
 		<?php
@@ -596,6 +616,11 @@ trait Settings {
 		$api_key         = filter_input( INPUT_POST, $api_key_key );
 		$customer_number = filter_input( INPUT_POST, $customer_number_key );
 
+		$mybring_authentication = [
+			'message' => '',
+			'authenticated' => false,
+		];
+
 		$is_credential_missing = false;
 
 		if ( ! $api_uid || ! $api_key ) {
@@ -613,6 +638,9 @@ trait Settings {
 		}
 
 		if ( $is_credential_missing ) {
+			$mybring_authentication['message'] = __( 'Missing credentials', 'bring-fraktguiden-for-woocommerce' );
+			update_option( 'mybring_authentication', $mybring_authentication );
+			update_option( 'mybring_authenticated_key', '', true );
 			return;
 		}
 
@@ -633,7 +661,9 @@ trait Settings {
 
 		if ( 200 !== $response->status_code ) {
 			$this->mybring_error( $response->body );
-
+			$mybring_authentication['message'] = 'Mybring error: ' . $response->body;
+			update_option( 'mybring_authentication', $mybring_authentication );
+			update_option( 'mybring_authenticated_key', '', true );
 			return;
 		}
 
@@ -664,13 +694,18 @@ trait Settings {
 
 					$this->mybring_error( $message );
 					$this->validation_messages = sprintf( '<p class="error-message">%s</p>', $message );
-
+					update_option( 'mybring_authentication', $mybring_authentication );
+					update_option( 'mybring_authenticated_key', '', true );
 					return;
 				}
 			}
 		}
 
+		$mybring_authentication['message'] = __( 'Successfully authenticated', 'bring-fraktguiden-for-woocommerce' );
+		$mybring_authentication['authenticated'] = true;
+
 		// Success. All authentication methods have passed.
+		update_option( 'mybring_authentication', $mybring_authentication );
 		update_option( 'mybring_authenticated_key', $hash, true );
 	}
 
@@ -686,7 +721,7 @@ trait Settings {
 			$message = sprintf( '<strong>%s:</strong> %s.', __( 'Mybring authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( "Couldn't connect to Bring with your API credentials. Please check that they are correct", 'bring-fraktguiden-for-woocommerce' ) );
 		}
 
-		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error' );
+		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error', false );
 	}
 
 	/**

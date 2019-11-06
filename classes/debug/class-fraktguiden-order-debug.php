@@ -31,7 +31,7 @@ class Fraktguiden_Order_Debug {
 
 		add_meta_box(
 			'bring_fraktguiden_debug',
-			'Bring Fraktguiden Debug information',
+			__( 'Bring Fraktguiden Debug information', 'bring-fraktguiden-for-woocommerce' ),
 			__CLASS__ . '::layout_of_meta_box_content'
 		);
 	}

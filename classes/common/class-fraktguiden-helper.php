@@ -122,21 +122,13 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	public static function get_all_services( $id = false ) {
-		$selected_service_name = self::get_option( 'service_name' );
-		$service_name          = $selected_service_name ? $selected_service_name : 'productName';
 		$services              = self::get_services_data();
 		$result                = [];
-
 		foreach ( $services as $group => $service_group ) {
 			foreach ( $service_group['services'] as $key => $service ) {
 				$result[ $key ] = $service['productName'];
-
-				if ( 'CustomName' === $service_name ) {
-					if ( ! empty( $id ) ) {
-						$result[ $key ] = '@TODO';
-					}
-				} elseif ( 'displayname' === strtolower( $service_name ) ) {
-					$result[ $key ] = $service['displayName'];
+				if ( ! empty( $id ) ) {
+					$result[ $key ] = '@TODO';
 				}
 			}
 		}
@@ -152,24 +144,14 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	public static function get_all_selected_services( $id = false ) {
-		$selected_service_name = self::get_option( 'service_name' );
-		$service_name          = $selected_service_name ? $selected_service_name : 'productName';
-
 		$services = self::get_services_data();
 		$selected = self::get_option( 'services' );
 		$result   = [];
-
 		foreach ( $services as $service_group ) {
 			foreach ( $service_group['services'] as $key => $service ) {
 				if ( in_array( $key, $selected ) ) {
-					if ( 'CustomName' == $service_name ) {
-						if ( empty( $id ) ) {
-							$result[ $key ] = $service['productName'];
-						} else {
-							$result[ $key ] = '@TODO';
-						}
-					} else {
-						$result[ $key ] = $service[ $service_name ];
+					if ( ! empty( $id ) ) {
+						$result[ $key ] = '@TODO';
 					}
 				}
 			}
@@ -204,63 +186,47 @@ class Fraktguiden_Helper {
 	}
 
 	/**
-	 * Get all services with customer types
-	 *
-	 * @return array
-	 */
-	public static function get_all_services_with_customer_types() {
-		$services = self::get_services_data();
-		$result   = [];
-
-		foreach ( $services as $service_group ) {
-			foreach ( $service_group['services'] as $key => $service ) {
-				$service['CustomerTypes'] = self::get_customer_types_for_service_id( $key );
-				$result[ $key ]           = $service;
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Get all services
-	 *
-	 * @param int|string $service_id Service ID.
-	 *
-	 * @return array
-	 */
-	private static function get_customer_types_for_service_id( $service_id ) {
-		$customer_types = self::get_customer_types_data();
-		$result         = [];
-
-		foreach ( $customer_types as $k => $v ) {
-			foreach ( $v as $item ) {
-				if ( $item == $service_id ) {
-					$result[] = $k;
-				}
-			}
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Available Fraktguiden services.
 	 * Information is copied from the service's XML API
 	 *
 	 * @return array
 	 */
 	public static function get_services_data() {
-		return require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		if ( new DateTime() < new DateTime( '2020-01-13' ) ) {
+			// Enable mailbox on the 13th of January
+			unset( $services_data['common']['services']['3570'] );
+			unset( $services_data['common']['services']['3584'] );
+		}
+		$customer_number = self::get_option( 'mybring_customer_number' );
+
+		$warning = sprintf(
+			__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
+			$customer_number
+		);
+
+		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+			foreach ( $services_data['common']['services'] as &$service_data ) {
+				if ( empty( $service_data['warning'] ) ) {
+					$service_data['warning'] = $warning;
+				} else {
+					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
+				}
+			}
+		}
+
+		return $services_data;
 	}
 
 	/**
-	 * Get customer types data
+	 * Value added services
+	 * https://developer.bring.com/api/services/
+	 * https://developer.bring.com/api/services/revisedservice/
 	 *
 	 * @return array
 	 */
-	public static function get_customer_types_data() {
-		return require dirname( dirname( __DIR__ ) ) . '/config/customer-types.php';
+	public static function get_vas_data() {
+		return require dirname( dirname( __DIR__ ) ) . '/config/value-added-services.php';
 	}
 
 	/**
@@ -325,6 +291,10 @@ class Fraktguiden_Helper {
 
 		if ( ! isset( self::$options[ $key ] ) ) {
 			return $default;
+		}
+
+		if ( 'services' === $key ) {
+			return array_map( 'strtoupper', self::$options[ $key ] );
 		}
 
 		return self::$options[ $key ];

@@ -48,10 +48,10 @@ class Fraktguiden_Pickup_Point {
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
 
 		// Pickup points.
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
-			add_filter( 'bring_shipping_rates', __CLASS__ . '::insert_pickup_points' );
-			add_filter( 'bring_pickup_point_limit', __CLASS__ . '::limit_pickup_points' );
-		}
+		// if ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
+			add_filter( 'bring_shipping_rates', __CLASS__ . '::insert_pickup_points', 10, 2 );
+			// add_filter( 'bring_pickup_point_limit', __CLASS__ . '::limit_pickup_points' );
+		// }
 	}
 
 	/**
@@ -376,29 +376,47 @@ class Fraktguiden_Pickup_Point {
 	 *
 	 * @return array
 	 */
-	public static function insert_pickup_points( $rates ) {
+	public static function insert_pickup_points( $rates, $shipping_rate ) {
+
+		$field_key            = $shipping_rate->get_field_key( 'services' );
+		$services             = \Fraktguiden_Service::all( $field_key );
+
 		$rate_key        = false;
 		$service_package = false;
+		$bring_product   = false;
 
 		foreach ( $rates as $key => $rate ) {
-			if ( 'servicepakke' === $rate['bring_product'] ) {
-				// Service package identified.
-				$service_package = $rate;
-				// Remove this package.
-				$rate_key = $key;
-				break;
+			// Service package identified.
+			$service_package = $rate;
+			$bring_product   = $rate['bring_product'];
+			if ( empty( $services[ $bring_product ] ) ) {
+				continue;
 			}
+
+			$service = $services[ $bring_product ];
+
+			if ( empty( $service->settings['pickup_point_cb'] ) ) {
+				continue;
+			}
+			// Remove this package.
+			$rate_key = $key;
+			break;
 		}
 
-		if ( ! $service_package ) {
+
+		if ( ! $rate_key ) {
 			// Service package is not available.
 			// That means it's the end of the line for pickup points.
 			return $rates;
 		}
 
-		$pickup_point_limit = apply_filters( 'bring_pickup_point_limit', 999 );
-		$postcode           = esc_html( WC()->customer->get_shipping_postcode() );
-		$country            = esc_html( WC()->customer->get_shipping_country() );
+		$pickup_point_limit = apply_filters( 'bring_pickup_point_limit', (int) $service->settings['pickup_point'] );
+		$postcode           = esc_html(
+			apply_filters( 'bring_pickup_point_postcode', WC()->customer->get_shipping_postcode() )
+		);
+		$country            = esc_html(
+			apply_filters( 'bring_pickup_point_country', WC()->customer->get_shipping_country() )
+		);
 		$response           = self::get_pickup_points( $country, $postcode );
 
 		if ( 200 !== $response->status_code ) {
@@ -413,14 +431,14 @@ class Fraktguiden_Pickup_Point {
 		// Remove service package.
 		unset( $rates[ $rate_key ] );
 
-		$pickup_point_count = 0;
+		$pickup_point_count = 1;
 		$pickup_points      = json_decode( $response->get_body(), 1 );
 		$new_rates          = [];
 
 		foreach ( $pickup_points['pickupPoint'] as $pickup_point ) {
 			$rate = [
-				'id'            => 'bring_fraktguiden:servicepakke-' . $pickup_point['id'],
-				'bring_product' => 'servicepakke',
+				'id'            => "bring_fraktguiden:{$bring_product}-{$pickup_point['id']}",
+				'bring_product' => $bring_product,
 				'cost'          => $service_package['cost'],
 				'label'         => $pickup_point['name'],
 				'meta_data'     => [
@@ -430,10 +448,10 @@ class Fraktguiden_Pickup_Point {
 			];
 
 			$new_rates[] = $rate;
-
-			if ( ++$pickup_point_count >= $pickup_point_limit ) {
+			if ( $pickup_point_limit && $pickup_point_limit <= $pickup_point_count ) {
 				break;
 			}
+			$pickup_point_count++;
 		}
 
 		foreach ( $rates as $key => $rate ) {

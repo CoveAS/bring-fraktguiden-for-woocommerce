@@ -36,7 +36,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 *
 	 * @var string
 	 */
-	private $pickup_point_enabled;
+	// private $pickup_point_enabled;
 
 	/**
 	 * $mybring_api_uid
@@ -150,7 +150,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
 		$this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
 
-		$this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled', 'no' );
+		// $this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled', 'no' );
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
 		$this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
 		$this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
@@ -167,6 +167,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
 
 		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
+		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates_sorting' ], 9000, 2 );
 	}
 
 	/**
@@ -178,12 +179,10 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 		parent::init_form_fields();
 
-		$this->init_form_fields_for_pickup_point();
-
 		if ( $this->instance_id ) {
 			return;
 		}
-
+		// $this->init_form_fields_for_pickup_point();
 		$this->init_form_fields_for_mybring();
 		$this->init_form_fields_for_booking();
 	}
@@ -250,7 +249,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
-			'title'       => __( 'After booking', 'bring-fraktguiden-for-woocommerce' ),
+			'title'       => __( 'Processing', 'bring-fraktguiden-for-woocommerce' ),
 			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden-for-woocommerce' ),
 			'class'       => 'bring-separate-admin-section',
 		];
@@ -259,6 +258,15 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'title'    => __( 'Order status after booking', 'bring-fraktguiden-for-woocommerce' ),
 			'type'     => 'select',
 			'desc_tip' => __( 'Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce' ),
+			'class'    => 'chosen_select',
+			'css'      => 'width: 400px;',
+			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
+			'default'  => 'none',
+		];
+		$this->form_fields['auto_set_status_after_print_label_success'] = [
+			'title'    => __( 'Order status after printing', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'select',
+			'desc_tip' => __( 'Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce' ),
 			'class'    => 'chosen_select',
 			'css'      => 'width: 400px;',
 			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
@@ -368,14 +376,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 * @return array
 	 */
 	public function filter_shipping_rates( $rates, $shipping_method ) {
-		$field_key                = $this->get_field_key( 'services' );
-		$custom_names             = get_option( $field_key . '_custom_names' );
-		$custom_prices            = get_option( $field_key . '_custom_prices' );
-		$free_shipping_checks     = get_option( $field_key . '_free_shipping_checks' );
-		$free_shipping_thresholds = get_option( $field_key . '_free_shipping_thresholds' );
-		$cart                     = WC()->cart;
-		$cart_items               = $cart ? $cart->get_cart() : [];
-		$cart_total               = 0;
+		$field_key            = $this->get_field_key( 'services' );
+		$services             = \Fraktguiden_Service::all( $field_key );
+		$cart                 = WC()->cart;
+		$cart_items           = $cart ? $cart->get_cart() : [];
+		$cart_total           = 0;
+
 
 		if ( empty( $rates ) ) {
 			return $rates;
@@ -393,22 +399,24 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 			$key = strtoupper( $rate['bring_product'] );
 
-			// custom_name for SERVICEPAKKE will also rename the pickup points
-			// SERVICEPAKKE's custom_name is ignored if 'pickup_point_enabled' is enabled.
-			if ( 0 === strpos( $key, 'SERVICEPAKKE' ) && 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
-				$key = 'SERVICEPAKKE';
-			} elseif ( 'CustomName' === $shipping_method->service_name && ! empty( $custom_names[ $key ] ) ) {
-				$rate['label'] = $custom_names[ $key ];
+			if ( empty( $services[ $key ] ) ) {
+				continue;
 			}
 
-			if ( isset( $custom_prices[ $key ] ) && is_numeric( $custom_prices[ $key ] ) ) {
-				$rate['cost'] = $this->calculate_excl_vat( $custom_prices[ $key ] );
+			$service = $services[ $key ];
+			if ( ! empty( $service->settings['custom_name'] ) && empty( $service->settings['pickup_point_cb'] ) ) {
+				$rate['label'] = $service->settings['custom_name'];
 			}
 
-			if ( isset( $free_shipping_checks[ $key ] ) && 'on' === $free_shipping_checks[ $key ] && isset( $free_shipping_thresholds[ $key ] ) ) {
+			if ( $service->settings['custom_price_cb'] ) {
+				$rate['cost'] = $this->calculate_excl_vat( $service->settings['custom_price'] );
+			}
+			if ( $service->settings['additional_fee_cb'] ) {
+				$rate['cost'] += $this->calculate_excl_vat( $service->settings['additional_fee'] );
+			}
+			if ( $service->settings['free_shipping_cb'] ) {
 				// Free shipping is checked and threshold is defined.
-				$threshold = $free_shipping_thresholds[ $key ];
-
+				$threshold = $service->settings['free_shipping'];
 				if ( ! is_numeric( $threshold ) || $cart_total >= $threshold ) {
 					// Threshold is not a number (ie. undefined) or
 					// cart total is more than or equal to the threshold.
@@ -417,6 +425,41 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			}
 		}
 
+		return $rates;
+	}
+
+	/**
+	 * Sort shipping rates
+	 *
+	 * @param array $a Shipping rate A.
+	 * @param array $b Shipping rate B.
+	 *
+	 * @return int
+	 */
+	public static function sort_shipping_rates( $a, $b ) {
+		$sorting = Fraktguiden_Helper::get_option( 'service_sorting', 'price' );
+		if ( $a['cost'] == $b['cost'] ) {
+			return 0;
+		}
+
+		if ( $a['cost'] > $b['cost'] ) {
+			return ( $sorting === 'price' ) ? 1 : -1;
+		}
+		return ( $sorting === 'price' ) ? -1 : 1;
+	}
+
+	/**
+	 * Filter shipping rates for sorting
+	 *
+	 * @param  array                    $rates           Rates.
+	 * @param  WC_Shipping_Method_Bring $shipping_method Shipping method.
+	 * @return array
+	 */
+	public function filter_shipping_rates_sorting( $rates, $shipping_method ) {
+		$sorting = Fraktguiden_Helper::get_option( 'service_sorting', 'price' );
+		if ( 'none' !== $sorting ) {
+			uasort( $rates, __CLASS__ . '::sort_shipping_rates' );
+		}
 		return $rates;
 	}
 }
