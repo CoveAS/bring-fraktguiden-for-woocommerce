@@ -68,12 +68,6 @@ Good question! Bring Pro enables you to customise your customers Bring experienc
     - You can book your shippment through Mybring directly on your orders page.
     - You can change the services offered to customers to their nearest collection point
 
-**'Minipakke' and 'Småpakke' are no longer available? What happened?**
-These have been replaced with new and exciting shipping option called 'Pakke i postkassen'! You can read more about it here: https://www.bring.no/radgivning/netthandel/pakkeipostkassen. In essence, it's  a streamlined version of the previous options available.
-
-**Where are 'A-Mail' and 'B-Mail' options?**
-Bring revealed that in 2018, A-mail and B-mail have been merged into a new service called "Brev". The idea is that we just don't post as much as we used to due to the digitalisation of mail. Combining A & B Mail means that daily flights to deliver post goes from 10 flights per day to 2 flights. Pretty neat right?
-
 **My products have dimensions, but they're being classified as heavy, why?**
 Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
 
@@ -92,6 +86,20 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 
 == Changelog ==
+
+= 1.7.0 =
+* Created a new service selection interface
+* Added filter to sort services by price
+* Added additional fee setting to services
+* Made the bring API error persistent
+* Other settings are now hidden untill API credentials have been filled in
+* Added validation for API credentials
+* Updated the system status page to provide more relevant information
+* Added support for transition from old to new services
+* Added new services from bring
+* Removed display-name option for services
+* Added support for value added services
+* Added AJAX for mass booking
 
 = 1.6.7 =
 
