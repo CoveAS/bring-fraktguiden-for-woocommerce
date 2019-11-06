@@ -164,6 +164,15 @@ class Bring_Booking {
 	 * @param WC_Order $wc_order WooCommerce order.
 	 */
 	public static function send_booking( $wc_order ) {
+		// Get booking count
+		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
+		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
+		$date_now = (int) $date_utc->format( 'Ymd' );
+
+		if ( ! is_array( $count ) ) {
+			$count = [];
+		}
+
 		// Bring_WC_Order_Adapter.
 		$adapter = new Bring_WC_Order_Adapter( $wc_order );
 
@@ -186,11 +195,13 @@ class Bring_Booking {
 			// Send the booking.
 			$response = $consignment_request->post();
 
-
 			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
-
 				// @TODO: Error message
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
+			}
+
+			if ( empty( $count[ $date_now ] ) ) {
+				$count[ $date_now ] = 0;
 			}
 
 			// Save the response json to the order.
@@ -205,6 +216,8 @@ class Bring_Booking {
 
 				continue;
 			}
+
+			$count[ $date_now ]++;
 
 			// Download the labels.
 			$consigments = Bring_Consignment::create_from_response( $response, $wc_order->get_id() );
@@ -224,6 +237,8 @@ class Bring_Booking {
 			// Update status.
 			$wc_order->update_status( $status, $status_note );
 		}
+
+		update_option( 'bring_fraktguiden_booking_count', $count, false );
 	}
 
 	/**
