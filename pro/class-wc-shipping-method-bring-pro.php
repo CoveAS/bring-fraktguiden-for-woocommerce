@@ -167,6 +167,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
 
 		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
+		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates_sorting' ], 9000, 2 );
 	}
 
 	/**
@@ -381,6 +382,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$cart_items           = $cart ? $cart->get_cart() : [];
 		$cart_total           = 0;
 
+
 		if ( empty( $rates ) ) {
 			return $rates;
 		}
@@ -423,6 +425,41 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			}
 		}
 
+		return $rates;
+	}
+
+	/**
+	 * Sort shipping rates
+	 *
+	 * @param array $a Shipping rate A.
+	 * @param array $b Shipping rate B.
+	 *
+	 * @return int
+	 */
+	public static function sort_shipping_rates( $a, $b ) {
+		$sorting = Fraktguiden_Helper::get_option( 'service_sorting', 'price' );
+		if ( $a['cost'] == $b['cost'] ) {
+			return 0;
+		}
+
+		if ( $a['cost'] > $b['cost'] ) {
+			return ( $sorting === 'price' ) ? 1 : -1;
+		}
+		return ( $sorting === 'price' ) ? -1 : 1;
+	}
+
+	/**
+	 * Filter shipping rates for sorting
+	 *
+	 * @param  array                    $rates           Rates.
+	 * @param  WC_Shipping_Method_Bring $shipping_method Shipping method.
+	 * @return array
+	 */
+	public function filter_shipping_rates_sorting( $rates, $shipping_method ) {
+		$sorting = Fraktguiden_Helper::get_option( 'service_sorting', 'price' );
+		if ( 'none' !== $sorting ) {
+			uasort( $rates, __CLASS__ . '::sort_shipping_rates' );
+		}
 		return $rates;
 	}
 }
