@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 5.6
 WC requires at least: 3.4.0
 WC tested up to: 3.7.0
-Stable tag: 1.6.7
+Stable tag: 1.7.0
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -88,6 +88,7 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 == Changelog ==
 
 = 1.7.0 =
+
 * Created a new service selection interface
 * Added filter to sort services by price
 * Added additional fee setting to services
