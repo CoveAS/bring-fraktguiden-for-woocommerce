@@ -21,15 +21,8 @@ All standard shipping methods from Bring are built-in. Volume calculations based
 
 **Bring Fraktguiden now requires you to have a [Mybring.com](https://www.mybring.com) account linked to your store. If updating from 1.5, please note that your shipping options won't show until you enter your email and API key into the Bring Fraktguiden settings.**
 
-**
+**Versions prior to 1.6 are no longer supported by Bring.no. Please read our [support post](https://wordpress.org/support/topic/1-5-no-longer-working/)**
 
-Please consult the installation section and the changelog section before installing or upgrading.
-
-== Shipping Zones ==
-
-Please note that it is **now required** to set up [Shipping Zones](https://docs.woocommerce.com/document/setting-up-shipping-zones/) for the shipping calculation to work.
-
-When creating a shipping zone, select **Bring Fraktguiden** as the method available.
 
 == Installation ==
 
