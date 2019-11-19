@@ -27,8 +27,9 @@ class Bring_Pdf_Collection extends Bring_Label_Collection {
 		// Set a path to a new file where multiple files will be merged.
 		$merged_file_path = $file['file']->get_dir() . '/labels-merged.pdf';
 
+		$plugin_path = dirname( dirname( dirname( dirname( __DIR__ ) ) ) );
 		// Load PDF merging library.
-		require FRAKTGUIDEN_PLUGIN_PATH . 'includes/pdfmerger/PDFMerger.php';
+		require $plugin_path . '/includes/pdfmerger/PDFMerger.php';
 
 		// Initialize merging object.
 		$merger = new \PDFMerger\PDFMerger();

@@ -25,9 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'FRAKTGUIDEN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
 require_once 'classes/class-bring-fraktguiden.php';
+require_once 'classes/common/class-fraktguiden-helper.php';
 
 add_action( 'plugins_loaded', 'Bring_Fraktguiden::init' );
 register_deactivation_hook( __FILE__, 'Bring_Fraktguiden::plugin_deactivate' );

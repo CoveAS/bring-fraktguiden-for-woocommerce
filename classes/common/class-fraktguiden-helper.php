@@ -35,6 +35,7 @@ class Fraktguiden_Helper {
 	 * @return boolean
 	 */
 	public static function valid_license() {
+		require_once 'class-fraktguiden-license.php';
 		$license = Fraktguiden_License::get_instance();
 
 		return $license->valid();

@@ -99,15 +99,17 @@ class Bring_Booking {
 		if ( empty( $printed_orders ) ) {
 			return;
 		}
+		if ( 'none' === $status || empty( $status ) ) {
+			return;
+		}
 		foreach ($printed_orders as $order_id) {
 			$order = wc_get_order( $order_id );
 			if ( ! $order || is_wp_error( $order ) ) {
 				continue;
 			}
-			if ( 'none' === $status || $status === $order->get_status() ) {
+			if ( $status === $order->get_status() ) {
 				continue;
 			}
-
 			// Update status.
 			$order->update_status(
 				$status,

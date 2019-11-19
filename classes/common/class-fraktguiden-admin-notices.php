@@ -279,7 +279,7 @@ class Fraktguiden_Admin_Notices {
 				$messages = [ $messages ];
 			}
 
-			require FRAKTGUIDEN_PLUGIN_PATH . '/includes/admin/pro-notices.php';
+			require dirname( dirname( __DIR__ ) ) . '/includes/admin/pro-notices.php';
 		}
 	}
 
