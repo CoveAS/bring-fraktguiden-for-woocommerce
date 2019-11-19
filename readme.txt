@@ -1,12 +1,12 @@
 === Bring Fraktguiden for WooCommerce ===
 Author: Driv Digital
 Author URI: https://drivdigital.no/
-Contributors: drivdigital, Matt Gates, oakidoaki
+Contributors: drivdigital, forsvunnet, yratof
 Donate link: http://drivdigital.no/
 Tags: woocommerce, shipping, bring, fraktguiden
 Requires at least: 4.5
 Tested up to: 5.2.2
-Requires PHP: 5.6
+Requires PHP: 7.1
 WC requires at least: 3.4.0
 WC tested up to: 3.7.0
 Stable tag: 1.7.0
