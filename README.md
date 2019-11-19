@@ -63,6 +63,11 @@ Yes, yes we do. [Bring Github](https://github.com/drivdigital/bring-fraktguiden-
 
 ### Changelog
 
+= 1.7.1 =
+
+* Fixed a bug with order status changing when downloading the label
+* Added missing translations
+
 = 1.7.0 =
 
 * Created a new service selection interface

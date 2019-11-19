@@ -6,7 +6,7 @@
  * Author:              Driv Digital AS
  * Author URI:          https://drivdigital.no/bring-fraktguiden-pro-woocommerce
  *
- * Version:             1.7.0
+ * Version:             1.7.1
  * Requires at least:   4.9.1
  * Tested up to:        5.2.2
  *
