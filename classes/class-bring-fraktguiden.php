@@ -73,6 +73,25 @@ class Bring_Fraktguiden {
 
 		require_once 'common/class-postcode-validation.php';
 		Bring_Fraktguiden\Postcode_Validation::setup();
+
+
+		add_action( 'admin_menu', __CLASS__ . '::add_subsetting_link', 100 );
+	}
+
+	public static function add_subsetting_link() {
+		global $submenu;
+		if (! isset( $submenu['woocommerce'] ) ) {
+			return;
+		}
+
+		add_submenu_page(
+			'woocommerce',
+			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
+			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
+			'manage_woocommerce',
+			'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden',
+		);
+		return $submenu;
 	}
 
 	/**
