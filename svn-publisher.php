@@ -195,7 +195,7 @@ if ( $result ) {
 	die( "ERROR: Failed to commit to SVN.\n" );
 }
 chdir( '..' );
-exec( "svn cp trunk tags/$version", $output, $result );
+exec( "svn cp trunk tags/$version && svn commit -m \"Updated the version number to $version\"", $output, $result );
 if ( $result ) {
 	die( "ERROR: Failed to copy the trunk to a new tag.\n" );
 }
