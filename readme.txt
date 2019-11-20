@@ -1,9 +1,9 @@
 === Bring Fraktguiden for WooCommerce ===
-Author: Driv Digital
-Author URI: https://drivdigital.no/
-Contributors: drivdigital, forsvunnet, yratof
-Donate link: http://drivdigital.no/
-Tags: woocommerce, shipping, bring, fraktguiden
+Author: Bring Fraktguiden Pro
+Author URI: https://bringfraktguiden.no/
+Contributors: forsvunnet, yratof
+Donate link: https://bringfraktguiden.no/
+Tags: woocommerce, shipping, bring, fraktguiden, posten, frakt, sporing, sending, sende, servicepakke, kolli, forsendelse, postnord, nord, cargonizer, shipment, postage, posting, mybring, my bring, posten.no, pakke, booking, norge, ehandel, e-handel, nettbutikk, netthandle, brev, pickup points, labels, collection, cargo
 Requires at least: 4.5
 Tested up to: 5.2.2
 Requires PHP: 7.1
@@ -21,14 +21,8 @@ All standard shipping methods from Bring are built-in. Volume calculations based
 
 **Bring Fraktguiden now requires you to have a [Mybring.com](https://www.mybring.com) account linked to your store. If updating from 1.5, please note that your shipping options won't show until you enter your email and API key into the Bring Fraktguiden settings.**
 
-Please consult the installation section and the changelog section before installing or upgrading.
+**Versions prior to 1.6 are no longer supported by Bring.no. Please read our [support post](https://wordpress.org/support/topic/1-5-no-longer-working/)**
 
-== Shipping Zones ==
-
-Please note that it is **now required** to set up [Shipping Zones](https://docs.woocommerce.com/document/setting-up-shipping-zones/) for the shipping
-calculation to work.
-
-When creating a shipping zone, select **Bring Fraktguiden** as the method available.
 
 == Installation ==
 
