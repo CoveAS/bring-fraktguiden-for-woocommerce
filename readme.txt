@@ -28,7 +28,11 @@ See installation.txt for a quick guide
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
 = 1.7.2 =
+
+* Improved bring booking logging
+* Fixed the location of the shipping options template
 * Reformed readme to meet standards
 * Added missing translations
 
