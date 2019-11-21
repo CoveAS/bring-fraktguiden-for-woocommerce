@@ -124,6 +124,21 @@
 			} );
 			var error_list = $( '<ul>' );
 			$.each( data.report, function( id, record ) {
+				var elem = $( '#post-' + id );
+				if ( elem.length ) {
+					// Update the WooCommerce order status.
+					elem.find( '.column-order_status' )
+						.html( record.order_status );
+					// Initialise the tooltip.
+					if ( $.prototype.tipTip ) {
+						elem.find( '.tips' ).tipTip( {
+							'attribute': 'data-tip',
+							'fadeIn': 50,
+							'fadeOut': 50,
+							'delay': 200
+						} );
+					}
+				}
 				if ( 'error' !== record.status ) {
 					return;
 				}
@@ -138,7 +153,6 @@
 							.text( record.message )
 					)
 				);
-
 			} );
 			if ( error_list.children().length ) {
 				modal.WCBackboneModal( {
