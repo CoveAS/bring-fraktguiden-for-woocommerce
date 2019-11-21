@@ -695,6 +695,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			return $template;
 		}
 
-		return dirname( __DIR__ ) . 'templates/woocommerce/cart-shipping.php';
+		return dirname( __DIR__ ) . '/templates/woocommerce/cart-shipping.php';
 	}
 }
