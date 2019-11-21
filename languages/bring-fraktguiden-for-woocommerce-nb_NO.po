@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "POT-Creation-Date: 2019-11-19 09:00+0100\n"
 "PO-Revision-Date: 2019-11-19 09:10+0100\n"
-"Last-Translator: Andrew Smith <andrew@drivdigital.no>\n"
+"Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -1900,8 +1900,8 @@ msgstr "Bring Fraktguiden for WooCommerce"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
-msgid "https://drivdigital.no/bring-fraktguiden-pro-woocommerce"
-msgstr "https://drivdigital.no/bring-fraktguiden-pro-woocommerce"
+msgid "https://bringfraktguiden.no/"
+msgstr "https://bringfraktguiden.no/"
 
 #. Description of the plugin/theme
 msgid ""
