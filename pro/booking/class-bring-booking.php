@@ -99,15 +99,17 @@ class Bring_Booking {
 		if ( empty( $printed_orders ) ) {
 			return;
 		}
+		if ( 'none' === $status || empty( $status ) ) {
+			return;
+		}
 		foreach ($printed_orders as $order_id) {
 			$order = wc_get_order( $order_id );
 			if ( ! $order || is_wp_error( $order ) ) {
 				continue;
 			}
-			if ( 'none' === $status || $status === $order->get_status() ) {
+			if ( $status === $order->get_status() ) {
 				continue;
 			}
-
 			// Update status.
 			$order->update_status(
 				$status,
@@ -194,6 +196,12 @@ class Bring_Booking {
 
 			// Send the booking.
 			$response = $consignment_request->post();
+
+			if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
+				$log = new WC_Logger();
+				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Request data: ' . wp_json_encode( $consignment_request->create_data(), JSON_PRETTY_PRINT ) );
+				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Response: ' . wp_json_encode( $response->to_array(), JSON_PRETTY_PRINT ) );
+			}
 
 			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
 				// @TODO: Error message
@@ -291,20 +299,39 @@ class Bring_Booking {
 				}
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
-					'status'  => 'error',
-					'message' => $e->getMessage(),
-					'url'     => get_edit_post_link( $post_id ),
+					'status'       => 'error',
+					'message'      => $e->getMessage(),
+					'order_status' => self::get_status( $post_id ),
+					'url'          => get_edit_post_link( $post_id ),
 				];
 				continue;
 			}
 			$report[ $post_id ] = [
-				'status'  => 'ok',
-				'message' => '',
-				'url'     => get_edit_post_link( $post_id, 'edit' ),
+				'status'       => 'ok',
+				'message'      => '',
+				'order_status' => self::get_status( $post_id ),
+				'url'          => get_edit_post_link( $post_id, 'edit' ),
 			];
 		}
 
 		return $report;
+	}
+
+	/**
+	 * Bulk booking requests
+	 *
+	 * @param array $post_ids Array of WC_Order IDs.
+	 */
+	public static function get_status( $post_id ) {
+		$table_orders_file = WP_PLUGIN_DIR . '/woocommerce/includes/admin/list-tables/class-wc-admin-list-table-orders.php';
+		if ( ! file_exists( $table_orders_file ) ) {
+			return false;
+		}
+		include_once $table_orders_file;
+		$wc_list_table = new WC_Admin_List_Table_Orders();
+		ob_start();
+		$wc_list_table->render_columns( 'order_status', $post_id );
+		return ob_get_clean();
 	}
 
 	/**

@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-11-06 11:31+0100\n"
+"POT-Creation-Date: 2019-11-21 09:57+0100\n"
 "PO-Revision-Date: 2019-11-06 11:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -20,93 +20,99 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/class-bring-fraktguiden.php:160
+#: classes/class-bring-fraktguiden.php:89
+#: classes/class-bring-fraktguiden.php:90
+msgid "Bring settings"
+msgstr ""
+
+#: classes/class-bring-fraktguiden.php:180
 msgid "View Bring Fraktguiden Settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:160
+#: classes/class-bring-fraktguiden.php:180
 msgid "Settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:181
+#: classes/class-bring-fraktguiden.php:201
 msgid ""
 "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
 "this message."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:136
+#. Author of the plugin/theme
+#: classes/class-wc-shipping-method-bring.php:135
 #: classes/traits/settings.php:93
 #: pro/class-wc-shipping-method-bring-pro.php:150
 #: pro/class-wc-shipping-method-bring-pro.php:151
 msgid "Bring Fraktguiden"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:137
+#: classes/class-wc-shipping-method-bring.php:136
 msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:279
-msgid "Shipping name:"
+#: classes/class-wc-shipping-method-bring.php:278
+msgid "Service name:"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:280
+#: classes/class-wc-shipping-method-bring.php:279
 msgid "Fixed price override:"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:281
+#: classes/class-wc-shipping-method-bring.php:280
 msgid "Alternative customer number:"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:282
+#: classes/class-wc-shipping-method-bring.php:281
 msgid "Free shipping activated at:"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:283
+#: classes/class-wc-shipping-method-bring.php:282
 msgid "Additional fee:"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:284
+#: classes/class-wc-shipping-method-bring.php:283
 msgid "Value added services"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:285
+#: classes/class-wc-shipping-method-bring.php:284
 msgid "Pickup points"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:286
+#: classes/class-wc-shipping-method-bring.php:285
 msgid "The api email should be a valid email address."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:287
+#: classes/class-wc-shipping-method-bring.php:286
 msgid ""
 "Customer numbers should be letters (A-Z) and underscores followed by a dash "
 "and a number."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:288
+#: classes/class-wc-shipping-method-bring.php:287
 msgid "The api key should only contain letters (a-z), numbers and dashes."
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:289
+#: classes/class-wc-shipping-method-bring.php:288
 msgid "Spaces are not allowed in the"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:290
+#: classes/class-wc-shipping-method-bring.php:289
 msgid "API email"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:291
+#: classes/class-wc-shipping-method-bring.php:290
 #: classes/traits/settings.php:460 classes/traits/settings.php:462
 msgid "API key"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:292
+#: classes/class-wc-shipping-method-bring.php:291
 msgid "customer number"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:381
-#: classes/class-wc-shipping-method-bring.php:454
-#: classes/class-wc-shipping-method-bring.php:483
+#: classes/class-wc-shipping-method-bring.php:380
+#: classes/class-wc-shipping-method-bring.php:453
+#: classes/class-wc-shipping-method-bring.php:482
 #: classes/traits/settings.php:296 classes/traits/settings.php:336
 #: classes/traits/settings.php:384
 msgid "Shipping"
@@ -131,16 +137,16 @@ msgid ""
 msgstr ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:55
-#: classes/common/class-fraktguiden-helper.php:415
+#: classes/common/class-fraktguiden-helper.php:416
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:58
-#: classes/common/class-fraktguiden-helper.php:399
-#: classes/common/class-fraktguiden-helper.php:411
-#: classes/common/class-fraktguiden-helper.php:416
+#: classes/common/class-fraktguiden-helper.php:400
+#: classes/common/class-fraktguiden-helper.php:412
+#: classes/common/class-fraktguiden-helper.php:417
 msgid "Click here to buy a license"
 msgstr ""
 
@@ -187,50 +193,50 @@ msgstr ""
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:204
+#: classes/common/class-fraktguiden-helper.php:205
 #, php-format
 msgid ""
 "You're using an outdated customer number, %s - The latest services from "
 "Bring require you to update your customer number."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:385
+#: classes/common/class-fraktguiden-helper.php:386
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:398
+#: classes/common/class-fraktguiden-helper.php:399
 msgid "Running in test-mode."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:410
+#: classes/common/class-fraktguiden-helper.php:411
 msgid "Please ensure you have a valid license to continue using PRO."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:415
+#: classes/common/class-fraktguiden-helper.php:416
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO license has not yet been activated. You have %s "
 "remaining before PRO features are disabled."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:426
+#: classes/common/class-fraktguiden-helper.php:427
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:427
+#: classes/common/class-fraktguiden-helper.php:428
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
 "their location."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:428
+#: classes/common/class-fraktguiden-helper.php:429
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:429
+#: classes/common/class-fraktguiden-helper.php:430
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr ""
@@ -907,28 +913,28 @@ msgstr ""
 msgid "Home Delivery"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:114
+#: pro/booking/class-bring-booking.php:116
 msgid "Changing status because the label was downloaded."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:129
-#: pro/booking/class-bring-booking.php:135
-#: pro/booking/class-bring-booking.php:154
+#: pro/booking/class-bring-booking.php:131
+#: pro/booking/class-bring-booking.php:137
+#: pro/booking/class-bring-booking.php:156
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:135
+#: pro/booking/class-bring-booking.php:137
 #, php-format
 msgid " <span class=\"count\">(%s)</span>"
 msgid_plural " <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: pro/booking/class-bring-booking.php:214
+#: pro/booking/class-bring-booking.php:216
 msgid "Booking errors. See the Bring Booking box for details."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:235
+#: pro/booking/class-bring-booking.php:237
 msgid "Booked with Bring"
 msgstr ""
 
@@ -1800,15 +1806,11 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
-msgid "https://drivdigital.no/bring-fraktguiden-pro-woocommerce"
+msgid "https://bringfraktguiden.no/"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
 "Bring Fraktguiden for WooCommerce makes it easy for your customers to choose "
 "delivery methods from Bring."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Driv Digital AS"
 msgstr ""

@@ -1,0 +1,26 @@
+== Frequently Asked Questions ==
+
+**Why do rates not show up on the cart page?**
+Bring rates are only shown when the customer has entered a valid postcode. Commonly customers have either entered the wrong postcode or live outside of your Bring postcode settings.
+
+**But the postcode is valid and the rate still isn't showing?**
+If you've entered any Mybring details, try removing them. If Bring shows up on the cart page after they're removed, it suggests that your details may be incorrect. If it's still not showing after that, you should check that all the settings are correctly filled out.
+
+**What do I get from Bring Pro that I can't from the Free version?**
+Good question! Bring Pro enables you to customise your customers Bring experience:
+    - You can customise the price of each shipping method
+    - You can set targets that enable free shipping if your customers spend a certain amount ( For example, Free shipping when you spend 1000 ).
+    - You can book your shippment through Mybring directly on your orders page.
+    - You can change the services offered to customers to their nearest collection point
+
+**My products have dimensions, but they're being classified as heavy, why?**
+Check your dimensions are set to the right unit values. Often, products are measured in MM but the default woocommerce unit is CM. This causes Bring to consider your products to be 10x their size.
+
+**I created a custom user role to manage Bring shippments, but they can't access the PDFs?**
+Shipping information such as PDFs are private, so we limit those to only certain user roles. Those roles/capabilities are: `administrator`, `manage_woocommerce`, `warehouse_team` and a custom capability called `bring_labels`. If you create a new role and only want them to access your orders, create a roll called `warehouse_team`. If you already have a role created, give them the `bring_labels` capability.
+
+**I activate the plugin and everything goes white!**
+A rare occasion, but when this happens, it means that your server is running an old version of PHP – You can find out what version of PHP you're using by heading to **Woocommerce -> Status**, this will let you know if you're running out-of-date software. The best way to recover from this [WSOD](https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death) is to use the FileEditor, PHPMyadmin, sFTP or SSH to rename the plugin, thus disabling it in wordpress. You should then consider upgrading your PHP version by contacting your Host provider.
+
+**What kind of support do you provide?**
+We monitor the Support forum of this plugin frequently to assist you in running your shop smoothly. You can visit the [Support](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce) section to read about any ongoing issues, or you can [Submit a new issue](https://wordpress.org/support/plugin/bring-fraktguiden-for-woocommerce#new-post) if you've discovered a problem.

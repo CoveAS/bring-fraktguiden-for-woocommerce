@@ -114,6 +114,9 @@ class Fraktguiden_Service {
 		if ( ! empty( $selected_post ) ) {
 			$selected = $selected_post;
 		}
+		if ( ! is_array( $selected ) ) {
+			$selected = [];
+		}
 		if ( ! $services_options ) {
 			$services_options = self::update_services_options( $service_key );
 		}
@@ -143,11 +146,11 @@ class Fraktguiden_Service {
 	 */
 	public static function update_services_options( $service_key ) {
 		$service_name             = Fraktguiden_Helper::get_option( 'service_name' );
-		$custom_names             = get_option( $service_key . '_custom_names' );
-		$customer_numbers         = get_option( $service_key . '_customer_numbers' );
-		$custom_prices            = get_option( $service_key . '_custom_prices' );
-		$free_shipping_checks     = get_option( $service_key . '_free_shipping_checks' );
-		$free_shipping_thresholds = get_option( $service_key . '_free_shipping_thresholds' );
+		$custom_names             = get_option( $service_key . '_custom_names' ) ?: [];
+		$customer_numbers         = get_option( $service_key . '_customer_numbers' ) ?: [];
+		$custom_prices            = get_option( $service_key . '_custom_prices' ) ?: [];
+		$free_shipping_checks     = get_option( $service_key . '_free_shipping_checks' ) ?: [];
+		$free_shipping_thresholds = get_option( $service_key . '_free_shipping_thresholds' ) ?: [];
 
 		$updated_options = [];
 

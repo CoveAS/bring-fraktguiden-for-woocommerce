@@ -35,6 +35,7 @@ class Fraktguiden_Helper {
 	 * @return boolean
 	 */
 	public static function valid_license() {
+		require_once 'class-fraktguiden-license.php';
 		$license = Fraktguiden_License::get_instance();
 
 		return $license->valid();
@@ -385,7 +386,7 @@ class Fraktguiden_Helper {
 			$text = __( 'Click here to buy a license or learn more about Bring Fraktguiden Pro.', 'bring-fraktguiden-for-woocommerce' );
 		}
 
-		return sprintf( '<a href="%s" target="_blank">%s</a>', 'https://drivdigital.no/bring-fraktguiden-pro-woocommerce', esc_html( $text ) );
+		return sprintf( '<a href="%s" target="_blank">%s</a>', 'https://bringfraktguiden.no/', esc_html( $text ) );
 	}
 
 	/**
