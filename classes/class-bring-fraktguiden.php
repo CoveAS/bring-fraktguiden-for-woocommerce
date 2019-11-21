@@ -89,7 +89,7 @@ class Bring_Fraktguiden {
 			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
 			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
 			'manage_woocommerce',
-			'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden',
+			'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden'
 		);
 		return $submenu;
 	}
