@@ -197,6 +197,12 @@ class Bring_Booking {
 			// Send the booking.
 			$response = $consignment_request->post();
 
+			if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
+				$log = new WC_Logger();
+				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Request data: ' . wp_json_encode( $consignment_request->create_data(), JSON_PRETTY_PRINT ) );
+				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Response: ' . wp_json_encode( $response->to_array(), JSON_PRETTY_PRINT ) );
+			}
+
 			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
 				// @TODO: Error message
 				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
