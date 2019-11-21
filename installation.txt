@@ -1,0 +1,24 @@
+== Installation ==
+
+When you install Bring, you need to head to the settings page to start configuring Bring to your specifications.
+
+1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory or install through Wordpress
+2. Activate the plugin
+3. Go to Dashboard >WooCommerce > Settings > Shipping
+4. Select **Bring Fraktguiden** on the sub menu
+5. Configure Bring Fraktguiden with your address and pricing
+6. Start shipping!
+
+== Prerequisites ==
+
+To ensure Bring will work correctly, you must set the following:
+
+1. **Dimension and weight units**
+    * WooCommerce > Settings > Products > Set your default dimensions
+
+2. **Currency**
+    * WooCommerce > Settings > General > Set store currency
+
+3. **Product dimensions**
+    * Woocommerce > Products > Select a products > Set the dimensions for the item
+        - This will fallback to the options in the Bring Settings if you don't set them here.
