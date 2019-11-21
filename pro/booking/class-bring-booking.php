@@ -293,20 +293,39 @@ class Bring_Booking {
 				}
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
-					'status'  => 'error',
-					'message' => $e->getMessage(),
-					'url'     => get_edit_post_link( $post_id ),
+					'status'       => 'error',
+					'message'      => $e->getMessage(),
+					'order_status' => self::get_status( $post_id ),
+					'url'          => get_edit_post_link( $post_id ),
 				];
 				continue;
 			}
 			$report[ $post_id ] = [
-				'status'  => 'ok',
-				'message' => '',
-				'url'     => get_edit_post_link( $post_id, 'edit' ),
+				'status'       => 'ok',
+				'message'      => '',
+				'order_status' => self::get_status( $post_id ),
+				'url'          => get_edit_post_link( $post_id, 'edit' ),
 			];
 		}
 
 		return $report;
+	}
+
+	/**
+	 * Bulk booking requests
+	 *
+	 * @param array $post_ids Array of WC_Order IDs.
+	 */
+	public static function get_status( $post_id ) {
+		$table_orders_file = WP_PLUGIN_DIR . '/woocommerce/includes/admin/list-tables/class-wc-admin-list-table-orders.php';
+		if ( ! file_exists( $table_orders_file ) ) {
+			return false;
+		}
+		include_once $table_orders_file;
+		$wc_list_table = new WC_Admin_List_Table_Orders();
+		ob_start();
+		$wc_list_table->render_columns( 'order_status', $post_id );
+		return ob_get_clean();
 	}
 
 	/**
