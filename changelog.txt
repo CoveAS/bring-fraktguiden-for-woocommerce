@@ -2,6 +2,8 @@
 
 = 1.7.2 =
 
+* Improved bring booking logging
+* Fixed the location of the shipping options template
 * Reformed readme to meet standards
 * Added missing translations
 
