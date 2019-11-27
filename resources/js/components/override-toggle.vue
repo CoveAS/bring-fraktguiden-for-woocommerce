@@ -39,7 +39,8 @@
 		position: absolute;
 		border-radius: 0;
 		height: 100%;
-		border-right: 1px solid #7e8993;
+		border: 1px solid #7e8993;
+		border-radius: 4px 0 0 4px;
 		&::after {
 		    top: 4px;
 		    height: 32px;
