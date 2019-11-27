@@ -39,10 +39,10 @@
 		position: absolute;
 		border-radius: 0;
 		height: 100%;
-		border-right: 1px solid #aaa;
+		border-right: 1px solid #7e8993;
 		&::after {
 		    top: 4px;
-		    height: 22px;
+		    height: 32px;
 		    width: 22px;
 			border-radius: 2px;
 

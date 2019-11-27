@@ -596,7 +596,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".togglererer {\n  position: relative;\n  width: 100%;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #aaa;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 22px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}\n.validation-error input[type=number],\n.validation-error input[type=text] {\n  border-color: #CC0000;\n  box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);\n}", ""]);
+exports.push([module.i, ".togglererer {\n  position: relative;\n  width: 100%;\n}\n.togglererer .bring-toggle-alt {\n  position: absolute;\n  border-radius: 0;\n  height: 100%;\n  border-right: 1px solid #7e8993;\n}\n.togglererer .bring-toggle-alt::after {\n  top: 4px;\n  height: 32px;\n  width: 22px;\n  border-radius: 2px;\n}\n#shipping_services .togglererer input[type=number],\n#shipping_services .togglererer input[type=text] {\n  padding-left: 4.2rem;\n}\n.validation-error input[type=number],\n.validation-error input[type=text] {\n  border-color: #CC0000;\n  box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);\n}", ""]);
 
 // exports
 
@@ -14947,10 +14947,10 @@ var api_customer_number = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
-__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
-__webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
-module.exports = __webpack_require__(/*! /Users/eivinlanda/Workspace/bring.x/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
+__webpack_require__(/*! /Users/mac/Sites/plugins/bring-fraktguiden-for-woocommerce/resources/js/bring-fraktguiden-settings.js */"./resources/js/bring-fraktguiden-settings.js");
+__webpack_require__(/*! /Users/mac/Sites/plugins/bring-fraktguiden-for-woocommerce/resources/sass/pro/admin.scss */"./resources/sass/pro/admin.scss");
+__webpack_require__(/*! /Users/mac/Sites/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden.scss */"./resources/sass/bring-fraktguiden.scss");
+module.exports = __webpack_require__(/*! /Users/mac/Sites/plugins/bring-fraktguiden-for-woocommerce/resources/sass/bring-fraktguiden-admin.scss */"./resources/sass/bring-fraktguiden-admin.scss");
 
 
 /***/ })
