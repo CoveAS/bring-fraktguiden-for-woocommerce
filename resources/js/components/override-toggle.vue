@@ -46,7 +46,10 @@
 		    height: 32px;
 		    width: 22px;
 			border-radius: 2px;
-
+		}
+		.validation-error & {
+		    background-color: red;
+		    border-color: #a50000;
 		}
 	}
 	#shipping_services & {
