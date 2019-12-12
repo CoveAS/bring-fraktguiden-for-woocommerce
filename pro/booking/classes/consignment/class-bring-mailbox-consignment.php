@@ -78,6 +78,15 @@ class Bring_Mailbox_Consignment extends Bring_Consignment {
 	}
 
 	/**
+	 * Set consignment number
+	 *
+	 * @return string
+	 */
+	public function set_customer_number( $customer_number ) {
+		$this->data['attributes']['customerNumber'] = $customer_number;
+	}
+
+	/**
 	 * Get test indicator
 	 *
 	 * @return boolean

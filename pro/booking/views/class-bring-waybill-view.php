@@ -246,9 +246,39 @@ class Bring_Waybill_View {
 			}
 			require dirname( __DIR__ ) . '/templates/waybills-messages.php';
 		}
+		add_filter( 'bring_fraktguiden_waybill_consignments', __CLASS__ . '::filter_consignments', 10, 2 );
+		$consignments = apply_filters( 'bring_fraktguiden_waybill_consignments', $consignments, $post );
 
 		require dirname( __DIR__ ) . '/templates/waybills-table-labels.php';
 		require dirname( __DIR__ ) . '/templates/waybills-waybill.php';
+	}
+
+
+	/**
+	 * Render Booking Meta Box
+	 *
+	 * @param WP_Post $post WP Post.
+	 */
+	static function filter_consignments( $consignments, $post ) {
+		$number_only = [];
+		foreach ( $consignments as $customer_number => $customer_consignments ) {
+			if ( preg_match( '/^\d+$/', $customer_number ) ) {
+				$number_only[] = $customer_number;
+			}
+		}
+		foreach ( $consignments as $customer_number => $customer_consignments ) {
+			if ( preg_match( '/\-(\d+)$/', $customer_number, $matches ) ) {
+				$search = $matches[1];
+				if ( in_array( $search, $number_only ) ) {
+					unset( $consignments[ $customer_number ] );
+					foreach ( $customer_consignments as $order_id => $consignment ) {
+						$consignments[ $search ][ $order_id ] = $consignment;
+						$consignment->set_customer_number( $search );
+					}
+				}
+			}
+		}
+		return $consignments;
 	}
 
 	/**
