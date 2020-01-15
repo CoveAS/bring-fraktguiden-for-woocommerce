@@ -200,14 +200,23 @@ class Fraktguiden_Helper {
 			unset( $services_data['common']['services']['3584'] );
 		}
 		$customer_number = self::get_option( 'mybring_customer_number' );
-
-		$warning = sprintf(
-			__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
-			$customer_number
-		);
-
 		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+			$warning = sprintf(
+				__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
+				$customer_number
+			);
 			foreach ( $services_data['common']['services'] as &$service_data ) {
+				if ( empty( $service_data['warning'] ) ) {
+					$service_data['warning'] = $warning;
+				} else {
+					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
+				}
+			}
+			$warning = sprintf(
+				__( 'The mailbox product require a customer number without the PARCELS_NORWAY- prefix. Enter your customer number as an alternative customer number without any prefix and remove any leading 0\'s in the number.', 'bring-fraktguiden-for-woocommerce' ),
+				$customer_number
+			);
+			foreach ( $services_data['mailbox']['services'] as &$service_data ) {
 				if ( empty( $service_data['warning'] ) ) {
 					$service_data['warning'] = $warning;
 				} else {

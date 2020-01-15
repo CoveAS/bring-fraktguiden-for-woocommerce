@@ -269,7 +269,7 @@ class Fraktguiden_Service {
 
 	public function getUrlParam() {
 		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
-			return "&product={$this->bring_product}:{$this->customer_number}";
+			return "&product={$this->bring_product}:{$this->settings['customer_number']}";
 		}
 
 		return "&product={$this->bring_product}";

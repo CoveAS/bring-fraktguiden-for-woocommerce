@@ -147,7 +147,23 @@ abstract class Bring_Consignment_Request {
 		$this->customer_number    = $args['customer_number'];
 		$this->shipping_date_time = $args['shipping_date_time'];
 
+		if ( '3584' == $this->service_id || '3570' == $this->service_id ) {
+			$this->customer_number = $this->special_mailbox_rule( $args['customer_number'] );
+		}
+
 		return $this;
+	}
+
+	/**
+	 * Special mailbox rule
+	 *
+	 * @param string $customer_number Customer number.
+	 *
+	 * @return string                  Customer number.
+	 */
+	public static function special_mailbox_rule( $customer_number ) {
+		$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
+		return $customer_number;
 	}
 
 	/**
