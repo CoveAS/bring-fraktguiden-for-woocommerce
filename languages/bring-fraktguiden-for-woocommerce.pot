@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Bring Fraktguiden for WooCommerce\n"
-"POT-Creation-Date: 2019-11-21 09:57+0100\n"
+"POT-Creation-Date: 2020-01-16 13:08+0100\n"
 "PO-Revision-Date: 2019-11-06 11:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: bring-fraktguiden-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -137,16 +137,16 @@ msgid ""
 msgstr ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:55
-#: classes/common/class-fraktguiden-helper.php:416
+#: classes/common/class-fraktguiden-helper.php:409
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:58
-#: classes/common/class-fraktguiden-helper.php:400
-#: classes/common/class-fraktguiden-helper.php:412
-#: classes/common/class-fraktguiden-helper.php:417
+#: classes/common/class-fraktguiden-helper.php:393
+#: classes/common/class-fraktguiden-helper.php:405
+#: classes/common/class-fraktguiden-helper.php:410
 msgid "Click here to buy a license"
 msgstr ""
 
@@ -193,50 +193,50 @@ msgstr ""
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:205
+#: classes/common/class-fraktguiden-helper.php:200
 #, php-format
 msgid ""
 "You're using an outdated customer number, %s - The latest services from "
 "Bring require you to update your customer number."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:386
+#: classes/common/class-fraktguiden-helper.php:379
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:399
+#: classes/common/class-fraktguiden-helper.php:392
 msgid "Running in test-mode."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:411
+#: classes/common/class-fraktguiden-helper.php:404
 msgid "Please ensure you have a valid license to continue using PRO."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:416
+#: classes/common/class-fraktguiden-helper.php:409
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO license has not yet been activated. You have %s "
 "remaining before PRO features are disabled."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:427
+#: classes/common/class-fraktguiden-helper.php:420
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:428
+#: classes/common/class-fraktguiden-helper.php:421
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
 "their location."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:429
+#: classes/common/class-fraktguiden-helper.php:422
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:430
+#: classes/common/class-fraktguiden-helper.php:423
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr ""
@@ -875,29 +875,33 @@ msgstr ""
 msgid "New services"
 msgstr ""
 
-#: config/services.php:75 config/services.php:86 config/services.php:147
-#: config/services.php:157
+#: config/services.php:70
+msgid "Services"
+msgstr ""
+
+#: config/services.php:111
+msgid "Mailbox (new)"
+msgstr ""
+
+#: config/services.php:122 config/services.php:133 config/services.php:155
+#: config/services.php:167
 msgid "Packages up to 2 kg."
 msgstr ""
 
-#: config/services.php:76 config/services.php:158
+#: config/services.php:123 config/services.php:168
 msgid ""
 "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 
-#: config/services.php:92
-msgid "Services"
+#: config/services.php:139
+msgid "Mailbox (depreceated)"
 msgstr ""
 
-#: config/services.php:133
-msgid "Mailbox"
-msgstr ""
-
-#: config/services.php:163 config/services.php:206
+#: config/services.php:173 config/services.php:216
 msgid "Other services"
 msgstr ""
 
-#: config/services.php:176 config/services.php:189 config/services.php:199
+#: config/services.php:186 config/services.php:199 config/services.php:209
 msgid ""
 "Fuel surcharge is not included in the price returned from the ShippingGuide "
 "and must be calculated / added manually. Bring Parcels is entitled to change "
@@ -905,11 +909,11 @@ msgid ""
 "be detailed on the invoice."
 msgstr ""
 
-#: config/services.php:299
+#: config/services.php:309
 msgid "Courier"
 msgstr ""
 
-#: config/services.php:341
+#: config/services.php:351
 msgid "Home Delivery"
 msgstr ""
 
@@ -930,24 +934,24 @@ msgid_plural " <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: pro/booking/class-bring-booking.php:216
+#: pro/booking/class-bring-booking.php:222
 msgid "Booking errors. See the Bring Booking box for details."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:237
+#: pro/booking/class-bring-booking.php:243
 msgid "Booked with Bring"
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:223
+#: pro/booking/classes/class-bring-booking-file.php:233
 msgid "Please check write permissions for yor uploads folder."
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:225
+#: pro/booking/classes/class-bring-booking-file.php:235
 msgid ""
 "Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/classes/class-bring-booking-file.php:226
+#: pro/booking/classes/class-bring-booking-file.php:236
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
 
