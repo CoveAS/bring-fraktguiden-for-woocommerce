@@ -9,7 +9,7 @@ Tested up to: 5.2.2
 Requires PHP: 7.1
 WC requires at least: 3.4.0
 WC tested up to: 3.7.0
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -29,8 +29,9 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.7.3 =
+= 1.7.4 =
 
+* Fixed download of ZPL files from orders using mailbox with tracking
 * Added special handling for mailbox services which fixes booking issues
 * Various interface improvements
 
