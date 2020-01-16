@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.7.3 =
+
+* Added special handling for mailbox services which fixes booking issues
+* Various interface improvements
+
 = 1.7.2 =
 
 * Improved bring booking logging
