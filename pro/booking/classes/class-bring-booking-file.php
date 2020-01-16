@@ -76,6 +76,16 @@ class Bring_Booking_File {
 	public function get_ext() {
 		$ext = 'pdf';
 
+		$order = new WC_Order( $this->order_id );
+		$adapter = new Bring_WC_Order_Adapter( $order );
+		$shipping_items = $adapter->get_fraktguiden_shipping_items();
+
+		foreach ( $shipping_items as $shipping_item ) {
+			if ( '3570' == $shipping_item->get_meta( 'bring_product' ) ) {
+				return 'zpl';
+			}
+		}
+
 		if ( $this->external_url ) {
 			$urlinfo  = wp_parse_url( $this->external_url );
 			$pathinfo = pathinfo( $urlinfo['path'] );
