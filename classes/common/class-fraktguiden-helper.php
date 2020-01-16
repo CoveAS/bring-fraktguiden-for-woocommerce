@@ -194,11 +194,6 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_services_data() {
 		$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
-		if ( new DateTime() < new DateTime( '2020-01-13' ) ) {
-			// Enable mailbox on the 13th of January
-			unset( $services_data['common']['services']['3570'] );
-			unset( $services_data['common']['services']['3584'] );
-		}
 		$customer_number = self::get_option( 'mybring_customer_number' );
 		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
 			$warning = sprintf(
@@ -206,17 +201,6 @@ class Fraktguiden_Helper {
 				$customer_number
 			);
 			foreach ( $services_data['common']['services'] as &$service_data ) {
-				if ( empty( $service_data['warning'] ) ) {
-					$service_data['warning'] = $warning;
-				} else {
-					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
-				}
-			}
-			$warning = sprintf(
-				__( 'The mailbox product require a customer number without the PARCELS_NORWAY- prefix. Enter your customer number as an alternative customer number without any prefix and remove any leading 0\'s in the number.', 'bring-fraktguiden-for-woocommerce' ),
-				$customer_number
-			);
-			foreach ( $services_data['mailbox']['services'] as &$service_data ) {
 				if ( empty( $service_data['warning'] ) ) {
 					$service_data['warning'] = $warning;
 				} else {

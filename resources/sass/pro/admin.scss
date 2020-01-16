@@ -47,24 +47,19 @@ mark.bring-shipment:after {
 .bring-booking-meta-box-content {
 	padding-top: 1em;
 }
+.bring-customer-numbers {
+	max-width: 35rem;
+}
+
 .bring-customer-number {
-	color: #71bdff;
-	visibility: hidden;
-	position: absolute;
-	left: 1.3rem;
+	float: right;
+	color: #CCC;
+	[type="radio"]:checked + .bring-customer-name + & {
+		color: black;
+	}
 }
 .bring-customer-label {
 	position: relative;
-	&:hover {
-		.bring-customer-name {
-			visibility: hidden;
-		}
-		.bring-customer-number {
-			visibility: visible;
-		}
-
-	}
-
 }
 
 .bring-booking-meta-box-content-body {

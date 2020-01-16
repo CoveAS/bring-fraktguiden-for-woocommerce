@@ -271,6 +271,12 @@ class Fraktguiden_Service {
 		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
 			return "&product={$this->bring_product}:{$this->settings['customer_number']}";
 		}
+		if ( '3584' == $this->bring_product || '3570' == $this->bring_product ) {
+			// Special mailbox rule.
+			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+			$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
+			return "&product={$this->bring_product}:{$customer_number}";
+		}
 
 		return "&product={$this->bring_product}";
 	}

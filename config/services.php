@@ -136,7 +136,7 @@ return [
 		],
 	],
 	'mailbox'  => [
-		'title'    => __( 'Mailbox (old)', 'bring-fraktguiden-for-woocommerce' ),
+		'title'    => __( 'Mailbox (depreceated)', 'bring-fraktguiden-for-woocommerce' ),
 		'expanded' => true,
 		'services' => [
 			/**
@@ -145,9 +145,11 @@ return [
 			 */
 			'PAKKE_I_POSTKASSEN'         => [
 				'ProductCode' => '3584',
-				'productName' => '(Gammel) Pakke i postkassen',
+				'productName' => 'Pakke i postkassen',
 				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
 				'deprecated'  => true,
+				'class'       => 'warning',
+				'warning'     => 'This product is depreacted. You should deactivate this and active the new mailbox service(s) instead.',
 				'pickuppoint' => false,
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
@@ -155,8 +157,10 @@ return [
 			'PAKKE_I_POSTKASSEN_SPORBAR' => [
 				'ProductCode' => '',
 				'class'       => 'warning',
-				'productName' => '(Gammel) Pakke i postkassen (sporbar)',
+				'productName' => 'Pakke i postkassen (sporbar)',
 				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+				'class'       => 'warning',
+				'warning'     => 'This product is depreacted. You should deactivate this and active the new mailbox service(s) instead.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',

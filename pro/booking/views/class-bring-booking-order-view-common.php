@@ -45,7 +45,7 @@ class Bring_Booking_Common_View {
 			return;
 		}
 
-		echo '<div>';
+		echo '<div class="bring-customer-numbers">';
 
 		// Set default customer number as fallback in case shipping item is missing or no match with customers.
 		if ( ! array_key_exists( $customer_number, $customers ) ) {
