@@ -9,25 +9,52 @@ Tested up to: 5.3.2
 Requires PHP: 7.1
 WC requires at least: 3.4.0
 WC tested up to: 3.9.0
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 == Description ==
 
 Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
-
-**Update: You must now have a [Mybring.com](https://www.mybring.com) account linked to your store.**
+**NB! You must have a [Mybring.com](https://www.mybring.com) account and API credentials to use this plugin.**
 
 **Versions prior to 1.6 are no longer supported by Bring.no. Please read our [support post](https://wordpress.org/support/topic/1-5-no-longer-working/)**
 
-== Installing manually ==
-See installation.txt for a quick guide
+== Installation ==
+
+When you install Bring, you need to head to the settings page to start configuring Bring to your specifications.
+
+1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory or install through Wordpress
+2. Activate the plugin
+3. Go to Dashboard >WooCommerce > Bring settings
+4. Enter your Mybring API credentials
+5. Configure Bring Fraktguiden with your address and select the services you would like to use.
+6. Start shipping!
+
+== Prerequisites ==
+
+To ensure Bring will work correctly, you must set the following:
+
+1. **Dimension and weight units**
+    * WooCommerce > Settings > Products > Set your default dimensions
+
+2. **Currency**
+    * WooCommerce > Settings > General > Set store currency
+
+3. **Product dimensions**
+    * Woocommerce > Products > Select a products > Set the dimensions for the item
+        - This will fallback to the options in the Bring Settings if you don't set them here.
+
 
 == Frequently Asked Questions ==
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.7.5 =
+
+* Fixed merging of ZPL files
+* Fixed tocountry bug with the product tester
 
 = 1.7.4 =
 

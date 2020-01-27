@@ -6,7 +6,7 @@
  * Author:              Bring Fraktguiden
  * Author URI:          https://bringfraktguiden.no/
  *
- * Version:             1.7.4
+ * Version:             1.7.5
  * Requires at least:   4.9.1
  * Tested up to:        5.2.2
  *

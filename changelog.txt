@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.7.5 =
+
+* Fixed merging of ZPL files
+* Fixed tocountry bug with the product tester
+
 = 1.7.4 =
 
 * Fixed download of ZPL files from orders using mailbox with tracking
