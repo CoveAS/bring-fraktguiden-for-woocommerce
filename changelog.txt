@@ -1,5 +1,16 @@
 == Changelog ==
 
+= 1.7.5 =
+
+* Fixed merging of ZPL files
+* Fixed tocountry bug with the product tester
+
+= 1.7.4 =
+
+* Fixed download of ZPL files from orders using mailbox with tracking
+* Added special handling for mailbox services which fixes booking issues
+* Various interface improvements
+
 = 1.7.2 =
 
 * Improved bring booking logging

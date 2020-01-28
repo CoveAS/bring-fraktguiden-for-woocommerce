@@ -1,7 +1,10 @@
 <template>
 	<div class="fraktguiden-product">
 		<header :class="classes">
-			<h3 v-html="service_data.productName"></h3>
+			<h3>
+				<span class="fraktguiden-product__name" v-html="service_data.productName"></span>
+				<span class="fraktguiden-product__id" v-html="service.bring_product"></span>
+			</h3>
 			<p class="warning" v-if="service_data.warning" v-html="service_data.warning"></p>
 			<p v-if="service_data.description" v-html="service_data.description"></p>
 		</header>
@@ -121,6 +124,9 @@
 	p.warning {
 		font-weight: 600;
 		color: #d20e0e;
+	}
+	&__id {
+		float: right;
 	}
 	&__vas {
 		border-top: 1px solid #e1e1e1;

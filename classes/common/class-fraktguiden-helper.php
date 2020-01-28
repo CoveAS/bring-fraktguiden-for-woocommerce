@@ -194,19 +194,12 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_services_data() {
 		$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
-		if ( new DateTime() < new DateTime( '2020-01-13' ) ) {
-			// Enable mailbox on the 13th of January
-			unset( $services_data['common']['services']['3570'] );
-			unset( $services_data['common']['services']['3584'] );
-		}
 		$customer_number = self::get_option( 'mybring_customer_number' );
-
-		$warning = sprintf(
-			__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
-			$customer_number
-		);
-
 		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+			$warning = sprintf(
+				__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
+				$customer_number
+			);
 			foreach ( $services_data['common']['services'] as &$service_data ) {
 				if ( empty( $service_data['warning'] ) ) {
 					$service_data['warning'] = $warning;

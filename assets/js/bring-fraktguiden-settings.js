@@ -445,6 +445,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -615,7 +621,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product h4, .fraktguiden-product h3 {\n  margin: 0;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__vas {\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product__vas h4 {\n  padding: 1rem 1rem 0.5rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes {\n  padding: 0 1rem 1rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes .checkbox {\n  margin-right: 0.5rem;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".fraktguiden-product {\n  border: 1px solid #e1e1e1;\n  background-color: #f9f9f9;\n  margin-bottom: 1rem;\n  margin-top: 1rem;\n}\n.fraktguiden-product .validation-errors {\n  margin: 0;\n  background-color: #ffecc8;\n  color: #956200;\n  padding: 1rem;\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product .validation-errors__error {\n  margin: 0;\n}\n.fraktguiden-product, .fraktguiden-product * {\n  box-sizing: border-box;\n}\n.fraktguiden-product h4, .fraktguiden-product h3 {\n  margin: 0;\n}\n.fraktguiden-product header {\n  background-color: #fff;\n  padding: 1rem;\n  border-bottom: 1px solid #e1e1e1;\n}\n.fraktguiden-product header.warning {\n  border-left: 3px solid #c00;\n}\n.fraktguiden-product p.warning {\n  font-weight: 600;\n  color: #d20e0e;\n}\n.fraktguiden-product__id {\n  float: right;\n}\n.fraktguiden-product__vas {\n  border-top: 1px solid #e1e1e1;\n}\n.fraktguiden-product__vas h4 {\n  padding: 1rem 1rem 0.5rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes {\n  padding: 0 1rem 1rem 1rem;\n}\n.fraktguiden-product .vas-checkboxes .checkbox {\n  margin-right: 0.5rem;\n}\n.fraktguiden-product__fields {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n.fraktguiden-product__fields label {\n  position: relative;\n  min-width: 25rem;\n  max-width: 100%;\n  padding: 0.5rem;\n  display: flex;\n  flex: 1 0 50%;\n  align-items: center;\n}\n@media (max-width: 32em) {\n.fraktguiden-product__fields label {\n    min-width: 15rem;\n    flex-wrap: wrap;\n}\n}\n.pro-disabled .fraktguiden-product__fields label::after {\n  content: \"Pro only\";\n  position: absolute;\n  display: block;\n  top: 0;\n  right: 0;\n  color: #C00;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.25rem 0.5rem;\n  opacity: 0.8;\n}\n.fraktguiden-product__fields span {\n  flex: 0 0 14rem;\n}\n#shipping_services .fraktguiden-product__fields input[type=number],\n#shipping_services .fraktguiden-product__fields input[type=text] {\n  width: 100%;\n}\n#shipping_services .fraktguiden-product__fields input[type=number] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -2006,9 +2012,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "fraktguiden-product" }, [
     _c("header", { class: _vm.classes }, [
-      _c("h3", {
-        domProps: { innerHTML: _vm._s(_vm.service_data.productName) }
-      }),
+      _c("h3", [
+        _c("span", {
+          staticClass: "fraktguiden-product__name",
+          domProps: { innerHTML: _vm._s(_vm.service_data.productName) }
+        }),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "fraktguiden-product__id",
+          domProps: { innerHTML: _vm._s(_vm.service.bring_product) }
+        })
+      ]),
       _vm._v(" "),
       _vm.service_data.warning
         ? _c("p", {

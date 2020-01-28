@@ -45,7 +45,7 @@ class Bring_Booking_Common_View {
 			return;
 		}
 
-		echo '<div>';
+		echo '<div class="bring-customer-numbers">';
 
 		// Set default customer number as fallback in case shipping item is missing or no match with customers.
 		if ( ! array_key_exists( $customer_number, $customers ) ) {
@@ -59,7 +59,7 @@ class Bring_Booking_Common_View {
 				$checked_attr = ' checked="checked"';
 			}
 
-			echo '<label><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $key ) . '"' . $checked_attr . '>' . esc_html( $val ) . '</label>'; // phpcs:ignore
+			echo '<label class="bring-customer-label"><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $key ) . '"' . $checked_attr . '><span class="bring-customer-name">' . esc_html( $val ) . '</span><span class="bring-customer-number">' . $key . '</span></label>'; // phpcs:ignore
 		}
 
 		echo '</div>';
