@@ -388,7 +388,8 @@ class Fraktguiden_Pickup_Point {
 		foreach ( $rates as $key => $rate ) {
 			// Service package identified.
 			$service_package = $rate;
-			$bring_product   = $rate['bring_product'];
+			$bring_product   = strtoupper( $rate['bring_product'] );
+
 			if ( empty( $services[ $bring_product ] ) ) {
 				continue;
 			}
@@ -404,7 +405,8 @@ class Fraktguiden_Pickup_Point {
 		}
 
 
-		if ( ! $rate_key ) {
+
+		if ( false === $rate_key ) {
 			// Service package is not available.
 			// That means it's the end of the line for pickup points.
 			return $rates;
