@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 1.7.6 =
+
+* Removed norgespakke because it is no longer supported
+* Fixed an issue with pickup points for klimanøytral servicepakke
+* Fixed bug with post code validation that caused validation intended for Norway to be applied on other some other countries
+* Added missing implementation of E-varsling and 2084 value added services
+
 = 1.7.5 =
 
 * Fixed merging of ZPL files

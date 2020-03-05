@@ -9,7 +9,7 @@ Tested up to: 5.3.2
 Requires PHP: 7.1
 WC requires at least: 3.4.0
 WC tested up to: 3.9.0
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -50,6 +50,13 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.7.6 =
+
+* Removed norgespakke because it is no longer supported
+* Fixed an issue with pickup points for klimanøytral servicepakke
+* Fixed bug with post code validation that caused validation intended for Norway to be applied on other some other countries
+* Added missing implementation of E-varsling and 2084 value added services
 
 = 1.7.5 =
 
