@@ -70,13 +70,6 @@ return [
 		'title'    => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
 		'expanded' => true,
 		'services' => [
-			'NORGESPAKKE'    => [
-				'ProductCode' => '3067',
-				'productName' => 'Norgespakke egenemballert',
-				'helptext'    => 'Sendingen er en Norgespakke som blir levert til mottakers postkontor/ post i butikk. Mottaker varsles om at sendingen er ankommet via hentemelding i postkassen. Transporttid er normalt 2-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-			],
 			'SERVICEPAKKE'   => [
 				'ProductCode' => '1202',
 				'productName' => 'Klimanøytral Servicepakke',
@@ -92,7 +85,7 @@ return [
 				'pickuppoint' => false,
 			],
 			'MAIL'           => [
-				'ProductCode' => '',
+				'ProductCode' => 'MAIL',
 				'productName' => 'Brev',
 				'helptext'    => '',
 				'deprecated'  => false,
@@ -132,40 +125,6 @@ return [
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
 				'oldcode'     => 'PAKKE_I_POSTKASSEN',
-			],
-		],
-	],
-	'mailbox'  => [
-		'title'    => __( 'Mailbox (depreceated)', 'bring-fraktguiden-for-woocommerce' ),
-		'expanded' => true,
-		'services' => [
-			/**
-			 * Pakke i postkassen
-			 * A customer number is required for ordering Pakke i postkassen services. There is a minimum fee of 150,- for each order.
-			 */
-			'PAKKE_I_POSTKASSEN'         => [
-				'ProductCode' => '3584',
-				'productName' => 'Pakke i postkassen',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'deprecated'  => true,
-				'class'       => 'warning',
-				'warning'     => 'This product is depreacted. You should deactivate this and active the new mailbox service(s) instead.',
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
-			],
-			'PAKKE_I_POSTKASSEN_SPORBAR' => [
-				'ProductCode' => '',
-				'class'       => 'warning',
-				'productName' => 'Pakke i postkassen (sporbar)',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'class'       => 'warning',
-				'warning'     => 'This product is depreacted. You should deactivate this and active the new mailbox service(s) instead.',
-				'deprecated'  => true,
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
-				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ),
 			],
 		],
 	],
