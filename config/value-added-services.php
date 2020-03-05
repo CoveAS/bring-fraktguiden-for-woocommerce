@@ -114,7 +114,7 @@ return [
 		'code'           => 'EVARSLING',
 		'name'           => 'Recipient notification over SMS or E-Mail',
 		'default'        => false,
-		'bring_products' => [ 'BPAKKE_DOR-DOR', 'SERVICEPAKKE, EKSPRESS09' ],
+		'bring_products' => [ 'BPAKKE_DOR-DOR', 'SERVICEPAKKE', 'EKSPRESS09' ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[

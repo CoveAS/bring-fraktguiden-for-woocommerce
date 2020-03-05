@@ -586,6 +586,16 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Remove spaces in post code.
 		$postcode = preg_replace( '/\s/', '', $package['destination']['postcode'] );
 
+		$enabled_services = Fraktguiden_Service::all( self::$field_key, true );
+
+		$additional_service = false;
+		foreach ( $enabled_services as $service ) {
+			$additional_service = $service->vas_match( [ '2084', 'EVARSLING' ] );
+			if ( $additional_service ) {
+				break;
+			}
+		}
+
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
 			[
@@ -595,7 +605,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'topostalcode'        => $postcode,
 				'tocountry'           => $country,
 				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
-				'additionalservice'   => ( 'yes' === $this->evarsling ) ? 'EVARSLING' : '',
+				'additionalservice'   => $additional_service ?? '',
 				'language'            => $this->get_bring_language(),
 			]
 		);

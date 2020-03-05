@@ -139,6 +139,21 @@ class Fraktguiden_Service {
 	}
 
 	/**
+	 * Find
+	 *
+	 * @param  string $service_key   Service key.
+	 * @param  string $bring_product Bring product.
+	 * @return Fraktguiden_Service|null
+	 */
+	public static function find( $service_key, $bring_product ) {
+		$services = self::all( $service_key );
+		if ( empty( $services[ $bring_product ] ) ) {
+			return null;
+		}
+		return $services[ $bring_product ];
+	}
+
+	/**
 	 * Update services options
 	 *
 	 * @param  string $service_key Field key.
@@ -295,5 +310,24 @@ class Fraktguiden_Service {
 		}
 
 		return $this->service_data[ $index ];
+	}
+
+	/**
+	 * VAS Check
+	 *
+	 * @param array $vas_codes VAS Codes.
+	 *
+	 * @return string|boolean VAS Code or false if not matched.
+	 */
+	public function vas_match( $vas_codes ) {
+		foreach ( $this->vas as $vas ) {
+			if ( in_array( $vas->code, $vas_codes, true ) ) {
+				if ( ! $vas->value ) {
+					continue;
+				}
+				return $vas->code;
+			}
+		}
+		return false;
 	}
 }

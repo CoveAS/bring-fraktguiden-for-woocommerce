@@ -22,6 +22,13 @@ abstract class Bring_Consignment_Request {
 	public $service_id;
 
 	/**
+	 * Service
+	 *
+	 * @var Fraktguiden_Service
+	 */
+	public $service;
+
+	/**
 	 * Shipping item
 	 *
 	 * @var string
@@ -58,6 +65,9 @@ abstract class Bring_Consignment_Request {
 		$this->shipping_item = $shipping_item;
 		$this->adapter       = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
 		$this->service_id    = $this->get_service_id();
+		$shipping_method     = new WC_Shipping_Method_Bring( $shipping_item->get_instance_id() );
+		$service_key         = $shipping_method->get_field_key( 'services' );
+		$this->service       = Fraktguiden_Service::find( $service_key, $this->service_id );
 	}
 
 	/**

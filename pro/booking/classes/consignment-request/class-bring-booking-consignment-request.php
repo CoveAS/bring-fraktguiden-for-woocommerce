@@ -192,15 +192,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
-			$consignments['product']['services'] = [
-				'recipientNotification' => [
-					'email'  => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
-				],
-			];
-		}
-
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
 
@@ -211,9 +202,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			];
 		}
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
-			$consignments['product']['services'] = [
-				'recipientNotification' => [
+		$evarsling = $this->service->vas_match( [ '2084', 'EVARSLING' ] );
+		if ( $evarsling ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id'     => $evarsling,
 					'email'  => $recipient_address['contact']['email'],
 					'mobile' => $recipient_address['contact']['phoneNumber'],
 				],
