@@ -146,7 +146,8 @@ class Fraktguiden_Service {
 	 * @return Fraktguiden_Service|null
 	 */
 	public static function find( $service_key, $bring_product ) {
-		$services = self::all( $service_key );
+		$services      = self::all( $service_key );
+		$bring_product = strtoupper( $bring_product );
 		if ( empty( $services[ $bring_product ] ) ) {
 			return null;
 		}

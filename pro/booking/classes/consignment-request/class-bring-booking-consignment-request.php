@@ -202,7 +202,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			];
 		}
 
-		$evarsling = $this->service->vas_match( [ '2084', 'EVARSLING' ] );
+		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
 		if ( $evarsling ) {
 			$consignments['product']['additionalServices'] = [
 				[
