@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.7 =
+
+* Fixed fatal bug during booking
+
 = 1.7.6 =
 
 * Removed norgespakke because it is no longer supported
