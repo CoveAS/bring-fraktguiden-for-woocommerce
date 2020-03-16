@@ -228,8 +228,8 @@ class Bring_Fraktguiden {
 			'bring_fraktguiden_settings',
 			[
 				'services_data'    => Fraktguiden_Helper::get_services_data(),
-				'services'         => Fraktguiden_Service::all( 'bring_fraktguiden_services' ),
-				'services_enabled' => array_keys( Fraktguiden_Service::all( 'bring_fraktguiden_services', true ) ),
+				'services'         => Fraktguiden_Service::all( 'woocommerce_bring_fraktguiden_services' ),
+				'services_enabled' => array_keys( Fraktguiden_Service::all( 'woocommerce_bring_fraktguiden_services', true ) ),
 				'pro_activated'    => Fraktguiden_Helper::pro_activated(),
 				'i18n'             => [
 					'shipping_name'               => esc_html__( 'Service name:', 'bring-fraktguiden-for-woocommerce' ),
