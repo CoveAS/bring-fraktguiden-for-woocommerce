@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.7.8 =
+
+* Made the plugin compatible with WooCommerce 4.0.0
+* Fixed default selection of customer number for booking
+
 = 1.7.7 =
 
 * Fixed fatal bug during booking
