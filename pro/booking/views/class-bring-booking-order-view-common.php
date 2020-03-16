@@ -51,11 +51,9 @@ class Bring_Booking_Common_View {
 		if ( ! array_key_exists( $customer_number, $customers ) ) {
 			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
 		}
-
 		foreach ( $customers as $key => $val ) {
 			$checked_attr = '';
-
-			if ( $customer_number === $key ) {
+			if ( $customer_number === "$key" ) {
 				$checked_attr = ' checked="checked"';
 			}
 
