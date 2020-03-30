@@ -114,8 +114,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$sender = $this->get_sender();
 
 		return apply_filters(
-      'bring_fraktguiden_get_consignment_sender_address',
-      [
+			'bring_fraktguiden_get_consignment_sender_address',
+			[
 			'name'                  => $sender['booking_address_store_name'],
 			'addressLine'           => $sender['booking_address_street1'],
 			'addressLine2'          => $sender['booking_address_street2'],
@@ -129,9 +129,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'email'       => $sender['booking_address_email'],
 				'phoneNumber' => $sender['booking_address_phone'],
 			],
-    ],
-    $wc_order
-  );
+		],
+		$wc_order
+	);
 	}
 
 	/**
