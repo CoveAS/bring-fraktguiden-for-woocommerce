@@ -138,6 +138,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
+	static $filters_registered = false;
+
 	/**
 	 * Construct
 	 *
@@ -166,8 +168,11 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->booking_address_email          = $this->get_setting( 'booking_address_email' );
 		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
 
-		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
-		add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates_sorting' ], 9000, 2 );
+		if (! self::$filters_registered) {
+			add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
+			add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates_sorting' ], 9000, 2 );
+			self::$filters_registered = true;
+		}
 	}
 
 	/**
@@ -376,12 +381,11 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 * @return array
 	 */
 	public function filter_shipping_rates( $rates, $shipping_method ) {
-		$field_key            = $this->get_field_key( 'services' );
-		$services             = \Fraktguiden_Service::all( $field_key );
-		$cart                 = WC()->cart;
-		$cart_items           = $cart ? $cart->get_cart() : [];
-		$cart_total           = 0;
-
+		$field_key  = $this->get_field_key( 'services' );
+		$services   = \Fraktguiden_Service::all( $field_key );
+		$cart       = WC()->cart;
+		$cart_items = $cart ? $cart->get_cart() : [];
+		$cart_total = 0;
 
 		if ( empty( $rates ) ) {
 			return $rates;
