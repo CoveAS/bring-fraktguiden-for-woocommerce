@@ -556,7 +556,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
 				'additionalservice'   => $additional_service ?? '',
 				'language'            => $this->get_bring_language(),
-			]
+			],
+			$package
 		);
 	}
 

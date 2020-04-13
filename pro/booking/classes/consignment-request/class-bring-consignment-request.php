@@ -183,6 +183,10 @@ abstract class Bring_Consignment_Request {
 	 * @return array
 	 */
 	public function get_sender() {
+
+		// Get the order
+		$wc_order = $this->shipping_item->get_order();
+
 		$form_fields = [
 			'booking_address_store_name',
 			'booking_address_street1',
@@ -203,7 +207,7 @@ abstract class Bring_Consignment_Request {
 			$result[ $field ] = Fraktguiden_Helper::get_option( $field );
 		}
 
-		return $result;
+		return apply_filters('bring_fraktguiden_get_consignment_sender', $result, $wc_order);
 	}
 
 	/**

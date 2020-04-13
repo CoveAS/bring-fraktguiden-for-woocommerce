@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.9 =
+
+* Fixed a bug with the implementation of the service table for WC 4.0.0 which caused service configuration not to save.
+
 = 1.7.8 =
 
 * Made the plugin compatible with WooCommerce 4.0.0
