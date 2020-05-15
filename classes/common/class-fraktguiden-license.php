@@ -10,7 +10,7 @@
  */
 class Fraktguiden_License {
 
-	const BASE_URL = 'https://bring.driv.digital/';
+	const BASE_URL = 'https://bringfraktguiden.no/license-check.php';
 
 	/**
 	 * An instance of this class
