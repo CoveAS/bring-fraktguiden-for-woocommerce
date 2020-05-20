@@ -10,7 +10,7 @@
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.7.9';
+	const VERSION = '1.7.11';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
