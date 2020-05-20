@@ -1,14 +1,14 @@
 === Bring Fraktguiden for WooCommerce ===
-Author: Bring Fraktguiden Pro
-Author URI: https://bringfraktguiden.no/
+Author: Cove AS
+Author URI: https://cove.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
 Requires at least: 4.5
-Tested up to: 5.3.2
+Tested up to: 5.4.1
 Requires PHP: 7.1
 WC requires at least: 3.4.0
-WC tested up to: 4.0.0
+WC tested up to: 4.1.0
 Stable tag: 1.7.11
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
