@@ -422,7 +422,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			// Check if any package exeeds the max settings.
 			$messages = $this->get_trace_messages();
 			foreach ( $messages as $message ) {
-				if ( false !== strpos( $message, 'Package exceed maximum measurements for product' ) ) {
+				if ( false !== strpos( $message, 'INVALID_MEASUREMENTS' ) ) {
 					$this->push_rate(
 						[
 							'id'            => $this->id,
