@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 1.7.11 =
+= 1.7.12 =
 
 * Added pickup selection for pakke til hentested in admin
 * Fixed issue with fallback solution for heavy consignments
