@@ -497,11 +497,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 			$label = $service_details['guiInformation']['productName'];
 
-			$rate = array(
-				'id'            => $this->id,
-				'bring_product' => sanitize_title( $service_details['id'] ),
-				'cost'          => (float) $rate + (float) $this->fee,
-				'label'         => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
+			$rate = apply_filters(
+				'bring_product_api_rate',
+				array(
+					'id'            => $this->id,
+					'bring_product' => sanitize_title( $service_details['id'] ),
+					'cost'          => (float) $rate + (float) $this->fee,
+					'label'         => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
+				),
+				$service_details
 			);
 
 			$rates[] = $rate;
