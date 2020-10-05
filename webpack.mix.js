@@ -10,7 +10,7 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+mix.setPublicPath('./');
 mix.js('resources/js/bring-fraktguiden-settings.js', 'assets/js')
     .sass('resources/sass/pro/admin.scss', 'pro/assets/css')
     .sass('resources/sass/bring-fraktguiden.scss', 'assets/css')

@@ -45,7 +45,6 @@
 		    height: 22px;
 		    width: 22px;
 			border-radius: 2px;
-
 		}
 	}
 	#shipping_services & {
