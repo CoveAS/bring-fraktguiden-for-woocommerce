@@ -392,9 +392,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		}
 
 		foreach ( $cart_items as $values ) {
-			$_product    = $values['data'];
-			$cart_total += $_product->get_price() * $values['quantity'];
+			$cart_total += $values['line_total'];
+			if ( function_exists( 'wc_prices_include_tax' ) && wc_prices_include_tax() ) {
+				$cart_total += $values['line_tax'];
+			}
 		}
+		var_dump($cart_total);
 
 		foreach ( $rates as &$rate ) {
 			if ( 0 !== strpos( $rate['id'], 'bring_fraktguiden' ) ) {
