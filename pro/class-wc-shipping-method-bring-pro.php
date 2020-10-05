@@ -397,7 +397,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 				$cart_total += $values['line_tax'];
 			}
 		}
-		var_dump($cart_total);
 
 		foreach ( $rates as &$rate ) {
 			if ( 0 !== strpos( $rate['id'], 'bring_fraktguiden' ) ) {
