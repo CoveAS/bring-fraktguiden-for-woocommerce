@@ -226,17 +226,26 @@ abstract class Bring_Consignment_Request {
 	 * @return mixed
 	 */
 	public static function parse_sender_address_reference( $reference, $wc_order ) {
-		$replacements = array(
-			'{order_id}' => $wc_order->get_id(),
-		);
-
-		$result = $reference;
-
-		foreach ( $replacements as $replacement => $value ) {
-			$result = preg_replace( '/' . preg_quote( $replacement ) . '/', $value, $result );
+		$products = $wc_order->get_items();
+		$names    = [];
+		foreach ( $products as $product ) {
+			$names[] = apply_filters(
+				'bring_reference_product_name',
+				$product->get_name()
+			);
 		}
-
-		return $result;
+		return apply_filters(
+			'bring_parse_sender_address_reference',
+			strtr(
+				$reference,
+				[
+					'{order_id}' => $wc_order->get_id(),
+					'{products}' => implode( ', ', $names ),
+				]
+			),
+			$reference,
+			$wc_order
+		);
 	}
 
 	/**

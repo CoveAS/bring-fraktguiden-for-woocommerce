@@ -333,7 +333,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'title'             => __( 'Reference', 'bring-fraktguiden-for-woocommerce' ),
 			'type'              => 'text',
 			'custom_attributes' => array( 'maxlength' => '35' ),
-			'description'       => __( 'Specify shipper or consignee reference. Available macros: {order_id}', 'bring-fraktguiden-for-woocommerce' ),
+			'description'       => sprintf(
+				__(
+					'Specify shipper or consignee reference. Available macros: %s',
+					'bring-fraktguiden-for-woocommerce'
+				),
+				'{order_id}, {products}'
+			),
 		];
 
 		$this->form_fields['booking_address_contact_person'] = [
