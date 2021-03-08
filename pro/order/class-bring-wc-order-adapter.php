@@ -350,8 +350,7 @@ class Bring_WC_Order_Adapter {
 			$method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
 
 			if ( strpos( $method_id, Fraktguiden_Helper::ID ) !== false ) {
-				$shipping_method['method_id'] = $method_id;
-				$result[ $item_id ]           = $shipping_method;
+				$result[ $item_id ] = $shipping_method;
 			}
 		}
 
