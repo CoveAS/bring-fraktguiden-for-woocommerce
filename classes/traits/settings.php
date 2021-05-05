@@ -428,8 +428,22 @@ trait Settings {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
+				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
+			],
+			'lead_time'            => [
+				'title'       => __( 'Lead time in days', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'number',
+				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => 1,
+			],
+			'lead_time_cutoff'            => [
+				'title'       => __( 'Lead time cutoff', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'number',
+				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => '1500',
 			],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),

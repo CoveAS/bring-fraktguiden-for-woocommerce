@@ -5,10 +5,13 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+require_once 'sanitizers/class-sanitize-alternative-delivery-dates.php';
 require_once 'traits/settings.php';
 require_once 'common/http/class-wp-bring-request.php';
 require_once 'common/class-fraktguiden-packer.php';
@@ -304,6 +307,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 		$args['meta_data']['bring_product'] = $args['bring_product'];
 		unset( $args['bring_product'] );
+		if ( ! empty( $args['alternative_delivery_dates'] ) ) {
+			$args['meta_data']['alternative_delivery_dates'] = $args['alternative_delivery_dates'];
+			unset( $args['alternative_delivery_dates'] );
+		}
 		$this->add_rate( $args );
 	}
 
@@ -386,10 +393,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Make the request.
 		$request  = new WP_Bring_Request();
 		$response = $request->get( $url, [], $options );
-
-		echo '<pre>';
-		var_dump($response->status_code, json_decode( $response->get_body(), true ));
-		die;
 
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );
@@ -490,27 +493,40 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				continue;
 			}
 			if ( ! empty( $service_details['price']['netPrice']['priceWithoutAdditionalServices'] ) ) {
-				$service = $service_details['price']['netPrice']['priceWithoutAdditionalServices'];
+				$service_price = $service_details['price']['netPrice']['priceWithoutAdditionalServices'];
 			} elseif ( ! empty( $service_details['price']['listPrice']['priceWithoutAdditionalServices'] ) ) {
-				$service = $service_details['price']['listPrice']['priceWithoutAdditionalServices'];
+				$service_price = $service_details['price']['listPrice']['priceWithoutAdditionalServices'];
 			} else {
+				// @TODO: Enable fixed prices
 				$this->add_trace_messages( [ 'No price provided for ' . $service_details['id'], $service_details ] );
 				continue;
 			}
-			$rate = $service['amountWithoutVAT'];
-
+			$bring_product = sanitize_title( $service_details['id'] );
+			$cost  = $service_price['amountWithoutVAT'];
 			$label = $service_details['guiInformation']['productName'];
-
-			$rate = apply_filters(
+			$rate  = apply_filters(
 				'bring_product_api_rate',
 				array(
 					'id'            => $this->id,
-					'bring_product' => sanitize_title( $service_details['id'] ),
-					'cost'          => (float) $rate + (float) $this->fee,
+					'bring_product' => $bring_product,
+					'cost'          => (float) $cost + (float) $this->fee,
 					'label'         => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
 				),
 				$service_details
 			);
+
+			$alternative_delivery_dates = false;
+			$enabled_services = Fraktguiden_Service::all( self::$field_key, true );
+			foreach ( $enabled_services as $service ) {
+				if ( $service->vas_match( [ 'alternative_delivery_dates' ] ) ) {
+					$alternative_delivery_dates = true;
+				}
+			}
+			if ( $alternative_delivery_dates && in_array( $bring_product, [ 5600, 1736 ] ) ) {
+				$rate['alternative_delivery_dates'] = Sanitize_Alternative_Delivery_Dates::sanitize(
+					$service_details['expectedDelivery']['alternativeDeliveryDates']
+				);
+			}
 
 			$rates[] = $rate;
 		}
@@ -553,18 +569,27 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			}
 		}
 
+		$params = [
+			'clientUrl'           => Fraktguiden_Helper::get_client_url(),
+			'frompostalcode'      => $this->from_zip,
+			'fromcountry'         => $this->get_selected_from_country(),
+			'topostalcode'        => $postcode,
+			'tocountry'           => $country,
+			'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
+			'additionalservice'   => $additional_service ?? '',
+			'language'            => $this->get_bring_language(),
+		];
+		foreach ( $enabled_services as $service ) {
+			if ( $service->vas_match( [ 'alternative_delivery_dates' ] ) ) {
+				$params['uniqueAlternateDeliveryDates'] = true;
+				$params['numberofdeliverydates']        = 5;
+				break;
+			}
+		}
+
 		return apply_filters(
 			'bring_fraktguiden_standard_url_params',
-			[
-				'clientUrl'           => Fraktguiden_Helper::get_client_url(),
-				'frompostalcode'      => $this->from_zip,
-				'fromcountry'         => $this->get_selected_from_country(),
-				'topostalcode'        => $postcode,
-				'tocountry'           => $country,
-				'postingatpostoffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
-				'additionalservice'   => $additional_service ?? '',
-				'language'            => $this->get_bring_language(),
-			],
+			$params,
 			$package
 		);
 	}
