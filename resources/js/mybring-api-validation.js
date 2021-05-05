@@ -1,4 +1,4 @@
-import TextValidator from './components/text-validator';
+import TextValidator from './components/text-validator.vue';
 
 var create_text_validator = function( callback ) {
 	return function( createElement ) {

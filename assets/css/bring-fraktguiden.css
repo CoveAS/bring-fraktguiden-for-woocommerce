@@ -1,1 +1,61 @@
-@charset "UTF-8";input.bring-error-input.input-text{border:solid;border-width:1px 1px 2px}span.bring-error-message{font-size:.8em}[class*=bring-]{--error-color:#f44336}.bring-enter-postcode form{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}.bring-enter-postcode form label{flex:1 0 100%}.bring-search-box{display:flex}.bring-input{margin-right:1rem}@supports (--variable:style){.bring-enter-postcode.bring-error,input.bring-error-input.input-text{border-color:var(--error-color,red)!important}span.bring-error-message{color:var(--error-color,red)!important}.bring-button:after{content:"\2757\FE0F"}}.bring_pickup_point{font-size:small;display:inline-block;width:100%}
+@charset "UTF-8";
+/**
+ * Input errors
+ */
+input.bring-error-input.input-text {
+  border: 1px solid;
+  border-bottom-width: 2px;
+}
+
+span.bring-error-message {
+  font-size: 0.8em;
+}
+
+/**
+ * Setting up the colours for the errors
+ */
+[class*=bring-] {
+  --error-color: #F44336;
+}
+
+.bring-enter-postcode form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bring-enter-postcode form label {
+  flex: 1 0 100%;
+}
+
+.bring-search-box {
+  display: flex;
+}
+
+.bring-input {
+  margin-right: 1rem;
+}
+
+@supports (--variable: style) {
+  .bring-enter-postcode.bring-error,
+input.bring-error-input.input-text {
+    border-color: var(--error-color, red) !important;
+  }
+
+  span.bring-error-message {
+    color: var(--error-color, red) !important;
+  }
+
+  .bring-button::after {
+    content: "❗️";
+  }
+}
+/**
+ * Pick-up points
+ */
+.bring_pickup_point {
+  font-size: small;
+  display: inline-block;
+  width: 100%;
+}

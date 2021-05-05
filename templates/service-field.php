@@ -22,11 +22,11 @@
 				</select>
 				<shippingproduct
 					v-for="service in services"
-					:id="service.id"
+					:id="service.bring_product"
 					:service_data="service.service_data"
 					:service="service"
 					:vas="service.vas"
-					v-bind:key="service.id"
+					:key="service.bring_product"
 				></shippingproducts>
 			</div>
 		</td>

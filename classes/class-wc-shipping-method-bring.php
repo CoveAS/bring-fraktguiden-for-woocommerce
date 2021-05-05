@@ -387,6 +387,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$request  = new WP_Bring_Request();
 		$response = $request->get( $url, [], $options );
 
+		echo '<pre>';
+		var_dump($response->status_code, json_decode( $response->get_body(), true ));
+		die;
+
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );
 			$this->set_trace_messages( $json['fieldErrors'] );
