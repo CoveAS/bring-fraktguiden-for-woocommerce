@@ -357,6 +357,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Request parameters.
 		$params = array_merge( $this->create_standard_url_params( $package ), $this->packages_params );
+
 		// Remove any empty elements.
 		$params =  array_filter( $params );
 

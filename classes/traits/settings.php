@@ -438,7 +438,7 @@ trait Settings {
 				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 1,
 			],
-			'lead_time_cutoff'            => [
+			'lead_time_cutoff' => [
 				'title'       => __( 'Lead time cutoff', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'number',
 				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),

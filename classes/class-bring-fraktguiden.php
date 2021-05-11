@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden\Common\Checkout_Modifications;
+
 /**
  * Bring_Fraktguiden class
  */
@@ -21,6 +23,7 @@ class Bring_Fraktguiden {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
+		spl_autoload_register( __CLASS__ . '::class_loader' );
 
 		$plugin_path = dirname( __DIR__ );
 		if ( ! class_exists( 'Packer' ) ) {
@@ -77,6 +80,31 @@ class Bring_Fraktguiden {
 		add_action( 'admin_menu', __CLASS__ . '::add_subsetting_link', 100 );
 
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
+
+		Checkout_Modifications::setup();
+	}
+
+	/**
+	 * Class loader
+	 *
+	 * @param string $class_name Path to class file.
+	 */
+	public static function class_loader( $class_name ) {
+		if ( ! preg_match( '/^Bring_Fraktguiden(\\\.*)$/', $class_name, $matches ) ) {
+			return;
+		}
+		$path      = substr( strtolower( $matches[1] ), 1 );
+		$path      = preg_replace( '/_/', '-', $path );
+		$parts     = explode( '\\', $path );
+		$file_name = array_pop( $parts );
+		$dir       = implode( '/', $parts );
+		if ( $dir ) {
+			$dir = "/$dir";
+		}
+		$file_name = __DIR__ . "{$dir}/class-{$file_name}.php";
+		if ( file_exists( $file_name ) ) {
+			require_once $file_name;
+		}
 	}
 
 	public static function add_subsetting_link() {
