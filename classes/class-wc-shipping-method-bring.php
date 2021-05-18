@@ -576,7 +576,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		foreach ( $enabled_services as $service ) {
 			if ( $service->vas_match( [ 'alternative_delivery_dates' ] ) ) {
 				$params['uniqueAlternateDeliveryDates'] = true;
-				$params['numberofdeliverydates']        = 5;
+				$lead_time                              = absint( \Fraktguiden_Helper::get_option( 'lead_time' ) );
+				$params['numberofdeliverydates']        = 5 + $lead_time;
 				break;
 			}
 		}

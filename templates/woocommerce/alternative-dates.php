@@ -2,7 +2,7 @@
 	<div class="bring-fraktguiden-date-options__inner">
 		<?php if ( ! empty( $alternatives ) && ! empty( $earliest ) && ! empty( $range ) && ! empty( $selected ) ) : ?>
 			<div class="bring-fraktguiden-date-options__description">
-				<?php esc_html_e( 'Choose delivery from' ); ?>
+				<?php esc_html_e( 'Choose delivery from', 'bring-fraktguiden-for-woocommerce' ); ?>
 				<?php echo esc_html( $earliest->date( 'l' ) ); ?>
 			</div>
 

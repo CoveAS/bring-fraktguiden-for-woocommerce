@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2021-05-18 15:58+0200\n"
-"PO-Revision-Date: 2021-05-18 16:03+0200\n"
+"POT-Creation-Date: 2021-05-18 16:30+0200\n"
+"PO-Revision-Date: 2021-05-18 16:32+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -89,8 +89,8 @@ msgstr "Mellomrom er ikke tillatt i"
 msgid "API email"
 msgstr "API E-post"
 
-#: classes/class-bring-fraktguiden.php:273 classes/traits/settings.php:474
-#: classes/traits/settings.php:476
+#: classes/class-bring-fraktguiden.php:273 classes/traits/settings.php:472
+#: classes/traits/settings.php:474
 msgid "API key"
 msgstr "API-nøkkel"
 
@@ -829,7 +829,7 @@ msgstr "Avanserte innstillinger og debugging."
 msgid "Debug mode"
 msgstr "Debug modus"
 
-#: classes/traits/settings.php:414 classes/traits/settings.php:451
+#: classes/traits/settings.php:414 classes/traits/settings.php:449
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
@@ -886,77 +886,77 @@ msgstr ""
 msgid "Lead time in days"
 msgstr "Antall dager lead time"
 
-#: classes/traits/settings.php:438
+#: classes/traits/settings.php:437
 msgid "Number of days before orders are shipped"
 msgstr "Antall dager før ordrer sendes"
 
-#: classes/traits/settings.php:442
+#: classes/traits/settings.php:441
 msgid "Lead time cutoff"
 msgstr "Lead time cutoff"
 
-#: classes/traits/settings.php:445
+#: classes/traits/settings.php:443
 msgid ""
 "Cutoff time every day. Orders after this time will be processed the next day."
 msgstr ""
 "Avskjæringstid hver dag. Bestillinger etter dette tidspunktet vil bli "
 "behandlet neste dag."
 
-#: classes/traits/settings.php:449
+#: classes/traits/settings.php:447
 msgid "Debug System information"
 msgstr "Debug systeminformasjon"
 
-#: classes/traits/settings.php:452
+#: classes/traits/settings.php:450
 msgid "We may ask for this information if you require support"
 msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
 
-#: classes/traits/settings.php:453
+#: classes/traits/settings.php:451
 msgid "View system info"
 msgstr "Se systeminformasjon"
 
-#: classes/traits/settings.php:460
+#: classes/traits/settings.php:458
 msgid "Mybring.com API"
 msgstr "Mybring.com API"
 
-#: classes/traits/settings.php:461
+#: classes/traits/settings.php:459
 msgid "Enter your API credentials. API authentication is required."
 msgstr "Legg inn din API legitimasjon. API autentisering er pålagt."
 
-#: classes/traits/settings.php:466 classes/traits/settings.php:468
+#: classes/traits/settings.php:464 classes/traits/settings.php:466
 #: pro/booking/views/class-bring-booking-order-view.php:667
 #: pro/class-wc-shipping-method-bring-pro.php:356
 msgid "Email"
 msgstr "Epost"
 
-#: classes/traits/settings.php:471
+#: classes/traits/settings.php:469
 #, php-format
 msgid "Find your Email %1$shere%2$s."
 msgstr "Finn din Epost %1$sher%2$s."
 
-#: classes/traits/settings.php:479
+#: classes/traits/settings.php:477
 #, php-format
 msgid "Find your API key %1$shere%2$s."
 msgstr "Finn din API-nøkkel %1$sher%2$s."
 
-#: classes/traits/settings.php:482 classes/traits/settings.php:484
+#: classes/traits/settings.php:480 classes/traits/settings.php:482
 msgid "API customer number"
 msgstr "API-kundenummer"
 
-#: classes/traits/settings.php:487
+#: classes/traits/settings.php:485
 #, php-format
 msgid "Find your API customer number %1$shere%2$s."
 msgstr "Finn ditt API-kundenummer %1$sher%2$s."
 
-#: classes/traits/settings.php:515
+#: classes/traits/settings.php:513
 msgid ""
 "Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
 msgstr ""
 "Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
 
-#: classes/traits/settings.php:529
+#: classes/traits/settings.php:527
 msgid "Gateway Disabled"
 msgstr "Gateway Disabled"
 
-#: classes/traits/settings.php:530
+#: classes/traits/settings.php:528
 #, php-format
 msgid ""
 "Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
@@ -969,19 +969,19 @@ msgstr ""
 "> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
 "Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
 
-#: classes/traits/settings.php:655
+#: classes/traits/settings.php:653
 msgid "Missing credentials"
 msgstr "Mangler påloggingsdetaljer"
 
-#: classes/traits/settings.php:718
+#: classes/traits/settings.php:716
 msgid "Successfully authenticated"
 msgstr "Autentisert"
 
-#: classes/traits/settings.php:735
+#: classes/traits/settings.php:733
 msgid "Mybring authentication failed"
 msgstr "Mybring autentisering mislyktes"
 
-#: classes/traits/settings.php:735
+#: classes/traits/settings.php:733
 msgid ""
 "Couldn't connect to Bring with your API credentials. Please check that they "
 "are correct"
