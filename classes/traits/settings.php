@@ -434,15 +434,13 @@ trait Settings {
 			'lead_time'            => [
 				'title'       => __( 'Lead time in days', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'number',
-				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Number of days before orders are shipped', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 1,
 			],
 			'lead_time_cutoff' => [
 				'title'       => __( 'Lead time cutoff', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'time',
-				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Cutoff time every day. Orders after this time will be processed the next day.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '15:00',
 			],
 			'system_information'            => [

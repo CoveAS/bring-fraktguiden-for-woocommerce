@@ -43,7 +43,7 @@
 									"
 								>
 									<div class="alternative-date-item__label">
-										Velg
+										<?php esc_html_e( 'Select', 'bring-fraktguiden-for-woocommerce' ); ?>
 									</div>
 									<div class="alternative-date-item__checkmark">
 										<svg xmlns="http://www.w3.org/2000/svg" width="78" height="57"
