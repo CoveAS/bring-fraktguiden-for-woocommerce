@@ -64,13 +64,13 @@ span.bring-error-message {
  * Alternative Delivery Dates
  */
 .bring-fraktguiden-date-options {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   overflow: auto;
-  &__inner {
-  display: flex;
-  flex-direction: column;
-  }
-  &__description {
 
+  &__inner {
+	display: flex;
+	flex-direction: column;
   }
 }
 
@@ -82,6 +82,7 @@ span.bring-error-message {
   margin-right: 0.125rem;
   flex: 0 0 5rem;
 }
+
 .alternative-date-items__label,
 .alternative-date-item {
   display: flex;
@@ -91,17 +92,15 @@ span.bring-error-message {
 
 .alternative-date-range {
   display: flex;
-  padding-left: 5rem;
-  margin: 0.5rem 0;
+  padding-left: 5.5rem;
+  margin: 0.5rem 0 0 0;
+
   &__item {
-  	padding: 0 1rem;
+	padding: 0 0.5rem;
   }
 
   &__day {
 	font-weight: 700;
-  }
-  &__date {
-
   }
 }
 
@@ -112,13 +111,16 @@ span.bring-error-message {
   }
 
   &__label {
-    position: sticky;
-    left: 0;
-    background: #fff;
+	position: sticky;
+	left: 0;
+	background: #fff;
   }
 }
 
 .alternative-date-item {
+  position: relative;
+  border-radius: 0.5rem;
+
   &--choice {
 	background: #FEE;
 	transition: background-color 0.2s;
@@ -131,20 +133,52 @@ span.bring-error-message {
   }
 
   &--chosen {
-	background: #EFE;
+	background: #DFD;
+
 	&:hover {
-	  background: #DFD;
+	  background: #CFC;
 	}
   }
+
   &--empty {
 	background: #EEE;
   }
 
-  &__day {
-
+  &__label {
+	opacity: 1;
+	transition: opacity 0.2s;
+	.alternative-date-item--chosen & {
+	  opacity: 0;
+	}
   }
 
-  &__date {
+  @keyframes checkmark {
+	0% {
+	  stroke-dashoffset: 100px
+	}
+	100% {
+	  stroke-dashoffset: 0px
+	}
+  }
 
+  &__checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	padding: 0.75rem 1.5rem;
+	justify-content: center;
+	align-items: center;
+
+	.alternative-date-item--chosen &,
+	.alternative-date-item--selected & {
+	  display: flex;
+	}
+
+	.alternative-date-item--selected & svg polyline {
+	  animation: checkmark 0.25s ease-in-out 0.5s backwards
+	}
   }
 }

@@ -96,7 +96,7 @@ class Checkout_Modifications {
 			return $args;
 		}
 		$lead_time    = \Fraktguiden_Helper::get_option( 'lead_time' );
-		$cutoff       = \Fraktguiden_Helper::get_option( 'cutoff' );
+		$cutoff       = \Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
 		$factory      = new Alternative_Delivery_Date_Factory( $lead_time, $cutoff );
 		$alternatives = $factory->from_array(
 			$meta_data['alternative_delivery_dates']
@@ -159,7 +159,11 @@ class Checkout_Modifications {
 			$key           = $date->format( "Y-m-d" );
 			$range[ $key ] = [
 				'day'  => ucfirst( wp_date( 'D', $date->getTimestamp() ) ),
-				'date' => wp_date( 'j F', $date->getTimestamp() ),
+				'date' => str_replace(
+					' ',
+					'&nbsp;',
+					wp_date( 'j. F', $date->getTimestamp() )
+				),
 			];
 		}
 

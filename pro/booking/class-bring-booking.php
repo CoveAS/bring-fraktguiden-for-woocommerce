@@ -152,7 +152,7 @@ class Bring_Booking {
 	 *
 	 * @param WC_Order $wc_order WooCommerce order.
 	 */
-	public static function send_booking( $wc_order ) {
+	public static function send_booking( $wc_order, $bulk_mode = false ) {
 		// Get booking count
 		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
 		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
@@ -175,7 +175,14 @@ class Bring_Booking {
 			];
 			if ( in_array( $adapter->bring_product, [5600, 'PA_DOREN'] ) ) {
 				// Alternative delivery date.
-				$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( ' _bring-delivery-date' );
+				if ( $bulk_mode ) {
+					$time_slot = $adapter->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
+					if ( $time_slot ) {
+						$args['customer_specified_delivery_date_time'] = $time_slot;
+					}
+				} else {
+					$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( '_bring-delivery-date' );
+				}
 			}
 			$consignment_request->fill( $args );
 
@@ -285,7 +292,7 @@ class Bring_Booking {
 			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
 			try {
 				if ( ! $order->has_booking_consignments() ) {
-					self::send_booking( $order->order );
+					self::send_booking( $order->order, true );
 				}
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [

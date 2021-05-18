@@ -440,10 +440,10 @@ trait Settings {
 			],
 			'lead_time_cutoff' => [
 				'title'       => __( 'Lead time cutoff', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'number',
+				'type'        => 'time',
 				'desc_tip'    => __( '', 'bring-fraktguiden-for-woocommerce' ),
 				'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
-				'default'     => '1500',
+				'default'     => '15:00',
 			],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),

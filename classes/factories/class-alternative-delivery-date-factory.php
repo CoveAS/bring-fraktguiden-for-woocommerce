@@ -6,11 +6,13 @@ use Bring_Fraktguiden\Models\Alternative_Delivery_Date;
 
 class Alternative_Delivery_Date_Factory {
 	public $lead_time;
-	public $cutoff;
+	public $cutoff_time = 0;
 
-	public function __construct( $lead_time, $cutoff ) {
-		$this->lead_time = $lead_time;
-		$this->cutoff    = $cutoff;
+	public function __construct( $lead_time, $cutoff_time ) {
+		$this->lead_time   = (int) $lead_time;
+		if (preg_match('/^\d{2}:\d{2}$/', $cutoff_time ) ) {
+			$this->cutoff_time = (int) str_replace( ':', '', $cutoff_time );
+		}
 	}
 
 	public function from_array( $alternative_delivery_dates ) {
@@ -50,6 +52,34 @@ class Alternative_Delivery_Date_Factory {
 			ksort( $time_slot_group['items'], SORT_NATURAL );
 		}
 		unset( $time_slot_group );
+
+		$cutoff    = new \DateTime(
+			null,
+			new \DateTimeZone( 'Europe/Oslo' )
+		);
+		$lead_time = $this->lead_time;
+		if ( $lead_time && $lead_time > 0 ) {
+			if ( (int) $cutoff->format( 'Hi' ) > $this->cutoff_time ) {
+				$lead_time += 1;
+			}
+			$cutoff->add( new \DateInterval( "P{$lead_time}D" ) );
+		}
+
+		// Filter available time slots by shipping date.
+		foreach ( $time_slot_groups as &$time_slot_group ) {
+			foreach ( $time_slot_group['items'] as $key => $item ) {
+				$valid = false;
+				foreach ( $item->shipping_dates as $shipping_date ) {
+					if ( $shipping_date > $cutoff ) {
+						$valid = true;
+						break;
+					}
+				}
+				if ( ! $valid ) {
+					unset( $time_slot_group['items'][ $key ] );
+				}
+			}
+		}
 
 		return $time_slot_groups;
 	}

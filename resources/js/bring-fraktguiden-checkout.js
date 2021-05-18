@@ -23,9 +23,9 @@ jQuery(function ($) {
 		}
 		busy = true;
 		const elem = $( this );
-		elem.addClass( 'alternative-date-item--chosen' )
+		elem.addClass( 'alternative-date-item--chosen alternative-date-item--selected' )
 			.siblings()
-			.removeClass( 'alternative-date-item--chosen' );
+			.removeClass( 'alternative-date-item--chosen alternative-date-item--selected' );
 		block_options();
 		$.post(
 			_fraktguiden_checkout.ajaxurl,

@@ -33,17 +33,27 @@
 
 							<?php if ( $alternative ) : ?>
 								<div
-									data-time_slot="<?php echo esc_attr( $time_slot_id ); ?>"
-									class="
+										data-time_slot="<?php echo esc_attr( $time_slot_id ); ?>"
+										class="
 										alternative-date-item
 										alternative-date-item--choice
-										<?php if ( $selected === $time_slot_id) : ?>
+										<?php if ( $selected === $time_slot_id ) : ?>
 											alternative-date-item--chosen
 										<?php endif; ?>
 									"
 								>
-									<div class="">
+									<div class="alternative-date-item__label">
 										Velg
+									</div>
+									<div class="alternative-date-item__checkmark">
+										<svg xmlns="http://www.w3.org/2000/svg" width="78" height="57"
+											 viewBox="0 0 78 57">
+											<g>
+												<polyline
+														style="fill:none;stroke:#005500;stroke-width:10;stroke-dasharray:100px, 100px; stroke-dashoffset: 200px;"
+														points="3.69,25.61 25.69,49.61 73.69,3.61"/>
+											</g>
+										</svg>
 									</div>
 								</div>
 							<?php else: ?>
