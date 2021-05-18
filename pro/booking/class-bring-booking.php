@@ -15,13 +15,11 @@ add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_Vie
 
 // Consignment.
 require_once 'classes/consignment/class-bring-consignment.php';
-require_once 'classes/consignment/class-bring-mailbox-consignment.php';
 require_once 'classes/consignment/class-bring-booking-consignment.php';
 
 // Consignment request.
 require_once 'classes/consignment-request/class-bring-consignment-request.php';
 require_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
-require_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
 
 // Classes.
 require_once 'classes/class-bring-booking-file.php';
@@ -30,22 +28,11 @@ require_once 'classes/class-bring-booking-customer.php';
 if ( is_admin() ) {
 	// Views.
 	include_once 'views/class-bring-booking-labels.php';
-	include_once 'views/class-bring-booking-waybills.php';
 	include_once 'views/class-bring-booking-order-view-common.php';
 	include_once 'views/class-bring-booking-orders-view.php';
 	include_once 'views/class-bring-booking-order-view.php';
-	include_once 'views/class-bring-waybill-view.php';
-	Bring_Waybill_View::setup();
 }
 
-if ( Fraktguiden_Helper::booking_enabled() && Fraktguiden_Helper::pro_activated() ) {
-	include_once 'classes/class-post-type-mailbox-waybill.php';
-	include_once 'classes/class-post-type-mailbox-label.php';
-	include_once 'classes/class-generate-mailbox-labels.php';
-	Post_Type_Mailbox_Waybill::setup();
-	Post_Type_Mailbox_Label::setup();
-	Generate_Mailbox_Labels::setup();
-}
 
 // Register awaiting shipment status.
 add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
