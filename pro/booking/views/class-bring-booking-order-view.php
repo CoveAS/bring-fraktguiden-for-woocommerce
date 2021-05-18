@@ -198,22 +198,33 @@ class Bring_Booking_Order_View {
 		</div>
 
 
-		<div class="bring-form-field">
-			<label><?php esc_html_e( 'Customer requested delivery date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+		<?php if ( in_array( $order->bring_product, [5600, 'PA_DOREN'] ) ): ?>
 
-			<div>
-				<?php
-				Bring_Booking_Common_View::render_shipping_date_time(
-					'_bring-delivery-date',
-					[
-						'date'   => '',
-						'hour'   => '',
-						'minute' => '',
-					]
-				);
-				?>
+			<?php
+				$date = false;
+				$time_slot = $order->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
+				if ( $time_slot ) {
+					$date = new DateTime( $time_slot );
+				}
+			?>
+			<div class="bring-form-field">
+				<label><?php esc_html_e( 'Customer requested delivery date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+
+				<div>
+					<?php
+					Bring_Booking_Common_View::render_shipping_date_time(
+						'_bring-delivery-date',
+						[
+							'date'   => $date->format('Y-m-d') ?? '',
+							'hour'   => $date->format('H') ?? '',
+							'minute' => $date->format('i') ?? '',
+						]
+					);
+					?>
+				</div>
 			</div>
-		</div>
+
+		<?php endif;?>
 
 		<script>
 		jQuery( document ).ready( function ( $) {

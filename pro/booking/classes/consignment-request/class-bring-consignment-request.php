@@ -43,6 +43,13 @@ abstract class Bring_Consignment_Request {
 	public $shipping_date_time;
 
 	/**
+	 * Customer specified delivery date time
+	 *
+	 * @var string
+	 */
+	public $customer_specified_delivery_date_time;
+
+	/**
 	 * Customer number
 	 *
 	 * @var string
@@ -154,8 +161,9 @@ abstract class Bring_Consignment_Request {
 	 * @return $this
 	 */
 	public function fill( $args ) {
-		$this->customer_number    = $args['customer_number'];
-		$this->shipping_date_time = $args['shipping_date_time'];
+		$this->customer_number                       = $args['customer_number'];
+		$this->shipping_date_time                    = $args['shipping_date_time'];
+		$this->customer_specified_delivery_date_time = $args['customer_specified_delivery_date_time'] ?? '';
 
 		if ( '3584' == $this->service_id || '3570' == $this->service_id ) {
 			// Special mailbox rule.

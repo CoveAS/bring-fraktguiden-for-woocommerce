@@ -22,6 +22,8 @@ class Bring_WC_Order_Adapter {
 	 * @var WC_Order|null
 	 */
 	public $order = null;
+	public $shipping_method = null;
+	public $bring_product = null;
 
 	/**
 	 * Construct
@@ -29,7 +31,15 @@ class Bring_WC_Order_Adapter {
 	 * @param WC_Order $order Order.
 	 */
 	public function __construct( $order ) {
-		$this->order = $order;
+		$this->order    = $order;
+		$shipping_items = $this->get_fraktguiden_shipping_items();
+		$shipping_item  = reset( $shipping_items );
+		if ( $shipping_item ) {
+			$instance_id           = $shipping_item->get_instance_id();
+			$this->shipping_item   = $shipping_item;
+			$this->shipping_method = WC_Shipping_Zones::get_shipping_method( $instance_id );
+			$this->bring_product   = $shipping_item->get_meta( 'bring_product' );
+		}
 	}
 
 	/**
@@ -214,8 +224,8 @@ class Bring_WC_Order_Adapter {
 	/**
 	 * Check meta key
 	 *
-	 * @param  array      $array Array.
-	 * @param  string|int $key   Key.
+	 * @param array $array Array.
+	 * @param string|int $key Key.
 	 *
 	 * @return bool
 	 */

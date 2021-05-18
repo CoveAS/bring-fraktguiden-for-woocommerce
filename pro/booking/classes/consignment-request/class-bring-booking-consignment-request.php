@@ -196,6 +196,10 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
+		if ( $this->customer_specified_delivery_date_time ) {
+			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
+		}
+
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
 

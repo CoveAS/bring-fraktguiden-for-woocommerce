@@ -182,12 +182,15 @@ class Bring_Booking {
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
 			// Create the consignment.
 			$consignment_request = Bring_Consignment_Request::create( $shipping_item );
-			$consignment_request->fill(
-				[
-					'shipping_date_time' => self::get_shipping_date_time(),
-					'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
-				]
-			);
+			$args = [
+				'shipping_date_time' => self::get_shipping_date_time(),
+				'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
+			];
+			if ( in_array( $adapter->bring_product, [5600, 'PA_DOREN'] ) ) {
+				// Alternative delivery date.
+				$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( ' _bring-delivery-date' );
+			}
+			$consignment_request->fill( $args );
 
 			$original_order_status = $wc_order->get_status();
 
@@ -265,14 +268,14 @@ class Bring_Booking {
 	/**
 	 * Get a shipping date time
 	 *
-	 * @return array
+	 * @return string
 	 */
-	public static function get_shipping_date_time() {
+	public static function get_shipping_date_time( $name = '_bring-shipping-date' ) {
 		$input_request = Fraktguiden_Helper::get_input_request_method();
 
-		$date         = filter_input( $input_request, '_bring-shipping-date' );
-		$date_hour    = filter_input( $input_request, '_bring-shipping-date-hour' );
-		$date_minutes = filter_input( $input_request, '_bring-shipping-date-minutes' );
+		$date         = filter_input( $input_request, $name . '' );
+		$date_hour    = filter_input( $input_request, $name . '-hour' );
+		$date_minutes = filter_input( $input_request, $name . '-minutes' );
 
 		// Get the shipping date.
 		if ( $date && $date_hour && $date_minutes ) {
