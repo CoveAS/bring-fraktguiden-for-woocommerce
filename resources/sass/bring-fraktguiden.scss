@@ -112,11 +112,13 @@ span.bring-error-message {
   }
 
   &__label {
+    position: sticky;
+    left: 0;
+    background: #fff;
   }
 }
 
 .alternative-date-item {
-
   &--choice {
 	background: #FEE;
 	transition: background-color 0.2s;
@@ -128,6 +130,12 @@ span.bring-error-message {
 	}
   }
 
+  &--chosen {
+	background: #EFE;
+	&:hover {
+	  background: #DFD;
+	}
+  }
   &--empty {
 	background: #EEE;
   }

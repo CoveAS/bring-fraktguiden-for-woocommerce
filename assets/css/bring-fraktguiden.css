@@ -101,6 +101,12 @@ input.bring-error-input.input-text {
   display: flex;
   padding: 0.5rem 0.375rem;
 }
+.alternative-date-items__label {
+  position: sticky;
+  left: 0;
+  background: #fff;
+}
+
 .alternative-date-item--choice {
   background: #FEE;
   transition: background-color 0.2s;
@@ -112,6 +118,12 @@ input.bring-error-input.input-text {
 }
 .alternative-date-item--choice:hover {
   background: #FDD;
+}
+.alternative-date-item--chosen {
+  background: #EFE;
+}
+.alternative-date-item--chosen:hover {
+  background: #DFD;
 }
 .alternative-date-item--empty {
   background: #EEE;

@@ -331,4 +331,27 @@ class Fraktguiden_Service {
 		}
 		return false;
 	}
+
+	/**
+	 * VAS For
+	 *
+	 * @param array $bring_product Bring product.
+	 * @param array $vas_codes     VAS Codes.
+	 *
+	 * @return string|boolean VAS Code or false if not matched.
+	 */
+	public static function vas_for( $field_key, $bring_product, $vas_codes ) {
+		$result = false;
+		$enabled_services = Fraktguiden_Service::all( $field_key, true );
+		foreach ( $enabled_services as $service ) {
+			if ( $service->bring_product != $bring_product ) {
+				continue;
+			}
+			$result = $service->vas_match( $vas_codes );
+			if ( $result ) {
+				break;
+			}
+		}
+		return $result;
+	}
 }

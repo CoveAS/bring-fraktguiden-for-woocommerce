@@ -516,14 +516,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				$service_details
 			);
 
-			$alternative_delivery_dates = false;
-			$enabled_services = Fraktguiden_Service::all( self::$field_key, true );
-			foreach ( $enabled_services as $service ) {
-				if ( $service->vas_match( [ 'alternative_delivery_dates' ] ) ) {
-					$alternative_delivery_dates = true;
-				}
-			}
-			if ( $alternative_delivery_dates && in_array( $bring_product, [ 5600, 1736 ] ) ) {
+			if ( Fraktguiden_Service::vas_for( self::$field_key, $bring_product, [ 'alternative_delivery_dates' ] ) ) {
 				$rate['alternative_delivery_dates'] = Sanitize_Alternative_Delivery_Dates::sanitize(
 					$service_details['expectedDelivery']['alternativeDeliveryDates']
 				);

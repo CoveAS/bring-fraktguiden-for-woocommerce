@@ -5,6 +5,7 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden\Common\Ajax;
 use Bring_Fraktguiden\Common\Checkout_Modifications;
 
 /**
@@ -82,6 +83,7 @@ class Bring_Fraktguiden {
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
 
 		Checkout_Modifications::setup();
+		Ajax::setup();
 	}
 
 	/**

@@ -69,8 +69,10 @@ class Bring_Booking_Common_View {
 	 * @param  string $name Input field name.
 	 * @return void
 	 */
-	public static function render_shipping_date_time( $name = '_bring-shipping-date' ) {
-		$shipping_date = Bring_Booking::create_shipping_date();
+	public static function render_shipping_date_time( $name = '_bring-shipping-date', $shipping_date = []) {
+		if ( empty( $shipping_date ) ) {
+			$shipping_date = Bring_Booking::create_shipping_date();
+		}
 		echo '<input type="text" name="' . esc_attr( $name ) . '" value="' . esc_attr( $shipping_date['date'] ) . '"  maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" style="width:12.5em">@';
 		echo '<input type="text" name="' . esc_attr( $name ) . '-hour" value="' . esc_attr( $shipping_date['hour'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'hh', 'bring-fraktguiden-for-woocommerce' ) ) . '" style="width:3em;text-align:center">:';
 		echo '<input type="text" name="' . esc_attr( $name ) . '-minutes" value="' . esc_attr( $shipping_date['minute'] ) . '" maxlength="2" placeholder="' . esc_attr( __( 'mm', 'bring-fraktguiden-for-woocommerce' ) ) . '" style="width:3em;text-align:center">';

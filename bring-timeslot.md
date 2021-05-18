@@ -55,3 +55,8 @@ add_filter(
 	}
 );
 ```
+
+Booking information:
+
+customerSpecifiedDeliveryDateTime	dateTime	Optional The date and time selected for preferred delivery by the customer. Note that for some services, the time part of this field will be ignored. This field is applicable for ‘PA_DOREN’, ‘5600’, and ‘OIL_EXPRESS’.
+Example: 2020-05-11T11:12:13 (yyyy-MM-ddThh:mm:ss)

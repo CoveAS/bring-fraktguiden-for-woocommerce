@@ -1,6 +1,6 @@
 <div class="bring-fraktguiden-date-options">
 	<div class="bring-fraktguiden-date-options__inner">
-		<?php if ( ! empty( $alternatives ) && ! empty( $earliest ) && ! empty( $range ) ) : ?>
+		<?php if ( ! empty( $alternatives ) && ! empty( $earliest ) && ! empty( $range ) && ! empty( $selected ) ) : ?>
 			<div class="bring-fraktguiden-date-options__description">
 				<?php esc_html_e( 'Choose delivery from' ); ?>
 				<?php echo esc_html( $earliest->date( 'l' ) ); ?>
@@ -26,12 +26,20 @@
 						</div>
 
 						<?php foreach ( $range as $key => $range_item ) : ?>
+
 							<?php $alternative = $time_slot_group['items'][ $key ] ?? false; ?>
+
+							<?php $time_slot_id = $key . 'T' . $time_slot_group['id']; ?>
+
 							<?php if ( $alternative ) : ?>
 								<div
+									data-time_slot="<?php echo esc_attr( $time_slot_id ); ?>"
 									class="
 										alternative-date-item
 										alternative-date-item--choice
+										<?php if ( $selected === $time_slot_id) : ?>
+											alternative-date-item--chosen
+										<?php endif; ?>
 									"
 								>
 									<div class="">

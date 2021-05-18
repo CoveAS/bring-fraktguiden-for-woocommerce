@@ -5,18 +5,27 @@ namespace Bring_Fraktguiden\Factories;
 use Bring_Fraktguiden\Models\Alternative_Delivery_Date;
 
 class Alternative_Delivery_Date_Factory {
-	public static function from_array( $alternative_delivery_dates ) {
+	public $lead_time;
+	public $cutoff;
+
+	public function __construct( $lead_time, $cutoff ) {
+		$this->lead_time = $lead_time;
+		$this->cutoff    = $cutoff;
+	}
+
+	public function from_array( $alternative_delivery_dates ) {
 		$time_slot_groups = [];
 
 		foreach ( $alternative_delivery_dates as $date_data ) {
 			$date                         = new Alternative_Delivery_Date();
 			$date->working_days           = $date_data['workingDays'];
-			$date->expected_delivery_date = self::compress_date( $date_data['expectedDeliveryDate'] );
-			$date->time_slots             = self::compress_time_slots( $date_data['expectedDeliveryDate']['timeSlots'] );
+			$date->expected_delivery_date = $this->compress_date( $date_data['expectedDeliveryDate'] );
+			$date->time_slots             = $this->compress_time_slots( $date_data['expectedDeliveryDate']['timeSlots'] );
 			$date->shipping_dates         = [];
 			foreach ( $date->time_slots as $time_slot ) {
 				if ( empty( $time_slot_groups[ $time_slot ] ) ) {
 					$time_slot_groups[ $time_slot ] = [
+						'id'    => substr( $time_slot, 0, 5 ) . ':00',
 						'label' => apply_filters(
 							'bring_fraktguiden_timeslot_label',
 							preg_replace(
@@ -29,31 +38,32 @@ class Alternative_Delivery_Date_Factory {
 						'items' => [],
 					];
 				}
-				$key = $date->date('Ymd' );
+				$key = $date->date( 'Y-m-d' );
 
-				if ( ! isset( $time_slot_groups[ $time_slot ]['items'][$key] ) ) {
-					$time_slot_groups[ $time_slot ]['items'][$key] = $date;
+				if ( ! isset( $time_slot_groups[ $time_slot ]['items'][ $key ] ) ) {
+					$time_slot_groups[ $time_slot ]['items'][ $key ] = $date;
 				}
-				$time_slot_groups[ $time_slot ]['items'][$key]->shipping_dates[] = self::compress_date( $date_data['shippingDate'] );
+				$time_slot_groups[ $time_slot ]['items'][ $key ]->shipping_dates[] = $this->compress_date( $date_data['shippingDate'] );
 			}
 		}
 		foreach ( $time_slot_groups as &$time_slot_group ) {
-			ksort($time_slot_group['items'] );
+			ksort( $time_slot_group['items'], SORT_NATURAL );
 		}
-		unset($time_slot_group);
+		unset( $time_slot_group );
 
 		return $time_slot_groups;
 	}
 
-	public static function compress_date( $date_array ) {
+	public function compress_date( $date_array ) {
 		$date = new \DateTime(
 			"{$date_array['year']}-{$date_array['month']}-{$date_array['day']}T17:00:00",
 			new \DateTimeZone( 'Europe/Oslo' )
 		);
+
 		return $date;
 	}
 
-	public static function compress_time_slots( $time_slots ) {
+	public function compress_time_slots( $time_slots ) {
 		$new_time_slots = [];
 		foreach ( $time_slots as $time_slot ) {
 			$new_time_slots[] = sprintf(
