@@ -89,15 +89,12 @@ class Checkout_Modifications {
 			$rate      = $package['rates'][ $chosen_shipping_methods[ $i ] ];
 			$meta_data = $rate->get_meta_data();
 			break;
-
 		}
 
 		if ( empty( $meta_data['alternative_delivery_dates'] ) ) {
 			return $args;
 		}
-		$lead_time    = \Fraktguiden_Helper::get_option( 'lead_time' );
-		$cutoff       = \Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
-		$factory      = new Alternative_Delivery_Date_Factory( $lead_time, $cutoff );
+		$factory      = new Alternative_Delivery_Date_Factory();
 		$alternatives = $factory->from_array(
 			$meta_data['alternative_delivery_dates']
 		);
@@ -111,7 +108,7 @@ class Checkout_Modifications {
 		$args['alternatives'] = $alternatives;
 
 		if ( ! self::validate_selected_time_slot( $args['selected'], $alternatives ) ) {
-			$args['selected'] = array_key_first( $time_slot_group['items'] );
+			$args['selected'] = array_key_first( $time_slot_group['items'] ) . 'T' . $time_slot_group['id'];
 		}
 
 		return $args;
@@ -138,18 +135,17 @@ class Checkout_Modifications {
 		foreach ( $alternatives as $time_slot_group ) {
 			$last = end( $time_slot_group['items'] );
 			if ( ! $last_date || $last->expected_delivery_date > $last_date ) {
-				$last_date = $last->expected_delivery_date;
+				$last_date = clone $last->expected_delivery_date;
 			}
 			$first = reset( $time_slot_group['items'] );
 			if ( ! $first_date || $first->expected_delivery_date < $first_date ) {
-				$first_date = $first->expected_delivery_date;
+				$first_date = clone $first->expected_delivery_date;
 			}
 		}
 		// Create a time period.
-		$interval  = \DateInterval::createFromDateString( '1 day' );
-		$last_date = clone $last_date;
-		$period    = new \DatePeriod(
-			$first_date,
+		$interval = \DateInterval::createFromDateString( '1 day' );
+		$period   = new \DatePeriod(
+			$first_date->modify( '-1 day' ),
 			$interval,
 			$last_date->modify( '+1 day' )
 		);
@@ -158,11 +154,12 @@ class Checkout_Modifications {
 		foreach ( $period as $date ) {
 			$key           = $date->format( "Y-m-d" );
 			$range[ $key ] = [
-				'day'  => ucfirst( wp_date( 'D', $date->getTimestamp() ) ),
+				'd'    => $date->format( 'D' ),
+				'day'  => ucfirst( wp_date( 'D', $date->getTimestamp(), $date->getTimezone() ) ),
 				'date' => str_replace(
 					' ',
 					'&nbsp;',
-					wp_date( 'j. F', $date->getTimestamp() )
+					wp_date( 'j. F', $date->getTimestamp(), $date->getTimezone() )
 				),
 			];
 		}
@@ -204,6 +201,7 @@ class Checkout_Modifications {
 			__CLASS__ . '::attach_order_note',
 		);
 	}
+
 	/**
 	 * Attach item meta
 	 *
@@ -213,7 +211,7 @@ class Checkout_Modifications {
 	 * @param \WC_Order $order Order Instance.
 	 */
 	public static function attach_order_note( $order_id ) {
-		$order = wc_get_order($order_id);
+		$order     = wc_get_order( $order_id );
 		$time_slot = WC()->session->get( 'bring_fraktguiden_time_slot' );
 		$order->add_order_note(
 			__( 'Customer requested delivery time:', 'bring-fraktguiden-for-woocommerce' ) . " $time_slot"
