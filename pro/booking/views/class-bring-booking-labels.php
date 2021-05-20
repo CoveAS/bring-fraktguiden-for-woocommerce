@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Create a menu item for PDF download.
-add_action( 'admin_menu', 'Bring_Booking_Labels::open_pdfs' );
+add_action( 'woocommerce_after_register_post_type', 'Bring_Booking_Labels::open_pdfs' );
 
 /**
  * Bring_Booking_Labels class
@@ -38,7 +38,10 @@ class Bring_Booking_Labels {
 	 * @return void
 	 */
 	public static function open_pdfs() {
-		add_dashboard_page( __( 'Print booking label', 'bring-fraktguiden-for-woocommerce' ), null, 'manage_woocommerce', 'bring_download', __CLASS__ . '::download_page' );
+		$page = filter_input( INPUT_GET, 'page' );
+		if ( is_admin() && 'bring_download' === $page ) {
+			static::download_page();
+		}
 	}
 
 	/**
@@ -146,6 +149,7 @@ class Bring_Booking_Labels {
 
 		if ( $pdf_collection->is_empty() && $zpl_collection->is_empty() ) {
 			esc_html_e( 'No files to download.', 'bring-fraktguiden-for-woocommerce' );
+
 			return;
 		}
 
@@ -173,7 +177,7 @@ class Bring_Booking_Labels {
 	public static function render_file_content( $file ) {
 		$filename = $file;
 
-		if ( '.' === substr( $filename, -1 ) ) {
+		if ( '.' === substr( $filename, - 1 ) ) {
 			$filename .= 'pdf';
 		}
 
@@ -193,6 +197,7 @@ class Bring_Booking_Labels {
 		// Workaround for Chrome's inline pdf viewer.
 		ob_clean();
 		flush();
+
 		readfile( $file );
 		die;
 	}
@@ -200,8 +205,8 @@ class Bring_Booking_Labels {
 	/**
 	 * Render download link
 	 *
-	 * @param array  $order_ids Order IDs.
-	 * @param string $name      Name.
+	 * @param array $order_ids Order IDs.
+	 * @param string $name Name.
 	 */
 	public static function render_download_link( $order_ids, $name ) {
 		printf(
