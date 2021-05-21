@@ -145,7 +145,7 @@ class Checkout_Modifications {
 		// Create a time period.
 		$interval = \DateInterval::createFromDateString( '1 day' );
 		$period   = new \DatePeriod(
-			$first_date->modify( '-1 day' ),
+			$first_date,
 			$interval,
 			$last_date->modify( '+1 day' )
 		);

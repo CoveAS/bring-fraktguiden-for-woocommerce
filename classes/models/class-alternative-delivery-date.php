@@ -9,6 +9,6 @@ class Alternative_Delivery_Date {
 	public $time_slots;
 
 	public function date( $format = 'j F') {
-		return wp_date($format, $this->expected_delivery_date->getTimestamp() );
+		return wp_date($format, $this->expected_delivery_date->getTimestamp(), $this->expected_delivery_date->getTimezone() );
 	}
 }

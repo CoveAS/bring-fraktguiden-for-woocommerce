@@ -315,6 +315,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 		$args['meta_data']['bring_product'] = $args['bring_product'];
 		unset( $args['bring_product'] );
+		if ( ! empty( $args['expected_delivery_date'] ) ) {
+			$args['meta_data']['expected_delivery_date'] = $args['expected_delivery_date'];
+			unset( $args['expected_delivery_date'] );
+		}
 		if ( ! empty( $args['alternative_delivery_dates'] ) ) {
 			$args['meta_data']['alternative_delivery_dates'] = $args['alternative_delivery_dates'];
 			unset( $args['alternative_delivery_dates'] );

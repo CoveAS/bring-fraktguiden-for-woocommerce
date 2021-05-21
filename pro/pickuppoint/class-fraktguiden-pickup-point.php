@@ -46,6 +46,7 @@ class Fraktguiden_Pickup_Point {
 		// Hide shipping meta data from order items (WooCommerce 2.6)
 		// See https://github.com/woothemes/woocommerce/issues/9094 for reference.
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( __CLASS__, 'woocommerce_hidden_order_itemmeta' ), 1, 1 );
+		add_filter( 'woocommerce_order_item_display_meta_key', array( __CLASS__, 'woocommerce_order_item_display_meta_key' ) );
 
 		// Pickup points.
 		// if ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
@@ -66,8 +67,23 @@ class Fraktguiden_Pickup_Point {
 		$fields[] = '_fraktguiden_pickup_point_info_cached';
 		$fields[] = 'pickup_point_id';
 		$fields[] = 'bring_product';
+		$fields[] = 'expected_delivery_date';
 
 		return $fields;
+	}
+
+	/**
+	 * Add additional item meta
+	 *
+	 * @param  string $display_key Display key.
+	 * @return string
+	 */
+	public static function woocommerce_order_item_display_meta_key( $display_key ) {
+
+		if ( 'bring_fraktguiden_time_slot' === $display_key ) {
+			return __( 'Selected time slot', 'bring-fraktguiden-for-woocommerce' );
+		}
+		return $display_key;
 	}
 
 	/**
@@ -441,6 +457,7 @@ class Fraktguiden_Pickup_Point {
 			$rate = [
 				'id'            => "bring_fraktguiden:{$bring_product}-{$pickup_point['id']}",
 				'bring_product' => $bring_product,
+				'expected_delivery_date' => $service_package['expected_delivery_date'],
 				'cost'          => $service_package['cost'],
 				'label'         => $pickup_point['name'],
 				'meta_data'     => [

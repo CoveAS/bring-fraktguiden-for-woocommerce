@@ -12,7 +12,6 @@ class Ajax {
 		add_action( 'wp_ajax_nopriv_bring_select_time_slot', __CLASS__ . '::select_time_slot' );
 	}
 
-
 	public static function select_time_slot( $fragments ) {
 		$time_slot = filter_input( INPUT_POST, 'time_slot', FILTER_DEFAULT );
 		if ( empty( $time_slot ) ) {

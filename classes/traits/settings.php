@@ -443,6 +443,13 @@ trait Settings {
 				'description' => __( 'Cutoff time every day. Orders after this time will be processed the next day.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '12:00',
 			],
+			'display_eta' => [
+				'title'       => __( 'Display ETA', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable expected delivery date', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Display expected delivery date below shipping rates', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => '12:00',
+			],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'hidden',
