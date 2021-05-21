@@ -498,8 +498,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$expected_delivery_date = false;
 			if ( ! empty( $service_details['expectedDelivery']['expectedDeliveryDate'] ) ) {
 				$expected_delivery_date = $date_factory->from_array(
-					$service_details['expectedDelivery']['expectedDeliveryDate']
-				)->format( 'c' ) ?? '';
+						$service_details['expectedDelivery']['expectedDeliveryDate']
+					)->format( 'c' ) ?? '';
 			}
 
 			if ( empty( $services[ $bring_product ] ) ) {
@@ -518,9 +518,30 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				$service_price = $service_details['price']['netPrice']['priceWithoutAdditionalServices'];
 			} elseif ( ! empty( $service_details['price']['listPrice']['priceWithoutAdditionalServices'] ) ) {
 				$service_price = $service_details['price']['listPrice']['priceWithoutAdditionalServices'];
+			} elseif ( ! empty( $service_details['warnings'] ) ) {
+				$no_price = false;
+				foreach ( $service_details['warnings'] as $warning ) {
+					if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
+						$no_price = true;
+						break;
+					}
+					$this->add_trace_messages( [ 'Warning: ' . $warning['description'] ] );
+				}
+				if ( ! $no_price ) {
+					continue;
+				}
+
+				$field_key = $this->get_field_key( 'services' );
+				$service   = \Fraktguiden_Service::find( $field_key, $bring_product );
+				if ( ! $service->settings['custom_price_cb'] ) {
+					$this->add_trace_messages( [ 'No price override provided for ' . $service_details['id'] ] );
+					continue;
+				}
+				$service_price = [
+					'amountWithoutVAT' => $this->calculate_excl_vat( $service->settings['custom_price'] )
+				];
 			} else {
-				// @TODO: Enable fixed prices
-				$this->add_trace_messages( [ 'No price provided for ' . $service_details['id'], $service_details ] );
+				$this->add_trace_messages( [ 'No price provided for ' . $service_details['id'] ] );
 				continue;
 			}
 			$bring_product = sanitize_title( $service_details['id'] );
@@ -529,10 +550,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$rate          = apply_filters(
 				'bring_product_api_rate',
 				array(
-					'id'                      => $this->id,
-					'bring_product'           => $bring_product,
-					'cost'                    => (float) $cost + (float) $this->fee,
-					'label'                   => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
+					'id'                     => $this->id,
+					'bring_product'          => $bring_product,
+					'cost'                   => (float) $cost + (float) $this->fee,
+					'label'                  => $label . ( 'no' === $this->display_desc ? '' : ': ' . $service_details['guiInformation']['descriptionText'] ),
 					'expected_delivery_date' => $expected_delivery_date,
 				),
 				$service_details
