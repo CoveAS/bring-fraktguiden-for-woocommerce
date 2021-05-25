@@ -5,10 +5,10 @@ Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
 Requires at least: 4.5
-Tested up to: 5.4.1
-Requires PHP: 7.1
+Tested up to: 5.7.2
+Requires PHP: 7.4
 WC requires at least: 3.4.0
-WC tested up to: 4.1.0
+WC tested up to: 5.3.0
 Stable tag: 1.7.12
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
@@ -17,8 +17,6 @@ Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
 Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
 **NB! You must have a [Mybring.com](https://www.mybring.com) account and API credentials to use this plugin.**
-
-**Versions prior to 1.6 are no longer supported by Bring.no. Please read our [support post](https://wordpress.org/support/topic/1-5-no-longer-working/)**
 
 == Installation ==
 
@@ -51,7 +49,17 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.7.11 =
+= 1.8.0 =
+
+* Added new feature for alternative delivery dates for home delivery
+* Added ETA support for shipping rates
+* Added support for services that does not return shipping prices
+* Made the product tester always available
+* Added lead time settings
+* Booking - Added {products} parameter for order reference
+* Booking - Changed action for rendering PDF's
+
+= 1.7.12 =
 
 * Added pickup selection for pakke til hentested in admin
 * Fixed issue with fallback solution for heavy consignments
