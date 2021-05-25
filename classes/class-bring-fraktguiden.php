@@ -13,7 +13,7 @@ use Bring_Fraktguiden\Common\Checkout_Modifications;
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.7.12';
+	const VERSION = '1.8.0';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
