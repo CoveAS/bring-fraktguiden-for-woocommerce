@@ -195,19 +195,45 @@ class Bring_Booking_Order_View {
 			<div>
 				<?php Bring_Booking_Common_View::render_shipping_date_time(); ?>
 			</div>
+		</div>
 
-			<script>
-			jQuery( document ).ready( function () {
-				jQuery( function () {
-					jQuery( "[name=_bring-shipping-date]" ).datepicker( {
-						minDate: 0,
-						dateFormat: 'yy-mm-dd'
-					} );
-				} );
+
+		<?php if ( in_array( $order->bring_product, [5600, 'PA_DOREN'] ) ): ?>
+
+			<?php
+				$date = false;
+				$time_slot = $order->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
+				if ( $time_slot ) {
+					$date = new DateTime( $time_slot );
+				}
+			?>
+			<div class="bring-form-field">
+				<label><?php esc_html_e( 'Customer requested delivery date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+
+				<div>
+					<?php
+					Bring_Booking_Common_View::render_shipping_date_time(
+						'_bring-delivery-date',
+						[
+							'date'   => $date->format('Y-m-d') ?? '',
+							'hour'   => $date->format('H') ?? '',
+							'minute' => $date->format('i') ?? '',
+						]
+					);
+					?>
+				</div>
+			</div>
+
+		<?php endif;?>
+
+		<script>
+		jQuery( document ).ready( function ( $) {
+			$( "[name=_bring-shipping-date], [name=_bring-delivery-date]" ).datepicker( {
+				minDate: 0,
+				dateFormat: 'yy-mm-dd'
 			} );
-			</script>
-	</div>
-
+		} );
+		</script>
 		<?php
 
 		$shipping_items = $order->get_fraktguiden_shipping_items();

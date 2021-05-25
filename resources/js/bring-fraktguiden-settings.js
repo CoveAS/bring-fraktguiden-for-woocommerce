@@ -1,8 +1,9 @@
-import ShippingProduct from './components/shipping-product';
+import ShippingProduct from './components/shipping-product.vue';
+import Vue from 'vue';
 
 if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 
-	window.Vue = require( 'vue' );
+	window.Vue = Vue;
 
 	var selected = bring_fraktguiden_settings.services_enabled;
 

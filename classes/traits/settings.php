@@ -428,8 +428,27 @@ trait Settings {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden-for-woocommerce' ),
 				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
+				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
+			],
+			'lead_time'            => [
+				'title'       => __( 'Lead time in days', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'number',
+				'description' => __( 'Number of days before orders are shipped', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => 0,
+			],
+			'lead_time_cutoff' => [
+				'title'       => __( 'Lead time cutoff', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'time',
+				'description' => __( 'Cutoff time every day. Orders after this time will be processed the next day.', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => '12:00',
+			],
+			'display_eta' => [
+				'title'       => __( 'Display ETA', 'bring-fraktguiden-for-woocommerce' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable expected delivery date', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Display expected delivery date below shipping rates', 'bring-fraktguiden-for-woocommerce' ),
+				'default'     => '12:00',
 			],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),

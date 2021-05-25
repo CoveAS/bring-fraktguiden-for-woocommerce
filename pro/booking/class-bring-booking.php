@@ -15,13 +15,11 @@ add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_Vie
 
 // Consignment.
 require_once 'classes/consignment/class-bring-consignment.php';
-require_once 'classes/consignment/class-bring-mailbox-consignment.php';
 require_once 'classes/consignment/class-bring-booking-consignment.php';
 
 // Consignment request.
 require_once 'classes/consignment-request/class-bring-consignment-request.php';
 require_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
-require_once 'classes/consignment-request/class-bring-mailbox-consignment-request.php';
 
 // Classes.
 require_once 'classes/class-bring-booking-file.php';
@@ -30,22 +28,11 @@ require_once 'classes/class-bring-booking-customer.php';
 if ( is_admin() ) {
 	// Views.
 	include_once 'views/class-bring-booking-labels.php';
-	include_once 'views/class-bring-booking-waybills.php';
 	include_once 'views/class-bring-booking-order-view-common.php';
 	include_once 'views/class-bring-booking-orders-view.php';
 	include_once 'views/class-bring-booking-order-view.php';
-	include_once 'views/class-bring-waybill-view.php';
-	Bring_Waybill_View::setup();
 }
 
-if ( Fraktguiden_Helper::booking_enabled() && Fraktguiden_Helper::pro_activated() ) {
-	include_once 'classes/class-post-type-mailbox-waybill.php';
-	include_once 'classes/class-post-type-mailbox-label.php';
-	include_once 'classes/class-generate-mailbox-labels.php';
-	Post_Type_Mailbox_Waybill::setup();
-	Post_Type_Mailbox_Label::setup();
-	Generate_Mailbox_Labels::setup();
-}
 
 // Register awaiting shipment status.
 add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
@@ -165,7 +152,7 @@ class Bring_Booking {
 	 *
 	 * @param WC_Order $wc_order WooCommerce order.
 	 */
-	public static function send_booking( $wc_order ) {
+	public static function send_booking( $wc_order, $bulk_mode = false ) {
 		// Get booking count
 		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
 		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
@@ -182,12 +169,22 @@ class Bring_Booking {
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
 			// Create the consignment.
 			$consignment_request = Bring_Consignment_Request::create( $shipping_item );
-			$consignment_request->fill(
-				[
-					'shipping_date_time' => self::get_shipping_date_time(),
-					'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
-				]
-			);
+			$args = [
+				'shipping_date_time' => self::get_shipping_date_time(),
+				'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
+			];
+			if ( in_array( $adapter->bring_product, [5600, 'PA_DOREN'] ) ) {
+				// Alternative delivery date.
+				if ( $bulk_mode ) {
+					$time_slot = $adapter->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
+					if ( $time_slot ) {
+						$args['customer_specified_delivery_date_time'] = $time_slot;
+					}
+				} else {
+					$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( '_bring-delivery-date' );
+				}
+			}
+			$consignment_request->fill( $args );
 
 			$original_order_status = $wc_order->get_status();
 
@@ -265,14 +262,14 @@ class Bring_Booking {
 	/**
 	 * Get a shipping date time
 	 *
-	 * @return array
+	 * @return string
 	 */
-	public static function get_shipping_date_time() {
+	public static function get_shipping_date_time( $name = '_bring-shipping-date' ) {
 		$input_request = Fraktguiden_Helper::get_input_request_method();
 
-		$date         = filter_input( $input_request, '_bring-shipping-date' );
-		$date_hour    = filter_input( $input_request, '_bring-shipping-date-hour' );
-		$date_minutes = filter_input( $input_request, '_bring-shipping-date-minutes' );
+		$date         = filter_input( $input_request, $name . '' );
+		$date_hour    = filter_input( $input_request, $name . '-hour' );
+		$date_minutes = filter_input( $input_request, $name . '-minutes' );
 
 		// Get the shipping date.
 		if ( $date && $date_hour && $date_minutes ) {
@@ -295,7 +292,7 @@ class Bring_Booking {
 			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
 			try {
 				if ( ! $order->has_booking_consignments() ) {
-					self::send_booking( $order->order );
+					self::send_booking( $order->order, true );
 				}
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [

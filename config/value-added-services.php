@@ -7,7 +7,7 @@
 return [
 	// New VAS.
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '1142',
 		'name'           => 'Notification VAS',
 		'default'        => false,
@@ -31,6 +31,14 @@ return [
 	],
 	[
 		'enabled'        => true,
+		'code'           => 'alternative_delivery_dates',
+		'name'           => 'Alternative delivery dates',
+		'default'        => true,
+		'bring_products' => [ 5600, 1736 ],
+		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+	],
+	[
+		'enabled'        => false,
 		'code'           => '0041',
 		'name'           => 'Simplified delivery',
 		'default'        => false,
@@ -38,7 +46,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '2141',
 		'name'           => 'Frost-free',
 		'default'        => false,
@@ -46,7 +54,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '1133',
 		'name'           => 'Proof of identity required',
 		'default'        => false,
@@ -61,7 +69,7 @@ return [
 		'bring_products' => [ 5000, 4850, 5300, 5800, 5600 ],
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '1082',
 		'name'           => 'Social check',
 		'default'        => false,
@@ -69,7 +77,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '2142',
 		'name'           => 'Special goods',
 		'default'        => false,
@@ -77,7 +85,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '0068',
 		'name'           => 'Optional insurance',
 		'default'        => false,
@@ -85,7 +93,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '1062',
 		'name'           => 'Saturday delivery',
 		'default'        => false,
@@ -93,7 +101,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '2086',
 		'name'           => 'Notification by letter',
 		'default'        => false,
@@ -101,7 +109,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => '1245',
 		'name'           => 'Dangerous goods',
 		'default'        => false,
@@ -114,7 +122,7 @@ return [
 		'code'           => 'EVARSLING',
 		'name'           => 'Recipient notification over SMS or E-Mail',
 		'default'        => false,
-		'bring_products' => [ 'BPAKKE_DOR-DOR', 'SERVICEPAKKE, EKSPRESS09' ],
+		'bring_products' => [ 'BPAKKE_DOR-DOR', 'SERVICEPAKKE', 'EKSPRESS09' ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
@@ -154,7 +162,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => 'EVE_DELIVERY',
 		'name'           => 'Evening delivery',
 		'default'        => false,
@@ -162,7 +170,7 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => true,
+		'enabled'        => false,
 		'code'           => 'SIMPLIFIED_DELIVERY',
 		'name'           => 'Simplified delivery',
 		'default'        => false,

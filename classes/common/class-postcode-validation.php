@@ -51,18 +51,7 @@ class Postcode_Validation {
 	 */
 	public static function validate_postcode( $valid, $postcode, $country ) {
 
-		$valid_countries = [
-			'NO', // Norway.
-			'DK', // Denmark.
-			'SE', // Sweden.
-			'FI', // Finland.
-			'NL', // Netherlands.
-			'DE', // Germany.
-			'US', // United States.
-			'BE', // Belgium.
-			'FO', // Faroe Islands.
-			'GL', // Greenland.
-		];
+		$valid_countries = [ 'NO' ];
 
 		if ( ! $valid || ! in_array( $country, $valid_countries, true ) ) {
 			return $valid;

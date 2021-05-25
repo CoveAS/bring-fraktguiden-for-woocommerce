@@ -24,18 +24,18 @@ class Bring_Zpl_Collection extends Bring_Label_Collection {
 			return $file['file']->get_path();
 		}
 
-		// Set a path to a new file where multiple files will be merged.
-		$merged_file_path = $file['file']->get_dir() . '/labels-merged.zpl';
-
 		// Initialize WP Filesystem.
 		WP_Filesystem();
 		global $wp_filesystem;
 
+		$content = '';
 		// Go through all the files and merge them into one.
 		foreach ( $this->files as $file ) {
-			$file_content = $wp_filesystem->get_contents( $file['file']->get_path() );
-			$wp_filesystem->put_contents( $merged_file_path, $file_content, FS_CHMOD_FILE );
+			$content .= $wp_filesystem->get_contents( $file['file']->get_path() );
 		}
+		// Set a path to a new file where multiple files will be merged.
+		$merged_file_path = $file['file']->get_dir() . '/labels-merged.zpl';
+		$wp_filesystem->put_contents( $merged_file_path, $content, FS_CHMOD_FILE );
 
 		return $merged_file_path;
 	}

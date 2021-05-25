@@ -1,5 +1,51 @@
 == Changelog ==
 
+= 1.8.0 =
+
+* Added new feature for alternative delivery dates for home delivery
+* Added ETA support for shipping rates
+* Added support for services that does not return shipping prices
+* Made the product tester always available
+* Added lead time settings
+* Booking - Added product parameter for order reference
+* Booking - Changed action for rendering PDF's
+
+= 1.7.12 =
+
+* Added pickup selection for pakke til hentested in admin
+* Fixed issue with fallback solution for heavy consignments
+
+= 1.7.9 =
+
+* Fixed a bug with the implementation of the service table for WC 4.0.0 which caused service configuration not to save.
+
+= 1.7.8 =
+
+* Made the plugin compatible with WooCommerce 4.0.0
+* Fixed default selection of customer number for booking
+
+= 1.7.7 =
+
+* Fixed fatal bug during booking
+
+= 1.7.6 =
+
+* Removed norgespakke because it is no longer supported
+* Fixed an issue with pickup points for klimanøytral servicepakke
+* Fixed bug with post code validation that caused validation intended for Norway to be applied on other some other countries
+* Added missing implementation of E-varsling and 2084 value added services
+
+= 1.7.5 =
+
+* Fixed merging of ZPL files
+* Fixed tocountry bug with the product tester
+
+= 1.7.4 =
+
+* Fixed download of ZPL files from orders using mailbox with tracking
+* Added special handling for mailbox services which fixes booking issues
+* Various interface improvements
+
 = 1.7.2 =
 
 * Improved bring booking logging

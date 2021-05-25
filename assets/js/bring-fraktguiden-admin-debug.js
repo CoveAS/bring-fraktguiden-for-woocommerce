@@ -18,7 +18,7 @@ jQuery(
 						{
 							action: 'bring_debug_product_rates',
 							post_code: $( '.bring-debug__post-code' ).val(),
-							country: $( '.bring-debug__country select' ).val(),
+							country: $( '#bring-debug-country' ).val(),
 							id: bring_fraktguiden_debug.id,
 						}
 					);

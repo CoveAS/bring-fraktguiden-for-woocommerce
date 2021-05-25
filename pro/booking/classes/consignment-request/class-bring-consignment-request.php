@@ -22,6 +22,13 @@ abstract class Bring_Consignment_Request {
 	public $service_id;
 
 	/**
+	 * Service
+	 *
+	 * @var Fraktguiden_Service
+	 */
+	public $service;
+
+	/**
 	 * Shipping item
 	 *
 	 * @var string
@@ -34,6 +41,13 @@ abstract class Bring_Consignment_Request {
 	 * @var string
 	 */
 	public $shipping_date_time;
+
+	/**
+	 * Customer specified delivery date time
+	 *
+	 * @var string
+	 */
+	public $customer_specified_delivery_date_time;
 
 	/**
 	 * Customer number
@@ -58,6 +72,9 @@ abstract class Bring_Consignment_Request {
 		$this->shipping_item = $shipping_item;
 		$this->adapter       = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
 		$this->service_id    = $this->get_service_id();
+		$shipping_method     = new WC_Shipping_Method_Bring( $shipping_item->get_instance_id() );
+		$service_key         = $shipping_method->get_field_key( 'services' );
+		$this->service       = Fraktguiden_Service::find( $service_key, $this->service_id );
 	}
 
 	/**
@@ -144,8 +161,14 @@ abstract class Bring_Consignment_Request {
 	 * @return $this
 	 */
 	public function fill( $args ) {
-		$this->customer_number    = $args['customer_number'];
-		$this->shipping_date_time = $args['shipping_date_time'];
+		$this->customer_number                       = $args['customer_number'];
+		$this->shipping_date_time                    = $args['shipping_date_time'];
+		$this->customer_specified_delivery_date_time = $args['customer_specified_delivery_date_time'] ?? '';
+
+		if ( '3584' == $this->service_id || '3570' == $this->service_id ) {
+			// Special mailbox rule.
+			$this->customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $args['customer_number'] );
+		}
 
 		return $this;
 	}
@@ -168,6 +191,10 @@ abstract class Bring_Consignment_Request {
 	 * @return array
 	 */
 	public function get_sender() {
+
+		// Get the order
+		$wc_order = $this->shipping_item->get_order();
+
 		$form_fields = [
 			'booking_address_store_name',
 			'booking_address_street1',
@@ -188,7 +215,7 @@ abstract class Bring_Consignment_Request {
 			$result[ $field ] = Fraktguiden_Helper::get_option( $field );
 		}
 
-		return $result;
+		return apply_filters('bring_fraktguiden_get_consignment_sender', $result, $wc_order);
 	}
 
 	/**
@@ -207,17 +234,31 @@ abstract class Bring_Consignment_Request {
 	 * @return mixed
 	 */
 	public static function parse_sender_address_reference( $reference, $wc_order ) {
-		$replacements = array(
-			'{order_id}' => $wc_order->get_id(),
-		);
-
-		$result = $reference;
-
-		foreach ( $replacements as $replacement => $value ) {
-			$result = preg_replace( '/' . preg_quote( $replacement ) . '/', $value, $result );
+		$items = $wc_order->get_items();
+		$names = [];
+		foreach ( $items as $item ) {
+			$name = $item->get_name();
+			if ( $item->get_quantity() > 1 ) {
+				$name = $item->get_quantity() . " x $name";
+			}
+			$names[] = apply_filters(
+				'bring_reference_product_name',
+				$name,
+				$item
+			);
 		}
-
-		return $result;
+		return apply_filters(
+			'bring_parse_sender_address_reference',
+			strtr(
+				$reference,
+				[
+					'{order_id}' => $wc_order->get_id(),
+					'{products}' => implode( ', ', $names ),
+				]
+			),
+			$reference,
+			$wc_order
+		);
 	}
 
 	/**

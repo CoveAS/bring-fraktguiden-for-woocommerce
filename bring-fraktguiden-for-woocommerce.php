@@ -3,15 +3,15 @@
  * Plugin Name:         Bring Fraktguiden for WooCommerce
  * Plugin URI:          https://bringfraktguiden.no/
  * Description:         Bring Fraktguiden for WooCommerce makes it easy for your customers to choose delivery methods from Bring.
- * Author:              Bring Fraktguiden
- * Author URI:          https://bringfraktguiden.no/
+ * Author:              Cove AS
+ * Author URI:          https://cove.no/
  *
- * Version:             1.7.2
+ * Version:             1.7.12
  * Requires at least:   4.9.1
- * Tested up to:        5.2.2
+ * Tested up to:        5.4.1
  *
  * WC requires at least: 3.4.0
- * WC tested up to: 3.7.0
+ * WC tested up to: 4.1.0
  *
  * Text Domain:         bring-fraktguiden-for-woocommerce
  * Domain Path:         /languages

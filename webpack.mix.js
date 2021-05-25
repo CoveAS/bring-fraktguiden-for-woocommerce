@@ -10,8 +10,10 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+mix.setPublicPath('./');
 mix.js('resources/js/bring-fraktguiden-settings.js', 'assets/js')
+	.vue({ version: 2 })
+	.js('resources/js/bring-fraktguiden-checkout.js', 'assets/js')
     .sass('resources/sass/pro/admin.scss', 'pro/assets/css')
     .sass('resources/sass/bring-fraktguiden.scss', 'assets/css')
     .sass('resources/sass/bring-fraktguiden-admin.scss', 'assets/css');

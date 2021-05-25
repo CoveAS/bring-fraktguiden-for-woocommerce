@@ -35,7 +35,7 @@ class Fraktguiden_Product_Debug {
 
 		add_meta_box(
 			'bring_fraktguiden_product_tester',
-			'Bring Fraktguiden Product Tester',
+			__( 'Bring Fraktguiden Product Tester', 'bring-fraktguiden-for-woocommerce' ),
 			__CLASS__ . '::layout_of_meta_box_content'
 		);
 	}

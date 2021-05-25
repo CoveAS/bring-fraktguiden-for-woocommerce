@@ -64,6 +64,46 @@ return [
 				'pickuppoint' => false,
 				'oldcode'     => 'CARGO',
 			],
+		],
+	],
+	'old'          => [
+		'title'    => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
+		'expanded' => true,
+		'services' => [
+			'SERVICEPAKKE'   => [
+				'ProductCode' => '1202',
+				'productName' => 'Klimanøytral Servicepakke',
+				'helptext'    => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'deprecated'  => false,
+				'pickuppoint' => true,
+			],
+			'PA_DOREN'       => [
+				'ProductCode' => '1736',
+				'productName' => 'På Døren',
+				'helptext'    => 'Sendingen leveres hjem til deg mellom klokken 17 og 21. Du varsles i god tid om forventet utleveringsdag på sms og/eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme kveld. Sjåfør ringer deg på mobiltelefon 30 - 60 minutter før levering. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk og du vil motta en varsel om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+			],
+			'MAIL'           => [
+				'ProductCode' => 'MAIL',
+				'productName' => 'Brev',
+				'helptext'    => '',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+			],
+			'CARGO_GROUPAGE' => [
+				'ProductCode' => '3050',
+				'productName' => 'Cargo',
+				'helptext'    => '',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+			],
+		],
+	],
+	'mailbox_new'      => [
+		'title'    => __( 'Mailbox (new)', 'bring-fraktguiden-for-woocommerce' ),
+		'expanded' => true,
+		'services' => [
 			'3570' => [
 				'ProductCode' => '3584',
 				'class'       => 'warning',
@@ -85,77 +125,6 @@ return [
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
 				'oldcode'     => 'PAKKE_I_POSTKASSEN',
-			],
-		],
-	],
-	'old'          => [
-		'title'    => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
-		'expanded' => true,
-		'services' => [
-			'NORGESPAKKE'    => [
-				'ProductCode' => '3067',
-				'productName' => 'Norgespakke egenemballert',
-				'helptext'    => 'Sendingen er en Norgespakke som blir levert til mottakers postkontor/ post i butikk. Mottaker varsles om at sendingen er ankommet via hentemelding i postkassen. Transporttid er normalt 2-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-			],
-			'SERVICEPAKKE'   => [
-				'ProductCode' => '1202',
-				'productName' => 'Klimanøytral Servicepakke',
-				'helptext'    => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
-				'deprecated'  => false,
-				'pickuppoint' => true,
-			],
-			'PA_DOREN'       => [
-				'ProductCode' => '1736',
-				'productName' => 'På Døren',
-				'helptext'    => 'Sendingen leveres hjem til deg mellom klokken 17 og 21. Du varsles i god tid om forventet utleveringsdag på sms og/eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme kveld. Sjåfør ringer deg på mobiltelefon 30 - 60 minutter før levering. Dersom sendingen ikke kan leveres, blir den fraktet til lokalt postkontor/ post i butikk og du vil motta en varsel om dette via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-			],
-			'MAIL'           => [
-				'ProductCode' => '',
-				'productName' => 'Brev',
-				'helptext'    => '',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-			],
-			'CARGO_GROUPAGE' => [
-				'ProductCode' => '3050',
-				'productName' => 'Cargo',
-				'helptext'    => '',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-			],
-		],
-	],
-	'mailbox'      => [
-		'title'    => __( 'Mailbox', 'bring-fraktguiden-for-woocommerce' ),
-		'expanded' => true,
-		'services' => [
-			/**
-			 * Pakke i postkassen
-			 * A customer number is required for ordering Pakke i postkassen services. There is a minimum fee of 150,- for each order.
-			 */
-			'PAKKE_I_POSTKASSEN'         => [
-				'ProductCode' => '3584',
-				'productName' => 'Pakke i postkassen',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
-			],
-			'PAKKE_I_POSTKASSEN_SPORBAR' => [
-				'ProductCode' => '',
-				'class'       => 'warning',
-				'productName' => 'Pakke i postkassen (sporbar)',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
-				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ),
 			],
 		],
 	],

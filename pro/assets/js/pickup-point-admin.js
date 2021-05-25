@@ -343,7 +343,7 @@
 			// Update shipping title.
 			this.elems.shipping_title().val( get_text_from_selector( service_selector ) );
 
-			if ( selected_service == 'servicepakke' ) {
+			if ( selected_service == 'servicepakke' || selected_service == '5800' ) {
 				this.show_pickup_point();
 			} else {
 				this.hide_pickup_point();

@@ -139,6 +139,22 @@ class Fraktguiden_Service {
 	}
 
 	/**
+	 * Find
+	 *
+	 * @param  string $service_key   Service key.
+	 * @param  string $bring_product Bring product.
+	 * @return Fraktguiden_Service|null
+	 */
+	public static function find( $service_key, $bring_product ) {
+		$services      = self::all( $service_key );
+		$bring_product = strtoupper( $bring_product );
+		if ( empty( $services[ $bring_product ] ) ) {
+			return null;
+		}
+		return $services[ $bring_product ];
+	}
+
+	/**
 	 * Update services options
 	 *
 	 * @param  string $service_key Field key.
@@ -269,7 +285,13 @@ class Fraktguiden_Service {
 
 	public function getUrlParam() {
 		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
-			return "&product={$this->bring_product}:{$this->customer_number}";
+			return "&product={$this->bring_product}:{$this->settings['customer_number']}";
+		}
+		if ( '3584' == $this->bring_product || '3570' == $this->bring_product ) {
+			// Special mailbox rule.
+			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+			$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
+			return "&product={$this->bring_product}:{$customer_number}";
 		}
 
 		return "&product={$this->bring_product}";
@@ -289,5 +311,47 @@ class Fraktguiden_Service {
 		}
 
 		return $this->service_data[ $index ];
+	}
+
+	/**
+	 * VAS Check
+	 *
+	 * @param array $vas_codes VAS Codes.
+	 *
+	 * @return string|boolean VAS Code or false if not matched.
+	 */
+	public function vas_match( $vas_codes ) {
+		foreach ( $this->vas as $vas ) {
+			if ( in_array( $vas->code, $vas_codes, true ) ) {
+				if ( ! $vas->value ) {
+					continue;
+				}
+				return $vas->code;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * VAS For
+	 *
+	 * @param array $bring_product Bring product.
+	 * @param array $vas_codes     VAS Codes.
+	 *
+	 * @return string|boolean VAS Code or false if not matched.
+	 */
+	public static function vas_for( $field_key, $bring_product, $vas_codes ) {
+		$result = false;
+		$enabled_services = Fraktguiden_Service::all( $field_key, true );
+		foreach ( $enabled_services as $service ) {
+			if ( $service->bring_product != $bring_product ) {
+				continue;
+			}
+			$result = $service->vas_match( $vas_codes );
+			if ( $result ) {
+				break;
+			}
+		}
+		return $result;
 	}
 }

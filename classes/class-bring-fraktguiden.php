@@ -5,12 +5,15 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden\Common\Ajax;
+use Bring_Fraktguiden\Common\Checkout_Modifications;
+
 /**
  * Bring_Fraktguiden class
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.7.2';
+	const VERSION = '1.7.12';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -21,6 +24,7 @@ class Bring_Fraktguiden {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
+		spl_autoload_register( __CLASS__ . '::class_loader' );
 
 		$plugin_path = dirname( __DIR__ );
 		if ( ! class_exists( 'Packer' ) ) {
@@ -39,6 +43,9 @@ class Bring_Fraktguiden {
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
 			require_once $plugin_path . '/pro/pickuppoint/class-fraktguiden-pick-up-point-enhancement.php';
 			Fraktguiden_Pick_Up_Point_Enhancement::setup();
+		}
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_eta' ) ) {
+			add_action( 'woocommerce_after_shipping_rate', 'Bring_Fraktguiden\Common\Rate_Eta::add_estimated_delivery_date', 10, 2 );
 		}
 
 		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
@@ -74,23 +81,51 @@ class Bring_Fraktguiden {
 		require_once 'common/class-postcode-validation.php';
 		Bring_Fraktguiden\Postcode_Validation::setup();
 
-
 		add_action( 'admin_menu', __CLASS__ . '::add_subsetting_link', 100 );
+
+		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
+
+		Checkout_Modifications::setup();
+		Ajax::setup();
+	}
+
+	/**
+	 * Class loader
+	 *
+	 * @param string $class_name Path to class file.
+	 */
+	public static function class_loader( $class_name ) {
+		if ( ! preg_match( '/^Bring_Fraktguiden(\\\.*)$/', $class_name, $matches ) ) {
+			return;
+		}
+		$path      = substr( strtolower( $matches[1] ), 1 );
+		$path      = preg_replace( '/_/', '-', $path );
+		$parts     = explode( '\\', $path );
+		$file_name = array_pop( $parts );
+		$dir       = implode( '/', $parts );
+		if ( $dir ) {
+			$dir = "/$dir";
+		}
+		$file_name = __DIR__ . "{$dir}/class-{$file_name}.php";
+		if ( file_exists( $file_name ) ) {
+			require_once $file_name;
+		}
 	}
 
 	public static function add_subsetting_link() {
 		global $submenu;
-		if (! isset( $submenu['woocommerce'] ) ) {
+		if ( ! isset( $submenu['woocommerce'] ) ) {
 			return;
 		}
 
 		add_submenu_page(
 			'woocommerce',
-			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
-			 __( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
+			__( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
+			__( 'Bring settings', 'bring-fraktguiden-for-woocommerce' ),
 			'manage_woocommerce',
 			'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden'
 		);
+
 		return $submenu;
 	}
 
@@ -114,12 +149,8 @@ class Bring_Fraktguiden {
 			Fraktguiden_KCO_Support::setup();
 		}
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
-			require_once 'debug/class-fraktguiden-product-debug.php';
-			Fraktguiden_Product_Debug::setup();
-			// require_once 'debug/class-fraktguiden-order-debug.php';
-			// Fraktguiden_Order_Debug::setup();
-		}
+		require_once 'debug/class-fraktguiden-product-debug.php';
+		Fraktguiden_Product_Debug::setup();
 
 		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
 			add_action( 'wp_enqueue_scripts', __CLASS__ . '::enqueue_styles' );
@@ -158,13 +189,15 @@ class Bring_Fraktguiden {
 	/**
 	 * Add Bring shipping method to WooCommerce
 	 *
+	 * @param array $methods A list of shipping methods.
+	 *
+	 * @return array
 	 * @package  WooCommerce/Classes/Shipping
 	 * @access public
-	 * @param array $methods A list of shipping methods.
-	 * @return array
 	 */
 	public static function add_bring_method( $methods ) {
 		$methods['bring_fraktguiden'] = 'WC_Shipping_Method_Bring_Pro';
+
 		return $methods;
 	}
 
@@ -172,6 +205,7 @@ class Bring_Fraktguiden {
 	 * Show action links on the plugin screen
 	 *
 	 * @param array $links The action links displayed for each plugin in the Plugins list table.
+	 *
 	 * @return array
 	 */
 	public static function plugin_action_links( $links ) {
@@ -199,5 +233,55 @@ class Bring_Fraktguiden {
 		}
 
 		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden-for-woocommerce' );
+	}
+
+
+	/**
+	 * Admin enqueue script
+	 * Add custom styling and javascript to the admin options
+	 *
+	 * @param string $hook Hook.
+	 */
+	public static function admin_enqueue_scripts( $hook ) {
+		if ( 'woocommerce_page_wc-settings' !== $hook ) {
+			return;
+		}
+		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [ 'jquery' ], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'bring-settings-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-settings.js', [], Bring_Fraktguiden::VERSION, true );
+		wp_localize_script(
+			'bring-admin-js',
+			'bring_fraktguiden',
+			[
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			]
+		);
+		wp_localize_script(
+			'bring-settings-js',
+			'bring_fraktguiden_settings',
+			[
+				'services_data'    => Fraktguiden_Helper::get_services_data(),
+				'services'         => Fraktguiden_Service::all( 'woocommerce_bring_fraktguiden_services' ),
+				'services_enabled' => array_keys( Fraktguiden_Service::all( 'woocommerce_bring_fraktguiden_services', true ) ),
+				'pro_activated'    => Fraktguiden_Helper::pro_activated(),
+				'i18n'             => [
+					'shipping_name'               => esc_html__( 'Service name:', 'bring-fraktguiden-for-woocommerce' ),
+					'fixed_price_override'        => esc_html__( 'Fixed price override:', 'bring-fraktguiden-for-woocommerce' ),
+					'alternative_customer_number' => esc_html__( 'Alternative customer number:', 'bring-fraktguiden-for-woocommerce' ),
+					'free_shipping_activated_at'  => esc_html__( 'Free shipping activated at:', 'bring-fraktguiden-for-woocommerce' ),
+					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
+					'value_added_services'        => esc_html__( 'Value added services', 'bring-fraktguiden-for-woocommerce' ),
+					'pickup_point'                => esc_html__( 'Pickup points', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_uid'               => esc_html__( 'The api email should be a valid email address.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_customer_number'       => esc_html__( 'Customer numbers should be letters (A-Z) and underscores followed by a dash and a number.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_api_key'               => esc_html__( 'The api key should only contain letters (a-z), numbers and dashes.', 'bring-fraktguiden-for-woocommerce' ),
+					'error_spaces'                => esc_html__( 'Spaces are not allowed in the', 'bring_fraktguiden-for-woocommerce' ),
+					'api_email'                   => esc_html__( 'API email', 'bring_fraktguiden-for-woocommerce' ),
+					'api_key'                     => esc_html__( 'API key', 'bring_fraktguiden-for-woocommerce' ),
+					'customer_number'             => esc_html__( 'customer number', 'bring_fraktguiden-for-woocommerce' ),
+				],
+			]
+		);
+		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
 	}
 }

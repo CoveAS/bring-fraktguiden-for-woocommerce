@@ -113,7 +113,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		$sender = $this->get_sender();
 
-		return [
+		return apply_filters(
+			'bring_fraktguiden_get_consignment_sender_address',
+			[
 			'name'                  => $sender['booking_address_store_name'],
 			'addressLine'           => $sender['booking_address_street1'],
 			'addressLine2'          => $sender['booking_address_street2'],
@@ -127,7 +129,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'email'       => $sender['booking_address_email'],
 				'phoneNumber' => $sender['booking_address_phone'],
 			],
-		];
+		],
+		$wc_order
+	);
 	}
 
 	/**
@@ -192,13 +196,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
-			$consignments['product']['services'] = [
-				'recipientNotification' => [
-					'email'  => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
-				],
-			];
+		if ( $this->customer_specified_delivery_date_time ) {
+			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
 		}
 
 		// Add pickup point.
@@ -211,9 +210,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			];
 		}
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'evarsling' ) ) {
-			$consignments['product']['services'] = [
-				'recipientNotification' => [
+		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
+		if ( $evarsling ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id'     => $evarsling,
 					'email'  => $recipient_address['contact']['email'],
 					'mobile' => $recipient_address['contact']['phoneNumber'],
 				],
