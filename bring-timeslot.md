@@ -33,7 +33,7 @@ add_filter(
 				'timeslot' => [
 					[
 						'id'    => '2021042109_8',              // Date + diff YYYYMMDDHH_{17-9}
-						'start' => 'Lørdag 21. April 09:00', 1
+						'start' => 'Lørdag 21. April 09:00',
 						'end'   => '17:00',
 					],
 					[
