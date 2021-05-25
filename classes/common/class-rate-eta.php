@@ -32,7 +32,7 @@ class Rate_Eta {
 
 		if ( 10000 > $diffDays && 0 < $diffDays ) {
 			$eta = __( 'Tomorrow', 'bring-fraktguiden-for-woocommerce' );
-		} else if ( 80000 > $diffDays ) {
+		} else if ( 60000 > $diffDays ) {
 			$eta = wp_date(
 				'l',
 				$expected_delivery_date->getTimestamp(),
