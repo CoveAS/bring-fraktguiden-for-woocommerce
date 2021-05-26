@@ -49,7 +49,7 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.0 =
+= 1.8.2 =
 
 * Added new feature for alternative delivery dates for home delivery
 * Added ETA support for shipping rates
@@ -58,6 +58,7 @@ See faq.txt for frequently asked questions
 * Added lead time settings
 * Booking - Added {products} parameter for order reference
 * Booking - Changed action for rendering PDF's
+* Fixed syntax error
 
 = 1.7.12 =
 
