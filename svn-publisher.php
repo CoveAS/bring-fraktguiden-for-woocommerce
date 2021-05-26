@@ -190,7 +190,7 @@ if ( $answer !== 'y' ) {
 }
 
 echo "Committing to SVN\n";
-exec( 'svn commit --username drivdigital -m "Synchronized trunk with master branch from Github"', $output, $result );
+exec( 'svn commit --username Forsvunnet -m "Synchronized trunk with master branch from Github"', $output, $result );
 if ( $result ) {
 	die( "ERROR: Failed to commit to SVN.\n" );
 }

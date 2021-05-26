@@ -198,7 +198,7 @@ class Checkout_Modifications {
 
 		add_action(
 			'woocommerce_checkout_update_order_meta',
-			__CLASS__ . '::attach_order_note',
+			__CLASS__ . '::attach_order_note'
 		);
 	}
 
