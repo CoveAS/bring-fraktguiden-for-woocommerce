@@ -24,6 +24,10 @@ class Bring_Zpl_Collection extends Bring_Label_Collection {
 			return $file['file']->get_path();
 		}
 
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once( ABSPATH .'/wp-admin/includes/file.php' );
+		}
+
 		// Initialize WP Filesystem.
 		WP_Filesystem();
 		global $wp_filesystem;
