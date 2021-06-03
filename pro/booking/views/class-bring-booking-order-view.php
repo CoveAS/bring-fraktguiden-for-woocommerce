@@ -215,9 +215,9 @@ class Bring_Booking_Order_View {
 					Bring_Booking_Common_View::render_shipping_date_time(
 						'_bring-delivery-date',
 						[
-							'date'   => $date->format('Y-m-d') ?? '',
-							'hour'   => $date->format('H') ?? '',
-							'minute' => $date->format('i') ?? '',
+							'date'   => $date ? $date->format('Y-m-d') : '',
+							'hour'   => $date ? $date->format('H') : '',
+							'minute' => $date ? $date->format('i') : '',
 						]
 					);
 					?>
