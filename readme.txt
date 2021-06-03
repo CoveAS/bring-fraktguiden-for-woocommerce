@@ -49,7 +49,7 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.3 =
+= 1.8.4 =
 
 * Fixed error when mass booking Mailbox with tracking
 * Fixed error when no date was set for home delivery

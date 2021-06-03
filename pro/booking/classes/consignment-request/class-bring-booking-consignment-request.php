@@ -196,7 +196,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
-		if ( $this->customer_specified_delivery_date_time ) {
+		if ( ! empty( $this->customer_specified_delivery_date_time ) ) {
 			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
 		}
 
