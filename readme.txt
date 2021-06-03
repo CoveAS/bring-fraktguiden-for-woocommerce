@@ -49,6 +49,11 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.8.3 =
+
+* Fixed error when mass booking Mailbox with tracking
+* Fixed error when no date was set for home delivery
+
 = 1.8.2 =
 
 * Added new feature for alternative delivery dates for home delivery
