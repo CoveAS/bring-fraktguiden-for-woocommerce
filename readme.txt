@@ -49,8 +49,9 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.4 =
+= 1.8.5 =
 
+* Added filter bring_fraktguiden_get_consignment_recipient_address
 * Fixed error when mass booking Mailbox with tracking
 * Fixed error when no date was set for home delivery
 
