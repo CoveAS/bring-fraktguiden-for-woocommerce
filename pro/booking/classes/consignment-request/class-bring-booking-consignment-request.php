@@ -130,7 +130,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'phoneNumber' => $sender['booking_address_phone'],
 			],
 		],
-		$wc_order
+		$wc_order,
+		$this
 	);
 	}
 
@@ -151,21 +152,26 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$additional_info = $bring_additional_info_recipient;
 		}
 
-		return [
-			'name'                  => $name,
-			'addressLine'           => $order->get_shipping_address_1(),
-			'addressLine2'          => $order->get_shipping_address_2(),
-			'postalCode'            => $order->get_shipping_postcode(),
-			'city'                  => $order->get_shipping_city(),
-			'countryCode'           => $order->get_shipping_country(),
-			'reference'             => null,
-			'additionalAddressInfo' => null,
-			'contact'               => [
-				'name'        => $full_name,
-				'email'       => $order->get_billing_email(),
-				'phoneNumber' => $order->get_billing_phone(),
+		return apply_filters(
+			'bring_fraktguiden_get_consignment_recipient_address',
+			[
+				'name'                  => $name,
+				'addressLine'           => $order->get_shipping_address_1(),
+				'addressLine2'          => $order->get_shipping_address_2(),
+				'postalCode'            => $order->get_shipping_postcode(),
+				'city'                  => $order->get_shipping_city(),
+				'countryCode'           => $order->get_shipping_country(),
+				'reference'             => null,
+				'additionalAddressInfo' => null,
+				'contact'               => [
+					'name'        => $full_name,
+					'email'       => $order->get_billing_email(),
+					'phoneNumber' => $order->get_billing_phone(),
+				],
 			],
-		];
+			$order,
+			$this
+		);
 	}
 
 	/**
