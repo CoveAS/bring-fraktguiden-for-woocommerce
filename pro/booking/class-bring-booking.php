@@ -83,6 +83,7 @@ class Bring_Booking {
 		// Create new status and order note.
 		$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_print_label_success' );
 		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
+
 		if ( empty( $printed_orders ) ) {
 			return;
 		}
@@ -98,7 +99,7 @@ class Bring_Booking {
 				continue;
 			}
 			// Do not change status if the order does not use fraktguiden shipping.
-			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
+			$adapter = new Bring_WC_Order_Adapter( $order );
 			if ( ! $adapter->has_bring_shipping_methods() ) {
 				continue;
 			}
