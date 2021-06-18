@@ -254,7 +254,11 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
 			'title'       => __( 'Processing', 'bring-fraktguiden-for-woocommerce' ),
-			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'Change order status after booking or printing labels.', 'bring-fraktguiden-for-woocommerce' )
+							. ' <span style="color: #c00">'
+							. ' <strong>' . __( 'WARNING!', 'bring-fraktguiden-for-woocommerce' ) . '</strong> '
+		                    .  __( 'This will change the status even if the order is completed', 'bring-fraktguiden-for-woocommerce' )
+		                    . '</span>',
 			'class'       => 'bring-separate-admin-section',
 		];
 

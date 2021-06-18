@@ -97,6 +97,11 @@ class Bring_Booking {
 			if ( $status === $order->get_status() ) {
 				continue;
 			}
+			// Do not change status if the order does not use fraktguiden shipping.
+			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
+			if ( ! $adapter->has_bring_shipping_methods() ) {
+				continue;
+			}
 			// Update status.
 			$order->update_status(
 				$status,
