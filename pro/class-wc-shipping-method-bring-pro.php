@@ -251,7 +251,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'description' => __( 'When enabled, Bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce' ),
 			'default'     => 'yes',
 		];
-
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
 			'title'       => __( 'Processing', 'bring-fraktguiden-for-woocommerce' ),
@@ -277,6 +276,26 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
 			'default'  => 'none',
 		];
+
+
+		$this->form_fields['booking_home_delivery_section_title'] = [
+			'type'        => 'title',
+			'title'       => __( 'Home delivery', 'bring-fraktguiden-for-woocommerce' ),
+			'class'       => 'bring-separate-admin-section',
+		];
+		$this->form_fields['booking_home_delivery_package_type'] = [
+			'title'    => __( 'Package type for home delivery', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'select',
+			'desc_tip' => __( 'Only applies to home delivery services', 'bring-fraktguiden-for-woocommerce' ),
+			'options'  => [
+				'hd_eur'     => 'HD_EUR_PALLET',
+				'hd_half'    => 'HD_HALF_PALLET',
+				'hd_quarter' => 'HD_QUARTER_PALLET',
+				'hd_loose'   => 'HD_SPECIAL_PALLET',
+			],
+			'default'  => 'hd_eur',
+		];
+
 	}
 
 	/**

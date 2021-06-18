@@ -63,6 +63,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 					$weight = $package[ 'weightInGrams' . $i ];
 				}
 
+				$package_type = null;
+				if ( $this->service->home_delivery ) {
+					$package_type = Fraktguiden_Helper::get_option( 'booking_home_delivery_package_type', 'hd_eur' );
+				}
+
 				$weight_in_kg = (int) $weight / 1000;
 				$data         = [
 					'weightInKg'       => $weight_in_kg,
@@ -73,7 +78,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 						'lengthInCm' => $package[ 'length' . $i ],
 					],
 					'containerId'      => null,
-					'packageType'      => null,
+					'packageType'      => $package_type,
 					'numberOfItems'    => null,
 					'correlationId'    => null,
 				];
@@ -144,7 +149,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$order           = $this->shipping_item->get_order();
 		$full_name       = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
 		$name            = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
-		$additional_info = '';
+		$additional_info = null;
 
 		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_SANITIZE_STRING );
 
@@ -162,7 +167,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'city'                  => $order->get_shipping_city(),
 				'countryCode'           => $order->get_shipping_country(),
 				'reference'             => null,
-				'additionalAddressInfo' => null,
+				'additionalAddressInfo' => $additional_info,
 				'contact'               => [
 					'name'        => $full_name,
 					'email'       => $order->get_billing_email(),

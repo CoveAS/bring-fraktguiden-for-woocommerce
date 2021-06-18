@@ -183,6 +183,7 @@ class Bring_Booking_Order_View {
 	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
 	public static function render_step2_screen( $order ) {
+		$service_data = Fraktguiden_Helper::get_service_data_for_key( $order->bring_product );
 		?>
 		<div class="bring-form-field">
 			<label><?php esc_html_e( 'Customer Number', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
@@ -259,6 +260,9 @@ class Bring_Booking_Order_View {
 	  <textarea
 		name="_bring_additional_info_recipient"
 		id="_bring_additional_info_recipient"
+			  <?php if ( $service_data['home_delivery'] ?? false ) : ?>
+			  	required="required"
+			  <?php endif; ?>
 		></textarea>
 	</div>
 	<?php if ( $order->order->get_customer_note() ) : ?>

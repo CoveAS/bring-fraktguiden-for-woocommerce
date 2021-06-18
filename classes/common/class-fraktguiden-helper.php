@@ -207,8 +207,12 @@ class Fraktguiden_Helper {
 					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
 				}
 			}
+			unset( $service_data );
 		}
-
+		foreach ( $services_data['homedelivery']['services'] as &$service_data ) {
+			$service_data['home_delivery'] = true;
+		}
+		unset( $service_data );
 		return $services_data;
 	}
 
