@@ -127,18 +127,6 @@ trait Settings {
 					'min' => '0',
 				],
 			],
-			'evarsling'                     => [
-				'title'       => __( 'Recipient notification', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Recipient notification over SMS or E-Mail', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __(
-					'<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper based recipient notification.<br/>
-							If enabled, the recipient will receive notification over SMS or E-mail when the parcel has arrived.<br/>
-							This only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>',
-					'bring-fraktguiden-for-woocommerce'
-				),
-				'default'     => 'no',
-			],
 			'availability'                  => [
 				'title'   => __( 'Method availability', 'bring-fraktguiden-for-woocommerce' ),
 				'type'    => 'select',

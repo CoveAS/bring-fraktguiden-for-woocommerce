@@ -176,7 +176,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->from_country = $this->get_setting( 'from_country' );
 		$this->from_zip     = $this->get_setting( 'from_zip' );
 		$this->post_office  = $this->get_setting( 'post_office' );
-		$this->evarsling    = $this->get_setting( 'evarsling' );
 		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
 
