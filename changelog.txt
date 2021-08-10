@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 1.8.6 =
+
+* Added PHP 8 support
+* Fixed a bug with the setting to change order status after printing labels where it would update old orders
+* Added support for booking of HD services
+
 = 1.8.5 =
 
 * Added filter bring_fraktguiden_get_consignment_recipient_address
