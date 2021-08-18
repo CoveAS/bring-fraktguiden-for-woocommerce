@@ -4,10 +4,10 @@ Author URI: https://cove.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
-Requires at least: 4.5
+Requires at least: 5.6
 Tested up to: 5.8
 Requires PHP: 8.0
-WC requires at least: 3.4.0
+WC requires at least: 4.8.0
 WC tested up to: 5.5.2
 Stable tag: 1.8.6
 
