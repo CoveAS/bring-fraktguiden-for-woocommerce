@@ -228,6 +228,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return int
 	 */
 	public function calculate_excl_vat( $line_price ) {
+		
+		$line_price = floatval( $line_price );
+
 		if ( $line_price && wc_prices_include_tax() ) {
 			$tax_rates    = WC_Tax::get_shipping_tax_rates();
 			$remove_taxes = WC_Tax::calc_tax( $line_price, $tax_rates, true );
