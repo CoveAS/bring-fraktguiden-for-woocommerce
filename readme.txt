@@ -9,7 +9,7 @@ Tested up to: 5.8.1
 Requires PHP: 8.0
 WC requires at least: 4.8.0
 WC tested up to: 5.7.1
-Stable tag: 1.8.7
+Stable tag: 1.8.8
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -49,8 +49,9 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.7 =
+= 1.8.8 =
 
+* Fixed some unsupported operand type errors.
 * Fixed a bug with decimals for shipping rates that caused incorrect tax calculation for shops that use 0 decimal places.
 
 = 1.8.6 =

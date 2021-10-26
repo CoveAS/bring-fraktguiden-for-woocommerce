@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.8.8 =
+
+* Fixed some unsupported operand type errors.
+* Fixed a bug with decimals for shipping rates that caused incorrect tax calculation for shops that use 0 decimal places.
+
 = 1.8.6 =
 
 * Added PHP 8 support
