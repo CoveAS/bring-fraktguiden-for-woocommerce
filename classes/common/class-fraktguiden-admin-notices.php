@@ -35,6 +35,7 @@ class Fraktguiden_Admin_Notices {
 
 		add_action( 'admin_notices', __CLASS__ . '::render_notices' );
 		add_action( 'wp_ajax_bring_dismiss_notice', __CLASS__ . '::ajax_dismiss_notice' );
+		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
 		// Check if PRO is available but not activated yet.
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
@@ -79,6 +80,42 @@ class Fraktguiden_Admin_Notices {
 		} else {
 			self::remove_missing_api_customer_number_notice();
 		}
+	}
+
+		/**
+	 * Function adds or removes notice based on shipping method availability in shipping zones
+	 */
+	public static function missing_shipping_method_notice_middleware() {
+    if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
+      self::remove_missing_shipping_method_notice();
+    } else {
+      self::add_missing_shipping_method_notice();
+    }
+  }
+
+	  /**
+	 * Generate missing shipping method notice
+	 */
+	public static function generate_missing_shipping_method_notice() {
+		$messages = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden Shipping Method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a Shipping Method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	* Add missing shipping method notice
+	*/
+	public static function add_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_method', self::generate_missing_shipping_method_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping method notice
+	 */
+	public static function remove_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_method' );
 	}
 
 	/**
