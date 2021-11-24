@@ -507,7 +507,7 @@ class Fraktguiden_Helper {
 		return $home_url['host'];
 	}
 
-		/**
+	/**
 	 * Get pretty-printed shipping methods
 	 *
 	 * @return array
@@ -536,7 +536,7 @@ class Fraktguiden_Helper {
 		return $normalized_shipping_methods;
 	}
 
-		/**
+	/**
 	 * Check if Bring Fraktguiden shipping method is active
 	 *
 	 * @return bool
