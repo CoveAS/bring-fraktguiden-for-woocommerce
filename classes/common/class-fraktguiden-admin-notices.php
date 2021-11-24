@@ -82,18 +82,18 @@ class Fraktguiden_Admin_Notices {
 		}
 	}
 
-		/**
+	/**
 	 * Function adds or removes notice based on shipping method availability in shipping zones
 	 */
-	public static function missing_shipping_method_notice_middleware() {
-    if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
-      self::remove_missing_shipping_method_notice();
-    } else {
-      self::add_missing_shipping_method_notice();
-    }
-  }
+		public static function missing_shipping_method_notice_middleware() {
+			if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
+				self::remove_missing_shipping_method_notice();
+			} else {
+				self::add_missing_shipping_method_notice();
+			}
+		}
 
-	  /**
+	/**
 	 * Generate missing shipping method notice
 	 */
 	public static function generate_missing_shipping_method_notice() {
