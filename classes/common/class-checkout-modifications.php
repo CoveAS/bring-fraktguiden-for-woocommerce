@@ -32,6 +32,25 @@ class Checkout_Modifications {
 			10,
 			4
 		);
+
+		add_action(
+			'woocommerce_review_order_before_submit',
+			__CLASS__ . '::bag_on_door_consent'
+		);
+
+		add_action(
+			'woocommerce_checkout_update_order_meta',
+			__CLASS__ . '::bag_on_door_order_meta',
+			10,
+			1
+		);
+
+		add_action(
+			'woocommerce_admin_order_data_after_billing_address',
+			__CLASS__ . '::bag_on_door_admin_value',
+			10,
+			1
+		);
 	}
 
 
@@ -216,5 +235,47 @@ class Checkout_Modifications {
 		$order->add_order_note(
 			__( 'Customer requested delivery time:', 'bring-fraktguiden-for-woocommerce' ) . " $time_slot"
 		);
+	}
+
+	/**
+	 * Bag on door consent
+	 */
+	public static function bag_on_door_consent() {
+		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
+		
+		if ( ! empty ( $current_shipping_method ) && $current_shipping_method[0] === 'bring_fraktguiden:3584' ) {
+			$name = __FUNCTION__;
+	
+			echo "<div id='$name'>";
+			woocommerce_form_field($name, array(
+				'type'      => 'checkbox',
+				'class'     => array('input-checkbox'),
+				'label'     => __( 'I agree to have my package delivered with bag on door', 'bring-fraktguiden-for-woocommerce' ),
+				'required'	=> true
+			), WC()->checkout->get_value($name));
+			echo '</div>';
+		}
+	}
+
+	/**
+	 * Save user selected bag on door value to order meta
+	 */
+	public static function bag_on_door_order_meta( $order_id ) {
+		$name = "bag_on_door_consent";
+
+		if ( ! empty( $_POST[$name] ) ) {
+			update_post_meta( $order_id, $name, $_POST[$name] );
+		}
+	}
+
+	/**
+	 * Display order related bag on door value in WC order admin page
+	 */
+	public static function bag_on_door_admin_value( $order ) {
+		$consent = get_post_meta( $order->get_id(), "bag_on_door_consent", true );
+
+		if ( $consent == 1 ) {
+			echo '<p><strong>Bag on door: </strong> Enabled</p>';
+		}
 	}
 }
