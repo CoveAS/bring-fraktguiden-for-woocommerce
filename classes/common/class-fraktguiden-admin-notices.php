@@ -80,6 +80,12 @@ class Fraktguiden_Admin_Notices {
 		} else {
 			self::remove_missing_api_customer_number_notice();
 		}
+
+		if ( ! Fraktguiden_Helper::get_option( 'services' ) ) {
+			self::add_missing_shipping_services_notice();
+		} else {
+			self::remove_missing_shipping_services_notice();
+		}
 	}
 
 	/**
@@ -116,6 +122,31 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function remove_missing_shipping_method_notice() {
 		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_method' );
+	}
+
+	/**
+	 * Generate missing shipping service notice
+	 */
+	public static function generate_missing_shipping_services_notice() {
+		$messages = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_general_options_title' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	* Add missing shipping service notice
+	*/
+	public static function add_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_services', self::generate_missing_shipping_services_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping service notice
+	 */
+	public static function remove_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_services' );
 	}
 
 	/**
