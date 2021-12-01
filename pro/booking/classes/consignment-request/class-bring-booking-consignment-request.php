@@ -238,6 +238,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'consignments'  => [ $consignments ],
 		];
 
-		return $data;
+		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
 	}
 }
