@@ -260,13 +260,13 @@ class Checkout_Modifications {
 	/**
 	 * Save user selected bag on door value to order meta
 	 */
-	public static function bag_on_door_order_meta( $order_id ) {
-		$name = "bag_on_door_consent";
+public static function bag_on_door_order_meta( $order_id ) {
+	$consent_value = filter_input(INPUT_POST, 'bag_on_door_consent', FILTER_DEFAULT);
 
-		if ( ! empty( $_POST[$name] ) ) {
-			update_post_meta( $order_id, $name, $_POST[$name] );
-		}
+	if ( $consent_value ) {
+		update_post_meta( $order_id, 'bag_on_door_consent', $consent_value );
 	}
+}
 
 	/**
 	 * Display order related bag on door value in WC order admin page
@@ -275,7 +275,7 @@ class Checkout_Modifications {
 		$consent = get_post_meta( $order->get_id(), "bag_on_door_consent", true );
 
 		if ( $consent == 1 ) {
-			echo '<p><strong>Bag on door: </strong> Enabled</p>';
+			echo esc_html_e( '<p><strong>Bag on door: </strong> Enabled</p>', 'bring-fraktguiden-for-woocommerce' );
 		}
 	}
 }
