@@ -177,4 +177,12 @@ return [
 		'bring_products' => [ 'PAKKE_I_POSTKASSEN', 'PAKKE_I_POSTKASSEN_SPORBAR' ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
+	[
+		'enabled'        => true,
+		'code'           => '1081',
+		'name'           => 'Bag on door delivery',
+		'default'        => false,
+		'bring_products' => [ '3584' ],
+		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+	],
 ];
