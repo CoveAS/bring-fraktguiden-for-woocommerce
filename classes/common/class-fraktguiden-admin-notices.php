@@ -86,18 +86,49 @@ class Fraktguiden_Admin_Notices {
 		} else {
 			self::remove_missing_shipping_services_notice();
 		}
+
+		if ( get_option('woocommerce_kco_settings')['enabled'] === "yes" && Fraktguiden_Helper::get_option('debug') === 'no' ) {
+			self::add_klarna_debug_notice();
+		} else {
+			self::remove_klarna_debug_notice();
+		}
 	}
 
 	/**
 	 * Function adds or removes notice based on shipping method availability in shipping zones
 	 */
-		public static function missing_shipping_method_notice_middleware() {
-			if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
-				self::remove_missing_shipping_method_notice();
-			} else {
-				self::add_missing_shipping_method_notice();
-			}
+	public static function missing_shipping_method_notice_middleware() {
+		if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
+			self::remove_missing_shipping_method_notice();
+		} else {
+			self::add_missing_shipping_method_notice();
 		}
+	}
+	
+	/**
+	 * Generate disabled debug message
+	 */
+	public static function generate_klarna_debug_notice() {
+		$messages = [];
+		$messages[] = '<span style="font-weight:bold">' . __( 'Enable debugging.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'Enabling debug mode is recommended for Klarna Checkout. Activate in <a href="%s">plugin settings</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden#woocommerce_bring_fraktguiden_advanced_settings' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	* Add disabled debug message
+	*/
+	public static function add_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_disabled_debug_mode', self::generate_klarna_debug_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove disabled debug message
+	 */
+	public static function remove_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_disabled_debug_mode' );
+	}
 
 	/**
 	 * Generate missing shipping method notice
