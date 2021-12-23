@@ -246,24 +246,24 @@ class Checkout_Modifications {
 	 * Bag on door consent
 	 */
 	public static function bag_on_door_consent() {
-		if ( WC()->session->get('chosen_payment_method') === 'kco' ) {
+		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
+
+		if ( empty($current_shipping_method)
+		|| $current_shipping_method[0] !== 'bring_fraktguiden:3584'
+		|| WC()->session->get('chosen_payment_method') === 'kco' ) {
 			return;
 		}
 
-		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
-		
-		if ( ! empty ( $current_shipping_method ) && $current_shipping_method[0] === 'bring_fraktguiden:3584' ) {
-			$name = __FUNCTION__;
-	
-			echo "<div id='$name'>";
-			woocommerce_form_field($name, array(
-				'type'      => 'checkbox',
-				'class'     => array('input-checkbox'),
-				'label'     => __( 'I agree to have my package delivered with bag on door', 'bring-fraktguiden-for-woocommerce' ),
-				'required'	=> true
-			), WC()->checkout->get_value($name));
-			echo '</div>';
-		}
+		$name = __FUNCTION__;
+
+		echo "<div id='$name'>";
+		woocommerce_form_field($name, array(
+			'type'      => 'checkbox',
+			'class'     => array('input-checkbox'),
+			'label'     => __( 'I agree to have my package delivered with bag on door', 'bring-fraktguiden-for-woocommerce' ),
+			'required'	=> true
+		), WC()->checkout->get_value($name));
+		echo '</div>';
 	}
 
 	/**
