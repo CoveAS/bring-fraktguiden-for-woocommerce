@@ -376,8 +376,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		];
 
 		$this->form_fields['booking_address_email'] = [
-			'title' => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
-			'type'  => 'text',
+			'title'    => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'email'
 		];
 	}
 
