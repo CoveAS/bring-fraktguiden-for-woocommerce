@@ -51,6 +51,11 @@ class Checkout_Modifications {
 			10,
 			1
 		);
+
+		add_filter(
+			'kco_additional_checkboxes',
+			__CLASS__ . '::kco_bag_on_door_consent'
+		);
 	}
 
 
@@ -241,6 +246,10 @@ class Checkout_Modifications {
 	 * Bag on door consent
 	 */
 	public static function bag_on_door_consent() {
+		if ( WC()->session->get('chosen_payment_method') === 'kco' ) {
+			return;
+		}
+
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 		
 		if ( ! empty ( $current_shipping_method ) && $current_shipping_method[0] === 'bring_fraktguiden:3584' ) {
@@ -275,7 +284,18 @@ class Checkout_Modifications {
 		$consent = get_post_meta( $order->get_id(), "bag_on_door_consent", true );
 
 		if ( $consent == 1 ) {
-			echo esc_html_e( '<p><strong>Bag on door: </strong> Enabled</p>', 'bring-fraktguiden-for-woocommerce' );
+			echo esc_html_e( 'Bag on door: Enabled', 'bring-fraktguiden-for-woocommerce' );
 		}
+	}
+
+	public static function kco_bag_on_door_consent(array $additional_checkboxes ) {
+		$additional_checkboxes[] = array(
+			'id'       => 'klarna_bag_on_door_consent',
+			'text'     => 'I agree to have my package delivered with bag on door',
+			'checked'  => false,
+			'required' => true,
+		);
+
+		return $additional_checkboxes;
 	}
 }
