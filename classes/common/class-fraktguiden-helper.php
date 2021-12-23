@@ -213,7 +213,10 @@ class Fraktguiden_Helper {
 			$service_data['home_delivery'] = true;
 		}
 		unset( $service_data );
-		return $services_data;
+		return apply_filters(
+			'bring_fraktguiden_services_data',
+			$services_data
+		);
 	}
 
 	/**
