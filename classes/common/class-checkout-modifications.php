@@ -288,7 +288,14 @@ class Checkout_Modifications {
 		}
 	}
 
+	/**
+	 * Bag on door option for Klarna checkout
+	 */
 	public static function kco_bag_on_door_consent(array $additional_checkboxes ) {
+		if ( WC()->session->get( 'chosen_shipping_methods' )[0] !== 'bring_fraktguiden:3584' ) {
+			return $additional_checkboxes;
+		}
+
 		$additional_checkboxes[] = array(
 			'id'       => 'klarna_bag_on_door_consent',
 			'text'     => 'I agree to have my package delivered with bag on door',
