@@ -249,31 +249,56 @@ class Checkout_Modifications {
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 
 		if ( empty($current_shipping_method)
-		|| $current_shipping_method[0] !== 'bring_fraktguiden:3584'
+		|| ! in_array( 'bring_fraktguiden:3584', $current_shipping_method )
 		|| WC()->session->get('chosen_payment_method') === 'kco' ) {
 			return;
 		}
-
-		$name = __FUNCTION__;
-
-		echo "<div id='$name'>";
-		woocommerce_form_field($name, array(
-			'type'      => 'checkbox',
-			'class'     => array('input-checkbox'),
-			'label'     => __( 'I agree to have my package delivered with bag on door', 'bring-fraktguiden-for-woocommerce' ),
-			'required'	=> true
-		), WC()->checkout->get_value($name));
-		echo '</div>';
+		$label = esc_html__(
+			"I consent to having the package delivered in a bag on my door if it doesn't fit in the mailbox",
+			'bring-fraktguiden-for-woocommerce'
+		);
+		$checked = checked(
+			isset( $_POST['bag_on_door_consent'] ), // WPCS: input var ok, csrf ok.
+			true,
+			false
+		);
+		$code = json_encode($current_shipping_method, JSON_PRETTY_PRINT);
+		echo <<<HTML
+			<p class="form-row">
+				<label
+					class="
+						woocommerce-form__label
+						woocommerce-form__label-for-checkbox
+						checkbox
+					"
+				>
+					<input
+						type="checkbox"
+						class="
+							woocommerce-form__input
+							woocommerce-form__input-checkbox
+							input-checkbox
+						"
+						name="bag_on_door_consent"
+						$checked
+						id="terms"
+					/>
+					<span class="bag-on-door-text">$label</span></span>
+				</label>
+				<input type="hidden" name="bag-on-door-field" value="1" />
+				<pre>$code</pre>
+			</p>
+		HTML;
 	}
 
 	/**
 	 * Save user selected bag on door value to order meta
 	 */
 	public static function bag_on_door_order_meta( $order_id ) {
-		$consent_value = filter_input(INPUT_POST, 'bag_on_door_consent', FILTER_DEFAULT);
+		$consent_value = filter_input(INPUT_POST, 'bag_on_door_consent', FILTER_VALIDATE_BOOLEAN);
 
 		if ( $consent_value ) {
-			update_post_meta( $order_id, 'bag_on_door_consent', $consent_value );
+			update_post_meta( $order_id, '_bag_on_door_consent', $consent_value );
 		}
 	}
 
@@ -281,11 +306,16 @@ class Checkout_Modifications {
 	 * Display order related bag on door value in WC order admin page
 	 */
 	public static function bag_on_door_admin_value( $order ) {
-		$consent = get_post_meta( $order->get_id(), "bag_on_door_consent", true );
+		$consent = get_post_meta( $order->get_id(), '_bag_on_door_consent', true );
 
-		if ( $consent == 1 ) {
-			echo esc_html_e( 'Bag on door: Enabled', 'bring-fraktguiden-for-woocommerce' );
+		if ( ! $consent ) {
+			return;
 		}
+		echo '<p><strong>';
+		esc_html_e('Bag on door consent', 'bring-fraktguiden-for-woocommerce' );
+		echo ':</strong><br>';
+		esc_html_e( 'Yes', 'bring-fraktguiden-for-woocommerce' );
+		echo '</p>';
 	}
 
 	/**
@@ -298,7 +328,7 @@ class Checkout_Modifications {
 
 		$additional_checkboxes[] = array(
 			'id'       => 'klarna_bag_on_door_consent',
-			'text'     => 'I agree to have my package delivered with bag on door',
+			'text'     => __( "I consent to having the package delivered in a bag on my door if it doesn't fit in the mailbox", 'bring-fraktguiden-for-woocommerce' ),
 			'checked'  => false,
 			'required' => true,
 		);

@@ -104,21 +104,32 @@ class Fraktguiden_Admin_Notices {
 			self::add_missing_shipping_method_notice();
 		}
 	}
-	
+
 	/**
 	 * Generate disabled debug message
 	 */
 	public static function generate_klarna_debug_notice() {
-		$messages = [];
-		$messages[] = '<span style="font-weight:bold">' . __( 'Enable debugging.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
-		$messages[] = sprintf( __( 'Enabling debug mode is recommended for Klarna Checkout. Activate in <a href="%s">plugin settings</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden#woocommerce_bring_fraktguiden_advanced_settings' );
-
-		return implode( '<br>', $messages );
+		return wp_kses_post(
+			sprintf(
+				__(
+					<<<TEXT
+					<strong>Shipping debug mode is not enabled</strong><br>
+					It is recommended to enable debug mode when using Bring Fraktguiden for WooCommerce in combination with Klarna Checkout.
+					Read more about why recommend this action <a href="%s" target="_blank">here</a>.<br>
+					<br>
+					Activate in <a href="%s">plugin settings</a>.
+					TEXT,
+					'bring-fraktguiden-for-woocommerce'
+				),
+				'https://bringfraktguiden.no/docs/debug-mode-with-payment-provider',
+				admin_url() . 'admin.php?page=wc-settings&tab=shipping&section=options#woocommerce_shipping_debug_mode'
+			)
+		);
 	}
 
 	/**
-	* Add disabled debug message
-	*/
+	 * Add disabled debug message
+	 */
 	public static function add_klarna_debug_notice() {
 		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_disabled_debug_mode', self::generate_klarna_debug_notice(), 'error', false );
 	}
