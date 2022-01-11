@@ -318,18 +318,19 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->form_fields['booking_address_store_name'] = [
 			'title'   => __( 'Store Name', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'text',
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'default' => get_bloginfo( 'name' ),
 		];
 
 		$this->form_fields['booking_address_street1'] = [
 			'title'             => __( 'Street Address 1', 'bring-fraktguiden-for-woocommerce' ),
-			'custom_attributes' => array( 'maxlength' => '35' ),
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'type'              => 'text',
 		];
 
 		$this->form_fields['booking_address_street2'] = [
 			'title'             => __( 'Street Address 2', 'bring-fraktguiden-for-woocommerce' ),
-			'custom_attributes' => array( 'maxlength' => '35' ),
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'type'              => 'text',
 		];
 
