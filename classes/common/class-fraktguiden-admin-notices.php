@@ -87,7 +87,8 @@ class Fraktguiden_Admin_Notices {
 			self::remove_missing_shipping_services_notice();
 		}
 
-		if ( get_option('woocommerce_kco_settings')['enabled'] === "yes" && get_option('woocommerce_shipping_debug_mode') === 'no' ) {
+		$kco_settings = get_option('woocommerce_kco_settings');
+		if ( !empty($kco_settings) && is_array($kco_settings) && $kco_settings['enabled'] === "yes" && get_option('woocommerce_shipping_debug_mode', 'no') === 'no' ) {
 			self::add_klarna_debug_notice();
 		} else {
 			self::remove_klarna_debug_notice();
