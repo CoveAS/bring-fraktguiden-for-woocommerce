@@ -60,6 +60,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	private $booking_enabled;
 
 	/**
+	 * $booking_without_bring
+	 *
+	 * @var string
+	 */
+	private $booking_without_bring;
+
+	/**
 	 * $booking_address_store_name
 	 *
 	 * @var string
@@ -156,6 +163,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
 		$this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
 		$this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
+		$this->booking_without_bring          = $this->get_setting( 'booking_without_bring', 'no' );
 		$this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name', get_bloginfo( 'name' ) );
 		$this->booking_address_street1        = $this->get_setting( 'booking_address_street1' );
 		$this->booking_address_street2        = $this->get_setting( 'booking_address_street2' );
@@ -241,6 +249,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
+			'default' => 'no',
+		];
+
+		$this->form_fields['booking_without_bring'] = [
+			'title'   => __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Allow booking without Bring shipping', 'bring-fraktguiden-for-woocommerce' ),
 			'default' => 'no',
 		];
 

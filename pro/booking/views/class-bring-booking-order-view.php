@@ -43,7 +43,7 @@ class Bring_Booking_Order_View {
 
 		// Do not show if the order does not use fraktguiden shipping.
 		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
-		if ( ! $order->has_bring_shipping_methods() ) {
+		if ( Fraktguiden_Helper::get_option('booking_without_bring') !== 'yes' && ! $order->has_bring_shipping_methods() ) {
 			return;
 		}
 		add_meta_box(
