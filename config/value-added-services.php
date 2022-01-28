@@ -185,4 +185,12 @@ return [
 		'bring_products' => [ 3584 ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
+	[
+		'enabled'        => true,
+		'code'           => 'personal_delivery',
+		'name'           => 'Personal delivery',
+		'default'        => false,
+		'bring_products' => [ 5800 ],
+		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+	],
 ];
