@@ -444,6 +444,34 @@ class Bring_Booking_Order_View {
 			}
 		}
 		?>
+		<tr>
+		  <td title="<?php echo $shipping_item_tip; ?>">
+				<input type="checkbox" id="bag_on_door_consent" name="subscribe" value="1" onclick="
+				if (confirm('Please make sure that user agreed to Bag on Door')) {
+					this.checked = true;
+				} else {
+					this.checked = false;
+				}" >
+		  </td>
+		  <td>
+				<?php echo __('Bag on door', 'bring-fraktguiden-for-woocommerce'); ?>
+		  </td>
+		  <td>
+			<input name="width[]" class="dimension" type="text" value="<?php echo $package['dimensions']['widthInCm']; ?>">
+		  </td>
+		  <td>
+			<input name="height[]" class="dimension" type="text" value="<?php echo $package['dimensions']['heightInCm']; ?>">
+		  </td>
+		  <td>
+			<input name="length[]" class="dimension" type="text" value="<?php echo $package['dimensions']['lengthInCm']; ?>">
+		  </td>
+		  <td>
+			<input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
+		  </td>
+		  <td align="right">
+			<span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden-for-woocommerce' ); ?></span>
+		  </td>
+		</tr>
 		<tr class="bring-package-template" style="display: none">
 		  <td title="<?php echo $shipping_item_tip; ?>">
 			<select class="order-item-id" name="order_item_id[]">

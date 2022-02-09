@@ -230,7 +230,13 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 					'mobile' => $recipient_address['contact']['phoneNumber'],
 				],
 			];
+
 		}
+
+		// $bag_on_door = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
+		// if ( $bag_on_door ) {
+		// 	$consignments['product']['additionalServices'];
+		// }
 
 		$data = [
 			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
