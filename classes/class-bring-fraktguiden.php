@@ -26,6 +26,9 @@ class Bring_Fraktguiden {
 		}
 		spl_autoload_register( __CLASS__ . '::class_loader' );
 
+		require_once __DIR__.'/../pro/class-bring-fraktguiden-pro.php';
+		Bring_Fraktguiden_Pro::setup();
+
 		$plugin_path = dirname( __DIR__ );
 		if ( ! class_exists( 'Packer' ) ) {
 			require_once $plugin_path . '/includes/php-laff/src/Packer.php';

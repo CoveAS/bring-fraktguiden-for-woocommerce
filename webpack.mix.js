@@ -14,6 +14,7 @@ mix.setPublicPath('./');
 mix.js('resources/js/bring-fraktguiden-settings.js', 'assets/js')
 	.vue({ version: 2 })
 	.js('resources/js/bring-fraktguiden-checkout.js', 'assets/js')
+	.js('pro/resources/js/booking.js', 'pro/assets/js')
     .sass('resources/sass/pro/admin.scss', 'pro/assets/css')
     .sass('resources/sass/bring-fraktguiden.scss', 'assets/css')
     .sass('resources/sass/bring-fraktguiden-admin.scss', 'assets/css');
