@@ -2,20 +2,20 @@
 <div>
 				<strong>Booking settings:</strong>
 		<ul class="">
-			<li class="flex items-center">
+			<li class="bfwc-flex bfwc-items-center">
 				<input type="checkbox" id="booking_bag_on_door" name="bag_on_door">
 				<label for="booking_bag_on_door">Use bag on door for mailbox packages</label>
-				<div class="relative bring-booking__tooltip">
+				<div class="bfwc-relative bring-booking__tooltip">
 					<span class="bring-booking__info">i</span>
 					<div class="bring-booking__tooltip__reveal">
 						Lorem ipsum dolor ...
 					</div>
 				</div>
 			</li>
-			<li class="flex items-center">
+			<li class="bfwc-flex bfwc-items-center">
 				<input type="checkbox" id="booking_personal_delivery" name="personal_delivery">
 				<label for="booking_personal_delivery">Use personal delivery for pickup parcels</label>
-				<div class="relative bring-booking__tooltip">
+				<div class="bfwc-relative bring-booking__tooltip">
 					<span class="bring-booking__info">i</span>
 					<div class="bring-booking__tooltip__reveal">
 						Lorem ipsum dolor ...
@@ -66,15 +66,15 @@ export default {
 	top: -2px;
 }
 
-.relative {
+.bfwc-relative {
 	position: relative;
 }
 
-.flex {
+.bfwc-flex {
 	display: flex;
 }
 
-.items-center {
+.bfwc-items-center {
 	align-items: center;
 }
 </style>

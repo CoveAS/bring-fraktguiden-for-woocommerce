@@ -74,9 +74,6 @@
 .bring-booking__loader.bring-booking__active {
 	opacity: 0.5;
 }
-
-.bring-booking-packages {
-}
 </style>
 
 <script>

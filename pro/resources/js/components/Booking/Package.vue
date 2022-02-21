@@ -81,10 +81,5 @@ export default {
 			required: true
 		}
 	},
-	mounted() {
-		console.log('Package:');
-		console.log(this.package);
-	},
-	methods: {}
 }
 </script>
