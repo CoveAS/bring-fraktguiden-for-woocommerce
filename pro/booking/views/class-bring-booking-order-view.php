@@ -193,6 +193,11 @@ class Bring_Booking_Order_View {
 		</div>
 
 		<div class="bring-form-field">
+			<label><?php esc_html_e( 'Shipping Service', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+			<?php Bring_Booking_Common_View::render_shipping_service_selector($order); ?>
+		</div>
+
+		<div class="bring-form-field">
 			<label><?php esc_html_e( 'Shipping Date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 
 			<div>
@@ -235,6 +240,8 @@ class Bring_Booking_Order_View {
 				minDate: 0,
 				dateFormat: 'yy-mm-dd'
 			} );
+
+			$( ".bring_shipping_services" ).select2();
 		} );
 		</script>
 		<?php

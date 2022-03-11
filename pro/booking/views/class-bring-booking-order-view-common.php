@@ -63,6 +63,20 @@ class Bring_Booking_Common_View {
 		echo '</div>';
 	}
 
+	public static function render_shipping_service_selector( $adapter = null ) {
+		if ( ! empty( $adapter ) ) {
+			$order = $adapter;
+		}
+
+		echo '<select class="bring_shipping_services" name="_bring_shipping_services">';
+		$services = Fraktguiden_Helper::get_all_services();
+		foreach ( $services as $id => $service ) {
+			$selected = $id == $order->bring_product ? 'selected="selected"' : "";
+			echo '<option value="' . esc_attr( $id ) . '"' . esc_attr( $selected ) . '">' . esc_html( $service ) . '</option>';
+		}
+		echo '</select>';
+	}
+
 	/**
 	 * Render shipping date time
 	 *
