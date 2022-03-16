@@ -247,6 +247,20 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			];
 		}
 
+		// Personal delivery option
+		$personal_delivery = ( $this->service ? $this->service->vas_match( [ 'personal_delivery' ] ) : false );
+		$personal_delivery_consent = filter_input( INPUT_POST, 'booking_personal_delivery', FILTER_SANITIZE_STRING );
+
+		if ( $personal_delivery && $personal_delivery_consent ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id'		 => $personal_delivery,
+					'email'	 => $recipient_address['contact']['email'],
+					'mobile' => $recipient_address['contact']['phoneNumber'],
+				],
+			];
+		}
+
 		$data = [
 			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
 			'schemaVersion' => 1,
