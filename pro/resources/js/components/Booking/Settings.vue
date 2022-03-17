@@ -2,78 +2,50 @@
 	<div>
 		<strong>Booking settings:</strong>
 		<ul class="">
-			<li class="bfwc-flex bfwc-items-center">
-				<input type="checkbox" id="booking_bag_on_door" name="bag_on_door">
-				<label for="booking_bag_on_door">Use bag on door for mailbox packages</label>
-				<div class="bfwc-relative bring-booking__tooltip">
-					<span class="bring-booking__info">i</span>
-					<div class="bring-booking__tooltip__reveal">
-						Lorem ipsum dolor ...
-					</div>
-				</div>
+			<li>
+				<checkbox
+						label="Bag on door (mailbox)"
+						description="Mailbox Parcel (Pakke i postkassen) is a parcel that will be delivered in the recipient’s mailbox. If the parcel for various reasons does not fit in the mailbox, the sender may, against a surcharge, choose to leave the parcel on the door handle (in a special bag) to avoid it being sent to the pickup point. It’s recommended that this delivery option is actively confirmed by the receiver upon booking in the sender’s webshop. When the parcel is delivered as a bag on the door, the bar code is scanned and the recipient will receive an SMS/email. Note that if the parcel is delivered in the mailbox the additional fee will not occur."
+						:checked="checked['1081']"
+						name="bag_on_door"
+				></checkbox>
 			</li>
-			<li class="bfwc-flex bfwc-items-center">
-				<input type="checkbox" id="booking_individual_verification" name="individual_verification">
-				<label for="booking_individual_verification">Use individual verification for pickup parcels</label>
-				<div class="bfwc-relative bring-booking__tooltip">
-					<span class="bring-booking__info">i</span>
-					<div class="bring-booking__tooltip__reveal">
-						Lorem ipsum dolor ...
-					</div>
-				</div>
+			<li>
+				<checkbox
+						description="Only the specified recipient can receive the shipment by showing identification. Use of authorization is not possible."
+						label="Individual verification"
+						:checked="checked['1134']"
+						name="individual_verification"
+				></checkbox>
+			</li>
+			<li>
+				<checkbox
+						description="ID is checked upon delivery. Any person (other than the recipient) can receive the shipment, but must legitimize before receiving it."
+						label="ID verification"
+						:checked="checked['1133']"
+						name="id_verification"
+				></checkbox>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
-export default {}
+import Checkbox from "./Settings/Checkbox";
+
+export default {
+	data() {
+		return {
+			checked: {
+				bag_on_door: true,
+				1133: true,
+				1134: true,
+			},
+		}
+	},
+	components: {Checkbox}
+}
 </script>
 
 <style scoped>
-.bring-booking__tooltip {
-	justify-self: end;
-}
-
-.bring-booking__tooltip:hover .bring-booking__tooltip__reveal {
-	display: block;
-}
-
-.bring-booking__tooltip__reveal {
-	position: absolute;
-	bottom: 2rem;
-	width: 16rem;
-	left: -8rem;
-	background-color: #fff;
-	color: #0a4b78;
-	border: 1px solid #0a4b78;
-	padding: 1rem 2rem;
-	display: none;
-}
-
-.bring-booking__info {
-	border: 2px solid #0a4b78;
-	color: #0a4b78;
-	display: block;
-	width: 1rem;
-	height: 1rem;
-	font-weight: bold;
-	border-radius: 1rem;
-	text-align: center;
-	margin-left: 1rem;
-	position: relative;
-	top: -2px;
-}
-
-.bfwc-relative {
-	position: relative;
-}
-
-.bfwc-flex {
-	display: flex;
-}
-
-.bfwc-items-center {
-	align-items: center;
-}
 </style>

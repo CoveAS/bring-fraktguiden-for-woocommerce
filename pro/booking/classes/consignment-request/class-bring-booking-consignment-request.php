@@ -235,7 +235,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		// Bag on door option
 		$bag_on_door         = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
-		$bag_on_door_consent = filter_input( INPUT_POST, 'booking_bag_on_door', FILTER_VALIDATE_BOOLEAN );
+		$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
 
 		if ( $bag_on_door && $bag_on_door_consent ) {
 			$consignments['product']['additionalServices'] = [
@@ -247,7 +247,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		// ID verification
 		$id_verification         = ( $this->service ? $this->service->vas_match( [ '1133' ] ) : false );
-		$id_verification_checked = filter_input( INPUT_POST, 'booking_id_verification', FILTER_VALIDATE_BOOLEAN );
+		$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
 
 		if ( $id_verification && $id_verification_checked ) {
 			$consignments['product']['additionalServices'] = [
@@ -259,7 +259,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		// Personal delivery option
 		$individual_verification         = ( $this->service ? $this->service->vas_match( [ '1134' ] ) : false );
-		$individual_verification_checked = filter_input( INPUT_POST, 'booking_individual_verification', FILTER_VALIDATE_BOOLEAN );
+		$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
 
 		if ( $individual_verification && $individual_verification_checked ) {
 			$consignments['product']['additionalServices'] = [
