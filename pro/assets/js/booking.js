@@ -17225,7 +17225,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return window.bring_fraktguiden_booking;
   },
-  computed: {},
+  computed: {
+    formattedServices: function formattedServices() {
+      var formatted = [];
+
+      for (var code in this.services) {
+        var service = this.services[code];
+        formatted.push({
+          label: service.service_data.productName,
+          code: code
+        });
+      }
+
+      return formatted;
+    }
+  },
   props: {
     removable: {
       type: Boolean,
@@ -17351,17 +17365,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Settings_Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Settings/Checkbox */ "./pro/resources/js/components/Booking/Settings/Checkbox.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    packages: {
+      required: true,
+      type: Object
+    }
+  },
   data: function data() {
     return {
-      i18n: window.bring_fraktguiden_booking.i18n,
-      checked: {
-        1081: true,
-        1133: true,
-        1134: true
-      }
+      bag_on_door_consent: window.bring_fraktguiden_booking.bag_on_door_consent,
+      services: window.bring_fraktguiden_booking.services,
+      i18n: window.bring_fraktguiden_booking.i18n
     };
+  },
+  computed: {
+    availableVas: function availableVas() {
+      var vas = [];
+
+      for (var x in this.packages) {
+        var pkg = this.packages[x];
+        var service = this.services[pkg.key];
+
+        if (!service) {
+          continue;
+        }
+
+        vas.push.apply(vas, _toConsumableArray(service.vas));
+      }
+
+      console.log(vas);
+      return vas;
+    }
+  },
+  methods: {
+    showVas: function showVas(code) {
+      for (var x in this.availableVas) {
+        var vas = this.availableVas[x];
+
+        if (vas.code !== code) {
+          continue;
+        }
+
+        return true;
+      }
+
+      return false;
+    },
+    checked: function checked(code) {
+      if (code === '1081' && this.bag_on_door_consent !== '1') {
+        return false;
+      }
+
+      for (var x in this.availableVas) {
+        var vas = this.availableVas[x];
+
+        if (vas.code !== code) {
+          continue;
+        }
+
+        if (vas.enabled) {
+          return true;
+        }
+      }
+
+      return false;
+    }
   },
   components: {
     Checkbox: _Settings_Checkbox__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -17424,56 +17506,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = ["title"];
-var _hoisted_2 = {
-  "class": "order-item-id",
-  name: "order_item_id[]"
-};
-var _hoisted_3 = ["value", "selected"];
-var _hoisted_4 = ["data-tip", "innerHTML"];
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_6 = ["innerHTML"];
+var _hoisted_2 = ["value"];
+var _hoisted_3 = ["data-tip", "innerHTML"];
+var _hoisted_4 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_v_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("v-select");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
     title: _ctx.i18n.tip
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.orderItemIds, function (id) {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $props["package"].id = $event;
+    }),
+    "class": "order-item-id",
+    name: "order_item_id[]"
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.orderItemIds, function (id) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-      value: id,
-      selected: id === $props["package"].id
+      value: id
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(id), 9
     /* TEXT, PROPS */
-    , _hoisted_3);
+    , _hoisted_2);
   }), 256
   /* UNKEYED_FRAGMENT */
-  ))])], 8
+  ))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $props["package"].id]])], 8
   /* PROPS */
   , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_v_select, {
     "class": "booking_shipping_service",
     name: "booking_shipping_service[]",
-    options: _ctx.services,
-    modelValue: $props["package"].serviceData.productName,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $props["package"].serviceData.productName = $event;
-    })
+    options: $options.formattedServices,
+    modelValue: $props["package"].key,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $props["package"].key = $event;
+    }),
+    reduce: function reduce(service) {
+      return service.code;
+    }
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue"]), $props["package"].pickupPoint ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
-    key: 0,
-    "class": "tips",
-    "data-tip": $props["package"].pickupPoint.replace('|', '<br/>'),
-    innerHTML: _ctx.i18n.pickupPoint
-  }, null, 8
-  /* PROPS */
-  , _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , ["options", "modelValue", "reduce"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     name: "width[]",
     "class": "dimension",
     type: "number",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $props["package"].dimensions.widthInCm = $event;
     })
   }, null, 512
@@ -17482,7 +17558,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "height[]",
     "class": "dimension",
     type: "number",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $props["package"].dimensions.heightInCm = $event;
     })
   }, null, 512
@@ -17491,7 +17567,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "length[]",
     "class": "dimension",
     type: "number",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $props["package"].dimensions.lengthInCm = $event;
     })
   }, null, 512
@@ -17502,21 +17578,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "number",
     step: ".01",
     min: "0",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $props["package"].weightInKg = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props["package"].weightInKg]])]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [$props.removable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props["package"].weightInKg]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [$props["package"].pickupPoint ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+    key: 0,
+    "class": "tips",
+    "data-tip": $props["package"].pickupPoint.replace('|', '<br/>'),
+    innerHTML: _ctx.i18n.pickupPoint
+  }, null, 8
+  /* PROPS */
+  , _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [$props.removable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
     key: 0,
     "class": "button-link button-link-delete delete",
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
       return _ctx.$emit('remove');
     }),
     innerHTML: _ctx.i18n["delete"]
   }, null, 8
   /* PROPS */
-  , _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  , _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),
@@ -17574,7 +17657,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_settings = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("settings");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     id: "bring_order_id",
     name: "bring_order_id",
@@ -17635,7 +17718,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , _hoisted_13)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_settings)]);
+  , _hoisted_13)])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_settings, {
+    packages: _ctx.packages
+  }, null, 8
+  /* PROPS */
+  , ["packages"])]);
 }
 
 /***/ }),
@@ -17664,28 +17751,34 @@ var _hoisted_2 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("checkbox");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     label: $data.i18n.bag_on_door,
     description: $data.i18n.bag_on_door_description,
-    checked: $data.checked['1081'],
+    checked: $options.checked('1081'),
     name: "bag_on_door"
   }, null, 8
   /* PROPS */
-  , ["label", "description", "checked"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
+  , ["label", "description", "checked"])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.showVas('1081')]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     label: $data.i18n.individual_verification,
     description: $data.i18n.individual_verification_description,
-    checked: $data.checked['1134'],
+    checked: $options.checked('1134'),
     name: "individual_verification"
   }, null, 8
   /* PROPS */
-  , ["label", "description", "checked"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
+  , ["label", "description", "checked"])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.showVas('1134')]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     label: $data.i18n.id_verification,
     description: $data.i18n.id_verification_description,
-    checked: $data.checked['1133'],
+    checked: $options.checked('1133'),
     name: "id_verification"
   }, null, 8
   /* PROPS */
-  , ["label", "description", "checked"])])])]);
+  , ["label", "description", "checked"])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.showVas('1133')]])])]);
 }
 
 /***/ }),
@@ -17785,7 +17878,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking-packages-form input.vs__search {\n\tborder: none;\n}\n.bring-booking-packages-form .vs__selected {\n\twhite-space: pre;\n}\n.bring-booking-packages-form .vs__selected-options {\n\tflex-wrap:nowrap;\n}\n.bring-booking-packages-form .dimension {\n\twidth: 5rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking-packages-form input.vs__search {\n\tborder: none;\n\tbox-shadow: none;\n}\n.bring-booking-packages-form .vs__selected-options {\n\tmin-width: 12rem;\n}\n.bring-booking-packages-form .vs__selected {\n\twhite-space: pre;\n}\n.bring-booking-packages-form .vs__selected-options {\n\tflex-wrap: nowrap;\n}\n.bring-booking-packages-form .dimension {\n\twidth: 5rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17809,7 +17902,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking-meta-box-content table th[data-v-7badcc10] {\n\t\ttext-align: left;\n\t\tbackground: transparent;\n}\n.bring-booking-packages-form[data-v-7badcc10] {\n\tposition: relative;\n}\n.bring-booking__loader[data-v-7badcc10] {\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n\tbackground-color: #fff;\n\topacity: 0;\n\ttransition: opacity 0.5s;\n}\n.bring-booking__loader.bring-booking__active[data-v-7badcc10] {\n\topacity: 0.5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking-meta-box-content table th[data-v-7badcc10] {\n\ttext-align: left;\n\tbackground: transparent;\n}\n.bring-booking-packages-form[data-v-7badcc10] {\n\tposition: relative;\n}\n.bring-booking__loader[data-v-7badcc10] {\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n\tbackground-color: #fff;\n\topacity: 0;\n\ttransition: opacity 0.5s;\n}\n.bring-booking__loader.bring-booking__active[data-v-7badcc10] {\n\topacity: 0.5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

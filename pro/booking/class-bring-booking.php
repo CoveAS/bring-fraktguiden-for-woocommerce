@@ -174,7 +174,7 @@ class Bring_Booking {
 		// One booking request per order shipping item (WC_Order_Item_Shipping).
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
 			// Create the consignment.
-			$consignment_request = Bring_Consignment_Request::create( $shipping_item );
+			$consignment_request = Bring_Booking_Consignment_Request::create( $shipping_item );
 			$args = [
 				'shipping_date_time' => self::get_shipping_date_time(),
 				'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
@@ -216,6 +216,7 @@ class Bring_Booking {
 			}
 
 			// Save the response json to the order.
+			// @TODO: Save per shipping item instead. See issue #48
 			$adapter->update_booking_response( $response );
 
 			// Download labels pdf.

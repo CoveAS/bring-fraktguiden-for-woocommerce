@@ -50,6 +50,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$elements_count = count( $elements );
 
 		foreach ( $order_items_packages as $item_id => $package ) {
+			if (! is_array($package)) {
+				continue;
+			}
 			$package_count = count( $package ) / $elements_count;
 
 			for ( $i = 0; $i < $package_count; $i ++ ) {
@@ -185,9 +188,41 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	 * @return array
 	 */
 	public function create_data() {
-		$recipient_address = $this->get_recipient_address();
 
-		$consignments = [
+		$consignment = $this->create_consignment();
+
+		$data = [
+			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
+			'schemaVersion' => 1,
+			'consignments'  => [ $consignment ],
+		];
+
+		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
+	}
+
+	/**
+	 * Create
+	 *
+	 * @param array $shipping_item Shipping item.
+	 *
+	 * @throws Exception Exception.
+	 *
+	 * @return Bring_Booking_Consignment_Request
+	 */
+	public static function create( $shipping_item ): Bring_Booking_Consignment_Request {
+		$service_id = self::get_bring_product( $shipping_item );
+
+		if ( ! $service_id ) {
+			throw new Exception( 'No bring product was found on the shipping method' );
+		}
+
+
+		return new self( $shipping_item );
+	}
+
+	private function create_consignment(): array {
+		$recipient_address = $this->get_recipient_address();
+		$consignment = [
 			'shippingDateTime' => $this->shipping_date_time,
 			// Sender and recipient.
 			'parties'          => [
@@ -208,73 +243,60 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		];
 
 		if ( ! empty( $this->customer_specified_delivery_date_time ) ) {
-			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
+			$consignment['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
 		}
 
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
 
 		if ( $pickup_point_id ) {
-			$consignments['parties']['pickupPoint'] = [
+			$consignment['parties']['pickupPoint'] = [
 				'id'          => $pickup_point_id,
 				'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
 			];
 		}
 
+		$consignment['product']['additionalServices'] = [];
 		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
 		if ( $evarsling ) {
-			$consignments['product']['additionalServices'] = [
-				[
-					'id'     => $evarsling,
-					'email'  => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
-				],
+			$consignment['product']['additionalServices'][] = [
+				'id'     => $evarsling,
+				'email'  => $recipient_address['contact']['email'],
+				'mobile' => $recipient_address['contact']['phoneNumber'],
 			];
 
 		}
 
 		// Bag on door option
-		$bag_on_door         = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
 		$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
-
-		if ( $bag_on_door && $bag_on_door_consent ) {
-			$consignments['product']['additionalServices'] = [
-				[
-					'id' => $bag_on_door,
-				],
-			];
+		if (
+			$this->service
+			&& $this->service->has_vas( '1081' )
+			&& $bag_on_door_consent
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1081'];
 		}
 
 		// ID verification
-		$id_verification         = ( $this->service ? $this->service->vas_match( [ '1133' ] ) : false );
 		$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
-
-		if ( $id_verification && $id_verification_checked ) {
-			$consignments['product']['additionalServices'] = [
-				[
-					'id' => $id_verification,
-				],
-			];
+		if (
+			$this->service
+			&& $this->service->has_vas( '1133' )
+			&& $id_verification_checked
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1133'];
 		}
 
 		// Personal delivery option
-		$individual_verification         = ( $this->service ? $this->service->vas_match( [ '1134' ] ) : false );
 		$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
-
-		if ( $individual_verification && $individual_verification_checked ) {
-			$consignments['product']['additionalServices'] = [
-				[
-					'id' => $individual_verification,
-				],
-			];
+		if (
+			$this->service
+			&& $this->service->has_vas( '1134' )
+			&& $individual_verification_checked
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1134'];
 		}
 
-		$data = [
-			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
-			'schemaVersion' => 1,
-			'consignments'  => [ $consignments ],
-		];
-
-		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
+		return $consignment;
 	}
 }

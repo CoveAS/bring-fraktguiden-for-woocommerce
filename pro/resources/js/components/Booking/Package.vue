@@ -2,11 +2,14 @@
 
 	<tr>
 		<td :title="i18n.tip">
-			<select class="order-item-id" name="order_item_id[]">
+			<select
+					v-model="package.id"
+					class="order-item-id"
+					name="order_item_id[]"
+			>
 				<option
 						v-for="id in orderItemIds"
 						:value="id"
-						:selected="id === package.id"
 				>{{ id }}
 				</option>
 			</select>
@@ -15,16 +18,11 @@
 			<v-select
 					class="booking_shipping_service"
 					name="booking_shipping_service[]"
-					:options="services"
-					v-model="package.serviceData.productName"
+					:options="formattedServices"
+					v-model="package.key"
+					:reduce="service => service.code"
 			>
 			</v-select>
-			<span
-					v-if="package.pickupPoint"
-					class="tips"
-					:data-tip="package.pickupPoint.replace( '|', '<br/>')"
-					v-html="i18n.pickupPoint"
-			></span>
 		</td>
 		<td>
 			<input
@@ -60,7 +58,14 @@
 					v-model="package.weightInKg"
 			>
 		</td>
-		<td></td>
+		<td>
+			<span
+			  v-if="package.pickupPoint"
+			  class="tips"
+			  :data-tip="package.pickupPoint.replace( '|', '<br/>')"
+			  v-html="i18n.pickupPoint"
+	  ></span>
+		</td>
 		<td>
 			<span
 			  v-if="removable"
@@ -76,6 +81,11 @@
 
 .bring-booking-packages-form input.vs__search {
 	border: none;
+	box-shadow: none;
+}
+
+.bring-booking-packages-form .vs__selected-options {
+	min-width: 12rem;
 }
 
 .bring-booking-packages-form .vs__selected {
@@ -83,7 +93,7 @@
 }
 
 .bring-booking-packages-form .vs__selected-options {
-	flex-wrap:nowrap;
+	flex-wrap: nowrap;
 }
 
 .bring-booking-packages-form .dimension {
@@ -99,7 +109,21 @@ export default {
 	data() {
 		return window.bring_fraktguiden_booking;
 	},
-	computed: {},
+	computed: {
+		formattedServices() {
+			const formatted = [];
+			for (let code in this.services) {
+				const service = this.services[code];
+				formatted.push(
+					{
+						label: service.service_data.productName,
+						code: code,
+					}
+				);
+			}
+			return formatted;
+		}
+	},
 	props: {
 		removable: {
 			type: Boolean,

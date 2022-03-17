@@ -1,65 +1,71 @@
 <template>
-	<form class="bring-booking-packages-form">
-		<input
-				type="hidden"
-				id="bring_order_id"
-				name="bring_order_id"
-				:value="orderId"
-		>
-		<div
-				v-show="showLoader"
-				class="bring-booking__loader"
-				:class="loading ? 'bring-booking__active' : ''"
-		>
-		</div>
-		<table
-				class="bring-booking-packages"
-		>
-			<thead>
-			<tr>
-				<th v-html="orderId" :title="i18n.tip"></th>
-				<th v-html="i18n.product"></th>
-				<th v-html="i18n.width"></th>
-				<th v-html="i18n.height"></th>
-				<th v-html="i18n.length"></th>
-				<th v-html="i18n.weight"></th>
-				<th v-html="i18n.pickupPoint"></th>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
+	<div>
 
-			<package
-					v-for="(packageData, id) in packages"
-					:key="id"
-					:package="packageData"
-					:removable="packages.length > 1"
-					v-on:remove="removePackage(id)"
+		<form class="bring-booking-packages-form">
+			<input
+					type="hidden"
+					id="bring_order_id"
+					name="bring_order_id"
+					:value="orderId"
 			>
-			</package>
+			<div
+					v-show="showLoader"
+					class="bring-booking__loader"
+					:class="loading ? 'bring-booking__active' : ''"
+			>
+			</div>
+			<table
+					class="bring-booking-packages"
+			>
+				<thead>
+				<tr>
+					<th v-html="orderId" :title="i18n.tip"></th>
+					<th v-html="i18n.product"></th>
+					<th v-html="i18n.width"></th>
+					<th v-html="i18n.height"></th>
+					<th v-html="i18n.length"></th>
+					<th v-html="i18n.weight"></th>
+					<th v-html="i18n.pickupPoint"></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
 
-			<tr>
-				<td colspan="7"></td>
-				<td>
+				<package
+						v-for="(packageData, id) in packages"
+						:key="id"
+						:package="packageData"
+						:removable="packages.length > 1"
+						v-on:remove="removePackage(id)"
+				>
+				</package>
+
+				<tr>
+					<td colspan="7"></td>
+					<td>
 					<span
 				  class="button add"
 				  v-html="i18n.add"
 				  @click="addPackage"
 		  ></span>
-				</td>
-			</tr>
-			</tbody>
-		</table>
-	<settings></settings>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+		<settings
+				:packages="packages"
+		></settings>
 
-	</form>
+	</div>
 </template>
 
 <style scoped>
 .bring-booking-meta-box-content table th {
-		text-align: left;
-		background: transparent;
+	text-align: left;
+	background: transparent;
 }
+
 .bring-booking-packages-form {
 	position: relative;
 }

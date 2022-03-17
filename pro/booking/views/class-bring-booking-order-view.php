@@ -27,16 +27,16 @@ class Bring_Booking_Order_View {
 	 * @return void
 	 */
 	public static function init() {
-		add_action( 'add_meta_boxes', array( __CLASS__, 'add_booking_meta_box' ), 1, 2 );
-		add_action( 'woocommerce_order_action_bring_book_with_bring', array( __CLASS__, 'send_booking' ) );
-		add_action( 'save_post', array( __CLASS__, 'redirect_page' ) );
+		add_action( 'add_meta_boxes', __CLASS__ . '::add_booking_meta_box', 1, 2 );
+		add_action( 'woocommerce_order_action_bring_book_with_bring', __CLASS__ . '::send_booking' );
+		add_action( 'save_post', __CLASS__ . '::redirect_page' );
 	}
 
 	/**
 	 * Add booking meta box
 	 *
-	 * @param string  $post_type Post type.
-	 * @param WP_Post $post      Post.
+	 * @param string $post_type Post type.
+	 * @param WP_Post $post Post.
 	 */
 	public static function add_booking_meta_box( $post_type, $post ) {
 		if ( 'shop_order' !== $post_type ) {
@@ -45,16 +45,16 @@ class Bring_Booking_Order_View {
 
 		// Do not show if the order does not use fraktguiden shipping.
 		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
-		if ( Fraktguiden_Helper::get_option('booking_without_bring') !== 'yes' && ! $order->has_bring_shipping_methods() ) {
+		if ( Fraktguiden_Helper::get_option( 'booking_without_bring' ) !== 'yes' && ! $order->has_bring_shipping_methods() ) {
 			return;
 		}
 		add_meta_box(
-			'woocommerce-order-bring-booking',
-			__( 'Bring Booking', 'bring-fraktguiden-for-woocommerce' ),
-			array( __CLASS__, 'render_booking_meta_box' ),
-			'shop_order',
-			'normal',
-			'high'
+				'woocommerce-order-bring-booking',
+				__( 'Bring Booking', 'bring-fraktguiden-for-woocommerce' ),
+				array( __CLASS__, 'render_booking_meta_box' ),
+				'shop_order',
+				'normal',
+				'high'
 		);
 	}
 
@@ -69,38 +69,38 @@ class Bring_Booking_Order_View {
 		$step2    = Bring_Booking_Common_View::is_step2();
 		?>
 
-	<div class="bring-booking-meta-box-content">
-		<?php
-		if ( ! $order->is_booked() ) {
-			self::render_progress_tracker( $order );
-		}
+		<div class="bring-booking-meta-box-content">
+			<?php
+			if ( ! $order->is_booked() ) {
+				self::render_progress_tracker( $order );
+			}
 
-		?>
-		<div class="bring-booking-meta-box-content-body">
-		<?php
-		if ( $order->has_booking_errors() && ! $step2 ) {
-			self::render_errors( $order );
-		}
+			?>
+			<div class="bring-booking-meta-box-content-body">
+				<?php
+				if ( $order->has_booking_errors() && ! $step2 ) {
+					self::render_errors( $order );
+				}
 
-		if ( ! $step2 && ! $order->is_booked() ) {
-			self::render_start( $order );
-		}
+				if ( ! $step2 && ! $order->is_booked() ) {
+					self::render_start( $order );
+				}
 
-		if ( $step2 && ! $order->is_booked() ) {
-			self::render_step2_screen( $order );
-		}
+				if ( $step2 && ! $order->is_booked() ) {
+					self::render_step2_screen( $order );
+				}
 
-		if ( $order->is_booked() ) {
-			self::render_booking_success_screen( $order );
-		}
+				if ( $order->is_booked() ) {
+					self::render_booking_success_screen( $order );
+				}
 
-		if ( ! $order->is_booked() ) {
-			self::render_footer( $step2 );
-		}
-		?>
+				if ( ! $order->is_booked() ) {
+					self::render_footer( $step2 );
+				}
+				?>
 
+			</div>
 		</div>
-	</div>
 		<?php
 	}
 
@@ -114,17 +114,17 @@ class Bring_Booking_Order_View {
 		<?php
 		if ( ! $order->has_booking_errors() ) {
 			?>
-		<div>
-			<?php esc_html_e( 'Press start to start booking', 'bring-fraktguiden-for-woocommerce' ); ?>
-			<br>
-			<?php
-			$next_status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
-			if ( 'none' !== $next_status ) {
-				$order_statuses = wc_get_order_statuses();
-				printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden-for-woocommerce' ), mb_strtolower( $order_statuses[ $next_status ] ) );
-			}
-			?>
-		</div>
+			<div>
+				<?php esc_html_e( 'Press start to start booking', 'bring-fraktguiden-for-woocommerce' ); ?>
+				<br>
+				<?php
+				$next_status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
+				if ( 'none' !== $next_status ) {
+					$order_statuses = wc_get_order_statuses();
+					printf( __( 'Order status will be set to %s upon successful booking', 'bring-fraktguiden-for-woocommerce' ), mb_strtolower( $order_statuses[ $next_status ] ) );
+				}
+				?>
+			</div>
 			<?php
 		}
 		?>
@@ -139,24 +139,24 @@ class Bring_Booking_Order_View {
 	 */
 	public static function render_booking_success_screen( $order ) {
 		?>
-	<div class="bring-info-box">
-		<div>
-		<?php
-		$status = Bring_Booking_Common_View::get_booking_status_info( $order );
-		echo Bring_Booking_Common_View::create_status_icon( $status, 90 );
-		?>
-		<h3><?php echo $status['text']; ?></h3>
-		<?php if ( 'completed' !== $order->order->get_status() ) { ?>
-			<div style="text-align:center;margin-bottom:1em;">
-				<?php esc_html_e( 'Note: Order is not completed', 'bring-fraktguiden-for-woocommerce' ); ?>
+		<div class="bring-info-box">
+			<div>
+				<?php
+				$status = Bring_Booking_Common_View::get_booking_status_info( $order );
+				echo Bring_Booking_Common_View::create_status_icon( $status, 90 );
+				?>
+				<h3><?php echo $status['text']; ?></h3>
+				<?php if ( 'completed' !== $order->order->get_status() ) { ?>
+					<div style="text-align:center;margin-bottom:1em;">
+						<?php esc_html_e( 'Note: Order is not completed', 'bring-fraktguiden-for-woocommerce' ); ?>
+					</div>
+				<?php } ?>
 			</div>
-		<?php } ?>
+			<div>
+				<h3 style="margin-top:0"><?php esc_html_e( 'Consignments', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
+				<?php self::render_consignments( $order ); ?>
+			</div>
 		</div>
-		<div>
-			<h3 style="margin-top:0"><?php esc_html_e( 'Consignments', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
-			<?php self::render_consignments( $order ); ?>
-		</div>
-	</div>
 		<?php
 	}
 
@@ -168,14 +168,14 @@ class Bring_Booking_Order_View {
 	public static function render_consignments( $order ) {
 		$type = $order->get_consignment_type();
 		?>
-	<div class="bring-consignments">
-		<?php
-		$consignments = $order->get_booking_consignments();
-		foreach ( $consignments as $consignment ) {
-			require dirname( __DIR__ ) . '/templates/consignment-table-' . $type . '.php';
-		}
-		?>
-	</div>
+		<div class="bring-consignments">
+			<?php
+			$consignments = $order->get_booking_consignments();
+			foreach ( $consignments as $consignment ) {
+				require dirname( __DIR__ ) . '/templates/consignment-table-' . $type . '.php';
+			}
+			?>
+		</div>
 		<?php
 	}
 
@@ -194,7 +194,7 @@ class Bring_Booking_Order_View {
 
 		<div class="bring-form-field">
 			<label><?php esc_html_e( 'Shipping Service', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
-			<?php Bring_Booking_Common_View::render_shipping_service_selector($order); ?>
+			<?php Bring_Booking_Common_View::render_shipping_service_selector( $order ); ?>
 		</div>
 
 		<div class="bring-form-field">
@@ -206,43 +206,44 @@ class Bring_Booking_Order_View {
 		</div>
 
 
-		<?php if ( in_array( $order->bring_product, [5600, 'PA_DOREN'] ) ): ?>
+		<?php if ( in_array( $order->bring_product, [ 5600, 'PA_DOREN' ] ) ): ?>
 
 			<?php
-				$date = false;
-				$time_slot = $order->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
-				if ( $time_slot ) {
-					$date = new DateTime( $time_slot );
-				}
+			$date      = false;
+			$time_slot = $order->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
+			if ( $time_slot ) {
+				$date = new DateTime( $time_slot );
+			}
 			?>
 			<div class="bring-form-field">
-				<label><?php esc_html_e( 'Customer requested delivery date', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+				<label><?php esc_html_e( 'Customer requested delivery date', 'bring-fraktguiden-for-woocommerce' ); ?>
+					:</label>
 
 				<div>
 					<?php
 					Bring_Booking_Common_View::render_shipping_date_time(
-						'_bring-delivery-date',
-						[
-							'date'   => $date ? $date->format('Y-m-d') : '',
-							'hour'   => $date ? $date->format('H') : '',
-							'minute' => $date ? $date->format('i') : '',
-						]
+							'_bring-delivery-date',
+							[
+									'date'   => $date ? $date->format( 'Y-m-d' ) : '',
+									'hour'   => $date ? $date->format( 'H' ) : '',
+									'minute' => $date ? $date->format( 'i' ) : '',
+							]
 					);
 					?>
 				</div>
 			</div>
 
-		<?php endif;?>
+		<?php endif; ?>
 
 		<script>
-		jQuery( document ).ready( function ( $) {
-			$( "[name=_bring-shipping-date], [name=_bring-delivery-date]" ).datepicker( {
-				minDate: 0,
-				dateFormat: 'yy-mm-dd'
-			} );
+			jQuery(document).ready(function ($) {
+				$("[name=_bring-shipping-date], [name=_bring-delivery-date]").datepicker({
+					minDate: 0,
+					dateFormat: 'yy-mm-dd'
+				});
 
-			$( ".bring_shipping_services" ).select2();
-		} );
+				$(".bring_shipping_services").select2();
+			});
 		</script>
 		<?php
 
@@ -251,46 +252,46 @@ class Bring_Booking_Order_View {
 			return;
 		}
 		$shipping_item = reset( $shipping_items );
-		$consignment   = new Bring_Booking_Consignment_Request( $shipping_item );
+		$consignment   = Bring_Booking_Consignment_Request::create( $shipping_item );
 		self::render_parties( $consignment );
 		?>
-	<div class="bring-form-field">
-	  <label for="_bring_additional_info_sender">
-		<?php esc_html_e( 'Additional Info', 'bring-fraktguiden-for-woocommerce' ); ?>
-		(<?php esc_html_e( 'Sender', 'bring-fraktguiden-for-woocommerce' ); ?>)
-	  </label>
-	  <textarea name="_bring_additional_info_sender" id="_bring_additional_info_sender"></textarea>
-	</div>
-	<div class="bring-form-field">
-	  <label for="_bring_additional_info_recipient">
-		<?php esc_html_e( 'Additional Info', 'bring-fraktguiden-for-woocommerce' ); ?>
-		(<?php esc_html_e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?>)
-	  </label>
-	  <textarea
-		name="_bring_additional_info_recipient"
-		id="_bring_additional_info_recipient"
+		<div class="bring-form-field">
+			<label for="_bring_additional_info_sender">
+				<?php esc_html_e( 'Additional Info', 'bring-fraktguiden-for-woocommerce' ); ?>
+				(<?php esc_html_e( 'Sender', 'bring-fraktguiden-for-woocommerce' ); ?>)
+			</label>
+			<textarea name="_bring_additional_info_sender" id="_bring_additional_info_sender"></textarea>
+		</div>
+		<div class="bring-form-field">
+			<label for="_bring_additional_info_recipient">
+				<?php esc_html_e( 'Additional Info', 'bring-fraktguiden-for-woocommerce' ); ?>
+				(<?php esc_html_e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?>)
+			</label>
+			<textarea
+					name="_bring_additional_info_recipient"
+					id="_bring_additional_info_recipient"
 			  <?php if ( $service_data['home_delivery'] ?? false ) : ?>
-			  	required="required"
+				  required="required"
 			  <?php endif; ?>
 		></textarea>
-	</div>
-	<?php if ( $order->order->get_customer_note() ) : ?>
-		<div class="bring-customer-note">
+		</div>
+		<?php if ( $order->order->get_customer_note() ) : ?>
+			<div class="bring-customer-note">
 		  <span class="bring-customer-note__label">
 			<?php esc_html_e( 'Customer note from the order', 'bring-fraktguiden-for-woocommerce' ); ?>:
 		  </span>
-		  <span class="bring-customer-note__value">
+				<span class="bring-customer-note__value">
 			<?php echo esc_html( $order->order->get_customer_note() ); ?>
 		  </span>
-		</div>
-	<?php endif; ?>
+			</div>
+		<?php endif; ?>
 
-	<div class="bring-form-field" style="margin-bottom:25px">
-	  <label>
-		<?php esc_html_e( 'Packages', 'bring-fraktguiden-for-woocommerce' ); ?>:
-	  </label>
-		<?php self::render_packages( $order ); ?>
-	</div>
+		<div class="bring-form-field" style="margin-bottom:25px">
+			<label>
+				<?php esc_html_e( 'Packages', 'bring-fraktguiden-for-woocommerce' ); ?>:
+			</label>
+			<?php self::render_packages( $order ); ?>
+		</div>
 		<?php
 	}
 
@@ -300,11 +301,11 @@ class Bring_Booking_Order_View {
 	public static function render_footer( $is_step2 ) {
 		$missing_params  = false;
 		$required_params = [
-			'booking_address_store_name',
-			'booking_address_street1',
-			'booking_address_postcode',
-			'booking_address_city',
-			'booking_address_country',
+				'booking_address_store_name',
+				'booking_address_street1',
+				'booking_address_postcode',
+				'booking_address_city',
+				'booking_address_country',
 		];
 		foreach ( $required_params as $field ) {
 			if ( ! Fraktguiden_Helper::get_option( $field ) ) {
@@ -312,32 +313,32 @@ class Bring_Booking_Order_View {
 			}
 		}
 		?>
-	<div class="bring-booking-footer">
-		<?php if ( $is_step2 ) { ?>
-		<!-- @todo: use a real link / not history back -->
-		<button type="button" onclick="window.history.back()"
-				class="button"
-				style="margin-right:1em"><?php _e( 'Cancel', 'bring-fraktguiden-for-woocommerce' ); ?></button>
-		<button type="submit" name="wc_order_action"
-				value="bring_book_with_bring"
-				data-tip="<?php _e( 'Update order and send consignment to Bring', 'bring-fraktguiden-for-woocommerce' ); ?>"
-				class="button button-primary tips">
-			<?php echo Bring_Booking_Common_View::booking_label(); ?>
-		</button>
-		<?php } elseif ( Fraktguiden_Helper::pro_activated() && $missing_params ) { ?>
-		<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>#woocommerce_bring_fraktguiden_booking_title"
-		   data-tip="<?php _e( 'Update your store address.', 'bring-fraktguiden-for-woocommerce' ); ?>"
-		   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden-for-woocommerce' ); ?></a>
-		<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
-		<button type="submit" name="_bring-start-booking"
-				data-tip="<?php _e( 'Start creating a label to ship this order with Mybring', 'bring-fraktguiden-for-woocommerce' ); ?>"
-				class="button button-primary tips"><?php _e( 'Start booking', 'bring-fraktguiden-for-woocommerce' ); ?></button>
-		<?php } else { ?>
-		<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>"
-		   data-tip="<?php _e( 'You have to upgrade to PRO in order to use this feature.', 'bring-fraktguiden-for-woocommerce' ); ?>"
-		   class="button button-primary tips"><?php _e( 'Activate PRO', 'bring-fraktguiden-for-woocommerce' ); ?></a>
-		<?php } ?>
-	</div>
+		<div class="bring-booking-footer">
+			<?php if ( $is_step2 ) { ?>
+				<!-- @todo: use a real link / not history back -->
+				<button type="button" onclick="window.history.back()"
+						class="button"
+						style="margin-right:1em"><?php _e( 'Cancel', 'bring-fraktguiden-for-woocommerce' ); ?></button>
+				<button type="submit" name="wc_order_action"
+						value="bring_book_with_bring"
+						data-tip="<?php _e( 'Update order and send consignment to Bring', 'bring-fraktguiden-for-woocommerce' ); ?>"
+						class="button button-primary tips">
+					<?php echo Bring_Booking_Common_View::booking_label(); ?>
+				</button>
+			<?php } elseif ( Fraktguiden_Helper::pro_activated() && $missing_params ) { ?>
+				<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>#woocommerce_bring_fraktguiden_booking_title"
+				   data-tip="<?php _e( 'Update your store address.', 'bring-fraktguiden-for-woocommerce' ); ?>"
+				   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden-for-woocommerce' ); ?></a>
+			<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
+				<button type="submit" name="_bring-start-booking"
+						data-tip="<?php _e( 'Start creating a label to ship this order with Mybring', 'bring-fraktguiden-for-woocommerce' ); ?>"
+						class="button button-primary tips"><?php _e( 'Start booking', 'bring-fraktguiden-for-woocommerce' ); ?></button>
+			<?php } else { ?>
+				<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>"
+				   data-tip="<?php _e( 'You have to upgrade to PRO in order to use this feature.', 'bring-fraktguiden-for-woocommerce' ); ?>"
+				   class="button button-primary tips"><?php _e( 'Activate PRO', 'bring-fraktguiden-for-woocommerce' ); ?></a>
+			<?php } ?>
+		</div>
 		<?php
 	}
 
@@ -346,30 +347,30 @@ class Bring_Booking_Order_View {
 	 */
 	static function render_parties( $consignment ) {
 		?>
-	<div class="bring-form-field">
-	  <a class="bring-show-parties button"
-		 href="#"><?php _e( 'Show Parties', 'bring-fraktguiden-for-woocommerce' ); ?></a>
-	</div>
-	<script type="text/javascript">
-	  (function () {
-		jQuery( '.bring-show-parties' ).click( function ( evt ) {
-		  evt.preventDefault();
-		  jQuery( '.bring-booking-parties' ).toggle();
-		} );
-	  })();
-	</script>
+		<div class="bring-form-field">
+			<a class="bring-show-parties button"
+			   href="#"><?php _e( 'Show Parties', 'bring-fraktguiden-for-woocommerce' ); ?></a>
+		</div>
+		<script type="text/javascript">
+			(function () {
+				jQuery('.bring-show-parties').click(function (evt) {
+					evt.preventDefault();
+					jQuery('.bring-booking-parties').toggle();
+				});
+			})();
+		</script>
 
-	<div class="bring-booking-parties bring-form-field bring-flex-box"
-		 style="display:none">
-	  <div>
-		<h3><?php _e( 'Sender Address', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
-		<?php self::render_address_table( $consignment->get_sender_address() ); ?>
-	  </div>
-	  <div>
-		<h3><?php _e( 'Recipient Address', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
-		<?php self::render_address_table( $consignment->get_recipient_address() ); ?>
-	  </div>
-	</div>
+		<div class="bring-booking-parties bring-form-field bring-flex-box"
+			 style="display:none">
+			<div>
+				<h3><?php _e( 'Sender Address', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
+				<?php self::render_address_table( $consignment->get_sender_address() ); ?>
+			</div>
+			<div>
+				<h3><?php _e( 'Recipient Address', 'bring-fraktguiden-for-woocommerce' ); ?></h3>
+				<?php self::render_address_table( $consignment->get_recipient_address() ); ?>
+			</div>
+		</div>
 		<?php
 	}
 
@@ -386,14 +387,14 @@ class Bring_Booking_Order_View {
 	 */
 	public static function render_table_row( $label, $value ) {
 		?>
-	<tr>
-	  <td>
-		<?php echo $label; ?>:
-	  </td>
-	  <td>
-		<?php echo $value; ?>
-	  </td>
-	</tr>
+		<tr>
+			<td>
+				<?php echo $label; ?>:
+			</td>
+			<td>
+				<?php echo $value; ?>
+			</td>
+		</tr>
 		<?php
 	}
 
@@ -402,34 +403,34 @@ class Bring_Booking_Order_View {
 	 */
 	public static function render_address_table( $address ) {
 		?>
-	<table>
-	  <tbody>
-		<?php
-		self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['name'] );
-		self::render_table_row( __( 'Street Address 1', 'bring-fraktguiden-for-woocommerce' ), $address['addressLine'] );
-		self::render_table_row( __( 'Street Address 2', 'bring-fraktguiden-for-woocommerce' ), $address['addressLine2'] );
-		self::render_table_row( __( 'Postcode', 'bring-fraktguiden-for-woocommerce' ), $address['postalCode'] );
-		self::render_table_row( __( 'City', 'bring-fraktguiden-for-woocommerce' ), $address['city'] );
-		self::render_table_row( __( 'Country', 'bring-fraktguiden-for-woocommerce' ), $address['countryCode'] );
-		if ( $address['reference'] ) {
-			self::render_table_row( __( 'Reference', 'bring-fraktguiden-for-woocommerce' ), $address['reference'] );
-		}
-		if ( $address['additionalAddressInfo'] ) {
-			self::render_table_row( __( 'Additional Address Info', 'bring-fraktguiden-for-woocommerce' ), $address['additionalAddressInfo'] );
-		}
-		?>
-	  <tr>
-		<td colspan="2">
-		  <h4><?php _e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></h4>
-		</td>
-	  </tr>
-		<?php
-		self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['name'] );
-		self::render_table_row( __( 'Email', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['email'] );
-		self::render_table_row( __( 'Phone Number', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['phoneNumber'] );
-		?>
-	  </tbody>
-	</table>
+		<table>
+			<tbody>
+			<?php
+			self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['name'] );
+			self::render_table_row( __( 'Street Address 1', 'bring-fraktguiden-for-woocommerce' ), $address['addressLine'] );
+			self::render_table_row( __( 'Street Address 2', 'bring-fraktguiden-for-woocommerce' ), $address['addressLine2'] );
+			self::render_table_row( __( 'Postcode', 'bring-fraktguiden-for-woocommerce' ), $address['postalCode'] );
+			self::render_table_row( __( 'City', 'bring-fraktguiden-for-woocommerce' ), $address['city'] );
+			self::render_table_row( __( 'Country', 'bring-fraktguiden-for-woocommerce' ), $address['countryCode'] );
+			if ( $address['reference'] ) {
+				self::render_table_row( __( 'Reference', 'bring-fraktguiden-for-woocommerce' ), $address['reference'] );
+			}
+			if ( $address['additionalAddressInfo'] ) {
+				self::render_table_row( __( 'Additional Address Info', 'bring-fraktguiden-for-woocommerce' ), $address['additionalAddressInfo'] );
+			}
+			?>
+			<tr>
+				<td colspan="2">
+					<h4><?php _e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></h4>
+				</td>
+			</tr>
+			<?php
+			self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['name'] );
+			self::render_table_row( __( 'Email', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['email'] );
+			self::render_table_row( __( 'Phone Number', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['phoneNumber'] );
+			?>
+			</tbody>
+		</table>
 		<?php
 	}
 
@@ -440,46 +441,47 @@ class Bring_Booking_Order_View {
 		$step2  = Bring_Booking_Common_View::is_step2();
 		$booked = $order->is_booked();
 		?>
-	<div class="bring-progress-tracker bring-flex-box">
+		<div class="bring-progress-tracker bring-flex-box">
 	  <span class="<?php echo( ( ! $step2 && ! $booked ) ? 'bring-progress-active' : '' ); ?>">
 		1. <?php _e( 'Create a new booking', 'bring-fraktguiden-for-woocommerce' ); ?>
 	  </span>
-	  <span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">
+			<span class="<?php echo( ( $step2 ) ? 'bring-progress-active' : '' ); ?>">
 		2. <?php _e( 'Confirm and submit consignment', 'bring-fraktguiden-for-woocommerce' ); ?>
 	  </span>
-	  <span class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">
+			<span class="<?php echo( ( $booked ) ? 'bring-progress-active' : '' ); ?>">
 		3. <?php _e( 'Sucessfully booked', 'bring-fraktguiden-for-woocommerce' ); ?>
 	  </span>
-	</div>
+		</div>
 		<?php
 	}
 
 	/**
 	 * @param Bring_WC_Order_Adapter $order
+	 *
 	 * @return string
 	 */
 	public static function render_errors( $order ) {
 		$errors = $order->get_booking_errors();
 		?>
-	<div class="bring-info-box">
-	  <div>
-		<?php
-		$status = Bring_Booking_Common_View::get_booking_status_info( $order );
-		echo Bring_Booking_Common_View::create_status_icon( $status );
-		?>
-		<h3><?php echo $status['text']; ?></h3>
-	  </div>
+		<div class="bring-info-box">
+			<div>
+				<?php
+				$status = Bring_Booking_Common_View::get_booking_status_info( $order );
+				echo Bring_Booking_Common_View::create_status_icon( $status );
+				?>
+				<h3><?php echo $status['text']; ?></h3>
+			</div>
 
-	  <div class="bring-booking-errors">
-		<div><?php _e( 'Previous booking request failed with the following errors:', 'bring-fraktguiden-for-woocommerce' ); ?></div>
-		<ul>
-			<?php foreach ( $errors as $error ) { ?>
-			<li><?php echo $error; ?></li>
-			<?php } ?>
-		</ul>
-		<div><?php _e( 'Press Start to try again', 'bring-fraktguiden-for-woocommerce' ); ?></div>
-	  </div>
-	</div>
+			<div class="bring-booking-errors">
+				<div><?php _e( 'Previous booking request failed with the following errors:', 'bring-fraktguiden-for-woocommerce' ); ?></div>
+				<ul>
+					<?php foreach ( $errors as $error ) { ?>
+						<li><?php echo $error; ?></li>
+					<?php } ?>
+				</ul>
+				<div><?php _e( 'Press Start to try again', 'bring-fraktguiden-for-woocommerce' ); ?></div>
+			</div>
+		</div>
 		<?php
 	}
 
@@ -510,11 +512,12 @@ class Bring_Booking_Order_View {
 		}
 		$packages        = $_POST['packages'];
 		$expected_fields = [
-			'height',
-			'length',
-			'order_item_id',
-			'weight',
-			'width',
+				'service_id',
+				'height',
+				'length',
+				'order_item_id',
+				'weight',
+				'width',
 		];
 		foreach ( $packages as $package ) {
 			foreach ( $expected_fields as $key ) {
@@ -531,12 +534,12 @@ class Bring_Booking_Order_View {
 			die( 'testing' );
 		}
 
-		$wc_order         = new WC_Order( $order_id );
-		$order            = new Bring_WC_Order_Adapter( $wc_order );
-		$shipping_methods = $order->order->get_shipping_methods();
-		$existing         = [];
+		$wc_order       = new WC_Order( $order_id );
+		$order          = new Bring_WC_Order_Adapter( $wc_order );
+		$shipping_items = $order->order->get_shipping_methods();
+		$existing       = [];
 		// Get the existing packages
-		foreach ( $shipping_methods as $item_id => $method ) {
+		foreach ( $shipping_items as $item_id => $method ) {
 			$meta_packages        = wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
 			$existing[ $item_id ] = $meta_packages;
 		}
@@ -545,16 +548,23 @@ class Bring_Booking_Order_View {
 		$new_packages = [];
 		// Create the package array that bring needs
 		// with eg. [ length0 = 10, length1 = 10 ] etc..
-		foreach ( $packages as $index => $package ) {
+		$indexes = [];
+		foreach ( $packages as $package ) {
+			$order_item_id            = $package['order_item_id'];
 			$package['weightInGrams'] = $package['weight'] * 1000;
-			if ( ! isset( $new_packages[ $package['order_item_id'] ] ) ) {
-				$new_packages[ $package['order_item_id'] ] = [];
+			if ( ! isset( $new_packages[ $order_item_id ] ) ) {
+				$new_packages[ $order_item_id ] = [];
 			}
+			if ( ! isset( $indexes[ $order_item_id ] ) ) {
+				$indexes[ $order_item_id ] = 0;
+			}
+			$index = $indexes[ $order_item_id ];
 			foreach ( $fields as $field ) {
 				// Assign the field + number as the key
 				// eg height0, height1, height2 etc...
-				$new_packages[ $package['order_item_id'] ][ $field . $index ] = $package[ $field ];
+				$new_packages[ $order_item_id ][ $field . $index ] = $package[ $field ];
 			}
+			$indexes[ $order_item_id ] ++;
 		}
 
 		// Save the new fields
@@ -562,6 +572,20 @@ class Bring_Booking_Order_View {
 			wc_update_order_item_meta( $item_id, '_fraktguiden_packages', $new_package );
 		}
 
+		$service_ids = [];
+		foreach ( $packages as $package ) {
+			$service_ids[ $package['order_item_id'] ] = $package['service_id'];
+		}
+
+		foreach ( $service_ids as $order_item_id => $service_id ) {
+			foreach ( $shipping_items as $item ) {
+				if ( $item->get_id() !== $order_item_id ) {
+					continue;
+				}
+				$item->update_meta_data( 'bring_product', $service_id );
+				$item->save();
+			}
+		}
 		// @TODO: with multiple shipping items, remove the metadata for items no longer used
 		die;
 	}
