@@ -89,7 +89,7 @@ export default {
 	components: {Settings, Package},
 	data() {
 		return {
-			...booking_packages,
+			...window.bring_fraktguiden_booking,
 			loading: false,
 			showLoader: false,
 			clearLoad: false,

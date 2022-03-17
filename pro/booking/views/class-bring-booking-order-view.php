@@ -377,7 +377,6 @@ class Bring_Booking_Order_View {
 	 * @param Bring_WC_Order_Adapter $order
 	 */
 	public static function render_packages( Bring_WC_Order_Adapter $order ) {
-		echo '<script>var booking_packages = ' . (new Get_Booking_Data_Action())($order) . ';</script>';
 		echo '<div id="bring-fraktguiden-booking-packages"></div>';
 	}
 

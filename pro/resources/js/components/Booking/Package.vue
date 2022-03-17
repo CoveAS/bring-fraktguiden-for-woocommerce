@@ -12,14 +12,13 @@
 			</select>
 		</td>
 		<td>
-			<select class="booking_shipping_service" name="booking_shipping_service[]">
-				<option
-					v-for="service in services"
-					:value="service"
-					:selected="service === package.serviceData.productName"
-					>{{service}}
-					</option>
-			</select>
+			<v-select
+					class="booking_shipping_service"
+					name="booking_shipping_service[]"
+					:options="services"
+					v-model="package.serviceData.productName"
+			>
+			</v-select>
 			<span
 					v-if="package.pickupPoint"
 					class="tips"
@@ -64,7 +63,7 @@
 		<td></td>
 		<td>
 			<span
-				v-if="removable"
+			  v-if="removable"
 			  class="button-link button-link-delete delete"
 			  v-on:click="$emit('remove')"
 			  v-html="i18n.delete"
@@ -73,17 +72,34 @@
 	</tr>
 </template>
 
-<style scoped>
-.dimension {
-		width: 5rem;
+<style>
+
+.bring-booking-packages-form input.vs__search {
+	border: none;
+}
+
+.bring-booking-packages-form .vs__selected {
+	white-space: pre;
+}
+
+.bring-booking-packages-form .vs__selected-options {
+	flex-wrap:nowrap;
+}
+
+.bring-booking-packages-form .dimension {
+	width: 5rem;
 }
 </style>
 
 <script>
+
+import vSelect from 'vue-select'
+
 export default {
 	data() {
-		return booking_packages;
+		return window.bring_fraktguiden_booking;
 	},
+	computed: {},
 	props: {
 		removable: {
 			type: Boolean,
@@ -94,5 +110,8 @@ export default {
 			required: true
 		}
 	},
+	components: {
+		vSelect
+	}
 }
 </script>
