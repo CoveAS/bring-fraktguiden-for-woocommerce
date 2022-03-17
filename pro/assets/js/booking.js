@@ -17349,7 +17349,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       checked: {
-        bag_on_door: true,
+        1081: true,
         1133: true,
         1134: true
       }
@@ -17373,6 +17373,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/InformationCircleIcon.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Checkbox",
   props: {
@@ -17392,6 +17394,9 @@ __webpack_require__.r(__webpack_exports__);
       required: true,
       type: Boolean
     }
+  },
+  components: {
+    InformationCircleIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -17712,17 +17717,10 @@ var _hoisted_3 = ["for", "innerHTML"];
 var _hoisted_4 = {
   "class": "bfwc-relative bring-booking__tooltip"
 };
-
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "bring-booking__info"
-  }, "i", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_6 = ["innerHTML"];
+var _hoisted_5 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_information_circle_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("information-circle-icon");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     id: 'booking_' + $props.name,
@@ -17735,12 +17733,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     innerHTML: $props.label
   }, null, 8
   /* PROPS */
-  , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_information_circle_icon, {
+    "class": "bring-booking__info"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "bring-booking__tooltip__reveal",
     innerHTML: $props.description
   }, null, 8
   /* PROPS */
-  , _hoisted_6)])]);
+  , _hoisted_5)])]);
 }
 
 /***/ }),
@@ -17810,7 +17810,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking__tooltip[data-v-77ca48bc] {\n\tjustify-self: end;\n}\n.bring-booking__tooltip:hover .bring-booking__tooltip__reveal[data-v-77ca48bc] {\n\tdisplay: block;\n}\n.bring-booking__tooltip__reveal[data-v-77ca48bc] {\n\tposition: absolute;\n\tbottom: 2rem;\n\twidth: 16rem;\n\tleft: -8rem;\n\tbackground-color: #fff;\n\tcolor: #0a4b78;\n\tborder: 1px solid #0a4b78;\n\tpadding: 1rem 2rem;\n\tdisplay: none;\n}\n.bring-booking__info[data-v-77ca48bc] {\n\tborder: 2px solid #0a4b78;\n\tcolor: #0a4b78;\n\tdisplay: block;\n\twidth: 1rem;\n\theight: 1rem;\n\tfont-weight: bold;\n\tborder-radius: 1rem;\n\ttext-align: center;\n\tmargin-left: 1rem;\n\tposition: relative;\n\ttop: -2px;\n}\n.bfwc-relative[data-v-77ca48bc] {\n\tposition: relative;\n}\n.bfwc-flex[data-v-77ca48bc] {\n\tdisplay: flex;\n}\n.bfwc-items-center[data-v-77ca48bc] {\n\talign-items: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bring-booking__tooltip[data-v-77ca48bc] {\n\tjustify-self: end;\n}\n.bring-booking__tooltip:hover .bring-booking__tooltip__reveal[data-v-77ca48bc] {\n\tdisplay: block;\n}\n.bring-booking__tooltip__reveal[data-v-77ca48bc] {\n\tposition: absolute;\n\tbottom: 2rem;\n\twidth: 16rem;\n\tleft: -8rem;\n\tbackground-color: #fff;\n\tcolor: #0a4b78;\n\tborder: 1px solid #0a4b78;\n\tpadding: 0.5rem 1rem;\n\tborder-radius: 0.25rem;\n\tdisplay: none;\n\tbox-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);\n}\n.bring-booking__info[data-v-77ca48bc] {\n\twidth: 1.5rem;\n\theight: 1.5rem;\n\tcolor: #2271b1;\n\tmargin-left: 0.25rem;\n}\n.bfwc-relative[data-v-77ca48bc] {\n\tposition: relative;\n}\n.bfwc-flex[data-v-77ca48bc] {\n\tdisplay: flex;\n}\n.bfwc-items-center[data-v-77ca48bc] {\n\talign-items: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36011,6 +36011,39 @@ function compileToFunction(template, options) {
 
 
 
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/outline/esm/InformationCircleIcon.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/outline/esm/InformationCircleIcon.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "2",
+    stroke: "currentColor",
+    "aria-hidden": "true"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    })
+  ]))
+}
 
 /***/ })
 

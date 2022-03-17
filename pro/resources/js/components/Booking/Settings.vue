@@ -37,7 +37,7 @@ export default {
 	data() {
 		return {
 			checked: {
-				bag_on_door: true,
+				1081: true,
 				1133: true,
 				1134: true,
 			},

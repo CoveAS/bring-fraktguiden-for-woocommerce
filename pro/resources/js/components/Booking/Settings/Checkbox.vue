@@ -8,7 +8,7 @@
 		>
 		<label :for="'booking_' + name" v-html="label"></label>
 		<div class="bfwc-relative bring-booking__tooltip">
-			<span class="bring-booking__info">i</span>
+			<information-circle-icon class="bring-booking__info"/>
 			<div
 					class="bring-booking__tooltip__reveal"
 					v-html="description"
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import {InformationCircleIcon} from '@heroicons/vue/outline';
+
 export default {
 	name: "Checkbox",
 	props: {
@@ -37,6 +39,9 @@ export default {
 			required: true,
 			type: Boolean,
 		}
+	},
+	components: {
+		InformationCircleIcon
 	}
 }
 </script>
@@ -59,22 +64,17 @@ export default {
 	background-color: #fff;
 	color: #0a4b78;
 	border: 1px solid #0a4b78;
-	padding: 1rem 2rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
 	display: none;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
 
 .bring-booking__info {
-	border: 2px solid #0a4b78;
-	color: #0a4b78;
-	display: block;
-	width: 1rem;
-	height: 1rem;
-	font-weight: bold;
-	border-radius: 1rem;
-	text-align: center;
-	margin-left: 1rem;
-	position: relative;
-	top: -2px;
+	width: 1.5rem;
+	height: 1.5rem;
+	color: #2271b1;
+	margin-left: 0.25rem;
 }
 
 .bfwc-relative {

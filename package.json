@@ -19,6 +19,7 @@
     "vue": "^3.2.31"
   },
   "dependencies": {
+    "@heroicons/vue": "^1.0.6",
     "vue-loader": "^17.0.0"
   }
 }
