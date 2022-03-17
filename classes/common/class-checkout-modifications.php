@@ -254,7 +254,7 @@ class Checkout_Modifications {
 			return;
 		}
 		$label = esc_html__(
-			"I consent to having the package delivered in a bag on my door if it doesn't fit in the mailbox",
+			"Deliver the package in a bag on my door if it doesn't fit in the mailbox",
 			'bring-fraktguiden-for-woocommerce'
 		);
 		$checked = checked(
@@ -328,7 +328,7 @@ class Checkout_Modifications {
 
 		$additional_checkboxes[] = array(
 			'id'       => 'klarna_bag_on_door_consent',
-			'text'     => __( "I consent to having the package delivered in a bag on my door if it doesn't fit in the mailbox", 'bring-fraktguiden-for-woocommerce' ),
+			'text'     => __( "Deliver the package in a bag on my door if it doesn't fit in the mailbox", 'bring-fraktguiden-for-woocommerce' ),
 			'checked'  => false,
 			'required' => true,
 		);

@@ -245,6 +245,18 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			];
 		}
 
+		// ID verification
+		$id_verification         = ( $this->service ? $this->service->vas_match( [ '1133' ] ) : false );
+		$id_verification_checked = filter_input( INPUT_POST, 'booking_id_verification', FILTER_VALIDATE_BOOLEAN );
+
+		if ( $id_verification && $id_verification_checked ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id' => $id_verification,
+				],
+			];
+		}
+
 		// Personal delivery option
 		$individual_verification         = ( $this->service ? $this->service->vas_match( [ '1134' ] ) : false );
 		$individual_verification_checked = filter_input( INPUT_POST, 'booking_individual_verification', FILTER_VALIDATE_BOOLEAN );

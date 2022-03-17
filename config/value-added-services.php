@@ -54,11 +54,19 @@ return [
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
-		'enabled'        => false,
+		'enabled'        => true,
 		'code'           => '1133',
-		'name'           => 'Proof of identity required',
+		'name'           => 'ID verification',
 		'default'        => false,
-		'bring_products' => [ 5000, 4850, 5800, 5600 ],
+		'bring_products' => [ 4850, 5800, 5600 ],
+		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+	],
+	[
+		'enabled'        => true,
+		'code'           => '1134',
+		'name'           => 'Individual verification',
+		'default'        => false,
+		'bring_products' => [ 5800, 5600, 'HOME_DELIVERY_PARCEL', 'PICKUP_PARCEL' ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 	[
@@ -183,14 +191,6 @@ return [
 		'name'           => 'Bag on door delivery',
 		'default'        => false,
 		'bring_products' => [ 3584 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
-	],
-	[
-		'enabled'        => true,
-		'code'           => '1134',
-		'name'           => 'Individual verification',
-		'default'        => false,
-		'bring_products' => [ 5800 ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 ];
