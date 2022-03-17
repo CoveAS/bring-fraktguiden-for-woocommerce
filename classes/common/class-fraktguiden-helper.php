@@ -207,9 +207,16 @@ class Fraktguiden_Helper {
 					$service_data['warning'] = $warning . '<br>' . $service_data['warning'];
 				}
 			}
+			unset( $service_data );
 		}
-
-		return $services_data;
+		foreach ( $services_data['homedelivery']['services'] as &$service_data ) {
+			$service_data['home_delivery'] = true;
+		}
+		unset( $service_data );
+		return apply_filters(
+			'bring_fraktguiden_services_data',
+			$services_data
+		);
 	}
 
 	/**
@@ -502,4 +509,47 @@ class Fraktguiden_Helper {
 
 		return $home_url['host'];
 	}
+
+	/**
+	 * Get pretty-printed shipping methods
+	 *
+	 * @return array
+	 */
+	public static function get_shipping_methods() {
+		if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
+			return false;
+		}
+
+		$zones = WC_Shipping_Zones::get_zones();
+
+		if ( ! is_array( $zones ) ) {
+			return false;
+		}
+
+		$shipping_methods = array_column( $zones, 'shipping_methods' );
+
+		$flatten = array_merge( ...$shipping_methods );
+
+		$normalized_shipping_methods = array();
+
+		foreach ( $flatten as $key => $class ) {
+			$normalized_shipping_methods[ $class->id ] = $class->method_title;
+		}
+
+		return $normalized_shipping_methods;
+	}
+
+	/**
+	 * Check if Bring Fraktguiden shipping method is active
+	 *
+	 * @return bool
+	 */
+	public static function check_bring_fraktguiden_shipping_method() {
+		if ( array_key_exists( self::ID, self::get_shipping_methods() ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

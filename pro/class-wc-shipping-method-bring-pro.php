@@ -60,6 +60,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	private $booking_enabled;
 
 	/**
+	 * $booking_without_bring
+	 *
+	 * @var string
+	 */
+	private $booking_without_bring;
+
+	/**
 	 * $booking_address_store_name
 	 *
 	 * @var string
@@ -156,6 +163,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
 		$this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
 		$this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
+		$this->booking_without_bring          = $this->get_setting( 'booking_without_bring', 'no' );
 		$this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name', get_bloginfo( 'name' ) );
 		$this->booking_address_street1        = $this->get_setting( 'booking_address_street1' );
 		$this->booking_address_street2        = $this->get_setting( 'booking_address_street2' );
@@ -244,6 +252,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'default' => 'no',
 		];
 
+		$this->form_fields['booking_without_bring'] = [
+			'title'   => __( 'Shipping', 'bring-fraktguiden-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Allow booking without Bring shipping', 'bring-fraktguiden-for-woocommerce' ),
+			'default' => 'no',
+		];
+
 		$this->form_fields['booking_test_mode_enabled'] = [
 			'title'       => __( 'Test mode', 'bring-fraktguiden-for-woocommerce' ),
 			'type'        => 'checkbox',
@@ -251,11 +266,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'description' => __( 'When enabled, Bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce' ),
 			'default'     => 'yes',
 		];
-
 		$this->form_fields['booking_status_section_title'] = [
 			'type'        => 'title',
 			'title'       => __( 'Processing', 'bring-fraktguiden-for-woocommerce' ),
-			'description' => __( 'Once an order is booked, it will be assigned the following status:', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'Change order status after booking or printing labels.', 'bring-fraktguiden-for-woocommerce' )
+							. ' <span style="color: #c00">'
+							. ' <strong>' . __( 'WARNING!', 'bring-fraktguiden-for-woocommerce' ) . '</strong> '
+		                    .  __( 'This will change the status even if the order is completed', 'bring-fraktguiden-for-woocommerce' )
+		                    . '</span>',
 			'class'       => 'bring-separate-admin-section',
 		];
 
@@ -277,6 +295,26 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'options'  => array( 'none' => __( 'None', 'bring-fraktguiden-for-woocommerce' ) ) + wc_get_order_statuses(),
 			'default'  => 'none',
 		];
+
+
+		$this->form_fields['booking_home_delivery_section_title'] = [
+			'type'        => 'title',
+			'title'       => __( 'Home delivery', 'bring-fraktguiden-for-woocommerce' ),
+			'class'       => 'bring-separate-admin-section',
+		];
+		$this->form_fields['booking_home_delivery_package_type'] = [
+			'title'    => __( 'Package type for home delivery', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'select',
+			'desc_tip' => __( 'Only applies to home delivery services', 'bring-fraktguiden-for-woocommerce' ),
+			'options'  => [
+				'hd_eur'     => 'HD_EUR_PALLET',
+				'hd_half'    => 'HD_HALF_PALLET',
+				'hd_quarter' => 'HD_QUARTER_PALLET',
+				'hd_loose'   => 'HD_SPECIAL_PALLET',
+			],
+			'default'  => 'hd_eur',
+		];
+
 	}
 
 	/**
@@ -295,18 +333,19 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->form_fields['booking_address_store_name'] = [
 			'title'   => __( 'Store Name', 'bring-fraktguiden-for-woocommerce' ),
 			'type'    => 'text',
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'default' => get_bloginfo( 'name' ),
 		];
 
 		$this->form_fields['booking_address_street1'] = [
 			'title'             => __( 'Street Address 1', 'bring-fraktguiden-for-woocommerce' ),
-			'custom_attributes' => array( 'maxlength' => '35' ),
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'type'              => 'text',
 		];
 
 		$this->form_fields['booking_address_street2'] = [
 			'title'             => __( 'Street Address 2', 'bring-fraktguiden-for-woocommerce' ),
-			'custom_attributes' => array( 'maxlength' => '35' ),
+			'custom_attributes' => [ 'maxlength' => '35' ],
 			'type'              => 'text',
 		];
 
@@ -353,8 +392,8 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		];
 
 		$this->form_fields['booking_address_email'] = [
-			'title' => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
-			'type'  => 'text',
+			'title'    => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
+			'type'     => 'email'
 		];
 	}
 

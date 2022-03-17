@@ -176,7 +176,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->from_country = $this->get_setting( 'from_country' );
 		$this->from_zip     = $this->get_setting( 'from_zip' );
 		$this->post_office  = $this->get_setting( 'post_office' );
-		$this->evarsling    = $this->get_setting( 'evarsling' );
 		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
 
@@ -229,12 +228,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return int
 	 */
 	public function calculate_excl_vat( $line_price ) {
-		if ( wc_prices_include_tax() ) {
+		
+		$line_price = floatval( $line_price );
+
+		if ( $line_price && wc_prices_include_tax() ) {
 			$tax_rates    = WC_Tax::get_shipping_tax_rates();
 			$remove_taxes = WC_Tax::calc_tax( $line_price, $tax_rates, true );
-
 			return $line_price - array_sum( $remove_taxes );
-
 		}
 
 		return $line_price;
@@ -322,6 +322,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( ! empty( $args['alternative_delivery_dates'] ) ) {
 			$args['meta_data']['alternative_delivery_dates'] = $args['alternative_delivery_dates'];
 			unset( $args['alternative_delivery_dates'] );
+		}
+		if ( empty( $args['price_decimals'] ) ) {
+			$args['price_decimals'] = 2;
 		}
 		$this->add_rate( $args );
 	}

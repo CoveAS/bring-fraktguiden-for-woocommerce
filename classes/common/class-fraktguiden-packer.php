@@ -337,11 +337,11 @@ class Fraktguiden_Packer {
 				rsort( $dims );
 
 				$box = [
-					'length'          => $dims[0],
-					'width'           => $dims[1],
-					'height'          => $dims[2],
-					'weight'          => $product->get_weight(),
-					'weight_in_grams' => $this->get_weight( $product->get_weight() ), // For $packer->exceeds_max_package_values only.
+					'length'          => floatval($dims[0]),
+					'width'           => floatval($dims[1]),
+					'height'          => floatval($dims[2]),
+					'weight'          => floatval($product->get_weight()),
+					'weight_in_grams' => floatval($this->get_weight( $product->get_weight() )),
 				];
 
 				$product_boxes[] = $box;

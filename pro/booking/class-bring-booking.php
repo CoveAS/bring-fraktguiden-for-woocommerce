@@ -83,6 +83,7 @@ class Bring_Booking {
 		// Create new status and order note.
 		$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_print_label_success' );
 		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
+
 		if ( empty( $printed_orders ) ) {
 			return;
 		}
@@ -95,6 +96,11 @@ class Bring_Booking {
 				continue;
 			}
 			if ( $status === $order->get_status() ) {
+				continue;
+			}
+			// Do not change status if the order does not use fraktguiden shipping.
+			$adapter = new Bring_WC_Order_Adapter( $order );
+			if ( ! $adapter->has_bring_shipping_methods() ) {
 				continue;
 			}
 			// Update status.
@@ -181,7 +187,7 @@ class Bring_Booking {
 						$args['customer_specified_delivery_date_time'] = $time_slot;
 					}
 				} else {
-					$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( '_bring-delivery-date' );
+					$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( '_bring-delivery-date', false );
 				}
 			}
 			$consignment_request->fill( $args );
@@ -264,7 +270,7 @@ class Bring_Booking {
 	 *
 	 * @return string
 	 */
-	public static function get_shipping_date_time( $name = '_bring-shipping-date' ) {
+	public static function get_shipping_date_time( $name = '_bring-shipping-date', $default_to_now = true ) {
 		$input_request = Fraktguiden_Helper::get_input_request_method();
 
 		$date         = filter_input( $input_request, $name . '' );
@@ -274,6 +280,10 @@ class Bring_Booking {
 		// Get the shipping date.
 		if ( $date && $date_hour && $date_minutes ) {
 			return $date . 'T' . $date_hour . ':' . $date_minutes . ':00';
+		}
+
+		if ( ! $default_to_now ) {
+			return false;
 		}
 
 		$shipping_date = self::create_shipping_date();

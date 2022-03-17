@@ -93,10 +93,7 @@ class Bring_Booking_Labels {
 
 		$order_ids = filter_input( INPUT_GET, 'order_ids' );
 
-		$printed_orders = Fraktguiden_Helper::get_option( 'printed_orders' );
-		if ( empty( $printed_orders ) ) {
-			$printed_orders = [];
-		}
+		$printed_orders = [];
 
 		if ( empty( $order_ids ) ) {
 			esc_html_e( 'Order ID is missing.', 'bring-fraktguiden-for-woocommerce' );

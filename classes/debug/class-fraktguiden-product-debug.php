@@ -285,14 +285,14 @@ class Fraktguiden_Product_Debug {
 	/**
 	 * Filter pickup point postcode
 	 */
-	public function filter_pp_postcode( $post_code ) {
+	public static function filter_pp_postcode( $post_code ) {
 		return sanitize_text_field( filter_input( INPUT_GET, 'post_code' ) );
 	}
 
 	/**
 	 * Filter pickup point country
 	 */
-	public function filter_pp_country( $post_code ) {
+	public static function filter_pp_country( $post_code ) {
 		return sanitize_text_field( filter_input( INPUT_GET, 'country' ) );
 	}
 

@@ -39,6 +39,13 @@ class Fraktguiden_Service {
 	public $service_data;
 
 	/**
+	 * Home delivery
+	 *
+	 * @var boolean
+	 */
+	public $home_delivery;
+
+	/**
 	 * Service options
 	 *
 	 * @var string
@@ -64,6 +71,7 @@ class Fraktguiden_Service {
 		$this->option_key    = "{$service_key}_options";
 		$this->bring_product = $bring_product;
 		$this->service_data  = $service_data;
+		$this->home_delivery = $service_data['home_delivery'] ?? false;
 		$selected            = Fraktguiden_Helper::get_option( 'services' );
 		$this->enabled       = ! empty( $selected ) ? in_array( $bring_product, $selected, true ) : false;
 		$this->vas           = Bring_Fraktguiden\VAS::create_collection( $bring_product, $service_option );

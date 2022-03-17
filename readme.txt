@@ -4,12 +4,12 @@ Author URI: https://cove.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
-Requires at least: 4.5
-Tested up to: 5.7.2
-Requires PHP: 7.4
-WC requires at least: 3.4.0
-WC tested up to: 5.3.0
-Stable tag: 1.7.12
+Requires at least: 5.6
+Tested up to: 5.8.1
+Requires PHP: 8.0
+WC requires at least: 4.8.0
+WC tested up to: 5.7.1
+Stable tag: 1.8.8
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -49,7 +49,24 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.0 =
+= 1.8.8 =
+
+* Fixed some unsupported operand type errors.
+* Fixed a bug with decimals for shipping rates that caused incorrect tax calculation for shops that use 0 decimal places.
+
+= 1.8.6 =
+
+* Added PHP 8 support
+* Fixed a bug with the setting to change order status after printing labels where it would update old orders
+* Added support for booking of HD services
+
+= 1.8.5 =
+
+* Added filter bring_fraktguiden_get_consignment_recipient_address
+* Fixed error when mass booking Mailbox with tracking
+* Fixed error when no date was set for home delivery
+
+= 1.8.2 =
 
 * Added new feature for alternative delivery dates for home delivery
 * Added ETA support for shipping rates
@@ -58,6 +75,7 @@ See faq.txt for frequently asked questions
 * Added lead time settings
 * Booking - Added {products} parameter for order reference
 * Booking - Changed action for rendering PDF's
+* Fixed syntax error
 
 = 1.7.12 =
 

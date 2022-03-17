@@ -251,6 +251,7 @@ class Fraktguiden_Pickup_Point {
 	 *
 	 * Only available from admin.
 	 */
+
 	public static function wp_ajax_get_rate() {
 		$result = [
 			'success'  => false,
@@ -312,12 +313,16 @@ class Fraktguiden_Pickup_Point {
 			'topostalcode'        => $postcode,
 			'tocountry'           => $country,
 			'postingatpostoffice' => ( Fraktguiden_Helper::get_option( 'post_office' ) === 'no' ) ? 'false' : 'true',
-			'additionalservice'   => ( Fraktguiden_Helper::get_option( 'evarsling' ) === 'yes' ) ? 'EVARSLING' : '',
 		);
 
-		$params = array_merge( $standard_params, $package_params );
-
 		$shipping_method = new WC_Shipping_Method_Bring();
+
+		$field_key = $shipping_method->get_field_key( 'services' );
+		$evarsling = \Fraktguiden_Service::vas_for( $field_key, $service, [ '2084', 'EVARSLING' ] );
+
+		$standard_params['additionalservice'] = ( $evarsling ? 'EVARSLING' : '' );
+
+		$params = array_merge( $standard_params, $package_params );
 
 		$url  = add_query_arg( $params, WC_Shipping_Method_Bring::SERVICE_URL );
 		$url .= '&product=' . strtoupper( $service );
@@ -344,7 +349,6 @@ class Fraktguiden_Pickup_Point {
 
 		wp_send_json( $result );
 	}
-
 	/**
 	 * Get pickup points via AJAX
 	 */

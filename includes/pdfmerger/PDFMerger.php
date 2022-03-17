@@ -68,7 +68,7 @@ class PDFMerger
 		}
 		else
 		{
-			throw new exception("Could not locate PDF on '$filepath'");
+			throw new \exception("Could not locate PDF on '$filepath'");
 		}
 
 		return $this;

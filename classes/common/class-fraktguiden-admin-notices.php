@@ -35,6 +35,7 @@ class Fraktguiden_Admin_Notices {
 
 		add_action( 'admin_notices', __CLASS__ . '::render_notices' );
 		add_action( 'wp_ajax_bring_dismiss_notice', __CLASS__ . '::ajax_dismiss_notice' );
+		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
 		// Check if PRO is available but not activated yet.
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
@@ -79,6 +80,116 @@ class Fraktguiden_Admin_Notices {
 		} else {
 			self::remove_missing_api_customer_number_notice();
 		}
+
+		if ( ! Fraktguiden_Helper::get_option( 'services' ) ) {
+			self::add_missing_shipping_services_notice();
+		} else {
+			self::remove_missing_shipping_services_notice();
+		}
+
+		$kco_settings = get_option('woocommerce_kco_settings');
+		if ( !empty($kco_settings) && is_array($kco_settings) && $kco_settings['enabled'] === "yes" && get_option('woocommerce_shipping_debug_mode', 'no') === 'no' ) {
+			self::add_klarna_debug_notice();
+		} else {
+			self::remove_klarna_debug_notice();
+		}
+	}
+
+	/**
+	 * Function adds or removes notice based on shipping method availability in shipping zones
+	 */
+	public static function missing_shipping_method_notice_middleware() {
+		if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
+			self::remove_missing_shipping_method_notice();
+		} else {
+			self::add_missing_shipping_method_notice();
+		}
+	}
+
+	/**
+	 * Generate disabled debug message
+	 */
+	public static function generate_klarna_debug_notice() {
+		return wp_kses_post(
+			sprintf(
+				__(
+					<<<TEXT
+					<strong>Shipping debug mode is not enabled</strong><br>
+					It is recommended to enable debug mode when using Bring Fraktguiden for WooCommerce in combination with Klarna Checkout.
+					Read more about why recommend this action <a href="%s" target="_blank">here</a>.<br>
+					<br>
+					Activate in <a href="%s">plugin settings</a>.
+					TEXT,
+					'bring-fraktguiden-for-woocommerce'
+				),
+				'https://bringfraktguiden.no/docs/debug-mode-with-payment-provider',
+				admin_url() . 'admin.php?page=wc-settings&tab=shipping&section=options#woocommerce_shipping_debug_mode'
+			)
+		);
+	}
+
+	/**
+	 * Add disabled debug message
+	 */
+	public static function add_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_disabled_debug_mode', self::generate_klarna_debug_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove disabled debug message
+	 */
+	public static function remove_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_disabled_debug_mode' );
+	}
+
+	/**
+	 * Generate missing shipping method notice
+	 */
+	public static function generate_missing_shipping_method_notice() {
+		$messages = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden Shipping Method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a Shipping Method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	* Add missing shipping method notice
+	*/
+	public static function add_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_method', self::generate_missing_shipping_method_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping method notice
+	 */
+	public static function remove_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_method' );
+	}
+
+	/**
+	 * Generate missing shipping service notice
+	 */
+	public static function generate_missing_shipping_services_notice() {
+		$messages = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_general_options_title' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	* Add missing shipping service notice
+	*/
+	public static function add_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_services', self::generate_missing_shipping_services_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping service notice
+	 */
+	public static function remove_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_services' );
 	}
 
 	/**

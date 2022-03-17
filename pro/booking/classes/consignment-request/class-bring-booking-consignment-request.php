@@ -63,6 +63,11 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 					$weight = $package[ 'weightInGrams' . $i ];
 				}
 
+				$package_type = null;
+				if ( $this->service->home_delivery ) {
+					$package_type = Fraktguiden_Helper::get_option( 'booking_home_delivery_package_type', 'hd_eur' );
+				}
+
 				$weight_in_kg = (int) $weight / 1000;
 				$data         = [
 					'weightInKg'       => $weight_in_kg,
@@ -73,7 +78,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 						'lengthInCm' => $package[ 'length' . $i ],
 					],
 					'containerId'      => null,
-					'packageType'      => null,
+					'packageType'      => $package_type,
 					'numberOfItems'    => null,
 					'correlationId'    => null,
 				];
@@ -130,7 +135,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'phoneNumber' => $sender['booking_address_phone'],
 			],
 		],
-		$wc_order
+		$wc_order,
+		$this
 	);
 	}
 
@@ -143,7 +149,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$order           = $this->shipping_item->get_order();
 		$full_name       = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
 		$name            = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
-		$additional_info = '';
+		$additional_info = null;
 
 		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_SANITIZE_STRING );
 
@@ -151,21 +157,26 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$additional_info = $bring_additional_info_recipient;
 		}
 
-		return [
-			'name'                  => $name,
-			'addressLine'           => $order->get_shipping_address_1(),
-			'addressLine2'          => $order->get_shipping_address_2(),
-			'postalCode'            => $order->get_shipping_postcode(),
-			'city'                  => $order->get_shipping_city(),
-			'countryCode'           => $order->get_shipping_country(),
-			'reference'             => null,
-			'additionalAddressInfo' => null,
-			'contact'               => [
-				'name'        => $full_name,
-				'email'       => $order->get_billing_email(),
-				'phoneNumber' => $order->get_billing_phone(),
+		return apply_filters(
+			'bring_fraktguiden_get_consignment_recipient_address',
+			[
+				'name'                  => $name,
+				'addressLine'           => $order->get_shipping_address_1(),
+				'addressLine2'          => $order->get_shipping_address_2(),
+				'postalCode'            => $order->get_shipping_postcode(),
+				'city'                  => $order->get_shipping_city(),
+				'countryCode'           => $order->get_shipping_country(),
+				'reference'             => null,
+				'additionalAddressInfo' => $additional_info,
+				'contact'               => [
+					'name'        => $full_name,
+					'email'       => $order->get_billing_email(),
+					'phoneNumber' => $order->get_billing_phone(),
+				],
 			],
-		];
+			$order,
+			$this
+		);
 	}
 
 	/**
@@ -196,7 +207,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
-		if ( $this->customer_specified_delivery_date_time ) {
+		if ( ! empty( $this->customer_specified_delivery_date_time ) ) {
 			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
 		}
 
@@ -219,6 +230,35 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 					'mobile' => $recipient_address['contact']['phoneNumber'],
 				],
 			];
+
+		}
+
+		// Bag on door option
+		$bag_on_door = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
+		$bag_on_door_consent = filter_input( INPUT_POST, 'booking_bag_on_door', FILTER_SANITIZE_STRING );
+
+		if ( $bag_on_door && $bag_on_door_consent ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id'		 => $bag_on_door,
+					'email'	 => $recipient_address['contact']['email'],
+					'mobile' => $recipient_address['contact']['phoneNumber'],
+				],
+			];
+		}
+
+		// Personal delivery option
+		$personal_delivery = ( $this->service ? $this->service->vas_match( [ 'personal_delivery' ] ) : false );
+		$personal_delivery_consent = filter_input( INPUT_POST, 'booking_personal_delivery', FILTER_SANITIZE_STRING );
+
+		if ( $personal_delivery && $personal_delivery_consent ) {
+			$consignments['product']['additionalServices'] = [
+				[
+					'id'		 => $personal_delivery,
+					'email'	 => $recipient_address['contact']['email'],
+					'mobile' => $recipient_address['contact']['phoneNumber'],
+				],
+			];
 		}
 
 		$data = [
@@ -227,6 +267,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'consignments'  => [ $consignments ],
 		];
 
-		return $data;
+		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
 	}
 }

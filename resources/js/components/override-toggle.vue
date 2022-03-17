@@ -43,7 +43,7 @@
 		border-radius: 4px 0 0 4px;
 		&::after {
 		    top: 4px;
-		    height: 32px;
+		    height: 20px;
 		    width: 22px;
 			border-radius: 2px;
 		}

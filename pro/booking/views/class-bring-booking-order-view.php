@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden_Pro\Booking\Actions\Get_Booking_Data_Action;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -43,7 +45,7 @@ class Bring_Booking_Order_View {
 
 		// Do not show if the order does not use fraktguiden shipping.
 		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
-		if ( ! $order->has_bring_shipping_methods() ) {
+		if ( Fraktguiden_Helper::get_option('booking_without_bring') !== 'yes' && ! $order->has_bring_shipping_methods() ) {
 			return;
 		}
 		add_meta_box(
@@ -183,10 +185,16 @@ class Bring_Booking_Order_View {
 	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
 	public static function render_step2_screen( $order ) {
+		$service_data = Fraktguiden_Helper::get_service_data_for_key( $order->bring_product );
 		?>
 		<div class="bring-form-field">
 			<label><?php esc_html_e( 'Customer Number', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 			<?php Bring_Booking_Common_View::render_customer_selector( '_bring-customer-number', $order ); ?>
+		</div>
+
+		<div class="bring-form-field">
+			<label><?php esc_html_e( 'Shipping Service', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
+			<?php Bring_Booking_Common_View::render_shipping_service_selector($order); ?>
 		</div>
 
 		<div class="bring-form-field">
@@ -215,9 +223,9 @@ class Bring_Booking_Order_View {
 					Bring_Booking_Common_View::render_shipping_date_time(
 						'_bring-delivery-date',
 						[
-							'date'   => $date->format('Y-m-d') ?? '',
-							'hour'   => $date->format('H') ?? '',
-							'minute' => $date->format('i') ?? '',
+							'date'   => $date ? $date->format('Y-m-d') : '',
+							'hour'   => $date ? $date->format('H') : '',
+							'minute' => $date ? $date->format('i') : '',
 						]
 					);
 					?>
@@ -232,6 +240,8 @@ class Bring_Booking_Order_View {
 				minDate: 0,
 				dateFormat: 'yy-mm-dd'
 			} );
+
+			$( ".bring_shipping_services" ).select2();
 		} );
 		</script>
 		<?php
@@ -259,6 +269,9 @@ class Bring_Booking_Order_View {
 	  <textarea
 		name="_bring_additional_info_recipient"
 		id="_bring_additional_info_recipient"
+			  <?php if ( $service_data['home_delivery'] ?? false ) : ?>
+			  	required="required"
+			  <?php endif; ?>
 		></textarea>
 	</div>
 	<?php if ( $order->order->get_customer_note() ) : ?>
@@ -363,260 +376,9 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param Bring_WC_Order_Adapter $order
 	 */
-	public static function render_packages( $order ) {
-		$shipping_item_tip = __( 'Shipping item id', 'bring-fraktguiden-for-woocommerce' );
-		$all_services      = Fraktguiden_Helper::get_all_services();
-		$order_item_ids    = array_keys( $order->get_fraktguiden_shipping_items() );
-		?>
-	<form class="bring-booking-packages-form">
-	<input type="hidden" id="bring_order_id" name="bring_order_id" value="<?php echo $order->order->get_id(); ?>">
-	<table class="bring-booking-packages">
-	  <thead>
-	  <tr>
-		<th title="<?php echo $shipping_item_tip; ?>"><?php _e( 'Order ID', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-		<th><?php _e( 'Product', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-		<th><?php _e( 'Width', 'bring-fraktguiden-for-woocommerce' ); ?> (cm)</th>
-		<th><?php _e( 'Height', 'bring-fraktguiden-for-woocommerce' ); ?> (cm)</th>
-		<th><?php _e( 'Length', 'bring-fraktguiden-for-woocommerce' ); ?> (cm)</th>
-		<th><?php _e( 'Weight', 'bring-fraktguiden-for-woocommerce' ); ?> (kg)</th>
-		<th></th>
-	  </tr>
-	  </thead>
-	  <tbody>
-		<?php
-		foreach ( $order->get_fraktguiden_shipping_items() as $item_id => $shipping_method ) {
-
-			// 1. Create Booking Consignment
-			$consignment = new Bring_Booking_Consignment_Request( $shipping_method );
-
-			// 2. Get packages from that consignment
-			foreach ( $consignment->create_packages( true ) as $key => $package ) {
-				?>
-				<?php
-				$shipping_item_id = $package['shipping_item_info']['item_id'];
-				$key              = $package['shipping_item_info']['shipping_method']['service'];
-				$service_data     = Fraktguiden_Helper::get_service_data_for_key( $key );
-				$pickup_point     = $package['shipping_item_info']['shipping_method']['pickup_point_id'];
-				?>
-		<tr>
-		  <td title="<?php echo $shipping_item_tip; ?>">
-			<select class="order-item-id" name="order_item_id[]">
-				<?php foreach ( $order_item_ids as $id ) : ?>
-					<?php if ( $id == $shipping_item_id ) : ?>
-				  <option value="<?php echo $id; ?>" selected="selected"><?php echo $id; ?></option>
-				<?php else : ?>
-				  <option value="<?php echo $id; ?>"><?php echo $id; ?></option>
-				<?php endif; ?>
-				<?php endforeach; ?>
-			</select>
-		  </td>
-		  <td>
-				<?php echo $service_data['productName']; ?>
-				<?php if ( ! empty( $pickup_point ) ) : ?>
-				<span
-				  class="tips"
-				  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point ); ?>">
-				   [<?php _e( 'Pickup point', 'bring-fraktguiden-for-woocommerce' ); ?>]
-				</span>
-				<?php endif; ?>
-		  </td>
-		  <td>
-			<input name="width[]" class="dimension" type="text" value="<?php echo $package['dimensions']['widthInCm']; ?>">
-		  </td>
-		  <td>
-			<input name="height[]" class="dimension" type="text" value="<?php echo $package['dimensions']['heightInCm']; ?>">
-		  </td>
-		  <td>
-			<input name="length[]" class="dimension" type="text" value="<?php echo $package['dimensions']['lengthInCm']; ?>">
-		  </td>
-		  <td>
-			<input name="weight[]" class="dimension" type="text" value="<?php echo $package['weightInKg']; ?>">
-		  </td>
-		  <td align="right">
-			<span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden-for-woocommerce' ); ?></span>
-		  </td>
-		</tr>
-				<?php
-			}
-		}
-		?>
-		<tr class="bring-package-template" style="display: none">
-		  <td title="<?php echo $shipping_item_tip; ?>">
-			<select class="order-item-id" name="order_item_id[]">
-			  <?php foreach ( $order_item_ids as $id ) : ?>
-				<option value="<?php echo $id; ?>"><?php echo $id; ?></option>
-				<?php endforeach; ?>
-			</select>
-		  </td>
-		  <td>
-			  <?php echo $service_data['productName']; ?>
-			  <?php if ( ! empty( $pickup_point ) ) : ?>
-				<span
-				  class="tips"
-				  data-tip="<?php echo str_replace( '|', '<br/>', $pickup_point ); ?>"
-				  >
-				   [<?php _e( 'Pickup point', 'bring-fraktguiden-for-woocommerce' ); ?>]
-				</span>
-				<?php endif; ?>
-		  </td>
-		  <td>
-			<input name="width[]" class="dimension" type="text" value="0">
-		  </td>
-		  <td>
-			<input name="height[]" class="dimension" type="text" value="0">
-		  </td>
-		  <td>
-			<input name="length[]" class="dimension" type="text" value="0">
-		  </td>
-		  <td>
-			<input name="weight[]" class="dimension" type="text" value="0">
-		  </td>
-		  <td align="right">
-			<span class="button-link button-link-delete delete"><?php echo __( 'Delete', 'bring-fraktguiden-for-woocommerce' ); ?></span>
-		  </td>
-		</tr>
-		<tr>
-		  <td colspan="6"></td>
-		  <td align="right">
-			<span class="button add"><?php echo __( 'Add', 'bring-fraktguiden-for-woocommerce' ); ?></span>
-		  </td>
-	  </tr>
-	  </tbody>
-	</table>
-	</form>
-	<script>
-	  jQuery( function( $ ) {
-
-		/**
-		 * Debounce
-		 * @param  function callback
-		 * @param  int      timeout
-		 * @param  string   id
-		 * @return function
-		 */
-		var _timers = {};
-		var debounce = function( callback, timeout, id ) {
-		  return function() {
-			if ( _timers[id] ) {
-			  clearTimeout( _timers[id] );
-			}
-			_timers[id] = setTimeout( callback, timeout );
-		  };
-		};
-
-		/**
-		 * Get val
-		 * Helper functino to quickly find an element in the row
-		 * @param  object row
-		 * @param  string name
-		 * @param  string default
-		 * @return string
-		 */
-		var get_val = function( row, name, _default ) {
-		  var elem = row.find( '[name="'+ name +'[]"]' );
-		  if ( ! elem.length ) {
-			return _default;
-		  }
-		  return elem.val();
-		};
-
-		/**
-		 * Ajax Update
-		 */
-		var ajax_update = function() {
-		  var order_id = $( '#bring_order_id' ).val();
-		  if ( ! order_id ) {
-			return;
-		  }
-		  var data = {
-			action   : 'bring_update_packages',
-			order_id : order_id,
-			packages : []
-		  };
-		  $( '.bring-booking-packages tr:visible' ).each( function() {
-			var row = $( this );
-			var order_item_id = get_val( row, 'order_item_id' );
-			if ( ! order_item_id ) {
-			  return;
-			}
-			data.packages.push( {
-			  order_item_id: order_item_id,
-			  service_id:    get_val( row, 'service_id' ),
-			  height:        get_val( row, 'height' ),
-			  length:        get_val( row, 'length' ),
-			  width:         get_val( row, 'width' ),
-			  weight:        get_val( row, 'weight' ),
-			} );
-		  } );
-
-		  $.post( ajaxurl, data, function( result ) {
-			console.log( data );
-			console.log( 'Returned from AJAX:' );
-			console.log( result );
-		  } );
-		}
-
-		/**
-		 * Delete row
-		 * Button handler
-		 */
-		var delete_row = function() {
-		  $( this ).closest( 'tr' ).remove();
-		  debounce( ajax_update, 500, 'ajax_update' )();
-		};
-
-		/**
-		 * Hook row
-		 * For each row/tr run this function to hook buttons and changes
-		 * @param  object
-		 */
-		var hook_row = function( row ) {
-		  row.find( '.delete' ).click( delete_row );
-		  row.find( '.service-id, .order-item-id, .dimension' ).on(
-			'change keyup',
-			debounce( ajax_update, 500, 'ajax_update' )
-		  );
-		};
-
-		/**
-		 * Fix pickup point id options
-		 * @param  object clone
-		 */
-		var fix_pickup_point_id_options = function( clone ) {
-		  var input_elems = clone.find('[name^="pickup_point_id"]');
-		  input_elems.each( function () {
-			var elem = $( this );
-			var index = elem.closest( 'tr' ).index();
-			var li_index = elem.parent().index();
-			var name = 'pickup_point_id['+ ( index + 1 ) + ']';
-			elem.attr( 'name', name );
-			var id = 'pickup_point_id_' + ( index + 1 ) + '_' + li_index;
-			elem.attr( 'id', id );
-			elem.next().attr( 'for', id );
-		  } );
-		};
-
-		// Button handler for "Add"
-		$( '.bring-booking-packages .add' ).click( function() {
-		  var clone = $( '.bring-package-template' ).clone();
-		  clone.removeClass( 'bring-package-template' );
-		  clone.insertBefore( '.bring-package-template' );
-		  fix_pickup_point_id_options( clone );
-		  clone.show();
-		  // Hook the new row
-		  hook_row( clone );
-		  // Trigger an ajax update
-		  debounce( ajax_update, 500, 'ajax_update' )();
-		} );
-
-		// Hook all rows
-		$( '.bring-booking-packages tr' ).each( function() {
-		  hook_row( $( this ) );
-		} );
-
-	  } )
-	</script>
-		<?php
+	public static function render_packages( Bring_WC_Order_Adapter $order ) {
+		echo '<script>var booking_packages = ' . (new Get_Booking_Data_Action())($order) . ';</script>';
+		echo '<div id="bring-fraktguiden-booking-packages"></div>';
 	}
 
 	/**
