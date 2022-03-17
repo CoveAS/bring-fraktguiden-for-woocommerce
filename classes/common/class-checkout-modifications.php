@@ -262,7 +262,6 @@ class Checkout_Modifications {
 			true,
 			false
 		);
-		$code = json_encode($current_shipping_method, JSON_PRETTY_PRINT);
 		echo <<<HTML
 			<p class="form-row">
 				<label
@@ -286,7 +285,6 @@ class Checkout_Modifications {
 					<span class="bag-on-door-text">$label</span></span>
 				</label>
 				<input type="hidden" name="bag-on-door-field" value="1" />
-				<pre>$code</pre>
 			</p>
 		HTML;
 	}
