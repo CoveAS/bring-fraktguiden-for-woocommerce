@@ -1,13 +1,12 @@
 import ShippingProduct from './components/shipping-product.vue';
-import Vue from 'vue';
+import {createApp} from 'vue';
 
 if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 
-	window.Vue = Vue;
 
 	var selected = bring_fraktguiden_settings.services_enabled;
 
-	var settings = new Vue( {
+	var settings = new createApp( {
 		el: '#shipping_services',
 		data: {
 			selected: selected,

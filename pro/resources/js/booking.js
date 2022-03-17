@@ -1,9 +1,5 @@
-import Packages from './components/Booking/Packages.vue';
-import Vue from 'vue';
+import Packages from './components/Booking/Packages';
+import {createApp} from 'vue';
 
-const booking = new Vue( {
-	el: '#bring-fraktguiden-booking-packages',
-	render: (createElement) => {
-		return createElement( Packages )
-	}
-} );
+const booking = createApp(Packages);
+booking.mount('#bring-fraktguiden-booking-packages');

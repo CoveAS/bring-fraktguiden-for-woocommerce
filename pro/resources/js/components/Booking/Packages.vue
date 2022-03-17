@@ -56,6 +56,10 @@
 </template>
 
 <style scoped>
+.bring-booking-meta-box-content table th {
+		text-align: left;
+		background: transparent;
+}
 .bring-booking-packages-form {
 	position: relative;
 }

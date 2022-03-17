@@ -73,6 +73,12 @@
 	</tr>
 </template>
 
+<style scoped>
+.dimension {
+		width: 5rem;
+}
+</style>
+
 <script>
 export default {
 	data() {
