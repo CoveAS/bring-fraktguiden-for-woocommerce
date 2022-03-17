@@ -12,7 +12,14 @@
 			</select>
 		</td>
 		<td>
-			{{ package.serviceData.productName }}
+			<select class="booking_shipping_service" name="booking_shipping_service[]">
+				<option
+					v-for="service in services"
+					:value="service"
+					:selected="service === package.serviceData.productName"
+					>{{service}}
+					</option>
+			</select>
 			<span
 					v-if="package.pickupPoint"
 					class="tips"

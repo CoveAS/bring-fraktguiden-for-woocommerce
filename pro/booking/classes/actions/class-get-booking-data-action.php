@@ -42,6 +42,7 @@ class Get_Booking_Data_Action {
 			[
 				'orderId'       => $order->order->get_id(),
 				'orderItemIds'  => array_keys( $order->get_fraktguiden_shipping_items() ),
+				'services'      => array_values(Fraktguiden_Helper::get_all_services()),
 				'packages' => $packages,
 				'i18n'          => [
 					'tip'         => __( 'Shipping item id', 'bring-fraktguiden-for-woocommerce' ),
