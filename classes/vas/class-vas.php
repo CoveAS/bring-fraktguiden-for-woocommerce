@@ -7,6 +7,8 @@
 
 namespace Bring_Fraktguiden;
 
+use Exception;
+
 /**
  * Fraktguiden_Service class
  */
@@ -68,9 +70,11 @@ class VAS {
 	}
 
 	/**
-	 * create
+	 * Create collection
+	 *
+	 * @throws Exception
 	 */
-	public static function create_collection( $bring_product, $service_option ) {
+	public static function create_collection( $bring_product, $service_option ): array {
 		$collection = [];
 		$all_vas_data = \Fraktguiden_Helper::get_vas_data();
 		$found = false;
@@ -84,7 +88,7 @@ class VAS {
 				continue;
 			}
 			if ( empty( $vas_data['class'] ) ) {
-				throw new \Exception( "VAS item, {$vas_data['code']}, does not have a class" );
+				throw new Exception( "VAS item, {$vas_data['code']}, does not have a class" );
 			}
 			$vas_class    = $vas_data['class'];
 			$value        =  ! empty( $service_option["vas_{$vas_data['code']}"] );

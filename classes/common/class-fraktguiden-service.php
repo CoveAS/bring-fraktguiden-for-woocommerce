@@ -113,7 +113,7 @@ class Fraktguiden_Service {
 	 *
 	 * @return array
 	 */
-	public static function all( $service_key, $only_selected = false ) {
+	public static function all( $service_key = 'woocommerce_bring_fraktguiden_services', $only_selected = false ) {
 		$selected         = \Fraktguiden_Helper::get_option( 'services' );
 		$selected_post    = filter_input( INPUT_POST, $service_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$services_data    = \Fraktguiden_Helper::get_services_data();
@@ -335,6 +335,22 @@ class Fraktguiden_Service {
 					continue;
 				}
 				return $vas->code;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Has VAS
+	 *
+	 * @param string $vas_code VAS Codes.
+	 *
+	 * @return boolean VAS Code or false if not matched.
+	 */
+	public function has_vas( $vas_code ) {
+		foreach ( $this->vas as $vas ) {
+			if ( $vas->code === $vas_code ) {
+				return true;
 			}
 		}
 		return false;
