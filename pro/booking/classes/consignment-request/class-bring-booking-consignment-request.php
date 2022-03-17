@@ -52,7 +52,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		foreach ( $order_items_packages as $item_id => $package ) {
 			$package_count = count( $package ) / $elements_count;
 
-			for ( $i = 0; $i < $package_count; $i++ ) {
+			for ( $i = 0; $i < $package_count; $i ++ ) {
 				$weight = 0;
 
 				if ( isset( $package[ 'weight' . $i ] ) ) {
@@ -121,23 +121,23 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		return apply_filters(
 			'bring_fraktguiden_get_consignment_sender_address',
 			[
-			'name'                  => $sender['booking_address_store_name'],
-			'addressLine'           => $sender['booking_address_street1'],
-			'addressLine2'          => $sender['booking_address_street2'],
-			'postalCode'            => $sender['booking_address_postcode'],
-			'city'                  => $sender['booking_address_city'],
-			'countryCode'           => $sender['booking_address_country'],
-			'reference'             => $this->get_reference(),
-			'additionalAddressInfo' => $additional_info,
-			'contact'               => [
-				'name'        => $sender['booking_address_contact_person'],
-				'email'       => $sender['booking_address_email'],
-				'phoneNumber' => $sender['booking_address_phone'],
+				'name'                  => $sender['booking_address_store_name'],
+				'addressLine'           => $sender['booking_address_street1'],
+				'addressLine2'          => $sender['booking_address_street2'],
+				'postalCode'            => $sender['booking_address_postcode'],
+				'city'                  => $sender['booking_address_city'],
+				'countryCode'           => $sender['booking_address_country'],
+				'reference'             => $this->get_reference(),
+				'additionalAddressInfo' => $additional_info,
+				'contact'               => [
+					'name'        => $sender['booking_address_contact_person'],
+					'email'       => $sender['booking_address_email'],
+					'phoneNumber' => $sender['booking_address_phone'],
+				],
 			],
-		],
-		$wc_order,
-		$this
-	);
+			$wc_order,
+			$this
+		);
 	}
 
 	/**
@@ -234,29 +234,25 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		}
 
 		// Bag on door option
-		$bag_on_door = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
-		$bag_on_door_consent = filter_input( INPUT_POST, 'booking_bag_on_door', FILTER_SANITIZE_STRING );
+		$bag_on_door         = ( $this->service ? $this->service->vas_match( [ '1081' ] ) : false );
+		$bag_on_door_consent = filter_input( INPUT_POST, 'booking_bag_on_door', FILTER_VALIDATE_BOOLEAN );
 
 		if ( $bag_on_door && $bag_on_door_consent ) {
 			$consignments['product']['additionalServices'] = [
 				[
-					'id'		 => $bag_on_door,
-					'email'	 => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
+					'id' => $bag_on_door,
 				],
 			];
 		}
 
 		// Personal delivery option
-		$personal_delivery = ( $this->service ? $this->service->vas_match( [ 'personal_delivery' ] ) : false );
-		$personal_delivery_consent = filter_input( INPUT_POST, 'booking_personal_delivery', FILTER_SANITIZE_STRING );
+		$individual_verification         = ( $this->service ? $this->service->vas_match( [ '1134' ] ) : false );
+		$individual_verification_checked = filter_input( INPUT_POST, 'booking_individual_verification', FILTER_VALIDATE_BOOLEAN );
 
-		if ( $personal_delivery && $personal_delivery_consent ) {
+		if ( $individual_verification && $individual_verification_checked ) {
 			$consignments['product']['additionalServices'] = [
 				[
-					'id'		 => $personal_delivery,
-					'email'	 => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
+					'id' => $individual_verification,
 				],
 			];
 		}

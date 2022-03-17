@@ -1,6 +1,6 @@
 <template>
-<div>
-				<strong>Booking settings:</strong>
+	<div>
+		<strong>Booking settings:</strong>
 		<ul class="">
 			<li class="bfwc-flex bfwc-items-center">
 				<input type="checkbox" id="booking_bag_on_door" name="bag_on_door">
@@ -13,8 +13,8 @@
 				</div>
 			</li>
 			<li class="bfwc-flex bfwc-items-center">
-				<input type="checkbox" id="booking_personal_delivery" name="personal_delivery">
-				<label for="booking_personal_delivery">Use personal delivery for pickup parcels</label>
+				<input type="checkbox" id="booking_individual_verification" name="individual_verification">
+				<label for="booking_individual_verification">Use individual verification for pickup parcels</label>
 				<div class="bfwc-relative bring-booking__tooltip">
 					<span class="bring-booking__info">i</span>
 					<div class="bring-booking__tooltip__reveal">
@@ -23,12 +23,11 @@
 				</div>
 			</li>
 		</ul>
-</div>
+	</div>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style scoped>

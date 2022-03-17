@@ -187,8 +187,8 @@ return [
 	],
 	[
 		'enabled'        => true,
-		'code'           => 'personal_delivery',
-		'name'           => 'Personal delivery',
+		'code'           => '1134',
+		'name'           => 'Individual verification',
 		'default'        => false,
 		'bring_products' => [ 5800 ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
