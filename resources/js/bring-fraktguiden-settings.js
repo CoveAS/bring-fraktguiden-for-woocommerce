@@ -1,24 +1,26 @@
 import ShippingProduct from './components/shipping-product.vue';
-import {createApp} from 'vue';
+import {createApp, ref} from 'vue';
 
 if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 
+	const pro_activated = ref(bring_fraktguiden_settings.pro_activated);
+	bring_fraktguiden_settings.pro_activated = pro_activated;
+	const selected = ref(bring_fraktguiden_settings.services_enabled);
 
-	var selected = bring_fraktguiden_settings.services_enabled;
-
-	var settings = new createApp( {
-		el: '#shipping_services',
-		data: {
-			selected: selected,
-			services_data: bring_fraktguiden_settings.services_data,
-			pro_activated: bring_fraktguiden_settings.pro_activated,
+	const settings = createApp( {
+		data() {
+			return {
+				selected: selected,
+				services_data: bring_fraktguiden_settings.services_data,
+			};
 		},
 		computed: {
 			services: function() {
-				var services = [];
-				for (var i = 0; i < this.selected.length; i++) {
-					var id = this.selected[i];
-					var service = bring_fraktguiden_settings.services[id];
+				const services = [];
+				let id, service;
+				for (let i = 0; i < this.selected.length; i++) {
+					id = this.selected[i];
+					service = bring_fraktguiden_settings.services[id];
 					services.push( service );
 				}
 				return services;
@@ -28,34 +30,22 @@ if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 			shippingproduct: ShippingProduct,
 		},
 	} );
+	settings.config.globalProperties.pro_activated = pro_activated;
+	settings.mount('#shipping_services');
 
 	require( './mybring-api-validation.js' );
 
-	Object.defineProperty(
-		bring_fraktguiden_settings,
-		'pro_activated',
-		{
-			get: function() {
-				return settings.$root.pro_activated;
-			},
-			set: function( val ) {
-				settings.$root.pro_activated = val;
-			}
-		}
-	);
-
 	jQuery( function( $ ) {
 		$( '#shipping_services .select2' ).select2().on( 'change select2:clear', function( e ) {
-			var values = $(this).val();
-			while(selected.length > 0) {selected.pop();}
+			const values = $(this).val();
+			while(selected.value.length > 0) {selected.value.pop();}
 			if (! values) {
 				return;
 			}
-			for (var i = 0; i < values.length; i++) {
-				selected.push( values[i] );
+			for (let i = 0; i < values.length; i++) {
+				selected.value.push( values[i] );
 			}
 		} );
 	} );
-
 }
 

@@ -576,7 +576,9 @@ trait Settings {
 		jQuery( function( $ ) {
 			function toggle_test_mode() {
 				var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
-				bring_fraktguiden_settings.pro_activated = is_checked;
+
+				console.log(bring_fraktguiden_settings.pro_activated);
+				bring_fraktguiden_settings.pro_activated.value = is_checked;
 				$( '#shipping_services' ).attr('class', is_checked ? 'pro-enabled' : 'pro-disabled' );
 				$( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
 

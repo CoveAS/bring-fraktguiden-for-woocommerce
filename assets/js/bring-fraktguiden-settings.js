@@ -17219,11 +17219,10 @@ __webpack_require__.r(__webpack_exports__);
     'label': {},
     'enabled': {},
     'checked': {},
-    'name_prefix': {}
-  },
-  computed: {
-    pro_activated: function pro_activated() {
-      return this.$root.pro_activated;
+    'name_prefix': {},
+    pro_activated: {
+      "default": true,
+      type: Boolean
     }
   },
   data: function data() {
@@ -17266,6 +17265,10 @@ var validation = function validation() {
     },
     'placeholder': {
       "default": '0.00'
+    },
+    pro_activated: {
+      "default": true,
+      type: Boolean
     }
   },
   data: function data() {
@@ -17274,11 +17277,6 @@ var validation = function validation() {
       checkbox_val: this.obj[this.field_id + '_cb'],
       classes: ''
     };
-  },
-  computed: {
-    pro_activated: function pro_activated() {
-      return this.$root.pro_activated;
-    }
   },
   watch: {
     checkbox_val: validation,
@@ -17329,9 +17327,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return this.service_data["class"];
-    },
-    pro_activated: function pro_activated() {
-      return this.$root.pro_activated;
     }
   },
   methods: {
@@ -17492,7 +17487,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.checkbox_val = $event;
     }),
-    readonly: !$options.pro_activated
+    readonly: !$props.pro_activated
   }, null, 8
   /* PROPS */
   , _hoisted_3), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.checkbox_val]]), _hoisted_4, 'number' === $props.input_type ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
@@ -17505,7 +17500,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.field_val = $event;
     }),
     name: $props.name_prefix + '[' + $props.field_id + ']',
-    readonly: !_ctx.checkbox_val || !$options.pro_activated
+    readonly: !_ctx.checkbox_val || !$props.pro_activated
   }, null, 8
   /* PROPS */
   , _hoisted_5)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.field_val]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
@@ -17515,7 +17510,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.field_val = $event;
     }),
     name: $props.name_prefix + '[' + $props.field_id + ']',
-    readonly: !_ctx.checkbox_val || !$options.pro_activated
+    readonly: !_ctx.checkbox_val || !$props.pro_activated
   }, null, 8
   /* PROPS */
   , _hoisted_6)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.field_val]])])], 2
@@ -17600,7 +17595,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.custom_name = $event;
     }),
     name: _ctx.name_prefix + '[custom_name]',
-    readonly: !$options.pro_activated
+    readonly: !_ctx.pro_activated
   }, null, 8
   /* PROPS */
   , _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.custom_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_overridetoggle, {
@@ -17741,21 +17736,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (window.shipping_services && window.bring_fraktguiden_settings) {
-  var selected = bring_fraktguiden_settings.services_enabled;
-  var settings = new vue__WEBPACK_IMPORTED_MODULE_1__.createApp({
-    el: '#shipping_services',
-    data: {
-      selected: selected,
-      services_data: bring_fraktguiden_settings.services_data,
-      pro_activated: bring_fraktguiden_settings.pro_activated
+  var pro_activated = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(bring_fraktguiden_settings.pro_activated);
+  bring_fraktguiden_settings.pro_activated = pro_activated;
+  var selected = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(bring_fraktguiden_settings.services_enabled);
+  var settings = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
+    data: function data() {
+      return {
+        selected: selected,
+        services_data: bring_fraktguiden_settings.services_data
+      };
     },
     computed: {
       services: function services() {
         var services = [];
+        var id, service;
 
         for (var i = 0; i < this.selected.length; i++) {
-          var id = this.selected[i];
-          var service = bring_fraktguiden_settings.services[id];
+          id = this.selected[i];
+          service = bring_fraktguiden_settings.services[id];
           services.push(service);
         }
 
@@ -17766,23 +17764,17 @@ if (window.shipping_services && window.bring_fraktguiden_settings) {
       shippingproduct: _components_shipping_product_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
     }
   });
+  settings.config.globalProperties.pro_activated = pro_activated;
+  settings.mount('#shipping_services');
 
   __webpack_require__(/*! ./mybring-api-validation.js */ "./resources/js/mybring-api-validation.js");
 
-  Object.defineProperty(bring_fraktguiden_settings, 'pro_activated', {
-    get: function get() {
-      return settings.$root.pro_activated;
-    },
-    set: function set(val) {
-      settings.$root.pro_activated = val;
-    }
-  });
   jQuery(function ($) {
     $('#shipping_services .select2').select2().on('change select2:clear', function (e) {
       var values = $(this).val();
 
-      while (selected.length > 0) {
-        selected.pop();
+      while (selected.value.length > 0) {
+        selected.value.pop();
       }
 
       if (!values) {
@@ -17790,7 +17782,7 @@ if (window.shipping_services && window.bring_fraktguiden_settings) {
       }
 
       for (var i = 0; i < values.length; i++) {
-        selected.push(values[i]);
+        selected.value.push(values[i]);
       }
     });
   });
@@ -17806,28 +17798,24 @@ if (window.shipping_services && window.bring_fraktguiden_settings) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_text_validator_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/text-validator.vue */ "./resources/js/components/text-validator.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var create_text_validator = function create_text_validator(callback) {
-  return function (createElement) {
-    return createElement(_components_text_validator_vue__WEBPACK_IMPORTED_MODULE_0__["default"], {
-      props: {
-        original_el: this.$el,
-        validator: callback
-      }
-    });
-  };
-};
 
 var validate_email = function validate_email(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
+var wrap = function wrap(el) {
+  var wrapper = jQuery(el).wrap('<div>').parent();
+  return wrapper.get(0);
+};
+
 var i18n = bring_fraktguiden_settings.i18n;
-var api_uid = new Vue({
-  el: '#woocommerce_bring_fraktguiden_mybring_api_uid',
-  render: create_text_validator(function (value) {
+var api_uid = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_text_validator_vue__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  original_el: window.woocommerce_bring_fraktguiden_mybring_api_uid,
+  validator: function validator(value) {
     var error_messages = [];
 
     if (value.match(/\s/)) {
@@ -17840,11 +17828,12 @@ var api_uid = new Vue({
     }
 
     return error_messages;
-  })
+  }
 });
-var api_key = new Vue({
-  el: '#woocommerce_bring_fraktguiden_mybring_api_key',
-  render: create_text_validator(function (value) {
+api_uid.mount(wrap('#woocommerce_bring_fraktguiden_mybring_api_uid'));
+var api_key = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_text_validator_vue__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  original_el: window.woocommerce_bring_fraktguiden_mybring_api_key,
+  validator: function validator(value) {
     var error_messages = [];
 
     if (value.match(/\s/)) {
@@ -17857,11 +17846,12 @@ var api_key = new Vue({
     }
 
     return error_messages;
-  })
+  }
 });
-var api_customer_number = new Vue({
-  el: '#woocommerce_bring_fraktguiden_mybring_customer_number',
-  render: create_text_validator(function (value) {
+api_key.mount(wrap('#woocommerce_bring_fraktguiden_mybring_api_key'));
+var api_customer_number = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_text_validator_vue__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  original_el: window.woocommerce_bring_fraktguiden_mybring_customer_number,
+  validator: function validator(value) {
     var error_messages = [];
 
     if (value.match(/\s/)) {
@@ -17874,8 +17864,9 @@ var api_customer_number = new Vue({
     }
 
     return error_messages;
-  })
+  }
 });
+api_customer_number.mount(wrap('#woocommerce_bring_fraktguiden_mybring_customer_number'));
 
 /***/ }),
 
