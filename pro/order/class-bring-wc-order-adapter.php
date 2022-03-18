@@ -356,11 +356,20 @@ class Bring_WC_Order_Adapter {
 
 		$shipping_methods = $this->order->get_shipping_methods();
 
-		foreach ( $shipping_methods as $item_id => $shipping_method ) {
+		if (
+			filter_var(
+				Fraktguiden_Helper::get_option( 'booking_without_bring' ),
+				FILTER_VALIDATE_BOOLEAN
+			)
+		) {
+			return $shipping_methods;
+		}
+
+		foreach ( $shipping_methods as $item_id => $shipping_item ) {
 			$method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
 
 			if ( strpos( $method_id, Fraktguiden_Helper::ID ) !== false ) {
-				$result[ $item_id ] = $shipping_method;
+				$result[ $item_id ] = $shipping_item;
 			}
 		}
 

@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden_Pro\Booking\Actions\Get_First_Enabled_Bring_Product;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -203,19 +205,29 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	/**
 	 * Create
 	 *
-	 * @param array $shipping_item Shipping item.
+	 * @param WC_Order_Item_Shipping $shipping_item Shipping item.
 	 *
 	 * @throws Exception Exception.
 	 *
 	 * @return Bring_Booking_Consignment_Request
 	 */
-	public static function create( $shipping_item ): Bring_Booking_Consignment_Request {
-		$service_id = self::get_bring_product( $shipping_item );
+	public static function create( WC_Order_Item_Shipping $shipping_item ): Bring_Booking_Consignment_Request {
+		$bring_product = self::get_bring_product( $shipping_item );
 
-		if ( ! $service_id ) {
+		if (
+			filter_var(
+				Fraktguiden_Helper::get_option( 'booking_without_bring' ),
+				FILTER_VALIDATE_BOOLEAN
+			)
+			&& ! $bring_product
+		) {
+			$bring_product = (new Get_First_Enabled_Bring_Product())();
+			$shipping_item->update_meta_data( 'bring_product', $bring_product );
+			$shipping_item->save();
+		}
+		if ( ! $bring_product ) {
 			throw new Exception( 'No bring product was found on the shipping method' );
 		}
-
 
 		return new self( $shipping_item );
 	}

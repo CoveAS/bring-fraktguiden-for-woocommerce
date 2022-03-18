@@ -6,6 +6,7 @@
  */
 
 use Bring_Fraktguiden_Pro\Booking\Actions\Get_Booking_Data_Action;
+use Bring_Fraktguiden_Pro\Booking\Actions\Get_First_Enabled_Bring_Product;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -188,16 +189,12 @@ class Bring_Booking_Order_View {
 	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
 	public static function render_step2_screen( $order ) {
-		$service_data = Fraktguiden_Helper::get_service_data_for_key( $order->bring_product );
+		$bring_product = $order->bring_product ?: (new Get_First_Enabled_Bring_Product())();;
+		$service_data = Fraktguiden_Helper::get_service_data_for_key( $bring_product );
 		?>
 		<div class="bring-form-field">
 			<label><?php esc_html_e( 'Customer Number', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
 			<?php Bring_Booking_Common_View::render_customer_selector( '_bring-customer-number', $order ); ?>
-		</div>
-
-		<div class="bring-form-field">
-			<label><?php esc_html_e( 'Shipping Service', 'bring-fraktguiden-for-woocommerce' ); ?>:</label>
-			<?php Bring_Booking_Common_View::render_shipping_service_selector( $order ); ?>
 		</div>
 
 		<div class="bring-form-field">
@@ -207,7 +204,6 @@ class Bring_Booking_Order_View {
 				<?php Bring_Booking_Common_View::render_shipping_date_time(); ?>
 			</div>
 		</div>
-
 
 		<?php if ( in_array( $order->bring_product, [ 5600, 'PA_DOREN' ] ) ): ?>
 
