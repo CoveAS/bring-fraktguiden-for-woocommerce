@@ -68,6 +68,7 @@ export default {
 	border-radius: 0.25rem;
 	display: none;
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+	z-index: 2;
 }
 
 .bring-booking__info {
