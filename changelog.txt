@@ -1,5 +1,13 @@
 == Changelog ==
 
+= 1.8.9 =
+* Added bag on door support for mailbox method
+* Added individual verification and id verification value added service
+* Added setting to enable booking for orders that does not use a bring shipping method
+* Added bring product select box to booking items
+* Added validation for booking settings
+* Upgraded vuejs from version 2 to 3
+
 = 1.8.8 =
 
 * Fixed some unsupported operand type errors.
