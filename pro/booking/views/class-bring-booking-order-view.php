@@ -95,7 +95,7 @@ class Bring_Booking_Order_View {
 				}
 
 				if ( ! $order->is_booked() ) {
-					self::render_footer( $step2 );
+					self::render_footer( $step2, $order );
 				}
 				?>
 
@@ -109,9 +109,15 @@ class Bring_Booking_Order_View {
 	 *
 	 * @param Bring_WC_Order_Adapter $order Order.
 	 */
-	public static function render_start( $order ) {
-		?>
-		<?php
+	public static function render_start( Bring_WC_Order_Adapter $order ): void {
+		if ( empty( $order->order->get_shipping_methods() ) ) {
+			?>
+			<div>
+				<?php esc_html_e( 'Please add a shipping item to the order and reload the page to enable booking', 'bring-fraktguiden-for-woocommerce' ); ?>
+			</div>
+			<?php
+			return;
+		}
 		if ( ! $order->has_booking_errors() ) {
 			?>
 			<div>
@@ -127,9 +133,6 @@ class Bring_Booking_Order_View {
 			</div>
 			<?php
 		}
-		?>
-
-		<?php
 	}
 
 	/**
@@ -298,7 +301,7 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param bool $is_step2
 	 */
-	public static function render_footer( $is_step2 ) {
+	public static function render_footer( bool $is_step2, Bring_WC_Order_Adapter $adapter ) {
 		$missing_params  = false;
 		$required_params = [
 				'booking_address_store_name',
@@ -331,6 +334,7 @@ class Bring_Booking_Order_View {
 				   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden-for-woocommerce' ); ?></a>
 			<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
 				<button type="submit" name="_bring-start-booking"
+						<?php if ( empty( $adapter->order->get_shipping_methods() ) ) { echo 'disabled="disabled"'; } ?>
 						data-tip="<?php _e( 'Start creating a label to ship this order with Mybring', 'bring-fraktguiden-for-woocommerce' ); ?>"
 						class="button button-primary tips"><?php _e( 'Start booking', 'bring-fraktguiden-for-woocommerce' ); ?></button>
 			<?php } else { ?>
