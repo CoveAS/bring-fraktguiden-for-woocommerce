@@ -233,6 +233,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	}
 
 	private function create_consignment(): array {
+		$is_bulk = $_REQUEST['action'] === 'bring_bulk_book';
+
 		$recipient_address = $this->get_recipient_address();
 		$consignment = [
 			'shippingDateTime' => $this->shipping_date_time,
@@ -284,7 +286,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if (
 			$this->service
 			&& $this->service->has_vas( '1081' )
-			&& $bag_on_door_consent
+			&& ($bag_on_door_consent || $is_bulk)
 		) {
 			$consignment['product']['additionalServices'][] = ['id' => '1081'];
 		}
@@ -294,7 +296,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if (
 			$this->service
 			&& $this->service->has_vas( '1133' )
-			&& $id_verification_checked
+			&& ($id_verification_checked || $is_bulk)
 		) {
 			$consignment['product']['additionalServices'][] = ['id' => '1133'];
 		}
@@ -304,7 +306,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if (
 			$this->service
 			&& $this->service->has_vas( '1134' )
-			&& $individual_verification_checked
+			&& ($individual_verification_checked || $is_bulk)
 		) {
 			$consignment['product']['additionalServices'][] = ['id' => '1134'];
 		}
