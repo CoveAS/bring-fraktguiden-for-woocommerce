@@ -1,5 +1,3 @@
-import { isValid } from 'swedish-postal-code-validator';
-
 const form = document.querySelector('#mainform')
 const inputs = [...document.querySelectorAll('input[id^=woocommerce_bring_fraktguiden_booking_address]')]
 const bookingStatus = document.querySelector('#woocommerce_bring_fraktguiden_booking_enabled')
@@ -29,7 +27,8 @@ jQuery("#woocommerce_bring_fraktguiden_booking_address_postcode").on('keyup', fu
 		}
 	}
 	else if ( countryInput === "Sweden" ) {
-		if ( isValid(this.value) ) {
+		let isValidZip = /^(s-|S-){0,1}[0-9]{3}\s?[0-9]{2}$/.test(this.value)
+		if (isValidZip && this.value > 11114 && this.value < 98500) {
 			this.style.borderColor = "green";
 		} else {
 			this.style.borderColor = "red";

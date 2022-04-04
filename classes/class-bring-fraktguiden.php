@@ -88,6 +88,8 @@ class Bring_Fraktguiden {
 
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
 
+		add_filter('script_loader_tag', __CLASS__ . '::add_type_attribute' , 10, 3);
+
 		Checkout_Modifications::setup();
 		Ajax::setup();
 	}
@@ -287,5 +289,14 @@ class Bring_Fraktguiden {
 			]
 		);
 		wp_enqueue_style( 'bring-fraktguiden-styles', plugin_dir_url( __DIR__ ) . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
+	}
+
+	public static function add_type_attribute($tag, $handle, $src) {
+    if ( 'mybring-admin-js' !== $handle ) {
+			return $tag;
+    }
+
+    $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+    return $tag;
 	}
 }
