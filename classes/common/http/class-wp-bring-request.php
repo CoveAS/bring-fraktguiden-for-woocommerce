@@ -77,7 +77,7 @@ class WP_Bring_Request {
 		$parameters = http_build_query( $params );
 		$result    .= $parameters;
 
-		return esc_url_raw( $result );
+		return esc_url_raw( apply_filters( 'bring_fraktguiden_request_url', $result, $this ) );
 	}
 
 	/**
