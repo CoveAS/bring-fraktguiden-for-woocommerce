@@ -1,34 +1,195 @@
+# Translation of Plugins - Bring Fraktguiden for WooCommerce - Stable (latest release) in Norwegian (Bokmål)
+# This file is distributed under the same license as the Plugins - Bring Fraktguiden for WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2021-05-18 16:30+0200\n"
-"PO-Revision-Date: 2021-05-18 16:32+0200\n"
-"Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
-"Language-Team: \n"
-"Language: nb\n"
+"PO-Revision-Date: 2022-04-20 19:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
-"X-Poedit-Basepath: ../classes\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __\n"
-"X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"Language: nb_NO\n"
+"Project-Id-Version: Plugins - Bring Fraktguiden for WooCommerce - Stable "
+"(latest release)\n"
+"Language-Team: Norsk bokmål"
 
-#: classes/class-bring-fraktguiden.php:120
-#: classes/class-bring-fraktguiden.php:121
-msgid "Bring settings"
-msgstr "Bring instillinger"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:122
+msgid "0"
+msgstr "0"
 
-#: classes/class-bring-fraktguiden.php:207
-msgid "View Bring Fraktguiden Settings"
-msgstr "Vis Bring Fraktguiden innstillinger"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-kco-support.php:173
+msgid "0000"
+msgstr "0563"
 
-#: classes/class-bring-fraktguiden.php:207
-msgid "Settings"
-msgstr "Innstillinger"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:67
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:329
+msgid "Activate PRO"
+msgstr "Aktivere PRO"
 
-#: classes/class-bring-fraktguiden.php:228
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:485
+msgid "Add"
+msgstr "Legg til"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:661
+msgid "Additional Address Info"
+msgstr "Ekstra adresseinformasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:272
+msgid "Additional fee:"
+msgstr "Tilleggsavgift:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:250
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:257
+msgid "Additional Info"
+msgstr "Tilleggsinformasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:318
+msgid "Address"
+msgstr "Adresse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:395
+msgid "Advanced"
+msgstr "Avansert"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:396
+msgid "Advanced configuration and debugging."
+msgstr "Avanserte innstillinger og debugging."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:136
+msgid "All allowed countries"
+msgstr "Alle tilatte land"
+
+#. %s: Mybring settings tab URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:94
+msgid ""
+"Already have an account? Enter your Mybring details <a href=\"%s\">here</a>."
+msgstr ""
+"Har du allerede en konto? Fyll inn dine Mybring-detaljer <a href=\"%s\">"
+"her</a>."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:270
+msgid "Alternative customer number:"
+msgstr "Alternativt kundenummer:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:475
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:477
+msgid "API customer number"
+msgstr "API-kundenummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:467
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:469
+msgid "API key"
+msgstr "API-nøkkel"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:84
+msgid "API response"
+msgstr "API svar"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-wc-shipping-method-bring.php:140
+msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
+msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:167
+msgid "Automatically pack items into several consignments"
+msgstr "Pakk varer i flere forsendelser automatisk"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/class-bring-booking.php:124
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/class-bring-booking.php:149
+msgid "Awaiting Shipment"
+msgstr "Avventer frakt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:133
+msgid "Booked"
+msgstr "Booked"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/class-bring-booking.php:246
+msgid "Booked with Bring"
+msgstr "Reservert hos Bring"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-orders-view.php:52
+msgid "Booking"
+msgstr "Booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/class-bring-booking.php:225
+msgid "Booking errors. See the Bring Booking box for details."
+msgstr ""
+"Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
+"detaljer."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-orders-view.php:39
+msgid "Bring - Print labels"
+msgstr "Bring - Etiketter"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:88
+msgid "Bring - Submit Consignments"
+msgstr "Bring - Send"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:267
+msgid "Bring API offline / No connection"
+msgstr "Bring API er offline / Ingen forbindelse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:51
+msgid "Bring Booking"
+msgstr "Bring Booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:152
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:153
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-wc-shipping-method-bring.php:139
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:93
+msgid "Bring Fraktguiden"
+msgstr "Bring Fraktguiden"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:118
+msgid "Bring Fraktguiden API Customer Number is missing."
+msgstr "Bring Fraktguiden API-kundenummer mangler."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/classes/class-bring-booking-file.php:235
+msgid ""
+"Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'."
+msgstr ""
+"Bring Fraktguiden kunne ikke lage mappen ‘uploads/bring_booking_labels’."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/classes/class-bring-booking-file.php:236
+msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
+msgstr ""
+"Bring Fraktguiden kunne ikke skrive til mappen "
+"‘uploads/bring_booking_labels’."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-order-debug.php:34
+msgid "Bring Fraktguiden Debug information"
+msgstr "Bring Fraktguiden Debug informasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:89
+msgid "Bring Fraktguiden Email / API key is missing."
+msgstr "Bring Fraktguiden Epost / API-nøkkel mangler."
+
+#. Name of the plugin
+msgid "Bring Fraktguiden for WooCommerce"
+msgstr "Bring Fraktguiden for WooCommerce"
+
+#. Description of the plugin
+msgid ""
+"Bring Fraktguiden for WooCommerce makes it easy for your customers to choose "
+"delivery methods from Bring."
+msgstr ""
+"Bring Fraktguiden for WooCommerce gjør det enkelt for kundene i din "
+"nettbutikk å velge leveringsmåte med Bring."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:508
+msgid ""
+"Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
+msgstr ""
+"Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:404
+msgid "Bring Fraktguiden logs will be saved in"
+msgstr "Bring Fraktguiden logg vil bli lagret i"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:50
+msgid "Bring Fraktguiden PRO features have been deactivated."
+msgstr "Bring Fraktguiden PRO funksjoner er deaktivert."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:235
 msgid ""
 "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
 "this message."
@@ -36,105 +197,8 @@ msgstr ""
 "Bring Fraktguiden PRO er i testmodus. Deaktivert testmodus for å fjerne "
 "denne meldingen."
 
-#: classes/class-bring-fraktguiden.php:261
-msgid "Service name:"
-msgstr "Tjenestenavn:"
-
-#: classes/class-bring-fraktguiden.php:262
-msgid "Fixed price override:"
-msgstr "Fast pris:"
-
-#: classes/class-bring-fraktguiden.php:263
-msgid "Alternative customer number:"
-msgstr "Alternativt kundenummer:"
-
-#: classes/class-bring-fraktguiden.php:264
-msgid "Free shipping activated at:"
-msgstr "Grense for gratis frakt:"
-
-#: classes/class-bring-fraktguiden.php:265
-msgid "Additional fee:"
-msgstr "Leveringsgebyr:"
-
-#: classes/class-bring-fraktguiden.php:266
-msgid "Value added services"
-msgstr "Value added services"
-
-#: classes/class-bring-fraktguiden.php:267
-msgid "Pickup points"
-msgstr "Hentesteder"
-
-#: classes/class-bring-fraktguiden.php:268
-msgid "The api email should be a valid email address."
-msgstr "E-posten må være gyldig."
-
-#: classes/class-bring-fraktguiden.php:269
-msgid ""
-"Customer numbers should be letters (A-Z) and underscores followed by a dash "
-"and a number."
-msgstr ""
-"Kundenumre skal være bokstaver (A-Z) og understrekninger etterfulgt av en "
-"bindestrek og et tall."
-
-#: classes/class-bring-fraktguiden.php:270
-msgid "The api key should only contain letters (a-z), numbers and dashes."
-msgstr ""
-"Api-nøkkelen skal bare inneholde bokstaver (a-z), tall og bindestreker."
-
-#: classes/class-bring-fraktguiden.php:271
-msgid "Spaces are not allowed in the"
-msgstr "Mellomrom er ikke tillatt i"
-
-#: classes/class-bring-fraktguiden.php:272
-msgid "API email"
-msgstr "API E-post"
-
-#: classes/class-bring-fraktguiden.php:273 classes/traits/settings.php:472
-#: classes/traits/settings.php:474
-msgid "API key"
-msgstr "API-nøkkel"
-
-#: classes/class-bring-fraktguiden.php:274
-msgid "customer number"
-msgstr "kundenummer"
-
-#: classes/class-wc-shipping-method-bring.php:138
-#: classes/traits/settings.php:93
-#: pro/class-wc-shipping-method-bring-pro.php:152
-#: pro/class-wc-shipping-method-bring-pro.php:153
-msgid "Bring Fraktguiden"
-msgstr "Bring Fraktguiden"
-
-#: classes/class-wc-shipping-method-bring.php:139
-msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
-msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
-
-#: classes/class-wc-shipping-method-bring.php:336
-#: classes/class-wc-shipping-method-bring.php:410
-#: classes/class-wc-shipping-method-bring.php:439
-#: classes/traits/settings.php:296 classes/traits/settings.php:336
-#: classes/traits/settings.php:384
-msgid "Shipping"
-msgstr "Frakt"
-
-#: classes/common/class-ajax.php:22
-msgid "Required field, time_slot, was empty"
-msgstr "Påkrevd felt, time_slot, var tomt"
-
-#: classes/common/class-ajax.php:40
-msgid "Saved location ID"
-msgstr "Lagret lokasjons-ID"
-
-#: classes/common/class-checkout-modifications.php:199
-msgid "Customer requested time slot: "
-msgstr "Kunde valgte tidsluke: "
-
-#: classes/common/class-checkout-modifications.php:219
-msgid "Customer requested delivery time:"
-msgstr "Kunden ba om leveringstid:"
-
-#: classes/common/class-fraktguiden-admin-notices.php:42
-#, php-format
+#. %s: Bring Fraktguiden settings page URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:42
 msgid ""
 "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
 "to PRO.</a>"
@@ -142,109 +206,8 @@ msgstr ""
 "Bring Fraktguiden PRO er nå tilgjengelig, <a href=\"%s\">Klikk her for å "
 "oppgradere til PRO.</a>"
 
-#: classes/common/class-fraktguiden-admin-notices.php:50
-msgid "Bring Fraktguiden PRO features have been deactivated."
-msgstr "Bring Fraktguiden PRO funksjoner er deaktivert."
-
-#: classes/common/class-fraktguiden-admin-notices.php:55
-#, php-format
-msgid ""
-"The Bring Fraktguiden PRO license has not yet been activated. You have %s "
-"remaining before PRO features are disabled."
-msgstr ""
-"Bring Fraktguiden PRO-lisensen har ikke blitt aktivert enda. Du har %s igjen "
-"før PRO-funksjonene blir deaktivert."
-
-#: classes/common/class-fraktguiden-admin-notices.php:55
-#: classes/common/class-fraktguiden-helper.php:409
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dag"
-msgstr[1] "dagen"
-
-#: classes/common/class-fraktguiden-admin-notices.php:58
-#: classes/common/class-fraktguiden-helper.php:393
-#: classes/common/class-fraktguiden-helper.php:405
-#: classes/common/class-fraktguiden-helper.php:410
-msgid "Click here to buy a license"
-msgstr "Klikk her for å kjøpe lisens"
-
-#: classes/common/class-fraktguiden-admin-notices.php:65
-#, php-format
-msgid ""
-"Bring requires a postcode to show where packages are being sent from. Please "
-"update your postcode on the <a href=\"%s\">settings page.</a>"
-msgstr ""
-"Bring krever postnummer for å vise hvor pakkene blir sendt fra. Vennligst "
-"oppdater ditt postnummer på <a href=\"%s\">innstillingssiden.</a>"
-
-#: classes/common/class-fraktguiden-admin-notices.php:89
-msgid "Bring Fraktguiden Email / API key is missing."
-msgstr "Bring Fraktguiden Epost / API-nøkkel mangler."
-
-#: classes/common/class-fraktguiden-admin-notices.php:90
-msgid ""
-"Bring updated their API. All users now need a Mybring account in order to "
-"calculate freight."
-msgstr ""
-"Bring har oppdatert sitt API. Alle brukere må ha en Mybring-konto for å "
-"kalkulere frakt."
-
-#: classes/common/class-fraktguiden-admin-notices.php:92
-#, php-format
-msgid ""
-"If you do not have a Mybring account, create your account <a href=\"%s\" "
-"target=\"_blank\">here</a>."
-msgstr ""
-"Hvis du ikke har en Mybring-konto, lag en konto <a href=\"%s\" target="
-"\"_blank\">her</a>."
-
-#: classes/common/class-fraktguiden-admin-notices.php:94
-#, php-format
-msgid ""
-"Already have an account? Enter your Mybring details <a href=\"%s\">here</a>."
-msgstr ""
-"Har du allerede en konto? Fyll inn dine Mybring-detaljer <a href=\"%s\">her</"
-"a>."
-
-#: classes/common/class-fraktguiden-admin-notices.php:118
-msgid "Bring Fraktguiden API Customer Number is missing."
-msgstr "Bring Fraktguiden API-kundenummer mangler."
-
-#: classes/common/class-fraktguiden-admin-notices.php:119
-msgid "Mybring Booking requires an API customer number."
-msgstr "Mybring Booking krever API-kundenummer."
-
-#: classes/common/class-fraktguiden-admin-notices.php:121
-#, php-format
-msgid "Enter your API customer number <a href=\"%s\">here</a>."
-msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
-
-#: classes/common/class-fraktguiden-helper.php:200
-#, php-format
-msgid ""
-"You're using an outdated customer number, %s - The latest services from "
-"Bring require you to update your customer number."
-msgstr ""
-"Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
-"at du oppdaterer til nytt kundenummer."
-
-#: classes/common/class-fraktguiden-helper.php:379
-msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
-msgstr ""
-"Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
-
-#: classes/common/class-fraktguiden-helper.php:392
-msgid "Running in test-mode."
-msgstr "Kjører i testmodus."
-
-#: classes/common/class-fraktguiden-helper.php:404
-msgid "Please ensure you have a valid license to continue using PRO."
-msgstr ""
-"Vennligst sørg for at du har en gyldig lisens før du fortsetter å bruke PRO."
-
-#: classes/common/class-fraktguiden-helper.php:409
-#, php-format
+#. %s: Number of days
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:413
 msgid ""
 "Bring Fraktguiden PRO license has not yet been activated. You have %s "
 "remaining before PRO features are disabled."
@@ -252,263 +215,1040 @@ msgstr ""
 "Bring Fraktguiden PRO-lisensen har ikke blitt aktivert enda. Du har %s  "
 "igjen før PRO-funksjonene blir deaktivert."
 
-#: classes/common/class-fraktguiden-helper.php:420
-msgctxt "Succinct explaination of feature"
-msgid "Free shipping limits: Set cart thresholds to enable free shipping."
-msgstr ""
-"Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
-"frakt."
-
-#: classes/common/class-fraktguiden-helper.php:421
-msgctxt "Succinct explaination of feature"
-msgid ""
-"Local pickup points: Let customers select their own pickup point based on "
-"their location."
-msgstr ""
-"Pickup points: La kunden velge hentested for utlevering av pakken basert på "
-"deres lokasjon."
-
-#: classes/common/class-fraktguiden-helper.php:422
-msgctxt "Succinct explaination of feature"
-msgid "Mybring Booking: Book orders directly from the order page with Mybring"
-msgstr ""
-"Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
-"Mybring"
-
-#: classes/common/class-fraktguiden-helper.php:423
-msgctxt "Succinct explaination of feature"
-msgid "Fixed shipping prices: Define your set price for each freight option"
-msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
-
-#: classes/common/class-fraktguiden-kco-support.php:158
-#: pro/booking/views/class-bring-booking-order-view.php:652
-#: pro/class-wc-shipping-method-bring-pro.php:324
-msgid "Country"
-msgstr "Land"
-
-#: classes/common/class-fraktguiden-kco-support.php:171
-msgid "Enter postcode (4 digits)"
-msgstr "Skriv postnummer (4 siffer)"
-
-#: classes/common/class-fraktguiden-kco-support.php:173
-msgid "0000"
-msgstr "0563"
-
-#: classes/common/class-fraktguiden-kco-support.php:174
-msgid "Get delivery methods"
-msgstr "Hent leveringsmetoder"
-
-#: classes/debug/class-fraktguiden-order-debug.php:34
-msgid "Bring Fraktguiden Debug information"
-msgstr "Bring Fraktguiden Debug informasjon"
-
-#: classes/debug/class-fraktguiden-order-debug.php:181
-msgid "Missing metadata on the waybill."
-msgstr "Metadata på Waybill mangler."
-
-#: classes/debug/class-fraktguiden-product-debug.php:38
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:38
 msgid "Bring Fraktguiden Product Tester"
-msgstr "Bring Fraktguiden produkttester"
+msgstr "Bring Fraktguiden Produkttester"
 
-#: classes/debug/class-fraktguiden-product-debug.php:69
-msgid "Loading."
-msgstr "Laster."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:419
+msgid ""
+"Bring Fraktguiden will hide Klarna Checkout until a shipping method is "
+"selected in order to ensure that a shipping method has been selected before "
+"payment is made."
+msgstr ""
+"Bring Fraktguiden vil skjule Klarna Checkout til en forsendelsesmetode er "
+"valgt for å sikre at en forsendelsesmetode er valgt før betaling utføres."
 
-#: classes/debug/class-fraktguiden-product-debug.php:81
-msgid "Can this product be shipped with Bring?"
-msgstr "Kan dette produktet sendes med Bring?"
-
-#: classes/debug/class-fraktguiden-product-debug.php:82
-msgid "Here's some information about your product"
-msgstr "Her er litt informasjon om produktet ditt"
-
-#: classes/debug/class-fraktguiden-product-debug.php:84
-msgid "API response"
-msgstr "API svar"
-
-#: classes/debug/class-fraktguiden-product-debug.php:177
-msgid "No problems detected"
-msgstr "Ingen problemer oppdaget"
-
-#: classes/debug/class-fraktguiden-product-debug.php:254
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:254
 msgid "Bring is not configured for the selected zone"
 msgstr "Bring er ikke konfigurert for den valgte sonen"
 
-#: classes/debug/class-fraktguiden-product-debug.php:318
-msgid "Address"
-msgstr "Adresse"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:214
+msgid ""
+"Bring needs a default shipping size for when products do not contain any "
+"dimension information."
+msgstr ""
+"Bring trenger et standardmål når produkter ikke inneholder dimensjoner."
 
-#: classes/debug/class-fraktguiden-product-debug.php:319
-msgid "Post code"
-msgstr "Postnummer"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:15
+msgid "Bring order ID:"
+msgstr "Bring ordre-ID:"
 
-#: classes/debug/class-fraktguiden-product-debug.php:320
-#: pro/booking/views/class-bring-booking-order-view.php:651
-#: pro/class-wc-shipping-method-bring-pro.php:319
-msgid "City"
-msgstr "By"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:192
+msgid "Bring products"
+msgstr "Bring produkter"
 
-#: classes/debug/class-fraktguiden-product-debug.php:321
-msgid "Country code"
-msgstr "Landkode"
+#. %s: Bring Fraktguiden settings page URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:65
+msgid ""
+"Bring requires a postcode to show where packages are being sent from. Please "
+"update your postcode on the <a href=\"%s\">settings page.</a>"
+msgstr ""
+"Bring krever postnummer for å vise hvor pakkene blir sendt fra. Vennligst "
+"oppdater ditt postnummer på <a href=\"%s\">innstillingssiden.</a>"
 
-#: classes/debug/class-fraktguiden-product-debug.php:322
-msgid "Municipality"
-msgstr "Kommune"
-
-#: classes/debug/class-fraktguiden-product-debug.php:323
-msgid "County"
-msgstr "Fylke"
-
-#: classes/debug/class-fraktguiden-product-debug.php:324
-msgid "Visiting address"
-msgstr "Besøksadresse"
-
-#: classes/debug/class-fraktguiden-product-debug.php:325
-msgid "Visiting post code"
-msgstr "Gyldig postnummer for frakt"
-
-#: classes/debug/class-fraktguiden-product-debug.php:326
-msgid "Visiting city"
-msgstr "Besøksbyen"
-
-#: classes/traits/settings.php:63
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:63
 msgid "Bring Settings"
 msgstr "Bring instillinger"
 
-#: classes/traits/settings.php:67
-#: pro/booking/views/class-bring-booking-order-view.php:325
-msgid "Activate PRO"
-msgstr "Aktivere PRO"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:123
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:124
+msgid "Bring settings"
+msgstr "Innstillinger for Bring"
 
-#: classes/traits/settings.php:69
-msgid "Enable/disable PRO features"
-msgstr "Aktiver/deaktiver PRO-funksjonene"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:523
+msgid ""
+"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
+"be enabled. Please enable them on the <a href=\"%1$s\">Catalog tab</a>. <br/>"
+" In addition, Bring also requires the <strong>Norweigian Krone</strong> "
+"currency. Choose that from the <a href=\"%2$s\">General tab</a>"
+msgstr ""
+"Bring krever <strong>vekt og dimensjoner</strong> for å kalkulere pris. Sørg "
+"for at dette er satt opp under <a href=\"%1$s\">katalogfanen</a>.<br/>I "
+"tillegg, kreves det at <strong>norske kroner</strong> er satt som valuta. "
+"Det kan velges fra <a href=\"%2$s\">generelt-fanen</a>"
 
-#: classes/traits/settings.php:73
-msgid "Enable test mode"
-msgstr "Aktiver testmodus"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:90
+msgid ""
+"Bring updated their API. All users now need a Mybring account in order to "
+"calculate freight."
+msgstr ""
+"Bring har oppdatert sitt API. Alle brukere må ha en Mybring-konto for å "
+"kalkulere frakt."
 
-#: classes/traits/settings.php:75
-msgid "Use PRO in test-mode. Used for development"
-msgstr "Bruk PRO i testmodus. Brukes til utvikling"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:160
+msgid "Calculate shipping costs based on weight only"
+msgstr "Kalkuler frakt kostnader basert kun på vekt"
 
-#: classes/traits/settings.php:80
-#: pro/class-wc-shipping-method-bring-pro.php:209
-#: pro/class-wc-shipping-method-bring-pro.php:241
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:81
+msgid "Can this product be shipped with Bring?"
+msgstr "Kan dette produktet sendes med Bring?"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:311
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:257
+msgid "Change order status after booking or printing labels."
+msgstr "Endre ordrestatus etter bestilling eller utskrift av etiketter."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/class-bring-booking.php:109
+msgid "Changing status because the label was downloaded."
+msgstr "Endrer status da fraktetiketten ble lastet ned."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/templates/woocommerce/alternative-dates.php:5
+msgid "Choose delivery from"
+msgstr "Velg levering fra"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:342
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:320
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:655
+msgid "City"
+msgstr "By"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:58
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:397
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:409
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:414
+msgid "Click here to buy a license"
+msgstr "Klikk her for å kjøpe lisens"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:383
+msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
+msgstr ""
+"Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:404
+msgid "Click here to see the logs"
+msgstr "Klikk her for å se loggene"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:9
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:47
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:57
+msgid "Close modal panel"
+msgstr "Lukk dialogvindu"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:691
+msgid "Confirm and submit consignment"
+msgstr "Bekreft og send forsendelsen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:47
+msgid "Consignment number"
+msgstr "Sendingsnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:154
+msgid "Consignments"
+msgstr "Forsendelser"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:23
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:666
+msgid "Contact"
+msgstr "Kontakt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:369
+msgid "Contact Person"
+msgstr "Kontaktperson"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:728
+msgid ""
+"Couldn't connect to Bring with your API credentials. Please check that they "
+"are correct"
+msgstr ""
+"Kunne ikke koble til Bring med påloggingsinformasjonen. Kontroller at de er "
+"riktige"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:347
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:656
+msgid "Country"
+msgstr "Land"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:321
+msgid "Country code"
+msgstr "Landkode"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:323
+msgid "County"
+msgstr "Fylke"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:268
+msgid "Courier"
+msgstr "Kurer"
+
+#. Author of the plugin
+msgid "Cove AS"
+msgstr "Cove AS"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:688
+msgid "Create a new booking"
+msgstr "Lag en ny booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-mailbox.php:39
+msgid "Create waybill"
+msgstr "Lag fraktbrev"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:278
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:317
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:357
+msgid "Custom flat rate"
+msgstr "Tilpasset fast pris"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:271
+msgid "Customer note from the order"
+msgstr "Kundenotat fra bestillingen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:189
+msgid "Customer Number"
+msgstr "Kundenummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:46
+msgid "Customer number"
+msgstr "Kundenummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:276
+msgid ""
+"Customer numbers should be letters (A-Z) and underscores followed by a dash "
+"and a number."
+msgstr ""
+"Kundetall skal være bokstaver (A-Z) og understreker etterfulgt av en "
+"bindestrek og et tall."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:212
+msgid "Customer requested delivery date"
+msgstr ""
+"\n"
+"Kunden ba om leveringsdato"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-checkout-modifications.php:217
+msgid "Customer requested delivery time:"
+msgstr "Kunden ba om leveringstid:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:431
+msgid ""
+"Cutoff time every day. Orders after this time will be processed the next day."
+msgstr ""
+"Avskjæringstid hver dag. Bestillinger etter dette tidspunktet vil bli "
+"behandlet neste dag."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:70
+msgid "Date"
+msgstr "Dato"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:55
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:413
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:400
+msgid "Debug mode"
+msgstr "Debug modus"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:442
+msgid "Debug System information"
+msgstr "Debug systeminformasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:440
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:479
+msgid "Delete"
+msgstr "Slett"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:120
+msgid "Delivery Fee"
+msgstr "Leveringsgebyr"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:411
+msgid ""
+"Disable loading the default stylesheet from the Bring Fraktguiden plugin to "
+"allow custom styling by the theme"
+msgstr ""
+"Deaktiver lasting standardstil arket fra Bring Fraktguiden plugin for å "
+"tillate tilpasset styling av temaet"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:409
+msgid "Disable stylesheet"
+msgstr "Deaktiver stylesheets"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:175
+msgid ""
+"Display detailed description and additional information for shipping methods "
+"in cart totals."
+msgstr ""
+"Vis detaljert beskrivelse og tilleggsinformasjon om forsendelsesmetoder."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:435
+msgid "Display ETA"
+msgstr "Vis ETA"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:438
+msgid "Display expected delivery date below shipping rates"
+msgstr "Vis forventet leveringsdato under fraktpriser"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:277
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:316
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:356
+msgid "Do nothing"
+msgstr "Gjør ingenting"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:51
+msgid "Dowload waybill"
+msgstr "Last ned fraktbrev"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-mailbox.php:33
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:33
+msgid "Download"
+msgstr "Last ned"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:75
+msgid "Download label"
+msgstr "Last ned etikett"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:155
+msgid "Downloads"
+msgstr "Nedlastinger"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:23
+msgid "Earliest Pickup"
+msgstr "Tidligst henting"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:379
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:459
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:461
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:671
+msgid "Email"
+msgstr "Epost"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:209
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:241
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:80
 msgid "Enable"
 msgstr "Aktiver"
 
-#: classes/traits/settings.php:82
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:82
 msgid "Enable Bring Fraktguiden"
 msgstr "Aktiver Bring Fraktguiden"
 
-#: classes/traits/settings.php:90
-msgid "Title"
-msgstr "Tittel"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:402
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:444
+msgid "Enable debug logs"
+msgstr "Aktiver debug-logging"
 
-#: classes/traits/settings.php:92
-msgid "This controls the title which the user sees during checkout."
-msgstr "Dette er tittelen som brukeren ser i kassen."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:437
+msgid "Enable expected delivery date"
+msgstr "Aktiver forventet leveringsdato"
 
-#: classes/traits/settings.php:96
-msgid "Post office"
-msgstr "Postkontor"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:417
+msgid "Enable legacy Klarna support"
+msgstr "Aktiver eldre støtte for Klarna"
 
-#: classes/traits/settings.php:98
-msgid "Shipping from post office"
-msgstr "Leveres fra postkontor"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:166
+msgid "Enable multipack"
+msgstr "Aktiver multipack"
 
-#: classes/traits/settings.php:99
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:243
+msgid "Enable Mybring booking"
+msgstr "Aktiver Mybring Booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:212
+msgid "Enable pickup point"
+msgstr "Aktiver hentested"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:204
+msgid ""
+"Enable pickup points on the cart / checkout. If disabled, Bring will show "
+"the names of shipment methods. <em>ie: <strong>\"Climate Neutral Service "
+"Pack\"</strong></em>"
+msgstr ""
+"For å vise hentested i handlekurven/kassen for kunden(e) må Hentested "
+"aktiveres. Hvis deaktivert, vil Bring kun vise navn på forsendelsesmetoder. "
+"<em>f.eks: <strong>”Klimanøytral Servicepakke”</strong> </em>"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:73
+msgid "Enable test mode"
+msgstr "Aktiver testmodus"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:250
+msgid "Enable test mode for Mybring booking"
+msgstr "Aktiver testmodus for Mybring booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:69
+msgid "Enable/disable PRO features"
+msgstr "Aktiver/deaktiver PRO-funksjonene"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:173
+msgid "Enhanced descriptions"
+msgstr "Bedre beskrivelser"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-kco-support.php:171
+msgid "Enter postcode (4 digits)"
+msgstr "Skriv postnummer (4 siffer)"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:454
+msgid "Enter your API credentials. API authentication is required."
+msgstr "Legg inn din API legitimasjon. API autentisering er pålagt."
+
+#. %s: Mybring settings tab URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:121
+msgid "Enter your API customer number <a href=\"%s\">here</a>."
+msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-messages.php:35
+msgid "Error"
+msgstr "Feil"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:27
+msgid "Expected delivery"
+msgstr "Forventet levert"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:140
+msgid "Failed"
+msgstr "Feilet"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:207
+msgid "Fallback options"
+msgstr "Fallback alternativer"
+
+#. %s: Mybring API settings page URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:480
+msgid "Find your API customer number %1$shere%2$s."
+msgstr "Finn ditt API-kundenummer %1$sher%2$s."
+
+#. %s: Mybring API settings page URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:472
+msgid "Find your API key %1$shere%2$s."
+msgstr "Finn din API-nøkkel %1$sher%2$s."
+
+#. %s: Mybring profile page URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:464
+msgid "Find your Email %1$shere%2$s."
+msgstr "Finn din Epost %1$sher%2$s."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:269
+msgid "Fixed price override:"
+msgstr "Overstyring av fast pris:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:99
 msgid ""
 "Flag that tells whether the parcel is delivered at a post office when it is "
 "shipped."
 msgstr "Kryss av om pakken blir levert til et postkontor ved sending."
 
-#: classes/traits/settings.php:103
-msgid "From zip"
-msgstr "Fra postnummer"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:222
+msgid "Fraktguiden requires the following fields"
+msgstr "Fraktguiden krever følgende felter utfylt"
 
-#: classes/traits/settings.php:105
-msgid "ie: 0159"
-msgstr "f.eks. 0159"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:271
+msgid "Free shipping activated at:"
+msgstr "Gratis frakt aktivert på:"
 
-#: classes/traits/settings.php:106
-msgid ""
-"This is the zip code of where you deliver from. For example, the post office."
-msgstr ""
-"Dette er postnummeret hvor du sender varen fra. F.eks. ditt postkontor."
-
-#: classes/traits/settings.php:111
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:111
 msgid "From country"
 msgstr "Fra land"
 
-#: classes/traits/settings.php:113
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:103
+msgid "From zip"
+msgstr "Fra postnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:145
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:158
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:168
 msgid ""
-"This is the country of origin where you deliver from (If omitted "
-"WooCommerce's default location will be used. See WooCommerce - Settings - "
-"General)"
+"Fuel surcharge is not included in the price returned from the ShippingGuide "
+"and must be calculated / added manually. Bring Parcels is entitled to change "
+"this charge without notice to the customer. Any fuel surcharge applied will "
+"be detailed on the invoice."
 msgstr ""
-"Dette er landet du sender fra (hvis ikke valgt benyttes WooCommerce sin "
-"standard lokasjon. Se WooCommerce - Innstillinger - Generelt)"
+"Drivstofftillegg er ikke inkludert i prisen som returneres fra ShippingGuide "
+"og må beregnes / legges til manuelt. Bring Parcels har rett til å endre "
+"denne avgiften uten varsel til kunden. Eventuelle drivstofftillegg vil bli "
+"spesifisert på fakturaen."
 
-#: classes/traits/settings.php:120
-msgid "Delivery Fee"
-msgstr "Leveringsgebyr"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:522
+msgid "Gateway Disabled"
+msgstr "Gateway Disabled"
 
-#: classes/traits/settings.php:122
-msgid "0"
-msgstr "0"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-kco-support.php:174
+msgid "Get delivery methods"
+msgstr "Hent leveringsmetoder"
 
-#: classes/traits/settings.php:123
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:231
+msgid "Get Rate"
+msgstr "Hent pris"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:306
+msgid "Heavy and oversized items"
+msgstr "Tunge og overdimensjonerte varer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:311
+msgid "Heavy item handling"
+msgstr "Håndtering av tunge varer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:383
+msgid "Height"
+msgstr "Høyde"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:82
+msgid "Here's some information about your product"
+msgstr "Her er litt informasjon om produktet ditt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:77
+msgid "hh"
+msgstr "tt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:310
+msgid "Home Delivery"
+msgstr "Hjemmelevering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:287
+msgid "Home delivery"
+msgstr "Hjemmelevering"
+
+#. URI of the plugin
+msgid "https://bringfraktguiden.no/"
+msgstr "https://bringfraktguiden.no/"
+
+#. Author URI of the plugin
+msgid "https://cove.no/"
+msgstr "https://cove.no/"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:105
+msgid "ie: 0159"
+msgstr "f.eks. 0159"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:378
+msgid "ie: 1500"
+msgstr "f.eks. 1500"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:290
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:330
+msgid "ie: 500"
+msgstr "f.eks. 500"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:323
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:371
+msgid "ie: Cargo shipping"
+msgstr "f.eks. Fraktgods"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:268
 msgid ""
-"What fee do you want to charge for Bring, disregarded if you choose free. "
-"Leave blank to disable."
+"If Bring has any technical difficulties, it won't be able to fetch prices "
+"from the bring server.<br>In these cases, shipping will default to these "
+"settings:"
 msgstr ""
-"Gebyr du ønsker å ta betalt for Bring. Blir ignorert dersom du velger "
-"gratis. La stå tomt for å deaktivere."
+"Hvis Bring har tekniske problemer, er det ikke mulig å hente fraktpriser fra "
+"Bring-serveren. <br> I disse tilfeller vil frakten settes til disse "
+"innstillingene:"
 
-#: classes/traits/settings.php:131
-msgid "Recipient notification"
-msgstr "Mottakervarsling"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:211
+msgid "If not checked, default services will be shown"
+msgstr "Hvis ikke merket, vises standardtjenester"
 
-#: classes/traits/settings.php:133
-msgid "Recipient notification over SMS or E-Mail"
-msgstr "Mottakervarsling på SMS eller Epost"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:222
+msgid "If set, it will be the maximum number of pickup points shown"
+msgstr "Hvis det er satt, blir det maksimalt antall hentested vist"
 
-#: classes/traits/settings.php:135
+#. %s: Mybring external URL
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:92
 msgid ""
-"<strong>Note:</strong> If not enabled, Fraktguiden will add a fee for paper "
-"based recipient notification.<br/>\n"
-"\t\t\t\t\t\t\tIf enabled, the recipient will receive notification over SMS "
-"or E-mail when the parcel has arrived.<br/>\n"
-"\t\t\t\t\t\t\tThis only applies to <u>Bedriftspakke</u>, <u>Kliman&oslash;"
-"ytral Servicepakke</u> and <u>Bedriftspakke Ekspress-Over natten 09</u>"
+"If you do not have a Mybring account, create your account <a href=\"%s\" "
+"target=\"_blank\">here</a>."
 msgstr ""
-"<strong>Notat:</strong> Hvis avslått, vil Fraktguiden legge til en avgift "
-"for skriftlig melding.<br/>\n"
-"              Hvis aktivert, vil mottaker få en melding over sms eller e-"
-"post når pakken har ankommet.<br/>\n"
-"              Dette gjelder bare for <u>Bedriftspakke</u>, <u>Kliman&oslash;"
-"ytral Servicepakke</u> og <u>Bedriftspakke Ekspress-Over natten 09</u>"
+"Hvis du ikke har en Mybring-konto, lag en konto <a href=\"%s\" "
+"target=\"_blank\">her</a>."
 
-#: classes/traits/settings.php:143
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:159
+msgid "Ignore product dimensions"
+msgstr "Ignorer produktdimensjoner"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:126
+msgid "In progress"
+msgstr "Prosesserer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:22
+msgid "Information"
+msgstr "Informasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:90
+msgid "Insufficient permissions"
+msgstr "Ikke tilstrekkelig tilgang"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:403
+msgid "Issues from the Bring API will be logged here"
+msgstr "Problemer med Bring API blir logget her"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:415
+msgid "Klarna checkout support"
+msgstr "Støtte for Klarna checkout"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-mailbox.php:31
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:31
+msgid "Labels"
+msgstr "Etiketter"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:429
+msgid "Lead time cutoff"
+msgstr "Avskjæring av ledetid"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:423
+msgid "Lead time in days"
+msgstr "Ledetid i dager"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:220
+msgid "Leave blank to remove limit"
+msgstr "La være tom for ingen grense"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:384
+msgid "Length"
+msgstr "Lengde"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:69
+msgid "Loading."
+msgstr "Laster."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:418
+msgid "Loads additional JavaScript on the checkout."
+msgstr "Laster inn ekstra JavaScript i kassen."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:104
+msgid "Mailbox (new)"
+msgstr "Postkasse (ny)"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:351
+msgid "Maximum product handling"
+msgstr "Maksimalt produktantall"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:361
+msgid "Maximum product limit"
+msgstr "Maksimalt produktantall"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:365
+msgid ""
+"Maximum total quantity of products in the cart before offering a custom price"
+msgstr "Maksimalt antall produkter i handlekurven før det tilbys en fast pris"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:158
+msgid "Merged PDF labels"
+msgstr "Sammenslåtte PDF etiketter"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:156
+msgid "Merged ZPL labels"
+msgstr "Sammenslåtte ZPL etiketter"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:131
 msgid "Method availability"
 msgstr "Tilgjengelighet"
 
-#: classes/traits/settings.php:148
-msgid "All allowed countries"
-msgstr "Alle tilatte land"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:240
+msgid "Minimum Height in cm"
+msgstr "Minimum høyde i cm"
 
-#: classes/traits/settings.php:149 classes/traits/settings.php:153
-msgid "Specific Countries"
-msgstr "Spesifikke land"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:218
+msgid "Minimum Length in cm"
+msgstr "Minimum lengde i cm"
 
-#: classes/traits/settings.php:166
-msgid "Shipping Options"
-msgstr "Fraktalternativer"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:213
+msgid "Minimum shipping dimensions"
+msgstr "Minimumsmål"
 
-#: classes/traits/settings.php:167
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:251
+msgid "Minimum Weight in kg"
+msgstr "Minimumsvekt i kg"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:229
+msgid "Minimum Width in cm"
+msgstr "Minimum bredde i cm"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:648
+msgid "Missing credentials"
+msgstr "Mangler påloggingsdetaljer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:78
+msgid "mm"
+msgstr "mm"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:322
+msgid "Municipality"
+msgstr "Kommune"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:232
+msgid "Must be at least 13cm"
+msgstr "Må være minst 13 cm"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:243
+msgid "Must be at least 1cm"
+msgstr "Må være minst 1 cm"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:221
+msgid "Must be at least 23cm"
+msgstr "Må være minst 23 cm"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:728
+msgid "Mybring authentication failed"
+msgstr "Mybring autentisering mislyktes"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:234
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:7
+msgid "Mybring Booking"
+msgstr "Mybring Booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:45
+msgid "Mybring Booking errors"
+msgstr "MyBring Booking-feil"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:119
+msgid "Mybring Booking requires an API customer number."
+msgstr "Mybring Booking krever API-kundenummer."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:21
+msgid "Mybring Customer"
+msgstr "Mybring kunde"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:453
+msgid "Mybring.com API"
+msgstr "Mybring.com API"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:651
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:670
+msgid "Name"
+msgstr "Navn"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:10
+msgid "New services"
+msgstr "Nye tjenester"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:39
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:120
+msgid "No"
+msgstr "Nei"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:272
+msgid "No API connection handling"
+msgstr "Ingen API tilkobling håndtering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/system-info-page.php:174
+msgid "No authentication data"
+msgstr "Ingen autenseringsdata"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:148
+msgid "No files to download."
+msgstr "Ingen filer å laste ned."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:105
+msgid "No labels available"
+msgstr "Ingen etiketter tilgjengelig"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:230
+msgid "No pickup points found for postcode"
+msgstr "Fant ingen hentesteder for dette postnummeret"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:177
+msgid "No problems detected"
+msgstr "Ingen problemer oppdaget"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:188
+msgid "No sorting"
+msgstr "Ingen sortering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:271
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:280
+msgid "None"
+msgstr "Ingen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:149
+msgid "Note: Order is not completed"
+msgstr "Notat: Bestillingen er ikke fullført"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:425
+msgid "Number of days before orders are shipped"
+msgstr "Antall dager før bestillinger sendes"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:379
+msgid ""
+"Offer a flat rate if the cart reaches max products or a product in the cart "
+"does not have the required dimensions"
+msgstr ""
+"Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
+"produkt som ikke har påkrevde dimensjoner"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:293
+msgid "Only applies to home delivery services"
+msgstr "Gjelder kun hjemlevering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:78
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:380
+msgid "Order ID"
+msgstr "Ordre-ID"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:99
+msgid "Order ID is missing."
+msgstr "Ordre-ID mangler."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:266
+msgid "Order status after booking"
+msgstr "Bestillingsstatus etter reservering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:275
+msgid "Order status after printing"
+msgstr "Ordrestatus etter utskrift"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:277
+msgid "Order status will be automatically set when a label is downloaded"
+msgstr "Ordrestatus settes automatisk når en fraktetikett er lastet ned "
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:268
+msgid "Order status will be automatically set when successfully booked"
+msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:122
+msgid "Order status will be set to %s upon successful booking"
+msgstr "Ordrestatus vil bli satt til %s når en bestilling er fullført"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:132
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:175
+msgid "Other services"
+msgstr "Andre tjenester"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:20
+msgid "Package number"
+msgstr "Pakkenummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:291
+msgid "Package type for home delivery"
+msgstr "Pakketype for hjemlevering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-mailbox.php:44
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:44
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:281
+msgid "Packages"
+msgstr "Pakker"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:115
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:126
+msgid "Packages up to 2 kg."
+msgstr "Pakker opp til 2 kg."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:374
+msgid "Phone"
+msgstr "Telefonnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:672
+msgid "Phone Number"
+msgstr "Telefonummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:220
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:423
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:462
+msgid "Pickup point"
+msgstr "Hentested"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:217
+msgid "Pickup point limit"
+msgstr "Hentested valg"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:203
+msgid "Pickup Point Options"
+msgstr "Hentested valg"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:274
+msgid "Pickup points"
+msgstr "Hentesteder"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:236
+msgid "Please add postal code"
+msgstr "Vennligst legg til postnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/classes/class-bring-booking-file.php:233
+msgid "Please check write permissions for yor uploads folder."
+msgstr "Kontroller om nettsiden har skrivetilgang til opplastingsmappen."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:408
+msgid "Please ensure you have a valid license to continue using PRO."
+msgstr ""
+"Vennligst sørg for at du har en gyldig lisens før du fortsetter å bruke PRO."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:116
+msgid ""
+"Please note in order to use mailbox with tracking you need a RFID printer."
+msgstr ""
+"NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:228
+msgid "Please select pickup point"
+msgstr "Vennligst velg hentested"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:226
+msgid "Please select service"
+msgstr "Vennligst velg tjeneste"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:225
+msgid "Please update the fields and save the order first"
+msgstr "Vennligst oppdater feltene og lagre orderen først"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:232
+msgid "Please wait"
+msgstr "Vennligst vent"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:221
+msgid "Please wait..."
+msgstr "Vennligst vent…"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:319
+msgid "Post code"
+msgstr "Postnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:96
+msgid "Post office"
+msgstr "Postkontor"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:337
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:227
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:654
+msgid "Postcode"
+msgstr "Postnummer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:116
+msgid "Press start to start booking"
+msgstr "Trykk start for å starte bestilling"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:723
+msgid "Press Start to try again"
+msgstr "Trykk start for å forsøke igjen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:717
+msgid "Previous booking request failed with the following errors:"
+msgstr "Forrige forespørsel feilet med følgende feilmeldinger:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:187
+msgid "Price, high to low"
+msgstr "Pris, høy til lav."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:186
+msgid "Price, low to high"
+msgstr "Pris, lav til høy."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:256
+msgid "Processing"
+msgstr "Behandler"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:381
+msgid "Product"
+msgstr "Produkt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:346
+msgid "Product quantity limit for cart"
+msgstr "Grense for antall produkter i kassen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:234
+msgid "Rate is not available for this order. Please try another service"
+msgstr ""
+"Pris er ikke tilgjengelig for denne orderen. Vennligst forsøk en annen "
+"tjeneste"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:21
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:258
+msgid "Recipient"
+msgstr "Mottaker"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:360
+msgid "Recipient Address"
+msgstr "Mottakeradresse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:356
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:658
+msgid "Reference"
+msgstr "Referanse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:410
+msgid "Remove all plugin styles from the checkout page"
+msgstr "Fjern alle plugin stiler fra kassa siden"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:235
+msgid "Request was not successful"
+msgstr "Forespørselen feilet"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-ajax.php:21
+msgid "Required field, time_slot, was empty"
+msgstr "Obligatorisk felt, time_slot, var tomt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:100
+msgid "Retry booking"
+msgstr "Prøv booking på nytt"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:39
+msgid "RFID:"
+msgstr "RFID:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:396
+msgid "Running in test-mode."
+msgstr "Kjører i testmodus."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-ajax.php:39
+msgid "Saved location ID"
+msgstr "Lagret steds-ID"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/templates/woocommerce/alternative-dates.php:46
+msgid "Select"
+msgstr "Velg"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-table-labels.php:90
+msgid "Select all"
+msgstr "Merk alle"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:17
+msgid "Selected orders"
+msgstr "Velg bestillinger"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:229
+msgid "Selected pickup point"
+msgstr "Velg hentested"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:84
+msgid "Selected time slot"
+msgstr "Valgt tidsluke"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:251
+msgid "Sender"
+msgstr "Avsender"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:356
+msgid "Sender Address"
+msgstr "Avsender adresse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:233
+msgid "Service"
+msgstr "Tjeneste"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:268
+msgid "Service name:"
+msgstr "Tjenestenavn:"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:294
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:334
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:383
+msgid "Service to use for booking"
+msgstr "Service som brukes til booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/config/services.php:70
+msgid "Services"
+msgstr "Tjenester"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:307
+msgid ""
+"Set a flat rate for packages that exceed the maximum measurements allowed by "
+"Bring."
+msgstr ""
+"Sett en fast pris på pakker som går over maksimale mål som støttes av Bring."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:155
 msgid ""
 "Set the default prices for shipping rates and allow free shipping options on "
 "those services. You can also set the free shipping limit for each shipping "
@@ -518,15 +1258,196 @@ msgstr ""
 "under hver tjeneste. Du kan også sette fraktfri grense under hver av "
 "tjenestene."
 
-#: classes/traits/settings.php:171
-msgid "Ignore product dimensions"
-msgstr "Ignorer produktdimensjoner"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:214
+msgid "Settings"
+msgstr "Innstillinger"
 
-#: classes/traits/settings.php:172
-msgid "Calculate shipping costs based on weight only"
-msgstr "Kalkuler frakt kostnader basert kun på vekt"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-wc-shipping-method-bring.php:352
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-wc-shipping-method-bring.php:427
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-wc-shipping-method-bring.php:457
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:284
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:324
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:372
+msgid "Shipping"
+msgstr "Frakt"
 
-#: classes/traits/settings.php:175
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:25
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:194
+msgid "Shipping Date"
+msgstr "Forsendelsesdato"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:98
+msgid "Shipping from post office"
+msgstr "Leveres fra postkontor"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:371
+msgid "Shipping item id"
+msgstr "Frakt ID"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:375
+msgid "Shipping method cost"
+msgstr "Fraktmetodekostnad"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:287
+msgid "Shipping method cost for 'API Error'"
+msgstr "Fraktmetode kost for ‘API Error’"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:327
+msgid "Shipping method cost for heavy items"
+msgstr "Fraktpris for tunge varer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:369
+msgid "Shipping method label"
+msgstr "Fraktmetode-etikett"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:321
+msgid "Shipping method Label for Heavy Items"
+msgstr "Fraktmetode-etikett for tunge varer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:282
+msgid "Shipping method Label to replace 'API Error'"
+msgstr "Fraktmetode Etikett til erstatning av ‘API Error’"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:154
+msgid "Shipping Options"
+msgstr "Fraktalternativer"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:342
+msgid "Show Parties"
+msgstr "Vis parter"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-labels.php:88
+msgid ""
+"Sorry, Labels are only available for Administrators, Warehouse Teams and "
+"Store Managers. Please contact the administrator to enable access."
+msgstr ""
+"Etiketter er kun tilgjengelig for Administratorer, Lagermedarbeidere og "
+"Butikksjefer. Kontakt en administrator for å få tilgang."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:180
+msgid "Sorting"
+msgstr "Sortering"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:137
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:141
+msgid "Specific Countries"
+msgstr "Spesifikke land"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:360
+#, php-format
+msgid "Specify shipper or consignee reference. Available macros: %s"
+msgstr ""
+"Spesifiser avsender- eller mottakerreferanse. Tilgjengelige makroer: %s"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:325
+msgid "Start booking"
+msgstr "Start booking"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:324
+msgid "Start creating a label to ship this order with Mybring"
+msgstr "Start å lage en etikett for å sende denne ordren med Mybring"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:313
+msgid "Store address and contact information"
+msgstr "Butikkadresse og kontaktinformasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:319
+msgid "Store Name"
+msgstr "Butikknavn"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:325
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:652
+msgid "Street Address 1"
+msgstr "Gateaddress 1"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:331
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:653
+msgid "Street Address 2"
+msgstr "Gateadresse 2"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:88
+msgid "Submit Consignment"
+msgstr "Send"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:711
+msgid "Successfully authenticated"
+msgstr "Autentisert"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:427
+msgctxt "Succinct explaination of feature"
+msgid "Fixed shipping prices: Define your set price for each freight option"
+msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:424
+msgctxt "Succinct explaination of feature"
+msgid "Free shipping limits: Set cart thresholds to enable free shipping."
+msgstr ""
+"Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
+"frakt."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:425
+msgctxt "Succinct explaination of feature"
+msgid ""
+"Local pickup points: Let customers select their own pickup point based on "
+"their location."
+msgstr ""
+"Pickup points: La kunden velge hentested for utlevering av pakken basert på "
+"deres lokasjon."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:426
+msgctxt "Succinct explaination of feature"
+msgid "Mybring Booking: Book orders directly from the order page with Mybring"
+msgstr ""
+"Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
+"Mybring"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:694
+msgid "Sucessfully booked"
+msgstr "Booking bekreftet"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:248
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view-common.php:89
+msgid "Test mode"
+msgstr "Test modus"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:275
+msgid "The api email should be a valid email address."
+msgstr "Api-e-posten må være en gyldig e-postadresse."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:277
+msgid "The api key should only contain letters (a-z), numbers and dashes."
+msgstr "Api-nøkkelen kan bare inneholde bokstaver (a-z), tall og bindestreker."
+
+#. %s: Number of days
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-admin-notices.php:55
+msgid ""
+"The Bring Fraktguiden PRO license has not yet been activated. You have %s "
+"remaining before PRO features are disabled."
+msgstr ""
+"Bring Fraktguiden PRO-lisensen har ikke blitt aktivert enda. Du har %s igjen "
+"før PRO-funksjonene blir deaktivert."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:244
+msgid "The lowest height for a consignment"
+msgstr "Den laveste høyde for en forsendelse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:222
+msgid "The lowest length for a consignment"
+msgstr "Den korteste lengde for en forsendelse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:254
+msgid "The lowest weight in kilograms for a consignment"
+msgstr "Den laveste vekt i kg for en forsendelse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:233
+msgid "The lowest width for a consignment"
+msgstr "Den minste bredde for en forsendelse"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:184
+msgid "The order in which shipping options should be displayed."
+msgstr "Rekkefølgen fraktalternativene skal vises i."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:163
 msgid ""
 "The shipping cost is normally calculated by a combination of weight and "
 "dimensions in order to calculate number of parcels to send and gives a more "
@@ -535,15 +1456,78 @@ msgstr ""
 "Normalt blir fraktkostnader kalkulert med en kombinasjon av vekt og "
 "dimensjoner for å regne ut riktig pris og sendinger."
 
-#: classes/traits/settings.php:178
-msgid "Enable multipack"
-msgstr "Aktiver multipack"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:314
+msgid ""
+"This address will be your 'from' address and will populate the details given "
+"to Bring during the booking process"
+msgstr ""
+"Denne adressen vil være din fra-adresse og vil fylle ut disse detaljene gitt "
+"til Bring under bookingprosessen"
 
-#: classes/traits/settings.php:179
-msgid "Automatically pack items into several consignments"
-msgstr "Pakk varer i flere forsendelser automatisk"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:92
+msgid "This controls the title which the user sees during checkout."
+msgstr "Dette er tittelen som brukeren ser i kassen."
 
-#: classes/traits/settings.php:182
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:113
+msgid ""
+"This is the country of origin where you deliver from (If omitted "
+"WooCommerce's default location will be used. See WooCommerce - Settings - "
+"General)"
+msgstr ""
+"Dette er landet du sender fra (hvis ikke valgt benyttes WooCommerce sin "
+"standard lokasjon. Se WooCommerce - Innstillinger - Generelt)"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:106
+msgid ""
+"This is the zip code of where you deliver from. For example, the post office."
+msgstr ""
+"Dette er postnummeret hvor du sender varen fra. F.eks. ditt postkontor."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:260
+msgid "This will change the status even if the order is completed"
+msgstr "Dette vil endre status selv om bestillingen er fullført"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/modal-templates.php:14
+msgid "This will only book orders that has not been booked."
+msgstr "Gjelder kun bestillinger som ikke er reservert."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:90
+msgid "Title"
+msgstr "Tittel"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:176
+msgid ""
+"To help customers, the service description will help explain how the "
+"services differ from each other"
+msgstr ""
+"For å hjelpe kunder vil tjenestebeskrivelsen forklare hvordan tjenestene "
+"skiller seg fra hverandre"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-rate-eta.php:34
+msgid "Tomorrow"
+msgstr "Morgen"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:37
+msgid "Tracking"
+msgstr "Sporing"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:24
+msgid "Tracking code"
+msgstr "Sporingskode"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:314
+msgid "Update order and send consignment to Bring"
+msgstr "Oppdater bestilling og send forsendelse til Bring"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:321
+msgid "Update store information"
+msgstr "Oppdater butikkinformasjon"
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:320
+msgid "Update your store address."
+msgstr "Oppdater butikkadressen din."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:170
 msgid ""
 "Use multipack when shipping many small items. This setting is highly "
 "recommended for SERVICEPAKKE. This will automatically divide shipped items "
@@ -559,224 +1543,64 @@ msgstr ""
 "innstillingen. F.eks. Hvis du bruker både SERVICEPAKKE og CARGO bør du "
 "deaktivere denne instillingen."
 
-#: classes/traits/settings.php:185
-msgid "Enhanced descriptions"
-msgstr "Bedre beskrivelser"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:75
+msgid "Use PRO in test-mode. Used for development"
+msgstr "Bruk PRO i testmodus. Brukes til utvikling"
 
-#: classes/traits/settings.php:187
-msgid ""
-"Display detailed description and additional information for shipping methods "
-"in cart totals."
-msgstr ""
-"Vis detaljert beskrivelse og tilleggsinformasjon om forsendelsesmetoder."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:223
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pickup-point.php:224
+msgid "Valid shipping postcode"
+msgstr "Gyldig postnummer for frakt"
 
-#: classes/traits/settings.php:188
-msgid ""
-"To help customers, the service description will help explain how the "
-"services differ from each other"
-msgstr ""
-"For å hjelpe kunder vil tjenestebeskrivelsen forklare hvordan tjenestene "
-"skiller seg fra hverandre"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:273
+msgid "Value added services"
+msgstr "Verdiøkende tjenester"
 
-#: classes/traits/settings.php:192
-msgid "Sorting"
-msgstr "Sortering"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-booking.php:39
+msgid "View"
+msgstr "Se"
 
-#: classes/traits/settings.php:196
-msgid "The order in which shipping options should be displayed."
-msgstr "Rekkefølgen fraktalternativene skal vises i."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/class-bring-fraktguiden.php:214
+msgid "View Bring Fraktguiden Settings"
+msgstr "Vis Bring Fraktguiden innstillinger"
 
-#: classes/traits/settings.php:198
-msgid "Price, low to high"
-msgstr "Pris, lav til høy"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/pickuppoint/class-fraktguiden-pick-up-point-enhancement.php:129
+msgid "View on map"
+msgstr "Se på kartet"
 
-#: classes/traits/settings.php:199
-msgid "Price, high to low"
-msgstr "Pris, høy til lav"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:446
+msgid "View system info"
+msgstr "Se systeminformasjon"
 
-#: classes/traits/settings.php:200
-msgid "No sorting"
-msgstr "Ingen sortering"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:324
+msgid "Visiting address"
+msgstr "Besøksadresse"
 
-#: classes/traits/settings.php:204
-msgid "Bring products"
-msgstr "Bring produkter"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:326
+msgid "Visiting city"
+msgstr "Besøksbyen"
 
-#: classes/traits/settings.php:219
-msgid "Fallback options"
-msgstr "Fallback alternativer"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/debug/class-fraktguiden-product-debug.php:325
+msgid "Visiting post code"
+msgstr "Gyldig postnummer for frakt"
 
-#: classes/traits/settings.php:220
-msgid ""
-"With scenarios that fall outside of what Bring can handle, you are able to "
-"set prices for cases such as oversized items, minimum sized items, how many "
-"items you allow in one shipment and what should happen if Bring is not "
-"accessible."
-msgstr ""
-"Scenarioer som faller på utsiden av det Bring kan håndtere, har du mulighet "
-"til å sette priser for scenario som; for store pakkemål, minimumskrav til "
-"pakkestørrelse og hvor mange enheter det er mulig å ha med i en forsendelse "
-"- og hva som skal skje hvis Bring API ikke er tilgjengelig."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:259
+msgid "WARNING!"
+msgstr "ADVARSEL!"
 
-#: classes/traits/settings.php:225
-msgid "Minimum shipping dimensions"
-msgstr "Minimumsmål"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/consignment-table-mailbox.php:37
+msgid "Waybill"
+msgstr "Fraktbrev"
 
-#: classes/traits/settings.php:226
-msgid ""
-"Bring needs a default shipping size for when products do not contain any "
-"dimension information."
-msgstr ""
-"Bring trenger et standardmål når produkter ikke inneholder dimensjoner."
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-messages.php:44
+msgid "Waybill completed"
+msgstr "Fraktbrev fullført"
 
-#: classes/traits/settings.php:230
-msgid "Minimum Length in cm"
-msgstr "Minimum lengde i cm"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:445
+msgid "We may ask for this information if you require support"
+msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
 
-#: classes/traits/settings.php:233
-msgid "Must be at least 23cm"
-msgstr "Må være minst 23 cm"
-
-#: classes/traits/settings.php:234
-msgid "The lowest length for a consignment"
-msgstr "Den korteste lengde for en forsendelse"
-
-#: classes/traits/settings.php:241
-msgid "Minimum Width in cm"
-msgstr "Minimum bredde i cm"
-
-#: classes/traits/settings.php:244
-msgid "Must be at least 13cm"
-msgstr "Må være minst 13 cm"
-
-#: classes/traits/settings.php:245
-msgid "The lowest width for a consignment"
-msgstr "Den minste bredde for en forsendelse"
-
-#: classes/traits/settings.php:252
-msgid "Minimum Height in cm"
-msgstr "Minimum høyde i cm"
-
-#: classes/traits/settings.php:255
-msgid "Must be at least 1cm"
-msgstr "Må være minst 1 cm"
-
-#: classes/traits/settings.php:256
-msgid "The lowest height for a consignment"
-msgstr "Den laveste høyde for en forsendelse"
-
-#: classes/traits/settings.php:263
-msgid "Minimum Weight in kg"
-msgstr "Minimumsvekt i kg"
-
-#: classes/traits/settings.php:266
-msgid "The lowest weight in kilograms for a consignment"
-msgstr "Den laveste vekt i kg for en forsendelse"
-
-#: classes/traits/settings.php:279
-msgid "Bring API offline / No connection"
-msgstr "Bring API er offline / Ingen forbindelse"
-
-#: classes/traits/settings.php:280
-msgid ""
-"If Bring has any technical difficulties, it won't be able to fetch prices "
-"from the bring server.<br>In these cases, shipping will default to these "
-"settings:"
-msgstr ""
-"Hvis Bring har tekniske problemer, er det ikke mulig å hente fraktpriser fra "
-"Bring-serveren. <br> I disse tilfeller vil frakten settes til disse "
-"innstillingene:"
-
-#: classes/traits/settings.php:284
-msgid "No API connection handling"
-msgstr "Ingen API tilkobling håndtering"
-
-#: classes/traits/settings.php:286
-msgid ""
-"What pricing should be used if no connection can be made to the bring API"
-msgstr ""
-"Hvilken prising bør brukes hvis det ikke kan gjøres forbindelse til bring-API"
-
-#: classes/traits/settings.php:289 classes/traits/settings.php:328
-#: classes/traits/settings.php:368
-msgid "Do nothing"
-msgstr "Gjør ingenting"
-
-#: classes/traits/settings.php:290 classes/traits/settings.php:329
-#: classes/traits/settings.php:369
-msgid "Custom flat rate"
-msgstr "Tilpasset fast pris"
-
-#: classes/traits/settings.php:294
-msgid "Shipping method Label to replace 'API Error'"
-msgstr "Fraktmetode Etikett til erstatning av ‘API Error’"
-
-#: classes/traits/settings.php:299
-msgid "Shipping method cost for 'API Error'"
-msgstr "Fraktmetode kost for ‘API Error’"
-
-#: classes/traits/settings.php:302 classes/traits/settings.php:342
-msgid "ie: 500"
-msgstr "f.eks. 500"
-
-#: classes/traits/settings.php:306 classes/traits/settings.php:346
-#: classes/traits/settings.php:395
-msgid "Service to use for booking"
-msgstr "Service som brukes til booking"
-
-#: classes/traits/settings.php:318
-msgid "Heavy and oversized items"
-msgstr "Tunge og overdimensjonerte varer"
-
-#: classes/traits/settings.php:319
-msgid ""
-"Set a flat rate for packages that exceed the maximum measurements allowed by "
-"Bring."
-msgstr ""
-"Sett en fast pris på pakker som går over maksimale mål som støttes av Bring."
-
-#: classes/traits/settings.php:323
-msgid "Heavy item handling"
-msgstr "Håndtering av tunge varer"
-
-#: classes/traits/settings.php:325
-msgid ""
-"What method should be used to calculate post rates for items that exceeds "
-"the limits set by bring"
-msgstr ""
-"Hvilken metode skal brukes for å kalkulere fraktprisen for varer som går "
-"over grensen satt av Bring"
-
-#: classes/traits/settings.php:333
-msgid "Shipping method Label for Heavy Items"
-msgstr "Fraktmetode-etikett for tunge varer"
-
-#: classes/traits/settings.php:335 classes/traits/settings.php:383
-msgid "ie: Cargo shipping"
-msgstr "f.eks. Fraktgods"
-
-#: classes/traits/settings.php:339
-msgid "Shipping method cost for heavy items"
-msgstr "Fraktpris for tunge varer"
-
-#: classes/traits/settings.php:358
-msgid "Product quantity limit for cart"
-msgstr "Grense for antall produkter i kassen"
-
-#: classes/traits/settings.php:359
-msgid ""
-"When a cart reaches this limit, you can enable this shipping method."
-"<br><em>For example, when ordering in bulk, the price for a shipping "
-"container may be a flat rate</em>"
-msgstr ""
-"Når en handlekurv når grensen, kan denne fraktmetoden aktiveres.<br><em>For "
-"eksempel ved bulkbestilling, prisen på fraktgods kan være en fast pris</em>"
-
-#: classes/traits/settings.php:363
-msgid "Maximum product handling"
-msgstr "Maksimalt produktantall"
-
-#: classes/traits/settings.php:365
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:353
 msgid ""
 "We use a packing algorithm to pack items in three dimensions. This algorithm "
 "is computationally heavy and to prevent against DDoS attacks we've "
@@ -788,1206 +1612,81 @@ msgstr ""
 "har vi implementert en innstilling for å kontrollere et maksimalt antall "
 "produkter som kan pakkes per ordre."
 
-#: classes/traits/settings.php:373
-msgid "Maximum product limit"
-msgstr "Maksimalt produktantall"
-
-#: classes/traits/settings.php:377
-msgid ""
-"Maximum total quantity of products in the cart before offering a custom price"
-msgstr "Maksimalt antall produkter i handlekurven før det tilbys en fast pris"
-
-#: classes/traits/settings.php:381
-msgid "Shipping method label"
-msgstr "Fraktmetode-etikett"
-
-#: classes/traits/settings.php:387
-msgid "Shipping method cost"
-msgstr "Fraktmetodekostnad"
-
-#: classes/traits/settings.php:390
-msgid "ie: 1500"
-msgstr "f.eks. 1500"
-
-#: classes/traits/settings.php:391
-msgid ""
-"Offer a flat rate if the cart reaches max products or a product in the cart "
-"does not have the required dimensions"
-msgstr ""
-"Tilby en fast sats hvis handlekurven har mer en maks produkter eller har et "
-"produkt som ikke har påkrevde dimensjoner"
-
-#: classes/traits/settings.php:407
-msgid "Advanced"
-msgstr "Avansert"
-
-#: classes/traits/settings.php:408
-msgid "Advanced configuration and debugging."
-msgstr "Avanserte innstillinger og debugging."
-
-#: classes/traits/settings.php:412
-msgid "Debug mode"
-msgstr "Debug modus"
-
-#: classes/traits/settings.php:414 classes/traits/settings.php:449
-msgid "Enable debug logs"
-msgstr "Aktiver debug-logging"
-
-#: classes/traits/settings.php:415
-msgid "Issues from the Bring API will be logged here"
-msgstr "Problemer med Bring API blir logget her"
-
-#: classes/traits/settings.php:416
-msgid "Bring Fraktguiden logs will be saved in"
-msgstr "Bring Fraktguiden logg vil bli lagret i"
-
-#: classes/traits/settings.php:416
-msgid "Click here to see the logs"
-msgstr "Klikk her for å se loggene"
-
-#: classes/traits/settings.php:421
-msgid "Disable stylesheet"
-msgstr "Deaktiver stylesheets"
-
-#: classes/traits/settings.php:422
-msgid "Remove all plugin styles from the checkout page"
-msgstr "Fjern alle plugin stiler fra kassa siden"
-
-#: classes/traits/settings.php:423
-msgid ""
-"Disable loading the default stylesheet from the Bring Fraktguiden plugin to "
-"allow custom styling by the theme"
-msgstr ""
-"Deaktiver lasting standardstil arket fra Bring Fraktguiden plugin for å "
-"tillate tilpasset styling av temaet"
-
-#: classes/traits/settings.php:427
-msgid "Klarna checkout support"
-msgstr "Støtte for Klarna checkout"
-
-#: classes/traits/settings.php:429
-msgid "Enable legacy Klarna support"
-msgstr "Aktiver eldre støtte for Klarna"
-
-#: classes/traits/settings.php:430
-msgid "Loads additional JavaScript on the checkout."
-msgstr "Laster inn ekstra JavaScript i kassen."
-
-#: classes/traits/settings.php:431
-msgid ""
-"Bring Fraktguiden will hide Klarna Checkout until a shipping method is "
-"selected in order to ensure that a shipping method has been selected before "
-"payment is made."
-msgstr ""
-"Bring Fraktguiden vil skjule Klarna Checkout til en forsendelsesmetode er "
-"valgt for å sikre at en forsendelsesmetode er valgt før betaling utføres."
-
-#: classes/traits/settings.php:435
-msgid "Lead time in days"
-msgstr "Antall dager lead time"
-
-#: classes/traits/settings.php:437
-msgid "Number of days before orders are shipped"
-msgstr "Antall dager før ordrer sendes"
-
-#: classes/traits/settings.php:441
-msgid "Lead time cutoff"
-msgstr "Lead time cutoff"
-
-#: classes/traits/settings.php:443
-msgid ""
-"Cutoff time every day. Orders after this time will be processed the next day."
-msgstr ""
-"Avskjæringstid hver dag. Bestillinger etter dette tidspunktet vil bli "
-"behandlet neste dag."
-
-#: classes/traits/settings.php:447
-msgid "Debug System information"
-msgstr "Debug systeminformasjon"
-
-#: classes/traits/settings.php:450
-msgid "We may ask for this information if you require support"
-msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
-
-#: classes/traits/settings.php:451
-msgid "View system info"
-msgstr "Se systeminformasjon"
-
-#: classes/traits/settings.php:458
-msgid "Mybring.com API"
-msgstr "Mybring.com API"
-
-#: classes/traits/settings.php:459
-msgid "Enter your API credentials. API authentication is required."
-msgstr "Legg inn din API legitimasjon. API autentisering er pålagt."
-
-#: classes/traits/settings.php:464 classes/traits/settings.php:466
-#: pro/booking/views/class-bring-booking-order-view.php:667
-#: pro/class-wc-shipping-method-bring-pro.php:356
-msgid "Email"
-msgstr "Epost"
-
-#: classes/traits/settings.php:469
-#, php-format
-msgid "Find your Email %1$shere%2$s."
-msgstr "Finn din Epost %1$sher%2$s."
-
-#: classes/traits/settings.php:477
-#, php-format
-msgid "Find your API key %1$shere%2$s."
-msgstr "Finn din API-nøkkel %1$sher%2$s."
-
-#: classes/traits/settings.php:480 classes/traits/settings.php:482
-msgid "API customer number"
-msgstr "API-kundenummer"
-
-#: classes/traits/settings.php:485
-#, php-format
-msgid "Find your API customer number %1$shere%2$s."
-msgstr "Finn ditt API-kundenummer %1$sher%2$s."
-
-#: classes/traits/settings.php:513
-msgid ""
-"Bring Fraktguiden is a shipping method using Bring.com to calculate rates."
-msgstr ""
-"Bring Fraktguiden er en fraktmetode som baserer seg på priser fra Bring."
-
-#: classes/traits/settings.php:527
-msgid "Gateway Disabled"
-msgstr "Gateway Disabled"
-
-#: classes/traits/settings.php:528
-#, php-format
-msgid ""
-"Bring shipping method requires <strong>weight &amp; dimensions</strong> to "
-"be enabled. Please enable them on the <a href=\"%1$s\">Catalog tab</a>. <br/"
-"> In addition, Bring also requires the <strong>Norweigian Krone</strong> "
-"currency. Choose that from the <a href=\"%2$s\">General tab</a>"
-msgstr ""
-"Bring krever <strong>vekt &amp; dimensjoner</strong> for å kalkulere pris. "
-"Sørg for at dette er satt opp under <a href=\"%s\">Generellt fanen</a>. <br/"
-"> I tilegg, kreves det at <strong>Norske kroner</strong> er satt som valuta. "
-"Det kan velges fra <a href=\"%s\">Generellt fanen</a>"
-
-#: classes/traits/settings.php:653
-msgid "Missing credentials"
-msgstr "Mangler påloggingsdetaljer"
-
-#: classes/traits/settings.php:716
-msgid "Successfully authenticated"
-msgstr "Autentisert"
-
-#: classes/traits/settings.php:733
-msgid "Mybring authentication failed"
-msgstr "Mybring autentisering mislyktes"
-
-#: classes/traits/settings.php:733
-msgid ""
-"Couldn't connect to Bring with your API credentials. Please check that they "
-"are correct"
-msgstr ""
-"Kunne ikke koble til Bring med påloggingsinformasjonen. Kontroller at de er "
-"riktige"
-
-#: config/services.php:10
-msgid "New services"
-msgstr "Nye tjenester"
-
-#: config/services.php:70
-msgid "Services"
-msgstr "Tjenester"
-
-#: config/services.php:104
-msgid "Mailbox (new)"
-msgstr "Pakke i postkassen (ny)"
-
-#: config/services.php:115 config/services.php:126
-msgid "Packages up to 2 kg."
-msgstr "Pakker opp til 2 kg."
-
-#: config/services.php:116
-msgid ""
-"Please note in order to use mailbox with tracking you need a RFID printer."
-msgstr ""
-"NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
-
-#: config/services.php:132 config/services.php:175
-msgid "Other services"
-msgstr "Andre tjenester"
-
-#: config/services.php:145 config/services.php:158 config/services.php:168
-msgid ""
-"Fuel surcharge is not included in the price returned from the ShippingGuide "
-"and must be calculated / added manually. Bring Parcels is entitled to change "
-"this charge without notice to the customer. Any fuel surcharge applied will "
-"be detailed on the invoice."
-msgstr ""
-"Drivstofftillegg er ikke inkludert i prisen som returneres fra ShippingGuide "
-"og må beregnes / legges til manuelt. Bring Parcels har rett til å endre "
-"denne kostnaden uten varsel til kunden. Eventuelt anvendt drivstofftillegg "
-"vil være detaljert på fakturaen."
-
-#: config/services.php:268
-msgid "Courier"
-msgstr "Courier"
-
-#: config/services.php:310
-msgid "Home Delivery"
-msgstr "Home Delivery"
-
-#: pro/booking/class-bring-booking.php:103
-msgid "Changing status because the label was downloaded."
-msgstr "Endrer status fordi etiketten ble lastet ned."
-
-#: pro/booking/class-bring-booking.php:118
-#: pro/booking/class-bring-booking.php:124
-#: pro/booking/class-bring-booking.php:143
-msgid "Awaiting Shipment"
-msgstr "Avventer frakt"
-
-#: pro/booking/class-bring-booking.php:124
-#, php-format
-msgid " <span class=\"count\">(%s)</span>"
-msgid_plural " <span class=\"count\">(%s)</span>"
-msgstr[0] " <span class=\"count\">(%s)</span>"
-msgstr[1] " <span class=\"count\">(%s)</span>"
-
-#: pro/booking/class-bring-booking.php:219
-msgid "Booking errors. See the Bring Booking box for details."
-msgstr ""
-"Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
-"detaljer."
-
-#: pro/booking/class-bring-booking.php:240
-msgid "Booked with Bring"
-msgstr "Reservert hos Bring"
-
-#: pro/booking/classes/class-bring-booking-file.php:233
-msgid "Please check write permissions for yor uploads folder."
-msgstr "Kontroller om nettsiden har skrivetilgang til opplastingsmappen."
-
-#: pro/booking/classes/class-bring-booking-file.php:235
-msgid ""
-"Bring Fraktguiden could not create the folder 'uploads/bring_booking_labels'."
-msgstr ""
-"Bring Fraktguiden kunne ikke lage mappen ‘uploads/bring_booking_labels’."
-
-#: pro/booking/classes/class-bring-booking-file.php:236
-msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
-msgstr ""
-"Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
-"bring_booking_labels’."
-
-#: pro/booking/templates/consignment-table-booking.php:23
-msgid "Earliest Pickup"
-msgstr "Tidligst henting"
-
-#: pro/booking/templates/consignment-table-booking.php:27
-msgid "Expected delivery"
-msgstr "Forventet levert"
-
-#: pro/booking/templates/consignment-table-booking.php:31
-#: pro/booking/templates/consignment-table-mailbox.php:31
-msgid "Labels"
-msgstr "Etiketter"
-
-#: pro/booking/templates/consignment-table-booking.php:33
-#: pro/booking/templates/consignment-table-mailbox.php:33
-msgid "Download"
-msgstr "Last ned"
-
-#: pro/booking/templates/consignment-table-booking.php:37
-msgid "Tracking"
-msgstr "Sporing"
-
-#: pro/booking/templates/consignment-table-booking.php:39
-msgid "View"
-msgstr "Se"
-
-#: pro/booking/templates/consignment-table-booking.php:44
-#: pro/booking/templates/consignment-table-mailbox.php:44
-#: pro/booking/views/class-bring-booking-order-view.php:277
-msgid "Packages"
-msgstr "Pakker"
-
-#: pro/booking/templates/consignment-table-mailbox.php:37
-msgid "Waybill"
-msgstr "Fraktbrev"
-
-#: pro/booking/templates/consignment-table-mailbox.php:39
-msgid "Create waybill"
-msgstr "Lag fraktbrev"
-
-#: pro/booking/templates/modal-templates.php:7
-#: pro/class-wc-shipping-method-bring-pro.php:234
-msgid "Mybring Booking"
-msgstr "Mybring Booking"
-
-#: pro/booking/templates/modal-templates.php:9
-#: pro/booking/templates/modal-templates.php:47
-#: pro/booking/templates/modal-templates.php:57
-msgid "Close modal panel"
-msgstr "Lukk dialogvindu"
-
-#: pro/booking/templates/modal-templates.php:14
-msgid "This will only book orders that has not been booked."
-msgstr "Gjelder kun bestillinger som ikke er reservert."
-
-#: pro/booking/templates/modal-templates.php:17
-msgid "Selected orders"
-msgstr "Velg bestillinger"
-
-#: pro/booking/templates/modal-templates.php:21
-msgid "Mybring Customer"
-msgstr "Mybring kunde"
-
-#: pro/booking/templates/modal-templates.php:25
-#: pro/booking/views/class-bring-booking-order-view.php:193
-msgid "Shipping Date"
-msgstr "Forsendelsesdato"
-
-#: pro/booking/templates/modal-templates.php:45
-msgid "Mybring Booking errors"
-msgstr "Mybring Booking feil"
-
-#: pro/booking/templates/waybills-messages.php:35
-msgid "Error"
-msgstr "Feil"
-
-#: pro/booking/templates/waybills-messages.php:44
-msgid "Waybill completed"
-msgstr "Fraktbrev fullført"
-
-#: pro/booking/templates/waybills-table-labels.php:46
-msgid "Customer number"
-msgstr "Kundenummer"
-
-#: pro/booking/templates/waybills-table-labels.php:47
-msgid "Consignment number"
-msgstr "Sendingsnummer"
-
-#: pro/booking/templates/waybills-table-labels.php:70
-msgid "Date"
-msgstr "Dato"
-
-#: pro/booking/templates/waybills-table-labels.php:75
-msgid "Download label"
-msgstr "Last ned etikett"
-
-#: pro/booking/templates/waybills-table-labels.php:78
-#: pro/booking/views/class-bring-booking-order-view.php:376
-msgid "Order ID"
-msgstr "Ordre-ID"
-
-#: pro/booking/templates/waybills-table-labels.php:90
-msgid "Select all"
-msgstr "Merk alle"
-
-#: pro/booking/templates/waybills-table-labels.php:100
-msgid "Retry booking"
-msgstr "Prøv booking på nytt"
-
-#: pro/booking/templates/waybills-table-labels.php:105
-msgid "No labels available"
-msgstr "Ingen etiketter tilgjengelig"
-
-#: pro/booking/templates/waybills-waybill.php:15
-msgid "Bring order ID:"
-msgstr "Bring ordre-ID:"
-
-#: pro/booking/templates/waybills-waybill.php:20
-msgid "Package number"
-msgstr "Pakkenummer"
-
-#: pro/booking/templates/waybills-waybill.php:21
-#: pro/booking/views/class-bring-booking-order-view.php:257
-msgid "Recipient"
-msgstr "Mottaker"
-
-#: pro/booking/templates/waybills-waybill.php:22
-msgid "Information"
-msgstr "Informasjon"
-
-#: pro/booking/templates/waybills-waybill.php:23
-#: pro/booking/views/class-bring-booking-order-view.php:662
-msgid "Contact"
-msgstr "Kontakt"
-
-#: pro/booking/templates/waybills-waybill.php:24
-msgid "Tracking code"
-msgstr "Sporingskode"
-
-#: pro/booking/templates/waybills-waybill.php:39
-msgid "RFID:"
-msgstr "RFID:"
-
-#: pro/booking/templates/waybills-waybill.php:39
-msgid "Yes"
-msgstr "Ja"
-
-#: pro/booking/templates/waybills-waybill.php:39
-#: pro/booking/views/class-bring-booking-order-view-common.php:120
-msgid "No"
-msgstr "Nei"
-
-#: pro/booking/templates/waybills-waybill.php:40
-msgid "Weight:"
-msgstr "Vekt:"
-
-#: pro/booking/templates/waybills-waybill.php:51
-msgid "Dowload waybill"
-msgstr "Last ned fraktbrev"
-
-#: pro/booking/views/class-bring-booking-labels.php:41
-msgid "Print booking label"
-msgstr "Skriv ut bestillingsetiketten"
-
-#: pro/booking/views/class-bring-booking-labels.php:85
-msgid ""
-"Sorry, Labels are only available for Administrators, Warehouse Teams and "
-"Store Managers. Please contact the administrator to enable access."
-msgstr ""
-"Etiketter er kun tilgjengelig for Administratorer, Lagermedarbeidere og "
-"Butikksjefer. Kontakt en administrator for å få tilgang."
-
-#: pro/booking/views/class-bring-booking-labels.php:87
-msgid "Insufficient permissions"
-msgstr "Ikke tilstrekkelig tilgang"
-
-#: pro/booking/views/class-bring-booking-labels.php:99
-msgid "Order ID is missing."
-msgstr "Ordre-ID mangler."
-
-#: pro/booking/views/class-bring-booking-labels.php:148
-msgid "No files to download."
-msgstr "Ingen filer å laste ned."
-
-#: pro/booking/views/class-bring-booking-labels.php:154
-msgid "Downloads"
-msgstr "Nedlastinger"
-
-#: pro/booking/views/class-bring-booking-labels.php:155
-msgid "Merged ZPL labels"
-msgstr "Sammenslåtte ZPL etiketter"
-
-#: pro/booking/views/class-bring-booking-labels.php:157
-msgid "Merged PDF labels"
-msgstr "Sammenslåtte PDF etiketter"
-
-#: pro/booking/views/class-bring-booking-my-order-view.php:48
-msgid "Your tracking number:"
-msgstr "Sporingsnummer:"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:77
-msgid "hh"
-msgstr "tt"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:78
-msgid "mm"
-msgstr "mm"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:88
-msgid "Bring - Submit Consignments"
-msgstr "Bring - Send"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:88
-msgid "Submit Consignment"
-msgstr "Send"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:89
-#: pro/class-wc-shipping-method-bring-pro.php:248
-msgid "Test mode"
-msgstr "Test modus"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:126
-msgid "In progress"
-msgstr "Prosesserer"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:133
-msgid "Booked"
-msgstr "Booked"
-
-#: pro/booking/views/class-bring-booking-order-view-common.php:140
-msgid "Failed"
-msgstr "Feilet"
-
-#: pro/booking/views/class-bring-booking-order-view.php:51
-msgid "Bring Booking"
-msgstr "Bring Booking"
-
-#: pro/booking/views/class-bring-booking-order-view.php:116
-msgid "Press start to start booking"
-msgstr "Trykk start for å starte bestilling"
-
-#: pro/booking/views/class-bring-booking-order-view.php:122
-#, php-format
-msgid "Order status will be set to %s upon successful booking"
-msgstr "Ordrestatus vil bli satt til %s når en bestilling er fullført"
-
-#: pro/booking/views/class-bring-booking-order-view.php:149
-msgid "Note: Order is not completed"
-msgstr "Notat: Bestillingen er ikke fullført"
-
-#: pro/booking/views/class-bring-booking-order-view.php:154
-msgid "Consignments"
-msgstr "Forsendelser"
-
-#: pro/booking/views/class-bring-booking-order-view.php:188
-msgid "Customer Number"
-msgstr "Kundenummer"
-
-#: pro/booking/views/class-bring-booking-order-view.php:211
-msgid "Customer requested delivery date"
-msgstr "Ønsket leveringsdato av kunde"
-
-#: pro/booking/views/class-bring-booking-order-view.php:249
-#: pro/booking/views/class-bring-booking-order-view.php:256
-msgid "Additional Info"
-msgstr "Tilleggsinformasjon"
-
-#: pro/booking/views/class-bring-booking-order-view.php:250
-msgid "Sender"
-msgstr "Avsender"
-
-#: pro/booking/views/class-bring-booking-order-view.php:267
-msgid "Customer note from the order"
-msgstr "Kundenotat fra bestillingen"
-
-#: pro/booking/views/class-bring-booking-order-view.php:307
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: pro/booking/views/class-bring-booking-order-view.php:310
-msgid "Update order and send consignment to Bring"
-msgstr "Oppdater bestilling og send forsendelse til Bring"
-
-#: pro/booking/views/class-bring-booking-order-view.php:316
-msgid "Update your store address."
-msgstr "Oppdater butikkadressen din."
-
-#: pro/booking/views/class-bring-booking-order-view.php:317
-msgid "Update store information"
-msgstr "Oppdater butikkinformasjon"
-
-#: pro/booking/views/class-bring-booking-order-view.php:320
-msgid "Start creating a label to ship this order with Mybring"
-msgstr "Start å lage en etikett for å sende denne ordren med Mybring"
-
-#: pro/booking/views/class-bring-booking-order-view.php:321
-msgid "Start booking"
-msgstr "Start booking"
-
-#: pro/booking/views/class-bring-booking-order-view.php:324
-msgid "You have to upgrade to PRO in order to use this feature."
-msgstr "Du må oppgradere til PRO for å kunne bruke denne funksjonen."
-
-#: pro/booking/views/class-bring-booking-order-view.php:338
-msgid "Show Parties"
-msgstr "Vis parter"
-
-#: pro/booking/views/class-bring-booking-order-view.php:352
-msgid "Sender Address"
-msgstr "Avsender adresse"
-
-#: pro/booking/views/class-bring-booking-order-view.php:356
-msgid "Recipient Address"
-msgstr "Mottakeradresse"
-
-#: pro/booking/views/class-bring-booking-order-view.php:367
-msgid "Shipping item id"
-msgstr "Frakt ID"
-
-#: pro/booking/views/class-bring-booking-order-view.php:377
-msgid "Product"
-msgstr "Produkt"
-
-#: pro/booking/views/class-bring-booking-order-view.php:378
-msgid "Width"
-msgstr "Bredde"
-
-#: pro/booking/views/class-bring-booking-order-view.php:379
-msgid "Height"
-msgstr "Høyde"
-
-#: pro/booking/views/class-bring-booking-order-view.php:380
-msgid "Length"
-msgstr "Lengde"
-
-#: pro/booking/views/class-bring-booking-order-view.php:381
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:385
 msgid "Weight"
 msgstr "Vekt"
 
-#: pro/booking/views/class-bring-booking-order-view.php:419
-#: pro/booking/views/class-bring-booking-order-view.php:458
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:204
-msgid "Pickup point"
-msgstr "Hentested"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:40
+msgid "Weight:"
+msgstr "Vekt:"
 
-#: pro/booking/views/class-bring-booking-order-view.php:436
-#: pro/booking/views/class-bring-booking-order-view.php:475
-msgid "Delete"
-msgstr "Slett"
-
-#: pro/booking/views/class-bring-booking-order-view.php:481
-msgid "Add"
-msgstr "Legg til"
-
-#: pro/booking/views/class-bring-booking-order-view.php:647
-#: pro/booking/views/class-bring-booking-order-view.php:666
-msgid "Name"
-msgstr "Navn"
-
-#: pro/booking/views/class-bring-booking-order-view.php:648
-#: pro/class-wc-shipping-method-bring-pro.php:302
-msgid "Street Address 1"
-msgstr "Gateaddress 1"
-
-#: pro/booking/views/class-bring-booking-order-view.php:649
-#: pro/class-wc-shipping-method-bring-pro.php:308
-msgid "Street Address 2"
-msgstr "Gateadresse 2"
-
-#: pro/booking/views/class-bring-booking-order-view.php:650
-#: pro/class-wc-shipping-method-bring-pro.php:314
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:211
-msgid "Postcode"
-msgstr "Postnummer"
-
-#: pro/booking/views/class-bring-booking-order-view.php:654
-#: pro/class-wc-shipping-method-bring-pro.php:333
-msgid "Reference"
-msgstr "Referanse"
-
-#: pro/booking/views/class-bring-booking-order-view.php:657
-msgid "Additional Address Info"
-msgstr "Ekstra adresseinformasjon"
-
-#: pro/booking/views/class-bring-booking-order-view.php:668
-msgid "Phone Number"
-msgstr "Telefonummer"
-
-#: pro/booking/views/class-bring-booking-order-view.php:684
-msgid "Create a new booking"
-msgstr "Lag en ny booking"
-
-#: pro/booking/views/class-bring-booking-order-view.php:687
-msgid "Confirm and submit consignment"
-msgstr "Bekreft og send forsendelsen"
-
-#: pro/booking/views/class-bring-booking-order-view.php:690
-msgid "Sucessfully booked"
-msgstr "Booking bekreftet"
-
-#: pro/booking/views/class-bring-booking-order-view.php:713
-msgid "Previous booking request failed with the following errors:"
-msgstr "Forrige forespørsel feilet med følgende feilmeldinger:"
-
-#: pro/booking/views/class-bring-booking-order-view.php:719
-msgid "Press Start to try again"
-msgstr "Trykk start for å forsøke igjen"
-
-#: pro/booking/views/class-bring-booking-orders-view.php:39
-msgid "Bring - Print labels"
-msgstr "Bring - Etiketter"
-
-#: pro/booking/views/class-bring-booking-orders-view.php:52
-msgid "Booking"
-msgstr "Booking"
-
-#: pro/class-wc-shipping-method-bring-pro.php:203
-msgid "Pickup Point Options"
-msgstr "Hentested valg"
-
-#: pro/class-wc-shipping-method-bring-pro.php:204
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:123
 msgid ""
-"Enable pickup points on the cart / checkout. If disabled, Bring will show "
-"the names of shipment methods. <em>ie: <strong>\"Climate Neutral Service Pack"
-"\"</strong></em>"
+"What fee do you want to charge for Bring, disregarded if you choose free. "
+"Leave blank to disable."
 msgstr ""
-"For å vise hentested i handlekurven/kassen for kunden(e) må Hentested "
-"aktiveres. Hvis deaktivert, vil Bring kun vise navn på forsendelsesmetoder. "
-"<em>f.eks: <strong>”Klimanøytral Servicepakke”</strong> </em>"
+"Gebyr du ønsker å ta betalt for Bring. Blir ignorert dersom du velger gratis."
+" La stå tomt for å deaktivere."
 
-#: pro/class-wc-shipping-method-bring-pro.php:211
-msgid "If not checked, default services will be shown"
-msgstr "Hvis ikke merket, vises standardtjenester"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:313
+msgid ""
+"What method should be used to calculate post rates for items that exceeds "
+"the limits set by bring"
+msgstr ""
+"Hvilken metode skal brukes for å kalkulere fraktprisen for varer som går "
+"over grensen satt av Bring"
 
-#: pro/class-wc-shipping-method-bring-pro.php:212
-msgid "Enable pickup point"
-msgstr "Aktiver hentested"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:274
+msgid ""
+"What pricing should be used if no connection can be made to the bring API"
+msgstr ""
+"Hvilken prising bør brukes hvis det ikke kan gjøres forbindelse til bring-API"
 
-#: pro/class-wc-shipping-method-bring-pro.php:217
-msgid "Pickup point limit"
-msgstr "Hentested valg"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:347
+msgid ""
+"When a cart reaches this limit, you can enable this shipping method.<br><em>"
+"For example, when ordering in bulk, the price for a shipping container may "
+"be a flat rate</em>"
+msgstr ""
+"Når en handlekurv når grensen, kan denne fraktmetoden aktiveres.<br><em>For "
+"eksempel ved bulkbestilling, prisen på fraktgods kan være en fast pris</em>"
 
-#: pro/class-wc-shipping-method-bring-pro.php:220
-msgid "Leave blank to remove limit"
-msgstr "La være tom for ingen grense"
-
-#: pro/class-wc-shipping-method-bring-pro.php:222
-msgid "If set, it will be the maximum number of pickup points shown"
-msgstr "Hvis det er satt, blir det maksimalt antall hentested vist"
-
-#: pro/class-wc-shipping-method-bring-pro.php:243
-msgid "Enable Mybring booking"
-msgstr "Aktiver Mybring Booking"
-
-#: pro/class-wc-shipping-method-bring-pro.php:250
-msgid "Enable test mode for Mybring booking"
-msgstr "Aktiver testmodus for Mybring booking"
-
-#: pro/class-wc-shipping-method-bring-pro.php:251
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/class-wc-shipping-method-bring-pro.php:251
 msgid "When enabled, Bookings will not be invoiced or fulfilled by Bring"
 msgstr "Når aktivert, blir bestillinger ikke fakturert eller oppfylt av Bring"
 
-#: pro/class-wc-shipping-method-bring-pro.php:257
-msgid "Processing"
-msgstr "Behandler"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:382
+msgid "Width"
+msgstr "Bredde"
 
-#: pro/class-wc-shipping-method-bring-pro.php:258
-msgid "Once an order is booked, it will be assigned the following status:"
-msgstr "Når en bestilling er bestilt, blir den tildelt følgende status:"
-
-#: pro/class-wc-shipping-method-bring-pro.php:263
-msgid "Order status after booking"
-msgstr "Bestillingsstatus etter reservering"
-
-#: pro/class-wc-shipping-method-bring-pro.php:265
-msgid "Order status will be automatically set when successfully booked"
-msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
-
-#: pro/class-wc-shipping-method-bring-pro.php:268
-#: pro/class-wc-shipping-method-bring-pro.php:277
-msgid "None"
-msgstr "Ingen"
-
-#: pro/class-wc-shipping-method-bring-pro.php:272
-msgid "Order status after printing"
-msgstr "Ordrestatus etter utskrift"
-
-#: pro/class-wc-shipping-method-bring-pro.php:274
-msgid "Order status will be automatically set when a label is downloaded"
-msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
-
-#: pro/class-wc-shipping-method-bring-pro.php:290
-msgid "Store address and contact information"
-msgstr "Butikkadresse og kontaktinformasjon"
-
-#: pro/class-wc-shipping-method-bring-pro.php:291
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/traits/settings.php:208
 msgid ""
-"This address will be your 'from' address and will populate the details given "
-"to Bring during the booking process"
+"With scenarios that fall outside of what Bring can handle, you are able to "
+"set prices for cases such as oversized items, minimum sized items, how many "
+"items you allow in one shipment and what should happen if Bring is not "
+"accessible."
 msgstr ""
-"Denne adressen vil være din fra-adresse og vil fylle ut disse detaljene gitt "
-"til Bring under bookingprosessen"
+"Scenarioer som faller på utsiden av det Bring kan håndtere, har du mulighet "
+"til å sette priser for scenario som; for store pakkemål, minimumskrav til "
+"pakkestørrelse og hvor mange enheter det er mulig å ha med i en forsendelse -"
+" og hva som skal skje hvis Bring API ikke er tilgjengelig."
 
-#: pro/class-wc-shipping-method-bring-pro.php:296
-msgid "Store Name"
-msgstr "Butikknavn"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/templates/waybills-waybill.php:39
+msgid "Yes"
+msgstr "Ja"
 
-#: pro/class-wc-shipping-method-bring-pro.php:338
-#, php-format
-msgid "Specify shipper or consignee reference. Available macros: %s"
-msgstr "Angi avsender eller mottakerreferanse. Tilgjengelige makroer: %s"
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-order-view.php:328
+msgid "You have to upgrade to PRO in order to use this feature."
+msgstr "Du må oppgradere til PRO for å kunne bruke denne funksjonen."
 
-#: pro/class-wc-shipping-method-bring-pro.php:346
-msgid "Contact Person"
-msgstr "Kontaktperson"
-
-#: pro/class-wc-shipping-method-bring-pro.php:351
-msgid "Phone"
-msgstr "Telefonnummer"
-
-#: pro/pickuppoint/class-fraktguiden-pick-up-point-enhancement.php:130
-msgid "View on map"
-msgstr "Se på kartet"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:205
-msgid "Please wait..."
-msgstr "Vennligst vent…"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:206
-msgid "Fraktguiden requires the following fields"
-msgstr "Fraktguiden krever følgende felter utfylt"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:207
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:208
-msgid "Valid shipping postcode"
-msgstr "Gyldig postnummer for frakt"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:209
-msgid "Please update the fields and save the order first"
-msgstr "Vennligst oppdater feltene og lagre orderen først"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:210
-msgid "Please select service"
-msgstr "Vennligst velg tjeneste"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:212
-msgid "Please select pickup point"
-msgstr "Vennligst velg hentested"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:213
-msgid "Selected pickup point"
-msgstr "Velg hentested"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:214
-msgid "No pickup points found for postcode"
-msgstr "Fant ingen hentesteder for dette postnummeret"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:215
-msgid "Get Rate"
-msgstr "Hent pris"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:216
-msgid "Please wait"
-msgstr "Vennligst vent"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:217
-msgid "Service"
-msgstr "Tjeneste"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:218
-msgid "Rate is not available for this order. Please try another service"
-msgstr ""
-"Pris er ikke tilgjengelig for denne orderen. Vennligst forsøk en annen "
-"tjeneste"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:219
-msgid "Request was not successful"
-msgstr "Forespørselen feilet"
-
-#: pro/pickuppoint/class-fraktguiden-pickup-point.php:220
-msgid "Please add postal code"
-msgstr "Vennligst legg til postnummer"
-
-#: system-info-page.php:174
-msgid "No authentication data"
-msgstr "Ingen autentiseringsdata"
-
-#: templates/system-info/shipping-zones.php:15
-msgid "Type"
-msgstr "Type"
-
-#: templates/system-info/shipping-zones.php:17
-msgid "Code"
-msgstr "Kode"
-
-#: templates/system-info/shipping-zones.php:25
-msgid "Shipping methods"
-msgstr "Fraktmetoder"
-
-#: templates/woocommerce/alternative-dates.php:5
-msgid "Choose delivery from"
-msgstr "Velg levering fra"
-
-#: templates/woocommerce/alternative-dates.php:46
-msgid "Select"
-msgstr "Velg"
-
-#: templates/woocommerce/cart-shipping.php:51
-#, php-format
-msgid "Shipping to %s."
-msgstr "Frakt til %s."
-
-#: templates/woocommerce/cart-shipping.php:52
-msgid "Change address"
-msgstr "Endre adresse"
-
-#: templates/woocommerce/cart-shipping.php:54
-msgid "Shipping options will be updated during checkout."
-msgstr "Fraktalternativer vil bli oppdatert på betalingssiden."
-
-#: templates/woocommerce/cart-shipping.php:61
-msgid "Enter your address to view shipping options."
-msgstr "Skriv inn adressen din for å se leveringsalternativer."
-
-#: templates/woocommerce/cart-shipping.php:63
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/classes/common/class-fraktguiden-helper.php:200
 msgid ""
-"There are no shipping options available. Please ensure that your address has "
-"been entered correctly, or contact us if you need any help."
+"You're using an outdated customer number, %s - The latest services from "
+"Bring require you to update your customer number."
 msgstr ""
-"Det er ingen fraktalternativer tilgjengelig. Kontroller at adressen din er "
-"riktig, eller kontakt oss hvis du trenger hjelp."
-
-#: templates/woocommerce/cart-shipping.php:66
-#, php-format
-msgid "No shipping options were found for %s."
-msgstr "Ingen fraktalternativer ble funnet for %s."
-
-#: templates/woocommerce/cart-shipping.php:67
-msgid "Enter a different address"
-msgstr "Skriv inn en annen adresse"
-
-#. Plugin Name of the plugin/theme
-msgid "Bring Fraktguiden for WooCommerce"
-msgstr "Bring Fraktguiden for WooCommerce"
-
-#. Plugin URI of the plugin/theme
-msgid "https://bringfraktguiden.no/"
-msgstr "https://bringfraktguiden.no/"
-
-#. Description of the plugin/theme
-msgid ""
-"Bring Fraktguiden for WooCommerce makes it easy for your customers to choose "
-"delivery methods from Bring."
-msgstr ""
-"Bring Fraktguiden for WooCommerce gjør det enkelt for kundene i din "
-"nettbutikk å velge leveringsmåte med Bring."
-
-#. Author of the plugin/theme
-msgid "Cove AS"
-msgstr "Cove AS"
-
-#. Author URI of the plugin/theme
-msgid "https://cove.no/"
-msgstr "https://cove.no"
-
-#~ msgid "Mailbox (depreceated)"
-#~ msgstr "Pakke i postkassen (utgått)"
-
-#~ msgid "Mailbox labels"
-#~ msgstr "Postboksetiketter"
-
-#~ msgid "Mailbox waybills"
-#~ msgstr "Pakke i postkasse fraktbrev"
-
-#~ msgctxt "Post Type General Name"
-#~ msgid "Mailbox Labels"
-#~ msgstr "Postboksetiketter"
-
-#~ msgctxt "Post Type Singular Name"
-#~ msgid "Mailbox Label"
-#~ msgstr "Postboksetiketter"
-
-#~ msgid "Mailbox Labels"
-#~ msgstr "Postboksetiketter"
-
-#~ msgid "Mailbox Label"
-#~ msgstr "Postboksetikett"
-
-#~ msgid "Mailbox Label Archives"
-#~ msgstr "Postboks etikettarkiver"
-
-#~ msgid "Mailbox Label Attributes"
-#~ msgstr "Attributter for postkasseetiketter"
-
-#~ msgid "Parent Mailbox Label:"
-#~ msgstr "Overordnet postkassemerke:"
-
-#~ msgid "All Mailbox Labels"
-#~ msgstr "Alle postboksetiketter"
-
-#~ msgid "Add New Mailbox Label"
-#~ msgstr "Legg til ny postkassemerke"
-
-#~ msgid "Add New"
-#~ msgstr "Legg til ny"
-
-#~ msgid "New Mailbox Label"
-#~ msgstr "Ny postkassemerke"
-
-#~ msgid "Edit Mailbox Label"
-#~ msgstr "Rediger postkassemerke"
-
-#~ msgid "Update Mailbox Label"
-#~ msgstr "Oppdater postkasselabel"
-
-#~ msgid "View Mailbox Label"
-#~ msgstr "Vis postkassemerke"
-
-#~ msgid "View Mailbox Labels"
-#~ msgstr "Vis postboksetiketter"
-
-#~ msgid "Search Mailbox Label"
-#~ msgstr "Søk på postkassemerke"
-
-#~ msgid "Not found"
-#~ msgstr "Ikke funnet"
-
-#~ msgid "Not found in Trash"
-#~ msgstr "Ikke funnet i søppel"
-
-#~ msgid "Featured Image"
-#~ msgstr "Fremhevet bilde"
-
-#~ msgid "Set featured image"
-#~ msgstr "Sett kjennetegnet bilde"
-
-#~ msgid "Remove featured image"
-#~ msgstr "Fjern Fraktguiden styling fra kassen"
-
-#~ msgid "Use as featured image"
-#~ msgstr "Service som brukes til booking"
-
-#~ msgid "Insert into Mailbox Label"
-#~ msgstr "Sett inn i postboksetiketten"
-
-#~ msgid "Uploaded to this Mailbox Label"
-#~ msgstr "Lastet opp til denne postboksetiketten"
-
-#~ msgid "Mailbox Labels list"
-#~ msgstr "Postkasselabelsliste"
-
-#~ msgid "Mailbox Labels list navigation"
-#~ msgstr "Navigering av postboksetiketter"
-
-#~ msgid "Filter Mailbox Labels list"
-#~ msgstr "Filtrer listen over postkassetiketter"
-
-#~ msgid "Mailbox Label information page."
-#~ msgstr "Informasjonsside for postkasseetikett."
-
-#~ msgctxt "Post Type General Name"
-#~ msgid "Mailbox Waybills"
-#~ msgstr "Fraktbrev for postkasse"
-
-#~ msgctxt "Post Type Singular Name"
-#~ msgid "Mailbox Waybill"
-#~ msgstr "Postkasse fraktbrev"
-
-#~ msgid "Mailbox Waybills"
-#~ msgstr "Fraktbrev for postkasse"
-
-#~ msgid "Mailbox Waybill"
-#~ msgstr "Postkasse fraktbrev"
-
-#~ msgid "Mailbox Waybill Archives"
-#~ msgstr "Postboks-arkiv"
-
-#~ msgid "Mailbox Waybill Attributes"
-#~ msgstr "Postboks-arkiv"
-
-#~ msgid "Parent Mailbox Waybill:"
-#~ msgstr "Foreldrepostkasse Waybill:"
-
-#~ msgid "All Mailbox Waybills"
-#~ msgstr "Alle postkasse fraktbrev"
-
-#~ msgid "Add New Mailbox Waybill"
-#~ msgstr "Legg til ny postkasse fraktbrev"
-
-#~ msgid "New Mailbox Waybill"
-#~ msgstr "Ny postkasse fraktbrev"
-
-#~ msgid "Edit Waybill"
-#~ msgstr "Rediger fraktbrev"
-
-#~ msgid "Update Mailbox Waybill"
-#~ msgstr "Oppdater postkasse fraktbrev"
-
-#~ msgid "View Mailbox Waybill"
-#~ msgstr "Vis postkasse fraktbrev"
-
-#~ msgid "View Mailbox Waybills"
-#~ msgstr "Vis postkasse fraktbrev"
-
-#~ msgid "Search Mailbox Waybill"
-#~ msgstr "Søk etter postkasse fraktbrev"
-
-#~ msgid "Insert into Mailbox Waybills"
-#~ msgstr "Sett inn i postkassen fraktbrev"
-
-#~ msgid "Uploaded to this Mailbox Waybill"
-#~ msgstr "Last opp til postkassen fraktbrev"
-
-#~ msgid "Mailbox Waybills list"
-#~ msgstr "Postkasse fraktbrevliste"
-
-#~ msgid "Mailbox Waybills list navigation"
-#~ msgstr "Postkasse fraktbrev liste navigasjon"
-
-#~ msgid "Filter Mailbox Waybills list"
-#~ msgstr "Filtrer postkasse fraktbrevliste"
-
-#~ msgid "Mailbox Waybill information page."
-#~ msgstr "Postkasse fraktbrev informasjonside."
-
-#~ msgid "Book consignments"
-#~ msgstr "Book sendinger"
-
-#, php-format
-#~ msgid "Booked %s mailbox parcels."
-#~ msgid_plural "Booked %s mailbox parcels."
-#~ msgstr[0] "Booket %s pakke i postkassen."
-#~ msgstr[1] "Booket %s pakker i postkassen."
-
-#~ msgid "Mailbox"
-#~ msgstr "Postkasse"
-
-#~ msgid "Driv Digital AS"
-#~ msgstr "Driv Digital AS"
-
-#~ msgid "Display Service As"
-#~ msgstr "Vis tjeneste med"
-
-#~ msgid "The service name displayed to the customer on the cart / checkout"
-#~ msgstr ""
-#~ "Velg hvilken måte kunden skal få vist frakttjenesten på i handlekurven/"
-#~ "kassen"
-
-#~ msgid ""
-#~ "Display name: <strong>\"At the post office\"</strong>,<br/>Product name: "
-#~ "<strong>\"Climate Neutral Service Pack\"</strong>"
-#~ msgstr ""
-#~ "Visningsnavn: <strong>”På posten”</strong>,<br/>Produktnavn: "
-#~ "<strong>”Klimanøytral servicepakke”</strong>"
-
-#~ msgid "Display Name"
-#~ msgstr "Visningsnavn"
-
-#~ msgid "Product Name"
-#~ msgstr "Produktnavn"
-
-#~ msgid "Custom Name"
-#~ msgstr "Tilpasset navn"
-
-#~ msgid "Developer"
-#~ msgstr "Utvikler"
-
-#~ msgid "For debugging and testing the plugin"
-#~ msgstr "For debugging og testing av pluginen"
-
-#~ msgid "Cargo services do not have unique %1$sProduct names%2$s."
-#~ msgstr "Cargo tjenester har ikke unike %1$sProduktnavn%2$s."
-
-#~ msgid ""
-#~ "Switch the %1$sDisplay Service As%2$s to %3$sDisplay names%4$s to ensure "
-#~ "customers can see the correct service."
-#~ msgstr ""
-#~ "Bytt %1$sVis tjeneste med%2$s til %3$sVisningsnavn%4$s for å være sikker "
-#~ "på at kundene kan se riktig tjeneste."
-
-#~ msgid "After booking"
-#~ msgstr "Etter booking"
-
-#~ msgid "(PRO only)"
-#~ msgstr "(Bare PRO)"
-
-#~ msgid "Active"
-#~ msgstr "Aktive"
-
-#~ msgid "Fixed price override"
-#~ msgstr "Overstyring av fast pris"
-
-#~ msgid "Alternative customer number"
-#~ msgstr "Alternativt kundenummer"
-
-#~ msgid ""
-#~ "Allows you to offer different shipping options from different shipping "
-#~ "accounts. Useful for when allowing international and cargo shipping "
-#~ "options"
-#~ msgstr ""
-#~ "Lar deg tilby forskjellige fraktalternativer fra forskjellige "
-#~ "fraktkontoer. Nyttig når du tillater internasjonale og fraktalternativer"
-
-#~ msgid "Free shipping threshold"
-#~ msgstr "Gratis fraktgrense"
-
-#~ msgid ""
-#~ "Allows you to enable free shipping when the customers cart reached this "
-#~ "value"
-#~ msgstr "Lar deg aktivere gratis frakt når kundekurven nådde denne verdien"
-
-#~ msgid "Show service description after the name of the service"
-#~ msgstr "Vis tjenestebeskrivelse etter navnet på tjenesten"
+"Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
+"at du oppdaterer til nytt kundenummer."
+
+#: ../../../../../shared/wp-content/plugins/bring-fraktguiden-for-woocommerce/pro/booking/views/class-bring-booking-my-order-view.php:48
+msgid "Your tracking number:"
+msgstr "Sporingsnummer:"
