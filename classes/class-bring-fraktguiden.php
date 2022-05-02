@@ -155,6 +155,9 @@ class Bring_Fraktguiden {
 		require_once 'debug/class-fraktguiden-product-debug.php';
 		Fraktguiden_Product_Debug::setup();
 
+		require_once 'common/class-customs-declaration.php';
+		Fraktguiden_Customs_Declaration::setup();
+
 		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
 			add_action( 'wp_enqueue_scripts', __CLASS__ . '::enqueue_styles' );
 		}

@@ -60,6 +60,13 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	private $booking_enabled;
 
 	/**
+	 * $customs_declaration_fields
+	 *
+	 * @var string
+	 */
+	private $customs_declaration_fields;
+
+	/**
 	 * $booking_without_bring
 	 *
 	 * @var string
@@ -163,6 +170,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
 		$this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
 		$this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
+		$this->customs_declaration_fields     = $this->get_setting( 'customs_declaration_fields', 'no' );
 		$this->booking_without_bring          = $this->get_setting( 'booking_without_bring', 'no' );
 		$this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name', get_bloginfo( 'name' ) );
 		$this->booking_address_street1        = $this->get_setting( 'booking_address_street1' );
@@ -175,6 +183,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->booking_address_phone          = $this->get_setting( 'booking_address_phone' );
 		$this->booking_address_email          = $this->get_setting( 'booking_address_email' );
 		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
+		$this->customs_ioss_number            = $this->get_setting( 'customs_ioss_number' );
 
 		if (! self::$filters_registered) {
 			add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
@@ -250,6 +259,14 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable Mybring booking', 'bring-fraktguiden-for-woocommerce' ),
 			'default' => 'no',
+		];
+
+		$this->form_fields['customs_declaration_fields'] = [
+			'title'       => __( 'Customs declaration', 'bring-fraktguiden-for-woocommerce' ),
+			'type'        => 'checkbox',
+			'label'       => __( 'Enable customs declaration fields on products', 'bring-fraktguiden-for-woocommerce' ),
+			'description' => __( 'When enabled, your products will have additional fields for customs declaration', 'bring-fraktguiden-for-woocommerce' ),
+			'default'     => 'no',
 		];
 
 		$this->form_fields['booking_without_bring'] = [
@@ -394,6 +411,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->form_fields['booking_address_email'] = [
 			'title'    => __( 'Email', 'bring-fraktguiden-for-woocommerce' ),
 			'type'     => 'email'
+		];
+
+		$this->form_fields['customs_ioss_number'] = [
+			'title'       => __( 'IOSS', 'bring-fraktguiden-for-woocommerce' ),
+			'type'        => 'text',
+			'description' => __( "You will need to specify IOSS number for customs if you're shipping from Norway to EU.")
 		];
 	}
 
