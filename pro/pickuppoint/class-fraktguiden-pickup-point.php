@@ -375,7 +375,21 @@ class Fraktguiden_Pickup_Point {
 	 */
 	public static function get_pickup_points( $country, $postcode ) {
 		$request = new WP_Bring_Request();
-		return $request->get( self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json' );
+
+		$url = self::BASE_URL . '/' . $country . '/postalCode/' . $postcode . '.json';
+
+		$address_1 = WC()->customer->get_shipping_address_1();
+		$address_2 = WC()->customer->get_shipping_address_2();
+
+		if ($address_1) {
+			$url.= '?street=' . $address_1;
+
+			if ($address_2) {
+				$url.= '&streetNumber=' . $address_2;
+			}
+		}
+		
+		return $request->get( $url );
 	}
 
 	/**
@@ -397,6 +411,7 @@ class Fraktguiden_Pickup_Point {
 	 * @return array
 	 */
 	public static function insert_pickup_points( $rates, $shipping_rate ) {
+		global $post;
 
 		$field_key            = $shipping_rate->get_field_key( 'services' );
 		$services             = \Fraktguiden_Service::all( $field_key );
