@@ -185,6 +185,37 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	}
 
 	/**
+	 * Returns the customs declaration data
+	 *
+	 * @return array
+	 */
+
+	public function get_customs_data() {
+		$order           = $this->shipping_item->get_order();
+
+		$args = array();
+		
+		foreach ( $order->get_items() as $item_id => $item ) {
+			$product = new WC_Product($item->get_product_id());
+			$itemNetWeightInKg = $item->get_quantity() * $product->get_weight();
+			$natureOfTransaction = 'SALE_OF_GOODS';
+
+			$args[] = array(
+				"quantity" => $item->get_quantity(),
+				"goodsDescription" => $product->get_meta('_customs_declaration_description', true),
+				"customsArticleNumber" => $product->get_meta('_customs_declaration_tariff_code', true),
+				"itemNetWeightInKg" => $itemNetWeightInKg,
+				"tarriffLineAmount" => $item->get_subtotal(),
+				"currency" => $order->get_currency(),
+				"countryOfOrigin" => $product->get_meta('_customs_declaration_state_of_origin', true),
+				"natureOfTransaction" => $natureOfTransaction
+			);
+		}
+
+		return apply_filters( 'bring_fraktguiden_get_consignment_customs_fields', $args, $order, $this );
+	}
+
+	/**
 	 * Create data
 	 *
 	 * @return array
@@ -248,7 +279,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				'id'                 => strtoupper( $this->service_id ),
 				'customerNumber'     => $this->customer_number,
 				'services'           => null,
-				'customsDeclaration' => null,
+				'ediCustomsDeclarations' => [
+					"ediCustomsDeclaration" => $this->get_customs_data()
+				]
 			],
 			'purchaseOrder'    => null,
 			'correlationId'    => null,
