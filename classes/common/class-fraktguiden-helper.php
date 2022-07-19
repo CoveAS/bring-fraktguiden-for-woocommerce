@@ -517,16 +517,18 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_shipping_methods() {
 		if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
-			return false;
+			return [];
 		}
 
-		$zones = WC_Shipping_Zones::get_zones();
+		$shipping_methods = array_map(
+			fn ($zoneArray) => $zoneArray['shipping_methods'],
+			WC_Shipping_Zones::get_zones()
+		);
+		$shipping_methods[] = WC_Shipping_Zones::get_zone(0)->get_shipping_methods();
 
-		if ( ! is_array( $zones ) ) {
-			return false;
+		if ( ! is_array( $shipping_methods ) ) {
+			return [];
 		}
-
-		$shipping_methods = array_column( $zones, 'shipping_methods' );
 
 		$flatten = array_merge( ...$shipping_methods );
 

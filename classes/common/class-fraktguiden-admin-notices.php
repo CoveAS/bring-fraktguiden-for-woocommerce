@@ -147,8 +147,8 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_shipping_method_notice() {
 		$messages = [];
-		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden Shipping Method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
-		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a Shipping Method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden shipping method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a shipping method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
 
 		return implode( '<br>', $messages );
 	}

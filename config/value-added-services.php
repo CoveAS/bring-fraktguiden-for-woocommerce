@@ -190,7 +190,7 @@ return [
 		'code'           => '1081',
 		'name'           => 'Bag on door delivery',
 		'default'        => false,
-		'bring_products' => [ 3584 ],
+		'bring_products' => [ 3584, 3570 ],
 		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
 	],
 ];

@@ -248,8 +248,12 @@ class Checkout_Modifications {
 	public static function bag_on_door_consent() {
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 
+		ray($current_shipping_method);
 		if ( empty($current_shipping_method)
-		|| ! in_array( 'bring_fraktguiden:3584', $current_shipping_method )
+		|| ! (
+			in_array( 'bring_fraktguiden:3584', $current_shipping_method )
+			|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
+			)
 		|| WC()->session->get('chosen_payment_method') === 'kco' ) {
 			return;
 		}
@@ -320,7 +324,11 @@ class Checkout_Modifications {
 	 * Bag on door option for Klarna checkout
 	 */
 	public static function kco_bag_on_door_consent(array $additional_checkboxes ) {
-		if ( WC()->session->get( 'chosen_shipping_methods' )[0] !== 'bring_fraktguiden:3584' ) {
+		$chosen_shipping_method = WC()->session->get( 'chosen_shipping_methods' )[0] ;
+		if (
+			$chosen_shipping_method !== 'bring_fraktguiden:3584'
+			&& $chosen_shipping_method !== 'bring_fraktguiden:3570'
+		) {
 			return $additional_checkboxes;
 		}
 
