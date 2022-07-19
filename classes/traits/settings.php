@@ -411,14 +411,6 @@ trait Settings {
 				'description' => __( 'Disable loading the default stylesheet from the Bring Fraktguiden plugin to allow custom styling by the theme', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 'no',
 			],
-			'enable_kco_support'            => [
-				'title'       => __( 'Klarna checkout support', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden-for-woocommerce' ),
-				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ),
-				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
-			],
 			'lead_time'            => [
 				'title'       => __( 'Lead time in days', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'number',

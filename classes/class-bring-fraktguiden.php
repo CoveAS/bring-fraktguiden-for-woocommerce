@@ -147,11 +147,6 @@ class Bring_Fraktguiden {
 	public static function add_settings() {
 		$default = Fraktguiden_Helper::get_kco_support_default();
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'enable_kco_support', $default ) ) {
-			require_once 'common/class-fraktguiden-kco-support.php';
-			Fraktguiden_KCO_Support::setup();
-		}
-
 		require_once 'debug/class-fraktguiden-product-debug.php';
 		Fraktguiden_Product_Debug::setup();
 
