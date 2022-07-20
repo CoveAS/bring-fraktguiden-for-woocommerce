@@ -22,8 +22,17 @@ class Bring_Booking_Customer {
 	 * @throws Exception Exception.
 	 * @return array
 	 */
-	public static function get_customer_numbers_formatted() {
+	public static function get_customer_numbers_formatted(): array
+	{
+		static $result = [];
+		if (empty($result)) {
+			$result = self::get_customer_numbers_from_api();
+		}
+		return $result;
+	}
 
+	private static function get_customer_numbers_from_api(): array
+	{
 		$args = [
 			'headers' => [
 				'Content-Type'       => 'application/json',
@@ -43,6 +52,19 @@ class Bring_Booking_Customer {
 
 		$result = [];
 		$json   = json_decode( $response->get_body() );
+
+		if (is_null($json)) {
+			return $result;
+		}
+
+		if ($response->status_code === 500 && isset($json->message)) {
+			throw new Exception(
+				esc_html_e(
+					'The mybring API return with an unknown error. Please contact mybring.com support for help. The error message given by the API:',
+					'bring-fraktguiden-for-woocommerce'
+				) . wp_kses($json->message, [])
+			);
+		}
 
 		foreach ( $json->customers as $customer ) {
 			$result[ $customer->customerNumber ] = '[' . $customer->countryCode . '] ' . $customer->name; // phpcs:ignore
