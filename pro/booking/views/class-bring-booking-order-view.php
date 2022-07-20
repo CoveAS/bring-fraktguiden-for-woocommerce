@@ -67,7 +67,6 @@ class Bring_Booking_Order_View {
 	public static function render_booking_meta_box( $post ) {
 		$wc_order = new WC_Order( $post->ID );
 		$order    = new Bring_WC_Order_Adapter( $wc_order );
-		$step2    = Bring_Booking_Common_View::is_step2();
 		?>
 
 		<div class="bring-booking-meta-box-content">
@@ -79,25 +78,7 @@ class Bring_Booking_Order_View {
 			?>
 			<div class="bring-booking-meta-box-content-body">
 				<?php
-				if ( $order->has_booking_errors() && ! $step2 ) {
-					self::render_errors( $order );
-				}
-
-				if ( ! $step2 && ! $order->is_booked() ) {
-					self::render_start( $order );
-				}
-
-				if ( $step2 && ! $order->is_booked() ) {
-					self::render_step2_screen( $order );
-				}
-
-				if ( $order->is_booked() ) {
-					self::render_booking_success_screen( $order );
-				}
-
-				if ( ! $order->is_booked() ) {
-					self::render_footer( $step2, $order );
-				}
+				self::render_booking_meta_box_content($order);
 				?>
 
 			</div>
@@ -588,5 +569,37 @@ class Bring_Booking_Order_View {
 		}
 		// @TODO: with multiple shipping items, remove the metadata for items no longer used
 		die;
+	}
+
+	private static function render_booking_meta_box_content(Bring_WC_Order_Adapter $adapter)
+	{
+
+		try {
+			$customers = Bring_Booking_Customer::get_customer_numbers_formatted();
+		} catch ( Exception $e ) {
+			printf( '<p class="error">%s</p>', esc_html( $e->getMessage() ) );
+			return;
+		}
+
+		$step2    = Bring_Booking_Common_View::is_step2();
+		if ( $adapter->has_booking_errors() && ! $step2 ) {
+			self::render_errors( $adapter );
+		}
+
+		if ( ! $step2 && ! $adapter->is_booked() ) {
+			self::render_start( $adapter );
+		}
+
+		if ( $step2 && ! $adapter->is_booked() ) {
+			self::render_step2_screen( $adapter );
+		}
+
+		if ( $adapter->is_booked() ) {
+			self::render_booking_success_screen( $adapter );
+		}
+
+		if ( ! $adapter->is_booked() ) {
+			self::render_footer( $step2, $adapter );
+		}
 	}
 }
