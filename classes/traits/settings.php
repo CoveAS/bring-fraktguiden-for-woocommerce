@@ -430,6 +430,17 @@ trait Settings {
 				'description' => __( 'Display expected delivery date below shipping rates', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '12:00',
 			],
+				'pickup_point_types' => [
+						'title'       => __( 'Pickup point types', 'bring-fraktguiden-for-woocommerce' ),
+						'type'        => 'select',
+						//'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+						'default'     => '',
+					'options' => [
+							'' => __('All'),
+							'manned' => __('Manned'),
+							'locker' => __('Locker'),
+					]
+				],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'hidden',
