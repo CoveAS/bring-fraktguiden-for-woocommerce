@@ -248,7 +248,6 @@ class Checkout_Modifications {
 	public static function bag_on_door_consent() {
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 
-		ray($current_shipping_method);
 		if ( empty($current_shipping_method)
 		|| ! (
 			in_array( 'bring_fraktguiden:3584', $current_shipping_method )
