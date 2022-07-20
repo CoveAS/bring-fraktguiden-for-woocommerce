@@ -271,8 +271,12 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		}
 
 		$consignment['product']['additionalServices'] = [];
+		$electronic_notification = filter_input( INPUT_POST, '2084', FILTER_VALIDATE_BOOLEAN );
 		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
-		if ( $evarsling ) {
+		if (
+			$evarsling
+			&& ($electronic_notification || $is_bulk)
+		) {
 			$consignment['product']['additionalServices'][] = [
 				'id'     => $evarsling,
 				'email'  => $recipient_address['contact']['email'],
