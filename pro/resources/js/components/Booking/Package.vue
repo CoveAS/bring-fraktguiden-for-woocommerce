@@ -58,21 +58,21 @@
 					v-model="package.weightInKg"
 			>
 		</td>
-		<td>
+		<td v-show="showPickupPoint">
 			<span
-			  v-if="package.pickupPoint"
-			  class="tips"
-			  :data-tip="package.pickupPoint.replace( '|', '<br/>')"
-			  v-html="i18n.pickupPoint"
-	  ></span>
+					v-if="package.pickupPoint"
+					class="tips"
+					:data-tip="package.pickupPoint.replace( '|', '<br/>')"
+					v-html="i18n.pickupPoint"
+			></span>
 		</td>
 		<td>
 			<span
-			  v-if="removable"
-			  class="button-link button-link-delete delete"
-			  v-on:click="$emit('remove')"
-			  v-html="i18n.delete"
-	  ></span>
+					v-if="removable"
+					class="button-link button-link-delete delete"
+					v-on:click="$emit('remove')"
+					v-html="i18n.delete"
+			></span>
 		</td>
 	</tr>
 </template>
@@ -115,10 +115,10 @@ export default {
 			for (let code in this.services) {
 				const service = this.services[code];
 				formatted.push(
-					{
-						label: service.service_data.productName,
-						code: code,
-					}
+						{
+							label: service.service_data.productName,
+							code: code,
+						}
 				);
 			}
 			return formatted;
@@ -132,6 +132,18 @@ export default {
 		package: {
 			type: Object,
 			required: true
+		},
+		showPickupPoint: {
+			type: Boolean,
+			required: true,
+		}
+	},
+	watch: {
+		package: {
+			deep: true,
+			handler: function () {
+				this.$emit('bringProductChange', this.package.key);
+			}
 		}
 	},
 	components: {

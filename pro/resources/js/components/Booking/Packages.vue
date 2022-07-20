@@ -25,7 +25,7 @@
 					<th v-html="i18n.height"></th>
 					<th v-html="i18n.length"></th>
 					<th v-html="i18n.weight"></th>
-					<th v-html="i18n.pickupPoint"></th>
+					<th v-html="i18n.pickupPoint" v-show="showPickupPoint"></th>
 					<th></th>
 				</tr>
 				</thead>
@@ -34,9 +34,11 @@
 				<package
 						v-for="(packageData, id) in packages"
 						:key="id"
+						:show-pickup-point="showPickupPoint"
 						:package="packageData"
 						:removable="packages.length > 1"
 						v-on:remove="removePackage(id)"
+						v-on:bring-product-change="updateBringProductOnAllPackages"
 				>
 				</package>
 
@@ -44,10 +46,10 @@
 					<td colspan="7"></td>
 					<td>
 					<span
-				  class="button add"
-				  v-html="i18n.add"
-				  @click="addPackage"
-		  ></span>
+							class="button add"
+							v-html="i18n.add"
+							@click="addPackage"
+					></span>
 					</td>
 				</tr>
 				</tbody>
@@ -109,6 +111,20 @@ export default {
 			}, 250)
 		}
 	},
+	computed: {
+		showPickupPoint() {
+			let result = false;
+			_.each(
+					this.packages,
+					(_package) => {
+						if (_package.pickupPoint) {
+							result = true;
+						}
+					}
+			);
+			return result;
+		}
+	},
 	methods: {
 		removePackage(id) {
 			if (this.packages.length <= 1) {
@@ -119,13 +135,21 @@ export default {
 		},
 		addPackage() {
 			this.packages.push(
-				JSON.parse(
-					JSON.stringify(
-						this.packages[0]
+					JSON.parse(
+							JSON.stringify(
+									this.packages[0]
+							)
 					)
-				)
 			);
 			this.updatePackages();
+		},
+		updateBringProductOnAllPackages(key) {
+			_.each(
+					this.packages,
+					_package => {
+						_package.key = key
+					}
+			);
 		},
 		updatePackages() {
 			if (this.loading) {
@@ -146,19 +170,19 @@ export default {
 				});
 			}
 			jQuery.post(
-				ajaxurl,
-				{
-					action: 'bring_update_packages',
-					order_id: this.orderId,
-					packages: packages
-				},
-				response => {
-					this.loading = false;
-					this.clearLoad = setTimeout(
-						() => this.showLoader = false,
-						500
-					)
-				}
+					ajaxurl,
+					{
+						action: 'bring_update_packages',
+						order_id: this.orderId,
+						packages: packages
+					},
+					response => {
+						this.loading = false;
+						this.clearLoad = setTimeout(
+								() => this.showLoader = false,
+								500
+						);
+					}
 			);
 		}
 	}

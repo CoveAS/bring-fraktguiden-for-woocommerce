@@ -10,7 +10,15 @@
 						name="bag_on_door"
 				></checkbox>
 			</li>
-			<li v-show="showVas('1134')">
+		<li v-show="showVas('2084')">
+			<checkbox
+					:label="i18n.electronic_notification"
+					:description="i18n.electronic_notification_description"
+					:checked="checked('2084')"
+					name="electronic_notification"
+			></checkbox>
+		</li>
+		<li v-show="showVas('1134')">
 				<checkbox
 						:label="i18n.individual_verification"
 						:description="i18n.individual_verification_description"
@@ -58,7 +66,6 @@ export default {
 				}
 				vas.push(...service.vas)
 			}
-			console.log(vas);
 			return vas;
 		}
 	},
@@ -82,7 +89,7 @@ export default {
 				if (vas.code !== code) {
 					continue;
 				}
-				if (vas.enabled) {
+				if (vas.enabled && vas.value) {
 					return true;
 				}
 			}

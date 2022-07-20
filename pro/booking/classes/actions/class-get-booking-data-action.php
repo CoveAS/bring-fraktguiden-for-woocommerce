@@ -62,6 +62,8 @@ class Get_Booking_Data_Action {
 				'bag_on_door_description'             => esc_html__( 'Mailbox Parcel (Pakke i postkassen) is a parcel that will be delivered in the recipient’s mailbox. If the parcel for various reasons does not fit in the mailbox, the sender may, against a surcharge, choose to leave the parcel on the door handle (in a special bag) to avoid it being sent to the pickup point. It’s recommended that this delivery option is actively confirmed by the receiver upon booking in the sender’s webshop. When the parcel is delivered as a bag on the door, the bar code is scanned and the recipient will receive an SMS/email. Note that if the parcel is delivered in the mailbox the additional fee will not occur.' ),
 				'id_verification'                     => esc_html__( 'ID verification' ),
 				'id_verification_description'         => esc_html__( 'ID is checked upon delivery. Any person (other than the recipient) can receive the shipment, but must legitimize before receiving it.' ),
+				'electronic_notification'             => esc_html__( 'Electronic notification' ),
+				'electronic_notification_description' => esc_html__( 'Digital notification by SMS and/or e-mail.' ),
 				'individual_verification'             => esc_html__( 'Individual verification' ),
 				'individual_verification_description' => esc_html__( 'Only the specified recipient can receive the shipment by showing identification. Use of authorization is not possible.' ),
 			]
