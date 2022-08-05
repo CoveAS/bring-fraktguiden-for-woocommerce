@@ -102,9 +102,12 @@ export default {
 	data: function () {
 		return {
 			field_val: this.obj[this.field_id],
-			checkbox_val: this.obj[this.field_id + '_cb'],
+			checkbox_val: this.obj[this.field_id + '_cb'] === 'on',
 			classes: '',
 		};
+	},
+	mounted() {
+		console.log(this.checkbox_val);
 	},
 	watch: {
 		checkbox_val: validation,
