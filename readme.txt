@@ -5,10 +5,10 @@ Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
 Requires at least: 5.6
-Tested up to: 5.9.2
+Tested up to: 6.0.1
 Requires PHP: 8.0
 WC requires at least: 4.8.0
-WC tested up to: 6.3.1
+WC tested up to: 6.7.0
 Stable tag: 1.8.9
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
