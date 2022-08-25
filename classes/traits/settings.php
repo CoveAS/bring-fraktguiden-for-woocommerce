@@ -437,9 +437,9 @@ trait Settings {
 						//'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
 						'default'     => '',
 					'options' => [
-							'' => __('All'),
-							'manned' => __('Manned'),
-							'locker' => __('Locker'),
+							''       => __( 'All', 'bring-fraktguiden-for-woocommerce' ),
+							'manned' => __( 'Manned', 'bring-fraktguiden-for-woocommerce' ),
+							'locker' => __( 'Locker', 'bring-fraktguiden-for-woocommerce' ),
 					]
 				],
 			'system_information'            => [
