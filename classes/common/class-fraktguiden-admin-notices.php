@@ -38,26 +38,17 @@ class Fraktguiden_Admin_Notices {
 		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
 		// Check if PRO is available but not activated yet.
+		$message = Fraktguiden_Helper::get_pro_description();
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
 			/* translators: %s: Bring Fraktguiden settings page URL */
-			$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden-for-woocommerce' );
-			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
-
 			self::add_notice( 'pro_available', $message );
 		} elseif ( ! Fraktguiden_Helper::valid_license() ) { // Check if PRO is activated but license not bought.
-			$days = Fraktguiden_Helper::get_pro_days_remaining();
-
-			// Default message when the trial period is over.
-			$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden-for-woocommerce' );
-
-			// Check if the trial period is not over yet.
-			if ( $days >= 0 ) {
-				/* translators: %s: Number of days */
-				$message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) );
-			}
-
-			$message = $message . '<br>' . Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
-			self::add_notice( 'pro_available', $message, 'warning', ( $days >= 0 ) );
+			self::add_notice(
+				'pro_available',
+				$message,
+				'warning',
+				fn() => $GLOBALS['current_section'] !== 'bring_fraktguiden'
+			);
 		}
 
 		// Check if a default postcode of the origin where packages are sent from is set.
@@ -253,11 +244,10 @@ class Fraktguiden_Admin_Notices {
 	/**
 	 * Update notice
 	 *
-	 * @param string $key Key.
-	 * @param string $message Message.
-	 * @param string $type Type.
-	 * @param boolean $dismissable Dismissable.
-	 *
+	 * @param string  $key         Key.
+	 * @param string  $message     Message.
+	 * @param string  $type        Type.
+	 * @param boolean|Closure $dismissable Dismissable.
 	 * @return boolean
 	 */
 	public static function update_notice( $key, $message, $type = 'info', $dismissable = true ) {
@@ -281,11 +271,10 @@ class Fraktguiden_Admin_Notices {
 	/**
 	 * Add notice
 	 *
-	 * @param string $key Key.
-	 * @param string $message Message.
-	 * @param string $type Type.
-	 * @param boolean $dismissable Dismissable.
-	 *
+	 * @param string  $key         Key.
+	 * @param string  $message     Message.
+	 * @param string  $type        Type.
+	 * @param boolean|Closure $dismissable Dismissable.
 	 * @return boolean
 	 */
 	public static function add_notice( $key, $message, $type = 'info', $dismissable = true ) {
@@ -383,7 +372,14 @@ class Fraktguiden_Admin_Notices {
 		$dismissed = self::get_dismissed_notices();
 
 		foreach ( self::$notices as $key => $notice ) {
-			if ( $notice['dismissable'] && in_array( $key, $dismissed ) ) {
+			$dismissable = $notice['dismissable'];
+			if (
+				is_callable(
+					$dismissable
+				)
+					? $dismissable()
+					: $dismissable
+				&& in_array( $key, $dismissed ) ) {
 				continue;
 			}
 

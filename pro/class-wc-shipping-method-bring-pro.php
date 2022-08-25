@@ -13,7 +13,7 @@ require_once 'order/class-bring-wc-order-adapter.php';
 require_once 'booking/class-bring-booking.php';
 require_once 'pickuppoint/class-fraktguiden-pickup-point.php';
 
-if ( Fraktguiden_Helper::pro_activated() ) {
+if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) {
 	Fraktguiden_Pickup_Point::init();
 }
 
