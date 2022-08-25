@@ -70,11 +70,12 @@ trait Settings {
 				'class' => 'bring-toggle-checkbox',
 			],
 			'test_mode'                     => [
-				'title'   => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
-				'type'    => 'checkbox',
-				'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden-for-woocommerce' ),
-				'default' => 'no',
-				'class'   => 'bring-toggle-checkbox',
+				'title'    => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'label'    => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development and testing.', 'bring-fraktguiden-for-woocommerce' ),
+				'desc_tip' => __( 'This setting let\'s you use PRO features without a license and displays a message on the checkout page that this is a test-site', 'bring-fraktguiden-for-woocommerce' ),
+				'default'  => 'no',
+				'class'    => 'bring-toggle-checkbox',
 			],
 			'enabled'                       => [
 				'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
