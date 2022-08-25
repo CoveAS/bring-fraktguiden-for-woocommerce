@@ -305,11 +305,11 @@ class Bring_Booking_Order_View {
 						class="button button-primary tips">
 					<?php echo Bring_Booking_Common_View::booking_label(); ?>
 				</button>
-			<?php } elseif ( Fraktguiden_Helper::pro_activated() && $missing_params ) { ?>
+			<?php } elseif ( ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) && $missing_params ) { ?>
 				<a href="<?php echo Fraktguiden_Helper::get_settings_url(); ?>#woocommerce_bring_fraktguiden_booking_title"
 				   data-tip="<?php _e( 'Update your store address.', 'bring-fraktguiden-for-woocommerce' ); ?>"
 				   class="button button-primary tips"><?php _e( 'Update store information', 'bring-fraktguiden-for-woocommerce' ); ?></a>
-			<?php } elseif ( Fraktguiden_Helper::pro_activated() ) { ?>
+			<?php } elseif ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) { ?>
 				<button type="submit" name="_bring-start-booking"
 						<?php if ( empty( $adapter->order->get_shipping_methods() ) ) { echo 'disabled="disabled"'; } ?>
 						data-tip="<?php _e( 'Start creating a label to ship this order with Mybring', 'bring-fraktguiden-for-woocommerce' ); ?>"
