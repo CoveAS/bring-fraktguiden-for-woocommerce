@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "POT-Creation-Date: 2022-08-25 13:41+0200\n"
-"PO-Revision-Date: 2022-08-25 13:44+0200\n"
+"PO-Revision-Date: 2022-08-25 14:25+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -1533,7 +1533,7 @@ msgstr "Aktiver Mybring Booking"
 
 #: pro/class-wc-shipping-method-bring-pro.php:258
 msgid "Allow booking without Bring shipping"
-msgstr "Tillat booking av ordre uten bring"
+msgstr "Tillat booking av ordre uten en bring fraktlinje"
 
 #: pro/class-wc-shipping-method-bring-pro.php:265
 msgid "Enable test mode for Mybring booking"
