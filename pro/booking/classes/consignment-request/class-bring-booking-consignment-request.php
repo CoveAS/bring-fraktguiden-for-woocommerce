@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden_Pro\Booking\Actions\Get_First_Enabled_Bring_Product;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -50,9 +52,12 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$elements_count = count( $elements );
 
 		foreach ( $order_items_packages as $item_id => $package ) {
+			if (! is_array($package)) {
+				continue;
+			}
 			$package_count = count( $package ) / $elements_count;
 
-			for ( $i = 0; $i < $package_count; $i++ ) {
+			for ( $i = 0; $i < $package_count; $i ++ ) {
 				$weight = 0;
 
 				if ( isset( $package[ 'weight' . $i ] ) ) {
@@ -121,23 +126,23 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		return apply_filters(
 			'bring_fraktguiden_get_consignment_sender_address',
 			[
-			'name'                  => $sender['booking_address_store_name'],
-			'addressLine'           => $sender['booking_address_street1'],
-			'addressLine2'          => $sender['booking_address_street2'],
-			'postalCode'            => $sender['booking_address_postcode'],
-			'city'                  => $sender['booking_address_city'],
-			'countryCode'           => $sender['booking_address_country'],
-			'reference'             => $this->get_reference(),
-			'additionalAddressInfo' => $additional_info,
-			'contact'               => [
-				'name'        => $sender['booking_address_contact_person'],
-				'email'       => $sender['booking_address_email'],
-				'phoneNumber' => $sender['booking_address_phone'],
+				'name'                  => $sender['booking_address_store_name'],
+				'addressLine'           => $sender['booking_address_street1'],
+				'addressLine2'          => $sender['booking_address_street2'],
+				'postalCode'            => $sender['booking_address_postcode'],
+				'city'                  => $sender['booking_address_city'],
+				'countryCode'           => $sender['booking_address_country'],
+				'reference'             => $this->get_reference(),
+				'additionalAddressInfo' => $additional_info,
+				'contact'               => [
+					'name'        => $sender['booking_address_contact_person'],
+					'email'       => $sender['booking_address_email'],
+					'phoneNumber' => $sender['booking_address_phone'],
+				],
 			],
-		],
-		$wc_order,
-		$this
-	);
+			$wc_order,
+			$this
+		);
 	}
 
 	/**
@@ -185,9 +190,53 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	 * @return array
 	 */
 	public function create_data() {
-		$recipient_address = $this->get_recipient_address();
 
-		$consignments = [
+		$consignment = $this->create_consignment();
+
+		$data = [
+			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
+			'schemaVersion' => 1,
+			'consignments'  => [ $consignment ],
+		];
+
+		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
+	}
+
+	/**
+	 * Create
+	 *
+	 * @param WC_Order_Item_Shipping $shipping_item Shipping item.
+	 *
+	 * @throws Exception Exception.
+	 *
+	 * @return Bring_Booking_Consignment_Request
+	 */
+	public static function create( WC_Order_Item_Shipping $shipping_item ): Bring_Booking_Consignment_Request {
+		$bring_product = self::get_bring_product( $shipping_item );
+
+		if (
+			filter_var(
+				Fraktguiden_Helper::get_option( 'booking_without_bring' ),
+				FILTER_VALIDATE_BOOLEAN
+			)
+			&& ! $bring_product
+		) {
+			$bring_product = (new Get_First_Enabled_Bring_Product())();
+			$shipping_item->update_meta_data( 'bring_product', $bring_product );
+			$shipping_item->save();
+		}
+		if ( ! $bring_product ) {
+			throw new Exception( 'No bring product was found on the shipping method' );
+		}
+
+		return new self( $shipping_item );
+	}
+
+	private function create_consignment(): array {
+		$is_bulk = $_REQUEST['action'] === 'bring_bulk_book';
+
+		$recipient_address = $this->get_recipient_address();
+		$consignment = [
 			'shippingDateTime' => $this->shipping_date_time,
 			// Sender and recipient.
 			'parties'          => [
@@ -208,36 +257,64 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		];
 
 		if ( ! empty( $this->customer_specified_delivery_date_time ) ) {
-			$consignments['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
+			$consignment['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;
 		}
 
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
 
 		if ( $pickup_point_id ) {
-			$consignments['parties']['pickupPoint'] = [
+			$consignment['parties']['pickupPoint'] = [
 				'id'          => $pickup_point_id,
 				'countryCode' => $this->shipping_item->get_order()->get_shipping_country(),
 			];
 		}
 
+		$consignment['product']['additionalServices'] = [];
+		$electronic_notification = filter_input( INPUT_POST, '2084', FILTER_VALIDATE_BOOLEAN );
 		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
-		if ( $evarsling ) {
-			$consignments['product']['additionalServices'] = [
-				[
-					'id'     => $evarsling,
-					'email'  => $recipient_address['contact']['email'],
-					'mobile' => $recipient_address['contact']['phoneNumber'],
-				],
+		if (
+			$evarsling
+			&& ($electronic_notification || $is_bulk)
+		) {
+			$consignment['product']['additionalServices'][] = [
+				'id'     => $evarsling,
+				'email'  => $recipient_address['contact']['email'],
+				'mobile' => $recipient_address['contact']['phoneNumber'],
 			];
+
 		}
 
-		$data = [
-			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
-			'schemaVersion' => 1,
-			'consignments'  => [ $consignments ],
-		];
+		// Bag on door option
+		$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
+		if (
+			$this->service
+			&& $this->service->has_vas( '1081' )
+			&& ($bag_on_door_consent || $is_bulk)
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1081'];
+		}
 
-		return apply_filters( 'bring_fraktguiden_booking_consignment_data', $data, $this );
+		// ID verification
+		$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
+		if (
+			$this->service
+			&& $this->service->has_vas( '1133' )
+			&& ($id_verification_checked || $is_bulk)
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1133'];
+		}
+
+		// Personal delivery option
+		$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
+		if (
+			$this->service
+			&& $this->service->has_vas( '1134' )
+			&& ($individual_verification_checked || $is_bulk)
+		) {
+			$consignment['product']['additionalServices'][] = ['id' => '1134'];
+		}
+
+		return $consignment;
 	}
 }

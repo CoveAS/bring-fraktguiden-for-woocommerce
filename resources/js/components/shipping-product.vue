@@ -223,9 +223,6 @@ export default {
 			}
 			return this.service_data.class;
 		},
-		pro_activated: function() {
-			return this.$root.pro_activated;
-		},
 	},
 	methods: {
 		validate_customer_number: function( value, checkbox_value ) {

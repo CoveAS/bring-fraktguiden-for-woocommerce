@@ -358,15 +358,6 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_pro_days_remaining() {
 		$start_date = self::get_option( 'pro_activated_on', false );
-		$time       = intval( $start_date );
-
-		// I made a mistake in the license check here.
-		// Any activation time before now (as of writing) should count as a reset for the 7 day trial.
-		if ( $time < 1522249027 ) {
-			$time = time();
-			self::update_option( 'pro_activated_on', $time );
-		}
-
 		$time = intval( $start_date );
 		$diff = $time + 86400 * 8 - time() - 10;
 		$time = floor( $diff / 86400 );
@@ -408,7 +399,8 @@ class Fraktguiden_Helper {
 			$days = self::get_pro_days_remaining();
 
 			if ( $days < 0 ) {
-				return __( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden-for-woocommerce' ) . '<br>'
+				$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden-for-woocommerce' );
+				return $message . ' ' .__( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden-for-woocommerce' ) . '<br>'
 				. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 			}
 
@@ -417,7 +409,10 @@ class Fraktguiden_Helper {
 			. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 		}
 
-		return sprintf(
+		$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden-for-woocommerce' );
+		$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
+
+		return $message . sprintf(
 			'<ol>
 				<li>%s</li>
 				<li>%s</li>
@@ -509,4 +504,49 @@ class Fraktguiden_Helper {
 
 		return $home_url['host'];
 	}
+
+	/**
+	 * Get pretty-printed shipping methods
+	 *
+	 * @return array
+	 */
+	public static function get_shipping_methods() {
+		if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
+			return [];
+		}
+
+		$shipping_methods = array_map(
+			fn ($zoneArray) => $zoneArray['shipping_methods'],
+			WC_Shipping_Zones::get_zones()
+		);
+		$shipping_methods[] = WC_Shipping_Zones::get_zone(0)->get_shipping_methods();
+
+		if ( ! is_array( $shipping_methods ) ) {
+			return [];
+		}
+
+		$flatten = array_merge( ...$shipping_methods );
+
+		$normalized_shipping_methods = array();
+
+		foreach ( $flatten as $key => $class ) {
+			$normalized_shipping_methods[ $class->id ] = $class->method_title;
+		}
+
+		return $normalized_shipping_methods;
+	}
+
+	/**
+	 * Check if Bring Fraktguiden shipping method is active
+	 *
+	 * @return bool
+	 */
+	public static function check_bring_fraktguiden_shipping_method() {
+		if ( array_key_exists( self::ID, self::get_shipping_methods() ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

@@ -142,6 +142,7 @@ class WP_Bring_Response {
 				return $this->handle_response();
 			break;
 
+			case 500:
 			case self::HTTP_STATUS_NO_CONTENT:
 			case self::HTTP_STATUS_NOT_FOUND:
 			case self::HTTP_STATUS_BAD_REQUEST:

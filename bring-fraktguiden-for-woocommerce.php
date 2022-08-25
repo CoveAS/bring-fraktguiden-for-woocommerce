@@ -6,12 +6,12 @@
  * Author:              Cove AS
  * Author URI:          https://cove.no/
  *
- * Version:             1.8.8
+ * Version:             1.9.0
  * Requires at least:   5.6.0
- * Tested up to:        5.8.1
+ * Tested up to:        6.0.1
  *
  * WC requires at least: 4.8.0
- * WC tested up to: 5.7.1
+ * WC tested up to: 6.7.0
  *
  * Text Domain:         bring-fraktguiden-for-woocommerce
  * Domain Path:         /languages

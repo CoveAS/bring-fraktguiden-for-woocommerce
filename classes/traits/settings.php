@@ -70,11 +70,12 @@ trait Settings {
 				'class' => 'bring-toggle-checkbox',
 			],
 			'test_mode'                     => [
-				'title'   => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
-				'type'    => 'checkbox',
-				'label'   => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development', 'bring-fraktguiden-for-woocommerce' ),
-				'default' => 'no',
-				'class'   => 'bring-toggle-checkbox',
+				'title'    => __( 'Enable test mode', 'bring-fraktguiden-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'label'    => '<em class="bring-toggle"></em>' . __( 'Use PRO in test-mode. Used for development and testing.', 'bring-fraktguiden-for-woocommerce' ),
+				'desc_tip' => __( 'This setting let\'s you use PRO features without a license and displays a message on the checkout page that this is a test-site', 'bring-fraktguiden-for-woocommerce' ),
+				'default'  => 'no',
+				'class'    => 'bring-toggle-checkbox',
 			],
 			'enabled'                       => [
 				'title'   => __( 'Enable', 'bring-fraktguiden-for-woocommerce' ),
@@ -411,14 +412,6 @@ trait Settings {
 				'description' => __( 'Disable loading the default stylesheet from the Bring Fraktguiden plugin to allow custom styling by the theme', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => 'no',
 			],
-			'enable_kco_support'            => [
-				'title'       => __( 'Klarna checkout support', 'bring-fraktguiden-for-woocommerce' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable legacy Klarna support', 'bring-fraktguiden-for-woocommerce' ),
-				'desc_tip'    => __( 'Loads additional JavaScript on the checkout.', 'bring-fraktguiden-for-woocommerce' ),
-				'description' => __( 'Bring Fraktguiden will hide Klarna Checkout until a shipping method is selected in order to ensure that a shipping method has been selected before payment is made.', 'bring-fraktguiden-for-woocommerce' ),
-				'default'     => \Fraktguiden_Helper::get_kco_support_default(),
-			],
 			'lead_time'            => [
 				'title'       => __( 'Lead time in days', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'number',
@@ -438,6 +431,17 @@ trait Settings {
 				'description' => __( 'Display expected delivery date below shipping rates', 'bring-fraktguiden-for-woocommerce' ),
 				'default'     => '12:00',
 			],
+				'pickup_point_types' => [
+						'title'       => __( 'Pickup point types', 'bring-fraktguiden-for-woocommerce' ),
+						'type'        => 'select',
+						//'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+						'default'     => '',
+					'options' => [
+							''       => __( 'All', 'bring-fraktguiden-for-woocommerce' ),
+							'manned' => __( 'Manned', 'bring-fraktguiden-for-woocommerce' ),
+							'locker' => __( 'Locker', 'bring-fraktguiden-for-woocommerce' ),
+					]
+				],
 			'system_information'            => [
 				'title'       => __( 'Debug System information', 'bring-fraktguiden-for-woocommerce' ),
 				'type'        => 'hidden',
@@ -576,7 +580,9 @@ trait Settings {
 		jQuery( function( $ ) {
 			function toggle_test_mode() {
 				var is_checked = $( '#woocommerce_bring_fraktguiden_pro_enabled' ).prop( 'checked' );
-				bring_fraktguiden_settings.pro_activated = is_checked;
+
+				console.log(bring_fraktguiden_settings.pro_activated);
+				bring_fraktguiden_settings.pro_activated.value = is_checked;
 				$( '#shipping_services' ).attr('class', is_checked ? 'pro-enabled' : 'pro-disabled' );
 				$( '#woocommerce_bring_fraktguiden_test_mode' ).closest( 'tr' ).toggle( is_checked );
 

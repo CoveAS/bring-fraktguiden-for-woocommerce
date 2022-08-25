@@ -5,11 +5,11 @@ Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
 Requires at least: 5.6
-Tested up to: 5.8.1
+Tested up to: 6.0.1
 Requires PHP: 8.0
 WC requires at least: 4.8.0
-WC tested up to: 5.7.1
-Stable tag: 1.8.8
+WC tested up to: 6.7.0
+Stable tag: 1.8.9
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -24,10 +24,25 @@ When you install Bring, you need to head to the settings page to start configuri
 
 1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory or install through Wordpress
 2. Activate the plugin
-3. Go to Dashboard >WooCommerce > Bring settings
-4. Enter your Mybring API credentials
-5. Configure Bring Fraktguiden with your address and select the services you would like to use.
+3. WooCommerce → Settings → Shipping
+4. Add Bring Fraktguiden to a shipping zone
+5. Go to WooCommerce → Bring settings
+6. Enter your Mybring API credentials
+7. Go to WooCommerce → Bring settings → Shipping options
+5. Select the bring products`*` you want to enable
 6. Start shipping!
+
+`*` The most commonly used bring products are "Pakke til hentested" and/or "Pakke i postkassen"
+
+== Pro version ==
+
+We offer a [PRO license](https://bringfraktguiden.no/) adds more features to the plugin.
+
+* Book orders with mybring directly from WooCommerce
+* Configure free shipping threshold for bring services
+* Enable pickup points for supported services
+
+Read more about the pro features on [https://bringfraktguiden.no/](https://bringfraktguiden.no/).
 
 == Prerequisites ==
 
@@ -48,6 +63,15 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.8.9 =
+
+* Added bag on door support for mailbox method
+* Added individual verification and id verification value added service
+* Added setting to enable booking for orders that does not use a bring shipping method
+* Added bring product select box to booking items
+* Added validation for booking settings
+* Upgraded vuejs from version 2 to 3
 
 = 1.8.8 =
 
@@ -76,42 +100,5 @@ See faq.txt for frequently asked questions
 * Booking - Added {products} parameter for order reference
 * Booking - Changed action for rendering PDF's
 * Fixed syntax error
-
-= 1.7.12 =
-
-* Added pickup selection for pakke til hentested in admin
-* Fixed issue with fallback solution for heavy consignments
-
-= 1.7.9 =
-
-* Fixed a bug with the implementation of the service table for WC 4.0.0 which caused service configuration not to save.
-* Made the plugin compatible with WooCommerce 4.0.0
-* Fixed default selection of customer number for booking
-* Fixed fatal bug during booking
-
-= 1.7.6 =
-
-* Removed norgespakke because it is no longer supported
-* Fixed an issue with pickup points for klimanøytral servicepakke
-* Fixed bug with post code validation that caused validation intended for Norway to be applied on other some other countries
-* Added missing implementation of E-varsling and 2084 value added services
-
-= 1.7.5 =
-
-* Fixed merging of ZPL files
-* Fixed tocountry bug with the product tester
-
-= 1.7.4 =
-
-* Fixed download of ZPL files from orders using mailbox with tracking
-* Added special handling for mailbox services which fixes booking issues
-* Various interface improvements
-
-= 1.7.2 =
-
-* Improved bring booking logging
-* Fixed the location of the shipping options template
-* Reformed readme to meet standards
-* Added missing translations
 
 See changelog.txt for more

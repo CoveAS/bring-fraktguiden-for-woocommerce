@@ -22,11 +22,10 @@ export default {
 		'enabled':{},
 		'checked':{},
 		'name_prefix':{},
-	},
-	computed: {
-		pro_activated: function() {
-			return this.$root.pro_activated;
-		},
+		pro_activated: {
+			default: true,
+			type: Boolean,
+		}
 	},
 	data: function() {
 		return {

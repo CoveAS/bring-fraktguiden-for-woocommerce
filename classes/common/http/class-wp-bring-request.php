@@ -26,9 +26,9 @@ class WP_Bring_Request {
 	/**
 	 * Get
 	 *
-	 * @param string $url     The url.
-	 * @param array  $params  Associative array representing url parameters.
-	 * @param array  $options WP_HTTP args.
+	 * @param string $url The url.
+	 * @param array $params Associative array representing url parameters.
+	 * @param array $options WP_HTTP args.
 	 *
 	 * @return WP_Bring_Response
 	 */
@@ -36,7 +36,6 @@ class WP_Bring_Request {
 		$url     = $this->build_url( $url, $params );
 		$options = $this->merge_options( $options );
 		$options = $this->add_authentication( $options );
-		$url     = $this->add_customer_number( $url );
 		$result  = wp_remote_get( $url, $options );
 
 		return new WP_Bring_Response( $result );
@@ -47,9 +46,9 @@ class WP_Bring_Request {
 	 *
 	 * Looks like this is never used. @TODO: deprecate this function
 	 *
-	 * @param string $url     The url.
-	 * @param array  $params  Associative array representing url parameters.
-	 * @param array  $options WP_HTTP args.
+	 * @param string $url The url.
+	 * @param array $params Associative array representing url parameters.
+	 * @param array $options WP_HTTP args.
 	 *
 	 * @return WP_Bring_Response
 	 */
@@ -57,7 +56,6 @@ class WP_Bring_Request {
 		$url     = $this->build_url( $url, $params );
 		$options = $this->merge_options( $options );
 		$options = $this->add_authentication( $options );
-		$url     = $this->add_customer_number( $url );
 		$result  = wp_remote_post( $url, $options );
 
 		return new WP_Bring_Response( $result );
@@ -66,18 +64,20 @@ class WP_Bring_Request {
 	/**
 	 * Build URL
 	 *
-	 * @param string $url    URL.
-	 * @param array  $params Parameters.
+	 * @param string $url URL.
+	 * @param array $params Parameters.
 	 *
 	 * @return string
 	 */
 	protected function build_url( $url, $params = [] ) {
-		$result     = $url;
-		$result    .= ( strpos( $url, '?' ) === false ) ? '?' : '&';
-		$parameters = http_build_query( $params );
-		$result    .= $parameters;
+		$result = $url;
+		if ( ! empty( $params ) ) {
+			$result     .= ( strpos( $url, '?' ) === false ) ? '?' : '&';
+			$parameters = http_build_query( $params );
+			$result     .= $parameters;
+		}
 
-		return esc_url_raw( $result );
+		return esc_url_raw( apply_filters( 'bring_fraktguiden_request_url', $result, $this ) );
 	}
 
 	/**
@@ -95,7 +95,7 @@ class WP_Bring_Request {
 	 * Get Var
 	 * Get the field value from either the POST or the saved value
 	 *
-	 * @param  string $key Key.
+	 * @param string $key Key.
 	 *
 	 * @return string
 	 */
@@ -142,7 +142,7 @@ class WP_Bring_Request {
 		$customer_number = $this->get_var( 'mybring_customer_number' );
 
 		if ( $mybring_api_key && $mybring_api_uid && $customer_number ) {
-			if ( '?' !== substr( $url, -1 ) && '&' !== substr( $url, -1 ) ) {
+			if ( '?' !== substr( $url, - 1 ) && '&' !== substr( $url, - 1 ) ) {
 				$url .= '&';
 			}
 

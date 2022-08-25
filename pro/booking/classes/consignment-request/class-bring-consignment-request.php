@@ -66,9 +66,9 @@ abstract class Bring_Consignment_Request {
 	/**
 	 * Construct
 	 *
-	 * @param string $shipping_item Shipping item.
+	 * @param WC_Order_Item_Shipping $shipping_item  item.
 	 */
-	public function __construct( $shipping_item ) {
+	public function __construct( WC_Order_Item_Shipping $shipping_item ) {
 		$this->shipping_item = $shipping_item;
 		$this->adapter       = new Bring_WC_Order_Adapter( $shipping_item->get_order() );
 		$this->service_id    = $this->get_service_id();
@@ -128,29 +128,6 @@ abstract class Bring_Consignment_Request {
 		}
 
 		return strtolower( $bring_product );
-	}
-
-	/**
-	 * Create
-	 *
-	 * @param array $shipping_item Shipping item.
-	 *
-	 * @throws Exception Exception.
-	 *
-	 * @return Bring_Booking_Consignment_Request
-	 */
-	public static function create( $shipping_item ) {
-		$service_id = self::get_bring_product( $shipping_item );
-
-		if ( ! $service_id ) {
-			throw new Exception( 'No bring product was found on the shipping method' );
-		}
-
-		if ( preg_match( '/^PAKKE_I_POSTKASSEN/', strtoupper( $service_id ) ) ) {
-			return new Bring_Mailbox_Consignment_Request( $shipping_item );
-		}
-
-		return new Bring_Booking_Consignment_Request( $shipping_item );
 	}
 
 	/**

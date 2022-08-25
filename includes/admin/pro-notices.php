@@ -9,7 +9,15 @@ $classes = [];
 
 $classes[] = 'notice';
 $classes[] = 'notice-' . $type;
-$classes[] = $dismissable ? 'is-dismissible' : '';
+if (
+	is_callable(
+			$dismissable
+	)
+	? $dismissable()
+	: $dismissable
+) {
+	$classes[] = 'is-dismissible';
+}
 $classes[] = 'bring-notice';
 $classes[] = 'bring-notice-' . $key;
 ?>

@@ -35,28 +35,20 @@ class Fraktguiden_Admin_Notices {
 
 		add_action( 'admin_notices', __CLASS__ . '::render_notices' );
 		add_action( 'wp_ajax_bring_dismiss_notice', __CLASS__ . '::ajax_dismiss_notice' );
+		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
 		// Check if PRO is available but not activated yet.
+		$message = Fraktguiden_Helper::get_pro_description();
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
 			/* translators: %s: Bring Fraktguiden settings page URL */
-			$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden-for-woocommerce' );
-			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
-
 			self::add_notice( 'pro_available', $message );
 		} elseif ( ! Fraktguiden_Helper::valid_license() ) { // Check if PRO is activated but license not bought.
-			$days = Fraktguiden_Helper::get_pro_days_remaining();
-
-			// Default message when the trial period is over.
-			$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden-for-woocommerce' );
-
-			// Check if the trial period is not over yet.
-			if ( $days >= 0 ) {
-				/* translators: %s: Number of days */
-				$message = sprintf( __( 'The Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) );
-			}
-
-			$message = $message . '<br>' . Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
-			self::add_notice( 'pro_available', $message, 'warning', ( $days >= 0 ) );
+			self::add_notice(
+				'pro_available',
+				$message,
+				'warning',
+				fn() => $GLOBALS['current_section'] !== 'bring_fraktguiden'
+			);
 		}
 
 		// Check if a default postcode of the origin where packages are sent from is set.
@@ -79,6 +71,118 @@ class Fraktguiden_Admin_Notices {
 		} else {
 			self::remove_missing_api_customer_number_notice();
 		}
+
+		if ( ! Fraktguiden_Helper::get_option( 'services' ) ) {
+			self::add_missing_shipping_services_notice();
+		} else {
+			self::remove_missing_shipping_services_notice();
+		}
+
+		if ( 0 ) {
+			$kco_settings = get_option( 'woocommerce_kco_settings' );
+			if ( ! empty( $kco_settings ) && is_array( $kco_settings ) && $kco_settings['enabled'] === "yes" && get_option( 'woocommerce_shipping_debug_mode', 'no' ) === 'no' ) {
+				self::add_klarna_debug_notice();
+			} else {
+				self::remove_klarna_debug_notice();
+			}
+		}
+	}
+
+	/**
+	 * Function adds or removes notice based on shipping method availability in shipping zones
+	 */
+	public static function missing_shipping_method_notice_middleware() {
+		if ( Fraktguiden_Helper::check_bring_fraktguiden_shipping_method() ) {
+			self::remove_missing_shipping_method_notice();
+		} else {
+			self::add_missing_shipping_method_notice();
+		}
+	}
+
+	/**
+	 * Generate disabled debug message
+	 */
+	public static function generate_klarna_debug_notice() {
+		return wp_kses_post(
+			sprintf(
+				__(
+					<<<TEXT
+					<strong>Shipping debug mode is not enabled</strong><br>
+					It is recommended to enable debug mode when using Bring Fraktguiden for WooCommerce in combination with Klarna Checkout.
+					Read more about why recommend this action <a href="%s" target="_blank">here</a>.<br>
+					<br>
+					Activate in <a href="%s">plugin settings</a>.
+					TEXT,
+					'bring-fraktguiden-for-woocommerce'
+				),
+				'https://bringfraktguiden.no/docs/debug-mode-with-payment-provider',
+				admin_url() . 'admin.php?page=wc-settings&tab=shipping&section=options#woocommerce_shipping_debug_mode'
+			)
+		);
+	}
+
+	/**
+	 * Add disabled debug message
+	 */
+	public static function add_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_disabled_debug_mode', self::generate_klarna_debug_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove disabled debug message
+	 */
+	public static function remove_klarna_debug_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_disabled_debug_mode' );
+	}
+
+	/**
+	 * Generate missing shipping method notice
+	 */
+	public static function generate_missing_shipping_method_notice() {
+		$messages   = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden shipping method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a shipping method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	 * Add missing shipping method notice
+	 */
+	public static function add_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_method', self::generate_missing_shipping_method_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping method notice
+	 */
+	public static function remove_missing_shipping_method_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_method' );
+	}
+
+	/**
+	 * Generate missing shipping service notice
+	 */
+	public static function generate_missing_shipping_services_notice() {
+		$messages   = [];
+		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = sprintf( __( 'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_general_options_title' );
+
+		return implode( '<br>', $messages );
+	}
+
+	/**
+	 * Add missing shipping service notice
+	 */
+	public static function add_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::add_notice( 'bring_fraktguiden_missing_shipping_services', self::generate_missing_shipping_services_notice(), 'error', false );
+	}
+
+	/**
+	 * Remove missing shipping service notice
+	 */
+	public static function remove_missing_shipping_services_notice() {
+		return Fraktguiden_Admin_Notices::remove_notice( 'bring_fraktguiden_missing_shipping_services' );
 	}
 
 	/**
@@ -143,7 +247,7 @@ class Fraktguiden_Admin_Notices {
 	 * @param string  $key         Key.
 	 * @param string  $message     Message.
 	 * @param string  $type        Type.
-	 * @param boolean $dismissable Dismissable.
+	 * @param boolean|Closure $dismissable Dismissable.
 	 * @return boolean
 	 */
 	public static function update_notice( $key, $message, $type = 'info', $dismissable = true ) {
@@ -170,7 +274,7 @@ class Fraktguiden_Admin_Notices {
 	 * @param string  $key         Key.
 	 * @param string  $message     Message.
 	 * @param string  $type        Type.
-	 * @param boolean $dismissable Dismissable.
+	 * @param boolean|Closure $dismissable Dismissable.
 	 * @return boolean
 	 */
 	public static function add_notice( $key, $message, $type = 'info', $dismissable = true ) {
@@ -185,6 +289,7 @@ class Fraktguiden_Admin_Notices {
 	 * Remove notice
 	 *
 	 * @param string $key Key.
+	 *
 	 * @return boolean
 	 */
 	public static function remove_notice( $key ) {
@@ -267,7 +372,14 @@ class Fraktguiden_Admin_Notices {
 		$dismissed = self::get_dismissed_notices();
 
 		foreach ( self::$notices as $key => $notice ) {
-			if ( $notice['dismissable'] && in_array( $key, $dismissed ) ) {
+			$dismissable = $notice['dismissable'];
+			if (
+				is_callable(
+					$dismissable
+				)
+					? $dismissable()
+					: $dismissable
+				&& in_array( $key, $dismissed ) ) {
 				continue;
 			}
 

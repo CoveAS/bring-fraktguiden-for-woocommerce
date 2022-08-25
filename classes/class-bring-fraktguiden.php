@@ -13,7 +13,7 @@ use Bring_Fraktguiden\Common\Checkout_Modifications;
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.8.8';
+	const VERSION = '1.9.0';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
@@ -25,6 +25,9 @@ class Bring_Fraktguiden {
 			return;
 		}
 		spl_autoload_register( __CLASS__ . '::class_loader' );
+
+		require_once __DIR__.'/../pro/class-bring-fraktguiden-pro.php';
+		Bring_Fraktguiden_Pro::setup();
 
 		$plugin_path = dirname( __DIR__ );
 		if ( ! class_exists( 'Packer' ) ) {
@@ -144,11 +147,6 @@ class Bring_Fraktguiden {
 	public static function add_settings() {
 		$default = Fraktguiden_Helper::get_kco_support_default();
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'enable_kco_support', $default ) ) {
-			require_once 'common/class-fraktguiden-kco-support.php';
-			Fraktguiden_KCO_Support::setup();
-		}
-
 		require_once 'debug/class-fraktguiden-product-debug.php';
 		Fraktguiden_Product_Debug::setup();
 
@@ -248,6 +246,7 @@ class Bring_Fraktguiden {
 		}
 		wp_enqueue_script( 'hash-tables', plugin_dir_url( __DIR__ ) . '/assets/js/jquery.hash-tabs.min.js', [ 'jquery' ], Bring_Fraktguiden::VERSION );
 		wp_enqueue_script( 'bring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
+		wp_enqueue_script( 'mybring-admin-js', plugin_dir_url( __DIR__ ) . '/assets/js/mybring-admin.js', ['jquery'], Bring_Fraktguiden::VERSION, true );
 		wp_enqueue_script( 'bring-settings-js', plugin_dir_url( __DIR__ ) . '/assets/js/bring-fraktguiden-settings.js', [], Bring_Fraktguiden::VERSION, true );
 		wp_localize_script(
 			'bring-admin-js',
