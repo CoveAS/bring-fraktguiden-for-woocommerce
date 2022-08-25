@@ -1,12 +1,15 @@
 == Changelog ==
 
-= 1.8.9 =
+= 1.9.0 =
+
 * Added bag on door support for mailbox method
+* Added setting to choose which type of pickup points to use
 * Added individual verification and id verification value added service
 * Added setting to enable booking for orders that does not use a bring shipping method
 * Added bring product select box to booking items
 * Added validation for booking settings
 * Upgraded vuejs from version 2 to 3
+* Fixed test-mode setting to allow PRO features to be used without a license on test-sites
 
 = 1.8.8 =
 
