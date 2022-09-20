@@ -66,6 +66,34 @@ return [
 			],
 		],
 	],
+	'mailbox_new'      => [
+		'title'    => __( 'Mailbox', 'bring-fraktguiden-for-woocommerce' ),
+		'expanded' => true,
+		'services' => [
+			'3570' => [
+				'ProductCode' => '3584',
+				'class'       => 'warning',
+				'productName' => 'Pakke i postkassen (sporbar)',
+				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
+				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
+				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ),
+				'oldcode'     => 'PAKKE_I_POSTKASSEN_SPORBAR',
+			],
+			'3584' => [
+				'ProductCode' => '3570',
+				'productName' => 'Pakke i postkassen',
+				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
+				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
+				'oldcode'     => 'PAKKE_I_POSTKASSEN',
+			],
+		],
+	],
 	'old'          => [
 		'title'    => __( 'Services', 'bring-fraktguiden-for-woocommerce' ),
 		'expanded' => true,
@@ -97,34 +125,6 @@ return [
 				'helptext'    => '',
 				'deprecated'  => false,
 				'pickuppoint' => false,
-			],
-		],
-	],
-	'mailbox_new'      => [
-		'title'    => __( 'Mailbox (new)', 'bring-fraktguiden-for-woocommerce' ),
-		'expanded' => true,
-		'services' => [
-			'3570' => [
-				'ProductCode' => '3584',
-				'class'       => 'warning',
-				'productName' => 'Pakke i postkassen (sporbar)',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
-				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ),
-				'oldcode'     => 'PAKKE_I_POSTKASSEN_SPORBAR',
-			],
-			'3584' => [
-				'ProductCode' => '3570',
-				'productName' => 'Pakke i postkassen',
-				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 2 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
-				'deprecated'  => false,
-				'pickuppoint' => false,
-				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
-				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ),
-				'oldcode'     => 'PAKKE_I_POSTKASSEN',
 			],
 		],
 	],
@@ -233,6 +233,20 @@ return [
 			'PICKUP_PARCEL'              => [
 				'ProductCode' => '0340',
 				'productName' => 'PickUp Parcel',
+				'description' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
+				'helptext'    => 'PickUp Parcel leveres til mottakers lokale hentested. Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+			],
+
+			/**
+			 * PickUp Parcel
+			 * Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.
+			 * For shipments to Denmark, PICKUP_PARCEL needs to be ordered with the “PICKUP_POINT” additional service to send as a low-cost delivery from Bring’s parcel shops or parcel lockers. Otherwise the shipment will be sent as a more expensive home delivery.
+			 */
+			'PICKUP_PARCEL_BULK'              => [
+				'ProductCode' => '0342',
+				'productName' => 'PickUp Parcel Bulk',
 				'description' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
 				'helptext'    => 'PickUp Parcel leveres til mottakers lokale hentested. Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,

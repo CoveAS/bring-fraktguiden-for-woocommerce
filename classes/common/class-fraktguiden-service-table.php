@@ -106,7 +106,7 @@ class Fraktguiden_Service_Table {
 		];
 		$title = $this->title;
 		ob_start();
-		require dirname( dirname( __DIR__ ) ) . '/templates/service-field.php';
+		require dirname(__DIR__, 2). '/templates/service-field.php';
 		return ob_get_clean();
 	}
 }
