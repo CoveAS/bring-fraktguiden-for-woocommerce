@@ -126,7 +126,7 @@ class Fraktguiden_Pickup_Point
 		$screen = get_current_screen();
 
 		// Only for order edit screen.
-		if ('shop_order' !== $screen->id) {
+		if ('shop_order' !== $screen->id && 'shop_subscription' !== $screen->id) {
 			return;
 		}
 
