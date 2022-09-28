@@ -1,6 +1,6 @@
 === Bring Fraktguiden for WooCommerce ===
 Author: Cove AS
-Author URI: https://cove.no/
+Author URI: https://bringfraktguiden.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
