@@ -261,19 +261,10 @@ class Checkout_Modifications {
 			return;
 		}
 
-		$service_key         = (new WC_Shipping_Method_Bring())->get_field_key( 'services' );
-		$bag_on_door = false;
-		foreach ($current_shipping_method as $shipping_method_key) {
-			$parts = explode(':', $shipping_method_key);
-			$bring_product = array_pop($parts);
-			if ( Fraktguiden_Service::vas_for( $service_key, $bring_product, ['1081'] ) ) {
-				$bag_on_door = true;
-				break;
-			}
-		}
-		if (! $bag_on_door) {
+		if ( ! self::is_bag_on_door_enabled( $current_shipping_method ) ) {
 			return;
 		}
+
 		$label = esc_html__(
 			"Deliver the package in a bag on my door if it doesn't fit in the mailbox",
 			'bring-fraktguiden-for-woocommerce'
@@ -341,14 +332,20 @@ class Checkout_Modifications {
 	 * Bag on door option for Klarna checkout
 	 */
 	public static function kco_bag_on_door_consent(array $additional_checkboxes ) {
-		$chosen_shipping_method = WC()->session->get( 'chosen_shipping_methods' )[0] ;
-		if (
-			$chosen_shipping_method !== 'bring_fraktguiden:3584'
-			&& $chosen_shipping_method !== 'bring_fraktguiden:3570'
-		) {
+		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
+
+		if ( empty($current_shipping_method)
+			|| ! (
+				in_array( 'bring_fraktguiden:3584', $current_shipping_method )
+				|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
+			)
+			) {
 			return $additional_checkboxes;
 		}
 
+		if ( ! self::is_bag_on_door_enabled( $current_shipping_method ) ) {
+			return $additional_checkboxes;
+		}
 		$additional_checkboxes[] = array(
 			'id'       => 'klarna_bag_on_door_consent',
 			'text'     => __( "Deliver the package in a bag on my door if it doesn't fit in the mailbox", 'bring-fraktguiden-for-woocommerce' ),
@@ -357,5 +354,18 @@ class Checkout_Modifications {
 		);
 
 		return $additional_checkboxes;
+	}
+
+	private static function is_bag_on_door_enabled( array $current_shipping_method ): bool
+	{
+		$service_key  = (new WC_Shipping_Method_Bring())->get_field_key( 'services' );
+		foreach ($current_shipping_method as $shipping_method_key) {
+			$parts = explode(':', $shipping_method_key);
+			$bring_product = array_pop($parts);
+			if ( Fraktguiden_Service::vas_for( $service_key, $bring_product, ['1081'] ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
