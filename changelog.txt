@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.9.1 =
+
+* Improved support for WooCommerce subscriptions
+* Fixed a bug where bag on door checkbox on checkout would show even if the option had not been enabled
+
 = 1.9.0 =
 
 * Added bag on door support for mailbox method

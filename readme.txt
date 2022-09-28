@@ -9,7 +9,7 @@ Tested up to: 6.0.1
 Requires PHP: 8.0
 WC requires at least: 4.8.0
 WC tested up to: 6.7.0
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -64,7 +64,12 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.8.9 =
+= 1.9.1 =
+
+* Improved support for WooCommerce subscriptions
+* Fixed a bug where bag on door checkbox on checkout would show even if the option had not been enabled
+
+= 1.9.0 =
 
 * Added bag on door support for mailbox method
 * Added individual verification and id verification value added service

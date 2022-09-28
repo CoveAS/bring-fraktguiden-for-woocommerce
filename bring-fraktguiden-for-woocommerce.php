@@ -6,7 +6,7 @@
  * Author:              Cove AS
  * Author URI:          https://cove.no/
  *
- * Version:             1.9.0
+ * Version:             1.9.1
  * Requires at least:   5.6.0
  * Tested up to:        6.0.1
  *
