@@ -3,6 +3,10 @@
 namespace Bring_Fraktguiden\Common;
 
 use Bring_Fraktguiden\Factories\Alternative_Delivery_Date_Factory;
+use Bring_Fraktguiden\VAS;
+use Bring_Fraktguiden\VAS_Checkbox;
+use Fraktguiden_Service;
+use WC_Shipping_Method_Bring;
 
 /**
  * Checkout Modifications
@@ -254,6 +258,20 @@ class Checkout_Modifications {
 			|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
 			)
 		|| WC()->session->get('chosen_payment_method') === 'kco' ) {
+			return;
+		}
+
+		$service_key         = (new WC_Shipping_Method_Bring())->get_field_key( 'services' );
+		$bag_on_door = false;
+		foreach ($current_shipping_method as $shipping_method_key) {
+			$parts = explode(':', $shipping_method_key);
+			$bring_product = array_pop($parts);
+			if ( Fraktguiden_Service::vas_for( $service_key, $bring_product, ['1081'] ) ) {
+				$bag_on_door = true;
+				break;
+			}
+		}
+		if (! $bag_on_door) {
 			return;
 		}
 		$label = esc_html__(
