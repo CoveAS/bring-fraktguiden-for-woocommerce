@@ -274,47 +274,73 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		$consignment['product']['additionalServices'] = [];
 		$electronic_notification = filter_input( INPUT_POST, '2084', FILTER_VALIDATE_BOOLEAN );
-		$evarsling = ( $this->service ? $this->service->vas_match( [ '2084', 'EVARSLING' ] ) : false );
-		if (
-			$evarsling
-			&& ($electronic_notification || $is_bulk)
-		) {
-			$consignment['product']['additionalServices'][] = [
-				'id'     => $evarsling,
-				'email'  => $recipient_address['contact']['email'],
-				'mobile' => $recipient_address['contact']['phoneNumber'],
-			];
 
-		}
+		if ( $this->service ) {
+			$vas_code = '2084';
+			if ( $this->service->has_vas( 'EVARSLING' ) ) {
+				$vas_code = 'EVARSLING';
+			}
+			if (
+				(
+					$this->service->has_vas( '2084' )
+					&& $electronic_notification
+				)
+				|| (
+					$is_bulk
+					&& $this->service->vas_match( ['2084', 'EVARSLING'] )
+				)
+			) {
+				$consignment['product']['additionalServices'][] = [
+					'id'     => $vas_code,
+					'email'  => $recipient_address['contact']['email'],
+					'mobile' => $recipient_address['contact']['phoneNumber'],
+				];
+			}
 
-		// Bag on door option
-		$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
-		if (
-			$this->service
-			&& $this->service->has_vas( '1081' )
-			&& ($bag_on_door_consent || $is_bulk)
-		) {
-			$consignment['product']['additionalServices'][] = ['id' => '1081'];
-		}
+			// Bag on door option
+			$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
+			if (
+				(
+					$this->service->has_vas( '1081' )
+					&& $bag_on_door_consent
+				)
+				|| (
+					$is_bulk
+					&& $this->service->vas_match( ['1081'] )
+				)
+			) {
+				$consignment['product']['additionalServices'][] = ['id' => '1081'];
+			}
 
-		// ID verification
-		$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
-		if (
-			$this->service
-			&& $this->service->has_vas( '1133' )
-			&& ($id_verification_checked || $is_bulk)
-		) {
-			$consignment['product']['additionalServices'][] = ['id' => '1133'];
-		}
+			// ID verification
+			$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
+			if (
+				(
+					$this->service->has_vas( '1133' )
+					&& $id_verification_checked
+				)
+				|| (
+					$is_bulk
+					&& $this->service->vas_match( ['1133'] )
+				)
+			) {
+				$consignment['product']['additionalServices'][] = ['id' => '1133'];
+			}
 
-		// Personal delivery option
-		$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
-		if (
-			$this->service
-			&& $this->service->has_vas( '1134' )
-			&& ($individual_verification_checked || $is_bulk)
-		) {
-			$consignment['product']['additionalServices'][] = ['id' => '1134'];
+			// Personal delivery option
+			$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
+			if (
+				(
+					$this->service->has_vas( '1134' )
+					&& $individual_verification_checked
+				)
+				|| (
+					$is_bulk
+					&& $this->service->vas_match( ['1134'] )
+				)
+			) {
+				$consignment['product']['additionalServices'][] = ['id' => '1134'];
+			}
 		}
 
 		return $consignment;
