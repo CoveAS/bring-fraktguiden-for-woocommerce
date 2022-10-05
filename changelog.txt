@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.9.2 =
+
+* Fixed a bug where the customer number would not be included in API requests
+
 = 1.9.1 =
 
 * Improved support for WooCommerce subscriptions
