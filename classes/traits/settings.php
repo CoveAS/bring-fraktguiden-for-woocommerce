@@ -670,7 +670,7 @@ trait Settings {
 		$params            = $this->create_standard_url_params();
 		$params['product'] = 'SERVICEPAKKE';
 		$params['weight']  = 100;
-		$response          = $request->get( self::SERVICE_URL, $params );
+		$response          = $request->getWithCustomerNumber( self::SERVICE_URL, $params );
 
 		if ( 200 !== $response->status_code ) {
 			$this->mybring_error( $response->body );

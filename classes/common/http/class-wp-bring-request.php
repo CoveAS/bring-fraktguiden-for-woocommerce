@@ -40,6 +40,15 @@ class WP_Bring_Request {
 
 		return new WP_Bring_Response( $result );
 	}
+	public function getWithCustomerNumber( $url, $params = [], $options = [] ) {
+		$url     = $this->build_url( $url, $params );
+		$options = $this->merge_options( $options );
+		$options = $this->add_authentication( $options );
+		$url     = $this->add_customer_number($url);
+		$result  = wp_remote_get( $url, $options );
+
+		return new WP_Bring_Response( $result );
+	}
 
 	/**
 	 * Post

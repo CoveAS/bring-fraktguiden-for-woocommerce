@@ -228,7 +228,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return int
 	 */
 	public function calculate_excl_vat( $line_price ) {
-		
+
 		$line_price = floatval( $line_price );
 
 		if ( $line_price && wc_prices_include_tax() ) {
@@ -410,7 +410,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Make the request.
 		$request  = new WP_Bring_Request();
-		$response = $request->get( $url, [], $options );
+		$response = $request->getWithCustomerNumber( $url, [], $options );
 
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );
