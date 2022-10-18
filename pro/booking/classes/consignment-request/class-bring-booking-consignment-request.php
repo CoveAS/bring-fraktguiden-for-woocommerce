@@ -298,15 +298,18 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			}
 
 			// Bag on door option
-			$bag_on_door_consent = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
+			$bag_on_door_checked = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
+			$bag_on_door_consent = get_post_meta( $this->adapter->order->get_id(), '_bag_on_door_consent', true );
+
 			if (
 				(
 					$this->service->has_vas( '1081' )
-					&& $bag_on_door_consent
+					&& $bag_on_door_checked
 				)
 				|| (
 					$is_bulk
 					&& $this->service->vas_match( ['1081'] )
+					&& $bag_on_door_consent
 				)
 			) {
 				$consignment['product']['additionalServices'][] = ['id' => '1081'];
