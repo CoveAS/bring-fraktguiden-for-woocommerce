@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.9.3 =
+
+* Fixed a bug where all value added services would always be used with bulk booking
+
 = 1.9.2 =
 
 * Fixed a bug where the customer number would not be included in API requests
