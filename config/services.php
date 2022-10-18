@@ -238,6 +238,13 @@ return [
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
+			'HOME_DELIVERY_PARCEL' => [
+				'ProductCode' => '0349',
+				'productName' => 'Home Delivery Parcel',
+				'helptext' => 'Parcels will be delivered between 8 a.m. - 5 p.m. or 5 p.m. - 9 p.m., based on the geographical location in the country.',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+			],
 
 			/**
 			 * PickUp Parcel
