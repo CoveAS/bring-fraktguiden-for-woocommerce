@@ -3,6 +3,7 @@
 = 1.9.3 =
 
 * Fixed a bug where all value added services would always be used with bulk booking
+* Added Home delivery parcel to available services
 
 = 1.9.2 =
 
