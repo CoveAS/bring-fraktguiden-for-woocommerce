@@ -537,7 +537,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				$field_key = $this->get_field_key( 'services' );
 				$service   = \Fraktguiden_Service::find( $field_key, $bring_product );
 				if ( ! $service->settings['custom_price_cb'] ) {
-					$this->add_trace_messages( [ 'No price override provided for ' . $service_details['id'] ] );
+					$this->add_trace_messages( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
 					continue;
 				}
 				$service_price = [
