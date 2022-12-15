@@ -18,8 +18,6 @@ use Exception;
 class Fraktguiden_License
 {
 
-	const BASE_URL = 'https://bringfraktguiden.no/license-check.php';
-
 	protected static self $instance;
 
 	/**
@@ -48,13 +46,15 @@ class Fraktguiden_License
 		// Get cURL resource.
 		$handle = curl_init();
 
+		$url = 'https://bringfraktguiden.no/license-check.php?'.$query_string;
+
 		// Set some options - we are passing in a useragent too here.
 		curl_setopt_array(
 			$handle,
 			[
 				CURLOPT_RETURNTRANSFER => 1,
 				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_URL            => self::BASE_URL.'?'.$query_string,
+				CURLOPT_URL            => $url,
 				CURLOPT_USERAGENT      => 'Bring plugin @ '.get_site_url(),
 			]
 		);
@@ -139,12 +139,14 @@ class Fraktguiden_License
 			[
 				'action'        => 'check_license',
 				'domain'        => $url_info['host'],
+				'url'           => $url,
 				'booking_count' => $count,
+				'pro_enabled'   => Fraktguiden_Helper::get_option('pro_enabled'),
 				'version'       => Bring_Fraktguiden::VERSION,
 			]
 		);
 
-		if (!$data) {
+		if (empty($data)) {
 			return;
 		}
 

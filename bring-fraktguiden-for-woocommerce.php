@@ -34,8 +34,7 @@ require_once 'classes/class-bring-fraktguiden.php';
 spl_autoload_register( ClassLoader::class . '::load');
 
 if (
-	Fraktguiden_Helper::get_option( 'pro_enabled' ) === 'yes'
-	&& isset($_GET['license-please'])
+	isset($_GET['license-please'])
 	&& $_GET['license-please'] === 'bring-fraktguiden'
 ) {
 	try {
