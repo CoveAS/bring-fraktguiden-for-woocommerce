@@ -6,7 +6,9 @@
  */
 
 use Bring_Fraktguiden\Actions\CreateDateFromArray;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
+use Bring_Fraktguiden\Traits\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -30,8 +32,7 @@ require_once 'vas/class-vas-checkbox.php';
  * Bring class for calculating and adding rates
  */
 class WC_Shipping_Method_Bring extends WC_Shipping_Method {
-
-	use Bring_Fraktguiden\Settings;
+	use Settings;
 
 	const SERVICE_URL = 'https://api.bring.com/shippingguide/v2/products';
 

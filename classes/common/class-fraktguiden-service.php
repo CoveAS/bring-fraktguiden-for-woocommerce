@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
 /**
  * Fraktguiden_Service class
  */
@@ -54,8 +56,6 @@ class Fraktguiden_Service {
 
 	/**
 	 * Value Added Services
-	 *
-	 * @var Fraktguiden_VAS
 	 */
 	public $vas = null;
 
@@ -114,9 +114,9 @@ class Fraktguiden_Service {
 	 * @return array
 	 */
 	public static function all( $service_key = 'woocommerce_bring_fraktguiden_services', $only_selected = false ) {
-		$selected         = \Fraktguiden_Helper::get_option( 'services' );
+		$selected         = Fraktguiden_Helper::get_option( 'services' );
 		$selected_post    = filter_input( INPUT_POST, $service_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-		$services_data    = \Fraktguiden_Helper::get_services_data();
+		$services_data    = Fraktguiden_Helper::get_services_data();
 		$services         = [];
 		$services_options = get_option( $service_key . '_options' );
 		if ( ! empty( $selected_post ) ) {
@@ -275,10 +275,6 @@ class Fraktguiden_Service {
 
 	/**
 	 * Get name by index
-	 *
-	 * @param string|int $index Index.
-	 *
-	 * @return string
 	 */
 	public function get_settings_array() {
 		$result      = [];
@@ -312,7 +308,8 @@ class Fraktguiden_Service {
 	 *
 	 * @return string
 	 */
-	public function get_name_by_index( $index = '' ) {
+	public function get_name_by_index( $index = '' ): string
+	{
 		if ( empty( $this->service_data[ $index ] ) ) {
 			// Return default name as fallback.
 			return $this->service_data['productName'];
@@ -328,7 +325,7 @@ class Fraktguiden_Service {
 	 *
 	 * @return string|boolean VAS Code or false if not matched.
 	 */
-	public function vas_match( $vas_codes ) {
+	public function vas_match( array $vas_codes ) {
 		foreach ( $this->vas as $vas ) {
 			if ( in_array( $vas->code, $vas_codes, true ) ) {
 				if ( ! $vas->value ) {
@@ -347,7 +344,8 @@ class Fraktguiden_Service {
 	 *
 	 * @return boolean VAS Code or false if not matched.
 	 */
-	public function has_vas( $vas_code ) {
+	public function has_vas( $vas_code ): bool
+	{
 		foreach ( $this->vas as $vas ) {
 			if ( $vas->code === $vas_code ) {
 				return true;

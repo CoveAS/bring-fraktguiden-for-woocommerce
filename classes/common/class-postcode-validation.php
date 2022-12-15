@@ -7,6 +7,8 @@
 
 namespace Bring_Fraktguiden;
 
+use WP_Error;
+
 /**
  * Postcode_Validation class
  */
@@ -28,7 +30,7 @@ class Postcode_Validation {
 	 *
 	 * @return WP_Error|array The response or WP_Error on failure.
 	 */
-	public static function get_postcode_information( $postcode, $country ) {
+	public static function get_postcode_information( string $postcode, string $country ) {
 		$params = [
 			'body' => [
 				'clientUrl' => get_site_url(),
@@ -49,7 +51,8 @@ class Postcode_Validation {
 	 *
 	 * @return boolean Valid postcode.
 	 */
-	public static function validate_postcode( $valid, $postcode, $country ) {
+	public static function validate_postcode( $valid, $postcode, $country ): bool
+	{
 
 		$valid_countries = [ 'NO' ];
 

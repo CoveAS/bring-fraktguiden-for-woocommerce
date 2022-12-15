@@ -3,6 +3,8 @@
 namespace Bring_Fraktguiden\Common;
 
 use DateTime;
+use Exception;
+use WC_Shipping_Rate;
 
 /**
  * Checkout Modifications
@@ -18,7 +20,9 @@ class Rate_Eta {
 	/**
 	 * Add opening hours to a full label
 	 *
-	 * @param \WC_Shipping_Rate $rate Shipping rate.
+	 * @param WC_Shipping_Rate $rate Shipping rate.
+	 *
+	 * @throws Exception
 	 */
 	public static function add_estimated_delivery_date( $rate ) {
 		$meta_data = $rate->get_meta_data();

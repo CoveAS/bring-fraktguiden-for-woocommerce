@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace Bring_Fraktguiden\Debug;
+
 /**
  * Fraktguiden Product Debug
  */
@@ -34,7 +36,7 @@ class Fraktguiden_Product_Debug {
 		}
 
 		add_meta_box(
-			'bring_fraktguiden_product_tester',
+			'BringFraktguidenProduct_tester',
 			__( 'Bring Fraktguiden Product Tester', 'bring-fraktguiden-for-woocommerce' ),
 			__CLASS__ . '::layout_of_meta_box_content'
 		);

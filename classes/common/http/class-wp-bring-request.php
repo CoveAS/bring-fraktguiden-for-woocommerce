@@ -6,6 +6,8 @@
  */
 
 // Load WP_Bring_Response class.
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
 require_once 'class-wp-bring-response.php';
 
 /**

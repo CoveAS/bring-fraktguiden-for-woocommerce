@@ -5,18 +5,12 @@
  * @package Bring_Fraktguiden
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-
-if ( ! class_exists( 'Fraktguiden_Helper' ) ) {
-	require_once 'classes/common/class-fraktguiden-helper.php';
-}
+namespace Bring_Fraktguiden\Common;
 
 /**
  *  Fraktguiden_System_Info class
  */
-class Fraktguiden_System_Info {
+class FraktguidenSystemInfo {
 
 	/**
 	 * Generate

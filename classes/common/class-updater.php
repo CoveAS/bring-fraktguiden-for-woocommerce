@@ -7,6 +7,9 @@
 
 namespace Bring_Fraktguiden;
 
+use Bring_Fraktguiden;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
 /**
  * Updater class
  */
@@ -16,18 +19,18 @@ class Updater {
 	 * Setup.
 	 */
 	public static function setup( $service_key ) {
-		$installed_version = \Fraktguiden_Helper::get_option( 'version_updater' );
+		$installed_version = Fraktguiden_Helper::get_option( 'version_updater' );
 
-		if ( $installed_version == \Bring_Fraktguiden::VERSION ) {
+		if ( $installed_version == Bring_Fraktguiden::VERSION ) {
 			return;
 		}
 
 		if ( 0 < version_compare( '1.6.8', $installed_version ) ) {
 			// do something...
-			if ( 'yes' === \Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
-				$limit =  \Fraktguiden_Helper::get_option( 'pickup_point_limit' );
+			if ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
+				$limit =  Fraktguiden_Helper::get_option( 'pickup_point_limit' );
 
-				$services_data    = \Fraktguiden_Helper::get_services_data();
+				$services_data    = Fraktguiden_Helper::get_services_data();
 				$services         = [];
 				$services_options = get_option( $service_key . '_options' );
 
@@ -58,7 +61,7 @@ class Updater {
 				update_option( $service_key . '_options', $services_options );
 			}
 		}
-		\Fraktguiden_Helper::update_option( 'version_updater', \Bring_Fraktguiden::VERSION );
+		Fraktguiden_Helper::update_option( 'version_updater', \Bring_Fraktguiden::VERSION );
 	}
 
 	public static function updates_for_version( $version ) {

@@ -2,7 +2,7 @@
 
 namespace Bring_Fraktguiden\Sanitizers;
 
-use PHPMailer\PHPMailer\Exception;
+use Exception;
 
 /**
  * Class Fraktguiden_Helper
@@ -21,7 +21,7 @@ class Sanitize_Alternative_Delivery_Dates {
 		foreach ( $alternative_delivery_dates as $item ) {
 			try {
 				$item = self::sanitize_item( $item );
-			} catch ( \Exception $e ) {
+			} catch ( Exception $e ) {
 				// @TODO: Log the error
 				continue;
 			}
@@ -33,23 +33,23 @@ class Sanitize_Alternative_Delivery_Dates {
 
 	protected static function sanitize_digit( $digit ) {
 		if ( ! ctype_digit( $digit ) && ! is_int( $digit ) ) {
-			throw new \Exception( 'Digit was not a number' );
+			throw new Exception( 'Digit was not a number' );
 		}
 		return intval( $digit );
 	}
 
 	protected static function sanitize_item( $item ) {
 		if ( ! isset( $item['workingDays'] ) ) {
-			throw new \Exception( 'workingDays should not be empty' );
+			throw new Exception( 'workingDays should not be empty' );
 		}
 		if ( ! isset( $item['shippingDate'] ) ) {
-			throw new \Exception( 'shippingDate should not be empty' );
+			throw new Exception( 'shippingDate should not be empty' );
 		}
 		if ( ! isset( $item['formattedExpectedDeliveryDate'] ) ) {
-			throw new \Exception( 'formattedExpectedDeliveryDate must be set' );
+			throw new Exception( 'formattedExpectedDeliveryDate must be set' );
 		}
         if ( ! isset( $item['expectedDeliveryDate'] ) ) {
-			throw new \Exception( 'expectedDeliveryDate must be set' );
+			throw new Exception( 'expectedDeliveryDate must be set' );
 		}
 		$sanitized_item = [
 			'workingDays' => self::sanitize_digit( $item['workingDays'] ?? '' ),
@@ -62,10 +62,10 @@ class Sanitize_Alternative_Delivery_Dates {
 
 	protected static function sanitize_formatted_date( $date ) {
 		if ( ! is_string( $date ) ) {
-			throw new \Exception( 'Formatted date must be string' );
+			throw new Exception( 'Formatted date must be string' );
 		}
 		if ( ! preg_match( '/^\d{2}\.\d{2}\.\d{4}$/', $date ) ) {
-			throw new \Exception( 'Formatted date has incorrect format' );
+			throw new Exception( 'Formatted date has incorrect format' );
 		}
 		return $date;
 	}
@@ -73,13 +73,13 @@ class Sanitize_Alternative_Delivery_Dates {
 	protected static function sanitize_date( $date, $with_time_slots ) {
 
 		if ( empty( $date['year'] ) ) {
-			throw new \Exception( 'Date must contain year' );
+			throw new Exception( 'Date must contain year' );
 		}
 		if ( empty( $date['month'] ) ) {
-			throw new \Exception( 'Date must contain month' );
+			throw new Exception( 'Date must contain month' );
 		}
 		if ( empty( $date['day'] ) ) {
-			throw new \Exception( 'Date must contain day' );
+			throw new Exception( 'Date must contain day' );
 		}
 		$sanitized_item = [
           'year' => self::sanitize_digit( $date['year'] ),
@@ -97,7 +97,7 @@ class Sanitize_Alternative_Delivery_Dates {
 
 	protected static function sanitize_time_slots( $slots ) {
 		if ( ! is_array( $slots ) ) {
-			throw new \Exception( 'Time slots was not an array' );
+			throw new Exception( 'Time slots was not an array' );
 		}
 		$sanitized_slots = [];
 		foreach ( $slots as $slot ) {
@@ -106,12 +106,15 @@ class Sanitize_Alternative_Delivery_Dates {
 		return $sanitized_slots;
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	protected static function sanitize_time_slot( $slot ) {
 		if ( empty( $slot['startTime'] ) ) {
-			throw new \Exception( 'Time slots must contain startTime' );
+			throw new Exception( 'Time slots must contain startTime' );
 		}
 		if ( empty( $slot['endTime'] ) ) {
-			throw new \Exception( 'Time slots must contain endTime' );
+			throw new Exception( 'Time slots must contain endTime' );
 		}
 		$sanitized_slot = [
 			'startTime' => [

@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace Bring_Fraktguiden\Debug;
+
 /**
  * Fraktguiden Order Debug
  */

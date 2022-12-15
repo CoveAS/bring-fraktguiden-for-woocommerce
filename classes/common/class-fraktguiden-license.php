@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace Bring_Fraktguiden\Common;
+
 /**
  * Fraktguiden_License class
  */
@@ -87,7 +89,7 @@ class Fraktguiden_License {
 	 * @return boolean
 	 */
 	public function valid() {
-		$valid = get_option( 'bring_fraktguiden_pro_valid_to' );
+		$valid = get_option( 'BringFraktguidenPro_valid_to' );
 
 		if (! ctype_digit($valid)) {
 			return false;
@@ -152,7 +154,7 @@ class Fraktguiden_License {
 		$valid = (int) $data['data']['license']['valid_to'];
 
 		if ( $valid > 0 ) {
-			update_option( 'bring_fraktguiden_pro_valid_to', $valid );
+			update_option( 'BringFraktguidenPro_valid_to', $valid );
 		}
 	}
 

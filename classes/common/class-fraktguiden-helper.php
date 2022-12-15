@@ -5,6 +5,10 @@
  * @package Bring_Fraktguiden
  */
 
+namespace Bring_Fraktguiden\Common;
+
+use WC_Shipping_Zones;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -78,7 +82,7 @@ class Fraktguiden_Helper {
 			$pro_allowed = ( $days >= 0 ) || self::valid_license() || $ignore_license;
 
 			if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-				return isset( $_POST['woocommerce_bring_fraktguiden_pro_enabled'] ) && $pro_allowed;
+				return isset( $_POST['woocommerce_BringFraktguidenPro_enabled'] ) && $pro_allowed;
 			}
 		}
 
@@ -511,11 +515,10 @@ class Fraktguiden_Helper {
 
 	/**
 	 * Get pretty-printed shipping methods
-	 *
-	 * @return array
 	 */
-	public static function get_shipping_methods() {
-		if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
+	public static function get_shipping_methods(): array
+	{
+		if ( ! class_exists( WC_Shipping_Zones::class ) ) {
 			return [];
 		}
 

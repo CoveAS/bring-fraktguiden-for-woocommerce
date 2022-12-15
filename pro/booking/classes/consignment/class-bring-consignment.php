@@ -42,13 +42,7 @@ abstract class Bring_Consignment {
 
 				$consignments[] = new Bring_Booking_Consignment( $order_id, $item );
 			}
-		} elseif ( isset( $body['data'] ) ) {
-			foreach ( $body['data']['attributes']['packages'] as $item ) {
-				// Build the mailbox consignments.
-				$consignments[] = new Bring_Mailbox_Consignment( $order_id, $item, $body['data'] );
-			}
 		}
-
 		return $consignments;
 	}
 

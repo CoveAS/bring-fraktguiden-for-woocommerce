@@ -12,8 +12,6 @@ class Fraktguiden_Service_Table {
 
 	/**
 	 * Shipping method
-	 *
-	 * @var string
 	 */
 	protected $shipping_method;
 
@@ -23,7 +21,7 @@ class Fraktguiden_Service_Table {
 	 *
 	 * @var string
 	 */
-	protected $title;
+	protected string $title;
 
 	/**
 	 * Construct

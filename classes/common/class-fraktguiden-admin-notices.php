@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace Bring_Fraktguiden\Common;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }

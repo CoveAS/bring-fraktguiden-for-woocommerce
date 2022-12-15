@@ -5,13 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
-namespace Bring_Fraktguiden_Pro\Booking\Actions;
+namespace BringFraktguidenPro\Booking\Actions;
 
-use Bring_Booking_Consignment_Request;
-use Bring_Fraktguiden\VAS;
-use Bring_WC_Order_Adapter;
-use Exception;
-use Fraktguiden_Helper;
 use Fraktguiden_Service;
 
 if ( ! defined( 'ABSPATH' ) ) {
