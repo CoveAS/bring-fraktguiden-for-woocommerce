@@ -42,19 +42,6 @@ class ClassLoader
 				return;
 			}
 		}
-		ray($suggestions)->red();
-
-		foreach ($suggestions as $suggestion) {
-			$fileName = array_pop($suggestion);
-			$dir      = ($pro ? dirname(__DIR__).'/pro' : __DIR__).'/'.implode('/', $suggestion);
-			if (substr($dir, -1) === '/') {
-				// Remove trailing slash
-				$dir = substr($dir, 0, -1);
-			}
-
-			ray("{$dir}/{$fileName}.php");
-		}
-		ray()->pause();
 	}
 
 	private static function getDashed(array $parts): array

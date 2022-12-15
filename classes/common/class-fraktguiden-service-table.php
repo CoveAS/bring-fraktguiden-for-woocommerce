@@ -7,6 +7,9 @@
 
 namespace BringFraktguiden\Common;
 
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
+
 /**
  * Fraktguiden_Service_Table class
  */

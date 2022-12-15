@@ -6,14 +6,15 @@ use Bring_Fraktguiden;
 
 class Styles
 {
-	public static function setup()
+	public static function setup(): void
 	{
 		add_action( 'wp_enqueue_scripts', __CLASS__ . '::enqueue_styles' );
 	}
 	/**
 	 * Enqueue styles
 	 */
-	public static function enqueue_styles() {
+	public static function enqueue_styles(): void
+	{
 		// Do not load styles on any page except cart and checkout.
 		if ( ! is_cart() && ! is_checkout() ) {
 			return;

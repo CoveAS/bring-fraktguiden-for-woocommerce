@@ -37,6 +37,9 @@ class Bring_Booking_Customer {
 		return $result;
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	private static function get_customer_numbers_from_api(): array
 	{
 		$args = [
@@ -53,7 +56,7 @@ class Bring_Booking_Customer {
 		$response = $request->get( self::CUSTOMERS_URL, array(), $args );
 
 		if ( $response->has_errors() ) {
-			throw new Exception( $response->get_body() );
+			throw new Exception( implode("\n", $response->get_errors()) );
 		}
 
 		$result = [];

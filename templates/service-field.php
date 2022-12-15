@@ -4,6 +4,9 @@
  *
  * @package Bring_Fraktguiden
  */
+
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
 ?>
 	<tr valign="top">
 		<th scope="row" class="titledesc">

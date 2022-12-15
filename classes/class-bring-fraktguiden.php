@@ -14,6 +14,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_License;
 use Bring_Fraktguiden\Common\FraktguidenSystemInfo;
 use Bring_Fraktguiden\Common\Rate_Eta;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
+use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguidenPro\BringFraktguidenPro;
 use BringFraktguidenPro\PickupPoint\Fraktguiden_Pick_Up_Point_Enhancement;
@@ -44,6 +45,7 @@ class Bring_Fraktguiden {
 		require_once 'class-wc-shipping-method-bring.php';
 
 		Fraktguiden_Admin_Notices::init();
+		Scripts::setup();
 
 		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
 
