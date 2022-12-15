@@ -82,7 +82,7 @@ class Fraktguiden_Helper {
 			$pro_allowed = ( $days >= 0 ) || self::valid_license() || $ignore_license;
 
 			if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-				return isset( $_POST['woocommerce_BringFraktguidenPro_enabled'] ) && $pro_allowed;
+				return isset( $_POST['woocommerce_bring_fraktguiden_enabled'] ) && $pro_allowed;
 			}
 		}
 

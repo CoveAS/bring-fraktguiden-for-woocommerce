@@ -11,6 +11,7 @@ use Bring_Fraktguiden\Common\Checkout_Modifications;
 use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
+use Bring_Fraktguiden\Common\FraktguidenSystemInfo;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguidenPro\BringFraktguidenPro;
@@ -31,8 +32,6 @@ class Bring_Fraktguiden {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
-		require_once __DIR__ . '/ClassLoader.php';
-		spl_autoload_register( ClassLoader::class . '::load');
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname( __DIR__ );
@@ -83,7 +82,7 @@ class Bring_Fraktguiden {
 		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
 
 		// Check the license when PRO version is activated.
-		if ( filter_input( INPUT_POST, 'woocommerce_BringFraktguidenPro_enabled' ) ) {
+		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_enabled' ) ) {
 			$license = Fraktguiden_License::get_instance();
 			$license->check_license();
 		}
@@ -119,14 +118,13 @@ class Bring_Fraktguiden {
 	 * Get system info page
 	 */
 	public static function get_system_info_page() {
-		require_once dirname( __DIR__ ) . '/system-info-page.php';
-
-		return Fraktguiden_System_Info::generate();
+		FraktguidenSystemInfo::generate();
 	}
 
 
 	/**
 	 * Set up a cron task for license check
+	 * @throws Exception
 	 */
 	public static function cron_task() {
 		$license = Fraktguiden_License::get_instance();

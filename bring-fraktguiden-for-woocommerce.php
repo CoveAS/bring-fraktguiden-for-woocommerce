@@ -21,12 +21,32 @@
  * @author              Bring Fraktguiden for WooCommerce
  */
 
+use Bring_Fraktguiden\ClassLoader;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_License;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
+require_once 'classes/ClassLoader.php';
 require_once 'classes/class-bring-fraktguiden.php';
-require_once 'classes/common/class-fraktguiden-helper.php';
 
-add_action( 'plugins_loaded', 'Bring_Fraktguiden::init' );
-register_deactivation_hook( __FILE__, 'Bring_Fraktguiden::plugin_deactivate' );
+spl_autoload_register( ClassLoader::class . '::load');
+
+if (
+	Fraktguiden_Helper::get_option( 'pro_enabled' ) === 'yes'
+	&& isset($_GET['license-please'])
+	&& $_GET['license-please'] === 'bring-fraktguiden'
+) {
+	try {
+		Fraktguiden_License::get_instance()->check_license();
+		$valid_to = get_option('bring_fraktguiden_pro_valid_to');
+		wp_send_json(['valid_to' => $valid_to]);
+	} catch (Exception $e) {
+		// Do nothing
+		wp_send_json(['error'=> $e->getMessage()], 500);
+	}
+}
+
+add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'init'] );
+register_deactivation_hook( __FILE__, [Bring_Fraktguiden::class, 'plugin_deactivate'] );

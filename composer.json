@@ -1,4 +1,7 @@
 {
   "name": "bring-fraktguiden/bring-fraktguiden-for-woocommerce",
-  "type": "wordpress-plugin"
+  "type": "wordpress-plugin",
+  "require": {
+    "ext-curl": "*"
+  }
 }

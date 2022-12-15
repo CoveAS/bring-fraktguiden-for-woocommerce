@@ -579,7 +579,7 @@ trait Settings {
 
 		jQuery( function( $ ) {
 			function toggle_test_mode() {
-				var is_checked = $( '#woocommerce_BringFraktguidenPro_enabled' ).prop( 'checked' );
+				var is_checked = $( '#woocommerce_bring_fraktguiden_enabled' ).prop( 'checked' );
 
 				console.log(bring_fraktguiden_settings.pro_activated);
 				bring_fraktguiden_settings.pro_activated.value = is_checked;
@@ -590,7 +590,7 @@ trait Settings {
 				$( '#5' ).toggle( is_checked );
 			}
 
-			$( '#woocommerce_BringFraktguidenPro_enabled' ).change( toggle_test_mode );
+			$( '#woocommerce_bring_fraktguiden_enabled' ).change( toggle_test_mode );
 			toggle_test_mode();
 		} );
 		jQuery( function( $ ) {
