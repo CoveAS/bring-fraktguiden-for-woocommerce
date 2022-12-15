@@ -2,9 +2,7 @@
 
 namespace Bring_Fraktguiden\Common;
 
-use Bring_Fraktguiden\Factories\Alternative_Delivery_Date_Factory;
-use Bring_Fraktguiden\VAS;
-use Bring_Fraktguiden\VAS_Checkbox;
+use Bring_Fraktguiden\Actions\CreateAlternativeDeliveryDateFromArray;
 use Fraktguiden_Service;
 use WC_Shipping_Method_Bring;
 
@@ -122,8 +120,7 @@ class Checkout_Modifications {
 		if ( empty( $meta_data['alternative_delivery_dates'] ) ) {
 			return $args;
 		}
-		$factory      = new Alternative_Delivery_Date_Factory();
-		$alternatives = $factory->from_array(
+		$alternatives = (new CreateAlternativeDeliveryDateFromArray)(
 			$meta_data['alternative_delivery_dates']
 		);
 

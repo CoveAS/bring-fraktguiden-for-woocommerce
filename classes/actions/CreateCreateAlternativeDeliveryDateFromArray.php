@@ -1,26 +1,20 @@
 <?php
 
-namespace Bring_Fraktguiden\Factories;
+namespace Bring_Fraktguiden\Actions;
 
 use Bring_Fraktguiden\Models\Alternative_Delivery_Date;
 
-class Alternative_Delivery_Date_Factory {
-	protected $date_factory;
-	protected $time_slot_factory;
+class CreateAlternativeDeliveryDateFromArray {
 
-	public function __construct() {
-		$this->date_factory = new Date_Factory();
-		$this->time_slot_factory = new Time_Slot_Factory();
-	}
-
-	public function from_array( $alternative_delivery_dates ) {
+	public function __invoke( $alternative_delivery_dates ): array
+	{
 		$time_slot_groups = [];
 
 		foreach ( $alternative_delivery_dates as $date_data ) {
 			$date                         = new Alternative_Delivery_Date();
 			$date->working_days           = $date_data['workingDays'];
-			$date->expected_delivery_date = $this->date_factory->from_array( $date_data['expectedDeliveryDate'] );
-			$date->time_slots             = $this->time_slot_factory->from_array( $date_data['expectedDeliveryDate']['timeSlots'] );
+			$date->expected_delivery_date = (new CreateDateFromArray)( $date_data['expectedDeliveryDate'] );
+			$date->time_slots             = (new CreateTimeSlotFromArray())( $date_data['expectedDeliveryDate']['timeSlots'] );
 			$date->shipping_dates         = [];
 			foreach ( $date->time_slots as $time_slot ) {
 				if ( empty( $time_slot_groups[ $time_slot ] ) ) {
@@ -42,7 +36,7 @@ class Alternative_Delivery_Date_Factory {
 				if ( ! isset( $time_slot_groups[ $time_slot ]['items'][ $key ] ) ) {
 					$time_slot_groups[ $time_slot ]['items'][ $key ] = $date;
 				}
-				$time_slot_groups[ $time_slot ]['items'][ $key ]->shipping_dates[] = $this->date_factory->from_array( $date_data['shippingDate'] );
+				$time_slot_groups[ $time_slot ]['items'][ $key ]->shipping_dates[] = (new CreateDateFromArray)( $date_data['shippingDate'] );
 			}
 		}
 		foreach ( $time_slot_groups as &$time_slot_group ) {

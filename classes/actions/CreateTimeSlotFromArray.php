@@ -1,9 +1,11 @@
 <?php
 
-namespace Bring_Fraktguiden\Factories;
+namespace Bring_Fraktguiden\Actions;
 
-class Time_Slot_Factory {
-	public function from_array( $time_slots ) {
+class CreateTimeSlotFromArray
+{
+	public function __invoke( $time_slots ): array
+	{
 		$new_time_slots = [];
 		foreach ( $time_slots as $time_slot ) {
 			$new_time_slots[] = sprintf(

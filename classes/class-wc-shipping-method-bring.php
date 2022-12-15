@@ -5,7 +5,7 @@
  * @package Bring_Fraktguiden
  */
 
-use Bring_Fraktguiden\Factories\Date_Factory;
+use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -493,14 +493,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( ! $response || ( is_array( $response ) && count( $response ) === 0 ) || empty( $response['consignments'] ) ) {
 			return [];
 		}
-		$date_factory = new Date_Factory();
 		$rates        = [];
 		$services     = \Fraktguiden_Service::all( self::$field_key );
 		foreach ( $response['consignments'][0]['products'] as $service_details ) {
 			$bring_product          = $service_details['id'];
 			$expected_delivery_date = false;
 			if ( ! empty( $service_details['expectedDelivery']['expectedDeliveryDate'] ) ) {
-				$expected_delivery_date = $date_factory->from_array(
+				$expected_delivery_date = (new CreateDateFromArray)(
 						$service_details['expectedDelivery']['expectedDeliveryDate']
 					)->format( 'c' ) ?? '';
 			}
