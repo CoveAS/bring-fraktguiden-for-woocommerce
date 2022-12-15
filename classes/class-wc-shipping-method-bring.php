@@ -640,9 +640,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	}
 
 	public function get_shipping_date() {
-		$lead_time        = (int) \Fraktguiden_Helper::get_option( 'lead_time' );
+		$lead_time        = (int) Fraktguiden_Helper::get_option( 'lead_time' );
 		$cutoff_time      = 0;
-		$lead_time_cutoff = \Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
+		$lead_time_cutoff = Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
 		if ( preg_match( '/^\d{2}:\d{2}$/', $lead_time_cutoff ) ) {
 			$cutoff_time = (int) str_replace( ':', '', $lead_time_cutoff );
 		}

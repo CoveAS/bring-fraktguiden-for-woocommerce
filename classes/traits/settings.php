@@ -7,6 +7,9 @@
 
 namespace Bring_Fraktguiden\Traits;
 
+use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
 trait Settings {
 
 	/**
@@ -115,7 +118,7 @@ trait Settings {
 				'class'    => 'chosen_select',
 				'css'      => 'width: 400px;',
 				'default'  => $woocommerce->countries->get_base_country(),
-				'options'  => \Fraktguiden_Helper::get_nordic_countries(),
+				'options'  => Fraktguiden_Helper::get_nordic_countries(),
 			],
 			'handling_fee'                  => [
 				'title'             => __( 'Delivery Fee', 'bring-fraktguiden-for-woocommerce' ),
@@ -195,7 +198,7 @@ trait Settings {
 				'class'   => 'chosen_select',
 				'css'     => 'width: 400px;',
 				'default' => '',
-				'options' => \Fraktguiden_Helper::get_all_services(),
+				'options' => Fraktguiden_Helper::get_all_services(),
 			],
 
 			/**
@@ -296,7 +299,7 @@ trait Settings {
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
-				'options' => \Fraktguiden_Helper::get_all_services(),
+				'options' => Fraktguiden_Helper::get_all_services(),
 			],
 
 			/**
@@ -336,7 +339,7 @@ trait Settings {
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
-				'options' => \Fraktguiden_Helper::get_all_services(),
+				'options' => Fraktguiden_Helper::get_all_services(),
 			],
 
 			/**
@@ -385,7 +388,7 @@ trait Settings {
 				'css'     => '',
 				'type'    => 'select',
 				'default' => '0',
-				'options' => \Fraktguiden_Helper::get_all_services(),
+				'options' => Fraktguiden_Helper::get_all_services(),
 			],
 
 			/**
@@ -637,17 +640,17 @@ trait Settings {
 		$is_credential_missing = false;
 
 		if ( ! $api_uid || ! $api_key ) {
-			\Fraktguiden_Admin_Notices::add_missing_api_credentials_notice();
+			Fraktguiden_Admin_Notices::add_missing_api_credentials_notice();
 			$is_credential_missing = true;
 		} else {
-			\Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
+			Fraktguiden_Admin_Notices::remove_missing_api_credentials_notice();
 		}
 
-		if ( ! $customer_number && \Fraktguiden_Helper::pro_activated() && \Fraktguiden_Helper::booking_enabled() ) {
-			\Fraktguiden_Admin_Notices::add_missing_api_customer_number_notice();
+		if ( ! $customer_number && Fraktguiden_Helper::pro_activated() && Fraktguiden_Helper::booking_enabled() ) {
+			Fraktguiden_Admin_Notices::add_missing_api_customer_number_notice();
 			$is_credential_missing = true;
 		} else {
-			\Fraktguiden_Admin_Notices::remove_missing_api_customer_number_notice();
+			Fraktguiden_Admin_Notices::remove_missing_api_customer_number_notice();
 		}
 
 		if ( $is_credential_missing ) {
@@ -734,7 +737,7 @@ trait Settings {
 			$message = sprintf( '<strong>%s:</strong> %s.', __( 'Mybring authentication failed', 'bring-fraktguiden-for-woocommerce' ), __( "Couldn't connect to Bring with your API credentials. Please check that they are correct", 'bring-fraktguiden-for-woocommerce' ) );
 		}
 
-		\Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error', false );
+		Fraktguiden_Admin_Notices::add_notice( 'mybring_error', $message, 'error', false );
 	}
 
 	/**

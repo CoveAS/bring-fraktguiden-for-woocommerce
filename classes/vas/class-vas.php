@@ -7,6 +7,7 @@
 
 namespace Bring_Fraktguiden;
 
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Exception;
 
 /**
@@ -76,7 +77,7 @@ class VAS {
 	 */
 	public static function create_collection( $bring_product, $service_option ): array {
 		$collection = [];
-		$all_vas_data = \Fraktguiden_Helper::get_vas_data();
+		$all_vas_data = Fraktguiden_Helper::get_vas_data();
 		$found = false;
 
 		foreach ( $all_vas_data as $vas_data ) {
