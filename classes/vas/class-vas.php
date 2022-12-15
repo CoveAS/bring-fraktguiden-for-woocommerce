@@ -5,7 +5,7 @@
  * @package Bring_Fraktguiden
  */
 
-namespace Bring_Fraktguiden;
+namespace Bring_Fraktguiden\Vas;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Exception;

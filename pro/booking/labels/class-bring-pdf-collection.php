@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Labels;
+
 /**
  * Bring_Pdf_Collection class
  */

@@ -5,16 +5,25 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Views;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
-use BringFraktguidenPro\Booking\Actions\Get_Booking_Data_Action;
 use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
+use BringFraktguidenPro\Booking\Bring_Booking;
+use BringFraktguidenPro\Booking\Bring_Booking_Customer;
+use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use DateTime;
+use Exception;
+use WC_Order;
+use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-add_action( 'wp_ajax_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
-add_action( 'wp_ajax_nopriv_bring_update_packages', 'Bring_Booking_Order_View::ajax_update_packages' );
+add_action( 'wp_ajax_bring_update_packages', [Bring_Booking_Order_View::class, 'ajax_update_packages'] );
+add_action( 'wp_ajax_nopriv_bring_update_packages', [Bring_Booking_Order_View::class, 'ajax_update_packages'] );
 
 /**
  * Bring_Booking_Order_View class
@@ -169,6 +178,8 @@ class Bring_Booking_Order_View {
 	 * Render step 2 screen
 	 *
 	 * @param Bring_WC_Order_Adapter $order Order.
+	 *
+	 * @throws Exception
 	 */
 	public static function render_step2_screen( $order ) {
 		$bring_product = $order->bring_product ?: (new Get_First_Enabled_Bring_Product())();;
@@ -279,7 +290,8 @@ class Bring_Booking_Order_View {
 	/**
 	 * @param bool $is_step2
 	 */
-	public static function render_footer( bool $is_step2, Bring_WC_Order_Adapter $adapter ) {
+	public static function render_footer( bool $is_step2, Bring_WC_Order_Adapter $adapter ): void
+	{
 		$missing_params  = false;
 		$required_params = [
 				'booking_address_store_name',
@@ -324,10 +336,8 @@ class Bring_Booking_Order_View {
 		<?php
 	}
 
-	/**
-	 * @param Bring_WC_Order_Adapter $order
-	 */
-	static function render_parties( $consignment ) {
+	static function render_parties( $consignment ): void
+	{
 		?>
 		<div class="bring-form-field">
 			<a class="bring-show-parties button"

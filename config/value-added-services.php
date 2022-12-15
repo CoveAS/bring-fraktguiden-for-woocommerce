@@ -4,6 +4,9 @@
  *
  * @package Bring_Fraktguiden
  */
+
+use Bring_Fraktguiden\Vas\VAS_Checkbox;
+
 return [
 	// New VAS.
 	[
@@ -12,7 +15,7 @@ return [
 		'name'           => 'Notification VAS',
 		'default'        => false,
 		'bring_products' => [ 5000, 4850, 5100, 5300 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -27,7 +30,7 @@ return [
 		'name'           => 'Electronic notification',
 		'default'        => true,
 		'bring_products' => [ 5800 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => true,
@@ -35,7 +38,7 @@ return [
 		'name'           => 'Alternative delivery dates',
 		'default'        => true,
 		'bring_products' => [ 5600, 1736 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -43,7 +46,7 @@ return [
 		'name'           => 'Simplified delivery',
 		'default'        => false,
 		'bring_products' => [ 5000, 4850, 5100, 5300, 5600 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -51,7 +54,7 @@ return [
 		'name'           => 'Frost-free',
 		'default'        => false,
 		'bring_products' => [ 5000, 4850, 5100, 5300 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => true,
@@ -59,7 +62,7 @@ return [
 		'name'           => 'ID verification',
 		'default'        => false,
 		'bring_products' => [ 4850, 5800, 5600 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => true,
@@ -67,7 +70,7 @@ return [
 		'name'           => 'Individual verification',
 		'default'        => false,
 		'bring_products' => [ 5800, 5600, 'HOME_DELIVERY_PARCEL', 'PICKUP_PARCEL' ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -82,7 +85,7 @@ return [
 		'name'           => 'Social check',
 		'default'        => false,
 		'bring_products' => [ 5000, 4850, 5100, 5300, 5800, 5600 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -90,7 +93,7 @@ return [
 		'name'           => 'Special goods',
 		'default'        => false,
 		'bring_products' => [ 5100, 5300 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -98,7 +101,7 @@ return [
 		'name'           => 'Optional insurance',
 		'default'        => false,
 		'bring_products' => [ 5000, 5800, 5600, 9000 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -106,7 +109,7 @@ return [
 		'name'           => 'Saturday delivery',
 		'default'        => false,
 		'bring_products' => [ 4850, 9600 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -114,7 +117,7 @@ return [
 		'name'           => 'Notification by letter',
 		'default'        => false,
 		'bring_products' => [ 5800 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -122,7 +125,7 @@ return [
 		'name'           => 'Dangerous goods',
 		'default'        => false,
 		'bring_products' => [ 5100, 5300 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	// Old VAS.
 	[
@@ -131,7 +134,7 @@ return [
 		'name'           => 'Recipient notification over SMS or E-Mail',
 		'default'        => false,
 		'bring_products' => [ 'BPAKKE_DOR-DOR', 'SERVICEPAKKE', 'EKSPRESS09' ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -167,7 +170,7 @@ return [
 		'name'           => 'Delivery to pickup point',
 		'default'        => false,
 		'bring_products' => [ 'PICKUP_PARCEL', 'PICKUP_PARCEL_BULK' ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -175,7 +178,7 @@ return [
 		'name'           => 'Evening delivery',
 		'default'        => false,
 		'bring_products' => [ 'CARGO', 'CARGO_GROUPAGE' ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => false,
@@ -183,7 +186,7 @@ return [
 		'name'           => 'Simplified delivery',
 		'default'        => false,
 		'bring_products' => [ 'PAKKE_I_POSTKASSEN', 'PAKKE_I_POSTKASSEN_SPORBAR' ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 	[
 		'enabled'        => true,
@@ -191,6 +194,6 @@ return [
 		'name'           => 'Bag on door delivery',
 		'default'        => false,
 		'bring_products' => [ 3584, 3570 ],
-		'class'          => 'Bring_Fraktguiden\VAS_Checkbox',
+		'class'          => VAS_Checkbox::class,
 	],
 ];

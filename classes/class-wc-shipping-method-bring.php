@@ -9,6 +9,7 @@ use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Bring_Fraktguiden\Traits\Settings;
+use BringFraktguiden\Common\Fraktguiden_Service_Table;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

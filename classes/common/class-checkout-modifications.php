@@ -3,7 +3,6 @@
 namespace Bring_Fraktguiden\Common;
 
 use Bring_Fraktguiden\Actions\CreateAlternativeDeliveryDateFromArray;
-use Fraktguiden_Service;
 use WC_Shipping_Method_Bring;
 
 /**
@@ -212,7 +211,7 @@ class Checkout_Modifications {
 		}
 		$shipping_method = $shipping_methods[ $shipping_method_id ];
 		$field_key       = $shipping_method->get_field_key( 'services' );
-		if ( ! \Fraktguiden_Service::vas_for( $field_key, $bring_product, [ 'alternative_delivery_dates' ] ) ) {
+		if ( ! Fraktguiden_Service::vas_for( $field_key, $bring_product, [ 'alternative_delivery_dates' ] ) ) {
 			return;
 		}
 		$time_slot = WC()->session->get( 'bring_fraktguiden_time_slot' );

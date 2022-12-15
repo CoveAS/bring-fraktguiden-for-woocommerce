@@ -5,7 +5,15 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Order;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
+use Exception;
+use WC_Order;
+use WC_Shipping_Zones;
+use WP_Bring_Request;
+use WP_Bring_Response;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -352,6 +360,7 @@ class Bring_WC_Order_Adapter {
 	 * Same as wc_order->get_shipping_methods() except that non-bring methods are filtered away.
 	 *
 	 * @return array
+	 * @throws Exception
 	 */
 	public function get_fraktguiden_shipping_items() {
 		$result = [];
@@ -370,7 +379,7 @@ class Bring_WC_Order_Adapter {
 		foreach ( $shipping_methods as $item_id => $shipping_item ) {
 			$method_id = wc_get_order_item_meta( $item_id, 'method_id', true );
 
-			if ( strpos( $method_id, Fraktguiden_Helper::ID ) !== false ) {
+			if (str_contains($method_id, Fraktguiden_Helper::ID)) {
 				$result[ $item_id ] = $shipping_item;
 			}
 		}

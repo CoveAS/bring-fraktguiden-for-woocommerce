@@ -7,8 +7,8 @@ namespace BringFraktguidenPro;
  */
 
 use Bring_Fraktguiden;
-use Bring_WC_Order_Adapter;
 use BringFraktguidenPro\Booking\Actions\Get_Booking_Data_Action;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

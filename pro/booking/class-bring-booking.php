@@ -5,42 +5,32 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_My_Order_View;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Order_View;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Orders_View;
+use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
+use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use Exception;
+use WC_Admin_List_Table_Orders;
+use WC_Logger;
+use WC_Order;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 // Frontend views.
-require_once 'views/class-bring-booking-my-order-view.php';
-add_filter( 'woocommerce_order_shipping_to_display', 'Bring_Booking_My_Order_View::order_display_tracking_info', 5, 2 );
-
-// Consignment.
-require_once 'classes/consignment/class-bring-consignment.php';
-require_once 'classes/consignment/class-bring-booking-consignment.php';
-
-// Consignment request.
-require_once 'classes/consignment-request/class-bring-consignment-request.php';
-require_once 'classes/consignment-request/class-bring-booking-consignment-request.php';
-
-// Classes.
-require_once 'classes/class-bring-booking-file.php';
-require_once 'classes/class-bring-booking-customer.php';
-
-if ( is_admin() ) {
-	// Views.
-	include_once 'views/class-bring-booking-labels.php';
-	include_once 'views/class-bring-booking-order-view-common.php';
-	include_once 'views/class-bring-booking-orders-view.php';
-	include_once 'views/class-bring-booking-order-view.php';
-}
-
+add_filter( 'woocommerce_order_shipping_to_display', [Bring_Booking_My_Order_View::class,'order_display_tracking_info'], 5, 2 );
 
 // Register awaiting shipment status.
-add_action( 'init', 'Bring_Booking::register_awaiting_shipment_order_status' );
+add_action( 'init', [Bring_Booking::class, 'register_awaiting_shipment_order_status'] );
 
 // Add awaiting shipping to existing order statuses.
-add_filter( 'wc_order_statuses', 'Bring_Booking::add_awaiting_shipment_status' );
+add_filter( 'wc_order_statuses', [Bring_Booking::class, 'add_awaiting_shipment_status'] );
 
 /**
  * Bring_Booking class

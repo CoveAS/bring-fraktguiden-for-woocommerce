@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Consignment;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }

@@ -5,6 +5,11 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Consignment;
+
+use BringFraktguidenPro\Booking\Bring_Booking_File;
+use Exception;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -49,9 +54,10 @@ abstract class Bring_Consignment {
 	/**
 	 * Get label file
 	 *
-	 * @return Bring_Booking_File
+	 * @throws Exception
 	 */
-	public function get_label_file() {
+	public function get_label_file(): Bring_Booking_File
+	{
 		return new Bring_Booking_File( 'label', $this->get_consignment_number(), $this->get_label_url(), $this->order_id );
 	}
 

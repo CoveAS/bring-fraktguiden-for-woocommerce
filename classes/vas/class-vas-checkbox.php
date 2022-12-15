@@ -5,7 +5,7 @@
  * @package Bring_Fraktguiden
  */
 
-namespace Bring_Fraktguiden;
+namespace Bring_Fraktguiden\Vas;
 
 /**
  * Fraktguiden_Service class

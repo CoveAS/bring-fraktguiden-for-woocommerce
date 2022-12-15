@@ -5,8 +5,12 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Consignment_Request;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
+use Exception;
+use WC_Order_Item_Shipping;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

@@ -5,7 +5,10 @@
  * @package Bring_Fraktguiden
  */
 
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+namespace Bring_Fraktguiden\Common;
+
+use Bring_Fraktguiden\Vas\VAS;
+use Exception;
 
 /**
  * Fraktguiden_Service class
@@ -66,6 +69,8 @@ class Fraktguiden_Service {
 	 * @param string $bring_product  Bring product.
 	 * @param array  $service_data   Service data.
 	 * @param array  $service_option Service option.
+	 *
+	 * @throws Exception
 	 */
 	public function __construct( $service_key, $bring_product, $service_data, $service_option ) {
 		$this->option_key    = "{$service_key}_options";
@@ -74,7 +79,7 @@ class Fraktguiden_Service {
 		$this->home_delivery = $service_data['home_delivery'] ?? false;
 		$selected            = Fraktguiden_Helper::get_option( 'services' );
 		$this->enabled       = ! empty( $selected ) ? in_array( $bring_product, $selected, true ) : false;
-		$this->vas           = Bring_Fraktguiden\VAS::create_collection( $bring_product, $service_option );
+		$this->vas           = VAS::create_collection( $bring_product, $service_option );
 
 		if ( $service_data['pickuppoint'] ) {
 			$this->settings['pickup_point']    = esc_html( $service_option['pickup_point'] ?? '' );

@@ -6,6 +6,8 @@
  */
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Bring_Booking;
+use BringFraktguidenPro\PickupPoint\Fraktguiden_Pickup_Point;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

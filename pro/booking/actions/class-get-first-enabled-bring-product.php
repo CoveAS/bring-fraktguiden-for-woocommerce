@@ -7,7 +7,7 @@
 
 namespace BringFraktguidenPro\Booking\Actions;
 
-use Fraktguiden_Service;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

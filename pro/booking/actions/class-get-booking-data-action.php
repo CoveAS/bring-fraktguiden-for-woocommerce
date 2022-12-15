@@ -7,9 +7,9 @@
 
 namespace BringFraktguidenPro\Booking\Actions;
 
-use Bring_Booking_Consignment_Request;
-use Bring_WC_Order_Adapter;
-use Fraktguiden_Service;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

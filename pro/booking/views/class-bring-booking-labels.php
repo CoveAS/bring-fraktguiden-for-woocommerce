@@ -5,14 +5,19 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Views;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Labels\Bring_Pdf_Collection;
+use BringFraktguidenPro\Booking\Labels\Bring_Zpl_Collection;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 // Create a menu item for PDF download.
-add_action( 'woocommerce_after_register_post_type', 'Bring_Booking_Labels::open_pdfs' );
+add_action( 'woocommerce_after_register_post_type', [ Bring_Booking_Labels::class, 'open_pdfs' ] );
 
 /**
  * Bring_Booking_Labels class
@@ -21,12 +26,8 @@ class Bring_Booking_Labels {
 
 	/**
 	 * Create download URL
-	 *
-	 * @param string $order_ids Comma separated string with order ids.
-	 *
-	 * @return string
 	 */
-	public static function create_download_url( $order_ids ) {
+	public static function create_download_url( array|string $order_ids ):string {
 		if ( is_array( $order_ids ) ) {
 			$order_ids = implode( ',', $order_ids );
 		}
@@ -204,10 +205,11 @@ class Bring_Booking_Labels {
 	/**
 	 * Render download link
 	 *
-	 * @param array $order_ids Order IDs.
-	 * @param string $name Name.
+	 * @param array  $order_ids Order IDs.
+	 * @param string $name      Name.
 	 */
-	public static function render_download_link( $order_ids, $name ) {
+	public static function render_download_link( array $order_ids, string $name ): void
+	{
 		printf(
 			'<li><a href="%s" target="_blank">%s</a></li>',
 			esc_attr( static::create_download_url( $order_ids ) ),

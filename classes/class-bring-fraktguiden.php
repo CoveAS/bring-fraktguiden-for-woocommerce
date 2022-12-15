@@ -12,9 +12,11 @@ use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
 use Bring_Fraktguiden\Common\FraktguidenSystemInfo;
+use Bring_Fraktguiden\Common\Rate_Eta;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguidenPro\BringFraktguidenPro;
+use BringFraktguidenPro\PickupPoint\Fraktguiden_Pick_Up_Point_Enhancement;
 
 /**
  * Bring_Fraktguiden class
@@ -51,12 +53,12 @@ class Bring_Fraktguiden {
 			Fraktguiden_Pick_Up_Point_Enhancement::setup();
 		}
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_eta' ) ) {
-			add_action( 'woocommerce_after_shipping_rate', 'Bring_Fraktguiden\Common\Rate_Eta::add_estimated_delivery_date', 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', [Rate_Eta::class, 'add_estimated_delivery_date'], 10, 2 );
 		}
 
 		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
 
-		add_action( 'woocommerce_shipping_init', 'Bring_Fraktguiden::shipping_init' );
+		add_action( 'woocommerce_shipping_init', [Bring_Fraktguiden::class, 'shipping_init'] );
 
 		add_filter( 'plugin_action_links_' . basename( $plugin_path ) . '/bring-fraktguiden-for-woocommerce.php', __CLASS__ . '::plugin_action_links' );
 
@@ -136,7 +138,7 @@ class Bring_Fraktguiden {
 	 */
 	public static function shipping_init() {
 		// Add the method to WooCommerce.
-		add_filter( 'woocommerce_shipping_methods', 'Bring_Fraktguiden::add_bring_method' );
+		add_filter( 'woocommerce_shipping_methods', [Bring_Fraktguiden::class, 'add_bring_method'] );
 	}
 
 	/**

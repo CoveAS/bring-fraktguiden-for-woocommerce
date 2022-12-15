@@ -5,7 +5,11 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Exception;
+use WP_Bring_Request;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

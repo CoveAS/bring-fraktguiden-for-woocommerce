@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Order;
+
 /**
  * Bring_Consignment_Service class
  */

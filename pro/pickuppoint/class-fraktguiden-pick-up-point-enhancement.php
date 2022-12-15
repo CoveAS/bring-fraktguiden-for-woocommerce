@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\PickupPoint;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -62,7 +64,7 @@ class Fraktguiden_Pick_Up_Point_Enhancement {
 		$meta_data = $method->get_meta_data();
 
 		if ( ! isset( $meta_data['pickup_point_data'] ) ) {
-			return;
+			return null;
 		}
 
 		$pickup_point_data = $meta_data['pickup_point_data'];

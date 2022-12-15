@@ -5,6 +5,12 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking;
+
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use Exception;
+use WC_Order;
+
 /**
  * Bring_Booking_File class
  */

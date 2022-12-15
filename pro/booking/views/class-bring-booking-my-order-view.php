@@ -5,7 +5,11 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Views;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use WC_Order;
 
 /**
  * Bring Booking - My order view

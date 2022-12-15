@@ -5,7 +5,16 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Consignment_Request;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use WC_Order;
+use WC_Order_Item_Shipping;
+use WC_Shipping_Method_Bring;
+use WP_Bring_Request;
+use WP_Bring_Response;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -25,10 +34,8 @@ abstract class Bring_Consignment_Request {
 
 	/**
 	 * Service
-	 *
-	 * @var Fraktguiden_Service
 	 */
-	public $service;
+	public Fraktguiden_Service $service;
 
 	/**
 	 * Shipping item
@@ -82,29 +89,19 @@ abstract class Bring_Consignment_Request {
 	/**
 	 * Get Service ID
 	 * Includes a fallback for older versions of bring
-	 *
-	 * @param boolean $force Force.
-	 *
-	 * @return string
 	 */
-	public function get_service_id( $force = false ) {
+	public function get_service_id( bool $force = false ): string {
 		if ( $this->service_id && ! $force ) {
 			return $this->service_id;
 		}
-
-		$bring_product = self::get_bring_product( $this->shipping_item );
-
-		return $bring_product;
+		return self::get_bring_product( $this->shipping_item );
 	}
 
 	/**
 	 * Get Bring product
-	 *
-	 * @param string $shipping_item Shipping item.
-	 *
-	 * @return string
 	 */
-	public static function get_bring_product( $shipping_item ) {
+	public static function get_bring_product( $shipping_item ): string
+	{
 		$bring_product = $shipping_item->get_meta( 'bring_product' );
 
 		if ( ! $bring_product ) {
@@ -274,8 +271,6 @@ abstract class Bring_Consignment_Request {
 
 	/**
 	 * Order update packages
-	 *
-	 * @return mixed
 	 */
 	public function order_update_packages() {
 		$wc_order = $this->shipping_item->get_order();
@@ -303,7 +298,7 @@ abstract class Bring_Consignment_Request {
 		$packages        = $shipping_method->pack_order( $cart );
 
 		if ( ! $packages ) {
-			return;
+			return null;
 		}
 
 		$shipping_methods = $wc_order->get_shipping_methods();

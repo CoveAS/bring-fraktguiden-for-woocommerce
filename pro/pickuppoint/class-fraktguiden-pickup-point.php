@@ -5,7 +5,18 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\PickupPoint;
+
+use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use Fraktguiden_Packer;
+use WC_Order;
+use WC_Product_Simple;
+use WC_Shipping_Method_Bring;
+use WP_Bring_Request;
+use WP_Bring_Response;
 
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
@@ -332,7 +343,7 @@ class Fraktguiden_Pickup_Point
 		$shipping_method = new WC_Shipping_Method_Bring();
 
 		$field_key = $shipping_method->get_field_key('services');
-		$evarsling = \Fraktguiden_Service::vas_for($field_key, $service, ['2084', 'EVARSLING']);
+		$evarsling = Fraktguiden_Service::vas_for($field_key, $service, ['2084', 'EVARSLING']);
 
 		$standard_params['additionalservice'] = ($evarsling ? 'EVARSLING' : '');
 
@@ -435,7 +446,7 @@ class Fraktguiden_Pickup_Point
 	{
 
 		$field_key = $shipping_rate->get_field_key('services');
-		$services = \Fraktguiden_Service::all($field_key);
+		$services = Fraktguiden_Service::all($field_key);
 
 		$rate_key = false;
 		$service_package = false;

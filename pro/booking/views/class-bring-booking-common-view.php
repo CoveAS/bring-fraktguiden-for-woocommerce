@@ -5,7 +5,14 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguidenPro\Booking\Views;
+
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Bring_Booking;
+use BringFraktguidenPro\Booking\Bring_Booking_Customer;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use Exception;
+use WC_Shipping_Method_Bring_Pro;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -113,11 +120,9 @@ class Bring_Booking_Common_View {
 
 	/**
 	 * Get booking status info
-	 *
-	 * @param Bring_WC_Order_Adapter $order Order.
-	 * @return string
 	 */
-	public static function get_booking_status_info( $order ) {
+	public static function get_booking_status_info( Bring_WC_Order_Adapter $order ): array
+	{
 		$result = [
 			'text' => __( 'No', 'bring-fraktguiden-for-woocommerce' ),
 			'icon' => 'dashicons-minus',

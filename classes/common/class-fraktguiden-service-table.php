@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+namespace BringFraktguiden\Common;
+
 /**
  * Fraktguiden_Service_Table class
  */
