@@ -45,6 +45,7 @@ if (
 		// Do nothing
 		wp_send_json(['error'=> $e->getMessage()], 500);
 	}
+	die;
 }
 
 add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'init'] );

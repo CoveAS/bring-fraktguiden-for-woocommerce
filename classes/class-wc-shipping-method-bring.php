@@ -7,6 +7,7 @@
 
 use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Bring_Fraktguiden\Traits\Settings;
 use BringFraktguiden\Common\Fraktguiden_Service_Table;
@@ -396,7 +397,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Add all the selected services to the URL.
 		$field_key = $this->get_field_key( 'services' );
-		$services  = \Fraktguiden_Service::all( $field_key, true );
+		$services  = Fraktguiden_Service::all( $field_key, true );
 		if ( ! empty( $services ) ) {
 			foreach ( $services as $service ) {
 				$url .= $service->getUrlParam();
@@ -496,7 +497,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			return [];
 		}
 		$rates        = [];
-		$services     = \Fraktguiden_Service::all( self::$field_key );
+		$services     = Fraktguiden_Service::all( self::$field_key );
 		foreach ( $response['consignments'][0]['products'] as $service_details ) {
 			$bring_product          = $service_details['id'];
 			$expected_delivery_date = false;
@@ -536,7 +537,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				}
 
 				$field_key = $this->get_field_key( 'services' );
-				$service   = \Fraktguiden_Service::find( $field_key, $bring_product );
+				$service   = Fraktguiden_Service::find( $field_key, $bring_product );
 				if ( ! $service->settings['custom_price_cb'] ) {
 					$this->add_trace_messages( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
 					continue;

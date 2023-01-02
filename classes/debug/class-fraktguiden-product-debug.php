@@ -7,6 +7,8 @@
 
 namespace Bring_Fraktguiden\Debug;
 
+use WC_Shipping_Method_Bring_Pro;
+
 /**
  * Fraktguiden Product Debug
  */
@@ -216,17 +218,13 @@ class Fraktguiden_Product_Debug {
 
 	/**
 	 * Get Bring
-	 *
-	 * @param  string $zone Zone.
-	 *
-	 * @return string
 	 */
 	public static function get_bring( $zone ) {
 		$bring   = false;
 		$methods = $zone->get_shipping_methods();
 
 		foreach ( $methods as $method ) {
-			if ( 'WC_Shipping_Method_Bring_Pro' === get_class( $method ) ) {
+			if ( WC_Shipping_Method_Bring_Pro::class === get_class( $method ) ) {
 				$bring = $method;
 				break;
 			}

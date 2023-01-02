@@ -6,6 +6,7 @@
  */
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\PickupPoint\Fraktguiden_Pickup_Point;
 
@@ -157,7 +158,6 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 * @param integer $instance_id Instance ID.
 	 */
 	public function __construct( $instance_id = 0 ) {
-
 		parent::__construct( $instance_id );
 
 		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
@@ -431,7 +431,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	 */
 	public function filter_shipping_rates( $rates, $shipping_method ) {
 		$field_key  = $this->get_field_key( 'services' );
-		$services   = \Fraktguiden_Service::all( $field_key );
+		$services   = Fraktguiden_Service::all( $field_key );
 		$cart       = WC()->cart;
 		$cart_items = $cart ? $cart->get_cart() : [];
 		$cart_total = 0;

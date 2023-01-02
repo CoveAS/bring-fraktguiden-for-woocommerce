@@ -153,7 +153,7 @@ class Bring_Fraktguiden {
 	 * @access public
 	 */
 	public static function add_bring_method( $methods ) {
-		$methods['bring_fraktguiden'] = 'WC_Shipping_Method_Bring_Pro';
+		$methods['bring_fraktguiden'] = WC_Shipping_Method_Bring_Pro::class;
 
 		return $methods;
 	}
