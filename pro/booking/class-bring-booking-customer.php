@@ -63,20 +63,38 @@ class Bring_Booking_Customer {
 		$json   = json_decode( $response->get_body() );
 
 		if (is_null($json)) {
-			return $result;
+			throw new Exception(
+				esc_html__(
+					'The mybring API responded with an unexpected response. Please contact our support on bringfraktguiden.no. The response from the API: ',
+					'bring-fraktguiden-for-woocommerce'
+				) . wp_kses($response->get_body(), [])
+			);
 		}
 
-		if ($response->status_code === 500 && isset($json->message)) {
+		if ($response->status_code === 500) {
 			throw new Exception(
-				esc_html_e(
+				esc_html__(
 					'The mybring API return with an unknown error. Please contact mybring.com support for help. The error message given by the API:',
 					'bring-fraktguiden-for-woocommerce'
-				) . wp_kses($json->message, [])
+				) . wp_kses(
+					$json->message ?? '500 Server error',
+					[]
+				)
 			);
 		}
 
 		foreach ( $json->customers as $customer ) {
 			$result[ $customer->customerNumber ] = '[' . $customer->countryCode . '] ' . $customer->name; // phpcs:ignore
+		}
+
+		if (empty($result)) {
+
+			throw new Exception(
+				esc_html__(
+					'The customer number API returned no customer numbers. Please contact mybring support, integrasjon.norge@bring.com, and ask them to investigate the issue. Raw output from the API:',
+					'bring-fraktguiden-for-woocommerce'
+				) . wp_kses($response->get_body(), [])
+			);
 		}
 
 		return $result;

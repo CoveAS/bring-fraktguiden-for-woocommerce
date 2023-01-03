@@ -60,7 +60,30 @@ class WP_Bring_Response {
 	 */
 	public function __construct( $response ) {
 		$this->response = $response;
-		$this->process();
+
+		if ( is_wp_error( $this->response ) ) {
+			$this->handle_error_response();
+		}
+
+		// Note Bring reports 400 for unauthorised requests.
+		$status_code = wp_remote_retrieve_response_code( $this->response );
+		switch ( $status_code ) {
+			case self::HTTP_STATUS_OK:
+			case self::HTTP_STATUS_CREATED:
+				$this->handle_response();
+				break;
+			case 500:
+			case self::HTTP_STATUS_NO_CONTENT:
+			case self::HTTP_STATUS_NOT_FOUND:
+			case self::HTTP_STATUS_BAD_REQUEST:
+			case self::HTTP_STATUS_UNPROCESSABLE_ENTITY:
+			case self::HTTP_STATUS_UNAUTHORIZED:
+				$this->handle_error_response();
+				break;
+			default:
+				$this->errors[] = esc_html__('Unknown response code from mybring API: ') . $status_code;
+				break;
+		}
 	}
 
 	/**
@@ -123,39 +146,6 @@ class WP_Bring_Response {
 	}
 
 	/**
-	 * Process
-	 *
-	 * @return array
-	 */
-	protected function process() {
-
-		if ( is_wp_error( $this->response ) ) {
-			return $this->handle_error_response();
-		}
-
-		// Note Bring reports 400 for unauthorised requests.
-
-		$status_code = wp_remote_retrieve_response_code( $this->response );
-		switch ( $status_code ) {
-			case self::HTTP_STATUS_OK:
-			case self::HTTP_STATUS_CREATED:
-				return $this->handle_response();
-			break;
-
-			case 500:
-			case self::HTTP_STATUS_NO_CONTENT:
-			case self::HTTP_STATUS_NOT_FOUND:
-			case self::HTTP_STATUS_BAD_REQUEST:
-			case self::HTTP_STATUS_UNPROCESSABLE_ENTITY:
-			case self::HTTP_STATUS_UNAUTHORIZED:
-				return $this->handle_error_response();
-
-			default:
-				return $this->response;
-		}
-	}
-
-	/**
 	 * Handle response
 	 *
 	 * @return void
@@ -182,12 +172,15 @@ class WP_Bring_Response {
 
 		// Add HTTP code name.
 		$class = new ReflectionClass( __CLASS__ );
-
 		foreach ( $class->getConstants() as $key => $val ) {
 			if ( $val == $this->status_code ) {
 				$this->errors[] = 'HTTP ' . $val . ': ' . $key;
 				break;
 			}
+		}
+
+		if (empty($this->errors)) {
+			$this->errors[] = 'Response error code: ' . $this->status_code;
 		}
 	}
 
