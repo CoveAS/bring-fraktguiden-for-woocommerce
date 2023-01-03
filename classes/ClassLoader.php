@@ -2,9 +2,14 @@
 
 namespace Bring_Fraktguiden;
 
+use Exception;
+
 class ClassLoader
 {
-	public static function load($className)
+	/**
+	 * @throws Exception
+	 */
+	public static function load($className): void
 	{
 		if (!preg_match('/^Bring_?Fraktguiden_?(Pro)?(\\\.*)$/', $className, $matches)) {
 			return;
@@ -42,6 +47,7 @@ class ClassLoader
 				return;
 			}
 		}
+		throw new Exception('Class file not found for ' . $className);
 	}
 
 	private static function getDashed(array $parts): array

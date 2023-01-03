@@ -8,11 +8,11 @@
 namespace BringFraktguidenPro\Booking;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
+use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_My_Order_View;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Order_View;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Orders_View;
-use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
-use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
 use WC_Admin_List_Table_Orders;
