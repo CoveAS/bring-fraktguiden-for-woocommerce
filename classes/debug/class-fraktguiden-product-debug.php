@@ -7,6 +7,8 @@
 
 namespace Bring_Fraktguiden\Debug;
 
+use Exception;
+use WC_Customer;
 use WC_Shipping_Method_Bring_Pro;
 
 /**
@@ -136,6 +138,7 @@ class Fraktguiden_Product_Debug {
 
 	/**
 	 * Render
+	 * @throws Exception
 	 */
 	public static function render() {
 		WC()->frontend_includes();

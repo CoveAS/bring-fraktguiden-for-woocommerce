@@ -362,7 +362,8 @@ class Fraktguiden_Service {
 	/**
 	 * VAS For
 	 *
-	 * @param array $bring_product Bring product.
+	 * @param string $field_key
+	 * @param string $bring_product Bring product.
 	 * @param array $vas_codes     VAS Codes.
 	 *
 	 * @return string|boolean VAS Code or false if not matched.
