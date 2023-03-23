@@ -5,6 +5,8 @@
  * @package Bring_Fraktguiden
  */
 
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
+
 $consignment_number = $consignment->get_consignment_number();
 $tracking           = $consignment->get_tracking_link();
 $date_and_times     = $consignment->get_dates();
