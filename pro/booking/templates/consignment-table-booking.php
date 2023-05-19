@@ -3,9 +3,13 @@
  * This file is part of Bring Fraktguiden for WooCommerce.
  *
  * @package Bring_Fraktguiden
+ * @var Bring_Consignment $consignment
+ * @var Bring_WC_Order_Adapter $order
  */
 
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
+use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 
 $consignment_number = $consignment->get_consignment_number();
 $tracking           = $consignment->get_tracking_link();
