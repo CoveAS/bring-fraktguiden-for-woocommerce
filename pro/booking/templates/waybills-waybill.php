@@ -17,11 +17,13 @@ foreach ( $waybills as $customer_number => $waybill ) : ?>
 	</h3>
 	<table class="mailbox-waybills">
 		<thead>
-			<th><?php esc_html_e( 'Package number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-			<th><?php esc_html_e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-			<th><?php esc_html_e( 'Information', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-			<th><?php esc_html_e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></th>
-			<th><?php esc_html_e( 'Tracking code', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			<tr>
+				<th><?php esc_html_e( 'Package number', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+				<th><?php esc_html_e( 'Recipient', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+				<th><?php esc_html_e( 'Information', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+				<th><?php esc_html_e( 'Contact', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+				<th><?php esc_html_e( 'Tracking code', 'bring-fraktguiden-for-woocommerce' ); ?></th>
+			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ( $waybill['data']['attributes']['packages'] as $package ) : ?>

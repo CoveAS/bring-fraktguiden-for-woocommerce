@@ -21,6 +21,7 @@
  * @author              Bring Fraktguiden for WooCommerce
  */
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Bring_Fraktguiden\ClassLoader;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
@@ -28,10 +29,20 @@ use Bring_Fraktguiden\Common\Fraktguiden_License;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
 require_once 'classes/ClassLoader.php';
 require_once 'classes/class-bring-fraktguiden.php';
 
 spl_autoload_register( ClassLoader::class . '::load');
+
+add_action(
+	'before_woocommerce_init',
+	fn() => class_exists(FeaturesUtil::class) ?
+	FeaturesUtil::declare_compatibility(
+		'custom_order_tables',
+		__FILE__
+	) : null
+);
 
 if (
 	isset($_GET['license-please'])

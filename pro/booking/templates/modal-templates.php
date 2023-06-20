@@ -1,4 +1,6 @@
-
+<?php
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Common_View;
+?>
 <script type="text/template" id="tmpl-bring-modal-bulk">
 	<div class="wc-backbone-modal">
 		<div class="wc-backbone-modal-content">

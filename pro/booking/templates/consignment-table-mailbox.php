@@ -5,6 +5,13 @@
  * @package Bring_Fraktguiden
  */
 
+use BringFraktguidenPro\Booking\Consignment\Bring_Booking_Consignment;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+
+/** @var Bring_WC_Order_Adapter $order */
+
+/** @var Bring_Booking_Consignment $consignment */
 $consignment = reset( $consignments );
 // $errors             = $consignment->errors;
 // $confirmation       = $consignment->confirmation;
