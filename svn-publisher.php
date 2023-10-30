@@ -117,9 +117,32 @@ if ( ! file_exists( 'trunk/svn-publisher.php' ) ) {
 
 // Go into the trunk
 chdir( 'trunk' );
+
+// Replace version number placeholder
+echo "Replacing bring-fraktguiden-for-woocommerce.php version number\n";
+$content = file_get_contents('bring-fraktguiden-for-woocommerce.php');
+$content = str_replace('###BRING_VERSION###', $version, $content);
+file_put_contents('bring-fraktguiden-for-woocommerce.php', $content);
+
+echo "Replacing classes/class-bring-fraktguiden.php version number\n";
+$content = file_get_contents('classes/class-bring-fraktguiden.php');
+$content = str_replace('###BRING_VERSION###', $version, $content);
+file_put_contents('classes/class-bring-fraktguiden.php', $content);
+
+echo "Checking bring-fraktguiden-for-woocommerce.php version number\n";
+$content = `head -n 20 bring-fraktguiden-for-woocommerce.php`;
+if ( ! preg_match( '/\* Version:\s+' . $esc_version . '/', $content, $matches ) ) {
+	die( "Version doesn't match $version in bring-fraktguiden-for-woocommerce.php" );
+}
+
+echo "Checking classes/class-bring-fraktguiden.php version number\n";
+$content = `head -n 100 classes/class-bring-fraktguiden.php`;
+if ( ! preg_match( '/\sVERSION\s+=\s+\'' . $esc_version . '\';/', $content, $matches ) ) {
+	die( "Version doesn't match $version in classes/class-bring-fraktguiden.php\n\n". $content );
+}
 // Cleanup
 `find . -name ".DS_Store" -type d -delete`;
-`rm -rf .git .gitignore composer.json svn-publisher.php README.md CONTRIBUTING.md`;
+`rm -rf .idea .git .gitignore composer.json svn-publisher.php README.md CONTRIBUTING.md`;
 `rm -rf node_modules package.json package.lock webpack.mix.js`;
 if ( file_exists( '.gitignore' ) ) {
 	die( "ERROR: Cleanup failed.\n" );

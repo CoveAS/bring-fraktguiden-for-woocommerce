@@ -24,7 +24,7 @@ use BringFraktguidenPro\PickupPoint\Fraktguiden_Pick_Up_Point_Enhancement;
  */
 class Bring_Fraktguiden {
 
-	const VERSION = '1.9.3';
+	const VERSION = '###BRING_VERSION###';
 
 	const TEXT_DOMAIN = Fraktguiden_Helper::TEXT_DOMAIN;
 
