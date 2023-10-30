@@ -64,6 +64,13 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.9.4 =
+
+* Improved error handling for customer number api integration
+* Fixed issue with settings not detecting pro activated correctly
+* Added method for license server to trigger license check on purchase of new license
+* Added namespacing for most of the classes and improved class autoloader
+
 = 1.9.3 =
 
 * Fixed a bug where all value added services would always be used with bulk booking
@@ -91,32 +98,4 @@ See faq.txt for frequently asked questions
 * Added validation for booking settings
 * Upgraded vuejs from version 2 to 3
 
-= 1.8.8 =
-
-* Fixed some unsupported operand type errors.
-* Fixed a bug with decimals for shipping rates that caused incorrect tax calculation for shops that use 0 decimal places.
-
-= 1.8.6 =
-
-* Added PHP 8 support
-* Fixed a bug with the setting to change order status after printing labels where it would update old orders
-* Added support for booking of HD services
-
-= 1.8.5 =
-
-* Added filter bring_fraktguiden_get_consignment_recipient_address
-* Fixed error when mass booking Mailbox with tracking
-* Fixed error when no date was set for home delivery
-
-= 1.8.2 =
-
-* Added new feature for alternative delivery dates for home delivery
-* Added ETA support for shipping rates
-* Added support for services that does not return shipping prices
-* Made the product tester always available
-* Added lead time settings
-* Booking - Added {products} parameter for order reference
-* Booking - Changed action for rendering PDF's
-* Fixed syntax error
-
-See changelog.txt for more
+See changelog.txt for older entries

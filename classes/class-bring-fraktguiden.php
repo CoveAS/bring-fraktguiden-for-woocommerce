@@ -5,7 +5,6 @@
  * @package Bring_Fraktguiden
  */
 
-use Bring_Fraktguiden\ClassLoader;
 use Bring_Fraktguiden\Common\Ajax;
 use Bring_Fraktguiden\Common\Checkout_Modifications;
 use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
