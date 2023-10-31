@@ -5,14 +5,14 @@
  * @package Bring_Fraktguiden
  */
 
-namespace BringFraktguidenPro\PickupPoint;
+namespace BringFraktguidenPro\PickUpPoint;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Pull meta data from Bring shipping rates
  */
-class Fraktguiden_Pick_Up_Point_Enhancement {
+class LegacyPickUpPointEnhancement {
 
 	/**
 	 * Load meta into action in order to display
@@ -20,7 +20,6 @@ class Fraktguiden_Pick_Up_Point_Enhancement {
 	 * @return void
 	 */
 	public static function setup() {
-		return;
 		add_action( 'woocommerce_after_shipping_rate', [ __CLASS__, 'add_opening_tag' ], 10, 2 );
 		add_action( 'woocommerce_after_shipping_rate', [ __CLASS__, 'add_opening_hours' ], 20, 1 );
 		add_action( 'woocommerce_after_shipping_rate', [ __CLASS__, 'add_address' ], 30, 1 );

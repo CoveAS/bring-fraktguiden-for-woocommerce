@@ -31,6 +31,7 @@ class ClassLoader
 			$parts,
 			$suggestion,
 			self::getDashed($parts),
+			self::getFolderDashed($parts),
 		];
 
 		foreach ($suggestions as $suggestion) {
@@ -58,6 +59,17 @@ class ClassLoader
 		);
 		$fileName = array_pop($suggestion);
 		$suggestion[] = "class-{$fileName}";
+		return $suggestion;
+	}
+
+	private static function getFolderDashed(array $parts): array
+	{
+		$fileName = array_pop($parts);
+		$suggestion = array_map(
+			fn($part) => strtolower(preg_replace('/(?<!^)([A-Z])/', '-$1', $part)),
+			$parts
+		);
+		$suggestion[] = $fileName;
 		return $suggestion;
 	}
 

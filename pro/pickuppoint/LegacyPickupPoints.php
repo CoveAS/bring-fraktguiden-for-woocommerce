@@ -1,6 +1,6 @@
 <?php
 
-namespace BringFraktguidenPro\PickupPoint;
+namespace BringFraktguidenPro\PickUpPoint;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
@@ -15,22 +15,14 @@ class LegacyPickupPoints {
 	public static function init()
 	{
 		// Pickup points.
-		// if ( 'yes' === Fraktguiden_Helper::get_option( 'pickup_point_enabled' ) ) {
 		add_filter('bring_shipping_rates', __CLASS__ . '::insert_pickup_points', 10, 2);
-		// add_filter( 'bring_pickup_point_limit', __CLASS__ . '::limit_pickup_points' );
-		// }
+
+		// Enable enhanced descriptions if the option is ticked.
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
+			LegacyPickUpPointEnhancement::setup();
+		}
 	}
 
-	/**
-	 * Limit pickup points
-	 *
-	 * @param int $default_limit Default limit.
-	 * @return int
-	 */
-	public static function limit_pickup_points($default_limit)
-	{
-		return Fraktguiden_Helper::get_option('pickup_point_limit') ?: $default_limit;
-	}
 	/**
 	 * Filter: Insert pickup points
 	 *
@@ -82,11 +74,11 @@ class LegacyPickupPoints {
 		$country = esc_html(
 			apply_filters('bring_pickup_point_country', WC()->customer->get_shipping_country())
 		);
-		$response = self::get_pickup_points($country, $postcode);
+		$response = (new GetPickupPointsAction)($country, $postcode);
 
 		if (200 !== $response->status_code) {
 			sleep(1);
-			$response = self::get_pickup_points($country, $postcode);
+			$response = (new GetPickupPointsAction)($country, $postcode);
 		}
 
 		if (200 !== $response->status_code) {
