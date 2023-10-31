@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\Booking;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_My_Order_View;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Order_View;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Orders_View;
@@ -55,6 +56,9 @@ class Bring_Booking {
 
 		// Update status on printed orders
 		add_action( 'init', __CLASS__ . '::update_printed_orders' );
+
+		// Create a menu item for PDF download.
+		add_action( 'woocommerce_after_register_post_type', [ Bring_Booking_Labels::class, 'open_pdfs' ] );
 	}
 
 	/**

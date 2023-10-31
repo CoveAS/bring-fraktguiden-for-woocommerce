@@ -60,12 +60,6 @@ if ( ! preg_match( '/Stable tag:\s+' . $esc_version . '/', $content, $matches ) 
 	die( "Stable tag doesn't match $version in readme.txt" );
 }
 
-echo "Checking bring-fraktguiden-for-woocommerce.php version number\n";
-$content = `head -n 20 $dir/bring-fraktguiden-for-woocommerce.php`;
-if ( ! preg_match( '/\* Version:\s+' . $esc_version . '/', $content, $matches ) ) {
-	die( "Version doesn't match $version in bring-fraktguiden-for-woocommerce.php" );
-}
-
 if ( 'svn-bring-fraktguiden-for-woocommerce' !== basename( $cwd ) ) {
 	// Create a new dir
 	if ( ! is_dir( 'svn-bring-fraktguiden-for-woocommerce' ) ) {

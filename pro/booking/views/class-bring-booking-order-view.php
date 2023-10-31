@@ -50,7 +50,7 @@ class Bring_Booking_Order_View {
 	 * @param WP_Post $post Post.
 	 */
 	public static function add_booking_meta_box( $post_type, $post ) {
-		if ( 'shop_order' !== $post_type ) {
+		if ( 'shop_order' !== $post_type && 'woocommerce_page_wc-orders' !== $post_type ) {
 			return;
 		}
 
@@ -62,8 +62,8 @@ class Bring_Booking_Order_View {
 		add_meta_box(
 				'woocommerce-order-bring-booking',
 				__( 'Bring Booking', 'bring-fraktguiden-for-woocommerce' ),
-				array( __CLASS__, 'render_booking_meta_box' ),
-				'shop_order',
+				[ __CLASS__, 'render_booking_meta_box' ],
+				$post_type,
 				'normal',
 				'high'
 		);

@@ -10,6 +10,8 @@ namespace BringFraktguidenPro\Booking;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
 use WC_Order;
+use WP_Bring_Request;
+use WP_Error;
 
 /**
  * Bring_Booking_File class

@@ -16,9 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Create a menu item for PDF download.
-add_action( 'woocommerce_after_register_post_type', [ Bring_Booking_Labels::class, 'open_pdfs' ] );
-
 /**
  * Bring_Booking_Labels class
  */
@@ -105,9 +102,9 @@ class Bring_Booking_Labels {
 		}
 
 		// Require classes.
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-label-collection.php';
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-pdf-collection.php';
-		require_once dirname( __DIR__ ) . '/classes/labels/class-bring-zpl-collection.php';
+		require_once dirname( __DIR__ ) . '/labels/class-bring-label-collection.php';
+		require_once dirname( __DIR__ ) . '/labels/class-bring-pdf-collection.php';
+		require_once dirname( __DIR__ ) . '/labels/class-bring-zpl-collection.php';
 
 		$order_ids = explode( ',', $order_ids );
 
