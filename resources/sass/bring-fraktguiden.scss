@@ -183,3 +183,67 @@ span.bring-error-message {
 	}
   }
 }
+
+.bring-fraktguiden-pick-up-point-picker {
+
+}
+.bfg-pup__name {
+	display: inline-block;
+}
+.bfg-pup__change {
+	display: inline;
+	color: #e90000;
+}
+.bfg-pup__change:focus,
+.bfg-pup__change:hover {
+	color: #9d1d1d;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.bfg-pup__change:active {
+	color: #157d37;
+	text-decoration: underline;
+}
+.bfg-pup__address{
+
+}
+.bfg-pup__opening-hours{
+
+}
+.bfg-pup__description{
+
+}
+.bfg-pup__{
+
+}
+
+.bring-fraktguiden-pick-up-points-modal {
+	position: fixed;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+	z-index: 99999;
+}
+
+.bfg-pupm__template {
+	display: none;
+}
+
+.bfg-pupm__list {
+	height: 100%;
+	background: white;
+	overflow: scroll;
+}
+.bfg-pupm__item {
+	user-select: none;
+	cursor: pointer;
+    padding: 1rem;
+    border-bottom: 1px solid #999999;
+}
+.bfg-pupm__item:focus,
+.bfg-pupm__item:hover {
+	background: #bde1c2;
+	color: #165f16;
+}
+
+.bfg-pupm__item:hover {
+}

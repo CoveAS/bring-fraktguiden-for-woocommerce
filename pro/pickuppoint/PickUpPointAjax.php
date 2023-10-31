@@ -176,17 +176,16 @@ class PickUpPointAjax
 	 */
 	public static function bring_get_pickup_points()
 	{
-
-		$response = (new GetPickupPointsAction)(
+		$response = (new GetRawPickupPointsAction)(
 			filter_input(INPUT_GET, 'country'),
 			filter_input(INPUT_GET, 'postcode')
 		);
 
-		if (200 !== $response->status_code) {
+		if (empty($response)) {
 			wp_die();
 		}
 
-		wp_send_json(json_decode($response->get_body(), true));
+		wp_send_json($response);
 	}
 
 }

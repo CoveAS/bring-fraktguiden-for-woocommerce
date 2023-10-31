@@ -13,7 +13,7 @@
     "@vue/compiler-sfc": "^3.2.31",
     "cross-env": "^7.0.3",
     "laravel-mix": "^6.0.43",
-    "resolve-url-loader": "^3.1.0",
+    "resolve-url-loader": "^5.0.0",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
     "vue": "^3.2.31"

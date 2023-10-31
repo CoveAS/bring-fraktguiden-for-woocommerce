@@ -19,7 +19,7 @@ class Styles
 		if ( ! is_cart() && ! is_checkout() ) {
 			return;
 		}
-		$plugin_path = dirname( __DIR__ );
+		$plugin_path = dirname( __DIR__, 2);
 		wp_register_style( 'bring-fraktguiden-for-woocommerce', plugins_url( basename( $plugin_path ) . '/assets/css/bring-fraktguiden.css' ), array(), Bring_Fraktguiden::VERSION );
 		wp_enqueue_style( 'bring-fraktguiden-for-woocommerce' );
 	}

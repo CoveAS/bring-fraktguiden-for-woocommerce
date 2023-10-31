@@ -281,15 +281,24 @@
 		};
 	})();
 
+	function create_cookie( name, value, days ) {
+		var expires;
+		if ( days ) {
+			var date = new Date();
+			date.setTime( date.getTime() + (days * 24 * 60 * 60 * 1000) );
+			expires = "; expires=" + date.toGMTString();
+		} else {
+			expires = "";
+		}
+
+		document.cookie = name + "=" + value + expires + "; path=/";
+	}
+
 	/**
 	 * Updates cookies with the user's data.
 	 */
 	function update_cookies() {
-		Bring_Common.create_cookie( '_fraktguiden_pickup_point_postcode', user_selected.postcode );
-		Bring_Common.create_cookie( '_fraktguiden_pickup_point_info_cached', $( '[name=_fraktguiden_pickup_point_info_cached]' ).val() );
-		// console.log( 'read cookie', Bring_Common.read_cookie( '_fraktguiden_pickup_point_id' ) );
-		// console.log( 'read cookie', Bring_Common.read_cookie( '_fraktguiden_pickup_point_postcode' ) );
-		// console.log( 'read cookie', Bring_Common.read_cookie( '_fraktguiden_pickup_point_info_cached' ) );
+		create_cookie( '_fraktguiden_pickup_point_postcode', user_selected.postcode );
+		create_cookie( '_fraktguiden_pickup_point_info_cached', $( '[name=_fraktguiden_pickup_point_info_cached]' ).val() );
 	}
-
 })();

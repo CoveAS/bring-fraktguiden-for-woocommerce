@@ -12,6 +12,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Fraktguiden_Packer;
+use ReflectionMethod;
 use WC_Order;
 use WC_Product_Simple;
 use WC_Shipping_Method_Bring;
@@ -50,6 +51,9 @@ class PickUpPoint
 
 		// Add pick up point selector after shipping option
 		add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 10, 2 );
+
+		// Add pick up points modal after checkout
+		add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
 	}
 
 	/**
@@ -94,9 +98,27 @@ class PickUpPoint
 		if (!is_checkout()) {
 			return;
 		}
-
-		wp_register_script('fraktguiden-common', plugins_url('assets/js/pickup-point-common.js', dirname(__FILE__)), [ 'jquery' ], Bring_Fraktguiden::VERSION, true);
-		wp_register_script('fraktguiden-pickup-point-checkout', plugins_url('assets/js/pickup-point-checkout.js', dirname(__FILE__)), [ 'jquery' ], Bring_Fraktguiden::VERSION, true);
+		$legacy = false; // @todo: Make checkbox setting to select legacy
+		$path = 'assets/js/pick-up-point-checkout.js';
+		if ($legacy) {
+			$path = 'assets/js/legacy-pickup-point-checkout.js';
+		}
+		wp_register_script(
+			'fraktguiden-pickup-point-checkout',
+			plugins_url($path, dirname(__FILE__)),
+			[ 'jquery' ],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
+		$pick_up_points = PickUpPointData::rawCollection(
+			(new GetRawPickupPointsAction())(null, null)
+		);
+		$selected_pick_up_point_id = WC()->session->get('bring_fraktguiden_pick_up_point', null);
+		$filtered = $selected_pick_up_point_id ? array_filter(
+			$pick_up_points,
+			fn ($pick_up_point) => $pick_up_point->id === $selected_pick_up_point_id
+		) : [];
+		$selected_pick_up_point = empty($filtered) ? reset($pick_up_points) : reset($filtered);
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
 			'_fraktguiden_data',
@@ -106,10 +128,13 @@ class PickUpPoint
 				'country' => Fraktguiden_Helper::get_option('from_country'),
 				'klarna_checkout_nonce' => wp_create_nonce('klarna_checkout_nonce'),
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
+				'pick_up_points' => PickUpPointData::rawCollection(
+					(new GetRawPickupPointsAction())(null, null)
+				),
+				'selected_pick_up_point' => $selected_pick_up_point,
 			]
 		);
 
-		wp_enqueue_script('fraktguiden-common');
 		wp_enqueue_script('fraktguiden-pickup-point-checkout');
 	}
 
@@ -199,6 +224,10 @@ class PickUpPoint
 
 		$number = (int)($service->settings['pickup_point'] ?? 0);
 
-		echo (new PickUpPointPicker($number))->render();
+		echo (new SelectedPickUpPointComponent($number, true))->render();
+	}
+
+	public static function pick_up_points_modal() {
+		echo (new PickUpPointsModalComponent())->render();
 	}
 }

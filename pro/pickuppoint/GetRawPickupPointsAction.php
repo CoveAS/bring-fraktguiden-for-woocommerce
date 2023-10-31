@@ -4,10 +4,17 @@ namespace BringFraktguidenPro\PickUpPoint;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use WP_Bring_Request;
-use WP_Bring_Response;
 
-class GetPickupPointsAction {
-	public function __invoke(string $country, string $postcode): WP_Bring_Response {
+class GetRawPickupPointsAction {
+	public function __invoke(?string $country, ?string $postcode): array {
+
+		$country = esc_html( apply_filters('bring_pickup_point_country', $country ?? WC()->customer->get_shipping_country() ) );
+		$postcode = esc_html( apply_filters('bring_pickup_point_postcode', $postcode ?? WC()->customer->get_shipping_postcode()) );
+
+		if (! $postcode || ! $country) {
+			return [];
+		}
+
 		$request = new WP_Bring_Request();
 		$customer = WC()->customer;
 		$args = [];
@@ -20,12 +27,23 @@ class GetPickupPointsAction {
 		if ('locker' === Fraktguiden_Helper::get_option('pickup_point_types')) {
 			$args['pickupPointType'] = 'locker';
 		}
-		return $request->get(
+		$response = $request->get(
 			'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/postalCode/' . $postcode . '.json',
 			apply_filters(
 				'bring_fraktguiden_get_pickup_points_args',
 				$args
 			)
 		);
+		// On error return empty array
+		if (is_wp_error($response) || 200 !== $response->status_code) {
+			return [];
+		}
+		// Decode data
+		$data = json_decode($response->get_body(), true);
+		if (empty($data['pickupPoint'])) {
+			return [];
+		}
+
+		return $data['pickupPoint'];
 	}
 }

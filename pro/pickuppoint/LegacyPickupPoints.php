@@ -68,20 +68,9 @@ class LegacyPickupPoints {
 		}
 
 		$pickup_point_limit = apply_filters('bring_pickup_point_limit', (int)$service->settings['pickup_point']);
-		$postcode = esc_html(
-			apply_filters('bring_pickup_point_postcode', WC()->customer->get_shipping_postcode())
-		);
-		$country = esc_html(
-			apply_filters('bring_pickup_point_country', WC()->customer->get_shipping_country())
-		);
-		$response = (new GetPickupPointsAction)($country, $postcode);
+		$pickup_points = (new GetRawPickupPointsAction)(null, null);
 
-		if (200 !== $response->status_code) {
-			sleep(1);
-			$response = (new GetPickupPointsAction)($country, $postcode);
-		}
-
-		if (200 !== $response->status_code) {
+		if (empty($pickup_points)) {
 			return $rates;
 		}
 
@@ -89,10 +78,9 @@ class LegacyPickupPoints {
 		unset($rates[$rate_key]);
 
 		$pickup_point_count = 1;
-		$pickup_points = json_decode($response->get_body(), 1);
 		$new_rates = [];
 
-		foreach ($pickup_points['pickupPoint'] as $pickup_point) {
+		foreach ($pickup_points as $pickup_point) {
 			$rate = [
 				'id' => "bring_fraktguiden:{$bring_product}-{$pickup_point['id']}",
 				'bring_product' => $bring_product,
