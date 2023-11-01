@@ -10,16 +10,9 @@ namespace BringFraktguidenPro\PickUpPoint;
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
-use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
-use Fraktguiden_Packer;
-use ReflectionMethod;
 use WC_Order;
 use WC_Order_Item_Shipping;
-use WC_Product_Simple;
-use WC_Shipping_Method_Bring;
 use WC_Shipping_Rate;
-use WP_Bring_Request;
-use WP_Bring_Response;
 
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
@@ -213,19 +206,9 @@ class PickUpPoint
 			return;
 		}
 
-		$services = Fraktguiden_Service::all();
-		$bring_product = strtoupper($metadata['bring_product']);
-
-		if (empty($services[$bring_product])) {
+		if (! self::supports_pick_up_point($metadata['bring_product'])) {
 			return;
 		}
-
-		$service = $services[$bring_product];
-
-		if (empty($service->settings['pickup_point_cb'])) {
-			return;
-		}
-
 		$number = (int)($service->settings['pickup_point'] ?? 0);
 
 		echo (new SelectedPickUpPointComponent($number, true))->render();
@@ -241,11 +224,34 @@ class PickUpPoint
 	 * @param WC_Order_Item_Shipping $item Shipping item.
 	 */
 	public static function attach_item_meta( WC_Order_Item_Shipping $item ): void {
-		ray($item);
+		$bring_product = $item->get_meta('bring_product');
+		if ( empty($bring_product) ) {
+			return;
+		}
+
+		if (! self::supports_pick_up_point($bring_product)) {
+			return;
+		}
 		$id = WC()->session->get( 'bring_fraktguiden_pick_up_point' );
 		if (empty($id)) {
 			return;
 		}
 		$item->add_meta_data( 'pickup_point_id', $id, true );
+	}
+
+	private static function supports_pick_up_point( string $bring_product ): bool {
+		$bring_product = strtoupper($bring_product);
+		$services = Fraktguiden_Service::all();
+
+		if (empty($services[$bring_product])) {
+			return false;
+		}
+
+		$service = $services[$bring_product];
+
+		if (empty($service->settings['pickup_point_cb'])) {
+			return false;
+		}
+		return true;
 	}
 }
