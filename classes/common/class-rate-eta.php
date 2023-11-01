@@ -51,7 +51,8 @@ class Rate_Eta {
 		}
 
 		printf(
-			'<div class="bring-fraktguiden-eta">%s</div>',
+			'<div class="bring-fraktguiden-eta">%s %s</div>',
+			esc_html__('Expected delivery:', 'bring-fraktguiden-for-woocommerce'),
 			esc_html(
 				apply_filters(
 					'bring_fraktguiden_shipping_rate_eta',
