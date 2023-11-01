@@ -432,7 +432,7 @@
 					pickup_point_selector.append( '<option value="">' + lang.LOADING_TEXT + '</option>' );
 				},
 				success: function ( response, status ) {
-					var pickup_points = response.pickupPoint;
+					var pickup_points = response;
 
 					// @todo: handle no pickup points.
 

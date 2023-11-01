@@ -2,13 +2,14 @@
 
 namespace BringFraktguidenPro\PickUpPoint;
 
+use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use WC_Order;
 
 class PickUpPointAdmin {
 
-	public function setup(  ) {
+	public static function init(): void {
 		// Enqueue admin Javascript.
 		add_action('admin_enqueue_scripts', [ __CLASS__, 'admin_load_javascript' ] );
 		// Admin save order items.
@@ -49,7 +50,7 @@ class PickUpPointAdmin {
 			[
 				'ajaxurl' => admin_url('admin-ajax.php'),
 				'services' => Fraktguiden_Helper::get_all_services(),
-				'i18n' => self::get_i18n(),
+				'i18n' => PickUpPoint::get_i18n(),
 				'make_items_editable' => $make_items_editable,
 			]
 		);

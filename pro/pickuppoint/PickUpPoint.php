@@ -14,6 +14,7 @@ use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Fraktguiden_Packer;
 use ReflectionMethod;
 use WC_Order;
+use WC_Order_Item_Shipping;
 use WC_Product_Simple;
 use WC_Shipping_Method_Bring;
 use WC_Shipping_Rate;
@@ -55,7 +56,12 @@ class PickUpPoint
 		// Add pick up points modal after checkout
 		add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
 
+		// Attach pick up point id to shipping item
+		add_action( 'woocommerce_checkout_create_order_shipping_item', __CLASS__ . '::attach_item_meta' );
+
+		// Setup ajax endpoints and admin scripts
 		PickUpPointAjax::init();
+		PickUpPointAdmin::init();
 	}
 
 	/**
@@ -227,5 +233,19 @@ class PickUpPoint
 
 	public static function pick_up_points_modal() {
 		echo (new PickUpPointsModalComponent())->render();
+	}
+
+	/**
+	 * Attach item meta
+	 *
+	 * @param WC_Order_Item_Shipping $item Shipping item.
+	 */
+	public static function attach_item_meta( WC_Order_Item_Shipping $item ): void {
+		ray($item);
+		$id = WC()->session->get( 'bring_fraktguiden_pick_up_point' );
+		if (empty($id)) {
+			return;
+		}
+		$item->add_meta_data( 'pickup_point_id', $id, true );
 	}
 }
