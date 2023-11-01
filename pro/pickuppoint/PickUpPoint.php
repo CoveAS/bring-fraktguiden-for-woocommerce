@@ -32,9 +32,6 @@ class PickUpPoint
 	 */
 	public static function init()
 	{
-		// Enqueue checkout Javascript.
-		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
-
 		// Display order received and mail.
 		add_filter('woocommerce_order_shipping_to_display_shipped_via', [ __CLASS__, 'checkout_order_shipping_to_display_shipped_via' ], 1, 2);
 
@@ -43,14 +40,23 @@ class PickUpPoint
 		add_filter('woocommerce_hidden_order_itemmeta', [ __CLASS__, 'woocommerce_hidden_order_itemmeta' ], 1, 1);
 		add_filter('woocommerce_order_item_display_meta_key', [ __CLASS__, 'woocommerce_order_item_display_meta_key' ] );
 
-		// Add pick up point selector after shipping option
-		add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 10, 2 );
+		// Enqueue checkout Javascript.
+		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
 
-		// Add pick up points modal after checkout
-		add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
+		$legacy = Fraktguiden_Helper::get_option('legacy_pick_up_points', false);
+		add_action('kco_wc_before_snippet', LegacyPickupPoints::class . '::init');
+		if (! $legacy) {
+			// Add pick up point selector after shipping option
+			add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 10, 2 );
 
-		// Attach pick up point id to shipping item
-		add_action( 'woocommerce_checkout_create_order_shipping_item', __CLASS__ . '::attach_item_meta' );
+			// Add pick up points modal after checkout
+			add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
+
+			// Attach pick up point id to shipping item
+			add_action( 'woocommerce_checkout_create_order_shipping_item', __CLASS__ . '::attach_item_meta' );
+		} else {
+			LegacyPickupPoints::init();
+		}
 
 		// Setup ajax endpoints and admin scripts
 		PickUpPointAjax::init();
@@ -93,17 +99,16 @@ class PickUpPoint
 	/**
 	 * Load checkout javascript
 	 */
-	public static function checkout_load_javascript()
-	{
+	public static function checkout_load_javascript(): void {
 
 		if (!is_checkout()) {
 			return;
 		}
-		$legacy = false; // @todo: Make checkbox setting to select legacy
-		$path = 'assets/js/pick-up-point-checkout.js';
-		if ($legacy) {
-			$path = 'assets/js/legacy-pickup-point-checkout.js';
-		}
+		$legacy = Fraktguiden_Helper::get_option('legacy_pick_up_points', false);
+		$path = $legacy
+			? 'assets/js/legacy-pickup-point-checkout.js'
+			: 'assets/js/pick-up-point-checkout.js';
+
 		wp_register_script(
 			'fraktguiden-pickup-point-checkout',
 			plugins_url($path, dirname(__FILE__)),
@@ -239,7 +244,7 @@ class PickUpPoint
 		$item->add_meta_data( 'pickup_point_id', $id, true );
 	}
 
-	private static function supports_pick_up_point( string $bring_product ): bool {
+	public static function supports_pick_up_point( string $bring_product ): bool {
 		$bring_product = strtoupper($bring_product);
 		$services = Fraktguiden_Service::all();
 
