@@ -54,6 +54,8 @@ class PickUpPoint
 
 		// Add pick up points modal after checkout
 		add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
+
+		PickUpPointAjax::init();
 	}
 
 	/**
@@ -113,12 +115,7 @@ class PickUpPoint
 		$pick_up_points = PickUpPointData::rawCollection(
 			(new GetRawPickupPointsAction())(null, null)
 		);
-		$selected_pick_up_point_id = WC()->session->get('bring_fraktguiden_pick_up_point', null);
-		$filtered = $selected_pick_up_point_id ? array_filter(
-			$pick_up_points,
-			fn ($pick_up_point) => $pick_up_point->id === $selected_pick_up_point_id
-		) : [];
-		$selected_pick_up_point = empty($filtered) ? reset($pick_up_points) : reset($filtered);
+		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
 			'_fraktguiden_data',
@@ -189,6 +186,7 @@ class PickUpPoint
 			'RATE_NOT_AVAILABLE' => __('Rate is not available for this order. Please try another service', 'bring-fraktguiden-for-woocommerce'),
 			'REQUEST_FAILED' => __('Request was not successful', 'bring-fraktguiden-for-woocommerce'),
 			'ADD_POSTCODE' => __('Please add postal code', 'bring-fraktguiden-for-woocommerce'),
+			'ERROR_LOADING_PICK_UP_POINTS' => __('ERROR: Could not load pick up points. If this happens again, please notify the website owner', 'bring-fraktguiden-for-woocommerce'),
 		];
 	}
 

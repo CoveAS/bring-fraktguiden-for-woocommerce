@@ -17,6 +17,26 @@ jQuery(function ($) {
     });
   };
   $(document).on('update_checkout', block_options);
+  function oneColumnShipping() {
+    var tr = $('.woocommerce-shipping-totals');
+    if (tr.children.length !== 2) {
+      return;
+    }
+    var header = tr.find('th');
+    var cell = tr.find('td');
+    if (!header.length || !cell.length) {
+      return;
+    }
+    // Move the header and give it colspan 2
+    header.attr('colspan', 2);
+    tr.before($('<tr>').append(header));
+    // Give cell colspan 2
+    cell.attr('colspan', 2);
+  }
+  if (_fraktguiden_checkout.one_column_shipping) {
+    $(document).on('updated_checkout', oneColumnShipping);
+    oneColumnShipping();
+  }
   var busy = false;
   var select_time_slot = function select_time_slot() {
     if (busy) {

@@ -167,13 +167,22 @@ span.bring-error-message {
   animation: checkmark 0.25s ease-in-out 0.5s backwards;
 }
 
+.bring-fraktguiden-pick-up-point-picker {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+  margin: 0.5rem 0;
+}
+
 .bfg-pup__name {
   display: inline-block;
+  font-weight: 600;
 }
 
 .bfg-pup__change {
   display: inline;
   color: #e90000;
+  float: right;
 }
 
 .bfg-pup__change:focus,
@@ -195,6 +204,40 @@ span.bring-error-message {
   left: 0;
   right: 0;
   z-index: 99999;
+  background: #FFFFFF;
+  color: #5f5f5f;
+}
+
+.bfg-pupm__header {
+  display: flex;
+  border-bottom: 1px solid #EEEEEE;
+  margin-bottom: -1px;
+}
+
+.bfg-pupm__instruction {
+  padding: 1rem 1rem 0.75rem;
+}
+
+.bfg-pupm__close {
+  margin-left: auto;
+  font-size: 2rem;
+  line-height: 0.8;
+  cursor: pointer;
+  padding: 1rem 1rem 0.75rem;
+  border-left: 1px solid #EEEEEE;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: color 0.2s;
+  color: #5f5f5f;
+}
+
+.bfg-pupm__close:hover {
+  color: #c12a2a;
+}
+
+.bfg-pupm__inner {
+  overflow: auto;
 }
 
 .bfg-pupm__template {
@@ -204,7 +247,6 @@ span.bring-error-message {
 .bfg-pupm__list {
   height: 100%;
   background: white;
-  overflow: scroll;
 }
 
 .bfg-pupm__item {
@@ -212,12 +254,37 @@ span.bring-error-message {
      -moz-user-select: none;
           user-select: none;
   cursor: pointer;
-  padding: 1rem;
-  border-bottom: 1px solid #999999;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #EEEEEE;
 }
 
 .bfg-pupm__item:focus,
 .bfg-pupm__item:hover {
-  background: #bde1c2;
+  background: #dffae3;
   color: #165f16;
+}
+
+.bfg-pupm__name {
+  font-weight: 600;
+}
+
+@media screen and (min-width: 767px) {
+  .bring-fraktguiden-pick-up-points-modal {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .bfg-pupm__wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .bfg-pupm__inner {
+    border-radius: 0.25rem;
+    background: #FFFFFF;
+    width: 100%;
+    min-height: 20rem;
+    max-height: 60rem;
+    max-width: 40rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }

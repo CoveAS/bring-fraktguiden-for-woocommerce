@@ -34,7 +34,7 @@ class PickUpPointAjax
 	 *
 	 * @return void
 	 */
-	public static function init()
+	public static function init(): void
 	{
 		// Ajax.
 		add_action('wp_ajax_bring_get_pickup_points', __CLASS__ . '::bring_get_pickup_points');
@@ -42,6 +42,14 @@ class PickUpPointAjax
 
 		add_action('wp_ajax_bring_shipping_info_var', [ __CLASS__, 'bring_shipping_info_var' ] );
 		add_action('wp_ajax_bring_get_rate', [ __CLASS__, 'bring_get_rate' ] );
+
+		// set pickup point
+		add_action('wp_ajax_bfg_select_pick_up_point', __CLASS__ . '::bfg_select_pick_up_point');
+		add_action('wp_ajax_nopriv_bfg_select_pick_up_point', __CLASS__ . '::bfg_select_pick_up_point');
+
+		// get pickup points
+		add_action('wp_ajax_bfg_get_pick_up_points', __CLASS__ . '::bfg_get_pick_up_points');
+		add_action('wp_ajax_nopriv_bfg_get_pick_up_points', __CLASS__ . '::bfg_get_pick_up_points');
 	}
 
 	/**
@@ -176,16 +184,43 @@ class PickUpPointAjax
 	 */
 	public static function bring_get_pickup_points()
 	{
-		$response = (new GetRawPickupPointsAction)(
+		$pick_up_points = (new GetRawPickupPointsAction)(
 			filter_input(INPUT_GET, 'country'),
 			filter_input(INPUT_GET, 'postcode')
 		);
 
-		if (empty($response)) {
+		if (empty($pick_up_points)) {
 			wp_die();
 		}
 
-		wp_send_json($response);
+		wp_send_json($pick_up_points);
 	}
 
+	/**
+	 * Select pickup point via AJAX
+	 */
+	public static function bfg_select_pick_up_point(): void {
+		$id = filter_input(INPUT_POST, 'id');
+		WC()->session->set('bring_fraktguiden_pick_up_point', $id);
+		wp_send_json(['message' => 'success']);
+	}
+
+	/**
+	 * Get pickup points via AJAX
+	 */
+	public static function bfg_get_pick_up_points(): void {
+		$result = (new GetRawPickupPointsAction)(null, null);
+
+		if (empty($result)) {
+			wp_die();
+		}
+
+		$pick_up_points = PickUpPointData::rawCollection($result);
+		wp_send_json(
+			[
+				'pick_up_points' => $pick_up_points,
+				'selected_pick_up_point' => (new GetSelectedPickUpPointAction())($pick_up_points),
+			]
+		);
+	}
 }

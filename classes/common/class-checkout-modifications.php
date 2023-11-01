@@ -78,6 +78,7 @@ class Checkout_Modifications {
 			'_fraktguiden_checkout',
 			[
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'one_column_shipping' => true,
 			]
 		);
 		wp_enqueue_script( 'fraktguiden-checkout-js' );
