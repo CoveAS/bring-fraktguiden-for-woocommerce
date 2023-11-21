@@ -83,6 +83,7 @@ class RateFactory {
 		$cost          = $service_price['amountWithoutVAT'];
 		$label         = $service_details['guiInformation']['productName'];
 		$meta_data     = [
+			'bring_description' => $service_details['guiInformation']['descriptionText'],
 			'bring_logo_alt' => $service_details['guiInformation']['logo'] ?? null,
 			'bring_logo_url' => $service_details['guiInformation']['logoUrl'] ?? null,
 			'bring_environmental_logo_url' => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
@@ -96,7 +97,7 @@ class RateFactory {
 				'id'                     => $this->id,
 				'bring_product'          => $bring_product,
 				'cost'                   => (float) $cost + $this->fee,
-				'label'                  => $label . ( $this->display_description ? ': ' . $service_details['guiInformation']['descriptionText'] : ''),
+				'label'                  => $label,
 				'expected_delivery_date' => $expected_delivery_date,
 				'meta_data'              => array_filter($meta_data),
 			],

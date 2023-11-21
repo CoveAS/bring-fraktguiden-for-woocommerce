@@ -26,7 +26,7 @@ class EnvironmentalTag {
 		}
 
 		printf(
-			'<img class="bring-fraktguiden-logo" alt="%s" src="%s">',
+			'<img class="bring-fraktguiden-environmental-tag" alt="%s" src="%s">',
 			$alt,
 			$logo
 		);

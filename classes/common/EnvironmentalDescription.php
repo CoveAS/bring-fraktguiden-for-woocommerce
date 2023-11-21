@@ -27,7 +27,7 @@ class EnvironmentalDescription {
 
 		printf(
 			'<div class="bring-fraktguiden-environmental">
-			<img src="%s">
+			<img class="environmental-logo" src="%s">
 			<span>%s</span>
 			</div>',
 

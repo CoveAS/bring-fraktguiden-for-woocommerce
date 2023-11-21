@@ -47,7 +47,7 @@ class PickUpPoint
 		add_action('kco_wc_before_snippet', LegacyPickupPoints::class . '::init');
 		if (! $legacy) {
 			// Add pick up point selector after shipping option
-			add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 11, 2 );
 
 			// Add pick up points modal after checkout
 			add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );

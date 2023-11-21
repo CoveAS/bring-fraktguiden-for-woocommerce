@@ -304,3 +304,29 @@ span.bring-error-message {
 		margin-left: auto;
 	}
 }
+
+.shipping ul#shipping_method li {
+	margin-bottom: 1rem;
+}
+.bring-fraktguiden-environmental-tag,
+.bring-fraktguiden-logo {
+	display: inline-block;
+}
+.bring-fraktguiden-logo {
+	transform: translateY(-1px);
+	max-width: 73px;
+	float: right;
+}
+.bring-fraktguiden-environmental {
+	display: flex;
+	gap: 0.25rem;
+	font-size: .875rem;
+	align-items: start;
+}
+.bring-fraktguiden-environmental .environmental-logo {
+	transform: translateY(0.25rem);
+	max-width: 1rem;
+}
+
+@media screen and (min-width: 767px) {
+}
