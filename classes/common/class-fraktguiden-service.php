@@ -113,8 +113,8 @@ class Fraktguiden_Service {
 	/**
 	 * All
 	 *
-	 * @param string  $service_key      Field key.
-	 * @param boolean $only_selected  Only get selected services.
+	 * @param string  $service_key   Field key.
+	 * @param boolean $only_selected Only get selected services.
 	 *
 	 * @return array
 	 */
@@ -153,24 +153,22 @@ class Fraktguiden_Service {
 
 	/**
 	 * Find
-	 *
-	 * @param  string $service_key   Service key.
-	 * @param  string $bring_product Bring product.
-	 * @return Fraktguiden_Service|null
 	 */
-	public static function find( $service_key, $bring_product ) {
+	public static function find( string $service_key, string $bring_product ): ?Fraktguiden_Service {
 		$services      = self::all( $service_key );
 		$bring_product = strtoupper( $bring_product );
 		if ( empty( $services[ $bring_product ] ) ) {
 			return null;
 		}
+
 		return $services[ $bring_product ];
 	}
 
 	/**
 	 * Update services options
 	 *
-	 * @param  string $service_key Field key.
+	 * @param string $service_key Field key.
+	 *
 	 * @return array             Services options.
 	 */
 	public static function update_services_options( $service_key ) {
@@ -238,7 +236,7 @@ class Fraktguiden_Service {
 	public function process_post_data() {
 		$result      = [];
 		$post_fields = $this->get_setting_fields();
-		$post_data = filter_input( INPUT_POST, $this->option_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$post_data   = filter_input( INPUT_POST, $this->option_key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		foreach ( $post_fields as $post_field ) {
 			if ( ! isset( $post_data[ $this->bring_product ][ $post_field ] ) ) {
 				if ( preg_match( '/_cb$/', $post_field ) && ! empty( $post_data[ $this->bring_product ] ) ) {
@@ -275,6 +273,7 @@ class Fraktguiden_Service {
 		foreach ( $this->vas as $vas_service ) {
 			$post_fields[] = "vas_{$vas_service->code}";
 		}
+
 		return $post_fields;
 	}
 
@@ -289,6 +288,7 @@ class Fraktguiden_Service {
 				$result[ $post_field ] = $this->settings[ $post_field ];
 			}
 		}
+
 		return $result;
 	}
 
@@ -300,10 +300,34 @@ class Fraktguiden_Service {
 			// Special mailbox rule.
 			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
 			$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
+
 			return "&product={$this->bring_product}:{$customer_number}";
 		}
 
 		return "&product={$this->bring_product}";
+	}
+
+	public function getProduct() {
+		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
+			return [
+				'id'        => $this->bring_product,
+				'customerNumber' => $this->settings['customer_number'],
+			];
+		}
+		if ( '3584' == $this->bring_product || '3570' == $this->bring_product ) {
+			// Special mailbox rule.
+			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+			$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
+
+			return [
+				'id'        => $this->bring_product,
+				'customerNumber' => $customer_number,
+			];
+		}
+
+		return [
+			'id' => $this->bring_product
+		];
 	}
 
 	/**
@@ -313,8 +337,7 @@ class Fraktguiden_Service {
 	 *
 	 * @return string
 	 */
-	public function get_name_by_index( $index = '' ): string
-	{
+	public function get_name_by_index( $index = '' ): string {
 		if ( empty( $this->service_data[ $index ] ) ) {
 			// Return default name as fallback.
 			return $this->service_data['productName'];
@@ -336,9 +359,11 @@ class Fraktguiden_Service {
 				if ( ! $vas->value ) {
 					continue;
 				}
+
 				return $vas->code;
 			}
 		}
+
 		return false;
 	}
 
@@ -349,13 +374,13 @@ class Fraktguiden_Service {
 	 *
 	 * @return boolean VAS Code or false if not matched.
 	 */
-	public function has_vas( $vas_code ): bool
-	{
+	public function has_vas( $vas_code ): bool {
 		foreach ( $this->vas as $vas ) {
 			if ( $vas->code === $vas_code ) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -364,12 +389,12 @@ class Fraktguiden_Service {
 	 *
 	 * @param string $field_key
 	 * @param string $bring_product Bring product.
-	 * @param array $vas_codes     VAS Codes.
+	 * @param array  $vas_codes     VAS Codes.
 	 *
 	 * @return string|boolean VAS Code or false if not matched.
 	 */
 	public static function vas_for( $field_key, $bring_product, $vas_codes ) {
-		$result = false;
+		$result           = false;
 		$enabled_services = Fraktguiden_Service::all( $field_key, true );
 		foreach ( $enabled_services as $service ) {
 			if ( $service->bring_product != $bring_product ) {
@@ -380,6 +405,7 @@ class Fraktguiden_Service {
 				break;
 			}
 		}
+
 		return $result;
 	}
 }

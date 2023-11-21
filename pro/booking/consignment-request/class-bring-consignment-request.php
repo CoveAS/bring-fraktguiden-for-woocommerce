@@ -302,7 +302,7 @@ abstract class Bring_Consignment_Request {
 		}
 
 		$shipping_methods = $wc_order->get_shipping_methods();
-		$this->shipping_item->update_meta_data( '_fraktguiden_packages', $packages, 1 );
+		$this->shipping_item->update_meta_data( '_fraktguiden_packages_v2', $packages, 1 );
 		$this->shipping_item->save_meta_data();
 
 		return $packages;

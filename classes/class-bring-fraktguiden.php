@@ -6,7 +6,10 @@
  */
 
 use Bring_Fraktguiden\Common\Ajax;
+use Bring_Fraktguiden\Common\CarrierLogo;
 use Bring_Fraktguiden\Common\Checkout_Modifications;
+use Bring_Fraktguiden\Common\EnvironmentalDescription;
+use Bring_Fraktguiden\Common\EnvironmentalTag;
 use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
@@ -51,6 +54,11 @@ class Bring_Fraktguiden {
 
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_eta' ) ) {
 			add_action( 'woocommerce_after_shipping_rate', [Rate_Eta::class, 'add_estimated_delivery_date'], 10, 2 );
+		}
+		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
+			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', [ CarrierLogo::class, 'add_carrier_logo'], 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalDescription::class, 'add_environmental_description'], 10, 2 );
 		}
 
 		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );

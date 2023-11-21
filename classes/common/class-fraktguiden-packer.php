@@ -63,9 +63,9 @@ class Fraktguiden_Packer {
 	 * @param array   $product_boxes Product boxes dimensions. Each box contains an array of { length, width, height, weight }.
 	 * @param boolean $multi_pack Multi pack.
 	 */
-	public function pack( $product_boxes, $multi_pack = false ) {
+	public function pack( $product_boxes, $multi_pack = false ): array {
 		if ( ! $this->laff_pack ) {
-			return;
+			return [];
 		}
 
 		// Calculate total weight of boxes.
@@ -92,7 +92,7 @@ class Fraktguiden_Packer {
 
 		if ( ! $multi_pack ) {
 			$this->packages_to_ship[] = $package;
-			return;
+			return $this->packages_to_ship;
 		}
 
 		// Check if the container exceeds max values.
@@ -106,7 +106,7 @@ class Fraktguiden_Packer {
 				$this->popped_product_boxes[] = $popped;
 				$this->pack( $product_boxes, true );
 
-				return;
+				return $this->packages_to_ship;
 			}
 
 			// $popped is too big to ship
@@ -124,6 +124,7 @@ class Fraktguiden_Packer {
 			$this->pack( $popped, true );
 		}
 
+		return $this->packages_to_ship;
 	}
 
 	/**

@@ -447,7 +447,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		}
 
 		foreach ( $rates as &$rate ) {
-			if ( 0 !== strpos( $rate['id'], 'bring_fraktguiden' ) ) {
+			if ( ! str_starts_with( $rate['id'], 'bring_fraktguiden' ) ) {
 				continue;
 			}
 

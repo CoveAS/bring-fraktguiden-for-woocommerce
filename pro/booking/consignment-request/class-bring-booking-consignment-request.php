@@ -37,7 +37,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	 *
 	 * @return array
 	 */
-	public function create_packages( $include_info = false ) {
+	public function legacy_create_packages( $include_info = false ) {
 		$order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
 
 		if ( ! $order_items_packages ) {

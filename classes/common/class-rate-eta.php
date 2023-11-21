@@ -24,7 +24,7 @@ class Rate_Eta {
 	 *
 	 * @throws Exception
 	 */
-	public static function add_estimated_delivery_date( $rate ) {
+	public static function add_estimated_delivery_date( WC_Shipping_Rate $rate ): void {
 		$meta_data = $rate->get_meta_data();
 		if ( empty( $meta_data['expected_delivery_date'] ) ) {
 			return;
@@ -51,8 +51,8 @@ class Rate_Eta {
 		}
 
 		printf(
-			'<div class="bring-fraktguiden-eta">%s %s</div>',
-			esc_html__('Expected delivery:', 'bring-fraktguiden-for-woocommerce'),
+			'<div class="bring-fraktguiden-eta">%s: %s</div>',
+			esc_html__('Expected delivery', 'bring-fraktguiden-for-woocommerce'),
 			esc_html(
 				apply_filters(
 					'bring_fraktguiden_shipping_rate_eta',
