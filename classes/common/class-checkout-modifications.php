@@ -79,7 +79,7 @@ class Checkout_Modifications {
 			'_fraktguiden_checkout',
 			[
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
-				'one_column_shipping' => Fraktguiden_Helper::get_option( 'shipping_options_full_width' ) === 'yes',
+				'one_column_shipping' => Fraktguiden_Helper::get_option( 'shipping_options_full_width', 'yes' ) === 'yes',
 				'map_key'             => Fraktguiden_Helper::get_option( 'pickup_point_map', 'postenMapsLink' ),
 			]
 		);
