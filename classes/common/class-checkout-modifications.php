@@ -184,7 +184,7 @@ class Checkout_Modifications {
 				'date' => str_replace(
 					' ',
 					'&nbsp;',
-					wp_date( 'j. F', $date->getTimestamp(), $date->getTimezone() )
+					wp_date( 'j. M', $date->getTimestamp(), $date->getTimezone() )
 				),
 			];
 		}
@@ -289,7 +289,6 @@ class Checkout_Modifications {
 						"
 						name="bag_on_door_consent"
 						$checked
-						id="terms"
 					/>
 					<span class="bag-on-door-text">$label</span></span>
 				</label>

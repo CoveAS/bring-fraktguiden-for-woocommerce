@@ -46,9 +46,9 @@ jQuery(function ($) {
 		}
 		busy = true;
 		const elem = $( this );
-		elem.addClass( 'alternative-date-item--chosen alternative-date-item--selected' )
-			.siblings()
+		$('.alternative-date-item--chosen')
 			.removeClass( 'alternative-date-item--chosen alternative-date-item--selected' );
+		elem.addClass( 'alternative-date-item--chosen alternative-date-item--selected' );
 		block_options();
 		$.post(
 			_fraktguiden_checkout.ajaxurl,
@@ -68,6 +68,9 @@ jQuery(function ($) {
 			'click',
 			select_time_slot
 		);
+
+		$('.bring-fraktguiden-logo, .bring-fraktguiden-description, .bring-fraktguiden-environmental, .bring-fraktguiden-eta')
+			.on('click', function () { $(this).closest('li').find('input').click()})
 	};
 
 	$( document ).on( 'updated_checkout', bind_buttons );

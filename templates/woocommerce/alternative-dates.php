@@ -50,7 +50,7 @@
 											 viewBox="0 0 78 57">
 											<g>
 												<polyline
-														style="fill:none;stroke:#005500;stroke-width:10;stroke-dasharray:100px, 100px; stroke-dashoffset: 200px;"
+														style="fill:none;stroke:#FFFFFF;stroke-width:10;stroke-dasharray:100px, 100px; stroke-dashoffset: 200px;"
 														points="3.69,25.61 25.69,49.61 73.69,3.61"/>
 											</g>
 										</svg>

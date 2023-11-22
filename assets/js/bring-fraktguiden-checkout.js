@@ -44,7 +44,8 @@ jQuery(function ($) {
     }
     busy = true;
     var elem = $(this);
-    elem.addClass('alternative-date-item--chosen alternative-date-item--selected').siblings().removeClass('alternative-date-item--chosen alternative-date-item--selected');
+    $('.alternative-date-item--chosen').removeClass('alternative-date-item--chosen alternative-date-item--selected');
+    elem.addClass('alternative-date-item--chosen alternative-date-item--selected');
     block_options();
     $.post(_fraktguiden_checkout.ajaxurl, {
       action: 'bring_select_time_slot',
@@ -56,6 +57,9 @@ jQuery(function ($) {
   };
   var bind_buttons = function bind_buttons() {
     $('.bring-fraktguiden-date-options .alternative-date-item--choice').on('click', select_time_slot);
+    $('.bring-fraktguiden-logo, .bring-fraktguiden-description, .bring-fraktguiden-environmental, .bring-fraktguiden-eta').on('click', function () {
+      $(this).closest('li').find('input').click();
+    });
   };
   $(document).on('updated_checkout', bind_buttons);
   bind_buttons();

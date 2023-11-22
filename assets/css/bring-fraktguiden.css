@@ -64,11 +64,11 @@ span.bring-error-message {
 .bring-fraktguiden-date-options {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  overflow: auto;
 }
 .bring-fraktguiden-date-options__inner {
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .alternative-date-range__item,
@@ -112,24 +112,32 @@ span.bring-error-message {
 
 .alternative-date-item {
   position: relative;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
 }
 .alternative-date-item--choice {
-  background: #FEE;
-  transition: background-color 0.2s;
+  color: #666;
+  border: 1px solid #eee;
+  background: #FFF;
+  transition: color, background-color 0.2s;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   cursor: pointer;
 }
 .alternative-date-item--choice:hover {
-  background: #FDD;
+  color: #2e2e2e;
+  border-color: #b4b4b4;
+  border-style: dashed;
 }
 .alternative-date-item--chosen {
-  background: #DFD;
+  background: #80c077;
+  border-color: transparent;
+  cursor: default;
 }
 .alternative-date-item--chosen:hover {
-  background: #CFC;
+  background: #68be5c;
+  border-color: #3b8930;
 }
 .alternative-date-item--empty {
   background: #EEE;
@@ -152,9 +160,9 @@ span.bring-error-message {
 .alternative-date-item__checkmark {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 3px;
+  right: -3px;
+  bottom: -2px;
   display: none;
   padding: 0.75rem 1.5rem;
   justify-content: center;
@@ -212,6 +220,9 @@ span.bring-error-message {
   display: flex;
   border-bottom: 1px solid #EEEEEE;
   margin-bottom: -1px;
+  position: sticky;
+  top: 0;
+  background: white;
 }
 
 .bfg-pupm__instruction {
@@ -236,8 +247,13 @@ span.bring-error-message {
   color: #c12a2a;
 }
 
+.bfg-pupm__wrap {
+  height: 100%;
+}
+
 .bfg-pupm__inner {
   overflow: auto;
+  max-height: 100%;
 }
 
 .bfg-pupm__template {
@@ -260,8 +276,8 @@ span.bring-error-message {
 
 .bfg-pupm__item:focus,
 .bfg-pupm__item:hover {
-  background: #dffae3;
-  color: #165f16;
+  background: #e4f1f9;
+  color: #163a5f;
 }
 
 .bfg-pupm__name {
@@ -275,14 +291,14 @@ span.bring-error-message {
   .bfg-pupm__wrap {
     display: flex;
     align-items: center;
-    height: 100%;
   }
   .bfg-pupm__inner {
     border-radius: 0.25rem;
     background: #FFFFFF;
     width: 100%;
     min-height: 20rem;
-    max-height: 60rem;
+    max-height: 90%;
+    max-height: min(90%, 60rem);
     max-width: 40rem;
     margin-right: auto;
     margin-left: auto;
@@ -311,6 +327,18 @@ span.bring-error-message {
 }
 
 .bring-fraktguiden-environmental .environmental-logo {
-  transform: translateY(0.25rem);
+  transform: translateY(3px);
   max-width: 1rem;
+}
+
+.shipping ul#shipping_method label {
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+.bring-fraktguiden-logo,
+.bring-fraktguiden-description,
+.bring-fraktguiden-environmental,
+.bring-fraktguiden-eta {
+  cursor: default;
 }

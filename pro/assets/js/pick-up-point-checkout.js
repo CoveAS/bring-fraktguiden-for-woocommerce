@@ -56,16 +56,25 @@ jQuery(function ($) {
 		}
 	);
 
+	let previous = $('#shipping_method .shipping_method:checked').val();
 	$(document).on(
 		'updated_checkout',
 		function (event, data) {
 			const el = $('.bring-fraktguiden-pick-up-point-picker');
+			const current = $('#shipping_method .shipping_method:checked').val();
+			let changed = current  !== previous;
+			if (changed) {
+				previous = current;
+			}
 			if (!el.length || !modalEl.length) {
 				return;
 			}
 			el.show();
 			el.block(blockArgs);
-
+			if (changed) {
+				// Show the picker when selecting method with pickup points
+				modalEl.show();
+			}
 
 			const listEl = modalEl.find('.bfg-pupm__list');
 			const template = modalEl.find('.bfg-pupm__template');
@@ -109,7 +118,7 @@ jQuery(function ($) {
 					}
 					listEl.unblock();
 				}
-			).error( () => listEl.text(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS) );
+			).fail( () => listEl.text(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS) );
 		}
 	);
 })
