@@ -437,7 +437,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		if ( 'yes' === $this->debug ) {
-			$this->log->add( $this->id, 'Request url: ' . print_r( $url, true ) );
+			$this->log->add( $this->id, 'Request url: ' . print_r( self::SERVICE_URL, true ) );
 			$this->log->add( $this->id, 'Parameters: ' . PHP_EOL . print_r( $params, true ) );
 			$this->log->add( $this->id, 'Response: ' . PHP_EOL . json_encode( $json, JSON_PRETTY_PRINT ) );
 			if ( $rates ) {
