@@ -45,7 +45,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if (empty($order_items_packages)) {
 			return $this->create_packages($include_info);
 		}
-		ray($order_items_packages);
 		$order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
 		foreach ( $order_items_packages as $item_id => $package ) {
 			if (! is_array($package)) {
