@@ -64,9 +64,28 @@ return [
 				'pickuppoint' => false,
 				'oldcode'     => 'CARGO',
 			],
+			'5400' => [
+				'ProductCode'    => '5400',
+				'productName'    => 'Pall til bedrift',
+				'description'    => 'Godset kan spores og leveres på døren mellom kl. 08-16.',
+				'helpText'       => 'Godset leveres på døren til bedrift mellom kl. 08-16. Dersom sendingen ikke kan leveres ved første forsøk, kontaktes mottaker for å avtale ny utkjøring. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'maxWeightInKgs' => '9600',
+				'deprecated'     => false,
+				'pickuppoint'    => false,
+				'oldcode'        => '',
+			],
+			'3266' => [
+				'ProductCode' => '3266',
+				'productName' => 'Mail',
+				'description' => '',
+				'helptext'    => '',
+				'deprecated'  => false,
+				'pickuppoint' => false,
+				'oldcode'     => 'MAIL',
+			],
 		],
 	],
-	'mailbox_new'      => [
+	'mailbox_new'  => [
 		'title'    => __( 'Mailbox', 'bring-fraktguiden-for-woocommerce' ),
 		'expanded' => true,
 		'services' => [
@@ -79,7 +98,8 @@ return [
 				'pickuppoint' => false,
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 2 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
-				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.', 'bring-fraktguiden-for-woocommerce' ),
+				'warning'     => __( 'Please note in order to use mailbox with tracking you need a RFID printer.',
+					'bring-fraktguiden-for-woocommerce' ),
 				'oldcode'     => 'PAKKE_I_POSTKASSEN_SPORBAR',
 			],
 			'3584' => [
@@ -142,7 +162,8 @@ return [
 				'productName' => 'Business Parcel',
 				'helptext'    => 'Business Parcel leveres på døren til bedrift mellom kl. 8 og 16. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'description' => 'Pakken kan spores og utleveres på døren mellom kl. 8-16.',
-				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.', 'bring-fraktguiden-for-woocommerce' ),
+				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.',
+					'bring-fraktguiden-for-woocommerce' ),
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
@@ -155,7 +176,8 @@ return [
 				'productName' => 'Business Pallet',
 				'helptext'    => 'Business Pallet leveres på døren til bedrift mellom kl. 8 og 16. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'description' => 'Pallen kan spores og utleveres på døren mellom kl. 8-16.',
-				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.', 'bring-fraktguiden-for-woocommerce' ),
+				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.',
+					'bring-fraktguiden-for-woocommerce' ),
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
@@ -165,7 +187,8 @@ return [
 				'productName' => 'Business Pallet (1/2)',
 				'helptext'    => 'Business Pallet (1/2) leveres på døren til bedrift mellom kl. 8 og 16. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'description' => 'Pallen kan spores og utleveres på døren mellom kl. 8-16.',
-				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.', 'bring-fraktguiden-for-woocommerce' ),
+				'warning'     => __( 'Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.',
+					'bring-fraktguiden-for-woocommerce' ),
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
@@ -238,10 +261,10 @@ return [
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
-			'HOME_DELIVERY_PARCEL' => [
+			'HOME_DELIVERY_PARCEL'       => [
 				'ProductCode' => '0349',
 				'productName' => 'Home Delivery Parcel',
-				'helptext' => 'Parcels will be delivered between 8 a.m. - 5 p.m. or 5 p.m. - 9 p.m., based on the geographical location in the country.',
+				'helptext'    => 'Parcels will be delivered between 8 a.m. - 5 p.m. or 5 p.m. - 9 p.m., based on the geographical location in the country.',
 				'deprecated'  => false,
 				'pickuppoint' => false,
 			],
@@ -251,7 +274,7 @@ return [
 			 * Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice.
 			 * For shipments to Denmark, PICKUP_PARCEL needs to be ordered with the “PICKUP_POINT” additional service to send as a low-cost delivery from Bring’s parcel shops or parcel lockers. Otherwise the shipment will be sent as a more expensive home delivery.
 			 */
-			'PICKUP_PARCEL_BULK'              => [
+			'PICKUP_PARCEL_BULK'         => [
 				'ProductCode' => '0342',
 				'productName' => 'PickUp Parcel Bulk',
 				'description' => 'Pakken kan spores og utleveres på ditt lokale hentested.',

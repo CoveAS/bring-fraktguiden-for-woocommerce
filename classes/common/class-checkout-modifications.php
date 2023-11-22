@@ -65,7 +65,8 @@ class Checkout_Modifications {
 			return;
 		}
 
-		$url = plugins_url( 'assets/js/bring-fraktguiden-checkout.js', dirname( __DIR__ ) );
+		$file = 'bring-fraktguiden-checkout.js';
+		$url = plugins_url( 'assets/js/' . $file, dirname( __DIR__ ) );
 		wp_register_script(
 			'fraktguiden-checkout-js',
 			$url,
@@ -77,8 +78,9 @@ class Checkout_Modifications {
 			'fraktguiden-checkout-js',
 			'_fraktguiden_checkout',
 			[
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'one_column_shipping' => true,
+				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
+				'one_column_shipping' => Fraktguiden_Helper::get_option( 'shipping_options_full_width' ) === 'yes',
+				'map_key'             => Fraktguiden_Helper::get_option( 'pickup_point_map', 'postenMapsLink' ),
 			]
 		);
 		wp_enqueue_script( 'fraktguiden-checkout-js' );
@@ -120,7 +122,7 @@ class Checkout_Modifications {
 		if ( empty( $meta_data['alternative_delivery_dates'] ) ) {
 			return $args;
 		}
-		$alternatives = (new CreateAlternativeDeliveryDateFromArray)(
+		$alternatives = ( new CreateAlternativeDeliveryDateFromArray )(
 			$meta_data['alternative_delivery_dates']
 		);
 
@@ -195,10 +197,10 @@ class Checkout_Modifications {
 	/**
 	 * Attach item meta
 	 *
-	 * @param \WC_Order_Item_Shipping $item Shipping item.
-	 * @param string $package_key Package key.
-	 * @param array $package Package.
-	 * @param \WC_Order $order Order Instance.
+	 * @param \WC_Order_Item_Shipping $item        Shipping item.
+	 * @param string                  $package_key Package key.
+	 * @param array                   $package     Package.
+	 * @param \WC_Order               $order       Order Instance.
 	 */
 	public static function attach_item_meta( $item, $package_key, $package, $order ) {
 		$bring_product = $item->get_meta( 'bring_product' );
@@ -230,10 +232,10 @@ class Checkout_Modifications {
 	/**
 	 * Attach item meta
 	 *
-	 * @param integer $order_id Order id.
-	 * @param string $package_key Package key
-	 * @param array $package Package.
-	 * @param \WC_Order $order Order Instance.
+	 * @param integer   $order_id    Order id.
+	 * @param string    $package_key Package key
+	 * @param array     $package     Package.
+	 * @param \WC_Order $order       Order Instance.
 	 */
 	public static function attach_order_note( $order_id ) {
 		$order     = wc_get_order( $order_id );
@@ -249,12 +251,12 @@ class Checkout_Modifications {
 	public static function bag_on_door_consent() {
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 
-		if ( empty($current_shipping_method)
-		|| ! (
-			in_array( 'bring_fraktguiden:3584', $current_shipping_method )
-			|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
+		if ( empty( $current_shipping_method )
+		     || ! (
+				in_array( 'bring_fraktguiden:3584', $current_shipping_method )
+				|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
 			)
-		|| WC()->session->get('chosen_payment_method') === 'kco' ) {
+		     || WC()->session->get( 'chosen_payment_method' ) === 'kco' ) {
 			return;
 		}
 
@@ -262,7 +264,7 @@ class Checkout_Modifications {
 			return;
 		}
 
-		$label = esc_html__(
+		$label   = esc_html__(
 			"Deliver the package in a bag on my door if it doesn't fit in the mailbox",
 			'bring-fraktguiden-for-woocommerce'
 		);
@@ -301,7 +303,7 @@ class Checkout_Modifications {
 	 * Save user selected bag on door value to order meta
 	 */
 	public static function bag_on_door_order_meta( $order_id ) {
-		$consent_value = filter_input(INPUT_POST, 'bag_on_door_consent', FILTER_VALIDATE_BOOLEAN);
+		$consent_value = filter_input( INPUT_POST, 'bag_on_door_consent', FILTER_VALIDATE_BOOLEAN );
 
 		if ( $consent_value ) {
 			update_post_meta( $order_id, '_bag_on_door_consent', $consent_value );
@@ -318,7 +320,7 @@ class Checkout_Modifications {
 			return;
 		}
 		echo '<p><strong>';
-		esc_html_e('Bag on door consent', 'bring-fraktguiden-for-woocommerce' );
+		esc_html_e( 'Bag on door consent', 'bring-fraktguiden-for-woocommerce' );
 		echo ':</strong><br>';
 		esc_html_e( 'Yes', 'bring-fraktguiden-for-woocommerce' );
 		echo '</p>';
@@ -327,15 +329,15 @@ class Checkout_Modifications {
 	/**
 	 * Bag on door option for Klarna checkout
 	 */
-	public static function kco_bag_on_door_consent(array $additional_checkboxes ) {
+	public static function kco_bag_on_door_consent( array $additional_checkboxes ) {
 		$current_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
 
-		if ( empty($current_shipping_method)
-			|| ! (
+		if ( empty( $current_shipping_method )
+		     || ! (
 				in_array( 'bring_fraktguiden:3584', $current_shipping_method )
 				|| in_array( 'bring_fraktguiden:3570', $current_shipping_method )
 			)
-			) {
+		) {
 			return $additional_checkboxes;
 		}
 
@@ -344,7 +346,8 @@ class Checkout_Modifications {
 		}
 		$additional_checkboxes[] = array(
 			'id'       => 'klarna_bag_on_door_consent',
-			'text'     => __( "Deliver the package in a bag on my door if it doesn't fit in the mailbox", 'bring-fraktguiden-for-woocommerce' ),
+			'text'     => __( "Deliver the package in a bag on my door if it doesn't fit in the mailbox",
+				'bring-fraktguiden-for-woocommerce' ),
 			'checked'  => false,
 			'required' => true,
 		);
@@ -352,16 +355,16 @@ class Checkout_Modifications {
 		return $additional_checkboxes;
 	}
 
-	private static function is_bag_on_door_enabled( array $current_shipping_method ): bool
-	{
-		$service_key  = (new WC_Shipping_Method_Bring())->get_field_key( 'services' );
-		foreach ($current_shipping_method as $shipping_method_key) {
-			$parts = explode(':', $shipping_method_key);
-			$bring_product = array_pop($parts);
-			if ( Fraktguiden_Service::vas_for( $service_key, $bring_product, ['1081'] ) ) {
+	private static function is_bag_on_door_enabled( array $current_shipping_method ): bool {
+		$service_key = ( new WC_Shipping_Method_Bring() )->get_field_key( 'services' );
+		foreach ( $current_shipping_method as $shipping_method_key ) {
+			$parts         = explode( ':', $shipping_method_key );
+			$bring_product = array_pop( $parts );
+			if ( Fraktguiden_Service::vas_for( $service_key, $bring_product, [ '1081' ] ) ) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 }

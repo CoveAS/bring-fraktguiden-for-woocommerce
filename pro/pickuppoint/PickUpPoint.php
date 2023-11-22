@@ -43,7 +43,7 @@ class PickUpPoint
 		// Enqueue checkout Javascript.
 		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
 
-		$legacy = Fraktguiden_Helper::get_option('legacy_pick_up_points', false);
+		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
 		add_action('kco_wc_before_snippet', LegacyPickupPoints::class . '::init');
 		if (! $legacy) {
 			// Add pick up point selector after shipping option
@@ -104,7 +104,7 @@ class PickUpPoint
 		if (!is_checkout()) {
 			return;
 		}
-		$legacy = Fraktguiden_Helper::get_option('legacy_pick_up_points', false);
+		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
 		$path = $legacy
 			? 'assets/js/legacy-pickup-point-checkout.js'
 			: 'assets/js/pick-up-point-checkout.js';

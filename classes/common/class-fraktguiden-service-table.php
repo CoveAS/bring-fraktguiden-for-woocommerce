@@ -9,6 +9,7 @@ namespace BringFraktguiden\Common;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use WC_Shipping_Method_Bring;
 
 /**
  * Fraktguiden_Service_Table class
@@ -30,10 +31,8 @@ class Fraktguiden_Service_Table {
 
 	/**
 	 * Construct
-	 *
-	 * @param string $shipping_method Shipping method.
 	 */
-	public function __construct( $shipping_method, $option ) {
+	public function __construct( WC_Shipping_Method_Bring $shipping_method, string $option ) {
 		$this->shipping_method = $shipping_method;
 		if ( ! empty( $shipping_method->form_fields[ $option ] ) ) {
 			$this->title = $shipping_method->form_fields[ $option ]['title'];
@@ -82,8 +81,6 @@ class Fraktguiden_Service_Table {
 
 		// Process services table.
 		$services  = Fraktguiden_Service::all( $service_key );
-
-		$options   = [];
 
 		$service_options = [];
 		// Only process options for enabled services.

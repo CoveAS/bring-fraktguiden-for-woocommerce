@@ -13,12 +13,18 @@ jQuery(function ($) {
 		return pickUpPoint.address + ', ' + pickUpPoint.postalCode + ' ' + pickUpPoint.city;
 	}
 
+	const mapKey = _fraktguiden_checkout.map_key;
 	function selectPickUpPoint(pickUpPoint) {
 		$('.bfg-pup__name').text(pickUpPoint.name);
 		$('.bfg-pup__address').text(getAddress(pickUpPoint));
 		$('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
 		$('.bfg-pup__description').text(pickUpPoint.description);
-		$('.bfg-pup__map').attr('href', pickUpPoint.postenMapsLink);
+		console.log(pickUpPoint);
+		if (mapKey) {
+			$('.bfg-pup__map').attr('href', pickUpPoint[mapKey]);
+		} else {
+			$('.bfg-pup__map').hide();
+		}
 	}
 
 	function ajaxSelect(pickUpPointId) {

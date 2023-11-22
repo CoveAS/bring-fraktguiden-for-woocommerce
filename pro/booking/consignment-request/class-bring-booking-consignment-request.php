@@ -37,6 +37,60 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	 *
 	 * @return array
 	 */
+	public function create_packages( $include_info = false ) {
+		$order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages_v2' );
+		if ( ! $order_items_packages ) {
+			$order_items_packages = $this->order_update_packages();
+		}
+		if (empty($order_items_packages)) {
+			return $this->create_packages($include_info);
+		}
+		ray($order_items_packages);
+		$order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
+		foreach ( $order_items_packages as $item_id => $package ) {
+			if (! is_array($package)) {
+				continue;
+			}
+			foreach ( $package as $i => $item ) {
+				$weight = $item[ 'weight_in_grams' ] ?? 0;
+
+				$package_type = null;
+				if ( $this->service->home_delivery ) {
+					$package_type = Fraktguiden_Helper::get_option( 'booking_home_delivery_package_type', 'hd_eur' );
+				}
+
+				$weight_in_kg = (int) $weight / 1000;
+				$data         = [
+					'weightInKg'       => $weight_in_kg,
+					'goodsDescription' => null,
+					'dimensions'       => [
+						'widthInCm'  => $item[ 'width' ],
+						'heightInCm' => $item[ 'height' ],
+						'lengthInCm' => $item[ 'length' ],
+					],
+					'containerId'      => null,
+					'packageType'      => $package_type,
+					'numberOfItems'    => null,
+					'correlationId'    => null,
+				];
+
+				if ( $include_info ) {
+					$data['shipping_item_info'] = [
+						'item_id'         => $item_id,
+						'shipping_method' => [
+							'name'            => $this->shipping_item['method_id'],
+							'service'         => $this->service_id,
+							'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
+						],
+					];
+				}
+
+				$result[] = $data;
+			}
+		}
+
+		return $result;
+	}
 	public function legacy_create_packages( $include_info = false ) {
 		$order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
 

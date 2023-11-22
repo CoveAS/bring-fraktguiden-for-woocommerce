@@ -131,7 +131,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 *
 	 * @var string
 	 */
-	static public $field_key;
+	static public                     $field_key;
+	private Fraktguiden_Service_Table $service_table;
 
 	/**
 	 * Initialize the instance
@@ -204,7 +205,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->service_table = new Fraktguiden_Service_Table( $this, 'services' );
 
 		$field_key = $this->get_field_key( 'services' );
-		Bring_Fraktguiden\updater::setup( $field_key );
+		Bring_Fraktguiden\Updater::setup( $field_key );
 	}
 
 	/**
@@ -405,6 +406,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		// Decode the JSON data from bring.
 		$json = json_decode( $response->get_body(), true );
+
 		if ( isset( $json['traceMessages'] ) ) {
 			$this->set_trace_messages( $json['traceMessages'] );
 		}
@@ -546,16 +548,21 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		);
 
 		$products = [];
+		$with_price = false;
 		if ( ! empty( $services ) ) {
 			/** @var Fraktguiden_Service $service */
 			foreach ( $services as $service ) {
 				$products[] = $service->getProduct();
+				if ($service->get_setting('custom_price_cb') !== 'on') {
+					$with_price = true;
+				}
 			}
 		}
 		$params = [
 			'language'                         => $this->get_bring_language(),
-			'withPrice'                        => $this->get_setting( 'with_prices', 'yes' ) === 'yes',
+			'withPrice'                        => $with_price,
 			'withExpectedDelivery'             => $this->get_setting('display_eta', 'no') === 'yes',
+//			'withEstimatedDeliveryTime'        => false,
 			'withGuiInformation'               => true, //
 			'withEnvironmentalData'            => $this->get_setting('display_desc', 'no') === 'yes',
 			'numberOfAlternativeDeliveryDates' => 0,
@@ -579,6 +586,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		foreach ( $services as $service ) {
 			if ( $service->vas_match( [ 'alternative_delivery_dates' ] ) ) {
 				$params['numberOfAlternativeDeliveryDates'] = 5;
+				$params['withUniqueAlternateDeliveryDates'] = true;
 				break;
 			}
 		}

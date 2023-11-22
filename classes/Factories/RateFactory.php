@@ -4,6 +4,7 @@ namespace Bring_Fraktguiden\Factories;
 
 use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Calculators\PriceCalculator;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Exception;
@@ -47,11 +48,18 @@ class RateFactory {
 
 			return null;
 		}
-		if ( ! empty( $service_details['price']['netPrice']['priceWithoutAdditionalServices'] ) ) {
-			$service_price = $service_details['price']['netPrice']['priceWithoutAdditionalServices'];
-		} elseif ( ! empty( $service_details['price']['listPrice']['priceWithoutAdditionalServices'] ) ) {
-			$service_price = $service_details['price']['listPrice']['priceWithoutAdditionalServices'];
-		} elseif ( ! empty( $service_details['warnings'] ) ) {
+		$service       = Fraktguiden_Service::find( self::$field_key, $bring_product );
+		$service_price = $service_details['price']['netPrice']['priceWithAdditionalServices']
+		                 ?? $service_details['price']['netPrice']['priceWithoutAdditionalServices']
+		                    ?? null;
+		// Net price is only provided when a customer number is used in the API request. Fallback to list price.
+		if ( Fraktguiden_Helper::get_option( 'price_to_use', 'net' ) === 'list' ?? empty( $service_price ) ) {
+			$service_price = $service_details['price']['listPrice']['priceWithAdditionalServices']
+			                 ?? $service_details['price']['listPrice']['priceWithoutAdditionalServices']
+			                    ?? $service_price;
+		}
+
+		if ( ! $service_price && ! empty( $service_details['warnings'] ) ) {
 			$no_price = false;
 			foreach ( $service_details['warnings'] as $warning ) {
 				if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
@@ -64,7 +72,6 @@ class RateFactory {
 				return null;
 			}
 
-			$service = Fraktguiden_Service::find( self::$field_key, $bring_product );
 			if ( ! $service->settings['custom_price_cb'] ) {
 				$log( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
 
@@ -73,21 +80,21 @@ class RateFactory {
 			$service_price = [
 				'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
 			];
-		} else {
-			$log( [ 'No price provided for ' . $service_details['id'] ] );
+		} elseif ( ! $service_price && $service->get_setting( 'custom_price_cb' ) !== 'on' ) {
+			$log( [ __( 'No price provided for' ) . ' ' . $service_details['id'] . '. ' . __( 'Please consider setting a custom price for this service.' ) ] );
 
 			return null;
 		}
 
 		$bring_product = sanitize_title( $service_details['id'] );
-		$cost          = $service_price['amountWithoutVAT'];
+		$cost          = $service_price['amountWithoutVAT'] ?? 0;
 		$label         = $service_details['guiInformation']['productName'];
 		$meta_data     = [
-			'bring_description' => $service_details['guiInformation']['descriptionText'],
-			'bring_logo_alt' => $service_details['guiInformation']['logo'] ?? null,
-			'bring_logo_url' => $service_details['guiInformation']['logoUrl'] ?? null,
-			'bring_environmental_logo_url' => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
-			'bring_environmental_tag_url' => $service_details['guiInformation']['environmentalTagUrl'] ?? null,
+			'bring_description'               => $service_details['guiInformation']['descriptionText'],
+			'bring_logo_alt'                  => $service_details['guiInformation']['logo'] ?? null,
+			'bring_logo_url'                  => $service_details['guiInformation']['logoUrl'] ?? null,
+			'bring_environmental_logo_url'    => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
+			'bring_environmental_tag_url'     => $service_details['guiInformation']['environmentalTagUrl'] ?? null,
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
 		];
 
@@ -99,13 +106,13 @@ class RateFactory {
 				'cost'                   => (float) $cost + $this->fee,
 				'label'                  => $label,
 				'expected_delivery_date' => $expected_delivery_date,
-				'meta_data'              => array_filter($meta_data),
+				'meta_data'              => array_filter( $meta_data ),
 			],
 			$service_details
 		);
 
 		if (
-			!empty($service_details['expectedDelivery']['alternativeDeliveryDates'])
+			! empty( $service_details['expectedDelivery']['alternativeDeliveryDates'] )
 			&& Fraktguiden_Service::vas_for( self::$field_key, $bring_product, [ 'alternative_delivery_dates' ] )
 		) {
 			$rate['alternative_delivery_dates'] = Sanitize_Alternative_Delivery_Dates::sanitize(
