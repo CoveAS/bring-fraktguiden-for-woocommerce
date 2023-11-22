@@ -312,7 +312,7 @@ class Fraktguiden_Service {
 	}
 
 	public function getProduct() {
-		$customer_number = Fraktguiden_Helper::get_option( 'use_customer_number_to_get_prices' ) === 'yes'
+		$customer_number = Fraktguiden_Helper::get_option( 'use_customer_number_to_get_prices', 'yes' ) === 'yes'
 			? Fraktguiden_Helper::get_option( 'mybring_customer_number' )
 			: null;
 		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
