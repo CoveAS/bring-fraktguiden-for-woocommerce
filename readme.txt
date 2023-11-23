@@ -9,7 +9,7 @@ Tested up to: 6.4.0
 Requires PHP: 8.0
 WC requires at least: 4.8.0
 WC tested up to: 8.2.1
-Stable tag: 1.9.5
+Stable tag: 1.10.0
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -63,6 +63,25 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.10.0 =
+
+* Fixed bug with styles missing on checkout page
+* Improved display of shipping options
+* Made improved descriptions on by default
+* Added setting to choose between net and list price
+* Added setting to get prices using customer number or not
+* Added setting for language
+* If price has been set on all services the plugin will no longer request prices from the api
+* New design for pick up points
+* Added logo and environmental tag for shipping rates
+* Added option to make shipping options full width on the checkout page
+* Added option to select which map provider to use for pick up points
+* Added option to chose the new or legacy design for pick up points
+* Changed usage of shipping guide rest api from using GET to POST method
+* Removed bring_fraktguiden_standard_url_params filter
+* Added bring_fraktguiden_shipping_guide_request_body filter
+* Removed WooCommerce cart-shipping template
 
 = 1.9.5 =
 
