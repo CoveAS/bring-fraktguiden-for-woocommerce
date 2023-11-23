@@ -98,7 +98,16 @@ class RateFactory {
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
 		];
 
-		$rate = apply_filters(
+		if (
+			! empty( $service_details['expectedDelivery']['alternativeDeliveryDates'] )
+			&& Fraktguiden_Service::vas_for( self::$field_key, $bring_product, [ 'alternative_delivery_dates' ] )
+		) {
+			$rate['alternative_delivery_dates'] = Sanitize_Alternative_Delivery_Dates::sanitize(
+				$service_details['expectedDelivery']['alternativeDeliveryDates']
+			);
+		}
+
+		return apply_filters(
 			'bring_product_api_rate',
 			[
 				'id'                     => $this->id,
@@ -110,16 +119,5 @@ class RateFactory {
 			],
 			$service_details
 		);
-
-		if (
-			! empty( $service_details['expectedDelivery']['alternativeDeliveryDates'] )
-			&& Fraktguiden_Service::vas_for( self::$field_key, $bring_product, [ 'alternative_delivery_dates' ] )
-		) {
-			$rate['alternative_delivery_dates'] = Sanitize_Alternative_Delivery_Dates::sanitize(
-				$service_details['expectedDelivery']['alternativeDeliveryDates']
-			);
-		}
-
-		return $rate;
 	}
 }
