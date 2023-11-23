@@ -7,6 +7,9 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use WC_Shipping_Method_Bring;
+use WC_Shipping_Zones;
+
 /**
  *  Fraktguiden_System_Info class
  */
@@ -304,7 +307,7 @@ class FraktguidenSystemInfo {
 
 		foreach ( $zones as $zone ) {
 			ob_start();
-			require __DIR__ . '/templates/system-info/shipping-zones.php';
+			require dirname(__DIR__, 2) . '/templates/system-info/shipping-zones.php';
 			$html = ob_get_clean();
 		}
 
