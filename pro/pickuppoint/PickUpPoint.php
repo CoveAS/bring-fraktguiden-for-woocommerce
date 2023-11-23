@@ -77,6 +77,10 @@ class PickUpPoint
 		$fields[] = 'pickup_point_id';
 		$fields[] = 'bring_product';
 		$fields[] = 'expected_delivery_date';
+		$fields[] = 'bring_description';
+		$fields[] = 'bring_logo_alt';
+		$fields[] = 'bring_logo_url';
+		$fields[] = 'bring_environmental_logo_url';
 
 		return $fields;
 	}

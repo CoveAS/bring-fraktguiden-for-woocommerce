@@ -19,7 +19,6 @@ jQuery(function ($) {
 		$('.bfg-pup__address').text(getAddress(pickUpPoint));
 		$('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
 		$('.bfg-pup__description').text(pickUpPoint.description);
-		console.log(pickUpPoint);
 		if (mapKey) {
 			$('.bfg-pup__map').attr('href', pickUpPoint[mapKey]);
 		} else {
