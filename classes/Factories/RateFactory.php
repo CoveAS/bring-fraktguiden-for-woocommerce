@@ -59,33 +59,27 @@ class RateFactory {
 			                    ?? $service_price;
 		}
 
-		if ( $service->get_setting( 'custom_price_cb' ) !== 'on' ) {
-			if ( ! $service_price && ! empty( $service_details['warnings'] ) ) {
-				$no_price = false;
-				foreach ( $service_details['warnings'] as $warning ) {
-					if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
-						$no_price = true;
-						break;
-					}
-					$log( [ 'Warning: ' . $warning['description'] ] );
-				}
-				if ( ! $no_price ) {
-					return null;
-				}
-
-				if ( ! $service->settings['custom_price_cb'] ) {
-					$log( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
-
-					return null;
-				}
-				$service_price = [
-					'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
-				];
-			} elseif ( ! $service_price ) {
+		if ( $service->get_setting( 'custom_price_cb' ) !== 'on' && ! $service_price ) {
+			if (  empty( $service_details['warnings'] ) ) {
 				$log( [ __( 'No price provided for' ) . ' ' . $service_details['id'] . '. ' . __( 'Please consider setting a custom price for this service.' ) ] );
 
 				return null;
 			}
+			$no_price = false;
+			foreach ( $service_details['warnings'] as $warning ) {
+				if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
+					$no_price = true;
+					break;
+				}
+				$log( [ 'Warning: ' . $warning['description'] ] );
+			}
+			if ( ! $no_price ) {
+				return null;
+			}
+		} else {
+			$service_price = [
+				'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
+			];
 		}
 
 		$bring_product = sanitize_title( $service_details['id'] );
