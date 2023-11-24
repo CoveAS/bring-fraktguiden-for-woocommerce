@@ -59,31 +59,33 @@ class RateFactory {
 			                    ?? $service_price;
 		}
 
-		if ( ! $service_price && ! empty( $service_details['warnings'] ) ) {
-			$no_price = false;
-			foreach ( $service_details['warnings'] as $warning ) {
-				if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
-					$no_price = true;
-					break;
+		if ( $service->get_setting( 'custom_price_cb' ) !== 'on' ) {
+			if ( ! $service_price && ! empty( $service_details['warnings'] ) ) {
+				$no_price = false;
+				foreach ( $service_details['warnings'] as $warning ) {
+					if ( 'NO_PRICE_INFORMATION' === $warning['code'] ) {
+						$no_price = true;
+						break;
+					}
+					$log( [ 'Warning: ' . $warning['description'] ] );
 				}
-				$log( [ 'Warning: ' . $warning['description'] ] );
-			}
-			if ( ! $no_price ) {
+				if ( ! $no_price ) {
+					return null;
+				}
+
+				if ( ! $service->settings['custom_price_cb'] ) {
+					$log( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
+
+					return null;
+				}
+				$service_price = [
+					'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
+				];
+			} elseif ( ! $service_price ) {
+				$log( [ __( 'No price provided for' ) . ' ' . $service_details['id'] . '. ' . __( 'Please consider setting a custom price for this service.' ) ] );
+
 				return null;
 			}
-
-			if ( ! $service->settings['custom_price_cb'] ) {
-				$log( [ 'No price provided by the api for ' . $service_details['id'] . '. Please use the fixed price override option to use this service.' ] );
-
-				return null;
-			}
-			$service_price = [
-				'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
-			];
-		} elseif ( ! $service_price && $service->get_setting( 'custom_price_cb' ) !== 'on' ) {
-			$log( [ __( 'No price provided for' ) . ' ' . $service_details['id'] . '. ' . __( 'Please consider setting a custom price for this service.' ) ] );
-
-			return null;
 		}
 
 		$bring_product = sanitize_title( $service_details['id'] );
@@ -98,6 +100,15 @@ class RateFactory {
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
 		];
 
+		$rate = [
+			'id'                     => $this->id,
+			'bring_product'          => $bring_product,
+			'cost'                   => (float) $cost + $this->fee,
+			'label'                  => $label,
+			'expected_delivery_date' => $expected_delivery_date,
+			'meta_data'              => $meta_data,
+		];
+
 		if (
 			! empty( $service_details['expectedDelivery']['alternativeDeliveryDates'] )
 			&& Fraktguiden_Service::vas_for( self::$field_key, $bring_product, [ 'alternative_delivery_dates' ] )
@@ -109,14 +120,7 @@ class RateFactory {
 
 		return apply_filters(
 			'bring_product_api_rate',
-			[
-				'id'                     => $this->id,
-				'bring_product'          => $bring_product,
-				'cost'                   => (float) $cost + $this->fee,
-				'label'                  => $label,
-				'expected_delivery_date' => $expected_delivery_date,
-				'meta_data'              => array_filter( $meta_data ),
-			],
+			$rate,
 			$service_details
 		);
 	}
