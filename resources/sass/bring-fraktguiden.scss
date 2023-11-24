@@ -330,7 +330,7 @@ span.bring-error-message {
 
 .woocommerce img.bring-fraktguiden-logo {
 	transform: translateY(-1px);
-	max-width: 73px;
+	max-width: 73px !important;
 	float: right;
 }
 
@@ -343,7 +343,7 @@ span.bring-error-message {
 
 .bring-fraktguiden-environmental .environmental-logo {
 	transform: translateY(3px);
-	max-width: 1rem;
+	max-width: 1rem !important;
 }
 
 .shipping ul#shipping_method label {
