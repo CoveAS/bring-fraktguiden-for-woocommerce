@@ -60,7 +60,7 @@ class RateFactory {
 		}
 
 		if ( $service->get_setting( 'custom_price_cb' ) !== 'on' && ! $service_price ) {
-			if (  empty( $service_details['warnings'] ) ) {
+			if ( empty( $service_details['warnings'] ) ) {
 				$log( [ __( 'No price provided for' ) . ' ' . $service_details['id'] . '. ' . __( 'Please consider setting a custom price for this service.' ) ] );
 
 				return null;
@@ -76,12 +76,13 @@ class RateFactory {
 			if ( ! $no_price ) {
 				return null;
 			}
-		} else {
+		} elseif ( $service->get_setting( 'custom_price_cb' ) === 'on' ) {
 			$service_price = [
 				'amountWithoutVAT' => ( new PriceCalculator() )->excl_vat( $service->settings['custom_price'] )
 			];
 		}
 
+		ray( $service_price );
 		$bring_product = sanitize_title( $service_details['id'] );
 		$cost          = $service_price['amountWithoutVAT'] ?? 0;
 		$label         = $service_details['guiInformation']['productName'];
