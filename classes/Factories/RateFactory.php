@@ -82,7 +82,6 @@ class RateFactory {
 			];
 		}
 
-		ray( $service_price );
 		$bring_product = sanitize_title( $service_details['id'] );
 		$cost          = $service_price['amountWithoutVAT'] ?? 0;
 		$label         = $service_details['guiInformation']['productName'];
