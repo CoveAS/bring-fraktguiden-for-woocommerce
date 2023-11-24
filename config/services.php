@@ -74,15 +74,6 @@ return [
 				'pickuppoint'    => false,
 				'oldcode'        => '',
 			],
-//			'MAIL' => [
-//				'ProductCode' => '3266',
-//				'productName' => 'Mail',
-//				'description' => '',
-//				'helptext'    => '',
-//				'deprecated'  => false,
-//				'pickuppoint' => false,
-//				'oldcode'     => 'MAIL',
-//			],
 		],
 	],
 	'mailbox_new'  => [
@@ -137,6 +128,7 @@ return [
 				'productName' => 'Brev',
 				'helptext'    => '',
 				'deprecated'  => false,
+				'warning'     => __( 'Please note that Mail does not return with prices from the api and you need to set a fixed price override to use this service' ),
 				'pickuppoint' => false,
 			],
 			'CARGO_GROUPAGE' => [
