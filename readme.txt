@@ -9,7 +9,7 @@ Tested up to: 6.4.0
 Requires PHP: 8.0
 WC requires at least: 4.8.0
 WC tested up to: 8.2.1
-Stable tag: 1.10.3
+Stable tag: 1.10.4
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -64,7 +64,7 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.10.3 =
+= 1.10.4 =
 
 * Fixed a bug that caused shipping rate prices to be 0
 * Fixed a bug where in some themes the posten/bring logo would be huge
