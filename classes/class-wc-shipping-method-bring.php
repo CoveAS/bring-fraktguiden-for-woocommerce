@@ -485,14 +485,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		return array_filter( $rates );
 	}
 
-	/**
-	 * Standard url params for the Bring HTTP request
-	 *
-	 * @param array $package Package.
-	 *
-	 * @return array
-	 */
-	public function make_shipping_guide_request_body( $package = null, $services, $packages ) {
+	public function make_shipping_guide_request_body( $package, $services, $packages ) {
 		if ( null === $package ) {
 			$package = [
 				'destination' => [
