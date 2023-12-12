@@ -60,7 +60,9 @@ class Fraktguiden_Service {
 	/**
 	 * Value Added Services
 	 */
-	public $vas = null;
+	public         $vas = null;
+	public string  $bring_product;
+	public string $option_key;
 
 	/**
 	 * Construct

@@ -40,6 +40,15 @@ class Fraktguiden_Packer {
 	private $laff_pack;
 
 	/**
+	 * @var false|mixed|null
+	 */
+	private mixed $dim_unit;
+	/**
+	 * @var false|mixed|null
+	 */
+	private mixed $weight_unit;
+
+	/**
 	 * Construct
 	 *
 	 * @return void

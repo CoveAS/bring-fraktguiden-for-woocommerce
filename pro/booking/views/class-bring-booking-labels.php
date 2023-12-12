@@ -178,7 +178,7 @@ class Bring_Booking_Labels {
 			$filename .= 'pdf';
 		}
 
-		header( 'Content-Length: ' . filesize( $file ) );
+//		header( 'Content-Length: ' . filesize( $file ) );
 
 		$content_type = 'Content-type: application/octet-stream';
 
@@ -192,7 +192,7 @@ class Bring_Booking_Labels {
 		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
 
 		// Workaround for Chrome's inline pdf viewer.
-		ob_clean();
+		@ob_clean();
 		flush();
 
 		readfile( $file );

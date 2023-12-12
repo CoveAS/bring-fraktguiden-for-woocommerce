@@ -31,9 +31,10 @@ class Bring_WC_Order_Adapter {
 	 *
 	 * @var WC_Order|null
 	 */
-	public $order = null;
-	public $shipping_method = null;
-	public $bring_product = null;
+	public        $order = null;
+	public        $shipping_method = null;
+	public        $bring_product = null;
+	public mixed $shipping_item = null;
 
 	/**
 	 * Construct

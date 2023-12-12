@@ -599,8 +599,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( preg_match( '/^\d{2}:\d{2}$/', $lead_time_cutoff ) ) {
 			$cutoff_time = (int) str_replace( ':', '', $lead_time_cutoff );
 		}
-		$shipping_date = new \DateTime(
-			null,
+		$shipping_date = new DateTime(
+			'now',
 			new \DateTimeZone( 'Europe/Oslo' )
 		);
 
