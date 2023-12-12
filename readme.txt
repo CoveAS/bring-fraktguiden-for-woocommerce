@@ -64,6 +64,10 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.10.5 =
+
+* Fixed some warning messages and notices in php 8.2 and above
+
 = 1.10.4 =
 
 * Fixed a bug that caused shipping rate prices to be 0
