@@ -28,6 +28,7 @@ class ClassLoader
 		$suggestion[] = $fileName;
 
 		$suggestions = [
+			['BringFraktguiden', ...$parts],
 			$parts,
 			$suggestion,
 			self::getDashed($parts),
@@ -37,7 +38,7 @@ class ClassLoader
 		foreach ($suggestions as $suggestion) {
 			$fileName = array_pop($suggestion);
 			$dir       = ($pro ? dirname(__DIR__) . '/pro' : __DIR__) . '/'. implode('/', $suggestion);
-			if (substr($dir, -1) === '/') {
+			if (str_ends_with($dir, '/')) {
 				// Remove trailing slash
 				$dir = substr($dir,0, -1);
 			}

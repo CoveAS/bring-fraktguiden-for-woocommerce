@@ -315,7 +315,7 @@ class Fraktguiden_Helper {
 	 */
 	public static function update_option( $key, $data ) {
 		if ( empty( self::$options ) ) {
-			self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
+			self::$options = get_option( 'woocommerce_bring_fraktguiden_settings', [] );
 		}
 
 		self::$options[ $key ] = $data;

@@ -9,7 +9,6 @@ use Bring_Fraktguiden\Common\Ajax;
 use Bring_Fraktguiden\Common\CarrierLogo;
 use Bring_Fraktguiden\Common\Checkout_Modifications;
 use Bring_Fraktguiden\Common\EnvironmentalDescription;
-use Bring_Fraktguiden\Common\EnvironmentalTag;
 use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
@@ -19,9 +18,8 @@ use Bring_Fraktguiden\Common\RateDescription;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
+use BringFraktguiden\Development\StateSelector;
 use BringFraktguidenPro\BringFraktguidenPro;
-use BringFraktguidenPro\PickupPoint\Fraktguiden_Pick_Up_Point_Enhancement;
-use BringFraktguidenPro\PickUpPoint\LegacyPickUpPointEnhancement;
 
 /**
  * Bring_Fraktguiden class
@@ -106,6 +104,10 @@ class Bring_Fraktguiden {
 
 		Checkout_Modifications::setup();
 		Ajax::setup();
+
+		if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local') {
+			StateSelector::setup();
+		}
 	}
 
 	public static function add_subsetting_link() {

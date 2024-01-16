@@ -89,7 +89,7 @@ class Fraktguiden_License
 	 */
 	public function valid(): bool
 	{
-		$valid = get_option('bring_fraktguiden_pro_valid_to');
+		$valid = get_option('bring_fraktguiden_pro_valid_to', '0');
 
 		if (!ctype_digit($valid)) {
 			return false;
