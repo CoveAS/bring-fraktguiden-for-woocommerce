@@ -24,7 +24,6 @@ class Scripts
 			return;
 		}
 		$baseUrl = plugin_dir_url(dirname(__DIR__));
-		wp_enqueue_script( 'hash-tables', $baseUrl . '/assets/js/jquery.hash-tabs.min.js', [ 'jquery' ], Bring_Fraktguiden::VERSION );
 		wp_enqueue_script( 'bring-admin-js', $baseUrl . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
 		wp_enqueue_script( 'mybring-admin-js', $baseUrl . '/assets/js/mybring-admin.js', ['jquery'], Bring_Fraktguiden::VERSION, true );
 		wp_enqueue_script( 'bring-settings-js', $baseUrl . '/assets/js/bring-fraktguiden-settings.js', [], Bring_Fraktguiden::VERSION, true );

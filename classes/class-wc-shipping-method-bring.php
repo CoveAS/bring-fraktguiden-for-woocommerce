@@ -198,10 +198,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 
-		if ( ! $this->is_valid_for_use() ) {
-			$this->enabled = false;
-		}
-
 		$this->service_table = new Fraktguiden_Service_Table( $this, 'services' );
 
 		$field_key = $this->get_field_key( 'services' );
@@ -229,18 +225,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		return ( new PriceCalculator() )->excl_vat( $line_price );
 	}
 
-	/**
-	 * Returns true if the required options are set
-	 *
-	 * @return boolean
-	 */
-	public function is_valid_for_use() {
-		$dimensions_unit = get_option( 'woocommerce_dimension_unit' );
-		$weight_unit     = get_option( 'woocommerce_weight_unit' );
-		$currency        = get_option( 'woocommerce_currency' );
-
-		return $weight_unit && $dimensions_unit && $currency;
-	}
 
 	/**
 	 * Process admin options

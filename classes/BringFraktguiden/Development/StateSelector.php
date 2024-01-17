@@ -38,8 +38,8 @@ class StateSelector
 
 		return [
 			'fresh' => [],
-			'api'   => $api_only,
-			'pro'   => $pro,
+			'api' => $api_only,
+			'pro' => $pro,
 			'trial' => $trial,
 			'pro_test' => $pro_test,
 			'expired' => $expired,
@@ -51,6 +51,12 @@ class StateSelector
 	public static function setup(): void
 	{
 		add_action('admin_bar_menu', function ($wp_admin_bar) {
+			$wp_admin_bar->add_node(
+				[
+					'id' => 'bring_states',
+					'title' => 'Select state',
+				]
+			);
 			foreach (self::getStateKeys() as $state) {
 				self::button($wp_admin_bar, $state);
 			}
@@ -70,8 +76,6 @@ class StateSelector
 			}
 
 			$state = self::getStates()[$stateKey];
-//			ray($state, get_option('woocommerce_bring_fraktguiden_services'));
-//			ray(get_option('woocommerce_bring_fraktguiden_settings'));
 			if ($stateKey === 'fresh') {
 				delete_option('woocommerce_bring_fraktguiden_settings');
 			} else {
@@ -83,6 +87,9 @@ class StateSelector
 			} else {
 				delete_option('bring_fraktguiden_pro_valid_to');
 			}
+
+			// Reset the new settings
+			delete_option('bring_fraktguiden_for_woocommerce_settings');
 
 			$referer = $_SERVER['HTTP_REFERER'] ?? null;
 			if ($referer) {
@@ -99,6 +106,7 @@ class StateSelector
 		$wp_admin_bar->add_node(array(
 			'id' => 'bring_state_' . $state,
 			'title' => ucfirst($state),
+			'parent' => 'bring_states',
 			'href' => admin_url('?bring-state-select=' . $state),
 			'meta' => array(
 				'class' => 'bring-state-button bring-state-button--' . $state,

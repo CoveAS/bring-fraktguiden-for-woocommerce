@@ -18,6 +18,7 @@ use Bring_Fraktguiden\Common\RateDescription;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
+use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguidenPro\BringFraktguidenPro;
 
@@ -33,10 +34,12 @@ class Bring_Fraktguiden {
 	/**
 	 * Initialize the plugin
 	 */
-	public static function init() {
+	public static function init(): void
+	{
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
+		SettingsPage::init();
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname( __DIR__ );
