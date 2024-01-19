@@ -241,7 +241,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$instance_key = $this->get_instance_option_key();
 		}
 		$this->service_table->process_services_field( $instance_key );
-		$this->process_mybring_api_credentials();
+//		$this->process_mybring_api_credentials();
 	}
 
 	/**

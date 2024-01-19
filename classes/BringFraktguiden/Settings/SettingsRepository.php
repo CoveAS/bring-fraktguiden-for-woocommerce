@@ -33,6 +33,12 @@ class SettingsRepository
 		return $this->settings[$key];
 	}
 
+	public function set(string $key, Setting $setting): self
+	{
+		$this->settings[$key] = $setting;
+		return $this;
+	}
+
 	public function all(): array
 	{
 		return $this->settings;

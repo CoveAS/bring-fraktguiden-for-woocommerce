@@ -1,0 +1,35 @@
+<?php
+
+use BringFraktguiden\Admin\FieldRenderer;
+
+/**
+ * @var string $title
+ * @var bool $value
+ * @var string $type
+ * @var string $label
+ * @var string $description
+ * @var string $desc_tip
+ * @var string $default
+ * @var string $placeholder
+ * @var string $css
+ * @var array $custom_attributes
+ * @var array $options
+ */
+?>
+<label>
+	<input
+		type="<?php echo esc_attr($type);?>"
+		value="<?php echo esc_attr($default); ?>"
+		<?php FieldRenderer::attributes($custom_attributes); ?>
+		<?php if ($placeholder): ?>
+			placeholder="<?php echo esc_attr($placeholder); ?>"
+		<?php endif; ?>
+		<?php if ($css): ?>
+			style="<?php echo esc_attr($css); ?>"
+		<?php endif; ?>
+		<?php if ($value): ?>
+			checked="checked"
+		<?php endif; ?>
+	>
+	<span><?php echo wp_kses_post($label); ?></span>
+</label>
