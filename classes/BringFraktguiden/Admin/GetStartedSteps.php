@@ -43,7 +43,7 @@ class GetStartedSteps
 		$steps [] = new Step(
 			label: __('Select shipping services', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Go to the shipping method settings and select which of the bring services you want to show on the checkout page', 'bring-fraktguiden-for-woocommerce'),
-			action: admin_url('admin.php?page=bring_fraktguiden_settings&sub-page=service-wizard'),
+			action: admin_url('admin.php?page=bring_fraktguiden_home&sub-page=service-wizard'),
 			actionText: __('Select services', 'bring-fraktguiden-for-woocommerce'),
 			completed: !empty(Fraktguiden_Helper::get_option('services')),
 		);
@@ -66,7 +66,7 @@ class GetStartedSteps
 		$steps [] = new Step(
 			label: __('Set up fallback rates', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Sometimes the API does not return any rates. This could be caused by a myriad of reasons and to mitigate this we recommend having some fallback options available for your customers.', 'bring-fraktguiden-for-woocommerce'),
-			action: '#',
+			action: admin_url('admin.php?page=bring_fraktguiden_fallback'),
 			actionText: __('Configure fallback options', 'bring-fraktguiden-for-woocommerce'),
 			completed: $fallback,
 		);

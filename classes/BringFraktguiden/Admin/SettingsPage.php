@@ -69,7 +69,7 @@ class SettingsPage
 			__('Booking', 'bring-fraktguiden-for-woocommerce'),
 			'manage_options',
 			'bring_fraktguiden_booking',
-			[self::class, 'settings_page']
+			[self::class, 'booking_page']
 		);
 		add_submenu_page(
 			'bring_fraktguiden_home',
@@ -77,7 +77,7 @@ class SettingsPage
 			__('Fallback rates', 'bring-fraktguiden-for-woocommerce'),
 			'manage_options',
 			'bring_fraktguiden_fallback',
-			[self::class, 'settings_page']
+			[self::class, 'fallback_page']
 		);
 		add_submenu_page(
 			'bring_fraktguiden_home',
@@ -109,12 +109,22 @@ class SettingsPage
 				break;
 			}
 		}
-		require_once dirname(__DIR__, 3) . '/templates/admin/settings.php';
+		require_once dirname(__DIR__, 3) . '/templates/admin/home.php';
 	}
 
 	public static function settings_page(): void
 	{
-		require_once dirname(__DIR__, 3) . '/templates/admin/service-wizard.php';
+		require_once dirname(__DIR__, 3) . '/templates/admin/settings.php';
+	}
+
+	public static function booking_page(): void
+	{
+		require_once dirname(__DIR__, 3) . '/templates/admin/booking.php';
+	}
+
+	public static function fallback_page(): void
+	{
+		require_once dirname(__DIR__, 3) . '/templates/admin/fallback-rates.php';
 	}
 
 	public static function settings_init(): void
@@ -175,12 +185,16 @@ class SettingsPage
 
 	private static function is_settings_page(): bool
 	{
-		return isset($_GET['page']) && 'bring_fraktguiden_home' === $_GET['page'];
+		return isset($_GET['page']) && str_starts_with($_GET['page'], 'bring_fraktguiden_');
 	}
 
 	public static function enqueue_admin_styles($hook): void
 	{
-		if ($hook !== 'toplevel_page_bring_fraktguiden_home') {
+		$pages = [
+			'bring-fraktguiden_page_bring_fraktguiden_settings',
+			'toplevel_page_bring_fraktguiden_home',
+		];
+		if (! in_array($hook, $pages)) {
 			return;
 		}
 		$dir = dirname(__DIR__, 2);
