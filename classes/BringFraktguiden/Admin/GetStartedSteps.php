@@ -48,8 +48,6 @@ class GetStartedSteps
 			completed: !empty(Fraktguiden_Helper::get_option('services')),
 		);
 
-
-
 		$fallback = false;
 		$fallback_settings = [
 			'fallback'

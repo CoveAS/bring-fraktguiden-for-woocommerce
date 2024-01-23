@@ -1,11 +1,14 @@
 <?php
 
 use BringFraktguiden\Admin\FieldRenderer;
+use BringFraktguiden\Fields\Field;
 
 /**
  * @var string $title
+ * @var string $value
  * @var string $type
  * @var string $label
+ * @var string $description
  * @var string $desc_tip
  * @var string $default
  * @var string $placeholder
@@ -15,12 +18,15 @@ use BringFraktguiden\Admin\FieldRenderer;
  */
 ?>
 <select
-	type="<?php echo esc_attr($type);?>"
-	<?php FieldRenderer::attributes($custom_attributes); ?>
+	type="<?php echo esc_attr($type); ?>"
+	<?php Field::attributes($custom_attributes); ?>
 	<?php if ($css): ?>
 		style="<?php echo esc_attr($css); ?>"
 	<?php endif; ?>
 >
+	<?php if ($placeholder): ?>
+		<option disabled><?php echo esc_attr($placeholder); ?></option>
+	<?php endif; ?>
 	<?php foreach ($options as $key => $option): ?>
 		<option
 			<?php echo $value === $key ? 'selected="selected"' : ''; ?>

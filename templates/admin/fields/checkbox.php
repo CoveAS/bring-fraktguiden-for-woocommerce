@@ -1,6 +1,7 @@
 <?php
 
 use BringFraktguiden\Admin\FieldRenderer;
+use BringFraktguiden\Fields\Field;
 
 /**
  * @var string $title
@@ -18,9 +19,9 @@ use BringFraktguiden\Admin\FieldRenderer;
 ?>
 <label>
 	<input
-		type="<?php echo esc_attr($type);?>"
+		type="<?php echo esc_attr($type); ?>"
 		value="<?php echo esc_attr($default); ?>"
-		<?php FieldRenderer::attributes($custom_attributes); ?>
+		<?php Field::attributes($custom_attributes); ?>
 		<?php if ($placeholder): ?>
 			placeholder="<?php echo esc_attr($placeholder); ?>"
 		<?php endif; ?>

@@ -16,4 +16,5 @@ use BringFraktguiden\Admin\FieldRenderer;
  */
 ?>
 
+<p><?php echo wp_kses_post($desc_tip); ?></p>
 <p><?php echo wp_kses_post($description); ?></p>

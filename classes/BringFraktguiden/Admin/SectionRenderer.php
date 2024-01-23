@@ -20,9 +20,12 @@ class SectionRenderer
 			printf('<p>%s</p>', $section['description']);
 		}
 
+		echo '<div class="bfg-grid">';
 		foreach ($section['fields'] as $key => $field) {
+			printf('<span>%s</span>',$field['title']);
 			FieldRenderer::{$key}();
 		}
+		echo '</div>';
 	}
 
 }

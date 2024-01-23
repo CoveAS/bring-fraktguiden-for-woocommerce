@@ -2,12 +2,66 @@
 
 namespace BringFraktguiden\Admin;
 
+use BringFraktguiden\Fields\Field;
+use BringFraktguiden\Settings\Attributes\Checkbox;
+use BringFraktguiden\Settings\Setting;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Utility\Config;
 
 /**
  * @method static pro_enabled()
  * @method static test_mode()
+ * @method static plugin_settings()
+ * @method static language()
+ * @method static post_office()
+ * @method static from_zip()
+ * @method static from_country()
+ * @method static handling_fee()
+ * @method static general_options_title()
+ * @method static calculate_by_weight()
+ * @method static enable_multipack()
+ * @method static shipping_options_full_width()
+ * @method static display_desc()
+ * @method static use_customer_number_to_get_prices()
+ * @method static price_to_use()
+ * @method static service_sorting()
+ * @method static mybring_title()
+ * @method static mybring_api_uid()
+ * @method static mybring_api_key()
+ * @method static mybring_customer_number()
+ * @method static no_connection_title()
+ * @method static no_connection_handling()
+ * @method static no_connection_flat_rate_label()
+ * @method static no_connection_flat_rate()
+ * @method static no_connection_rate_id()
+ * @method static exceptions_title()
+ * @method static exception_handling()
+ * @method static exception_flat_rate_label()
+ * @method static exception_flat_rate()
+ * @method static exception_rate_id()
+ * @method static max_products_title()
+ * @method static alt_handling()
+ * @method static max_products()
+ * @method static alt_flat_rate_label()
+ * @method static alt_flat_rate()
+ * @method static alt_flat_rate_id()
+ * @method static advanced_settings()
+ * @method static debug()
+ * @method static disable_stylesheet()
+ * @method static lead_time()
+ * @method static lead_time_cutoff()
+ * @method static display_eta()
+ * @method static pickup_point_section()
+ * @method static pickup_point_types()
+ * @method static pickup_point_style()
+ * @method static pickup_point_map()
+ * @method static system_information()
+ * @method static fallback_options()
+ * @method static minimum_sizing_params()
+ * @method static minimum_length()
+ * @method static minimum_width()
+ * @method static minimum_height()
+ * @method static minimum_weight()
  */
 class FieldRenderer
 {
@@ -20,63 +74,9 @@ class FieldRenderer
 				continue;
 			}
 			$field = $section['fields'][$name];
-			self::render($name, $field);
+			echo (new Field($name, $field))->render();
 			break;
 		}
 	}
 
-	public static function render(string $name, array $field): void
-	{
-		$field = wp_parse_args(
-			$field,
-			[
-				'title' => '',
-				'type' => 'text',
-				'label' => '',
-				'desc_tip' => '',
-				'default' => '',
-				'placeholder' => '',
-				'css' => '',
-				'custom_attributes' => [],
-				'options' => []
-			]
-		);
-		switch ($field['type']) {
-			case 'checkbox':
-				self::template($name,'checkbox', $field);
-				break;
-			case 'select':
-				self::template($name, 'select', $field);
-				break;
-			case 'info':
-				self::template($name, 'info', $field);
-				break;
-			case 'text':
-			case 'time':
-			case 'number':
-				self::template($name, 'input', $field);
-				break;
-		}
-	}
-
-	private static function template(string $name, string $template, array $field): void
-	{
-		unset($field['name']);
-		unset($field['template']);
-		unset($field['field']);
-		extract($field);
-		$value = Settings::instance()->{$name}->value;
-		require dirname(__DIR__, 3) . '/templates/admin/fields/' . $template . '.php';
-	}
-
-	public static function attributes(array $attributes): void
-	{
-		foreach ($attributes as $attribute => $value) {
-			printf(
-				' %s="%s" ',
-				esc_attr($attribute),
-				esc_attr($value)
-			);
-		}
-	}
 }

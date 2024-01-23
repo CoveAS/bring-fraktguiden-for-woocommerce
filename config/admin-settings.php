@@ -7,6 +7,8 @@ if (defined('WC_LOG_DIR')) {
 	$wc_log_dir = WC_LOG_DIR;
 }
 
+$base_country = WC()->countries->get_base_country();
+$base_postcode = WC()->countries->get_base_postcode();
 return [
 	[
 		'title' => __('Bring Settings', 'bring-fraktguiden-for-woocommerce'),
@@ -31,7 +33,7 @@ return [
 			'language' => [
 				'title' => __('Language', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
-				'desc_tip' => __('Choose which language to ask the API to use', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Choose the language you want to use for the names and descriptions of shipping rates.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'website',
 				'options' => [
 					'website' => __('Use website language', 'bring-fraktguiden-for-woocommerce'),
@@ -46,36 +48,36 @@ return [
 				'title' => __('Post office', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
 				'label' => __('Shipping from post office', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('Flag that tells whether the parcel is delivered at a post office when it is shipped.',
+				'description' => __('Enable this option if you deliver packages to a post office.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
 			'from_zip' => [
 				'title' => __('From zip', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'placeholder' => __('ie: 0159', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('This is the zip code of where you deliver from. For example, the post office.',
-					'bring-fraktguiden-for-woocommerce'),
-				'css' => 'width: 8em;',
+				'placeholder' => $base_postcode,
+				'css' => 'width: 100px; text-align: right;',
 				'default' => '',
 			],
 			'from_country' => [
 				'title' => __('From country', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
-				'desc_tip' => __('This is the country of origin where you deliver from (If omitted WooCommerce\'s default location will be used. See WooCommerce - Settings - General)',
-					'bring-fraktguiden-for-woocommerce'),
 				'class' => 'chosen_select',
-				'css' => 'width: 400px;',
-				'default' => WC()->countries->get_base_country(),
-				'options' => Fraktguiden_Helper::get_nordic_countries(),
+				'css' => 'width: 200px;',
+				'default' => '',
+				'placeholder' => __('Choose a country', 'bring-fraktguiden-for-woocommerce'),
+				'options' => [
+					'' => '',
+					...Fraktguiden_Helper::get_nordic_countries(),
+					],
 			],
 			'handling_fee' => [
-				'title' => __('Delivery Fee', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Handling Fee', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'placeholder' => __('0', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('What fee do you want to charge for Bring, disregarded if you choose free. Leave blank to disable.',
+				'description' => __('Use this setting if you want to add an additional fee on top of the calculated shipping rates. All services will have their prices increased by this amount.',
 					'bring-fraktguiden-for-woocommerce'),
-				'css' => 'width: 8em;',
+				'css' => 'width: 100px; text-align: right;',
 				'default' => '',
 				'custom_attributes' => [
 					'min' => '0',
@@ -449,56 +451,63 @@ return [
 		'description' => __('With scenarios that fall outside of what Bring can handle, you are able to set prices for cases such as oversized items, minimum sized items, how many items you allow in one shipment and what should happen if Bring is not accessible.',
 			'bring-fraktguiden-for-woocommerce'),
 		'fields' => [
-			],
 		],
+	],
 	'minimum_sizing_params' => [
 		'title' => __('Minimum shipping dimensions', 'bring-fraktguiden-for-woocommerce'),
 		'description' => __('Bring needs a default shipping size for when products do not contain any dimension information.',
 			'bring-fraktguiden-for-woocommerce'),
 		'fields' => [
 			'minimum_length' => [
-				'title' => __('Minimum Length in cm', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Length', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
-				'css' => 'width: 8em;',
+				'css' => 'width: 75px;',
 				'placeholder' => __('Must be at least 23cm', 'bring-fraktguiden-for-woocommerce'),
 				'desc_tip' => __('The lowest length for a consignment', 'bring-fraktguiden-for-woocommerce'),
-				'default' => '23',
+				'default' => '23.0',
 				'custom_attributes' => [
+					'step' => '0.1',
 					'min' => '1',
+					'class' => 'bfg-suffixed-number'
 				],
 			],
 			'minimum_width' => [
-				'title' => __('Minimum Width in cm', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Width', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
-				'css' => 'width: 8em;',
+				'css' => 'width: 75px;',
 				'placeholder' => __('Must be at least 13cm', 'bring-fraktguiden-for-woocommerce'),
 				'desc_tip' => __('The lowest width for a consignment', 'bring-fraktguiden-for-woocommerce'),
-				'default' => '13',
+				'default' => '13.0',
 				'custom_attributes' => [
+					'step' => '0.1',
 					'min' => '1',
+					'class' => 'bfg-suffixed-number'
 				],
 			],
 			'minimum_height' => [
-				'title' => __('Minimum Height in cm', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Height', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
-				'css' => 'width: 8em;',
+				'css' => 'width: 75px;',
 				'placeholder' => __('Must be at least 1cm', 'bring-fraktguiden-for-woocommerce'),
 				'desc_tip' => __('The lowest height for a consignment', 'bring-fraktguiden-for-woocommerce'),
-				'default' => '1',
+				'default' => '1.0',
 				'custom_attributes' => [
+					'step' => '0.1',
 					'min' => '1',
+					'class' => 'bfg-suffixed-number'
 				],
 			],
 			'minimum_weight' => [
-				'title' => __('Minimum Weight in kg', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Weight', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
-				'css' => 'width: 8em;',
+				'css' => 'width: 75px;',
 				'desc_tip' => __('The lowest weight in kilograms for a consignment',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => '0.01',
 				'custom_attributes' => [
 					'step' => '0.01',
 					'min' => '0.01',
+					'class' => 'bfg-suffixed-number'
 				],
 			],
 		],

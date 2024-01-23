@@ -1,12 +1,15 @@
 <?php
 
 use BringFraktguiden\Admin\FieldRenderer;
+use BringFraktguiden\Fields\Field;
 
 /**
+ * @var string $value
  * @var string $name
  * @var string $title
  * @var string $type
  * @var string $label
+ * @var string $description
  * @var string $desc_tip
  * @var string $default
  * @var string $placeholder
@@ -16,11 +19,12 @@ use BringFraktguiden\Admin\FieldRenderer;
  */
 ?>
 <input
-	name="<?php echo esc_attr($name);?>"
-	type="<?php echo esc_attr($type);?>"
-	value="<?php echo esc_attr($default); ?>"
-	<?php FieldRenderer::attributes($custom_attributes); ?>
-	<?php if ($placeholder): ?>
+	id="<?php echo esc_attr($name); ?>"
+	name="<?php echo esc_attr($name); ?>"
+	type="<?php echo esc_attr($type); ?>"
+	value="<?php echo esc_attr($value); ?>"
+	<?php Field::attributes($custom_attributes); ?>
+	<?php if ($placeholder !== ''): ?>
 		placeholder="<?php echo esc_attr($placeholder); ?>"
 	<?php endif; ?>
 	<?php if ($css): ?>

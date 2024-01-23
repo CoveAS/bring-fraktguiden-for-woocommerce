@@ -3,6 +3,7 @@
 namespace BringFraktguiden\Admin;
 
 use Automattic\WooCommerce\Admin\PageController;
+use BringFraktguiden\Fields\Fields;
 use BringFraktguiden\Settings\SettingsRepository;
 use BringFraktguiden\Utility\Config;
 
@@ -114,6 +115,8 @@ class SettingsPage
 
 	public static function settings_page(): void
 	{
+		$fields = Fields::instance();
+		$currency = get_option( 'woocommerce_currency' );
 		require_once dirname(__DIR__, 3) . '/templates/admin/settings.php';
 	}
 
