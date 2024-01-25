@@ -55,7 +55,7 @@ class Bring_Booking_Order_View {
 		}
 
 		// Do not show if the order does not use fraktguiden shipping.
-		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
+		$order = new Bring_WC_Order_Adapter( wc_get_order($post) );
 		if ( Fraktguiden_Helper::get_option( 'booking_without_bring' ) !== 'yes' && ! $order->has_bring_shipping_methods() ) {
 			return;
 		}
@@ -75,7 +75,7 @@ class Bring_Booking_Order_View {
 	 * @param WP_Post $post Post.
 	 */
 	public static function render_booking_meta_box( $post ) {
-		$wc_order = new WC_Order( $post->ID );
+		$wc_order = wc_get_order($post);
 		$order    = new Bring_WC_Order_Adapter( $wc_order );
 		?>
 
@@ -481,6 +481,7 @@ class Bring_Booking_Order_View {
 		global $post_ID;
 		$type = get_post_type();
 
+		ray($_REQUEST);
 		if ( $type == 'shop_order' && isset( $_POST['_bring-start-booking'] ) ) {
 			$url = admin_url() . 'post.php?post=' . $post_ID . '&action=edit&booking_step=2';
 			wp_redirect( $url );
@@ -532,36 +533,29 @@ class Bring_Booking_Order_View {
 		$existing       = [];
 		// Get the existing packages
 		foreach ( $shipping_items as $item_id => $method ) {
-			$meta_packages        = wc_get_order_item_meta( $item_id, '_fraktguiden_packages', true );
+			$meta_packages        = wc_get_order_item_meta( $item_id, '_fraktguiden_packages_v2', true );
 			$existing[ $item_id ] = $meta_packages;
 		}
 
-		$fields       = [ 'weightInGrams', 'length', 'width', 'height' ];
+		$fields       = [ 'weight_in_grams', 'length', 'width', 'height' ];
 		$new_packages = [];
 		// Create the package array that bring needs
-		// with eg. [ length0 = 10, length1 = 10 ] etc..
-		$indexes = [];
 		foreach ( $packages as $package ) {
-			$order_item_id            = $package['order_item_id'];
-			$package['weightInGrams'] = $package['weight'] * 1000;
-			if ( ! isset( $new_packages[ $order_item_id ] ) ) {
-				$new_packages[ $order_item_id ] = [];
+			$order_item_id = $package['order_item_id'];
+			if (! isset($new_packages[$order_item_id])) {
+				$new_packages[$order_item_id] = [];
 			}
-			if ( ! isset( $indexes[ $order_item_id ] ) ) {
-				$indexes[ $order_item_id ] = 0;
-			}
-			$index = $indexes[ $order_item_id ];
-			foreach ( $fields as $field ) {
-				// Assign the field + number as the key
-				// eg height0, height1, height2 etc...
-				$new_packages[ $order_item_id ][ $field . $index ] = $package[ $field ];
-			}
-			$indexes[ $order_item_id ] ++;
+			$new_packages[$order_item_id][] = [
+				'weight_in_grams' => $package['weight'] * 1000,
+				'length' => $package['length'],
+				'width' => $package['width'],
+				'height' => $package['height'],
+			];
 		}
 
 		// Save the new fields
 		foreach ( $new_packages as $item_id => $new_package ) {
-			wc_update_order_item_meta( $item_id, '_fraktguiden_packages', $new_package );
+			wc_update_order_item_meta( $item_id, '_fraktguiden_packages_v2', $new_package );
 		}
 
 		$service_ids = [];

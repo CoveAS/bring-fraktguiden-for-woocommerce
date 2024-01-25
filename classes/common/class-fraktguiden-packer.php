@@ -84,19 +84,29 @@ class Fraktguiden_Packer {
 			$total_weight += floatval( $box['weight'] );
 		}
 
-		// Pack the boxes in a container.
-		$this->laff_pack->pack( $product_boxes );
-		$package_size = $this->laff_pack->get_container_dimensions();
+		$package = [
+			'weight_in_grams' => $this->get_weight( $total_weight ),
+			'length' => Fraktguiden_Helper::get_option( 'minimum_length' ),
+			'width' => Fraktguiden_Helper::get_option( 'minimum_width' ),
+			'height' => Fraktguiden_Helper::get_option( 'minimum_height' ),
+		];
+		if (! empty($product_boxes)) {
+
+			// Pack the boxes in a container.
+			$this->laff_pack->pack( $product_boxes );
+			$package_size = $this->laff_pack->get_container_dimensions();
+			$package = [
+				...$package,
+				'length'          => $this->dimension_in_cm( $package_size['length'] ),
+				'width'           => $this->dimension_in_cm( $package_size['width'] ),
+				'height'          => $this->dimension_in_cm( $package_size['height'] ),
+			];
+		}
 
 		// Get the sizes in cm.
 		$package = apply_filters(
 			'bring_fraktguiden_minimum_dimensions',
-			array(
-				'weight_in_grams' => $this->get_weight( $total_weight ),
-				'length'          => $this->get_dimension( $package_size['length'] ),
-				'width'           => $this->get_dimension( $package_size['width'] ),
-				'height'          => $this->get_dimension( $package_size['height'] ),
-			)
+			$package
 		);
 
 		if ( ! $multi_pack ) {
@@ -251,7 +261,7 @@ class Fraktguiden_Packer {
 	 *
 	 * @return float
 	 */
-	public function get_dimension( $dimension ) {
+	public function dimension_in_cm($dimension ) {
 
 		switch ( $this->dim_unit ) {
 			case 'mm':
