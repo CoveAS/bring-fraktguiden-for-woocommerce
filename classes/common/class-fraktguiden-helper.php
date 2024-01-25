@@ -197,8 +197,14 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	public static function get_services_data() {
-		$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
-		$customer_number = self::get_option( 'mybring_customer_number' );
+		static $services_data;
+		static $customer_number;
+		if (! isset($services_data)) {
+			$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
+		}
+		if (! isset($customer_number)) {
+			$customer_number = self::get_option( 'mybring_customer_number' );
+		}
 		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
 			$warning = sprintf(
 				__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
@@ -216,7 +222,6 @@ class Fraktguiden_Helper {
 		foreach ( $services_data['homedelivery']['services'] as &$service_data ) {
 			$service_data['home_delivery'] = true;
 		}
-		unset( $service_data );
 		return apply_filters(
 			'bring_fraktguiden_services_data',
 			$services_data

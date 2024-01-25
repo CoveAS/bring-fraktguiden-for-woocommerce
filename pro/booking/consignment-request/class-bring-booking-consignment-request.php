@@ -43,7 +43,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$order_items_packages = $this->order_update_packages();
 		}
 		if (empty($order_items_packages)) {
-			return $this->create_packages($include_info);
+			return [];
 		}
 		$order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
 		foreach ( $order_items_packages as $item_id => $package ) {
@@ -66,79 +66,6 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 						'widthInCm'  => $item[ 'width' ],
 						'heightInCm' => $item[ 'height' ],
 						'lengthInCm' => $item[ 'length' ],
-					],
-					'containerId'      => null,
-					'packageType'      => $package_type,
-					'numberOfItems'    => null,
-					'correlationId'    => null,
-				];
-
-				if ( $include_info ) {
-					$data['shipping_item_info'] = [
-						'item_id'         => $item_id,
-						'shipping_method' => [
-							'name'            => $this->shipping_item['method_id'],
-							'service'         => $this->service_id,
-							'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
-						],
-					];
-				}
-
-				$result[] = $data;
-			}
-		}
-
-		return $result;
-	}
-	public function legacy_create_packages( $include_info = false ) {
-		$order_items_packages = $this->shipping_item->get_meta( '_fraktguiden_packages' );
-
-		if ( ! $order_items_packages ) {
-			$order_items_packages = $this->order_update_packages();
-		}
-
-		// Make sure packages is an array of arrays.
-		if ( isset( $order_items_packages['length0'] ) ) {
-			$order_items_packages = [ $this->shipping_item->get_id() => $order_items_packages ];
-		}
-
-		if ( ! $order_items_packages ) {
-			return [];
-		}
-
-		$elements       = [ 'width', 'height', 'length', 'weightInGrams' ];
-		$elements_count = count( $elements );
-
-		foreach ( $order_items_packages as $item_id => $package ) {
-			if (! is_array($package)) {
-				continue;
-			}
-			$package_count = count( $package ) / $elements_count;
-
-			for ( $i = 0; $i < $package_count; $i ++ ) {
-				$weight = 0;
-
-				if ( isset( $package[ 'weight' . $i ] ) ) {
-					$weight = $package[ 'weight' . $i ];
-				}
-
-				if ( isset( $package[ 'weightInGrams' . $i ] ) ) {
-					$weight = $package[ 'weightInGrams' . $i ];
-				}
-
-				$package_type = null;
-				if ( $this->service->home_delivery ) {
-					$package_type = Fraktguiden_Helper::get_option( 'booking_home_delivery_package_type', 'hd_eur' );
-				}
-
-				$weight_in_kg = (int) $weight / 1000;
-				$data         = [
-					'weightInKg'       => $weight_in_kg,
-					'goodsDescription' => null,
-					'dimensions'       => [
-						'widthInCm'  => $package[ 'width' . $i ],
-						'heightInCm' => $package[ 'height' . $i ],
-						'lengthInCm' => $package[ 'length' . $i ],
 					],
 					'containerId'      => null,
 					'packageType'      => $package_type,
