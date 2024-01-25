@@ -55,7 +55,7 @@ class Bring_Booking_Order_View {
 		}
 
 		// Do not show if the order does not use fraktguiden shipping.
-		$order = new Bring_WC_Order_Adapter( new WC_Order( $post->ID ) );
+		$order = new Bring_WC_Order_Adapter( wc_get_order($post) );
 		if ( Fraktguiden_Helper::get_option( 'booking_without_bring' ) !== 'yes' && ! $order->has_bring_shipping_methods() ) {
 			return;
 		}
@@ -75,7 +75,7 @@ class Bring_Booking_Order_View {
 	 * @param WP_Post $post Post.
 	 */
 	public static function render_booking_meta_box( $post ) {
-		$wc_order = new WC_Order( $post->ID );
+		$wc_order = wc_get_order($post);
 		$order    = new Bring_WC_Order_Adapter( $wc_order );
 		?>
 
@@ -481,6 +481,7 @@ class Bring_Booking_Order_View {
 		global $post_ID;
 		$type = get_post_type();
 
+		ray($_REQUEST);
 		if ( $type == 'shop_order' && isset( $_POST['_bring-start-booking'] ) ) {
 			$url = admin_url() . 'post.php?post=' . $post_ID . '&action=edit&booking_step=2';
 			wp_redirect( $url );

@@ -100,7 +100,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$wc_order        = $this->shipping_item->get_order();
 		$additional_info = '';
 
-		$bring_additional_info_sender = filter_input( INPUT_POST, '_bring_additional_info_sender', FILTER_SANITIZE_STRING );
+		$bring_additional_info_sender = filter_input( INPUT_POST, '_bring_additional_info_sender', FILTER_UNSAFE_RAW );
 
 		if ( ! is_null( $bring_additional_info_sender ) ) {
 			$additional_info = $bring_additional_info_sender;
@@ -141,7 +141,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$name            = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
 		$additional_info = null;
 
-		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_SANITIZE_STRING );
+		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_UNSAFE_RAW );
 
 		if ( ! is_null( $bring_additional_info_recipient ) ) {
 			$additional_info = $bring_additional_info_recipient;

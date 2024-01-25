@@ -24,7 +24,8 @@ class BringFraktguidenPro {
 	}
 
 	public static function admin_enqueue_scripts( $hook ): void {
-		if ( 'post.php' !== $hook ) {
+		ray($hook);
+		if ( 'post.php' !== $hook && 'woocommerce_page_wc-orders' !== $hook) {
 			return;
 		}
 
