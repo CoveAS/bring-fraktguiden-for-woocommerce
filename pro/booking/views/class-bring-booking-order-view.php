@@ -481,7 +481,6 @@ class Bring_Booking_Order_View {
 		global $post_ID;
 		$type = get_post_type();
 
-		ray($_REQUEST);
 		if ( $type == 'shop_order' && isset( $_POST['_bring-start-booking'] ) ) {
 			$url = admin_url() . 'post.php?post=' . $post_ID . '&action=edit&booking_step=2';
 			wp_redirect( $url );
