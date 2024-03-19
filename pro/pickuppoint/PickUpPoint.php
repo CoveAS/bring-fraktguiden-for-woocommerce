@@ -44,6 +44,9 @@ class PickUpPoint
 		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
 
 		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
+		if ( 'kco' === WC()->session->get( 'chosen_payment_method' ) ) {
+			$legacy = true;
+		}
 		add_action('kco_wc_before_snippet', LegacyPickupPoints::class . '::init');
 		if (! $legacy) {
 			// Add pick up point selector after shipping option

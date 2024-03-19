@@ -7,6 +7,10 @@ use Bring_Fraktguiden\Common\Fraktguiden_Service;
 
 class LegacyPickupPoints {
 
+	public static function setup()
+	{
+		add_filter('woocommerce_shipping_chosen_method', [LegacyPickupPoints::class, 'chosen_method'], 10, 3);
+	}
 	/**
 	 * Initialize
 	 *
@@ -17,10 +21,35 @@ class LegacyPickupPoints {
 		// Pickup points.
 		add_filter('bring_shipping_rates', __CLASS__ . '::insert_pickup_points', 10, 2);
 
+
 		// Enable enhanced descriptions if the option is ticked.
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
 			LegacyPickUpPointEnhancement::setup();
 		}
+	}
+
+	public static function chosen_method($default, $rates, $chosen_method)
+	{
+		$id = WC()->session->get( 'bring_fraktguiden_pick_up_point' );
+		$keys = array_keys($rates);
+
+		if (preg_match('/^bring_fraktguiden:\d+$/', $chosen_method)) {
+			// Going from legacy to new
+			$key = $chosen_method . '-' . $id;
+			if (in_array($key, $keys)) {
+				return $key;
+			}
+		}
+
+		if (preg_match('/^bring_fraktguiden:\d+-\d+$/', $chosen_method)) {
+			// Going from new to legacy (eg. klarna checkout)
+			$key = preg_replace('/^(bring_fraktguiden:\d+)-\d+$/', '$1', $chosen_method);
+			if (in_array($key, $keys)) {
+				return $key;
+			}
+		}
+
+		return $default;
 	}
 
 	/**

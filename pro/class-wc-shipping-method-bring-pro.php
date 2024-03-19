@@ -8,6 +8,7 @@
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguidenPro\Booking\Bring_Booking;
+use BringFraktguidenPro\PickUpPoint\LegacyPickupPoints;
 use BringFraktguidenPro\PickUpPoint\PickUpPoint;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +19,8 @@ require_once 'order/class-bring-wc-order-adapter.php';
 require_once 'booking/class-bring-booking.php';
 
 if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) {
-	PickUpPoint::init();
+	LegacyPickupPoints::setup();
+	add_action( 'init', PickUpPoint::class.'::init');
 }
 
 if ( is_admin() ) {
