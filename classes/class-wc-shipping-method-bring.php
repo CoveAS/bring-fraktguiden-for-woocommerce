@@ -369,6 +369,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );
+			if (empty($json['fieldErrors'])) {
+				$this->log->add( $this->id, 'Response error: '. $response->get_body() );
+				$this->set_trace_messages( ['An unknown error occurred. Please contact support on bringfraktguiden.no'] );
+				return;
+			}
 			$this->set_trace_messages( $json['fieldErrors'] );
 		}
 		if ( 200 != $response->status_code ) {
