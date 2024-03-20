@@ -87,7 +87,6 @@ use BringFraktguiden\Admin\Step;
 
 					<div class="bfg-box__checkbox"><?php FieldRenderer::pro_enabled(); ?></div>
 					<div class="bfg-box__checkbox"><?php FieldRenderer::test_mode(); ?></div>
-
 					<div class="bfg-box__section">
 						<p><?php esc_html_e('Using our PRO features requires a license. For test and development sites you can activate a development mode where you can test the PRO features without requiring a license. When you first activate the PRO you will get a free 7 day trial before you are required to purchase a license.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 						<?php submit_button(); ?>

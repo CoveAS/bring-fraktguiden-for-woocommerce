@@ -74,8 +74,8 @@ class SettingsPage
 		);
 		add_submenu_page(
 			'bring_fraktguiden_home',
-			__('Fallback rates', 'bring-fraktguiden-for-woocommerce'),
-			__('Fallback rates', 'bring-fraktguiden-for-woocommerce'),
+			__('Fallback options', 'bring-fraktguiden-for-woocommerce'),
+			__('Fallback options', 'bring-fraktguiden-for-woocommerce'),
 			'manage_options',
 			'bring_fraktguiden_fallback',
 			[self::class, 'fallback_page']
@@ -122,12 +122,16 @@ class SettingsPage
 
 	public static function booking_page(): void
 	{
+		$fields = Fields::instance();
+		$currency = get_option( 'woocommerce_currency' );
 		require_once dirname(__DIR__, 3) . '/templates/admin/booking.php';
 	}
 
 	public static function fallback_page(): void
 	{
-		require_once dirname(__DIR__, 3) . '/templates/admin/fallback-rates.php';
+		$fields = Fields::instance();
+		$currency = get_option( 'woocommerce_currency' );
+		require_once dirname(__DIR__, 3) . '/templates/admin/fallback-options.php';
 	}
 
 	public static function settings_init(): void
@@ -195,6 +199,8 @@ class SettingsPage
 	{
 		$pages = [
 			'bring-fraktguiden_page_bring_fraktguiden_settings',
+			'bring-fraktguiden_page_bring_fraktguiden_fallback',
+			'bring-fraktguiden_page_bring_fraktguiden_booking',
 			'toplevel_page_bring_fraktguiden_home',
 		];
 		if (! in_array($hook, $pages)) {

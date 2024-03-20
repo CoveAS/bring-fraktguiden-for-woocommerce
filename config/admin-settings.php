@@ -6,8 +6,9 @@ $wc_log_dir = '';
 if (defined('WC_LOG_DIR')) {
 	$wc_log_dir = WC_LOG_DIR;
 }
-
-$base_country = WC()->countries->get_base_country();
+$nordic_countries = Fraktguiden_Helper::get_nordic_countries();
+$base_country_code = WC()->countries->get_base_country();
+$base_country = $nordic_countries[$base_country_code] ?? __('Choose a country', 'bring-fraktguiden-for-woocommerce');
 $base_postcode = WC()->countries->get_base_postcode();
 return [
 	[
@@ -19,13 +20,14 @@ return [
 				'label' => '<em class="bring-toggle"></em>' . __('Enable/disable PRO features',
 						'bring-fraktguiden-for-woocommerce'),
 				'class' => 'bring-toggle-checkbox',
+				'description' => __('Please note that using the PRO features on a live website requires a license. First time activation starts a free 7 day trial. After the free period the PRO features will be disabled pending a valid license.', 'bring-fraktguiden-for-woocommerce'),
 			],
 			'test_mode' => [
 				'title' => __('Enable test mode', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
-				'label' => '<em class="bring-toggle"></em>' . __('Use PRO in test-mode. Used for development and testing.',
+				'label' => '<em class="bring-toggle"></em>' . __('Test and staging mode',
 						'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('This setting let\'s you use PRO features without a license and displays a message on the checkout page that this is a test-site',
+				'desc_tip' => __('Removes the license requirement and lets you use all of the pro features. A message will be displayed on the cart and checkout page that this is a test-site.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 				'class' => 'bring-toggle-checkbox',
@@ -65,7 +67,7 @@ return [
 				'class' => 'chosen_select',
 				'css' => 'width: 200px;',
 				'default' => '',
-				'placeholder' => __('Choose a country', 'bring-fraktguiden-for-woocommerce'),
+				'placeholder' => $base_country,
 				'options' => [
 					'' => '',
 					...Fraktguiden_Helper::get_nordic_countries(),
@@ -139,7 +141,7 @@ return [
 				'default' => 'yes',
 			],
 			'price_to_use' => [
-				'title' => __('Price to use', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Price type', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
 				'options' => [
 					'net' => __('Net price'),
@@ -300,12 +302,11 @@ return [
 			'alt_handling' => [
 				'title' => __('Maximum product handling', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
-				'desc_tip' => __('We use a packing algorithm to pack items in three dimensions. This algorithm is computationally heavy and to prevent against DDoS attacks we\'ve implemented setting to control the maximum number of items that can be packed per order.',
-					'bring-fraktguiden-for-woocommerce'),
-				'default' => 'no_rate',
+				'description' => __('', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'flat_rate',
 				'options' => [
-					'no_rate' => __('Do nothing', 'bring-fraktguiden-for-woocommerce'),
 					'flat_rate' => __('Custom flat rate', 'bring-fraktguiden-for-woocommerce'),
+					'no_rate' => __('No shipping', 'bring-fraktguiden-for-woocommerce'),
 				],
 			],
 			'max_products' => [
@@ -313,7 +314,7 @@ return [
 				'type' => 'text',
 				'css' => 'width: 8em;',
 				'placeholder' => 1000,
-				'desc_tip' => __('Maximum total quantity of products in the cart before offering a custom price',
+				'desc_tip' => __('Use this setting to set a threshold for how many cart items the plugin will attempt to process. A large quantity will impact the speed of the website during the checkout and we recommend keeping this number at 1000 or lower to ensure good performance.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 1000,
 			],
@@ -462,8 +463,6 @@ return [
 				'title' => __('Length', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'css' => 'width: 75px;',
-				'placeholder' => __('Must be at least 23cm', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('The lowest length for a consignment', 'bring-fraktguiden-for-woocommerce'),
 				'default' => '23.0',
 				'custom_attributes' => [
 					'step' => '0.1',
@@ -475,8 +474,6 @@ return [
 				'title' => __('Width', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'css' => 'width: 75px;',
-				'placeholder' => __('Must be at least 13cm', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('The lowest width for a consignment', 'bring-fraktguiden-for-woocommerce'),
 				'default' => '13.0',
 				'custom_attributes' => [
 					'step' => '0.1',
@@ -488,8 +485,6 @@ return [
 				'title' => __('Height', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'css' => 'width: 75px;',
-				'placeholder' => __('Must be at least 1cm', 'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('The lowest height for a consignment', 'bring-fraktguiden-for-woocommerce'),
 				'default' => '1.0',
 				'custom_attributes' => [
 					'step' => '0.1',
@@ -501,8 +496,6 @@ return [
 				'title' => __('Weight', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'css' => 'width: 75px;',
-				'desc_tip' => __('The lowest weight in kilograms for a consignment',
-					'bring-fraktguiden-for-woocommerce'),
 				'default' => '0.01',
 				'custom_attributes' => [
 					'step' => '0.01',

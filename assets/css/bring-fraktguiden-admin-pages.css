@@ -1,4 +1,4 @@
-
+.bfg__notice-list-hide { display: none; }
 .bfg-admin-page #wpcontent {
 	padding: 0;
 }
@@ -209,7 +209,10 @@ body .bfg-suffixed-number {
 	color: #000000;
 	border-color: var(--wp-admin-theme-color);
 	z-index: 1;
+}
 
+.bfg-box__checkbox .bfg-description {
+	padding: 10px 24px;
 }
 
 .bfg-step {

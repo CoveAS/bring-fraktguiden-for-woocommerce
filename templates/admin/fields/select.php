@@ -25,11 +25,11 @@ use BringFraktguiden\Fields\Field;
 	<?php endif; ?>
 >
 	<?php if ($placeholder): ?>
-		<option disabled><?php echo esc_attr($placeholder); ?></option>
+		<option <?php echo $value ? '' : 'selected'; ?> disabled><?php echo esc_attr($placeholder); ?></option>
 	<?php endif; ?>
 	<?php foreach ($options as $key => $option): ?>
 		<option
-			<?php echo $value === $key ? 'selected="selected"' : ''; ?>
+			<?php echo $value && $value === $key ? 'selected="selected"' : ''; ?>
 		><?php echo esc_html($option); ?></option>
 	<?php endforeach; ?>
 </select>
