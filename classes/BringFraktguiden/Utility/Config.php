@@ -9,7 +9,11 @@ class Config
 	public static function get($name): array
 	{
 		if (! isset(self::$config[$name])) {
-			self::$config[$name]= require dirname(__DIR__, 3). '/config/' . $name . '.php';
+			$data = require dirname(__DIR__, 3). '/config/' . $name . '.php';
+			if (! WC()->countries) {
+				return $data;
+			}
+			self::$config[$name] = $data;
 		}
 		return self::$config[$name];
 	}

@@ -4,6 +4,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Fields\Field;
 
 /**
+ * @var string $name
  * @var string $title
  * @var string $value
  * @var string $type
@@ -18,6 +19,7 @@ use BringFraktguiden\Fields\Field;
  */
 ?>
 <select
+	name="<?php echo esc_attr($name); ?>"
 	type="<?php echo esc_attr($type); ?>"
 	<?php Field::attributes($custom_attributes); ?>
 	<?php if ($css): ?>
@@ -29,7 +31,12 @@ use BringFraktguiden\Fields\Field;
 	<?php endif; ?>
 	<?php foreach ($options as $key => $option): ?>
 		<option
-			<?php echo $value && $value === $key ? 'selected="selected"' : ''; ?>
+			value="<?php echo esc_attr($key); ?>"
+			<?php if ($value && $value == $key ): ?>
+				selected="selected"
+			<?php elseif ($default && $default == $key ): ?>
+				selected="selected"
+			<?php endif;?>
 		><?php echo esc_html($option); ?></option>
 	<?php endforeach; ?>
 </select>

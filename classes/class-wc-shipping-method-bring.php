@@ -312,11 +312,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// Offer flat rate if the cart contents exceeds max product.
 		// @TODO: Use the package instead of the cart.
 		if ( WC()->cart && WC()->cart->get_cart_contents_count() > $this->max_products ) {
-			$alt_handling = $this->get_setting( 'alt_handling' );
-			if ( 'flat_rate' === $alt_handling ) {
+			$alt_flat_rate_id = $this->get_setting( 'alt_flat_rate_id' );
+			if ( $alt_flat_rate_id ) {
 				$rate = array(
 					'id'            => $this->id,
-					'bring_product' => $this->get_setting( 'alt_flat_rate_id' ),
+					'bring_product' => $alt_flat_rate_id,
 					'cost'          => $this->get_price_setting( 'alt_flat_rate' ),
 					'label'         => $this->get_setting( 'alt_flat_rate_label',
 						__( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
@@ -377,15 +377,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$this->set_trace_messages( $json['fieldErrors'] );
 		}
 		if ( 200 != $response->status_code ) {
-			$no_connection_handling = $this->get_setting( 'no_connection_handling' );
-			if ( 'flat_rate' === $no_connection_handling ) {
+			$no_connection_rate_id = $this->get_setting( 'no_connection_rate_id' );
+			if ( $no_connection_rate_id ) {
 				$this->push_rate(
 					[
 						'id'            => $this->id,
-						'bring_product' => $this->get_setting( 'no_connection_rate_id', 'servicepakke' ),
+						'bring_product' => $no_connection_rate_id,
 						'cost'          => $this->get_price_setting( 'no_connection_flat_rate' ),
-						'label'         => $this->get_setting( 'no_connection_flat_rate_label',
-							__( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
+						'label'         => $this->get_setting(
+							'no_connection_flat_rate_label',
+								__( 'Shipping', 'bring-fraktguiden-for-woocommerce' )
+							),
 					]
 				);
 			}
@@ -399,14 +401,14 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( isset( $json['traceMessages'] ) ) {
 			$this->set_trace_messages( $json['traceMessages'] );
 		}
-		$exception_handling = $this->get_setting( 'exception_handling' );
+		$exception_rate_id = $this->get_setting( 'exception_rate_id', 'servicepakke' );
 
 		// Filter the response json to get only the selected services from the settings.
 		$rates = $this->get_services_from_response( $json );
 		$rates = apply_filters( 'bring_shipping_rates', $rates, $this );
 
 		// Only push the heavy rate when there are no other bring rates.
-		if ( 'flat_rate' === $exception_handling && empty( $rates ) ) {
+		if ( $exception_rate_id && empty( $rates ) ) {
 			// Check if any package exeeds the max settings.
 			$messages = $this->get_trace_messages();
 			foreach ( $messages as $message ) {
@@ -414,7 +416,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					$this->push_rate(
 						[
 							'id'            => $this->id,
-							'bring_product' => $this->get_setting( 'exception_rate_id', 'servicepakke' ),
+							'bring_product' => $exception_rate_id,
 							'cost'          => $this->get_price_setting( 'exception_flat_rate' ),
 							'label'         => $this->get_setting( 'exception_flat_rate_label',
 								__( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
@@ -692,7 +694,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function get_selected_from_country() {
 		global $woocommerce;
 
-		return isset( $this->from_country ) ? $this->from_country : $woocommerce->countries->get_base_country();
+		$countries = $woocommerce->countries?->get_base_country();
+		return isset( $this->from_country ) ? $this->from_country : $countries;
 	}
 
 	/**

@@ -18,24 +18,37 @@
 	gap: 16px;
 }
 
+body .bfg-suffixed-number-lg,
 body .bfg-suffixed-number {
 	padding-right: 30px;
-	text-align: right;
 	-moz-appearance: textfield;
 }
+body .bfg-suffixed-number-lg {
+	padding-right: 35px;
+}
 
+.bfg-input--number input[type="number"] {
+	text-align: right;
+}
+
+.bfg-suffixed-number-lg::-webkit-inner-spin-button,
+.bfg-suffixed-number-lg::-webkit-outer-spin-button,
 .bfg-suffixed-number::-webkit-outer-spin-button,
 .bfg-suffixed-number::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
 
+.bfg-suffix-lg,
 .bfg-suffix {
 	margin-left: -30px;
 	padding-right: 8px;
 	z-index: 2;
 	position: relative;
 	pointer-events: none;
+}
+.bfg-suffix-lg {
+	margin-left: -35px;
 }
 
 .bfg-page__content {
@@ -45,6 +58,10 @@ body .bfg-suffixed-number {
 .bfg-page__content h1 {
 	font-size: 14px;
 	font-weight: 600;
+}
+
+.bfg-field {
+	margin-bottom: 1rem;
 }
 
 .bfg-page__content h2,
@@ -64,6 +81,7 @@ body .bfg-suffixed-number {
 
 .bfg-page__content .bfg-description {
 	font-size: 14px;
+	margin-bottom: 0;
 }
 
 .bfg-page__content .submit {

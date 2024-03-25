@@ -5,6 +5,7 @@ use BringFraktguiden\Fields\Field;
 
 /**
  * @var string $title
+ * @var string $name
  * @var bool $value
  * @var string $type
  * @var string $label
@@ -19,6 +20,7 @@ use BringFraktguiden\Fields\Field;
 ?>
 <label>
 	<input
+		name="<?php echo esc_attr($name); ?>"
 		type="<?php echo esc_attr($type); ?>"
 		value="<?php echo esc_attr($default); ?>"
 		<?php Field::attributes($custom_attributes); ?>

@@ -31,7 +31,7 @@ class Field
 	public function render(): string
 	{
 		return sprintf(
-			'<div class="%s">%s%s</div>',
+			'<div class="%s">%s</div>%s',
 			'bfg-input bfg-input--'. $this->field['type'],
 			$this->field(),
 			$this->description(),
@@ -58,10 +58,14 @@ class Field
 			$this->field['description'],
 			$this->field['desc_tip'],
 		];
+		$content = trim(implode(' ', $text));
+		if (! $content) {
+			return '';
+		}
 		return sprintf(
 			'<p class="%s">%s</p>',
 			'bfg-description',
-			wp_kses_post(implode(' ', $text))
+			wp_kses_post($content)
 		);
 	}
 

@@ -4,6 +4,7 @@ namespace BringFraktguiden\Admin;
 
 use Automattic\WooCommerce\Admin\PageController;
 use BringFraktguiden\Fields\Fields;
+use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
 use BringFraktguiden\Utility\Config;
 
@@ -21,6 +22,8 @@ class SettingsPage
 		add_action('admin_notices', [__CLASS__, 'inject_after_notices'], PHP_INT_MAX);
 
 		add_action('admin_enqueue_scripts', __CLASS__ . '::enqueue_admin_styles');
+
+		add_filter('pre_update_option_bring_fraktguiden_for_woocommerce_settings', [__CLASS__, 'process_settings'], 10, 2);
 	}
 
 	public static function update_admin_title($admin_title)
@@ -136,16 +139,19 @@ class SettingsPage
 
 	public static function settings_init(): void
 	{
-		register_setting('bring_fraktguiden_plugin_page', 'bring_fraktguiden_settings');
 
 		$admin_settings = Config::get('admin-settings');
 
 		foreach ($admin_settings as $section_key => $section) {
+			register_setting(
+				'bring_fraktguiden_' . $section_key,
+				'bring_fraktguiden_for_woocommerce_settings'
+			);
 			add_settings_section(
 				'bring_fraktguiden_' . $section_key,
-				$section['title'],
+				$section['title'] ?? 'No title',
 				SectionRenderer::class . '::' . $section_key,
-				'bring_fraktguiden_plugin_page'
+				'bring_fraktguiden_' . $section_key
 			);
 		}
 
@@ -211,5 +217,31 @@ class SettingsPage
 			'bring_fraktguiden_admin_css',
 			plugin_dir_url($dir) . 'assets/css/bring-fraktguiden-admin-pages.css'
 		);
+	}
+
+	public static function process_settings($value, $old_value): array
+	{
+		$value = isset($old_value) && is_array($old_value) ? $old_value : [];
+
+		// Get the current page
+		$page = 'settings';
+		if (preg_match('/^bring_fraktguiden_(.*)$/', $_POST['option_page'] ?? '', $matches)) {
+			$page = $matches[1];
+		}
+
+		// Get the page settings
+		$admin_settings = Config::get('admin-settings');
+		$pageFieldKeys = array_keys($admin_settings[$page]['fields']);
+
+		$settings = Settings::instance();
+		foreach ($pageFieldKeys as $key) {
+			$setting = $settings->get($key);
+			if ('info' == $setting->type) {
+				continue;
+			}
+			$value[$key] = $setting->sanitize($_POST[$key] ?? false);
+		}
+
+		return $value;
 	}
 }

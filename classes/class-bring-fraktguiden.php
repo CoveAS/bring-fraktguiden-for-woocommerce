@@ -20,6 +20,7 @@ use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
+use BringFraktguiden\Settings\Settings;
 use BringFraktguidenPro\BringFraktguidenPro;
 
 /**
@@ -54,14 +55,14 @@ class Bring_Fraktguiden {
 
 		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
 
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
+		if ( Settings::instance()->display_desc->value ) {
 //			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
 			add_action( 'woocommerce_after_shipping_rate', [ CarrierLogo::class, 'add_carrier_logo'], 10, 2 );
 		}
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_eta' ) ) {
+		if ( Settings::instance()->display_eta->value ) {
 			add_action( 'woocommerce_after_shipping_rate', [Rate_Eta::class, 'add_estimated_delivery_date'], 10, 2 );
 		}
-		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
+		if ( Settings::instance()->display_desc->value ) {
 			add_action( 'woocommerce_after_shipping_rate', [ RateDescription::class, 'add_description'], 10, 2 );
 			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalDescription::class, 'add_environmental_description'], 10, 2 );
 		}

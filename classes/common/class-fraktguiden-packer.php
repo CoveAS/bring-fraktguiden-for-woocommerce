@@ -6,6 +6,7 @@
  */
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -90,7 +91,9 @@ class Fraktguiden_Packer {
 			'width' => Fraktguiden_Helper::get_option( 'minimum_width' ),
 			'height' => Fraktguiden_Helper::get_option( 'minimum_height' ),
 		];
-		if (! empty($product_boxes)) {
+
+		$calculate_by_weight = Settings::instance()->calculate_by_weight->value;
+		if (! empty($product_boxes) && ! $calculate_by_weight) {
 
 			// Pack the boxes in a container.
 			$this->laff_pack->pack( $product_boxes );
@@ -175,7 +178,7 @@ class Fraktguiden_Packer {
 
 		$weight = $container_size['weight_in_grams'];
 
-		if ( $weight >= 35000 ) {
+		if ( $weight >= Settings::instance()->dimension_packing_weight->value * 1000 ) {
 			if ( $product ) {
 				Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max weight of 35 Kg', $product->get_sku() );
 			}
@@ -194,7 +197,7 @@ class Fraktguiden_Packer {
 		// The longest side should now be on the first element.
 		$longest_side = current( $dimensions );
 
-		if ( $longest_side > 240 ) {
+		if ( $longest_side > Settings::instance()->dimension_packing_side->value ) {
 			if ( $product ) {
 				Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max length of 240 cm', $product->get_sku() );
 			}
@@ -209,7 +212,7 @@ class Fraktguiden_Packer {
 		// Add the longest side and add the other sides multiplied by 2.
 		$longest_plus_circumference = $longest_side + ( $side2 * 2 ) + ( $side3 * 2 );
 
-		if ( $longest_plus_circumference > 360 ) {
+		if ( $longest_plus_circumference > Settings::instance()->dimension_packing_circumference->value ) {
 			if ( $product ) {
 				Fraktguiden_Helper::add_admin_message( 'Product with SKU %s exceeds the max circumference of 360 cm', $product->get_sku() );
 			}

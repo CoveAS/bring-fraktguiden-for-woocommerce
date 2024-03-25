@@ -132,8 +132,8 @@ function init_form_fields_for_mybring() {
 		'class'   => 'chosen_select',
 		'css'     => 'width: 400px;',
 		'type'    => 'select',
-		'options' => WC()->countries->get_countries(),
-		'default' => WC()->countries->get_base_country(),
+		'options' => WC()->countries?->get_countries(),
+		'default' => WC()->countries?->get_base_country(),
 	];
 
 	$form_fields['booking_address_reference'] = [

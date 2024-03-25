@@ -164,7 +164,13 @@ class Fraktguiden_Admin_Notices {
 	public static function generate_missing_shipping_services_notice() {
 		$messages   = [];
 		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
-		$messages[] = sprintf( __( 'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_general_options_title' );
+		$messages[] = sprintf(
+			__(
+				'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.',
+				'bring-fraktguiden-for-woocommerce'
+			),
+			Fraktguiden_Helper::get_settings_url()
+		);
 
 		return implode( '<br>', $messages );
 	}
@@ -191,7 +197,13 @@ class Fraktguiden_Admin_Notices {
 		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = __( 'Mybring Booking requires an API customer number.', 'bring-fraktguiden-for-woocommerce' );
 		/* translators: %s: Mybring settings tab URL */
-		$messages[] = sprintf( __( 'Enter your API customer number <a href="%s">here</a>.', 'bring-fraktguiden-for-woocommerce' ), Fraktguiden_Helper::get_settings_url() . '#woocommerce_bring_fraktguiden_mybring_title' );
+		$messages[] = sprintf(
+			__(
+				'Enter your API customer number <a href="%s">here</a>.',
+				'bring-fraktguiden-for-woocommerce'
+			),
+			Fraktguiden_Helper::get_settings_url()
+		);
 
 		return implode( '<br>', $messages );
 	}

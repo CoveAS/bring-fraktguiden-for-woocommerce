@@ -12,7 +12,6 @@ class Settings
 {
 	use HasInstance;
 
-	public Setting $plugin_settings;
 	#[Checkbox]
 	public Setting $pro_enabled;
 	#[Checkbox]
@@ -23,11 +22,13 @@ class Settings
 	public Setting $from_zip;
 	public Setting $from_country;
 	public Setting $handling_fee;
-	public Setting $general_options_title;
 	#[Checkbox]
 	public Setting $calculate_by_weight;
 	#[Checkbox]
 	public Setting $enable_multipack;
+	public Setting $dimension_packing_side;
+	public Setting $dimension_packing_circumference;
+	public Setting $dimension_packing_weight;
 	#[Checkbox]
 	public Setting $shipping_options_full_width;
 	#[Checkbox]
@@ -36,27 +37,19 @@ class Settings
 	public Setting $use_customer_number_to_get_prices;
 	public Setting $price_to_use;
 	public Setting $service_sorting;
-	public Setting $mybring_title;
 	public Setting $mybring_api_uid;
 	public Setting $mybring_api_key;
 	public Setting $mybring_customer_number;
-	public Setting $no_connection_title;
-	public Setting $no_connection_handling;
 	public Setting $no_connection_flat_rate_label;
 	public Setting $no_connection_flat_rate;
 	public Setting $no_connection_rate_id;
-	public Setting $exceptions_title;
-	public Setting $exception_handling;
 	public Setting $exception_flat_rate_label;
 	public Setting $exception_flat_rate;
 	public Setting $exception_rate_id;
-	public Setting $max_products_title;
-	public Setting $alt_handling;
 	public Setting $max_products;
 	public Setting $alt_flat_rate_label;
 	public Setting $alt_flat_rate;
 	public Setting $alt_flat_rate_id;
-	public Setting $advanced_settings;
 	#[Checkbox]
 	public Setting $debug;
 	#[Checkbox]
@@ -64,13 +57,10 @@ class Settings
 	public Setting $lead_time;
 	public Setting $lead_time_cutoff;
 	public Setting $display_eta;
-	public Setting $pickup_point_section;
 	public Setting $pickup_point_types;
 	public Setting $pickup_point_style;
 	public Setting $pickup_point_map;
 	public Setting $system_information;
-	public Setting $fallback_options;
-	public Setting $minimum_sizing_params;
 	public Setting $minimum_length;
 	public Setting $minimum_width;
 	public Setting $minimum_height;
@@ -118,19 +108,18 @@ class Settings
 			}
 			$this->{$name} = $settings[$name];
 		}
-//		echo '<pre>';
-//		foreach ($all_settings as $name) {
-//			echo "\tpublic Setting \$$name;\n";
-//		}
-//		echo '</pre>';
 		foreach ($all_settings as $name) {
 			if (! property_exists($this, $name)) {
 				throw SettingsPropertyException::missing($name);
 			}
 		}
-
 	}
 
-
-
+	public function get(string $key) :?Setting
+	{
+		if (property_exists($this, $key)){
+			return $this->{$key};
+		}
+		return null;
+	}
 }
