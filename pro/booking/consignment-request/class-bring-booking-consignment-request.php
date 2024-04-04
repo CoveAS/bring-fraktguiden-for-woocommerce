@@ -146,24 +146,27 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if ( ! is_null( $bring_additional_info_recipient ) ) {
 			$additional_info = $bring_additional_info_recipient;
 		}
+		$args = [
+			'name'                  => $name,
+			'addressLine'           => $order->get_shipping_address_1(),
+			'addressLine2'          => $order->get_shipping_address_2(),
+			'postalCode'            => $order->get_shipping_postcode(),
+			'city'                  => $order->get_shipping_city(),
+			'countryCode'           => $order->get_shipping_country(),
+			'reference'             => null,
+			'additionalAddressInfo' => $additional_info,
+			'contact'               => [
+				'email'       => $order->get_billing_email(),
+				'phoneNumber' => $order->get_billing_phone(),
+			],
+		];
+		if ($name !== $full_name) {
+			$args['contact']['name'] = $full_name;
+		}
 
 		return apply_filters(
 			'bring_fraktguiden_get_consignment_recipient_address',
-			[
-				'name'                  => $name,
-				'addressLine'           => $order->get_shipping_address_1(),
-				'addressLine2'          => $order->get_shipping_address_2(),
-				'postalCode'            => $order->get_shipping_postcode(),
-				'city'                  => $order->get_shipping_city(),
-				'countryCode'           => $order->get_shipping_country(),
-				'reference'             => null,
-				'additionalAddressInfo' => $additional_info,
-				'contact'               => [
-					'name'        => $full_name,
-					'email'       => $order->get_billing_email(),
-					'phoneNumber' => $order->get_billing_phone(),
-				],
-			],
+			$args,
 			$order,
 			$this
 		);
