@@ -78,11 +78,9 @@ class Bring_Booking_Orders_View {
 	 * @param string $column Column.
 	 */
 	public static function booking_column_value( $column, $order = null ) {
-		global $the_order;
-		if (empty($order)) {
-			$order = $the_order;
+		if ( is_int($order) ) {
+			$order = wc_get_order($order);
 		}
-
 		if ( 'bring_booking_status' === $column ) {
 			$order = new Bring_WC_Order_Adapter( $order );
 			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
