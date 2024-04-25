@@ -64,6 +64,11 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.10.8 =
+
+* Added bulk action support and booking column on orders when using HPOS
+* Added fallback to legacy view for pickup points when klarna checkout is chosen
+
 = 1.10.7 =
 
 * Fixed bugs related to HPOS
