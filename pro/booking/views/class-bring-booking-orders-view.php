@@ -26,12 +26,22 @@ class Bring_Booking_Orders_View {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init(): void
+	{
+		// Legacy
 		add_action( 'admin_footer-edit.php', [ __CLASS__, 'add_bulk_admin_footer' ] );
 		add_filter( 'manage_edit-shop_order_columns', [ __CLASS__, 'booking_status_column' ], 15 );
 		add_action( 'manage_shop_order_posts_custom_column', [ __CLASS__, 'booking_column_value' ], 10, 2 );
-		add_action( 'admin_action_bring_bulk_book', [ __CLASS__, 'bulk_send_booking' ] );
 		add_filter( 'bulk_actions-edit-shop_order', [ __CLASS__, 'add_bring_bulk_actions' ] );
+
+		// HPOS
+		add_action( 'admin_footer-woocommerce_page_wc-orders', [ __CLASS__, 'add_bulk_admin_footer' ] );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', [ __CLASS__, 'booking_status_column' ], 15 );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', [ __CLASS__, 'booking_column_value' ], 10, 2 );
+		add_filter( 'bulk_actions-woocommerce_page_wc-orders', [ __CLASS__, 'add_bring_bulk_actions' ] );
+
+		// Js and ajax
+		add_action( 'wp_ajax_bring_bulk_book', [ __CLASS__, 'bulk_send_booking' ] );
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_load_javascript' );
 	}
 
@@ -41,7 +51,8 @@ class Bring_Booking_Orders_View {
 	 * @param  array $actions Actions.
 	 * @return array
 	 */
-	public static function add_bring_bulk_actions( $actions ) {
+	public static function add_bring_bulk_actions( $actions )
+	{
 		$actions['bring_bulk_book']  = Bring_Booking_Common_View::booking_label( true );
 		$actions['bring_bulk_print'] = __( 'Bring - Print labels', 'bring-fraktguiden-for-woocommerce' );
 
@@ -66,11 +77,14 @@ class Bring_Booking_Orders_View {
 	 *
 	 * @param string $column Column.
 	 */
-	public static function booking_column_value( $column ) {
+	public static function booking_column_value( $column, $order = null ) {
 		global $the_order;
+		if (empty($order)) {
+			$order = $the_order;
+		}
 
 		if ( 'bring_booking_status' === $column ) {
-			$order = new Bring_WC_Order_Adapter( $the_order );
+			$order = new Bring_WC_Order_Adapter( $order );
 			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
 			?>
 
@@ -90,11 +104,11 @@ class Bring_Booking_Orders_View {
 	 * Add bulk admin footer
 	 */
 	public static function add_bulk_admin_footer() {
-		global $post_type;
-
-		if ( 'shop_order' === $post_type ) {
-			require_once dirname( __DIR__ ) . '/templates/modal-templates.php';
+		$screen = get_current_screen();
+		if ( 'edit-shop_order' !== $screen->id && 'woocommerce_page_wc-orders' !== $screen->id ) {
+			return;
 		}
+		require_once dirname( __DIR__ ) . '/templates/modal-templates.php';
 	}
 
 	/**
@@ -103,7 +117,7 @@ class Bring_Booking_Orders_View {
 	public static function admin_load_javascript() {
 		$screen = get_current_screen();
 		// Only for order edit screen.
-		if ( 'edit-shop_order' !== $screen->id ) {
+		if ( 'edit-shop_order' !== $screen->id && 'woocommerce_page_wc-orders' !== $screen->id ) {
 			return;
 		}
 
@@ -112,6 +126,7 @@ class Bring_Booking_Orders_View {
 			'fraktguiden-booking-admin',
 			'_booking_data',
 			[
+				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
 				'downloadurl' => Bring_Booking_Labels::create_download_url( '' ),
 			]
 		);
@@ -127,6 +142,10 @@ class Bring_Booking_Orders_View {
 	public static function bulk_send_booking() {
 		$json     = filter_input( Fraktguiden_Helper::get_input_request_method(), 'json' );
 		$post_ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'id', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( empty($post_ids) && ! empty( $ids ) ) {
+			$post_ids = $ids;
+		}
 
 		if ( empty( $post_ids ) ) {
 			return;

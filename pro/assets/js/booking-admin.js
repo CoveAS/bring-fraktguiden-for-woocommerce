@@ -7,7 +7,7 @@
 	//@todo: does this need to be global?
 	var modal = $( {} );
 
-	var form = $( 'form#posts-filter' );
+	var form = $( 'form#posts-filter, #wc-orders-filter' );
 
 	// Add input for form filter submit from modal.
 	var customer_number = $( '<input type="hidden" name="_bring-customer-number" value="">' );
@@ -28,8 +28,13 @@
 		return result;
 	}
 
+	let busy = false;
 
 	function show_bulk_book_dialog() {
+		if (busy) {
+			return;
+		}
+		busy = true;
 		// Open dialog.
 		modal.WCBackboneModal( {
 			template: 'bring-modal-bulk'
@@ -52,6 +57,7 @@
 
 		// Print order ids in dialog.
 		$( '.bring-modal-selected-orders-list' ).text( order_ids.join( ' - ' ) );
+		setTimeout(function() { busy= false; }, 500);
 	}
 
 	var display_errors = function() {
@@ -98,8 +104,26 @@
 			}
 		);
 
-		var url = location.origin + location.pathname;
-		$.get( url + '?json=true&' + form.serialize(), function( data ) {
+		var url = _booking_data.ajaxurl;
+		// console.log(form.serializeArray());
+		var dataArray = form.serializeArray();
+		var formDataObj = {};
+		// Convert array to object
+		$.each(dataArray, function() {
+			if (formDataObj[this.name]) {
+				// If the property already exists, (for checkboxes or multiple selects), add it as an array
+				if (!formDataObj[this.name].push) {
+					formDataObj[this.name] = [formDataObj[this.name]];
+				}
+				formDataObj[this.name].push(this.value || '');
+			} else {
+				formDataObj[this.name] = this.value || '';
+			}
+		});
+		formDataObj.json = true;
+		$.post( url,
+			formDataObj,
+			function( data ) {
 			form.unblock();
 			if ( ! data.bring_column ) {
 				return;
@@ -112,7 +136,7 @@
 				error_messages.push( record.message );
 			} );
 			$.each( data.bring_column, function( id, column_item ) {
-				var elem = $( '#post-' + id );
+				var elem = $( '#post-' + id +',#order-' + id );
 				if ( ! elem.length ) {
 					return;
 				}
@@ -124,7 +148,7 @@
 			} );
 			var error_list = $( '<ul>' );
 			$.each( data.report, function( id, record ) {
-				var elem = $( '#post-' + id );
+				var elem = $( '#post-' + id +',#order-' + id );
 				if ( elem.length ) {
 					// Update the WooCommerce order status.
 					elem.find( '.column-order_status' )
