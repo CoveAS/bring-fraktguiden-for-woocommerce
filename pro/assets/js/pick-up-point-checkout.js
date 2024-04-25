@@ -9,6 +9,18 @@ jQuery(function ($) {
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
 	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
 
+	const handleSelectPickUpPoint = function (pickUpPoint) {
+		return function (e) {
+			e.preventDefault();
+			selectPickUpPoint(pickUpPoint);
+			if (selectedPickUpPoint.id !== pickUpPoint.id) {
+				ajaxSelect(pickUpPoint.id);
+			}
+			selectedPickUpPoint = pickUpPoint;
+			modalEl.hide();
+		};
+	};
+
 	function getAddress(pickUpPoint) {
 		return pickUpPoint.address + ', ' + pickUpPoint.postalCode + ' ' + pickUpPoint.city;
 	}
@@ -48,11 +60,23 @@ jQuery(function ($) {
 	modalEl.find('.bfg-pupm__close').on('click', function (e) {
 		e.preventDefault();
 		modalEl.hide();
-	})
+	}).on('keyup', function (e) {
+		if (e.key !== 'Enter' && e.key !== ' ') {
+			return;
+		}
+		e.preventDefault();
+		modalEl.hide();
+	});
 	modalEl.on('click', function (e) {
 		e.preventDefault();
 		modalEl.hide();
-	})
+	}).on('keyup', function (e) {
+		if (e.key !== 'Escape') {
+			return;
+		}
+		e.preventDefault();
+		modalEl.hide();
+	});
 	modalEl.find('.bfg-pupm__inner').on(
 		'click',
 		function (e) {
@@ -76,16 +100,32 @@ jQuery(function ($) {
 			}
 			el.show();
 			el.block(blockArgs);
-			if (changed) {
-				// Show the picker when selecting method with pickup points
-				modalEl.show();
-			}
 
 			const listEl = modalEl.find('.bfg-pupm__list');
 			const template = modalEl.find('.bfg-pupm__template');
-			$('.bfg-pup__change').on('click', function () {
+
+			const focusItem = function () {
+				// find selected pick up point and focus it
+				let selected = listEl.find('.bfg-pupm__item').filter(function () {
+					return $(this).data('id') === selectedPickUpPoint.id;
+				});
+				if (! selected.length) {
+					selected = listEl.find('.bfg-pupm__item').first().focus();
+				}
+				selected.focus();
+				setTimeout(function () { selected.focus(); },100);
+				console.log(selected);
+			}
+			const showModal = function () {
 				modalEl.show();
-			});
+				focusItem();
+			};
+			if (changed) {
+				// Show the picker when selecting method with pickup points
+				showModal();
+			}
+
+			$('.bfg-pup__change').on('click', showModal)
 
 			// Delete items
 			listEl.html('').block(blockArgs);
@@ -109,19 +149,35 @@ jQuery(function ($) {
 						let pickUpPoint = pickUpPoints[i];
 						const clone = template.clone();
 						clone.attr('class', 'bfg-pupm__item')
+						clone.data('id', pickUpPoint.id);
 						clone.find('.bfg-pupm__name').text(pickUpPoint.name)
 						clone.find('.bfg-pupm__address').text(getAddress(pickUpPoint))
-						clone.on('click', function () {
-							selectPickUpPoint(pickUpPoint);
-							if (selectedPickUpPoint.id !== pickUpPoint.id) {
-								ajaxSelect(pickUpPoint.id);
+						clone.on('click', handleSelectPickUpPoint(pickUpPoint));
+						clone.on('keyup', function (e) {
+							if (e.key === 'ArrowUp') {
+								clone.prev().focus();
+								e.preventDefault();
+								return;
 							}
-							selectedPickUpPoint = pickUpPoint;
-							modalEl.hide();
-						})
+							if (e.key === 'ArrowDown') {
+								clone.next().focus();
+								e.preventDefault();
+								return;
+							}
+
+							if (e.key !== 'Enter' && e.key !== ' ') {
+								return;
+							}
+							handleSelectPickUpPoint(pickUpPoint)(e);
+						});
 						listEl.append(clone);
+
 					}
 					listEl.unblock();
+
+					if (modalEl.is(':visible')) {
+						focusItem();
+					}
 				}
 			).fail( () => listEl.text(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS) );
 		}

@@ -70,7 +70,7 @@ jQuery(function ($) {
 		);
 
 		$('.bring-fraktguiden-logo, .bring-fraktguiden-description, .bring-fraktguiden-environmental, .bring-fraktguiden-eta')
-			.on('click', function () { $(this).closest('li').find('input').click()})
+			.on('click', function () { $(this).closest('li').find('input').trigger('click');})
 	};
 
 	$( document ).on( 'updated_checkout', bind_buttons );

@@ -9,7 +9,7 @@ Tested up to: 6.4.2
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 8.5.1
-Stable tag: 1.10.7
+Stable tag: 1.10.8
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -66,8 +66,9 @@ See faq.txt for frequently asked questions
 
 = 1.10.8 =
 
-* Added bulk action support and booking column on orders when using HPOS
+* Fixed missing bulk action  and booking column on orders when using HPOS
 * Added fallback to legacy view for pickup points when klarna checkout is chosen
+* Added keyboard support for the new pick up point modal
 
 = 1.10.7 =
 
