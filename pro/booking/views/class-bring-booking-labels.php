@@ -8,6 +8,7 @@
 namespace BringFraktguidenPro\Booking\Views;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Labels\Bring_Pdf_Collection;
 use BringFraktguidenPro\Booking\Labels\Bring_Zpl_Collection;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
@@ -39,6 +40,22 @@ class Bring_Booking_Labels {
 	 */
 	public static function open_pdfs() {
 		$page = filter_input( INPUT_GET, 'page' );
+		if ( is_admin() && 'bring_book_orders' === $page ) {
+			$order_ids = explode(
+				',',
+				filter_input( INPUT_GET, 'order_ids' )
+			);
+			foreach ($order_ids as $order_id) {
+				$order = wc_get_order($order_id);
+				$adapter = new Bring_WC_Order_Adapter($order);
+				if ($adapter->is_booked()) {
+					continue;
+				}
+				Bring_Booking::send_booking( $adapter, true );
+			}
+
+			static::download_page();
+		}
 		if ( is_admin() && 'bring_download' === $page ) {
 			static::download_page();
 		}

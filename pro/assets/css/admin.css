@@ -22,6 +22,7 @@ mark.bring-shipment:after {
   color: #7BC144;
 }
 
+
 .wp-core-ui .button-bring-shipment {
   background: #7BC144;
   border-color: #7BC144 #6EAD3D #6EAD3D;
@@ -111,6 +112,10 @@ mark.bring-shipment:after {
 .bring-flex-box {
   display: flex;
   flex-flow: row;
+}
+.bring-booking-cell .bring-flex-box {
+	align-items: center;
+	justify-content: center;
 }
 
 .bring-info-box {
@@ -236,6 +241,7 @@ mark.bring-shipment:after {
   border-radius: 20rem;
   color: #fff;
   display: inline-block;
+	margin-right: 4px;
 }
 
 .bring-info-box .bring-booking-status-icon {

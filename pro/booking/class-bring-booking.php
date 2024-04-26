@@ -152,9 +152,15 @@ class Bring_Booking {
 	/**
 	 * Send booking
 	 *
-	 * @param WC_Order $wc_order WooCommerce order.
+	 * @param WC_Order|Bring_WC_Order_Adapter $wc_order WooCommerce order.
 	 */
 	public static function send_booking( $wc_order, $bulk_mode = false ) {
+		$adapter = $wc_order;
+		if ( $wc_order instanceof WC_Order ) {
+			$adapter = new Bring_WC_Order_Adapter( $adapter );
+		} else {
+			$wc_order = $adapter->order;
+		}
 		// Get booking count
 		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
 		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
@@ -165,7 +171,10 @@ class Bring_Booking {
 		}
 
 		// Bring_WC_Order_Adapter.
-		$adapter = new Bring_WC_Order_Adapter( $wc_order );
+		$customer_number = (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' );
+		if (! $customer_number) {
+			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+		}
 
 		// One booking request per order shipping item (WC_Order_Item_Shipping).
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
@@ -173,7 +182,7 @@ class Bring_Booking {
 			$consignment_request = Bring_Booking_Consignment_Request::create( $shipping_item );
 			$args = [
 				'shipping_date_time' => self::get_shipping_date_time(),
-				'customer_number'    => (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' ),
+				'customer_number'    => $customer_number,
 			];
 			if ( in_array( $adapter->bring_product, [5600, 'PA_DOREN'] ) ) {
 				// Alternative delivery date.
