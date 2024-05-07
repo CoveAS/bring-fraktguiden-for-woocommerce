@@ -83,41 +83,45 @@ class Bring_Booking_Orders_View {
 		}
 		if ( 'bring_booking_status' === $column ) {
 			$order = new Bring_WC_Order_Adapter( $order );
-			$info  = Bring_Booking_Common_View::get_booking_status_info( $order );
-			if ( ! $info ) {
-				return;
-			}
-			?>
+			echo self::get_booking_status_html($order);
+		}
+	}
 
-
-			<div class="bring-booking-cell">
-				<?php if ( $info['href'] ) : ?>
-					<a
-						<?php if (!empty($info['action'])): ?>
-							data-action="<?php echo esc_attr( $info['action'] ); ?>"
-						<?php endif; ?>
-						<?php if (! empty($info['ids'])): ?>
-							data-order-ids="<?php echo esc_attr( implode( ',', $info['ids'] ) ); ?>"
-						<?php endif; ?>
-						target="_blank"
-						class="button "
-						href="<?php echo esc_url( $info['href'] ); ?>">
+	public static function get_booking_status_html(Bring_WC_Order_Adapter $adapter)
+	{
+		$info  = Bring_Booking_Common_View::get_booking_status_info( $adapter );
+		if ( ! $info ) {
+			return;
+		}
+		ob_start();
+		?>
+		<div class="bring-booking-cell">
+			<?php if ( $info['href'] ) : ?>
+			<a
+				<?php if (!empty($info['action'])): ?>
+					data-action="<?php echo esc_attr( $info['action'] ); ?>"
+				<?php endif; ?>
+				<?php if (! empty($info['ids'])): ?>
+					data-order-ids="<?php echo esc_attr( implode( ',', $info['ids'] ) ); ?>"
+				<?php endif; ?>
+				target="_blank"
+				class="button "
+				href="<?php echo esc_url( $info['href'] ); ?>">
 				<?php endif; ?>
 
-					<div class="bring-flex-box">
+				<div class="bring-flex-box">
 					<?php echo Bring_Booking_Common_View::create_status_icon( $info, 16 ); ?>
 					<span class="bring-area-info">
 						<?php echo $info['text']; ?>
 					</span>
 
-					</div>
+				</div>
 				<?php if ( $info['href'] ) : ?>
-					</a>
-				<?php endif; ?>
-			</div>
-
-			<?php
-		}
+			</a>
+		<?php endif; ?>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -177,10 +181,12 @@ class Bring_Booking_Orders_View {
 		foreach ( $post_ids as $post_id ) {
 			$wc_order                = wc_get_order( $post_id );
 			$adapter                 = new Bring_WC_Order_Adapter( $wc_order );
-			$column_data[ $post_id ] = Bring_Booking_Common_View::get_booking_status_info( $adapter );
+			$column_data[ $post_id ] = self::get_booking_status_html( $adapter );
+
 		}
 		if ( $json ) {
 			wp_send_json( [
+				'print_url'    => Bring_Booking_Labels::create_download_url( $post_ids ),
 				'bring_column' => $column_data,
 				'report'       => $report,
 			] );
