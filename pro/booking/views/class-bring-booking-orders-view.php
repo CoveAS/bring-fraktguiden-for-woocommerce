@@ -163,7 +163,8 @@ class Bring_Booking_Orders_View {
 	 *
 	 * @return void
 	 */
-	public static function bulk_send_booking() {
+	public static function bulk_send_booking(): void
+	{
 		$json     = filter_input( Fraktguiden_Helper::get_input_request_method(), 'json' );
 		$post_ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'id', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
