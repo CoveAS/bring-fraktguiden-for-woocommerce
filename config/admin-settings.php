@@ -98,14 +98,6 @@ return [
 					'class' => 'bfg-suffixed-number-lg',
 				],
 			],
-			'calculate_by_weight' => [
-				'label' => __('Calculate shipping costs based on weight only',
-					'bring-fraktguiden-for-woocommerce'),
-				'default' => 'no',
-				'type' => 'checkbox',
-				'description' => __('The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.',
-					'bring-fraktguiden-for-woocommerce'),
-			],
 			'shipping_options_full_width' => [
 				'label' => __('Display shipping options full-width',
 					'bring-fraktguiden-for-woocommerce'),
@@ -389,6 +381,15 @@ If you have a specific size of box that you ship, or you ship using different se
 					__('No shipping'),
 					...$all_services,
 				],
+			],
+
+			'calculate_by_weight' => [
+				'label' => __('Calculate shipping costs based on weight only',
+					'bring-fraktguiden-for-woocommerce'),
+				'default' => 'no',
+				'type' => 'checkbox',
+				'description' => __('The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.',
+					'bring-fraktguiden-for-woocommerce'),
 			],
 
 			// Maximum product limit

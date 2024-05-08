@@ -36,17 +36,23 @@ use BringFraktguiden\Fields\Fields;
 
 					<div class="bfg-box__section">
 
+						<div class="bfg-field">
 						<?php echo $fields->no_connection_rate_id->label(); ?>
 						<?php echo $fields->no_connection_rate_id; ?>
+						</div>
 
+						<div class="bfg-field">
 						<?php echo $fields->no_connection_flat_rate->label(); ?>
 						<div class="bfg-input bfg-input--number">
 							<?php echo $fields->no_connection_flat_rate->field(); ?>
 							<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
 						</div>
+						</div>
 
+						<div class="bfg-field">
 						<?php echo $fields->no_connection_flat_rate_label->label(); ?>
 						<?php echo $fields->no_connection_flat_rate_label; ?>
+						</div>
 
 						<?php submit_button(); ?>
 					</div>
@@ -59,18 +65,24 @@ use BringFraktguiden\Fields\Fields;
 					<div class="bfg-box__section">
 
 
+						<div class="bfg-field">
 						<?php echo $fields->exception_rate_id->label(); ?>
 						<?php echo $fields->exception_rate_id; ?>
 
+						</div>
+						<div class="bfg-field">
 						<?php echo $fields->exception_flat_rate->label(); ?>
 						<div class="bfg-input bfg-input--number">
 							<?php echo $fields->exception_flat_rate->field(); ?>
 							<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
 						</div>
 						<?php echo $fields->exception_flat_rate->description(); ?>
+						</div>
+						<div class="bfg-field">
 
 						<?php echo $fields->exception_flat_rate_label->label(); ?>
 						<?php echo $fields->exception_flat_rate_label; ?>
+						</div>
 
 						<?php submit_button(); ?>
 					</div>

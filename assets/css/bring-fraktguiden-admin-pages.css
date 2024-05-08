@@ -30,6 +30,9 @@ body .bfg-suffixed-number-lg {
 .bfg-input--number input[type="number"] {
 	text-align: right;
 }
+input:disabled {
+	background-color: #f0f0f0;
+}
 
 .bfg-suffixed-number-lg::-webkit-inner-spin-button,
 .bfg-suffixed-number-lg::-webkit-outer-spin-button,
