@@ -6,12 +6,13 @@ use BringFraktguiden\Utility\Config;
 
 class Setting
 {
-	readonly public array $data;
+	readonly public array  $data;
 	readonly public string $type;
+	readonly public mixed  $value;
 
 	public function __construct(
-		readonly public string            $key,
-		readonly public bool|string|array $value,
+		readonly public string $key,
+		readonly public mixed  $raw_value,
 	)
 	{
 		$admin_settings = Config::get('admin-settings');
@@ -26,17 +27,20 @@ class Setting
 			}
 		}
 		$this->data = $data;
-		if (!$data['type'])
-			ray($this->key, $key, $this->value, $data);
 		$this->type = $data['type'];
+		$value      = $this->sanitize($raw_value);
+		if (!$value) {
+			$value = $this->sanitize($data['placeholder'] ?? '');
+		}
+		$this->value = $value;
 	}
 
 	public function validate(mixed $param): array
 	{
-		$errors = [];
-		$type   = $this->data['type'];
-		$required   = ! empty($this->data['required']);
-		if ($required && ! $param) {
+		$errors   = [];
+		$type     = $this->data['type'];
+		$required = !empty($this->data['required']);
+		if ($required && !$param) {
 			$errors[] = __(
 				'Value is required!',
 				'bring-fraktguiden-for-woocommerce'
@@ -54,7 +58,7 @@ class Setting
 				'bring-fraktguiden-for-woocommerce'
 			);
 		}
-		if ($type === 'time' && ! preg_match('/^\d{2}:\d{2}$/', $param)) {
+		if ($type === 'time' && !preg_match('/^\d{2}:\d{2}$/', $param)) {
 			$errors[] = __(
 				'Value must follow the format ##:##',
 				'bring-fraktguiden-for-woocommerce'
@@ -63,15 +67,19 @@ class Setting
 		return $errors;
 	}
 
+	/**
+	 * @throws \Exception
+	 */
 	public function sanitize(mixed $param): mixed
 	{
 		return match ($this->type) {
 			'time',
 			'select' => $param,
+			'info',
 			'text' => wp_kses_post($param),
 			'checkbox' => !empty($param),
-			'number' => $param === '' ? '' : floatval($param),
-			default => throw new \Exception($this->data['type']),
+			'number' => $param === '' ? 0 : floatval($param),
+			default => throw new \Exception("Unknown data type: " . $this->data['type']),
 		};
 	}
 }

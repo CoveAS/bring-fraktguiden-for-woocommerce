@@ -3,6 +3,7 @@
 namespace BringFraktguiden\Admin;
 
 use Automattic\WooCommerce\Admin\PageController;
+use Bring_Fraktguiden;
 use BringFraktguiden\Fields\Fields;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
@@ -215,7 +216,15 @@ class SettingsPage
 		$dir = dirname(__DIR__, 2);
 		wp_enqueue_style(
 			'bring_fraktguiden_admin_css',
-			plugin_dir_url($dir) . 'assets/css/bring-fraktguiden-admin-pages.css'
+			plugin_dir_url($dir) . 'assets/css/bring-fraktguiden-admin-pages.css',
+			[],
+			Bring_Fraktguiden::VERSION
+		);
+		wp_enqueue_script(
+			'bring-admin-js',
+			plugin_dir_url($dir) . '/assets/js/bring-fraktguiden-admin.js',
+			[],
+			Bring_Fraktguiden::VERSION
 		);
 	}
 
@@ -239,7 +248,7 @@ class SettingsPage
 			if ('info' == $setting->type) {
 				continue;
 			}
-			$value[$key] = $setting->sanitize($_POST[$key] ?? false);
+			$value[$key] = $_POST[$key] ? $setting->sanitize($_POST[$key]) : '';
 		}
 
 		return $value;

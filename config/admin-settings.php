@@ -318,8 +318,10 @@ return [
 				'default' => 'yes',
 				'type' => 'checkbox',
 				'description' => __('
-This will automatically divide cart items into boxes with sides less than 240 cm and weigh less than 35kg and a circumference less than 360cm.
-If you have a specific size of box that you ship you can customize these values in the settings below.
+Pickup parcel has limits on size and weight. Sometimes if a customer orders many items you may need to pack the items in multiple boxes.
+Enabling this option will automatically divide cart items into boxes with sides less than 240 cm and weigh less than 35kg and a circumference less than 360cm.
+These default values are the maximum size that bring accepts for a single parcel.
+If you have a specific size of box that you ship, or you ship using different services you can customize these values in the settings below.
 				', 'bring-fraktguiden-for-woocommerce'),
 			],
 			'dimension_packing_side' => [
@@ -327,6 +329,7 @@ If you have a specific size of box that you ship you can customize these values 
 				'css' => 'width: 8em;',
 				'placeholder' => '240',
 				'type' => 'number',
+				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [
 					'step' => '0.1',
 					'min' => '0',
@@ -338,6 +341,7 @@ If you have a specific size of box that you ship you can customize these values 
 				'css' => 'width: 8em;',
 				'placeholder' => '360',
 				'type' => 'number',
+				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [
 					'step' => '0.1',
 					'min' => '0',
@@ -349,6 +353,7 @@ If you have a specific size of box that you ship you can customize these values 
 				'css' => 'width: 8em;',
 				'placeholder' => '35',
 				'type' => 'number',
+				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [
 					'step' => '0.1',
 					'min' => '0',
@@ -395,6 +400,7 @@ If you have a specific size of box that you ship you can customize these values 
 				'desc_tip' => __('Use this setting to set a threshold for how many cart items the plugin will attempt to process. A large quantity will impact the speed of the website during the checkout and we recommend keeping this number at 1000 or lower to ensure good performance.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 1000,
+				'dependencies' => ['calculate_by_weight' => false],
 				'custom_attributes' => [
 					'step' => '1',
 					'min' => '0',

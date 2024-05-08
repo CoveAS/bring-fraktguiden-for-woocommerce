@@ -14,6 +14,7 @@ use BringFraktguiden\Fields\Field;
  * @var string $default
  * @var string $placeholder
  * @var string $css
+ * @var array $dependencies
  * @var array $custom_attributes
  * @var array $options
  */
@@ -23,6 +24,7 @@ use BringFraktguiden\Fields\Field;
 	name="<?php echo esc_attr($name); ?>"
 	type="<?php echo esc_attr($type); ?>"
 	value="<?php echo esc_attr($value); ?>"
+	data-dependencies="<?php echo esc_attr(json_encode($dependencies)); ?>"
 	<?php Field::attributes($custom_attributes); ?>
 	<?php if ($placeholder !== ''): ?>
 		placeholder="<?php echo esc_attr($placeholder); ?>"

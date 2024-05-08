@@ -335,7 +335,7 @@ class Fraktguiden_Packer {
 	public function create_boxes( $cart ) {
 		// Create an array of 'product boxes' (l,w,h,weight).
 		$product_boxes     = [];
-		$ignore_dimensions = 'yes' === Fraktguiden_Helper::get_option( 'calculate_by_weight' );
+		$calculate_by_weight = Settings::instance()->calculate_by_weight->value;
 
 		foreach ( $cart as $values ) {
 			$product = $values['data']; // WC_Product.
@@ -350,7 +350,7 @@ class Fraktguiden_Packer {
 				// Assign product the lowest unit dimensions (1x1x1cm) by default.
 				$dims = [ 0, 0, 0 ];
 
-				if ( $product->has_dimensions() && ! $ignore_dimensions ) {
+				if ( $product->has_dimensions() && ! $calculate_by_weight ) {
 					$dims = [
 						$product->get_length(),
 						$product->get_width(),

@@ -13,6 +13,7 @@ use Bring_Fraktguiden\Factories\RateFactory;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Bring_Fraktguiden\Traits\Settings;
 use BringFraktguiden\Common\Fraktguiden_Service_Table;
+use BringFraktguiden\Settings\Settings as BringSettings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -189,7 +190,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
 
 		$max_products       = (int) $this->get_setting( 'max_products', 1000 );
-		$this->max_products = $max_products ? $max_products : 1000;
+		$this->max_products = $max_products ?: 1000;
 
 		// The packer may make a lot of recursion when the cart contains many items.
 		// Make sure xdebug max_nesting_level is raised.
@@ -257,7 +258,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( ! $product_boxes ) {
 			return false;
 		}
-		$multipack = $this->get_setting( 'enable_multipack', 'yes' ) === 'yes';
+		$multipack = BringSettings::instance()->enable_multipack->value;
 
 		// Pack product boxes.
 		return $packer->pack( $product_boxes, $multipack );
@@ -311,8 +312,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// include_once( 'common/class-fraktguiden-packer.php' );
 		// Offer flat rate if the cart contents exceeds max product.
 		// @TODO: Use the package instead of the cart.
-		if ( WC()->cart && WC()->cart->get_cart_contents_count() > $this->max_products ) {
-			$alt_flat_rate_id = $this->get_setting( 'alt_flat_rate_id' );
+		$contents = $package['contents'];
+		$settings = BringSettings::instance();
+		if ( ! $settings->calculate_by_weight->value && count($contents) > $this->max_products) {
+			// Package is not calculated by weight and contents exceeds max products.
+			$alt_flat_rate_id = $settings->alt_flat_rate_id->value;
 			if ( $alt_flat_rate_id ) {
 				$rate = array(
 					'id'            => $this->id,

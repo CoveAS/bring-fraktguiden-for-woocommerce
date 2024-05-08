@@ -19,6 +19,7 @@ class Field
 				'default' => '',
 				'placeholder' => '',
 				'css' => '',
+				'dependencies' => [],
 				'custom_attributes' => [],
 				'options' => []
 			]
@@ -41,7 +42,7 @@ class Field
 	{
 		extract($this->field);
 		$name = $this->name;
-		$value = Settings::instance()->{$name}->value;
+		$value = Settings::instance()->{$name}->raw_value;
 		$template = $this->get_template();
 		ob_start();
 		require dirname(__DIR__, 3) . '/templates/admin/fields/' . $template . '.php';

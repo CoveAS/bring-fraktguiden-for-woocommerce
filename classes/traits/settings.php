@@ -10,6 +10,7 @@ namespace Bring_Fraktguiden\Traits;
 use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Settings\Settings as BringSettings;
 
 trait Settings
 {
@@ -22,9 +23,9 @@ trait Settings
 	 *
 	 * @return mixed
 	 */
-	public function get_setting($key, $default = '')
+	public function get_setting(string $key, $default = ''): mixed
 	{
-		return array_key_exists($key, $this->settings) ? $this->settings[$key] : $default;
+		return BringSettings::instance()->get($key)->value;
 	}
 
 	/**
@@ -35,12 +36,11 @@ trait Settings
 	 *
 	 * @return float
 	 */
-	public function get_price_setting($key, $default = '')
+	public function get_price_setting(string $key, $default = ''): float
 	{
-		$price = floatval($this->get_setting($key, $default));
-		$price = $this->calculate_excl_vat($price);
-
-		return $price;
+		$value = BringSettings::instance()->get($key);
+		$price = floatval($value);
+		return $this->calculate_excl_vat($price);
 	}
 
 	/**
