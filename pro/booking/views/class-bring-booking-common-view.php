@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\Booking\Views;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
+use BringFraktguidenPro\Booking\Bring_Booking_Url;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
 use WC_Shipping_Method_Bring_Pro;
@@ -121,23 +122,25 @@ class Bring_Booking_Common_View {
 	/**
 	 * Get booking status info
 	 */
-	public static function get_booking_status_info( Bring_WC_Order_Adapter $order ): array
+	public static function get_booking_status_info( Bring_WC_Order_Adapter $order ): ?array
 	{
+		if (! $order->has_bring_shipping_methods()) {
+			return null;
+		}
+
 		$result = [
-			'text' => __( 'No', 'bring-fraktguiden-for-woocommerce' ),
+			'text' => __( 'Book now', 'bring-fraktguiden-for-woocommerce' ),
+			'href' => new Bring_Booking_Url( $order ),
+			'action' => 'bring-book-orders',
+			'ids' => [$order->order->get_id()],
 			'icon' => 'dashicons-minus',
 		];
 
-		if ( self::is_step2() ) {
-			$result = [
-				'text' => __( 'In progress', 'bring-fraktguiden-for-woocommerce' ),
-				'icon' => '',
-			];
-		}
-
+		$labels_url         = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
 		if ( $order->is_booked() ) {
 			$result = [
-				'text' => __( 'Booked', 'bring-fraktguiden-for-woocommerce' ),
+				'text' => __( 'Print label', 'bring-fraktguiden-for-woocommerce' ),
+				'href' => $labels_url,
 				'icon' => 'dashicons-yes',
 			];
 		}
@@ -145,6 +148,7 @@ class Bring_Booking_Common_View {
 		if ( $order->has_booking_errors() ) {
 			$result = [
 				'text' => __( 'Failed', 'bring-fraktguiden-for-woocommerce' ),
+				'href' => '',
 				'icon' => 'dashicons-warning',
 			];
 		}

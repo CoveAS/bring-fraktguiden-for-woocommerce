@@ -545,7 +545,7 @@ class Bring_Booking_Order_View {
 				$new_packages[$order_item_id] = [];
 			}
 			$new_packages[$order_item_id][] = [
-				'weight_in_grams' => $package['weight'] * 1000,
+				'weight_in_grams' => floatval($package['weight']) * 1000,
 				'length' => $package['length'],
 				'width' => $package['width'],
 				'height' => $package['height'],

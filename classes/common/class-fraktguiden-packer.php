@@ -340,7 +340,7 @@ class Fraktguiden_Packer {
 		foreach ( $cart as $values ) {
 			$product = $values['data']; // WC_Product.
 
-			if ( ! $product->needs_shipping() ) {
+			if ( empty($product) || ! $product->needs_shipping() ) {
 				continue;
 			}
 

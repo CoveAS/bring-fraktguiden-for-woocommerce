@@ -1,13 +1,94 @@
 
-(function () {
-	var $ = jQuery;
-
-	$( document ).ready( function () {
-
-	//@todo: does this need to be global?
+jQuery(function ($) {
 	var modal = $( {} );
+	var form = $( 'form#posts-filter, #wc-orders-filter' );
 
-	var form = $( 'form#posts-filter' );
+	if ( ! form.length ) {
+		return;
+	}
+
+	const handleBulkBookResponse = function (data) {
+		form.unblock();
+		if ( ! data.bring_column ) {
+			return;
+		}
+		if ( data.print_url ) {
+			window.open( data.print_url, '_blank' ).focus();
+		}
+		var error_messages = [];
+		$.each( data.report, function( id, record ) {
+			if ( record.status === 'ok' ) {
+				return;
+			}
+			error_messages.push( record.message );
+		} );
+		$.each( data.bring_column, function( id, column_item ) {
+			var elem = $( '#post-' + id +',#order-' + id );
+			if ( ! elem.length ) {
+				return;
+			}
+			elem.find( '.bring-booking-cell' ).replaceWith( column_item );
+		} );
+		var error_list = $( '<ul>' );
+		$.each( data.report, function( id, record ) {
+			var elem = $( '#post-' + id +',#order-' + id );
+			if ( elem.length ) {
+				// Update the WooCommerce order status.
+				elem.find( '.column-order_status' )
+					.html( record.order_status );
+				// Initialise the tooltip.
+				if ( $.prototype.tipTip ) {
+					elem.find( '.tips' ).tipTip( {
+						'attribute': 'data-tip',
+						'fadeIn': 50,
+						'fadeOut': 50,
+						'delay': 200
+					} );
+				}
+			}
+			if ( 'error' !== record.status ) {
+				return;
+			}
+			error_list.append(
+				$( '<li>' ).append(
+					$( '<a>' ).addClass( 'error-post-id' )
+						.attr( 'href', record.url.replace( '&amp;', '&' ) )
+						.text( '#' + id ),
+					' ',
+					$( '<span>' )
+						.addClass( 'error-post-message' )
+						.text( record.message )
+				)
+			);
+		} );
+		if ( error_list.children().length ) {
+			modal.WCBackboneModal( {
+				template: 'bring-modal-bulk-errors'
+			} );
+			$( '#bring-error-modal-content' ).html( error_list );
+		}
+	};
+	const buttons = $('[data-action="bring-book-orders"]');
+	const handleClick = function(e, el) {
+		e.preventDefault();
+		const ids = el.data('order-ids');
+		$.post(
+			_booking_data.ajaxurl,
+			{
+				action: 'bring_bulk_book',
+				json : true,
+				'id[]': (ids + '').split(','),
+			},
+			handleBulkBookResponse
+		);
+	};
+	buttons.on('click', function (e) { handleClick(e, $(this)); });
+	buttons.on('keyup', function(e) {
+		if (e.keyCode === 13) {
+			handleClick(e, $(this));
+		}
+	});
+	//@todo: does this need to be global?
 
 	// Add input for form filter submit from modal.
 	var customer_number = $( '<input type="hidden" name="_bring-customer-number" value="">' );
@@ -28,8 +109,13 @@
 		return result;
 	}
 
+	let busy = false;
 
 	function show_bulk_book_dialog() {
+		if (busy) {
+			return;
+		}
+		busy = true;
 		// Open dialog.
 		modal.WCBackboneModal( {
 			template: 'bring-modal-bulk'
@@ -52,6 +138,7 @@
 
 		// Print order ids in dialog.
 		$( '.bring-modal-selected-orders-list' ).text( order_ids.join( ' - ' ) );
+		setTimeout(function() { busy= false; }, 500);
 	}
 
 	var display_errors = function() {
@@ -98,70 +185,25 @@
 			}
 		);
 
-		var url = location.origin + location.pathname;
-		$.get( url + '?json=true&' + form.serialize(), function( data ) {
-			form.unblock();
-			if ( ! data.bring_column ) {
-				return;
+		var url = _booking_data.ajaxurl;
+		var dataArray = form.serializeArray();
+		var formDataObj = {};
+		// Convert array to object
+		$.each(dataArray, function() {
+			if (formDataObj[this.name]) {
+				// If the property already exists, (for checkboxes or multiple selects), add it as an array
+				if (!formDataObj[this.name].push) {
+					formDataObj[this.name] = [formDataObj[this.name]];
+				}
+				formDataObj[this.name].push(this.value || '');
+			} else {
+				formDataObj[this.name] = this.value || '';
 			}
-			var error_messages = [];
-			$.each( data.report, function( id, record ) {
-				if ( record.status === 'ok' ) {
-					return;
-				}
-				error_messages.push( record.message );
-			} );
-			$.each( data.bring_column, function( id, column_item ) {
-				var elem = $( '#post-' + id );
-				if ( ! elem.length ) {
-					return;
-				}
-				elem.find( '.bring-area-icon span' )
-				.removeClass( 'dashicons-minus dashicons-yes dashicons-warning' )
-				.addClass( column_item.icon );
-				elem.find( '.bring-area-info' )
-				.text( column_item.text );
-			} );
-			var error_list = $( '<ul>' );
-			$.each( data.report, function( id, record ) {
-				var elem = $( '#post-' + id );
-				if ( elem.length ) {
-					// Update the WooCommerce order status.
-					elem.find( '.column-order_status' )
-						.html( record.order_status );
-					// Initialise the tooltip.
-					if ( $.prototype.tipTip ) {
-						elem.find( '.tips' ).tipTip( {
-							'attribute': 'data-tip',
-							'fadeIn': 50,
-							'fadeOut': 50,
-							'delay': 200
-						} );
-					}
-				}
-				if ( 'error' !== record.status ) {
-					return;
-				}
-				error_list.append(
-					$( '<li>' ).append(
-						$( '<a>' ).addClass( 'error-post-id' )
-							.attr( 'href', record.url.replace( '&amp;', '&' ) )
-							.text( '#' + id ),
-						' ',
-						$( '<span>' )
-							.addClass( 'error-post-message' )
-							.text( record.message )
-					)
-				);
-			} );
-			if ( error_list.children().length ) {
-				modal.WCBackboneModal( {
-					template: 'bring-modal-bulk-errors'
-				} );
-				$( '#bring-error-modal-content' ).html( error_list );
-			}
-		} );
+		});
+		formDataObj.json = true;
+		$.post( url,
+			formDataObj,
+			handleBulkBookResponse
+		 );
 	} );
-
-} );
-})();
+});

@@ -12,7 +12,10 @@ class PickUpPointsModalComponent {
 		return <<<HTML
 
 <div class="bring-fraktguiden-pick-up-points-modal" style="display:none">
-	<div class="bfg-pupm__template">
+	<div
+		class="bfg-pupm__template"
+		tabindex="0"
+	>
 		<div class="bfg-pupm__name"></div>
 		<div class="bfg-pupm__address"></div>
 	</div>
@@ -20,7 +23,7 @@ class PickUpPointsModalComponent {
 		<div class="bfg-pupm__inner">
 			<div class="bfg-pupm__header">
 				<div class="bfg-pupm__instruction">$instructions</div>
-				<div class="bfg-pupm__close">&times;</div>
+				<div class="bfg-pupm__close" tabindex="0">&times;</div>
 			</div>
 			<div class="bfg-pupm__list"></div>
 		</div>

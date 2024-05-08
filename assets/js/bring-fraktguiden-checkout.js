@@ -58,7 +58,7 @@ jQuery(function ($) {
   var bind_buttons = function bind_buttons() {
     $('.bring-fraktguiden-date-options .alternative-date-item--choice').on('click', select_time_slot);
     $('.bring-fraktguiden-logo, .bring-fraktguiden-description, .bring-fraktguiden-environmental, .bring-fraktguiden-eta').on('click', function () {
-      $(this).closest('li').find('input').click();
+      $(this).closest('li').find('input').trigger('click');
     });
   };
   $(document).on('updated_checkout', bind_buttons);
