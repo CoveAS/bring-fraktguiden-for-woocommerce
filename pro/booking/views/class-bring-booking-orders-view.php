@@ -145,7 +145,14 @@ class Bring_Booking_Orders_View {
 			return;
 		}
 
-		wp_register_script( 'fraktguiden-booking-admin', plugins_url( 'assets/js/booking-admin.js', dirname( __DIR__ ) ), [ 'jquery' ], Bring_Fraktguiden::VERSION, true );
+		wp_register_script(
+			'fraktguiden-booking-admin',
+			plugins_url( 'assets/js/booking-admin.js',
+			dirname( __DIR__ ) ),
+			[ 'jquery' ],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
 		wp_localize_script(
 			'fraktguiden-booking-admin',
 			'_booking_data',

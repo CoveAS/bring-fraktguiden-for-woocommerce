@@ -8,10 +8,10 @@
  *
  * Version:              ###BRING_VERSION###
  * Requires at least:    5.6.0
- * Tested up to:         6.5.2
+ * Tested up to:         6.5.3
  *
  * WC requires at least: 4.8.0
- * WC tested up to:      8.8.2
+ * WC tested up to:      8.8.3
  *
  * Text Domain:          bring-fraktguiden-for-woocommerce
  * Domain Path:          /languages
