@@ -305,23 +305,31 @@ class Bring_Booking {
 	public static function bulk_send_booking( $post_ids ) {
 		$report = [];
 		foreach ( $post_ids as $post_id ) {
-			$order = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
+			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
 			try {
-				if ( ! $order->has_booking_consignments() ) {
-					self::send_booking( $order->order, true );
+				if ( ! $adapter->has_booking_consignments() ) {
+					self::send_booking( $adapter->order, true );
 				}
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
 					'status'       => 'error',
+					'order_id'     => $post_id,
 					'message'      => $e->getMessage(),
 					'order_status' => self::get_status( $post_id ),
 					'url'          => get_edit_post_link( $post_id ),
 				];
 				continue;
 			}
+			$status = 'ok';
+			$message = '';
+			if ($adapter->has_booking_errors()) {
+				$status = 'error';
+				$message = esc_attr__('Error: Could not book the order!', 'bring-fraktguiden-for-woocommerce');
+			}
 			$report[ $post_id ] = [
-				'status'       => 'ok',
-				'message'      => '',
+				'status'       => $status,
+				'order_id'     => $post_id,
+				'message'      => $message,
 				'order_status' => self::get_status( $post_id ),
 				'url'          => get_edit_post_link( $post_id, 'edit' ),
 			];

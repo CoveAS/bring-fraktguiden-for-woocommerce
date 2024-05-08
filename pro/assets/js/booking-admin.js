@@ -12,6 +12,7 @@ jQuery(function ($) {
 		if ( ! data.bring_column ) {
 			return;
 		}
+		console.log(data)
 		if ( data.print_url ) {
 			window.open( data.print_url, '_blank' ).focus();
 		}
