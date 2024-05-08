@@ -37,7 +37,7 @@ class Fraktguiden_Admin_Notices {
 
 		add_action( 'admin_notices', __CLASS__ . '::render_notices' );
 		add_action( 'wp_ajax_bring_dismiss_notice', __CLASS__ . '::ajax_dismiss_notice' );
-		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
+//		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
 		// Check if PRO is available but not activated yet.
 		$message = Fraktguiden_Helper::get_pro_description();
@@ -70,11 +70,11 @@ class Fraktguiden_Admin_Notices {
 			self::remove_missing_api_customer_number_notice();
 		}
 
-		if ( ! Fraktguiden_Helper::get_option( 'services' ) ) {
-			self::add_missing_shipping_services_notice();
-		} else {
-			self::remove_missing_shipping_services_notice();
-		}
+//		if ( ! Fraktguiden_Helper::get_option( 'services' ) ) {
+//			self::add_missing_shipping_services_notice();
+//		} else {
+//			self::remove_missing_shipping_services_notice();
+//		}
 
 		if ( 0 ) {
 			$kco_settings = get_option( 'woocommerce_kco_settings' );
