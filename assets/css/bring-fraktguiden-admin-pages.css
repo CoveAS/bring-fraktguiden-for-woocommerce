@@ -14,6 +14,12 @@
 	display: flex;
 }
 
+.bfg-mb-8 {
+	margin-bottom: 32px;
+}
+.bfg-mb-5 {
+	margin-bottom: 20px;
+}
 .bfg-gap-8 {
 	gap: 16px;
 }
@@ -204,8 +210,14 @@ input:disabled {
 .bfg-box__section,
 .bfg-box__header,
 .bfg-steps__header {
-	padding: 20px 24px;
+	padding: 0 24px;
 	border-bottom: 0;
+}
+.bfg-box__header {
+	padding-top: 20px;
+}
+.bfg-box__section {
+	padding-bottom: 20px;
 }
 
 .bfg-box__checkbox {

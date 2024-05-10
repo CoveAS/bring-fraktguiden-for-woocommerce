@@ -73,7 +73,7 @@ use BringFraktguiden\Admin\Step;
 					<?php settings_fields('bring_fraktguiden_plugin_page'); ?>
 					<div class="bfg-box__header">
 						<h2><?php esc_html_e('Do more with our PRO features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-						<ul>
+						<ul class="bfg-mb-5">
 							<li><?php esc_html_e('Book orders directly with mybring.com from within WooCommerce', 'bring-fraktguiden-for-woocommerce'); ?>
 								<sup>1</sup></li>
 							<li><?php esc_html_e('Set a free shipping threshold per service', 'bring-fraktguiden-for-woocommerce'); ?></li>

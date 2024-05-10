@@ -31,14 +31,15 @@ use BringFraktguiden\Fields\Fields;
 				<?php settings_fields('bring_fraktguiden_fallback'); ?>
 				<div class="bfg-box">
 					<div class="bfg-box__header">
-						<h2><?php esc_html_e('Bring API offline / No connection', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+						<h2><?php esc_html_e('No connection', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+						<p><?php esc_html_e('In some rare cases the plugin will be unable to make connection with the API. This could be caused by a myriad of reasons, but the most common is that either the bring API has some temporary down time or that there is some problem with the network connection. We recommend configuring a fallback shipping option that your customers can use when the API is unavailable.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 
 					<div class="bfg-box__section">
 
 						<div class="bfg-field">
-						<?php echo $fields->no_connection_rate_id->label(); ?>
-						<?php echo $fields->no_connection_rate_id; ?>
+							<?php echo $fields->no_connection_rate_id->label(); ?>
+							<?php echo $fields->no_connection_rate_id; ?>
 						</div>
 
 						<div class="bfg-field">
@@ -50,16 +51,14 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 
 						<div class="bfg-field">
-						<?php echo $fields->no_connection_flat_rate_label->label(); ?>
-						<?php echo $fields->no_connection_flat_rate_label; ?>
+							<?php echo $fields->no_connection_flat_rate_label->label(); ?>
+							<?php echo $fields->no_connection_flat_rate_label; ?>
 						</div>
 
-						<?php submit_button(); ?>
 					</div>
-				</div>
-				<div class="bfg-box">
 					<div class="bfg-box__header">
 						<h2><?php esc_html_e('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+						<p><?php esc_html_e('A heavily loaded cart may exceed your selected service\'s size or weight limits. Set up a fallback option here to handle instances where shipping rates are not available due to excess weight or size.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 
 					<div class="bfg-box__section">
