@@ -283,8 +283,6 @@ class Fraktguiden_Helper {
 	 * Gets a Woo admin setting by key
 	 * Returns false if key is not found.
 	 *
-	 * @todo: There must be an API in woo for this. Investigate.
-	 *
 	 * @param string  $key     Key.
 	 * @param boolean $default Default.
 	 *

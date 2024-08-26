@@ -32,7 +32,7 @@ class Fraktguiden_Minimum_Dimensions {
 	 */
 	public static function minimum_dimensions( $dimensions ) {
 		// Check the weight.
-		$minimum_weight = Fraktguiden_Helper::get_option( 'minimum_weight', '0.01' ) * 1000;
+		$minimum_weight = floatval(Fraktguiden_Helper::get_option( 'minimum_weight', '0.01' )) * 1000;
 
 		if ( $minimum_weight > $dimensions['weight_in_grams'] ) {
 			$dimensions['weight_in_grams'] = $minimum_weight;
