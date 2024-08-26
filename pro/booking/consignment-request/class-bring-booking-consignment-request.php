@@ -302,6 +302,13 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			) {
 				$consignment['product']['additionalServices'][] = ['id' => '1081'];
 			}
+			if (
+				(
+					$this->service->has_vas( '1280' )
+				)
+			) {
+				$consignment['product']['additionalServices'][] = ['id' => '1280'];
+			}
 
 			// ID verification
 			$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
