@@ -201,7 +201,6 @@ class Bring_Booking_Orders_View {
 			},
 			[],
 		);
-		ray($printable);
 		if ( $json ) {
 			wp_send_json( [
 				'print_url'    => empty($printable) ? '' : Bring_Booking_Labels::create_download_url( $printable ),
