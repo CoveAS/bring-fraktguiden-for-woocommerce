@@ -64,6 +64,12 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.10.10 =
+
+* Better error handling for bulk booking
+* Added VAS 1280 Signature required for Mailbox services
+* Adjusted texts for mailbox services to say 5 kg instead of 2 kg
+
 = 1.10.9 =
 
 * Changed booking column on the orders page to buttons that can be used to book or print labels.
