@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.9.5 =
+
+* Fixed bug with downloading labels
+
 = 1.9.4 =
 
 * Improved error handling for customer number api integration

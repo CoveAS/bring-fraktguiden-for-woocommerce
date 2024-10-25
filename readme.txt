@@ -9,7 +9,7 @@ Tested up to: 6.6.1
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 9.2.2
-Stable tag: 1.10.10
+Stable tag: 1.10.11
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -64,6 +64,10 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.10.11 =
+
+* Updated PDF merger package
+
 = 1.10.10 =
 
 * Better error handling for bulk booking
@@ -112,43 +116,5 @@ See faq.txt for frequently asked questions
 * Removed bring_fraktguiden_standard_url_params filter
 * Added bring_fraktguiden_shipping_guide_request_body filter
 * Removed WooCommerce cart-shipping template
-
-= 1.9.5 =
-
-* Fixed bug with downloading labels
-
-= 1.9.4 =
-
-* Improved error handling for customer number api integration
-* Fixed issue with settings not detecting pro activated correctly
-* Added method for license server to trigger license check on purchase of new license
-* Added namespacing for most of the classes and improved class autoloader
-
-= 1.9.3 =
-
-* Fixed a bug where all value added services would always be used with bulk booking
-* Added Home delivery parcel to available services
-
-= 1.9.2 =
-
-* Fixed a bug where the customer number would not be included in API requests
-
-= 1.9.1 =
-
-* Fixed a bug where the customer number would not be included in API requests
-
-= 1.9.1 =
-
-* Improved support for WooCommerce subscriptions
-* Fixed a bug where bag on door checkbox on checkout would show even if the option had not been enabled
-
-= 1.9.0 =
-
-* Added bag on door support for mailbox method
-* Added individual verification and id verification value added service
-* Added setting to enable booking for orders that does not use a bring shipping method
-* Added bring product select box to booking items
-* Added validation for booking settings
-* Upgraded vuejs from version 2 to 3
 
 See changelog.txt for older entries
