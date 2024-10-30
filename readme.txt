@@ -66,7 +66,7 @@ See faq.txt for frequently asked questions
 
 = 1.10.12 =
 
-* Added the support flag for modal settings to enable aditional settings for other plugins such as vipss and avarda checkout
+* Added the support flag for modal settings to enable aditional settings for other plugins such as vipps and avarda checkout
 * Updated PDF merger package
 
 = 1.10.10 =
