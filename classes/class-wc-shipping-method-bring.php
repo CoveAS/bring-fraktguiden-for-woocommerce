@@ -149,6 +149,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			'shipping-zones',
 			'settings',
 			'instance-settings',
+			'instance-settings-modal',
 		);
 
 		if ( $instance_id ) {
