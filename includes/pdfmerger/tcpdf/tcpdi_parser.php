@@ -1,9 +1,9 @@
 <?php
 //============================================================+
 // File name   : tcpdi_parser.php
-// Version     : 1.0
+// Version     : 1.1
 // Begin       : 2013-09-25
-// Last Update : 2013-09-25
+// Last Update : 2016-05-03
 // Author      : Paul Nicholls - https://github.com/pauln
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
 //
@@ -44,13 +44,8 @@
  * This is a PHP class for parsing PDF documents.<br>
  * @author Paul Nicholls
  * @author Nicola Asuni
- * @version 1.0
+ * @version 1.1
  */
-
-/**
- * Exception for handling issues on pdf parsing.
- */
-class TCPdiParserException extends Exception {};
 
 // include class for decoding filters
 require_once(dirname(__FILE__).'/include/tcpdf_filters.php');
@@ -81,17 +76,13 @@ if (!defined ('PDF_TYPE_BOOLEAN'))
     define ('PDF_TYPE_BOOLEAN', 11);
 if (!defined ('PDF_TYPE_REAL'))
     define ('PDF_TYPE_REAL', 12);
-if (!defined ('PDF_PARSER_ERROR_HANDLER_PHP_DIE'))
-    define('PDF_PARSER_ERROR_HANDLER_PHP_DIE', 'php_die');
-if (!defined ('PDF_PARSER_ERROR_HANDLER_EXCEPTION'))
-    define('PDF_PARSER_ERROR_HANDLER_EXCEPTION', 'exception');
 
 /**
  * @class tcpdi_parser
  * This is a PHP class for parsing PDF documents.<br>
  * Based on TCPDF_PARSER, part of the TCPDF project by Nicola Asuni.
  * @brief This is a PHP class for parsing PDF documents..
- * @version 1.0
+ * @version 1.1
  * @author Paul Nicholls - github.com/pauln
  * @author Nicola Asuni - info@tecnick.com
  */
@@ -176,13 +167,6 @@ class tcpdi_parser {
     private $pdfVersion;
 
     /**
-     * Error handler
-     * @var string
-     */
-    private $errorHandler;
-
-
-    /**
      * Available BoxTypes
      *
      * @public array
@@ -197,8 +181,7 @@ class tcpdi_parser {
      * @public
      * @since 1.0.000 (2011-05-24)
      */
-    public function __construct($data, $uniqueid, $errorHandler = PDF_PARSER_ERROR_HANDLER_PHP_DIE) {
-        $this->errorHandler = $errorHandler;
+    public function __construct($data, $uniqueid) {
         if (empty($data)) {
             $this->Error('Empty PDF data.');
         }
@@ -344,7 +327,7 @@ class tcpdi_parser {
     protected function getXrefData($offset=0, $xref=array()) {
         if ($offset == 0) {
             // find last startxref
-            if (preg_match('/.*[\r\n]startxref[\s]*[\r\n]+([0-9]+)[\s]*[\r\n]+%%EOF/is', $this->pdfdata, $matches) == 0) {
+            if (preg_match('/.*[\r\n]startxref[\s\r\n]+([0-9]+)[\s\r\n]+%%EOF/is', $this->pdfdata, $matches) == 0) {
                 $this->Error('Unable to find startxref');
             }
             $startxref = $matches[1];
@@ -352,7 +335,7 @@ class tcpdi_parser {
             if (preg_match('/([0-9]+[\s][0-9]+[\s]obj)/i', $this->pdfdata, $matches, PREG_OFFSET_CAPTURE, $offset)) {
                 // Cross-Reference Stream object
                 $startxref = $offset;
-            } elseif (preg_match('/[\r\n]startxref[\s]*[\r\n]+([0-9]+)[\s]*[\r\n]+%%EOF/i', $this->pdfdata, $matches, PREG_OFFSET_CAPTURE, $offset)) {
+            } elseif (preg_match('/[\r\n]startxref[\s\r\n]+([0-9]+)[\s\r\n]+%%EOF/i', $this->pdfdata, $matches, PREG_OFFSET_CAPTURE, $offset)) {
                 // startxref found
                 $startxref = $matches[1][0];
             } else {
@@ -422,7 +405,7 @@ class tcpdi_parser {
         unset($matches);
         $xref['max_object'] = max($xref['max_object'], $obj_num);
         // get trailer data
-        if (preg_match('/trailer[\s]*<<(.*)>>[\s]*[\r\n]+(?:[%].*[\r\n]+)*startxref[\s]*[\r\n]+/isU', $this->pdfdata, $matches, PREG_OFFSET_CAPTURE, $xoffset) > 0) {
+        if (preg_match('/trailer[\s]*<<(.*)>>[\s\r\n]+(?:[%].*[\r\n]+)*startxref[\s\r\n]+/isU', $this->pdfdata, $matches, PREG_OFFSET_CAPTURE, $xoffset) > 0) {
             $trailer_data = $matches[1][0];
             if (!isset($xref['trailer']) OR empty($xref['trailer'])) {
                 // get only the last updated version
@@ -559,6 +542,10 @@ class tcpdi_parser {
                 }
                 // for each byte on the row
                 for ($i=1; $i<=$columns; ++$i) {
+                    if (!isset($row[$i])) {
+                        // No more data in this row - we're done here.
+                        break;
+                    }
                     // new index
                     $j = ($i - 1);
                     $row_up = $prev_row[$j];
@@ -572,7 +559,7 @@ class tcpdi_parser {
                     switch ($predictor) {
                         case 1: // No prediction (equivalent to PNG None)
                         case 10: { // PNG prediction (on encoding, PNG None on all rows)
-                            $ddata[$k][$j] = $row[$i] ?? 0;
+                            $ddata[$k][$j] = $row[$i];
                             break;
                         }
                         case 11: { // PNG prediction (on encoding, PNG Sub on all rows)
@@ -1232,6 +1219,42 @@ class tcpdi_parser {
         }
     }
 
+    /**
+     * Get annotations from current page
+     *
+     * @return array
+     */
+    public function getPageAnnotations() {
+        return $this->_getPageAnnotations($this->pages[$this->pageno]);
+    }
+
+    /**
+     * Get annotations from /Page
+     *
+     * @param array $obj Array of pdf-data
+     */
+    private function _getPageAnnotations ($obj) { // $obj = /Page
+        $obj = $this->getObjectVal($obj);
+
+        // If the current object has an annotations
+        // dictionary associated with it, we use
+        // it. Otherwise, we move back to its
+        // parent object.
+        if (isset ($obj[1][1]['/Annots'])) {
+            $annots = $obj[1][1]['/Annots'];
+        } else {
+            if (!isset ($obj[1][1]['/Parent'])) {
+                return false;
+            } else {
+                $annots = $this->_getPageAnnotations($obj[1][1]['/Parent']);
+            }
+        }
+
+        if ($annots[0] == PDF_TYPE_OBJREF)
+            return $this->getObjectVal($annots);
+        return $annots;
+    }
+
 
     /**
      * Get content of current page
@@ -1403,7 +1426,7 @@ class tcpdi_parser {
                 return false;
             } else {
                 $res = $this->_getPageRotation($obj[1][1]['/Parent']);
-                if ($res && $res[0] == PDF_TYPE_OBJECT)
+                if ($res[0] == PDF_TYPE_OBJECT)
                     return $res[1];
                 return $res;
             }
@@ -1417,16 +1440,8 @@ class tcpdi_parser {
      * @since 1.0.000 (2011-05-23)
      */
     public function Error($msg) {
-        // exit program and print error.
-        if ($this->errorHandler == PDF_PARSER_ERROR_HANDLER_PHP_DIE) {
-          die("<strong>TCPDI_PARSER ERROR [{$this->uniqueid}]: </strong>".$msg);
-        }
-        elseif ($this->errorHandler == PDF_PARSER_ERROR_HANDLER_EXCEPTION) {
-          throw new TCPdiParserException($msg);
-        }
-        else {
-          die("<strong>TCPDI_PARSER ERROR [{$this->uniqueid}]: </strong>".$msg);
-        }
+        // exit program and print error
+        die("<strong>TCPDI_PARSER ERROR [{$this->uniqueid}]: </strong>".$msg);
     }
 
 } // END OF TCPDF_PARSER CLASS

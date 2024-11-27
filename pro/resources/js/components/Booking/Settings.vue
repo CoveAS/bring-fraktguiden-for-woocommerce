@@ -10,6 +10,14 @@
 						name="bag_on_door"
 				></checkbox>
 			</li>
+			<li v-show="showVas('1280')">
+				<checkbox
+					:label="i18n.signature_required"
+					:description="i18n.signature_required_description"
+					:checked="checked('1280')"
+					name="signature_required"
+				></checkbox>
+			</li>
 		<li v-show="showVas('2084')">
 			<checkbox
 					:label="i18n.electronic_notification"

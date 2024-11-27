@@ -112,6 +112,12 @@ mark.bring-shipment:after {
 	flex-flow: row;
 }
 
+.bring-booking-cell .bring-flex-box {
+	align-items: center;
+	justify-content: center;
+	gap: 0.25rem;
+}
+
 .bring-info-box {
 	display: flex;
 	flex-flow: row;

@@ -5,11 +5,11 @@ Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
 Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
 Requires at least: 5.6
-Tested up to: 6.5.3
+Tested up to: 6.6.1
 Requires PHP: 8.1
 WC requires at least: 4.8.0
-WC tested up to: 8.8.3
-Stable tag: 1.10.9
+WC tested up to: 9.2.2
+Stable tag: 1.10.12
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -64,6 +64,17 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.10.12 =
+
+* Added the support flag for modal settings to enable aditional settings for other plugins such as vipps and avarda checkout
+* Updated PDF merger package
+
+= 1.10.10 =
+
+* Better error handling for bulk booking
+* Added VAS 1280 Signature required for Mailbox services
+* Adjusted texts for mailbox services to say 5 kg instead of 2 kg
+
 = 1.10.9 =
 
 * Changed booking column on the orders page to buttons that can be used to book or print labels.
@@ -106,43 +117,5 @@ See faq.txt for frequently asked questions
 * Removed bring_fraktguiden_standard_url_params filter
 * Added bring_fraktguiden_shipping_guide_request_body filter
 * Removed WooCommerce cart-shipping template
-
-= 1.9.5 =
-
-* Fixed bug with downloading labels
-
-= 1.9.4 =
-
-* Improved error handling for customer number api integration
-* Fixed issue with settings not detecting pro activated correctly
-* Added method for license server to trigger license check on purchase of new license
-* Added namespacing for most of the classes and improved class autoloader
-
-= 1.9.3 =
-
-* Fixed a bug where all value added services would always be used with bulk booking
-* Added Home delivery parcel to available services
-
-= 1.9.2 =
-
-* Fixed a bug where the customer number would not be included in API requests
-
-= 1.9.1 =
-
-* Fixed a bug where the customer number would not be included in API requests
-
-= 1.9.1 =
-
-* Improved support for WooCommerce subscriptions
-* Fixed a bug where bag on door checkbox on checkout would show even if the option had not been enabled
-
-= 1.9.0 =
-
-* Added bag on door support for mailbox method
-* Added individual verification and id verification value added service
-* Added setting to enable booking for orders that does not use a bring shipping method
-* Added bring product select box to booking items
-* Added validation for booking settings
-* Upgraded vuejs from version 2 to 3
 
 See changelog.txt for older entries

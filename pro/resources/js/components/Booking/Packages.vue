@@ -43,7 +43,7 @@
 				</package>
 
 				<tr>
-					<td colspan="7"></td>
+					<td :colspan="showPickupPoint ? 7 : 6"></td>
 					<td>
 					<span
 							class="button add"

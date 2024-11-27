@@ -190,11 +190,20 @@ class Bring_Booking_Orders_View {
 			$wc_order                = wc_get_order( $post_id );
 			$adapter                 = new Bring_WC_Order_Adapter( $wc_order );
 			$column_data[ $post_id ] = self::get_booking_status_html( $adapter );
-
 		}
+		$printable = array_reduce(
+			$report,
+			function ($carry, $item) {
+				if ( $item['status'] === 'ok' ) {
+					$carry[] = $item['order_id'];
+				}
+				return $carry;
+			},
+			[],
+		);
 		if ( $json ) {
 			wp_send_json( [
-				'print_url'    => Bring_Booking_Labels::create_download_url( $post_ids ),
+				'print_url'    => empty($printable) ? '' : Bring_Booking_Labels::create_download_url( $printable ),
 				'bring_column' => $column_data,
 				'report'       => $report,
 			] );

@@ -196,4 +196,12 @@ return [
 		'bring_products' => [ 3584, 3570 ],
 		'class'          => VAS_Checkbox::class,
 	],
+	[
+		'enabled'        => true,
+		'code'           => '1280',
+		'name'           => __('Signature required (prevents customers from selecting bag on door delivery)', 'bring-fraktguiden-for-woocommerce'),
+		'default'        => false,
+		'bring_products' => [ 3584, 3570 ],
+		'class'          => VAS_Checkbox::class,
+	],
 ];

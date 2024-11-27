@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
-"POT-Creation-Date: 2024-05-08 10:18+0200\n"
-"PO-Revision-Date: 2024-05-08 10:21+0200\n"
+"POT-Creation-Date: 2024-08-26 14:44+0200\n"
+"PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -169,32 +169,32 @@ msgstr ""
 "Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
 "at du oppdaterer til nytt kundenummer."
 
-#: classes/common/class-fraktguiden-helper.php:386
+#: classes/common/class-fraktguiden-helper.php:384
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 "Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
 
-#: classes/common/class-fraktguiden-helper.php:399
+#: classes/common/class-fraktguiden-helper.php:397
 msgid "Running in test-mode."
 msgstr "Kjører i testmodus."
 
-#: classes/common/class-fraktguiden-helper.php:400
-#: classes/common/class-fraktguiden-helper.php:413
-#: classes/common/class-fraktguiden-helper.php:417
-#: classes/common/class-fraktguiden-helper.php:422
+#: classes/common/class-fraktguiden-helper.php:398
+#: classes/common/class-fraktguiden-helper.php:411
+#: classes/common/class-fraktguiden-helper.php:415
+#: classes/common/class-fraktguiden-helper.php:420
 msgid "Click here to buy a license"
 msgstr "Klikk her for å kjøpe lisens"
 
-#: classes/common/class-fraktguiden-helper.php:411
+#: classes/common/class-fraktguiden-helper.php:409
 msgid "Bring Fraktguiden PRO features have been deactivated."
 msgstr "Bring Fraktguiden PRO funksjoner er deaktivert."
 
-#: classes/common/class-fraktguiden-helper.php:412
+#: classes/common/class-fraktguiden-helper.php:410
 msgid "Please ensure you have a valid license to continue using PRO."
 msgstr ""
 "Vennligst sørg for at du har en gyldig lisens før du fortsetter å bruke PRO."
 
-#: classes/common/class-fraktguiden-helper.php:416
+#: classes/common/class-fraktguiden-helper.php:414
 msgid ""
 "☠️ Ahoy, matey! we understand that there ye don't want to, or fer other "
 "reasons be unable pay fer our plugin. Please kindly consider gettin' a "
@@ -205,14 +205,14 @@ msgstr ""
 "å skaffe deg eit brev av løyve ved ei seinare anledning om du koser deg med "
 "bruket av den. Yarr!"
 
-#: classes/common/class-fraktguiden-helper.php:416
-#: classes/common/class-fraktguiden-helper.php:421
+#: classes/common/class-fraktguiden-helper.php:414
+#: classes/common/class-fraktguiden-helper.php:419
 msgid "day"
 msgid_plural "days"
 msgstr[0] "dag"
 msgstr[1] "dagen"
 
-#: classes/common/class-fraktguiden-helper.php:421
+#: classes/common/class-fraktguiden-helper.php:419
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO license has not yet been activated. You have %s "
@@ -221,7 +221,7 @@ msgstr ""
 "Bring Fraktguiden PRO-lisensen har ikke blitt aktivert enda. Du har %s  "
 "igjen før PRO-funksjonene blir deaktivert."
 
-#: classes/common/class-fraktguiden-helper.php:425
+#: classes/common/class-fraktguiden-helper.php:423
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
@@ -230,14 +230,14 @@ msgstr ""
 "Bring Fraktguiden PRO er nå tilgjengelig, <a href=\"%s\">Klikk her for å "
 "oppgradere til PRO.</a>"
 
-#: classes/common/class-fraktguiden-helper.php:435
+#: classes/common/class-fraktguiden-helper.php:433
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 "Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
 "frakt."
 
-#: classes/common/class-fraktguiden-helper.php:436
+#: classes/common/class-fraktguiden-helper.php:434
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
@@ -246,14 +246,14 @@ msgstr ""
 "Pickup points: La kunden velge hentested for utlevering av pakken basert på "
 "deres lokasjon."
 
-#: classes/common/class-fraktguiden-helper.php:437
+#: classes/common/class-fraktguiden-helper.php:435
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 "Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
 "Mybring"
 
-#: classes/common/class-fraktguiden-helper.php:438
+#: classes/common/class-fraktguiden-helper.php:436
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
@@ -1083,8 +1083,8 @@ msgid "Mailbox"
 msgstr "Postkasse"
 
 #: config/services.php:91 config/services.php:103
-msgid "Packages up to 2 kg."
-msgstr "Pakker opp til 2 kg."
+msgid "Packages up to 5 kg."
+msgstr "Pakker opp til 5 kg."
 
 #: config/services.php:92
 msgid ""
@@ -1127,6 +1127,11 @@ msgstr "Courier"
 #: config/services.php:346
 msgid "Home Delivery"
 msgstr "Home Delivery"
+
+#: config/value-added-services.php:202
+msgid ""
+"Signature required (prevents customers from selecting bag on door delivery)"
+msgstr "Signatur kreves (forhindrer kunder å velge pose på dør ved levering)"
 
 #: pro/booking/actions/class-get-booking-data-action.php:48
 msgid "Shipping item id"
@@ -1171,10 +1176,18 @@ msgid "Add"
 msgstr "Legg til"
 
 #: pro/booking/actions/class-get-booking-data-action.php:58
+msgid "Signature required"
+msgstr "Signatur kreves"
+
+#: pro/booking/actions/class-get-booking-data-action.php:59
+msgid "prevents customers from selecting bag on door delivery"
+msgstr "forhindrer kunder å velge pose på dør ved levering"
+
+#: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Bag on door (mailbox)"
 msgstr "Pose på døren (Pakke i postkassen)"
 
-#: pro/booking/actions/class-get-booking-data-action.php:59
+#: pro/booking/actions/class-get-booking-data-action.php:61
 msgid ""
 "Mailbox Parcel (Pakke i postkassen) is a parcel that will be delivered in "
 "the recipient’s mailbox. If the parcel for various reasons does not fit in "
@@ -1195,11 +1208,11 @@ msgstr ""
 "strekkoden og mottakeren vil motta en SMS / e-post. Vær oppmerksom på at "
 "hvis pakken leveres i postkassen blir det ingen tilleggsavgift."
 
-#: pro/booking/actions/class-get-booking-data-action.php:60
+#: pro/booking/actions/class-get-booking-data-action.php:62
 msgid "ID verification"
 msgstr "ID-verifisering"
 
-#: pro/booking/actions/class-get-booking-data-action.php:61
+#: pro/booking/actions/class-get-booking-data-action.php:63
 msgid ""
 "ID is checked upon delivery. Any person (other than the recipient) can "
 "receive the shipment, but must legitimize before receiving it."
@@ -1207,19 +1220,19 @@ msgstr ""
 "ID kontrolleres ved levering. Enhver person (annet enn mottakeren) kan motta "
 "forsendelsen, men må legitimere før han/hun mottar den."
 
-#: pro/booking/actions/class-get-booking-data-action.php:62
+#: pro/booking/actions/class-get-booking-data-action.php:64
 msgid "Electronic notification"
 msgstr "Elektronisk melding"
 
-#: pro/booking/actions/class-get-booking-data-action.php:63
+#: pro/booking/actions/class-get-booking-data-action.php:65
 msgid "Digital notification by SMS and/or e-mail."
 msgstr "Mottakervarsling på SMS eller Epost."
 
-#: pro/booking/actions/class-get-booking-data-action.php:64
+#: pro/booking/actions/class-get-booking-data-action.php:66
 msgid "Individual verification"
 msgstr "Individuell verifisering"
 
-#: pro/booking/actions/class-get-booking-data-action.php:65
+#: pro/booking/actions/class-get-booking-data-action.php:67
 msgid ""
 "Only the specified recipient can receive the shipment by showing "
 "identification. Use of authorization is not possible."
@@ -1295,6 +1308,10 @@ msgstr ""
 #: pro/booking/class-bring-booking.php:252
 msgid "Booked with Bring"
 msgstr "Reservert hos Bring"
+
+#: pro/booking/class-bring-booking.php:327
+msgid "Error: Could not book the order!"
+msgstr "Feil: Kunne ikke booke ordren!"
 
 #: pro/booking/templates/consignment-table-booking.php:29
 msgid "Earliest Pickup"

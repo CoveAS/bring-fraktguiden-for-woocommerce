@@ -417,7 +417,7 @@ class Bring_Booking_Order_View {
 				</td>
 			</tr>
 			<?php
-			self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['name'] );
+			self::render_table_row( __( 'Name', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['name'] ?? $address['name'] );
 			self::render_table_row( __( 'Email', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['email'] );
 			self::render_table_row( __( 'Phone Number', 'bring-fraktguiden-for-woocommerce' ), $address['contact']['phoneNumber'] );
 			?>
