@@ -1,6 +1,7 @@
 <?php
-$skin = get_user_option('admin_color');
-
+/**
+ * @var string $skin = 'fresh'
+ */
 $colors = apply_filters('bring_fraktguiden_skin_colors', match ($skin) {
 	default => [
 		'#1d2327',

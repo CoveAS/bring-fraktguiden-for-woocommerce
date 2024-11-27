@@ -216,7 +216,6 @@ class SettingsPage
 			return;
 		}
 		$skin = get_user_option('admin_color');
-		ray($skin);
 
 		require_once dirname(__DIR__, 3) . '/templates/admin/styles.php';
 	}
