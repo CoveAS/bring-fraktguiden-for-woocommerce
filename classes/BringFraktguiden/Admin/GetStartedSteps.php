@@ -62,19 +62,19 @@ class GetStartedSteps
 		}
 
 		$steps [] = new Step(
+			label: __('API connection', 'bring-fraktguiden-for-woocommerce'),
+			description: __('', 'bring-fraktguiden-for-woocommerce'),
+			action: '#',
+			actionText: __('Authenticate', 'bring-fraktguiden-for-woocommerce'),
+			completed: false,
+		);
+
+		$steps [] = new Step(
 			label: __('Set up fallback rates', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Sometimes the API does not return any rates. This could be caused by a myriad of reasons and to mitigate this we recommend having some fallback options available for your customers.', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_fallback'),
 			actionText: __('Configure fallback options', 'bring-fraktguiden-for-woocommerce'),
 			completed: $fallback,
-		);
-
-		$steps [] = new Step(
-			label: __('Authenticate with the mybring.com API', 'bring-fraktguiden-for-woocommerce'),
-			description: __('By entering your mybring credentials you\'ll be able to display your agreement prices instead of the list prices and if you have a PRO license you can book orders directly from within WooCommerce', 'bring-fraktguiden-for-woocommerce'),
-			action: '#',
-			actionText: __('Authenticate', 'bring-fraktguiden-for-woocommerce'),
-			completed: false,
 		);
 
 		$steps [] = new Step(

@@ -70,7 +70,7 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 						<div class="bfg-field">
 							<label
-								for="from_zip"><?php esc_html_e('Shipping from a different location', 'bring-fraktguiden-for-woocommerce'); ?></label>
+								for="from_zip"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
 							<div class="bfg-flex bfg-gap-8">
 								<div>
 									<?php echo $fields->from_zip->label() ?>
@@ -83,7 +83,7 @@ use BringFraktguiden\Fields\Fields;
 							</div>
 							<p class="bfg-description">
 								<?php echo strtr(
-									esc_html__('Required if you are sending from a different address than the {{a}}store address{{/a}}', 'bring-fraktguiden-for-woocommerce'),
+									esc_html__('Required if you are sending from a different address than the {{a}}store address{{/a}}. Eg. you\'re shipping from a warehouse.', 'bring-fraktguiden-for-woocommerce'),
 									[
 										'{{a}}' => sprintf('<a href="%s">', admin_url('admin.php?page=wc-settings')),
 										'{{/a}}' => '</a>',

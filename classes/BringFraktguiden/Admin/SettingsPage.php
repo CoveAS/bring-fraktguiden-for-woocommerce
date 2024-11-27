@@ -23,6 +23,7 @@ class SettingsPage
 		add_action('admin_notices', [__CLASS__, 'inject_after_notices'], PHP_INT_MAX);
 
 		add_action('admin_enqueue_scripts', __CLASS__ . '::enqueue_admin_styles');
+		add_filter('admin_head', __CLASS__. '::admin_head');
 
 		add_filter('pre_update_option_bring_fraktguiden_for_woocommerce_settings', [__CLASS__, 'process_settings'], 10, 2);
 	}
@@ -140,7 +141,6 @@ class SettingsPage
 
 	public static function settings_init(): void
 	{
-
 		$admin_settings = Config::get('admin-settings');
 
 		foreach ($admin_settings as $section_key => $section) {
@@ -200,6 +200,25 @@ class SettingsPage
 	private static function is_settings_page(): bool
 	{
 		return isset($_GET['page']) && str_starts_with($_GET['page'], 'bring_fraktguiden_');
+	}
+
+	public static function admin_head(): void
+	{
+		global $hook_suffix;
+		$pages = [
+			'bring-fraktguiden_page_bring_fraktguiden_settings',
+			'bring-fraktguiden_page_bring_fraktguiden_fallback',
+			'bring-fraktguiden_page_bring_fraktguiden_booking',
+			'toplevel_page_bring_fraktguiden_home',
+		];
+
+		if (! in_array($hook_suffix, $pages)) {
+			return;
+		}
+		$skin = get_user_option('admin_color');
+		ray($skin);
+
+		require_once dirname(__DIR__, 3) . '/templates/admin/styles.php';
 	}
 
 	public static function enqueue_admin_styles($hook): void

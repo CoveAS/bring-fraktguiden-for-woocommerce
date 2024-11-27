@@ -22,7 +22,7 @@ use BringFraktguiden\Fields\Field;
 	<input
 		name="<?php echo esc_attr($name); ?>"
 		type="<?php echo esc_attr($type); ?>"
-		value="<?php echo esc_attr($default); ?>"
+		value="1"
 		<?php Field::attributes($custom_attributes); ?>
 		<?php if ($placeholder): ?>
 			placeholder="<?php echo esc_attr($placeholder); ?>"

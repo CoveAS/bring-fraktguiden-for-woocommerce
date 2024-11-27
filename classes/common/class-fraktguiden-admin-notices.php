@@ -43,8 +43,25 @@ class Fraktguiden_Admin_Notices {
 		$message = Fraktguiden_Helper::get_pro_description();
 		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
 			/* translators: %s: Bring Fraktguiden settings page URL */
-			self::add_notice( 'pro_available', $message );
+//			self::add_notice( 'pro_available', $message );
 		} elseif ( ! Fraktguiden_Helper::valid_license() ) { // Check if PRO is activated but license not bought.
+			$days = Fraktguiden_Helper::get_pro_days_remaining();
+			$terms_link = Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
+
+			/* translators: %s: Number of days */
+			$message =  sprintf( __( 'Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled.', 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) ) . '<br>'
+				. $terms_link;
+
+			if ( $days < 0 ) {
+				$message = __( 'Bring Fraktguiden PRO features have been deactivated.', 'bring-fraktguiden-for-woocommerce' );
+				$message .= ' ' .__( 'Please ensure you have a valid license to continue using PRO.', 'bring-fraktguiden-for-woocommerce' ) . '<br>'
+					. $terms_link;
+			}
+			if ( $days > 8 ) {
+				$message = sprintf( __( "☠️ Ahoy, matey! we understand that there ye don't want to, or fer other reasons be unable pay fer our plugin. Please kindly consider gettin' a license at a later time if ye enjoy usin' it.", 'bring-fraktguiden-for-woocommerce' ), "$days " . _n( 'day', 'days', $days, 'bring-fraktguiden-for-woocommerce' ) ) . '<br>'
+					. $terms_link;
+			}
+
 			self::add_notice(
 				'pro_available',
 				$message,
@@ -54,13 +71,13 @@ class Fraktguiden_Admin_Notices {
 		}
 
 		// Check if a default postcode of the origin where packages are sent from is set.
-		if ( ! Fraktguiden_Helper::get_option( 'from_zip' ) ) {
-			/* translators: %s: Bring Fraktguiden settings page URL */
-			$message = __( 'Bring requires a postcode to show where packages are being sent from. Please update your postcode on the <a href="%s">settings page.</a>', 'bring-fraktguiden-for-woocommerce' );
-			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
-
-			self::add_notice( 'from_zip_error', $message, 'error', false );
-		}
+//		if ( ! Fraktguiden_Helper::get_option( 'from_zip' ) ) {
+//			/* translators: %s: Bring Fraktguiden settings page URL */
+//			$message = __( 'Bring requires a postcode to show where packages are being sent from. Please update your postcode on the <a href="%s">settings page.</a>', 'bring-fraktguiden-for-woocommerce' );
+//			$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
+//
+//			self::add_notice( 'from_zip_error', $message, 'error', false );
+//		}
 
 		self::remove_notice( 'bring_api_uid_or_key_missing' );
 

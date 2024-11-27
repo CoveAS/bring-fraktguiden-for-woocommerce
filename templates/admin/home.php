@@ -70,7 +70,7 @@ use BringFraktguiden\Admin\Step;
 
 			<div class="bfg-box">
 				<form method="post" action="options.php">
-					<?php settings_fields('bring_fraktguiden_plugin_page'); ?>
+					<?php settings_fields('bring_fraktguiden_home'); ?>
 					<div class="bfg-box__header">
 						<h2><?php esc_html_e('Do more with our PRO features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 						<ul class="bfg-mb-5">

@@ -61,7 +61,7 @@ return [
 			'post_office' => [
 				'title' => __('Post office', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
-				'label' => __('Shipping from post office', 'bring-fraktguiden-for-woocommerce'),
+				'label' => __('Posting at post office', 'bring-fraktguiden-for-woocommerce'),
 				'description' => __('Enable this option if you deliver packages to a post office.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
@@ -89,7 +89,7 @@ return [
 				'title' => __('Handling Fee', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'placeholder' => __('0', 'bring-fraktguiden-for-woocommerce'),
-				'description' => __('Use this setting if you want to add an additional fee on top of the calculated shipping rates. All services will have their prices increased by this amount.',
+				'description' => __('Add an additional fee on top of the calculated shipping rates. All bring shipping options will have their prices increased by this amount.',
 					'bring-fraktguiden-for-woocommerce'),
 				'css' => 'width: 100px; text-align: right;',
 				'default' => '',
