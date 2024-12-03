@@ -26,6 +26,9 @@ class Setting
 				break 2;
 			}
 		}
+		if (empty($data)) {
+			throw new InvalidSetting($this->key);
+		}
 		$this->data = $data;
 		$this->type = $data['type'];
 		$value      = $this->sanitize($raw_value);
@@ -76,6 +79,7 @@ class Setting
 			'time',
 			'select' => $param,
 			'info',
+			'url' => esc_url($param),
 			'text' => wp_kses_post($param),
 			'checkbox' => !empty($param),
 			'number' => $param === '' ? 0 : floatval($param),

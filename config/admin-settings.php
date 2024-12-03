@@ -19,16 +19,14 @@ return [
 			'pro_enabled' => [
 				'title' => __('Activate PRO', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
-				'label' => '<em class="bring-toggle"></em>' . __('Enable/disable PRO features',
-						'bring-fraktguiden-for-woocommerce'),
+				'label' => __('Activate PRO', 'bring-fraktguiden-for-woocommerce'),
 				'class' => 'bring-toggle-checkbox',
-				'description' => __('Please note that using the PRO features on a live website requires a license. First time activation starts a free 7 day trial. After the free period the PRO features will be disabled pending a valid license.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('A license is required to use PRO features on a live website. Activating PRO for the first time gives you a free 7-day trial. After the trial, PRO features will be disabled until a license is activated.', 'bring-fraktguiden-for-woocommerce'),
 			],
-			'test_mode' => [
+			'test_url' => [
 				'title' => __('Enable test mode', 'bring-fraktguiden-for-woocommerce'),
-				'type' => 'checkbox',
-				'label' => '<em class="bring-toggle"></em>' . __('Test and staging mode',
-						'bring-fraktguiden-for-woocommerce'),
+				'type' => 'url',
+				'label' => __('Test site url', 'bring-fraktguiden-for-woocommerce'),
 				'desc_tip' => __('Removes the license requirement and lets you use all of the pro features. A message will be displayed on the cart and checkout page that this is a test-site.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',

@@ -100,6 +100,8 @@ class SettingsPage
 	{
 		$sub_page = $_GET['sub-page'] ?? '';
 		if ($sub_page === 'service-wizard') {
+			$country_code = WC()->countries?->get_base_country();
+			$country = WC()->countries?->countries[$country_code] ?? null;
 			require_once dirname(__DIR__, 3) . '/templates/admin/service-wizard.php';
 			return;
 		}

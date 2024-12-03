@@ -10,7 +10,7 @@ use BringFraktguiden\Utility\Config;
 
 /**
  * @method static pro_enabled()
- * @method static test_mode()
+ * @method static test_url()
  * @method static language()
  * @method static post_office()
  * @method static from_zip()

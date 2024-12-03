@@ -20,7 +20,12 @@ class SettingsRepository
 		$settings = get_option($this->option, []);
 		$this->settings = [];
 		foreach ($settings as $settingName => $value) {
-			$this->settings[$settingName] = new Setting($settingName, $value);
+			try {
+				$this->settings[$settingName] = new Setting($settingName, $value);
+			}
+			catch (\Exception $e) {
+//				ray($e->getMessage());
+			}
 		}
 		return $this;
 	}

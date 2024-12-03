@@ -88,6 +88,7 @@ class Field
 			'date',
 			'time',
 			'number',
+			'url',
 			'text' => 'input',
 			'checkbox' => 'checkbox',
 			'select' => 'select',
