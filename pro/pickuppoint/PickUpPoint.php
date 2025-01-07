@@ -41,7 +41,8 @@ class PickUpPoint
 		add_filter('woocommerce_order_item_display_meta_key', [ __CLASS__, 'woocommerce_order_item_display_meta_key' ] );
 
 		// Enqueue checkout Javascript.
-		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
+		add_action('wp_enqueue_scripts', [ __CLASS__, 'classic_checkout_javascript' ] );
+		add_action( 'woocommerce_blocks_enqueue_checkout_block_scripts_before', __CLASS__ . '::block_checkout_javascript' );
 
 		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
 		if ( 'kco' === WC()->session?->get( 'chosen_payment_method' ) ) {
@@ -53,7 +54,7 @@ class PickUpPoint
 			add_action( 'woocommerce_after_shipping_rate', __CLASS__ . '::pick_up_point_picker', 11, 2 );
 
 			// Add pick up points modal after checkout
-			add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
+//			add_action( 'woocommerce_after_checkout_form', __CLASS__ . '::pick_up_points_modal' );
 
 			// Attach pick up point id to shipping item
 			add_action( 'woocommerce_checkout_create_order_shipping_item', __CLASS__ . '::attach_item_meta' );
@@ -103,19 +104,30 @@ class PickUpPoint
 		return $display_key;
 	}
 
+	public static function block_checkout_javascript(): void {
+		self::register_javascript('assets/js/pick-up-point-checkout.js');
+
+		$number = apply_filters('bring_pickup_point_limit', 0);
+		echo (new SelectedPickUpPointComponent($number, true))->render();
+//		echo (new PickUpPointsModalComponent())->render();
+	}
 	/**
 	 * Load checkout javascript
 	 */
-	public static function checkout_load_javascript(): void {
-
+	public static function classic_checkout_javascript(): void
+	{
 		if (!is_checkout()) {
 			return;
 		}
 		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
-		$path = $legacy
+		$path   = $legacy
 			? 'assets/js/legacy-pickup-point-checkout.js'
 			: 'assets/js/pick-up-point-checkout.js';
 
+		self::register_javascript($path);
+	}
+
+	public static function register_javascript(string $path): void {
 		wp_register_script(
 			'fraktguiden-pickup-point-checkout',
 			plugins_url($path, dirname(__FILE__)),
@@ -127,6 +139,7 @@ class PickUpPoint
 			(new GetRawPickupPointsAction())(null, null)
 		);
 		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
+
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
 			'_fraktguiden_data',
@@ -140,6 +153,7 @@ class PickUpPoint
 					(new GetRawPickupPointsAction())(null, null)
 				),
 				'selected_pick_up_point' => $selected_pick_up_point,
+				'pick_up_point_rate_ids' =>  ['bring_fraktguiden:5800'],
 			]
 		);
 
@@ -198,6 +212,7 @@ class PickUpPoint
 			'REQUEST_FAILED' => __('Request was not successful', 'bring-fraktguiden-for-woocommerce'),
 			'ADD_POSTCODE' => __('Please add postal code', 'bring-fraktguiden-for-woocommerce'),
 			'ERROR_LOADING_PICK_UP_POINTS' => __('ERROR: Could not load pick up points. If this happens again, please notify the website owner', 'bring-fraktguiden-for-woocommerce'),
+			'MODAL_INSTRUCTIONS' => __('Please choose a pick up point from the list below','bring-fraktguiden-for-woocommerce'),
 		];
 	}
 
@@ -217,17 +232,22 @@ class PickUpPoint
 		if ( empty($metadata['bring_product']) ) {
 			return;
 		}
+		$bring_product = $metadata['bring_product'];
 
-		if (! self::supports_pick_up_point($metadata['bring_product'])) {
+		if (! self::supports_pick_up_point($bring_product)) {
 			return;
 		}
-		$number = (int)($service->settings['pickup_point'] ?? 0);
+
+		$services = Fraktguiden_Service::all();
+		$service = $services[$bring_product];
+
+		$number = apply_filters('bring_pickup_point_limit', (int)($service->settings['pickup_point'] ?? 0));
 
 		echo (new SelectedPickUpPointComponent($number, true))->render();
 	}
 
 	public static function pick_up_points_modal() {
-		echo (new PickUpPointsModalComponent())->render();
+//		echo (new PickUpPointsModalComponent())->render();
 	}
 
 	/**

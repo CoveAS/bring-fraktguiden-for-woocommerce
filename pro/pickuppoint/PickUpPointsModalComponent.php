@@ -8,7 +8,7 @@ class PickUpPointsModalComponent {
 	}
 
 	public function render(): string {
-		$instructions = esc_html__('Please choose a pick up point from the list below','bring-fraktguiden-for-woocommerce');
+		$instructions =esc_html__('', '');
 		return <<<HTML
 
 <div class="bring-fraktguiden-pick-up-points-modal" style="display:none">
