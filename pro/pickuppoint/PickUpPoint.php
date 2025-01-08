@@ -32,6 +32,7 @@ class PickUpPoint
 	 */
 	public static function init()
 	{
+
 		// Display order received and mail.
 		add_filter('woocommerce_order_shipping_to_display_shipped_via', [ __CLASS__, 'checkout_order_shipping_to_display_shipped_via' ], 1, 2);
 
@@ -154,6 +155,9 @@ class PickUpPoint
 				),
 				'selected_pick_up_point' => $selected_pick_up_point,
 				'pick_up_point_rate_ids' =>  ['bring_fraktguiden:5800'],
+				'pick_up_point_modal_css' => file_get_contents(
+					dirname(__DIR__) . '/assets/css/pick-up-point-modal.css',
+				)
 			]
 		);
 

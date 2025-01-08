@@ -2,6 +2,7 @@
 	// Assign data from localised js object
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
 	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
+	let requireUpdate = false;
 
 	/**
 	 * jQuery UI block arguments
@@ -21,8 +22,47 @@
 
 	let pickerEl;
 	let listEl;
+	let getRequest = undefined;
 
 	const utility = {
+		refreshPickUpPoints: function () {
+			if (! requireUpdate) {
+				return;
+			}
+			requireUpdate = false;
+			pickerEl.block(blockArgs);
+			if (getRequest) {
+				getRequest.cancel();
+			}
+			getRequest = $.get(
+				_fraktguiden_checkout.ajaxurl,
+				{action: 'bfg_get_pick_up_points'}
+			).done(
+				handlers.fetchPickUpPointsDone
+			).fail(handlers.fetchPickUpPointsFailed);
+			return getRequest;
+		},
+		getShippingKey: function () {
+			const cart = wp.data.select('wc/store/cart');
+			// Check if cart is valid
+			if (!cart || typeof cart.getCustomerData !== 'function') {
+				console.warn('Cart store or customer data is unavailable.');
+				return '';
+			}
+			const cartData = cart.getCartData();
+			// Check if customer data is valid
+			if (!cartData || !cartData.shippingAddress) {
+				console.warn('Customer data or shipping address is missing.');
+				return '';
+			}
+			const {country, postcode} = cartData.shippingAddress;
+			// Ensure country and postcode are valid strings
+			if (typeof country !== 'string' || typeof postcode !== 'string') {
+				console.warn('Shipping address country or postcode is invalid.');
+				return '';
+			}
+			return `${country}${postcode}`;
+		},
 		/**
 		 * Get packages
 		 * @returns {*[]}
@@ -84,87 +124,80 @@
 			}
 		}
 	};
+
+	/**
+	 * Handlers
+	 */
+	const handlers = {
+		/**
+		 * Select Pickup Point handler
+		 * @param pickUpPoint
+		 * @returns {(function(*): void)|*}
+		 */
+		selectPickUpPointHandler: function (pickUpPoint) {
+			return function (e) {
+				e.preventDefault();
+				modalEl.close();
+
+				if (selectedPickUpPoint.id === pickUpPoint.id) {
+					return;
+				}
+
+				const tr = $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
+				tr.block(blockArgs);
+
+				// Ajax select pick up point
+				$.post(
+					_fraktguiden_checkout.ajaxurl,
+					{
+						action: 'bfg_select_pick_up_point',
+						id: pickUpPoint.id,
+					}
+				).error(
+					function (data) {
+						console.error(data);
+						tr.unblock();
+					}
+				).done(function () {
+					tr.unblock();
+					utility.renderSelectedPickUpPoint(pickUpPoint);
+				});
+				selectedPickUpPoint = pickUpPoint;
+			};
+		},
+
+		fetchPickUpPointsFailed: function () {
+			getRequest = undefined;
+			const el = document.querySelector('pick-up-points-modal');
+			el.setError(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS)
+			pickerEl.unblock();
+		},
+
+		fetchPickUpPointsDone: function (response) {
+			getRequest = undefined;
+			// Update values from response
+			window._fraktguiden_data.selected_pick_up_point = response.selected_pick_up_point;
+			selectedPickUpPoint = response.selected_pick_up_point;
+			window._fraktguiden_data.pick_up_points = response.pick_up_points;
+			pickUpPoints = response.pick_up_points;
+
+			utility.renderSelectedPickUpPoint(selectedPickUpPoint);
+
+			const el = document.querySelector('pick-up-points-modal');
+			el.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
+			pickerEl.unblock();
+		}
+	};
+
 	const init = function () {
 		// Set items
-		pickerEl = $('.bring-fraktguiden-pick-up-point-picker');
-		// modalEl = $('.bring-fraktguiden-pick-up-points-modal');
-		// listEl = modalEl.find('.bfg-pupm__list');
-
-		// Move modal to end of body
-		// $('body').append(modalEl);
-
-
-		/**
-		 * Handlers
-		 */
-		const handlers = {
-			/**
-			 * Select Pickup Point handler
-			 * @param pickUpPoint
-			 * @returns {(function(*): void)|*}
-			 */
-			selectPickUpPointHandler: function (pickUpPoint) {
-				return function (e) {
-					e.preventDefault();
-					modalEl.close();
-
-					if (selectedPickUpPoint.id === pickUpPoint.id) {
-						return;
-					}
-
-					const tr = $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
-					tr.block(blockArgs);
-
-					// Ajax select pick up point
-					$.post(
-						_fraktguiden_checkout.ajaxurl,
-						{
-							action: 'bfg_select_pick_up_point',
-							id: pickUpPoint.id,
-						}
-					).error(
-						function (data) {
-							console.error(data);
-							tr.unblock();
-						}
-					).done(function () {
-						tr.unblock();
-						utility.renderSelectedPickUpPoint(pickUpPoint);
-					});
-					selectedPickUpPoint = pickUpPoint;
-				};
-			},
-			fetchPickUpPointsFailed: function () {
-				listEl.text(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS);
-			},
-			fetchPickUpPointsDone: function (response) {
-				// Update values from response
-				window._fraktguiden_data.selected_pick_up_point = response.selected_pick_up_point;
-				selectedPickUpPoint = response.selected_pick_up_point;
-				window._fraktguiden_data.pick_up_points = response.pick_up_points;
-				pickUpPoints = response.pick_up_points;
-
-				utility.renderSelectedPickUpPoint(selectedPickUpPoint);
-
-				let modal = document.querySelector('pick-up-points-modal');
-				modal.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
-				listEl.unblock();
-
-				// if (modalEl.is(':visible')) {
-				// 	focusItem();
-				// }
-			}
-		};
+		pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
 
 		// Bind modal clicks and key-presses
-
-
 		modalEl.setPickUpPoints(
 			_fraktguiden_data.pick_up_points,
 			handlers.selectPickUpPointHandler
 		);
-		modalEl.open();
-
 	};
 
 
@@ -176,30 +209,30 @@
 
 		const shippingOptionsEl = e.detail.element;
 		const inputs = $(shippingOptionsEl).find('input')
-
-		console.log(inputs, $(shippingOptionsEl));
-
-		console.log(utility.getShippingRates())
 		const shippingRates = utility.getShippingRates();
+
+		const getPicker = function(rate) {
+			const inputEl = $('[value="' + rate.rate_id + '"]')
+			const control = inputEl.parent();
+			pickerEl = control.find('.bring-fraktguiden-pick-up-point-picker');
+			if (!pickerEl.length) {
+				pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
+				pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
+				control.append(pickerEl);
+			}
+			return pickerEl;
+		}
 
 		for (let i = 0; i < shippingRates.length; i++) {
 			const shippingRate = shippingRates[i];
-			console.log(shippingRate);
 			if (!utility.usesPickUpPoint(shippingRate.rate_id)) {
 				continue;
 			}
-			const inputEl = $('[value="' + shippingRate.rate_id + '"]')
 			utility.renderSelectedPickUpPoint(_fraktguiden_data.selected_pick_up_point);
 
-
-			$(inputEl).parent().append(pickerEl);
-			pickerEl.show();
-
-
-			console.log(inputEl.value);
+			getPicker(shippingRate).show();
 		}
 
-		$('.bfg-pup__change').on('click', () => modalEl.open());
 
 		// Bind callback to the set-selected-shipping-rate action
 		// This is triggered when selecting a shipping option
@@ -211,6 +244,84 @@
 			}
 		);
 
+		// 26712 - wrong list?
+		wp.hooks.addAction(
+			'experimental__woocommerce_blocks-checkout-set-selected-shipping-rate',
+			'bring-fraktguiden-for-woocommerce',
+			function () {
+				console.log('updated')
+			}
+		);
+		let timeout = undefined;
+
+		monitorNetworkRequests(() => {
+			if (timeout) {
+				clearTimeout(timeout);
+			}
+			timeout = setTimeout(utility.refreshPickUpPoints, 100);
+		});
+
+		let monitorTimeout = undefined;
+		let shippingKey = utility.getShippingKey();
+		wp.data.subscribe(
+			function () {
+				if (window.localStorage.getItem('WOOCOMMERCE_CHECKOUT_IS_CUSTOMER_DATA_DIRTY') === 'true') {
+					// Don't do me dirty
+					return;
+				}
+
+				const key = utility.getShippingKey();
+				if (shippingKey === key) {
+					return;
+				}
+				shippingKey = key;
+				requireUpdate = true;
+
+				// Give the monitor a time limit to detect changes
+				if (monitorTimeout) {
+					clearTimeout(monitorTimeout);
+				}
+				monitorTimeout = setTimeout(
+					function () {
+						if (! requireUpdate) {
+							return;
+						}
+						console.warn('Timeout on detect wc/store/batch update');
+						utility.refreshPickUpPoints();
+					},
+					5000
+				);
+			}
+		);
+
+		wp.data.subscribe(
+			function () {
+				let rates = utility.getShippingRates();
+				let showPicker = false;
+				for (let i = 0; i < rates.length; i++) {
+					const rate = rates[i];
+					if (! rate.selected) {
+						continue;
+					}
+					if (rate.method_id !== 'bring_fraktguiden') {
+						continue;
+					}
+
+					if (! utility.usesPickUpPoint(rate.rate_id)) {
+						continue;
+					}
+					getPicker(rate).show();
+					requireUpdate = true;
+					showPicker = true;
+					break;
+				}
+
+				if (! showPicker) {
+					pickerEl.hide();
+					return;
+				}
+			}
+		);
 
 		// The checkout block is empty on load and it takes a few seconds to load before it's ready.
 		// Poll to check for the existance of the woocommerce shipping option or label element.
@@ -233,13 +344,6 @@
 	}
 	document.addEventListener('bfg-shipping-rates-loaded', blockCheckout);
 
-	$(document).on(
-		'updated_checkout',
-		function () {
-			console.log('updated checkout');
-		}
-	);
-
 	/**
 	 * Classic checkout
 	 */
@@ -248,82 +352,20 @@
 		$(document).on(
 			'updated_checkout',
 			function (event, data) {
-				const el = pickerEl();
 				const current = $('#shipping_method .shipping_method:checked').val();
 				let changed = current !== previous;
 				if (changed) {
 					previous = current;
 				}
-				if (!el.length || !modalEl.length) {
-					return;
-				}
 				pickerEl.show();
 				pickerEl.block(blockArgs);
 
-
-				const focusItem = function () {
-					// find selected pick up point and focus it
-					let selected = listEl.find('.bfg-pupm__item').filter(function () {
-						return $(this).data('id') === selectedPickUpPoint.id;
-					});
-					if (!selected.length) {
-						selected = listEl.find('.bfg-pupm__item').first().focus();
-					}
-					selected.focus();
-					setTimeout(function () {
-						selected.focus();
-					}, 100);
-					console.log(selected);
-				}
-				const showModal = function () {
-					modalEl.open();
-					focusItem();
-				};
-				if (changed) {
-					// Show the picker when selecting method with pickup points
-					showModal();
-				}
-
-
-				// Delete items
-				listEl.html('').block(blockArgs);
-
-				$.get(
-					_fraktguiden_checkout.ajaxurl,
-					{action: 'bfg_get_pick_up_points'}
-				).done(
-					handlers.fetchPickUpPointsDone
-				).fail(handlers.fetchPickUpPointsFailed);
+				utility.refreshPickUpPoints();
 			}
 		);
 	}
 
 
-	// Because WordPress is now 50% react we have to use space age technology to implement stone age methods to figure out
-	// when the element we want is ready to be interacted with...
-	// Believe me, I spent 3 days trying to figure out a "correct" way, but there is nothing to hook into and not a single
-	// event we can use. The new block system is a shit-show start to finish.
-	const observer = new MutationObserver(
-		function (mutationsList, observer) {
-			for (const mutation of mutationsList) {
-				if (mutation.type !== 'childList') {
-					continue;
-				}
-				// Check if the .wc-block-components-shipping-rates-control element exists
-				const el = document.querySelector(
-					// Trust that WooCommerce never changes this?
-					'.wc-block-components-shipping-rates-control'
-				);
-				if (!el || el.children.length <= 0) {
-					continue;
-				}
-				document.dispatchEvent(new CustomEvent('bfg-shipping-rates-loaded', {detail: {element: el}}));
-				observer.disconnect();
-				break;
-			}
-		}
-	);
-	observer.observe(document.body, {childList: true, subtree: true});
 
 	class PickUpPointsModal extends HTMLElement {
 		constructor() {
@@ -332,155 +374,31 @@
 
 			// Create styles for the modal
 			const styles = document.createElement('style');
-			styles.textContent = `
+			styles.textContent = _fraktguiden_data.pick_up_point_modal_css;
 
-.bring-fraktguiden-pick-up-points-modal {
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 99999;
-	background: #FFFFFF;
-	color: #5f5f5f;
-}
-.bring-fraktguiden-pick-up-points-modal.open {
-	display: block;
-}
-
-.bfg-pupm__header {
-	display: flex;
-	border-bottom: 1px solid #EEEEEE;
-	margin-bottom: -1px;
-	position: sticky;
-	top: 0;
-	background: white;
-}
-
-.bfg-pupm__instruction {
-	font-size: 1rem;
-	padding: 16px;
-}
-
-.bfg-pupm__close {
-	margin-left: auto;
-	font-size: 32px;
-	line-height: 0.8;
-	cursor: pointer;
-	padding: 16px;
-	border-left: 1px solid #EEEEEE;
-	user-select: none;
-	transition: color 0.2s;
-	color: #5f5f5f;
-}
-
-.bfg-pupm__close:focus,
-.bfg-pupm__close:hover {
-	color: #c12a2a;
-}
-.bfg-pupm__close:focus {
-	outline: 0;
-	box-shadow: inset 0 0 0 2px #c12a2a;
-}
-
-.bfg-pupm__wrap {
-	height: 100%;
-}
-
-.bfg-pupm__inner {
-	max-height: 100%;
-	display: flex;
-	flex-direction: column;
-}
-
-.bfg-pupm__template {
-	display: none;
-}
-
-.bfg-pupm__list {
-	height: 100%;
-	background: white;
-	overflow: auto;
-}
-
-.bfg-pupm__item {
-	user-select: none;
-	cursor: pointer;
-	padding: 8px 16px;
-	border-top: 1px solid #EEEEEE;
-	line-height: 1.5;
-}
-
-.bfg-pupm__item:focus {
-	outline: 0;
-	box-shadow: inset 0 0 0 2px #6c97c3;
-	background: #f4f9fc;
-	color: #163a5f;
-}
-.bfg-pupm__item:hover {
-	background: #f4f9fc;
-	color: #163a5f;
-}
-
-.bfg-pupm__name {
-	font-weight: 600;
-}
-.bfg-pupm__item:hover .bfg-pupm__name {
-	text-decoration: underline;
-}
-
-@media screen and (min-width: 767px) {
-	.bring-fraktguiden-pick-up-points-modal {
-		background: rgba(0, 0, 0, 0.2);
-	}
-	.bfg-pupm__wrap {
-		display: flex;
-		align-items: center;
-	}
-	.bfg-pupm__inner {
-		border-radius: 12px;
-		overflow: hidden;
-		background: #FFFFFF;
-		width: 100%;
-		min-height: 320px;
-		max-height: 90%;
-		max-height: min(90%, 960px);
-		max-width: 640px;
-		margin-right: auto;
-		margin-left: auto;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-}
-		`;
-
-			const modal = document.createElement('div');
-		modal.classList.add('bring-fraktguiden-pick-up-points-modal');
-
-		modal.innerHTML = `
-		  <div class="bfg-pupm__wrap">
-			<div class="bfg-pupm__inner">
-			  <div class="bfg-pupm__header">
-				<div class="bfg-pupm__instruction">
-				${_fraktguiden_data.i18n.MODAL_INSTRUCTIONS}
+			const el = document.createElement('div');
+			el.classList.add('bring-fraktguiden-pick-up-points-modal');
+			el.innerHTML = `
+			  <div class="bfg-pupm__wrap">
+				<div class="bfg-pupm__inner">
+					<div class="bfg-pupm__header">
+						<div class="bfg-pupm__instruction">
+							${_fraktguiden_data.i18n.MODAL_INSTRUCTIONS}
+						</div>
+						<div class="bfg-pupm__close" tabindex="0">&times;</div>
+					</div>
+					<div class="bfg-pupm__list"></div>
 				</div>
-				<div class="bfg-pupm__close" tabindex="0">&times;</div>
 			  </div>
-			  <div class="bfg-pupm__list">
-				<!-- Dynamically populated list goes here -->
-			  </div>
-			</div>
-		  </div>
-		`;
+			`;
 
 			// Append styles and modal to the shadow DOM
-			this.shadowRoot.append(styles, modal);
+			this.shadowRoot.append(styles, el);
 
+			const jqEl = $(el);
 			// Create the modal structure
-			const el = $(modal);
 			// Close modal when clicking on the close button ✖️
-			el.find('.bfg-pupm__close').on('click',  (e) => {
+			jqEl.find('.bfg-pupm__close').on('click',  (e) => {
 				e.preventDefault();
 				this.close();
 			}).on('keyup', (e) => {
@@ -489,10 +407,10 @@
 				}
 				e.preventDefault();
 				this.close();
-			});
+			})
 
 			// Close modal when clicking on backdrop or the [esc] key
-			el.on('click', (e) => {
+			jqEl.on('click', (e) => {
 				e.preventDefault();
 				this.close();
 			}).on('keyup', (e) => {
@@ -504,7 +422,7 @@
 			});
 
 			// Prevent closing when clicking on inner elements
-			el.find('.bfg-pupm__inner').on(
+			jqEl.find('.bfg-pupm__inner').on(
 				'click',
 				function (e) {
 					e.preventDefault();
@@ -515,12 +433,30 @@
 
 		// Open the modal
 		open() {
-			this.shadowRoot.querySelector('.bring-fraktguiden-pick-up-points-modal').classList.add('open');
+			const el = this.shadowRoot.querySelector('.bring-fraktguiden-pick-up-points-modal');
+			el.classList.add('open');
+
+			const listItems = $(el).find('.bfg-pupm__item')
+			// Find selected pick up point and focus it
+			let selectedItems = listItems.filter(function () {
+				return $(this).data('id') === selectedPickUpPoint.id;
+			});
+			if (!selectedItems.length) {
+				selectedItems = listItems.first().focus();
+			}
+			selectedItems.focus();
+			setTimeout(function () {
+				selectedItems.focus();
+			}, 100);
 		}
 
 		// Close the modal
 		close() {
 			this.shadowRoot.querySelector('.bring-fraktguiden-pick-up-points-modal').classList.remove('open');
+		}
+
+		setError(text) {
+			$(this.shadowRoot.querySelector('.bfg-pupm__list')).text(text);
 		}
 
 		// Add pick-up points dynamically
@@ -562,5 +498,78 @@
 
 	// Define the custom element
 	customElements.define('pick-up-points-modal', PickUpPointsModal);
+
+	const checkoutBlock = document.querySelector(
+		'.wc-block-checkout'
+	);
+
+	// Because WordPress is now 50% react we have to use space age technology to implement stone age methods to figure out
+	// when the element we want is ready to be interacted with...
+	// Believe me, I spent 3 days trying to figure out a "correct" way, but there is nothing to hook into and not a single
+	// event we can use. The new block system is a shit-show start to finish.
+	let loaded = false;
+	let refreshTimeout = undefined;
+	const observer = new MutationObserver(
+		function (mutationsList, observer) {
+			for (const mutation of mutationsList) {
+				if (mutation.type !== 'childList') {
+					continue;
+				}
+				// Check if the .wc-block-components-shipping-rates-control element exists
+				const el = document.querySelector(
+					// Trust that WooCommerce never changes this?
+					'.wc-block-components-shipping-rates-control'
+				);
+				if (!el || el.children.length <= 0) {
+					continue;
+				}
+				if (! loaded) {
+					document.dispatchEvent(new CustomEvent('bfg-shipping-rates-loaded', {detail: {element: el}}));
+					loaded = true;
+				}
+				const mask = document.querySelector(
+					// Trust that WooCommerce never changes this?
+					'.wc-block-components-loading-mask'
+				);
+				if (! mask) {
+					continue;
+				}
+				if (refreshTimeout) {
+					clearTimeout(refreshTimeout);
+				}
+				refreshTimeout = setTimeout(utility.refreshPickUpPoints, 1000);
+			}
+		}
+	);
+	if (checkoutBlock) {
+		observer.observe(checkoutBlock, {childList: true, subtree: true});
+	}
+
+	let lastStartTime = 0;
+	function monitorNetworkRequests(callback) {
+		const observer = new PerformanceObserver((list, ob) => {
+			if (! requireUpdate) {
+				return;
+			}
+			const entries = list.getEntries();
+			for (const entry of entries) {
+				if (entry.initiatorType !== 'fetch') {
+					continue;
+				}
+				if (! entry.name.includes('%2Fwc%2Fstore%2Fv1%2Fbatch')) {
+					console.log('wrong name: ' + entry.name)
+					continue;
+				}
+				if (entry.startTime <= lastStartTime) {
+					continue;
+				}
+				lastStartTime = entry.startTime + 1;
+				// Stop monitoring after detecting the request
+				callback();
+			}
+		});
+
+		observer.observe({type: 'resource', buffered: true});
+	}
 
 })(jQuery);
