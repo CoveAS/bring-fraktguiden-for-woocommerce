@@ -6,6 +6,7 @@ use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Calculators\PriceCalculator;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use Bring_Fraktguiden\Common\Rate_Eta;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Exception;
 
@@ -92,6 +93,7 @@ class RateFactory {
 			'bring_environmental_logo_url'    => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
 			'bring_environmental_tag_url'     => $service_details['guiInformation']['environmentalTagUrl'] ?? null,
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
+			'bring_eta'                       => Rate_Eta::eta($expected_delivery_date),
 		];
 
 		$rate = [

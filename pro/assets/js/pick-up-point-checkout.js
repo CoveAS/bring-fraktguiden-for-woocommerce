@@ -154,8 +154,6 @@
 		}
 	}
 
-
-
 	let getRequest = undefined;
 
 	/**
@@ -200,31 +198,6 @@
 				return '';
 			}
 			return `${country}${postcode}`;
-		},
-		/**
-		 * Get packages
-		 * @returns {*[]}
-		 */
-		getPackages: function () {
-			if (!window.wc || !window.wp) {
-				return [];
-			}
-			const storeKey = wc.wcBlocksData.CART_STORE_KEY;
-			const store = wp.data.select(storeKey);
-			return store.getShippingRates();
-		},
-		/**
-		 * Get shipping rates
-		 * @returns {*[]}
-		 */
-		getShippingRates: function () {
-			const packages = utility.getPackages();
-			let shippingRates = [];
-			for (let i = 0; i < packages.length; i++) {
-				const rates = packages[i].shipping_rates;
-				shippingRates = shippingRates.concat(rates);
-			}
-			return shippingRates;
 		},
 
 		/**
@@ -347,7 +320,7 @@
 
 		const shippingOptionsEl = e.detail.element;
 		const inputs = $(shippingOptionsEl).find('input')
-		const shippingRates = utility.getShippingRates();
+		const shippingRates = bring_fraktguiden_for_woocommerce.getShippingRates();
 
 		/**
 		 * Get picker on shippingRate
@@ -436,7 +409,7 @@
 		 */
 		wp.data.subscribe(
 			function () {
-				let rates = utility.getShippingRates();
+				let rates = bring_fraktguiden_for_woocommerce.getShippingRates();
 				for (let i = 0; i < rates.length; i++) {
 					const rate = rates[i];
 					if (!rate.selected || rate.method_id !== 'bring_fraktguiden') {
@@ -462,47 +435,6 @@
 
 	// Initialise block checkout
 	document.addEventListener('bfg-block-shipping-rates-loaded', blockCheckout);
-
-	// Because WordPress is now 50% react we have to use space age technology to implement stone age methods to figure out
-	// when the element we want is ready to be interacted with...
-	// Believe me, I spent 3 days trying to figure out a "correct" way, but there is nothing to hook into and not a single
-	// event we can use. The new block system is a shit-show start to finish.
-	let loaded = false;
-	let refreshTimeout = undefined;
-	const observer = new MutationObserver(
-		function (mutationsList, observer) {
-			for (const mutation of mutationsList) {
-				if (mutation.type !== 'childList') {
-					continue;
-				}
-				// Check if the .wc-block-components-shipping-rates-control element exists
-				const el = document.querySelector(
-					// Trust that WooCommerce never changes this?
-					'.wc-block-components-shipping-rates-control'
-				);
-				if (!el || el.children.length <= 0) {
-					continue;
-				}
-				if (!loaded) {
-					document.dispatchEvent(new CustomEvent('bfg-block-shipping-rates-loaded', {detail: {element: el}}));
-					loaded = true;
-				}
-				const mask = document.querySelector(
-					// Trust that WooCommerce never changes this?
-					'.wc-block-components-loading-mask'
-				);
-				if (!mask) {
-					continue;
-				}
-				document.dispatchEvent(new CustomEvent('bfg-block-shipping-rates-updating', {detail: {element: el}}));
-			}
-		}
-	);
-
-	const checkoutBlock = document.querySelector('.wc-block-checkout');
-	if (checkoutBlock) {
-		observer.observe(checkoutBlock, {childList: true, subtree: true});
-	}
 
 	let lastStartTime = 0;
 
