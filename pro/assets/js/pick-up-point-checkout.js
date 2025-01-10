@@ -163,7 +163,10 @@
 	 */
 	const utility = {
 		refreshPickUpPoints: function () {
-			if (!requireUpdate || utility.getShippingKey() === loadedShippingKey) {
+			if (!requireUpdate) {
+				return;
+			}
+			if (loadedShippingKey && utility.getShippingKey()  === loadedShippingKey) {
 				return;
 			}
 			requireUpdate = false;
@@ -514,7 +517,9 @@
 					previous = current;
 				}
 				pickerEl.show();
+				requireUpdate = true;
 				utility.renderSelectedPickUpPoint(selectedPickUpPoint)
+				loadedShippingKey = ''; // A small hack to force update the pick up points
 				utility.refreshPickUpPoints();
 			}
 		);

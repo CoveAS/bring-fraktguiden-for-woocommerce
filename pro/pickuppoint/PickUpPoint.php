@@ -111,7 +111,6 @@ class PickUpPoint
 
 		$number = apply_filters('bring_pickup_point_limit', 0);
 		echo (new SelectedPickUpPointComponent($number, true))->render();
-//		echo (new PickUpPointsModalComponent())->render();
 	}
 	/**
 	 * Load checkout javascript
