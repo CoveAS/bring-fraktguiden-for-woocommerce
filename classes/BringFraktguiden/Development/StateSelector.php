@@ -70,8 +70,6 @@ class StateSelector
 			}
 
 			$state = self::getStates()[$stateKey];
-//			ray($state, get_option('woocommerce_bring_fraktguiden_services'));
-//			ray(get_option('woocommerce_bring_fraktguiden_settings'));
 			if ($stateKey === 'fresh') {
 				delete_option('woocommerce_bring_fraktguiden_settings');
 			} else {

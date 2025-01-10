@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\PickUpPoint;
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Utility\CustomerAddress;
 use WC_Order;
 use WC_Order_Item_Shipping;
 use WC_Shipping_Rate;
@@ -136,8 +137,13 @@ class PickUpPoint
 			Bring_Fraktguiden::VERSION,
 			true
 		);
+
+		$customerAddress = new CustomerAddress();
+		$country = $customerAddress->getCountry();
+		$postcode = $customerAddress->getPostcode();
+
 		$pick_up_points = PickUpPointData::rawCollection(
-			(new GetRawPickupPointsAction())(null, null)
+			(new GetRawPickupPointsAction)($country, $postcode)
 		);
 		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
 
@@ -150,9 +156,8 @@ class PickUpPoint
 				'country' => Fraktguiden_Helper::get_option('from_country'),
 				'klarna_checkout_nonce' => wp_create_nonce('klarna_checkout_nonce'),
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
-				'pick_up_points' => PickUpPointData::rawCollection(
-					(new GetRawPickupPointsAction())(null, null)
-				),
+				'pick_up_points' => $pick_up_points,
+				'shipping_key' => $country . $postcode,
 				'selected_pick_up_point' => $selected_pick_up_point,
 				'pick_up_point_rate_ids' =>  ['bring_fraktguiden:5800'],
 				'pick_up_point_modal_css' => file_get_contents(

@@ -38,7 +38,6 @@ class Styles
 		}
 
 		// Check for the WooCommerce Checkout block in the current post content.
-		ray( isset( $post->post_content ) , has_block( 'woocommerce/checkout', $post->post_content ));
 		return isset( $post->post_content ) && has_block( 'woocommerce/checkout', $post->post_content );
 	}
 }

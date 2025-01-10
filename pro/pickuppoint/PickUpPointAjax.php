@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\PickUpPoint;
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Utility\CustomerAddress;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Fraktguiden_Packer;
 use WC_Order;
@@ -184,10 +185,15 @@ class PickUpPointAjax
 	 */
 	public static function bring_get_pickup_points()
 	{
-		$pick_up_points = (new GetRawPickupPointsAction)(
-			filter_input(INPUT_GET, 'country'),
-			filter_input(INPUT_GET, 'postcode')
-		);
+
+		$customerAddress = (new CustomerAddress())
+			->withCountry(filter_input(INPUT_GET, 'country'))
+			->withPostcode(filter_input(INPUT_GET, 'postcode'));
+
+		$country = $customerAddress->getCountry();
+		$postcode = $customerAddress->getPostcode();
+
+		$pick_up_points = (new GetRawPickupPointsAction)($country, $postcode);
 
 		if (empty($pick_up_points)) {
 			wp_die();
@@ -209,17 +215,26 @@ class PickUpPointAjax
 	 * Get pickup points via AJAX
 	 */
 	public static function bfg_get_pick_up_points(): void {
-		$result = (new GetRawPickupPointsAction)(null, null);
+
+		$customerAddress = (new CustomerAddress());
+
+		$country = $customerAddress->getCountry();
+		$postcode = $customerAddress->getPostcode();
+
+		$result = (new GetRawPickupPointsAction)($country, $postcode);
 
 		if (empty($result)) {
 			wp_die();
 		}
 
 		$pick_up_points = PickUpPointData::rawCollection($result);
+
 		wp_send_json(
 			[
 				'pick_up_points' => $pick_up_points,
+				'shipping_key' => $country . $postcode,
 				'selected_pick_up_point' => (new GetSelectedPickUpPointAction())($pick_up_points),
+
 			]
 		);
 	}

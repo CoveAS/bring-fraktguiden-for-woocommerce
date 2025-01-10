@@ -3,6 +3,7 @@
 	// Assign data from localised js object
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
 	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
+	let loadedShippingKey = window._fraktguiden_data.shipping_key;
 	let requireUpdate = false;
 
 	// Global picker element variable
@@ -162,7 +163,7 @@
 	 */
 	const utility = {
 		refreshPickUpPoints: function () {
-			if (!requireUpdate) {
+			if (!requireUpdate || utility.getShippingKey() === loadedShippingKey) {
 				return;
 			}
 			requireUpdate = false;
@@ -224,6 +225,9 @@
 		 * @param pickUpPoint
 		 */
 		renderSelectedPickUpPoint: function (pickUpPoint) {
+			if (! pickUpPoint) {
+				return;
+			}
 			$('.bfg-pup__name').text(pickUpPoint.name);
 			$('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
 			$('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
@@ -291,9 +295,15 @@
 			selectedPickUpPoint = response.selected_pick_up_point;
 			window._fraktguiden_data.pick_up_points = response.pick_up_points;
 			pickUpPoints = response.pick_up_points;
+			window._fraktguiden_data.shipping_key = response.shipping_key;
+			loadedShippingKey = response.shipping_key;
 
-			utility.renderSelectedPickUpPoint(selectedPickUpPoint);
-			modalEl.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
+			if (selectedPickUpPoint) {
+				utility.renderSelectedPickUpPoint(selectedPickUpPoint);
+			}
+			if (pickUpPoints) {
+				modalEl.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
+			}
 			pickerEl.unblock();
 		}
 	};
@@ -306,10 +316,12 @@
 	document.body.appendChild(modalEl);
 
 	// Bind modal clicks and key-presses
-	modalEl.setPickUpPoints(
-		_fraktguiden_data.pick_up_points,
-		handlers.selectPickUpPointHandler
-	);
+	if (_fraktguiden_data.pick_up_points) {
+		modalEl.setPickUpPoints(
+			_fraktguiden_data.pick_up_points,
+			handlers.selectPickUpPointHandler
+		);
+	}
 
 	/**
 	 * Block checkout
@@ -393,13 +405,14 @@
 		// Ensure pick-up points are updated whenever WooCommerce triggers a reload in the checkout.
 		// This can occur when the country is changed or if changes are made after `refreshPickUpPoints`
 		// has started but before it finishes. We use a timeout to debounce updates and avoid conflicts.
+		let refreshTimeout;
 		document.addEventListener(
 			'bfg-block-shipping-rates-updating',
 			function () {
 				if (refreshTimeout) {
 					clearTimeout(refreshTimeout);
 				}
-				refreshTimeout = setTimeout(utility.refreshPickUpPoints, 1000);
+				refreshTimeout = setTimeout(utility.refreshPickUpPoints, 5000);
 			}
 		);
 
@@ -407,9 +420,11 @@
 		 * Monitor all state changes
 		 * React to changes in selected rate
 		 */
+		let currentRateId = '';
 		wp.data.subscribe(
 			function () {
 				let rates = bring_fraktguiden_for_woocommerce.getShippingRates();
+				let shouldHide = true;
 				for (let i = 0; i < rates.length; i++) {
 					const rate = rates[i];
 					if (!rate.selected || rate.method_id !== 'bring_fraktguiden') {
@@ -417,18 +432,34 @@
 						continue;
 					}
 
+					if (! currentRateId) {
+						currentRateId = rate.rate_id;
+					}
+
+
 					if (!utility.usesPickUpPoint(rate.rate_id)) {
 						// Doesn't support pick up points
 						continue;
 					}
+					shouldHide = false;
+
+					if (rate.rate_id === currentRateId) {
+						// No change
+						continue;
+					}
+					currentRateId = rate.rate_id;
 					// Selected rate supports pick up points
 					getPicker(rate).show();
+
 					requireUpdate = true;
+					utility.refreshPickUpPoints();
 					return;
 				}
 
 				// No rate selected that supports pick up points
-				pickerEl.hide();
+				if (shouldHide) {
+					pickerEl.hide();
+				}
 			}
 		);
 	}
