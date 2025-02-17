@@ -67,6 +67,9 @@ See faq.txt for frequently asked questions
 = 1.11.0 =
 
 * Added support for WooCommerce Block Checkout
+* Fixed a minor bug when creating an order in admin
+* Added HPOS support for pick up point selection in the admin
+* Improvments to the pick up point selector on checkout
 
 = 1.10.12 =
 
