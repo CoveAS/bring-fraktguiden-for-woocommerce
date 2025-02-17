@@ -202,6 +202,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	public static function create( WC_Order_Item_Shipping $shipping_item ): Bring_Booking_Consignment_Request {
 		$bring_product = self::get_bring_product( $shipping_item );
 
+
 		if (
 			filter_var(
 				Fraktguiden_Helper::get_option( 'booking_without_bring' ),

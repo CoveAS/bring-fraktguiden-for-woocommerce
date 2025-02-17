@@ -53,8 +53,9 @@ class RateFactory {
 		$service_price = $service_details['price']['netPrice']['priceWithAdditionalServices']
 		                 ?? $service_details['price']['netPrice']['priceWithoutAdditionalServices']
 		                    ?? null;
+
 		// Net price is only provided when a customer number is used in the API request. Fallback to list price.
-		if ( Fraktguiden_Helper::get_option( 'price_to_use', 'net' ) === 'list' ?? empty( $service_price ) ) {
+		if ( empty( $service_price ) || (Fraktguiden_Helper::get_option( 'price_to_use', 'net' ) === 'list') ) {
 			$service_price = $service_details['price']['listPrice']['priceWithAdditionalServices']
 			                 ?? $service_details['price']['listPrice']['priceWithoutAdditionalServices']
 			                    ?? $service_price;

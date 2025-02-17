@@ -22,6 +22,12 @@ class Get_Booking_Data_Action {
 	public function __invoke( Bring_WC_Order_Adapter $adapter ): array {
 		$packages = [];
 		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
+
+			$bring_product = $shipping_item->get_meta( 'bring_product' );
+			if (! $bring_product) {
+				continue;
+			}
+
 			// 1. Create Booking Consignment
 			$consignment = Bring_Booking_Consignment_Request::create( $shipping_item );
 
