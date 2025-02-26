@@ -9,7 +9,9 @@ Tested up to: 6.7.2
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 9.6.2
-Stable tag: 1.11.0
+Stable tag: 1.11.1
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -63,6 +65,11 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.11.1 =
+
+* Added GPL license
+* Fixed a bug with showing the pickup point in the block checkout
 
 = 1.11.0 =
 

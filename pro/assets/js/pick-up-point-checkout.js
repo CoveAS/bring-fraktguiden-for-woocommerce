@@ -430,20 +430,22 @@
 				let shouldHide = true;
 				for (let i = 0; i < rates.length; i++) {
 					const rate = rates[i];
-					if (!rate.selected || rate.method_id !== 'bring_fraktguiden') {
-						// Not selected, or not a bring method
+					if (!rate.selected ) {
+						// Not selected
 						continue;
 					}
 
 					if (! currentRateId) {
+						// Unselected
 						currentRateId = rate.rate_id;
+						continue;
 					}
 
-
-					if (!utility.usesPickUpPoint(rate.rate_id)) {
+					if (rate.method_id !== 'bring_fraktguiden' || !utility.usesPickUpPoint(rate.rate_id)) {
 						// Doesn't support pick up points
 						continue;
 					}
+					getPicker(rate).show();
 					shouldHide = false;
 
 					if (rate.rate_id === currentRateId) {
@@ -452,7 +454,6 @@
 					}
 					currentRateId = rate.rate_id;
 					// Selected rate supports pick up points
-					getPicker(rate).show();
 
 					requireUpdate = true;
 					utility.refreshPickUpPoints();
