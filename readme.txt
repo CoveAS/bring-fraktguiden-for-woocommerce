@@ -3,13 +3,13 @@ Author: Cove AS
 Author URI: https://bringfraktguiden.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
-Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
+Tags: woocommerce, posten, frakt, sporing, bring
 Requires at least: 5.6
 Tested up to: 6.7.2
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 9.6.2
-Stable tag: 1.11.1
+Stable tag: 1.11.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,7 +66,7 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
-= 1.11.1 =
+= 1.11.2 =
 
 * Added GPL license
 * Fixed a bug with showing the pickup point in the block checkout
