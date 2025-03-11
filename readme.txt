@@ -9,7 +9,7 @@ Tested up to: 6.7.2
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 9.6.2
-Stable tag: 1.11.2
+Stable tag: 1.11.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.11.3 =
+
+* Added a fix for pickup points where localisation of the script sometimes happens after the script has loaded
 
 = 1.11.2 =
 
