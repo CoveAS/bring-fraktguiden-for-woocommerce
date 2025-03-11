@@ -1,5 +1,4 @@
-
-(function ($) {
+jQuery(function ($) {
 	// Assign data from localised js object
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
 	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
@@ -506,24 +505,27 @@
 	 */
 	(() => {
 		let previous = $('#shipping_method .shipping_method:checked').val();
+		const classicCheckout = function () {
+			const current = $('#shipping_method .shipping_method:checked').val();
+			pickerEl = $('.bring-fraktguiden-pick-up-point-picker');
+			if (!pickerEl.length) {
+				return;
+			}
+			pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
+
+			let changed = current !== previous;
+			if (changed) {
+				previous = current;
+			}
+			pickerEl.show();
+			requireUpdate = true;
+			utility.renderSelectedPickUpPoint(selectedPickUpPoint)
+			loadedShippingKey = ''; // A small hack to force update the pick up points
+			utility.refreshPickUpPoints();
+		};
 		$(document).on(
 			'updated_checkout',
-			function (event, data) {
-				const current = $('#shipping_method .shipping_method:checked').val();
-				pickerEl = $('.bring-fraktguiden-pick-up-point-picker');
-				pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
-
-				let changed = current !== previous;
-				if (changed) {
-					previous = current;
-				}
-				pickerEl.show();
-				requireUpdate = true;
-				utility.renderSelectedPickUpPoint(selectedPickUpPoint)
-				loadedShippingKey = ''; // A small hack to force update the pick up points
-				utility.refreshPickUpPoints();
-			}
+			classicCheckout
 		);
 	})();
-
-})(jQuery);
+});

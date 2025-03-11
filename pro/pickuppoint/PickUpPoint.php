@@ -145,6 +145,7 @@ class PickUpPoint
 			(new GetRawPickupPointsAction)($country, $postcode)
 		);
 		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
+		WC()->session?->set( 'bring_fraktguiden_pick_up_point', $selected_pick_up_point );
 
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
