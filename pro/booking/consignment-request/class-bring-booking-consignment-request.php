@@ -74,12 +74,16 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				];
 
 				if ( $include_info ) {
+					$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+					if (is_object($pickup_point_id) && property_exists($pickup_point_id, 'id')) {
+						$pickup_point_id = $pickup_point_id->id;
+					}
 					$data['shipping_item_info'] = [
 						'item_id'         => $item_id,
 						'shipping_method' => [
 							'name'            => $this->shipping_item['method_id'],
 							'service'         => $this->service_id,
-							'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
+							'pickup_point_id' => $pickup_point_id,
 						],
 					];
 				}
@@ -253,6 +257,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+		if (is_object($pickup_point_id) && property_exists($pickup_point_id, 'id')) {
+			$pickup_point_id = $pickup_point_id->id;
+		}
 
 		if ( $pickup_point_id ) {
 			$consignment['parties']['pickupPoint'] = [
