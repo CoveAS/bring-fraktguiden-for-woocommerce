@@ -333,7 +333,6 @@ class Bring_WC_Order_Adapter {
 			if (is_object($pickup_point_id) && property_exists($pickup_point_id, 'id')) {
 				$pickup_point_id = $pickup_point_id->id;
 			}
-			ray($pickup_point_id);
 			$pickup_point    = null;
 
 			if ( $pickup_point_id ) {

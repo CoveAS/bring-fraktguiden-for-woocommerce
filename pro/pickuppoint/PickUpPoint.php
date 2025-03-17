@@ -145,9 +145,10 @@ class PickUpPoint
 			(new GetRawPickupPointsAction)($country, $postcode)
 		);
 		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
-		WC()->session?->set( 'bring_fraktguiden_pick_up_point', $selected_pick_up_point );
+		if ($selected_pick_up_point && $selected_pick_up_point instanceof PickUpPointData) {
+			WC()->session?->set( 'bring_fraktguiden_pick_up_point', $selected_pick_up_point->id );
+		}
 
-		ray($selected_pick_up_point);
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
 			'_fraktguiden_data',
@@ -275,6 +276,9 @@ class PickUpPoint
 			return;
 		}
 		$id = WC()->session?->get( 'bring_fraktguiden_pick_up_point' );
+		if (is_object($id) && property_exists($id, 'id')) {
+			$id = $id->id;
+		}
 		if (empty($id)) {
 			return;
 		}

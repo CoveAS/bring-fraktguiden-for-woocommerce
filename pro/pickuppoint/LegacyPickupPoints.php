@@ -30,7 +30,10 @@ class LegacyPickupPoints {
 
 	public static function chosen_method($default, $rates, $chosen_method)
 	{
-		$id = WC()->session->get( 'bring_fraktguiden_pick_up_point' );
+		$id = WC()->session?->get( 'bring_fraktguiden_pick_up_point' );
+		if (is_object($id) && property_exists($id, 'id')) {
+			$id = $id->id;
+		}
 		$keys = array_keys($rates);
 
 		if (preg_match('/^bring_fraktguiden:\d+$/', $chosen_method)) {
