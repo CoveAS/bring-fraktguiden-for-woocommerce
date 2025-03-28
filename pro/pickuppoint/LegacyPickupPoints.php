@@ -4,6 +4,7 @@ namespace BringFraktguidenPro\PickUpPoint;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Utility\CustomerAddress;
 
 class LegacyPickupPoints {
 
@@ -99,8 +100,11 @@ class LegacyPickupPoints {
 			return $rates;
 		}
 
+		$customerAddress = new CustomerAddress();
+		$country = $customerAddress->getCountry();
+		$postcode = $customerAddress->getPostcode();
 		$pickup_point_limit = apply_filters('bring_pickup_point_limit', (int)$service->settings['pickup_point']);
-		$pickup_points = (new GetRawPickupPointsAction)(null, null);
+		$pickup_points = (new GetRawPickupPointsAction)($country, $postcode);
 
 		if (empty($pickup_points)) {
 			return $rates;
