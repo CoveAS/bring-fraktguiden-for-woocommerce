@@ -69,7 +69,7 @@ class Bring_Fraktguiden {
 
 		add_filter( 'plugin_action_links_' . basename( $plugin_path ) . '/bring-fraktguiden-for-woocommerce.php', __CLASS__ . '::plugin_action_links' );
 
-		if ( is_admin() ) {
+		if ( current_user_can( 'manage_woocommerce') ) {
 			add_action( 'wp_ajax_bring_system_info', [ __CLASS__, 'get_system_info_page' ] );
 		}
 
