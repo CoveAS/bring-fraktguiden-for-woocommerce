@@ -14,7 +14,7 @@
  * Tested up to:         6.7.2
  *
  * WC requires at least: 4.8.0
- * WC tested up to:      9.6.2
+ * WC tested up to:      9.7.1
  *
  * Text Domain:          bring-fraktguiden-for-woocommerce
  * Domain Path:          /languages

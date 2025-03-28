@@ -8,8 +8,8 @@ Requires at least: 5.6
 Tested up to: 6.7.2
 Requires PHP: 8.1
 WC requires at least: 4.8.0
-WC tested up to: 9.6.2
-Stable tag: 1.11.4
+WC tested up to: 9.7.1
+Stable tag: 1.11.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,11 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.11.5 =
+
+* Fixed permission issue for status page
+* Fixed a bug where pickup points would not show in legacy mode
 
 = 1.11.4 =
 
