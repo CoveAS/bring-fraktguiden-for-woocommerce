@@ -219,7 +219,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$shipping_item->save();
 		}
 		if ( ! $bring_product ) {
-			$shipping_item->update_meta_data('bring_product', '5800');
+			$default_bring_product = apply_filters( 'bring_fraktguiden_default_bring_product', '5800', $shipping_item );
+			$shipping_item->update_meta_data('bring_product', $default_bring_product);
 			$shipping_item->save();
 			throw new Exception( 'No bring product was found on the shipping method' );
 		}
