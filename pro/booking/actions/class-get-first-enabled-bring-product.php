@@ -20,7 +20,7 @@ class Get_First_Enabled_Bring_Product {
 	public function __invoke(): string {
 		$services = Fraktguiden_Service::all( null, true );
 		if ( empty( $services ) ) {
-			return '5800';
+			return apply_filters( 'bring_fraktguiden_default_bring_product', '5800' );
 		}
 		$service = array_shift( $services );
 
