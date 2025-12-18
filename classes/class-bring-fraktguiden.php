@@ -33,23 +33,22 @@ class Bring_Fraktguiden {
 	/**
 	 * Initialize the plugin
 	 */
-	public static function init() {
-		if ( ! class_exists( 'WooCommerce' ) ) {
+	public static function loaded()
+	{
+		if (!class_exists('WooCommerce')) {
 			return;
 		}
 		BringFraktguidenPro::setup();
 
-		$plugin_path = dirname( __DIR__ );
-		if ( ! class_exists( 'Packer' ) ) {
+		$plugin_path = dirname(__DIR__);
+		if (!class_exists('Packer')) {
 			require_once $plugin_path . '/includes/php-laff/src/Packer.php';
 		}
 
-		require_once 'class-wc-shipping-method-bring.php';
+		add_action('admin_init', Fraktguiden_Admin_Notices::class . '::init');
+		add_action('init', self::class . '::init');
 
-		Fraktguiden_Admin_Notices::init();
 		Scripts::setup();
-
-		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
 
 		if ( 'yes' === Fraktguiden_Helper::get_option( 'display_desc' ) ) {
 //			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
@@ -62,8 +61,7 @@ class Bring_Fraktguiden {
 			add_action( 'woocommerce_after_shipping_rate', [ RateDescription::class, 'add_description'], 10, 2 );
 			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalDescription::class, 'add_environmental_description'], 10, 2 );
 		}
-
-		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
+		require_once 'class-wc-shipping-method-bring.php';
 
 		add_action( 'woocommerce_shipping_init', [Bring_Fraktguiden::class, 'shipping_init'] );
 
@@ -89,6 +87,16 @@ class Bring_Fraktguiden {
 
 		add_action( 'woocommerce_before_checkout_form', __CLASS__ . '::checkout_message' );
 		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
+	}
+	public static function init() {
+
+
+		$plugin_path = dirname(__DIR__);
+		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
+
+
+		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
+
 
 		// Check the license when PRO version is activated.
 		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_enabled' ) ) {
@@ -100,7 +108,6 @@ class Bring_Fraktguiden {
 		Bring_Fraktguiden\Postcode_Validation::setup();
 
 		add_action( 'admin_menu', __CLASS__ . '::add_subsetting_link', 100 );
-
 
 		Checkout_Modifications::setup();
 		Ajax::setup();

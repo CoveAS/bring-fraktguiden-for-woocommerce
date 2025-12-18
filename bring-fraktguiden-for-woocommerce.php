@@ -11,10 +11,10 @@
  * Version:              ###BRING_VERSION###
  * Requires at least:    5.6.0
  * Requires PHP:         8.1
- * Tested up to:         6.7.2
+ * Tested up to:         6.9
  *
  * WC requires at least: 4.8.0
- * WC tested up to:      9.7.1
+ * WC tested up to:      10.4.2
  *
  * Text Domain:          bring-fraktguiden-for-woocommerce
  * Domain Path:          /languages
@@ -61,5 +61,5 @@ if (
 	die;
 }
 
-add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'init'] );
+add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'loaded'] );
 register_deactivation_hook( __FILE__, [Bring_Fraktguiden::class, 'plugin_deactivate'] );
