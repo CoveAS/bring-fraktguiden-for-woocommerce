@@ -9,7 +9,7 @@ Tested up to: 6.9
 Requires PHP: 8.1
 WC requires at least: 4.8.0
 WC tested up to: 10.4.2
-Stable tag: 1.11.6
+Stable tag: 1.11.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.11.7 =
+
+* Fixed bug with printing labels introduced by changing the loading order
 
 = 1.11.6 =
 
