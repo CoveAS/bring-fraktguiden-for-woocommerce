@@ -45,6 +45,7 @@ class Bring_Fraktguiden {
 			require_once $plugin_path . '/includes/php-laff/src/Packer.php';
 		}
 
+
 		add_action('admin_init', Fraktguiden_Admin_Notices::class . '::init');
 		add_action('init', self::class . '::init');
 
@@ -87,17 +88,6 @@ class Bring_Fraktguiden {
 
 		add_action( 'woocommerce_before_checkout_form', __CLASS__ . '::checkout_message' );
 		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
-	}
-	public static function init() {
-
-
-		$plugin_path = dirname(__DIR__);
-		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
-
-
-		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
-
-
 		// Check the license when PRO version is activated.
 		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_enabled' ) ) {
 			$license = Fraktguiden_License::get_instance();
@@ -115,6 +105,13 @@ class Bring_Fraktguiden {
 		if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local') {
 			StateSelector::setup();
 		}
+
+		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
+	}
+
+	public static function init() {
+		$plugin_path = dirname(__DIR__);
+		load_plugin_textdomain( 'bring-fraktguiden-for-woocommerce', false, basename( $plugin_path ) . '/languages/' );
 	}
 
 	public static function add_subsetting_link() {
