@@ -214,10 +214,19 @@ input:disabled {
 	border-bottom: 0;
 }
 .bfg-box__header {
+	padding-top: 32px;
+	padding-bottom: 20px;
+}
+.bfg-box__header--divider {
 	padding-top: 20px;
+	border-top: 1px solid #ddd;
 }
 .bfg-box__section {
 	padding-bottom: 20px;
+}
+.bfg-steps__header {
+	padding-top: 24px;
+	padding-bottom: 24px;
 }
 
 .bfg-box__checkbox {

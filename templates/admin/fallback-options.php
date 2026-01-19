@@ -56,7 +56,7 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 
 					</div>
-					<div class="bfg-box__header">
+					<div class="bfg-box__header bfg-box__header--divider">
 						<h2><?php esc_html_e('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 						<p><?php esc_html_e('A heavily loaded cart may exceed your selected service\'s size or weight limits. Set up a fallback option here to handle instances where shipping rates are not available due to excess weight or size.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
