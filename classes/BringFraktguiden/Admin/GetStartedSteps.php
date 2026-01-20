@@ -35,7 +35,7 @@ class GetStartedSteps
 		$steps [] = new Step(
 			label: __('Add shipping method', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Add the Bring method to your shipping zone', 'bring-fraktguiden-for-woocommerce'),
-			action: admin_url() . 'admin.php?page=wc-settings&tab=shipping',
+			action: admin_url('admin.php?page=wc-settings&tab=shipping'),
 			actionText: __('Configure shipping zone', 'bring-fraktguiden-for-woocommerce'),
 			completed: $added,
 		);

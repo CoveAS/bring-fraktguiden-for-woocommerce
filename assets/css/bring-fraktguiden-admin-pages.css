@@ -496,6 +496,15 @@ input:disabled {
 	background: #fff;
 	border: 1px solid #E5E7EB;
 	border-radius: 10px;
+	text-decoration: none;
+	color: inherit;
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.bfg-step-row:hover {
+	border-color: #BFDBFE;
+	background: #F8FAFC;
 }
 
 .bfg-step--in-progress {
@@ -564,10 +573,26 @@ input:disabled {
 
 /* Pro Features Redesign */
 .bfg-pro-features-teaser {
-	background: #F9FAFB;
-	border: 1px solid #E5E7EB;
-	border-radius: 12px;
-	padding: 32px;
+	background: #fff;
+	border: 2px solid #E9D5FF;
+	border-radius: 16px;
+	padding: 40px;
+	position: relative;
+	overflow: hidden;
+	margin-top: 40px;
+}
+
+.bfg-pro-features-teaser::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 128px;
+	height: 128px;
+	background: linear-gradient(to bottom right, #c084fc, #60a5fa);
+	opacity: 0.1;
+	border-bottom-left-radius: 100%;
+	z-index: 0;
 }
 
 .bfg-pro-header h3 {

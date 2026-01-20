@@ -147,6 +147,14 @@ use BringFraktguiden\Admin\Step;
 	background: #fff;
 	border: 1px solid #E5E7EB;
 	border-radius: 10px;
+	text-decoration: none;
+	color: inherit;
+	transition: all 0.2s;
+	cursor: pointer;
+}
+.bfg-step-row:hover {
+	border-color: #BFDBFE;
+	background: #F8FAFC;
 }
 .bfg-step--in-progress {
 	border-color: #BFDBFE;
@@ -204,7 +212,7 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-pro-features-teaser {
 	background: #fff;
-	border: 1px solid #F3E8FF;
+	border: 2px solid #E9D5FF;
 	border-radius: 16px;
 	padding: 40px;
 	position: relative;
@@ -214,12 +222,13 @@ use BringFraktguiden\Admin\Step;
 .bfg-pro-features-teaser::after {
 	content: "";
 	position: absolute;
-	top: -50px;
-	right: -50px;
-	width: 300px;
-	height: 300px;
-	background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-	border-radius: 50%;
+	top: 0;
+	right: 0;
+	width: 128px;
+	height: 128px;
+	background: linear-gradient(to bottom right, #c084fc, #60a5fa);
+	opacity: 0.1;
+	border-bottom-left-radius: 100%;
 	z-index: 0;
 }
 .bfg-pro-header {
@@ -468,7 +477,7 @@ use BringFraktguiden\Admin\Step;
 						$statusClass = 'bfg-step--pending';
 					}
 					?>
-					<div class="bfg-step-row <?php echo $statusClass; ?>">
+					<a href="<?php echo esc_attr($step->action); ?>" class="bfg-step-row <?php echo $statusClass; ?>" style="text-decoration: none; color: inherit; display: flex;">
 						<div class="bfg-step-row__indicator">
 							<?php if ($step->completed): ?>
 								<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -490,7 +499,7 @@ use BringFraktguiden\Admin\Step;
 								<span class="bfg-badge bfg-badge--in-progress"><?php esc_html_e('In Progress', 'bring-fraktguiden-for-woocommerce'); ?></span>
 							<?php endif; ?>
 						</div>
-					</div>
+					</a>
 				<?php endforeach; ?>
 			</div>
 
