@@ -233,16 +233,16 @@ class SettingsPage
 		if (! in_array($hook, $pages)) {
 			return;
 		}
-		$dir = dirname(__DIR__, 2);
+		
 		wp_enqueue_style(
 			'bring_fraktguiden_admin_css',
-			plugin_dir_url($dir) . 'assets/css/bring-fraktguiden-admin-pages.css',
+			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/bring-fraktguiden-admin-pages.css'),
 			[],
 			Bring_Fraktguiden::VERSION
 		);
 		wp_enqueue_script(
 			'bring-admin-js',
-			plugin_dir_url($dir) . '/assets/js/bring-fraktguiden-admin.js',
+			plugins_url('bring-fraktguiden-for-woocommerce/assets/js/bring-fraktguiden-admin.js'),
 			[],
 			Bring_Fraktguiden::VERSION
 		);
