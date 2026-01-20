@@ -7,6 +7,7 @@ use Bring_Fraktguiden;
 use BringFraktguiden\Fields\Fields;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
+use BringFraktguiden\Admin\GetStartedSteps;
 use BringFraktguiden\Utility\Config;
 
 class SettingsPage
@@ -52,6 +53,9 @@ class SettingsPage
 
 		$classes = explode(' ', trim($admin_body_class));
 		$classes[] = 'bfg-admin-page';
+		if (isset($_GET['page'])) {
+			$classes[] = 'bfg-admin-page--' . str_replace('_', '-', $_GET['page']);
+		}
 
 		$admin_body_class = implode(' ', array_unique($classes));
 		return " $admin_body_class ";
@@ -238,7 +242,7 @@ class SettingsPage
 			'bring_fraktguiden_admin_css',
 			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/bring-fraktguiden-admin-pages.css'),
 			[],
-			Bring_Fraktguiden::VERSION
+			Bring_Fraktguiden::VERSION . '.' . time()
 		);
 		wp_enqueue_script(
 			'bring-admin-js',

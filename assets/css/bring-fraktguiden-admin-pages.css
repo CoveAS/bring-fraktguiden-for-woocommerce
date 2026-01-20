@@ -3,7 +3,7 @@
 }
 
 .bfg-admin-page #wpcontent {
-	padding: 0;
+	padding: 0 !important;
 }
 
 .bfg-grid {
@@ -145,12 +145,6 @@ input:disabled {
 	margin: 0 auto;
 }
 
-@media (min-width: 783px) {
-	.bfg-page__content {
-		max-width: 682px;
-	}
-}
-
 .bfg-page__header {
 	background: #fff;
 	box-sizing: border-box;
@@ -241,8 +235,6 @@ input:disabled {
 	padding-top: 24px;
 	padding-bottom: 24px;
 }
-
-.bfg-box__checkbox {}
 
 .bfg-box__checkbox label {
 	display: block;
@@ -343,13 +335,17 @@ input:disabled {
 	border-top-left-radius: 16px
 }
 
-/* Redesign Styles */
-.bfg-admin-page__home {
+/* Redesign Styles Shared */
+.bfg-admin-page {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	color: #1d2327;
 }
 
-.bfg-admin-page__home .bfg-page__main {
+.bfg-admin-page #wpcontent {
+	padding: 0 !important;
+}
+
+.bfg-admin-page .bfg-page__main {
 	max-width: 900px;
 	margin-left: auto;
 	margin-right: auto;
@@ -368,18 +364,42 @@ input:disabled {
 }
 
 .bfg-notice-banner p {
-	margin: 0;
+	margin: 0 !important;
 	color: #9A3412;
 	font-size: 14px;
 	font-weight: 500;
 }
 
-.bfg-page__main-card {
-	background: #fff;
-	border: 1px solid #E5E7EB;
-	border-radius: 12px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	padding: 40px;
+.bfg-page__main-card,
+.bfg-admin-page .bfg-box {
+	background: #fff !important;
+	border: 1px solid #E5E7EB !important;
+	border-radius: 12px !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+	padding: 40px !important;
+	margin-bottom: 32px !important;
+}
+
+.bfg-admin-page .bfg-box__header {
+	padding: 0 !important;
+	margin-bottom: 24px !important;
+}
+
+.bfg-admin-page .bfg-box__header h2 {
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	color: #111827 !important;
+	margin: 0 0 8px !important;
+}
+
+.bfg-admin-page .bfg-box__header p {
+	font-size: 14px !important;
+	color: #6B7280 !important;
+	margin: 0 !important;
+}
+
+.bfg-admin-page .bfg-box__section {
+	padding: 0 !important;
 }
 
 .bfg-page__header-row {
@@ -419,7 +439,6 @@ input:disabled {
 .bfg-progress-bar-fill {
 	height: 100%;
 	background: #111827;
-	/* Dark as per mockup */
 	border-radius: 4px;
 	transition: width 0.3s ease;
 }
@@ -451,13 +470,13 @@ input:disabled {
 .bfg-active-step__content h3 {
 	font-size: 20px;
 	font-weight: 700;
-	margin: 0 0 8px;
+	margin: 0 0 8px !important;
 	color: #111827;
 }
 
 .bfg-active-step__content p {
 	font-size: 16px;
-	margin: 0 0 20px;
+	margin: 0 0 20px !important;
 	color: #4B5563;
 	line-height: 1.5;
 }
@@ -467,7 +486,7 @@ input:disabled {
 	align-items: center;
 	gap: 8px;
 	background: #2563EB;
-	color: #fff;
+	color: #fff !important;
 	text-decoration: none;
 	padding: 10px 20px;
 	border-radius: 8px;
@@ -478,7 +497,7 @@ input:disabled {
 
 .bfg-button-primary:hover {
 	background: #1D4ED8;
-	color: #fff;
+	color: #fff !important;
 }
 
 .bfg-steps-list {
@@ -598,7 +617,7 @@ input:disabled {
 .bfg-pro-header h3 {
 	font-size: 18px;
 	font-weight: 700;
-	margin: 0 0 20px;
+	margin: 0 0 20px !important;
 	color: #111827;
 }
 
@@ -616,6 +635,7 @@ input:disabled {
 	color: #374151;
 	padding-left: 20px;
 	position: relative;
+	margin-bottom: 0 !important;
 }
 
 .bfg-pro-list li::before {
@@ -710,4 +730,152 @@ input:disabled {
 	border: 1px solid #D1D5DB;
 	border-radius: 6px;
 	font-size: 14px;
+}
+
+/* Settings Specific Styles */
+.bfg-admin-page--bring-fraktguiden-settings .bfg-page__header h1 {
+	font-size: 24px;
+	font-weight: 700;
+	color: #111827;
+	margin: 0 !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-field {
+	margin-bottom: 24px;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-field>label {
+	display: block;
+	font-weight: 600;
+	font-size: 14px;
+	color: #374151;
+	margin-bottom: 8px !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings select,
+.bfg-admin-page--bring-fraktguiden-settings input[type="text"],
+.bfg-admin-page--bring-fraktguiden-settings input[type="number"],
+.bfg-admin-page--bring-fraktguiden-settings input[type="url"] {
+	border: 1px solid #D1D5DB;
+	border-radius: 8px;
+	padding: 8px 12px;
+	font-size: 14px;
+	min-width: 400px;
+	background: #fff;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings select {
+	appearance: none;
+	-webkit-appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke='%236B7280' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 8l4 4 4-4'/%3E%3C/svg%3E") !important;
+	background-repeat: no-repeat !important;
+	background-position: right 12px center !important;
+	background-size: 1.25rem !important;
+	padding-right: 40px !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-input--checkbox {
+	background: #F8FAFC;
+	border: 1px solid #E5E7EB !important;
+	border-radius: 12px;
+	padding: 24px;
+	margin-bottom: 0;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-field--checkbox-box {
+	background: #F8FAFC;
+	border: 1px solid #E5E7EB;
+	border-radius: 12px;
+	padding: 0;
+	margin-bottom: 12px;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-field--checkbox-box .bfg-input--checkbox {
+	border: none !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-input--checkbox label {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	font-weight: 700;
+	font-size: 15px;
+	color: #111827;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	cursor: pointer;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-input--checkbox input[type="checkbox"] {
+	width: 18px !important;
+	height: 18px !important;
+	margin: 3px 0 0 0 !important;
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-input--checkbox .bfg-description {
+	margin: 8px 0 0 30px !important;
+	font-size: 14px;
+	color: #6B7280;
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .submit {
+	margin: 32px 0 0 !important;
+	padding: 24px 0 0 !important;
+	border-top: 1px solid #E5E7EB !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .button-primary {
+	background: #2563EB !important;
+	border: none !important;
+	border-radius: 8px !important;
+	padding: 0 24px !important;
+	height: 44px !important;
+	line-height: 44px !important;
+	font-weight: 600 !important;
+	font-size: 15px !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+	text-shadow: none !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .button-primary:hover {
+	background: #1D4ED8 !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-notice-banner {
+	border-left: 4px solid #F97316;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-description {
+	font-size: 14px;
+	color: #6B7280;
+	margin-top: 8px !important;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-field-sub label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #374151;
+	margin-bottom: 4px;
+	display: block;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-flex.bfg-gap-8 {
+	display: flex;
+	gap: 16px;
+	max-width: 600px;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-flex.bfg-gap-8 div {
+	flex: 1;
+}
+
+.bfg-admin-page--bring-fraktguiden-settings .bfg-flex.bfg-gap-8 input,
+.bfg-admin-page--bring-fraktguiden-settings .bfg-flex.bfg-gap-8 select {
+	min-width: 0 !important;
+	width: 100% !important;
 }

@@ -12,8 +12,6 @@ use BringFraktguiden\Admin\Step;
  */
 ?>
 
-<script>
-</script>
 <style>
 .bfg-admin-page__home {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -24,22 +22,6 @@ use BringFraktguiden\Admin\Step;
 	max-width: 900px;
 	margin: 0 auto;
 	padding-bottom: 60px;
-}
-.bfg-notice-banner {
-	background: #FFF7ED; /* orange-50 */
-	border: 1px solid #FED7AA; /* orange-200 */
-	border-radius: 8px;
-	padding: 12px 16px;
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	margin-bottom: 24px;
-}
-.bfg-notice-banner p {
-	margin: 0 !important;
-	color: #9A3412; /* orange-800 */
-	font-size: 14px;
-	font-weight: 500;
 }
 .bfg-page__main-card {
 	background: #fff;
@@ -417,17 +399,6 @@ use BringFraktguiden\Admin\Step;
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
 
-		<?php if (true): // Example notice, could be tied to a setting ?>
-			<div class="bfg-notice-banner">
-				<span class="bfg-notice-icon" style="color: #9A3412;">
-					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				</span>
-				<p><?php esc_html_e('This site is running in a local environment and pretender settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'); ?></p>
-			</div>
-		<?php endif; ?>
-
 		<div class="bfg-page__main-card">
 			<?php
 			$nextStepIndex = $nextStep ? array_search($nextStep, $steps, true) : false;
@@ -563,4 +534,3 @@ use BringFraktguiden\Admin\Step;
 		</div>
 	</div>
 </div>
-
