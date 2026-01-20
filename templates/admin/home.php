@@ -235,15 +235,17 @@ use BringFraktguiden\Admin\Step;
 	color: #111827;
 }
 .bfg-pro-header .sparkle-icon {
-	color: #A855F7;
+	color: #9333EA;
 	flex-shrink: 0;
 }
 .bfg-pro-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 16px 40px;
+	gap: 16px 60px;
 	margin: 0 0 40px 0 !important;
+	margin-left: 0 !important;
 	padding: 0 !important;
+	padding-left: 0 !important;
 	list-style: none !important;
 	position: relative;
 	z-index: 1;
@@ -255,17 +257,22 @@ use BringFraktguiden\Admin\Step;
 	font-size: 15px;
 	color: #374151;
 	line-height: 1.4;
+	list-style-type: none !important;
+	padding: 0 !important;
+}
+.bfg-pro-list li::before {
+	content: none !important;
 }
 .bfg-pro-list li svg {
-	color: #A855F7;
+	color: #9333EA;
 	flex-shrink: 0;
 	margin-top: 2px;
 }
 .bfg-pro-activation-card {
 	background: #F9FAFB;
-	border: 1px solid #F3F4F6;
-	border-radius: 12px;
-	padding: 32px;
+	border: 1px solid #E5E7EB;
+	border-radius: 8px;
+	padding: 24px;
 	position: relative;
 	z-index: 1;
 }
@@ -275,16 +282,17 @@ use BringFraktguiden\Admin\Step;
 .bfg-pro-activation-card .bfg-input--checkbox label {
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	font-weight: 600;
-	font-size: 18px;
+	gap: 8px;
+	font-weight: 500;
+	font-size: 16px;
 	color: #111827;
 	cursor: pointer;
+	margin-bottom: 12px;
 }
 .bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"] {
-	width: 24px;
-	height: 24px;
-	border-radius: 6px;
+	width: 24px !important;
+	height: 24px !important;
+	border-radius: 4px;
 	border: 2px solid #D1D5DB;
 	appearance: none;
 	-webkit-appearance: none;
@@ -292,48 +300,57 @@ use BringFraktguiden\Admin\Step;
 	cursor: pointer;
 	background: #fff;
 	margin: 0;
+	flex-shrink: 0;
 }
 .bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]::before {
 	content: none !important;
 }
 .bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]:checked {
-	background: #A855F7 !important;
-	border-color: #A855F7 !important;
+	background: #9333EA !important;
+	border-color: #9333EA !important;
 	background-image: none !important;
 }
 .bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]:checked::after {
-	content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+	content: "";
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	width: 16px;
+	height: 16px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
 	transform: translate(-50%, -50%);
 }
 .bfg-pro-activation-card .bfg-description {
 	font-size: 14px;
 	color: #4B5563;
-	line-height: 1.6;
-	margin: 0 0 24px 0 !important;
+	line-height: 1.5;
+	margin: 0 0 16px 0 !important;
 }
 .bfg-license-input-row {
 	display: flex;
 	gap: 12px;
 }
 .bfg-license-input-row .bfg-input {
-	flex-grow: 1;
+	flex-grow: 1 !important;
+	display: flex !important;
 }
 .bfg-license-input-row input[type="text"],
 .bfg-license-input-row input[type="url"] {
-	width: 100%;
-	background: #F3F4F6;
+	width: 100% !important;
+	max-width: none !important;
+	background: #ECEFF1;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	padding: 12px 16px;
+	padding: 10px 16px;
 	font-size: 14px;
 	box-shadow: none;
 	transition: border-color 0.2s;
+	margin: 0 !important;
 }
 .bfg-license-input-row input:focus {
-	border-color: #A855F7;
+	border-color: #9333EA;
 	outline: none;
 }
 .bfg-pro-activation-card .submit-button {
@@ -344,7 +361,7 @@ use BringFraktguiden\Admin\Step;
 	margin: 0 !important;
 }
 .bfg-pro-activation-card .button-primary {
-	background: #A855F7 !important;
+	background: #9333EA !important;
 	border: none !important;
 	border-radius: 8px !important;
 	padding: 0 24px !important;
@@ -356,7 +373,7 @@ use BringFraktguiden\Admin\Step;
 	text-shadow: none !important;
 }
 .bfg-pro-activation-card .button-primary:hover {
-	background: #9333EA !important;
+	background: #7E22CE !important;
 }
 .bfg-page__footer-notes {
 	margin-top: 32px;

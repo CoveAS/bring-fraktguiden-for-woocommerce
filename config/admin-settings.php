@@ -24,12 +24,10 @@ return [
 				'description' => __('A license is required to use PRO features on a live website. Activating PRO first gives you a free 7-day trial. After the trial, PRO features will be disabled until a license is activated.', 'bring-fraktguiden-for-woocommerce'),
 			],
 			'test_url' => [
-				'title' => __('License key', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
 				'label' => __('License key', 'bring-fraktguiden-for-woocommerce'),
 				'placeholder' => __('Enter your license key', 'bring-fraktguiden-for-woocommerce'),
 				'default' => '',
-				'class' => 'bring-toggle-checkbox',
 			],
 		],
 	],
