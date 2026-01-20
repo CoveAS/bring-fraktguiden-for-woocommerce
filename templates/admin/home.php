@@ -22,12 +22,12 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-admin-page__home .bfg-page__main {
 	max-width: 900px;
-	margin-left: 0; /* Keep it left-aligned like mockup but with hierarchy */
+	margin: 0 auto;
 	padding-bottom: 60px;
 }
 .bfg-notice-banner {
-	background: #FFF7ED;
-	border: 1px solid #FFEDD5;
+	background: #FFF7ED; /* orange-50 */
+	border: 1px solid #FED7AA; /* orange-200 */
 	border-radius: 8px;
 	padding: 12px 16px;
 	display: flex;
@@ -37,7 +37,7 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-notice-banner p {
 	margin: 0 !important;
-	color: #9A3412;
+	color: #9A3412; /* orange-800 */
 	font-size: 14px;
 	font-weight: 500;
 }
@@ -226,6 +226,12 @@ use BringFraktguiden\Admin\Step;
 	gap: 8px;
 	font-weight: 600;
 }
+/* Hide old standard notices on this page */
+.bfg-admin-page__home .notice,
+.bfg-admin-page__home .updated,
+.bfg-admin-page__home .error {
+	display: none !important;
+}
 </style>
 
 <div class="wrap bfg-admin-page__home">
@@ -242,7 +248,7 @@ use BringFraktguiden\Admin\Step;
 			<div class="bfg-notice-banner">
 				<span class="bfg-notice-icon">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="#9A3412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 				</span>
 				<p><?php esc_html_e('This site is running in a local environment and pretender settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'); ?></p>
