@@ -56,7 +56,7 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-page__title {
 	font-size: 24px;
-	font-weight: 700;
+	font-weight: 500;
 	color: #111827;
 	margin: 0 !important;
 }
@@ -107,7 +107,7 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-active-step__content h3 {
 	font-size: 20px;
-	font-weight: 700;
+	font-weight: 500;
 	margin: 0 0 8px !important;
 	color: #111827;
 }
@@ -201,32 +201,177 @@ use BringFraktguiden\Admin\Step;
 	color: #fff;
 }
 .bfg-pro-features-teaser {
-	background: #F9FAFB;
-	border: 1px solid #E5E7EB;
-	border-radius: 12px;
-	padding: 32px;
+	background: #fff;
+	border: 1px solid #F3E8FF;
+	border-radius: 16px;
+	padding: 40px;
+	position: relative;
+	overflow: hidden;
+	margin-top: 40px;
 }
-.bfg-pro-list {
-	list-style: disc !important;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 12px;
-	margin: 20px 0 !important;
-	padding-left: 20px !important;
+.bfg-pro-features-teaser::after {
+	content: "";
+	position: absolute;
+	top: -50px;
+	right: -50px;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+	border-radius: 50%;
+	z-index: 0;
 }
-.bfg-field-group {
-	margin-bottom: 24px;
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-}
-.bfg-input label {
+.bfg-pro-header {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	font-weight: 600;
+	gap: 12px;
+	margin-bottom: 32px;
+	position: relative;
+	z-index: 1;
 }
-/* Hide old standard notices on this page */
+.bfg-pro-header h3 {
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0 !important;
+	color: #111827;
+}
+.bfg-pro-header .sparkle-icon {
+	color: #A855F7;
+	flex-shrink: 0;
+}
+.bfg-pro-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px 40px;
+	margin: 0 0 40px 0 !important;
+	padding: 0 !important;
+	list-style: none !important;
+	position: relative;
+	z-index: 1;
+}
+.bfg-pro-list li {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	font-size: 15px;
+	color: #374151;
+	line-height: 1.4;
+}
+.bfg-pro-list li svg {
+	color: #A855F7;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+.bfg-pro-activation-card {
+	background: #F9FAFB;
+	border: 1px solid #F3F4F6;
+	border-radius: 12px;
+	padding: 32px;
+	position: relative;
+	z-index: 1;
+}
+.bfg-pro-activation-card .bfg-input--checkbox {
+	margin-bottom: 16px;
+}
+.bfg-pro-activation-card .bfg-input--checkbox label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 600;
+	font-size: 18px;
+	color: #111827;
+	cursor: pointer;
+}
+.bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"] {
+	width: 24px;
+	height: 24px;
+	border-radius: 6px;
+	border: 2px solid #D1D5DB;
+	appearance: none;
+	-webkit-appearance: none;
+	position: relative;
+	cursor: pointer;
+	background: #fff;
+	margin: 0;
+}
+.bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]::before {
+	content: none !important;
+}
+.bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]:checked {
+	background: #A855F7 !important;
+	border-color: #A855F7 !important;
+	background-image: none !important;
+}
+.bfg-pro-activation-card .bfg-input--checkbox input[type="checkbox"]:checked::after {
+	content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.bfg-pro-activation-card .bfg-description {
+	font-size: 14px;
+	color: #4B5563;
+	line-height: 1.6;
+	margin: 0 0 24px 0 !important;
+}
+.bfg-license-input-row {
+	display: flex;
+	gap: 12px;
+}
+.bfg-license-input-row .bfg-input {
+	flex-grow: 1;
+}
+.bfg-license-input-row input[type="text"],
+.bfg-license-input-row input[type="url"] {
+	width: 100%;
+	background: #F3F4F6;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	padding: 12px 16px;
+	font-size: 14px;
+	box-shadow: none;
+	transition: border-color 0.2s;
+}
+.bfg-license-input-row input:focus {
+	border-color: #A855F7;
+	outline: none;
+}
+.bfg-pro-activation-card .submit-button {
+	margin: 0 !important;
+}
+.bfg-pro-activation-card p.submit {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.bfg-pro-activation-card .button-primary {
+	background: #A855F7 !important;
+	border: none !important;
+	border-radius: 8px !important;
+	padding: 0 24px !important;
+	height: 44px !important;
+	line-height: 44px !important;
+	font-weight: 600 !important;
+	font-size: 14px !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+.bfg-pro-activation-card .button-primary:hover {
+	background: #9333EA !important;
+}
+.bfg-page__footer-notes {
+	margin-top: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding-top: 24px;
+	border-top: 1px solid #F3F4F6;
+}
+.bfg-page__footer-notes small {
+	display: block;
+	font-size: 13px;
+	color: #6B7280;
+	line-height: 1.5;
+}
 .bfg-admin-page__home .notice,
 .bfg-admin-page__home .updated,
 .bfg-admin-page__home .error {
@@ -330,24 +475,50 @@ use BringFraktguiden\Admin\Step;
 				<form method="post" action="options.php">
 					<?php settings_fields('bring_fraktguiden_home'); ?>
 					<div class="bfg-pro-header">
-						<h3><?php esc_html_e('Do more with our PRO features', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="sparkle-icon">
+							<path d="M12 3L14.5 9L21 11.5L14.5 14L12 21L9.5 14L3 11.5L9.5 9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+						<h3><?php esc_html_e('Unlock PRO features', 'bring-fraktguiden-for-woocommerce'); ?></h3>
 					</div>
+
 					<ul class="bfg-pro-list">
-						<li><?php esc_html_e('Book orders directly with mybring.com from within WooCommerce', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup></li>
-						<li><?php esc_html_e('Set a free shipping threshold per service', 'bring-fraktguiden-for-woocommerce'); ?></li>
-						<li><?php esc_html_e('Option to set a fixed price per service', 'bring-fraktguiden-for-woocommerce'); ?></li>
-						<li><?php esc_html_e('Customize the name of the shipping rates', 'bring-fraktguiden-for-woocommerce'); ?></li>
-						<li><?php esc_html_e('Enable pick-up-points for supported services', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup></li>
-						<li><?php esc_html_e('Get prioritised support', 'bring-fraktguiden-for-woocommerce'); ?></li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Book orders directly with signaling cost from within WooCommerce', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Set a free shipping threshold per service', 'bring-fraktguiden-for-woocommerce'); ?>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Option to set a fixed price per service', 'bring-fraktguiden-for-woocommerce'); ?>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Customize the name of the shipping zone', 'bring-fraktguiden-for-woocommerce'); ?>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Show customer estimated delivery services', 'bring-fraktguiden-for-woocommerce'); ?>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Get prioritized support', 'bring-fraktguiden-for-woocommerce'); ?>
+						</li>
+						<li>
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<?php esc_html_e('Enable pick-up-points for supported services', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup>
+						</li>
 					</ul>
 
-					<div class="bfg-pro-actions">
-						<div class="bfg-field-group">
-							<?php BringFraktguiden\Admin\FieldRenderer::pro_enabled(); ?>
+					<div class="bfg-pro-activation-card">
+						<?php BringFraktguiden\Admin\FieldRenderer::pro_enabled(); ?>
+						
+						<div class="bfg-license-input-row">
 							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
+							<?php submit_button(__('Activate', 'bring-fraktguiden-for-woocommerce')); ?>
 						</div>
-						<p class="bfg-pro-note"><?php esc_html_e('Using our PRO features requires a license. For test and development sites you can activate a development mode where you can test the PRO features without requiring a license.', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						<?php submit_button(__('Save changes', 'bring-fraktguiden-for-woocommerce')); ?>
 					</div>
 				</form>
 			</div>
@@ -356,6 +527,7 @@ use BringFraktguiden\Admin\Step;
 				<small><sup>1</sup> <?php esc_html_e('Domestic shipments only. We\'re working on building support for international shipping.', 'bring-fraktguiden-for-woocommerce'); ?></small>
 				<small><sup>2</sup> <?php esc_html_e('List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til Pakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL and PICKUP_PARCEL_BULK', 'bring-fraktguiden-for-woocommerce'); ?></small>
 			</div>
+
 		</div>
 	</div>
 </div>
