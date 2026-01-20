@@ -156,8 +156,12 @@ use BringFraktguiden\Admin\Step;
 	flex-shrink: 0;
 	width: 32px;
 	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .bfg-step-row__number {
+	flex-shrink: 0;
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
@@ -186,15 +190,13 @@ use BringFraktguiden\Admin\Step;
 	color: #6B7280;
 }
 .bfg-badge {
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	padding: 4px 8px;
-	border-radius: 4px;
+	font-size: 12px;
+	padding: 6px 8px;
+	border-radius: 8px;
 }
 .bfg-badge--completed {
-	color: #166534;
-	border: 1px solid #166534;
+	color: #15803d;
+	border: 1px solid #16a34a;
 }
 .bfg-badge--in-progress {
 	background: #2563EB;
@@ -408,9 +410,9 @@ use BringFraktguiden\Admin\Step;
 
 		<?php if (true): // Example notice, could be tied to a setting ?>
 			<div class="bfg-notice-banner">
-				<span class="bfg-notice-icon">
+				<span class="bfg-notice-icon" style="color: #9A3412;">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 				</span>
 				<p><?php esc_html_e('This site is running in a local environment and pretender settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'); ?></p>
@@ -418,10 +420,14 @@ use BringFraktguiden\Admin\Step;
 		<?php endif; ?>
 
 		<div class="bfg-page__main-card">
+			<?php
+			$nextStepIndex = $nextStep ? array_search($nextStep, $steps, true) : false;
+			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : $stepsCompleted + 1;
+			?>
 			<div class="bfg-page__header-row">
 				<h2 class="bfg-page__title"><?php esc_html_e('Get started with Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				<div class="bfg-progress-badge">
-					<?php printf(__('Step %d of %d', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted + 1, $stepCount); ?>
+					<?php printf(__('Step %d of %d', 'bring-fraktguiden-for-woocommerce'), $currentStepNumber, $stepCount); ?>
 				</div>
 			</div>
 
@@ -434,7 +440,7 @@ use BringFraktguiden\Admin\Step;
 			<?php if ($nextStep): ?>
 				<div class="bfg-active-step-card">
 					<div class="bfg-active-step__icon">
-						<?php echo $stepsCompleted + 1; ?>
+						<?php echo $currentStepNumber; ?>
 					</div>
 					<div class="bfg-active-step__content">
 						<h3><?php echo esc_html($nextStep->label); ?></h3>
@@ -465,9 +471,9 @@ use BringFraktguiden\Admin\Step;
 					<div class="bfg-step-row <?php echo $statusClass; ?>">
 						<div class="bfg-step-row__indicator">
 							<?php if ($step->completed): ?>
-								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<rect width="20" height="20" rx="10" fill="#DCFCE7"/>
-									<path d="M6 10L9 13L14 7" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<circle cx="16" cy="16" r="16" fill="#dcfce7"/>
+									<path d="M10 16L14 20L22 12" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 							<?php else: ?>
 								<div class="bfg-step-row__number"><?php echo $i + 1; ?></div>

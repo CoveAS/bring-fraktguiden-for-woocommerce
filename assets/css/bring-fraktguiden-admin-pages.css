@@ -513,6 +513,7 @@ input:disabled {
 }
 
 .bfg-step-row__number {
+	flex-shrink: 0;
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
@@ -546,17 +547,14 @@ input:disabled {
 }
 
 .bfg-badge {
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	padding: 4px 8px;
-	border-radius: 4px;
-	letter-spacing: 0.025em;
+	font-size: 12px;
+	padding: 6px 8px;
+	border-radius: 8px;
 }
 
 .bfg-badge--completed {
-	color: #166534;
-	border: 1px solid #166534;
+	color: #15803d;
+	border: 1px solid #16a34a;
 }
 
 .bfg-badge--in-progress {
