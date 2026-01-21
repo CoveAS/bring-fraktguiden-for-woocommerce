@@ -440,38 +440,38 @@
 }
 
 .bfg-pro-env-banner {
-	background: #EFF6FF;
-	border: 1px solid #DBEAFE;
-	border-radius: 12px;
-	padding: 16px 20px;
+	background: #F9FAFB;
+	border: 1px solid #E5E7EB;
+	border-radius: 10px;
+	padding: 14px 18px;
 	margin-bottom: 32px;
 	text-align: left;
 }
 
 .bfg-pro-env-banner--test {
-	background: #ECFDF5;
-	border-color: #D1FAE5;
+	background: #F0FDF4;
+	border-color: #BBF7D0;
 }
 
 .bfg-pro-env-banner__title {
 	font-weight: 600;
-	font-size: 14px;
-	color: #1E40AF;
+	font-size: 13px;
+	color: #374151;
 	margin-bottom: 4px;
 	display: block;
 }
 
 .bfg-pro-env-banner--test .bfg-pro-env-banner__title {
-	color: #065F46;
+	color: #15803D;
 }
 
 .bfg-pro-env-banner__subtitle {
 	font-size: 13px;
-	color: #3B82F6;
+	color: #6B7280;
 }
 
 .bfg-pro-env-banner--test .bfg-pro-env-banner__subtitle {
-	color: #10B981;
+	color: #16A34A;
 }
 
 .bfg-pro-tabs {
@@ -510,7 +510,7 @@
 	background: #EFF6FF;
 	border: 1px solid #DBEAFE;
 	border-radius: 12px;
-	padding: 32px;
+	padding: 40px;
 	margin-bottom: 24px;
 }
 
@@ -527,6 +527,33 @@
 	margin: 0 0 24px !important;
 }
 
+.bfg-pro-content-block__test-url {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	text-align: left;
+	width: 100%;
+}
+
+.bfg-pro-content-block__test-url .bfg-input,
+.bfg-pro-content-block__test-url input {
+	width: 100% !important;
+	max-width: none !important;
+	display: block !important;
+}
+
+.bfg-pro-content-block__subtitle {
+	font-size: 16px;
+	font-weight: 600;
+	color: #111827;
+	margin: 0 0 12px !important;
+}
+
+.bfg-pro-content-block__description {
+	font-size: 13px;
+	color: #6B7280;
+	margin: 8px 0 0 0 !important;
+}
+
 .bfg-pro-features-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -540,7 +567,7 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 8px;
-	font-size: 13px;
+	font-size: 15px;
 	color: #374151;
 	font-weight: 500;
 }
@@ -576,7 +603,7 @@
 
 .bfg-pro-footer__title {
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #4B5563;
 	margin: 0 0 16px !important;
 }
@@ -615,10 +642,12 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: #111827;
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 }
 
-.bfg-license-input-wrapper input {
+.bfg-license-input-wrapper input,
+#bfg-tab-license input[name="test_url"],
+#bfg-tab-trial input[name="test_url"] {
 	width: 100% !important;
 	max-width: none !important;
 	background: #F3F4F6 !important;
@@ -626,12 +655,18 @@
 	border-radius: 8px !important;
 	padding: 12px 16px !important;
 	font-size: 15px !important;
+	margin-bottom: 0 !important;
+	box-sizing: border-box !important;
+}
+
+.bfg-license-input-wrapper .bfg-input {
 	margin-bottom: 8px !important;
 }
 
 .bfg-license-input-help {
-	font-size: 14px;
+	font-size: 13px;
 	color: #6B7280;
+	margin: 0 !important;
 }
 
 /* Hide/Show logic for tabs */

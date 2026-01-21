@@ -570,6 +570,12 @@ use BringFraktguiden\Admin\Step;
 								</li>
 							</ul>
 						</div>
+
+						<div class="bfg-pro-content-block__test-url">
+							<h4 class="bfg-pro-content-block__subtitle"><?php esc_html_e('Test Site URL (Optional)', 'bring-fraktguiden-for-woocommerce'); ?></h4>
+							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
+							<p class="bfg-pro-content-block__description"><?php esc_html_e('Enter your staging or test site URL to activate the trial there first.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+						</div>
 						<button type="submit" class="bfg-button-primary bfg-pro-btn-main">
 							<?php esc_html_e('Start My Free Trial', 'bring-fraktguiden-for-woocommerce'); ?>
 						</button>
@@ -582,8 +588,7 @@ use BringFraktguiden\Admin\Step;
 							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
 							<span class="bfg-license-input-help"><?php esc_html_e('Your license key was sent to your email after purchase.', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
-						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="background: #60A5FA !important;">
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3L15.5 7.5z"></path></svg>
+						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="background: #BFDBFE !important; color: #3B82F6 !important; cursor: not-allowed;">
 							<?php esc_html_e('Activate PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</button>
 					</div>
@@ -608,6 +613,52 @@ use BringFraktguiden\Admin\Step;
 				const footnotes = document.getElementById('bfg-pro-footnotes');
 				const proCheckbox = document.querySelector('input[name="pro_enabled"]');
 				const form = document.getElementById('bfg-pro-activation-form');
+				const testUrlInputs = document.querySelectorAll('input[name="test_url"]');
+				const licenseTabButton = document.querySelector('#bfg-tab-license .bfg-pro-btn-main');
+				const licenseInput = document.querySelector('#bfg-tab-license input[name="test_url"]');
+
+				// Function to update license button state
+				function updateLicenseButtonState() {
+					if (licenseInput && licenseTabButton) {
+						if (licenseInput.value.trim().length > 0) {
+							licenseTabButton.disabled = false;
+							licenseTabButton.style.setProperty('background', '#2563EB', 'important');
+							licenseTabButton.style.setProperty('color', '#fff', 'important');
+							licenseTabButton.style.cursor = 'pointer';
+						} else {
+							licenseTabButton.disabled = true;
+							licenseTabButton.style.setProperty('background', '#BFDBFE', 'important');
+							licenseTabButton.style.setProperty('color', '#3B82F6', 'important');
+							licenseTabButton.style.cursor = 'not-allowed';
+						}
+					}
+				}
+
+				// Initialize placeholders on page load and handle saved values
+				const activeTab = document.querySelector('.bfg-pro-tab.is-active');
+				if (activeTab) {
+					const activeTabName = activeTab.getAttribute('data-tab');
+					testUrlInputs.forEach(input => {
+						// Always clear any saved value on page load
+						const currentValue = input.value.trim();
+						if (currentValue) {
+							input.value = '';
+						}
+
+						// Set appropriate placeholder based on active tab
+						if (activeTabName === 'trial') {
+							input.setAttribute('placeholder', 'https://staging.yoursite.com');
+						} else if (activeTabName === 'license') {
+							input.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
+						}
+					});
+				}
+
+				// Initialize button state on page load
+				if (licenseInput && licenseTabButton) {
+					updateLicenseButtonState();
+					licenseInput.addEventListener('input', updateLicenseButtonState);
+				}
 
 				tabs.forEach(tab => {
 					tab.addEventListener('click', () => {
@@ -622,6 +673,20 @@ use BringFraktguiden\Admin\Step;
 						// Handle footnotes visibility
 						if (footnotes) {
 							footnotes.style.display = (target === 'trial') ? 'block' : 'none';
+						}
+
+						// Update placeholder based on active tab
+						testUrlInputs.forEach(input => {
+							if (target === 'trial') {
+								input.setAttribute('placeholder', 'https://staging.yoursite.com');
+							} else if (target === 'license') {
+								input.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
+							}
+						});
+
+						// Update button state when switching to license tab
+						if (target === 'license') {
+							updateLicenseButtonState();
 						}
 					});
 				});
