@@ -12,6 +12,14 @@
 	--bfg-radius-card: 12px;
 	--bfg-radius-input: 8px;
 	--bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+	/* Typography Scale */
+	--bfg-text-level-1: 30px;  /* Main Headings - Bold */
+	--bfg-text-level-2: 16px;  /* Descriptions/Subtitles - Regular */
+	--bfg-text-level-3: 16px;  /* Section Titles - Semibold */
+	--bfg-text-level-4: 14px;  /* Body Text & Features - Regular */
+	--bfg-text-level-5: 14px;  /* Helper Text & Labels - Regular */
+	--bfg-text-level-6: 14px;  /* Footnotes - Regular */
 }
 
 .bfg-admin-page #wpcontent,
@@ -47,9 +55,9 @@
 }
 
 .bfg-page__header h1 {
-	font-size: 24px;
-	font-weight: 400;
-	color: #6B7280;
+	font-size: var(--bfg-text-level-1);
+	font-weight: 700;
+	color: var(--bfg-text-main);
 	margin: 0 !important;
 }
 
@@ -71,16 +79,17 @@
 }
 
 .bfg-admin-page .bfg-box__header h2 {
-	font-size: 24px !important;
-	font-weight: 500 !important;
+	font-size: var(--bfg-text-level-1) !important;
+	font-weight: 700 !important;
 	color: var(--bfg-text-main) !important;
 	margin: 0 0 8px !important;
 }
 
 .bfg-admin-page .bfg-box__header p {
-	font-size: 16px !important;
+	font-size: var(--bfg-text-level-2) !important;
 	color: var(--bfg-text-secondary) !important;
 	margin: 0 !important;
+	font-weight: 400 !important;
 }
 
 /* Form Section Styling */
@@ -96,7 +105,7 @@
 .bfg-field>.label {
 	display: block;
 	font-weight: 600;
-	font-size: 16px;
+	font-size: var(--bfg-text-level-3);
 	color: var(--bfg-text-main);
 	margin-bottom: 12px !important;
 }
@@ -109,7 +118,7 @@
 	border: 1px solid transparent;
 	border-radius: var(--bfg-radius-input);
 	padding: 10px 16px;
-	font-size: 14px;
+	font-size: var(--bfg-text-level-4);
 	width: 100%;
 	max-width: 480px;
 	background: #ECEFF1;
@@ -165,7 +174,7 @@
 	position: absolute;
 	right: 12px;
 	color: var(--bfg-text-muted);
-	font-size: 13px;
+	font-size: var(--bfg-text-level-5);
 	pointer-events: none;
 }
 
@@ -222,7 +231,7 @@
 	align-items: flex-start;
 	gap: 12px;
 	font-weight: 600;
-	font-size: 15px;
+	font-size: var(--bfg-text-level-3);
 	color: var(--bfg-text-main);
 	cursor: pointer;
 	margin: 0 !important;
@@ -263,10 +272,19 @@
 
 .bfg-input--checkbox .bfg-description {
 	margin: 8px 0 0 36px !important;
-	font-size: 14px;
+	font-size: var(--bfg-text-level-4);
 	color: var(--bfg-text-secondary);
 	font-weight: 400;
 	line-height: 1.5;
+}
+
+/* General description text */
+.bfg-description,
+.bfg-admin-page .bfg-description {
+	font-size: var(--bfg-text-level-4) !important;
+	color: var(--bfg-text-secondary) !important;
+	font-weight: 400 !important;
+	line-height: 1.5 !important;
 }
 
 /* Button Consistency */
@@ -342,7 +360,7 @@
 }
 
 .bfg-field-sub label {
-	font-size: 13px !important;
+	font-size: var(--bfg-text-level-5) !important;
 	font-weight: 600 !important;
 	color: var(--bfg-text-secondary) !important;
 	margin-bottom: 4px !important;
@@ -384,7 +402,8 @@
 	padding: 0 !important;
 	text-align: left !important;
 	line-height: 1.5 !important;
-	font-size: 14px !important;
+	font-size: var(--bfg-text-level-4) !important;
+	font-weight: 400 !important;
 }
 
 /* Hide WordPress notices and footer on Bring pages to avoid clutter */
@@ -423,20 +442,21 @@
 }
 
 .bfg-pro-teaser__title {
-	font-size: 24px;
-	font-weight: 500;
+	font-size: var(--bfg-text-level-1);
+	font-weight: 700;
 	color: #111827;
 	margin: 0 0 8px !important;
 }
 
 .bfg-pro-teaser__subtitle {
-	font-size: 16px;
+	font-size: var(--bfg-text-level-2);
 	color: #4B5563;
 	line-height: 1.5;
 	margin-bottom: 32px !important;
 	max-width: 460px;
 	margin-left: auto;
 	margin-right: auto;
+	font-weight: 400;
 }
 
 .bfg-pro-env-banner {
@@ -455,7 +475,7 @@
 
 .bfg-pro-env-banner__title {
 	font-weight: 600;
-	font-size: 13px;
+	font-size: var(--bfg-text-level-5);
 	color: #374151;
 	margin-bottom: 4px;
 	display: block;
@@ -466,7 +486,7 @@
 }
 
 .bfg-pro-env-banner__subtitle {
-	font-size: 13px;
+	font-size: var(--bfg-text-level-5);
 	color: #6B7280;
 }
 
@@ -489,7 +509,7 @@
 	justify-content: center;
 	gap: 8px;
 	padding: 10px;
-	font-size: 14px;
+	font-size: var(--bfg-text-level-4);
 	font-weight: 600;
 	color: #4B5563;
 	border-radius: 8px;
@@ -515,16 +535,17 @@
 }
 
 .bfg-pro-content-block__title {
-	font-size: 20px;
-	font-weight: 500;
+	font-size: var(--bfg-text-level-3);
+	font-weight: 600;
 	color: #111827;
 	margin: 0 0 8px !important;
 }
 
 .bfg-pro-content-block__text {
-	font-size: 16px;
+	font-size: var(--bfg-text-level-2);
 	color: #4B5563;
 	margin: 0 0 24px !important;
+	font-weight: 400;
 }
 
 .bfg-pro-content-block__test-url {
@@ -542,16 +563,17 @@
 }
 
 .bfg-pro-content-block__subtitle {
-	font-size: 16px;
+	font-size: var(--bfg-text-level-3);
 	font-weight: 600;
 	color: #111827;
 	margin: 0 0 12px !important;
 }
 
 .bfg-pro-content-block__description {
-	font-size: 13px;
+	font-size: var(--bfg-text-level-5);
 	color: #6B7280;
 	margin: 8px 0 0 0 !important;
+	font-weight: 400;
 }
 
 .bfg-pro-features-grid {
@@ -567,9 +589,9 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 8px;
-	font-size: 15px;
+	font-size: var(--bfg-text-level-4);
 	color: #374151;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 .bfg-pro-features-grid li svg {
@@ -591,9 +613,10 @@
 }
 
 .bfg-pro-disclaimer {
-	font-size: 14px;
+	font-size: var(--bfg-text-level-6);
 	color: #6B7280;
 	margin-bottom: 32px;
+	font-weight: 400;
 }
 
 .bfg-pro-footer {
@@ -602,8 +625,8 @@
 }
 
 .bfg-pro-footer__title {
-	font-size: 16px;
-	font-weight: 500;
+	font-size: var(--bfg-text-level-3);
+	font-weight: 600;
 	color: #4B5563;
 	margin: 0 0 16px !important;
 }
@@ -639,7 +662,7 @@
 
 .bfg-license-input-label {
 	display: block;
-	font-size: 16px;
+	font-size: var(--bfg-text-level-3);
 	font-weight: 600;
 	color: #111827;
 	margin-bottom: 12px;
@@ -654,7 +677,7 @@
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
 	padding: 12px 16px !important;
-	font-size: 15px !important;
+	font-size: var(--bfg-text-level-4) !important;
 	margin-bottom: 0 !important;
 	box-sizing: border-box !important;
 }
@@ -664,9 +687,10 @@
 }
 
 .bfg-license-input-help {
-	font-size: 13px;
+	font-size: var(--bfg-text-level-5);
 	color: #6B7280;
 	margin: 0 !important;
+	font-weight: 400;
 }
 
 /* Hide/Show logic for tabs */
@@ -679,6 +703,6 @@
 }
 
 .bfg-pro-teaser-v2 sup {
-	font-size: 10px;
+	font-size: var(--bfg-text-level-6);
 	color: #6B7280;
 }

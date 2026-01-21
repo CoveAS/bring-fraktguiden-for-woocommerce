@@ -37,8 +37,8 @@ use BringFraktguiden\Admin\Step;
 	margin-bottom: 24px;
 }
 .bfg-page__title {
-	font-size: 24px;
-	font-weight: 500;
+	font-size: 30px;
+	font-weight: 700;
 	color: #111827;
 	margin: 0 !important;
 }
@@ -46,7 +46,7 @@ use BringFraktguiden\Admin\Step;
 	background: #F3F4F6;
 	border-radius: 6px;
 	padding: 4px 12px;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #374151;
 }
@@ -88,16 +88,17 @@ use BringFraktguiden\Admin\Step;
 	font-weight: 700;
 }
 .bfg-active-step__content h3 {
-	font-size: 20px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
 	margin: 0 0 8px !important;
 	color: #111827;
 }
 .bfg-active-step__content p {
-	font-size: 16px;
+	font-size: 14px;
 	margin: 0 0 20px !important;
 	color: #4B5563;
 	line-height: 1.5;
+	font-weight: 400;
 }
 .bfg-button-primary {
 	display: inline-flex;
@@ -171,18 +172,20 @@ use BringFraktguiden\Admin\Step;
 	flex-grow: 1;
 }
 .bfg-step-row__label {
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #111827;
 }
 .bfg-step-row__description {
-	font-size: 13px;
+	font-size: 14px;
 	color: #6B7280;
+	font-weight: 400;
 }
 .bfg-badge {
-	font-size: 12px;
+	font-size: 14px;
 	padding: 6px 8px;
 	border-radius: 8px;
+	font-weight: 400;
 }
 .bfg-badge--completed {
 	color: #15803d;
@@ -222,8 +225,8 @@ use BringFraktguiden\Admin\Step;
 	z-index: 1;
 }
 .bfg-pro-header h3 {
-	font-size: 24px;
-	font-weight: 600;
+	font-size: 30px;
+	font-weight: 700;
 	margin: 0 !important;
 	color: #111827;
 }
@@ -247,11 +250,12 @@ use BringFraktguiden\Admin\Step;
 	display: flex;
 	align-items: flex-start;
 	gap: 12px;
-	font-size: 15px;
+	font-size: 14px;
 	color: #374151;
 	line-height: 1.4;
 	list-style-type: none !important;
 	padding: 0 !important;
+	font-weight: 400;
 }
 .bfg-pro-list li::before {
 	content: none !important;
@@ -276,7 +280,7 @@ use BringFraktguiden\Admin\Step;
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 16px;
 	color: #111827;
 	cursor: pointer;
@@ -378,9 +382,10 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-page__footer-notes small {
 	display: block;
-	font-size: 13px;
+	font-size: 14px;
 	color: #6B7280;
 	line-height: 1.5;
+	font-weight: 400;
 }
 /* Hide WordPress notices */
 .bfg-admin-page__home .notice,
