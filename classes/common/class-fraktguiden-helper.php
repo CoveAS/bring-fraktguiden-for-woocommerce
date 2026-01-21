@@ -75,6 +75,10 @@ class Fraktguiden_Helper {
 	 * @return boolean True means that PRO mode is active.
 	 */
 	public static function pro_activated( $ignore_license = false ) {
+		if ( self::is_test_site() ) {
+			return true;
+		}
+
 		$pro_allowed = true;
 
 		if ( ! $ignore_license ) {
@@ -87,6 +91,41 @@ class Fraktguiden_Helper {
 		}
 
 		return self::get_option( 'pro_enabled' ) === 'yes' && $pro_allowed;
+	}
+
+	/**
+	 * Check if the site is a test site
+	 *
+	 * @return boolean
+	 */
+	public static function is_test_site() {
+		$url  = get_site_url();
+		$host = wp_parse_url( $url, PHP_URL_HOST );
+
+		if ( empty( $host ) ) {
+			return false;
+		}
+
+		// Check for local environment constant
+		if ( defined( 'BRING_ENVIRONMENT' ) && BRING_ENVIRONMENT === 'local' ) {
+			return true;
+		}
+
+		$test_domains = [
+			'.test',
+			'.local',
+			'localhost',
+			'staging.',
+			'dev.',
+		];
+
+		foreach ( $test_domains as $domain ) {
+			if ( str_contains( $host, $domain ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

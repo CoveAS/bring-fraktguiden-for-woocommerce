@@ -272,7 +272,19 @@ class SettingsPage
 			if ('info' == $setting->type) {
 				continue;
 			}
-			$value[$key] = $_POST[$key] ? $setting->sanitize($_POST[$key]) : '';
+			$sanitized = $_POST[$key] ? $setting->sanitize($_POST[$key]) : '';
+			if ($setting->type === 'checkbox') {
+				$sanitized = $sanitized ? 'yes' : 'no';
+			}
+			$value[$key] = $sanitized;
+		}
+
+		// Handle trial activation date
+		if (
+			isset($value['pro_enabled']) && $value['pro_enabled'] === 'yes'
+			&& empty($value['pro_activated_on'])
+		) {
+			$value['pro_activated_on'] = time();
 		}
 
 		return $value;

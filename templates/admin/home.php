@@ -485,64 +485,161 @@ use BringFraktguiden\Admin\Step;
 					</a>
 				<?php endforeach; ?>
 			</div>
+		</div>
 
-			<div class="bfg-pro-features-teaser">
-				<form method="post" action="options.php">
+			<?php
+			$is_test_site = Bring_Fraktguiden\Common\Fraktguiden_Helper::is_test_site();
+			$license_active = Bring_Fraktguiden\Common\Fraktguiden_Helper::valid_license();
+			?>
+			<div class="bfg-pro-teaser-v2">
+				<div class="bfg-pro-teaser__shield">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+					</svg>
+				</div>
+
+				<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Unlock PRO Features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+				<p class="bfg-pro-teaser__subtitle">
+					<?php esc_html_e('Activate your license or start a free trial to access all premium features on your live site.', 'bring-fraktguiden-for-woocommerce'); ?>
+				</p>
+
+				<?php if ($is_test_site): ?>
+					<div class="bfg-pro-env-banner bfg-pro-env-banner--test">
+						<span class="bfg-pro-env-banner__title"><?php esc_html_e('Detected Environment: Test/Staging Site', 'bring-fraktguiden-for-woocommerce'); ?></span>
+						<span class="bfg-pro-env-banner__subtitle"><?php esc_html_e('PRO features are automatically unlocked for testing.', 'bring-fraktguiden-for-woocommerce'); ?></span>
+					</div>
+				<?php else: ?>
+					<div class="bfg-pro-env-banner">
+						<span class="bfg-pro-env-banner__title"><?php esc_html_e('Detected Environment: Live/Production Site', 'bring-fraktguiden-for-woocommerce'); ?></span>
+						<span class="bfg-pro-env-banner__subtitle"><?php esc_html_e('PRO features require activation on production domains.', 'bring-fraktguiden-for-woocommerce'); ?></span>
+					</div>
+				<?php endif; ?>
+
+				<div class="bfg-pro-tabs">
+					<button type="button" class="bfg-pro-tab is-active" data-tab="trial">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+						<?php esc_html_e('Start Free Trial', 'bring-fraktguiden-for-woocommerce'); ?>
+					</button>
+					<button type="button" class="bfg-pro-tab" data-tab="license">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3L15.5 7.5z"></path></svg>
+						<?php esc_html_e('Enter License', 'bring-fraktguiden-for-woocommerce'); ?>
+					</button>
+				</div>
+
+				<form method="post" action="options.php" id="bfg-pro-activation-form">
 					<?php settings_fields('bring_fraktguiden_home'); ?>
-					<div class="bfg-pro-header">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="sparkle-icon">
-							<path d="M12 3L14.5 9L21 11.5L14.5 14L12 21L9.5 14L3 11.5L9.5 9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-						<h3><?php esc_html_e('Unlock PRO features', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+					
+					<!-- Hidden pro_enabled checkbox that we toggle via JS -->
+					<div style="display:none">
+						<?php BringFraktguiden\Admin\FieldRenderer::pro_enabled(); ?>
 					</div>
 
-					<ul class="bfg-pro-list">
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Book orders directly with signaling cost from within WooCommerce', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Set a free shipping threshold per service', 'bring-fraktguiden-for-woocommerce'); ?>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Option to set a fixed price per service', 'bring-fraktguiden-for-woocommerce'); ?>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Customize the name of the shipping zone', 'bring-fraktguiden-for-woocommerce'); ?>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Show customer estimated delivery services', 'bring-fraktguiden-for-woocommerce'); ?>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Get prioritized support', 'bring-fraktguiden-for-woocommerce'); ?>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							<?php esc_html_e('Enable pick-up-points for supported services', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup>
-						</li>
-					</ul>
-
-					<div class="bfg-pro-activation-card">
-						<?php BringFraktguiden\Admin\FieldRenderer::pro_enabled(); ?>
-						
-						<div class="bfg-license-input-row">
-							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
-							<?php submit_button(__('Activate', 'bring-fraktguiden-for-woocommerce')); ?>
+					<div id="bfg-tab-trial" class="bfg-pro-tab-content is-active">
+						<div class="bfg-pro-content-block">
+							<h3 class="bfg-pro-content-block__title"><?php esc_html_e('7-Day Free Trial', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+							<p class="bfg-pro-content-block__text"><?php esc_html_e('Get instant access to all PRO features for 7 days. No credit card required.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+							
+							<ul class="bfg-pro-features-grid">
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Book orders with signaling cost', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Free shipping threshold', 'bring-fraktguiden-for-woocommerce'); ?>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Fixed price per service', 'bring-fraktguiden-for-woocommerce'); ?>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Custom shipping zone names', 'bring-fraktguiden-for-woocommerce'); ?>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Estimated delivery services', 'bring-fraktguiden-for-woocommerce'); ?>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Prioritized support', 'bring-fraktguiden-for-woocommerce'); ?>
+								</li>
+								<li>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<?php esc_html_e('Pick-up-points for services', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup>
+								</li>
+							</ul>
 						</div>
+						<button type="submit" class="bfg-button-primary bfg-pro-btn-main">
+							<?php esc_html_e('Start My Free Trial', 'bring-fraktguiden-for-woocommerce'); ?>
+						</button>
+						<p class="bfg-pro-disclaimer"><?php esc_html_e('Trial starts immediately and lasts for 7 days from activation.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+					</div>
+
+					<div id="bfg-tab-license" class="bfg-pro-tab-content">
+						<div class="bfg-license-input-wrapper">
+							<label class="bfg-license-input-label" for="bfg_license_key"><?php esc_html_e('Enter Your License Key', 'bring-fraktguiden-for-woocommerce'); ?></label>
+							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
+							<span class="bfg-license-input-help"><?php esc_html_e('Your license key was sent to your email after purchase.', 'bring-fraktguiden-for-woocommerce'); ?></span>
+						</div>
+						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="background: #60A5FA !important;">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3L15.5 7.5z"></path></svg>
+							<?php esc_html_e('Activate PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
+						</button>
 					</div>
 				</form>
+
+				<div class="bfg-pro-footer">
+					<h4 class="bfg-pro-footer__title"><?php esc_html_e("Don't have a license yet?", 'bring-fraktguiden-for-woocommerce'); ?></h4>
+					<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
+						<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
+					</a>
+				</div>
 			</div>
 
-			<div class="bfg-page__footer-notes">
+			<style>
+				/* Inline styles for tab switching logic if needed, but mostly served by the main CSS */
+			</style>
+			
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const tabs = document.querySelectorAll('.bfg-pro-tab');
+				const contents = document.querySelectorAll('.bfg-pro-tab-content');
+				const footnotes = document.getElementById('bfg-pro-footnotes');
+				const proCheckbox = document.querySelector('input[name="pro_enabled"]');
+				const form = document.getElementById('bfg-pro-activation-form');
+
+				tabs.forEach(tab => {
+					tab.addEventListener('click', () => {
+						const target = tab.getAttribute('data-tab');
+
+						tabs.forEach(t => t.classList.remove('is-active'));
+						contents.forEach(c => c.classList.remove('is-active'));
+
+						tab.classList.add('is-active');
+						document.getElementById('bfg-tab-' + target).classList.add('is-active');
+
+						// Handle footnotes visibility
+						if (footnotes) {
+							footnotes.style.display = (target === 'trial') ? 'block' : 'none';
+						}
+					});
+				});
+
+				if (form) {
+					form.addEventListener('submit', function() {
+						if (proCheckbox) {
+							proCheckbox.checked = true;
+						}
+					});
+				}
+			});
+			</script>
+
+			<div class="bfg-page__footer-notes" id="bfg-pro-footnotes">
 				<small><sup>1</sup> <?php esc_html_e('Domestic shipments only. We\'re working on building support for international shipping.', 'bring-fraktguiden-for-woocommerce'); ?></small>
 				<small><sup>2</sup> <?php esc_html_e('List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til Pakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL and PICKUP_PARCEL_BULK', 'bring-fraktguiden-for-woocommerce'); ?></small>
 			</div>
 
-		</div>
 	</div>
 </div>
