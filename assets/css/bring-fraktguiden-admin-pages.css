@@ -16,13 +16,15 @@
 
 .bfg-admin-page #wpcontent,
 .bfg-admin-page__home #wpcontent,
-.bfg-admin-page__settings #wpcontent {
+.bfg-admin-page__settings #wpcontent,
+.bfg-admin-page__fallback #wpcontent {
 	padding: 0 !important;
 }
 
 .bfg-admin-page,
 .bfg-admin-page__home,
-.bfg-admin-page__settings {
+.bfg-admin-page__settings,
+.bfg-admin-page__fallback {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
@@ -314,31 +316,42 @@
 	}
 }
 
-/* Settings Notice Banner */
+/* Banner and Notice Styling */
 .bfg-notice-banner {
-	background: #FFF7ED;
-	color: #9A3412;
-	padding: 16px 20px;
-	border-radius: 8px;
-	border: 1px solid #FED7AA;
-	font-weight: 500;
-	margin-bottom: 24px;
+	background: #FFF7ED !important;
+	color: #9A3412 !important;
+	padding: 16px 20px !important;
+	border-radius: 8px !important;
+	border: 1px solid #FED7AA !important;
+	font-weight: 500 !important;
+	margin: 0 0 24px 0 !important;
 	display: flex !important;
 	align-items: center !important;
-	justify-content: flex-start;
-	gap: 8px;
-	flex-direction: row !important;
+	gap: 12px !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .bfg-notice-banner .bfg-notice-icon {
 	display: flex !important;
 	align-items: center !important;
 	justify-content: center !important;
-	flex-shrink: 0;
+	flex-shrink: 0 !important;
+	width: 20px !important;
+	height: 20px !important;
 }
 
 .bfg-notice-banner p {
 	margin: 0 !important;
-	text-align: left;
-	align-self: center !important;
+	padding: 0 !important;
+	text-align: left !important;
+	line-height: 1.5 !important;
+	font-size: 14px !important;
+}
+
+/* Hide WordPress notices on Bring pages to avoid duplicates */
+.bfg-admin-page .notice,
+.bfg-admin-page .updated,
+.bfg-admin-page .error,
+.bfg__notice-list-hide {
+	display: none !important;
 }
