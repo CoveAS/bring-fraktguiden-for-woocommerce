@@ -6,12 +6,12 @@
 ?>
 
 <div class="wrap">
-	<div class="bfg-page__header">
-		<h1><?php use Bring_Fraktguiden\Common\Fraktguiden_Helper;
-
-			esc_html_e('Select services', 'bring-fraktguiden-for-woocommerce'); ?></h1>
-	</div>
 	<div class="bfg-page__main">
+		<div class="bfg-page__header">
+			<h1><?php use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+
+				esc_html_e('Select services', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+		</div>
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>

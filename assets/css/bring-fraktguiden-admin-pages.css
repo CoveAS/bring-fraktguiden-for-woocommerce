@@ -31,21 +31,26 @@
 	color: #1d2327;
 	background-color: var(--bfg-bg-page);
 	min-height: 100vh;
-	margin-top: 20px;
 }
 
 .bfg-admin-page .bfg-page__main {
 	max-width: 900px;
-	margin: 0 auto;
+	margin: 24px auto 0;
 	padding: 0 20px 60px;
 }
 
 /* Typography Consistency */
+.bfg-page__header {
+	margin-bottom: 48px;
+	border-bottom: 1px solid var(--bfg-border);
+	padding-bottom: 32px;
+}
+
 .bfg-page__header h1 {
 	font-size: 24px;
-	font-weight: 500;
-	color: var(--bfg-text-main);
-	margin: 0;
+	font-weight: 400;
+	color: #6B7280;
+	margin: 0 !important;
 }
 
 /* Cards / Boxes Styling */

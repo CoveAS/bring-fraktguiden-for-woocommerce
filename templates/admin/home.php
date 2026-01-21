@@ -391,11 +391,11 @@ use BringFraktguiden\Admin\Step;
 </style>
 
 <div class="wrap bfg-admin-page__home">
-	<div class="bfg-page__header">
-		<h1><?php esc_html_e('Home', 'bring-fraktguiden-for-woocommerce'); ?></h1>
-	</div>
-
 	<div class="bfg-page__main">
+		<div class="bfg-page__header">
+			<h1><?php esc_html_e('Home', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+		</div>
+
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
