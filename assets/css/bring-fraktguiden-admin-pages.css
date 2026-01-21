@@ -382,10 +382,11 @@
 	font-size: 14px !important;
 }
 
-/* Hide WordPress notices on Bring pages to avoid duplicates */
+/* Hide WordPress notices and footer on Bring pages to avoid clutter */
 .bfg-admin-page .notice,
 .bfg-admin-page .updated,
 .bfg-admin-page .error,
+.bfg-admin-page #wpfooter,
 .bfg__notice-list-hide {
 	display: none !important;
 }
