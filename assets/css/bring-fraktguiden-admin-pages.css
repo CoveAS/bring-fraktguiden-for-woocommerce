@@ -42,7 +42,7 @@
 }
 
 .bfg-admin-page .bfg-page__main {
-	max-width: 900px;
+	max-width: 768px;
 	margin: 24px auto 0;
 	padding: 0 20px 60px;
 }
@@ -56,7 +56,7 @@
 
 .bfg-page__header h1 {
 	font-size: var(--bfg-text-level-1);
-	font-weight: 700;
+	font-weight: 600;
 	color: var(--bfg-text-main);
 	margin: 0 !important;
 }
@@ -68,7 +68,7 @@
 	border: 1px solid var(--bfg-border) !important;
 	border-radius: var(--bfg-radius-card) !important;
 	box-shadow: var(--bfg-shadow) !important;
-	padding: 40px !important;
+	padding: 56px !important;
 	margin-bottom: 40px !important;
 }
 
@@ -80,7 +80,7 @@
 
 .bfg-admin-page .bfg-box__header h2 {
 	font-size: var(--bfg-text-level-1) !important;
-	font-weight: 700 !important;
+	font-weight: 600 !important;
 	color: var(--bfg-text-main) !important;
 	margin: 0 0 8px !important;
 }
@@ -420,7 +420,7 @@
 	background: #fff;
 	border: 1px solid var(--bfg-border);
 	border-radius: var(--bfg-radius-card);
-	padding: 40px !important;
+	padding: 56px !important;
 	width: 100%;
 	box-sizing: border-box;
 	margin: 0 0 40px;
@@ -443,7 +443,7 @@
 
 .bfg-pro-teaser__title {
 	font-size: var(--bfg-text-level-1);
-	font-weight: 700;
+	font-weight: 600;
 	color: #111827;
 	margin: 0 0 8px !important;
 }
@@ -587,7 +587,7 @@
 
 .bfg-pro-features-grid li {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 8px;
 	font-size: var(--bfg-text-level-4);
 	color: #374151;
@@ -597,7 +597,11 @@
 .bfg-pro-features-grid li svg {
 	color: #2563EB;
 	flex-shrink: 0;
-	margin-top: 1px;
+}
+
+.bfg-pro-features-grid li sup {
+	font-size: 12px;
+	color: #6B7280;
 }
 
 .bfg-pro-btn-main {
@@ -705,4 +709,97 @@
 .bfg-pro-teaser-v2 sup {
 	font-size: var(--bfg-text-level-6);
 	color: #6B7280;
+}
+
+/* State-specific PRO teaser styles */
+.bfg-pro-teaser__shield--success {
+	background: #16A34A !important;
+	box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3) !important;
+}
+
+.bfg-pro-teaser__shield--test {
+	background: #F59E0B !important;
+	box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+}
+
+.bfg-pro-teaser__shield--trial {
+	background: #8B5CF6 !important;
+	box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+}
+
+.bfg-pro-teaser__shield--expired {
+	background: #EF4444 !important;
+	box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Status Card Styles */
+.bfg-pro-status-card {
+	display: flex;
+	justify-content: center;
+	gap: 48px;
+	background: #F9FAFB;
+	border: 1px solid #E5E7EB;
+	border-radius: 12px;
+	padding: 24px 32px;
+	margin-bottom: 32px;
+}
+
+.bfg-pro-status-card--test {
+	background: #FFFBEB;
+	border-color: #FCD34D;
+}
+
+.bfg-pro-status-card--trial {
+	background: #F5F3FF;
+	border-color: #C4B5FD;
+}
+
+.bfg-pro-status-card--expired {
+	background: #FEF2F2;
+	border-color: #FECACA;
+}
+
+.bfg-pro-status-card__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.bfg-pro-status-card__label {
+	font-size: var(--bfg-text-level-5);
+	color: #6B7280;
+	font-weight: 400;
+}
+
+.bfg-pro-status-card__value {
+	font-size: var(--bfg-text-level-3);
+	font-weight: 600;
+	color: #111827;
+}
+
+.bfg-pro-status-card__value--success {
+	color: #16A34A;
+}
+
+.bfg-pro-status-card__value--test {
+	color: #D97706;
+}
+
+.bfg-pro-status-card__value--trial {
+	color: #7C3AED;
+}
+
+.bfg-pro-status-card__value--expired {
+	color: #DC2626;
+}
+
+/* Compact features grid for active states */
+.bfg-pro-features-grid--compact {
+	max-width: 400px;
+	margin: 0 auto !important;
+}
+
+.bfg-pro-features-grid--compact li svg {
+	color: #16A34A;
 }

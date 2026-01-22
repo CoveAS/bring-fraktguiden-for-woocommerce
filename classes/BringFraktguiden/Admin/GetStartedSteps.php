@@ -48,12 +48,15 @@ class GetStartedSteps
 			completed: !empty(Fraktguiden_Helper::get_option('services')),
 		);
 
+		$has_api_credentials = !empty(Fraktguiden_Helper::get_option('mybring_api_uid'))
+			&& !empty(Fraktguiden_Helper::get_option('mybring_api_key'));
+
 		$steps [] = new Step(
 			label: __('API conversion', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Connect your Bring API credentials', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
 			actionText: __('Connect API', 'bring-fraktguiden-for-woocommerce'),
-			completed: false,
+			completed: $has_api_credentials,
 		);
 
 		$fallback = false;
@@ -85,12 +88,15 @@ class GetStartedSteps
 			completed: false,
 		);
 
+		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
+		$has_valid_license = Fraktguiden_Helper::valid_license();
+
 		$steps [] = new Step(
 			label: __('Go live', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Activate shipping on your store', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
 			actionText: __('Go live', 'bring-fraktguiden-for-woocommerce'),
-			completed: false,
+			completed: $pro_enabled && $has_valid_license,
 		);
 
 		return $steps;

@@ -32,6 +32,7 @@ class StateSelector
 		$pro_test['test_mode'] = 'yes';
 
 		$expired = $pro;
+		$expired['pro_activated_on'] = time() - (86400 * 30); // 30 days ago, trial expired
 
 		$pirate = $pro;
 		$pirate['pro_activated_on'] = time() + 999999999;
