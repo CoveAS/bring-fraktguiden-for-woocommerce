@@ -14,12 +14,18 @@
 	--bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
 	/* Typography Scale */
-	--bfg-text-level-1: 30px;  /* Main Headings - Bold */
-	--bfg-text-level-2: 16px;  /* Descriptions/Subtitles - Regular */
-	--bfg-text-level-3: 16px;  /* Section Titles - Semibold */
-	--bfg-text-level-4: 14px;  /* Body Text & Features - Regular */
-	--bfg-text-level-5: 14px;  /* Helper Text & Labels - Regular */
-	--bfg-text-level-6: 14px;  /* Footnotes - Regular */
+	--bfg-text-level-1: 30px;
+	/* Main Headings - Bold */
+	--bfg-text-level-2: 16px;
+	/* Descriptions/Subtitles - Regular */
+	--bfg-text-level-3: 16px;
+	/* Section Titles - Semibold */
+	--bfg-text-level-4: 14px;
+	/* Body Text & Features - Regular */
+	--bfg-text-level-5: 14px;
+	/* Helper Text & Labels - Regular */
+	--bfg-text-level-6: 14px;
+	/* Footnotes - Regular */
 }
 
 .bfg-admin-page #wpcontent,
@@ -245,29 +251,40 @@
 	flex-shrink: 0;
 	border: 2px solid #D1D5DB !important;
 	cursor: pointer;
-	appearance: none;
-	-webkit-appearance: none;
+	appearance: none !important;
+	-webkit-appearance: none !important;
 	position: relative;
-	background: #fff;
+	background: #fff !important;
+	box-shadow: none !important;
 	transition: all 0.2s;
 }
 
-.bfg-input--checkbox input[type="checkbox"]:checked {
-	background-color: var(--bfg-primary) !important;
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked {
+	background: var(--bfg-primary) !important;
 	border-color: var(--bfg-primary) !important;
 }
 
-.bfg-input--checkbox input[type="checkbox"]:checked::after {
-	content: "";
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::before {
+	content: none !important;
+	display: none !important;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::after {
+	content: none !important;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::after {
+	content: "" !important;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	width: 14px;
 	height: 14px;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
 	background-size: contain;
 	background-repeat: no-repeat;
 	transform: translate(-50%, -50%);
+	display: block !important;
 }
 
 .bfg-input--checkbox .bfg-description {
