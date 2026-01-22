@@ -328,7 +328,8 @@ use BringFraktguiden\Admin\Step;
 }
 .bfg-license-input-row {
 	display: flex;
-	gap: 12px;
+	flex-direction: column;
+	gap: 32px;
 }
 .bfg-license-input-row .bfg-input {
 	flex-grow: 1 !important;
