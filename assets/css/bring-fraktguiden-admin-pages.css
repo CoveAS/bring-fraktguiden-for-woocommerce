@@ -61,9 +61,9 @@
 }
 
 .bfg-page__header h1 {
-	font-size: var(--bfg-text-level-1);
-	font-weight: 600;
-	color: var(--bfg-text-main);
+	font-size: 20px;
+	font-weight: 500;
+	color: var(--bfg-text-secondary);
 	margin: 0 !important;
 }
 
