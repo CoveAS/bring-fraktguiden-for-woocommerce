@@ -411,12 +411,21 @@ use BringFraktguiden\Fields\Fields;
 
 					<div class="bfg-field">
 						<label for="auto_set_status_after_booking_success"><?php esc_html_e('Order status after booking', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<?php
+						$order_statuses = wc_get_order_statuses();
+						$saved_booking_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_booking_success');
+						$booking_status_value = !empty($saved_booking_status) ? $saved_booking_status : 'wc-bring-shipment';
+						?>
 						<select id="auto_set_status_after_booking_success" name="auto_set_status_after_booking_success">
-							<option value="none"><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
+							<option value="none" <?php selected($booking_status_value, 'none'); ?>><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
 							<?php
-							$order_statuses = wc_get_order_statuses();
 							foreach ($order_statuses as $status => $label) {
-								printf('<option value="%s">%s</option>', esc_attr($status), esc_html($label));
+								printf(
+									'<option value="%s" %s>%s</option>',
+									esc_attr($status),
+									selected($booking_status_value, $status, false),
+									esc_html($label)
+								);
 							}
 							?>
 						</select>
@@ -425,11 +434,20 @@ use BringFraktguiden\Fields\Fields;
 
 					<div class="bfg-field">
 						<label for="auto_set_status_after_print_label_success"><?php esc_html_e('Order status after printing', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<?php
+						$saved_print_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_print_label_success');
+						$print_status_value = !empty($saved_print_status) ? $saved_print_status : 'none';
+						?>
 						<select id="auto_set_status_after_print_label_success" name="auto_set_status_after_print_label_success">
-							<option value="none"><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
+							<option value="none" <?php selected($print_status_value, 'none'); ?>><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
 							<?php
 							foreach ($order_statuses as $status => $label) {
-								printf('<option value="%s">%s</option>', esc_attr($status), esc_html($label));
+								printf(
+									'<option value="%s" %s>%s</option>',
+									esc_attr($status),
+									selected($print_status_value, $status, false),
+									esc_html($label)
+								);
 							}
 							?>
 						</select>

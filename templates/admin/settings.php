@@ -57,7 +57,7 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->price_to_use; ?>
 					</div>
 					<div class="bfg-field">
-						<label><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<label class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
 						<div class="bfg-flex bfg-gap-8">
 							<div class="bfg-field-sub">
 								<?php echo $fields->from_zip->label() ?>
@@ -101,32 +101,32 @@ use BringFraktguiden\Fields\Fields;
 					</div>
 
 					<div class="bfg-field">
-						<label><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<label class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
 						<div class="bfg-flex bfg-gap-8 bfg-mb-5">
-							<div class="bfg-input bfg-input--number">
+							<div class="bfg-field-sub">
 								<?php echo $fields->minimum_length->label(); ?>
-								<div>
+								<div class="bfg-input bfg-input--number">
 									<?php echo $fields->minimum_length->field(); ?>
 									<span class="bfg-suffix">cm</span>
 								</div>
 							</div>
-							<div class="bfg-input bfg-input--number">
+							<div class="bfg-field-sub">
 								<?php echo $fields->minimum_width->label(); ?>
-								<div>
+								<div class="bfg-input bfg-input--number">
 									<?php echo $fields->minimum_width->field(); ?>
 									<span class="bfg-suffix">cm</span>
 								</div>
 							</div>
-							<div class="bfg-input bfg-input--number">
+							<div class="bfg-field-sub">
 								<?php echo $fields->minimum_height->label(); ?>
-								<div>
+								<div class="bfg-input bfg-input--number">
 									<?php echo $fields->minimum_height->field(); ?>
 									<span class="bfg-suffix">cm</span>
 								</div>
 							</div>
-							<div class="bfg-input bfg-input--number">
+							<div class="bfg-field-sub">
 								<?php echo $fields->minimum_weight->label(); ?>
-								<div>
+								<div class="bfg-input bfg-input--number">
 									<?php echo $fields->minimum_weight->field(); ?>
 									<span class="bfg-suffix">kg</span>
 								</div>

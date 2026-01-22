@@ -106,7 +106,7 @@ use BringFraktguiden\Fields\Fields;
 					</div>
 
 					<div class="bfg-field">
-						<label><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<label class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
 						<div class="bfg-flex bfg-gap-8 bfg-mb-5">
 							<div class="bfg-field-sub">
 								<?php echo $fields->dimension_packing_side->label(); ?>
