@@ -435,9 +435,9 @@
 }
 
 .bfg-field-sub label {
-	font-size: var(--bfg-text-level-5) !important;
+	font-size: var(--bfg-text-level-3) !important;
 	font-weight: 600 !important;
-	color: var(--bfg-text-secondary) !important;
+	color: var(--bfg-text-main) !important;
 	margin-bottom: 10px !important;
 	display: block !important;
 }
