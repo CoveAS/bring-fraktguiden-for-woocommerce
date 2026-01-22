@@ -32,7 +32,7 @@ class Field
 	public function render(): string
 	{
 		return sprintf(
-			'<div class="%s">%s</div>%s',
+			'<div class="%s">%s %s</div>',
 			'bfg-input bfg-input--'. $this->field['type'],
 			$this->field(),
 			$this->description(),

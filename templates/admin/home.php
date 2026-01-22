@@ -408,8 +408,11 @@ use BringFraktguiden\Admin\Step;
 
 		<div class="bfg-page__main-card">
 			<?php
-			$nextStepIndex = $nextStep ? array_search($nextStep, $steps, true) : false;
-			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : $stepsCompleted + 1;
+			// Only show "next step" highlighting if at least one step is completed
+			// For fresh state (nothing completed), don't highlight any step as "in progress"
+			$showNextStep = $stepsCompleted > 0 && $nextStep;
+			$nextStepIndex = $showNextStep ? array_search($nextStep, $steps, true) : false;
+			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : 1;
 			?>
 			<div class="bfg-page__header-row">
 				<h2 class="bfg-page__title"><?php esc_html_e('Get started with Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></h2>
@@ -424,7 +427,7 @@ use BringFraktguiden\Admin\Step;
 				</div>
 			</div>
 
-			<?php if ($nextStep): ?>
+			<?php if ($showNextStep): ?>
 				<div class="bfg-active-step-card">
 					<div class="bfg-active-step__icon">
 						<?php echo $currentStepNumber; ?>
@@ -445,7 +448,8 @@ use BringFraktguiden\Admin\Step;
 			<div class="bfg-steps-list">
 				<?php foreach ($steps as $i => $step): ?>
 					<?php
-					$isNext = $nextStep === $step;
+					// Only mark as "in progress" if we're showing the next step (i.e., at least one step completed)
+					$isNext = $showNextStep && $nextStep === $step;
 					$statusClass = '';
 					if ($step->completed) {
 						$statusClass = 'bfg-step--completed';
@@ -484,13 +488,14 @@ use BringFraktguiden\Admin\Step;
 
 			<?php
 			$is_test_site = Bring_Fraktguiden\Common\Fraktguiden_Helper::is_test_site();
-			$license_active = Bring_Fraktguiden\Common\Fraktguiden_Helper::valid_license();
+			$pro_valid_to = get_option('bring_fraktguiden_pro_valid_to', false);
+			$license_active = $pro_valid_to && intval($pro_valid_to) > time();
 			$pro_enabled = Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
 			$pro_activated = Bring_Fraktguiden\Common\Fraktguiden_Helper::pro_activated();
 			$days_remaining = Bring_Fraktguiden\Common\Fraktguiden_Helper::get_pro_days_remaining();
 			$pro_activated_on = Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('pro_activated_on');
-			$is_trial = $pro_enabled && $pro_activated_on && !$license_active;
-			$is_expired = $pro_enabled && $days_remaining < 0 && !$license_active;
+			$is_trial = $pro_enabled && $pro_activated_on && !$license_active && $days_remaining >= 0;
+			$is_expired = $pro_enabled && $pro_activated_on && $days_remaining < 0 && !$license_active;
 			?>
 
 			<?php if ($license_active && $pro_enabled): ?>
@@ -539,40 +544,41 @@ use BringFraktguiden\Admin\Step;
 					</ul>
 				</div>
 
-			<?php elseif ($is_test_site && $pro_enabled): ?>
-				<!-- Test Site State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--test">
-					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--test">
+			<?php elseif ($is_expired): ?>
+				<!-- Expired State -->
+				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--expired">
+					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--expired">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+							<circle cx="12" cy="12" r="10"></circle>
+							<line x1="12" y1="8" x2="12" y2="12"></line>
+							<line x1="12" y1="16" x2="12.01" y2="16"></line>
 						</svg>
 					</div>
 
-					<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Test Environment Active', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+					<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Trial Expired', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p class="bfg-pro-teaser__subtitle">
-						<?php esc_html_e('PRO features are enabled for testing. A license is required for production use.', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('Your trial has ended. Purchase a license to continue using PRO features.', 'bring-fraktguiden-for-woocommerce'); ?>
 					</p>
 
-					<div class="bfg-pro-status-card bfg-pro-status-card--test">
+					<div class="bfg-pro-status-card bfg-pro-status-card--expired">
 						<div class="bfg-pro-status-card__item">
-							<span class="bfg-pro-status-card__label"><?php esc_html_e('Environment', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<span class="bfg-pro-status-card__value bfg-pro-status-card__value--test"><?php esc_html_e('Test Site', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__label"><?php esc_html_e('Status', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__value bfg-pro-status-card__value--expired"><?php esc_html_e('Expired', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
 						<div class="bfg-pro-status-card__item">
 							<span class="bfg-pro-status-card__label"><?php esc_html_e('PRO Features', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<span class="bfg-pro-status-card__value"><?php esc_html_e('Enabled', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__value"><?php esc_html_e('Disabled', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
 					</div>
 
 					<div class="bfg-pro-footer">
-						<h4 class="bfg-pro-footer__title"><?php esc_html_e('Ready to go live?', 'bring-fraktguiden-for-woocommerce'); ?></h4>
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-button-primary bfg-pro-btn-main">
 							<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</a>
 					</div>
 				</div>
 
-			<?php elseif ($is_trial && !$is_expired): ?>
+			<?php elseif ($is_trial): ?>
 				<!-- Trial Active State -->
 				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--trial">
 					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--trial">
@@ -608,35 +614,34 @@ use BringFraktguiden\Admin\Step;
 					</div>
 				</div>
 
-			<?php elseif ($is_expired): ?>
-				<!-- Expired State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--expired">
-					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--expired">
+			<?php elseif ($is_test_site && $pro_enabled): ?>
+				<!-- Test Site State -->
+				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--test">
+					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--test">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="12" y1="8" x2="12" y2="12"></line>
-							<line x1="12" y1="16" x2="12.01" y2="16"></line>
+							<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
 						</svg>
 					</div>
 
-					<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Trial Expired', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+					<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Test Environment Active', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p class="bfg-pro-teaser__subtitle">
-						<?php esc_html_e('Your trial has ended. Purchase a license to continue using PRO features.', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('PRO features are enabled for testing. A license is required for production use.', 'bring-fraktguiden-for-woocommerce'); ?>
 					</p>
 
-					<div class="bfg-pro-status-card bfg-pro-status-card--expired">
+					<div class="bfg-pro-status-card bfg-pro-status-card--test">
 						<div class="bfg-pro-status-card__item">
-							<span class="bfg-pro-status-card__label"><?php esc_html_e('Status', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<span class="bfg-pro-status-card__value bfg-pro-status-card__value--expired"><?php esc_html_e('Expired', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__label"><?php esc_html_e('Environment', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__value bfg-pro-status-card__value--test"><?php esc_html_e('Test Site', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
 						<div class="bfg-pro-status-card__item">
 							<span class="bfg-pro-status-card__label"><?php esc_html_e('PRO Features', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<span class="bfg-pro-status-card__value"><?php esc_html_e('Disabled', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<span class="bfg-pro-status-card__value"><?php esc_html_e('Enabled', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
 					</div>
 
 					<div class="bfg-pro-footer">
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-button-primary bfg-pro-btn-main">
+						<h4 class="bfg-pro-footer__title"><?php esc_html_e('Ready to go live?', 'bring-fraktguiden-for-woocommerce'); ?></h4>
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
 							<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</a>
 					</div>
