@@ -49,12 +49,6 @@ use BringFraktguiden\Fields\Fields;
 	font-weight: 600;
 }
 
-/* Checkbox active state */
-.bfg-field--checkbox-box.is-checked {
-	background: #eff6ff;
-}
-
-
 /* Submit button states */
 .bfg-submit-wrapper {
 	position: relative;
@@ -348,51 +342,47 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 					</div>
 
-					<div class="bfg-field">
-						<label><?php esc_html_e('Contact details', 'bring-fraktguiden-for-woocommerce'); ?></label>
-						<div class="bfg-flex bfg-gap-8">
-							<div class="bfg-field-sub" data-validate="required|phone">
-								<label for="booking_address_phone">
-									<?php esc_html_e('Phone', 'bring-fraktguiden-for-woocommerce'); ?>
-									<span class="bfg-required" aria-hidden="true">*</span>
-								</label>
-								<input
-									type="tel"
-									id="booking_address_phone"
-									name="booking_address_phone"
-									required
-									aria-required="true"
-									aria-describedby="phone_error"
-									autocomplete="tel"
-								/>
-								<div class="bfg-field__validation bfg-field__validation--error" id="phone_error" role="alert">
-									<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-										<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-									</svg>
-									<span><?php esc_html_e('Valid phone number is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-								</div>
-							</div>
-							<div class="bfg-field-sub" data-validate="required|email">
-								<label for="booking_address_email">
-									<?php esc_html_e('Email', 'bring-fraktguiden-for-woocommerce'); ?>
-									<span class="bfg-required" aria-hidden="true">*</span>
-								</label>
-								<input
-									type="email"
-									id="booking_address_email"
-									name="booking_address_email"
-									required
-									aria-required="true"
-									aria-describedby="email_error"
-									autocomplete="email"
-								/>
-								<div class="bfg-field__validation bfg-field__validation--error" id="email_error" role="alert">
-									<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-										<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-									</svg>
-									<span><?php esc_html_e('Valid email address is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-								</div>
-							</div>
+					<div class="bfg-field" data-validate="required|phone">
+						<label for="booking_address_phone">
+							<?php esc_html_e('Phone', 'bring-fraktguiden-for-woocommerce'); ?>
+							<span class="bfg-required" aria-hidden="true">*</span>
+						</label>
+						<input
+							type="tel"
+							id="booking_address_phone"
+							name="booking_address_phone"
+							required
+							aria-required="true"
+							aria-describedby="phone_error"
+							autocomplete="tel"
+						/>
+						<div class="bfg-field__validation bfg-field__validation--error" id="phone_error" role="alert">
+							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+							</svg>
+							<span><?php esc_html_e('Valid phone number is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
+						</div>
+					</div>
+
+					<div class="bfg-field" data-validate="required|email">
+						<label for="booking_address_email">
+							<?php esc_html_e('Email', 'bring-fraktguiden-for-woocommerce'); ?>
+							<span class="bfg-required" aria-hidden="true">*</span>
+						</label>
+						<input
+							type="email"
+							id="booking_address_email"
+							name="booking_address_email"
+							required
+							aria-required="true"
+							aria-describedby="email_error"
+							autocomplete="email"
+						/>
+						<div class="bfg-field__validation bfg-field__validation--error" id="email_error" role="alert">
+							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+							</svg>
+							<span><?php esc_html_e('Valid email address is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
 						</div>
 					</div>
 
@@ -554,17 +544,5 @@ use BringFraktguiden\Fields\Fields;
 		}, 1000);
 	}
 
-	// Toggle checkbox card active state
-	const checkboxCards = form.querySelectorAll('.bfg-field--checkbox-box input[type="checkbox"]');
-	checkboxCards.forEach(checkbox => {
-		const card = checkbox.closest('.bfg-field--checkbox-box');
-
-		function updateCardState() {
-			card.classList.toggle('is-checked', checkbox.checked);
-		}
-
-		checkbox.addEventListener('change', updateCardState);
-		updateCardState(); // Set initial state
-	});
 })();
 </script>

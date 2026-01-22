@@ -121,14 +121,16 @@
 	font-weight: 600;
 	font-size: var(--bfg-text-level-3);
 	color: var(--bfg-text-main);
-	margin-bottom: 12px !important;
+	margin-bottom: 10px !important;
 }
 
 /* Inputs and Selects Consistency */
 .bfg-admin-page select,
 .bfg-admin-page input[type="text"],
 .bfg-admin-page input[type="number"],
-.bfg-admin-page input[type="url"] {
+.bfg-admin-page input[type="url"],
+.bfg-admin-page input[type="tel"],
+.bfg-admin-page input[type="email"] {
 	border: 1px solid transparent;
 	border-radius: var(--bfg-radius-input);
 	padding: 10px 16px;
@@ -140,6 +142,20 @@
 	transition: all 0.2s ease-in-out;
 	color: var(--bfg-text-main);
 	margin: 0 !important;
+}
+
+/* Override WordPress defaults for tel and email inputs */
+.bfg-admin-page input[type="tel"],
+.bfg-admin-page input[type="email"] {
+	border: 1px solid transparent !important;
+	border-radius: var(--bfg-radius-input) !important;
+	padding: 10px 16px !important;
+	font-size: var(--bfg-text-level-4) !important;
+	width: 100% !important;
+	max-width: none !important;
+	background: #ECEFF1 !important;
+	box-shadow: none !important;
+	color: var(--bfg-text-main) !important;
 }
 
 .bfg-admin-page select {
@@ -160,6 +176,14 @@
 	background: #fff;
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 	outline: none;
+}
+
+.bfg-admin-page input[type="tel"]:focus,
+.bfg-admin-page input[type="email"]:focus {
+	border-color: var(--bfg-primary) !important;
+	background: #fff !important;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+	outline: none !important;
 }
 
 /* Specific focus state for Pro Features section (Purple) */
@@ -387,10 +411,11 @@
 /* Layout Utilities (Flexbox, Gaps) */
 .bfg-flex {
 	display: flex;
+	flex-direction: column;
 }
 
 .bfg-gap-8 {
-	gap: 24px;
+	gap: 32px;
 }
 
 .bfg-mb-5 {
@@ -411,14 +436,13 @@
 	font-size: var(--bfg-text-level-5) !important;
 	font-weight: 600 !important;
 	color: var(--bfg-text-secondary) !important;
-	margin-bottom: 12px !important;
+	margin-bottom: 10px !important;
 	display: block !important;
 }
 
-@media (max-width: 640px) {
-	.bfg-flex {
-		flex-direction: column;
-	}
+/* Stacking by default for better completion rate */
+.bfg-flex {
+	flex-direction: column;
 }
 
 /* Banner and Notice Styling */
@@ -717,7 +741,7 @@
 	font-size: var(--bfg-text-level-3);
 	font-weight: 600;
 	color: #111827;
-	margin-bottom: 12px;
+	margin-bottom: 10px;
 }
 
 .bfg-license-input-wrapper input,
