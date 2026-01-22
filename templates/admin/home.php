@@ -275,12 +275,12 @@ use BringFraktguiden\Admin\Step;
 	z-index: 1;
 }
 .bfg-pro-activation-card .bfg-input--checkbox {
-	margin-bottom: 16px;
+	margin-bottom: 32px;
 }
 .bfg-pro-activation-card .bfg-input--checkbox label {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 16px;
 	font-weight: 600;
 	font-size: 16px;
 	color: #111827;

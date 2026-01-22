@@ -164,6 +164,5 @@ use BringFraktguiden\Fields\Fields;
 				</div>
 			</div>
 		</form>
-		</div>
 	</div>
 </div>

@@ -84,6 +84,14 @@
 	border: none !important;
 }
 
+.bfg-admin-page .bfg-box .bfg-box__header--divider {
+	margin-top: 80px !important;
+	padding-top: 80px !important;
+	border-top: 1px solid var(--bfg-border) !important;
+	display: block !important;
+	clear: both !important;
+}
+
 .bfg-admin-page .bfg-box__header h2 {
 	font-size: var(--bfg-text-level-1) !important;
 	font-weight: 600 !important;
@@ -104,7 +112,7 @@
 }
 
 .bfg-field {
-	margin-bottom: 24px;
+	margin-bottom: 32px;
 }
 
 .bfg-field>label,
@@ -224,7 +232,7 @@
 	border: 1px solid var(--bfg-border);
 	border-radius: 10px;
 	padding: 24px;
-	margin-bottom: 12px;
+	margin-bottom: 32px;
 	transition: border-color 0.2s;
 }
 
@@ -232,10 +240,30 @@
 	border-color: #CBD5E1;
 }
 
-.bfg-input--checkbox label {
+/* Wizard Checkbox Styles */
+.bfg-box__checkbox {
+	margin-bottom: 12px;
+	padding: 0 56px;
+}
+
+.bfg-box__checkbox label {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: var(--bfg-text-level-4);
+	color: var(--bfg-text-secondary);
+	cursor: pointer;
+}
+
+.bfg-box__checkbox input[type="checkbox"] {
+	margin: 0 !important;
+}
+
+.bfg-input--checkbox label,
+.bfg-field--checkbox-box label {
 	display: flex;
 	align-items: flex-start;
-	gap: 12px;
+	gap: 16px;
 	font-weight: 600;
 	font-size: var(--bfg-text-level-3);
 	color: var(--bfg-text-main);
@@ -271,6 +299,7 @@
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::after {
 	content: none !important;
+	pointer-events: none !important;
 }
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::after {
@@ -285,14 +314,16 @@
 	background-repeat: no-repeat;
 	transform: translate(-50%, -50%);
 	display: block !important;
+	pointer-events: none !important;
 }
 
 .bfg-input--checkbox .bfg-description {
-	margin: 8px 0 0 36px !important;
+	margin: 8px 0 0 40px !important;
 	font-size: var(--bfg-text-level-4);
 	color: var(--bfg-text-secondary);
 	font-weight: 400;
 	line-height: 1.5;
+	display: block;
 }
 
 /* General description text */
@@ -380,7 +411,7 @@
 	font-size: var(--bfg-text-level-5) !important;
 	font-weight: 600 !important;
 	color: var(--bfg-text-secondary) !important;
-	margin-bottom: 4px !important;
+	margin-bottom: 12px !important;
 	display: block !important;
 }
 
@@ -548,7 +579,7 @@
 	border: 1px solid #DBEAFE;
 	border-radius: 12px;
 	padding: 40px;
-	margin-bottom: 24px;
+	margin-bottom: 32px;
 }
 
 .bfg-pro-content-block__title {
@@ -567,7 +598,7 @@
 
 .bfg-pro-content-block__test-url {
 	margin-top: 24px;
-	margin-bottom: 24px;
+	margin-bottom: 32px;
 	text-align: left;
 	width: 100%;
 }
@@ -677,7 +708,7 @@
 }
 
 .bfg-license-input-wrapper {
-	margin-bottom: 24px;
+	margin-bottom: 32px;
 	text-align: left;
 }
 
