@@ -130,13 +130,16 @@
 .bfg-admin-page input[type="number"],
 .bfg-admin-page input[type="url"],
 .bfg-admin-page input[type="tel"],
-.bfg-admin-page input[type="email"] {
-	border: 1px solid transparent;
+.bfg-admin-page input[type="email"],
+.bfg-admin-page .select,
+.bfg-admin-page select.postform {
+	border: 1px solid var(--bfg-border) !important;
 	border-radius: var(--bfg-radius-input);
 	padding: 10px 16px;
 	font-size: var(--bfg-text-level-4);
-	width: 100%;
-	background: #ECEFF1;
+	width: 100% !important;
+	max-width: none !important;
+	background: #ffffff !important;
 	box-shadow: none;
 	transition: all 0.2s ease-in-out;
 	color: var(--bfg-text-main);
@@ -146,13 +149,13 @@
 /* Override WordPress defaults for tel and email inputs */
 .bfg-admin-page input[type="tel"],
 .bfg-admin-page input[type="email"] {
-	border: 1px solid transparent !important;
+	border: 1px solid var(--bfg-border) !important;
 	border-radius: var(--bfg-radius-input) !important;
 	padding: 10px 16px !important;
 	font-size: var(--bfg-text-level-4) !important;
 	width: 100% !important;
 	max-width: none !important;
-	background: #ECEFF1 !important;
+	background: #ffffff !important;
 	box-shadow: none !important;
 	color: var(--bfg-text-main) !important;
 }
@@ -748,8 +751,8 @@
 #bfg-tab-trial input[name="test_url"] {
 	width: 100% !important;
 	max-width: none !important;
-	background: #F3F4F6 !important;
-	border: 1px solid transparent !important;
+	background: #ffffff !important;
+	border: 1px solid var(--bfg-border) !important;
 	border-radius: 8px !important;
 	padding: 12px 16px !important;
 	font-size: var(--bfg-text-level-4) !important;

@@ -339,8 +339,8 @@ use BringFraktguiden\Admin\Step;
 .bfg-license-input-row input[type="url"] {
 	width: 100% !important;
 	max-width: none !important;
-	background: #ECEFF1;
-	border: 1px solid transparent;
+	background: #ffffff !important;
+	border: 1px solid #E5E7EB !important;
 	border-radius: 8px;
 	padding: 10px 16px;
 	font-size: 14px;
