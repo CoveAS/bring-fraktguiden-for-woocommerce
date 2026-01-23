@@ -14,17 +14,21 @@
 	--bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
 	/* Typography Scale */
-	--bfg-text-level-1: 30px;
-	/* Main Headings - Bold */
+	--bfg-text-level-1: 32px;
+	/* line-height: 40px */
+	/* Main Headings - Semibold */
 	--bfg-text-level-2: 16px;
+	/* line-height: 24px */
 	/* Descriptions/Subtitles - Regular */
 	--bfg-text-level-3: 16px;
 	/* Section Titles - Semibold */
 	--bfg-text-level-4: 16px;
 	/* Body Text & Features - Regular */
-	--bfg-text-level-5: 14px;
+	--bfg-text-level-5: 16px;
+	/* line-height: 24px */
 	/* Helper Text & Labels - Regular */
-	--bfg-text-level-6: 14px;
+	--bfg-text-level-6: 12px;
+	/* line-height: 16px */
 	/* Footnotes - Regular */
 }
 
@@ -97,6 +101,7 @@
 	font-weight: 600 !important;
 	color: var(--bfg-text-main) !important;
 	margin: 0 0 8px !important;
+	line-height: 40px !important;
 }
 
 .bfg-admin-page .bfg-box__header p {
@@ -104,6 +109,7 @@
 	color: var(--bfg-text-secondary) !important;
 	margin: 0 !important;
 	font-weight: 400 !important;
+	line-height: 24px !important;
 }
 
 /* Form Section Styling */
@@ -129,7 +135,8 @@
 .bfg-field-group-title {
 	display: block;
 	font-weight: 600;
-	font-size: 20px !important;
+	font-size: 24px !important;
+	line-height: 32px !important;
 	color: var(--bfg-text-main);
 	margin-bottom: 16px !important;
 }
@@ -281,7 +288,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 }
 
@@ -308,10 +315,11 @@
 }
 
 .bfg-badge {
-	font-size: 14px;
-	padding: 6px 8px;
+	font-size: 16px;
+	padding: 4px 12px;
 	border-radius: 8px;
-	font-weight: 400;
+	font-weight: 600;
+	line-height: 24px;
 }
 
 .bfg-badge--completed {
@@ -420,24 +428,33 @@
 }
 
 .bfg-input--checkbox .bfg-description {
-	margin: 4px 0 0 40px !important;
-	font-size: 14px;
+	margin: 8px 0 0 40px !important;
+	font-size: 12px !important;
 	color: var(--bfg-text-secondary);
 	font-weight: 400;
-	line-height: 1.5;
+	line-height: 16px !important;
 	display: block;
 }
 
 /* General description text */
 .bfg-description,
 .bfg-admin-page .bfg-description {
-	font-size: 14px !important;
+	font-size: 16px !important;
 	color: var(--bfg-text-secondary) !important;
 	font-weight: 400 !important;
-	line-height: 1.5 !important;
-	margin-top: 4px !important;
+	line-height: 24px !important;
+	margin-top: 8px !important;
 	margin-bottom: 0 !important;
 	display: block;
+}
+
+/* Specific helper text under fields/inputs */
+.bfg-field .bfg-description,
+.bfg-input .bfg-description,
+.bfg-input--checkbox .bfg-description {
+	font-size: 12px !important;
+	line-height: 16px !important;
+	margin-top: 8px !important;
 }
 
 /* Button Consistency */
@@ -448,9 +465,9 @@
 	border-radius: 8px !important;
 	padding: 12px 24px !important;
 	height: auto !important;
-	line-height: 1.4 !important;
+	line-height: 24px !important;
 	font-weight: 600 !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	color: #fff !important;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 	text-shadow: none !important;
@@ -639,8 +656,9 @@
 }
 
 .bfg-pro-env-banner__subtitle {
-	font-size: var(--bfg-text-level-5);
+	font-size: var(--bfg-text-level-3);
 	color: #6B7280;
+	line-height: 24px;
 }
 
 .bfg-pro-env-banner--test .bfg-pro-env-banner__subtitle {
@@ -723,10 +741,11 @@
 }
 
 .bfg-pro-content-block__description {
-	font-size: var(--bfg-text-level-5);
+	font-size: var(--bfg-text-level-3);
 	color: #6B7280;
 	margin: 8px 0 0 0 !important;
 	font-weight: 400;
+	line-height: 24px;
 }
 
 .bfg-pro-features-grid {
@@ -763,17 +782,19 @@
 	box-sizing: border-box;
 	justify-content: center;
 	padding: 16px !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	font-weight: 600 !important;
 	border-radius: 8px !important;
 	margin-bottom: 16px !important;
+	line-height: 24px !important;
 }
 
 .bfg-pro-disclaimer {
-	font-size: var(--bfg-text-level-6);
+	font-size: 16px;
 	color: #6B7280;
 	margin-bottom: 32px;
 	font-weight: 400;
+	line-height: 24px;
 }
 
 .bfg-pro-footer {
@@ -794,10 +815,11 @@
 	box-sizing: border-box;
 	justify-content: center;
 	padding: 16px 24px !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	font-weight: 600 !important;
 	border: 1px solid #BFDBFE !important;
 	background: #fff !important;
+	line-height: 24px !important;
 	color: #2563EB !important;
 	border-radius: 12px !important;
 	transition: all 0.2s ease;
