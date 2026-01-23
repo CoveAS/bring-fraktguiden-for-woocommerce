@@ -1,5 +1,6 @@
 <?php
 
+use BringFraktguiden\Admin\Component;
 use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Fields\Fields;
 
@@ -111,11 +112,11 @@ use BringFraktguiden\Fields\Fields;
 
 /* Responsive grid */
 @media (max-width: 600px) {
-	.bfg-flex.bfg-gap-8 {
+	.bfgu-flex.bfgu-gap-8 {
 		flex-direction: column;
 	}
 
-	.bfg-field-sub {
+	.bfgu-flex-1 {
 		width: 100% !important;
 	}
 }
@@ -150,10 +151,10 @@ use BringFraktguiden\Fields\Fields;
 			<div aria-live="polite" aria-atomic="true" class="sr-only" id="bfg-form-announcements"></div>
 
 			<div class="bfg-box">
-				<div class="bfg-box__header">
-					<h2><?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Book orders directly from the order page with MyBring integration', 'bring-fraktguiden-for-woocommerce'); ?></p>
-				</div>
+				<?php echo Component::boxHeader(
+					__('MyBring Booking', 'bring-fraktguiden-for-woocommerce'),
+					__('Book orders directly from the order page with MyBring integration', 'bring-fraktguiden-for-woocommerce')
+				); ?>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field bfg-field--checkbox-box">
@@ -191,10 +192,10 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Shipping Address', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('By default, your WooCommerce store address is used as the "from" address during booking.', 'bring-fraktguiden-for-woocommerce'); ?></p>
-				</div>
+				<?php echo Component::boxHeader(
+					__('Shipping Address', 'bring-fraktguiden-for-woocommerce'),
+					__('By default, your WooCommerce store address is used as the "from" address during booking.', 'bring-fraktguiden-for-woocommerce')
+				); ?>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field bfg-field--checkbox-box">
@@ -245,8 +246,8 @@ use BringFraktguiden\Fields\Fields;
 
 						<div class="bfg-field">
 							<label><?php esc_html_e('Address details', 'bring-fraktguiden-for-woocommerce'); ?></label>
-							<div class="bfg-flex bfg-gap-8">
-								<div class="bfg-field-sub">
+							<div class="bfgu-flex bfgu-flex-col bfgu-gap-8">
+								<div class="bfgu-flex-1">
 									<label for="booking_address_postcode"><?php esc_html_e('Postcode', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<input
 										type="text"
@@ -255,7 +256,7 @@ use BringFraktguiden\Fields\Fields;
 										autocomplete="postal-code"
 									/>
 								</div>
-								<div class="bfg-field-sub">
+								<div class="bfgu-flex-1">
 									<label for="booking_address_city"><?php esc_html_e('City', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<input
 										type="text"
@@ -264,7 +265,7 @@ use BringFraktguiden\Fields\Fields;
 										autocomplete="address-level2"
 									/>
 								</div>
-								<div class="bfg-field-sub">
+								<div class="bfgu-flex-1">
 									<label for="booking_address_country"><?php esc_html_e('Country', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<select id="booking_address_country" name="booking_address_country" autocomplete="country">
 										<?php
@@ -286,9 +287,11 @@ use BringFraktguiden\Fields\Fields;
 					</div>
 				</div>
 
-				<div class="bfg-box__header bfg-box__header--divider">
-					<h2><?php esc_html_e('Contact Information', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-				</div>
+				<?php echo Component::boxHeader(
+					__('Contact Information', 'bring-fraktguiden-for-woocommerce'),
+					'',
+					true
+				); ?>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field" data-validate="required">
@@ -314,7 +317,7 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 							<p class="bfg-description" id="reference_help">
 							<?php echo sprintf(
-								esc_html__('The store’s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
+								esc_html__('The store\'s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
 								'<code>{order_id}</code>',
 								'<code>{products}</code>'
 							); ?>
@@ -392,23 +395,17 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Processing', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Change order status after booking or printing labels', 'bring-fraktguiden-for-woocommerce'); ?></p>
-				</div>
+				<?php echo Component::boxHeader(
+					__('Processing', 'bring-fraktguiden-for-woocommerce'),
+					__('Change order status after booking or printing labels', 'bring-fraktguiden-for-woocommerce')
+				); ?>
 
 				<div class="bfg-box__section">
-					<div class="bfg-notice-banner">
-						<span class="bfg-notice-icon">
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</span>
-						<p>
-							<strong><?php esc_html_e('WARNING!', 'bring-fraktguiden-for-woocommerce'); ?></strong>
-							<?php esc_html_e('This will change the status even if the order is completed', 'bring-fraktguiden-for-woocommerce'); ?>
-						</p>
-					</div>
+					<?php echo Component::noticeBanner(
+						'<strong>' . esc_html__('WARNING!', 'bring-fraktguiden-for-woocommerce') . '</strong> ' .
+						esc_html__('This will change the status even if the order is completed', 'bring-fraktguiden-for-woocommerce'),
+						'warning'
+					); ?>
 
 					<div class="bfg-field">
 						<label for="auto_set_status_after_booking_success"><?php esc_html_e('Order status after booking', 'bring-fraktguiden-for-woocommerce'); ?></label>
@@ -460,10 +457,10 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Home Delivery', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Configure package type for home delivery services', 'bring-fraktguiden-for-woocommerce'); ?></p>
-				</div>
+				<?php echo Component::boxHeader(
+					__('Home Delivery', 'bring-fraktguiden-for-woocommerce'),
+					__('Configure package type for home delivery services', 'bring-fraktguiden-for-woocommerce')
+				); ?>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field">
