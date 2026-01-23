@@ -37,11 +37,14 @@ use BringFraktguiden\Admin\Step;
 	align-items: center;
 	margin-bottom: 24px;
 }
-.bfg-page__title {
-	font-size: 30px;
-	font-weight: 600;
+.bfg-section-card-title {
+	font-size: var(--bfg-text-level-1) !important;
+	font-weight: 500;
 	color: #111827;
 	margin: 0 !important;
+	line-height: 40px;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
 }
 .bfg-progress-badge {
 	background: #F3F4F6;
@@ -50,6 +53,7 @@ use BringFraktguiden\Admin\Step;
 	font-size: 14px;
 	font-weight: 600;
 	color: #374151;
+	white-space: nowrap;
 }
 .bfg-progress-container {
 	margin-bottom: 40px;
@@ -89,17 +93,20 @@ use BringFraktguiden\Admin\Step;
 	font-weight: 700;
 }
 .bfg-active-step__content h3 {
-	font-size: 16px;
-	font-weight: 600;
+	font-size: 24px;
+	font-weight: 500;
 	margin: 0 0 8px !important;
 	color: #111827;
+	line-height: 32px;
+	text-wrap: balance;
 }
 .bfg-active-step__content p {
-	font-size: 14px;
+	font-size: 16px;
 	margin: 0 0 20px !important;
 	color: #4B5563;
-	line-height: 1.5;
+	line-height: 24px;
 	font-weight: 400;
+	text-wrap: pretty;
 }
 .bfg-button-primary {
 	display: inline-flex;
@@ -113,6 +120,7 @@ use BringFraktguiden\Admin\Step;
 	font-weight: 600;
 	font-size: 14px;
 	transition: background 0.2s;
+	white-space: nowrap;
 }
 .bfg-button-primary:hover {
 	background: #1D4ED8;
@@ -154,10 +162,13 @@ use BringFraktguiden\Admin\Step;
 	z-index: 1;
 }
 .bfg-pro-header h3 {
-	font-size: 30px;
-	font-weight: 600;
+	font-size: var(--bfg-text-level-1) !important;
+	font-weight: 500;
 	margin: 0 !important;
 	color: #111827;
+	line-height: 40px;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
 }
 .bfg-pro-header .sparkle-icon {
 	color: #9333EA;
@@ -185,6 +196,7 @@ use BringFraktguiden\Admin\Step;
 	list-style-type: none !important;
 	padding: 0 !important;
 	font-weight: 400;
+	text-wrap: pretty;
 }
 .bfg-pro-list li::before {
 	content: none !important;
@@ -253,6 +265,7 @@ use BringFraktguiden\Admin\Step;
 	color: #4B5563;
 	line-height: 1.5;
 	margin: 0 0 16px 0 !important;
+	text-wrap: pretty;
 }
 .bfg-license-input-row {
 	display: flex;
@@ -316,6 +329,7 @@ use BringFraktguiden\Admin\Step;
 	color: #6B7280;
 	line-height: 1.5;
 	font-weight: 400;
+	text-wrap: pretty;
 }
 /* Hide WordPress notices */
 .bfg-admin-page__home .notice,
@@ -344,7 +358,7 @@ use BringFraktguiden\Admin\Step;
 			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : 1;
 			?>
 			<div class="bfg-page__header-row">
-				<h2 class="bfg-page__title"><?php esc_html_e('Get started with Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+				<h2 class="bfg-section-card-title"><?php esc_html_e('Get started with Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				<div class="bfg-progress-badge">
 					<?php printf(__('Step %d of %d', 'bring-fraktguiden-for-woocommerce'), $currentStepNumber, $stepCount); ?>
 				</div>
@@ -649,7 +663,7 @@ use BringFraktguiden\Admin\Step;
 						<div class="bfg-pro-content-block__test-url">
 							<h4 class="bfg-pro-content-block__subtitle"><?php esc_html_e('Test Site URL (Optional)', 'bring-fraktguiden-for-woocommerce'); ?></h4>
 							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
-							<p class="bfg-pro-content-block__description"><?php esc_html_e('Enter your staging or test site URL to activate the trial there first.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+							<p class="bfg-description"><?php esc_html_e('Enter your staging or test site URL to activate the trial there first.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 						</div>
 						<button type="submit" class="bfg-button-primary bfg-pro-btn-main">
 							<?php esc_html_e('Start My Free Trial', 'bring-fraktguiden-for-woocommerce'); ?>
@@ -661,7 +675,7 @@ use BringFraktguiden\Admin\Step;
 						<div class="bfg-license-input-wrapper">
 							<label class="bfg-license-input-label" for="bfg_license_key"><?php esc_html_e('Enter Your License Key', 'bring-fraktguiden-for-woocommerce'); ?></label>
 							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
-							<span class="bfg-license-input-help"><?php esc_html_e('Your license key was sent to your email after purchase.', 'bring-fraktguiden-for-woocommerce'); ?></span>
+							<p class="bfg-description"><?php esc_html_e('Your license key was sent to your email after purchase.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 						</div>
 						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="background: #BFDBFE !important; color: #3B82F6 !important; cursor: not-allowed;">
 							<?php esc_html_e('Activate PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
