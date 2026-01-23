@@ -24,8 +24,8 @@ use BringFraktguiden\Fields\Fields;
 .bfg-field__validation {
 	display: none;
 	align-items: center;
-	gap: 6px;
-	margin-top: 6px;
+	gap: 8px;
+	margin-top: 8px;
 	font-size: 13px;
 }
 
@@ -54,7 +54,7 @@ use BringFraktguiden\Fields\Fields;
 	position: relative;
 	display: inline-flex;
 	align-items: center;
-	gap: 12px;
+	gap: 16px;
 }
 
 .bfg-submit-wrapper .button-primary {
@@ -96,7 +96,7 @@ use BringFraktguiden\Fields\Fields;
 .bfg-save-success {
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
+	gap: 8px;
 	color: #16a34a;
 	font-size: 14px;
 	opacity: 0;
@@ -314,8 +314,9 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 							<p class="bfg-description" id="reference_help">
 							<?php echo sprintf(
-								esc_html__('Usually a shipping label or order ID. Available macros: %s', 'bring-fraktguiden-for-woocommerce'),
-								'<code>{order_id}</code>, <code>{products}</code>'
+								esc_html__('The store’s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
+								'<code>{order_id}</code>',
+								'<code>{products}</code>'
 							); ?>
 						</p>
 					</div>

@@ -142,10 +142,11 @@ function init_form_fields_for_mybring() {
 		'custom_attributes' => array( 'maxlength' => '35' ),
 		'description'       => sprintf(
 			__(
-				'Specify shipper or consignee reference. Available macros: %s',
+				'The store’s reference printed on the shipping label. Usually %s, but can also be %s.',
 				'bring-fraktguiden-for-woocommerce'
 			),
-			'{order_id}, {products}'
+			'{order_id}',
+			'{products}'
 		),
 	];
 

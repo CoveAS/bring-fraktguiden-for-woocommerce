@@ -49,13 +49,13 @@
 
 .bfg-admin-page .bfg-page__main {
 	max-width: 768px;
-	margin: 24px auto 0;
-	padding: 0 20px 60px;
+	margin: 32px auto 0;
+	padding: 0 32px 64px;
 }
 
 /* Typography Consistency */
 .bfg-page__header {
-	margin-bottom: 48px;
+	margin-bottom: 32px;
 	border-bottom: 1px solid var(--bfg-border);
 	padding-bottom: 32px;
 }
@@ -74,8 +74,8 @@
 	border: 1px solid var(--bfg-border) !important;
 	border-radius: var(--bfg-radius-card) !important;
 	box-shadow: var(--bfg-shadow) !important;
-	padding: 56px !important;
-	margin-bottom: 40px !important;
+	padding: 32px !important;
+	margin-bottom: 32px !important;
 }
 
 .bfg-admin-page .bfg-box__header {
@@ -85,8 +85,8 @@
 }
 
 .bfg-admin-page .bfg-box .bfg-box__header--divider {
-	margin-top: 80px !important;
-	padding-top: 80px !important;
+	margin-top: 64px !important;
+	padding-top: 64px !important;
 	border-top: 1px solid var(--bfg-border) !important;
 	display: block !important;
 	clear: both !important;
@@ -121,7 +121,7 @@
 	font-weight: 600;
 	font-size: 16px;
 	color: var(--bfg-text-main);
-	margin-bottom: 10px !important;
+	margin-bottom: 8px !important;
 }
 
 /* Sub-level group titles (smaller than section h2) */
@@ -242,10 +242,10 @@
 	display: flex;
 	align-items: center;
 	gap: 16px;
-	padding: 16px 20px;
+	padding: 16px;
 	background: #fff;
 	border: 1px solid var(--bfg-border);
-	border-radius: 10px;
+	border-radius: 8px;
 	text-decoration: none;
 	color: inherit;
 	transition: all 0.2s;
@@ -328,9 +328,9 @@
 .bfg-field--checkbox-box {
 	background: #F9FAFB;
 	border: 1px solid var(--bfg-border);
-	border-radius: 10px;
+	border-radius: 8px;
 	padding: 24px;
-	margin-bottom: 32px;
+	margin-bottom: 16px;
 	transition: border-color 0.2s;
 }
 
@@ -344,14 +344,14 @@
 
 /* Wizard Checkbox Styles */
 .bfg-box__checkbox {
-	margin-bottom: 12px;
-	padding: 0 56px;
+	margin-bottom: 16px;
+	padding: 0 32px;
 }
 
 .bfg-box__checkbox label {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: 16px;
 	font-size: var(--bfg-text-level-4);
 	color: var(--bfg-text-secondary);
 	cursor: pointer;
@@ -446,7 +446,7 @@
 	background: var(--bfg-primary) !important;
 	border: none !important;
 	border-radius: 8px !important;
-	padding: 10px 20px !important;
+	padding: 12px 24px !important;
 	height: auto !important;
 	line-height: 1.4 !important;
 	font-weight: 600 !important;
@@ -517,7 +517,7 @@
 	font-size: var(--bfg-text-level-3) !important;
 	font-weight: 600 !important;
 	color: var(--bfg-text-main) !important;
-	margin-bottom: 10px !important;
+	margin-bottom: 8px !important;
 	display: block !important;
 }
 
@@ -530,14 +530,14 @@
 .bfg-notice-banner {
 	background: #FFF7ED !important;
 	color: #9A3412 !important;
-	padding: 16px 20px !important;
+	padding: 16px 24px !important;
 	border-radius: 8px !important;
 	border: 1px solid #FED7AA !important;
 	font-weight: 500 !important;
 	margin: 0 0 24px 0 !important;
 	display: flex !important;
 	align-items: center !important;
-	gap: 12px !important;
+	gap: 16px !important;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -573,10 +573,10 @@
 	background: #fff;
 	border: 1px solid var(--bfg-border);
 	border-radius: var(--bfg-radius-card);
-	padding: 56px !important;
+	padding: 32px !important;
 	width: 100%;
 	box-sizing: border-box;
-	margin: 0 0 40px;
+	margin: 0 0 32px;
 	box-shadow: var(--bfg-shadow);
 	text-align: center;
 }
@@ -615,8 +615,8 @@
 .bfg-pro-env-banner {
 	background: #F9FAFB;
 	border: 1px solid #E5E7EB;
-	border-radius: 10px;
-	padding: 14px 18px;
+	border-radius: 8px;
+	padding: 16px 24px;
 	margin-bottom: 32px;
 	text-align: left;
 }
@@ -732,7 +732,7 @@
 .bfg-pro-features-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 12px 24px;
+	gap: 16px 24px;
 	list-style: none !important;
 	padding: 0 !important;
 	margin: 0 !important;
@@ -762,11 +762,11 @@
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 14px !important;
+	padding: 16px !important;
 	font-size: 14px !important;
 	font-weight: 600 !important;
-	border-radius: 10px !important;
-	margin-bottom: 12px !important;
+	border-radius: 8px !important;
+	margin-bottom: 16px !important;
 }
 
 .bfg-pro-disclaimer {
@@ -793,7 +793,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 14px 24px !important;
+	padding: 16px 24px !important;
 	font-size: 14px !important;
 	font-weight: 600 !important;
 	border: 1px solid #BFDBFE !important;
