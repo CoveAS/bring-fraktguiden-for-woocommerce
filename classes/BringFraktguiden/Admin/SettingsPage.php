@@ -237,7 +237,7 @@ class SettingsPage
 		if (! in_array($hook, $pages)) {
 			return;
 		}
-		
+
 		wp_enqueue_style(
 			'bring_fraktguiden_admin_css',
 			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/bring-fraktguiden-admin-pages.css'),
@@ -248,7 +248,8 @@ class SettingsPage
 			'bring-admin-js',
 			plugins_url('bring-fraktguiden-for-woocommerce/assets/js/bring-fraktguiden-admin.js'),
 			[],
-			Bring_Fraktguiden::VERSION
+			Bring_Fraktguiden::VERSION,
+			true
 		);
 	}
 

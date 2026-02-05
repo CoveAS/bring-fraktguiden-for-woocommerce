@@ -85,10 +85,7 @@ return [
 				'css' => 'width: 200px;',
 				'default' => '',
 				'placeholder' => $base_country,
-				'options' => [
-					'' => '',
-					...Fraktguiden_Helper::get_nordic_countries(),
-				],
+				'options' => Fraktguiden_Helper::get_nordic_countries(),
 			],
 			'handling_fee' => [
 				'title' => __('Handling Fee', 'bring-fraktguiden-for-woocommerce'),
@@ -209,7 +206,6 @@ return [
 				'description' => __('Cutoff time every day. Orders after this time will be processed the next day.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => '12:00',
-				'css' => 'width: 90px',
 			],
 			'display_eta' => [
 				'title' => __('Display ETA', 'bring-fraktguiden-for-woocommerce'),
