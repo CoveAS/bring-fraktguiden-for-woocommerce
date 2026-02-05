@@ -413,13 +413,14 @@
 	clear: both !important;
 }
 
-.bfg-admin-page .bfg-box__header h2 {
-	font-size: var(--bfg-text-level-1) !important;
+.bfg-admin-page .bfg-box__header h2,
+.bfg-section-card-title {
+	font-size: 28px !important;
 	font-weight: 500 !important;
 	color: var(--bfg-text-main) !important;
 	margin: 0 0 8px !important;
-	line-height: 40px !important;
-	letter-spacing: -0.02em;
+	line-height: 36px !important;
+	text-wrap: balance;
 }
 
 .bfg-admin-page .bfg-box__header p {
@@ -440,7 +441,8 @@
 }
 
 .bfg-field>label,
-.bfg-field>.label {
+.bfg-field>.label,
+.bfg-field .bfgu-flex-1>label {
 	display: block;
 	font-weight: 500;
 	font-size: 16px;
@@ -953,6 +955,9 @@
 	font-weight: 500;
 	color: #111827;
 	margin: 0 0 8px !important;
+	line-height: 40px;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
 }
 
 .bfg-pro-teaser__subtitle {

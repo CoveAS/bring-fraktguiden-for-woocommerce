@@ -86,7 +86,7 @@ use BringFraktguiden\Fields\Fields;
 					<?php echo Component::checkboxBox($fields->use_customer_number_to_get_prices); ?>
 					<?php echo Component::checkboxBox($fields->calculate_by_weight); ?>
 
-					<div class="bfg-field">
+					<div class="bfg-field bfgu-mt-8">
 						<label class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
 							<div class="bfgu-flex-1">
@@ -119,13 +119,15 @@ use BringFraktguiden\Fields\Fields;
 					__('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce')
 				); ?>
 				<div class="bfg-box__section">
-					<div class="bfg-field">
-						<?php echo $fields->lead_time->label(); ?>
-						<?php echo $fields->lead_time; ?>
-					</div>
-					<div class="bfg-field">
-						<?php echo $fields->lead_time_cutoff->label(); ?>
-						<?php echo $fields->lead_time_cutoff; ?>
+					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
+						<div class="bfgu-flex-1">
+							<?php echo $fields->lead_time->label(); ?>
+							<?php echo $fields->lead_time; ?>
+						</div>
+						<div class="bfgu-flex-1">
+							<?php echo $fields->lead_time_cutoff->label(); ?>
+							<?php echo $fields->lead_time_cutoff; ?>
+						</div>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>

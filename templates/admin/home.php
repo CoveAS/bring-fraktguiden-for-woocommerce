@@ -37,15 +37,6 @@ use BringFraktguiden\Admin\Step;
 	align-items: center;
 	margin-bottom: 24px;
 }
-.bfg-section-card-title {
-	font-size: var(--bfg-text-level-1) !important;
-	font-weight: 500;
-	color: #111827;
-	margin: 0 !important;
-	line-height: 40px;
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-}
 .bfg-progress-badge {
 	background: #F3F4F6;
 	border-radius: 6px;
@@ -599,7 +590,7 @@ use BringFraktguiden\Admin\Step;
 					</svg>
 				</div>
 
-				<h2 class="bfg-pro-teaser__title"><?php esc_html_e('Unlock PRO Features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+				<h2 class="bfg-section-card-title"><?php esc_html_e('Unlock PRO Features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				<p class="bfg-pro-teaser__subtitle">
 					<?php esc_html_e('Activate your license or start a free trial to access all premium features on your live site.', 'bring-fraktguiden-for-woocommerce'); ?>
 				</p>

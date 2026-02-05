@@ -46,14 +46,19 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->no_connection_rate_id; ?>
 					</div>
 
-					<div class="bfg-field">
-						<?php echo $fields->no_connection_flat_rate->label(); ?>
-						<?php echo Component::inputWithSuffix($fields->no_connection_flat_rate, $currency, 'lg'); ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->no_connection_flat_rate_label->label(); ?>
-						<?php echo $fields->no_connection_flat_rate_label; ?>
+					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->no_connection_flat_rate_label->label(); ?>
+								<?php echo $fields->no_connection_flat_rate_label; ?>
+							</div>
+						</div>
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->no_connection_flat_rate->label(); ?>
+								<?php echo Component::inputWithSuffix($fields->no_connection_flat_rate, $currency, 'lg'); ?>
+							</div>
+						</div>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
@@ -71,15 +76,20 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->exception_rate_id; ?>
 					</div>
 
-					<div class="bfg-field">
-						<?php echo $fields->exception_flat_rate->label(); ?>
-						<?php echo Component::inputWithSuffix($fields->exception_flat_rate, $currency, 'lg'); ?>
-						<?php echo $fields->exception_flat_rate->description(); ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->exception_flat_rate_label->label(); ?>
-						<?php echo $fields->exception_flat_rate_label; ?>
+					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->exception_flat_rate_label->label(); ?>
+								<?php echo $fields->exception_flat_rate_label; ?>
+							</div>
+						</div>
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->exception_flat_rate->label(); ?>
+								<?php echo Component::inputWithSuffix($fields->exception_flat_rate, $currency, 'lg'); ?>
+								<?php echo $fields->exception_flat_rate->description(); ?>
+							</div>
+						</div>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
@@ -127,15 +137,20 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->alt_flat_rate_id; ?>
 					</div>
 
-					<div class="bfg-field">
-						<?php echo $fields->alt_flat_rate->label(); ?>
-						<?php echo Component::inputWithSuffix($fields->alt_flat_rate, $currency, 'lg'); ?>
-						<?php echo $fields->alt_flat_rate->description(); ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->alt_flat_rate_label->label(); ?>
-						<?php echo $fields->alt_flat_rate_label; ?>
+					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->alt_flat_rate_label->label(); ?>
+								<?php echo $fields->alt_flat_rate_label; ?>
+							</div>
+						</div>
+						<div class="bfgu-flex-1">
+							<div class="bfg-field">
+								<?php echo $fields->alt_flat_rate->label(); ?>
+								<?php echo Component::inputWithSuffix($fields->alt_flat_rate, $currency, 'lg'); ?>
+								<?php echo $fields->alt_flat_rate->description(); ?>
+							</div>
+						</div>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
