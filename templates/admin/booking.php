@@ -267,20 +267,11 @@ use BringFraktguiden\Fields\Fields;
 								</div>
 								<div class="bfgu-flex-1">
 									<label for="booking_address_country"><?php esc_html_e('Country', 'bring-fraktguiden-for-woocommerce'); ?></label>
-									<select id="booking_address_country" name="booking_address_country" autocomplete="country">
-										<?php
-										$countries = WC()->countries?->get_countries();
-										$base_country = WC()->countries?->get_base_country();
-										foreach ($countries as $code => $name) {
-											printf(
-												'<option value="%s" %s>%s</option>',
-												esc_attr($code),
-												selected($base_country, $code, false),
-												esc_html($name)
-											);
-										}
-										?>
-									</select>
+									<?php
+									$countries = WC()->countries?->get_countries() ?: [];
+									$base_country = WC()->countries?->get_base_country() ?: '';
+									echo Component::customSelect('booking_address_country', $countries, $base_country);
+									?>
 								</div>
 							</div>
 						</div>
@@ -413,20 +404,12 @@ use BringFraktguiden\Fields\Fields;
 						$order_statuses = wc_get_order_statuses();
 						$saved_booking_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_booking_success');
 						$booking_status_value = !empty($saved_booking_status) ? $saved_booking_status : 'wc-bring-shipment';
+						$booking_status_options = array_merge(
+							['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
+							$order_statuses
+						);
+						echo Component::customSelect('auto_set_status_after_booking_success', $booking_status_options, $booking_status_value);
 						?>
-						<select id="auto_set_status_after_booking_success" name="auto_set_status_after_booking_success">
-							<option value="none" <?php selected($booking_status_value, 'none'); ?>><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
-							<?php
-							foreach ($order_statuses as $status => $label) {
-								printf(
-									'<option value="%s" %s>%s</option>',
-									esc_attr($status),
-									selected($booking_status_value, $status, false),
-									esc_html($label)
-								);
-							}
-							?>
-						</select>
 						<p class="bfg-description"><?php esc_html_e('Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 
@@ -435,20 +418,12 @@ use BringFraktguiden\Fields\Fields;
 						<?php
 						$saved_print_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_print_label_success');
 						$print_status_value = !empty($saved_print_status) ? $saved_print_status : 'none';
+						$print_status_options = array_merge(
+							['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
+							$order_statuses
+						);
+						echo Component::customSelect('auto_set_status_after_print_label_success', $print_status_options, $print_status_value);
 						?>
-						<select id="auto_set_status_after_print_label_success" name="auto_set_status_after_print_label_success">
-							<option value="none" <?php selected($print_status_value, 'none'); ?>><?php esc_html_e('None', 'bring-fraktguiden-for-woocommerce'); ?></option>
-							<?php
-							foreach ($order_statuses as $status => $label) {
-								printf(
-									'<option value="%s" %s>%s</option>',
-									esc_attr($status),
-									selected($print_status_value, $status, false),
-									esc_html($label)
-								);
-							}
-							?>
-						</select>
 						<p class="bfg-description"><?php esc_html_e('Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 
@@ -465,12 +440,17 @@ use BringFraktguiden\Fields\Fields;
 				<div class="bfg-box__section">
 					<div class="bfg-field">
 						<label for="booking_home_delivery_package_type"><?php esc_html_e('Package type for home delivery', 'bring-fraktguiden-for-woocommerce'); ?></label>
-						<select id="booking_home_delivery_package_type" name="booking_home_delivery_package_type">
-							<option value="hd_eur" selected>HD_EUR_PALLET</option>
-							<option value="hd_half">HD_HALF_PALLET</option>
-							<option value="hd_quarter">HD_QUARTER_PALLET</option>
-							<option value="hd_loose">HD_SPECIAL_PALLET</option>
-						</select>
+						<?php
+						$saved_package_type = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('booking_home_delivery_package_type');
+						$package_type_value = !empty($saved_package_type) ? $saved_package_type : 'hd_eur';
+						$package_type_options = [
+							'hd_eur' => 'HD_EUR_PALLET',
+							'hd_half' => 'HD_HALF_PALLET',
+							'hd_quarter' => 'HD_QUARTER_PALLET',
+							'hd_loose' => 'HD_SPECIAL_PALLET',
+						];
+						echo Component::customSelect('booking_home_delivery_package_type', $package_type_options, $package_type_value);
+						?>
 						<p class="bfg-description"><?php esc_html_e('Only applies to home delivery services', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 

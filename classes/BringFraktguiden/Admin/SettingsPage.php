@@ -247,7 +247,7 @@ class SettingsPage
 		wp_enqueue_script(
 			'bring-admin-js',
 			plugins_url('bring-fraktguiden-for-woocommerce/assets/js/bring-fraktguiden-admin.js'),
-			[],
+			['jquery'],
 			Bring_Fraktguiden::VERSION,
 			true
 		);

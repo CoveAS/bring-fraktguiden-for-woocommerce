@@ -196,4 +196,23 @@ class Component
 			'compact' => $compact,
 		]);
 	}
+
+	/**
+	 * Render a custom select dropdown component.
+	 *
+	 * @param string $name        Input name attribute
+	 * @param array  $options     Associative array of value => label options
+	 * @param string $selected    Currently selected value
+	 * @param string $placeholder Optional placeholder text
+	 * @return string Rendered HTML
+	 */
+	public static function customSelect(string $name, array $options, string $selected = '', string $placeholder = ''): string
+	{
+		return self::render('custom-select', [
+			'name' => $name,
+			'options' => $options,
+			'selected' => $selected,
+			'placeholder' => $placeholder,
+		]);
+	}
 }

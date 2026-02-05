@@ -1073,14 +1073,16 @@
 .bfg-admin-page #wpcontent,
 .bfg-admin-page__home #wpcontent,
 .bfg-admin-page__settings #wpcontent,
-.bfg-admin-page__fallback #wpcontent {
+.bfg-admin-page__fallback #wpcontent,
+.bfg-admin-page__booking #wpcontent {
 	padding: 0 !important;
 }
 
 .bfg-admin-page,
 .bfg-admin-page__home,
 .bfg-admin-page__settings,
-.bfg-admin-page__fallback {
+.bfg-admin-page__fallback,
+.bfg-admin-page__booking {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 16px;
 	line-height: 1.5;
@@ -1243,6 +1245,22 @@
 	background: #fff;
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 	outline: none;
+}
+
+/* Placeholder styling for selects - when showing placeholder option */
+.bfg-admin-page select.has-placeholder,
+.bfg-admin-page select:invalid {
+	color: var(--bfg-text-muted);
+}
+
+.bfg-admin-page select option {
+	color: var(--bfg-text-main);
+}
+
+.bfg-admin-page select option[value=""],
+.bfg-admin-page select option[value="none"],
+.bfg-admin-page select option:disabled {
+	color: var(--bfg-text-muted);
 }
 
 .bfg-admin-page input[type="tel"]:focus,
