@@ -50,12 +50,8 @@ use BringFraktguiden\Fields\Fields;
 				); ?>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
-						<?php echo $fields->price_to_use->label(); ?>
-						<?php echo $fields->price_to_use; ?>
-					</div>
-					<div class="bfg-field">
 						<label class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
-						<div class="bfgu-flex bfgu-flex-col bfgu-gap-8">
+						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
 							<div class="bfgu-flex-1">
 								<?php echo $fields->from_zip->label() ?>
 								<?php echo $fields->from_zip->field(); ?>
@@ -74,6 +70,11 @@ use BringFraktguiden\Fields\Fields;
 								],
 							); ?>
 						</p>
+					</div>
+
+					<div class="bfg-field">
+						<?php echo $fields->price_to_use->label(); ?>
+						<?php echo $fields->price_to_use; ?>
 					</div>
 
 					<div class="bfg-field">
@@ -119,14 +120,18 @@ use BringFraktguiden\Fields\Fields;
 					__('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce')
 				); ?>
 				<div class="bfg-box__section">
-					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-						<div class="bfgu-flex-1">
-							<?php echo $fields->lead_time->label(); ?>
-							<?php echo $fields->lead_time; ?>
-						</div>
-						<div class="bfgu-flex-1">
-							<?php echo $fields->lead_time_cutoff->label(); ?>
-							<?php echo $fields->lead_time_cutoff; ?>
+					<div class="bfg-field">
+						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
+							<div class="bfgu-flex-1">
+								<?php echo $fields->lead_time->label(); ?>
+								<?php echo Component::inputWithSuffix($fields->lead_time, __('days', 'bring-fraktguiden-for-woocommerce')); ?>
+								<?php echo $fields->lead_time->description(); ?>
+							</div>
+							<div class="bfgu-flex-1">
+								<?php echo $fields->lead_time_cutoff->label(); ?>
+								<?php echo $fields->lead_time_cutoff->field(); ?>
+								<?php echo $fields->lead_time_cutoff->description(); ?>
+							</div>
 						</div>
 					</div>
 

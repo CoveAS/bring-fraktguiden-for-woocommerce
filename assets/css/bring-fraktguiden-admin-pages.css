@@ -440,12 +440,13 @@
 	margin-bottom: 32px;
 }
 
-.bfg-field>label,
-.bfg-field>.label,
-.bfg-field .bfgu-flex-1>label {
+.bfg-admin-page .bfg-field>label,
+.bfg-admin-page .bfg-field>.label,
+.bfg-admin-page .bfg-field .bfgu-flex-1>label {
 	display: block;
 	font-weight: 500;
 	font-size: 16px;
+	line-height: 24px;
 	color: var(--bfg-text-main);
 	margin-bottom: 8px !important;
 }
@@ -468,6 +469,7 @@
 .bfg-admin-page input[type="url"],
 .bfg-admin-page input[type="tel"],
 .bfg-admin-page input[type="email"],
+.bfg-admin-page input[type="time"],
 .bfg-admin-page .select,
 .bfg-admin-page select.postform {
 	border: 1px solid var(--bfg-border) !important;
@@ -514,7 +516,8 @@
 .bfg-admin-page select:focus,
 .bfg-admin-page input[type="text"]:focus,
 .bfg-admin-page input[type="number"]:focus,
-.bfg-admin-page input[type="url"]:focus {
+.bfg-admin-page input[type="url"]:focus,
+.bfg-admin-page input[type="time"]:focus {
 	border-color: var(--bfg-primary);
 	background: #fff;
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
