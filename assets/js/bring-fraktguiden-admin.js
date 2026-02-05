@@ -141,35 +141,33 @@ jQuery(function ($) {
 	// Initialize custom selects
 	initCustomSelects();
 
-	// Initialize Flatpickr time pickers
-	function initTimePickers() {
-		if (typeof flatpickr === 'undefined') {
-			return;
-		}
+	// Make time inputs open picker when clicking anywhere on the field
+	$('.bfg-admin-page input[type="time"]').each(function() {
+		const input = this;
+		const $input = $(this);
+		const $wrapper = $input.closest('.bfg-input--time');
 
-		$('.bfg-admin-page input[type="time"]').each(function() {
-			const $input = $(this);
-
-			// Skip if already initialized
-			if ($input.data('flatpickr-initialized')) {
-				return;
+		// Make clicking anywhere on the input open the picker
+		$input.on('click', function(e) {
+			try {
+				this.showPicker();
+			} catch (err) {
+				// Browser doesn't support showPicker
 			}
-
-			// Mark as initialized
-			$input.data('flatpickr-initialized', true);
-
-			// Initialize flatpickr
-			flatpickr(this, {
-				enableTime: true,
-				noCalendar: true,
-				dateFormat: "H:i",
-				time_24hr: true,
-				clickOpens: true,
-				allowInput: true
-			});
 		});
-	}
 
-	// Initialize time pickers
-	initTimePickers();
+		// Also handle wrapper clicks
+		if ($wrapper.length) {
+			$wrapper.css('cursor', 'pointer');
+			$wrapper.on('click', function(e) {
+				if (e.target !== input) {
+					try {
+						input.showPicker();
+					} catch (err) {
+						input.focus();
+					}
+				}
+			});
+		}
+	});
 });
