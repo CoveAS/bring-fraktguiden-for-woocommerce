@@ -1335,12 +1335,19 @@
 }
 
 .bfg-step-row:hover {
-	border-color: #BFDBFE;
-	background: #F8FAFC;
+	border-color: #D1D5DB;
+	background: #F9FAFB;
+}
+
+.bfg-step-row:focus,
+.bfg-step-row:focus-visible {
+	border-color: var(--bfg-primary);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .bfg-step--in-progress {
-	border-color: var(--bfg-primary) !important;
+	border-color: #BFDBFE !important;
 	background: #F0F7FF !important;
 }
 
@@ -1419,6 +1426,11 @@
 
 .bfg-field--checkbox-box:hover {
 	border-color: #CBD5E1;
+}
+
+.bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
+	border-color: #BFDBFE;
+	background: #F0F7FF;
 }
 
 /* Wizard Checkbox Styles */
