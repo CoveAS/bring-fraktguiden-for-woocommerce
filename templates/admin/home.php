@@ -276,13 +276,29 @@ use BringFraktguiden\Admin\Step;
 	border-radius: 8px;
 	padding: 10px 16px;
 	font-size: 14px;
-	box-shadow: none;
+	box-shadow: none !important;
 	transition: border-color 0.2s;
 	margin: 0 !important;
 }
 .bfg-license-input-row input:focus {
-	border-color: #9333EA;
-	outline: none;
+	border-color: #9333EA !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+body:not(.using-mouse) .bfg-license-input-row input:focus {
+	box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.3) !important;
+}
+/* Test URL and license input focus - blue border */
+.bfg-pro-content-block__test-url input:focus,
+.bfg-license-input-wrapper input:focus {
+	border-color: var(--bfg-primary) !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+/* Keyboard focus - add ring */
+body:not(.using-mouse) .bfg-pro-content-block__test-url input:focus,
+body:not(.using-mouse) .bfg-license-input-wrapper input:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 .bfg-pro-activation-card .submit-button {
 	margin: 0 !important;

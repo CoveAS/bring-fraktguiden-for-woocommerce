@@ -1,4 +1,17 @@
 jQuery(function ($) {
+	// Track keyboard vs mouse focus for focus ring styling
+	// Only show focus ring when using keyboard navigation (like step rows)
+	(function() {
+		document.body.addEventListener('mousedown', function() {
+			document.body.classList.add('using-mouse');
+		});
+		document.body.addEventListener('keydown', function(e) {
+			if (e.key === 'Tab') {
+				document.body.classList.remove('using-mouse');
+			}
+		});
+	})();
+
 	$('.bring-notice.is-dismissible').each(
 		function () {
 			var notice_id = $(this).data('notice_id');

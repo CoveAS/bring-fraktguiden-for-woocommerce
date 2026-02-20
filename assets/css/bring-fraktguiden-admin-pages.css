@@ -1236,15 +1236,21 @@
 	padding-right: 40px !important;
 }
 
-.bfg-admin-page select:focus,
-.bfg-admin-page input[type="text"]:focus,
-.bfg-admin-page input[type="number"]:focus,
-.bfg-admin-page input[type="url"]:focus,
-.bfg-admin-page input[type="time"]:focus {
-	border-color: var(--bfg-primary);
-	background: #fff;
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-	outline: none;
+/* All focus states - blue border, no ring by default */
+[class*="bfg-admin-page"] input:focus,
+[class*="bfg-admin-page"] select:focus,
+[class*="bfg-admin-page"] textarea:focus {
+	border-color: var(--bfg-primary) !important;
+	background: #fff !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+/* Keyboard focus (tab navigation) - add ring only when not using mouse */
+body:not(.using-mouse) [class*="bfg-admin-page"] input:focus,
+body:not(.using-mouse) [class*="bfg-admin-page"] select:focus,
+body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 /* Placeholder styling for selects - when showing placeholder option */
@@ -1263,22 +1269,18 @@
 	color: var(--bfg-text-muted);
 }
 
-.bfg-admin-page input[type="tel"]:focus,
-.bfg-admin-page input[type="email"]:focus {
-	border-color: var(--bfg-primary) !important;
-	background: #fff !important;
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+/* Pro Features section (Purple) - focus state */
+.bfg-pro-features-teaser input:focus,
+.bfg-license-input-row input:focus {
+	border-color: #9333EA !important;
 	outline: none !important;
+	box-shadow: none !important;
 }
 
-/* Specific focus state for Pro Features section (Purple) */
-.bfg-pro-features-teaser input[type="text"]:focus,
-.bfg-pro-features-teaser input[type="url"]:focus,
-.bfg-license-input-row input[type="text"]:focus,
-.bfg-license-input-row input[type="url"]:focus {
-	border-color: #9333EA !important;
-	box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2) !important;
-	outline: none !important;
+/* Pro Features section (Purple) - keyboard focus */
+body:not(.using-mouse) .bfg-pro-features-teaser input:focus,
+body:not(.using-mouse) .bfg-license-input-row input:focus {
+	box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.3) !important;
 }
 
 /* Suffix Handling for Units */
@@ -2159,12 +2161,16 @@
 .bfg-custom-select__trigger:focus {
 	outline: none;
 	border-color: var(--bfg-primary);
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+	box-shadow: none;
+}
+
+body:not(.using-mouse) .bfg-custom-select__trigger:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .bfg-custom-select.is-open .bfg-custom-select__trigger {
 	border-color: var(--bfg-primary);
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+	box-shadow: none;
 }
 
 .bfg-custom-select__value {
@@ -2426,8 +2432,12 @@
 
 .bfg-admin-page .flatpickr-time input.numInput:focus {
 	border-color: var(--bfg-primary) !important;
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
 	outline: none !important;
+	box-shadow: none !important;
+}
+
+body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 .bfg-admin-page .flatpickr-time .flatpickr-time-separator {
