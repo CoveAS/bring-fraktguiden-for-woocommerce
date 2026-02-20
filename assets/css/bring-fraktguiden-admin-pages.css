@@ -1314,20 +1314,49 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	display: block !important;
 }
 
-.bfg-suffix,
-.bfg-suffix-lg {
-	position: absolute;
-	right: 12px;
-	top: 50%;
-	transform: translateY(-50%);
-	color: var(--bfg-text-muted);
-	font-size: var(--bfg-text-level-5);
-	pointer-events: none;
+/* Number input with suffix - flexbox container */
+.bfg-input--number {
+	display: flex !important;
+	align-items: stretch !important;
+	background: #ffffff;
+	border: 1px solid var(--bfg-border);
+	border-radius: var(--bfg-radius-input);
+	overflow: hidden;
+	transition: border-color 0.2s ease-in-out;
+}
+
+.bfg-input--number:focus-within {
+	border-color: var(--bfg-primary);
 }
 
 .bfg-input--number input[type="number"] {
-	padding-right: 40px !important;
+	flex: 1;
 	text-align: right;
+	border: none !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+}
+
+.bfg-input--number input[type="number"]:focus {
+	box-shadow: none !important;
+}
+
+.bfg-suffix,
+.bfg-suffix-lg {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 8px;
+	color: var(--bfg-text-muted);
+	font-size: var(--bfg-text-level-5);
+	background: var(--bfg-bg-page);
+	border-left: 1px solid var(--bfg-border);
+	flex-shrink: 0;
+}
+
+/* Ensure consistent spacing for descriptions under inputs with suffixes */
+.bfg-input--number + .bfg-description {
+	margin-top: 8px !important;
 }
 
 /* Step Rows (Used on Home, served as reference) */
@@ -1361,6 +1390,12 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-step--in-progress {
 	border-color: #BFDBFE !important;
 	background: #F0F7FF !important;
+}
+
+.bfg-step--in-progress .bfg-step-row__number,
+.bfg-step--in-progress:hover .bfg-step-row__number {
+	background: var(--bfg-primary) !important;
+	color: #fff !important;
 }
 
 .bfg-step-row__indicator {
@@ -1564,7 +1599,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-button-primary,
 .bfg-admin-page .button-primary {
 	background: var(--bfg-primary) !important;
-	border: none !important;
+	border: 1px solid transparent !important;
 	border-radius: 8px !important;
 	padding: 12px 24px !important;
 	height: auto !important;
@@ -1574,7 +1609,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	color: #fff !important;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 	text-shadow: none !important;
-	transition: background 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -1586,6 +1621,25 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-admin-page .button-primary:hover {
 	background: var(--bfg-primary-hover) !important;
 	color: #fff !important;
+}
+
+.bfg-button-primary:focus,
+.bfg-admin-page .button-primary:focus {
+	outline: none !important;
+	background: var(--bfg-primary) !important;
+	color: #fff !important;
+	border-color: var(--bfg-primary) !important;
+}
+
+body.using-mouse .bfg-button-primary:focus,
+body.using-mouse .bfg-admin-page .button-primary:focus {
+	border-color: transparent !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+body:not(.using-mouse) .bfg-button-primary:focus,
+body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 .bfg-button-primary:disabled,
@@ -1805,10 +1859,23 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	font-weight: 600;
 	color: #4B5563;
 	border-radius: 8px;
-	border: none;
+	border: 1px solid transparent;
 	background: transparent;
 	cursor: pointer;
 	transition: all 0.2s;
+}
+
+.bfg-pro-tab:focus {
+	outline: none;
+	border-color: var(--bfg-primary);
+}
+
+body.using-mouse .bfg-pro-tab:focus {
+	border-color: transparent;
+}
+
+body:not(.using-mouse) .bfg-pro-tab:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .bfg-pro-tab.is-active {
@@ -1905,9 +1972,23 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	padding: 16px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
+	border: 1px solid transparent !important;
 	border-radius: 8px !important;
 	margin-bottom: 16px !important;
 	line-height: 24px !important;
+}
+
+.bfg-pro-btn-main:focus {
+	outline: none !important;
+	border-color: var(--bfg-primary) !important;
+}
+
+body.using-mouse .bfg-pro-btn-main:focus {
+	border-color: transparent !important;
+}
+
+body:not(.using-mouse) .bfg-pro-btn-main:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 .bfg-pro-disclaimer {
@@ -1938,16 +2019,15 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	padding: 16px 24px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
-	border: none !important;
+	border: 1px solid transparent !important;
 	outline: none !important;
 	background: #DBEAFE !important;
 	line-height: 24px !important;
 	color: #2563EB !important;
 	border-radius: 12px !important;
 	text-decoration: none !important;
-	box-shadow: none !important;
 	margin: 0 !important;
-	transition: background 0.2s ease;
+	transition: all 0.2s ease;
 }
 
 .bfg-pro-btn-outline:hover {
@@ -1957,7 +2037,11 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 .bfg-pro-btn-outline:focus {
 	outline: none !important;
-	box-shadow: none !important;
+	border-color: var(--bfg-primary) !important;
+}
+
+body.using-mouse .bfg-pro-btn-outline:focus {
+	border-color: transparent !important;
 }
 
 body:not(.using-mouse) .bfg-pro-btn-outline:focus {
