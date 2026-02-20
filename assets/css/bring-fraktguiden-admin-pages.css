@@ -1348,7 +1348,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 }
 
 .bfg-step-row:hover {
-	background: #F3F4F6;
+	background: #F7F8FA;
 }
 
 .bfg-step-row:focus,
@@ -1432,7 +1432,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 }
 
 .bfg-field--checkbox-box:hover {
-	background: #F3F4F6;
+	background: #F7F8FA;
 }
 
 .bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
@@ -2269,7 +2269,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-custom-select__option:hover {
-	background: #F9FAFB;
+	background: #F7F8FA;
 }
 
 .bfg-custom-select__option.is-selected {
