@@ -308,14 +308,9 @@ return [
 		'fields' => [
 			'enable_multipack' => [
 				'label' => __('Pack in multiple boxes', 'bring-fraktguiden-for-woocommerce'),
-				'default' => 'yes',
+				'default' => 'no',
 				'type' => 'checkbox',
-				'description' => __('
-Pickup parcel has limits on size and weight. Sometimes if a customer orders many items you may need to pack the items in multiple boxes.
-Enabling this option will automatically divide cart items into boxes with sides less than 240 cm and weigh less than 35kg and a circumference less than 360cm.
-These default values are the maximum size that bring accepts for a single parcel.
-If you have a specific size of box that you ship, or you ship using different services you can customize these values in the settings below.
-				', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Split large orders into multiple shipments. This increases shipping costs proportionally. Consider using a fallback rate instead for bulk orders.', 'bring-fraktguiden-for-woocommerce'),
 			],
 			'dimension_packing_side' => [
 				'title' => __('Side', 'bring-fraktguiden-for-woocommerce'),
@@ -387,10 +382,9 @@ If you have a specific size of box that you ship, or you ship using different se
 			'calculate_by_weight' => [
 				'label' => __('Calculate shipping costs based on weight only',
 					'bring-fraktguiden-for-woocommerce'),
-				'default' => 'no',
+				'default' => 'yes',
 				'type' => 'checkbox',
-				'description' => __('The shipping cost is normally calculated by a combination of weight and dimensions in order to calculate number of parcels to send and gives a more accurate price. Use this option to disable calculation based on dimensions.',
-					'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Recommended for most stores. Uses weight only for shipping rates, which is simpler and works well if you pack orders in fixed-size boxes.', 'bring-fraktguiden-for-woocommerce'),
 			],
 
 			// Maximum product limit
@@ -399,8 +393,7 @@ If you have a specific size of box that you ship, or you ship using different se
 				'type' => 'number',
 				'css' => 'width: 8em;',
 				'placeholder' => 1000,
-				'desc_tip' => __('Use this setting to set a threshold for how many cart items the plugin will attempt to process. A large quantity will impact the speed of the website during the checkout and we recommend keeping this number at 1000 or lower to ensure good performance.',
-					'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Limit how many cart items are processed for shipping calculation. Higher values may slow down checkout. Default: 1000.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 1000,
 				'dependencies' => ['calculate_by_weight' => false],
 				'custom_attributes' => [

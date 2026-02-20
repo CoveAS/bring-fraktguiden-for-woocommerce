@@ -11,6 +11,23 @@ use BringFraktguiden\Fields\Fields;
 ?>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+	const multipackCheckbox = document.querySelector('input[name="enable_multipack"]');
+	const dimensionFields = document.getElementById('dimension-fields');
+
+	function toggleDimensionFields() {
+		const inputs = dimensionFields.querySelectorAll('input');
+		const isDisabled = !multipackCheckbox.checked;
+
+		dimensionFields.style.opacity = isDisabled ? '0.5' : '1';
+		inputs.forEach(input => input.disabled = isDisabled);
+	}
+
+	if (multipackCheckbox && dimensionFields) {
+		toggleDimensionFields();
+		multipackCheckbox.addEventListener('change', toggleDimensionFields);
+	}
+});
 </script>
 
 <?php
@@ -37,7 +54,7 @@ use BringFraktguiden\Fields\Fields;
 			<div class="bfg-box">
 				<?php echo Component::boxHeader(
 					__('No connection', 'bring-fraktguiden-for-woocommerce'),
-					__('In some rare cases the plugin will be unable to make connection with the API. This could be caused by a myriad of reasons, but the most common is that either the bring API has some temporary down time or that there is some problem with the network connection. We recommend configuring a fallback shipping option that your customers can use when the API is unavailable.', 'bring-fraktguiden-for-woocommerce')
+					__('When the Bring API is unavailable, no shipping options appear at checkout and customers can\'t complete their order. Add a fallback rate here to prevent lost sales.', 'bring-fraktguiden-for-woocommerce')
 				); ?>
 
 				<div class="bfg-box__section">
@@ -66,7 +83,7 @@ use BringFraktguiden\Fields\Fields;
 
 				<?php echo Component::boxHeader(
 					__('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'),
-					__('A heavily loaded cart may exceed your selected service\'s size or weight limits. Set up a fallback option here to handle instances where shipping rates are not available due to excess weight or size.', 'bring-fraktguiden-for-woocommerce'),
+					__('Orders that exceed Bring\'s weight or size limits won\'t get a shipping rate. Add a fallback option for these cases.', 'bring-fraktguiden-for-woocommerce'),
 					true
 				); ?>
 
@@ -99,13 +116,13 @@ use BringFraktguiden\Fields\Fields;
 			<div class="bfg-box">
 				<?php echo Component::boxHeader(
 					__('Dimension packing for cart items', 'bring-fraktguiden-for-woocommerce'),
-					__('Packing options for cart items. The plugin uses an algorithm to pack items in the cart into an imaginary box. The dimension is then sent to the bring.com API and services and prices are returned.', 'bring-fraktguiden-for-woocommerce')
+					__('Configure how cart items are packed into boxes before calculating shipping rates. Useful for stores with large or heavy products.', 'bring-fraktguiden-for-woocommerce')
 				); ?>
 
 				<div class="bfg-box__section">
 					<?php echo Component::checkboxBox($fields->enable_multipack); ?>
 
-					<div class="bfg-field">
+					<div class="bfg-field" id="dimension-fields">
 						<label class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
 							<div class="bfgu-flex-1">
@@ -130,6 +147,7 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfg-input bfg-input--number">
 							<?php echo $fields->max_products->field(); ?>
 						</div>
+						<?php echo $fields->max_products->description(); ?>
 					</div>
 
 					<div class="bfg-field">
