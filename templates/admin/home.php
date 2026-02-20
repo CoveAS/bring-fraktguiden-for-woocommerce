@@ -290,14 +290,18 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 }
 /* Test URL and license input focus - blue border */
 .bfg-pro-content-block__test-url input:focus,
-.bfg-license-input-wrapper input:focus {
-	border-color: var(--bfg-primary) !important;
+.bfg-license-input-wrapper input:focus,
+#bfg-tab-trial input[name="test_url"]:focus,
+#bfg-tab-license input[name="test_url"]:focus {
+	border-color: #2563EB !important;
 	outline: none !important;
 	box-shadow: none !important;
 }
 /* Keyboard focus - add ring */
 body:not(.using-mouse) .bfg-pro-content-block__test-url input:focus,
-body:not(.using-mouse) .bfg-license-input-wrapper input:focus {
+body:not(.using-mouse) .bfg-license-input-wrapper input:focus,
+body:not(.using-mouse) #bfg-tab-trial input[name="test_url"]:focus,
+body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 .bfg-pro-activation-card .submit-button {
@@ -343,6 +347,24 @@ body:not(.using-mouse) .bfg-license-input-wrapper input:focus {
 .bfg-admin-page__home .updated,
 .bfg-admin-page__home .error {
 	display: none !important;
+}
+/* Scoped overrides for Home page elements */
+.bfg-admin-page__home .bfg-step-row__number {
+	background: #DDE2E8;
+	color: #111827;
+}
+.bfg-admin-page__home .bfg-pro-tabs {
+	background: #EBEEF2;
+}
+.bfg-admin-page__home .bfg-pro-tab:hover:not(.is-active) {
+	background: #DDE2E8;
+	color: #111827;
+}
+.bfg-admin-page__home .bfg-pro-tab.is-active {
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.bfg-admin-page__home .bfg-pro-content-block {
+	border: none !important;
 }
 </style>
 
