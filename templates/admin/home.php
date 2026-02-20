@@ -353,6 +353,11 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	background: #E5E7EB;
 	color: #111827;
 }
+.bfg-admin-page__home .bfg-step--in-progress .bfg-step-row__number,
+.bfg-admin-page__home .bfg-step--in-progress:hover .bfg-step-row__number {
+	background: #2563EB;
+	color: #fff;
+}
 .bfg-admin-page__home .bfg-pro-tabs {
 	background: #EBEEF2;
 }

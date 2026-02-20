@@ -1440,10 +1440,14 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 .bfg-badge {
 	font-size: 14px;
-	padding: 4px 12px;
-	border-radius: 8px;
+	padding: 6px 12px;
+	border-radius: 9999px;
 	font-weight: 400;
-	line-height: 20px;
+	line-height: 16px;
+	min-height: 28px;
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
 }
 
 .bfg-badge--completed {

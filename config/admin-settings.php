@@ -74,7 +74,7 @@ return [
 			'from_zip' => [
 				'title' => __('From zip', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'placeholder' => $base_postcode,
+				'placeholder' => '0010',
 				'css' => 'width: 100px; text-align: right;',
 				'default' => '',
 			],
