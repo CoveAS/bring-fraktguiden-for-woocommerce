@@ -1423,16 +1423,16 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 /* Checkbox Blocks (Cards for checkboxes) */
 .bfg-field--checkbox-box {
-	background: #F9FAFB;
+	background: #fff;
 	border: 1px solid var(--bfg-border);
 	border-radius: 8px;
 	padding: 24px;
 	margin-bottom: 16px;
-	transition: border-color 0.2s;
+	transition: background 0.2s;
 }
 
 .bfg-field--checkbox-box:hover {
-	border-color: #CBD5E1;
+	background: #F3F4F6;
 }
 
 .bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {

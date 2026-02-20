@@ -350,7 +350,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 }
 /* Scoped overrides for Home page elements */
 .bfg-admin-page__home .bfg-step-row__number {
-	background: #DDE2E8;
+	background: #E5E7EB;
 	color: #111827;
 }
 .bfg-admin-page__home .bfg-pro-tabs {
