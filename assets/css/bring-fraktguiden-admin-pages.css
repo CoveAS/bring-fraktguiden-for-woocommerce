@@ -1236,6 +1236,16 @@
 	padding-right: 40px !important;
 }
 
+/* Active state - brief moment while pressing down */
+[class*="bfg-admin-page"] input:active,
+[class*="bfg-admin-page"] select:active,
+[class*="bfg-admin-page"] textarea:active {
+	border-color: #93C5FD !important; /* blue-300 - light tint */
+	background: #fff !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
 /* All focus states - blue border, no ring by default */
 [class*="bfg-admin-page"] input:focus,
 [class*="bfg-admin-page"] select:focus,
