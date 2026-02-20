@@ -6,7 +6,7 @@
 	--bfg-text-main: #111827;
 	--bfg-text-secondary: #4B5563;
 	--bfg-text-muted: #6B7280;
-	--bfg-border: #E5E7EB;
+	--bfg-border: #D1D5DB;
 	--bfg-bg-card: #ffffff;
 	--bfg-bg-page: #F9FAFB;
 	--bfg-radius-card: 12px;
@@ -1958,6 +1958,10 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-pro-btn-outline:focus {
 	outline: none !important;
 	box-shadow: none !important;
+}
+
+body:not(.using-mouse) .bfg-pro-btn-outline:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 .bfg-license-input-wrapper {
