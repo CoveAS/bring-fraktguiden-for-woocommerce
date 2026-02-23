@@ -1332,9 +1332,19 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-input--number input[type="number"] {
 	flex: 1;
 	text-align: right;
+	padding-right: 16px !important;
 	border: none !important;
 	border-radius: 0 !important;
 	background: transparent !important;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+.bfg-input--number input[type="number"]::-webkit-outer-spin-button,
+.bfg-input--number input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
 }
 
 .bfg-input--number input[type="number"]:focus {
@@ -1465,7 +1475,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: #fff;
 	border: 1px solid var(--bfg-border);
 	border-radius: 8px;
-	padding: 24px;
 	margin-bottom: 16px;
 	transition: background 0.2s;
 }
@@ -1509,6 +1518,33 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	cursor: pointer;
 	margin: 0 !important;
 	text-wrap: pretty;
+}
+
+.bfg-field--checkbox-box > .bfg-input--checkbox {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.bfg-field--checkbox-box label {
+	padding: 24px;
+	padding-bottom: 0;
+}
+
+/* Make the entire card clickable via label pseudo-element */
+.bfg-field--checkbox-box label::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	cursor: pointer;
+}
+
+.bfg-field--checkbox-box .bfg-description {
+	padding: 0 24px 24px 64px;
+}
+
+.bfg-field--checkbox-box .bfg-input--checkbox:not(:has(.bfg-description)) label {
+	padding-bottom: 24px;
 }
 
 .bfg-input--checkbox input[type="checkbox"] {
@@ -2559,4 +2595,357 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 /* Hide AM/PM toggle - using 24hr format */
 .bfg-admin-page .flatpickr-time .flatpickr-am-pm {
 	display: none !important;
+}
+
+/* ===========================================
+   Mobile Responsive Styles
+   =========================================== */
+
+@media screen and (max-width: 782px) {
+	/* Page Layout */
+	.bfg-admin-page,
+	.bfg-admin-page__home,
+	.bfg-admin-page__settings,
+	.bfg-admin-page__fallback,
+	.bfg-admin-page__booking {
+		margin: 0 !important;
+	}
+
+	.bfg-admin-page .bfg-page__main {
+		padding: 0 16px 48px;
+		margin-top: 16px;
+	}
+
+	.bfg-page__header {
+		margin-bottom: 24px;
+		padding-bottom: 24px;
+	}
+
+	.bfg-page__header h1 {
+		font-size: 16px;
+	}
+
+	/* Cards */
+	.bfg-page__main-card,
+	.bfg-admin-page .bfg-box {
+		padding: 20px !important;
+		margin-bottom: 24px !important;
+		border-radius: 8px !important;
+	}
+
+	.bfg-admin-page .bfg-box__header {
+		margin-bottom: 24px !important;
+	}
+
+	.bfg-admin-page .bfg-box__header h2,
+	.bfg-section-card-title {
+		font-size: 24px !important;
+		line-height: 32px !important;
+	}
+
+	.bfg-admin-page .bfg-box .bfg-box__header--divider {
+		margin-top: 48px !important;
+		padding-top: 48px !important;
+	}
+
+	/* Fields */
+	.bfg-field {
+		margin-bottom: 24px;
+	}
+
+	.bfg-field-group-title {
+		font-size: 20px !important;
+		line-height: 28px !important;
+	}
+
+	.bfg-admin-page .bfg-field > label,
+	.bfg-admin-page .bfg-field > .label {
+		font-size: 16px;
+	}
+
+	.bfg-description {
+		font-size: 16px !important;
+	}
+
+	.bfg-field .bfg-description,
+	.bfg-input .bfg-description {
+		font-size: 12px !important;
+	}
+
+	/* Flex row fields - stack on mobile */
+	.bfg-flex--row {
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	/* Step Rows */
+	.bfg-step-row {
+		height: auto;
+		min-height: 72px;
+		padding: 14px;
+		gap: 12px;
+	}
+
+	.bfg-step-row__label {
+		font-size: 16px;
+	}
+
+	.bfg-step-row__description {
+		font-size: 12px;
+		margin-top: 2px;
+	}
+
+	.bfg-step-row__indicator {
+		width: 28px;
+		height: 28px;
+	}
+
+	.bfg-step-row__number {
+		width: 28px;
+		height: 28px;
+		font-size: 12px;
+	}
+
+	.bfg-step-row__indicator svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.bfg-badge {
+		font-size: 12px;
+		padding: 4px 10px;
+		min-height: 24px;
+	}
+
+	/* Checkbox cards */
+	.bfg-field--checkbox-box label {
+		padding: 20px;
+		padding-bottom: 0;
+	}
+
+	.bfg-field--checkbox-box .bfg-description {
+		padding: 0 20px 20px 56px;
+	}
+
+	.bfg-input--checkbox input[type="checkbox"] {
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+	.bfg-input--checkbox label {
+		gap: 12px;
+		font-size: 16px;
+	}
+
+	.bfg-input--checkbox .bfg-description {
+		margin-left: 32px !important;
+		font-size: 12px !important;
+	}
+
+	/* PRO Teaser */
+	.bfg-pro-teaser-v2 {
+		padding: 20px !important;
+		border-radius: 8px;
+	}
+
+	.bfg-pro-teaser__shield {
+		width: 56px;
+		height: 56px;
+		margin-bottom: 20px;
+	}
+
+	.bfg-pro-teaser__shield svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.bfg-pro-teaser__title {
+		font-size: 24px;
+		line-height: 32px;
+	}
+
+	.bfg-pro-teaser__subtitle {
+		font-size: 16px;
+		line-height: 24px;
+		margin-bottom: 24px !important;
+	}
+
+	.bfg-pro-tabs {
+		flex-direction: column;
+		gap: 4px;
+		margin-bottom: 24px;
+	}
+
+	.bfg-pro-tab {
+		justify-content: center;
+		padding: 12px;
+		font-size: 16px;
+	}
+
+	.bfg-pro-content-block {
+		padding: 20px;
+		margin-bottom: 24px;
+		border-radius: 8px;
+	}
+
+	.bfg-pro-content-block__title {
+		font-size: 16px;
+	}
+
+	.bfg-pro-content-block__text {
+		font-size: 16px;
+		margin-bottom: 20px !important;
+	}
+
+	.bfg-pro-features-grid {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.bfg-pro-features-grid li {
+		font-size: 16px;
+	}
+
+	.bfg-pro-features-grid--compact {
+		max-width: none;
+	}
+
+	.bfg-pro-status-card {
+		flex-direction: column;
+		gap: 16px;
+		padding: 20px;
+	}
+
+	.bfg-pro-status-card__item {
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.bfg-pro-status-card__label {
+		font-size: 12px;
+	}
+
+	.bfg-pro-status-card__value {
+		font-size: 16px;
+	}
+
+	.bfg-pro-footer {
+		padding-top: 24px;
+	}
+
+	.bfg-pro-footer__title {
+		font-size: 16px;
+		margin-bottom: 12px !important;
+	}
+
+	.bfg-pro-btn-main,
+	.bfg-pro-btn-outline {
+		padding: 14px 20px !important;
+		font-size: 16px !important;
+	}
+
+	.bfg-pro-disclaimer {
+		font-size: 16px;
+		margin-bottom: 24px;
+	}
+
+	/* Buttons */
+	.bfg-button-primary,
+	.bfg-admin-page .button-primary {
+		padding: 10px 20px !important;
+		font-size: 16px !important;
+	}
+
+	.bfg-admin-page .submit {
+		margin: 24px 0 0 !important;
+	}
+
+	/* Custom Select */
+	.bfg-custom-select__trigger {
+		height: 44px;
+		font-size: 16px;
+	}
+
+	.bfg-custom-select__option {
+		padding: 12px 16px;
+		font-size: 16px;
+	}
+
+	/* Inputs */
+	.bfg-admin-page select,
+	.bfg-admin-page input[type="text"],
+	.bfg-admin-page input[type="number"],
+	.bfg-admin-page input[type="url"],
+	.bfg-admin-page input[type="tel"],
+	.bfg-admin-page input[type="email"],
+	.bfg-admin-page input[type="time"] {
+		height: 44px;
+		font-size: 16px;
+	}
+
+	/* Notice Banner */
+	.bfg-notice-banner {
+		padding: 14px 16px !important;
+		gap: 12px !important;
+		flex-direction: row;
+	}
+
+	.bfg-notice-banner p {
+		font-size: 16px !important;
+	}
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+	.bfg-admin-page .bfg-page__main {
+		padding: 0 16px 40px;
+	}
+
+	.bfg-page__main-card,
+	.bfg-admin-page .bfg-box {
+		padding: 20px !important;
+	}
+
+	.bfg-admin-page .bfg-box__header h2,
+	.bfg-section-card-title {
+		font-size: 20px !important;
+		line-height: 28px !important;
+	}
+
+	.bfg-pro-teaser-v2 {
+		padding: 20px !important;
+	}
+
+	.bfg-pro-teaser__title {
+		font-size: 20px;
+		line-height: 28px;
+	}
+
+	.bfg-pro-teaser__subtitle {
+		font-size: 16px;
+	}
+
+	.bfg-pro-content-block {
+		padding: 20px;
+	}
+
+	.bfg-step-row {
+		padding: 12px;
+	}
+
+	.bfg-field--checkbox-box label {
+		padding: 16px;
+		padding-bottom: 0;
+		gap: 10px;
+	}
+
+	.bfg-field--checkbox-box .bfg-description {
+		padding: 0 16px 16px 46px;
+		font-size: 12px !important;
+	}
+
+	.bfg-field--checkbox-box .bfg-input--checkbox:not(:has(.bfg-description)) label {
+		padding-bottom: 16px;
+	}
 }

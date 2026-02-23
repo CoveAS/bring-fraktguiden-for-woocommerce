@@ -371,6 +371,231 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 .bfg-admin-page__home .bfg-pro-content-block {
 	border: none !important;
 }
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 782px) {
+	.bfg-admin-page__home {
+		margin: 0 !important;
+	}
+	.bfg-admin-page__home .bfg-page__main {
+		padding: 0 16px 40px;
+	}
+	.bfg-page__main-card {
+		padding: 20px;
+		margin-bottom: 24px;
+	}
+	.bfg-page__header-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+	.bfg-section-card-title {
+		font-size: 24px !important;
+		line-height: 32px !important;
+	}
+	.bfg-active-step-card {
+		flex-direction: column;
+		padding: 20px;
+		gap: 16px;
+	}
+	.bfg-active-step__icon {
+		width: 40px;
+		height: 40px;
+		font-size: 16px;
+	}
+	.bfg-active-step__content h3 {
+		font-size: 20px;
+		line-height: 28px;
+	}
+	.bfg-active-step__content p {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	.bfg-step-row {
+		height: auto;
+		min-height: 80px;
+		padding: 16px;
+		flex-wrap: wrap;
+	}
+	.bfg-step-row__content {
+		flex: 1 1 calc(100% - 64px);
+		min-width: 0;
+	}
+	.bfg-step-row__status {
+		flex: 0 0 auto;
+		margin-left: auto;
+	}
+	.bfg-step-row__label {
+		font-size: 16px;
+	}
+	.bfg-step-row__description {
+		font-size: 12px;
+	}
+	/* PRO Teaser Mobile */
+	.bfg-pro-teaser-v2 {
+		padding: 20px !important;
+	}
+	.bfg-pro-teaser__shield {
+		width: 56px;
+		height: 56px;
+		margin-bottom: 20px;
+	}
+	.bfg-pro-teaser__shield svg {
+		width: 28px;
+		height: 28px;
+	}
+	.bfg-pro-teaser__title {
+		font-size: 24px;
+		line-height: 32px;
+	}
+	.bfg-pro-teaser__subtitle {
+		font-size: 16px;
+		line-height: 24px;
+		margin-bottom: 24px !important;
+	}
+	.bfg-pro-tabs {
+		flex-direction: column;
+		gap: 4px;
+	}
+	.bfg-pro-tab {
+		justify-content: center;
+		font-size: 16px;
+	}
+	.bfg-pro-content-block {
+		padding: 20px;
+	}
+	.bfg-pro-content-block__title {
+		font-size: 16px;
+	}
+	.bfg-pro-content-block__text {
+		font-size: 16px;
+	}
+	.bfg-pro-features-grid {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+	.bfg-pro-features-grid li {
+		font-size: 16px;
+	}
+	.bfg-pro-status-card {
+		flex-direction: column;
+		gap: 16px;
+		padding: 20px;
+	}
+	.bfg-pro-status-card__item {
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.bfg-pro-status-card__label {
+		font-size: 12px;
+	}
+	.bfg-pro-status-card__value {
+		font-size: 16px;
+	}
+	.bfg-pro-footer {
+		padding-top: 24px;
+	}
+	.bfg-pro-footer__title {
+		font-size: 16px;
+	}
+	.bfg-pro-btn-main,
+	.bfg-pro-btn-outline {
+		padding: 14px 20px !important;
+		font-size: 16px !important;
+	}
+	.bfg-page__footer-notes {
+		margin-top: 24px;
+		padding-top: 16px;
+	}
+	.bfg-page__footer-notes small {
+		font-size: 12px;
+	}
+	.bfg-pro-list {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+	.bfg-pro-list li {
+		font-size: 16px;
+	}
+	.bfg-pro-features-teaser {
+		padding: 20px;
+	}
+	.bfg-pro-header h3 {
+		font-size: 24px !important;
+		line-height: 32px;
+	}
+	.bfg-pro-activation-card {
+		padding: 20px;
+	}
+	.bfg-license-input-row {
+		gap: 24px;
+	}
+	.bfg-badge {
+		font-size: 12px;
+	}
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+	.bfg-admin-page__home .bfg-page__main {
+		padding: 0 16px 32px;
+	}
+	.bfg-page__main-card {
+		padding: 20px;
+		border-radius: 8px;
+	}
+	.bfg-section-card-title {
+		font-size: 20px !important;
+		line-height: 28px !important;
+	}
+	.bfg-step-row {
+		gap: 12px;
+	}
+	.bfg-step-row__indicator {
+		width: 28px;
+		height: 28px;
+	}
+	.bfg-step-row__number {
+		width: 28px;
+		height: 28px;
+		font-size: 12px;
+	}
+	.bfg-step-row__indicator svg {
+		width: 28px;
+		height: 28px;
+	}
+	.bfg-badge {
+		padding: 4px 10px;
+	}
+	.bfg-active-step-card {
+		padding: 20px;
+	}
+	.bfg-active-step__content h3 {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	.bfg-button-primary {
+		padding: 10px 16px;
+		font-size: 16px;
+	}
+	.bfg-pro-teaser-v2 {
+		padding: 20px !important;
+		border-radius: 8px;
+	}
+	.bfg-pro-teaser__title {
+		font-size: 20px;
+		line-height: 28px;
+	}
+	.bfg-pro-header h3 {
+		font-size: 20px !important;
+		line-height: 28px;
+	}
+	.bfg-pro-content-block {
+		padding: 20px;
+		border-radius: 8px;
+	}
+}
 </style>
 
 <div class="wrap bfg-admin-page__home">
