@@ -394,7 +394,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 			<div class="bfg-page__header-row">
 				<h2 class="bfg-section-card-title"><?php esc_html_e('Get started with Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				<div class="bfg-progress-badge">
-					<?php printf(__('Step %d of %d', 'bring-fraktguiden-for-woocommerce'), $currentStepNumber, $stepCount); ?>
+					<?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted, $stepCount); ?>
 				</div>
 			</div>
 
