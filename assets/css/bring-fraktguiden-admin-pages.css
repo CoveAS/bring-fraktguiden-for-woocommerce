@@ -1585,7 +1585,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: var(--bfg-primary) !important;
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
-	padding: 11px 24px !important;
+	padding: 11px 32px !important;
 	height: auto !important;
 	line-height: 24px !important;
 	font-weight: 600 !important;
@@ -1633,13 +1633,6 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	cursor: not-allowed !important;
 }
 
-.bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .bfg-button-primary,
-.bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .button-primary {
-	padding: 9px 16px !important;
-	font-size: 14px !important;
-	font-weight: 500 !important;
-	line-height: 20px !important;
-}
 
 .bfg-admin-page a {
 	color: var(--bfg-primary);
@@ -1951,12 +1944,12 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 11px 24px !important;
+	padding: 11px 32px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
-	margin-bottom: 16px !important;
+	margin-bottom: 0 !important;
 	line-height: 24px !important;
 }
 
@@ -1998,7 +1991,7 @@ body:not(.using-mouse) .bfg-pro-btn-main:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 11px 24px !important;
+	padding: 11px 32px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
 	border: 1px solid transparent !important;
@@ -2006,7 +1999,7 @@ body:not(.using-mouse) .bfg-pro-btn-main:focus {
 	background: #DBEAFE !important;
 	line-height: 24px !important;
 	color: #2563EB !important;
-	border-radius: 12px !important;
+	border-radius: 8px !important;
 	text-decoration: none !important;
 	margin: 0 !important;
 	transition: all 0.2s ease;
@@ -2777,7 +2770,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-pro-btn-main,
 	.bfg-pro-btn-outline {
-		padding: 11px 20px !important;
+		padding: 11px 32px !important;
 		font-size: 16px !important;
 	}
 
@@ -2789,7 +2782,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	
 	.bfg-button-primary,
 	.bfg-admin-page .button-primary {
-		padding: 9px 20px !important;
+		padding: 11px 32px !important;
 		font-size: 16px !important;
 	}
 
