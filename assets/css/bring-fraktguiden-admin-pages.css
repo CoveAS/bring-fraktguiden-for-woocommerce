@@ -1450,11 +1450,12 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 .bfg-badge {
 	font-size: 14px;
-	padding: 6px 12px;
+	padding: 7px 12px;
+	border: 1px solid transparent;
 	border-radius: 9999px;
 	font-weight: 400;
 	line-height: 16px;
-	min-height: 28px;
+	min-height: 32px;
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
@@ -1641,7 +1642,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: var(--bfg-primary) !important;
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
-	padding: 12px 24px !important;
+	padding: 11px 24px !important;
 	height: auto !important;
 	line-height: 24px !important;
 	font-weight: 600 !important;
@@ -1692,7 +1693,7 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 /* Smaller buttons in section cards for non-home pages */
 .bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .bfg-button-primary,
 .bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .button-primary {
-	padding: 10px 16px !important;
+	padding: 9px 16px !important;
 	font-size: 14px !important;
 	font-weight: 500 !important;
 	line-height: 20px !important;
@@ -1705,6 +1706,11 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 
 .bfg-admin-page a:hover {
 	text-decoration: underline;
+}
+
+.bfg-admin-page a.bfg-button-primary:hover,
+.bfg-admin-page a.button-primary:hover {
+	text-decoration: none;
 }
 
 .bfg-admin-page .submit {
@@ -2009,7 +2015,7 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 16px !important;
+	padding: 11px 24px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
 	border: 1px solid transparent !important;
@@ -2056,7 +2062,7 @@ body:not(.using-mouse) .bfg-pro-btn-main:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 16px 24px !important;
+	padding: 11px 24px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
 	border: 1px solid transparent !important;
@@ -2679,20 +2685,45 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	/* Step Rows */
+	a.bfg-step-row,
 	.bfg-step-row {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
+		justify-content: flex-start !important;
 		height: auto;
 		min-height: 72px;
 		padding: 14px;
 		gap: 12px;
 	}
 
+	a.bfg-step-row > *,
+	.bfg-step-row > * {
+		flex-shrink: 0;
+	}
+
+	a.bfg-step-row > .bfg-step-row__content,
+	.bfg-step-row__content {
+		min-width: 0 !important;
+		flex: 1 1 0% !important;
+		flex-shrink: 1 !important;
+		overflow: hidden !important;
+	}
+
 	.bfg-step-row__label {
 		font-size: 16px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.bfg-step-row__description {
 		font-size: 12px;
 		margin-top: 2px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.bfg-step-row__indicator {
@@ -2711,10 +2742,14 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		height: 28px;
 	}
 
-	.bfg-badge {
+	.bfg-step-row .bfg-badge {
 		font-size: 12px;
-		padding: 4px 10px;
-		min-height: 24px;
+		padding: 5px 10px;
+		min-height: 28px;
+		flex: 0 0 auto !important;
+		width: auto !important;
+		display: inline-flex !important;
+		align-self: center !important;
 	}
 
 	/* Checkbox cards */
@@ -2841,7 +2876,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-pro-btn-main,
 	.bfg-pro-btn-outline {
-		padding: 14px 20px !important;
+		padding: 11px 20px !important;
 		font-size: 16px !important;
 	}
 
@@ -2853,7 +2888,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	/* Buttons */
 	.bfg-button-primary,
 	.bfg-admin-page .button-primary {
-		padding: 10px 20px !important;
+		padding: 9px 20px !important;
 		font-size: 16px !important;
 	}
 
@@ -2930,8 +2965,28 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		padding: 20px;
 	}
 
+	a.bfg-step-row,
 	.bfg-step-row {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
 		padding: 12px;
+	}
+
+	a.bfg-step-row > .bfg-step-row__content,
+	.bfg-step-row__content {
+		min-width: 0 !important;
+		flex: 1 1 0% !important;
+		flex-shrink: 1 !important;
+		overflow: hidden !important;
+	}
+
+	a.bfg-step-row > .bfg-badge,
+	.bfg-step-row .bfg-badge {
+		flex: 0 0 auto !important;
+		width: auto !important;
+		display: inline-flex !important;
 	}
 
 	.bfg-field--checkbox-box label {

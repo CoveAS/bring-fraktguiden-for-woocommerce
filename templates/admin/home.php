@@ -106,10 +106,11 @@ use BringFraktguiden\Admin\Step;
 	background: #2563EB;
 	color: #fff !important;
 	text-decoration: none;
-	padding: 10px 20px;
+	padding: 11px 24px;
 	border-radius: 8px;
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 24px;
 	transition: background 0.2s;
 	white-space: nowrap;
 }
@@ -119,8 +120,7 @@ use BringFraktguiden\Admin\Step;
 .bfg-steps-list {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
-	margin-bottom: 48px;
+	gap: 16px;
 }
 
 .bfg-pro-features-teaser {
@@ -381,13 +381,17 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		padding: 0 16px 40px;
 	}
 	.bfg-page__main-card {
-		padding: 20px;
-		margin-bottom: 24px;
+		padding: 24px;
+		margin-bottom: 32px;
 	}
 	.bfg-page__header-row {
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 12px;
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+	.bfg-progress-container {
+		margin-bottom: 32px;
 	}
 	.bfg-section-card-title {
 		font-size: 24px !important;
@@ -395,7 +399,11 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 	.bfg-active-step-card {
 		flex-direction: column;
-		padding: 20px;
+		padding: 24px;
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+	.bfg-steps-list {
 		gap: 16px;
 	}
 	.bfg-active-step__icon {
@@ -412,33 +420,51 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		line-height: 24px;
 	}
 	.bfg-step-row {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
 		height: auto;
-		min-height: 80px;
+		min-height: 72px;
 		padding: 16px;
-		flex-wrap: wrap;
+		gap: 16px;
 	}
 	.bfg-step-row__content {
-		flex: 1 1 calc(100% - 64px);
-		min-width: 0;
-	}
-	.bfg-step-row__status {
-		flex: 0 0 auto;
-		margin-left: auto;
+		flex: 1 1 0% !important;
+		min-width: 0 !important;
+		overflow: hidden !important;
 	}
 	.bfg-step-row__label {
 		font-size: 16px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.bfg-step-row__description {
 		font-size: 12px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.bfg-step-row__status {
+		flex: 0 0 auto !important;
+	}
+	.bfg-step-row .bfg-badge {
+		flex-shrink: 0 !important;
 	}
 	/* PRO Teaser Mobile */
 	.bfg-pro-teaser-v2 {
-		padding: 20px !important;
+		padding: 24px !important;
+		margin-bottom: 32px;
+	}
+	.bfg-pro-features-teaser {
+		padding: 24px;
+		margin-top: 40px;
 	}
 	.bfg-pro-teaser__shield {
-		width: 56px;
-		height: 56px;
-		margin-bottom: 20px;
+		width: 48px;
+		height: 48px;
+		margin-bottom: 24px;
 	}
 	.bfg-pro-teaser__shield svg {
 		width: 28px;
@@ -494,45 +520,71 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		font-size: 16px;
 	}
 	.bfg-pro-footer {
-		padding-top: 24px;
+		padding-top: 32px;
+		margin-top: 32px;
 	}
 	.bfg-pro-footer__title {
 		font-size: 16px;
+		margin-bottom: 12px !important;
 	}
 	.bfg-pro-btn-main,
 	.bfg-pro-btn-outline {
-		padding: 14px 20px !important;
+		padding: 9px 20px !important;
 		font-size: 16px !important;
 	}
 	.bfg-page__footer-notes {
-		margin-top: 24px;
-		padding-top: 16px;
+		margin-top: 32px;
+		padding-top: 24px;
+		gap: 8px;
 	}
 	.bfg-page__footer-notes small {
 		font-size: 12px;
+		line-height: 1.4;
 	}
 	.bfg-pro-list {
 		grid-template-columns: 1fr;
-		gap: 12px;
+		gap: 8px;
+		margin-bottom: 32px !important;
 	}
 	.bfg-pro-list li {
-		font-size: 16px;
+		font-size: 14px;
 	}
-	.bfg-pro-features-teaser {
-		padding: 20px;
+	.bfg-pro-header {
+		margin-bottom: 32px;
 	}
 	.bfg-pro-header h3 {
-		font-size: 24px !important;
-		line-height: 32px;
+		font-size: 20px !important;
+		line-height: 28px;
 	}
 	.bfg-pro-activation-card {
-		padding: 20px;
+		padding: 16px;
+	}
+	.bfg-pro-activation-card .bfg-input--checkbox {
+		margin-bottom: 24px;
 	}
 	.bfg-license-input-row {
 		gap: 24px;
 	}
 	.bfg-badge {
 		font-size: 12px;
+	}
+	.bfg-pro-content-block {
+		padding: 24px;
+		margin-bottom: 32px;
+	}
+	.bfg-pro-content-block__text {
+		margin-bottom: 24px !important;
+	}
+	.bfg-pro-content-block__test-url {
+		margin-top: 24px;
+		margin-bottom: 32px;
+	}
+	.bfg-pro-disclaimer {
+		font-size: 14px;
+		margin-bottom: 24px;
+	}
+	.bfg-pro-tabs {
+		margin-bottom: 32px;
 	}
 }
 
@@ -542,19 +594,40 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		padding: 0 16px 32px;
 	}
 	.bfg-page__main-card {
-		padding: 20px;
+		padding: 16px;
+		margin-bottom: 32px;
 		border-radius: 8px;
+	}
+	.bfg-page__header-row {
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+	.bfg-progress-container {
+		margin-bottom: 24px;
 	}
 	.bfg-section-card-title {
 		font-size: 20px !important;
 		line-height: 28px !important;
 	}
+	.bfg-active-step-card {
+		padding: 16px;
+		margin-bottom: 16px;
+	}
+	.bfg-steps-list {
+		gap: 16px;
+	}
 	.bfg-step-row {
-		gap: 12px;
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
+		padding: 16px;
+		gap: 16px;
 	}
 	.bfg-step-row__indicator {
 		width: 28px;
 		height: 28px;
+		flex-shrink: 0;
 	}
 	.bfg-step-row__number {
 		width: 28px;
@@ -565,35 +638,146 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		width: 28px;
 		height: 28px;
 	}
-	.bfg-badge {
-		padding: 4px 10px;
+	.bfg-step-row__content {
+		flex: 1 1 0% !important;
+		min-width: 0 !important;
+		overflow: hidden !important;
 	}
-	.bfg-active-step-card {
-		padding: 20px;
+	.bfg-step-row .bfg-badge {
+		padding: 4px 8px;
+		font-size: 11px;
+		flex-shrink: 0 !important;
+	}
+	.bfg-active-step__icon {
+		width: 36px;
+		height: 36px;
+		font-size: 14px;
 	}
 	.bfg-active-step__content h3 {
 		font-size: 16px;
 		line-height: 24px;
 	}
+	.bfg-active-step__content p {
+		font-size: 14px;
+		margin-bottom: 16px !important;
+	}
 	.bfg-button-primary {
-		padding: 10px 16px;
-		font-size: 16px;
+		padding: 9px 16px;
+		font-size: 14px;
 	}
 	.bfg-pro-teaser-v2 {
-		padding: 20px !important;
+		padding: 16px !important;
+		margin-bottom: 32px;
 		border-radius: 8px;
+	}
+	.bfg-pro-teaser__shield {
+		width: 48px;
+		height: 48px;
+		margin-bottom: 16px;
+	}
+	.bfg-pro-teaser__shield svg {
+		width: 24px;
+		height: 24px;
 	}
 	.bfg-pro-teaser__title {
-		font-size: 20px;
-		line-height: 28px;
+		font-size: 18px;
+		line-height: 26px;
+	}
+	.bfg-pro-teaser__subtitle {
+		font-size: 14px;
+		line-height: 24px;
+		margin-bottom: 24px !important;
+	}
+	.bfg-pro-features-teaser {
+		padding: 16px;
+		margin-top: 32px;
+	}
+	.bfg-pro-header {
+		margin-bottom: 24px;
 	}
 	.bfg-pro-header h3 {
-		font-size: 20px !important;
-		line-height: 28px;
+		font-size: 18px !important;
+		line-height: 26px;
+	}
+	.bfg-pro-list {
+		gap: 8px;
+		margin-bottom: 32px !important;
+	}
+	.bfg-pro-list li {
+		font-size: 14px;
+		gap: 8px;
 	}
 	.bfg-pro-content-block {
-		padding: 20px;
+		padding: 16px;
+		margin-bottom: 24px;
 		border-radius: 8px;
+	}
+	.bfg-pro-content-block__title {
+		font-size: 14px;
+	}
+	.bfg-pro-content-block__text {
+		font-size: 14px;
+		margin-bottom: 16px !important;
+	}
+	.bfg-pro-features-grid {
+		gap: 8px;
+	}
+	.bfg-pro-features-grid li {
+		font-size: 13px;
+	}
+	.bfg-pro-tabs {
+		margin-bottom: 24px;
+		padding: 3px;
+	}
+	.bfg-pro-tab {
+		padding: 10px;
+		font-size: 14px;
+	}
+	.bfg-pro-status-card {
+		padding: 16px;
+		gap: 16px;
+	}
+	.bfg-pro-btn-main,
+	.bfg-pro-btn-outline {
+		padding: 9px 16px !important;
+		font-size: 14px !important;
+	}
+	.bfg-pro-footer {
+		padding-top: 24px;
+		margin-top: 24px;
+	}
+	.bfg-pro-footer__title {
+		font-size: 14px;
+		margin-bottom: 16px !important;
+	}
+	.bfg-pro-activation-card {
+		padding: 16px;
+	}
+	.bfg-pro-activation-card .bfg-input--checkbox {
+		margin-bottom: 24px;
+	}
+	.bfg-pro-activation-card .bfg-input--checkbox label {
+		font-size: 14px;
+		gap: 16px;
+	}
+	.bfg-license-input-row {
+		gap: 24px;
+	}
+	.bfg-pro-content-block__test-url {
+		margin-top: 16px;
+		margin-bottom: 24px;
+	}
+	.bfg-pro-disclaimer {
+		font-size: 12px;
+		margin-bottom: 24px;
+	}
+	.bfg-page__footer-notes {
+		margin-top: 32px;
+		padding-top: 24px;
+		gap: 8px;
+	}
+	.bfg-page__footer-notes small {
+		font-size: 12px;
 	}
 }
 </style>
