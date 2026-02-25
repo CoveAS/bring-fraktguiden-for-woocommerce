@@ -99,22 +99,23 @@ use BringFraktguiden\Admin\Step;
 	font-weight: 400;
 	text-wrap: pretty;
 }
-.bfg-button-primary {
+.bfg-admin-page__home .bfg-button-primary {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
 	background: #2563EB;
-	color: #fff !important;
+	color: #fff;
 	text-decoration: none;
 	padding: 11px 24px;
 	border-radius: 8px;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 16px;
 	line-height: 24px;
 	transition: background 0.2s;
 	white-space: nowrap;
+	box-sizing: border-box;
 }
-.bfg-button-primary:hover {
+.bfg-admin-page__home .bfg-button-primary:hover {
 	background: #1D4ED8;
 }
 .bfg-steps-list {
@@ -419,6 +420,9 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		font-size: 16px;
 		line-height: 24px;
 	}
+	.bfg-admin-page__home .bfg-active-step__content .bfg-button-primary {
+		width: fit-content;
+	}
 	.bfg-step-row {
 		display: flex !important;
 		flex-direction: row !important;
@@ -527,10 +531,11 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		font-size: 16px;
 		margin-bottom: 12px !important;
 	}
-	.bfg-pro-btn-main,
-	.bfg-pro-btn-outline {
-		padding: 9px 20px !important;
-		font-size: 16px !important;
+	.bfg-admin-page__home .bfg-pro-btn-main,
+	.bfg-admin-page__home .bfg-pro-btn-outline {
+		padding: 9px 20px;
+		font-size: 16px;
+		width: fit-content;
 	}
 	.bfg-page__footer-notes {
 		margin-top: 32px;
@@ -661,7 +666,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		font-size: 14px;
 		margin-bottom: 16px !important;
 	}
-	.bfg-button-primary {
+	.bfg-admin-page__home .bfg-button-primary {
 		padding: 9px 16px;
 		font-size: 14px;
 	}
@@ -737,10 +742,16 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 		padding: 16px;
 		gap: 16px;
 	}
-	.bfg-pro-btn-main,
-	.bfg-pro-btn-outline {
-		padding: 9px 16px !important;
-		font-size: 14px !important;
+	.bfg-admin-page__home .bfg-pro-btn-main,
+	.bfg-admin-page__home .bfg-pro-btn-outline {
+		padding: 9px 16px;
+		font-size: 14px;
+		width: 100%;
+		justify-content: center;
+	}
+	.bfg-admin-page__home .bfg-active-step__content .bfg-button-primary {
+		width: 100%;
+		justify-content: center;
 	}
 	.bfg-pro-footer {
 		padding-top: 24px;
@@ -823,9 +834,6 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 						<p><?php echo esc_html($nextStep->description); ?></p>
 						<a class="bfg-button-primary" href="<?php echo esc_attr($nextStep->action); ?>">
 							<?php echo esc_html($nextStep->actionText); ?>
-							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M6 12L10 8L6 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
 						</a>
 					</div>
 				</div>
