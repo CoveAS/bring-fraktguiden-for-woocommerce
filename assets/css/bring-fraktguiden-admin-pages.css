@@ -1,4 +1,4 @@
-/* Global Design System for Bring Fraktguiden Admin */
+
 
 :root {
 	--bfg-primary: #2563EB;
@@ -13,32 +13,25 @@
 	--bfg-radius-input: 8px;
 	--bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-	/* Typography Scale */
+	
 	--bfg-text-level-1: 32px;
-	/* line-height: 40px */
-	/* Main Headings - Semibold */
+	
+	
 	--bfg-text-level-2: 16px;
-	/* line-height: 24px */
-	/* Descriptions/Subtitles - Regular */
+	
+	
 	--bfg-text-level-3: 16px;
-	/* Section Titles - Semibold */
+	
 	--bfg-text-level-4: 16px;
-	/* Body Text & Features - Regular */
+	
 	--bfg-text-level-5: 16px;
-	/* line-height: 24px */
-	/* Helper Text & Labels - Regular */
+	
+	
 	--bfg-text-level-6: 14px;
-	/* line-height: 20px */
-	/* Footnotes - Regular */
+	
+	
 }
 
-/* ===========================================
-   Utility Classes (.bfgu-*)
-   Tailwind-like utilities for Bring Fraktguiden
-   Scale: 0=0, 1=4px, 2=8px, 3=12px, 4=16px, 5=20px, 6=24px, 8=32px, 10=40px, 12=48px, 16=64px
-   =========================================== */
-
-/* --- Spacing: Margin --- */
 .bfgu-m-0 {
 	margin: 0 !important;
 }
@@ -290,7 +283,6 @@
 	margin-bottom: 32px !important;
 }
 
-/* --- Spacing: Padding --- */
 .bfgu-p-0 {
 	padding: 0 !important;
 }
@@ -515,7 +507,6 @@
 	padding-bottom: 32px !important;
 }
 
-/* --- Spacing: Gap --- */
 .bfgu-gap-0 {
 	gap: 0 !important;
 }
@@ -588,7 +579,6 @@
 	row-gap: 32px !important;
 }
 
-/* --- Typography: Font Size --- */
 .bfgu-text-xs {
 	font-size: 12px !important;
 	line-height: 16px !important;
@@ -619,7 +609,6 @@
 	line-height: 40px !important;
 }
 
-/* --- Typography: Font Weight --- */
 .bfgu-font-normal {
 	font-weight: 400 !important;
 }
@@ -636,7 +625,6 @@
 	font-weight: 700 !important;
 }
 
-/* --- Typography: Text Alignment --- */
 .bfgu-text-left {
 	text-align: left !important;
 }
@@ -649,7 +637,6 @@
 	text-align: right !important;
 }
 
-/* --- Typography: Text Wrapping --- */
 .bfgu-text-balance {
 	text-wrap: balance;
 }
@@ -666,7 +653,6 @@
 	white-space: normal !important;
 }
 
-/* --- Colors: Text --- */
 .bfgu-text-main {
 	color: var(--bfg-text-main) !important;
 }
@@ -699,7 +685,6 @@
 	color: #EF4444 !important;
 }
 
-/* --- Colors: Background --- */
 .bfgu-bg-white {
 	background-color: #ffffff !important;
 }
@@ -764,7 +749,6 @@
 	background-color: transparent !important;
 }
 
-/* --- Colors: Border --- */
 .bfgu-border-default {
 	border-color: var(--bfg-border) !important;
 }
@@ -797,7 +781,6 @@
 	border-color: #BBF7D0 !important;
 }
 
-/* --- Layout: Display --- */
 .bfgu-block {
 	display: block !important;
 }
@@ -822,7 +805,6 @@
 	display: none !important;
 }
 
-/* --- Layout: Flexbox --- */
 .bfgu-flex-row {
 	flex-direction: row !important;
 }
@@ -859,7 +841,6 @@
 	flex-grow: 0 !important;
 }
 
-/* --- Layout: Alignment --- */
 .bfgu-items-start {
 	align-items: flex-start !important;
 }
@@ -904,7 +885,6 @@
 	align-self: flex-end !important;
 }
 
-/* --- Layout: Grid --- */
 .bfgu-grid-cols-1 {
 	grid-template-columns: repeat(1, 1fr) !important;
 }
@@ -921,7 +901,6 @@
 	grid-template-columns: repeat(4, 1fr) !important;
 }
 
-/* --- Layout: Width & Height --- */
 .bfgu-w-full {
 	width: 100% !important;
 }
@@ -954,7 +933,6 @@
 	min-height: 100vh !important;
 }
 
-/* --- Borders --- */
 .bfgu-border {
 	border: 1px solid var(--bfg-border) !important;
 }
@@ -983,7 +961,6 @@
 	border-width: 2px !important;
 }
 
-/* --- Border Radius --- */
 .bfgu-rounded-none {
 	border-radius: 0 !important;
 }
@@ -1004,7 +981,6 @@
 	border-radius: 50% !important;
 }
 
-/* --- Shadows --- */
 .bfgu-shadow {
 	box-shadow: var(--bfg-shadow) !important;
 }
@@ -1021,7 +997,6 @@
 	box-shadow: none !important;
 }
 
-/* --- Positioning --- */
 .bfgu-relative {
 	position: relative !important;
 }
@@ -1030,7 +1005,6 @@
 	position: absolute !important;
 }
 
-/* --- Transitions --- */
 .bfgu-transition {
 	transition: all 0.2s ease-in-out !important;
 }
@@ -1043,7 +1017,6 @@
 	transition: none !important;
 }
 
-/* --- Cursor --- */
 .bfgu-cursor-pointer {
 	cursor: pointer !important;
 }
@@ -1052,7 +1025,6 @@
 	cursor: not-allowed !important;
 }
 
-/* --- Overflow --- */
 .bfgu-overflow-hidden {
 	overflow: hidden !important;
 }
@@ -1061,14 +1033,9 @@
 	overflow: auto !important;
 }
 
-/* --- List Styles --- */
 .bfgu-list-none {
 	list-style: none !important;
 }
-
-/* ===========================================
-   End Utility Classes
-   =========================================== */
 
 .bfg-admin-page #wpcontent,
 .bfg-admin-page__home #wpcontent,
@@ -1097,7 +1064,6 @@
 	padding: 0 32px 64px;
 }
 
-/* Typography Consistency */
 .bfg-page__header {
 	margin-bottom: 32px;
 	border-bottom: 1px solid var(--bfg-border);
@@ -1111,7 +1077,6 @@
 	margin: 0 !important;
 }
 
-/* Cards / Boxes Styling */
 .bfg-page__main-card,
 .bfg-admin-page .bfg-box {
 	background: var(--bfg-bg-card) !important;
@@ -1154,7 +1119,6 @@
 	line-height: 24px !important;
 }
 
-/* Form Section Styling */
 .bfg-admin-page .bfg-box__section {
 	padding: 0 !important;
 }
@@ -1174,7 +1138,6 @@
 	margin-bottom: 8px !important;
 }
 
-/* Sub-level group titles (smaller than section h2) */
 .bfg-field>.bfg-field-group-title,
 .bfg-field-group-title {
 	display: block;
@@ -1185,7 +1148,6 @@
 	margin-bottom: 16px !important;
 }
 
-/* Inputs and Selects Consistency */
 .bfg-admin-page select,
 .bfg-admin-page input[type="text"],
 .bfg-admin-page input[type="number"],
@@ -1210,7 +1172,6 @@
 	margin: 0 !important;
 }
 
-/* Override WordPress defaults for tel and email inputs */
 .bfg-admin-page input[type="tel"],
 .bfg-admin-page input[type="email"] {
 	border: 1px solid var(--bfg-border) !important;
@@ -1236,18 +1197,16 @@
 	padding-right: 40px !important;
 }
 
-/* Active state - brief moment while pressing down */
 [class*="bfg-admin-page"] input:active,
 [class*="bfg-admin-page"] select:active,
 [class*="bfg-admin-page"] textarea:active {
 	border-color: #93C5FD !important;
-	/* blue-300 - light tint */
+	
 	background: #fff !important;
 	outline: none !important;
 	box-shadow: none !important;
 }
 
-/* All focus states - blue border, no ring by default */
 [class*="bfg-admin-page"] input:focus,
 [class*="bfg-admin-page"] select:focus,
 [class*="bfg-admin-page"] textarea:focus {
@@ -1257,14 +1216,12 @@
 	box-shadow: none !important;
 }
 
-/* Keyboard focus (tab navigation) - add ring only when not using mouse */
 body:not(.using-mouse) [class*="bfg-admin-page"] input:focus,
 body:not(.using-mouse) [class*="bfg-admin-page"] select:focus,
 body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
-/* Placeholder styling for selects - when showing placeholder option */
 .bfg-admin-page select.has-placeholder,
 .bfg-admin-page select:invalid {
 	color: var(--bfg-text-muted);
@@ -1280,7 +1237,6 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 	color: var(--bfg-text-muted);
 }
 
-/* Pro Features section (Purple) - focus state */
 .bfg-pro-features-teaser input:focus,
 .bfg-license-input-row input:focus {
 	border-color: #9333EA !important;
@@ -1288,13 +1244,11 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 	box-shadow: none !important;
 }
 
-/* Pro Features section (Purple) - keyboard focus */
 body:not(.using-mouse) .bfg-pro-features-teaser input:focus,
 body:not(.using-mouse) .bfg-license-input-row input:focus {
 	box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.3) !important;
 }
 
-/* Suffix Handling for Units */
 .bfg-input {
 	position: relative;
 }
@@ -1305,7 +1259,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	align-items: center;
 }
 
-/* Override for custom select - don't apply flex centering */
 .bfg-input--select {
 	display: block !important;
 }
@@ -1314,7 +1267,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	display: block !important;
 }
 
-/* Number input with suffix - flexbox container */
 .bfg-input--number {
 	display: flex !important;
 	align-items: stretch !important;
@@ -1364,12 +1316,10 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	flex-shrink: 0;
 }
 
-/* Ensure consistent spacing for descriptions under inputs with suffixes */
 .bfg-input--number + .bfg-description {
 	margin-top: 8px !important;
 }
 
-/* Step Rows (Used on Home, served as reference) */
 .bfg-step-row {
 	display: flex;
 	align-items: center;
@@ -1471,7 +1421,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	color: #fff !important;
 }
 
-/* Checkbox Blocks (Cards for checkboxes) */
 .bfg-field--checkbox-box {
 	background: #fff;
 	border: 1px solid var(--bfg-border);
@@ -1489,7 +1438,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: #F0F7FF;
 }
 
-/* Wizard Checkbox Styles */
 .bfg-box__checkbox {
 	margin-bottom: 16px;
 	padding: 0 32px;
@@ -1532,7 +1480,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	padding-bottom: 0;
 }
 
-/* Make the entire card clickable via label pseudo-element */
 .bfg-field--checkbox-box label::after {
 	content: "";
 	position: absolute;
@@ -1603,7 +1550,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	display: block;
 }
 
-/* General description text */
 .bfg-description,
 .bfg-admin-page .bfg-description {
 	font-size: 16px !important;
@@ -1616,7 +1562,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	text-wrap: pretty;
 }
 
-/* Specific helper text under fields/inputs */
 .bfg-field .bfg-description,
 .bfg-input .bfg-description,
 .bfg-pro-content-block__test-url .bfg-description,
@@ -1626,7 +1571,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	margin-top: 8px !important;
 }
 
-/* Descriptions inside Checkbox/Card items */
 .bfg-input--checkbox .bfg-description,
 .bfg-field--checkbox-box .bfg-description {
 	font-size: 14px !important;
@@ -1636,7 +1580,6 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	text-wrap: pretty;
 }
 
-/* Button Consistency */
 .bfg-button-primary,
 .bfg-admin-page .button-primary {
 	background: var(--bfg-primary) !important;
@@ -1690,7 +1633,6 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	cursor: not-allowed !important;
 }
 
-/* Smaller buttons in section cards for non-home pages */
 .bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .bfg-button-primary,
 .bfg-admin-page:not(.bfg-admin-page__home) .bfg-box .button-primary {
 	padding: 9px 16px !important;
@@ -1718,7 +1660,6 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	padding: 0 !important;
 }
 
-/* Layout Utilities (Flexbox, Gaps) */
 .bfg-flex {
 	display: flex;
 	flex-direction: column;
@@ -1750,18 +1691,15 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	display: block !important;
 }
 
-/* Stacking by default for better completion rate */
 .bfg-flex {
 	flex-direction: column;
 }
 
-/* Row layout for inline fields (e.g., maximum box dimensions) */
 .bfg-flex--row {
 	flex-direction: row;
 	gap: 16px;
 }
 
-/* Banner and Notice Styling */
 .bfg-notice-banner {
 	background: #FFF7ED !important;
 	color: #9A3412 !important;
@@ -1794,7 +1732,6 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	font-weight: 400 !important;
 }
 
-/* Hide WordPress notices and footer on Bring pages to avoid clutter */
 .bfg-admin-page .notice,
 .bfg-admin-page .updated,
 .bfg-admin-page .error,
@@ -1803,7 +1740,6 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	display: none !important;
 }
 
-/* Unlock PRO Experience */
 .bfg-pro-teaser-v2 {
 	background: #fff;
 	border: 1px solid var(--bfg-border);
@@ -2133,7 +2069,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	line-height: 20px;
 }
 
-/* Hide/Show logic for tabs */
 .bfg-pro-tab-content {
 	display: none;
 }
@@ -2147,7 +2082,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	color: #6B7280;
 }
 
-/* State-specific PRO teaser styles */
 .bfg-pro-teaser__shield--success {
 	background: #16A34A !important;
 	box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3) !important;
@@ -2168,7 +2102,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
 }
 
-/* Status Card Styles */
 .bfg-pro-status-card {
 	display: flex;
 	justify-content: center;
@@ -2230,7 +2163,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	color: #DC2626;
 }
 
-/* Compact features grid for active states */
 .bfg-pro-features-grid--compact {
 	max-width: 460px;
 	margin: 0 auto !important;
@@ -2244,10 +2176,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	color: #16A34A;
 }
 
-/* ===========================================
-   Custom Select Dropdown
-   =========================================== */
-
 .bfg-custom-select {
 	position: relative;
 	width: 100% !important;
@@ -2255,7 +2183,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	display: block;
 }
 
-/* Ensure full width in admin field context */
 .bfg-admin-page .bfg-field .bfg-custom-select,
 .bfg-admin-page .bfg-custom-select,
 .bfg-input .bfg-custom-select {
@@ -2265,7 +2192,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	flex: 1 1 100% !important;
 }
 
-/* Hide the native select visually but keep it functional for form submission */
 .bfg-custom-select__native {
 	position: absolute !important;
 	width: 1px !important;
@@ -2278,7 +2204,6 @@ body:not(.using-mouse) .bfg-pro-btn-outline:focus {
 	border: 0 !important;
 }
 
-/* Custom trigger button - matches existing input styling */
 .bfg-custom-select__trigger {
 	display: flex;
 	align-items: center;
@@ -2338,7 +2263,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	transform: rotate(180deg);
 }
 
-/* Dropdown panel - vertical list below trigger */
 .bfg-custom-select__dropdown {
 	position: absolute !important;
 	top: 100%;
@@ -2374,7 +2298,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	transform: translateY(0);
 }
 
-/* Options - stacked vertically */
 .bfg-custom-select__option {
 	display: flex;
 	flex-direction: row;
@@ -2424,11 +2347,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	margin-left: 12px;
 }
 
-/* ===========================================
-   Widow Prevention System
-   =========================================== */
-
-/* Elements that should never wrap - badges, buttons, status values */
 .bfg-badge,
 .bfg-progress-badge,
 .bfg-pro-tab,
@@ -2437,7 +2355,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	white-space: nowrap;
 }
 
-/* Buttons - prevent text wrapping */
 .bfg-button-primary,
 .bfg-pro-btn-main,
 .bfg-pro-btn-outline,
@@ -2445,7 +2362,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	white-space: nowrap;
 }
 
-/* Headings - use text-wrap: balance for even line distribution */
 .bfg-section-card-title,
 .bfg-pro-teaser__title,
 .bfg-pro-content-block__title,
@@ -2461,7 +2377,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	text-wrap: balance;
 }
 
-/* Body text and descriptions - use text-wrap: pretty to prevent widows */
 .bfg-pro-teaser__subtitle,
 .bfg-admin-page .bfg-box__header p,
 .bfg-pro-content-block__text,
@@ -2478,10 +2393,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	text-wrap: pretty;
 }
 
-/* ===========================================
-   Time Input Styling
-   =========================================== */
-
 .bfg-admin-page .bfg-input--time {
 	display: flex;
 	justify-content: flex-end;
@@ -2492,7 +2403,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 	min-width: 140px;
 }
 
-/* Style the inner text of the time input */
 .bfg-admin-page .bfg-input--time input[type="time"]::-webkit-datetime-edit {
 	text-align: right;
 	padding-right: 8px;
@@ -2501,10 +2411,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 .bfg-admin-page .bfg-input--time input[type="time"]::-webkit-datetime-edit-fields-wrapper {
 	text-align: right;
 }
-
-/* ===========================================
-   Flatpickr Time Picker Styling (if used)
-   =========================================== */
 
 .bfg-admin-page .flatpickr-calendar {
 	margin-top: 8px !important;
@@ -2598,17 +2504,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	flex-shrink: 0 !important;
 }
 
-/* Hide AM/PM toggle - using 24hr format */
 .bfg-admin-page .flatpickr-time .flatpickr-am-pm {
 	display: none !important;
 }
 
-/* ===========================================
-   Mobile Responsive Styles
-   =========================================== */
-
 @media screen and (max-width: 782px) {
-	/* Page Layout */
+	
 	.bfg-admin-page,
 	.bfg-admin-page__home,
 	.bfg-admin-page__settings,
@@ -2631,7 +2532,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 16px;
 	}
 
-	/* Cards */
+	
 	.bfg-page__main-card,
 	.bfg-admin-page .bfg-box {
 		padding: 20px !important;
@@ -2654,7 +2555,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		padding-top: 48px !important;
 	}
 
-	/* Fields */
+	
 	.bfg-field {
 		margin-bottom: 24px;
 	}
@@ -2678,13 +2579,13 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 12px !important;
 	}
 
-	/* Flex row fields - stack on mobile */
+	
 	.bfg-flex--row {
 		flex-direction: column;
 		gap: 24px;
 	}
 
-	/* Step Rows */
+	
 	a.bfg-step-row,
 	.bfg-step-row {
 		display: flex !important;
@@ -2752,7 +2653,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		align-self: center !important;
 	}
 
-	/* Checkbox cards */
+	
 	.bfg-field--checkbox-box label {
 		padding: 20px;
 		padding-bottom: 0;
@@ -2777,7 +2678,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 12px !important;
 	}
 
-	/* PRO Teaser */
+	
 	.bfg-pro-teaser-v2 {
 		padding: 20px !important;
 		border-radius: 8px;
@@ -2885,7 +2786,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		margin-bottom: 24px;
 	}
 
-	/* Buttons */
+	
 	.bfg-button-primary,
 	.bfg-admin-page .button-primary {
 		padding: 9px 20px !important;
@@ -2896,7 +2797,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		margin: 24px 0 0 !important;
 	}
 
-	/* Custom Select */
+	
 	.bfg-custom-select__trigger {
 		height: 44px;
 		font-size: 16px;
@@ -2907,7 +2808,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 16px;
 	}
 
-	/* Inputs */
+	
 	.bfg-admin-page select,
 	.bfg-admin-page input[type="text"],
 	.bfg-admin-page input[type="number"],
@@ -2919,7 +2820,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 16px;
 	}
 
-	/* Notice Banner */
+	
 	.bfg-notice-banner {
 		padding: 14px 16px !important;
 		gap: 12px !important;
@@ -2931,7 +2832,6 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 }
 
-/* Extra small screens */
 @media screen and (max-width: 480px) {
 	.bfg-admin-page .bfg-page__main {
 		padding: 0 16px 40px;

@@ -1,7 +1,5 @@
 @charset "UTF-8";
-/**
- * Input errors
- */
+
 input.bring-error-input.input-text {
   border: 1px solid;
   border-bottom-width: 2px;
@@ -11,9 +9,6 @@ span.bring-error-message {
   font-size: 0.8em;
 }
 
-/**
- * Setting up the colours for the errors
- */
 [class*=bring-] {
   --error-color: #F44336;
 }
@@ -49,18 +44,13 @@ span.bring-error-message {
     content: "❗️";
   }
 }
-/**
- * Pick-up points
- */
+
 .bring_pickup_point {
   font-size: small;
   display: inline-block;
   width: 100%;
 }
 
-/**
- * Alternative Delivery Dates
- */
 .bring-fraktguiden-date-options {
   margin-top: 16px;
   margin-bottom: 16px;

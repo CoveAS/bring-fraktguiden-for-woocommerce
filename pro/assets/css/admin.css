@@ -1,4 +1,4 @@
-/** Booking awaiting shipment status icon */
+
 mark.bring-shipment:after {
   font-family: WooCommerce;
   speak: none;
@@ -297,9 +297,6 @@ mark.bring-shipment:after {
   width: 4.5em;
 }
 
-/**
- * Separate admin sections require separation
- */
 .bring-list-tracking-numbers {
   list-style: none;
   margin: 0;
