@@ -31,11 +31,14 @@ class Field
 
 	public function render(): string
 	{
+		// Checkbox includes description in its template
+		$description = $this->field['type'] === 'checkbox' ? '' : $this->description();
+
 		return sprintf(
-			'<div class="%s">%s %s</div>',
-			'bfg-input bfg-input--'. $this->field['type'],
+			'<div class="%s">%s%s</div>',
+			'bfg-input bfg-input--' . $this->field['type'],
 			$this->field(),
-			$this->description(),
+			$description,
 		);
 	}
 	public function field(): string

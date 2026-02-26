@@ -17,6 +17,8 @@ use BringFraktguiden\Fields\Field;
  * @var array $custom_attributes
  * @var array $options
  */
+
+$desc_content = trim(implode(' ', [$description, $desc_tip]));
 ?>
 <label>
 	<input
@@ -34,5 +36,10 @@ use BringFraktguiden\Fields\Field;
 			checked="checked"
 		<?php endif; ?>
 	>
-	<span><?php echo wp_kses_post($label); ?></span>
+	<div class="bfg-checkbox-content">
+		<span class="bfg-checkbox-title"><?php echo wp_kses_post($label); ?></span>
+		<?php if ($desc_content): ?>
+			<p class="bfg-checkbox-desc"><?php echo wp_kses_post($desc_content); ?></p>
+		<?php endif; ?>
+	</div>
 </label>
