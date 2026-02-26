@@ -1,8 +1,19 @@
 <?php
 /**
- * @var string $skin = 'fresh'
+ * Styles Component
+ *
+ * Outputs CSS custom properties based on WordPress admin color scheme.
+ *
+ * @var array $args {
+ *     @type string $skin WordPress admin color scheme name.
+ * }
  */
-$colors = apply_filters('bring_fraktguiden_skin_colors', match ($skin) {
+
+$args = wp_parse_args($args ?? [], [
+	'skin' => 'fresh',
+]);
+
+$colors = apply_filters('bring_fraktguiden_skin_colors', match ($args['skin']) {
 	default => [
 		'#1d2327',
 		'#2c3338',

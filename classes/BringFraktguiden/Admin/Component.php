@@ -215,4 +215,17 @@ class Component
 			'placeholder' => $placeholder,
 		]);
 	}
+
+	/**
+	 * Render CSS custom properties based on admin color scheme.
+	 *
+	 * @param string $skin WordPress admin color scheme name
+	 * @return string Rendered style tag
+	 */
+	public static function styles(string $skin = 'fresh'): string
+	{
+		return self::render('styles', [
+			'skin' => $skin,
+		]);
+	}
 }
