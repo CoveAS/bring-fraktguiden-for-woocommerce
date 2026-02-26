@@ -1489,6 +1489,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 .bfg-field--checkbox-box .bfg-description {
 	padding: 0 24px 24px 64px;
+	margin: 0 !important;
 }
 
 .bfg-field--checkbox-box .bfg-input--checkbox:not(:has(.bfg-description)) label {
@@ -2932,14 +2933,26 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		padding: 16px;
 		padding-bottom: 0;
 		gap: 10px;
+		font-size: 16px;
 	}
 
 	.bfg-field--checkbox-box .bfg-description {
-		padding: 0 16px 16px 46px;
-		font-size: 12px !important;
+		padding: 0 16px 16px 44px;
+		font-size: 14px !important;
+		margin: 0 !important;
 	}
 
 	.bfg-field--checkbox-box .bfg-input--checkbox:not(:has(.bfg-description)) label {
 		padding-bottom: 16px;
+	}
+
+	.bfg-input--checkbox input[type="checkbox"] {
+		width: 18px !important;
+		height: 18px !important;
+	}
+
+	.bfg-input--checkbox label {
+		gap: 10px;
+		font-size: 16px;
 	}
 }
