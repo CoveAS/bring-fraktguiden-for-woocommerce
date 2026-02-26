@@ -1127,6 +1127,11 @@
 	margin-bottom: 32px;
 }
 
+.bfgu-flex-1 > .bfg-field:last-child,
+.bfgu-flex-1 > .bfg-field:only-child {
+	margin-bottom: 0;
+}
+
 .bfg-admin-page .bfg-field>label,
 .bfg-admin-page .bfg-field>.label,
 .bfg-admin-page .bfg-field .bfgu-flex-1>label {
@@ -1487,7 +1492,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	cursor: pointer;
 }
 
-.bfg-field--checkbox-box .bfg-description {
+.bfg-field--checkbox-box .bfg-input--checkbox .bfg-description {
 	padding: 0 24px 24px 64px;
 	margin: 0 !important;
 }
@@ -1585,11 +1590,11 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: var(--bfg-primary);
 	border: 1px solid transparent;
 	border-radius: 8px;
-	padding: 11px 32px;
+	padding: 7px 32px;
 	height: auto;
 	line-height: 24px;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 14px;
 	color: #fff;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 	text-shadow: none;
@@ -1606,11 +1611,11 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	background: var(--bfg-primary) !important;
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
-	padding: 11px 32px !important;
+	padding: 7px 32px !important;
 	height: auto !important;
 	line-height: 24px !important;
 	font-weight: 500 !important;
-	font-size: 16px !important;
+	font-size: 14px !important;
 	color: #fff !important;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 	text-shadow: none !important;
@@ -1694,6 +1699,10 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 .bfg-admin-page .submit {
 	margin: 32px 0 0 !important;
 	padding: 0 !important;
+}
+
+.bfg-box__section > *:has(+ .submit) {
+	margin-bottom: 0 !important;
 }
 
 .bfg-flex {
@@ -2695,8 +2704,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		padding-bottom: 0;
 	}
 
-	.bfg-field--checkbox-box .bfg-description {
-		padding: 0 20px 20px 56px;
+	.bfg-field--checkbox-box .bfg-input--checkbox .bfg-description {
+		padding: 0 20px 20px 52px;
 	}
 
 	.bfg-input--checkbox input[type="checkbox"] {
@@ -2824,17 +2833,17 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 
 	.bfg-admin-page .bfg-button-primary {
-		padding: 11px 32px;
-		font-size: 16px;
+		padding: 7px 32px;
+		font-size: 14px;
 	}
 
 	.bfg-admin-page .button-primary {
-		padding: 11px 32px !important;
-		font-size: 16px !important;
+		padding: 7px 32px !important;
+		font-size: 14px !important;
 	}
 
 	.bfg-admin-page .submit {
-		margin: 24px 0 0 !important;
+		margin: 32px 0 0 !important;
 	}
 
 	
@@ -2936,7 +2945,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 16px;
 	}
 
-	.bfg-field--checkbox-box .bfg-description {
+	.bfg-field--checkbox-box .bfg-input--checkbox .bfg-description {
 		padding: 0 16px 16px 44px;
 		font-size: 14px !important;
 		margin: 0 !important;
