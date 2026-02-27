@@ -22,10 +22,10 @@ use BringFraktguiden\Fields\Fields;
 		<form method="post" action="options.php">
 			<?php settings_fields('bring_fraktguiden_settings'); ?>
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Display Options', 'bring-fraktguiden-for-woocommerce'),
-					__('Customize how shipping options appear to customers', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Display Options', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Customize how shipping options appear to customers', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field">
@@ -36,18 +36,18 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->service_sorting->label(); ?>
 						<?php echo $fields->service_sorting; ?>
 					</div>
-					<?php echo Component::checkboxBox($fields->shipping_options_full_width); ?>
-					<?php echo Component::checkboxBox($fields->display_desc); ?>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->shipping_options_full_width; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->display_desc; ?></div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</div>
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Pricing Options', 'bring-fraktguiden-for-woocommerce'),
-					__('Settings that affect the shipping rates, price estimation and service availability', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Pricing Options', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Settings that affect the shipping rates, price estimation and service availability', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
 						<label class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
@@ -83,9 +83,9 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->handling_fee->description(); ?>
 					</div>
 
-					<?php echo Component::checkboxBox($fields->post_office); ?>
-					<?php echo Component::checkboxBox($fields->use_customer_number_to_get_prices); ?>
-					<?php echo Component::checkboxBox($fields->calculate_by_weight); ?>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->post_office; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->use_customer_number_to_get_prices; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
 					<div class="bfg-field bfgu-mt-8">
 						<label class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
@@ -115,10 +115,10 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Lead Time', 'bring-fraktguiden-for-woocommerce'),
-					__('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Lead Time', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
@@ -140,12 +140,12 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Advanced Settings', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Advanced Settings', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+				</div>
 				<div class="bfg-box__section">
-					<?php echo Component::checkboxBox($fields->debug); ?>
-					<?php echo Component::checkboxBox($fields->disable_stylesheet); ?>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->debug; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->disable_stylesheet; ?></div>
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</div>
 			</div>

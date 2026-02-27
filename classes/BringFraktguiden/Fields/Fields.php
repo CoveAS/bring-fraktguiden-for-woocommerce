@@ -51,6 +51,10 @@ class Fields
 	public readonly Field $minimum_width;
 	public readonly Field $minimum_height;
 	public readonly Field $minimum_weight;
+	public readonly Field $booking_enabled;
+	public readonly Field $booking_without_bring;
+	public readonly Field $booking_test_mode_enabled;
+	public readonly Field $booking_use_custom_address;
 
 	protected function __construct()
 	{

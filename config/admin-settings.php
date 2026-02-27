@@ -302,6 +302,38 @@ return [
 	],
 
 	/**
+	 * Booking page
+	 */
+	'booking' => [
+		'fields' => [
+			'booking_enabled' => [
+				'type' => 'checkbox',
+				'label' => __('Enable MyBring booking', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Allow booking shipments directly from WooCommerce order pages', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'no',
+			],
+			'booking_without_bring' => [
+				'type' => 'checkbox',
+				'label' => __('Allow booking without Bring shipping', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Enable booking for orders that don\'t use Bring shipping methods', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'no',
+			],
+			'booking_test_mode_enabled' => [
+				'type' => 'checkbox',
+				'label' => __('Enable test mode for MyBring booking', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('When enabled, bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'yes',
+			],
+			'booking_use_custom_address' => [
+				'type' => 'checkbox',
+				'label' => __('Use a different shipping address', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Enable this if you ship from a different address than your WooCommerce store address.', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'no',
+			],
+		],
+	],
+
+	/**
 	 * Fallback options page
 	 */
 	'fallback' => [

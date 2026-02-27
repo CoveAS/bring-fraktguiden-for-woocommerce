@@ -64,6 +64,14 @@ class Settings
 	public Setting $minimum_width;
 	public Setting $minimum_height;
 	public Setting $minimum_weight;
+	#[Checkbox]
+	public Setting $booking_enabled;
+	#[Checkbox]
+	public Setting $booking_without_bring;
+	#[Checkbox]
+	public Setting $booking_test_mode_enabled;
+	#[Checkbox]
+	public Setting $booking_use_custom_address;
 
 	/**
 	 * @throws SettingsPropertyException

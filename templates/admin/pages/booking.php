@@ -26,62 +26,28 @@ use BringFraktguiden\Fields\Fields;
 			<div aria-live="polite" aria-atomic="true" class="sr-only" id="bfg-form-announcements"></div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('MyBring Booking', 'bring-fraktguiden-for-woocommerce'),
-					__('Book orders directly from the order page with MyBring integration', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Book orders directly from the order page with MyBring integration', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 
 				<div class="bfg-box__section">
-					<div class="bfg-field bfg-field--checkbox-box">
-						<div class="bfg-input--checkbox">
-							<label>
-								<input type="checkbox" name="booking_enabled" value="yes" />
-								<span><?php esc_html_e('Enable MyBring booking', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							</label>
-							<p class="bfg-description"><?php esc_html_e('Allow booking shipments directly from WooCommerce order pages', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						</div>
-					</div>
-
-					<div class="bfg-field bfg-field--checkbox-box">
-						<div class="bfg-input--checkbox">
-							<label>
-								<input type="checkbox" name="booking_without_bring" value="yes" />
-								<span><?php esc_html_e('Allow booking without Bring shipping', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							</label>
-							<p class="bfg-description"><?php esc_html_e('Enable booking for orders that don\'t use Bring shipping methods', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						</div>
-					</div>
-
-					<div class="bfg-field bfg-field--checkbox-box">
-						<div class="bfg-input--checkbox">
-							<label>
-								<input type="checkbox" name="booking_test_mode_enabled" value="yes" checked />
-								<span><?php esc_html_e('Enable test mode for MyBring booking', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							</label>
-							<p class="bfg-description"><?php esc_html_e('When enabled, bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						</div>
-					</div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_enabled; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_without_bring; ?></div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?></div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</div>
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Shipping Address', 'bring-fraktguiden-for-woocommerce'),
-					__('By default, your WooCommerce store address is used as the "from" address during booking.', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Shipping Address', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('By default, your WooCommerce store address is used as the "from" address during booking.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 
 				<div class="bfg-box__section">
-					<div class="bfg-field bfg-field--checkbox-box">
-						<div class="bfg-input--checkbox">
-							<label>
-								<input type="checkbox" name="booking_use_custom_address" id="booking_use_custom_address" value="yes" />
-								<span><?php esc_html_e('Use a different shipping address', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							</label>
-							<p class="bfg-description"><?php esc_html_e('Enable this if you ship from a different address than your WooCommerce store address.', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						</div>
-					</div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_use_custom_address; ?></div>
 
 					<div id="bfg-custom-shipping-address" style="display: none;">
 						<div class="bfg-field">
@@ -153,118 +119,70 @@ use BringFraktguiden\Fields\Fields;
 					</div>
 				</div>
 
-				<?php echo Component::boxHeader(
-					__('Contact Information', 'bring-fraktguiden-for-woocommerce'),
-					'',
-					true
-				); ?>
+				<div class="bfg-box__header bfg-box__header--divider">
+					<strong><?php esc_html_e('Contact Information', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+				</div>
 
 				<div class="bfg-box__section">
-					<div class="bfg-field" data-validate="required">
-						<label for="booking_address_reference">
-							<?php esc_html_e('Reference', 'bring-fraktguiden-for-woocommerce'); ?>
-							<span class="bfg-required" aria-hidden="true">*</span>
-						</label>
-						<input
-							type="text"
-							id="booking_address_reference"
-							name="booking_address_reference"
-							maxlength="35"
-							placeholder="<?php esc_attr_e('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'); ?>"
-							required
-							aria-required="true"
-							aria-describedby="reference_help reference_error"
-						/>
-						<div class="bfg-field__validation bfg-field__validation--error" id="reference_error" role="alert">
-							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-							</svg>
-							<span><?php esc_html_e('Reference is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-						</div>
-							<p class="bfg-description" id="reference_help">
-							<?php echo sprintf(
-								esc_html__('The store\'s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
-								'<code>{order_id}</code>',
-								'<code>{products}</code>'
-							); ?>
-						</p>
-					</div>
+					<?php echo Component::validatedInputField([
+						'id' => 'booking_address_reference',
+						'name' => 'booking_address_reference',
+						'type' => 'text',
+						'label' => __('Reference', 'bring-fraktguiden-for-woocommerce'),
+						'required' => true,
+						'validation' => ['required'],
+						'error_message' => __('Reference is required', 'bring-fraktguiden-for-woocommerce'),
+						'description' => sprintf(
+							__('The store\'s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
+							'<code>{order_id}</code>',
+							'<code>{products}</code>'
+						),
+						'placeholder' => __('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'),
+						'maxlength' => 35,
+					]); ?>
 
-					<div class="bfg-field" data-validate="required">
-						<label for="booking_address_contact_person">
-							<?php esc_html_e('Contact Person', 'bring-fraktguiden-for-woocommerce'); ?>
-							<span class="bfg-required" aria-hidden="true">*</span>
-						</label>
-						<input
-							type="text"
-							id="booking_address_contact_person"
-							name="booking_address_contact_person"
-							required
-							aria-required="true"
-							aria-describedby="contact_person_error"
-							autocomplete="name"
-						/>
-						<div class="bfg-field__validation bfg-field__validation--error" id="contact_person_error" role="alert">
-							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-							</svg>
-							<span><?php esc_html_e('Contact person is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-						</div>
-					</div>
+					<?php echo Component::validatedInputField([
+						'id' => 'booking_address_contact_person',
+						'name' => 'booking_address_contact_person',
+						'type' => 'text',
+						'label' => __('Contact Person', 'bring-fraktguiden-for-woocommerce'),
+						'required' => true,
+						'validation' => ['required'],
+						'error_message' => __('Contact person is required', 'bring-fraktguiden-for-woocommerce'),
+						'autocomplete' => 'name',
+					]); ?>
 
-					<div class="bfg-field" data-validate="required|phone">
-						<label for="booking_address_phone">
-							<?php esc_html_e('Phone', 'bring-fraktguiden-for-woocommerce'); ?>
-							<span class="bfg-required" aria-hidden="true">*</span>
-						</label>
-						<input
-							type="tel"
-							id="booking_address_phone"
-							name="booking_address_phone"
-							required
-							aria-required="true"
-							aria-describedby="phone_error"
-							autocomplete="tel"
-						/>
-						<div class="bfg-field__validation bfg-field__validation--error" id="phone_error" role="alert">
-							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-							</svg>
-							<span><?php esc_html_e('Valid phone number is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-						</div>
-					</div>
+					<?php echo Component::validatedInputField([
+						'id' => 'booking_address_phone',
+						'name' => 'booking_address_phone',
+						'type' => 'tel',
+						'label' => __('Phone', 'bring-fraktguiden-for-woocommerce'),
+						'required' => true,
+						'validation' => ['required', 'phone'],
+						'error_message' => __('Valid phone number is required', 'bring-fraktguiden-for-woocommerce'),
+						'autocomplete' => 'tel',
+					]); ?>
 
-					<div class="bfg-field" data-validate="required|email">
-						<label for="booking_address_email">
-							<?php esc_html_e('Email', 'bring-fraktguiden-for-woocommerce'); ?>
-							<span class="bfg-required" aria-hidden="true">*</span>
-						</label>
-						<input
-							type="email"
-							id="booking_address_email"
-							name="booking_address_email"
-							required
-							aria-required="true"
-							aria-describedby="email_error"
-							autocomplete="email"
-						/>
-						<div class="bfg-field__validation bfg-field__validation--error" id="email_error" role="alert">
-							<svg class="bfg-field__validation-icon" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-							</svg>
-							<span><?php esc_html_e('Valid email address is required', 'bring-fraktguiden-for-woocommerce'); ?></span>
-						</div>
-					</div>
+					<?php echo Component::validatedInputField([
+						'id' => 'booking_address_email',
+						'name' => 'booking_address_email',
+						'type' => 'email',
+						'label' => __('Email', 'bring-fraktguiden-for-woocommerce'),
+						'required' => true,
+						'validation' => ['required', 'email'],
+						'error_message' => __('Valid email address is required', 'bring-fraktguiden-for-woocommerce'),
+						'autocomplete' => 'email',
+					]); ?>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</div>
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Processing', 'bring-fraktguiden-for-woocommerce'),
-					__('Change order status after booking or printing labels', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Processing', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Change order status after booking or printing labels', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 
 				<div class="bfg-box__section">
 					<?php echo Component::noticeBanner(
@@ -307,10 +225,10 @@ use BringFraktguiden\Fields\Fields;
 			</div>
 
 			<div class="bfg-box">
-				<?php echo Component::boxHeader(
-					__('Home Delivery', 'bring-fraktguiden-for-woocommerce'),
-					__('Configure package type for home delivery services', 'bring-fraktguiden-for-woocommerce')
-				); ?>
+				<div class="bfg-box__header">
+					<strong><?php esc_html_e('Home Delivery', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<p><?php esc_html_e('Configure package type for home delivery services', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				</div>
 
 				<div class="bfg-box__section">
 					<div class="bfg-field">
@@ -341,7 +259,7 @@ use BringFraktguiden\Fields\Fields;
 	'use strict';
 
 	const form = document.getElementById('bfg-booking-form');
-	const checkbox = document.getElementById('booking_use_custom_address');
+	const checkbox = document.querySelector('input[name="booking_use_custom_address"]');
 	const addressFields = document.getElementById('bfg-custom-shipping-address');
 	const announcements = document.getElementById('bfg-form-announcements');
 

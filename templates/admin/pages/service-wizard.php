@@ -8,7 +8,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  */
 ?>
 
-<div class="wrap">
+<div class="wrap bfg-admin-page bfg-admin-page__service-wizard">
 	<div class="bfg-page__main">
 		<div class="bfg-page__header">
 			<h1><?php esc_html_e('Select services', 'bring-fraktguiden-for-woocommerce'); ?></h1>

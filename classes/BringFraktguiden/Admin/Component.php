@@ -8,8 +8,8 @@ use BringFraktguiden\Fields\Field;
  * Component renderer for reusable admin UI components.
  *
  * Usage:
- *   echo Component::render('box-header', ['title' => 'My Title', 'description' => 'My description']);
- *   echo Component::boxHeader('My Title', 'My description');
+ *   echo Component::render('notice-banner', ['message' => 'Hello', 'type' => 'warning']);
+ *   echo Component::noticeBanner('Hello', 'warning');
  *   echo Component::inputWithSuffix($field, 'cm');
  */
 class Component
@@ -32,36 +32,6 @@ class Component
 		ob_start();
 		require $template_path;
 		return ob_get_clean();
-	}
-
-	/**
-	 * Render a box header component.
-	 *
-	 * @param string $title       Section title
-	 * @param string $description Optional description text
-	 * @param bool   $divider     Whether to show top divider
-	 * @return string Rendered HTML
-	 */
-	public static function boxHeader(string $title, string $description = '', bool $divider = false): string
-	{
-		return self::render('box-header', [
-			'title' => $title,
-			'description' => $description,
-			'divider' => $divider,
-		]);
-	}
-
-	/**
-	 * Render a box section wrapper component.
-	 *
-	 * @param string $content Inner HTML content
-	 * @return string Rendered HTML
-	 */
-	public static function boxSection(string $content): string
-	{
-		return self::render('box-section', [
-			'content' => $content,
-		]);
 	}
 
 	/**
@@ -92,49 +62,6 @@ class Component
 	{
 		return self::render('notice-banner', [
 			'message' => $message,
-			'type' => $type,
-		]);
-	}
-
-	/**
-	 * Render a field wrapper component.
-	 *
-	 * @param string $content Inner HTML content (label + field)
-	 * @param string $class   Additional CSS classes
-	 * @return string Rendered HTML
-	 */
-	public static function fieldWrapper(string $content, string $class = ''): string
-	{
-		return self::render('field-wrapper', [
-			'content' => $content,
-			'class' => $class,
-		]);
-	}
-
-	/**
-	 * Render a checkbox box component (checkbox in a card).
-	 *
-	 * @param Field $field The checkbox field object
-	 * @return string Rendered HTML
-	 */
-	public static function checkboxBox(Field $field): string
-	{
-		return self::render('checkbox-box', [
-			'field' => $field,
-		]);
-	}
-
-	/**
-	 * Render a badge component.
-	 *
-	 * @param string $text  Badge text
-	 * @param string $type  Badge type: 'completed', 'in-progress', 'default'
-	 * @return string Rendered HTML
-	 */
-	public static function badge(string $text, string $type = 'default'): string
-	{
-		return self::render('badge', [
-			'text' => $text,
 			'type' => $type,
 		]);
 	}
@@ -226,6 +153,70 @@ class Component
 	{
 		return self::render('styles', [
 			'skin' => $skin,
+		]);
+	}
+
+	/**
+	 * Render a validated input field component with error display.
+	 *
+	 * @param array $args {
+	 *     @type string $id            Required. Field ID.
+	 *     @type string $name          Required. Field name attribute.
+	 *     @type string $type          Input type: 'text', 'email', 'tel'. Default 'text'.
+	 *     @type string $label         Required. Field label text.
+	 *     @type bool   $required      Whether field is required. Default false.
+	 *     @type array  $validation    Validation rules: ['required', 'email', 'phone'].
+	 *     @type string $error_message Error message to display.
+	 *     @type string $description   Help text displayed below field.
+	 *     @type string $placeholder   Placeholder text.
+	 *     @type int    $maxlength     Max length attribute.
+	 *     @type string $autocomplete  Autocomplete attribute.
+	 *     @type string $value         Current value.
+	 * }
+	 * @return string Rendered HTML
+	 */
+	public static function validatedInputField(array $args): string
+	{
+		return self::render('validated-input-field', $args);
+	}
+
+	/**
+	 * Render a form section box component.
+	 *
+	 * @param string $title         Section title
+	 * @param string $content       Inner HTML content
+	 * @param array  $options {
+	 *     @type string $description   Optional description text.
+	 *     @type bool   $divider       Whether to show top divider. Default false.
+	 *     @type bool   $submit_button Whether to include submit button. Default true.
+	 *     @type string $submit_text   Custom submit button text.
+	 * }
+	 * @return string Rendered HTML
+	 */
+	public static function formSectionBox(string $title, string $content, array $options = []): string
+	{
+		return self::render('form-section-box', array_merge([
+			'title' => $title,
+			'content' => $content,
+		], $options));
+	}
+
+	/**
+	 * Render a conditional field group component.
+	 *
+	 * @param string $id           Unique identifier for the group
+	 * @param string $trigger_name Name attribute of the trigger checkbox
+	 * @param string $content      Inner HTML content (fields to conditionally show)
+	 * @param bool   $invert       Invert the logic (hide when checked). Default false.
+	 * @return string Rendered HTML
+	 */
+	public static function conditionalFieldGroup(string $id, string $trigger_name, string $content, bool $invert = false): string
+	{
+		return self::render('conditional-field-group', [
+			'id' => $id,
+			'trigger_name' => $trigger_name,
+			'content' => $content,
+			'invert' => $invert,
 		]);
 	}
 }
