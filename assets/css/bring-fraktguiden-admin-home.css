@@ -539,7 +539,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-step-row__description {
-		font-size: 12px;
+		font-size: 14px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -630,7 +630,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-status-card__label {
-		font-size: 12px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-status-card__value {
@@ -661,7 +661,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-page__footer-notes small {
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 1.4;
 	}
 
@@ -697,7 +697,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-badge {
-		font-size: 12px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-content-block {
@@ -780,7 +780,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	.bfg-step-row__number {
 		width: 28px;
 		height: 28px;
-		font-size: 12px;
+		font-size: 14px;
 	}
 
 	.bfg-step-row__indicator svg {
@@ -796,7 +796,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 
 	.bfg-step-row .bfg-badge {
 		padding: 4px 8px;
-		font-size: 11px;
+		font-size: 14px;
 		flex-shrink: 0 !important;
 	}
 
@@ -893,7 +893,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-features-grid li {
-		font-size: 13px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-tabs {
@@ -957,7 +957,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-disclaimer {
-		font-size: 12px;
+		font-size: 14px;
 		margin-bottom: 24px;
 	}
 
@@ -968,6 +968,6 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-page__footer-notes small {
-		font-size: 12px;
+		font-size: 14px;
 	}
 }

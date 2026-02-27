@@ -578,8 +578,8 @@
 }
 
 .bfgu-text-xs {
-	font-size: 12px !important;
-	line-height: 16px !important;
+	font-size: 14px !important;
+	line-height: 20px !important;
 }
 
 .bfgu-text-sm {
@@ -1166,7 +1166,7 @@
 	align-items: center;
 	gap: 8px;
 	margin-top: 8px;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 .bfg-field__validation.is-visible {
@@ -1490,7 +1490,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 }
 
@@ -2148,7 +2148,7 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 }
 
 .bfg-pro-features-grid li sup {
-	font-size: 12px;
+	font-size: 14px;
 	color: #6B7280;
 }
 
@@ -2782,7 +2782,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-field .bfg-description,
 	.bfg-input .bfg-description {
-		font-size: 12px !important;
+		font-size: 14px !important;
 	}
 
 
@@ -2826,7 +2826,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-step-row__description {
-		font-size: 12px;
+		font-size: 14px;
 		margin-top: 2px;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -2841,7 +2841,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	.bfg-step-row__number {
 		width: 28px;
 		height: 28px;
-		font-size: 12px;
+		font-size: 14px;
 	}
 
 	.bfg-step-row__indicator svg {
@@ -2850,7 +2850,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-step-row .bfg-badge {
-		font-size: 12px;
+		font-size: 14px;
 		padding: 5px 10px;
 		min-height: 28px;
 		flex: 0 0 auto !important;
@@ -2866,7 +2866,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		--cb-gap: 12px;
 		--cb-title-size: 15px;
 		--cb-title-line-height: 18px;
-		--cb-desc-size: 13px;
+		--cb-desc-size: 14px;
 		--cb-desc-line-height: 18px;
 		--cb-content-gap: 4px;
 	}
@@ -2883,7 +2883,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) .bfg-description {
 		margin-left: calc(18px + 10px);
-		font-size: 13px;
+		font-size: 14px;
 	}
 
 
@@ -2967,7 +2967,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-pro-status-card__label {
-		font-size: 12px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-status-card__value {
