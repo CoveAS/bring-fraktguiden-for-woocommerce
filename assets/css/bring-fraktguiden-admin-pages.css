@@ -2738,7 +2738,6 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 16px;
 	}
 
-
 	.bfg-page__main-card,
 	.bfg-admin-page .bfg-box {
 		padding: 20px !important;
@@ -2752,8 +2751,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-admin-page .bfg-box__header h2,
 	.bfg-section-card-title {
-		font-size: 24px !important;
-		line-height: 32px !important;
+		font-size: 28px !important;
+		line-height: 36px !important;
 	}
 
 	.bfg-admin-page .bfg-box .bfg-box__header--divider {
@@ -2767,8 +2766,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-field-group-title {
-		font-size: 20px !important;
-		line-height: 28px !important;
+		font-size: 24px !important;
+		line-height: 32px !important;
 	}
 
 	.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
@@ -3066,8 +3065,18 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-admin-page .bfg-box__header h2,
 	.bfg-section-card-title {
+		font-size: 24px !important;
+		line-height: 32px !important;
+	}
+
+	.bfg-field-group-title {
 		font-size: 20px !important;
 		line-height: 28px !important;
+	}
+
+	.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
+	.bfg-admin-page .bfg-field>.label {
+		font-size: 14px;
 	}
 
 	.bfg-pro-teaser-v2 {
@@ -3075,12 +3084,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-pro-teaser__title {
-		font-size: 20px;
-		line-height: 28px;
+		font-size: 16px;
+		line-height: 24px;
 	}
 
 	.bfg-pro-teaser__subtitle {
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-content-block {

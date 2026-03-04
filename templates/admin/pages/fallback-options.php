@@ -31,7 +31,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('No connection', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('No connection', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('When the Bring API is unavailable, no shipping options appear at checkout and customers can\'t complete their order. Add a fallback rate here to prevent lost sales.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -60,7 +60,7 @@ use BringFraktguiden\Fields\Fields;
 				</div>
 
 				<div class="bfg-box__header bfg-box__header--divider">
-					<strong><?php esc_html_e('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Orders that exceed Bring\'s weight or size limits won\'t get a shipping rate. Add a fallback option for these cases.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -92,7 +92,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Dimension packing for cart items', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Dimension packing for cart items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Configure how cart items are packed into boxes before calculating shipping rates. Useful for stores with large or heavy products.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -103,7 +103,7 @@ use BringFraktguiden\Fields\Fields;
 					ob_start();
 					?>
 					<div class="bfg-field">
-						<label class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<h3 class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
 							<div class="bfgu-flex-1">
 								<?php echo $fields->dimension_packing_side->label(); ?>

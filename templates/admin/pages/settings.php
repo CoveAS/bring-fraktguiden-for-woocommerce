@@ -23,7 +23,7 @@ use BringFraktguiden\Fields\Fields;
 			<?php settings_fields('bring_fraktguiden_settings'); ?>
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Display Options', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Display Options', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Customize how shipping options appear to customers', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -45,12 +45,12 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Pricing Options', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Pricing Options', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Settings that affect the shipping rates, price estimation and service availability', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
-						<label class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<h3 class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></h3>
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
 							<div class="bfgu-flex-1">
 								<?php echo $fields->from_zip->label() ?>
@@ -88,7 +88,7 @@ use BringFraktguiden\Fields\Fields;
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
 					<div class="bfg-field bfgu-mt-8">
-						<label class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></label>
+						<h3 class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
 						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
 							<div class="bfgu-flex-1">
 								<?php echo $fields->minimum_length->label(); ?>
@@ -116,7 +116,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Lead Time', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Lead Time', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 				<div class="bfg-box__section">
@@ -141,7 +141,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Advanced Settings', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Advanced Settings', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->debug; ?></div>

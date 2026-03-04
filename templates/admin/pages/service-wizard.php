@@ -39,7 +39,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 			</p>
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Who are you shipping to?', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Who are you shipping to?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Choose the type of customers you ship to.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 				<div class="bfg-box__checkbox">
@@ -61,7 +61,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Where do you ship to?', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Where do you ship to?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 				<div class="bfg-box__checkbox">
 					<label>
@@ -86,7 +86,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('How heavy are the packages you’re sending?', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('How heavy are the packages you're sending?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 				<div class="bfg-box__checkbox">
 					<label>
@@ -113,7 +113,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Do you have an RFID-enabled printer and labels?', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Do you have an RFID-enabled printer and labels?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p class="bfg-description">
 						<?php esc_html_e('If your packages weigh less than 5 kg, you can use the "Pakke i postkassen" shipping option with RFID tracking. Compatible printer models include:', 'bring-fraktguiden-for-woocommerce'); ?>
 					</p>
@@ -142,7 +142,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Based on your selection we recommend that you enable these services', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Based on your selection we recommend that you enable these services', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 				<div class="bfg-box__checkbox">
 					<label>

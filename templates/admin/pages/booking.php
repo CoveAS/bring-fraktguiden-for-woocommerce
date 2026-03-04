@@ -27,7 +27,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Book orders directly from the order page with MyBring integration', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -42,7 +42,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Shipping Address', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Shipping Address', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('By default, your WooCommerce store address is used as the "from" address during booking.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -86,7 +86,7 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 
 						<div class="bfg-field">
-							<label><?php esc_html_e('Address details', 'bring-fraktguiden-for-woocommerce'); ?></label>
+							<h3 class="bfg-field-group-title"><?php esc_html_e('Address details', 'bring-fraktguiden-for-woocommerce'); ?></h3>
 							<div class="bfgu-flex bfgu-flex-col bfgu-gap-8">
 								<div class="bfgu-flex-1">
 									<label for="booking_address_postcode"><?php esc_html_e('Postcode', 'bring-fraktguiden-for-woocommerce'); ?></label>
@@ -120,7 +120,7 @@ use BringFraktguiden\Fields\Fields;
 				</div>
 
 				<div class="bfg-box__header bfg-box__header--divider">
-					<strong><?php esc_html_e('Contact Information', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Contact Information', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 
 				<div class="bfg-box__section">
@@ -180,7 +180,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Processing', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Processing', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Change order status after booking or printing labels', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
@@ -226,7 +226,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<strong><?php esc_html_e('Home Delivery', 'bring-fraktguiden-for-woocommerce'); ?></strong>
+					<h2><?php esc_html_e('Home Delivery', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Configure package type for home delivery services', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
