@@ -1549,13 +1549,23 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	--cb-desc-line-height: 24px;
 	--cb-content-gap: 4px;
 
-	background: #F7F8FA;
+	background: #fff;
 	border: 1px solid var(--bfg-border);
 	border-radius: 8px;
 	margin-bottom: 16px;
 	transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
+.bfg-field--checkbox-box:hover {
+	background: #F7F8FA;
+}
+
+.bfg-field--checkbox-box:active {
+	border-color: #BFDBFE;
+	background: #F0F7FF;
+}
+
+.bfg-field--checkbox-box.is-checked,
 .bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
 	border-color: #BFDBFE;
 	background: #F0F7FF;
@@ -1620,25 +1630,25 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
    Checkbox Input Styles (shared)
    ========================================================================== */
 
-.bfg-input--checkbox input[type="checkbox"] {
-	width: var(--cb-checkbox-size, 24px);
-	height: var(--cb-checkbox-size, 24px);
-	margin: 0;
-	border-radius: 4px;
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"] {
+	width: var(--cb-checkbox-size, 24px) !important;
+	height: var(--cb-checkbox-size, 24px) !important;
+	margin: 0 !important;
+	border-radius: 4px !important;
 	flex-shrink: 0;
-	border: 2px solid #D1D5DB;
+	border: 2px solid #D1D5DB !important;
 	cursor: pointer;
-	appearance: none;
-	-webkit-appearance: none;
+	appearance: none !important;
+	-webkit-appearance: none !important;
 	position: relative;
-	background: #fff;
-	box-shadow: none;
+	background: #fff !important;
+	box-shadow: none !important;
 	transition: border-color 0.2s, background-color 0.2s;
 }
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked {
-	background: var(--bfg-primary);
-	border-color: var(--bfg-primary);
+	background: var(--bfg-primary) !important;
+	border-color: var(--bfg-primary) !important;
 }
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:focus {
@@ -1650,9 +1660,16 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	border-color: var(--bfg-primary);
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::before {
-	content: none;
-	display: none;
+/* Active (being clicked) */
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:active {
+	border-color: var(--bfg-primary);
+	background: #DBEAFE;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::before,
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::before {
+	content: none !important;
+	display: none !important;
 }
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::after {
