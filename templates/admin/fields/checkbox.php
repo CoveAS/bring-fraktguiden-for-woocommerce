@@ -22,6 +22,7 @@ $desc_content = trim(implode(' ', [$description, $desc_tip]));
 ?>
 <label>
 	<input
+		id="<?php echo esc_attr($name); ?>"
 		name="<?php echo esc_attr($name); ?>"
 		type="<?php echo esc_attr($type); ?>"
 		value="1"

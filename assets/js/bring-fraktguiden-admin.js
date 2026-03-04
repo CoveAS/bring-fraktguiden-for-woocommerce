@@ -154,6 +154,22 @@ jQuery(function ($) {
 	// Initialize custom selects
 	initCustomSelects();
 
+	// Checkbox card toggle - add/remove is-checked class for styling
+	$('.bfg-field--checkbox-box').each(function() {
+		const $card = $(this);
+		const $checkbox = $card.find('input[type="checkbox"]');
+
+		// Set initial state
+		if ($checkbox.prop('checked')) {
+			$card.addClass('is-checked');
+		}
+
+		// Toggle on change
+		$checkbox.on('change', function() {
+			$card.toggleClass('is-checked', this.checked);
+		});
+	});
+
 	// Make time inputs open picker when clicking anywhere on the field
 	$('.bfg-admin-page input[type="time"]').each(function() {
 		const input = this;

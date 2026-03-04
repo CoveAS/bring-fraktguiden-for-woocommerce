@@ -1068,11 +1068,12 @@
 	padding-bottom: 32px;
 }
 
-.bfg-page__header h1 {
+.bfg-admin-page .bfg-page__header h1 {
 	font-size: 20px;
 	font-weight: 500;
 	color: var(--bfg-text-secondary);
-	margin: 0 !important;
+	margin: 0;
+	padding: 0;
 }
 
 .bfg-admin-page .bfg-box {
@@ -1121,7 +1122,7 @@
 }
 
 .bfg-field {
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 }
 
 .bfgu-flex-1>.bfg-field:last-child,
@@ -1143,9 +1144,9 @@
 .bfg-field>.bfg-field-group-title,
 .bfg-field-group-title {
 	display: block;
-	font-weight: 500;
-	font-size: 24px !important;
-	line-height: 32px !important;
+	font-weight: 600;
+	font-size: 16px !important;
+	line-height: 24px !important;
 	color: var(--bfg-text-main);
 	margin-bottom: 16px !important;
 }
@@ -1512,7 +1513,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 
 .bfg-badge {
 	font-size: 14px;
-	padding: 7px 12px;
+	padding: 8px 16px;
 	border: 1px solid transparent;
 	border-radius: 9999px;
 	font-weight: 400;
@@ -1540,32 +1541,24 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 .bfg-field--checkbox-box {
 	/* Spacing variables - responsive */
 	--cb-padding: 16px;
-	--cb-checkbox-size: 20px;
-	--cb-gap: 12px;
+	--cb-checkbox-size: 24px;
+	--cb-gap: 16px;
 	--cb-title-size: 16px;
-	--cb-title-line-height: 20px;
+	--cb-title-line-height: 24px;
 	--cb-desc-size: 14px;
-	--cb-desc-line-height: 20px;
+	--cb-desc-line-height: 24px;
 	--cb-content-gap: 4px;
 
-	background: #fff;
+	background: #F7F8FA;
 	border: 1px solid var(--bfg-border);
 	border-radius: 8px;
-	margin-bottom: 12px;
+	margin-bottom: 16px;
 	transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
-}
-
-.bfg-field--checkbox-box:hover {
-	background: #F7F8FA;
 }
 
 .bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
 	border-color: #BFDBFE;
 	background: #F0F7FF;
-}
-
-.bfg-field--checkbox-box:focus-within {
-	border-color: var(--bfg-primary);
 }
 
 body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
@@ -1575,10 +1568,9 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 /* Inner wrapper */
 .bfg-field--checkbox-box>.bfg-input--checkbox {
 	position: relative;
-	padding: var(--cb-padding);
 }
 
-/* Label - must override .bfg-admin-page .bfg-field>label */
+/* Label - covers the full card area for clickability */
 .bfg-admin-page .bfg-field--checkbox-box .bfg-input--checkbox label {
 	display: flex !important;
 	align-items: flex-start !important;
@@ -1586,14 +1578,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	cursor: pointer;
 	margin: 0 !important;
 	font-weight: normal;
-}
-
-/* Expand click area to full card */
-.bfg-field--checkbox-box .bfg-input--checkbox label::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	cursor: pointer;
+	padding: var(--cb-padding);
 }
 
 /* Text content container */
@@ -1636,8 +1621,8 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
    ========================================================================== */
 
 .bfg-input--checkbox input[type="checkbox"] {
-	width: var(--cb-checkbox-size, 20px);
-	height: var(--cb-checkbox-size, 20px);
+	width: var(--cb-checkbox-size, 24px);
+	height: var(--cb-checkbox-size, 24px);
 	margin: 0;
 	border-radius: 4px;
 	flex-shrink: 0;
@@ -1653,6 +1638,15 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked {
 	background: var(--bfg-primary);
+	border-color: var(--bfg-primary);
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:focus {
+	outline: none;
+	border-color: #D1D5DB;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked:focus {
 	border-color: var(--bfg-primary);
 }
 
@@ -1688,17 +1682,17 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
 	display: flex;
 	align-items: flex-start;
-	gap: var(--cb-gap, 12px);
+	gap: var(--cb-gap, 16px);
 	cursor: pointer;
 	margin: 0;
 }
 
 .bfg-input--checkbox .bfg-description {
-	margin: 8px 0 0 calc(var(--cb-checkbox-size, 20px) + var(--cb-gap, 12px));
+	margin: 8px 0 0 calc(var(--cb-checkbox-size, 24px) + var(--cb-gap, 16px));
 	font-size: 14px;
 	color: var(--bfg-text-secondary);
 	font-weight: 400;
-	line-height: 20px;
+	line-height: 24px;
 	display: block;
 	text-wrap: pretty;
 }
@@ -1742,7 +1736,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-pro-content-block__test-url .bfg-description,
 .bfg-license-input-wrapper .bfg-description {
 	font-size: 14px !important;
-	line-height: 20px !important;
+	line-height: 24px !important;
 	margin-top: 8px !important;
 }
 
@@ -1750,7 +1744,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	background: var(--bfg-primary);
 	border: 1px solid transparent;
 	border-radius: 8px;
-	padding: 7px 32px;
+	padding: 8px 32px;
 	height: auto;
 	line-height: 24px;
 	font-weight: 500;
@@ -1771,7 +1765,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	background: var(--bfg-primary) !important;
 	border: 1px solid transparent !important;
 	border-radius: 8px !important;
-	padding: 7px 32px !important;
+	padding: 8px 32px !important;
 	height: auto !important;
 	line-height: 24px !important;
 	font-weight: 500 !important;
@@ -1875,7 +1869,7 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 }
 
 .bfg-mb-5 {
-	margin-bottom: 20px;
+	margin-bottom: 24px;
 }
 
 .bfg-field-sub {
@@ -1924,8 +1918,8 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	align-items: center !important;
 	justify-content: center !important;
 	flex-shrink: 0 !important;
-	width: 20px !important;
-	height: 20px !important;
+	width: 24px !important;
+	height: 24px !important;
 }
 
 .bfg-notice-banner p {
@@ -2033,7 +2027,7 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
-	padding: 10px;
+	padding: 12px;
 	font-size: var(--bfg-text-level-4);
 	font-weight: 600;
 	color: #4B5563;
@@ -2104,7 +2098,7 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	font-size: var(--bfg-text-level-3);
 	font-weight: 500;
 	color: #111827;
-	margin: 0 0 12px !important;
+	margin: 0 0 16px !important;
 }
 
 .bfg-pro-content-block__description {
@@ -2112,7 +2106,7 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	color: #6B7280;
 	margin: 8px 0 0 0 !important;
 	font-weight: 400;
-	line-height: 20px;
+	line-height: 24px;
 }
 
 .bfg-pro-features-grid {
@@ -2148,7 +2142,7 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 11px 32px;
+	padding: 12px 32px;
 	font-size: 16px;
 	font-weight: 500;
 	border: 1px solid transparent;
@@ -2195,7 +2189,7 @@ body:not(.using-mouse) .bfg-admin-page .bfg-pro-btn-main:focus {
 	width: 100%;
 	box-sizing: border-box;
 	justify-content: center;
-	padding: 11px 32px;
+	padding: 12px 32px;
 	font-size: 16px;
 	font-weight: 500;
 	border: 1px solid transparent;
@@ -2237,7 +2231,7 @@ body:not(.using-mouse) .bfg-admin-page .bfg-pro-btn-outline:focus {
 	font-size: var(--bfg-text-level-3);
 	font-weight: 600;
 	color: #111827;
-	margin-bottom: 10px;
+	margin-bottom: 8px;
 }
 
 .bfg-license-input-wrapper input,
@@ -2263,7 +2257,7 @@ body:not(.using-mouse) .bfg-admin-page .bfg-pro-btn-outline:focus {
 	color: #6B7280;
 	margin: 8px 0 0 0 !important;
 	font-weight: 400;
-	line-height: 20px;
+	line-height: 24px;
 }
 
 .bfg-pro-tab-content {
@@ -2730,7 +2724,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-admin-page .bfg-box {
-		padding: 20px;
+		padding: 24px;
 		margin-bottom: 24px;
 		border-radius: 8px;
 	}
@@ -2752,12 +2746,11 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 
 	.bfg-field {
-		margin-bottom: 24px;
+		margin-bottom: 16px;
 	}
 
-	.bfg-field-group-title {
-		font-size: 24px !important;
-		line-height: 32px !important;
+	.bfg-mb-5 {
+		margin-bottom: 16px;
 	}
 
 	.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
@@ -2777,9 +2770,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-flex--row {
 		flex-direction: column;
-		gap: 24px;
+		gap: 16px;
 	}
 
+	.bfg-field-group-title {
+		margin-bottom: 8px !important;
+	}
 
 	a.bfg-step-row,
 	.bfg-step-row {
@@ -2790,8 +2786,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		justify-content: flex-start !important;
 		height: auto;
 		min-height: 72px;
-		padding: 14px;
-		gap: 12px;
+		padding: 16px;
+		gap: 16px;
 	}
 
 	a.bfg-step-row>*,
@@ -2816,7 +2812,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-step-row__description {
 		font-size: 14px;
-		margin-top: 2px;
+		margin-top: 4px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -2840,8 +2836,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-step-row .bfg-badge {
 		font-size: 14px;
-		padding: 5px 10px;
-		min-height: 28px;
+		padding: 4px 8px;
+		min-height: 32px;
 		flex: 0 0 auto !important;
 		width: auto !important;
 		display: inline-flex !important;
@@ -2850,28 +2846,28 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	/* Checkbox Card - mobile responsive */
 	.bfg-field--checkbox-box {
-		--cb-padding: 14px;
-		--cb-checkbox-size: 18px;
-		--cb-gap: 12px;
-		--cb-title-size: 15px;
-		--cb-title-line-height: 18px;
+		--cb-padding: 16px;
+		--cb-checkbox-size: 24px;
+		--cb-gap: 16px;
+		--cb-title-size: 16px;
+		--cb-title-line-height: 24px;
 		--cb-desc-size: 14px;
-		--cb-desc-line-height: 18px;
+		--cb-desc-line-height: 24px;
 		--cb-content-gap: 4px;
 	}
 
 	/* Standalone checkbox (outside checkbox-box) */
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) {
-		--cb-checkbox-size: 18px;
-		--cb-gap: 10px;
+		--cb-checkbox-size: 24px;
+		--cb-gap: 16px;
 	}
 
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
-		font-size: 15px;
+		font-size: 16px;
 	}
 
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) .bfg-description {
-		margin-left: calc(18px + 10px);
+		margin-left: calc(24px + 16px);
 		font-size: 14px;
 	}
 
@@ -2883,7 +2879,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	.bfg-pro-teaser__shield {
 		width: 56px;
 		height: 56px;
-		margin-bottom: 20px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-pro-teaser__shield svg {
@@ -2915,7 +2911,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-pro-content-block {
-		padding: 20px;
+		padding: 24px;
 		margin-bottom: 24px;
 		border-radius: 8px;
 	}
@@ -2926,12 +2922,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-pro-content-block__text {
 		font-size: 16px;
-		margin-bottom: 20px !important;
+		margin-bottom: 24px !important;
 	}
 
 	.bfg-pro-features-grid {
 		grid-template-columns: 1fr;
-		gap: 12px;
+		gap: 16px;
 	}
 
 	.bfg-pro-features-grid li {
@@ -2945,7 +2941,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	.bfg-pro-status-card {
 		flex-direction: column;
 		gap: 16px;
-		padding: 20px;
+		padding: 24px;
 	}
 
 	.bfg-pro-status-card__item {
@@ -2968,12 +2964,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	.bfg-pro-footer__title {
 		font-size: 16px;
-		margin-bottom: 12px !important;
+		margin-bottom: 16px !important;
 	}
 
 	.bfg-admin-page .bfg-pro-btn-main,
 	.bfg-admin-page .bfg-pro-btn-outline {
-		padding: 11px 32px;
+		padding: 12px 32px;
 		font-size: 16px;
 	}
 
@@ -2984,12 +2980,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 
 	.bfg-admin-page .bfg-button-primary {
-		padding: 7px 32px;
+		padding: 8px 32px;
 		font-size: 14px;
 	}
 
 	.bfg-admin-page .button-primary {
-		padding: 7px 32px !important;
+		padding: 8px 32px !important;
 		font-size: 14px !important;
 	}
 
@@ -2999,7 +2995,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 
 	.bfg-custom-select__trigger {
-		height: 44px;
+		height: 48px;
 		font-size: 16px;
 	}
 
@@ -3016,14 +3012,14 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	.bfg-admin-page input[type="tel"],
 	.bfg-admin-page input[type="email"],
 	.bfg-admin-page input[type="time"] {
-		height: 44px;
+		height: 48px;
 		font-size: 16px;
 	}
 
 
 	.bfg-notice-banner {
-		padding: 14px 16px !important;
-		gap: 12px !important;
+		padding: 16px !important;
+		gap: 16px !important;
 		flex-direction: row;
 	}
 
@@ -3048,7 +3044,15 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-admin-page .bfg-box {
-		padding: 20px;
+		padding: 16px;
+	}
+
+	.bfg-field {
+		margin-bottom: 16px;
+	}
+
+	.bfg-mb-5 {
+		margin-bottom: 16px;
 	}
 
 	.bfg-admin-page .bfg-box__header h2,
@@ -3057,16 +3061,14 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		line-height: 32px !important;
 	}
 
-	.bfg-field-group-title {
-		font-size: 20px !important;
-		line-height: 28px !important;
-	}
-
 	.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
 	.bfg-admin-page .bfg-field>.label {
 		font-size: 14px;
 	}
 
+	.bfg-field-group-title {
+		margin-bottom: 8px !important;
+	}
 
 	.bfg-pro-teaser__title {
 		font-size: 16px;
@@ -3078,7 +3080,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-pro-content-block {
-		padding: 20px;
+		padding: 16px;
 	}
 
 	a.bfg-step-row,
@@ -3087,7 +3089,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		flex-direction: row !important;
 		flex-wrap: nowrap !important;
 		align-items: center !important;
-		padding: 12px;
+		padding: 16px;
 	}
 
 	a.bfg-step-row>.bfg-step-row__content,
@@ -3107,20 +3109,20 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 	/* Checkbox Card - small mobile */
 	.bfg-field--checkbox-box {
-		--cb-padding: 12px;
-		--cb-checkbox-size: 18px;
-		--cb-gap: 10px;
+		--cb-padding: 16px;
+		--cb-checkbox-size: 24px;
+		--cb-gap: 8px;
 		--cb-title-size: 14px;
-		--cb-title-line-height: 18px;
-		--cb-desc-size: 13px;
-		--cb-desc-line-height: 18px;
+		--cb-title-line-height: 24px;
+		--cb-desc-size: 14px;
+		--cb-desc-line-height: 24px;
 		--cb-content-gap: 4px;
 	}
 
 	/* Standalone checkbox */
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) {
-		--cb-checkbox-size: 18px;
-		--cb-gap: 10px;
+		--cb-checkbox-size: 24px;
+		--cb-gap: 8px;
 	}
 
 	.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
