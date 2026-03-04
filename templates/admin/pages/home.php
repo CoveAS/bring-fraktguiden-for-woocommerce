@@ -24,7 +24,7 @@ use BringFraktguiden\Admin\Step;
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
 
-		<div class="bfg-page__main-card">
+		<div class="bfg-box">
 			<?php
 			// Only show "next step" highlighting if at least one step is completed
 			// For fresh state (nothing completed), don't highlight any step as "in progress"
@@ -115,7 +115,7 @@ use BringFraktguiden\Admin\Step;
 
 			<?php if ($license_active && $pro_enabled): ?>
 				<!-- PRO Active State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--active">
+				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--active">
 					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--success">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -161,7 +161,7 @@ use BringFraktguiden\Admin\Step;
 
 			<?php elseif ($is_expired): ?>
 				<!-- Expired State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--expired">
+				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--expired">
 					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--expired">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="10"></circle>
@@ -195,7 +195,7 @@ use BringFraktguiden\Admin\Step;
 
 			<?php elseif ($is_trial): ?>
 				<!-- Trial Active State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--trial">
+				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--trial">
 					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--trial">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="10"></circle>
@@ -231,7 +231,7 @@ use BringFraktguiden\Admin\Step;
 
 			<?php elseif ($is_test_site && $pro_enabled): ?>
 				<!-- Test Site State -->
-				<div class="bfg-pro-teaser-v2 bfg-pro-teaser--test">
+				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--test">
 					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--test">
 						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -264,7 +264,7 @@ use BringFraktguiden\Admin\Step;
 
 			<?php else: ?>
 				<!-- Fresh/Default State - Show Trial/License Options -->
-			<div class="bfg-pro-teaser-v2">
+			<div class="bfg-box bfg-pro-teaser-v2">
 				<div class="bfg-pro-teaser__shield">
 					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
