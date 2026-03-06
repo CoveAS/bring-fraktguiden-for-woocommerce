@@ -1082,7 +1082,11 @@
 	border-radius: var(--bfg-radius-card);
 	box-shadow: var(--bfg-shadow);
 	padding: 48px;
-	margin-bottom: 32px;
+	margin-bottom: 40px;
+}
+
+.bfg-admin-page .bfg-box:last-child {
+	margin-bottom: 0;
 }
 
 .bfg-admin-page .bfg-box__header {
@@ -2749,6 +2753,10 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		box-shadow: none;
 	}
 
+	.bfg-admin-page .bfg-box:last-child {
+		margin-bottom: 0;
+	}
+
 	.bfg-admin-page .bfg-box__header {
 		margin-bottom: 24px !important;
 	}
@@ -3076,6 +3084,10 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		border: none;
 		border-radius: 0;
 		box-shadow: none;
+	}
+
+	.bfg-admin-page .bfg-box:last-child {
+		margin-bottom: 0;
 	}
 
 	.bfg-field {
