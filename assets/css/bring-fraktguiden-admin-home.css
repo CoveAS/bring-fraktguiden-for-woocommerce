@@ -172,7 +172,7 @@
 	display: flex;
 	align-items: center;
 	gap: 16px;
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 	position: relative;
 	z-index: 1;
 }
@@ -242,7 +242,7 @@
 }
 
 .bfg-pro-activation-card .bfg-input--checkbox {
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 }
 
 .bfg-pro-activation-card .bfg-input--checkbox label {
@@ -458,12 +458,16 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-admin-page__home .bfg-page__main {
-		padding: 0 16px 40px;
+		padding: 20px;
 	}
 
 	.bfg-admin-page__home .bfg-box {
-		padding: 24px;
+		padding: 0;
 		margin-bottom: 32px;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.bfg-page__header-row {
@@ -474,7 +478,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-progress-container {
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-section-card-title {
@@ -554,7 +558,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 
 	/* PRO Teaser Mobile */
 	.bfg-pro-teaser-v2 {
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-pro-features-teaser {
@@ -674,7 +678,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-header {
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-pro-header h3 {
@@ -700,7 +704,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 
 	.bfg-pro-content-block {
 		padding: 24px;
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-pro-content-block__text {
@@ -709,7 +713,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 
 	.bfg-pro-content-block__test-url {
 		margin-top: 24px;
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.bfg-pro-disclaimer {
@@ -718,7 +722,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-tabs {
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 }
 
@@ -728,13 +732,16 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 
 @media screen and (max-width: 480px) {
 	.bfg-admin-page__home .bfg-page__main {
-		padding: 0 16px 32px;
+		padding: 20px;
 	}
 
 	.bfg-admin-page__home .bfg-box {
-		padding: 16px;
+		padding: 0;
 		margin-bottom: 32px;
-		border-radius: 8px;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.bfg-page__header-row {
@@ -820,7 +827,7 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-teaser-v2 {
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 		border-radius: 8px;
 	}
 

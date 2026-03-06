@@ -2727,8 +2727,8 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-admin-page .bfg-page__main {
-		padding: 0 16px 48px;
-		margin-top: 16px;
+		padding: 20px;
+		margin-top: 0;
 	}
 
 	.bfg-page__header {
@@ -2741,9 +2741,12 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-admin-page .bfg-box {
-		padding: 24px;
-		margin-bottom: 24px;
-		border-radius: 8px;
+		padding: 0;
+		margin-bottom: 32px;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.bfg-admin-page .bfg-box__header {
@@ -2794,6 +2797,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		margin-bottom: 8px !important;
 	}
 
+	a.bfg-step-row,
 	a.bfg-step-row,
 	.bfg-step-row {
 		display: flex !important;
@@ -2928,7 +2932,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 	}
 
 	.bfg-pro-content-block {
-		padding: 24px;
+		padding: 0;
 		margin-bottom: 24px;
 		border-radius: 8px;
 	}
@@ -3010,6 +3014,11 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		margin: 32px 0 0 !important;
 	}
 
+	.bfg-admin-page .submit .button,
+	.bfg-admin-page .submit .button-primary,
+	.bfg-admin-page .submit input[type="submit"] {
+		width: 100% !important;
+	}
 
 	.bfg-custom-select__trigger {
 		height: 48px;
@@ -3057,11 +3066,16 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 
 @media screen and (max-width: 480px) {
 	.bfg-admin-page .bfg-page__main {
-		padding: 0 16px 40px;
+		padding: 20px;
 	}
 
 	.bfg-admin-page .bfg-box {
-		padding: 16px;
+		padding: 0;
+		margin-bottom: 32px;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.bfg-field {
