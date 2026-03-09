@@ -67,7 +67,7 @@ return [
 				'title' => __('Post office', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
 				'label' => __('Posting at post office', 'bring-fraktguiden-for-woocommerce'),
-				'description' => __('Enable this option if you deliver packages to a post office.',
+				'description' => __('Enable if you drop off packages at a post office. Leave unchecked if Bring picks up from your location.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
@@ -105,13 +105,14 @@ return [
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
 				'type' => 'checkbox',
-				'description' => __('By default WooCommerce displays all the shipping options in a table with two columns, one for the title, "Shipping", and one for the options. This means that the options gets squished into a very tight space. Enable this option to display the shipping options full-width.',
+				'description' => __('Moves the "Shipping" heading to its own row so shipping options can use the full width. Makes them easier to read at checkout.',
 					'bring-fraktguiden-for-woocommerce'),
 			],
 			'display_desc' => [
 				'type' => 'checkbox',
 				'label' => __('Display detailed shipping option description', 'bring-fraktguiden-for-woocommerce'),
-				'description' => __('Show more details for each shipping option on the checkout page. This includes logo and environmental description for the service.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Displays service logos and additional info for each shipping option.',
+					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
 			],
 			'use_customer_number_to_get_prices' => [
@@ -119,7 +120,7 @@ return [
 				'type' => 'checkbox',
 				'label' => __('Use main mybring customer number to get prices from the api.',
 					'bring-fraktguiden-for-woocommerce'),
-				'desc_tip' => __('Using the customer number when querying the API will return your agreement price (net price), with bring. This is usually cheaper than the list price and you can choose which price to display during checkout. This setting will be overridden by specifying a customer number on individual services.',
+				'desc_tip' => __('Uses your Mybring customer number to get discounted business rates instead of standard prices.',
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
 			],
@@ -416,7 +417,7 @@ return [
 					'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
 				'type' => 'checkbox',
-				'description' => __('Recommended for most stores. Uses weight only for shipping rates, which is simpler and works well if you pack orders in fixed-size boxes.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Uses weight only for shipping rates. Works best if you pack orders in standard-size boxes.', 'bring-fraktguiden-for-woocommerce'),
 			],
 
 			// Maximum product limit

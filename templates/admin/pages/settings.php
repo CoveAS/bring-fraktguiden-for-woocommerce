@@ -107,7 +107,7 @@ use BringFraktguiden\Fields\Fields;
 								<?php echo Component::inputWithSuffix($fields->minimum_weight, 'kg'); ?>
 							</div>
 						</div>
-						<p class="bfg-description"><?php esc_html_e('Some services add an extra fee for small items. Here you can customize the smallest dimension of packages you send. If the packaged size of the items in the cart is below this threshold then the plugin will round up the dimensions to avoid this fee.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+						<p class="bfg-description"><?php esc_html_e('Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
