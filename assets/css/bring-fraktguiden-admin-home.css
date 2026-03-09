@@ -119,7 +119,7 @@
 	text-decoration: none;
 	padding: 12px 24px;
 	border-radius: 8px;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 16px;
 	line-height: 24px;
 	transition: background 0.2s;
@@ -358,26 +358,26 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	margin: 0 !important;
 }
 
-.bfg-pro-activation-card p.submit {
-	padding: 0 !important;
-	margin: 0 !important;
+body.wp-admin .bfg-pro-activation-card p.submit {
+	padding: 0;
+	margin: 0;
 }
 
-.bfg-pro-activation-card .button-primary {
-	background: #9333EA !important;
-	border: none !important;
-	border-radius: 8px !important;
-	padding: 0 24px !important;
-	height: 48px !important;
-	line-height: 48px !important;
-	font-weight: 600 !important;
-	font-size: 14px !important;
-	box-shadow: none !important;
-	text-shadow: none !important;
+body.wp-admin .bfg-pro-activation-card .button-primary {
+	background: #9333EA;
+	border: none;
+	border-radius: 8px;
+	padding: 0 24px;
+	height: 48px;
+	line-height: 48px;
+	font-weight: 600;
+	font-size: 14px;
+	box-shadow: none;
+	text-shadow: none;
 }
 
-.bfg-pro-activation-card .button-primary:hover {
-	background: #7E22CE !important;
+body.wp-admin .bfg-pro-activation-card .button-primary:hover {
+	background: #7E22CE;
 }
 
 /* ==========================================================================
@@ -607,11 +607,13 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-content-block__title {
-		font-size: 16px;
+		font-size: 20px;
+		font-weight: 600;
 	}
 
 	.bfg-pro-content-block__text {
 		font-size: 16px;
+		color: var(--bfg-text-secondary);
 	}
 
 	.bfg-pro-features-grid {
@@ -894,11 +896,13 @@ body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-content-block__title {
-		font-size: 14px;
+		font-size: 18px;
+		font-weight: 600;
 	}
 
 	.bfg-pro-content-block__text {
-		font-size: 14px;
+		font-size: 16px;
+		color: var(--bfg-text-secondary);
 		margin-bottom: 16px !important;
 	}
 

@@ -1768,7 +1768,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	padding: 8px 32px;
 	height: auto;
 	line-height: 24px;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	color: #fff;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -1782,18 +1782,18 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	box-sizing: border-box;
 }
 
-.bfg-admin-page .button-primary {
-	background: var(--bfg-primary) !important;
-	border: 1px solid transparent !important;
-	border-radius: 8px !important;
-	padding: 8px 32px !important;
-	height: auto !important;
-	line-height: 24px !important;
-	font-weight: 500 !important;
-	font-size: 14px !important;
-	color: #fff !important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-	text-shadow: none !important;
+body.wp-admin .bfg-admin-page .button-primary {
+	background: var(--bfg-primary);
+	border: 1px solid transparent;
+	border-radius: 8px;
+	padding: 8px 32px;
+	height: auto;
+	line-height: 24px;
+	font-weight: 600;
+	font-size: 14px;
+	color: #fff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	text-shadow: none;
 	transition: all 0.2s ease-in-out;
 	display: inline-flex;
 	align-items: center;
@@ -1807,9 +1807,9 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	color: #fff;
 }
 
-.bfg-admin-page .button-primary:hover {
-	background: var(--bfg-primary-hover) !important;
-	color: #fff !important;
+body.wp-admin .bfg-admin-page .button-primary:hover {
+	background: var(--bfg-primary-hover);
+	color: #fff;
 }
 
 .bfg-admin-page .bfg-button-primary:focus {
@@ -1819,11 +1819,11 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	border-color: var(--bfg-primary);
 }
 
-.bfg-admin-page .button-primary:focus {
-	outline: none !important;
-	background: var(--bfg-primary) !important;
-	color: #fff !important;
-	border-color: var(--bfg-primary) !important;
+body.wp-admin .bfg-admin-page .button-primary:focus {
+	outline: none;
+	background: var(--bfg-primary);
+	color: #fff;
+	border-color: var(--bfg-primary);
 }
 
 body.using-mouse .bfg-admin-page .bfg-button-primary:focus {
@@ -1831,17 +1831,17 @@ body.using-mouse .bfg-admin-page .bfg-button-primary:focus {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-body.using-mouse .bfg-admin-page .button-primary:focus {
-	border-color: transparent !important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+body.wp-admin.using-mouse .bfg-admin-page .button-primary:focus {
+	border-color: transparent;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 body:not(.using-mouse) .bfg-admin-page .bfg-button-primary:focus {
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
-body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
-	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+body.wp-admin:not(.using-mouse) .bfg-admin-page .button-primary:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .bfg-admin-page .bfg-button-primary:disabled {
@@ -1850,10 +1850,10 @@ body:not(.using-mouse) .bfg-admin-page .button-primary:focus {
 	cursor: not-allowed;
 }
 
-.bfg-admin-page .button-primary:disabled {
-	background: #E5E7EB !important;
-	color: #9CA3AF !important;
-	cursor: not-allowed !important;
+body.wp-admin .bfg-admin-page .button-primary:disabled {
+	background: #E5E7EB;
+	color: #9CA3AF;
+	cursor: not-allowed;
 }
 
 
@@ -3013,19 +3013,19 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		font-size: 14px;
 	}
 
-	.bfg-admin-page .button-primary {
-		padding: 8px 32px !important;
-		font-size: 14px !important;
+	body.wp-admin .bfg-admin-page .button-primary {
+		padding: 8px 32px;
+		font-size: 14px;
 	}
 
 	.bfg-admin-page .submit {
 		margin: 32px 0 0 !important;
 	}
 
-	.bfg-admin-page .submit .button,
-	.bfg-admin-page .submit .button-primary,
-	.bfg-admin-page .submit input[type="submit"] {
-		width: 100% !important;
+	body.wp-admin .bfg-admin-page .submit .button,
+	body.wp-admin .bfg-admin-page .submit .button-primary,
+	body.wp-admin .bfg-admin-page .submit input[type="submit"] {
+		width: 100%;
 	}
 
 	.bfg-custom-select__trigger {
