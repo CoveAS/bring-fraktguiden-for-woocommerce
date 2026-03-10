@@ -1764,7 +1764,11 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-field .bfg-description:last-child {
-	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+/* Remove margin-bottom when followed by description (let description's margin-top control spacing) */
+.bfgu-mb-5:has(+.bfg-description) {
 	margin-bottom: 0 !important;
 }
 
