@@ -1763,6 +1763,11 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	margin-bottom: 24px !important;
 }
 
+.bfg-field .bfg-description:last-child {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
 .bfg-admin-page .bfg-button-primary {
 	background: var(--bfg-primary);
 	border: 1px solid transparent;
