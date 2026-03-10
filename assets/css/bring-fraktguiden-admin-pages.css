@@ -1551,7 +1551,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	--cb-title-size: 15px;
 	--cb-title-line-height: 1.5;
 	--cb-desc-size: 14px;
-	--cb-desc-line-height: 1.625;
+	--cb-desc-line-height: 21px;
 	--cb-content-gap: 6px;
 
 	background: #fff;
@@ -1758,7 +1758,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-pro-content-block__test-url .bfg-description,
 .bfg-license-input-wrapper .bfg-description {
 	font-size: 14px !important;
-	line-height: 20px !important;
+	line-height: 21px !important;
 	margin-top: 8px !important;
 	margin-bottom: 24px !important;
 }
@@ -2892,7 +2892,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		--cb-title-size: 15px;
 		--cb-title-line-height: 1.5;
 		--cb-desc-size: 14px;
-		--cb-desc-line-height: 1.625;
+		--cb-desc-line-height: 21px;
 		--cb-content-gap: 6px;
 	}
 
@@ -3199,7 +3199,7 @@ body:not(.using-mouse) .bfg-admin-page .flatpickr-time input.numInput:focus {
 		--cb-title-size: 15px;
 		--cb-title-line-height: 1.5;
 		--cb-desc-size: 14px;
-		--cb-desc-line-height: 1.625;
+		--cb-desc-line-height: 21px;
 		--cb-content-gap: 6px;
 	}
 
