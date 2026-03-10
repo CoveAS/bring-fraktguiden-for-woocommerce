@@ -1760,6 +1760,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	font-size: 14px !important;
 	line-height: 20px !important;
 	margin-top: 8px !important;
+	margin-bottom: 24px !important;
 }
 
 .bfg-admin-page .bfg-button-primary {
