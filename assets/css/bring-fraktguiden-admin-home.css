@@ -110,25 +110,9 @@
 	text-wrap: pretty;
 }
 
-.bfg-admin-page__home .bfg-button-primary {
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
-	background: #2563EB;
-	color: #fff;
-	text-decoration: none;
-	padding: 12px 24px;
-	border-radius: 8px;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 24px;
-	transition: background 0.2s;
-	white-space: nowrap;
-	box-sizing: border-box;
-}
-
-.bfg-admin-page__home .bfg-button-primary:hover {
-	background: #1D4ED8;
+/* Home page uses medium-large buttons in the active step card */
+.bfg-admin-page__home .bfg-btn--primary {
+	font-weight: 500;
 }
 
 /* ==========================================================================
@@ -503,24 +487,54 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	margin-left: -2px;
 }
 
-.bfg-admin-page__home .bfg-pro-btn-main,
-.bfg-admin-page__home .bfg-pro-btn-outline {
-	width: fit-content;
-	padding: 12px 24px;
-}
-
-.bfg-admin-page__home .bfg-pro-btn-main--large {
-	width: 100%;
-	height: 48px;
-	padding: 0 24px;
-	font-size: 16px;
-	font-weight: 500;
-	border-radius: 8px;
+/* PRO section buttons - margin for trial button */
+.bfg-admin-page__home #bfg-pro-activation-form .bfg-btn {
 	margin-top: 32px;
 }
 
-#bfg-license-submit-btn:not(:disabled):hover {
-	background: #1D4ED8 !important;
+.bfg-pro-license-form__row {
+	position: relative;
+	display: block;
+}
+
+.bfg-pro-license-form__row .bfg-input .bfg-description {
+	display: none;
+}
+
+.bfg-pro-license-form__row input[type="text"] {
+	width: 100% !important;
+	padding-right: 48px !important;
+}
+
+.bfg-license-feedback {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bfg-license-feedback--saved {
+	color: #15803d;
+}
+
+.bfg-license-feedback--error {
+	color: #dc2626;
+}
+
+.bfg-license-feedback--saving .bfg-license-saving {
+	width: 18px;
+	height: 18px;
+	border: 2px solid #e5e7eb;
+	border-top-color: #2563eb;
+	border-radius: 50%;
+	animation: bfg-spin 0.8s linear infinite;
+}
+
+@keyframes bfg-spin {
+	to { transform: rotate(360deg); }
 }
 
 .bfg-admin-page__home .bfg-pro-disclaimer {
@@ -618,10 +632,12 @@ body:not(.using-mouse) .bfg-pro-license-buy a:focus {
 .bfg-pro-license-form {
 	margin-top: 0;
 	text-align: left;
+	width: 100%;
 }
 
 .bfg-pro-license-form__field {
 	margin-bottom: 24px;
+	width: 100%;
 }
 
 .bfg-pro-license-form__label {
@@ -635,12 +651,14 @@ body:not(.using-mouse) .bfg-pro-license-buy a:focus {
 .bfg-pro-license-form input[name="test_url"] {
 	width: 100% !important;
 	max-width: none !important;
-	padding: 14px 16px !important;
+	height: 48px !important;
+	padding: 0 16px !important;
 	font-size: 16px !important;
 	text-align: left !important;
 	border: 1px solid #E5E7EB !important;
 	border-radius: 8px !important;
 	background: #F9FAFB !important;
+	box-sizing: border-box !important;
 }
 
 .bfg-pro-license-form input[name="test_url"]::placeholder {
@@ -738,7 +756,7 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		line-height: 24px;
 	}
 
-	.bfg-admin-page__home .bfg-active-step__content .bfg-button-primary {
+	.bfg-admin-page__home .bfg-active-step__content .bfg-btn {
 		width: fit-content;
 	}
 
@@ -877,8 +895,7 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		margin-bottom: 16px !important;
 	}
 
-	.bfg-admin-page__home .bfg-pro-btn-main,
-	.bfg-admin-page__home .bfg-pro-btn-outline {
+	.bfg-admin-page__home .bfg-btn--lg.bfg-btn--full-width {
 		padding: 12px 24px;
 		width: fit-content;
 	}
@@ -1049,9 +1066,10 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		margin-bottom: 16px !important;
 	}
 
-	.bfg-admin-page__home .bfg-button-primary {
+	.bfg-admin-page__home .bfg-btn {
 		padding: 8px 16px;
 		font-size: 14px;
+		height: auto;
 	}
 
 	.bfg-pro-teaser-v2 {
@@ -1145,20 +1163,16 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		gap: 16px;
 	}
 
-	.bfg-admin-page__home .bfg-pro-btn-main,
-	.bfg-admin-page__home .bfg-pro-btn-outline,
-	.bfg-admin-page__home .bfg-button-primary.bfg-pro-btn-main {
+	.bfg-admin-page__home .bfg-btn--lg.bfg-btn--full-width {
 		padding: 12px 16px;
 		font-size: 14px;
-		font-weight: 600;
 		width: 100%;
 		justify-content: center;
 		height: 44px;
 		max-height: 44px;
-		box-sizing: border-box;
 	}
 
-	.bfg-admin-page__home .bfg-active-step__content .bfg-button-primary {
+	.bfg-admin-page__home .bfg-active-step__content .bfg-btn {
 		width: 100%;
 		justify-content: center;
 	}

@@ -53,7 +53,7 @@ use BringFraktguiden\Admin\Step;
 					<div class="bfg-active-step__content">
 						<h3><?php echo esc_html($nextStep->label); ?></h3>
 						<p><?php echo esc_html($nextStep->description); ?></p>
-						<a class="bfg-button-primary" href="<?php echo esc_attr($nextStep->action); ?>">
+						<a class="bfg-btn bfg-btn--primary" href="<?php echo esc_attr($nextStep->action); ?>">
 							<?php echo esc_html($nextStep->actionText); ?>
 						</a>
 					</div>
@@ -187,7 +187,7 @@ use BringFraktguiden\Admin\Step;
 					</div>
 
 					<div class="bfg-pro-footer">
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-button-primary bfg-pro-btn-main">
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary bfg-btn--lg bfg-btn--full-width">
 							<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</a>
 					</div>
@@ -223,7 +223,7 @@ use BringFraktguiden\Admin\Step;
 					</div>
 
 					<div class="bfg-pro-footer">
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-button-primary bfg-pro-btn-main">
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary bfg-btn--lg bfg-btn--full-width">
 							<?php esc_html_e('Upgrade to PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</a>
 					</div>
@@ -256,7 +256,7 @@ use BringFraktguiden\Admin\Step;
 
 					<div class="bfg-pro-footer">
 						<h4 class="bfg-pro-footer__title"><?php esc_html_e('Ready to go live?', 'bring-fraktguiden-for-woocommerce'); ?></h4>
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--secondary bfg-btn--lg bfg-btn--full-width">
 							<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</a>
 					</div>
@@ -310,7 +310,7 @@ use BringFraktguiden\Admin\Step;
 						<?php BringFraktguiden\Admin\FieldRenderer::pro_enabled(); ?>
 					</div>
 
-					<button type="submit" class="bfg-button-primary bfg-pro-btn-main bfg-pro-btn-main--large">
+					<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--lg bfg-btn--full-width">
 						<?php esc_html_e('Start Your Free 7-Day Trial', 'bring-fraktguiden-for-woocommerce'); ?>
 					</button>
 					<p class="bfg-pro-disclaimer"><?php esc_html_e('Trial starts immediately and lasts for 7 days from activation.', 'bring-fraktguiden-for-woocommerce'); ?></p>
@@ -334,13 +334,12 @@ use BringFraktguiden\Admin\Step;
 
 					<div class="bfg-pro-license-form__field">
 						<label class="bfg-pro-license-form__label"><?php esc_html_e('Enter Your License Key', 'bring-fraktguiden-for-woocommerce'); ?></label>
-						<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
+						<div class="bfg-pro-license-form__row">
+							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
+							<span class="bfg-license-feedback" id="bfg-license-feedback"></span>
+						</div>
 						<p class="bfg-description"><?php esc_html_e('Your license key is a 16-character code you received after purchase', 'bring-fraktguiden-for-woocommerce'); ?></p>
 					</div>
-
-					<button type="submit" class="bfg-button-primary bfg-pro-btn-main bfg-pro-btn-main--large" id="bfg-license-submit-btn" disabled style="background: #2563EB !important; color: #fff !important; cursor: not-allowed; opacity: 0.5;">
-						<?php esc_html_e('Activate License', 'bring-fraktguiden-for-woocommerce'); ?>
-					</button>
 
 					<p class="bfg-pro-license-buy" style="text-align: center;"><?php esc_html_e('Need a license?', 'bring-fraktguiden-for-woocommerce'); ?> <a href="https://bringfraktguiden.no/" target="_blank"><?php esc_html_e('Purchase here', 'bring-fraktguiden-for-woocommerce'); ?></a></p>
 				</form>
@@ -354,8 +353,7 @@ use BringFraktguiden\Admin\Step;
 				const showLicenseLink = document.getElementById('bfg-show-license-form');
 				const licenseLinks = document.querySelector('.bfg-pro-license-links');
 				const licenseInput = licenseForm ? licenseForm.querySelector('input[name="test_url"]') : null;
-				const licenseSubmitBtn = document.getElementById('bfg-license-submit-btn');
-				const licenseProCheckbox = licenseForm ? licenseForm.querySelector('input[name="pro_enabled"]') : null;
+				const licenseFeedback = document.getElementById('bfg-license-feedback');
 
 				// Show license form when clicking the link
 				if (showLicenseLink && licenseForm && licenseLinks) {
@@ -369,22 +367,71 @@ use BringFraktguiden\Admin\Step;
 					});
 				}
 
-				// Initialize license input
+				// Check if license key format is valid (XXXX-XXXX-XXXX-XXXX or 16 chars without dashes)
+				function isValidLicenseFormat(value) {
+					const cleaned = value.replace(/-/g, '').trim();
+					return cleaned.length === 16;
+				}
+
+				// Show feedback
+				function showFeedback(type) {
+					if (!licenseFeedback) return;
+					if (type === 'saving') {
+						licenseFeedback.innerHTML = '<span class="bfg-license-saving"></span>';
+						licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--saving';
+					} else if (type === 'saved') {
+						licenseFeedback.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+						licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--saved';
+					} else if (type === 'error') {
+						licenseFeedback.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+						licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--error';
+					} else {
+						licenseFeedback.innerHTML = '';
+						licenseFeedback.className = 'bfg-license-feedback';
+					}
+				}
+
+				// Save license via AJAX
+				async function saveLicense(licenseKey) {
+					const formData = new FormData();
+					formData.append('action', 'bring_save_license');
+					formData.append('license_key', licenseKey);
+
+					try {
+						const response = await fetch(ajaxurl, {
+							method: 'POST',
+							body: formData
+						});
+						const data = await response.json();
+						return data.status === 'success';
+					} catch (error) {
+						return false;
+					}
+				}
+
+				// Auto-save license on valid input
+				let saveTimeout = null;
 				if (licenseInput) {
 					licenseInput.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
 					licenseInput.value = '';
 
 					licenseInput.addEventListener('input', function() {
-						const hasValue = licenseInput.value.trim().length > 0;
-						if (licenseSubmitBtn) {
-							licenseSubmitBtn.disabled = !hasValue;
-							if (hasValue) {
-								licenseSubmitBtn.style.opacity = '1';
-								licenseSubmitBtn.style.cursor = 'pointer';
-							} else {
-								licenseSubmitBtn.style.opacity = '0.5';
-								licenseSubmitBtn.style.cursor = 'not-allowed';
-							}
+						showFeedback('');
+						clearTimeout(saveTimeout);
+
+						if (isValidLicenseFormat(licenseInput.value)) {
+							saveTimeout = setTimeout(async function() {
+								showFeedback('saving');
+								const success = await saveLicense(licenseInput.value);
+								if (success) {
+									showFeedback('saved');
+									setTimeout(function() {
+										window.location.reload();
+									}, 800);
+								} else {
+									showFeedback('error');
+								}
+							}, 500);
 						}
 					});
 				}
@@ -394,15 +441,6 @@ use BringFraktguiden\Admin\Step;
 					trialForm.addEventListener('submit', function() {
 						if (proCheckbox) {
 							proCheckbox.checked = true;
-						}
-					});
-				}
-
-				// Handle license form submit
-				if (licenseForm) {
-					licenseForm.addEventListener('submit', function() {
-						if (licenseProCheckbox) {
-							licenseProCheckbox.checked = true;
 						}
 					});
 				}

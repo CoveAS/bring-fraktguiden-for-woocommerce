@@ -193,7 +193,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 					</label>
 				</div>
 				<div class="bfg-box__section">
-					<button class="button button-primary"><?php esc_html_e('Enable selected services', 'bring-fraktguiden-for-woocommerce'); ?></button>
+					<button class="bfg-btn bfg-btn--primary"><?php esc_html_e('Enable selected services', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 
