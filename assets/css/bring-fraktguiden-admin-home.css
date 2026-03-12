@@ -454,14 +454,16 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	max-width: 480px;
 }
 
-/* Pro Features Grid - Two Column */
-.bfg-pro-features-grid--two-col {
+/* Pro Features Grid - Two Column Centered */
+.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 16px 32px;
+	gap: 16px 48px;
 	list-style: none;
-	padding: 0;
-	margin: 0 0 40px 0;
+	padding: 40px !important;
+	margin: 0 !important;
+	background: #F8FAFC !important;
+	border-radius: 12px !important;
 }
 
 .bfg-pro-features-grid--two-col li {
@@ -854,15 +856,27 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		color: var(--bfg-text-secondary);
 	}
 
-	.bfg-pro-features-grid,
-	.bfg-pro-features-grid--two-col {
-		grid-template-columns: 1fr;
-		gap: 16px;
+	.bfg-pro-features-grid {
+		grid-template-columns: 1fr !important;
+		gap: 16px !important;
+		padding: 32px !important;
+		background: #F8FAFC !important;
+		border-radius: 12px !important;
+	}
+
+	/* Keep 2 columns on tablet for the two-col variant */
+	.bfg-pro-features-grid--two-col,
+	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
+		grid-template-columns: 1fr 1fr !important;
+		gap: 16px 32px !important;
+		padding: 32px !important;
+		background: #F8FAFC !important;
+		border-radius: 12px !important;
 	}
 
 	.bfg-pro-features-grid li,
 	.bfg-pro-features-grid--two-col li {
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	.bfg-pro-status-card {
@@ -962,6 +976,19 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 
 	.bfg-pro-tabs {
 		margin-bottom: 24px;
+	}
+}
+
+/* ==========================================================================
+   Responsive - Below 768px: Switch to 1 column
+   ========================================================================== */
+
+@media screen and (max-width: 767px) {
+	.bfg-pro-features-grid--two-col,
+	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
+		grid-template-columns: 1fr !important;
+		gap: 16px !important;
+		padding: 32px !important;
 	}
 }
 
@@ -1140,12 +1167,14 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		margin-bottom: 16px !important;
 	}
 
-	.bfg-pro-features-grid {
-		gap: 8px;
-	}
-
-	.bfg-pro-features-grid li {
-		font-size: 14px;
+	.bfg-pro-features-grid,
+	.bfg-pro-features-grid--two-col,
+	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
+		grid-template-columns: 1fr !important;
+		gap: 12px !important;
+		padding: 24px !important;
+		background: #F8FAFC !important;
+		border-radius: 12px !important;
 	}
 
 	.bfg-pro-tabs {
