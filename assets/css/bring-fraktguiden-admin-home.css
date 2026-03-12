@@ -430,11 +430,19 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 /* Pro Teaser Caption */
 .bfg-pro-teaser__caption {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #2563EB;
 	margin: 0 auto 8px;
 	text-align: center;
+}
+
+.bfg-pro-teaser__caption svg {
+	flex-shrink: 0;
 }
 
 /* Pro Teaser Title */
@@ -449,7 +457,7 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
 	font-size: 16px;
 	color: #6B7280;
-	margin: 0 auto 32px;
+	margin: 0 auto 20px;
 	text-align: center;
 	max-width: 480px;
 }
@@ -472,6 +480,8 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	gap: 8px;
 	font-size: 14px;
 	color: #374151;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 .bfg-pro-features-grid--two-col li svg {
@@ -491,7 +501,7 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 /* PRO section buttons - margin for trial button */
 .bfg-admin-page__home #bfg-pro-activation-form .bfg-btn {
-	margin-top: 32px;
+	margin-top: 20px;
 }
 
 .bfg-pro-license-form__row {
@@ -802,7 +812,8 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 	}
 
 	/* PRO Teaser Mobile */
-	.bfg-pro-teaser-v2 {
+	.bfg-admin-page__home .bfg-box.bfg-pro-teaser-v2 {
+		margin-top: 40px;
 		margin-bottom: 24px;
 	}
 
@@ -1099,7 +1110,8 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		height: auto;
 	}
 
-	.bfg-pro-teaser-v2 {
+	.bfg-admin-page__home .bfg-box.bfg-pro-teaser-v2 {
+		margin-top: 48px;
 		margin-bottom: 24px;
 		border-radius: 8px;
 	}

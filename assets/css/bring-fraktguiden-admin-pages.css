@@ -1458,7 +1458,7 @@ body:not(.using-mouse) .bfg-admin-page .bfg-pro-btn-outline:focus {
 	border: 1px solid var(--bfg-border);
 	border-radius: var(--bfg-radius-card);
 	box-shadow: var(--bfg-shadow);
-	padding: 48px;
+	padding: 64px;
 	margin-bottom: 40px;
 }
 
@@ -2421,9 +2421,9 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 16px 24px;
-	list-style: none !important;
-	padding: 0 !important;
-	margin: 0 !important;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 .bfg-pro-features-grid li {

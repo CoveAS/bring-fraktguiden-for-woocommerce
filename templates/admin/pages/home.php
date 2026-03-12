@@ -265,7 +265,10 @@ use BringFraktguiden\Admin\Step;
 			<?php else: ?>
 				<!-- Fresh/Default State - Show Trial/License Options -->
 			<div class="bfg-box bfg-pro-teaser-v2">
-				<p class="bfg-pro-teaser__caption"><?php esc_html_e('Try Pro Free for 7 Days', 'bring-fraktguiden-for-woocommerce'); ?></p>
+				<p class="bfg-pro-teaser__caption">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+					<?php esc_html_e('Try Pro Free for 7 Days', 'bring-fraktguiden-for-woocommerce'); ?>
+				</p>
 				<h2 class="bfg-section-card-title"><?php esc_html_e('Experience Pro Features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				<p class="bfg-pro-teaser__subtitle">
 					<?php esc_html_e('Get instant access to all premium features on your live site. Start your free trial or activate your license.', 'bring-fraktguiden-for-woocommerce'); ?>
@@ -274,7 +277,11 @@ use BringFraktguiden\Admin\Step;
 				<ul class="bfg-pro-features-grid bfg-pro-features-grid--two-col">
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Book orders with signaling cost', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>
+						<?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>
+					</li>
+					<li>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+						<?php esc_html_e('Fixed shipping prices', 'bring-fraktguiden-for-woocommerce'); ?>
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -282,23 +289,23 @@ use BringFraktguiden\Admin\Step;
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Fixed price per service', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('Pick-up points', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup>
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Custom shipping zone names', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('Multiple customer numbers', 'bring-fraktguiden-for-woocommerce'); ?>
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Estimated delivery services', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('Custom service names', 'bring-fraktguiden-for-woocommerce'); ?>
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Prioritized support', 'bring-fraktguiden-for-woocommerce'); ?>
+						<?php esc_html_e('Service fallback pricing', 'bring-fraktguiden-for-woocommerce'); ?>
 					</li>
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-						<?php esc_html_e('Pick-up-points for services', 'bring-fraktguiden-for-woocommerce'); ?><sup>2</sup>
+						<?php esc_html_e('PRO support', 'bring-fraktguiden-for-woocommerce'); ?>
 					</li>
 				</ul>
 
