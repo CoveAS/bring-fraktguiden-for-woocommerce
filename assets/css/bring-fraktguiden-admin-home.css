@@ -336,10 +336,8 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 	box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.3) !important;
 }
 
-/* Test URL and license input focus - blue border */
-.bfg-pro-content-block__test-url input:focus,
+/* License input focus - blue border */
 .bfg-license-input-wrapper input:focus,
-#bfg-tab-trial input[name="test_url"]:focus,
 #bfg-tab-license input[name="test_url"]:focus {
 	border-color: #2563EB !important;
 	outline: none !important;
@@ -347,9 +345,7 @@ body:not(.using-mouse) .bfg-license-input-row input:focus {
 }
 
 /* Keyboard focus - add ring */
-body:not(.using-mouse) .bfg-pro-content-block__test-url input:focus,
 body:not(.using-mouse) .bfg-license-input-wrapper input:focus,
-body:not(.using-mouse) #bfg-tab-trial input[name="test_url"]:focus,
 body:not(.using-mouse) #bfg-tab-license input[name="test_url"]:focus {
 	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
@@ -446,6 +442,22 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 .bfg-admin-page__home .bfg-pro-content-block {
 	border: none !important;
+}
+
+.bfg-admin-page__home .bfg-pro-btn-main,
+.bfg-admin-page__home .bfg-pro-btn-outline {
+	width: fit-content;
+	padding: 12px 24px;
+}
+
+.bfg-admin-page__home .bfg-pro-disclaimer {
+	font-size: 14px;
+	color: #6B7280;
+	margin-top: 8px;
+}
+
+.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-description {
+	color: #6B7280;
 }
 
 /* ==========================================================================
@@ -658,7 +670,6 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	.bfg-admin-page__home .bfg-pro-btn-main,
 	.bfg-admin-page__home .bfg-pro-btn-outline {
 		padding: 12px 24px;
-		font-size: 16px;
 		width: fit-content;
 	}
 
@@ -715,11 +726,6 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 	.bfg-pro-content-block__text {
 		margin-bottom: 24px !important;
-	}
-
-	.bfg-pro-content-block__test-url {
-		margin-top: 24px;
-		margin-bottom: 24px;
 	}
 
 	.bfg-pro-disclaimer {
@@ -972,11 +978,6 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 	.bfg-license-input-row {
 		gap: 24px;
-	}
-
-	.bfg-pro-content-block__test-url {
-		margin-top: 16px;
-		margin-bottom: 24px;
 	}
 
 	.bfg-pro-disclaimer {

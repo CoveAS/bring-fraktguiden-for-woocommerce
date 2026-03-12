@@ -332,12 +332,7 @@ use BringFraktguiden\Admin\Step;
 							</ul>
 						</div>
 
-						<div class="bfg-pro-content-block__test-url">
-							<h4 class="bfg-pro-content-block__subtitle"><?php esc_html_e('Test Site URL (Optional)', 'bring-fraktguiden-for-woocommerce'); ?></h4>
-							<?php BringFraktguiden\Admin\FieldRenderer::test_url(); ?>
-							<p class="bfg-description"><?php esc_html_e('Enter your staging or test site URL to activate the trial there first.', 'bring-fraktguiden-for-woocommerce'); ?></p>
-						</div>
-						<button type="submit" class="bfg-button-primary bfg-pro-btn-main">
+						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="width: 100%;">
 							<?php esc_html_e('Start My Free Trial', 'bring-fraktguiden-for-woocommerce'); ?>
 						</button>
 						<p class="bfg-pro-disclaimer"><?php esc_html_e('Trial starts immediately and lasts for 7 days from activation.', 'bring-fraktguiden-for-woocommerce'); ?></p>
@@ -352,15 +347,16 @@ use BringFraktguiden\Admin\Step;
 						<button type="submit" class="bfg-button-primary bfg-pro-btn-main" style="background: #BFDBFE !important; color: #3B82F6 !important; cursor: not-allowed;">
 							<?php esc_html_e('Activate PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
 						</button>
+
+						<div class="bfg-pro-footer">
+							<h4 class="bfg-pro-footer__title"><?php esc_html_e("Don't have a license yet?", 'bring-fraktguiden-for-woocommerce'); ?></h4>
+							<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
+								<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
+							</a>
+						</div>
 					</div>
 				</form>
 
-				<div class="bfg-pro-footer">
-					<h4 class="bfg-pro-footer__title"><?php esc_html_e("Don't have a license yet?", 'bring-fraktguiden-for-woocommerce'); ?></h4>
-					<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-pro-btn-outline">
-						<?php esc_html_e('Purchase PRO License', 'bring-fraktguiden-for-woocommerce'); ?>
-					</a>
-				</div>
 			</div>
 
 			<style>
@@ -374,7 +370,6 @@ use BringFraktguiden\Admin\Step;
 				const footnotes = document.getElementById('bfg-pro-footnotes');
 				const proCheckbox = document.querySelector('input[name="pro_enabled"]');
 				const form = document.getElementById('bfg-pro-activation-form');
-				const testUrlInputs = document.querySelectorAll('input[name="test_url"]');
 				const licenseTabButton = document.querySelector('#bfg-tab-license .bfg-pro-btn-main');
 				const licenseInput = document.querySelector('#bfg-tab-license input[name="test_url"]');
 
@@ -395,27 +390,11 @@ use BringFraktguiden\Admin\Step;
 					}
 				}
 
-				// Initialize placeholders on page load and handle saved values
-				const activeTab = document.querySelector('.bfg-pro-tab.is-active');
-				if (activeTab) {
-					const activeTabName = activeTab.getAttribute('data-tab');
-					testUrlInputs.forEach(input => {
-						// Always clear any saved value on page load
-						const currentValue = input.value.trim();
-						if (currentValue) {
-							input.value = '';
-						}
-
-						// Set appropriate placeholder based on active tab
-						if (activeTabName === 'trial') {
-							input.setAttribute('placeholder', 'https://staging.yoursite.com');
-						} else if (activeTabName === 'license') {
-							input.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
-						}
-					});
+				// Initialize license input placeholder and button state
+				if (licenseInput) {
+					licenseInput.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
+					licenseInput.value = '';
 				}
-
-				// Initialize button state on page load
 				if (licenseInput && licenseTabButton) {
 					updateLicenseButtonState();
 					licenseInput.addEventListener('input', updateLicenseButtonState);
@@ -435,15 +414,6 @@ use BringFraktguiden\Admin\Step;
 						if (footnotes) {
 							footnotes.style.display = (target === 'trial') ? 'block' : 'none';
 						}
-
-						// Update placeholder based on active tab
-						testUrlInputs.forEach(input => {
-							if (target === 'trial') {
-								input.setAttribute('placeholder', 'https://staging.yoursite.com');
-							} else if (target === 'license') {
-								input.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
-							}
-						});
 
 						// Update button state when switching to license tab
 						if (target === 'license') {
