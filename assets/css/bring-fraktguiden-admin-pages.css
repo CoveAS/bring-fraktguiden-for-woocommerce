@@ -2562,6 +2562,11 @@ body:not(.using-mouse) .bfg-pro-tab:focus {
 	border-color: #FECACA;
 }
 
+.bfg-pro-teaser--trial .bfg-pro-footer,
+.bfg-pro-teaser--expired .bfg-pro-footer {
+	border-top: none;
+}
+
 .bfg-pro-status-card__item {
 	display: flex;
 	flex-direction: column;
