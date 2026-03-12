@@ -1100,13 +1100,17 @@ body:not(.using-mouse) .bfg-btn:focus {
 }
 
 /* Primary Button */
-.bfg-btn--primary {
+.bfg-btn--primary,
+a.bfg-btn--primary,
+.bfg-admin-page a.bfg-btn--primary {
 	background: var(--bfg-primary);
 	color: #fff;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.bfg-btn--primary:hover {
+.bfg-btn--primary:hover,
+a.bfg-btn--primary:hover,
+.bfg-admin-page a.bfg-btn--primary:hover {
 	background: var(--bfg-primary-hover);
 	color: #fff;
 }
@@ -1123,12 +1127,16 @@ body:not(.using-mouse) .bfg-btn:focus {
 }
 
 /* Secondary Button */
-.bfg-btn--secondary {
+.bfg-btn--secondary,
+a.bfg-btn--secondary,
+.bfg-admin-page a.bfg-btn--secondary {
 	background: var(--bfg-primary-light);
 	color: var(--bfg-primary);
 }
 
-.bfg-btn--secondary:hover {
+.bfg-btn--secondary:hover,
+a.bfg-btn--secondary:hover,
+.bfg-admin-page a.bfg-btn--secondary:hover {
 	background: var(--bfg-primary-light-hover);
 	color: var(--bfg-primary);
 }
@@ -1138,13 +1146,17 @@ body:not(.using-mouse) .bfg-btn:focus {
 }
 
 /* Outline Button */
-.bfg-btn--outline {
+.bfg-btn--outline,
+a.bfg-btn--outline,
+.bfg-admin-page a.bfg-btn--outline {
 	background: transparent;
 	color: var(--bfg-primary);
 	border-color: var(--bfg-primary);
 }
 
-.bfg-btn--outline:hover {
+.bfg-btn--outline:hover,
+a.bfg-btn--outline:hover,
+.bfg-admin-page a.bfg-btn--outline:hover {
 	background: var(--bfg-primary-light);
 	color: var(--bfg-primary);
 }
