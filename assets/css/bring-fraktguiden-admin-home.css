@@ -444,20 +444,229 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	border: none !important;
 }
 
+/* Pro Teaser Caption */
+.bfg-pro-teaser__caption {
+	font-size: 14px;
+	font-weight: 600;
+	color: #2563EB;
+	margin: 0 auto 8px;
+	text-align: center;
+}
+
+/* Pro Teaser Title */
+.bfg-pro-teaser-v2 .bfg-section-card-title {
+	font-size: 32px;
+	font-weight: 700;
+	margin: 0 auto 8px;
+	text-align: center;
+}
+
+/* Pro Teaser Subtitle */
+.bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
+	font-size: 16px;
+	color: #6B7280;
+	margin: 0 auto 32px;
+	text-align: center;
+	max-width: 480px;
+}
+
+/* Pro Features Grid - Two Column */
+.bfg-pro-features-grid--two-col {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px 32px;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 40px 0;
+}
+
+.bfg-pro-features-grid--two-col li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 14px;
+	color: #374151;
+}
+
+.bfg-pro-features-grid--two-col li svg {
+	flex-shrink: 0;
+	width: 15px;
+	height: 15px;
+	stroke: #2563EB;
+	stroke-width: 2.5;
+}
+
+.bfg-pro-features-grid--two-col li sup {
+	font-size: 11px;
+	color: #6B7280;
+	vertical-align: super;
+	margin-left: -2px;
+}
+
 .bfg-admin-page__home .bfg-pro-btn-main,
 .bfg-admin-page__home .bfg-pro-btn-outline {
 	width: fit-content;
 	padding: 12px 24px;
 }
 
+.bfg-admin-page__home .bfg-pro-btn-main--large {
+	width: 100%;
+	height: 48px;
+	padding: 0 24px;
+	font-size: 16px;
+	font-weight: 500;
+	border-radius: 8px;
+	margin-top: 32px;
+}
+
+#bfg-license-submit-btn:not(:disabled):hover {
+	background: #1D4ED8 !important;
+}
+
 .bfg-admin-page__home .bfg-pro-disclaimer {
 	font-size: 14px;
 	color: #6B7280;
-	margin-top: 8px;
+	margin-top: 16px;
+	text-align: center;
 }
 
 .bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-description {
 	color: #6B7280;
+}
+
+/* Pro Teaser Divider */
+.bfg-pro-divider {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin: 32px 0;
+	color: #6B7280;
+	font-size: 14px;
+}
+
+.bfg-pro-divider::before,
+.bfg-pro-divider::after {
+	content: '';
+	flex: 1;
+	border-bottom: 1px solid #E5E7EB;
+}
+
+.bfg-pro-divider span {
+	padding: 0 16px;
+	white-space: nowrap;
+}
+
+/* Pro License Links */
+.bfg-pro-license-links {
+	text-align: center;
+}
+
+.bfg-pro-license-activate-link {
+	display: inline-block;
+	color: #2563EB;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	margin-bottom: 12px;
+}
+
+.bfg-pro-license-activate-link:hover {
+	text-decoration: underline;
+	color: #1D4ED8;
+}
+
+.bfg-pro-license-activate-link:focus {
+	outline: none !important;
+	box-shadow: none !important;
+	text-decoration: underline;
+}
+
+body:not(.using-mouse) .bfg-pro-license-activate-link:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+	border-radius: 4px;
+}
+
+.bfg-pro-license-buy {
+	color: #6B7280;
+	font-size: 14px;
+	margin: 0;
+}
+
+.bfg-pro-license-buy a {
+	color: #2563EB;
+	text-decoration: underline;
+}
+
+.bfg-pro-license-buy a:visited {
+	color: #7C3AED;
+}
+
+.bfg-pro-license-buy a:hover {
+	color: #1D4ED8;
+}
+
+.bfg-pro-license-buy a:focus {
+	outline: none;
+}
+
+body:not(.using-mouse) .bfg-pro-license-buy a:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+	border-radius: 4px;
+}
+
+/* Pro License Form */
+.bfg-pro-license-form {
+	margin-top: 0;
+	text-align: left;
+}
+
+.bfg-pro-license-form__field {
+	margin-bottom: 24px;
+}
+
+.bfg-pro-license-form__label {
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	color: #374151;
+	margin-bottom: 8px;
+}
+
+.bfg-pro-license-form input[name="test_url"] {
+	width: 100% !important;
+	max-width: none !important;
+	padding: 14px 16px !important;
+	font-size: 16px !important;
+	text-align: left !important;
+	border: 1px solid #E5E7EB !important;
+	border-radius: 8px !important;
+	background: #F9FAFB !important;
+}
+
+.bfg-pro-license-form input[name="test_url"]::placeholder {
+	color: #9CA3AF;
+	text-align: left;
+}
+
+.bfg-pro-license-form input[name="test_url"]:focus {
+	border-color: #2563EB !important;
+	outline: none !important;
+	box-shadow: none !important;
+	background: #fff !important;
+}
+
+body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+}
+
+.bfg-pro-license-form .bfg-description {
+	color: #6B7280;
+	font-size: 14px !important;
+	margin-top: 8px;
+}
+
+.bfg-pro-license-form .bfg-pro-license-buy {
+	margin-top: 16px;
 }
 
 /* ==========================================================================
@@ -593,25 +802,24 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 		height: 28px;
 	}
 
+	.bfg-pro-teaser__caption {
+		font-size: 12px;
+	}
+
+	.bfg-pro-teaser-v2 .bfg-section-card-title {
+		font-size: 24px;
+	}
+
 	.bfg-pro-teaser__title {
 		font-size: 24px;
 		line-height: 32px;
 	}
 
-	.bfg-pro-teaser__subtitle {
-		font-size: 16px;
-		line-height: 24px;
+	.bfg-pro-teaser__subtitle,
+	.bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
+		font-size: 14px;
+		line-height: 21px;
 		margin-bottom: 24px !important;
-	}
-
-	.bfg-pro-tabs {
-		flex-direction: column;
-		gap: 4px;
-	}
-
-	.bfg-pro-tab {
-		justify-content: center;
-		font-size: 16px;
 	}
 
 	.bfg-pro-content-block {
@@ -628,12 +836,14 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 		color: var(--bfg-text-secondary);
 	}
 
-	.bfg-pro-features-grid {
+	.bfg-pro-features-grid,
+	.bfg-pro-features-grid--two-col {
 		grid-template-columns: 1fr;
 		gap: 16px;
 	}
 
-	.bfg-pro-features-grid li {
+	.bfg-pro-features-grid li,
+	.bfg-pro-features-grid--two-col li {
 		font-size: 16px;
 	}
 
