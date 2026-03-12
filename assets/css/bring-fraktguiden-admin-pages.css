@@ -2150,6 +2150,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 	text-decoration: underline;
 }
 
+.bfg-admin-page a.bfg-btn:hover,
 .bfg-admin-page a.bfg-button-primary:hover,
 .bfg-admin-page a.button-primary:hover {
 	text-decoration: none;
