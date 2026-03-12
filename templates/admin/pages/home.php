@@ -266,7 +266,7 @@ use BringFraktguiden\Admin\Step;
 				<!-- Fresh/Default State - Show Trial/License Options -->
 			<div class="bfg-box bfg-pro-teaser-v2">
 				<p class="bfg-pro-teaser__caption">
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
 					<?php esc_html_e('Try Pro Free for 7 Days', 'bring-fraktguiden-for-woocommerce'); ?>
 				</p>
 				<h2 class="bfg-section-card-title"><?php esc_html_e('Experience Pro Features', 'bring-fraktguiden-for-woocommerce'); ?></h2>
@@ -274,7 +274,7 @@ use BringFraktguiden\Admin\Step;
 					<?php esc_html_e('Get instant access to all premium features on your live site. Start your free trial or activate your license.', 'bring-fraktguiden-for-woocommerce'); ?>
 				</p>
 
-				<ul class="bfg-pro-features-grid bfg-pro-features-grid--two-col">
+				<ul class="bfg-pro-teaser-features">
 					<li>
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						<?php esc_html_e('MyBring Booking', 'bring-fraktguiden-for-woocommerce'); ?><sup>1</sup>

@@ -457,34 +457,34 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
 	font-size: 16px;
 	color: #6B7280;
-	margin: 0 auto 20px;
+	margin: 0 auto 32px;
 	text-align: center;
 	max-width: 480px;
 }
 
-/* Pro Features Grid - Two Column Centered */
-.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
+/* Pro Teaser Features */
+.bfg-pro-teaser-features {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 16px 48px;
 	list-style: none;
-	padding: 40px !important;
-	margin: 0 !important;
-	background: #F8FAFC !important;
-	border-radius: 12px !important;
+	padding: 40px;
+	margin: 0;
+	background: #EFF6FF;
+	border-radius: 12px;
 }
 
-.bfg-pro-features-grid--two-col li {
+.bfg-pro-teaser-features li {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 12px;
 	font-size: 14px;
 	color: #374151;
-	margin: 0 !important;
-	padding: 0 !important;
+	margin: 0;
+	padding: 0;
 }
 
-.bfg-pro-features-grid--two-col li svg {
+.bfg-pro-teaser-features li svg {
 	flex-shrink: 0;
 	width: 15px;
 	height: 15px;
@@ -492,7 +492,7 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 	stroke-width: 2.5;
 }
 
-.bfg-pro-features-grid--two-col li sup {
+.bfg-pro-teaser-features li sup {
 	font-size: 11px;
 	color: #6B7280;
 	vertical-align: super;
@@ -501,7 +501,8 @@ body.wp-admin .bfg-pro-activation-card .button-primary:hover {
 
 /* PRO section buttons - margin for trial button */
 .bfg-admin-page__home #bfg-pro-activation-form .bfg-btn {
-	margin-top: 20px;
+	margin-top: 32px;
+	width: 100%;
 }
 
 .bfg-pro-license-form__row {
@@ -853,6 +854,10 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		margin-bottom: 24px !important;
 	}
 
+	.bfg-admin-page__home #bfg-pro-activation-form .bfg-btn {
+		margin-top: 24px;
+	}
+
 	.bfg-pro-content-block {
 		padding: 24px;
 	}
@@ -875,18 +880,13 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		border-radius: 12px !important;
 	}
 
-	/* Keep 2 columns on tablet for the two-col variant */
-	.bfg-pro-features-grid--two-col,
-	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
-		grid-template-columns: 1fr 1fr !important;
-		gap: 16px 32px !important;
-		padding: 32px !important;
-		background: #F8FAFC !important;
-		border-radius: 12px !important;
+	.bfg-pro-teaser-features {
+		gap: 16px 32px;
+		padding: 32px;
 	}
 
 	.bfg-pro-features-grid li,
-	.bfg-pro-features-grid--two-col li {
+	.bfg-pro-teaser-features li {
 		font-size: 14px;
 	}
 
@@ -922,7 +922,7 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 
 	.bfg-admin-page__home .bfg-btn--lg.bfg-btn--full-width {
 		padding: 12px 24px;
-		width: fit-content;
+		width: 100%;
 	}
 
 	.bfg-page__footer-notes {
@@ -995,11 +995,10 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
    ========================================================================== */
 
 @media screen and (max-width: 767px) {
-	.bfg-pro-features-grid--two-col,
-	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
-		grid-template-columns: 1fr !important;
-		gap: 16px !important;
-		padding: 32px !important;
+	.bfg-pro-teaser-features {
+		grid-template-columns: 1fr;
+		gap: 16px;
+		padding: 32px;
 	}
 }
 
@@ -1138,6 +1137,10 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 		margin-bottom: 24px !important;
 	}
 
+	.bfg-admin-page__home #bfg-pro-activation-form .bfg-btn {
+		margin-top: 24px;
+	}
+
 	.bfg-pro-features-teaser {
 		padding: 16px;
 		margin-top: 32px;
@@ -1180,13 +1183,10 @@ body:not(.using-mouse) .bfg-pro-license-form input[name="test_url"]:focus {
 	}
 
 	.bfg-pro-features-grid,
-	.bfg-pro-features-grid--two-col,
-	.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-pro-features-grid.bfg-pro-features-grid--two-col {
-		grid-template-columns: 1fr !important;
-		gap: 12px !important;
-		padding: 24px !important;
-		background: #F8FAFC !important;
-		border-radius: 12px !important;
+	.bfg-pro-teaser-features {
+		grid-template-columns: 1fr;
+		gap: 20px;
+		padding: 32px;
 	}
 
 	.bfg-pro-tabs {
