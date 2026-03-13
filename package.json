@@ -4,10 +4,12 @@
   "main": "vite.config.js",
   "scripts": {
     "clean": "rm -rf assets/js/bring-fraktguiden-settings.js assets/js/bring-fraktguiden-checkout.js assets/js/shared assets/css/compiled-styles.css pro/assets/js/booking.js",
-    "dev": "npm run clean && vite build --mode development",
-    "build": "npm run clean && vite build",
+    "compile-php": "php bin/compile-templates.php",
+    "test-php-compiler": "php bin/test-compiler.php",
+    "dev": "npm run compile-php && npm run clean && vite build --mode development",
+    "build": "npm run compile-php && npm run clean && vite build",
     "watch": "npm run clean && vite build --watch",
-    "production": "npm run clean && vite build --mode production"
+    "production": "npm run compile-php && npm run clean && vite build --mode production"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",

@@ -30,17 +30,13 @@
 ?>
 
 <div class="bfg-box">
-	<div class="bfg-box__header">
-		<h2>
-			<t>title</t>
-		</h2>
-		<if :description>
-			<p>
-				<t>description</t>
-			</p>
-		</if>
-	</div>
-	<div class="bfg-box__section">
-		<slot />
-	</div>
+    <div class="bfg-box__header">
+        <h2><t>title</t></h2>
+        <if :description>
+        <p><t>description</t></p>
+        </if>
+    </div>
+    <div class="bfg-box__section">
+        <slot />
+    </div>
 </div>
