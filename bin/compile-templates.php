@@ -103,13 +103,21 @@ class BFGComponentCompiler
         $templateContent = $this->loadComponentTemplate($componentName);
         $templateDoc = Dom\HTMLDocument::createFromString($templateContent, LIBXML_NOERROR);
 
-        // For <bfg-t>, pass text content as 'slot' attribute
-        if ($componentName === 't') {
-            $attributes['slot'] = $slotContent;
-        }
-
         // Reset used attributes tracking
         $this->usedAttributes = [];
+
+        // Always pass slot content as 'slot' attribute so templates can use <t>slot</t>
+        // For <bfg-t>, use text content only; for others, use full HTML
+        if ($componentName === 't') {
+            $attributes['slot'] = $slotContent;
+        } else {
+            // Make slot content available as attribute for translatable slots
+            // Strip HTML tags to get plain text for translation
+            $attributes['slot'] = strip_tags($slotContent);
+        }
+
+        // Mark 'slot' as used so it doesn't get passed through as an attribute
+        $this->usedAttributes[] = 'slot';
 
         // Apply replacements in order
         $this->replaceTextElements($templateDoc, $attributes);
