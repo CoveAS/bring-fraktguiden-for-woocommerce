@@ -30,7 +30,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 					:service="service"
 					:vas="service.vas"
 					:key="service.bring_product"
-				></shippingproducts>
+				></shippingproduct>
 			</div>
 		</td>
 	</tr>

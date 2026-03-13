@@ -21,6 +21,18 @@ class BringFraktguidenPro {
 
 	public static function setup() {
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
+		add_filter( 'script_loader_tag', __CLASS__ . '::add_type_module', 10, 3 );
+	}
+
+	/**
+	 * Add type="module" to Vue scripts
+	 */
+	public static function add_type_module( string $tag, string $handle, string $src ): string {
+		// Add type="module" to our Vite-built scripts
+		if ( in_array( $handle, [ 'bring-vue-runtime', 'bring-fraktguiden-pro-booking' ], true ) ) {
+			$tag = str_replace( '<script ', '<script type="module" ', $tag );
+		}
+		return $tag;
 	}
 
 	public static function admin_enqueue_scripts( $hook ): void {
@@ -34,10 +46,19 @@ class BringFraktguidenPro {
 		}
 		$adapter = new Bring_WC_Order_Adapter($order);
 
+		// Enqueue Vue runtime chunks (required for booking script)
+		wp_enqueue_script(
+			'bring-vue-runtime',
+			plugin_dir_url( __DIR__ ) . 'assets/js/shared/vue-runtime.js',
+			[],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
+
 		wp_enqueue_script(
 			'bring-fraktguiden-pro-booking',
 			plugin_dir_url( __DIR__ ) . 'pro/assets/js/booking.js',
-			[],
+			['bring-vue-runtime'],
 			Bring_Fraktguiden::VERSION,
 			true
 		);
