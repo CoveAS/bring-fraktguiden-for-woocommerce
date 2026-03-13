@@ -12,19 +12,6 @@ class Scripts
 	public static function setup(): void
 	{
 		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts' );
-		add_filter( 'script_loader_tag', __CLASS__ . '::add_type_module', 10, 3 );
-	}
-
-	/**
-	 * Add type="module" to Vue scripts
-	 */
-	public static function add_type_module( string $tag, string $handle, string $src ): string
-	{
-		// Add type="module" to our Vite-built scripts
-		if ( in_array( $handle, [ 'bring-vue-runtime', 'bring-settings-js' ], true ) ) {
-			$tag = str_replace( '<script ', '<script type="module" ', $tag );
-		}
-		return $tag;
 	}
 
 	/**
@@ -38,12 +25,17 @@ class Scripts
 		}
 		$baseUrl = plugin_dir_url(dirname(__DIR__));
 
-		// Enqueue Vue runtime chunks (required for settings script)
-		wp_enqueue_script( 'bring-vue-runtime', $baseUrl . '/assets/js/shared/vue-runtime.js', [], Bring_Fraktguiden::VERSION, true );
+		// Enqueue vanilla JS shipping services script
+		wp_enqueue_script(
+			'bring-shipping-services',
+			$baseUrl . 'resources/js/shipping-services.js',
+			['jquery'],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
 
 		wp_enqueue_script( 'bring-admin-js', $baseUrl . '/assets/js/bring-fraktguiden-admin.js', [], Bring_Fraktguiden::VERSION );
 		wp_enqueue_script( 'mybring-admin-js', $baseUrl . '/assets/js/mybring-admin.js', ['jquery'], Bring_Fraktguiden::VERSION, true );
-		wp_enqueue_script( 'bring-settings-js', $baseUrl . '/assets/js/bring-fraktguiden-settings.js', ['bring-vue-runtime'], Bring_Fraktguiden::VERSION, true );
 		wp_localize_script(
 			'bring-admin-js',
 			'bring_fraktguiden',
@@ -52,7 +44,7 @@ class Scripts
 			]
 		);
 		wp_localize_script(
-			'bring-settings-js',
+			'bring-shipping-services',
 			'bring_fraktguiden_settings',
 			[
 				'services_data'    => Fraktguiden_Helper::get_services_data(),
@@ -77,6 +69,15 @@ class Scripts
 				],
 			]
 		);
+
+		// Enqueue shipping services CSS
+		wp_enqueue_style(
+			'bring-shipping-services',
+			$baseUrl . 'resources/css/shipping-services.css',
+			[],
+			Bring_Fraktguiden::VERSION
+		);
+
 		wp_enqueue_style( 'bring-fraktguiden-styles', $baseUrl . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
 	}
 }

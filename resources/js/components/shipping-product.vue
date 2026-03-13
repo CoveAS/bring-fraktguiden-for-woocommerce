@@ -67,8 +67,7 @@
 		<div class="fraktguiden-product__vas" v-if="vas.length">
 			<h4 v-html="i18n.value_added_services"></h4>
 			<div class="vas-checkboxes">
-				<component
-					:is="service.vue_component"
+				<checkbox
 					:name_prefix="name_prefix"
 					:label="service.name"
 					:code="service.code"
@@ -76,7 +75,7 @@
 					:checked="service.value"
 					v-for="service in vas"
 					:key="service.code"
-				></component>
+				></checkbox>
 			</div>
 		</div>
 		<footer>

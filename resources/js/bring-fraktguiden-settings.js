@@ -2,17 +2,20 @@ import ShippingProduct from './components/shipping-product.vue';
 import {createApp, ref} from 'vue';
 import './mybring-api-validation.js';
 
-if ( window.shipping_services && window.bring_fraktguiden_settings ) {
+console.log('Settings script loaded');
+console.log('bring_fraktguiden_settings exists:', !!window.bring_fraktguiden_settings);
+console.log('bring_fraktguiden_settings data:', window.bring_fraktguiden_settings);
 
-	const pro_activated = ref(bring_fraktguiden_settings.pro_activated);
-	bring_fraktguiden_settings.pro_activated = pro_activated;
+if ( window.bring_fraktguiden_settings ) {
+
 	const selected = ref(bring_fraktguiden_settings.services_enabled);
 
 	const settings = createApp( {
-		data() {
+		setup() {
 			return {
 				selected: selected,
 				services_data: bring_fraktguiden_settings.services_data,
+				pro_activated: bring_fraktguiden_settings.pro_activated,
 			};
 		},
 		computed: {
@@ -31,8 +34,11 @@ if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 			shippingproduct: ShippingProduct,
 		},
 	} );
-	settings.config.globalProperties.pro_activated = pro_activated;
+	console.log('Vue app created, about to mount to #shipping_services');
+	const mountTarget = document.getElementById('shipping_services');
+	console.log('Mount target element:', mountTarget);
 	settings.mount('#shipping_services');
+	console.log('Vue app mounted successfully');
 
 	jQuery( function( $ ) {
 		$( '#shipping_services .select2' ).select2().on( 'change select2:clear', function( e ) {

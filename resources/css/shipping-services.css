@@ -1,0 +1,170 @@
+/* Service card container */
+.fraktguiden-product {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    background: #fff;
+}
+
+.fraktguiden-product header {
+    padding: 1rem;
+    background: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+}
+
+.fraktguiden-product header.warning {
+    background: #fff8e5;
+    border-color: #f0c36d;
+}
+
+.fraktguiden-product h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1em;
+}
+
+.fraktguiden-product__name {
+    font-weight: 600;
+}
+
+.fraktguiden-product__id {
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 0.5rem;
+}
+
+.fraktguiden-product p.warning {
+    color: #856404;
+    margin: 0.5rem 0 0;
+}
+
+/* Fields container */
+.fraktguiden-product__fields {
+    padding: 1rem;
+}
+
+.fraktguiden-product__fields label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.fraktguiden-product__fields label > span {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+/* Override toggle fields */
+.override-toggle-label {
+    position: relative;
+}
+
+.togglererer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bring-toggle-checkbox {
+    margin: 0 !important;
+}
+
+.bring-toggle-alt {
+    font-style: normal;
+    width: 2rem;
+    height: 1rem;
+    background: #ccc;
+    border-radius: 1rem;
+    position: relative;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.bring-toggle-alt::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.3s;
+}
+
+.bring-toggle-checkbox:checked + .bring-toggle-alt {
+    background: #2271b1;
+}
+
+.bring-toggle-checkbox:checked + .bring-toggle-alt::after {
+    left: calc(100% - 0.75rem - 2px);
+}
+
+.togglererer input[type="text"],
+.togglererer input[type="number"] {
+    flex: 1;
+}
+
+/* VAS section */
+.fraktguiden-product__vas {
+    padding: 0 1rem 1rem;
+    border-top: 1px solid #eee;
+}
+
+.fraktguiden-product__vas h4 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1em;
+}
+
+.vas-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.vas-checkboxes label.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vas-checkboxes .bring-checkbox {
+    margin: 0;
+}
+
+/* Validation errors */
+.validation-errors {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: #f8d7da;
+    border-top: 1px solid #f5c6cb;
+}
+
+.validation-errors__error {
+    color: #721c24;
+    margin: 0.25rem 0;
+}
+
+input.validation-error {
+    border-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+/* Pro feature gating */
+.pro-disabled .override-toggle-label::after {
+    content: 'Pro only';
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #C00;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+.pro-disabled input[readonly] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

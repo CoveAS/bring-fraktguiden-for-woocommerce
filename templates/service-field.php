@@ -16,21 +16,27 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 		</th>
 		<td class="forminp">
 			<div id="shipping_services" class="pro-<?php echo Fraktguiden_Helper::pro_activated() ? 'enabled' : 'disabled'; ?>">
-				<select class="select2" v-model="selected" multiple="multiple" name="<?php echo esc_attr( $field_key ); ?>[]">
-					<optgroup v-for="optgroup in services_data" :label="optgroup.title">
-						<option v-for="(option, option_id) in optgroup.services" :value="option_id">
-							{{option.productName}}
-						</option>
-					</optgroup>
+
+				<!-- Multi-select dropdown -->
+				<select
+					class="select2"
+					multiple="multiple"
+					name="<?php echo esc_attr( $field_key ); ?>[]"
+				>
+					<?php foreach ( Fraktguiden_Helper::get_services_data() as $group_id => $group ) : ?>
+						<optgroup label="<?php echo esc_attr( $group['title'] ); ?>">
+							<?php foreach ( $group['services'] as $service_id => $service ) : ?>
+								<option value="<?php echo esc_attr( $service_id ); ?>">
+									<?php echo esc_html( $service['productName'] ); ?>
+								</option>
+							<?php endforeach; ?>
+						</optgroup>
+					<?php endforeach; ?>
 				</select>
-				<shippingproduct
-					v-for="service in services"
-					:id="service.bring_product"
-					:service_data="service.service_data"
-					:service="service"
-					:vas="service.vas"
-					:key="service.bring_product"
-				></shippingproduct>
+
+				<!-- Service cards will be rendered here by JavaScript -->
+				<div id="service-cards-container"></div>
+
 			</div>
 		</td>
 	</tr>
