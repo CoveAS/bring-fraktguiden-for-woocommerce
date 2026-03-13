@@ -38,9 +38,6 @@ class BFGComponentCompiler
         // Parse source file as HTML
         $sourceDoc = Dom\HTMLDocument::createFromString($sourceContent, LIBXML_NOERROR);
 
-        // Process inline <bfg-t> tags first (before components)
-        $this->processInlineTranslations($sourceDoc);
-
         // Find all <bfg-*> component tags and process them
         $this->processComponentTags($sourceDoc);
 
@@ -57,39 +54,16 @@ class BFGComponentCompiler
     }
 
     /**
-     * Process inline <bfg-t> translation tags
-     */
-    private function processInlineTranslations(Dom\HTMLDocument $doc): void
-    {
-        $translationTags = [];
-
-        // Find all <bfg-t> tags
-        foreach ($doc->getElementsByTagName('*') as $element) {
-            if (strtolower($element->tagName) === 'bfg-t') {
-                $translationTags[] = $element;
-            }
-        }
-
-        // Replace each <bfg-t> with PHP translation code
-        foreach ($translationTags as $tag) {
-            $text = $tag->textContent;
-            $phpCode = "esc_html_e('{$text}', '{$this->textDomain}');";
-            $comment = $doc->createComment("BFG_PHP:{$phpCode}");
-            $tag->parentNode->replaceChild($comment, $tag);
-        }
-    }
-
-    /**
      * Process all <bfg-*> component tags in the document
      */
     private function processComponentTags(Dom\HTMLDocument $doc): void
     {
         $componentTags = [];
 
-        // Collect all elements that start with 'bfg-' (case-insensitive), excluding <bfg-t>
+        // Collect all elements that start with 'bfg-' (case-insensitive)
         foreach ($doc->getElementsByTagName('*') as $element) {
             $tagName = strtolower($element->tagName);
-            if (str_starts_with($tagName, 'bfg-') && $tagName !== 'bfg-t') {
+            if (str_starts_with($tagName, 'bfg-')) {
                 $componentTags[] = $element;
             }
         }
@@ -113,15 +87,26 @@ class BFGComponentCompiler
             $attributes[$attr->name] = $attr->value;
         }
 
-        // Extract slot content (inner HTML)
+        // Extract slot content (inner HTML or text content for <bfg-t>)
         $slotContent = '';
-        foreach ($tag->childNodes as $child) {
-            $slotContent .= $sourceDoc->saveHTML($child);
+        if ($componentName === 't') {
+            // For <bfg-t>, use text content only (for translation)
+            $slotContent = $tag->textContent;
+        } else {
+            // For other components, use full HTML
+            foreach ($tag->childNodes as $child) {
+                $slotContent .= $sourceDoc->saveHTML($child);
+            }
         }
 
         // Load component template
         $templateContent = $this->loadComponentTemplate($componentName);
         $templateDoc = Dom\HTMLDocument::createFromString($templateContent, LIBXML_NOERROR);
+
+        // For <bfg-t>, pass text content as 'slot' attribute
+        if ($componentName === 't') {
+            $attributes['slot'] = $slotContent;
+        }
 
         // Reset used attributes tracking
         $this->usedAttributes = [];
