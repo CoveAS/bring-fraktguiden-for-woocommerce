@@ -97,6 +97,16 @@ class SettingsPage
 			'bring_fraktguiden_settings',
 			[self::class, 'settings_page']
 		);
+		if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local') {
+			add_submenu_page(
+				'bring_fraktguiden_home',
+				__('Kitchen Sink', 'bring-fraktguiden-for-woocommerce'),
+				__('Kitchen Sink', 'bring-fraktguiden-for-woocommerce'),
+				'manage_options',
+				'bring_fraktguiden_kitchen_sink',
+				[self::class, 'kitchen_sink_page']
+			);
+		}
 		$submenu['bring_fraktguiden_home'][0][0] = __('Home', 'bring-fraktguiden-for-woocommerce');
 	}
 
@@ -143,6 +153,11 @@ class SettingsPage
 		$fields = Fields::instance();
 		$currency = get_option( 'woocommerce_currency' );
 		require_once dirname(__DIR__, 3) . '/templates/admin/pages/fallback-options.php';
+	}
+
+	public static function kitchen_sink_page(): void
+	{
+		require_once dirname(__DIR__, 3) . '/templates/admin/pages/kitchen-sink.php';
 	}
 
 	public static function settings_init(): void
@@ -215,6 +230,7 @@ class SettingsPage
 			'bring-fraktguiden_page_bring_fraktguiden_settings',
 			'bring-fraktguiden_page_bring_fraktguiden_fallback',
 			'bring-fraktguiden_page_bring_fraktguiden_booking',
+			'bring-fraktguiden_page_bring_fraktguiden_kitchen_sink',
 			'toplevel_page_bring_fraktguiden_home',
 		];
 
@@ -232,6 +248,7 @@ class SettingsPage
 			'bring-fraktguiden_page_bring_fraktguiden_settings',
 			'bring-fraktguiden_page_bring_fraktguiden_fallback',
 			'bring-fraktguiden_page_bring_fraktguiden_booking',
+			'bring-fraktguiden_page_bring_fraktguiden_kitchen_sink',
 			'toplevel_page_bring_fraktguiden_home',
 		];
 		if (! in_array($hook, $pages)) {
