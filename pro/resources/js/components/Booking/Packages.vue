@@ -89,9 +89,21 @@
 </style>
 
 <script>
-import Package from "./Package";
-import _ from 'lodash';
-import Settings from "./Settings";
+import Package from "./Package.vue";
+import Settings from "./Settings.vue";
+
+// Simple debounce helper
+function debounce(func, wait) {
+	let timeout;
+	return function executedFunction(...args) {
+		const later = () => {
+			clearTimeout(timeout);
+			func.apply(this, args);
+		};
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+	};
+}
 
 export default {
 	components: {Settings, Package},
@@ -101,28 +113,25 @@ export default {
 			loading: false,
 			showLoader: false,
 			clearLoad: false,
+			debouncedUpdate: null,
 		};
+	},
+	created() {
+		this.debouncedUpdate = debounce(function() {
+			this.updatePackages();
+		}, 250);
 	},
 	watch: {
 		packages: {
 			deep: true,
-			handler: _.debounce(function () {
-				this.updatePackages()
-			}, 250)
+			handler() {
+				this.debouncedUpdate();
+			}
 		}
 	},
 	computed: {
 		showPickupPoint() {
-			let result = false;
-			_.each(
-					this.packages,
-					(_package) => {
-						if (_package.pickupPoint) {
-							result = true;
-						}
-					}
-			);
-			return result;
+			return this.packages.some(_package => _package.pickupPoint);
 		}
 	},
 	methods: {
@@ -144,12 +153,9 @@ export default {
 			this.updatePackages();
 		},
 		updateBringProductOnAllPackages(key) {
-			_.each(
-					this.packages,
-					_package => {
-						_package.key = key
-					}
-			);
+			this.packages.forEach(_package => {
+				_package.key = key;
+			});
 		},
 		updatePackages() {
 			if (this.loading) {

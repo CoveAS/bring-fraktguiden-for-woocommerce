@@ -1,4 +1,4 @@
-import Packages from './components/Booking/Packages';
+import Packages from './components/Booking/Packages.vue';
 import {createApp} from 'vue';
 import 'vue-select/dist/vue-select.css';
 

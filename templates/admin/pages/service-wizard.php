@@ -86,7 +86,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<h2><?php esc_html_e('How heavy are the packages you're sending?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+					<h2><?php esc_html_e('How heavy are the packages you\'re sending?', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 				</div>
 				<div class="bfg-box__checkbox">
 					<label>

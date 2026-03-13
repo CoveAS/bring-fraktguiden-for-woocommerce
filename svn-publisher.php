@@ -91,6 +91,36 @@ if ( is_dir( '.svn' ) ) {
 	}
 }
 
+// Build assets in git repo before copying
+echo "Building production assets in git repo.\n";
+$current_dir = getcwd();
+chdir( $dir );
+exec( 'npm install --production=false 2>&1', $output, $result );
+if ( $result ) {
+	die( "ERROR: npm install failed.\n" . implode("\n", $output) . "\n" );
+}
+unset( $output );
+exec( 'npm run production 2>&1', $output, $result );
+if ( $result ) {
+	die( "ERROR: npm run production failed.\n" . implode("\n", $output) . "\n" );
+}
+// Verify build outputs exist
+$required_files = [
+	'assets/js/bring-fraktguiden-settings.js',
+	'assets/js/bring-fraktguiden-checkout.js',
+	'assets/js/shared/vue-runtime.js',
+	'assets/css/compiled-styles.css',
+	'pro/assets/js/booking.js',
+];
+foreach ( $required_files as $file ) {
+	if ( ! file_exists( $file ) ) {
+		die( "ERROR: Required build output missing: $file\n" );
+	}
+}
+echo "✓ Build successful, all assets present.\n";
+chdir( $current_dir );
+unset( $output );
+
 // Remove existing trunk
 echo "Copying from git repo.\n";
 exec( 'rm -rf trunk', $output, $result );
@@ -137,7 +167,7 @@ if ( ! preg_match( '/\sVERSION\s+=\s+\'' . $esc_version . '\';/', $content, $mat
 // Cleanup
 `find . -name ".DS_Store" -type d -delete`;
 `rm -rf .idea .git .gitignore composer.json svn-publisher.php README.md CONTRIBUTING.md`;
-`rm -rf vendor node_modules package.json package.lock webpack.mix.js tags`;
+`rm -rf vendor node_modules package.json package-lock.json vite.config.js resources pro/resources tags`;
 if ( file_exists( '.gitignore' ) ) {
 	die( "ERROR: Cleanup failed.\n" );
 }

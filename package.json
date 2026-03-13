@@ -1,26 +1,22 @@
 {
   "name": "bring-fraktguiden-for-woocommerce",
   "description": "Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no",
-  "main": "webpack.mix.js",
+  "main": "vite.config.js",
   "scripts": {
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "production": "mix --production"
+    "clean": "rm -rf assets/js/bring-fraktguiden-settings.js assets/js/bring-fraktguiden-checkout.js assets/js/shared assets/css/compiled-styles.css pro/assets/js/booking.js",
+    "dev": "npm run clean && vite build --mode development",
+    "build": "npm run clean && vite build",
+    "watch": "npm run clean && vite build --watch",
+    "production": "npm run clean && vite build --mode production"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.2.31",
-    "cross-env": "^7.0.3",
-    "laravel-mix": "^6.0.43",
-    "resolve-url-loader": "^5.0.0",
+    "@vitejs/plugin-vue": "^5.2.4",
     "sass": "^1.32.12",
-    "sass-loader": "^11.0.1",
+    "vite": "^6.4.1",
     "vue": "^3.2.31"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
-    "vue-loader": "^17.0.0",
     "vue-select": "^4.0.0-beta.3"
   }
 }

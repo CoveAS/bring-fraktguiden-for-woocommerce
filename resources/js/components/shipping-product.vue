@@ -189,8 +189,8 @@
 </style>
 
 <script>
-import OverrideToggle from './override-toggle';
-import Checkbox from './checkbox';
+import OverrideToggle from './override-toggle.vue';
+import Checkbox from './checkbox.vue';
 export default {
 	props: [
 		'vas',

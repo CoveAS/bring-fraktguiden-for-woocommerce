@@ -1,5 +1,6 @@
 import ShippingProduct from './components/shipping-product.vue';
 import {createApp, ref} from 'vue';
+import './mybring-api-validation.js';
 
 if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 
@@ -32,8 +33,6 @@ if ( window.shipping_services && window.bring_fraktguiden_settings ) {
 	} );
 	settings.config.globalProperties.pro_activated = pro_activated;
 	settings.mount('#shipping_services');
-
-	require( './mybring-api-validation.js' );
 
 	jQuery( function( $ ) {
 		$( '#shipping_services .select2' ).select2().on( 'change select2:clear', function( e ) {

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import Checkbox from "./Settings/Checkbox";
+import Checkbox from "./Settings/Checkbox.vue";
 
 export default {
 	props: {
