@@ -87,8 +87,8 @@ use BringFraktguiden\Fields\Fields;
 
 						<div class="bfg-field">
 							<h3 class="bfg-field-group-title"><?php esc_html_e('Address details', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-							<div class="bfgu-flex bfgu-flex-col bfgu-gap-8">
-								<div class="bfgu-flex-1">
+							<div class="bfgu:flex bfgu:flex-col bfgu:gap-8">
+								<div class="bfgu:flex-1">
 									<label for="booking_address_postcode"><?php esc_html_e('Postcode', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<input
 										type="text"
@@ -97,7 +97,7 @@ use BringFraktguiden\Fields\Fields;
 										autocomplete="postal-code"
 									/>
 								</div>
-								<div class="bfgu-flex-1">
+								<div class="bfgu:flex-1">
 									<label for="booking_address_city"><?php esc_html_e('City', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<input
 										type="text"
@@ -106,7 +106,7 @@ use BringFraktguiden\Fields\Fields;
 										autocomplete="address-level2"
 									/>
 								</div>
-								<div class="bfgu-flex-1">
+								<div class="bfgu:flex-1">
 									<label for="booking_address_country"><?php esc_html_e('Country', 'bring-fraktguiden-for-woocommerce'); ?></label>
 									<?php
 									$countries = WC()->countries?->get_countries() ?: [];

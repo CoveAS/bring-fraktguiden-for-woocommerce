@@ -41,14 +41,14 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->no_connection_rate_id; ?>
 					</div>
 
-					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-						<div class="bfgu-flex-1">
+					<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->no_connection_flat_rate_label->label(); ?>
 								<?php echo $fields->no_connection_flat_rate_label; ?>
 							</div>
 						</div>
-						<div class="bfgu-flex-1">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->no_connection_flat_rate->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->no_connection_flat_rate, $currency, 'lg'); ?>
@@ -70,14 +70,14 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->exception_rate_id; ?>
 					</div>
 
-					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-						<div class="bfgu-flex-1">
+					<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->exception_flat_rate_label->label(); ?>
 								<?php echo $fields->exception_flat_rate_label; ?>
 							</div>
 						</div>
-						<div class="bfgu-flex-1">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->exception_flat_rate->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->exception_flat_rate, $currency, 'lg'); ?>
@@ -104,16 +104,16 @@ use BringFraktguiden\Fields\Fields;
 					?>
 					<div class="bfg-field">
 						<h3 class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
-							<div class="bfgu-flex-1">
+						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-5">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->dimension_packing_side->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->dimension_packing_side, 'cm'); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->dimension_packing_circumference->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->dimension_packing_circumference, 'cm'); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->dimension_packing_weight->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->dimension_packing_weight, 'kg'); ?>
 							</div>
@@ -139,14 +139,14 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->alt_flat_rate_id; ?>
 					</div>
 
-					<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-						<div class="bfgu-flex-1">
+					<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->alt_flat_rate_label->label(); ?>
 								<?php echo $fields->alt_flat_rate_label; ?>
 							</div>
 						</div>
-						<div class="bfgu-flex-1">
+						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->alt_flat_rate->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->alt_flat_rate, $currency, 'lg'); ?>
