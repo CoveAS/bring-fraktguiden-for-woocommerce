@@ -7,8 +7,6 @@
  *
  * Only visible when BRING_ENVIRONMENT === 'local'
  */
-
-use BringFraktguiden\Admin\Component;
 ?>
 
 <div class="wrap bfg-admin-page bfg-admin-page__kitchen-sink">
@@ -60,13 +58,33 @@ use BringFraktguiden\Admin\Component;
 				<h2><?php esc_html_e('Notice Banners', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 			</div>
 			<div class="bfg-box__section">
-				<?php echo Component::noticeBanner('This is a warning notice banner', 'warning'); ?>
+				<div class="bfg-notice-banner">
+					<span class="bfg-notice-icon">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<p><?php echo wp_kses_post('This is a warning notice banner'); ?></p>
+				</div>
 				<br>
-				<?php echo Component::noticeBanner('This is an info notice banner', 'info'); ?>
+				<div class="bfg-notice-banner">
+					<span class="bfg-notice-icon">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<p><?php echo wp_kses_post('This is an info notice banner'); ?></p>
+				</div>
 				<br>
-				<?php echo Component::noticeBanner('This is a success notice banner', 'success'); ?>
+				<div class="bfg-notice-banner">
+					<span class="bfg-notice-icon">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.6666 5L7.49998 14.1667L3.33331 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<p><?php echo wp_kses_post('This is a success notice banner'); ?></p>
+				</div>
 				<br>
-				<?php echo Component::noticeBanner('This is an error notice banner', 'error'); ?>
+				<div class="bfg-notice-banner">
+					<span class="bfg-notice-icon">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<p><?php echo wp_kses_post('This is an error notice banner'); ?></p>
+				</div>
 			</div>
 		</div>
 
@@ -156,18 +174,63 @@ use BringFraktguiden\Admin\Component;
 				<div class="bfg-field">
 					<label
 						for="demo-select"><?php esc_html_e('Custom Select', 'bring-fraktguiden-for-woocommerce'); ?></label>
-					<?php
-					echo Component::customSelect(
-						'demo-select',
-						[
-							'option1' => __('Option 1', 'bring-fraktguiden-for-woocommerce'),
-							'option2' => __('Option 2', 'bring-fraktguiden-for-woocommerce'),
-							'option3' => __('Option 3', 'bring-fraktguiden-for-woocommerce'),
-						],
-						'option1',
-						__('Select an option', 'bring-fraktguiden-for-woocommerce')
-					);
-					?>
+					<?php $uniqueId = 'bfg-select-demo-select-' . wp_rand(); ?>
+					<div class="bfg-input bfg-input--select">
+						<div class="bfg-custom-select" id="<?php echo $uniqueId; ?>">
+							<!-- Hidden native select for form submission -->
+							<select
+								name="demo-select"
+								id="demo-select"
+								class="bfg-custom-select__native"
+								tabindex="-1"
+								aria-hidden="true"
+							>
+								<option value="" disabled><?php echo esc_html(__('Select an option', 'bring-fraktguiden-for-woocommerce')); ?></option>
+								<option value="option1" selected><?php echo esc_html(__('Option 1', 'bring-fraktguiden-for-woocommerce')); ?></option>
+								<option value="option2"><?php echo esc_html(__('Option 2', 'bring-fraktguiden-for-woocommerce')); ?></option>
+								<option value="option3"><?php echo esc_html(__('Option 3', 'bring-fraktguiden-for-woocommerce')); ?></option>
+							</select>
+
+							<!-- Custom visible select trigger -->
+							<button type="button" class="bfg-custom-select__trigger" aria-haspopup="listbox" aria-expanded="false">
+								<span class="bfg-custom-select__value"><?php echo esc_html(__('Option 1', 'bring-fraktguiden-for-woocommerce')); ?></span>
+								<svg class="bfg-custom-select__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M6 9l6 6 6-6"/>
+								</svg>
+							</button>
+
+							<!-- Custom dropdown list -->
+							<div class="bfg-custom-select__dropdown" role="listbox">
+								<div
+									class="bfg-custom-select__option is-selected"
+									data-value="option1"
+									role="option"
+									aria-selected="true"
+								>
+									<span class="bfg-custom-select__option-text"><?php echo esc_html(__('Option 1', 'bring-fraktguiden-for-woocommerce')); ?></span>
+									<svg class="bfg-custom-select__check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+										<polyline points="20 6 9 17 4 12"></polyline>
+									</svg>
+								</div>
+								<div
+									class="bfg-custom-select__option"
+									data-value="option2"
+									role="option"
+									aria-selected="false"
+								>
+									<span class="bfg-custom-select__option-text"><?php echo esc_html(__('Option 2', 'bring-fraktguiden-for-woocommerce')); ?></span>
+								</div>
+								<div
+									class="bfg-custom-select__option"
+									data-value="option3"
+									role="option"
+									aria-selected="false"
+								>
+									<span class="bfg-custom-select__option-text"><?php echo esc_html(__('Option 3', 'bring-fraktguiden-for-woocommerce')); ?></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<h3 class="bfg-field-group-title">
@@ -231,7 +294,12 @@ use BringFraktguiden\Admin\Component;
 				<h2><?php esc_html_e('Progress Bar', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 			</div>
 			<div class="bfg-box__section">
-				<?php echo Component::progressBar(3, 5, __('3 of 5 completed', 'bring-fraktguiden-for-woocommerce')); ?>
+				<div class="bfg-progress-container">
+					<span class="bfg-progress-badge"><?php echo esc_html(__('3 of 5 completed', 'bring-fraktguiden-for-woocommerce')); ?></span>
+					<div class="bfg-progress-bar-new">
+						<div class="bfg-progress-bar-fill" style="width: 60%;"></div>
+					</div>
+				</div>
 				<p class="bfg-description"><strong>Usage:</strong>
 					<code>Component::progressBar(3, 5, '3 of 5 completed')</code></p>
 			</div>
@@ -305,19 +373,27 @@ use BringFraktguiden\Admin\Component;
 				<h2><?php esc_html_e('Status Cards', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 			</div>
 			<div class="bfg-box__section">
-				<?php
-				echo Component::statusCard([
-					['label' => __('Status', 'bring-fraktguiden-for-woocommerce'), 'value' => __('Active', 'bring-fraktguiden-for-woocommerce'), 'type' => 'success'],
-					['label' => __('License Type', 'bring-fraktguiden-for-woocommerce'), 'value' => __('PRO License', 'bring-fraktguiden-for-woocommerce'), 'type' => 'default'],
-				], 'default');
-				?>
+				<div class="bfg-pro-status-card">
+					<div class="bfg-pro-status-card__item">
+						<span class="bfg-pro-status-card__label"><?php echo esc_html(__('Status', 'bring-fraktguiden-for-woocommerce')); ?></span>
+						<span class="bfg-pro-status-card__value bfg-pro-status-card__value--success"><?php echo esc_html(__('Active', 'bring-fraktguiden-for-woocommerce')); ?></span>
+					</div>
+					<div class="bfg-pro-status-card__item">
+						<span class="bfg-pro-status-card__label"><?php echo esc_html(__('License Type', 'bring-fraktguiden-for-woocommerce')); ?></span>
+						<span class="bfg-pro-status-card__value"><?php echo esc_html(__('PRO License', 'bring-fraktguiden-for-woocommerce')); ?></span>
+					</div>
+				</div>
 				<br>
-				<?php
-				echo Component::statusCard([
-					['label' => __('Status', 'bring-fraktguiden-for-woocommerce'), 'value' => __('Trial', 'bring-fraktguiden-for-woocommerce'), 'type' => 'trial'],
-					['label' => __('Days Remaining', 'bring-fraktguiden-for-woocommerce'), 'value' => '7', 'type' => 'default'],
-				], 'trial');
-				?>
+				<div class="bfg-pro-status-card bfg-pro-status-card--trial">
+					<div class="bfg-pro-status-card__item">
+						<span class="bfg-pro-status-card__label"><?php echo esc_html(__('Status', 'bring-fraktguiden-for-woocommerce')); ?></span>
+						<span class="bfg-pro-status-card__value bfg-pro-status-card__value--trial"><?php echo esc_html(__('Trial', 'bring-fraktguiden-for-woocommerce')); ?></span>
+					</div>
+					<div class="bfg-pro-status-card__item">
+						<span class="bfg-pro-status-card__label"><?php echo esc_html(__('Days Remaining', 'bring-fraktguiden-for-woocommerce')); ?></span>
+						<span class="bfg-pro-status-card__value"><?php echo esc_html('7'); ?></span>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -329,24 +405,41 @@ use BringFraktguiden\Admin\Component;
 			<div class="bfg-box__section">
 				<h3 class="bfg-field-group-title">
 					<?php esc_html_e('Regular Feature List', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-				<?php
-				echo Component::featureList([
-					__('MyBring Booking', 'bring-fraktguiden-for-woocommerce'),
-					__('Fixed shipping prices', 'bring-fraktguiden-for-woocommerce'),
-					__('Free shipping threshold', 'bring-fraktguiden-for-woocommerce'),
-					__('Pick-up points', 'bring-fraktguiden-for-woocommerce'),
-				], false);
-				?>
+				<ul class="bfg-pro-features-grid">
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('MyBring Booking', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('Fixed shipping prices', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('Free shipping threshold', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('Pick-up points', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+				</ul>
 
 				<h3 class="bfg-field-group-title">
 					<?php esc_html_e('Compact Feature List', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-				<?php
-				echo Component::featureList([
-					__('MyBring Booking', 'bring-fraktguiden-for-woocommerce'),
-					__('Fixed shipping prices', 'bring-fraktguiden-for-woocommerce'),
-					__('Free shipping threshold', 'bring-fraktguiden-for-woocommerce'),
-				], true);
-				?>
+				<ul class="bfg-pro-features-grid bfg-pro-features-grid--compact">
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('MyBring Booking', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('Fixed shipping prices', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html(__('Free shipping threshold', 'bring-fraktguiden-for-woocommerce')); ?>
+					</li>
+				</ul>
 			</div>
 		</div>
 
