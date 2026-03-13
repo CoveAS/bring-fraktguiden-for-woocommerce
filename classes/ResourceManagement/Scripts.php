@@ -78,6 +78,12 @@ class Scripts
 			Bring_Fraktguiden::VERSION
 		);
 
-		wp_enqueue_style( 'bring-fraktguiden-styles', $baseUrl . '/assets/css/bring-fraktguiden-admin.css', [], Bring_Fraktguiden::VERSION );
+		// Consolidated admin styles (includes bring-fraktguiden-admin.css)
+		wp_enqueue_style(
+			'bring-fraktguiden-compiled-styles',
+			$baseUrl . 'assets/css/compiled-styles.css',
+			[],
+			Bring_Fraktguiden::VERSION
+		);
 	}
 }

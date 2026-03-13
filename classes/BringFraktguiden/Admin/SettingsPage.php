@@ -238,22 +238,13 @@ class SettingsPage
 			return;
 		}
 
+		// Consolidated admin styles (includes admin-pages.css, admin-home.css, admin.css)
 		wp_enqueue_style(
-			'bring_fraktguiden_admin_css',
-			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/bring-fraktguiden-admin-pages.css'),
+			'bring_fraktguiden_compiled_styles',
+			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/compiled-styles.css'),
 			[],
 			Bring_Fraktguiden::VERSION . '.' . time()
 		);
-
-		// Conditionally load home page styles
-		if ($hook === 'toplevel_page_bring_fraktguiden_home') {
-			wp_enqueue_style(
-				'bring_fraktguiden_admin_home_css',
-				plugins_url('bring-fraktguiden-for-woocommerce/assets/css/bring-fraktguiden-admin-home.css'),
-				['bring_fraktguiden_admin_css'],
-				Bring_Fraktguiden::VERSION . '.' . time()
-			);
-		}
 
 		wp_enqueue_script(
 			'bring-admin-js',
