@@ -51,12 +51,12 @@ use BringFraktguiden\Fields\Fields;
 				<div class="bfg-box__section">
 					<div class="bfg-field">
 						<h3 class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-							<div class="bfgu-flex-1">
+						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->from_zip->label() ?>
 								<?php echo $fields->from_zip->field(); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->from_country->label() ?>
 								<?php echo $fields->from_country->field(); ?>
 							</div>
@@ -87,22 +87,22 @@ use BringFraktguiden\Fields\Fields;
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->use_customer_number_to_get_prices; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
-					<div class="bfg-field bfgu-mt-8">
+					<div class="bfg-field bfgu:mt-8">
 						<h3 class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4 bfgu-mb-5">
-							<div class="bfgu-flex-1">
+						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-5">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_length->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->minimum_length, 'cm'); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_width->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->minimum_width, 'cm'); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_height->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->minimum_height, 'cm'); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_weight->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->minimum_weight, 'kg'); ?>
 							</div>
@@ -121,13 +121,13 @@ use BringFraktguiden\Fields\Fields;
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
-						<div class="bfgu-flex bfgu-flex-row bfgu-gap-4">
-							<div class="bfgu-flex-1">
+						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->lead_time->label(); ?>
 								<?php echo Component::inputWithSuffix($fields->lead_time, __('days', 'bring-fraktguiden-for-woocommerce')); ?>
 								<?php echo $fields->lead_time->description(); ?>
 							</div>
-							<div class="bfgu-flex-1">
+							<div class="bfgu:flex-1">
 								<?php echo $fields->lead_time_cutoff->label(); ?>
 								<?php echo $fields->lead_time_cutoff->field(); ?>
 								<?php echo $fields->lead_time_cutoff->description(); ?>

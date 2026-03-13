@@ -1,6 +1,7 @@
 import ShippingProduct from './components/shipping-product.vue';
 import {createApp, ref} from 'vue';
 import './mybring-api-validation.js';
+import '../css/tailwind.css';
 
 console.log('Settings script loaded');
 console.log('bring_fraktguiden_settings exists:', !!window.bring_fraktguiden_settings);
