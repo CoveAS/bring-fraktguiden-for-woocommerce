@@ -125,6 +125,9 @@ class BFGComponentCompiler
         $this->replaceConditionals($templateDoc, $attributes);
         $this->replaceSlots($templateDoc, $slotContent);
 
+        // Process any nested component tags that were introduced by slot content
+        $this->processComponentTags($templateDoc);
+
         // Get root element and apply unmatched attributes
         $rootElement = $templateDoc->body->firstChild;
         while ($rootElement && $rootElement->nodeType !== XML_ELEMENT_NODE) {

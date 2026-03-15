@@ -7,14 +7,20 @@
  *
  * @param string $label The label text
  * @param string $value The value text
- * @param string $type Optional type modifier for styling (e.g., "success", "trial", "default")
  *
- * Usage:
- * <bfg-status-item label="Status" value="Active" type="success" />
+ * Usage (standalone):
+ * <bfg-status-item label="Status" value="Active"></bfg-status-item>
+ *
+ * Usage (nested in status-card):
+ * <bfg-status-card>
+ *     <bfg-status-item label="Status" value="Active"></bfg-status-item>
+ * </bfg-status-card>
+ *
+ * Note: Use explicit closing tags when nesting components (not self-closing />)
  */
 ?>
 
 <div class="bfg-pro-status-card__item">
-	<span class="bfg-pro-status-card__label"><t>:label</t></span>
-	<span class="bfg-pro-status-card__value<if :type> bfg-pro-status-card__value--:type</if>"><t>:value</t></span>
+	<span class="bfg-pro-status-card__label"><t>label</t></span>
+	<span class="bfg-pro-status-card__value"><t>value</t></span>
 </div>
