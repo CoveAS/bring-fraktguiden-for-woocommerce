@@ -17,7 +17,7 @@ use BringFraktguiden\Admin\Step;
 <div class="wrap bfg-admin-page bfg-admin-page__home">
 	<div class="bfg-page__main">
 		<div class="bfg-page__header">
-			<h1><?php esc_html_e('Home', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+			<h1><bfg-t>Home</bfg-t></h1>
 		</div>
 
 		<div class="bfg-notices">
@@ -65,38 +65,25 @@ use BringFraktguiden\Admin\Step;
 					<?php
 					// Only mark as "in progress" if we're showing the next step (i.e., at least one step completed)
 					$isNext = $showNextStep && $nextStep === $step;
-					$statusClass = '';
-					if ($step->completed) {
-						$statusClass = 'bfg-step--completed';
-					} elseif ($isNext) {
-						$statusClass = 'bfg-step--in-progress';
-					} else {
-						$statusClass = 'bfg-step--pending';
-					}
 					?>
-					<a href="<?php echo esc_attr($step->action); ?>" class="bfg-step-row <?php echo $statusClass; ?>" style="text-decoration: none; color: inherit; display: flex;">
-						<div class="bfg-step-row__indicator">
-							<?php if ($step->completed): ?>
-								<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<circle cx="16" cy="16" r="16" fill="#dcfce7"/>
-									<path d="M10 16L14 20L22 12" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-							<?php else: ?>
-								<div class="bfg-step-row__number"><?php echo $i + 1; ?></div>
-							<?php endif; ?>
-						</div>
-						<div class="bfg-step-row__content">
-							<div class="bfg-step-row__label"><?php echo esc_html($step->label) ?></div>
-							<div class="bfg-step-row__description"><?php echo esc_html($step->description) ?></div>
-						</div>
-						<div class="bfg-step-row__status">
-							<?php if ($step->completed): ?>
-								<span class="bfg-badge bfg-badge--completed"><?php esc_html_e('Completed', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<?php elseif ($isNext) : ?>
-								<span class="bfg-badge bfg-badge--in-progress"><?php esc_html_e('In Progress', 'bring-fraktguiden-for-woocommerce'); ?></span>
-							<?php endif; ?>
-						</div>
-					</a>
+					<?php if ($step->completed): ?>
+						<bfg-step.completed :href="$step->action">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
+							<bfg-badge.completed>Completed</bfg-badge.completed>
+						</bfg-step.completed>
+					<?php elseif ($isNext): ?>
+						<bfg-step.in-progress :href="$step->action" :number="$i + 1">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
+							<bfg-badge.in-progress>In Progress</bfg-badge.in-progress>
+						</bfg-step.in-progress>
+					<?php else: ?>
+						<bfg-step.pending :href="$step->action" :number="$i + 1">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
+						</bfg-step.pending>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
 		</div>

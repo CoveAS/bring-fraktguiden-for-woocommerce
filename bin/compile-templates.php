@@ -17,6 +17,7 @@ class BFGComponentCompiler
     private string $componentsDir;
     private string $textDomain = 'bring-fraktguiden-for-woocommerce';
     private array $usedAttributes = [];
+    private array $dynamicAttributes = [];
 
     public function __construct(string $projectRoot)
     {
@@ -62,6 +63,11 @@ class BFGComponentCompiler
         // Convert compiler-generated placeholder comments back to PHP tags
         $output = preg_replace('/<!--BFG_PHP:(.*?)-->/', '<?php $1 ?>', $output);
 
+        // Replace dynamic attribute placeholders with PHP code
+        foreach ($this->dynamicAttributes as $placeholder => $expression) {
+            $output = str_replace($placeholder, '<?php echo ' . $expression . '; ?>', $output);
+        }
+
         // Restore original PHP tags
         foreach ($phpTagMap as $placeholder => $phpTag) {
             $output = str_replace($placeholder, $phpTag, $output);
@@ -98,10 +104,16 @@ class BFGComponentCompiler
     {
         $componentName = substr(strtolower($tag->tagName), 4); // Remove 'bfg-' prefix
 
-        // Extract attributes
+        // Extract attributes (including dynamic ones with : prefix)
         $attributes = [];
+        $dynamicAttrs = [];
         foreach ($tag->attributes as $attr) {
-            $attributes[$attr->name] = $attr->value;
+            if (str_starts_with($attr->name, ':')) {
+                // Dynamic attribute - store separately
+                $dynamicAttrs[substr($attr->name, 1)] = $attr->value;
+            } else {
+                $attributes[$attr->name] = $attr->value;
+            }
         }
 
         // Extract slot content (inner HTML or text content for <bfg-t>)
@@ -153,6 +165,7 @@ class BFGComponentCompiler
 
         if ($rootElement instanceof Dom\Element) {
             $this->applyUnmatchedAttributes($rootElement, $attributes, $this->usedAttributes);
+            $this->applyDynamicAttributes($rootElement, $dynamicAttrs);
         }
 
         // Import compiled template into source document
@@ -370,6 +383,22 @@ class BFGComponentCompiler
                     $rootElement->setAttribute($name, $value);
                 }
             }
+        }
+    }
+
+    /**
+     * Apply dynamic attributes (prefixed with :) to root element
+     * These will be replaced with PHP expressions later
+     */
+    private function applyDynamicAttributes(Dom\Element $rootElement, array $dynamicAttrs): void
+    {
+        foreach ($dynamicAttrs as $name => $expression) {
+            // Create a unique placeholder for this dynamic attribute
+            $placeholder = 'BFG_DYNAMIC_' . count($this->dynamicAttributes) . '_ATTR';
+            $this->dynamicAttributes[$placeholder] = $expression;
+
+            // Set the attribute with the placeholder value
+            $rootElement->setAttribute($name, $placeholder);
         }
     }
 }
