@@ -108,10 +108,11 @@ class BFGComponentCompiler
         }
 
         foreach ($translationTags as $tElement) {
-            $textContent = $tElement->textContent;
+            $textContent = trim($tElement->textContent);
 
             // Create placeholder comment (will be converted to PHP later)
-            $phpCode = "esc_html_e('{$textContent}', '{$this->textDomain}');";
+            $escapedText = addslashes($textContent);
+            $phpCode = "esc_html_e('{$escapedText}', '{$this->textDomain}');";
             $comment = $doc->createComment("BFG_PHP:{$phpCode}");
 
             // Replace <t> element with comment placeholder
@@ -286,7 +287,7 @@ class BFGComponentCompiler
         }
 
         foreach ($textElements as $element) {
-            $varName = $element->textContent;
+            $varName = trim($element->textContent);
             $value = $attributes[$varName] ?? '';
 
             // Track attribute usage
@@ -300,7 +301,8 @@ class BFGComponentCompiler
                 $phpCode = "echo ({$value});";
             } else {
                 // Static attribute - output as translatable string
-                $phpCode = "esc_html_e('{$value}', '{$this->textDomain}');";
+                $escapedValue = addslashes(trim($value));
+                $phpCode = "esc_html_e('{$escapedValue}', '{$this->textDomain}');";
             }
             $comment = $doc->createComment("BFG_PHP:{$phpCode}");
 
