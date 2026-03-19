@@ -1,188 +1,168 @@
 # BFG Component System
 
-## What We're Building
+A **build-time template compilation system** for WordPress admin pages that transforms clean, component-based syntax into standard PHP/HTML with zero runtime overhead.
 
-A **custom template compilation system** for WordPress admin pages that transforms clean, declarative syntax into standard PHP/HTML.
+## Quick Start
 
-The system compiles `.bfg.php` source files with custom component notation into standard `.php` files using reusable `.bfgc.php` component templates.
+```bash
+# Build all templates
+./bin/build
+
+# Run tests
+php bin/test-compiler.php
+```
 
 ## How It Works
 
-### 1. Source Files (`.bfg.php`)
-Custom notation with component tags:
+### 1. Write Source Templates (`.bfg.php`)
+Clean, component-based syntax with auto-translation:
 
 ```php
-<bfg-box title="My Box" description="Description" class="extra-class">
-    <p>Content</p>
+<bfg-box title="Settings" description="Configure your options">
+    <bfg-field.text id="api-key" name="api_key" label="API Key" />
 </bfg-box>
 ```
 
-### 2. Component Templates (`.bfgc.php`)
-Simple templates with placeholders:
+### 2. Compile to Standard PHP
+Run `./bin/build` to compile to `build/templates/`:
 
 ```php
-<div class="bfg-box {{$class}}" {{ $attributes }}>
+<div class="bfg-box">
     <div class="bfg-box__header">
-        <h2>{{ $title }}</h2>
-        @if ($description)
-        <p>{{ $description }}</p>
-        @endif
+        <h2><?php esc_html_e('Settings', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+        <p><?php esc_html_e('Configure your options', 'bring-fraktguiden-for-woocommerce'); ?></p>
     </div>
     <div class="bfg-box__section">
-        {{ $slot }}
+        <div class="bfg-field">
+            <label for="api-key"><?php esc_html_e('API Key', 'bring-fraktguiden-for-woocommerce'); ?></label>
+            <input type="text" id="api-key" name="api_key">
+        </div>
     </div>
 </div>
 ```
 
-### 3. Compiled Output (`.php`)
-Standard WordPress PHP:
+### 3. WordPress Includes Compiled Output
+Admin pages include from `build/templates/`:
 
 ```php
-<div class="bfg-box extra-class">
-    <div class="bfg-box__header">
-        <h2><?php esc_html_e('My Box', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-        <?php if (!empty($description)) : ?>
-        <p><?php esc_html_e('Description', 'bring-fraktguiden-for-woocommerce'); ?></p>
-        <?php endif; ?>
-    </div>
-    <div class="bfg-box__section">
-        <p>Content</p>
-    </div>
+require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
+```
+
+## Project Structure
+
+```
+.
+├── bin/
+│   ├── build                      ← Build script (runs compiler)
+│   ├── compile-templates.php      ← Compiler implementation
+│   └── test-compiler.php          ← Test runner
+├── src/
+│   ├── components/                ← Component templates (.bfgc.php)
+│   │   ├── box.bfgc.php
+│   │   ├── notice.bfgc.php
+│   │   ├── field.text.bfgc.php
+│   │   ├── field.select.bfgc.php
+│   │   ├── step.completed.bfgc.php
+│   │   └── ...
+│   └── templates/                 ← Source files (.bfg.php)
+│       └── admin/pages/
+│           ├── home.bfg.php
+│           ├── settings.bfg.php
+│           ├── booking.bfg.php
+│           └── kitchen-sink.bfg.php
+├── build/
+│   └── templates/                 ← Compiled output (.php) [gitignored]
+│       └── admin/pages/
+│           ├── home.php
+│           ├── settings.php
+│           └── ...
+└── tests/
+    ├── input/                     ← Test input files
+    └── expected/                  ← Expected output files
+```
+
+## Component Template Syntax
+
+### Basic Template Structure
+
+Component templates use simple placeholders:
+
+```php
+<!-- src/components/notice.bfgc.php -->
+<div class="bfg-notice bfg-notice--:type">
+    <t>slot</t>
 </div>
+```
+
+### Placeholders
+
+- `<t>varname</t>` - Translatable text (wraps with `esc_html_e()`)
+- `:varname` - Attribute value substitution
+- `<slot/>` - Inject inner content
+- `<if :varname>...</if>` - Conditional rendering
+- `<else>...</else>` - Else branch
+
+### Dynamic Values
+
+Use `:` prefix for PHP variables (no translation):
+
+```php
+<bfg-box :title="$dynamic_title">  <!-- Uses variable, not translated -->
+<bfg-box title="Static Title">     <!-- Translated string -->
 ```
 
 ## Key Features
 
-- **Class forwarding** - `{{$class}}` merges with base classes
-- **Attribute passthrough** - `{{ $attributes }}` forwards unknown attributes
-- **Conditional rendering** - `@if`/`@endif` for optional content
-- **Auto-translation** - Compiler wraps strings with `esc_html_e()`
-- **Slot content** - `{{ $slot }}` for inner content
-- **No runtime overhead** - Compiled at build time
+- ✅ **PHP tag preservation** - Existing `<?php ?>` tags pass through unchanged
+- ✅ **Auto-translation** - String literals wrapped with `esc_html_e()`
+- ✅ **Build-time compilation** - Zero runtime overhead
+- ✅ **Component reusability** - Define once, use everywhere
+- ✅ **TDD workflow** - Test-driven component development
+- ✅ **Warning system** - Alerts for plain `.php` files in source directory
 
-## Key Files
+## Available Components
 
-### Component System
+- **Layout**: `box`, `notice`, `progress`
+- **Fields**: `field.text`, `field.number`, `field.select`, `field.checkbox`
+- **Steps**: `step.completed`, `step.in-progress`, `step.pending`, `step-desc`
+- **Badges**: `badge.completed`, `badge.in-progress`, `badge.progress`
+- **Cards**: `status-card`, `status-item`
+- **Lists**: `feature-list`
+- **Utilities**: `t` (translation wrapper)
 
-**Component Templates:**
-- `src/components/box.bfgc.php` - Box component with class/attribute support
+See `src/templates/admin/pages/kitchen-sink.bfg.php` for usage examples.
 
-**Documentation:**
-- `src/components/COMPILER.md` - Detailed compilation algorithm and guide
+## Creating New Components
 
-### Template Files
+Use the `/create-component` skill for TDD workflow:
 
-**Source (Custom Notation):**
-- `src/templates/admin/pages/kitchen-sink.bfg.php` - Demo page with `<bfg-box>`, `<bfg-notice>`, etc.
-
-**Compiled Output:**
-- `build/templates/admin/pages/kitchen-sink.php` - Standard WordPress PHP
-
-### Project Structure
-
-```
-.
-├── BFG-COMPONENTS.md              ← This file
-├── src/
-│   ├── components/
-│   │   ├── box.bfgc.php           ← Component templates
-│   │   └── COMPILER.md            ← Compilation guide
-│   └── templates/
-│       └── admin/
-│           └── pages/
-│               └── kitchen-sink.bfg.php  ← Source files
-└── build/
-    └── templates/
-        └── admin/
-            └── pages/
-                └── kitchen-sink.php      ← Compiled output
+```bash
+# Creates component template, test input, and expected output
+# Runs tests to verify compilation
 ```
 
-## What's Missing
+Or manually:
 
-### Compiler Script
+1. Create component template in `src/components/my-component.bfgc.php`
+2. Create test input in `tests/input/my-component.bfg.php`
+3. Create expected output in `tests/expected/my-component.php`
+4. Run `php bin/test-compiler.php` to verify
 
-The main piece missing is the compiler itself - a PHP script (e.g., `bin/compile-templates.php`) that:
+## Build Process
 
-1. Finds all `.bfg.php` files in `src/templates/`
-2. Parses custom tags (e.g., `<bfg-box>`)
-3. Loads matching `.bfgc.php` component templates
-4. Replaces placeholders with actual values
-5. Handles `@if` directives
-6. Wraps strings with WordPress translation functions
-7. Outputs compiled `.php` files to `build/templates/`
+The build process:
 
-## Current Status
-
-**✅ Completed:**
-- Component template format defined (`.bfgc.php`)
-- Source file format defined (`.bfg.php`)
-- Example component created (`box.bfgc.php`)
-- Compilation algorithm documented
-- Example source file created
-- Example compiled output created (manually)
-
-**🚧 In Progress:**
-- Evaluating alternative approaches (Pug, Twig, etc.)
-- Deciding on final implementation approach
-
-**⏳ Todo:**
-- Implement compiler script
-- Add more component templates
-- Integrate with build process
-- Add validation/error handling
-- Create additional components (notice, field, progress, etc.)
-
-## Design Decisions
-
-### Translation Handling (Option B)
-The compiler handles translation by wrapping string literals in `esc_html_e()`:
-
-```php
-// Source:
-<bfg-box title="My Title">
-
-// Compiled:
-<h2><?php esc_html_e('My Title', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-```
-
-For dynamic values, use `:` prefix:
-```php
-<bfg-box :title="$page_title">  // Don't translate, use variable
-```
-
-### Reserved Attributes
-- `title`, `description`, `class` - Extracted as named variables
-- Everything else → Passed through via `{{ $attributes }}`
-
-### Conditional Rendering
-Uses Blade-like `@if`/`@endif` syntax in component templates:
-
-```php
-@if ($description)
-<p>{{ $description }}</p>
-@endif
-```
-
-If $description is present the template compiles to:
-```php
-<p><?php esc_html_e('Description', 'bring-fraktguiden-for-woocommerce'); ?></p>
-```
+1. Scans `src/templates/` for `.bfg.php` files
+2. Warns about plain `.php` files (should be `.bfg.php`)
+3. Compiles each file using component templates
+4. Outputs to `build/templates/` (preserving directory structure)
+5. Reports success/failure for each file
 
 ## Benefits
 
-1. **Cleaner source files** - Less boilerplate, more readable
-2. **Reusable components** - Define once, use everywhere
-3. **Translation-ready** - Automatic WordPress i18n wrapping
-4. **Type safety potential** - Can validate attributes during compilation
-5. **Build-time processing** - Zero runtime overhead
-6. **Familiar syntax** - Blade/Vue-like for easy adoption
-7. **No dependencies** - Pure PHP, no external libraries needed
-
-## Next Steps
-
-1. Decide on final approach (current Blade-like syntax vs. alternatives)
-2. Implement compiler script
-3. Test with real-world components
-4. Integrate into build pipeline
-5. Document component authoring guidelines
+- **Cleaner source files** - 50% less boilerplate than raw PHP
+- **Translation-ready** - Automatic WordPress i18n wrapping
+- **Build-time processing** - Zero runtime performance impact
+- **Type safety** - Attributes validated during compilation
+- **Testable** - TDD workflow with automated tests
+- **No dependencies** - Pure PHP, uses native DOM parser
