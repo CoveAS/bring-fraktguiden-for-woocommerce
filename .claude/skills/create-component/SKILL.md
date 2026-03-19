@@ -9,7 +9,9 @@ This skill guides you through creating a new BFG component using a test-driven d
 
 ## Process
 
-### 1. Review existing compiled output (if available)
+### 1. Review existing components and compiled output
+- Run `php bin/list-components.php` to see all available components
+- Run `php bin/list-components.php --detailed` for component descriptions
 - Check `src/templates/admin/pages/kitchen-sink.bfg.php` for component usage examples
 - Check `build/templates/admin/pages/kitchen-sink.php` for compiled output examples
 - Identify the HTML structure, classes, and behavior of the component
@@ -71,6 +73,7 @@ Example:
 - `<if :varname>...</if>` - Conditional rendering based on attribute existence
 - `<else>...</else>` - Optional else block for conditionals
 - Unmatched attributes automatically pass through to root element
+- **IMPORTANT:** Self-closing component tags are NOT supported. Always use `</tag>` closing tags, not `<tag />`
 
 ### 5. Run tests
 ```bash
@@ -125,22 +128,34 @@ php bin/test-compiler.php
 | Tag Name | Component File |
 |----------|----------------|
 | `<bfg-box>` | `box.bfgc.php` |
+| `<bfg-box.header>` | `box.header.bfgc.php` |
+| `<bfg-box.section>` | `box.section.bfgc.php` |
 | `<bfg-notice>` | `notice.bfgc.php` |
 | `<bfg-field.text>` | `field.text.bfgc.php` |
 | `<bfg-badge.completed>` | `badge.completed.bfgc.php` |
 
 **Rule:** Remove `bfg-` prefix, add `.bfgc.php` extension.
 
+**Nested components:** Use dot notation (e.g., `box.header`) for sub-components that belong to a parent component.
+
 ## Common Issues
 
-1. **Self-closing tags:** DOM parser expands `<path ... />` to `<path ...></path>` - update expected output accordingly
-2. **Whitespace differences:** Test normalizer removes empty lines and trims - focus on actual content differences
-3. **Missing attributes:** Unmatched attributes automatically pass through to root element
-4. **Conditionals:** Use `<if :varname>` to check attribute existence, not value comparison
+1. **Self-closing component tags NOT supported:**
+   - ❌ `<bfg-box.header title="Test" />` - Will break compilation, rest of content is lost
+   - ✅ `<bfg-box.header title="Test"></bfg-box.header>` - Always use closing tags
+   - This applies to component tags, not HTML elements inside components
+2. **Self-closing SVG/HTML tags:** DOM parser expands `<path ... />` to `<path ...></path>` in expected output
+3. **Whitespace differences:** Test normalizer removes empty lines and trims - focus on actual content differences
+4. **Missing attributes:** Unmatched attributes automatically pass through to root element
+5. **Conditionals:** Use `<if :varname>` to check attribute existence, not value comparison
+6. **Multi-line text in `<bfg-t>` tags:** Keep text on single line to avoid line breaks in translation strings
+   - ❌ `<bfg-t>Full Width\n\t\t\tButton</bfg-t>` - Creates broken translation
+   - ✅ `<bfg-t>Full Width Button</bfg-t>` - Keep on one line
 
-## Reference Files
+## Reference Files & Tools
 
 - Strategy: `COMPONENT-COMPILER-STRATEGY.md`
 - Compiler: `bin/compile-templates.php`
 - Test runner: `bin/test-compiler.php`
+- Component lister: `bin/list-components.php` (use `--detailed` for descriptions)
 - Kitchen sink: `src/templates/admin/pages/kitchen-sink.bfg.php`
