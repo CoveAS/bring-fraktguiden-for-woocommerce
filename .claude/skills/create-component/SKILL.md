@@ -150,7 +150,7 @@ php bin/test-compiler.php
 5. **Conditionals:** Use `<if :varname>` to check attribute existence, not value comparison
 6. **Multi-line text in `<bfg-t>` tags:** Keep text on single line to avoid line breaks in translation strings
    - ❌ `<bfg-t>Full Width\n\t\t\tButton</bfg-t>` - Creates broken translation
-   - ✅ `<bfg-t>Full Width Button</bfg-t>` - Keep on one line
+   - ✅ `<t>Full Width Button</t>` - Keep on one line
 
 ## Reference Files & Tools
 

@@ -43,7 +43,7 @@ Each component file (`src/components/*.bfgc.php`) has a docblock with:
 
 ### Translatable Text (Inside Components)
 ```php
-<bfg-t>Text to translate</bfg-t>
+<t>Text to translate</t>
 ```
 Compiles to: `<?php esc_html_e('Text to translate', 'bring-fraktguiden-for-woocommerce'); ?>`
 
@@ -97,7 +97,7 @@ Components handle translation automatically for certain attributes:
 
 **Attributes that auto-translate:**
 - `<bfg-box.header title="..." description="...">` - both title and description
-- Any text inside `<bfg-t>...</bfg-t>` tags
+- Any text inside `<t>...</t>` tags
 
 **Manual translation still needed:**
 - Labels, placeholders, and other PHP code outside components
@@ -108,9 +108,9 @@ Components handle translation automatically for certain attributes:
 <!-- Component attributes: auto-translated -->
 <bfg-box.header title="Settings" description="Configure your options"></bfg-box.header>
 
-<!-- Content inside bfg-t: auto-translated -->
+<!-- Content inside t: auto-translated -->
 <bfg-notice type="info">
-    <bfg-t>Your changes have been saved</bfg-t>
+    <t>Your changes have been saved</t>
 </bfg-notice>
 
 <!-- Labels outside components: manual translation needed -->
@@ -179,7 +179,7 @@ The `bfg-box__header--divider` class adds a visual separator.
 **After (Component):**
 ```php
 <bfg-notice type="warning">
-    <strong><bfg-t>WARNING!</bfg-t></strong> <bfg-t>This will change the status</bfg-t>
+    <strong><t>WARNING!</t></strong> <t>This will change the status</t>
 </bfg-notice>
 ```
 
@@ -221,7 +221,7 @@ Classes are passed through to the root element of the compiled output.
     <bfg-box.section>
         <!-- Component for notice -->
         <bfg-notice type="info">
-            <bfg-t>Configure your options below</bfg-t>
+            <t>Configure your options below</t>
         </bfg-notice>
 
         <!-- Keep PHP method for complex form field -->
@@ -255,7 +255,7 @@ Classes are passed through to the root element of the compiled output.
 ### Notices
 ```php
 <bfg-notice type="warning">
-    <bfg-t>This is a warning message</bfg-t>
+    <t>This is a warning message</t>
 </bfg-notice>
 ```
 
@@ -263,8 +263,8 @@ Types: `warning`, `info`, `success`, `error`
 
 ### Badges
 ```php
-<bfg-badge.completed><bfg-t>Completed</bfg-t></bfg-badge.completed>
-<bfg-badge.in-progress><bfg-t>In Progress</bfg-t></bfg-badge.in-progress>
+<bfg-badge.completed><t>Completed</t></bfg-badge.completed>
+<bfg-badge.in-progress><t>In Progress</t></bfg-badge.in-progress>
 <bfg-badge.progress>3 of 5 completed</bfg-badge.progress>
 ```
 
@@ -287,7 +287,7 @@ Types: `warning`, `info`, `success`, `error`
     name="enabled"
     :checked="$isEnabled"
 >
-    <bfg-t>Enable this feature</bfg-t>
+    <t>Enable this feature</t>
 </bfg-field.checkbox>
 ```
 
@@ -309,13 +309,13 @@ Types: `warning`, `info`, `success`, `error`
 <bfg-step.completed :href="$link">
     Step Title
     <bfg-step-desc>Step description here</bfg-step-desc>
-    <bfg-badge.completed><bfg-t>Completed</bfg-t></bfg-badge.completed>
+    <bfg-badge.completed><t>Completed</t></bfg-badge.completed>
 </bfg-step.completed>
 
 <bfg-step.in-progress :href="$link" :number="2">
     Step Title
     <bfg-step-desc>Step description here</bfg-step-desc>
-    <bfg-badge.in-progress><bfg-t>In Progress</bfg-t></bfg-badge.in-progress>
+    <bfg-badge.in-progress><t>In Progress</t></bfg-badge.in-progress>
 </bfg-step.in-progress>
 
 <bfg-step.pending :href="$link" :number="3">
@@ -328,7 +328,7 @@ Types: `warning`, `info`, `success`, `error`
 
 ### ✅ DO
 - Use closing tags for all components: `<bfg-box></bfg-box>`
-- Keep `<bfg-t>` text on single line (no line breaks)
+- Keep `<t>` text on single line (no line breaks)
 - Use `:attribute` syntax for dynamic/PHP values
 - Use plain `attribute` for static strings
 - Escape special characters in attributes: `&quot;` for quotes, `&apos;` for apostrophes
@@ -337,7 +337,7 @@ Types: `warning`, `info`, `success`, `error`
 
 ### ❌ DON'T
 - Use self-closing component tags: `<bfg-box.header />`
-- Put line breaks inside `<bfg-t>` tags
+- Put line breaks inside `<t>` tags
 - Mix static and dynamic attributes incorrectly
 - Forget to compile after changes
 
@@ -377,17 +377,17 @@ Types: `warning`, `info`, `success`, `error`
     ></bfg-box.header>
     <bfg-box.section>
         <div class="bfg-field">
-            <label><bfg-t>Enable Feature</bfg-t></label>
+            <label><t>Enable Feature</t></label>
             <bfg-field.checkbox
                 name="enable_feature"
                 :checked="$isEnabled"
             >
-                <bfg-t>Turn this feature on</bfg-t>
+                <t>Turn this feature on</t>
             </bfg-field.checkbox>
         </div>
 
         <bfg-notice type="info">
-            <bfg-t>This setting applies globally</bfg-t>
+            <t>This setting applies globally</t>
         </bfg-notice>
     </bfg-box.section>
 </bfg-box>
@@ -397,7 +397,7 @@ Types: `warning`, `info`, `success`, `error`
 ```php
 <?php if ($showWarning): ?>
     <bfg-notice type="warning">
-        <bfg-t>Important: Review your settings before saving</bfg-t>
+        <t>Important: Review your settings before saving</t>
     </bfg-notice>
 <?php endif; ?>
 ```
@@ -409,7 +409,7 @@ Types: `warning`, `info`, `success`, `error`
         <bfg-step.completed :href="$step->url">
             <?php echo esc_html($step->title); ?>
             <bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
-            <bfg-badge.completed><bfg-t>Completed</bfg-t></bfg-badge.completed>
+            <bfg-badge.completed><t>Completed</t></bfg-badge.completed>
         </bfg-step.completed>
     <?php else: ?>
         <bfg-step.pending :href="$step->url" :number="$i + 1">

@@ -13,7 +13,7 @@ use BringFraktguiden\Fields\Fields;
 <div class="wrap bfg-admin-page bfg-admin-page__booking">
 	<div class="bfg-page__main">
 		<div class="bfg-page__header">
-			<h1><?php esc_html_e('Booking', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+			<h1><t>Booking</t></h1>
 		</div>
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
@@ -63,37 +63,37 @@ use BringFraktguiden\Fields\Fields;
 
 						<div class="bfg-field">
 							<label
-								for="booking_address_street1"><?php esc_html_e('Street Address 1', 'bring-fraktguiden-for-woocommerce'); ?></label>
+								for="booking_address_street1"><t>Street Address 1</t></label>
 							<input type="text" id="booking_address_street1" name="booking_address_street1"
 								maxlength="35" autocomplete="address-line1" />
 						</div>
 
 						<div class="bfg-field">
 							<label
-								for="booking_address_street2"><?php esc_html_e('Street Address 2', 'bring-fraktguiden-for-woocommerce'); ?></label>
+								for="booking_address_street2"><t>Street Address 2</t></label>
 							<input type="text" id="booking_address_street2" name="booking_address_street2"
 								maxlength="35" autocomplete="address-line2" />
 						</div>
 
 						<div class="bfg-field">
 							<h3 class="bfg-field-group-title">
-								<?php esc_html_e('Address details', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+								<t>Address details</t></h3>
 							<div class="bfgu:flex bfgu:flex-col bfgu:gap-8">
 								<div class="bfgu:flex-1">
 									<label
-										for="booking_address_postcode"><?php esc_html_e('Postcode', 'bring-fraktguiden-for-woocommerce'); ?></label>
+										for="booking_address_postcode"><t>Postcode</t></label>
 									<input type="text" id="booking_address_postcode" name="booking_address_postcode"
 										autocomplete="postal-code" />
 								</div>
 								<div class="bfgu:flex-1">
 									<label
-										for="booking_address_city"><?php esc_html_e('City', 'bring-fraktguiden-for-woocommerce'); ?></label>
+										for="booking_address_city"><t>City</t></label>
 									<input type="text" id="booking_address_city" name="booking_address_city"
 										autocomplete="address-level2" />
 								</div>
 								<div class="bfgu:flex-1">
 									<label
-										for="booking_address_country"><?php esc_html_e('Country', 'bring-fraktguiden-for-woocommerce'); ?></label>
+										for="booking_address_country"><t>Country</t></label>
 									<?php
 									$countries = WC()->countries?->get_countries() ?: [];
 									$base_country = WC()->countries?->get_base_country() ?: '';
@@ -174,7 +174,7 @@ use BringFraktguiden\Fields\Fields;
 
 					<div class="bfg-field">
 						<label
-							for="auto_set_status_after_booking_success"><?php esc_html_e('Order status after booking', 'bring-fraktguiden-for-woocommerce'); ?></label>
+							for="auto_set_status_after_booking_success"><t>Order status after booking</t></label>
 						<?php
 						$order_statuses = wc_get_order_statuses();
 						$saved_booking_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_booking_success');
@@ -186,13 +186,13 @@ use BringFraktguiden\Fields\Fields;
 						echo Component::customSelect('auto_set_status_after_booking_success', $booking_status_options, $booking_status_value);
 						?>
 						<p class="bfg-description">
-							<?php esc_html_e('Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce'); ?>
+							<t>Order status will be automatically set when successfully booked</t>
 						</p>
 					</div>
 
 					<div class="bfg-field">
 						<label
-							for="auto_set_status_after_print_label_success"><?php esc_html_e('Order status after printing', 'bring-fraktguiden-for-woocommerce'); ?></label>
+							for="auto_set_status_after_print_label_success"><t>Order status after printing</t></label>
 						<?php
 						$saved_print_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_print_label_success');
 						$print_status_value = !empty($saved_print_status) ? $saved_print_status : 'none';
@@ -203,7 +203,7 @@ use BringFraktguiden\Fields\Fields;
 						echo Component::customSelect('auto_set_status_after_print_label_success', $print_status_options, $print_status_value);
 						?>
 						<p class="bfg-description">
-							<?php esc_html_e('Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce'); ?>
+							<t>Order status will be automatically set when a label is downloaded</t>
 						</p>
 					</div>
 
@@ -218,7 +218,7 @@ use BringFraktguiden\Fields\Fields;
 				<bfg-box.section>
 					<div class="bfg-field">
 						<label
-							for="booking_home_delivery_package_type"><?php esc_html_e('Package type for home delivery', 'bring-fraktguiden-for-woocommerce'); ?></label>
+							for="booking_home_delivery_package_type"><t>Package type for home delivery</t></label>
 						<?php
 						$saved_package_type = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('booking_home_delivery_package_type');
 						$package_type_value = !empty($saved_package_type) ? $saved_package_type : 'hd_eur';
@@ -231,7 +231,7 @@ use BringFraktguiden\Fields\Fields;
 						echo Component::customSelect('booking_home_delivery_package_type', $package_type_options, $package_type_value);
 						?>
 						<p class="bfg-description">
-							<?php esc_html_e('Only applies to home delivery services', 'bring-fraktguiden-for-woocommerce'); ?>
+							<t>Only applies to home delivery services</t>
 						</p>
 					</div>
 

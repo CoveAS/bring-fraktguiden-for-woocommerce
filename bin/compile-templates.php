@@ -90,19 +90,16 @@ class BFGComponentCompiler
 
         // Collect all <t> tags (not <bfg-t>, just plain <t>)
         foreach ($doc->getElementsByTagName('t') as $element) {
-            // Check if this <t> is inside a <bfg-*> component
-            $isInsideComponent = false;
-            $parent = $element->parentNode;
-            while ($parent && $parent->nodeType === XML_ELEMENT_NODE) {
-                if (str_starts_with(strtolower($parent->tagName), 'bfg-')) {
-                    $isInsideComponent = true;
-                    break;
-                }
-                $parent = $parent->parentNode;
-            }
+            // Skip <t> tags that are DIRECT children of <bfg-*> components
+            // (those are for the component's own text processing)
+            // But process <t> tags in regular HTML elements inside components
+            // (those are user content that needs translation)
+            $directParent = $element->parentNode;
+            $isDirectChildOfComponent = $directParent
+                && $directParent->nodeType === XML_ELEMENT_NODE
+                && str_starts_with(strtolower($directParent->tagName), 'bfg-');
 
-            // Only process if not inside a component
-            if (!$isInsideComponent) {
+            if (!$isDirectChildOfComponent) {
                 $translationTags[] = $element;
             }
         }
