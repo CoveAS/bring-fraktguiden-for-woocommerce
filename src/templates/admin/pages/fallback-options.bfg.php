@@ -1,9 +1,4 @@
 <?php
-
-use BringFraktguiden\Admin\Component;
-use BringFraktguiden\Admin\FieldRenderer;
-use BringFraktguiden\Fields\Fields;
-
 /**
  * @var string $currency
  * @var Fields $fields
@@ -20,10 +15,9 @@ use BringFraktguiden\Fields\Fields;
 		</div>
 
 		<?php if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local'): ?>
-			<?php echo Component::noticeBanner(
-				__('This site is running in a local environment and production settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'),
-				'warning'
-			); ?>
+			<bfg-notice type="warning">
+				<?php esc_html_e('This site is running in a local environment and production settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'); ?>
+			</bfg-notice>
 		<?php endif; ?>
 
 		<form method="post" action="options.php">
@@ -51,7 +45,10 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->no_connection_flat_rate->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->no_connection_flat_rate, $currency, 'lg'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->no_connection_flat_rate->field(); ?>
+									<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -80,7 +77,10 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->exception_flat_rate->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->exception_flat_rate, $currency, 'lg'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->exception_flat_rate->field(); ?>
+									<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
+								</div>
 								<?php echo $fields->exception_flat_rate->description(); ?>
 							</div>
 						</div>
@@ -99,30 +99,34 @@ use BringFraktguiden\Fields\Fields;
 				<div class="bfg-box__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->enable_multipack; ?></div>
 
-					<?php
-					ob_start();
-					?>
-					<div class="bfg-field">
-						<h3 class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
-						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-5">
-							<div class="bfgu:flex-1">
-								<?php echo $fields->dimension_packing_side->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->dimension_packing_side, 'cm'); ?>
-							</div>
-							<div class="bfgu:flex-1">
-								<?php echo $fields->dimension_packing_circumference->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->dimension_packing_circumference, 'cm'); ?>
-							</div>
-							<div class="bfgu:flex-1">
-								<?php echo $fields->dimension_packing_weight->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->dimension_packing_weight, 'kg'); ?>
+					<bfg-conditional-field-group id="dimension-fields" trigger="enable_multipack">
+						<div class="bfg-field">
+							<h3 class="bfg-field-group-title"><?php esc_html_e('Maximum box dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+							<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-5">
+								<div class="bfgu:flex-1">
+									<?php echo $fields->dimension_packing_side->label(); ?>
+									<div class="bfg-input bfg-input--number">
+										<?php echo $fields->dimension_packing_side->field(); ?>
+										<span class="bfg-suffix">cm</span>
+									</div>
+								</div>
+								<div class="bfgu:flex-1">
+									<?php echo $fields->dimension_packing_circumference->label(); ?>
+									<div class="bfg-input bfg-input--number">
+										<?php echo $fields->dimension_packing_circumference->field(); ?>
+										<span class="bfg-suffix">cm</span>
+									</div>
+								</div>
+								<div class="bfgu:flex-1">
+									<?php echo $fields->dimension_packing_weight->label(); ?>
+									<div class="bfg-input bfg-input--number">
+										<?php echo $fields->dimension_packing_weight->field(); ?>
+										<span class="bfg-suffix">kg</span>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<?php
-					$dimension_fields_content = ob_get_clean();
-					echo Component::conditionalFieldGroup('dimension-fields', 'enable_multipack', $dimension_fields_content);
-					?>
+					</bfg-conditional-field-group>
 
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
@@ -149,7 +153,10 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfgu:flex-1">
 							<div class="bfg-field">
 								<?php echo $fields->alt_flat_rate->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->alt_flat_rate, $currency, 'lg'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->alt_flat_rate->field(); ?>
+									<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
+								</div>
 								<?php echo $fields->alt_flat_rate->description(); ?>
 							</div>
 						</div>

@@ -199,4 +199,29 @@ jQuery(function ($) {
 			});
 		}
 	});
+
+	// Conditional field groups - show/hide based on checkbox state
+	$('.bfg-conditional-group').each(function() {
+		const $group = $(this);
+		const triggerName = $group.data('trigger');
+		const $trigger = $('input[name="' + triggerName + '"]');
+
+		if (!$trigger.length) {
+			return;
+		}
+
+		function updateState() {
+			const isEnabled = $trigger.prop('checked');
+			const $inputs = $group.find('input, select, textarea');
+
+			$group.css({
+				'opacity': isEnabled ? '1' : '0.5',
+				'pointer-events': isEnabled ? 'auto' : 'none'
+			});
+			$inputs.prop('disabled', !isEnabled);
+		}
+
+		updateState();
+		$trigger.on('change', updateState);
+	});
 });

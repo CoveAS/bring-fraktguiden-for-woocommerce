@@ -9,6 +9,7 @@ use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
 use BringFraktguiden\Admin\GetStartedSteps;
 use BringFraktguiden\Utility\Config;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 class SettingsPage
 {
@@ -19,12 +20,12 @@ class SettingsPage
 		add_action('admin_notices', [self::class, 'admin_notices']);
 
 		add_filter('admin_body_class', [__CLASS__, 'add_admin_body_classes']);
-//		add_filter( 'admin_title', [__CLASS__, 'update_admin_title']);
+		//		add_filter( 'admin_title', [__CLASS__, 'update_admin_title']);
 		add_action('admin_notices', [__CLASS__, 'inject_before_notices'], -9999);
 		add_action('admin_notices', [__CLASS__, 'inject_after_notices'], PHP_INT_MAX);
 
 		add_action('admin_enqueue_scripts', __CLASS__ . '::enqueue_admin_styles');
-		add_filter('admin_head', __CLASS__. '::admin_head');
+		add_filter('admin_head', __CLASS__ . '::admin_head');
 
 		add_filter('pre_update_option_bring_fraktguiden_for_woocommerce_settings', [__CLASS__, 'process_settings'], 10, 2);
 	}
@@ -116,6 +117,7 @@ class SettingsPage
 		if ($sub_page === 'service-wizard') {
 			$country_code = WC()->countries?->get_base_country();
 			$country = WC()->countries?->countries[$country_code] ?? null;
+			$settings_url = Fraktguiden_Helper::get_settings_url();
 			require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/service-wizard.php';
 			return;
 		}
@@ -137,21 +139,21 @@ class SettingsPage
 	public static function settings_page(): void
 	{
 		$fields = Fields::instance();
-		$currency = get_option( 'woocommerce_currency' );
+		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
 	}
 
 	public static function booking_page(): void
 	{
 		$fields = Fields::instance();
-		$currency = get_option( 'woocommerce_currency' );
+		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/booking.php';
 	}
 
 	public static function fallback_page(): void
 	{
 		$fields = Fields::instance();
-		$currency = get_option( 'woocommerce_currency' );
+		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/fallback-options.php';
 	}
 
@@ -234,7 +236,7 @@ class SettingsPage
 			'toplevel_page_bring_fraktguiden_home',
 		];
 
-		if (! in_array($hook_suffix, $pages)) {
+		if (!in_array($hook_suffix, $pages)) {
 			return;
 		}
 		$skin = get_user_option('admin_color');
@@ -251,7 +253,7 @@ class SettingsPage
 			'bring-fraktguiden_page_bring_fraktguiden_kitchen_sink',
 			'toplevel_page_bring_fraktguiden_home',
 		];
-		if (! in_array($hook, $pages)) {
+		if (!in_array($hook, $pages)) {
 			return;
 		}
 

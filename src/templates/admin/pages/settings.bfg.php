@@ -1,9 +1,4 @@
 <?php
-
-use BringFraktguiden\Admin\Component;
-use BringFraktguiden\Admin\FieldRenderer;
-use BringFraktguiden\Fields\Fields;
-
 /**
  * @var string $currency
  * @var Fields $fields
@@ -13,7 +8,7 @@ use BringFraktguiden\Fields\Fields;
 <div class="wrap bfg-admin-page bfg-admin-page__settings">
 	<div class="bfg-page__main">
 		<div class="bfg-page__header">
-			<h1><?php esc_html_e('Settings', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+			<h1><t>Settings</t></h1>
 		</div>
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
@@ -23,8 +18,8 @@ use BringFraktguiden\Fields\Fields;
 			<?php settings_fields('bring_fraktguiden_settings'); ?>
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Display Options', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Customize how shipping options appear to customers', 'bring-fraktguiden-for-woocommerce'); ?></p>
+					<h2><t>Display Options</t></h2>
+					<p><t>Customize how shipping options appear to customers</t></p>
 				</div>
 
 				<div class="bfg-box__section">
@@ -45,12 +40,12 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Pricing Options', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Settings that affect the shipping rates, price estimation and service availability', 'bring-fraktguiden-for-woocommerce'); ?></p>
+					<h2><t>Pricing Options</t></h2>
+					<p><t>Settings that affect the shipping rates, price estimation and service availability</t></p>
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
-						<h3 class="bfg-field-group-title"><?php esc_html_e('Shipping location', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+						<h3 class="bfg-field-group-title"><t>Shipping location</t></h3>
 						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
 							<div class="bfgu:flex-1">
 								<?php echo $fields->from_zip->label() ?>
@@ -79,7 +74,10 @@ use BringFraktguiden\Fields\Fields;
 
 					<div class="bfg-field">
 						<?php echo $fields->handling_fee->label(); ?>
-						<?php echo Component::inputWithSuffix($fields->handling_fee, $currency, 'lg'); ?>
+						<div class="bfg-input bfg-input--number">
+							<?php echo $fields->handling_fee->field(); ?>
+							<span class="bfg-suffix-lg"><?php echo esc_html($currency); ?></span>
+						</div>
 						<?php echo $fields->handling_fee->description(); ?>
 					</div>
 
@@ -88,26 +86,38 @@ use BringFraktguiden\Fields\Fields;
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
 					<div class="bfg-field bfgu:mt-8">
-						<h3 class="bfg-field-group-title"><?php esc_html_e('Minimum package dimensions', 'bring-fraktguiden-for-woocommerce'); ?></h3>
+						<h3 class="bfg-field-group-title"><t>Minimum package dimensions</t></h3>
 						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-5">
 							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_length->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->minimum_length, 'cm'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->minimum_length->field(); ?>
+									<span class="bfg-suffix">cm</span>
+								</div>
 							</div>
 							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_width->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->minimum_width, 'cm'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->minimum_width->field(); ?>
+									<span class="bfg-suffix">cm</span>
+								</div>
 							</div>
 							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_height->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->minimum_height, 'cm'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->minimum_height->field(); ?>
+									<span class="bfg-suffix">cm</span>
+								</div>
 							</div>
 							<div class="bfgu:flex-1">
 								<?php echo $fields->minimum_weight->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->minimum_weight, 'kg'); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->minimum_weight->field(); ?>
+									<span class="bfg-suffix">kg</span>
+								</div>
 							</div>
 						</div>
-						<p class="bfg-description"><?php esc_html_e('Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees.', 'bring-fraktguiden-for-woocommerce'); ?></p>
+						<p class="bfg-description"><t>Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees.</t></p>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
@@ -116,15 +126,18 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Lead Time', 'bring-fraktguiden-for-woocommerce'); ?></h2>
-					<p><?php esc_html_e('Configure lead time and cutoff settings', 'bring-fraktguiden-for-woocommerce'); ?></p>
+					<h2><t>Lead Time</t></h2>
+					<p><t>Configure lead time and cutoff settings</t></p>
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field">
 						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
 							<div class="bfgu:flex-1">
 								<?php echo $fields->lead_time->label(); ?>
-								<?php echo Component::inputWithSuffix($fields->lead_time, __('days', 'bring-fraktguiden-for-woocommerce')); ?>
+								<div class="bfg-input bfg-input--number">
+									<?php echo $fields->lead_time->field(); ?>
+									<span class="bfg-suffix"><t>days</t></span>
+								</div>
 								<?php echo $fields->lead_time->description(); ?>
 							</div>
 							<div class="bfgu:flex-1">
@@ -141,7 +154,7 @@ use BringFraktguiden\Fields\Fields;
 
 			<div class="bfg-box">
 				<div class="bfg-box__header">
-					<h2><?php esc_html_e('Advanced Settings', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+					<h2><t>Advanced Settings</t></h2>
 				</div>
 				<div class="bfg-box__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->debug; ?></div>
