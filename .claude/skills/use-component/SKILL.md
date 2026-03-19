@@ -52,6 +52,189 @@ Compiles to: `<?php esc_html_e('Text to translate', 'bring-fraktguiden-for-wooco
 - Dynamic: `:attribute="$variable"` or `:attribute="function()"`
 - Dynamic expressions: `:attribute="$var + 10"` or `:attribute="condition ? 'yes' : 'no'"`
 
+## Migration Guide: HTML to Components
+
+This section shows how to convert existing HTML markup to BFG components.
+
+### Converting bfg-box from HTML to Components
+
+**Before (HTML):**
+```php
+<div class="bfg-box">
+    <div class="bfg-box__header">
+        <h2><?php esc_html_e('Title', 'bring-fraktguiden-for-woocommerce'); ?></h2>
+        <p><?php esc_html_e('Description here', 'bring-fraktguiden-for-woocommerce'); ?></p>
+    </div>
+
+    <div class="bfg-box__section">
+        <p>Your content here</p>
+    </div>
+</div>
+```
+
+**After (Component):**
+```php
+<bfg-box>
+    <bfg-box.header
+        title="Title"
+        description="Description here"
+    ></bfg-box.header>
+
+    <bfg-box.section>
+        <p>Your content here</p>
+    </bfg-box.section>
+</bfg-box>
+```
+
+**Key Points:**
+- The component automatically wraps `title` and `description` in `esc_html_e()` during compilation
+- Just provide the plain text without translation functions
+- The text domain is added automatically
+
+### Translation Handling
+
+Components handle translation automatically for certain attributes:
+
+**Attributes that auto-translate:**
+- `<bfg-box.header title="..." description="...">` - both title and description
+- Any text inside `<bfg-t>...</bfg-t>` tags
+
+**Manual translation still needed:**
+- Labels, placeholders, and other PHP code outside components
+- Dynamic content from variables
+
+**Example:**
+```php
+<!-- Component attributes: auto-translated -->
+<bfg-box.header title="Settings" description="Configure your options"></bfg-box.header>
+
+<!-- Content inside bfg-t: auto-translated -->
+<bfg-notice type="info">
+    <bfg-t>Your changes have been saved</bfg-t>
+</bfg-notice>
+
+<!-- Labels outside components: manual translation needed -->
+<label><?php esc_html_e('Email Address', 'bring-fraktguiden-for-woocommerce'); ?></label>
+```
+
+### Escaping Special Characters in Attributes
+
+When attribute values contain special characters, use HTML entities:
+
+```php
+<!-- Quotes in descriptions -->
+<bfg-box.header
+    title="Shipping Address"
+    description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."
+></bfg-box.header>
+
+<!-- Apostrophes -->
+<bfg-box.header
+    title="User's Profile"
+    description="Manage the user&apos;s personal information"
+></bfg-box.header>
+```
+
+Common entities: `&quot;` for `"`, `&apos;` for `'`, `&amp;` for `&`, `&lt;` for `<`, `&gt;` for `>`
+
+### Multiple Headers/Sections (Divider Pattern)
+
+You can have multiple headers and sections in one box for sub-sections:
+
+```php
+<bfg-box>
+    <!-- Main section -->
+    <bfg-box.header
+        title="Shipping Address"
+        description="Configure your shipping details"
+    ></bfg-box.header>
+    <bfg-box.section>
+        <p>Main section content...</p>
+    </bfg-box.section>
+
+    <!-- Sub-section with divider -->
+    <bfg-box.header
+        class="bfg-box__header--divider"
+        title="Contact Information"
+    ></bfg-box.header>
+    <bfg-box.section>
+        <p>Contact fields...</p>
+    </bfg-box.section>
+</bfg-box>
+```
+
+The `bfg-box__header--divider` class adds a visual separator.
+
+### Converting Notices
+
+**Before (Legacy Component class):**
+```php
+<?php echo Component::noticeBanner(
+    '<strong>' . esc_html__('WARNING!', 'bring-fraktguiden-for-woocommerce') . '</strong> ' .
+    esc_html__('This will change the status', 'bring-fraktguiden-for-woocommerce'),
+    'warning'
+); ?>
+```
+
+**After (Component):**
+```php
+<bfg-notice type="warning">
+    <strong><bfg-t>WARNING!</bfg-t></strong> <bfg-t>This will change the status</bfg-t>
+</bfg-notice>
+```
+
+### Custom Classes on Components
+
+Pass custom classes through to components:
+
+```php
+<!-- On root element -->
+<bfg-box class="my-custom-class another-class">
+    <bfg-box.header title="Title"></bfg-box.header>
+    <bfg-box.section>...</bfg-box.section>
+</bfg-box>
+
+<!-- On sub-components -->
+<bfg-box.header
+    class="bfg-box__header--divider"
+    title="Section Title"
+></bfg-box.header>
+```
+
+Classes are passed through to the root element of the compiled output.
+
+### What to Convert vs. What to Keep
+
+**✅ Convert to Components:**
+- `<div class="bfg-box">` → `<bfg-box>`
+- `Component::noticeBanner()` → `<bfg-notice>`
+- Any structural/presentational markup with component equivalents
+
+**❌ Keep as PHP Methods:**
+- Form fields with custom behavior
+- Any component that has complex PHP logic beyond presentation
+
+**Example - Mixed Approach:**
+```php
+<bfg-box>
+    <bfg-box.header title="Settings"></bfg-box.header>
+    <bfg-box.section>
+        <!-- Component for notice -->
+        <bfg-notice type="info">
+            <bfg-t>Configure your options below</bfg-t>
+        </bfg-notice>
+
+        <!-- Keep PHP method for complex form field -->
+        <?php echo Component::validatedInputField([
+            'id' => 'email',
+            'type' => 'email',
+            'label' => __('Email', 'bring-fraktguiden-for-woocommerce'),
+            'validation' => ['required', 'email'],
+        ]); ?>
+    </bfg-box.section>
+</bfg-box>
+```
+
 ## Common Components
 
 ### Box Components (Container)
@@ -148,6 +331,7 @@ Types: `warning`, `info`, `success`, `error`
 - Keep `<bfg-t>` text on single line (no line breaks)
 - Use `:attribute` syntax for dynamic/PHP values
 - Use plain `attribute` for static strings
+- Escape special characters in attributes: `&quot;` for quotes, `&apos;` for apostrophes
 - Check component docblocks for usage examples
 - Test compilation with `npm run compile-php`
 

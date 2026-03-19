@@ -16,7 +16,7 @@
  *   </div>
  *
  * Compiler replaces:
- *   <slot/> -> inner content (the notice message)
+ *   <slot></slot> -> inner content (the notice message)
  *
  * Unmatched attributes (class, data-*, type, etc.) are automatically passed through to root element.
  */

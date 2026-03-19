@@ -8,4 +8,4 @@
  */
 ?>
 
-<p class="bfg-step__desc"><slot/></p>
+<p class="bfg-step__desc"><slot></slot></p>

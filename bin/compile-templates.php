@@ -386,6 +386,10 @@ class BFGComponentCompiler
                 }
 
                 // Create PHP conditional start
+                if (!$ifElement->parentNode) {
+                    continue;
+                }
+
                 $phpCode = "if (!empty({$conditionExpression})): ";
                 $phpIfStart = $doc->createComment("BFG_PHP:{$phpCode}");
                 $ifElement->parentNode->insertBefore($phpIfStart, $ifElement);
@@ -413,7 +417,9 @@ class BFGComponentCompiler
                         $ifElement->parentNode->insertBefore($child, $ifElement);
                     }
 
-                    $elseElement->parentNode->removeChild($elseElement);
+                    if ($elseElement->parentNode) {
+                        $elseElement->parentNode->removeChild($elseElement);
+                    }
                 }
 
                 // Add endif
@@ -442,10 +448,12 @@ class BFGComponentCompiler
                     foreach ($ifElement->childNodes as $child) {
                         $children[] = $child;
                     }
-                    foreach ($children as $child) {
-                        $ifElement->parentNode->insertBefore($child, $ifElement);
+                    if ($ifElement->parentNode) {
+                        foreach ($children as $child) {
+                            $ifElement->parentNode->insertBefore($child, $ifElement);
+                        }
                     }
-                    if ($elseElement) {
+                    if ($elseElement && $elseElement->parentNode) {
                         $elseElement->parentNode->removeChild($elseElement);
                     }
                 } else {
@@ -455,15 +463,21 @@ class BFGComponentCompiler
                         foreach ($elseElement->childNodes as $child) {
                             $children[] = $child;
                         }
-                        foreach ($children as $child) {
-                            $ifElement->parentNode->insertBefore($child, $ifElement);
+                        if ($ifElement->parentNode) {
+                            foreach ($children as $child) {
+                                $ifElement->parentNode->insertBefore($child, $ifElement);
+                            }
                         }
-                        $elseElement->parentNode->removeChild($elseElement);
+                        if ($elseElement->parentNode) {
+                            $elseElement->parentNode->removeChild($elseElement);
+                        }
                     }
                 }
 
                 // Remove <if> element
-                $ifElement->parentNode->removeChild($ifElement);
+                if ($ifElement->parentNode) {
+                    $ifElement->parentNode->removeChild($ifElement);
+                }
             }
         }
     }

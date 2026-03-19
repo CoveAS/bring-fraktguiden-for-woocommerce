@@ -25,7 +25,7 @@
 			<if :placeholder>
 			<option value="" disabled selected><t>placeholder</t></option>
 			</if>
-			<slot/>
+			<slot></slot>
 		</select>
 	</div>
 	<if :description>

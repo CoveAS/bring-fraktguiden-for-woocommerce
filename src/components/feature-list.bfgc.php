@@ -12,8 +12,8 @@
 ?>
 
 <if :compact>
-<ul class="bfg-feature-list bfg-feature-list--compact"><slot/></ul>
+<ul class="bfg-feature-list bfg-feature-list--compact"><slot></slot></ul>
 <else>
-<ul class="bfg-feature-list"><slot/></ul>
+<ul class="bfg-feature-list"><slot></slot></ul>
 </else>
 </if>
