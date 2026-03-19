@@ -17,3 +17,6 @@ node_modules
 /assets/js/shared/
 /assets/css/compiled-styles.css
 /pro/assets/js/booking.js
+
+# Compiled templates (generated from src/templates/)
+/build/templates/

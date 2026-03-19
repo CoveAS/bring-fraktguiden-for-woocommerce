@@ -35,6 +35,18 @@ class BFGComponentCompiler
 
         $sourceContent = file_get_contents($sourceFilePath);
 
+        // Protect existing PHP tags before HTML parsing
+        $phpTagMap = [];
+        $sourceContent = preg_replace_callback(
+            '/<\?php(.*?)\?>/s',
+            function($matches) use (&$phpTagMap) {
+                $placeholder = '<!--BFG_PHP_PRESERVE_' . count($phpTagMap) . '-->';
+                $phpTagMap[$placeholder] = '<?php' . $matches[1] . '?>';
+                return $placeholder;
+            },
+            $sourceContent
+        );
+
         // Parse source file as HTML
         $sourceDoc = Dom\HTMLDocument::createFromString($sourceContent, LIBXML_NOERROR);
 
@@ -47,8 +59,13 @@ class BFGComponentCompiler
             $output .= $sourceDoc->saveHTML($node);
         }
 
-        // Convert placeholder comments back to PHP tags
+        // Convert compiler-generated placeholder comments back to PHP tags
         $output = preg_replace('/<!--BFG_PHP:(.*?)-->/', '<?php $1 ?>', $output);
+
+        // Restore original PHP tags
+        foreach ($phpTagMap as $placeholder => $phpTag) {
+            $output = str_replace($placeholder, $phpTag, $output);
+        }
 
         return $output;
     }
@@ -369,15 +386,32 @@ if (php_sapi_name() === 'cli' && isset($argv) && __FILE__ === realpath($argv[0])
         // Compile all templates
         echo "Compiling all BFG templates...\n";
 
-        // Recursively find all .bfg.php files
+        // Recursively find all .bfg.php files and warn about plain .php files
         $sourceFiles = [];
+        $plainPhpFiles = [];
         $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($projectRoot . '/src/templates', RecursiveDirectoryIterator::SKIP_DOTS)
         );
         foreach ($iterator as $file) {
-            if ($file->isFile() && str_ends_with($file->getFilename(), '.bfg.php')) {
-                $sourceFiles[] = $file->getPathname();
+            if ($file->isFile()) {
+                $filename = $file->getFilename();
+                if (str_ends_with($filename, '.bfg.php')) {
+                    $sourceFiles[] = $file->getPathname();
+                } elseif (str_ends_with($filename, '.php')) {
+                    $plainPhpFiles[] = $file->getPathname();
+                }
             }
+        }
+
+        // Display warnings for plain .php files
+        if (!empty($plainPhpFiles)) {
+            echo "\n⚠️  Warning: Found plain .php files in src/templates/\n";
+            echo "These files should use .bfg.php extension to be compiled:\n";
+            foreach ($plainPhpFiles as $phpFile) {
+                $relativePath = str_replace($projectRoot . '/src/templates/', '', $phpFile);
+                echo "   • {$relativePath}\n";
+            }
+            echo "\n";
         }
 
         $compiled = 0;

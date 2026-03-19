@@ -116,7 +116,7 @@ class SettingsPage
 		if ($sub_page === 'service-wizard') {
 			$country_code = WC()->countries?->get_base_country();
 			$country = WC()->countries?->countries[$country_code] ?? null;
-			require_once dirname(__DIR__, 3) . '/templates/admin/pages/service-wizard.php';
+			require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/service-wizard.php';
 			return;
 		}
 
@@ -131,33 +131,33 @@ class SettingsPage
 				break;
 			}
 		}
-		require_once dirname(__DIR__, 3) . '/templates/admin/pages/home.php';
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/home.php';
 	}
 
 	public static function settings_page(): void
 	{
 		$fields = Fields::instance();
 		$currency = get_option( 'woocommerce_currency' );
-		require_once dirname(__DIR__, 3) . '/templates/admin/pages/settings.php';
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
 	}
 
 	public static function booking_page(): void
 	{
 		$fields = Fields::instance();
 		$currency = get_option( 'woocommerce_currency' );
-		require_once dirname(__DIR__, 3) . '/templates/admin/pages/booking.php';
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/booking.php';
 	}
 
 	public static function fallback_page(): void
 	{
 		$fields = Fields::instance();
 		$currency = get_option( 'woocommerce_currency' );
-		require_once dirname(__DIR__, 3) . '/templates/admin/pages/fallback-options.php';
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/fallback-options.php';
 	}
 
 	public static function kitchen_sink_page(): void
 	{
-		require_once dirname(__DIR__, 3) . '/templates/admin/pages/kitchen-sink.php';
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/kitchen-sink.php';
 	}
 
 	public static function settings_init(): void
