@@ -17,7 +17,7 @@ use BringFraktguiden\Admin\Step;
 <div class="wrap bfg-admin-page bfg-admin-page__home">
 	<div class="bfg-page__main">
 		<div class="bfg-page__header">
-			<h1><bfg-t>Home</bfg-t></h1>
+			<h1><t>Home</t></h1>
 		</div>
 
 		<div class="bfg-notices">
@@ -70,13 +70,13 @@ use BringFraktguiden\Admin\Step;
 						<bfg-step.completed :href="$step->action">
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
-							<bfg-badge.completed>Completed</bfg-badge.completed>
+							<bfg-badge.completed><t>Completed</t></bfg-badge.completed>
 						</bfg-step.completed>
 					<?php elseif ($isNext): ?>
 						<bfg-step.in-progress :href="$step->action" :number="$i + 1">
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
-							<bfg-badge.in-progress>In Progress</bfg-badge.in-progress>
+							<bfg-badge.in-progress><t>In Progress</t></bfg-badge.in-progress>
 						</bfg-step.in-progress>
 					<?php else: ?>
 						<bfg-step.pending :href="$step->action" :number="$i + 1">

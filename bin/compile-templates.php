@@ -51,6 +51,9 @@ class BFGComponentCompiler
         // Parse source file as HTML
         $sourceDoc = Dom\HTMLDocument::createFromString($sourceContent, LIBXML_NOERROR);
 
+        // Process standalone <t> tags for translation (before component processing)
+        $this->processTranslationTags($sourceDoc);
+
         // Find all <bfg-*> component tags and process them
         $this->processComponentTags($sourceDoc);
 
@@ -74,6 +77,46 @@ class BFGComponentCompiler
         }
 
         return $output;
+    }
+
+    /**
+     * Process standalone <t> tags for translation
+     * Converts <t>Text</t> to <?php esc_html_e('Text', 'text-domain'); ?>
+     * Only processes <t> tags that are NOT inside <bfg-*> components
+     */
+    private function processTranslationTags(Dom\HTMLDocument $doc): void
+    {
+        $translationTags = [];
+
+        // Collect all <t> tags (not <bfg-t>, just plain <t>)
+        foreach ($doc->getElementsByTagName('t') as $element) {
+            // Check if this <t> is inside a <bfg-*> component
+            $isInsideComponent = false;
+            $parent = $element->parentNode;
+            while ($parent && $parent->nodeType === XML_ELEMENT_NODE) {
+                if (str_starts_with(strtolower($parent->tagName), 'bfg-')) {
+                    $isInsideComponent = true;
+                    break;
+                }
+                $parent = $parent->parentNode;
+            }
+
+            // Only process if not inside a component
+            if (!$isInsideComponent) {
+                $translationTags[] = $element;
+            }
+        }
+
+        foreach ($translationTags as $tElement) {
+            $textContent = $tElement->textContent;
+
+            // Create placeholder comment (will be converted to PHP later)
+            $phpCode = "esc_html_e('{$textContent}', '{$this->textDomain}');";
+            $comment = $doc->createComment("BFG_PHP:{$phpCode}");
+
+            // Replace <t> element with comment placeholder
+            $tElement->parentNode->replaceChild($comment, $tElement);
+        }
     }
 
     /**
@@ -135,6 +178,10 @@ class BFGComponentCompiler
         // Reset used attributes tracking
         $this->usedAttributes = [];
 
+        // Merge dynamic attributes into regular attributes, but track which ones are dynamic
+        $dynamicAttrNames = array_keys($dynamicAttrs);
+        $attributes = array_merge($attributes, $dynamicAttrs);
+
         // Always pass slot content as 'slot' attribute so templates can use <t>slot</t>
         // For <bfg-t>, use text content only; for others, use full HTML
         if ($componentName === 't') {
@@ -149,13 +196,22 @@ class BFGComponentCompiler
         $this->usedAttributes[] = 'slot';
 
         // Apply replacements in order
-        $this->replaceTextElements($templateDoc, $attributes);
-        $this->replaceAttributeVariables($templateDoc, $attributes);
-        $this->replaceConditionals($templateDoc, $attributes);
+        $this->replaceTextElements($templateDoc, $attributes, $dynamicAttrNames);
+        $this->replaceAttributeVariables($templateDoc, $attributes, $dynamicAttrNames);
+        $this->replaceConditionals($templateDoc, $attributes, $dynamicAttrNames);
         $this->replaceSlots($templateDoc, $slotContent);
+
+        // Save used attributes before processing nested components
+        $savedUsedAttributes = $this->usedAttributes;
 
         // Process any nested component tags that were introduced by slot content
         $this->processComponentTags($templateDoc);
+
+        // Restore used attributes after nested component processing
+        $this->usedAttributes = $savedUsedAttributes;
+
+        // Clean up any remaining <else> tags (they should have been removed by conditional processing)
+        $this->cleanupElseTags($templateDoc);
 
         // Get root element and apply unmatched attributes
         $rootElement = $templateDoc->body->firstChild;
@@ -164,8 +220,7 @@ class BFGComponentCompiler
         }
 
         if ($rootElement instanceof Dom\Element) {
-            $this->applyUnmatchedAttributes($rootElement, $attributes, $this->usedAttributes);
-            $this->applyDynamicAttributes($rootElement, $dynamicAttrs);
+            $this->applyUnmatchedAttributes($rootElement, $attributes, $this->usedAttributes, $dynamicAttrNames);
         }
 
         // Import compiled template into source document
@@ -221,8 +276,9 @@ class BFGComponentCompiler
 
     /**
      * Replace <t>varname</t> with <?php esc_html_e('value', 'text-domain'); ?>
+     * For dynamic attributes, output <?php echo expression; ?>
      */
-    private function replaceTextElements(Dom\HTMLDocument $doc, array $attributes): void
+    private function replaceTextElements(Dom\HTMLDocument $doc, array $attributes, array $dynamicAttrNames = []): void
     {
         $textElements = [];
         foreach ($doc->getElementsByTagName('t') as $element) {
@@ -239,7 +295,13 @@ class BFGComponentCompiler
             }
 
             // Create placeholder comment (will be converted to PHP later)
-            $phpCode = "esc_html_e('{$value}', '{$this->textDomain}');";
+            if (in_array($varName, $dynamicAttrNames)) {
+                // Dynamic attribute - output as PHP expression
+                $phpCode = "echo ({$value});";
+            } else {
+                // Static attribute - output as translatable string
+                $phpCode = "esc_html_e('{$value}', '{$this->textDomain}');";
+            }
             $comment = $doc->createComment("BFG_PHP:{$phpCode}");
 
             // Replace <t> element with comment placeholder
@@ -249,8 +311,9 @@ class BFGComponentCompiler
 
     /**
      * Replace :varname in attributes with actual values
+     * For dynamic attributes, create a placeholder that will be replaced with PHP
      */
-    private function replaceAttributeVariables(Dom\HTMLDocument $doc, array $attributes): void
+    private function replaceAttributeVariables(Dom\HTMLDocument $doc, array $attributes, array $dynamicAttrNames = []): void
     {
         foreach ($doc->getElementsByTagName('*') as $element) {
             foreach ($element->attributes as $attr) {
@@ -263,7 +326,15 @@ class BFGComponentCompiler
                         $this->usedAttributes[] = $varName;
                     }
 
-                    $element->setAttribute($attr->name, $value);
+                    if (in_array($varName, $dynamicAttrNames)) {
+                        // Dynamic attribute - create placeholder for PHP expression
+                        $placeholder = 'BFG_DYNAMIC_' . count($this->dynamicAttributes) . '_ATTR';
+                        $this->dynamicAttributes[$placeholder] = $value;
+                        $element->setAttribute($attr->name, $placeholder);
+                    } else {
+                        // Static attribute - use value directly
+                        $element->setAttribute($attr->name, $value);
+                    }
                 }
             }
         }
@@ -271,8 +342,9 @@ class BFGComponentCompiler
 
     /**
      * Process <if :varname>...<else>...</else></if> conditionals
+     * For dynamic attributes, generate runtime PHP conditionals
      */
-    private function replaceConditionals(Dom\HTMLDocument $doc, array $attributes): void
+    private function replaceConditionals(Dom\HTMLDocument $doc, array $attributes, array $dynamicAttrNames = []): void
     {
         $ifElements = [];
         foreach ($doc->getElementsByTagName('if') as $element) {
@@ -296,48 +368,125 @@ class BFGComponentCompiler
             // Track attribute usage
             $this->usedAttributes[] = $condition;
 
-            // Check if condition is met (attribute exists and is not empty)
-            $conditionMet = !empty($attributes[$condition]);
+            if (in_array($condition, $dynamicAttrNames)) {
+                // Dynamic conditional - generate runtime PHP if/else
+                $conditionExpression = $attributes[$condition];
 
-            // Find <else> sibling if it exists
-            $elseElement = null;
-            $nextSibling = $ifElement->nextSibling;
-            while ($nextSibling) {
-                if ($nextSibling->nodeType === XML_ELEMENT_NODE && $nextSibling->nodeName === 'else') {
-                    $elseElement = $nextSibling;
-                    break;
+                // Find <else> sibling if it exists
+                $elseElement = null;
+                $nextSibling = $ifElement->nextSibling;
+                while ($nextSibling) {
+                    if ($nextSibling->nodeType === XML_ELEMENT_NODE && strtolower($nextSibling->nodeName) === 'else') {
+                        $elseElement = $nextSibling;
+                        break;
+                    }
+                    $nextSibling = $nextSibling->nextSibling;
                 }
-                $nextSibling = $nextSibling->nextSibling;
-            }
 
-            if ($conditionMet) {
-                // Condition true: keep <if> content, remove <else>
-                $children = [];
+                // Create PHP conditional start
+                $phpCode = "if (!empty({$conditionExpression})): ";
+                $phpIfStart = $doc->createComment("BFG_PHP:{$phpCode}");
+                $ifElement->parentNode->insertBefore($phpIfStart, $ifElement);
+
+                // Move if content directly (no serialization)
+                $ifChildren = [];
                 foreach ($ifElement->childNodes as $child) {
-                    $children[] = $child;
+                    $ifChildren[] = $child;
                 }
-                foreach ($children as $child) {
+                foreach ($ifChildren as $child) {
                     $ifElement->parentNode->insertBefore($child, $ifElement);
                 }
+
                 if ($elseElement) {
+                    // Add else clause
+                    $phpElse = $doc->createComment("BFG_PHP:else: ");
+                    $ifElement->parentNode->insertBefore($phpElse, $ifElement);
+
+                    // Move else content directly (no serialization)
+                    $elseChildren = [];
+                    foreach ($elseElement->childNodes as $child) {
+                        $elseChildren[] = $child;
+                    }
+                    foreach ($elseChildren as $child) {
+                        $ifElement->parentNode->insertBefore($child, $ifElement);
+                    }
+
                     $elseElement->parentNode->removeChild($elseElement);
                 }
+
+                // Add endif
+                $phpEndif = $doc->createComment("BFG_PHP:endif; ");
+                $ifElement->parentNode->insertBefore($phpEndif, $ifElement);
+
+                $ifElement->parentNode->removeChild($ifElement);
             } else {
-                // Condition false: keep <else> content if exists
-                if ($elseElement) {
+                // Static conditional - evaluate at compile time
+                $conditionMet = !empty($attributes[$condition]);
+
+                // Find <else> sibling if it exists
+                $elseElement = null;
+                $nextSibling = $ifElement->nextSibling;
+                while ($nextSibling) {
+                    if ($nextSibling->nodeType === XML_ELEMENT_NODE && strtolower($nextSibling->nodeName) === 'else') {
+                        $elseElement = $nextSibling;
+                        break;
+                    }
+                    $nextSibling = $nextSibling->nextSibling;
+                }
+
+                if ($conditionMet) {
+                    // Condition true: keep <if> content, remove <else>
                     $children = [];
-                    foreach ($elseElement->childNodes as $child) {
+                    foreach ($ifElement->childNodes as $child) {
                         $children[] = $child;
                     }
                     foreach ($children as $child) {
                         $ifElement->parentNode->insertBefore($child, $ifElement);
                     }
-                    $elseElement->parentNode->removeChild($elseElement);
+                    if ($elseElement) {
+                        $elseElement->parentNode->removeChild($elseElement);
+                    }
+                } else {
+                    // Condition false: keep <else> content if exists
+                    if ($elseElement) {
+                        $children = [];
+                        foreach ($elseElement->childNodes as $child) {
+                            $children[] = $child;
+                        }
+                        foreach ($children as $child) {
+                            $ifElement->parentNode->insertBefore($child, $ifElement);
+                        }
+                        $elseElement->parentNode->removeChild($elseElement);
+                    }
                 }
-            }
 
-            // Remove <if> element
-            $ifElement->parentNode->removeChild($ifElement);
+                // Remove <if> element
+                $ifElement->parentNode->removeChild($ifElement);
+            }
+        }
+    }
+
+    /**
+     * Clean up any remaining <else> tags (safety cleanup)
+     */
+    private function cleanupElseTags(Dom\HTMLDocument $doc): void
+    {
+        $elseTags = [];
+        foreach ($doc->getElementsByTagName('else') as $element) {
+            $elseTags[] = $element;
+        }
+
+        foreach ($elseTags as $elseTag) {
+            // This shouldn't happen, but if there are any <else> tags left, remove them
+            // but keep their children
+            $children = [];
+            foreach ($elseTag->childNodes as $child) {
+                $children[] = $child;
+            }
+            foreach ($children as $child) {
+                $elseTag->parentNode->insertBefore($child, $elseTag);
+            }
+            $elseTag->parentNode->removeChild($elseTag);
         }
     }
 
@@ -352,13 +501,18 @@ class BFGComponentCompiler
         }
 
         foreach ($slotElements as $slotElement) {
-            // Parse slot content
-            $slotDoc = Dom\HTMLDocument::createFromString($slotContent, LIBXML_NOERROR);
+            // Wrap slot content in a div to ensure all content (including comments) is preserved
+            $wrappedContent = '<div>' . $slotContent . '</div>';
+            $slotDoc = Dom\HTMLDocument::createFromString($wrappedContent, LIBXML_NOERROR);
 
-            // Import and insert nodes
-            foreach ($slotDoc->body->childNodes as $child) {
-                $imported = $doc->importNode($child, true);
-                $slotElement->parentNode->insertBefore($imported, $slotElement);
+            // Get the wrapper div's children (not the div itself)
+            $wrapperDiv = $slotDoc->body->firstChild;
+            if ($wrapperDiv && $wrapperDiv->nodeType === XML_ELEMENT_NODE) {
+                // Import and insert nodes from inside the wrapper
+                foreach ($wrapperDiv->childNodes as $child) {
+                    $imported = $doc->importNode($child, true);
+                    $slotElement->parentNode->insertBefore($imported, $slotElement);
+                }
             }
 
             // Remove slot element
@@ -368,37 +522,36 @@ class BFGComponentCompiler
 
     /**
      * Apply unmatched attributes to root element
+     * For dynamic attributes, create placeholders that will be replaced with PHP
      */
-    private function applyUnmatchedAttributes(Dom\Element $rootElement, array $attributes, array $usedAttributes): void
+    private function applyUnmatchedAttributes(Dom\Element $rootElement, array $attributes, array $usedAttributes, array $dynamicAttrNames = []): void
     {
         foreach ($attributes as $name => $value) {
             if (!in_array($name, $usedAttributes)) {
                 if ($name === 'class') {
                     // Merge classes
                     $existingClass = $rootElement->getAttribute('class');
-                    $mergedClass = trim("$existingClass $value");
-                    $rootElement->setAttribute('class', $mergedClass);
+                    if (in_array($name, $dynamicAttrNames)) {
+                        // Dynamic class - need to merge at runtime (not supported yet, treat as override)
+                        $placeholder = 'BFG_DYNAMIC_' . count($this->dynamicAttributes) . '_ATTR';
+                        $this->dynamicAttributes[$placeholder] = $value;
+                        $rootElement->setAttribute('class', $placeholder);
+                    } else {
+                        $mergedClass = trim("$existingClass $value");
+                        $rootElement->setAttribute('class', $mergedClass);
+                    }
                 } else {
-                    // Add other attributes
-                    $rootElement->setAttribute($name, $value);
+                    if (in_array($name, $dynamicAttrNames)) {
+                        // Dynamic attribute - create placeholder for PHP expression
+                        $placeholder = 'BFG_DYNAMIC_' . count($this->dynamicAttributes) . '_ATTR';
+                        $this->dynamicAttributes[$placeholder] = $value;
+                        $rootElement->setAttribute($name, $placeholder);
+                    } else {
+                        // Static attribute - use value directly
+                        $rootElement->setAttribute($name, $value);
+                    }
                 }
             }
-        }
-    }
-
-    /**
-     * Apply dynamic attributes (prefixed with :) to root element
-     * These will be replaced with PHP expressions later
-     */
-    private function applyDynamicAttributes(Dom\Element $rootElement, array $dynamicAttrs): void
-    {
-        foreach ($dynamicAttrs as $name => $expression) {
-            // Create a unique placeholder for this dynamic attribute
-            $placeholder = 'BFG_DYNAMIC_' . count($this->dynamicAttributes) . '_ATTR';
-            $this->dynamicAttributes[$placeholder] = $expression;
-
-            // Set the attribute with the placeholder value
-            $rootElement->setAttribute($name, $placeholder);
         }
     }
 }
