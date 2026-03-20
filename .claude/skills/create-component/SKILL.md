@@ -24,6 +24,7 @@ When the user has confirmed, you may continue.
    cp build/templates/{name}.php tests/expected/{name}.php
    ```
 4. **Run tests:** `./bin/test`
+5. **Add component to kitchen sink:** `src/templates/admin/pages/kitchen-sink.bfg.php`
 
 ## Component Syntax
 
