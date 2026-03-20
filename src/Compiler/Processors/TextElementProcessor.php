@@ -17,7 +17,7 @@ class BFG_TextElementProcessor implements BFG_ProcessorInterface
         $this->attrManager = $attrManager;
     }
 
-    public function process(Dom\HTMLDocument $doc): void
+    public function process(BFG_Document $doc): void
     {
         $textElements = [];
         foreach ($doc->getElementsByTagName('t') as $element) {

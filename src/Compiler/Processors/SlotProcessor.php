@@ -13,7 +13,7 @@ class BFG_SlotProcessor implements BFG_ProcessorInterface
         $this->slotContent = $slotContent;
     }
 
-    public function process(Dom\HTMLDocument $doc): void
+    public function process(BFG_Document $doc): void
     {
         $slotElements = [];
         foreach ($doc->getElementsByTagName('slot') as $element) {
@@ -23,7 +23,7 @@ class BFG_SlotProcessor implements BFG_ProcessorInterface
         foreach ($slotElements as $slotElement) {
             // Wrap slot content in a div to ensure all content (including comments) is preserved
             $wrappedContent = '<div>' . $this->slotContent . '</div>';
-            $slotDoc = Dom\HTMLDocument::createFromString($wrappedContent, LIBXML_NOERROR);
+            $slotDoc = BFG_Document::createFromString($wrappedContent, LIBXML_NOERROR);
 
             // Get the wrapper div's children (not the div itself)
             $wrapperDiv = $slotDoc->body->firstChild;

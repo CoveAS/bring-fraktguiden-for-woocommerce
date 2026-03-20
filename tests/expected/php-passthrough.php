@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var string $title
+ * @var array $items
+ */
+?>
+
 <div class="wrap">
     <h1><?php echo esc_html($title); ?></h1>
 

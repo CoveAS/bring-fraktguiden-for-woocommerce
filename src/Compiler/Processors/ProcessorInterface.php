@@ -10,8 +10,8 @@ interface BFG_ProcessorInterface
     /**
      * Process a document
      *
-     * @param Dom\HTMLDocument $doc The document to process
+     * @param BFG_Document $doc The document to process
      * @return void
      */
-    public function process(Dom\HTMLDocument $doc): void;
+    public function process(BFG_Document $doc): void;
 }

@@ -16,7 +16,7 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
         $this->attrManager = $attrManager;
     }
 
-    public function process(Dom\HTMLDocument $doc): void
+    public function process(BFG_Document $doc): void
     {
         $ifElements = [];
         foreach ($doc->getElementsByTagName('if') as $element) {
@@ -48,7 +48,7 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
         }
     }
 
-    private function processDynamicConditional(Dom\HTMLDocument $doc, Dom\Element $ifElement, string $condition): void
+    private function processDynamicConditional(BFG_Document $doc, BFG_ElementNode $ifElement, string $condition): void
     {
         // Dynamic conditional - generate runtime PHP if/else
         $conditionExpression = $this->attrManager->get($condition);
@@ -88,7 +88,7 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
         $ifElement->parentNode->removeChild($ifElement);
     }
 
-    private function processStaticConditional(Dom\Element $ifElement, string $condition): void
+    private function processStaticConditional(BFG_ElementNode $ifElement, string $condition): void
     {
         // Static conditional - evaluate at compile time
         $conditionMet = !empty($this->attrManager->get($condition));
@@ -118,7 +118,7 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
         }
     }
 
-    private function findElseSibling(Dom\Element $element): ?Dom\Element
+    private function findElseSibling(BFG_ElementNode $element): ?BFG_ElementNode
     {
         $nextSibling = $element->nextSibling;
         while ($nextSibling) {
@@ -130,7 +130,7 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
         return null;
     }
 
-    private function moveChildrenBefore(Dom\Element $source, Dom\Element $before): void
+    private function moveChildrenBefore(BFG_ElementNode $source, BFG_ElementNode $before): void
     {
         $children = [];
         foreach ($source->childNodes as $child) {

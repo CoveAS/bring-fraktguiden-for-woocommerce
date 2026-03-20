@@ -12,6 +12,7 @@
  */
 
 // Load dependencies
+require_once __DIR__ . '/../src/Compiler/Parser/BFG_Document.php';
 require_once __DIR__ . '/../src/Compiler/AttributeManager.php';
 require_once __DIR__ . '/../src/Compiler/TemplateLoader.php';
 require_once __DIR__ . '/../src/Compiler/PhpCodeGenerator.php';
@@ -66,7 +67,7 @@ class BFGComponentCompiler
         );
 
         // Parse source file as HTML
-        $sourceDoc = Dom\HTMLDocument::createFromString($sourceContent, LIBXML_NOERROR);
+        $sourceDoc = BFG_Document::createFromString($sourceContent, LIBXML_NOERROR);
 
         // Process standalone <t> tags for translation (before component processing)
         $this->translationProcessor->process($sourceDoc);
@@ -99,7 +100,7 @@ class BFGComponentCompiler
     /**
      * Process all <bfg-*> component tags in the document
      */
-    private function processComponentTags(Dom\HTMLDocument $doc): void
+    private function processComponentTags(BFG_Document $doc): void
     {
         $componentTags = [];
 
@@ -120,7 +121,7 @@ class BFGComponentCompiler
     /**
      * Process a single <bfg-*> component tag
      */
-    private function processComponentTag(Dom\Element $tag, Dom\HTMLDocument $sourceDoc): void
+    private function processComponentTag(BFG_ElementNode $tag, BFG_Document $sourceDoc): void
     {
         $componentName = substr(strtolower($tag->tagName), 4); // Remove 'bfg-' prefix
 
@@ -150,7 +151,7 @@ class BFGComponentCompiler
 
         // Load component template
         $templateContent = $this->templateLoader->load($componentName);
-        $templateDoc = Dom\HTMLDocument::createFromString($templateContent, LIBXML_NOERROR);
+        $templateDoc = BFG_Document::createFromString($templateContent, LIBXML_NOERROR);
 
         // Merge dynamic attributes into regular attributes, but track which ones are dynamic
         $dynamicAttrNames = array_keys($dynamicAttrs);
@@ -206,7 +207,7 @@ class BFGComponentCompiler
             $rootElement = $rootElement->nextSibling;
         }
 
-        if ($rootElement instanceof Dom\Element) {
+        if ($rootElement instanceof BFG_ElementNode) {
             $this->applyUnmatchedAttributes($rootElement, $attrManager);
         }
 
@@ -228,7 +229,7 @@ class BFGComponentCompiler
     /**
      * Clean up any remaining <else> tags (safety cleanup)
      */
-    private function cleanupElseTags(Dom\HTMLDocument $doc): void
+    private function cleanupElseTags(BFG_Document $doc): void
     {
         $elseTags = [];
         foreach ($doc->getElementsByTagName('else') as $element) {
@@ -253,7 +254,7 @@ class BFGComponentCompiler
      * Apply unmatched attributes to root element
      * For dynamic attributes, create placeholders that will be replaced with PHP
      */
-    private function applyUnmatchedAttributes(Dom\Element $rootElement, BFG_AttributeManager $attrManager): void
+    private function applyUnmatchedAttributes(BFG_ElementNode $rootElement, BFG_AttributeManager $attrManager): void
     {
         $unused = $attrManager->getUnused();
         foreach ($unused as $name => $value) {

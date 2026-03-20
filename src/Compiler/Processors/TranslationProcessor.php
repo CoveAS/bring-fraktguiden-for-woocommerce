@@ -14,7 +14,7 @@ class BFG_TranslationProcessor implements BFG_ProcessorInterface
         $this->phpGenerator = $phpGenerator;
     }
 
-    public function process(Dom\HTMLDocument $doc): void
+    public function process(BFG_Document $doc): void
     {
         $translationTags = [];
 

@@ -17,7 +17,7 @@ class BFG_AttributeProcessor implements BFG_ProcessorInterface
         $this->dynamicAttributePlaceholders = &$dynamicAttributePlaceholders;
     }
 
-    public function process(Dom\HTMLDocument $doc): void
+    public function process(BFG_Document $doc): void
     {
         foreach ($doc->getElementsByTagName('*') as $element) {
             foreach ($element->attributes as $attr) {
