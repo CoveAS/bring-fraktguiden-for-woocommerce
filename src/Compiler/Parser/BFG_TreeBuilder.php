@@ -15,6 +15,19 @@ class BFG_TreeBuilder
     }
 
     /**
+     * Check if a tag name represents a custom component
+     *
+     * Custom components contain hyphens or dots (e.g., "bfg-box", "bfg-field.text")
+     *
+     * @param string $tagName
+     * @return bool
+     */
+    private function isCustomComponent(string $tagName): bool
+    {
+        return strpos($tagName, '-') !== false || strpos($tagName, '.') !== false;
+    }
+
+    /**
      * Build a DOM tree from tokens
      *
      * @param array $tokens Token array from BFG_Tokenizer
@@ -50,6 +63,15 @@ class BFG_TreeBuilder
                     break;
 
                 case 'self_closing_tag':
+                    // Validate: custom components cannot be self-closing
+                    if ($this->isCustomComponent($token['tag_name'])) {
+                        throw new Exception(
+                            "Self-closing custom components are not allowed. " .
+                            "Found self-closing tag: <{$token['tag_name']} />. " .
+                            "Custom components must have an opening and closing tag."
+                        );
+                    }
+
                     $element = new BFG_ElementNode($token['tag_name'], true);
 
                     // Parse and set attributes

@@ -41,11 +41,30 @@ class SettingsPage
 		}
 
 		$plugin_dir = dirname(__DIR__, 3);
-		$build_script = $plugin_dir . '/bin/build';
+		$compile_script = $plugin_dir . '/bin/compile-templates.php';
 
-		if (file_exists($build_script)) {
-			exec("cd " . escapeshellarg($plugin_dir) . " && ./bin/build 2>&1", $output, $return_code);
+		if (!file_exists($compile_script)) {
+			return;
 		}
+
+		// Require the compiler dependencies
+		require_once $compile_script;
+
+		// Use BatchCompiler to compile all templates
+		$batchCompiler = new \BFG_BatchCompiler($plugin_dir);
+		$result = $batchCompiler->compileAll();
+
+		// Show error notice if any compilations failed
+		if (!$result->hasErrors()) {
+			return;
+		}
+		$message = sprintf(
+			__('BFG Template compilation failed (%d files):', 'bring-fraktguiden-for-woocommerce'),
+			$result->failed
+		);
+		$message .= '<br>' . implode('<br>', $result->getErrorMessages());
+
+		wp_die($message);
 	}
 
 	public static function update_admin_title($admin_title)

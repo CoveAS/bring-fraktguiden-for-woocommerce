@@ -109,13 +109,13 @@
 				</h3>
 
 				<bfg-field.text id="demo-text" name="demo-text" label="Text Input" placeholder="Placeholder text"
-					description="Help text goes here" />
+					description="Help text goes here"></bfg-field.text>
 
 				<bfg-field.number id="demo-number" name="demo-number" label="Number Input with Suffix" value="100"
-					suffix="NOK" />
+					suffix="NOK"></bfg-field.number>
 
 				<bfg-field.number id="demo-number-lg" name="demo-number-lg" label="Number Input with Large Suffix"
-					value="250" suffix-lg="NOK" />
+					value="250" suffix-lg="NOK"></bfg-field.number>
 
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Select Dropdowns</bfg-t>
@@ -125,16 +125,16 @@
 					'option1' => __('Option 1', 'bring-fraktguiden-for-woocommerce'),
 					'option2' => __('Option 2', 'bring-fraktguiden-for-woocommerce'),
 					'option3' => __('Option 3', 'bring-fraktguiden-for-woocommerce'),
-				]" value="option1" placeholder="Select an option" />
+				]" value="option1" placeholder="Select an option"></bfg-field.select>
 
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Checkboxes</bfg-t>
 				</h3>
 
 				<bfg-field.checkbox name="demo-checkbox-1" value="1" title="Enable this feature"
-					description="This is a checkbox with a description below the title" />
+					description="This is a checkbox with a description below the title"></bfg-field.checkbox>
 
-				<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checked checkbox" checked />
+				<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checked checkbox" checked></bfg-field.checkbox>
 
 				<p class="bfg-description"><strong>Field Classes:</strong> <code>.bfg-field</code>,
 					<code>.bfg-field--checkbox-box</code>, <code>.bfg-input</code>, <code>.bfg-input--number</code>,
@@ -171,7 +171,7 @@
 		<bfg-box>
 			<bfg-box.header title="Progress Bar"></bfg-box.header>
 			<bfg-box.section>
-				<bfg-progress current="3" total="5" label="3 of 5 completed" />
+				<bfg-progress current="3" total="5" label="3 of 5 completed"></bfg-progress>
 				<p class="bfg-description"><strong>Usage:</strong>
 					<code>&lt;bfg-progress current="3" total="5" label="..." /&gt;</code>
 				</p>
@@ -208,13 +208,13 @@
 			<bfg-box.header title="Status Cards"></bfg-box.header>
 			<bfg-box.section>
 				<bfg-status-card type="default">
-					<bfg-status-item label="Status" value="Active" type="success" />
-					<bfg-status-item label="License Type" value="PRO License" type="default" />
+					<bfg-status-item label="Status" value="Active" type="success"></bfg-status-item>
+					<bfg-status-item label="License Type" value="PRO License" type="default"></bfg-status-item>
 				</bfg-status-card>
 				<br>
 				<bfg-status-card type="trial">
-					<bfg-status-item label="Status" value="Trial" type="trial" />
-					<bfg-status-item label="Days Remaining" value="7" type="default" />
+					<bfg-status-item label="Status" value="Trial" type="trial"></bfg-status-item>
+					<bfg-status-item label="Days Remaining" value="7" type="default"></bfg-status-item>
 				</bfg-status-card>
 			</bfg-box.section>
 		</bfg-box>

@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * BFG Component Compiler
@@ -22,6 +21,7 @@ require_once __DIR__ . '/../src/Compiler/Processors/TextElementProcessor.php';
 require_once __DIR__ . '/../src/Compiler/Processors/AttributeProcessor.php';
 require_once __DIR__ . '/../src/Compiler/Processors/ConditionalProcessor.php';
 require_once __DIR__ . '/../src/Compiler/Processors/SlotProcessor.php';
+require_once __DIR__ . '/../src/Compiler/BatchCompiler.php';
 
 class BFGComponentCompiler
 {
@@ -286,76 +286,30 @@ class BFGComponentCompiler
 // CLI entry point - only run when this file is executed directly
 if (php_sapi_name() === 'cli' && isset($argv) && __FILE__ === realpath($argv[0])) {
     $projectRoot = dirname(__DIR__);
-    $compiler = new BFGComponentCompiler($projectRoot);
 
     // Get command line arguments
     $args = array_slice($argv, 1);
 
     if (count($args) === 0) {
-        // Compile all templates
-        echo "Compiling all BFG templates...\n";
+        // Compile all templates using BatchCompiler
+        echo "Compiling all BFG templates...\n\n";
 
-        // Recursively find all .bfg.php files and warn about plain .php files
-        $sourceFiles = [];
-        $plainPhpFiles = [];
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($projectRoot . '/src/templates', RecursiveDirectoryIterator::SKIP_DOTS)
-        );
-        foreach ($iterator as $file) {
-            if ($file->isFile()) {
-                $filename = $file->getFilename();
-                if (str_ends_with($filename, '.bfg.php')) {
-                    $sourceFiles[] = $file->getPathname();
-                } elseif (str_ends_with($filename, '.php')) {
-                    $plainPhpFiles[] = $file->getPathname();
-                }
+        $batchCompiler = new BFG_BatchCompiler($projectRoot);
+        $result = $batchCompiler->compileAll();
+
+        // Display results
+        if ($result->hasErrors()) {
+            foreach ($result->errors as $error) {
+                echo "✗ {$error->file} - Error: {$error->message}\n";
             }
         }
 
-        // Display warnings for plain .php files
-        if (!empty($plainPhpFiles)) {
-            echo "\n⚠️  Warning: Found plain .php files in src/templates/\n";
-            echo "These files should use .bfg.php extension to be compiled:\n";
-            foreach ($plainPhpFiles as $phpFile) {
-                $relativePath = str_replace($projectRoot . '/src/templates/', '', $phpFile);
-                echo "   • {$relativePath}\n";
-            }
-            echo "\n";
-        }
-
-        $compiled = 0;
-        $failed = 0;
-
-        foreach ($sourceFiles as $sourceFile) {
-            try {
-                $output = $compiler->compile($sourceFile);
-
-                // Calculate output path: src/templates/... -> build/templates/...
-                $relativePath = str_replace($projectRoot . '/src/templates/', '', $sourceFile);
-                $outputPath = $projectRoot . '/build/templates/' . str_replace('.bfg.php', '.php', $relativePath);
-
-                // Create output directory if needed
-                $outputDir = dirname($outputPath);
-                if (!is_dir($outputDir)) {
-                    mkdir($outputDir, 0755, true);
-                }
-
-                // Write compiled output
-                file_put_contents($outputPath, $output);
-
-                echo "✓ " . basename($sourceFile) . " → " . str_replace($projectRoot . '/', '', $outputPath) . "\n";
-                $compiled++;
-            } catch (Exception $e) {
-                echo "✗ " . basename($sourceFile) . " - Error: " . $e->getMessage() . "\n";
-                $failed++;
-            }
-        }
-
-        echo "\nCompiled: {$compiled} | Failed: {$failed}\n";
-        exit($failed > 0 ? 1 : 0);
+        echo "\nCompiled: {$result->compiled} | Failed: {$result->failed}\n";
+        exit($result->hasErrors() ? 1 : 0);
     } else {
         // Compile single file
         $sourceFile = $args[0];
+        $compiler = new BFGComponentCompiler($projectRoot);
 
         try {
             $output = $compiler->compile($sourceFile);
