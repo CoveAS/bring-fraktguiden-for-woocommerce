@@ -1,6 +1,5 @@
 <?php
 
-use BringFraktguiden\Admin\Component;
 use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Fields\Fields;
 
@@ -94,14 +93,10 @@ use BringFraktguiden\Fields\Fields;
 								<div class="bfgu:flex-1">
 									<bfg-field.select id="booking_address_country" name="booking_address_country"
 										label="Country">
-										<?php
-										$countries = WC()->countries?->get_countries() ?: [];
-										$base_country = WC()->countries?->get_base_country() ?: '';
-										foreach ($countries as $code => $name) {
+										<?php foreach ($countries as $code => $name) {
 											$selected = $code === $base_country ? ' selected' : '';
 											echo '<option value="' . esc_attr($code) . '"' . $selected . '>' . esc_html($name) . '</option>';
-										}
-										?>
+										} ?>
 									</bfg-field.select>
 								</div>
 							</div>
@@ -112,55 +107,55 @@ use BringFraktguiden\Fields\Fields;
 				<bfg-box.header class="bfg-box__header--divider" title="Contact Information"></bfg-box.header>
 
 				<bfg-box.section>
-					<?php echo Component::validatedInputField([
-						'id' => 'booking_address_reference',
-						'name' => 'booking_address_reference',
-						'type' => 'text',
-						'label' => __('Reference', 'bring-fraktguiden-for-woocommerce'),
-						'required' => true,
-						'validation' => ['required'],
-						'error_message' => __('Reference is required', 'bring-fraktguiden-for-woocommerce'),
-						'description' => sprintf(
-							__('The store\'s reference printed on the shipping label. Usually %s, but can also be %s.', 'bring-fraktguiden-for-woocommerce'),
-							'<code>{order_id}</code>',
-							'<code>{products}</code>'
-						),
-						'placeholder' => __('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'),
-						'maxlength' => 35,
-					]); ?>
+					<bfg-field.text
+						id="booking_address_reference"
+						label="Reference"
+						description="The store's reference printed on the shipping label. Usually {order_id}, but can also be {products}.">
+						<input
+							type="text"
+							id="booking_address_reference"
+							name="booking_address_reference"
+							placeholder="<?php echo esc_attr__('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'); ?>"
+							maxlength="35"
+							required
+						/>
+					</bfg-field.text>
 
-					<?php echo Component::validatedInputField([
-						'id' => 'booking_address_contact_person',
-						'name' => 'booking_address_contact_person',
-						'type' => 'text',
-						'label' => __('Contact Person', 'bring-fraktguiden-for-woocommerce'),
-						'required' => true,
-						'validation' => ['required'],
-						'error_message' => __('Contact person is required', 'bring-fraktguiden-for-woocommerce'),
-						'autocomplete' => 'name',
-					]); ?>
+					<bfg-field.text
+						id="booking_address_contact_person"
+						label="Contact Person">
+						<input
+							type="text"
+							id="booking_address_contact_person"
+							name="booking_address_contact_person"
+							autocomplete="name"
+							required
+						/>
+					</bfg-field.text>
 
-					<?php echo Component::validatedInputField([
-						'id' => 'booking_address_phone',
-						'name' => 'booking_address_phone',
-						'type' => 'tel',
-						'label' => __('Phone', 'bring-fraktguiden-for-woocommerce'),
-						'required' => true,
-						'validation' => ['required', 'phone'],
-						'error_message' => __('Valid phone number is required', 'bring-fraktguiden-for-woocommerce'),
-						'autocomplete' => 'tel',
-					]); ?>
+					<bfg-field.text
+						id="booking_address_phone"
+						label="Phone">
+						<input
+							type="tel"
+							id="booking_address_phone"
+							name="booking_address_phone"
+							autocomplete="tel"
+							required
+						/>
+					</bfg-field.text>
 
-					<?php echo Component::validatedInputField([
-						'id' => 'booking_address_email',
-						'name' => 'booking_address_email',
-						'type' => 'email',
-						'label' => __('Email', 'bring-fraktguiden-for-woocommerce'),
-						'required' => true,
-						'validation' => ['required', 'email'],
-						'error_message' => __('Valid email address is required', 'bring-fraktguiden-for-woocommerce'),
-						'autocomplete' => 'email',
-					]); ?>
+					<bfg-field.text
+						id="booking_address_email"
+						label="Email">
+						<input
+							type="email"
+							id="booking_address_email"
+							name="booking_address_email"
+							autocomplete="email"
+							required
+						/>
+					</bfg-field.text>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</bfg-box.section>
@@ -179,36 +174,19 @@ use BringFraktguiden\Fields\Fields;
 					<bfg-field.select id="auto_set_status_after_booking_success"
 						name="auto_set_status_after_booking_success" label="Order status after booking"
 						description="Order status will be automatically set when successfully booked">
-						<?php
-						$order_statuses = wc_get_order_statuses();
-						$saved_booking_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_booking_success');
-						$booking_status_value = !empty($saved_booking_status) ? $saved_booking_status : 'wc-bring-shipment';
-						$booking_status_options = array_merge(
-							['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
-							$order_statuses
-						);
-						foreach ($booking_status_options as $value => $label) {
+						<?php foreach ($booking_status_options as $value => $label) {
 							$selected = $value === $booking_status_value ? ' selected' : '';
 							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						}
-						?>
+						} ?>
 					</bfg-field.select>
 
 					<bfg-field.select id="auto_set_status_after_print_label_success"
 						name="auto_set_status_after_print_label_success" label="Order status after printing"
 						description="Order status will be automatically set when a label is downloaded">
-						<?php
-						$saved_print_status = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('auto_set_status_after_print_label_success');
-						$print_status_value = !empty($saved_print_status) ? $saved_print_status : 'none';
-						$print_status_options = array_merge(
-							['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
-							$order_statuses
-						);
-						foreach ($print_status_options as $value => $label) {
+						<?php foreach ($print_status_options as $value => $label) {
 							$selected = $value === $print_status_value ? ' selected' : '';
 							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						}
-						?>
+						} ?>
 					</bfg-field.select>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
@@ -222,20 +200,10 @@ use BringFraktguiden\Fields\Fields;
 				<bfg-box.section>
 					<bfg-field.select id="booking_home_delivery_package_type" name="booking_home_delivery_package_type"
 						label="Package type for home delivery" description="Only applies to home delivery services">
-						<?php
-						$saved_package_type = \Bring_Fraktguiden\Common\Fraktguiden_Helper::get_option('booking_home_delivery_package_type');
-						$package_type_value = !empty($saved_package_type) ? $saved_package_type : 'hd_eur';
-						$package_type_options = [
-							'hd_eur' => 'HD_EUR_PALLET',
-							'hd_half' => 'HD_HALF_PALLET',
-							'hd_quarter' => 'HD_QUARTER_PALLET',
-							'hd_loose' => 'HD_SPECIAL_PALLET',
-						];
-						foreach ($package_type_options as $value => $label) {
+						<?php foreach ($package_type_options as $value => $label) {
 							$selected = $value === $package_type_value ? ' selected' : '';
 							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						}
-						?>
+						} ?>
 					</bfg-field.select>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>

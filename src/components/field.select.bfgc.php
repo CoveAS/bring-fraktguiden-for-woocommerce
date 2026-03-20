@@ -19,16 +19,22 @@
 ?>
 
 <div class="bfg-field">
-	<label for=":id"><t>label</t></label>
+	<label for=":id">
+		<t>label</t>
+	</label>
 	<div class="bfg-input bfg-input--select">
 		<select id=":id" name=":name" class="bfg-custom-select">
-			<if :placeholder>
-			<option value="" disabled selected><t>placeholder</t></option>
+			<if placeholder>
+				<option value="" disabled selected>
+					<t>placeholder</t>
+				</option>
 			</if>
 			<slot></slot>
 		</select>
 	</div>
 	<if :description>
-	<p class="bfg-description"><t>description</t></p>
+		<p class="bfg-description">
+			<t>description</t>
+		</p>
 	</if>
 </div>

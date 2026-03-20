@@ -147,6 +147,38 @@ class SettingsPage
 	{
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
+
+		// Country select data
+		$countries = WC()->countries?->get_countries() ?: [];
+		$base_country = WC()->countries?->get_base_country() ?: '';
+
+		// Order status after booking
+		$order_statuses = wc_get_order_statuses();
+		$saved_booking_status = Fraktguiden_Helper::get_option('auto_set_status_after_booking_success');
+		$booking_status_value = !empty($saved_booking_status) ? $saved_booking_status : 'wc-bring-shipment';
+		$booking_status_options = array_merge(
+			['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
+			$order_statuses
+		);
+
+		// Order status after printing
+		$saved_print_status = Fraktguiden_Helper::get_option('auto_set_status_after_print_label_success');
+		$print_status_value = !empty($saved_print_status) ? $saved_print_status : 'none';
+		$print_status_options = array_merge(
+			['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
+			$order_statuses
+		);
+
+		// Package type options
+		$saved_package_type = Fraktguiden_Helper::get_option('booking_home_delivery_package_type');
+		$package_type_value = !empty($saved_package_type) ? $saved_package_type : 'hd_eur';
+		$package_type_options = [
+			'hd_eur' => 'HD_EUR_PALLET',
+			'hd_half' => 'HD_HALF_PALLET',
+			'hd_quarter' => 'HD_QUARTER_PALLET',
+			'hd_loose' => 'HD_SPECIAL_PALLET',
+		];
+
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/booking.php';
 	}
 
