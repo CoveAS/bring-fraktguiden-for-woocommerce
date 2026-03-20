@@ -1388,12 +1388,12 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 
 .bfg-badge {
     font-size: 14px;
-    padding: 6px 20px;
+    padding: 0 16px;
+    height: 32px;
     border: none;
     border-radius: 9999px;
     font-weight: 500;
-    line-height: 24px;
-    min-height: 38px;
+    line-height: 1;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
