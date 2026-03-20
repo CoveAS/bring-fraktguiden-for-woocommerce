@@ -67,18 +67,24 @@
 		<bfg-box>
 			<bfg-box.header title="Buttons"></bfg-box.header>
 			<bfg-box.section>
-				<div class="bfgu:flex bfgu:gap-4 bfgu:mb-5">
-					<button class="bfg-btn bfg-btn--primary"><bfg-t>Primary Button</bfg-t></button>
-					<button class="bfg-btn bfg-btn--secondary"><bfg-t>Secondary Button</bfg-t></button>
-					<button class="bfg-btn bfg-btn--primary bfg-btn--lg"><bfg-t>Large Primary</bfg-t></button>
+				<div class="bfgu:flex bfgu:flex-wrap bfgu:gap-4 bfgu:mb-5">
+					<button class="bfg-btn bfg-btn--primary"><bfg-t>Primary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--secondary"><bfg-t>Secondary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--outline"><bfg-t>Outline</bfg-t></button>
+					<button class="bfg-btn bfg-btn--ghost"><bfg-t>Ghost</bfg-t></button>
+				</div>
+				<div class="bfgu:flex bfgu:items-end bfgu:gap-4 bfgu:mb-5">
+					<button class="bfg-btn bfg-btn--primary bfg-btn--sm"><bfg-t>Small Button</bfg-t></button>
+					<button class="bfg-btn bfg-btn--primary"><bfg-t>Medium Button</bfg-t></button>
+					<button class="bfg-btn bfg-btn--primary bfg-btn--lg"><bfg-t>Large Button</bfg-t></button>
 				</div>
 				<div class="bfgu:flex bfgu:gap-4">
 					<button class="bfg-btn bfg-btn--primary bfg-btn--full-width">
-						<t>Full Width Button</t>
+						<bfg-t>Full Width Button</bfg-t>
 					</button>
 				</div>
-				<p class="bfg-description"><strong>Classes:</strong> <code>.bfg-btn</code>,
-					<code>.bfg-btn--primary</code>, <code>.bfg-btn--secondary</code>, <code>.bfg-btn--lg</code>,
+				<p class="bfg-description bfgu:mt-4"><strong>Classes:</strong> <code>.bfg-btn</code>,
+					<code>.bfg-btn--primary</code>, <code>.bfg-btn--secondary</code>, <code>.bfg-btn--outline</code>, <code>.bfg-btn--ghost</code>, <code>.bfg-btn--sm</code>, <code>.bfg-btn--lg</code>,
 					<code>.bfg-btn--full-width</code>
 				</p>
 			</bfg-box.section>
