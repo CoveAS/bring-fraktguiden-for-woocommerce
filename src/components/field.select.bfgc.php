@@ -24,7 +24,7 @@
 	</label>
 	<div class="bfg-input bfg-input--select">
 		<select id=":id" name=":name" class="bfg-custom-select">
-			<if placeholder>
+			<if :placeholder>
 				<option value="" disabled selected>
 					<t>placeholder</t>
 				</option>
