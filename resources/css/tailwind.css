@@ -723,7 +723,8 @@ body:not(.using-mouse) .bfg-btn:focus {
 a.bfg-btn--primary,
 .bfg-admin-page a.bfg-btn--primary {
     background: var(--bfg-primary);
-    color: #fff;
+    color: #ffffff;
+    border: 1px solid var(--bfg-primary);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -731,29 +732,120 @@ a.bfg-btn--primary,
 a.bfg-btn--primary:hover,
 .bfg-admin-page a.bfg-btn--primary:hover {
     background: var(--bfg-primary-hover);
-    color: #fff;
+    border-color: var(--bfg-primary-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
 }
 
 .bfg-btn--primary:active {
     background: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(1px);
 }
 
 .bfg-btn--primary:disabled,
 .bfg-btn--primary.is-disabled {
     background: #E5E7EB;
+    border-color: #E5E7EB;
     color: #9CA3AF;
     box-shadow: none;
+    transform: none;
 }
 
 /* Secondary Button */
+.bfg-btn--secondary,
+a.bfg-btn--secondary,
+.bfg-admin-page a.bfg-btn--secondary {
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    border: 1px solid var(--bfg-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bfg-btn--secondary:hover,
+a.bfg-btn--secondary:hover,
+.bfg-admin-page a.bfg-btn--secondary:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #000000;
+}
+
+.bfg-btn--secondary:active {
+    background: #F3F4F6;
+    transform: translateY(1px);
+}
+
+.bfg-btn--secondary:disabled,
+.bfg-btn--secondary.is-disabled {
+    background: #F9FAFB;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+    box-shadow: none;
+    transform: none;
+}
 
 /* Outline Button */
+.bfg-btn--outline,
+a.bfg-btn--outline,
+.bfg-admin-page a.bfg-btn--outline {
+    background: transparent;
+    color: var(--bfg-primary);
+    border: 1px solid var(--bfg-primary);
+}
+
+.bfg-btn--outline:hover,
+a.bfg-btn--outline:hover,
+.bfg-admin-page a.bfg-btn--outline:hover {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary-hover);
+}
+
+.bfg-btn--outline:active {
+    background: #BFDBFE;
+    transform: translateY(1px);
+}
 
 /* Ghost Button */
+.bfg-btn--ghost,
+a.bfg-btn--ghost,
+.bfg-admin-page a.bfg-btn--ghost {
+    background: transparent;
+    color: var(--bfg-text-secondary);
+    border: 1px solid transparent;
+}
+
+.bfg-btn--ghost:hover,
+a.bfg-btn--ghost:hover,
+.bfg-admin-page a.bfg-btn--ghost:hover {
+    background: #F3F4F6;
+    color: var(--bfg-text-main);
+}
+
+.bfg-btn--ghost:active {
+    background: #E5E7EB;
+    transform: translateY(1px);
+}
 
 /* Size Variants */
+.bfg-btn--sm {
+    padding: var(--bfg-btn-sm-padding);
+    font-size: var(--bfg-btn-sm-font-size);
+    line-height: var(--bfg-btn-sm-line-height);
+    height: var(--bfg-btn-sm-height);
+}
+
+.bfg-btn--lg {
+    padding: var(--bfg-btn-lg-padding);
+    font-size: var(--bfg-btn-lg-font-size);
+    line-height: var(--bfg-btn-lg-line-height);
+    height: var(--bfg-btn-lg-height);
+}
 
 /* Modifiers */
+.bfg-btn--full-width {
+    width: 100%;
+    display: flex;
+}
 
 /* Loading State */
 .bfg-btn.is-loading {
@@ -1296,25 +1388,26 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 
 .bfg-badge {
     font-size: 14px;
-    padding: 8px 16px;
-    border: 1px solid transparent;
+    padding: 6px 20px;
+    border: none;
     border-radius: 9999px;
-    font-weight: 400;
-    line-height: 16px;
-    min-height: 32px;
+    font-weight: 500;
+    line-height: 24px;
+    min-height: 38px;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 }
 
 .bfg-badge--completed {
+    background-color: color-mix(in srgb, #15803d 15%, white);
     color: #15803d;
-    border: 1px solid #16a34a;
 }
 
 .bfg-badge--in-progress {
-    background: var(--bfg-primary) !important;
-    color: #fff !important;
+    background-color: var(--bfg-primary-light) !important;
+    color: var(--bfg-primary) !important;
 }
 
 /* ==========================================================================
