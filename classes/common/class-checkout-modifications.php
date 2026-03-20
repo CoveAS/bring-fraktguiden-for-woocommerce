@@ -65,8 +65,8 @@ class Checkout_Modifications {
 			return;
 		}
 
-		$file = 'bring-fraktguiden-checkout.js';
-		$url = plugins_url( 'assets/js/' . $file, dirname( __DIR__ ) );
+		$file = 'checkout.js';
+		$url = plugins_url( 'build/js/' . $file, dirname( __DIR__ ) );
 		wp_register_script(
 			'fraktguiden-checkout-js',
 			$url,

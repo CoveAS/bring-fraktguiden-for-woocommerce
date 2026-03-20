@@ -81,7 +81,7 @@ class Scripts
 		// Consolidated admin styles (includes bring-fraktguiden-admin.css)
 		wp_enqueue_style(
 			'bring-fraktguiden-compiled-styles',
-			$baseUrl . 'assets/css/compiled-styles.css',
+			$baseUrl . 'build/css/admin.css',
 			[],
 			Bring_Fraktguiden::VERSION
 		);

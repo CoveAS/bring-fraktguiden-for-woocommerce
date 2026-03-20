@@ -339,7 +339,7 @@ class SettingsPage
 		// Consolidated admin styles (includes admin-pages.css, admin-home.css, admin.css)
 		wp_enqueue_style(
 			'bring_fraktguiden_compiled_styles',
-			plugins_url('bring-fraktguiden-for-woocommerce/assets/css/compiled-styles.css'),
+			plugins_url('bring-fraktguiden-for-woocommerce/build/css/admin.css'),
 			[],
 			Bring_Fraktguiden::VERSION . '.' . time()
 		);

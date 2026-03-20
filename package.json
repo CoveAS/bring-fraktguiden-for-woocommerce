@@ -3,7 +3,7 @@
   "description": "Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no",
   "main": "vite.config.js",
   "scripts": {
-    "clean": "rm -rf assets/js/bring-fraktguiden-settings.js assets/js/bring-fraktguiden-checkout.js assets/js/shared assets/css/compiled-styles.css pro/assets/js/booking.js",
+    "clean": "rm -rf build",
     "compile-php": "php bin/compile-templates.php",
     "test-php-compiler": "php bin/test-compiler.php",
     "dev": "npm run compile-php && npm run clean && vite build --mode development",

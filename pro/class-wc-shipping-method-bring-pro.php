@@ -207,7 +207,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 	public static function load_admin_css() {
 		// Load consolidated admin styles (includes all admin CSS)
 		$plugin_dir = dirname( __DIR__ );
-		$src = plugins_url( basename( $plugin_dir ) . '/assets/css/compiled-styles.css' );
+		$src = plugins_url( basename( $plugin_dir ) . '/build/css/admin.css' );
 		wp_enqueue_style( 'bfg-admin-css', $src, array(), Bring_Fraktguiden::VERSION, false );
 	}
 

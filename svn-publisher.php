@@ -106,11 +106,10 @@ if ( $result ) {
 }
 // Verify build outputs exist
 $required_files = [
-	'assets/js/bring-fraktguiden-settings.js',
-	'assets/js/bring-fraktguiden-checkout.js',
-	'assets/js/shared/vue-runtime.js',
-	'assets/css/compiled-styles.css',
-	'pro/assets/js/booking.js',
+	'build/js/admin.js',
+	'build/js/checkout.js',
+	'build/js/shared/vue-runtime.js',
+	'build/css/admin.css',
 ];
 foreach ( $required_files as $file ) {
 	if ( ! file_exists( $file ) ) {

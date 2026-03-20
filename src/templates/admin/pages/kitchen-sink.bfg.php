@@ -106,6 +106,34 @@
 			</bfg-box.section>
 		</bfg-box>
 
+		<!-- Indicator Dots -->
+		<bfg-box>
+			<bfg-box.header title="Indicator Dots"
+				description="Simple colored dots for health/status indication"></bfg-box.header>
+			<bfg-box.section>
+				<div class="bfgu:flex bfgu:items-center bfgu:gap-4 bfgu:mb-5">
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-2">
+						<bfg-indicator-dot class="bfg-indicator-dot--healthy"></bfg-indicator-dot>
+						<span>Healthy</span>
+					</div>
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-2">
+						<bfg-indicator-dot class="bfg-indicator-dot--warning"></bfg-indicator-dot>
+						<span>Warning</span>
+					</div>
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-2">
+						<bfg-indicator-dot class="bfg-indicator-dot--error"></bfg-indicator-dot>
+						<span>Error</span>
+					</div>
+				</div>
+				<p class="bfg-description"><strong>Usage:</strong>
+					<code>&lt;bfg-indicator-dot class="bfg-indicator-dot--healthy"&gt;&lt;/bfg-indicator-dot&gt;</code>
+				</p>
+				<p class="bfg-description"><strong>Modifiers:</strong> <code>.bfg-indicator-dot--healthy</code>,
+					<code>.bfg-indicator-dot--warning</code>, <code>.bfg-indicator-dot--error</code>
+				</p>
+			</bfg-box.section>
+		</bfg-box>
+
 		<!-- Form Fields -->
 		<bfg-box>
 			<bfg-box.header title="Form Fields"></bfg-box.header>

@@ -20,3 +20,4 @@ node_modules
 
 # Compiled templates (generated from src/templates/)
 /build/templates/
+/build
