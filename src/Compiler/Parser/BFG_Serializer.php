@@ -43,8 +43,11 @@ class BFG_Serializer
         foreach ($attributes as $attr) {
             $html .= ' ' . $attr->name;
             if ($attr->value !== '') {
-                // Escape quotes in attribute values
-                $escapedValue = htmlspecialchars($attr->value, ENT_QUOTES, 'UTF-8');
+                // Only escape double quotes to prevent breaking the attribute syntax
+                // Don't HTML-encode other characters as this is internal processing,
+                // not final HTML output. Encoding here causes issues with nested components
+                // where attribute values would be double-encoded.
+                $escapedValue = str_replace('"', '&quot;', $attr->value);
                 $html .= '="' . $escapedValue . '"';
             }
         }

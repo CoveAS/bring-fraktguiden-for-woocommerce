@@ -55,11 +55,12 @@ class BFGComponentCompiler
         $sourceContent = file_get_contents($sourceFilePath);
 
         // Protect existing PHP tags before HTML parsing
+        // Use escape-proof placeholders that won't be HTML-entity-encoded
         $phpTagMap = [];
         $sourceContent = preg_replace_callback(
             '/<\?php(.*?)\?>/s',
             function($matches) use (&$phpTagMap) {
-                $placeholder = '<!--BFG_PHP_PRESERVE_' . count($phpTagMap) . '-->';
+                $placeholder = '__BFG_PHP_PRESERVE_' . count($phpTagMap) . '__';
                 $phpTagMap[$placeholder] = '<?php' . $matches[1] . '?>';
                 return $placeholder;
             },
@@ -81,15 +82,12 @@ class BFGComponentCompiler
             $output .= $sourceDoc->saveHTML($node);
         }
 
-        // Convert compiler-generated placeholder comments back to PHP tags
-        $output = preg_replace('/<!--BFG_PHP:(.*?)-->/', '<?php $1 ?>', $output);
-
         // Replace dynamic attribute placeholders with PHP code
         foreach ($this->dynamicAttributePlaceholders as $placeholder => $expression) {
             $output = str_replace($placeholder, '<?php echo ' . $expression . '; ?>', $output);
         }
 
-        // Restore original PHP tags
+        // Restore original PHP tags from escape-proof placeholders
         foreach ($phpTagMap as $placeholder => $phpTag) {
             $output = str_replace($placeholder, $phpTag, $output);
         }

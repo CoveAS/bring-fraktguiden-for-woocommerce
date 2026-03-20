@@ -15,11 +15,11 @@ class BFG_PhpCodeGenerator
     }
 
     /**
-     * Create a PHP placeholder comment node
+     * Create a PHP node with the given code
      */
-    public function createPlaceholder(BFG_Document $doc, string $phpCode): BFG_CommentNode
+    public function createPlaceholder(BFG_Document $doc, string $phpCode): BFG_PhpNode
     {
-        return $doc->createComment("BFG_PHP:{$phpCode}");
+        return new BFG_PhpNode("<?php {$phpCode} ?>");
     }
 
     /**
