@@ -1251,6 +1251,49 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     margin-top: 4px;
 }
 
+/* ==========================================================================
+   Access Link
+   ========================================================================== */
+
+.bfg-access-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-access-link:last-child {
+    border-bottom: none;
+}
+
+.bfg-access-link__content {
+    flex-grow: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--bfg-text-main);
+}
+
+.bfg-access-link__content .bfg-step__desc {
+    font-size: 14px;
+    color: var(--bfg-text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.bfg-access-link__btn {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bfg-primary);
+    text-decoration: none;
+}
+
+.bfg-access-link__btn:hover {
+    text-decoration: underline;
+}
+
 .bfg-badge {
     font-size: 14px;
     padding: 8px 16px;
