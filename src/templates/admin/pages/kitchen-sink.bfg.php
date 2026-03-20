@@ -95,8 +95,8 @@
 			<bfg-box.header title="Badges"></bfg-box.header>
 			<bfg-box.section>
 				<div class="bfgu:flex bfgu:gap-4 bfgu:mb-5">
-					<bfg-badge.completed>Completed</bfg-badge.completed>
-					<bfg-badge.in-progress>In Progress</bfg-badge.in-progress>
+					<bfg-badge.completed>Done</bfg-badge.completed>
+					<bfg-badge.in-progress>In progress</bfg-badge.in-progress>
 					<bfg-badge.progress>3 of 5 completed</bfg-badge.progress>
 				</div>
 				<p class="bfg-description"><strong>Classes:</strong> <code>.bfg-badge</code>,
