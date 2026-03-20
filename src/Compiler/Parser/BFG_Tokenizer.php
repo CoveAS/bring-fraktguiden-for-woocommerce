@@ -61,9 +61,10 @@ class BFG_Tokenizer
             // Check for opening tag or self-closing tag
             if ($html[$position] === '<') {
                 // Match opening tag with optional attributes and self-closing slash
-                if (preg_match('/<([a-zA-Z][a-zA-Z0-9:.-]*)((?:\s+[^>]*?)?)(\/)?\s*>/', $html, $matches, 0, $position)) {
+                // Pattern handles quoted attribute values properly (including > inside quotes)
+                if (preg_match('/<([a-zA-Z][a-zA-Z0-9:.-]*)(\s+(?:[^"\'>]|"[^"]*"|\'[^\']*\')*)?(\/)?\s*>/s', $html, $matches, 0, $position)) {
                     $tagName = $matches[1];
-                    $attributesString = trim($matches[2]);
+                    $attributesString = isset($matches[2]) ? trim($matches[2]) : '';
                     $selfClosing = isset($matches[3]) && $matches[3] === '/';
 
                     $tokens[] = [
