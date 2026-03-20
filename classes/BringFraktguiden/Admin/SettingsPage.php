@@ -30,6 +30,24 @@ class SettingsPage
 		add_filter('pre_update_option_bring_fraktguiden_for_woocommerce_settings', [__CLASS__, 'process_settings'], 10, 2);
 	}
 
+	/**
+	 * Run build script in local environment before requiring templates
+	 */
+	private static function maybe_build(): void
+	{
+		// Only run in local environment
+		if (!defined('BRING_ENVIRONMENT') || BRING_ENVIRONMENT !== 'local') {
+			return;
+		}
+
+		$plugin_dir = dirname(__DIR__, 3);
+		$build_script = $plugin_dir . '/bin/build';
+
+		if (file_exists($build_script)) {
+			exec("cd " . escapeshellarg($plugin_dir) . " && ./bin/build 2>&1", $output, $return_code);
+		}
+	}
+
 	public static function update_admin_title($admin_title)
 	{
 		if (
@@ -113,6 +131,8 @@ class SettingsPage
 
 	public static function home_page(): void
 	{
+		self::maybe_build();
+
 		$sub_page = $_GET['sub-page'] ?? '';
 		if ($sub_page === 'service-wizard') {
 			$country_code = WC()->countries?->get_base_country();
@@ -138,6 +158,8 @@ class SettingsPage
 
 	public static function settings_page(): void
 	{
+		self::maybe_build();
+
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
@@ -145,6 +167,8 @@ class SettingsPage
 
 	public static function booking_page(): void
 	{
+		self::maybe_build();
+
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
 
@@ -184,6 +208,8 @@ class SettingsPage
 
 	public static function fallback_page(): void
 	{
+		self::maybe_build();
+
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/fallback-options.php';
@@ -191,6 +217,8 @@ class SettingsPage
 
 	public static function kitchen_sink_page(): void
 	{
+		self::maybe_build();
+
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/kitchen-sink.php';
 	}
 
