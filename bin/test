@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Run BFG component compiler tests
+
+php "$(dirname "$0")/test-compiler.php"

@@ -3,4 +3,4 @@
 	name="demo-number"
 	label="Number Input with Suffix"
 	value="100"
-	suffix="NOK" />
+	suffix="NOK"></bfg-field.number>

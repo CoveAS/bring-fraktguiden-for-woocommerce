@@ -14,7 +14,7 @@ $projectRoot = dirname(__DIR__);
 $componentsDir = $projectRoot . '/src/components';
 
 // Parse command line arguments
-$detailed = in_array('--detailed', $argv);
+$detailed = true;
 
 if (!is_dir($componentsDir)) {
     echo "Error: Components directory not found: {$componentsDir}\n";
@@ -63,6 +63,3 @@ foreach ($components as $componentPath) {
     }
 }
 
-if (!$detailed) {
-    echo "\nUse --detailed flag for more information\n";
-}
