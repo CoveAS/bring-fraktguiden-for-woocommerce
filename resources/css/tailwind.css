@@ -1330,7 +1330,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     height: 80px;
     box-sizing: border-box;
     background: #fff;
-    border: 1px solid var(--bfg-border);
+    border: 1px solid #D1D5DB;
     border-radius: 8px;
     text-decoration: none;
     color: inherit;
@@ -1412,7 +1412,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     padding: 16px 20px;
     box-sizing: border-box;
     background: #ffffff;
-    border: 1px solid #E5E7EB;
+    border: 1px solid #D1D5DB;
     border-radius: 8px;
     transition: all 0.2s;
     text-decoration: none;
@@ -1440,7 +1440,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 /* Pending State - Compact gray row */
 .bfg-step--pending {
     background: #ffffff;
-    border-color: #E5E7EB;
+    border-color: #D1D5DB;
     align-items: center;
 }
 .bfg-step--pending .bfg-step__icon--number {
@@ -1484,7 +1484,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 /* Completed State - Compact gray row with checkmark */
 .bfg-step--completed {
     background: #ffffff;
-    border-color: #E5E7EB;
+    border-color: #D1D5DB;
     align-items: center;
 }
 .bfg-step--completed .bfg-step__icon--completed {
