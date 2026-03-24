@@ -11,9 +11,7 @@
  */
 ?>
 
-<div class="bfg-step bfg-step--pending">
+<a href=":href" class="bfg-step bfg-step--pending">
 	<div class="bfg-step__icon bfg-step__icon--number"><t>number</t></div>
-	<div class="bfg-step__content">
-		<a href=":href" class="bfg-step__link"><slot></slot></a>
-	</div>
-</div>
+	<div class="bfg-step__content"><slot></slot></div>
+</a>

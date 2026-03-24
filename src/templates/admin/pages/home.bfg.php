@@ -34,36 +34,42 @@ use BringFraktguiden\Admin\Step;
 			$nextStepIndex = $showNextStep ? array_search($nextStep, $steps, true) : false;
 			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : 1;
 			?>
-			<div class="bfg-page__header-row">
-				<h2 class="bfg-section-card-title">
-					<t>Get started with Bring shipping</t>
+
+			<!-- Setup Header -->
+			<div class="bfg-setup-header">
+				<h2 class="bfg-setup-header__title">
+					<t>Get Started with Bring shipping</t>
 				</h2>
-				<div class="bfg-progress-badge">
-					<?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted, $stepCount); ?>
-				</div>
-			</div>
+				<p class="bfg-setup-header__subtitle">
+					<t>Complete these steps to configure Bring Shipping</t>
+				</p>
 
-			<div class="bfg-progress-container">
-				<div class="bfg-progress-bar-new">
-					<div class="bfg-progress-bar-fill"
-						style="width: <?php echo ($stepsCompleted / $stepCount) * 100; ?>%;"></div>
-				</div>
-			</div>
-
-			<?php if ($showNextStep): ?>
-				<div class="bfg-active-step-card">
-					<div class="bfg-active-step__icon">
-						<?php echo $currentStepNumber; ?>
+				<div class="bfg-setup-header__stats">
+					<div class="bfg-setup-header__stat">
+						<span class="bfg-setup-header__stat-label">
+							<t>Current Step</t>
+						</span>
+						<span class="bfg-setup-header__stat-value">
+							<?php printf(__('Step %d of %d', 'bring-fraktguiden-for-woocommerce'), $currentStepNumber, $stepCount); ?>
+						</span>
 					</div>
-					<div class="bfg-active-step__content">
-						<h3><?php echo esc_html($nextStep->label); ?></h3>
-						<p><?php echo esc_html($nextStep->description); ?></p>
-						<a class="bfg-btn bfg-btn--primary" href="<?php echo esc_attr($nextStep->action); ?>">
-							<?php echo esc_html($nextStep->actionText); ?>
-						</a>
+					<div class="bfg-setup-header__stat bfg-setup-header__stat--right">
+						<span class="bfg-setup-header__stat-label">
+							<t>Progress</t>
+						</span>
+						<span class="bfg-setup-header__stat-value">
+							<?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted, $stepCount); ?>
+						</span>
 					</div>
 				</div>
-			<?php endif; ?>
+
+				<div class="bfg-progress-container">
+					<div class="bfg-progress-bar-new">
+						<div class="bfg-progress-bar-fill"
+							style="width: <?php echo ($stepsCompleted / $stepCount) * 100; ?>%;"></div>
+					</div>
+				</div>
+			</div>
 
 			<div class="bfg-steps-list">
 				<?php foreach ($steps as $i => $step): ?>
@@ -76,13 +82,16 @@ use BringFraktguiden\Admin\Step;
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
 							<bfg-badge.completed>
-								<t>Completed</t>
+								<t>Done</t>
 							</bfg-badge.completed>
 						</bfg-step.completed>
 					<?php elseif ($isNext): ?>
-						<bfg-step.in-progress :href="$step->action" :number="$i + 1">
+						<bfg-step.in-progress :number="$i + 1">
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
+							<a class="bfg-btn bfg-btn--primary" href="<?php echo esc_attr($step->action); ?>">
+								<?php echo esc_html($step->actionText); ?>
+							</a>
 							<bfg-badge.in-progress>
 								<t>In Progress</t>
 							</bfg-badge.in-progress>

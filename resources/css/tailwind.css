@@ -1419,13 +1419,24 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     color: inherit;
 }
 
+a.bfg-step,
+a.bfg-step:hover,
+a.bfg-step:focus,
+a.bfg-step:active {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
 .bfg-step:hover {
     background: #F9FAFB;
 }
 
+a.bfg-step:focus,
+a.bfg-step:focus-visible,
 .bfg-step:focus-within {
     border-color: var(--bfg-primary);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    outline: none;
 }
 
 .bfg-step__icon {
