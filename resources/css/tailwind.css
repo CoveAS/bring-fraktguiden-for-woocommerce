@@ -131,6 +131,63 @@ input:checked+.bring-toggle-alt::after {
 }
 
 /* ==========================================================================
+   Setup Header (New Design)
+   ========================================================================== */
+
+.bfg-setup-header {
+    margin-bottom: 24px;
+}
+
+.bfg-setup-header__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px !important;
+    line-height: 1.2;
+}
+
+.bfg-setup-header__subtitle {
+    font-size: 16px;
+    color: #6B7280;
+    margin: 0 0 24px !important;
+    font-weight: 400;
+}
+
+.bfg-setup-header__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+.bfg-setup-header__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bfg-setup-header__stat--right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.bfg-setup-header__stat-label {
+    font-size: 13px;
+    color: #6B7280;
+    font-weight: 400;
+}
+
+.bfg-setup-header__stat-value {
+    font-size: 15px;
+    color: #111827;
+    font-weight: 500;
+}
+
+.bfg-setup-header .bfg-progress-container {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
    Active Step Card
    ========================================================================== */
 
@@ -1390,8 +1447,8 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #F3F4F6;
-    border: none;
+    background: #F3F4F6; /* gray-100 - slightly darker than card bg */
+    border: 1px solid #E5E7EB; /* gray-200 */
     color: #6B7280;
     font-size: 14px;
     font-weight: 500;
@@ -1407,18 +1464,14 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     padding: 24px;
     align-items: flex-start;
 }
-.bfg-step--in-progress .bfg-step__icon {
-    width: 40px;
-    height: 40px;
-}
 .bfg-step--in-progress .bfg-step__icon--number {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #2563EB;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
+    background: transparent;
+    border: 1px solid #2563EB;
+    color: #2563EB;
+    font-size: 14px;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -1481,20 +1534,13 @@ a.bfg-step__link:hover,
     outline: none;
 }
 
-/* Description - hidden by default for compact rows */
+/* Description for step rows */
 .bfg-step__desc {
     font-size: 14px;
     color: #6B7280;
     font-weight: 400;
     margin: 2px 0 0 0 !important;
     line-height: 1.4;
-    display: none; /* Hidden in compact rows */
-}
-
-/* Show description in expanded in-progress state */
-.bfg-step--in-progress .bfg-step__desc {
-    display: block;
-    margin-top: 4px !important;
 }
 
 /* Button inside Step - only visible in in-progress */
@@ -1530,8 +1576,8 @@ a.bfg-step__link:hover,
 }
 
 .bfg-step .bfg-badge--in-progress {
-    background-color: #BFDBFE !important;
-    color: #2563EB !important;
+    background-color: #C4D7FF;
+    color: #2563EB;
 }
 
 /* Badge positioning for expanded in-progress state */
