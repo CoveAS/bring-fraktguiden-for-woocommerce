@@ -17,11 +17,6 @@
 		</svg>
 	</div>
 	<div class="bfg-step__content">
-		<if :href>
 		<a href=":href" class="bfg-step__link"><slot></slot></a>
-		</if>
-		<else>
-		<slot></slot>
-		</else>
 	</div>
 </div>

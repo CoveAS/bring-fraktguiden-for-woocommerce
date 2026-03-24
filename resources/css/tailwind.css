@@ -1344,6 +1344,175 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 }
 
 /* ==========================================================================
+   BFG Step Component (New)
+   ========================================================================== */
+
+.bfg-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    min-height: 80px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.bfg-step:hover {
+    background: #F9FAFB;
+}
+
+.bfg-step:focus-within {
+    border-color: var(--bfg-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.bfg-step__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pending State */
+.bfg-step--pending {
+    background: #ffffff;
+    border-color: #E5E7EB;
+}
+.bfg-step--pending .bfg-step__icon--number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #D1D5DB;
+    color: #4B5563;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* In Progress State */
+.bfg-step--in-progress {
+    background: #F4F7FF !important; /* Lighter background to increase contrast with the badge */
+    border-color: #93C5FD !important;
+}
+.bfg-step--in-progress .bfg-step__icon--number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid #2563EB;
+    color: #2563EB;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Completed State */
+.bfg-step--completed {
+    background: #ffffff;
+    border-color: #E5E7EB;
+}
+.bfg-step--completed .bfg-step__icon--completed {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #16A34A; /* Bring green */
+    color: #ffffff; /* Make SVG stroke white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bfg-step--completed .bfg-step__icon--completed svg {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+}
+
+/* Content Area */
+.bfg-step__content {
+    flex-grow: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #111827;
+    display: flex;
+    flex-direction: column;
+    padding-right: 120px; /* Space for the absolute badge */
+}
+
+/* Links inside Step */
+a.bfg-step__link,
+.bfg-step__link {
+    text-decoration: none !important;
+    color: #111827 !important; /* Titles are black in the mockup */
+    display: flex;
+    flex-direction: column;
+}
+
+a.bfg-step__link:hover,
+.bfg-step__link:hover {
+    text-decoration: none !important;
+    color: #111827 !important;
+}
+
+.bfg-step__link:focus,
+.bfg-step__link:focus-visible {
+    outline: none;
+}
+
+/* Description */
+.bfg-step__desc {
+    font-size: 14px;
+    color: #6B7280;
+    font-weight: 400;
+    margin: 4px 0 0 0 !important;
+    line-height: normal;
+}
+
+/* Button inside Step (for Connect API) */
+.bfg-step .bfg-btn {
+    margin-top: 16px;
+    align-self: flex-start;
+}
+
+/* Badges inside Step */
+.bfg-step .bfg-badge {
+    position: absolute;
+    right: 24px;
+    top: 20px; /* Same as the padding-top of the block */
+    margin: 0;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 9999px; /* Pill shape in mockup */
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bfg-step .bfg-badge--completed {
+    background-color: #DCFCE7 !important;
+    color: #16A34A !important;
+}
+
+.bfg-step .bfg-badge--in-progress {
+    background-color: #BFDBFE !important; /* Darkened from #DBEAFE to increase contrast with #EFF6FF card background */
+    color: #2563EB !important;
+}
+
+/* ==========================================================================
    Access Link
    ========================================================================== */
 
@@ -1408,6 +1577,31 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 .bfg-badge--in-progress {
     background-color: var(--bfg-primary-light) !important;
     color: var(--bfg-primary) !important;
+}
+
+/* ==========================================================================
+   Indicator Dot Component (.bfg-indicator-dot)
+   ========================================================================== */
+
+.bfg-indicator-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #9CA3AF;
+    flex-shrink: 0;
+}
+
+.bfg-indicator-dot--healthy {
+    background-color: #16A34A;
+}
+
+.bfg-indicator-dot--warning {
+    background-color: #F59E0B;
+}
+
+.bfg-indicator-dot--error {
+    background-color: #dc2626;
 }
 
 /* ==========================================================================
