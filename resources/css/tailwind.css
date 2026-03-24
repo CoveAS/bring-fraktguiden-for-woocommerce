@@ -1352,8 +1352,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    padding: 20px 24px;
-    min-height: 80px;
+    padding: 16px 20px;
     box-sizing: border-box;
     background: #ffffff;
     border: 1px solid #E5E7EB;
@@ -1374,25 +1373,26 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 
 .bfg-step__icon {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Pending State */
+/* Pending State - Compact gray row */
 .bfg-step--pending {
     background: #ffffff;
     border-color: #E5E7EB;
+    align-items: center;
 }
 .bfg-step--pending .bfg-step__icon--number {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid #D1D5DB;
-    color: #4B5563;
+    background: #F3F4F6;
+    border: none;
+    color: #6B7280;
     font-size: 14px;
     font-weight: 500;
     display: flex;
@@ -1400,62 +1400,72 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
     justify-content: center;
 }
 
-/* In Progress State */
+/* In Progress State - Expanded active card with button */
 .bfg-step--in-progress {
-    background: #F4F7FF !important; /* Lighter background to increase contrast with the badge */
+    background: #EFF6FF !important;
     border-color: #93C5FD !important;
+    padding: 24px;
+    align-items: flex-start;
+}
+.bfg-step--in-progress .bfg-step__icon {
+    width: 40px;
+    height: 40px;
 }
 .bfg-step--in-progress .bfg-step__icon--number {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: transparent;
-    border: 1px solid #2563EB;
-    color: #2563EB;
-    font-size: 14px;
-    font-weight: 500;
+    background: #2563EB;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.bfg-step--in-progress:hover {
+    background: #DBEAFE !important;
+}
 
-/* Completed State */
+/* Completed State - Compact gray row with checkmark */
 .bfg-step--completed {
     background: #ffffff;
     border-color: #E5E7EB;
+    align-items: center;
 }
 .bfg-step--completed .bfg-step__icon--completed {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #16A34A; /* Bring green */
-    color: #ffffff; /* Make SVG stroke white */
+    background: #16A34A;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .bfg-step--completed .bfg-step__icon--completed svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     stroke: #ffffff;
 }
 
 /* Content Area */
 .bfg-step__content {
     flex-grow: 1;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     color: #111827;
     display: flex;
     flex-direction: column;
-    padding-right: 120px; /* Space for the absolute badge */
+    padding-right: 100px; /* Space for the absolute badge */
 }
 
 /* Links inside Step */
 a.bfg-step__link,
 .bfg-step__link {
     text-decoration: none !important;
-    color: #111827 !important; /* Titles are black in the mockup */
+    color: #111827 !important;
     display: flex;
     flex-direction: column;
 }
@@ -1471,17 +1481,28 @@ a.bfg-step__link:hover,
     outline: none;
 }
 
-/* Description */
+/* Description - hidden by default for compact rows */
 .bfg-step__desc {
     font-size: 14px;
     color: #6B7280;
     font-weight: 400;
-    margin: 4px 0 0 0 !important;
-    line-height: normal;
+    margin: 2px 0 0 0 !important;
+    line-height: 1.4;
+    display: none; /* Hidden in compact rows */
 }
 
-/* Button inside Step (for Connect API) */
+/* Show description in expanded in-progress state */
+.bfg-step--in-progress .bfg-step__desc {
+    display: block;
+    margin-top: 4px !important;
+}
+
+/* Button inside Step - only visible in in-progress */
 .bfg-step .bfg-btn {
+    display: none;
+}
+.bfg-step--in-progress .bfg-btn {
+    display: inline-flex;
     margin-top: 16px;
     align-self: flex-start;
 }
@@ -1489,13 +1510,14 @@ a.bfg-step__link:hover,
 /* Badges inside Step */
 .bfg-step .bfg-badge {
     position: absolute;
-    right: 24px;
-    top: 20px; /* Same as the padding-top of the block */
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     margin: 0;
-    height: 32px;
-    padding: 0 16px;
-    border-radius: 9999px; /* Pill shape in mockup */
-    font-size: 14px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 9999px;
+    font-size: 13px;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
@@ -1508,8 +1530,14 @@ a.bfg-step__link:hover,
 }
 
 .bfg-step .bfg-badge--in-progress {
-    background-color: #BFDBFE !important; /* Darkened from #DBEAFE to increase contrast with #EFF6FF card background */
+    background-color: #BFDBFE !important;
     color: #2563EB !important;
+}
+
+/* Badge positioning for expanded in-progress state */
+.bfg-step--in-progress .bfg-badge {
+    top: 24px;
+    transform: none;
 }
 
 /* ==========================================================================
