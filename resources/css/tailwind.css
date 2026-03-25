@@ -507,7 +507,7 @@ input:checked+.bring-toggle-alt::after {
 
     .bfg-pro-status-card__item + .bfg-pro-status-card__item {
         border-left: none;
-        border-top: 1px solid #E5E7EB;
+        border-top: none;
     }
 
     .bfg-pro-status-card__label {
@@ -2193,7 +2193,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     justify-content: flex-start;
     gap: 0;
     background: #fff;
-    border: 1px solid #E5E7EB;
+    border: none;
     border-radius: 12px;
     padding: 0;
     margin-bottom: 32px;
@@ -2209,14 +2209,14 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-pro-status-card__item + .bfg-pro-status-card__item {
-    border-left: 1px solid #E5E7EB;
+    border-left: none;
 }
 
 .bfg-pro-status-card__label {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #6B7280;
@@ -2230,8 +2230,8 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-pro-status-card__value {
-    font-size: var(--bfg-text-level-3);
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     color: #111827;
     margin-bottom: 2px;
 }
@@ -2685,7 +2685,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
     .bfg-pro-status-card__item + .bfg-pro-status-card__item {
         border-left: none;
-        border-top: 1px solid #E5E7EB;
+        border-top: none;
     }
 
     .bfg-pro-status-card__label {
