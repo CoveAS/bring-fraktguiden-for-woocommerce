@@ -2110,24 +2110,6 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     padding: 48px;
 }
 
-.bfg-pro-teaser__content .bfg-pro-status-card {
-    margin-bottom: 40px;
-    border: none !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
-
-.bfg-pro-teaser__content .bfg-pro-status-card__item {
-    padding-left: 0;
-    padding-right: 24px;
-}
-
-.bfg-pro-teaser__content .bfg-pro-status-card__item + .bfg-pro-status-card__item {
-    border-left: none !important;
-    padding-left: 24px;
-}
-
 /* PRO Features List */
 .bfg-pro-features-list {
     list-style: none;
@@ -2262,6 +2244,25 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-pro-status-card__value--success {
     color: #16A34A;
+}
+
+/* Remove borders from status card when inside pro teaser content */
+.bfg-pro-teaser__content .bfg-pro-status-card {
+    margin-bottom: 40px;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.bfg-pro-teaser__content .bfg-pro-status-card__item {
+    padding-left: 0;
+    padding-right: 24px;
+}
+
+.bfg-pro-teaser__content .bfg-pro-status-card__item + .bfg-pro-status-card__item {
+    border-left: none !important;
+    padding-left: 24px;
 }
 
 .bfg-pro-features-grid--compact {
