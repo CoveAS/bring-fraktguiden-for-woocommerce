@@ -16,13 +16,15 @@
 ?>
 
 <div class="bfg-field bfg-field--checkbox-box">
-	<label>
-		<input type="checkbox" name=":name" value=":value">
-		<div class="bfg-checkbox-content">
-			<span class="bfg-checkbox-title"><t>title</t></span>
-			<if :description>
-			<p class="bfg-checkbox-desc"><t>description</t></p>
-			</if>
-		</div>
-	</label>
+	<div class="bfg-input bfg-input--checkbox">
+		<label>
+			<input type="checkbox" name=":name" value=":value">
+			<div class="bfg-checkbox-content">
+				<span class="bfg-checkbox-title"><t>title</t></span>
+				<if :description>
+				<p class="bfg-checkbox-desc"><t>description</t></p>
+				</if>
+			</div>
+		</label>
+	</div>
 </div>
