@@ -2063,16 +2063,13 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     padding: 0;
     overflow: hidden;
     background: #fff;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .bfg-pro-teaser__header {
     background: linear-gradient(135deg, #F0F4FF 0%, #E9EFFF 100%);
     padding: 40px 48px;
     text-align: left;
-    border-bottom: 1px solid #D7E0FF;
+    border-bottom: none;
 }
 
 .bfg-pro-teaser__title-row {
@@ -2124,6 +2121,10 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-pro-teaser__content .bfg-pro-status-card__item {
     padding-left: 0;
     padding-right: 0;
+}
+
+.bfg-pro-teaser__content .bfg-pro-status-card__item + .bfg-pro-status-card__item {
+    border-left: none;
 }
 
 /* PRO Features List */
