@@ -55,14 +55,14 @@
 						<tr style="border-bottom: 1px solid var(--bfg-border);">
 							<td style="padding: 16px 16px 16px 0;"><code>48px</code></td>
 							<td style="padding: 16px;"><code>56px</code></td>
-							<td style="padding: 16px;"><code>700</code> Bold</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 48px; line-height: 56px; font-weight: 700;">Display</td>
+							<td style="padding: 16px;"><code>600</code> Semibold</td>
+							<td style="padding: 16px 0 16px 16px; font-size: 48px; line-height: 56px; font-weight: 600;">Display</td>
 						</tr>
 						<tr style="border-bottom: 1px solid var(--bfg-border);">
 							<td style="padding: 16px 16px 16px 0;"><code>32px</code></td>
 							<td style="padding: 16px;"><code>40px</code></td>
-							<td style="padding: 16px;"><code>700</code> Bold</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 32px; line-height: 40px; font-weight: 700;">Heading XL</td>
+							<td style="padding: 16px;"><code>600</code> Semibold</td>
+							<td style="padding: 16px 0 16px 16px; font-size: 32px; line-height: 40px; font-weight: 600;">Heading XL</td>
 						</tr>
 						<tr style="border-bottom: 1px solid var(--bfg-border);">
 							<td style="padding: 16px 16px 16px 0;"><code>28px</code></td>
@@ -123,11 +123,11 @@
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">600</code>
-						<span style="font-size: 20px; font-weight: 600;">Semibold — Field group titles, emphasis</span>
+						<span style="font-size: 20px; font-weight: 600;">Semibold — Display headings, field group titles</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">700</code>
-						<span style="font-size: 20px; font-weight: 700;">Bold — Display headings, strong emphasis</span>
+						<span style="font-size: 20px; font-weight: 700;">Bold — Strong emphasis</span>
 					</div>
 				</div>
 
