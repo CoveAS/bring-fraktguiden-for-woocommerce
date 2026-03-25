@@ -1498,6 +1498,20 @@ a.bfg-step:focus-visible,
     background: #DBEAFE !important;
 }
 
+/* Make the entire in-progress card clickable via stretched link */
+.bfg-step--in-progress .bfg-step__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Ensure button stays clickable above the stretched link */
+.bfg-step--in-progress .bfg-btn {
+    position: relative;
+    z-index: 1;
+}
+
 /* Completed State - Compact gray row with checkmark */
 .bfg-step--completed {
     background: #ffffff;
@@ -1548,7 +1562,15 @@ a.bfg-step__link:hover,
 
 .bfg-step__link:focus,
 .bfg-step__link:focus-visible {
-    outline: none;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* In-progress card focus state - match other cards */
+.bfg-step--in-progress:focus-within {
+    border-color: var(--bfg-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
 /* Description for step rows */
@@ -1595,6 +1617,10 @@ a.bfg-step__link:hover,
 .bfg-step .bfg-badge--in-progress {
     background-color: #C4D7FF;
     color: #2563EB;
+}
+
+.bfg-step--in-progress:hover .bfg-badge--in-progress {
+    background-color: #93C5FD;
 }
 
 /* Badge positioning for expanded in-progress state */
