@@ -173,7 +173,7 @@
 				<bfg-field.checkbox name="demo-checkbox-1" value="1" title="Enable this feature"
 					description="This is a checkbox with a description below the title"></bfg-field.checkbox>
 
-				<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checked checkbox" checked></bfg-field.checkbox>
+				<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checked checkbox with description" description="Checked checkboxes can also have descriptions" checked></bfg-field.checkbox>
 
 				<p class="bfg-description"><strong>Field Classes:</strong> <code>.bfg-field</code>,
 					<code>.bfg-field--checkbox-box</code>, <code>.bfg-input</code>, <code>.bfg-input--number</code>,
