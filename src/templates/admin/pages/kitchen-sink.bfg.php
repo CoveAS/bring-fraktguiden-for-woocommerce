@@ -291,8 +291,8 @@
 				</bfg-status-card>
 
 				<bfg-status-card>
-					<bfg-status-item.lock label="STATUS" value="Trial" detail=""></bfg-status-item.lock>
-					<bfg-status-item.calendar label="DAYS REMAINING" value="7" detail="Expires April 1, 2026"></bfg-status-item.calendar>
+					<bfg-status-item.lock label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-status-item.lock>
+					<bfg-status-item.calendar label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-status-item.calendar>
 				</bfg-status-card>
 			</bfg-box.section>
 		</bfg-box>
