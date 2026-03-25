@@ -289,7 +289,7 @@
 					<bfg-t>Pro Status Card (Active)</bfg-t>
 				</h3>
 
-				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser-v2--active">
+				<div class="bfg-pro-teaser-v2 bfg-pro-teaser-v2--active">
 					<!-- Header -->
 					<div class="bfg-pro-teaser__header">
 						<div class="bfg-pro-teaser__title-row">
