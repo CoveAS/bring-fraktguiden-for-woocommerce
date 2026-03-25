@@ -1495,7 +1495,7 @@ a.bfg-step:focus-visible,
     justify-content: center;
 }
 .bfg-step--in-progress:hover {
-    background: #DBEAFE !important;
+    background: color-mix(in srgb, #EFF6FF 97%, #2563EB) !important;
 }
 
 /* Make the entire in-progress card clickable via stretched link */
@@ -1614,15 +1614,6 @@ a.bfg-step__link:hover,
     color: #16A34A !important;
 }
 
-.bfg-step .bfg-badge--in-progress {
-    background-color: #C4D7FF;
-    color: #2563EB;
-}
-
-.bfg-step--in-progress:hover .bfg-badge--in-progress {
-    background-color: #93C5FD;
-}
-
 /* Badge positioning for expanded in-progress state */
 .bfg-step--in-progress .bfg-badge {
     top: 24px;
@@ -1692,8 +1683,8 @@ a.bfg-step__link:hover,
 }
 
 .bfg-badge--in-progress {
-    background-color: var(--bfg-primary-light) !important;
-    color: var(--bfg-primary) !important;
+    background-color: color-mix(in srgb, #2563EB 15%, white);
+    color: var(--bfg-primary);
 }
 
 /* ==========================================================================
