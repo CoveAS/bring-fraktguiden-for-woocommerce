@@ -283,16 +283,83 @@
 
 		<!-- Status Cards -->
 		<bfg-box>
-			<bfg-box.header title="Status Cards"></bfg-box.header>
+			<bfg-box.header title="Status Cards" description="Status display for Pro licenses and trials"></bfg-box.header>
 			<bfg-box.section>
-				<bfg-status-card type="default">
-					<bfg-status-item label="Status" value="Active" type="success"></bfg-status-item>
-					<bfg-status-item label="License Type" value="PRO License" type="default"></bfg-status-item>
-				</bfg-status-card>
-				<br>
-				<bfg-status-card type="trial">
-					<bfg-status-item label="Status" value="Trial" type="trial"></bfg-status-item>
-					<bfg-status-item label="Days Remaining" value="7" type="default"></bfg-status-item>
+				<h3 class="bfg-field-group-title">
+					<bfg-t>Pro Status Card (Active)</bfg-t>
+				</h3>
+
+				<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser-v2--active">
+					<!-- Header -->
+					<div class="bfg-pro-teaser__header">
+						<div class="bfg-pro-teaser__title-row">
+							<h2 class="bfg-pro-teaser__title"><bfg-t>Bring Pro</bfg-t></h2>
+							<span class="bfg-badge bfg-badge--active"><bfg-t>Active</bfg-t></span>
+						</div>
+						<p class="bfg-pro-teaser__subtitle">
+							<bfg-t>Thank you for upgrading! Your Pro features are now active and ready to use.</bfg-t>
+						</p>
+					</div>
+
+					<div class="bfg-pro-teaser__content">
+						<bfg-status-card>
+							<bfg-status-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-status-item.lock>
+							<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
+						</bfg-status-card>
+
+						<!-- Feature List -->
+						<ul class="bfg-pro-features-list">
+							<li>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+									<circle cx="12" cy="12" r="10" fill="#16A34A"/>
+									<path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<bfg-t>MyBring Booking</bfg-t>
+							</li>
+							<li>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+									<circle cx="12" cy="12" r="10" fill="#16A34A"/>
+									<path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<bfg-t>Free shipping threshold</bfg-t>
+							</li>
+							<li>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+									<circle cx="12" cy="12" r="10" fill="#16A34A"/>
+									<path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<bfg-t>Multiple customers numbers</bfg-t>
+							</li>
+							<li>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+									<circle cx="12" cy="12" r="10" fill="#16A34A"/>
+									<path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<bfg-t>Service fallback pricing</bfg-t>
+							</li>
+						</ul>
+
+						<!-- Footer -->
+						<div class="bfg-pro-teaser__footer">
+							<div class="bfg-pro-teaser__divider">
+								<span><bfg-t>Already have a license?</bfg-t></span>
+							</div>
+							<a href="#" class="bfg-pro-teaser__link bfg-pro-teaser__link--primary">
+								<bfg-t>Click here to activate your license</bfg-t>
+							</a>
+							<p class="bfg-pro-teaser__footer-text">
+								<bfg-t>Don't have a license?</bfg-t> <a href="#"><bfg-t>Buy one here</bfg-t></a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<h3 class="bfg-field-group-title bfgu:mt-8">
+					<bfg-t>Trial Status Card</bfg-t>
+				</h3>
+				<bfg-status-card class="bfg-pro-status-card--trial">
+					<bfg-status-item.lock label="STATUS" value="Trial" detail=""></bfg-status-item.lock>
+					<bfg-status-item.calendar label="DAYS REMAINING" value="7" detail="Expires April 1, 2026"></bfg-status-item.calendar>
 				</bfg-status-card>
 			</bfg-box.section>
 		</bfg-box>
@@ -322,31 +389,6 @@
 			</bfg-box.section>
 		</bfg-box>
 
-		<!-- PRO Teaser Components -->
-		<bfg-box>
-			<bfg-box.header title="PRO Teaser Components"></bfg-box.header>
-			<bfg-box.section>
-				<div class="bfg-box bfg-pro-teaser-v2">
-					<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--success">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-							<polyline points="22 4 12 14.01 9 11.01"></polyline>
-						</svg>
-					</div>
-					<h2 class="bfg-pro-teaser__title">
-						<bfg-t>PRO Teaser Example</bfg-t>
-					</h2>
-					<p class="bfg-pro-teaser__subtitle">
-						<bfg-t>Example subtitle text for PRO teaser boxes</bfg-t>
-					</p>
-				</div>
-				<p class="bfg-description"><strong>Classes:</strong> <code>.bfg-pro-teaser-v2</code>,
-					<code>.bfg-pro-teaser__shield</code>, <code>.bfg-pro-teaser__title</code>,
-					<code>.bfg-pro-teaser__subtitle</code>
-				</p>
-			</bfg-box.section>
-		</bfg-box>
 
 		<!-- Active Step Card -->
 		<bfg-box>

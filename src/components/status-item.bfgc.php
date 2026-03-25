@@ -5,6 +5,10 @@
  * Displays a single status item with a label and value.
  * Used within a status-card component.
  *
+ * For items with icons, use the variant components:
+ * - <bfg-status-item.lock> for lock icon
+ * - <bfg-status-item.calendar> for calendar icon
+ *
  * @param string $label The label text
  * @param string $value The value text
  *
