@@ -206,17 +206,6 @@
 			</bfg-box.section>
 		</bfg-box>
 
-		<!-- Progress Bar -->
-		<bfg-box>
-			<bfg-box.header title="Progress Bar"></bfg-box.header>
-			<bfg-box.section>
-				<bfg-progress current="3" total="5" label="3 of 5 completed"></bfg-progress>
-				<p class="bfg-description"><strong>Usage:</strong>
-					<code>&lt;bfg-progress current="3" total="5" label="..." /&gt;</code>
-				</p>
-			</bfg-box.section>
-		</bfg-box>
-
 		<!-- Step Row -->
 		<bfg-box>
 			<bfg-box.header title="Step Rows"></bfg-box.header>
