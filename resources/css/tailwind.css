@@ -2112,19 +2112,20 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-pro-teaser__content .bfg-pro-status-card {
     margin-bottom: 40px;
-    border: none;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
 }
 
 .bfg-pro-teaser__content .bfg-pro-status-card__item {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 24px;
 }
 
 .bfg-pro-teaser__content .bfg-pro-status-card__item + .bfg-pro-status-card__item {
-    border-left: none;
+    border-left: none !important;
+    padding-left: 24px;
 }
 
 /* PRO Features List */
