@@ -1217,6 +1217,18 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     padding-right: 40px !important;
 }
 
+/* Prevent WordPress admin hover effects on inputs */
+.bfg-admin-page select:hover,
+.bfg-admin-page input[type="text"]:hover,
+.bfg-admin-page input[type="number"]:hover,
+.bfg-admin-page input[type="url"]:hover,
+.bfg-admin-page input[type="tel"]:hover,
+.bfg-admin-page input[type="email"]:hover,
+.bfg-admin-page input[type="time"]:hover {
+    color: var(--bfg-text-main) !important;
+    border-color: var(--bfg-border) !important;
+}
+
 [class*="bfg-admin-page"] input:active,
 [class*="bfg-admin-page"] select:active,
 [class*="bfg-admin-page"] textarea:active {
@@ -1941,6 +1953,21 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-field .bfg-description:last-child {
     margin-bottom: 0 !important;
+}
+
+/* Code element styles - prevent link-like hover effects */
+.bfg-admin-page code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    color: var(--bfg-text-main);
+}
+
+.bfg-admin-page code:hover {
+    color: var(--bfg-text-main);
+    background: #F3F4F6;
 }
 
 .bfg-admin-page a {
