@@ -67,26 +67,33 @@
 		<bfg-box>
 			<bfg-box.header title="Buttons"></bfg-box.header>
 			<bfg-box.section>
-				<div class="bfgu:flex bfgu:flex-wrap bfgu:gap-4 bfgu:mb-5">
+				<p class="bfg-description bfgu:mb-4"><strong>Small</strong> <code>.bfg-btn--sm</code></p>
+				<div class="bfgu:flex bfgu:flex-wrap bfgu:items-center bfgu:gap-4 bfgu:mb-5">
+					<button class="bfg-btn bfg-btn--primary bfg-btn--sm"><bfg-t>Primary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--secondary bfg-btn--sm"><bfg-t>Secondary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--outline bfg-btn--sm"><bfg-t>Outline</bfg-t></button>
+					<button class="bfg-btn bfg-btn--ghost bfg-btn--sm"><bfg-t>Ghost</bfg-t></button>
+				</div>
+				<p class="bfg-description bfgu:mb-4"><strong>Medium</strong> (default)</p>
+				<div class="bfgu:flex bfgu:flex-wrap bfgu:items-center bfgu:gap-4 bfgu:mb-5">
 					<button class="bfg-btn bfg-btn--primary"><bfg-t>Primary</bfg-t></button>
 					<button class="bfg-btn bfg-btn--secondary"><bfg-t>Secondary</bfg-t></button>
 					<button class="bfg-btn bfg-btn--outline"><bfg-t>Outline</bfg-t></button>
 					<button class="bfg-btn bfg-btn--ghost"><bfg-t>Ghost</bfg-t></button>
 				</div>
-				<div class="bfgu:flex bfgu:items-end bfgu:gap-4 bfgu:mb-5">
-					<button class="bfg-btn bfg-btn--primary bfg-btn--sm"><bfg-t>Small Button</bfg-t></button>
-					<button class="bfg-btn bfg-btn--primary"><bfg-t>Medium Button</bfg-t></button>
-					<button class="bfg-btn bfg-btn--primary bfg-btn--lg"><bfg-t>Large Button</bfg-t></button>
+				<p class="bfg-description bfgu:mb-4"><strong>Large</strong> <code>.bfg-btn--lg</code></p>
+				<div class="bfgu:flex bfgu:flex-wrap bfgu:items-center bfgu:gap-4 bfgu:mb-5">
+					<button class="bfg-btn bfg-btn--primary bfg-btn--lg"><bfg-t>Primary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--secondary bfg-btn--lg"><bfg-t>Secondary</bfg-t></button>
+					<button class="bfg-btn bfg-btn--outline bfg-btn--lg"><bfg-t>Outline</bfg-t></button>
+					<button class="bfg-btn bfg-btn--ghost bfg-btn--lg"><bfg-t>Ghost</bfg-t></button>
 				</div>
+				<p class="bfg-description bfgu:mb-4"><strong>Full Width</strong> <code>.bfg-btn--full-width</code></p>
 				<div class="bfgu:flex bfgu:gap-4">
 					<button class="bfg-btn bfg-btn--primary bfg-btn--full-width">
 						<bfg-t>Full Width Button</bfg-t>
 					</button>
 				</div>
-				<p class="bfg-description bfgu:mt-4"><strong>Classes:</strong> <code>.bfg-btn</code>,
-					<code>.bfg-btn--primary</code>, <code>.bfg-btn--secondary</code>, <code>.bfg-btn--outline</code>, <code>.bfg-btn--ghost</code>, <code>.bfg-btn--sm</code>, <code>.bfg-btn--lg</code>,
-					<code>.bfg-btn--full-width</code>
-				</p>
 			</bfg-box.section>
 		</bfg-box>
 
