@@ -323,24 +323,6 @@
 		</bfg-box>
 
 
-		<!-- Active Step Card -->
-		<bfg-box>
-			<bfg-box.header title="Active Step Card"></bfg-box.header>
-			<bfg-box.section>
-				<div class="bfg-active-step-card">
-					<div class="bfg-active-step__icon">1</div>
-					<div class="bfg-active-step__content">
-						<h3><bfg-t>Next Step Title</bfg-t></h3>
-						<p><bfg-t>Description of the next step to complete</bfg-t>
-						</p>
-						<a class="bfg-btn bfg-btn--primary" href="#">
-							<bfg-t>Take Action</bfg-t>
-						</a>
-					</div>
-				</div>
-			</bfg-box.section>
-		</bfg-box>
-
 		<!-- Color & Style Reference -->
 		<bfg-box>
 			<bfg-box.header title="Component CSS Reference"></bfg-box.header>
