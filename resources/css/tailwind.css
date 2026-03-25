@@ -1477,7 +1477,7 @@ a.bfg-step:focus-visible,
 /* In Progress State - Expanded active card with button */
 .bfg-step--in-progress {
     background: #EFF6FF !important;
-    border-color: #93C5FD !important;
+    border-color: #BFDBFE !important;
     padding: 24px;
     align-items: flex-start;
 }

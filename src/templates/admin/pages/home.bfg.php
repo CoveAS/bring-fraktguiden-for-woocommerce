@@ -89,7 +89,7 @@ use BringFraktguiden\Admin\Step;
 						<bfg-step.in-progress :number="$i + 1">
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
-							<a class="bfg-btn bfg-btn--primary" href="<?php echo esc_attr($step->action); ?>">
+							<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_attr($step->action); ?>">
 								<?php echo esc_html($step->actionText); ?>
 							</a>
 							<bfg-badge.in-progress>

@@ -232,7 +232,7 @@
 					<bfg-step.in-progress number="3">
 						<bfg-t>API conversion</bfg-t>
 						<bfg-step-desc><bfg-t>Connect your Bring API credentials</bfg-t></bfg-step-desc>
-						<button class="bfg-btn bfg-btn--primary"><bfg-t>Connect API</bfg-t></button>
+						<button class="bfg-btn bfg-btn--primary bfg-btn--sm"><bfg-t>Connect API</bfg-t></button>
 						<bfg-badge.in-progress><t>In progress</t></bfg-badge.in-progress>
 					</bfg-step.in-progress>
 
