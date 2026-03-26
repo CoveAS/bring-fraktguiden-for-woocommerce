@@ -1,25 +1,23 @@
 <?php
 /**
- * BFG Status Item with Calendar Icon
+ * BFG Subscription Item with Lock Icon
  *
- * Status item with calendar icon, label, value, and optional detail.
+ * Subscription item with lock icon for displaying license status.
  *
  * @param string $label The label text (displayed uppercase)
  * @param string $value The value text
  * @param string $detail Optional detail text below value
  *
  * Usage:
- * <bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
+ * <bfg-subscription-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-subscription-item.lock>
  */
 ?>
 
 <div class="bfg-pro-status-card__item">
 	<div class="bfg-pro-status-card__label">
 		<svg class="bfg-pro-status-card__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-			<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-			<line x1="16" y1="2" x2="16" y2="6"></line>
-			<line x1="8" y1="2" x2="8" y2="6"></line>
-			<line x1="3" y1="10" x2="21" y2="10"></line>
+			<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+			<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
 		</svg>
 		<t>label</t>
 	</div>

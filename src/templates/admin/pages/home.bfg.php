@@ -136,10 +136,10 @@ use BringFraktguiden\Admin\Step;
 					<t>You have full access to all PRO features. Thank you for your support!</t>
 				</p>
 
-				<bfg-status-card class="bfg-pro-status-card--success">
-					<bfg-status-item label="Status" value="Active"></bfg-status-item>
-					<bfg-status-item label="License Type" value="PRO License"></bfg-status-item>
-				</bfg-status-card>
+				<bfg-subscription-info class="bfg-pro-status-card--success">
+					<bfg-subscription-item label="Status" value="Active"></bfg-subscription-item>
+					<bfg-subscription-item label="License Type" value="PRO License"></bfg-subscription-item>
+				</bfg-subscription-info>
 
 				<ul class="bfg-pro-features-grid bfg-pro-features-grid--compact">
 					<li>
@@ -192,10 +192,10 @@ use BringFraktguiden\Admin\Step;
 					<t>Your trial has ended. Purchase a license to continue using PRO features.</t>
 				</p>
 
-				<bfg-status-card class="bfg-pro-status-card--expired">
-					<bfg-status-item label="Status" value="Expired"></bfg-status-item>
-					<bfg-status-item label="PRO Features" value="Disabled"></bfg-status-item>
-				</bfg-status-card>
+				<bfg-subscription-info class="bfg-pro-status-card--expired">
+					<bfg-subscription-item label="Status" value="Expired"></bfg-subscription-item>
+					<bfg-subscription-item label="PRO Features" value="Disabled"></bfg-subscription-item>
+				</bfg-subscription-info>
 
 				<div class="bfg-pro-footer">
 					<a href="https://bringfraktguiden.no/" target="_blank"
@@ -226,10 +226,10 @@ use BringFraktguiden\Admin\Step;
 					); ?>
 				</p>
 
-				<bfg-status-card class="bfg-pro-status-card--trial">
-					<bfg-status-item label="Status" value="Trial"></bfg-status-item>
-					<bfg-status-item label="Days Remaining" :value="max(0, $days_remaining)"></bfg-status-item>
-				</bfg-status-card>
+				<bfg-subscription-info class="bfg-pro-status-card--trial">
+					<bfg-subscription-item label="Status" value="Trial"></bfg-subscription-item>
+					<bfg-subscription-item label="Days Remaining" :value="max(0, $days_remaining)"></bfg-subscription-item>
+				</bfg-subscription-info>
 
 				<div class="bfg-pro-footer">
 					<a href="https://bringfraktguiden.no/" target="_blank"
@@ -258,10 +258,10 @@ use BringFraktguiden\Admin\Step;
 					<t>PRO features are enabled for testing. A license is required for production use.</t>
 				</p>
 
-				<bfg-status-card class="bfg-pro-status-card--test">
-					<bfg-status-item label="Environment" value="Test Site"></bfg-status-item>
-					<bfg-status-item label="PRO Features" value="Enabled"></bfg-status-item>
-				</bfg-status-card>
+				<bfg-subscription-info class="bfg-pro-status-card--test">
+					<bfg-subscription-item label="Environment" value="Test Site"></bfg-subscription-item>
+					<bfg-subscription-item label="PRO Features" value="Enabled"></bfg-subscription-item>
+				</bfg-subscription-info>
 
 				<div class="bfg-pro-footer">
 					<h4 class="bfg-pro-footer__title">

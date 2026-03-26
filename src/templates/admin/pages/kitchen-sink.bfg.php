@@ -418,18 +418,22 @@
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Active License</bfg-t>
 				</h3>
-				<bfg-status-card style="margin-bottom: 0">
-					<bfg-status-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-status-item.lock>
-					<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
-				</bfg-status-card>
+				<div style="margin-bottom: 0" class="bfg-pro-status-card-wrapper">
+					<bfg-subscription-info>
+						<bfg-subscription-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-subscription-item.lock>
+						<bfg-subscription-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-subscription-item.calendar>
+					</bfg-subscription-info>
+				</div>
 
 				<h3 class="bfg-field-group-title bfgu:mt-8">
 					<bfg-t>Trial License</bfg-t>
 				</h3>
-				<bfg-status-card style="margin-bottom: 0">
-					<bfg-status-item.lock label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-status-item.lock>
-					<bfg-status-item.calendar label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-status-item.calendar>
-				</bfg-status-card>
+				<div style="margin-bottom: 0" class="bfg-pro-status-card-wrapper">
+					<bfg-subscription-info>
+						<bfg-subscription-item.lock label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-subscription-item.lock>
+						<bfg-subscription-item.calendar label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-subscription-item.calendar>
+					</bfg-subscription-info>
+				</div>
 			</bfg-box.section>
 		</bfg-box>
 
