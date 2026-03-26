@@ -442,12 +442,14 @@
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Regular Feature List</bfg-t>
 				</h3>
-				<bfg-feature-list>
-					<li>MyBring Booking</li>
-					<li>Fixed shipping prices</li>
-					<li>Free shipping threshold</li>
-					<li>Pick-up points</li>
-				</bfg-feature-list>
+				<div class="bfgu:mb-8">
+					<bfg-feature-list>
+						<li>MyBring Booking</li>
+						<li>Fixed shipping prices</li>
+						<li>Free shipping threshold</li>
+						<li>Pick-up points</li>
+					</bfg-feature-list>
+				</div>
 
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Compact Feature List</bfg-t>
