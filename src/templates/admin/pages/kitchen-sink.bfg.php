@@ -423,7 +423,7 @@
 					<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
 				</bfg-status-card>
 
-				<h3 class="bfg-field-group-title bfgu:mt-8">
+				<h3 class="bfg-field-group-title">
 					<bfg-t>Trial License</bfg-t>
 				</h3>
 				<bfg-status-card>
