@@ -161,13 +161,12 @@
 		<bfg-box>
 			<bfg-box.header title="Notice Banners"></bfg-box.header>
 			<bfg-box.section>
-				<bfg-notice type="warning">This is a warning notice banner</bfg-notice>
-				<br>
-				<bfg-notice type="info">This is an info notice banner</bfg-notice>
-				<br>
-				<bfg-notice type="success">This is a success notice banner</bfg-notice>
-				<br>
-				<bfg-notice type="error">This is an error notice banner</bfg-notice>
+				<div class="bfgu:flex bfgu:flex-col bfgu:gap-4">
+					<bfg-notice type="warning">This is a warning notice banner</bfg-notice>
+					<bfg-notice type="info">This is an info notice banner</bfg-notice>
+					<bfg-notice type="success">This is a success notice banner</bfg-notice>
+					<bfg-notice type="error">This is an error notice banner</bfg-notice>
+				</div>
 			</bfg-box.section>
 		</bfg-box>
 
