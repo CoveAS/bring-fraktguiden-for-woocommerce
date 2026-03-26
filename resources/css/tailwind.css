@@ -2029,6 +2029,25 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     font-weight: 400 !important;
 }
 
+/* Notice type variants */
+.bfg-notice-banner[type="info"] {
+    background: #F3F4F6 !important;
+    color: #374151 !important;
+    border-color: #D1D5DB !important;
+}
+
+.bfg-notice-banner[type="success"] {
+    background: #DCFCE7 !important;
+    color: #166534 !important;
+    border-color: #86EFAC !important;
+}
+
+.bfg-notice-banner[type="error"] {
+    background: #FEE2E2 !important;
+    color: #991B1B !important;
+    border-color: #FCA5A5 !important;
+}
+
 .bfg-admin-page .notice,
 .bfg-admin-page .error,
 .bfg-admin-page #wpfooter,
