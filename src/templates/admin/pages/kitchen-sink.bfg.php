@@ -480,7 +480,7 @@
 					<li><code>.bfg-box__section</code> - Box content section</li>
 				</ul>
 
-				<h3 class="bfg-field-group-title">
+				<h3 class="bfg-field-group-title bfgu:mt-8">
 					<bfg-t>Form Classes</bfg-t>
 				</h3>
 				<ul>
@@ -494,7 +494,7 @@
 					<li><code>.bfg-suffix-lg</code> - Input suffix (large)</li>
 				</ul>
 
-				<h3 class="bfg-field-group-title">
+				<h3 class="bfg-field-group-title bfgu:mt-8">
 					<bfg-t>Utility Classes</bfg-t>
 				</h3>
 				<ul>
