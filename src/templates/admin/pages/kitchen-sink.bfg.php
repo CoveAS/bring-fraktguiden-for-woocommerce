@@ -132,26 +132,20 @@
 				</div>
 
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Semantic Styles</bfg-t>
+					<bfg-t>Medium Weight Sizes</bfg-t>
 				</h3>
-				<div class="bfgu:flex bfgu:flex-col bfgu:gap-5 bfgu:mb-8">
-					<div>
-						<p class="bfg-description bfgu:mb-2"><code>.bfg-section-card-title</code> · 28px/36px · weight 500</p>
-						<h2 class="bfg-section-card-title">Section Card Title</h2>
+				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-8">
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
+						<code class="bfgu:w-12 bfgu:shrink-0">14px</code>
+						<span style="font-size: 14px; font-weight: 500;">Medium 14 — Small labels, compact UI</span>
 					</div>
-					<div>
-						<p class="bfg-description bfgu:mb-2"><code>.bfg-field-group-title</code> · 15px/1.5 · weight 600</p>
-						<h3 class="bfg-field-group-title">Field Group Title</h3>
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
+						<code class="bfgu:w-12 bfgu:shrink-0">16px</code>
+						<span style="font-size: 16px; font-weight: 500;">Medium 16 — Default labels, buttons</span>
 					</div>
-					<div>
-						<p class="bfg-description bfgu:mb-2"><code>.bfg-description</code> · 16px/22px · weight 400</p>
-						<p class="bfg-description">Description text used for section help text and explanations.</p>
-					</div>
-					<div>
-						<p class="bfg-description bfgu:mb-2"><code>.bfg-field .bfg-description</code> · 14px/21px · weight 400</p>
-						<div class="bfg-field">
-							<p class="bfg-description">Field description text appears below form inputs.</p>
-						</div>
+					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
+						<code class="bfgu:w-12 bfgu:shrink-0">18px</code>
+						<span style="font-size: 18px; font-weight: 500;">Medium 18 — Larger labels, subheadings</span>
 					</div>
 				</div>
 
@@ -260,63 +254,81 @@
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Text Inputs</bfg-t>
 				</h3>
+				<div class="bfgu:mb-8">
+					<bfg-field.text id="demo-text" name="demo-text" label="Text Input" placeholder="Placeholder text"
+						description="Help text goes here"></bfg-field.text>
 
-				<bfg-field.text id="demo-text" name="demo-text" label="Text Input" placeholder="Placeholder text"
-					description="Help text goes here"></bfg-field.text>
+					<bfg-field.number id="demo-number" name="demo-number" label="Number Input with Suffix" value="100"
+						suffix="NOK"></bfg-field.number>
 
-				<bfg-field.number id="demo-number" name="demo-number" label="Number Input with Suffix" value="100"
-					suffix="NOK"></bfg-field.number>
-
-				<bfg-field.number id="demo-number-lg" name="demo-number-lg" label="Number Input with Large Suffix"
-					value="250" suffix-lg="NOK"></bfg-field.number>
+					<bfg-field.number id="demo-number-lg" name="demo-number-lg" label="Number Input with Large Suffix"
+						value="250" suffix-lg="NOK"></bfg-field.number>
+				</div>
 
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Select Dropdowns</bfg-t>
 				</h3>
-
-				<bfg-field.select id="demo-select" name="demo-select" label="Custom Select" :options="[
-					'option1' => __('Option 1', 'bring-fraktguiden-for-woocommerce'),
-					'option2' => __('Option 2', 'bring-fraktguiden-for-woocommerce'),
-					'option3' => __('Option 3', 'bring-fraktguiden-for-woocommerce'),
-				]" value="option1" placeholder="Select an option"></bfg-field.select>
+				<div class="bfgu:mb-8">
+					<bfg-field.select id="demo-select" name="demo-select" label="Custom Select" :options="[
+						'option1' => __('Option 1', 'bring-fraktguiden-for-woocommerce'),
+						'option2' => __('Option 2', 'bring-fraktguiden-for-woocommerce'),
+						'option3' => __('Option 3', 'bring-fraktguiden-for-woocommerce'),
+					]" value="option1" placeholder="Select an option"></bfg-field.select>
+				</div>
 
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Checkboxes</bfg-t>
 				</h3>
+				<div class="bfgu:mb-8">
+					<bfg-field.checkbox name="demo-checkbox-1" value="1" title="Checkbox with description"
+						description="Description text appears below the title"></bfg-field.checkbox>
 
-				<bfg-field.checkbox name="demo-checkbox-1" value="1" title="Checkbox with description"
-					description="Description text appears below the title"></bfg-field.checkbox>
+					<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checkbox without description" checked></bfg-field.checkbox>
+				</div>
 
-				<bfg-field.checkbox name="demo-checkbox-2" value="1" title="Checkbox without description" checked></bfg-field.checkbox>
-
-				<p class="bfg-description"><strong>Field Classes:</strong> <code>.bfg-field</code>,
-					<code>.bfg-field--checkbox-box</code>, <code>.bfg-input</code>, <code>.bfg-input--number</code>,
-					<code>.bfg-input--select</code>
-				</p>
-			</bfg-box.section>
-		</bfg-box>
-
-		<!-- Flex Layout Utilities -->
-		<bfg-box>
-			<bfg-box.header title="Flex Layout Utilities"></bfg-box.header>
-			<bfg-box.section>
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Flex Row with Gap</bfg-t>
+					<bfg-t>3-Column Grid</bfg-t>
+				</h3>
+				<div class="bfgu:flex bfgu:flex-row bfgu:gap-4 bfgu:mb-8">
+					<div class="bfgu:flex-1">
+						<label class="bfg-label">Length</label>
+						<div class="bfg-input bfg-input--number">
+							<input type="number" value="120" class="bfg-input__field">
+							<span class="bfg-suffix">cm</span>
+						</div>
+					</div>
+					<div class="bfgu:flex-1">
+						<label class="bfg-label">Width</label>
+						<div class="bfg-input bfg-input--number">
+							<input type="number" value="80" class="bfg-input__field">
+							<span class="bfg-suffix">cm</span>
+						</div>
+					</div>
+					<div class="bfgu:flex-1">
+						<label class="bfg-label">Height</label>
+						<div class="bfg-input bfg-input--number">
+							<input type="number" value="60" class="bfg-input__field">
+							<span class="bfg-suffix">cm</span>
+						</div>
+					</div>
+				</div>
+
+				<h3 class="bfg-field-group-title">
+					<bfg-t>2-Column Grid</bfg-t>
 				</h3>
 				<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
-					<div class="bfgu:flex-1" style="background: #f0f0f0; padding: 1rem;">Flex item 1</div>
-					<div class="bfgu:flex-1" style="background: #e0e0e0; padding: 1rem;">Flex item 2</div>
-					<div class="bfgu:flex-1" style="background: #d0d0d0; padding: 1rem;">Flex item 3</div>
+					<div class="bfgu:flex-1">
+						<label class="bfg-label">Rate name</label>
+						<input type="text" value="Standard Shipping" class="bfg-input">
+					</div>
+					<div class="bfgu:flex-1">
+						<label class="bfg-label">Price</label>
+						<div class="bfg-input bfg-input--number">
+							<input type="number" value="99" class="bfg-input__field">
+							<span class="bfg-suffix-lg">NOK</span>
+						</div>
+					</div>
 				</div>
-				<p class="bfg-description"><strong>Classes:</strong> <code>.bfgu:flex</code>,
-					<code>.bfgu:flex-row</code>, <code>.bfgu:gap-4</code>, <code>.bfgu:flex-1</code>
-				</p>
-
-				<h3 class="bfg-field-group-title">
-					<bfg-t>Spacing Utilities</bfg-t>
-				</h3>
-				<p class="bfg-description"><code>.bfgu:mt-8</code> - Margin top, <code>.bfgu:mb-5</code> - Margin bottom
-				</p>
 			</bfg-box.section>
 		</bfg-box>
 
