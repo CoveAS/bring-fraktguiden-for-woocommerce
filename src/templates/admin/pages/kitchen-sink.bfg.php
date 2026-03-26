@@ -418,14 +418,12 @@
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Active License</bfg-t>
 				</h3>
-				<div class="bfgu:mb-8">
-					<bfg-status-card>
-						<bfg-status-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-status-item.lock>
-						<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
-					</bfg-status-card>
-				</div>
+				<bfg-status-card>
+					<bfg-status-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-status-item.lock>
+					<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
+				</bfg-status-card>
 
-				<h3 class="bfg-field-group-title">
+				<h3 class="bfg-field-group-title bfgu:mt-8">
 					<bfg-t>Trial License</bfg-t>
 				</h3>
 				<bfg-status-card>
