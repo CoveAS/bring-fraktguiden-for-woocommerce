@@ -411,14 +411,14 @@
 			</bfg-box.section>
 		</bfg-box>
 
-		<!-- Status Cards -->
+		<!-- Pro Status -->
 		<bfg-box>
-			<bfg-box.header title="Status Cards" description="Status display for Pro licenses and trials"></bfg-box.header>
+			<bfg-box.header title="Pro Status" description="License status metadata display"></bfg-box.header>
 			<bfg-box.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Active License</bfg-t>
 				</h3>
-				<bfg-status-card class="bfgu:mb-0">
+				<bfg-status-card style="margin-bottom: 0">
 					<bfg-status-item.lock label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-status-item.lock>
 					<bfg-status-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-status-item.calendar>
 				</bfg-status-card>
@@ -426,7 +426,7 @@
 				<h3 class="bfg-field-group-title bfgu:mt-8">
 					<bfg-t>Trial License</bfg-t>
 				</h3>
-				<bfg-status-card class="bfgu:mb-0">
+				<bfg-status-card style="margin-bottom: 0">
 					<bfg-status-item.lock label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-status-item.lock>
 					<bfg-status-item.calendar label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-status-item.calendar>
 				</bfg-status-card>
