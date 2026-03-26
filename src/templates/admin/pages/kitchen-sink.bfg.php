@@ -413,7 +413,7 @@
 
 		<!-- Pro Status -->
 		<bfg-box>
-			<bfg-box.header title="Pro Status" description="License status metadata display"></bfg-box.header>
+			<bfg-box.header title="Pro Status" description="Displays license info for trial and Pro customers"></bfg-box.header>
 			<bfg-box.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Active License</bfg-t>
