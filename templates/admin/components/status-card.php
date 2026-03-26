@@ -15,12 +15,12 @@ $args = wp_parse_args($args ?? [], [
 
 $type_classes = [
 	'default' => '',
-	'test' => 'bfg-pro-status-card--test',
-	'trial' => 'bfg-pro-status-card--trial',
-	'expired' => 'bfg-pro-status-card--expired',
+	'test' => 'bfg-subscription--test',
+	'trial' => 'bfg-subscription--trial',
+	'expired' => 'bfg-subscription--expired',
 ];
 
-$card_class = 'bfg-pro-status-card';
+$card_class = 'bfg-subscription';
 if (!empty($type_classes[$args['type']])) {
 	$card_class .= ' ' . $type_classes[$args['type']];
 }
@@ -36,19 +36,19 @@ if (!empty($type_classes[$args['type']])) {
 
 		$value_type_classes = [
 			'default' => '',
-			'success' => 'bfg-pro-status-card__value--success',
-			'test' => 'bfg-pro-status-card__value--test',
-			'trial' => 'bfg-pro-status-card__value--trial',
-			'expired' => 'bfg-pro-status-card__value--expired',
+			'success' => 'bfg-subscription__value--success',
+			'test' => 'bfg-subscription__value--test',
+			'trial' => 'bfg-subscription__value--trial',
+			'expired' => 'bfg-subscription__value--expired',
 		];
 
-		$value_class = 'bfg-pro-status-card__value';
+		$value_class = 'bfg-subscription__value';
 		if (!empty($value_type_classes[$item['type']])) {
 			$value_class .= ' ' . $value_type_classes[$item['type']];
 		}
 		?>
-		<div class="bfg-pro-status-card__item">
-			<span class="bfg-pro-status-card__label"><?php echo esc_html($item['label']); ?></span>
+		<div class="bfg-subscription__item">
+			<span class="bfg-subscription__label"><?php echo esc_html($item['label']); ?></span>
 			<span class="<?php echo esc_attr($value_class); ?>"><?php echo esc_html($item['value']); ?></span>
 		</div>
 	<?php endforeach; ?>

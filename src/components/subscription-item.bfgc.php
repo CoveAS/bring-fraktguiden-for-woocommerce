@@ -21,7 +21,7 @@
  */
 ?>
 
-<div class="bfg-pro-status-card__item">
-	<span class="bfg-pro-status-card__label"><t>label</t></span>
-	<span class="bfg-pro-status-card__value"><t>value</t></span>
+<div class="bfg-subscription__item">
+	<span class="bfg-subscription__label"><t>label</t></span>
+	<span class="bfg-subscription__value"><t>value</t></span>
 </div>

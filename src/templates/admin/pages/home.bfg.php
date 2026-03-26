@@ -136,7 +136,7 @@ use BringFraktguiden\Admin\Step;
 					<t>You have full access to all PRO features. Thank you for your support!</t>
 				</p>
 
-				<bfg-subscription-info class="bfg-pro-status-card--success">
+				<bfg-subscription-info class="bfg-subscription--success">
 					<bfg-subscription-item label="Status" value="Active"></bfg-subscription-item>
 					<bfg-subscription-item label="License Type" value="PRO License"></bfg-subscription-item>
 				</bfg-subscription-info>
@@ -192,7 +192,7 @@ use BringFraktguiden\Admin\Step;
 					<t>Your trial has ended. Purchase a license to continue using PRO features.</t>
 				</p>
 
-				<bfg-subscription-info class="bfg-pro-status-card--expired">
+				<bfg-subscription-info class="bfg-subscription--expired">
 					<bfg-subscription-item label="Status" value="Expired"></bfg-subscription-item>
 					<bfg-subscription-item label="PRO Features" value="Disabled"></bfg-subscription-item>
 				</bfg-subscription-info>
@@ -226,7 +226,7 @@ use BringFraktguiden\Admin\Step;
 					); ?>
 				</p>
 
-				<bfg-subscription-info class="bfg-pro-status-card--trial">
+				<bfg-subscription-info class="bfg-subscription--trial">
 					<bfg-subscription-item label="Status" value="Trial"></bfg-subscription-item>
 					<bfg-subscription-item label="Days Remaining" :value="max(0, $days_remaining)"></bfg-subscription-item>
 				</bfg-subscription-info>
@@ -258,7 +258,7 @@ use BringFraktguiden\Admin\Step;
 					<t>PRO features are enabled for testing. A license is required for production use.</t>
 				</p>
 
-				<bfg-subscription-info class="bfg-pro-status-card--test">
+				<bfg-subscription-info class="bfg-subscription--test">
 					<bfg-subscription-item label="Environment" value="Test Site"></bfg-subscription-item>
 					<bfg-subscription-item label="PRO Features" value="Enabled"></bfg-subscription-item>
 				</bfg-subscription-info>

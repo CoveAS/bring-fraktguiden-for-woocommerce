@@ -33,12 +33,12 @@ bfg-step-row                   // Clickable row with indicator
 │   └── bfg-step-row__description  // Subtitle text
 └── bfg-step--in-progress     // State modifier on parent
 
-bfg-pro-status-card           // Status display card
-├── bfg-pro-status-card__item // Single key-value row
-│   ├── bfg-pro-status-card__label
-│   └── bfg-pro-status-card__value
-│       └── bfg-pro-status-card__value--success  // Type modifier
-└── bfg-pro-status-card--expired  // Card state modifier
+bfg-subscription              // Subscription status display
+├── bfg-subscription__item    // Single key-value row
+│   ├── bfg-subscription__label
+│   └── bfg-subscription__value
+│       └── bfg-subscription__value--success  // Type modifier
+└── bfg-subscription--expired  // State modifier
 ```
 
 ## Utility Classes

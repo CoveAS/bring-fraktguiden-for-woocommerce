@@ -492,29 +492,28 @@ input:checked+.bring-toggle-alt::after {
         font-size: 14px;
     }
 
-    .bfg-pro-status-card {
+    .bfg-subscription {
         flex-direction: column;
         gap: 0;
         padding: 0;
     }
 
-    .bfg-pro-status-card__item {
+    .bfg-subscription__item {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        padding: 20px 24px;
     }
 
-    .bfg-pro-status-card__item + .bfg-pro-status-card__item {
+    .bfg-subscription__item + .bfg-subscription__item {
         border-left: none;
         border-top: none;
     }
 
-    .bfg-pro-status-card__label {
-        font-size: 11px;
+    .bfg-subscription__label {
+        font-size: 12px;
     }
 
-    .bfg-pro-status-card__value {
+    .bfg-subscription__value {
         font-size: 16px;
     }
 
@@ -668,7 +667,7 @@ input:checked+.bring-toggle-alt::after {
         padding: 32px;
     }
 
-    .bfg-pro-status-card {
+    .bfg-subscription {
         padding: 0;
         gap: 0;
     }
@@ -2251,7 +2250,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     text-decoration: underline;
 }
 
-.bfg-pro-status-card {
+.bfg-subscription {
     display: flex;
     justify-content: flex-start;
     gap: 0;
@@ -2262,20 +2261,19 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     margin-bottom: 32px;
 }
 
-.bfg-pro-status-card__item {
+.bfg-subscription__item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    padding: 24px 32px;
     flex: 1;
 }
 
-.bfg-pro-status-card__item + .bfg-pro-status-card__item {
+.bfg-subscription__item + .bfg-subscription__item {
     border-left: none;
 }
 
-.bfg-pro-status-card__label {
+.bfg-subscription__label {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -2287,30 +2285,30 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     margin-bottom: 4px;
 }
 
-.bfg-pro-status-card__icon {
+.bfg-subscription__icon {
     color: #9CA3AF;
     flex-shrink: 0;
 }
 
-.bfg-pro-status-card__value {
+.bfg-subscription__value {
     font-size: 18px;
     font-weight: 700;
     color: #111827;
     margin-bottom: 2px;
 }
 
-.bfg-pro-status-card__detail {
+.bfg-subscription__detail {
     font-size: var(--bfg-text-level-5);
     color: #6B7280;
     font-weight: 400;
 }
 
-.bfg-pro-status-card__value--success {
+.bfg-subscription__value--success {
     color: #16A34A;
 }
 
 /* Remove borders from status card when inside pro teaser content */
-.bfg-pro-teaser__content .bfg-pro-status-card {
+.bfg-pro-teaser__content .bfg-subscription {
     margin-bottom: 40px;
     border: none !important;
     background: transparent !important;
@@ -2318,14 +2316,8 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     box-shadow: none !important;
 }
 
-.bfg-pro-teaser__content .bfg-pro-status-card__item {
-    padding-left: 0;
-    padding-right: 24px;
-}
-
-.bfg-pro-teaser__content .bfg-pro-status-card__item + .bfg-pro-status-card__item {
+.bfg-pro-teaser__content .bfg-subscription__item + .bfg-subscription__item {
     border-left: none !important;
-    padding-left: 24px;
 }
 
 .bfg-pro-features-grid--compact {
@@ -2499,8 +2491,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-badge,
 .bfg-progress-badge,
-.bfg-pro-status-card__value,
-.bfg-pro-status-card__label {
+.bfg-subscription__value,
+.bfg-subscription__label {
     white-space: nowrap;
 }
 
@@ -2733,29 +2725,28 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         max-width: none;
     }
 
-    .bfg-pro-status-card {
+    .bfg-subscription {
         flex-direction: column;
         gap: 0;
         padding: 0;
     }
 
-    .bfg-pro-status-card__item {
+    .bfg-subscription__item {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        padding: 20px 24px;
     }
 
-    .bfg-pro-status-card__item + .bfg-pro-status-card__item {
+    .bfg-subscription__item + .bfg-subscription__item {
         border-left: none;
         border-top: none;
     }
 
-    .bfg-pro-status-card__label {
-        font-size: 11px;
+    .bfg-subscription__label {
+        font-size: 12px;
     }
 
-    .bfg-pro-status-card__value {
+    .bfg-subscription__value {
         font-size: 16px;
     }
 

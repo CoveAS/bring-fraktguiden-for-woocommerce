@@ -13,14 +13,14 @@
  */
 ?>
 
-<div class="bfg-pro-status-card__item">
-	<div class="bfg-pro-status-card__label">
-		<svg class="bfg-pro-status-card__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="bfg-subscription__item <t>class</t>">
+	<div class="bfg-subscription__label">
+		<svg class="bfg-subscription__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
 			<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
 		</svg>
 		<t>label</t>
 	</div>
-	<span class="bfg-pro-status-card__value"><t>value</t></span>
-	<span class="bfg-pro-status-card__detail"><t>detail</t></span>
+	<span class="bfg-subscription__value"><t>value</t></span>
+	<span class="bfg-subscription__detail"><t>detail</t></span>
 </div>
