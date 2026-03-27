@@ -1093,7 +1093,8 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
 
 
 .bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-.bfg-admin-page .bfg-field>.label {
+.bfg-admin-page .bfg-field>.label,
+.bfg-admin-page .bfg-label {
     display: block;
     font-weight: 500;
     font-size: 15px;
@@ -2573,7 +2574,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     }
 
     .bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-    .bfg-admin-page .bfg-field>.label {
+    .bfg-admin-page .bfg-field>.label,
+    .bfg-admin-page .bfg-label {
         font-size: 16px;
     }
 
@@ -2851,7 +2853,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     }
 
     .bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-    .bfg-admin-page .bfg-field>.label {
+    .bfg-admin-page .bfg-field>.label,
+    .bfg-admin-page .bfg-label {
         font-size: 14px;
     }
 
