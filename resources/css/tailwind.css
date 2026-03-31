@@ -1058,6 +1058,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     padding-bottom: 48px;
     margin-bottom: 0;
     border-bottom: 1px solid var(--bfg-border);
+    max-width: 640px;
 }
 
 .bfg-admin-page .bfg-box:last-child {
