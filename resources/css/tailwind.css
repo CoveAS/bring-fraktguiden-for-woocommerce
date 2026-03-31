@@ -350,15 +350,20 @@ input:checked+.bring-toggle-alt::after {
 
     .bfg-admin-page__home .bfg-box {
         padding: 0;
-        margin-bottom: 32px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
         background: transparent;
         border: none;
         border-radius: 0;
         box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
     }
 
     .bfg-admin-page__home .bfg-box:last-child {
         margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 
     .bfg-page__header-row {
@@ -537,15 +542,20 @@ input:checked+.bring-toggle-alt::after {
 
     .bfg-admin-page__home .bfg-box {
         padding: 0;
-        margin-bottom: 32px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
         background: transparent;
         border: none;
         border-radius: 0;
         box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
     }
 
     .bfg-admin-page__home .bfg-box:last-child {
         margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 
     .bfg-page__header-row {
@@ -1039,16 +1049,21 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
 }
 
 .bfg-admin-page .bfg-box {
-    background: var(--bfg-bg-card);
-    border: 1px solid var(--bfg-border);
-    border-radius: var(--bfg-radius-card);
-    box-shadow: var(--bfg-shadow);
-    padding: 64px;
-    margin-bottom: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--bfg-border);
 }
 
 .bfg-admin-page .bfg-box:last-child {
     margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .bfg-admin-page .bfg-box__header {
@@ -2542,15 +2557,20 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
     .bfg-admin-page .bfg-box {
         padding: 0;
-        margin-bottom: 32px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
         background: transparent;
         border: none;
         border-radius: 0;
         box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
     }
 
     .bfg-admin-page .bfg-box:last-child {
         margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 
     .bfg-admin-page .bfg-box__header {
@@ -2831,15 +2851,20 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
     .bfg-admin-page .bfg-box {
         padding: 0;
-        margin-bottom: 32px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
         background: transparent;
         border: none;
         border-radius: 0;
         box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
     }
 
     .bfg-admin-page .bfg-box:last-child {
         margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 
     .bfg-field {
