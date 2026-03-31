@@ -17,7 +17,7 @@ class BFG_TreeBuilder
     /**
      * Check if a tag name represents a custom component
      *
-     * Custom components contain hyphens or dots (e.g., "bfg-box", "bfg-field.text")
+     * Custom components contain hyphens or dots (e.g., "bfg-section", "bfg-field.text")
      *
      * @param string $tagName
      * @return bool

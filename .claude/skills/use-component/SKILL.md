@@ -56,17 +56,17 @@ Compiles to: `<?php esc_html_e('Text to translate', 'bring-fraktguiden-for-wooco
 
 This section shows how to convert existing HTML markup to BFG components.
 
-### Converting bfg-box from HTML to Components
+### Converting bfg-section from HTML to Components
 
 **Before (HTML):**
 ```php
-<div class="bfg-box">
-    <div class="bfg-box__header">
+<div class="bfg-section">
+    <div class="bfg-section__header">
         <h2><?php esc_html_e('Title', 'bring-fraktguiden-for-woocommerce'); ?></h2>
         <p><?php esc_html_e('Description here', 'bring-fraktguiden-for-woocommerce'); ?></p>
     </div>
 
-    <div class="bfg-box__section">
+    <div class="bfg-section__section">
         <p>Your content here</p>
     </div>
 </div>
@@ -74,16 +74,16 @@ This section shows how to convert existing HTML markup to BFG components.
 
 **After (Component):**
 ```php
-<bfg-box>
-    <bfg-box.header
+<bfg-section>
+    <bfg-section.header
         title="Title"
         description="Description here"
-    ></bfg-box.header>
+    ></bfg-section.header>
 
-    <bfg-box.section>
+    <bfg-section.section>
         <p>Your content here</p>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
 **Key Points:**
@@ -96,7 +96,7 @@ This section shows how to convert existing HTML markup to BFG components.
 Components handle translation automatically for certain attributes:
 
 **Attributes that auto-translate:**
-- `<bfg-box.header title="..." description="...">` - both title and description
+- `<bfg-section.header title="..." description="...">` - both title and description
 - Any text inside `<t>...</t>` tags
 
 **Manual translation still needed:**
@@ -106,7 +106,7 @@ Components handle translation automatically for certain attributes:
 **Example:**
 ```php
 <!-- Component attributes: auto-translated -->
-<bfg-box.header title="Settings" description="Configure your options"></bfg-box.header>
+<bfg-section.header title="Settings" description="Configure your options"></bfg-section.header>
 
 <!-- Content inside t: auto-translated -->
 <bfg-notice type="info">
@@ -123,16 +123,16 @@ When attribute values contain special characters, use HTML entities:
 
 ```php
 <!-- Quotes in descriptions -->
-<bfg-box.header
+<bfg-section.header
     title="Shipping Address"
     description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."
-></bfg-box.header>
+></bfg-section.header>
 
 <!-- Apostrophes -->
-<bfg-box.header
+<bfg-section.header
     title="User's Profile"
     description="Manage the user&apos;s personal information"
-></bfg-box.header>
+></bfg-section.header>
 ```
 
 Common entities: `&quot;` for `"`, `&apos;` for `'`, `&amp;` for `&`, `&lt;` for `<`, `&gt;` for `>`
@@ -142,28 +142,28 @@ Common entities: `&quot;` for `"`, `&apos;` for `'`, `&amp;` for `&`, `&lt;` for
 You can have multiple headers and sections in one box for sub-sections:
 
 ```php
-<bfg-box>
+<bfg-section>
     <!-- Main section -->
-    <bfg-box.header
+    <bfg-section.header
         title="Shipping Address"
         description="Configure your shipping details"
-    ></bfg-box.header>
-    <bfg-box.section>
+    ></bfg-section.header>
+    <bfg-section.section>
         <p>Main section content...</p>
-    </bfg-box.section>
+    </bfg-section.section>
 
     <!-- Sub-section with divider -->
-    <bfg-box.header
-        class="bfg-box__header--divider"
+    <bfg-section.header
+        class="bfg-section__header--divider"
         title="Contact Information"
-    ></bfg-box.header>
-    <bfg-box.section>
+    ></bfg-section.header>
+    <bfg-section.section>
         <p>Contact fields...</p>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
-The `bfg-box__header--divider` class adds a visual separator.
+The `bfg-section__header--divider` class adds a visual separator.
 
 ### Converting Notices
 
@@ -189,16 +189,16 @@ Pass custom classes through to components:
 
 ```php
 <!-- On root element -->
-<bfg-box class="my-custom-class another-class">
-    <bfg-box.header title="Title"></bfg-box.header>
-    <bfg-box.section>...</bfg-box.section>
-</bfg-box>
+<bfg-section class="my-custom-class another-class">
+    <bfg-section.header title="Title"></bfg-section.header>
+    <bfg-section.section>...</bfg-section.section>
+</bfg-section>
 
 <!-- On sub-components -->
-<bfg-box.header
-    class="bfg-box__header--divider"
+<bfg-section.header
+    class="bfg-section__header--divider"
     title="Section Title"
-></bfg-box.header>
+></bfg-section.header>
 ```
 
 Classes are passed through to the root element of the compiled output.
@@ -206,7 +206,7 @@ Classes are passed through to the root element of the compiled output.
 ### What to Convert vs. What to Keep
 
 **✅ Convert to Components:**
-- `<div class="bfg-box">` → `<bfg-box>`
+- `<div class="bfg-section">` → `<bfg-section>`
 - `Component::noticeBanner()` → `<bfg-notice>`
 - Any structural/presentational markup with component equivalents
 
@@ -216,9 +216,9 @@ Classes are passed through to the root element of the compiled output.
 
 **Example - Mixed Approach:**
 ```php
-<bfg-box>
-    <bfg-box.header title="Settings"></bfg-box.header>
-    <bfg-box.section>
+<bfg-section>
+    <bfg-section.header title="Settings"></bfg-section.header>
+    <bfg-section.section>
         <!-- Component for notice -->
         <bfg-notice type="info">
             <t>Configure your options below</t>
@@ -231,24 +231,24 @@ Classes are passed through to the root element of the compiled output.
             'label' => __('Email', 'bring-fraktguiden-for-woocommerce'),
             'validation' => ['required', 'email'],
         ]); ?>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
 ## Common Components
 
 ### Box Components (Container)
 ```php
-<bfg-box class="custom-class">
-    <bfg-box.header title="Title Here" description="Optional description"></bfg-box.header>
-    <bfg-box.section>
+<bfg-section class="custom-class">
+    <bfg-section.header title="Title Here" description="Optional description"></bfg-section.header>
+    <bfg-section.section>
         <p>Your content here</p>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
 **Important:**
-- Always use closing tags: `</bfg-box.header>`, NOT `<bfg-box.header />`
+- Always use closing tags: `</bfg-section.header>`, NOT `<bfg-section.header />`
 - Description is optional (will be hidden if not provided)
 - Custom classes and attributes pass through to root element
 
@@ -327,7 +327,7 @@ Types: `warning`, `info`, `success`, `error`
 ## Important Rules
 
 ### ✅ DO
-- Use closing tags for all components: `<bfg-box></bfg-box>`
+- Use closing tags for all components: `<bfg-section></bfg-section>`
 - Keep `<t>` text on single line (no line breaks)
 - Use `:attribute` syntax for dynamic/PHP values
 - Use plain `attribute` for static strings
@@ -336,7 +336,7 @@ Types: `warning`, `info`, `success`, `error`
 - Test compilation with `npm run compile-php`
 
 ### ❌ DON'T
-- Use self-closing component tags: `<bfg-box.header />`
+- Use self-closing component tags: `<bfg-section.header />`
 - Put line breaks inside `<t>` tags
 - Mix static and dynamic attributes incorrectly
 - Forget to compile after changes
@@ -370,12 +370,12 @@ Types: `warning`, `info`, `success`, `error`
 
 ### Complete Box Example
 ```php
-<bfg-box class="my-custom-box" :data-id="$boxId">
-    <bfg-box.header
+<bfg-section class="my-custom-box" :data-id="$boxId">
+    <bfg-section.header
         title="Configuration"
         description="Manage your plugin settings"
-    ></bfg-box.header>
-    <bfg-box.section>
+    ></bfg-section.header>
+    <bfg-section.section>
         <div class="bfg-field">
             <label><t>Enable Feature</t></label>
             <bfg-field.checkbox
@@ -389,8 +389,8 @@ Types: `warning`, `info`, `success`, `error`
         <bfg-notice type="info">
             <t>This setting applies globally</t>
         </bfg-notice>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
 ### Conditional Rendering

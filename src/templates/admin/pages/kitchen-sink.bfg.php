@@ -22,23 +22,23 @@
 		</div>
 
 		<!-- Boxes & Containers -->
-		<bfg-box>
-			<bfg-box.header title="Boxes & Containers"
-				description="Primary container component used throughout the admin"></bfg-box.header>
-			<bfg-box.section>
-				<p><strong>Classes:</strong> <code>.bfg-box</code>, <code>.bfg-box__header</code>,
-					<code>.bfg-box__section</code>
+		<bfg-section>
+			<bfg-section.header title="Boxes & Containers"
+				description="Primary container component used throughout the admin"></bfg-section.header>
+			<bfg-section.section>
+				<p><strong>Classes:</strong> <code>.bfg-section</code>, <code>.bfg-section__header</code>,
+					<code>.bfg-section__section</code>
 				</p>
-				<p><bfg-t>Use .bfg-box for main content sections. Contains header with title/description and section for
+				<p><bfg-t>Use .bfg-section for main content sections. Contains header with title/description and section for
 						content.</bfg-t>
 				</p>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Typography -->
-		<bfg-box>
-			<bfg-box.header title="Typography" description="8pt scaling system for consistent visual rhythm"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Typography" description="8pt scaling system for consistent visual rhythm"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Type Scale</bfg-t>
 				</h3>
@@ -154,26 +154,26 @@
 				</h3>
 				<p>Regular paragraph text with <strong>bold text</strong> and <em>italic text</em>.</p>
 				<p>Links look <a href="#">like this</a> and inline <code>code snippets</code> use monospace.</p>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Notice Banners -->
-		<bfg-box>
-			<bfg-box.header title="Notice Banners"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Notice Banners"></bfg-section.header>
+			<bfg-section.section>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-4">
 					<bfg-notice type="warning">This is a warning notice banner</bfg-notice>
 					<bfg-notice type="info">This is an info notice banner</bfg-notice>
 					<bfg-notice type="success">This is a success notice banner</bfg-notice>
 					<bfg-notice type="error">This is an error notice banner</bfg-notice>
 				</div>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Buttons & Links -->
-		<bfg-box>
-			<bfg-box.header title="Buttons"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Buttons"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Small</bfg-t>
 				</h3>
@@ -212,13 +212,13 @@
 						<bfg-t>Full Width Button</bfg-t>
 					</button>
 				</div>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Badges -->
-		<bfg-box>
-			<bfg-box.header title="Badges"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Badges"></bfg-section.header>
+			<bfg-section.section>
 				<div class="bfgu:flex bfgu:gap-4 bfgu:mb-5">
 					<bfg-badge.completed>Done</bfg-badge.completed>
 					<bfg-badge.in-progress>In progress</bfg-badge.in-progress>
@@ -226,13 +226,13 @@
 				<p class="bfg-description"><strong>Classes:</strong> <code>.bfg-badge</code>,
 					<code>.bfg-badge--completed</code>, <code>.bfg-badge--in-progress</code>
 				</p>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Form Fields -->
-		<bfg-box>
-			<bfg-box.header title="Form Fields"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Form Fields"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Text Inputs</bfg-t>
 				</h3>
@@ -311,13 +311,13 @@
 						</div>
 					</div>
 				</div>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Step Row -->
-		<bfg-box>
-			<bfg-box.header title="Step Rows"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Step Rows"></bfg-section.header>
+			<bfg-section.section>
 				<div class="bfg-steps-list">
 					<bfg-step.completed href="#">
 						<bfg-t>Add shipping method</bfg-t>
@@ -348,14 +348,14 @@
 						<bfg-step-desc><bfg-t>Test with a sample product</bfg-t></bfg-step-desc>
 					</bfg-step.pending>
 				</div>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Access Links -->
-		<bfg-box>
-			<bfg-box.header title="Access Links"
-				description="Clickable rows for navigation without status tracking"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Access Links"
+				description="Clickable rows for navigation without status tracking"></bfg-section.header>
+			<bfg-section.section>
 				<div class="bfg-steps-list">
 					<bfg-access-link href="#">
 						<bfg-t>MyBring Booking</bfg-t>
@@ -380,13 +380,13 @@
 				<p class="bfg-description bfgu:mt-4"><strong>Usage:</strong>
 					<code>&lt;bfg-access-link href="#"&gt;Title&lt;bfg-step-desc&gt;Description&lt;/bfg-step-desc&gt;&lt;/bfg-access-link&gt;</code>
 				</p>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Subscription Status -->
-		<bfg-box>
-			<bfg-box.header title="Subscription Status" description="Displays license and subscription details"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Subscription Status" description="Displays license and subscription details"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Active License</bfg-t>
 				</h3>
@@ -402,13 +402,13 @@
 					<bfg-subscription-item.lock class="bfgu:p-0" label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-subscription-item.lock>
 					<bfg-subscription-item.calendar class="bfgu:p-0" label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-subscription-item.calendar>
 				</bfg-subscription-info>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 		<!-- Feature List -->
-		<bfg-box>
-			<bfg-box.header title="Feature Lists"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Feature Lists"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Regular Feature List</bfg-t>
 				</h3>
@@ -429,14 +429,14 @@
 					<li>Fixed shipping prices</li>
 					<li>Free shipping threshold</li>
 				</bfg-feature-list>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 
 
 		<!-- Color & Style Reference -->
-		<bfg-box>
-			<bfg-box.header title="Component CSS Reference"></bfg-box.header>
-			<bfg-box.section>
+		<bfg-section>
+			<bfg-section.header title="Component CSS Reference"></bfg-section.header>
+			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Main Classes</bfg-t>
 				</h3>
@@ -445,9 +445,9 @@
 					<li><code>.bfg-page__main</code> - Main content area</li>
 					<li><code>.bfg-page__header</code> - Page header section</li>
 					<li><code>.bfg-page__header-row</code> - Header row with title and badge</li>
-					<li><code>.bfg-box</code> - Card/box container</li>
-					<li><code>.bfg-box__header</code> - Box header with title</li>
-					<li><code>.bfg-box__section</code> - Box content section</li>
+					<li><code>.bfg-section</code> - Card/box container</li>
+					<li><code>.bfg-section__header</code> - Box header with title</li>
+					<li><code>.bfg-section__section</code> - Box content section</li>
 				</ul>
 
 				<h3 class="bfg-field-group-title bfgu:mt-8">
@@ -475,7 +475,7 @@
 					<li><code>.bfgu:mt-8</code> - Margin top</li>
 					<li><code>.bfgu:mb-5</code> - Margin bottom</li>
 				</ul>
-			</bfg-box.section>
-		</bfg-box>
+			</bfg-section.section>
+		</bfg-section>
 	</div>
 </div>

@@ -87,7 +87,7 @@ input:checked+.bring-toggle-alt::after {
     padding-bottom: 64px;
 }
 
-.bfg-admin-page__home .bfg-box:last-child {
+.bfg-admin-page__home .bfg-section:last-child {
     margin-bottom: 0;
 }
 
@@ -348,7 +348,7 @@ input:checked+.bring-toggle-alt::after {
         padding: 20px;
     }
 
-    .bfg-admin-page__home .bfg-box {
+    .bfg-admin-page__home .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -360,7 +360,7 @@ input:checked+.bring-toggle-alt::after {
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page__home .bfg-box:last-child {
+    .bfg-admin-page__home .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
@@ -453,7 +453,7 @@ input:checked+.bring-toggle-alt::after {
     }
 
     /* PRO Teaser Mobile */
-    .bfg-admin-page__home .bfg-box.bfg-pro-teaser-v2 {
+    .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
         margin-top: 40px;
         margin-bottom: 24px;
     }
@@ -540,7 +540,7 @@ input:checked+.bring-toggle-alt::after {
         padding: 20px;
     }
 
-    .bfg-admin-page__home .bfg-box {
+    .bfg-admin-page__home .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -552,7 +552,7 @@ input:checked+.bring-toggle-alt::after {
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page__home .bfg-box:last-child {
+    .bfg-admin-page__home .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
@@ -643,7 +643,7 @@ input:checked+.bring-toggle-alt::after {
         height: auto;
     }
 
-    .bfg-admin-page__home .bfg-box.bfg-pro-teaser-v2 {
+    .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
         margin-top: 48px;
         margin-bottom: 24px;
         border-radius: 8px;
@@ -1048,7 +1048,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     padding: 0;
 }
 
-.bfg-admin-page .bfg-box {
+.bfg-admin-page .bfg-section {
     background: transparent;
     border: none;
     border-radius: 0;
@@ -1058,22 +1058,21 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     padding-bottom: 48px;
     margin-bottom: 0;
     border-bottom: 1px solid var(--bfg-border);
-    max-width: 480px;
 }
 
-.bfg-admin-page .bfg-box:last-child {
+.bfg-admin-page .bfg-section:last-child {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.bfg-admin-page .bfg-box__header {
+.bfg-admin-page .bfg-section__header {
     padding: 0 !important;
     margin-bottom: 32px !important;
     border: none !important;
 }
 
-.bfg-admin-page .bfg-box .bfg-box__header--divider {
+.bfg-admin-page .bfg-section .bfg-section__header--divider {
     margin-top: 64px !important;
     padding-top: 64px !important;
     border-top: 1px solid var(--bfg-border) !important;
@@ -1081,7 +1080,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     clear: both !important;
 }
 
-.bfg-admin-page .bfg-box__header h2,
+.bfg-admin-page .bfg-section__header h2,
 .bfg-section-card-title {
     font-size: 28px !important;
     font-weight: 500 !important;
@@ -1091,7 +1090,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     text-wrap: balance;
 }
 
-.bfg-admin-page .bfg-box__header p {
+.bfg-admin-page .bfg-section__header p {
     font-size: var(--bfg-text-level-2) !important;
     color: var(--bfg-text-secondary) !important;
     margin: 0 !important;
@@ -1099,7 +1098,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     line-height: 24px !important;
 }
 
-.bfg-admin-page .bfg-box__section {
+.bfg-admin-page .bfg-section__section {
     padding: 0 !important;
 }
 
@@ -1926,15 +1925,15 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 /* ==========================================================================
-   Legacy: .bfg-box__checkbox (inline checkbox in box)
+   Legacy: .bfg-section__checkbox (inline checkbox in box)
    ========================================================================== */
 
-.bfg-box__checkbox {
+.bfg-section__checkbox {
     margin-bottom: 16px;
     padding: 0 32px;
 }
 
-.bfg-box__checkbox label {
+.bfg-section__checkbox label {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1943,7 +1942,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     cursor: pointer;
 }
 
-.bfg-box__checkbox input[type="checkbox"] {
+.bfg-section__checkbox input[type="checkbox"] {
     margin: 0;
 }
 
@@ -2005,11 +2004,11 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     padding: 0 !important;
 }
 
-.bfg-box__section>*:has(+ .submit) {
+.bfg-section__section>*:has(+ .submit) {
     margin-bottom: 0 !important;
 }
 
-.submit+.bfg-box__header--divider {
+.submit+.bfg-section__header--divider {
     margin-top: 32px !important;
 }
 
@@ -2558,7 +2557,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-section-card-title,
 .bfg-pro-teaser__title,
-.bfg-admin-page .bfg-box__header h2,
+.bfg-admin-page .bfg-section__header h2,
 .bfg-active-step__content h3,
 .bfg-step-row__label,
 .bfg-field-group-title,
@@ -2567,7 +2566,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-pro-teaser__subtitle,
-.bfg-admin-page .bfg-box__header p,
+.bfg-admin-page .bfg-section__header p,
 .bfg-step-row__description,
 .bfg-active-step__content p,
 .bfg-pro-features-grid li,
@@ -2599,7 +2598,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         font-size: 16px;
     }
 
-    .bfg-admin-page .bfg-box {
+    .bfg-admin-page .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -2611,23 +2610,23 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page .bfg-box:last-child {
+    .bfg-admin-page .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
     }
 
-    .bfg-admin-page .bfg-box__header {
+    .bfg-admin-page .bfg-section__header {
         margin-bottom: 24px !important;
     }
 
-    .bfg-admin-page .bfg-box__header h2,
+    .bfg-admin-page .bfg-section__header h2,
     .bfg-section-card-title {
         font-size: 28px !important;
         line-height: 36px !important;
     }
 
-    .bfg-admin-page .bfg-box .bfg-box__header--divider {
+    .bfg-admin-page .bfg-section .bfg-section__header--divider {
         margin-top: 48px !important;
         padding-top: 48px !important;
     }
@@ -2893,7 +2892,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         padding: 20px;
     }
 
-    .bfg-admin-page .bfg-box {
+    .bfg-admin-page .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -2905,7 +2904,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page .bfg-box:last-child {
+    .bfg-admin-page .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
@@ -2915,7 +2914,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         margin-bottom: 16px;
     }
 
-    .bfg-admin-page .bfg-box__header h2,
+    .bfg-admin-page .bfg-section__header h2,
     .bfg-section-card-title {
         font-size: 24px !important;
         line-height: 32px !important;

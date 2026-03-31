@@ -50,12 +50,12 @@ Use the BFG component system for reusable UI elements like boxes, notices, badge
 
 **Example:**
 ```php
-<bfg-box>
-    <bfg-box.header title="Settings" description="Configure your options"></bfg-box.header>
-    <bfg-box.section>
+<bfg-section>
+    <bfg-section.header title="Settings" description="Configure your options"></bfg-section.header>
+    <bfg-section.section>
         <bfg-field.text name="api_key" label="API Key"></bfg-field.text>
-    </bfg-box.section>
-</bfg-box>
+    </bfg-section.section>
+</bfg-section>
 ```
 
 ### Styling BFG Components
@@ -64,18 +64,18 @@ Component styles are written in `resources/css/tailwind.css` using BEM notation 
 
 ```css
 /* Component defined in src/components/box.bfgc.php */
-.bfg-box {
+.bfg-section {
     background: var(--bfg-bg-card);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-card);
 }
 
-.bfg-box__header {
+.bfg-section__header {
     padding: 0;
     margin-bottom: 32px;
 }
 
-.bfg-box__section {
+.bfg-section__section {
     padding: 0;
 }
 ```

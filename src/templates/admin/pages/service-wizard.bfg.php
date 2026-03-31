@@ -36,8 +36,8 @@
 				); ?>
 
 			</p>
-			<bfg-box>
-				<div class="bfg-box__header">
+			<bfg-section>
+				<div class="bfg-section__header">
 					<h2>
 						<t>Who are you shipping to?</t>
 					</h2>
@@ -45,7 +45,7 @@
 						<t>Choose the type of customers you ship to.</t>
 					</p>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox" name="shipping_to" value="individuals">
 						<span>
@@ -53,7 +53,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox" name="shipping_to" value="business">
 						<span>
@@ -61,20 +61,20 @@
 						</span>
 					</label>
 				</div>
-				<bfg-box.section>
+				<bfg-section.section>
 					<p>
 						<t>Please make a selection to continue</t>
 					</p>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<div class="bfg-box__header">
+			<bfg-section>
+				<div class="bfg-section__header">
 					<h2>
 						<t>Where do you ship to?</t>
 					</h2>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox" value="domestic">
 						<?php if ($country): ?>
@@ -86,7 +86,7 @@
 						<?php endif; ?>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox" value="international">
 						<span>
@@ -94,20 +94,20 @@
 						</span>
 					</label>
 				</div>
-				<bfg-box.section>
+				<bfg-section.section>
 					<p>
 						<t>Please make a selection to continue</t>
 					</p>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<div class="bfg-box__header">
+			<bfg-section>
+				<div class="bfg-section__header">
 					<h2>
 						<t>How heavy are the packages you're sending?</t>
 					</h2>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -115,7 +115,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -123,7 +123,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -131,15 +131,15 @@
 						</span>
 					</label>
 				</div>
-				<bfg-box.section>
+				<bfg-section.section>
 					<p>
 						<t>Please make a selection to continue</t>
 					</p>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<div class="bfg-box__header">
+			<bfg-section>
+				<div class="bfg-section__header">
 					<h2>
 						<t>Do you have an RFID-enabled printer and labels?</t>
 					</h2>
@@ -154,7 +154,7 @@
 						<li>Intermec (H oneywell) PC43d RFID</li>
 					</ul>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -162,7 +162,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -170,20 +170,20 @@
 						</span>
 					</label>
 				</div>
-				<bfg-box.section>
+				<bfg-section.section>
 					<p>
 						<t>Please make a selection to continue</t>
 					</p>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<div class="bfg-box__header">
+			<bfg-section>
+				<div class="bfg-section__header">
 					<h2>
 						<t>Based on your selection we recommend that you enable these services</t>
 					</h2>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -191,7 +191,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -199,7 +199,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -207,7 +207,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -215,7 +215,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -223,7 +223,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -231,7 +231,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -239,7 +239,7 @@
 						</span>
 					</label>
 				</div>
-				<div class="bfg-box__checkbox">
+				<div class="bfg-section__checkbox">
 					<label>
 						<input type="checkbox">
 						<span>
@@ -247,12 +247,12 @@
 						</span>
 					</label>
 				</div>
-				<bfg-box.section>
+				<bfg-section.section>
 					<button class="bfg-btn bfg-btn--primary">
 						<t>Enable selected services</t>
 					</button>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 		</div>
 	</div>
 </div>

@@ -27,19 +27,19 @@ if (!$args['title']) {
 	return;
 }
 
-$header_class = 'bfg-box__header';
+$header_class = 'bfg-section__header';
 if ($args['divider']) {
-	$header_class .= ' bfg-box__header--divider';
+	$header_class .= ' bfg-section__header--divider';
 }
 ?>
-<div class="bfg-box">
+<div class="bfg-section">
 	<div class="<?php echo esc_attr($header_class); ?>">
 		<strong><?php echo esc_html($args['title']); ?></strong>
 		<?php if ($args['description']): ?>
 			<p><?php echo esc_html($args['description']); ?></p>
 		<?php endif; ?>
 	</div>
-	<div class="bfg-box__section">
+	<div class="bfg-section__section">
 		<?php echo $args['content']; ?>
 		<?php if ($args['submit_button']): ?>
 			<?php submit_button($args['submit_text']); ?>

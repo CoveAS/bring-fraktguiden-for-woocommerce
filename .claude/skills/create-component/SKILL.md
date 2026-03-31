@@ -39,8 +39,8 @@ When the user has confirmed, you may continue.
 
 | Component Tag | File |
 |--------------|------|
-| `<bfg-box>` | `box.bfgc.php` |
-| `<bfg-box.header>` | `box.header.bfgc.php` |
+| `<bfg-section>` | `box.bfgc.php` |
+| `<bfg-section.header>` | `box.header.bfgc.php` |
 | `<bfg-field.text>` | `field.text.bfgc.php` |
 
 **Rule:** Remove `bfg-` prefix, add `.bfgc.php` extension. Use dots for sub-components.
@@ -48,8 +48,8 @@ When the user has confirmed, you may continue.
 ## Critical Rules
 
 1. **❌ Self-closing component tags NOT supported**
-   - ❌ `<bfg-box />` - Breaks compilation
-   - ✅ `<bfg-box></bfg-box>` - Always use closing tags
+   - ❌ `<bfg-section />` - Breaks compilation
+   - ✅ `<bfg-section></bfg-section>` - Always use closing tags
 2. **Keep `<bfg-t>` text on single line** - Multi-line breaks translations
 3. **DOM parser expands self-closing HTML tags** - `<path />` becomes `<path></path>` in output
 

@@ -26,25 +26,25 @@ use BringFraktguiden\Fields\Fields;
 			<!-- Live region for screen reader announcements -->
 			<div aria-live="polite" aria-atomic="true" class="sr-only" id="bfg-form-announcements"></div>
 
-			<bfg-box>
-				<bfg-box.header title="MyBring Booking"
-					description="Book orders directly from the order page with MyBring integration"></bfg-box.header>
+			<bfg-section>
+				<bfg-section.header title="MyBring Booking"
+					description="Book orders directly from the order page with MyBring integration"></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_enabled; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_without_bring; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
 					</div>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<bfg-box.header title="Shipping Address"
-					description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."></bfg-box.header>
+			<bfg-section>
+				<bfg-section.header title="Shipping Address"
+					description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_use_custom_address; ?>
 					</div>
 
@@ -102,11 +102,11 @@ use BringFraktguiden\Fields\Fields;
 							</div>
 						</div>
 					</div>
-				</bfg-box.section>
+				</bfg-section.section>
 
-				<bfg-box.header class="bfg-box__header--divider" title="Contact Information"></bfg-box.header>
+				<bfg-section.header class="bfg-section__header--divider" title="Contact Information"></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<bfg-field.text
 						id="booking_address_reference"
 						label="Reference"
@@ -158,14 +158,14 @@ use BringFraktguiden\Fields\Fields;
 					</bfg-field.text>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<bfg-box.header title="Processing"
-					description="Change order status after booking or printing labels"></bfg-box.header>
+			<bfg-section>
+				<bfg-section.header title="Processing"
+					description="Change order status after booking or printing labels"></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<bfg-notice type="warning">
 						<strong><bfg-t>WARNING!</bfg-t></strong> <bfg-t>This will change the status even if the order is
 							completed</bfg-t>
@@ -190,14 +190,14 @@ use BringFraktguiden\Fields\Fields;
 					</bfg-field.select>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 
-			<bfg-box>
-				<bfg-box.header title="Home Delivery"
-					description="Configure package type for home delivery services"></bfg-box.header>
+			<bfg-section>
+				<bfg-section.header title="Home Delivery"
+					description="Configure package type for home delivery services"></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<bfg-field.select id="booking_home_delivery_package_type" name="booking_home_delivery_package_type"
 						label="Package type for home delivery" description="Only applies to home delivery services">
 						<?php foreach ($package_type_options as $value => $label) {
@@ -207,8 +207,8 @@ use BringFraktguiden\Fields\Fields;
 					</bfg-field.select>
 
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
-				</bfg-box.section>
-			</bfg-box>
+				</bfg-section.section>
+			</bfg-section>
 		</form>
 	</div>
 </div>

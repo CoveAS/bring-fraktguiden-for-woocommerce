@@ -5,12 +5,12 @@
  * Content section for a box component. Contains the main body content.
  *
  * Source (.bfg.php):
- *   <bfg-box.section>
+ *   <bfg-section.section>
  *     <p>Your content here</p>
- *   </bfg-box.section>
+ *   </bfg-section.section>
  *
  * Compiled output (.php):
- *   <div class="bfg-box__section">
+ *   <div class="bfg-section__section">
  *     <p>Your content here</p>
  *   </div>
  *
@@ -19,6 +19,6 @@
  */
 ?>
 
-<div class="bfg-box__section">
+<div class="bfg-section__section">
     <slot />
 </div>

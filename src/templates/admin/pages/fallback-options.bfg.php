@@ -23,13 +23,13 @@
 		<form method="post" action="options.php">
 			<?php settings_fields('bring_fraktguiden_fallback'); ?>
 
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><?php esc_html_e('No connection', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('When the Bring API is unavailable, no shipping options appear at checkout and customers can\'t complete their order. Add a fallback rate here to prevent lost sales.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field">
 						<?php echo $fields->no_connection_rate_id->label(); ?>
 						<?php echo $fields->no_connection_rate_id; ?>
@@ -56,12 +56,12 @@
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
 				</div>
 
-				<div class="bfg-box__header bfg-box__header--divider">
+				<div class="bfg-section__header bfg-section__header--divider">
 					<h2><?php esc_html_e('Heavy and oversized items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Orders that exceed Bring\'s weight or size limits won\'t get a shipping rate. Add a fallback option for these cases.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field">
 						<?php echo $fields->exception_rate_id->label(); ?>
 						<?php echo $fields->exception_rate_id; ?>
@@ -90,13 +90,13 @@
 				</div>
 			</div>
 
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><?php esc_html_e('Dimension packing for cart items', 'bring-fraktguiden-for-woocommerce'); ?></h2>
 					<p><?php esc_html_e('Configure how cart items are packed into boxes before calculating shipping rates. Useful for stores with large or heavy products.', 'bring-fraktguiden-for-woocommerce'); ?></p>
 				</div>
 
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->enable_multipack; ?></div>
 
 					<bfg-conditional-field-group id="dimension-fields" trigger="enable_multipack">

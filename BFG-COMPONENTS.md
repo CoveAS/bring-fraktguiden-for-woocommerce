@@ -18,21 +18,21 @@ php bin/test-compiler.php
 Clean, component-based syntax with auto-translation:
 
 ```php
-<bfg-box title="Settings" description="Configure your options">
+<bfg-section title="Settings" description="Configure your options">
     <bfg-field.text id="api-key" name="api_key" label="API Key" />
-</bfg-box>
+</bfg-section>
 ```
 
 ### 2. Compile to Standard PHP
 Run `./bin/build` to compile to `build/templates/`:
 
 ```php
-<div class="bfg-box">
-    <div class="bfg-box__header">
+<div class="bfg-section">
+    <div class="bfg-section__header">
         <h2><?php esc_html_e('Settings', 'bring-fraktguiden-for-woocommerce'); ?></h2>
         <p><?php esc_html_e('Configure your options', 'bring-fraktguiden-for-woocommerce'); ?></p>
     </div>
-    <div class="bfg-box__section">
+    <div class="bfg-section__section">
         <div class="bfg-field">
             <label for="api-key"><?php esc_html_e('API Key', 'bring-fraktguiden-for-woocommerce'); ?></label>
             <input type="text" id="api-key" name="api_key">
@@ -58,7 +58,7 @@ require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
 │   └── test-compiler.php          ← Test runner
 ├── src/
 │   ├── components/                ← Component templates (.bfgc.php)
-│   │   ├── box.bfgc.php
+│   │   ├── section.bfgc.php
 │   │   ├── notice.bfgc.php
 │   │   ├── field.text.bfgc.php
 │   │   ├── field.select.bfgc.php
@@ -107,8 +107,8 @@ Component templates use simple placeholders:
 Use `:` prefix for PHP variables (no translation):
 
 ```php
-<bfg-box :title="$dynamic_title">  <!-- Uses variable, not translated -->
-<bfg-box title="Static Title">     <!-- Translated string -->
+<bfg-section :title="$dynamic_title">  <!-- Uses variable, not translated -->
+<bfg-section title="Static Title">     <!-- Translated string -->
 ```
 
 ## Key Features
@@ -122,7 +122,7 @@ Use `:` prefix for PHP variables (no translation):
 
 ## Available Components
 
-- **Layout**: `box`, `notice`, `progress`
+- **Layout**: `section`, `notice`, `progress`
 - **Fields**: `field.text`, `field.number`, `field.select`, `field.checkbox`
 - **Steps**: `step.completed`, `step.in-progress`, `step.pending`, `step-desc`
 - **Badges**: `badge.completed`, `badge.in-progress`, `badge.progress`

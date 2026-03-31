@@ -16,13 +16,13 @@
 
 		<form method="post" action="options.php">
 			<?php settings_fields('bring_fraktguiden_settings'); ?>
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><t>Display Options</t></h2>
 					<p><t>Customize how shipping options appear to customers</t></p>
 				</div>
 
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field">
 						<?php echo $fields->language->label(); ?>
 						<?php echo $fields->language; ?>
@@ -38,12 +38,12 @@
 				</div>
 			</div>
 
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><t>Pricing Options</t></h2>
 					<p><t>Settings that affect the shipping rates, price estimation and service availability</t></p>
 				</div>
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field">
 						<h3 class="bfg-field-group-title"><t>Shipping location</t></h3>
 						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
@@ -124,12 +124,12 @@
 				</div>
 			</div>
 
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><t>Lead Time</t></h2>
 					<p><t>Configure lead time and cutoff settings</t></p>
 				</div>
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field">
 						<div class="bfgu:flex bfgu:flex-row bfgu:gap-4">
 							<div class="bfgu:flex-1">
@@ -152,11 +152,11 @@
 				</div>
 			</div>
 
-			<div class="bfg-box">
-				<div class="bfg-box__header">
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><t>Advanced Settings</t></h2>
 				</div>
-				<div class="bfg-box__section">
+				<div class="bfg-section__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->debug; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->disable_stylesheet; ?></div>
 					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>

@@ -13,17 +13,17 @@ Templates are organized in:
 ## CSS Class Naming (BEM)
 
 Classes use BEM methodology with `bfg-` prefix:
-- **Block**: `bfg-{block}` - Standalone entity (e.g., `bfg-box`, `bfg-field`)
-- **Element**: `bfg-{block}__{element}` - Part of a block (e.g., `bfg-box__header`, `bfg-box__section`)
+- **Block**: `bfg-{block}` - Standalone entity (e.g., `bfg-section`, `bfg-field`)
+- **Element**: `bfg-{block}__{element}` - Part of a block (e.g., `bfg-section__header`, `bfg-section__section`)
 - **Modifier**: `bfg-{block}--{modifier}` - Variant of block/element (e.g., `bfg-field--checkbox-box`, `bfg-badge--completed`)
 
 ### Block Hierarchy Examples
 
 ```
-bfg-box                        // Container card
-├── bfg-box__header           // Title area with h2 and optional description
-│   └── bfg-box__header--divider  // Modifier for top border
-└── bfg-box__section          // Content area with fields
+bfg-section                        // Container card
+├── bfg-section__header           // Title area with h2 and optional description
+│   └── bfg-section__header--divider  // Modifier for top border
+└── bfg-section__section          // Content area with fields
 
 bfg-step-row                   // Clickable row with indicator
 ├── bfg-step-row__indicator   // Left circle with number/checkmark
@@ -112,13 +112,13 @@ echo $fields->my_field->label();  // Just the label
 ### Content Box Pattern
 
 ```php
-<div class="bfg-box">
+<div class="bfg-section">
     <?php echo Component::boxHeader(
         __('Section Title', 'bring-fraktguiden-for-woocommerce'),
         __('Optional description text', 'bring-fraktguiden-for-woocommerce')
     ); ?>
 
-    <div class="bfg-box__section">
+    <div class="bfg-section__section">
         <!-- Standard field -->
         <div class="bfg-field">
             <?php echo $fields->my_field->label(); ?>

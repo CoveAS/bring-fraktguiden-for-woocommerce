@@ -5,10 +5,10 @@
  * Header section for a box component with title and optional description.
  *
  * Source (.bfg.php):
- *   <bfg-box.header title="Page Title" description="Optional description"></bfg-box.header>
+ *   <bfg-section.header title="Page Title" description="Optional description"></bfg-section.header>
  *
  * Compiled output (.php):
- *   <div class="bfg-box__header">
+ *   <div class="bfg-section__header">
  *     <h2><?php esc_html_e('Page Title', 'bring-fraktguiden-for-woocommerce'); ?></h2>
  *     <p><?php esc_html_e('Optional description', 'bring-fraktguiden-for-woocommerce'); ?></p>
  *   </div>
@@ -22,7 +22,7 @@
  */
 ?>
 
-<div class="bfg-box__header">
+<div class="bfg-section__header">
     <h2>
         <t>title</t>
     </h2>

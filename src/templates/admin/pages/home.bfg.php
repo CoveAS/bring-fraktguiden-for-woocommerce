@@ -26,7 +26,7 @@ use BringFraktguiden\Admin\Step;
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
 
-		<div class="bfg-box">
+		<div class="bfg-section">
 			<?php
 			// Only show "next step" highlighting if at least one step is completed
 			// For fresh state (nothing completed), don't highlight any step as "in progress"
@@ -107,7 +107,7 @@ use BringFraktguiden\Admin\Step;
 		</div>
 
 		<!-- What's Next Section -->
-		<div class="bfg-box bfg-whats-next">
+		<div class="bfg-section bfg-whats-next">
 			<h2 class="bfg-section-card-title">
 				<t>What's next?</t>
 			</h2>

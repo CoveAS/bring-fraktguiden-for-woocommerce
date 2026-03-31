@@ -1,9 +1,9 @@
 <?php
 $i = 1;
 ?>
-<div class="bfg-box custom-class" data-id="<?php echo 122 + $i; ?>">
+<div class="bfg-section custom-class" data-id="<?php echo 122 + $i; ?>">
     
-    <div class="bfg-box__header">
+    <div class="bfg-section__header">
     <h2>
         <?php esc_html_e('Test Box', 'bring-fraktguiden-for-woocommerce'); ?>
     </h2>
@@ -13,7 +13,7 @@ $i = 1;
         </p>
     
 </div>
-    <div class="bfg-box__section">
+    <div class="bfg-section__section">
     
         <p>Test content</p>
     

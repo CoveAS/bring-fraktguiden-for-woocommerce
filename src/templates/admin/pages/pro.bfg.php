@@ -31,7 +31,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 
 		<?php if ($license_active && $pro_enabled): ?>
 			<!-- PRO Active State -->
-			<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--active">
+			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--active">
 				<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--success">
 					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 						stroke-linecap="round" stroke-linejoin="round">
@@ -57,12 +57,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</div>
 
 			<!-- PRO Features Overview -->
-			<div class="bfg-box">
-				<bfg-box.header>
+			<div class="bfg-section">
+				<bfg-section.header>
 					<t>Your PRO Features</t>
-				</bfg-box.header>
+				</bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<ul class="bfg-pro-features-grid">
 						<li>
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -121,12 +121,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 							<t>PRO support</t>
 						</li>
 					</ul>
-				</bfg-box.section>
+				</bfg-section.section>
 			</div>
 
 		<?php elseif ($is_expired): ?>
 			<!-- Expired State -->
-			<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--expired">
+			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--expired">
 				<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--expired">
 					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 						stroke-linecap="round" stroke-linejoin="round">
@@ -157,12 +157,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</div>
 
 			<!-- License Activation Form -->
-			<div class="bfg-box">
-				<bfg-box.header>
+			<div class="bfg-section">
+				<bfg-section.header>
 					<t>Activate Your License</t>
-				</bfg-box.header>
+				</bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<form method="post" action="options.php" id="bfg-license-form-pro">
 						<?php settings_fields('bring_fraktguiden_pro'); ?>
 
@@ -183,12 +183,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 							</p>
 						</div>
 					</form>
-				</bfg-box.section>
+				</bfg-section.section>
 			</div>
 
 		<?php elseif ($is_trial): ?>
 			<!-- Trial Active State -->
-			<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--trial">
+			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--trial">
 				<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--trial">
 					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 						stroke-linecap="round" stroke-linejoin="round">
@@ -221,12 +221,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</div>
 
 			<!-- PRO Features Overview -->
-			<div class="bfg-box">
-				<bfg-box.header>
+			<div class="bfg-section">
+				<bfg-section.header>
 					<t>PRO Features You're Enjoying</t>
-				</bfg-box.header>
+				</bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<ul class="bfg-pro-features-grid">
 						<li>
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -285,14 +285,14 @@ use BringFraktguiden\Admin\FieldRenderer;
 							<t>PRO support</t>
 						</li>
 					</ul>
-				</bfg-box.section>
+				</bfg-section.section>
 			</div>
 
 			<!-- License Activation Form -->
-			<div class="bfg-box">
-				<bfg-box.header title="Activate Your License" description="Already have a license? Enter it below to activate."></bfg-box.header>
+			<div class="bfg-section">
+				<bfg-section.header title="Activate Your License" description="Already have a license? Enter it below to activate."></bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<form method="post" action="options.php" id="bfg-license-form-pro">
 						<?php settings_fields('bring_fraktguiden_pro'); ?>
 
@@ -313,7 +313,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 							</p>
 						</div>
 					</form>
-				</bfg-box.section>
+				</bfg-section.section>
 			</div>
 
 			<div class="bfg-page__footer-notes">
@@ -329,7 +329,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 
 		<?php elseif ($is_test_site && $pro_enabled): ?>
 			<!-- Test Site State -->
-			<div class="bfg-box bfg-pro-teaser-v2 bfg-pro-teaser--test">
+			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--test">
 				<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--test">
 					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 						stroke-linecap="round" stroke-linejoin="round">
@@ -363,12 +363,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</div>
 
 			<!-- PRO Features Overview -->
-			<div class="bfg-box">
-				<bfg-box.header>
+			<div class="bfg-section">
+				<bfg-section.header>
 					<t>PRO Features Available</t>
-				</bfg-box.header>
+				</bfg-section.header>
 
-				<bfg-box.section>
+				<bfg-section.section>
 					<ul class="bfg-pro-features-grid">
 						<li>
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -427,12 +427,12 @@ use BringFraktguiden\Admin\FieldRenderer;
 							<t>PRO support</t>
 						</li>
 					</ul>
-				</bfg-box.section>
+				</bfg-section.section>
 			</div>
 
 		<?php else: ?>
 			<!-- Fresh/Default State - Show Trial/License Options -->
-			<div class="bfg-box bfg-pro-teaser-v2">
+			<div class="bfg-section bfg-pro-teaser-v2">
 				<p class="bfg-pro-teaser__caption">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 						stroke-linecap="round" stroke-linejoin="round">
