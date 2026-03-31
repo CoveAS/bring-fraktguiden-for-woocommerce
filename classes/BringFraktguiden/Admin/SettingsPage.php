@@ -113,6 +113,14 @@ class SettingsPage
 		);
 		add_submenu_page(
 			'bring_fraktguiden_home',
+			__('Pro', 'bring-fraktguiden-for-woocommerce'),
+			__('Pro', 'bring-fraktguiden-for-woocommerce'),
+			'manage_options',
+			'bring_fraktguiden_pro',
+			[self::class, 'pro_page']
+		);
+		add_submenu_page(
+			'bring_fraktguiden_home',
 			__('Booking', 'bring-fraktguiden-for-woocommerce'),
 			__('Booking', 'bring-fraktguiden-for-woocommerce'),
 			'manage_options',
@@ -182,6 +190,29 @@ class SettingsPage
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
+	}
+
+	public static function pro_page(): void
+	{
+		self::maybe_build();
+
+		$fields = Fields::instance();
+
+		// Pro status data
+		$is_test_site = Fraktguiden_Helper::is_test_site();
+		$pro_valid_to = get_option('bring_fraktguiden_pro_valid_to', false);
+		$license_active = $pro_valid_to && intval($pro_valid_to) > time();
+		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
+		$pro_activated = Fraktguiden_Helper::pro_activated();
+		$days_remaining = Fraktguiden_Helper::get_pro_days_remaining();
+		$pro_activated_on = Fraktguiden_Helper::get_option('pro_activated_on');
+		$is_trial = $pro_enabled && $pro_activated_on && !$license_active && $days_remaining >= 0;
+		$is_expired = $pro_enabled && $pro_activated_on && $days_remaining < 0 && !$license_active;
+
+		// Format valid_to date if set
+		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
+
+		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/pro.php';
 	}
 
 	public static function booking_page(): void
@@ -311,6 +342,7 @@ class SettingsPage
 			'bring-fraktguiden_page_bring_fraktguiden_settings',
 			'bring-fraktguiden_page_bring_fraktguiden_fallback',
 			'bring-fraktguiden_page_bring_fraktguiden_booking',
+			'bring-fraktguiden_page_bring_fraktguiden_pro',
 			'bring-fraktguiden_page_bring_fraktguiden_kitchen_sink',
 			'toplevel_page_bring_fraktguiden_home',
 		];
@@ -329,6 +361,7 @@ class SettingsPage
 			'bring-fraktguiden_page_bring_fraktguiden_settings',
 			'bring-fraktguiden_page_bring_fraktguiden_fallback',
 			'bring-fraktguiden_page_bring_fraktguiden_booking',
+			'bring-fraktguiden_page_bring_fraktguiden_pro',
 			'bring-fraktguiden_page_bring_fraktguiden_kitchen_sink',
 			'toplevel_page_bring_fraktguiden_home',
 		];

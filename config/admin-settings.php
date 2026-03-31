@@ -41,6 +41,15 @@ return [
 			],
 		],
 	],
+
+	/**
+	 * Pro page - license management and feature overview
+	 * Note: Uses pro_enabled and test_url fields from 'home' section
+	 */
+	'pro' => [
+		'title' => __('Bring Fraktguiden Pro', 'bring-fraktguiden-for-woocommerce'),
+		'fields' => [],
+	],
 	/**
 	 * General options setting
 	 */
