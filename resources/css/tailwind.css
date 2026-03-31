@@ -78,7 +78,10 @@ input:checked+.bring-toggle-alt::after {
 .bfg-admin-page__home {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #1d2327;
-    margin-top: 24px;
+    margin-top: 0;
+    padding-top: 24px;
+    background-color: var(--bfg-bg-page);
+    min-height: 100vh;
 }
 
 .bfg-admin-page__home .bfg-page__main {
@@ -704,7 +707,7 @@ input:checked+.bring-toggle-alt::after {
     --bfg-text-muted: #6B7280;
     --bfg-border: #D1D5DB;
     --bfg-bg-card: #ffffff;
-    --bfg-bg-page: #F9FAFB;
+    --bfg-bg-page: #ffffff;
     --bfg-radius-card: 12px;
     --bfg-radius-input: 8px;
     --bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -1016,7 +1019,6 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
 }
 
 .bfg-admin-page,
-.bfg-admin-page__home,
 .bfg-admin-page__settings,
 .bfg-admin-page__fallback,
 .bfg-admin-page__booking {
