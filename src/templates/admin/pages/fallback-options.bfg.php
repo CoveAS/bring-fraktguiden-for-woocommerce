@@ -6,10 +6,11 @@
 ?>
 
 <div class="wrap bfg-admin-page bfg-admin-page__fallback">
+	<div class="bfg-page__header">
+		<h1><?php esc_html_e('Fallback Options', 'bring-fraktguiden-for-woocommerce'); ?></h1>
+	</div>
+
 	<div class="bfg-page__main">
-		<div class="bfg-page__header">
-			<h1><?php esc_html_e('Fallback Options', 'bring-fraktguiden-for-woocommerce'); ?></h1>
-		</div>
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>

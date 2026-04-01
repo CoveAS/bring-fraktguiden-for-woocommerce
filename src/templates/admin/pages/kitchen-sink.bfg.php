@@ -10,13 +10,11 @@
 ?>
 
 <div class="wrap bfg-admin-page bfg-admin-page__kitchen-sink">
-	<div class="bfg-page__main">
-		<div class="bfg-page__header">
-			<h1><bfg-t>Kitchen Sink - Component Library</bfg-t></h1>
-			<p><bfg-t>Reference guide for all UI components and design patterns</bfg-t>
-			</p>
-		</div>
+	<div class="bfg-page__header">
+		<h1><bfg-t>Kitchen Sink - Component Library</bfg-t></h1>
+	</div>
 
+	<div class="bfg-page__main">
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>

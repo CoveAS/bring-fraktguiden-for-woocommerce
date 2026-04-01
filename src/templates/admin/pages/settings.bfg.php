@@ -6,10 +6,11 @@
 ?>
 
 <div class="wrap bfg-admin-page bfg-admin-page__settings">
+	<div class="bfg-page__header">
+		<h1><t>Settings</t></h1>
+	</div>
+
 	<div class="bfg-page__main">
-		<div class="bfg-page__header">
-			<h1><t>Settings</t></h1>
-		</div>
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
