@@ -16,7 +16,7 @@ use BringFraktguiden\Admin\Step;
 
 <div class="wrap bfg-admin-page bfg-admin-page__home">
 	<div class="bfg-page__header">
-		<h1><t>Home</t></h1>
+		<h1><t>Setup</t></h1>
 	</div>
 
 	<div class="bfg-page__main">
@@ -103,46 +103,5 @@ use BringFraktguiden\Admin\Step;
 				<?php endforeach; ?>
 			</div>
 		</div>
-
-		<!-- What's Next Section -->
-		<div class="bfg-section bfg-whats-next">
-			<h2 class="bfg-section-card-title">
-				<t>What's next?</t>
-			</h2>
-			<p class="bfg-pro-teaser__subtitle">
-				<t>When you're ready, there are a few more things you can set up your shipping and give your customers a better experience.</t>
-			</p>
-
-			<ul class="bfg-whats-next__links">
-				<li>
-					<a href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>">
-						<t>Test your shipping rates in Bring</t>
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M5 12h14"></path>
-							<path d="m12 5 7 7-7 7"></path>
-						</svg>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden')); ?>">
-						<t>Configure pickup points</t>
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M5 12h14"></path>
-							<path d="m12 5 7 7-7 7"></path>
-						</svg>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>">
-						<t>Learn more about Pro</t>
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M5 12h14"></path>
-							<path d="m12 5 7 7-7 7"></path>
-						</svg>
-					</a>
-				</li>
-			</ul>
-		</div>
-
 	</div>
 </div>
