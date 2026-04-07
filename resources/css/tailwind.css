@@ -921,6 +921,47 @@ a.bfg-btn--ghost:hover,
     display: flex;
 }
 
+.bfg-btn--icon-only {
+    padding: 0;
+    width: var(--bfg-btn-md-height);
+    flex-shrink: 0;
+}
+
+.bfg-btn--icon-only.bfg-btn--sm {
+    width: var(--bfg-btn-sm-height);
+}
+
+.bfg-btn--icon-only.bfg-btn--lg {
+    width: var(--bfg-btn-lg-height);
+}
+
+/* Grey Button */
+.bfg-btn--grey,
+a.bfg-btn--grey,
+.bfg-admin-page a.bfg-btn--grey {
+    background: #F3F4F6;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-btn--grey:hover,
+a.bfg-btn--grey:hover,
+.bfg-admin-page a.bfg-btn--grey:hover {
+    background: #E5E7EB;
+    color: var(--bfg-text-main);
+}
+
+.bfg-btn--grey:active {
+    background: #D1D5DB;
+    transform: translateY(1px);
+}
+
+.bfg-btn--grey:disabled,
+.bfg-btn--grey.is-disabled {
+    background: #F9FAFB;
+    color: #9CA3AF;
+    box-shadow: none;
+}
+
 /* Loading State */
 .bfg-btn.is-loading {
     color: transparent;
@@ -3047,6 +3088,11 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.bfg-complete-card__body {
+    flex: 1;
+    min-width: 0;
 }
 
 .bfg-complete-card__title {
