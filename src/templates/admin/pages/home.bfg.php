@@ -15,13 +15,11 @@ use BringFraktguiden\Admin\Step;
 <?php /* Styles moved to assets/css/bring-fraktguiden-admin-home.css */ ?>
 
 <div class="wrap bfg-admin-page bfg-admin-page__home">
-	<div class="bfg-page__main">
-		<div class="bfg-page__header">
-			<h1>
-				<t>Home</t>
-			</h1>
-		</div>
+	<div class="bfg-page__header">
+		<h1><t>Home</t></h1>
+	</div>
 
+	<div class="bfg-page__main">
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
