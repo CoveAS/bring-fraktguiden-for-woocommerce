@@ -3086,8 +3086,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Booking Upsell Card */
 .bfg-booking-upsell {
-    background: linear-gradient(135deg, #eff6ff 0%, var(--bfg-primary-light) 60%) !important;
-    border-color: var(--bfg-primary-light-hover) !important;
     display: flex;
     align-items: flex-start;
     gap: 20px;
