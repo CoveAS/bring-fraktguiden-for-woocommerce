@@ -697,10 +697,10 @@ input:checked+.bring-toggle-alt::after {
 
 :root {
     /* Colors */
-    --bfg-primary: #16A34A;
-    --bfg-primary-hover: #15803d;
-    --bfg-primary-light: #dcfce7;
-    --bfg-primary-light-hover: #bbf7d0;
+    --bfg-primary: #2563EB;
+    --bfg-primary-hover: #1D4ED8;
+    --bfg-primary-light: #DBEAFE;
+    --bfg-primary-light-hover: #BFDBFE;
     --bfg-text-main: #111827;
     --bfg-text-secondary: #4B5563;
     --bfg-text-muted: #6B7280;
