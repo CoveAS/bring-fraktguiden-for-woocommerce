@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => ({
       input: [
         'resources/js/admin.js',
         'resources/js/checkout.js',
+        'resources/js/home.js',
+        'resources/js/pro.js',
       ],
       output: {
         entryFileNames: 'js/[name].js',

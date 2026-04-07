@@ -384,6 +384,29 @@ class SettingsPage
 			Bring_Fraktguiden::VERSION,
 			true
 		);
+
+		if ($hook === 'toplevel_page_bring_fraktguiden_home') {
+			wp_enqueue_script(
+				'bring-home-js',
+				plugins_url('bring-fraktguiden-for-woocommerce/build/js/home.js'),
+				[],
+				Bring_Fraktguiden::VERSION,
+				true
+			);
+			wp_localize_script('bring-home-js', 'bfgHomeData', [
+				'proPageUrl' => admin_url('admin.php?page=bring_fraktguiden_pro'),
+			]);
+		}
+
+		if ($hook === 'bring-fraktguiden_page_bring_fraktguiden_pro') {
+			wp_enqueue_script(
+				'bring-pro-js',
+				plugins_url('bring-fraktguiden-for-woocommerce/build/js/pro.js'),
+				[],
+				Bring_Fraktguiden::VERSION,
+				true
+			);
+		}
 	}
 
 	public static function process_settings($value, $old_value): array

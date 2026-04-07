@@ -14,7 +14,7 @@ use BringFraktguiden\Admin\Step;
 
 <?php /* Styles moved to assets/css/bring-fraktguiden-admin-home.css */ ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__home">
+<div class="wrap bfg-admin-page bfg-admin-page__home" data-setup-complete="<?php echo $stepsCompleted === $stepCount ? 'true' : 'false'; ?>">
 	<div class="bfg-page__header">
 		<h1><t>Setup</t></h1>
 	</div>
@@ -35,9 +35,15 @@ use BringFraktguiden\Admin\Step;
 
 			<!-- Setup Header -->
 			<div class="bfg-setup-header">
-				<h2 class="bfg-setup-header__title">
-					<t>Get Started with Bring shipping</t>
-				</h2>
+				<div class="bfgu:flex bfgu:justify-between bfgu:items-center">
+					<h2 class="bfg-setup-header__title">
+						<t>Get Started with Bring shipping</t>
+					</h2>
+					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-badge bfg-badge--outline bfg-badge--pro">
+						<span class="bfg-badge__dot bfg-badge__dot--green"></span>
+						<t>Pro available</t>
+					</a>
+				</div>
 				<p class="bfg-setup-header__subtitle">
 					<t>Complete these steps to configure Bring Shipping</t>
 				</p>

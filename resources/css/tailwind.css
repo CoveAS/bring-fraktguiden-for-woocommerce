@@ -1714,6 +1714,38 @@ a.bfg-step__link:hover,
     color: var(--bfg-primary);
 }
 
+.bfg-badge--outline,
+.bfg-admin-page a.bfg-badge--outline,
+.bfg-admin-page a.bfg-badge--outline:hover,
+.bfg-admin-page a.bfg-badge--outline:visited,
+.bfg-admin-page a.bfg-badge--outline:focus,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:hover,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:visited,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:focus {
+    background-color: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    color: #6B7280 !important;
+    border-radius: 8px;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    outline: none;
+    cursor: pointer;
+}
+
+.bfg-badge__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.bfg-badge__dot--green {
+    background-color: #16A34A;
+}
+
 /* ==========================================================================
    Indicator Dot Component (.bfg-indicator-dot)
    ========================================================================== */

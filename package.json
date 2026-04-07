@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "canvas-confetti": "^1.9.4",
     "vue-select": "^4.0.0-beta.3"
   }
 }
