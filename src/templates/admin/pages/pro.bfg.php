@@ -454,7 +454,39 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 				</div>
 
-				<!-- Card 2: Next — Configure Bring Booking (PRO upsell) -->
+				<!-- Card 2: Next steps (free tier) -->
+				<div class="bfg-free-card bfg-complete-card">
+					<div class="bfg-complete-card__icon">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<line x1="8" y1="6" x2="21" y2="6"></line>
+							<line x1="8" y1="12" x2="21" y2="12"></line>
+							<line x1="8" y1="18" x2="21" y2="18"></line>
+							<line x1="3" y1="6" x2="3.01" y2="6"></line>
+							<line x1="3" y1="12" x2="3.01" y2="12"></line>
+							<line x1="3" y1="18" x2="3.01" y2="18"></line>
+						</svg>
+					</div>
+					<div class="bfg-complete-card__body">
+						<h3 class="bfg-complete-card__title"><t>Next steps</t></h3>
+						<div class="bfg-steps-list">
+							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')); ?>">
+								<t>Configure fallback rates</t>
+								<bfg-step-desc><t>Set a fixed rate to show customers when Bring rates can't be retrieved</t></bfg-step-desc>
+							</bfg-access-link>
+							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')); ?>">
+								<t>Adjust display settings</t>
+								<bfg-step-desc><t>Configure handling fee, lead time, delivery estimates and checkout appearance</t></bfg-step-desc>
+							</bfg-access-link>
+							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>">
+								<t>Verify your checkout</t>
+								<bfg-step-desc><t>Confirm Bring shipping rates are showing correctly for customers</t></bfg-step-desc>
+							</bfg-access-link>
+						</div>
+					</div>
+				</div>
+
+				<!-- Card 3: Next — Configure Bring Booking (PRO upsell) -->
 				<div class="bfg-free-card bfg-booking-upsell">
 					<div class="bfg-booking-upsell__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -466,7 +498,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-booking-upsell__body">
 						<div class="bfg-booking-upsell__title-row">
-							<h3 class="bfg-booking-upsell__title"><t>Next: Configure Bring Booking</t></h3>
+							<h3 class="bfg-booking-upsell__title"><t>Go further with PRO</t></h3>
 							<span class="bfg-badge bfg-badge--pro-green"><t>PRO</t></span>
 						</div>
 						<p class="bfg-booking-upsell__desc"><t>Automatically book shipments and print labels in one click</t></p>
