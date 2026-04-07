@@ -439,7 +439,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 				<!-- Card 1: Setup Complete -->
 				<div class="bfg-free-card bfg-complete-card">
 					<div class="bfg-complete-card__icon">
-						<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 							stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="20 6 9 17 4 12"></polyline>
 						</svg>
@@ -457,7 +457,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 				<!-- Card 2: Next — Configure Bring Booking (PRO upsell) -->
 				<div class="bfg-free-card bfg-booking-upsell">
 					<div class="bfg-booking-upsell__icon">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
 							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
 							<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
