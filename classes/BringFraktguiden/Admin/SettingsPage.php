@@ -212,6 +212,10 @@ class SettingsPage
 		// Format valid_to date if set
 		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
 
+		// Stats for free state
+		$shipmentsThisMonth = self::get_shipments_this_month();
+		$activeShippingMethodsCount = self::get_active_bring_methods_count();
+
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/pro.php';
 	}
 
@@ -328,6 +332,36 @@ class SettingsPage
 		// Close the hidden div used to prevent notices from flickering before
 		// they are inserted elsewhere in the page.
 		echo '</div>';
+	}
+
+	private static function get_shipments_this_month(): int
+	{
+		if (!function_exists('wc_get_orders')) {
+			return 0;
+		}
+		$orders = wc_get_orders([
+			'date_created' => '>=' . date('Y-m-01'),
+			'return'       => 'ids',
+			'limit'        => -1,
+			'status'       => ['wc-completed', 'wc-processing', 'wc-shipped'],
+		]);
+		return count($orders);
+	}
+
+	private static function get_active_bring_methods_count(): int
+	{
+		if (!class_exists('WC_Shipping_Zones')) {
+			return 0;
+		}
+		$count = 0;
+		foreach (\WC_Shipping_Zones::get_zones() as $zone) {
+			foreach ($zone['shipping_methods'] as $method) {
+				if ($method instanceof \WC_Shipping_Method_Bring && $method->is_enabled()) {
+					$count++;
+				}
+			}
+		}
+		return $count;
 	}
 
 	private static function is_settings_page(): bool

@@ -14,6 +14,8 @@ use BringFraktguiden\Admin\FieldRenderer;
  * @var bool $is_trial
  * @var bool $is_expired
  * @var string $valid_to_formatted
+ * @var int $shipmentsThisMonth
+ * @var int $activeShippingMethodsCount
  */
 ?>
 
@@ -431,252 +433,149 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</div>
 
 		<?php else: ?>
-			<!-- Fresh/Default State - Show Trial/License Options -->
-			<div class="bfg-section bfg-pro-teaser-v2">
-				<p class="bfg-pro-teaser__caption">
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round">
-						<path
-							d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-						<path d="M5 3v4" />
-						<path d="M19 17v4" />
-						<path d="M3 5h4" />
-						<path d="M17 19h4" />
-					</svg>
-					<t>Try Pro Free for 7 Days</t>
-				</p>
-				<h2 class="bfg-section-card-title">
-					<t>Unlock PRO Features</t>
-				</h2>
-				<p class="bfg-pro-teaser__subtitle">
-					<t>Get instant access to all premium features on your live site. Start your free trial or activate your
-						license.</t>
-				</p>
+			<!-- Free Version State -->
+			<div class="bfg-section bfg-pro-free-state">
 
-				<ul class="bfg-pro-teaser-features">
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+				<!-- Card 1: Setup Complete -->
+				<div class="bfg-free-card bfg-complete-card">
+					<div class="bfg-complete-card__icon">
+						<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
 							stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="20 6 9 17 4 12"></polyline>
 						</svg>
-						<t>MyBring Booking</t><sup>1</sup>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Fixed shipping prices</t>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Free shipping threshold</t>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Pick-up points</t><sup>2</sup>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Multiple customer numbers</t>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Custom service names</t>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>Service fallback pricing</t>
-					</li>
-					<li>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-						<t>PRO support</t>
-					</li>
-				</ul>
-
-				<form method="post" action="options.php" id="bfg-pro-activation-form-pro">
-					<?php settings_fields('bring_fraktguiden_pro'); ?>
-
-					<!-- Hidden pro_enabled checkbox that we toggle via JS -->
-					<div style="display:none">
-						<?php FieldRenderer::pro_enabled(); ?>
 					</div>
-
-					<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--lg bfg-btn--full-width">
-						<t>Start Your Free 7-Day Trial</t>
-					</button>
-					<p class="bfg-pro-disclaimer">
-						<t>Trial starts immediately and lasts for 7 days from activation.</t>
-					</p>
-				</form>
-
-				<div class="bfg-pro-divider">
-					<span>
-						<t>Already have a license?</t>
-					</span>
-				</div>
-
-				<div class="bfg-pro-license-links">
-					<a href="#" class="bfg-pro-license-activate-link" id="bfg-show-license-form-pro">
-						<t>Click here to activate your license</t>
-					</a>
-					<p class="bfg-pro-license-buy">
-						<t>Don't have a license?</t> <a href="https://bringfraktguiden.no/" target="_blank">
-							<t>Buy one here</t>
-						</a>
-					</p>
-				</div>
-
-				<form method="post" action="options.php" id="bfg-license-form-pro" class="bfg-pro-license-form"
-					style="display: none;">
-					<?php settings_fields('bring_fraktguiden_pro'); ?>
-
-					<div style="display:none">
-						<?php FieldRenderer::pro_enabled(); ?>
-					</div>
-
-					<div class="bfg-pro-license-form__field">
-						<label class="bfg-pro-license-form__label">
-							<t>Enter Your License Key</t>
-						</label>
-						<div class="bfg-pro-license-form__row">
-							<?php FieldRenderer::test_url(); ?>
-							<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
-						</div>
-						<p class="bfg-description">
-							<t>Your license key is a 16-character code you received after purchase</t>
+					<div class="bfg-complete-card__body">
+						<h2 class="bfg-complete-card__title"><t>Setup Complete</t></h2>
+						<p class="bfg-complete-card__desc"><t>Your shipping is configured and ready to use.</t></p>
+						<p class="bfg-complete-card__hint">
+							<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green bfg-link-green--bold"><t>Explore Pro features</t></a>
+							<t>if you want more capabilities</t>
 						</p>
 					</div>
+				</div>
 
-					<p class="bfg-pro-license-buy" style="text-align: center;">
-						<t>Need a license?</t> <a href="https://bringfraktguiden.no/" target="_blank">
-							<t>Purchase here</t>
-						</a>
-					</p>
-				</form>
-			</div>
+				<!-- Card 2: Next — Configure Bring Booking (PRO upsell) -->
+				<div class="bfg-free-card bfg-booking-upsell">
+					<div class="bfg-booking-upsell__icon">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+							<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+							<line x1="12" y1="22.08" x2="12" y2="12"></line>
+						</svg>
+					</div>
+					<div class="bfg-booking-upsell__body">
+						<div class="bfg-booking-upsell__title-row">
+							<h3 class="bfg-booking-upsell__title"><t>Next: Configure Bring Booking</t></h3>
+							<span class="bfg-badge bfg-badge--pro-green"><t>PRO</t></span>
+						</div>
+						<p class="bfg-booking-upsell__desc"><t>Automatically book shipments and print labels in one click</t></p>
+						<ul class="bfg-check-list">
+							<li>
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round">
+									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+									<polyline points="22 4 12 14.01 9 11.01"></polyline>
+								</svg>
+								<t>Automatic booking when orders are placed</t>
+							</li>
+							<li>
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round">
+									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+									<polyline points="22 4 12 14.01 9 11.01"></polyline>
+								</svg>
+								<t>Print shipping labels directly from WooCommerce</t>
+							</li>
+							<li>
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round">
+									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+									<polyline points="22 4 12 14.01 9 11.01"></polyline>
+								</svg>
+								<t>Real-time tracking updates for customers</t>
+							</li>
+						</ul>
+						<div class="bfg-booking-upsell__cta">
+							<form method="post" action="options.php" id="bfg-pro-activation-form-pro">
+								<?php settings_fields('bring_fraktguiden_pro'); ?>
+								<div style="display:none">
+									<?php FieldRenderer::pro_enabled(); ?>
+								</div>
+								<button type="submit" class="bfg-btn bfg-btn--primary">
+									<t>Try it free for 7 days</t>
+								</button>
+							</form>
+							<span class="bfg-booking-upsell__no-cc"><t>No credit card required</t></span>
+						</div>
+					</div>
+				</div>
 
-			<div class="bfg-page__footer-notes" id="bfg-pro-footnotes">
-				<small><sup>1</sup>
-					<t>Domestic shipments only. We're working on building support for international shipping.</t>
-				</small>
-				<small><sup>2</sup>
-					<t>List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til
-						Pakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL
-						and PICKUP_PARCEL_BULK</t>
-				</small>
+				<!-- Stats Row -->
+				<div class="bfg-stats-row">
+					<div class="bfg-free-card bfg-stat-card">
+						<div class="bfg-stat-card__icon">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+							</svg>
+						</div>
+						<div>
+							<div class="bfg-stat-card__number"><?php echo esc_html($shipmentsThisMonth); ?></div>
+							<div class="bfg-stat-card__label"><t>Shipments this month</t></div>
+						</div>
+					</div>
+					<div class="bfg-free-card bfg-stat-card">
+						<div class="bfg-stat-card__icon">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+								<polyline points="17 6 23 6 23 12"></polyline>
+							</svg>
+						</div>
+						<div>
+							<div class="bfg-stat-card__number"><?php echo esc_html($activeShippingMethodsCount); ?></div>
+							<div class="bfg-stat-card__label"><t>Active shipping methods</t></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Card 4: Do more with Pro -->
+				<div class="bfg-free-card bfg-do-more-card">
+					<div class="bfg-do-more-card__header">
+						<div class="bfg-do-more-card__icon">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+							</svg>
+						</div>
+						<h3 class="bfg-do-more-card__title"><t>Do more with Pro</t></h3>
+					</div>
+					<div class="bfg-do-more-card__grid">
+						<div class="bfg-do-more-feature">
+							<strong><t>MyBring Booking</t></strong>
+							<span><t>Book shipments in one click</t></span>
+						</div>
+						<div class="bfg-do-more-feature">
+							<strong><t>Pickup Points</t></strong>
+							<span><t>Show pickup locations</t></span>
+						</div>
+						<div class="bfg-do-more-feature">
+							<strong><t>Shipping Labels</t></strong>
+							<span><t>Print labels automatically</t></span>
+						</div>
+					</div>
+					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green">
+						<t>View all Pro features</t> &rarr;
+					</a>
+				</div>
+
 			</div>
 
 			<script>
 				document.addEventListener('DOMContentLoaded', function () {
 					const proCheckbox = document.querySelector('#bfg-pro-activation-form-pro input[name="pro_enabled"]');
 					const trialForm = document.getElementById('bfg-pro-activation-form-pro');
-					const licenseForm = document.getElementById('bfg-license-form-pro');
-					const showLicenseLink = document.getElementById('bfg-show-license-form-pro');
-					const licenseLinks = document.querySelector('.bfg-pro-license-links');
-					const licenseInput = licenseForm ? licenseForm.querySelector('input[name="test_url"]') : null;
-					const licenseFeedback = document.getElementById('bfg-license-feedback-pro');
-
-					// Show license form when clicking the link
-					if (showLicenseLink && licenseForm && licenseLinks) {
-						showLicenseLink.addEventListener('click', function (e) {
-							e.preventDefault();
-							licenseLinks.style.display = 'none';
-							licenseForm.style.display = 'block';
-							if (licenseInput) {
-								licenseInput.focus();
-							}
-						});
-					}
-
-					// Check if license key format is valid (XXXX-XXXX-XXXX-XXXX or 16 chars without dashes)
-					function isValidLicenseFormat(value) {
-						const cleaned = value.replace(/-/g, '').trim();
-						return cleaned.length === 16;
-					}
-
-					// Show feedback
-					function showFeedback(type) {
-						if (!licenseFeedback) return;
-						if (type === 'saving') {
-							licenseFeedback.innerHTML = '<span class="bfg-license-saving"></span>';
-							licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--saving';
-						} else if (type === 'saved') {
-							licenseFeedback.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-							licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--saved';
-						} else if (type === 'error') {
-							licenseFeedback.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
-							licenseFeedback.className = 'bfg-license-feedback bfg-license-feedback--error';
-						} else {
-							licenseFeedback.innerHTML = '';
-							licenseFeedback.className = 'bfg-license-feedback';
-						}
-					}
-
-					// Save license via AJAX
-					async function saveLicense(licenseKey) {
-						const formData = new FormData();
-						formData.append('action', 'bring_save_license');
-						formData.append('license_key', licenseKey);
-
-						try {
-							const response = await fetch(ajaxurl, {
-								method: 'POST',
-								body: formData
-							});
-							const data = await response.json();
-							return data.status === 'success';
-						} catch (error) {
-							return false;
-						}
-					}
-
-					// Auto-save license on valid input
-					let saveTimeout = null;
-					if (licenseInput) {
-						licenseInput.setAttribute('placeholder', 'XXXX-XXXX-XXXX-XXXX');
-						licenseInput.value = '';
-
-						licenseInput.addEventListener('input', function () {
-							showFeedback('');
-							clearTimeout(saveTimeout);
-
-							if (isValidLicenseFormat(licenseInput.value)) {
-								saveTimeout = setTimeout(async function () {
-									showFeedback('saving');
-									const success = await saveLicense(licenseInput.value);
-									if (success) {
-										showFeedback('saved');
-										setTimeout(function () {
-											window.location.reload();
-										}, 800);
-									} else {
-										showFeedback('error');
-									}
-								}, 500);
-							}
-						});
-					}
-
-					// Handle trial form submit
 					if (trialForm) {
 						trialForm.addEventListener('submit', function () {
 							if (proCheckbox) {

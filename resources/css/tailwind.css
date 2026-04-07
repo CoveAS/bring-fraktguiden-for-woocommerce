@@ -3012,6 +3012,254 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     }
 }
 
+/* ==========================================================================
+   Pro Page — Free Version State
+   ========================================================================== */
+
+.bfg-pro-free-state {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 0 !important;
+}
+
+.bfg-free-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* Setup Complete Card */
+.bfg-complete-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.bfg-complete-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-complete-card__title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin: 0 0 4px !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.bfg-complete-card__desc {
+    font-size: 15px;
+    color: #4B5563;
+    margin: 0 0 4px !important;
+}
+
+.bfg-complete-card__hint {
+    font-size: 15px;
+    color: #4B5563;
+    margin: 0 !important;
+}
+
+.bfg-link-green {
+    color: #16A34A !important;
+    text-decoration: none !important;
+}
+
+.bfg-link-green:hover {
+    color: #15803d !important;
+    text-decoration: underline !important;
+}
+
+.bfg-link-green--bold {
+    font-weight: 600;
+}
+
+/* Booking Upsell Card */
+.bfg-booking-upsell {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%) !important;
+    border-color: #bbf7d0 !important;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.bfg-booking-upsell__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #dcfce7;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-booking-upsell__body {
+    flex: 1;
+}
+
+.bfg-booking-upsell__title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.bfg-booking-upsell__title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+.bfg-badge--pro-green {
+    background: #dcfce7;
+    color: #16A34A;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0 8px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.bfg-booking-upsell__desc {
+    font-size: 14px;
+    color: #4B5563;
+    margin: 0 0 16px !important;
+}
+
+.bfg-check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bfg-check-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.bfg-check-list li svg {
+    color: #16A34A;
+    flex-shrink: 0;
+}
+
+.bfg-booking-upsell__cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-booking-upsell__no-cc {
+    font-size: 13px;
+    color: #6B7280;
+}
+
+/* Stats Row */
+.bfg-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.bfg-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-stat-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #dcfce7;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-stat-card__number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.1;
+}
+
+.bfg-stat-card__label {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+}
+
+/* Do More with Pro Card */
+.bfg-do-more-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.bfg-do-more-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #dcfce7;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-do-more-card__title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+.bfg-do-more-card__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.bfg-do-more-feature strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.bfg-do-more-feature span {
+    font-size: 13px;
+    color: #6B7280;
+}
+
 /* ----------------------------------------
    Source: pro/assets/css/admin.css
    ---------------------------------------- */
