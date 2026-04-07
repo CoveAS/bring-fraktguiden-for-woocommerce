@@ -506,7 +506,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 									<t>Try it free for 7 days</t>
 								</button>
 							</form>
-							<span class="bfg-booking-upsell__no-cc"><t>No credit card required</t></span>
 						</div>
 					</div>
 				</div>
