@@ -3095,8 +3095,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: var(--bfg-primary-light);
-    color: var(--bfg-primary);
+    background: #F3F4F6;
+    color: #374151;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3190,8 +3190,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: var(--bfg-primary-light);
-    color: var(--bfg-primary);
+    background: #F3F4F6;
+    color: #374151;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3223,8 +3223,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: var(--bfg-primary-light);
-    color: var(--bfg-primary);
+    background: #F3F4F6;
+    color: #374151;
     display: flex;
     align-items: center;
     justify-content: center;
