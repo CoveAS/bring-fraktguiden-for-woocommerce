@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	confetti({
 		particleCount: 150,
 		spread: 80,
-		origin: { y: 0.6 },
+		origin: { x: 0, y: 1 },
 		ticks: 200,
 	});
 });
