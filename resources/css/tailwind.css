@@ -1767,6 +1767,20 @@ a.bfg-step__link:hover,
     text-decoration: underline;
 }
 
+.bfg-access-link__content .bfg-badge--completed {
+    display: inline-flex;
+    margin-top: 8px;
+}
+
+.bfg-access-link .bfg-badge--completed-text {
+    display: none;
+    margin-top: 8px;
+}
+
+.bfg-access-link--done .bfg-badge--completed-text {
+    display: inline-flex;
+}
+
 .bfg-badge {
     font-size: 14px;
     padding: 0 16px;
@@ -1784,6 +1798,25 @@ a.bfg-step__link:hover,
 .bfg-badge--completed {
     background-color: color-mix(in srgb, #15803d 15%, white);
     color: #15803d;
+}
+
+.bfg-badge--md {
+    font-size: 12px;
+    padding: 0 10px;
+    height: 28px;
+}
+
+.bfg-badge--completed-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #15803d;
+    background: none;
+    padding: 0;
+    height: auto;
+    border-radius: 0;
+    line-height: 1;
 }
 
 .bfg-badge--in-progress {
@@ -3244,10 +3277,10 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 .bfg-check-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px !important;
+    margin: 0 0 16px !important;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
 }
 
 .bfg-check-list li {
@@ -3359,6 +3392,120 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 .bfg-do-more-feature span {
     font-size: 13px;
     color: #6B7280;
+}
+
+/* Free Version State — Status title */
+.bfg-free-status__title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+    color: #111827;
+    margin: 0 0 4px !important;
+}
+
+/* Pro Upsell Card */
+.bfg-pro-upsell-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.bfg-pro-upsell-card__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: #F3F4F6;
+    color: #6B7280;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bfg-pro-upsell-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-pro-upsell-card__desc {
+    font-size: 14px;
+    color: #4B5563;
+    margin: 0 0 16px !important;
+}
+
+.bfg-pro-upsell-card__ctas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* License Activate Card */
+.bfg-license-activate-card .bfg-complete-card__desc {
+    margin-bottom: 8px !important;
+}
+
+/* Pro Features Section */
+.bfg-pro-features-section {
+    margin-top: 8px;
+}
+
+.bfg-pro-features-section__header {
+    margin-bottom: 16px;
+}
+
+.bfg-pro-features-section__title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #111827;
+    margin: 0 0 2px !important;
+}
+
+.bfg-pro-features-section__subtitle {
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0 !important;
+}
+
+.bfg-pro-feature-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.bfg-pro-feature-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-pro-feature-card__icon {
+    width: 36px;
+    height: 36px;
+    background: #F3F4F6;
+    color: #9CA3AF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.bfg-pro-feature-card__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    display: block;
+}
+
+.bfg-pro-feature-card__desc {
+    font-size: 13px;
+    color: #9CA3AF;
+    display: block;
 }
 
 /* ----------------------------------------

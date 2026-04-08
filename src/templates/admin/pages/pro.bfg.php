@@ -436,58 +436,9 @@ use BringFraktguiden\Admin\FieldRenderer;
 			<!-- Free Version State -->
 			<div class="bfg-section bfg-pro-free-state">
 
-				<!-- Card 1: Setup Complete -->
-				<div class="bfg-free-card bfg-complete-card">
-					<div class="bfg-complete-card__icon bfg-complete-card__icon--success">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-							stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="20 6 9 17 4 12"></polyline>
-						</svg>
-					</div>
-					<div class="bfg-complete-card__body">
-						<h2 class="bfg-complete-card__title"><t>Setup Complete</t></h2>
-						<p class="bfg-complete-card__desc"><t>Your shipping is configured and ready to use.</t></p>
-						<p class="bfg-complete-card__hint">
-							<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green bfg-link-green--bold"><t>Explore Pro features</t></a>
-							<t>if you want more capabilities</t>
-						</p>
-					</div>
-				</div>
-
-				<!-- Card 2: Next steps (free tier) -->
+				<!-- Card 1: Status -->
 				<div class="bfg-free-card bfg-complete-card">
 					<div class="bfg-complete-card__icon">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-							stroke-linecap="round" stroke-linejoin="round">
-							<path d="m3 17 2 2 4-4"/>
-							<path d="m3 7 2 2 4-4"/>
-							<path d="M13 6h8"/>
-							<path d="M13 12h8"/>
-							<path d="M13 18h8"/>
-						</svg>
-					</div>
-					<div class="bfg-complete-card__body">
-						<h3 class="bfg-complete-card__title"><t>Next steps</t></h3>
-						<div class="bfg-steps-list">
-							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback&ref=bring_fraktguiden_pro')); ?>">
-								<t>Configure fallback rates</t>
-								<bfg-step-desc><t>Set a fixed rate to show customers when Bring rates can't be retrieved</t></bfg-step-desc>
-							</bfg-access-link>
-							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_settings&ref=bring_fraktguiden_pro')); ?>">
-								<t>Adjust display settings</t>
-								<bfg-step-desc><t>Configure handling fee, lead time, delivery estimates and checkout appearance</t></bfg-step-desc>
-							</bfg-access-link>
-							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>">
-								<t>Verify your checkout</t>
-								<bfg-step-desc><t>Confirm Bring shipping rates are showing correctly for customers</t></bfg-step-desc>
-							</bfg-access-link>
-						</div>
-					</div>
-				</div>
-
-				<!-- Card 3: Next — Configure Bring Booking (PRO upsell) -->
-				<div class="bfg-free-card bfg-booking-upsell">
-					<div class="bfg-booking-upsell__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
 							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -495,116 +446,161 @@ use BringFraktguiden\Admin\FieldRenderer;
 							<line x1="12" y1="22.08" x2="12" y2="12"/>
 						</svg>
 					</div>
-					<div class="bfg-booking-upsell__body">
-						<p class="bfg-booking-upsell__eyebrow"><t>Go further with PRO</t></p>
-						<div class="bfg-booking-upsell__title-row">
-							<h3 class="bfg-booking-upsell__title"><t>Configure MyBring Booking</t></h3>
-							<span class="bfg-badge bfg-badge--pro-green"><t>PRO</t></span>
-						</div>
-						<p class="bfg-booking-upsell__desc"><t>Automatically book shipments and print labels in one click</t></p>
-						<ul class="bfg-check-list">
-							<li>
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-									stroke-linecap="round" stroke-linejoin="round">
-									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-									<polyline points="22 4 12 14.01 9 11.01"></polyline>
-								</svg>
-								<t>Automatic booking when orders are placed</t>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-									stroke-linecap="round" stroke-linejoin="round">
-									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-									<polyline points="22 4 12 14.01 9 11.01"></polyline>
-								</svg>
-								<t>Print shipping labels directly from WooCommerce</t>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-									stroke-linecap="round" stroke-linejoin="round">
-									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-									<polyline points="22 4 12 14.01 9 11.01"></polyline>
-								</svg>
-								<t>Real-time tracking updates for customers</t>
-							</li>
-						</ul>
-						<div class="bfg-booking-upsell__cta">
+					<div class="bfg-complete-card__body">
+						<h2 class="bfg-free-status__title"><t>Free Version</t></h2>
+						<p class="bfg-complete-card__desc"><t>Upgrade to Pro for advanced shipping features</t></p>
+					</div>
+				</div>
+
+				<!-- Card 2: Pro Features upsell -->
+				<div class="bfg-free-card bfg-pro-upsell-card">
+					<div class="bfg-pro-upsell-card__icon">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/>
+							<path d="M5 21h14"/>
+						</svg>
+					</div>
+					<div class="bfg-pro-upsell-card__body">
+						<h2 class="bfg-complete-card__title"><t>Pro Features</t></h2>
+						<p class="bfg-pro-upsell-card__desc"><t>Try everything free for 7 days, or purchase directly if you prefer.</t></p>
+						<div class="bfg-pro-upsell-card__ctas">
 							<form method="post" action="options.php" id="bfg-pro-activation-form-pro">
 								<?php settings_fields('bring_fraktguiden_pro'); ?>
 								<div style="display:none">
 									<?php FieldRenderer::pro_enabled(); ?>
 								</div>
 								<button type="submit" class="bfg-btn bfg-btn--primary">
-									<t>Try it free for 7 days</t>
+									<t>Start Free Trial</t>
 								</button>
 							</form>
+							<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--secondary">
+								<t>Purchase License</t>
+							</a>
 						</div>
 					</div>
 				</div>
 
-				<!-- Stats Row -->
-				<div class="bfg-stats-row">
-					<div class="bfg-free-card bfg-stat-card">
-						<div class="bfg-stat-card__icon">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round">
-								<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
-								<path d="M15 18H9"/>
-								<path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
-								<circle cx="17" cy="18" r="2"/>
-								<circle cx="7" cy="18" r="2"/>
-							</svg>
-						</div>
-						<div>
-							<div class="bfg-stat-card__number"><?php echo esc_html($shipmentsThisMonth); ?></div>
-							<div class="bfg-stat-card__label"><t>Shipments this month</t></div>
-						</div>
-					</div>
-					<div class="bfg-free-card bfg-stat-card">
-						<div class="bfg-stat-card__icon">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round">
-								<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-								<polyline points="17 6 23 6 23 12"></polyline>
-							</svg>
-						</div>
-						<div>
-							<div class="bfg-stat-card__number"><?php echo esc_html($activeShippingMethodsCount); ?></div>
-							<div class="bfg-stat-card__label"><t>Active shipping methods</t></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Card 4: Do more with Pro -->
-				<div class="bfg-free-card bfg-complete-card bfg-do-more-card">
+				<!-- Card 3: Have a license key? -->
+				<div class="bfg-free-card bfg-complete-card bfg-license-activate-card">
 					<div class="bfg-complete-card__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
-							<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+							<circle cx="7.5" cy="15.5" r="5.5"/>
+							<path d="m21 2-9.6 9.6"/>
+							<path d="m15.5 7.5 3 3L22 7l-3-3"/>
 						</svg>
 					</div>
 					<div class="bfg-complete-card__body">
-						<h3 class="bfg-do-more-card__title"><t>Do more with Pro</t></h3>
-						<div class="bfg-do-more-card__grid">
-							<div class="bfg-do-more-feature">
-								<strong><t>MyBring Booking</t></strong>
-								<span><t>Book shipments in one click</t></span>
-							</div>
-							<div class="bfg-do-more-feature">
-								<strong><t>Pickup Points</t></strong>
-								<span><t>Show pickup locations</t></span>
-							</div>
-							<div class="bfg-do-more-feature">
-								<strong><t>Shipping Labels</t></strong>
-								<span><t>Print labels automatically</t></span>
-							</div>
-						</div>
-						<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green bfg-link-green--bold">
-							<t>View all Pro features</t> &rarr;
+						<h3 class="bfg-complete-card__title"><t>Have a license key?</t></h3>
+						<p class="bfg-complete-card__desc"><t>Activate your existing Pro license</t></p>
+						<a href="#bfg-license-form-section" class="bfg-link-green bfg-link-green--bold" id="bfg-activate-license-toggle">
+							<t>Activate License</t>
 						</a>
 					</div>
 				</div>
 
+			</div>
+
+			<!-- License Form (hidden, revealed on click) -->
+			<div class="bfg-section" id="bfg-license-form-section" style="display:none">
+				<bfg-section.header title="Activate Your License" description="Enter your 16-character license key to activate Pro."></bfg-section.header>
+				<bfg-section.section>
+					<form method="post" action="options.php" id="bfg-license-form-pro">
+						<?php settings_fields('bring_fraktguiden_pro'); ?>
+						<div style="display:none">
+							<?php FieldRenderer::pro_enabled(); ?>
+						</div>
+						<div class="bfg-field">
+							<label class="bfg-field__label">
+								<t>Enter Your License Key</t>
+							</label>
+							<div class="bfg-pro-license-form__row">
+								<?php FieldRenderer::test_url(); ?>
+								<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
+							</div>
+							<p class="bfg-description">
+								<t>Your license key is a 16-character code you received after purchase</t>
+							</p>
+						</div>
+					</form>
+				</bfg-section.section>
+			</div>
+
+			<!-- Features Section -->
+			<div class="bfg-pro-features-section">
+				<div class="bfg-pro-features-section__header">
+					<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
+					<p class="bfg-pro-features-section__subtitle"><t>Available with Pro</t></p>
+				</div>
+				<div class="bfg-pro-feature-card-grid">
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>MyBring Booking</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+					</div>
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>Fixed Pricing</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Set custom shipping prices</t></span>
+					</div>
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>Pickup Points</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Show pickup locations to customers</t></span>
+					</div>
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>Shipping Labels</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Print labels automatically</t></span>
+					</div>
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>Advanced Tracking</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Real-time shipment tracking</t></span>
+					</div>
+					<div class="bfg-pro-feature-card">
+						<div class="bfg-pro-feature-card__icon">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</div>
+						<strong class="bfg-pro-feature-card__title"><t>Return Management</t></strong>
+						<span class="bfg-pro-feature-card__desc"><t>Handle returns efficiently</t></span>
+					</div>
+				</div>
 			</div>
 
 			<script>
@@ -616,6 +612,16 @@ use BringFraktguiden\Admin\FieldRenderer;
 							if (proCheckbox) {
 								proCheckbox.checked = true;
 							}
+						});
+					}
+
+					const toggle = document.getElementById('bfg-activate-license-toggle');
+					const licenseSection = document.getElementById('bfg-license-form-section');
+					if (toggle && licenseSection) {
+						toggle.addEventListener('click', function (e) {
+							e.preventDefault();
+							licenseSection.style.display = licenseSection.style.display === 'none' ? '' : 'none';
+							licenseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 						});
 					}
 				});
