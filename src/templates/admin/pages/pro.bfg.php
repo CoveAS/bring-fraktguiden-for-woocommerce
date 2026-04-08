@@ -49,39 +49,17 @@ use BringFraktguiden\Admin\FieldRenderer;
 
 			<!-- License Info Card -->
 			<div class="bfg-section bfg-license-info-section">
-				<div class="bfg-free-card bfg-complete-card bfg-license-card">
-					<div class="bfg-complete-card__icon bfg-complete-card__icon--success">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-							stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="7.5" cy="15.5" r="5.5"/>
-							<path d="m21 2-9.6 9.6"/>
-							<path d="m15.5 7.5 3 3L22 7l-3-3"/>
-						</svg>
-					</div>
-					<div class="bfg-complete-card__body">
-						<h2 class="bfg-complete-card__title"><t>License Active</t></h2>
-						<?php if ($license_key): ?>
-							<span class="bfg-license-key-pill"><?php echo esc_html($license_key); ?></span>
-						<?php endif; ?>
+				<div class="bfg-free-card bfg-license-active-card">
+					<bfg-subscription-info class="bfg-subscription--active">
+						<bfg-subscription-item.lock label="LICENSE STATUS" value="Active" :detail="$license_key ? 'License: ' . esc_html( $license_key ) : ''"></bfg-subscription-item.lock>
 						<?php if ($valid_to_formatted): ?>
-							<p class="bfg-license-expiry">
-								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-									stroke-linecap="round" stroke-linejoin="round">
-									<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-									<line x1="16" y1="2" x2="16" y2="6"></line>
-									<line x1="8" y1="2" x2="8" y2="6"></line>
-									<line x1="3" y1="10" x2="21" y2="10"></line>
-								</svg>
-								<?php printf(
-									esc_html__('Expires %s', 'bring-fraktguiden-for-woocommerce'),
-									esc_html($valid_to_formatted)
-								); ?>
-							</p>
+						<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$days_remaining > 0 ? sprintf( '%d days remaining', $days_remaining ) : ''"></bfg-subscription-item.calendar>
 						<?php endif; ?>
-					</div>
-					<div class="bfg-license-card__actions">
+					</bfg-subscription-info>
+
+					<div class="bfg-license-active-card__actions">
 						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
-							<t>Manage</t>
+							<?php esc_html_e('Manage', 'bring-fraktguiden-for-woocommerce'); ?>
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>

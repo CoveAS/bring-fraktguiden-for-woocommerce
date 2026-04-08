@@ -3496,15 +3496,29 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     align-items: center;
 }
 
-.bfg-license-card__actions {
-    margin-left: auto;
-    flex-shrink: 0;
+/* Active license card */
+.bfg-license-active-card {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.bfg-license-card__actions a {
+.bfg-license-active-card .bfg-subscription {
+    margin-bottom: 0;
+    background: transparent;
+    padding: 0;
+}
+
+
+.bfg-license-active-card__actions {
+    display: flex;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #F3F4F6;
+    gap: 8px;
+}
+
+.bfg-license-active-card__actions a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
