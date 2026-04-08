@@ -3160,8 +3160,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    background: linear-gradient(to bottom right, #dbeafe, #93c5fd) !important;
-    border-color: #bfdbfe !important;
+    background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.15), rgba(147, 197, 253, 0.15)) !important;
+    border-color: rgba(191, 219, 254, 0.4) !important;
 }
 
 .bfg-booking-upsell__icon {
@@ -3186,6 +3186,16 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     gap: 10px;
     margin-bottom: 6px;
 }
+
+.bfg-booking-upsell__eyebrow {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6B7280 !important;
+    margin: 0 0 4px !important;
+}
+
 
 .bfg-booking-upsell__title {
     font-size: 17px !important;

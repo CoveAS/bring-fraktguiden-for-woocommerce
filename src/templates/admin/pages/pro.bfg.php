@@ -497,8 +497,9 @@ use BringFraktguiden\Admin\FieldRenderer;
 						</svg>
 					</div>
 					<div class="bfg-booking-upsell__body">
+						<p class="bfg-booking-upsell__eyebrow"><t>Go further with PRO</t></p>
 						<div class="bfg-booking-upsell__title-row">
-							<h3 class="bfg-booking-upsell__title"><t>Go further with PRO</t></h3>
+							<h3 class="bfg-booking-upsell__title"><t>Configure MyBring Booking</t></h3>
 							<span class="bfg-badge bfg-badge--pro-green"><t>PRO</t></span>
 						</div>
 						<p class="bfg-booking-upsell__desc"><t>Automatically book shipments and print labels in one click</t></p>
