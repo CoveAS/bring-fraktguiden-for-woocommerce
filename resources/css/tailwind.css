@@ -3137,8 +3137,9 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-complete-card__title {
-    font-size: 18px !important;
-    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+    font-weight: 500 !important;
     color: #111827 !important;
     margin: 0 0 4px !important;
     padding: 0 !important;
@@ -3152,7 +3153,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-complete-card__hint {
-    font-size: 15px;
+    font-size: 14px;
     color: #4B5563;
     margin: 0 !important;
 }
@@ -3214,8 +3215,9 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 
 .bfg-booking-upsell__title {
-    font-size: 17px !important;
-    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+    font-weight: 500 !important;
     color: #111827 !important;
     margin: 0 !important;
 }
@@ -3331,8 +3333,9 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-do-more-card__title {
-    font-size: 17px !important;
-    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+    font-weight: 500 !important;
     color: #111827 !important;
     margin: 0 !important;
 }
@@ -3341,6 +3344,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
+    margin-top: 16px;
     margin-bottom: 20px;
 }
 

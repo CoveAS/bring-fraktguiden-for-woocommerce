@@ -576,33 +576,33 @@ use BringFraktguiden\Admin\FieldRenderer;
 				</div>
 
 				<!-- Card 4: Do more with Pro -->
-				<div class="bfg-free-card bfg-do-more-card">
-					<div class="bfg-do-more-card__header">
-						<div class="bfg-do-more-card__icon">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round">
-								<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-							</svg>
-						</div>
+				<div class="bfg-free-card bfg-complete-card bfg-do-more-card">
+					<div class="bfg-complete-card__icon">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+						</svg>
+					</div>
+					<div class="bfg-complete-card__body">
 						<h3 class="bfg-do-more-card__title"><t>Do more with Pro</t></h3>
+						<div class="bfg-do-more-card__grid">
+							<div class="bfg-do-more-feature">
+								<strong><t>MyBring Booking</t></strong>
+								<span><t>Book shipments in one click</t></span>
+							</div>
+							<div class="bfg-do-more-feature">
+								<strong><t>Pickup Points</t></strong>
+								<span><t>Show pickup locations</t></span>
+							</div>
+							<div class="bfg-do-more-feature">
+								<strong><t>Shipping Labels</t></strong>
+								<span><t>Print labels automatically</t></span>
+							</div>
+						</div>
+						<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green bfg-link-green--bold">
+							<t>View all Pro features</t> &rarr;
+						</a>
 					</div>
-					<div class="bfg-do-more-card__grid">
-						<div class="bfg-do-more-feature">
-							<strong><t>MyBring Booking</t></strong>
-							<span><t>Book shipments in one click</t></span>
-						</div>
-						<div class="bfg-do-more-feature">
-							<strong><t>Pickup Points</t></strong>
-							<span><t>Show pickup locations</t></span>
-						</div>
-						<div class="bfg-do-more-feature">
-							<strong><t>Shipping Labels</t></strong>
-							<span><t>Print labels automatically</t></span>
-						</div>
-					</div>
-					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-link-green">
-						<t>View all Pro features</t> &rarr;
-					</a>
 				</div>
 
 			</div>
