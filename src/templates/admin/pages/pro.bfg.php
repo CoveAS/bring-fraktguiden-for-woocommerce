@@ -438,8 +438,8 @@ use BringFraktguiden\Admin\FieldRenderer;
 
 				<!-- Card 1: Setup Complete -->
 				<div class="bfg-free-card bfg-complete-card">
-					<div class="bfg-complete-card__icon">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+					<div class="bfg-complete-card__icon bfg-complete-card__icon--success">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="20 6 9 17 4 12"></polyline>
 						</svg>
@@ -459,12 +459,11 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<div class="bfg-complete-card__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
-							<line x1="8" y1="6" x2="21" y2="6"></line>
-							<line x1="8" y1="12" x2="21" y2="12"></line>
-							<line x1="8" y1="18" x2="21" y2="18"></line>
-							<line x1="3" y1="6" x2="3.01" y2="6"></line>
-							<line x1="3" y1="12" x2="3.01" y2="12"></line>
-							<line x1="3" y1="18" x2="3.01" y2="18"></line>
+							<path d="m3 17 2 2 4-4"/>
+							<path d="m3 7 2 2 4-4"/>
+							<path d="M13 6h8"/>
+							<path d="M13 12h8"/>
+							<path d="M13 18h8"/>
 						</svg>
 					</div>
 					<div class="bfg-complete-card__body">
@@ -491,9 +490,9 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<div class="bfg-booking-upsell__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
-							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-							<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-							<line x1="12" y1="22.08" x2="12" y2="12"></line>
+							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+							<polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+							<line x1="12" y1="22.08" x2="12" y2="12"/>
 						</svg>
 					</div>
 					<div class="bfg-booking-upsell__body">
@@ -549,7 +548,11 @@ use BringFraktguiden\Admin\FieldRenderer;
 						<div class="bfg-stat-card__icon">
 							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
-								<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+								<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+								<path d="M15 18H9"/>
+								<path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+								<circle cx="17" cy="18" r="2"/>
+								<circle cx="7" cy="18" r="2"/>
 							</svg>
 						</div>
 						<div>

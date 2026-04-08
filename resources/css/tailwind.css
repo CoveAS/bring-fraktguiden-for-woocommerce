@@ -250,6 +250,17 @@ input:checked+.bring-toggle-alt::after {
     gap: 16px;
 }
 
+.bfg-steps-list .bfg-access-link__content {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.bfg-steps-list .bfg-access-link__content .bfg-step__desc {
+    font-size: 13px;
+    color: #6B7280;
+}
+
 /* ==========================================================================
    PRO Features Teaser
    ========================================================================== */
@@ -3107,12 +3118,17 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: var(--bfg-primary-light);
-    color: var(--bfg-primary);
+    background: #F3F4F6;
+    color: #374151;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.bfg-complete-card__icon--success {
+    background: #DCFCE7;
+    color: #16A34A;
 }
 
 .bfg-complete-card__body {
