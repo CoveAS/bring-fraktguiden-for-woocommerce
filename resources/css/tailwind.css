@@ -3451,6 +3451,81 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     margin-bottom: 8px !important;
 }
 
+/* ==========================================================================
+   Pro Page — Active State
+   ========================================================================== */
+
+.bfg-license-info-section {
+    margin-top: 16px;
+    padding-top: 0 !important;
+}
+
+.bfg-license-card {
+    align-items: center;
+}
+
+.bfg-license-card__actions {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bfg-license-card__actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bfg-license-key-pill {
+    display: inline-block;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #374151;
+    margin: 6px 0 4px;
+    letter-spacing: 0.05em;
+}
+
+.bfg-license-expiry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px !important;
+    color: #6B7280;
+    margin: 4px 0 0 !important;
+}
+
+/* Clickable feature cards (active/enabled state) */
+a.bfg-pro-feature-card {
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+a.bfg-pro-feature-card:hover {
+    border-color: #CBD5E1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    transform: translateY(-1px);
+}
+
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__icon {
+    background: #EFF6FF;
+    color: #2563EB;
+}
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__title {
+    color: #111827;
+}
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
+    color: #374151;
+}
+
 /* Pro Features Section */
 .bfg-pro-features-section {
     margin-top: 32px;

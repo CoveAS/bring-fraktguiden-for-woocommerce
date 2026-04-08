@@ -212,6 +212,15 @@ class SettingsPage
 		// Format valid_to date if set
 		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
 
+		// Masked license key for display (last 4 chars visible)
+		$raw_key = Fraktguiden_Helper::get_option('test_url') ?? '';
+		$license_key = '';
+		if ($raw_key) {
+			$clean = str_replace('-', '', $raw_key);
+			$last4 = strtoupper(substr($clean, -4));
+			$license_key = 'XXXX-XXXX-XXXX-' . $last4;
+		}
+
 		// Stats for free state
 		$shipmentsThisMonth = self::get_shipments_this_month();
 		$activeShippingMethodsCount = self::get_active_bring_methods_count();
