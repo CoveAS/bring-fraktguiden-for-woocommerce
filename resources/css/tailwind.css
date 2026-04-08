@@ -3502,14 +3502,14 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Clickable feature cards (active/enabled state) */
 a.bfg-pro-feature-card {
-    text-decoration: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    text-decoration: none !important;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 a.bfg-pro-feature-card:hover {
-    border-color: #CBD5E1;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-    transform: translateY(-1px);
+    text-decoration: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 

@@ -82,7 +82,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<div class="bfg-license-card__actions">
 						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-link-green bfg-link-green--bold">
 							<t>Manage</t>
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
 								<polyline points="15 3 21 3 21 9"></polyline>
@@ -104,7 +104,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
 								<line x1="16" y1="2" x2="16" y2="6"></line>
@@ -119,7 +119,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
 								<circle cx="12" cy="10" r="3"/>
@@ -132,7 +132,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<line x1="12" y1="1" x2="12" y2="23"></line>
 								<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -145,7 +145,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<path d="M20 12V22H4V12"/>
 								<path d="M22 7H2v5h20V7z"/>
@@ -161,7 +161,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
 								<polyline points="2 17 12 22 22 17"></polyline>
@@ -175,7 +175,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')); ?>"
 						class="bfg-pro-feature-card bfg-pro-feature-card--link">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<circle cx="12" cy="12" r="3"></circle>
 								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -582,7 +582,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 				<div class="bfg-pro-feature-card-grid">
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -593,7 +593,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -604,7 +604,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -615,7 +615,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -626,7 +626,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -637,7 +637,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 					</div>
 					<div class="bfg-pro-feature-card">
 						<div class="bfg-pro-feature-card__icon">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
 								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
