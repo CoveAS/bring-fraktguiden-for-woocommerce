@@ -80,9 +80,9 @@ use BringFraktguiden\Admin\FieldRenderer;
 						<?php endif; ?>
 					</div>
 					<div class="bfg-license-card__actions">
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-link-green bfg-link-green--bold">
+						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
 							<t>Manage</t>
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
 								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
 								<polyline points="15 3 21 3 21 9"></polyline>

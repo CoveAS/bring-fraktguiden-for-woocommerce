@@ -250,6 +250,36 @@ function bfg_ks_variant( string $name, string $variant, array $hover, array $pre
 					</button>
 				</div>
 
+<?php
+/* ── Text Button ─────────────────────────────────────────────────── */
+$text_sizes = [
+	[ 'Small',   'bfg-btn--sm', 13 ],
+	[ 'Medium',  '',            16 ],
+	[ 'Large',   'bfg-btn--lg', 18 ],
+];
+echo "<div style=\"margin-top:40px;padding-top:40px;border-top:1px solid var(--bfg-border)\">";
+echo "<p class=\"bfg-field-group-title bfgu:mb-5\">Text</p>";
+foreach ( $text_sizes as $i => [ $size_label, $sz, $px ] ) {
+	$v   = 'bfg-btn bfg-btn--text' . ( $sz ? " {$sz}" : '' );
+	$top = $i === 0 ? '0' : '32px';
+	$border = $i === 0 ? 'none' : '1px dashed var(--bfg-border)';
+	echo "<div style=\"margin-top:{$top};padding-top:" . ( $i === 0 ? '0' : '28px' ) . ";border-top:{$border}\">";
+	echo "<p style=\"font-size:12px;color:var(--bfg-text-muted);margin:0 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em\">{$size_label}</p>";
+	echo "<div class=\"bfgu:flex bfgu:flex-col bfgu:gap-2\">";
+	foreach ( [ 'Default' => '', 'Hover' => 'color:var(--bfg-primary-hover);text-decoration:underline;pointer-events:none', 'Pressed' => 'color:#1e40af;pointer-events:none', 'Disabled' => '' ] as $state => $style ) {
+		$st  = $style ? " style=\"{$style}\"" : '';
+		$dis = $state === 'Disabled' ? ' disabled' : '';
+		echo "
+				<div class=\"bfgu:flex bfgu:items-center bfgu:gap-3\">
+					<span style=\"width:68px;flex-shrink:0;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--bfg-text-muted)\">{$state}</span>
+					<button class=\"{$v}\"{$st}{$dis}>Text Button</button>
+				</div>";
+	}
+	echo "</div></div>";
+}
+echo "</div>";
+?>
+
 			</bfg-section.section>
 		</bfg-section>
 

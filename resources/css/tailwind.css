@@ -973,6 +973,38 @@ a.bfg-btn--grey:hover,
     box-shadow: none;
 }
 
+/* Text Button */
+.bfg-btn--text,
+a.bfg-btn--text,
+.bfg-admin-page a.bfg-btn--text {
+    background: transparent;
+    color: var(--bfg-primary);
+    border: 1px solid transparent;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    text-decoration: none;
+}
+
+.bfg-btn--text:hover,
+a.bfg-btn--text:hover,
+.bfg-admin-page a.bfg-btn--text:hover {
+    background: transparent;
+    color: var(--bfg-primary-hover);
+    text-decoration: underline;
+}
+
+.bfg-btn--text:active {
+    color: #1e40af;
+    transform: none;
+}
+
+.bfg-btn--text:disabled,
+.bfg-btn--text.is-disabled {
+    color: #9CA3AF;
+    text-decoration: none;
+}
+
 /* Loading State */
 .bfg-btn.is-loading {
     color: transparent;
