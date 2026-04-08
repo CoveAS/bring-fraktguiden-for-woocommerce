@@ -3394,7 +3394,11 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     color: #6B7280;
 }
 
-/* Free Version State — Status title */
+/* Free Version State — Status card */
+.bfg-free-status-card .bfg-complete-card__desc {
+    font-size: 14px;
+}
+
 .bfg-free-status__title {
     font-size: 15px !important;
     font-weight: 600 !important;
@@ -3408,6 +3412,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: flex;
     align-items: flex-start;
     gap: 16px;
+    background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.15), rgba(147, 197, 253, 0.15)) !important;
+    border-color: rgba(191, 219, 254, 0.4) !important;
 }
 
 .bfg-pro-upsell-card__icon {
@@ -3428,7 +3434,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-pro-upsell-card__desc {
-    font-size: 14px;
+    font-size: 15px;
     color: #4B5563;
     margin: 0 0 16px !important;
 }
@@ -3447,7 +3453,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Pro Features Section */
 .bfg-pro-features-section {
-    margin-top: 8px;
+    margin-top: 32px;
 }
 
 .bfg-pro-features-section__header {
@@ -3455,10 +3461,10 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-pro-features-section__title {
-    font-size: 15px !important;
-    font-weight: 700 !important;
+    font-size: 24px !important;
+    font-weight: 500 !important;
     color: #111827;
-    margin: 0 0 2px !important;
+    margin: 0 0 4px !important;
 }
 
 .bfg-pro-features-section__subtitle {
@@ -3503,7 +3509,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-pro-feature-card__desc {
-    font-size: 13px;
+    font-size: 14px;
     color: #9CA3AF;
     display: block;
 }
