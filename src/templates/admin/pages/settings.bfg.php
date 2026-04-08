@@ -7,7 +7,20 @@
 
 <div class="wrap bfg-admin-page bfg-admin-page__settings">
 	<div class="bfg-page__header">
-		<h1><t>Settings</t></h1>
+		<?php if (!empty($_GET['ref']) && $_GET['ref'] === 'bring_fraktguiden_pro'): ?>
+			<div class="bfg-page__header-with-back">
+				<a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_pro')); ?>" class="bfg-back-link">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="19" y1="12" x2="5" y2="12"></line>
+						<polyline points="12 19 5 12 12 5"></polyline>
+					</svg>
+					<t>Back to Pro</t>
+				</a>
+				<h1><t>Settings</t></h1>
+			</div>
+		<?php else: ?>
+			<h1><t>Settings</t></h1>
+		<?php endif; ?>
 	</div>
 
 	<div class="bfg-page__main">

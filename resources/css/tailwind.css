@@ -1083,6 +1083,31 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     padding: 0;
 }
 
+.bfg-page__header-with-back {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-admin-page .bfg-back-link,
+.bfg-admin-page .bfg-back-link:visited {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bfg-text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.bfg-admin-page .bfg-back-link:hover,
+.bfg-admin-page .bfg-back-link:focus {
+    color: var(--bfg-primary);
+    outline: none;
+    box-shadow: none;
+}
+
 .bfg-admin-page .bfg-page__main {
     max-width: 896px;
     margin: 0 auto;
@@ -3135,6 +3160,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: flex;
     align-items: flex-start;
     gap: 20px;
+    background: linear-gradient(to bottom right, #dbeafe, #93c5fd) !important;
+    border-color: #bfdbfe !important;
 }
 
 .bfg-booking-upsell__icon {

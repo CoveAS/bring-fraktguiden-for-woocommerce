@@ -470,11 +470,11 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<div class="bfg-complete-card__body">
 						<h3 class="bfg-complete-card__title"><t>Next steps</t></h3>
 						<div class="bfg-steps-list">
-							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')); ?>">
+							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback&ref=bring_fraktguiden_pro')); ?>">
 								<t>Configure fallback rates</t>
 								<bfg-step-desc><t>Set a fixed rate to show customers when Bring rates can't be retrieved</t></bfg-step-desc>
 							</bfg-access-link>
-							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')); ?>">
+							<bfg-access-link href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_settings&ref=bring_fraktguiden_pro')); ?>">
 								<t>Adjust display settings</t>
 								<bfg-step-desc><t>Configure handling fee, lead time, delivery estimates and checkout appearance</t></bfg-step-desc>
 							</bfg-access-link>
