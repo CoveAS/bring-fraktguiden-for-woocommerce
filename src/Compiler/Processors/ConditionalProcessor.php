@@ -91,7 +91,8 @@ class BFG_ConditionalProcessor implements BFG_ProcessorInterface
     private function processStaticConditional(BFG_ElementNode $ifElement, string $condition): void
     {
         // Static conditional - evaluate at compile time
-        $conditionMet = !empty($this->attrManager->get($condition));
+        // Use has() so boolean attributes (empty string value) also trigger the condition
+        $conditionMet = $this->attrManager->has($condition);
 
         // Find <else> sibling if it exists
         $elseElement = $this->findElseSibling($ifElement);

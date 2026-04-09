@@ -33,6 +33,21 @@ abstract class BFG_Node
     abstract public function getNodeName(): string;
 
     /**
+     * Get the next sibling node
+     */
+    public function getNextSibling(): ?BFG_Node
+    {
+        if (!$this->parentNode) {
+            return null;
+        }
+        $index = array_search($this, $this->parentNode->childNodes, true);
+        if ($index === false) {
+            return null;
+        }
+        return $this->parentNode->childNodes[$index + 1] ?? null;
+    }
+
+    /**
      * Magic getter for property access (e.g., $node->nodeType)
      */
     public function __get(string $name)
@@ -41,6 +56,7 @@ abstract class BFG_Node
             'nodeType' => $this->getNodeType(),
             'nodeName' => $this->getNodeName(),
             'parentNode' => $this->parentNode,
+            'nextSibling' => $this->getNextSibling(),
             default => null,
         };
     }

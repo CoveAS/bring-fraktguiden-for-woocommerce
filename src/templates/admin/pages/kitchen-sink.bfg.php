@@ -479,30 +479,77 @@ echo "</div>";
 			</bfg-section.section>
 		</bfg-section>
 
-		<!-- Feature List -->
+		<!-- Feature Cards -->
 		<bfg-section>
-			<bfg-section.header title="Feature Lists"></bfg-section.header>
+			<bfg-section.header title="Feature Cards" description="Used across Pro page states — gray icon default, blue when active"></bfg-section.header>
 			<bfg-section.section>
+
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Regular Feature List</bfg-t>
+					<bfg-t>Default state (teaser / no license)</bfg-t>
 				</h3>
-				<div class="bfgu:mb-8">
-					<bfg-feature-list>
-						<li>MyBring Booking</li>
-						<li>Fixed shipping prices</li>
-						<li>Free shipping threshold</li>
-						<li>Pick-up points</li>
-					</bfg-feature-list>
+				<div class="bfg-pro-feature-card-grid bfgu:mb-8">
+					<bfg-feature-card>
+						<bfg-feature-card.icon>
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+								<line x1="16" y1="2" x2="16" y2="6"></line>
+								<line x1="8" y1="2" x2="8" y2="6"></line>
+								<line x1="3" y1="10" x2="21" y2="10"></line>
+							</svg>
+						</bfg-feature-card.icon>
+						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
+						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+						<bfg-feature-card.benefits>
+							<li><t>7-day free trial</t></li>
+							<li><t>Test on live site</t></li>
+						</bfg-feature-card.benefits>
+					</bfg-feature-card>
+
+					<bfg-feature-card>
+						<bfg-feature-card.icon>
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+								<circle cx="12" cy="10" r="3"></circle>
+							</svg>
+						</bfg-feature-card.icon>
+						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
+						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+						<bfg-feature-card.benefits>
+							<li><t>Parcel lockers</t></li>
+							<li><t>Post offices</t></li>
+						</bfg-feature-card.benefits>
+					</bfg-feature-card>
 				</div>
 
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Compact Feature List</bfg-t>
+					<bfg-t>Active state (linked, blue icon — Pro license active)</bfg-t>
 				</h3>
-				<bfg-feature-list compact>
-					<li>MyBring Booking</li>
-					<li>Fixed shipping prices</li>
-					<li>Free shipping threshold</li>
-				</bfg-feature-list>
+				<div class="bfg-pro-feature-card-grid">
+					<bfg-feature-card href="#" active>
+						<bfg-feature-card.icon>
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+								<line x1="16" y1="2" x2="16" y2="6"></line>
+								<line x1="8" y1="2" x2="8" y2="6"></line>
+								<line x1="3" y1="10" x2="21" y2="10"></line>
+							</svg>
+						</bfg-feature-card.icon>
+						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
+						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+					</bfg-feature-card>
+
+					<bfg-feature-card href="#" active>
+						<bfg-feature-card.icon>
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+								<circle cx="12" cy="10" r="3"></circle>
+							</svg>
+						</bfg-feature-card.icon>
+						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
+						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+					</bfg-feature-card>
+				</div>
+
 			</bfg-section.section>
 		</bfg-section>
 

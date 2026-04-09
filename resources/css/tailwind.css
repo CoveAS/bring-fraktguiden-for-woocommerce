@@ -3637,6 +3637,95 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     display: block;
 }
 
+/* Feature Card Component
+   ---------------------------------------- */
+
+.bfg-feature-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-feature-card--link {
+    text-decoration: none !important;
+    color: inherit;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.bfg-feature-card--link:hover {
+    text-decoration: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.bfg-feature-card__icon {
+    width: 44px;
+    height: 44px;
+    background: #F3F4F6;
+    color: #9CA3AF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.bfg-feature-card--active .bfg-feature-card__icon {
+    background: #EFF6FF;
+    color: #2563EB;
+}
+
+.bfg-feature-card__title {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #111827;
+    display: block;
+    margin: 0 0 6px !important;
+    line-height: 1.3;
+}
+
+.bfg-feature-card__desc {
+    font-size: 14px !important;
+    color: #6B7280;
+    display: block;
+    margin: 0 !important;
+    line-height: 1.5;
+}
+
+.bfg-feature-card__benefits {
+    list-style: none;
+    margin: 16px 0 0 !important;
+    padding: 16px 0 0 !important;
+    border-top: 1px solid #F3F4F6;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-feature-card__benefits li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    padding: 0;
+}
+
+.bfg-feature-card__benefits li::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 /* ----------------------------------------
    Source: pro/assets/css/admin.css
    ---------------------------------------- */
