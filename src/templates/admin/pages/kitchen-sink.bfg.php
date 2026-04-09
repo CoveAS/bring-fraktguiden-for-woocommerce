@@ -485,7 +485,7 @@ echo "</div>";
 			<bfg-section.section>
 
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Default state (teaser / no license)</bfg-t>
+					<bfg-t>Default state (gray icon)</bfg-t>
 				</h3>
 				<div class="bfg-pro-feature-card-grid bfgu:mb-8">
 					<bfg-feature-card>
@@ -499,22 +499,15 @@ echo "</div>";
 						</bfg-feature-card.icon>
 						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
 						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+						<bfg-feature-card.benefits>
+							<li><t>7-day free trial</t></li>
+							<li><t>Test on live site</t></li>
+						</bfg-feature-card.benefits>
 					</bfg-feature-card>
 				</div>
 
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Active state (linked, blue icon — Pro license active)</bfg-t>
+					<bfg-t>Active state (blue icon, linked)</bfg-t>
 				</h3>
 				<div class="bfg-pro-feature-card-grid">
 					<bfg-feature-card href="#" active>
@@ -528,17 +521,10 @@ echo "</div>";
 						</bfg-feature-card.icon>
 						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
 						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card href="#" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+						<bfg-feature-card.benefits>
+							<li><t>7-day free trial</t></li>
+							<li><t>Test on live site</t></li>
+						</bfg-feature-card.benefits>
 					</bfg-feature-card>
 				</div>
 
