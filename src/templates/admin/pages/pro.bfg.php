@@ -373,7 +373,7 @@ if ($license_active && $pro_enabled) {
 			<div class="bfg-pro-feature-card-grid">
 
 				<!-- MyBring Booking -->
-				<bfg-feature-card :href="$bfg_booking_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_booking_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -392,7 +392,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Pickup Points -->
-				<bfg-feature-card :href="$bfg_shipping_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
@@ -409,7 +409,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Fixed Pricing -->
-				<bfg-feature-card :href="$bfg_shipping_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<line x1="12" y1="1" x2="12" y2="23"></line>
@@ -426,7 +426,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Free Shipping -->
-				<bfg-feature-card :href="$bfg_shipping_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 12V22H4V12"></path>
@@ -446,7 +446,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Fallback Pricing -->
-				<bfg-feature-card :href="$bfg_fallback_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_fallback_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -464,7 +464,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- PRO Settings -->
-				<bfg-feature-card :href="$bfg_settings_url" <?php if ($bfg_cards_active): ?>active<?php endif; ?>>
+				<bfg-feature-card :href="$bfg_settings_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="3"></circle>
