@@ -211,6 +211,7 @@ class SettingsPage
 
 		// Format valid_to date if set
 		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
+		$license_days_remaining = $pro_valid_to ? max(0, (int) floor(((int) $pro_valid_to - time()) / 86400)) : 0;
 
 		// Masked license key for display (last 4 chars visible)
 		$raw_key = Fraktguiden_Helper::get_option('test_url') ?? '';

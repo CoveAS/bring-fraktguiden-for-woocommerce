@@ -174,7 +174,7 @@ input:checked+.bring-toggle-alt::after {
 }
 
 .bfg-setup-header__stat-label {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
     font-weight: 400;
 }
@@ -257,7 +257,7 @@ input:checked+.bring-toggle-alt::after {
 }
 
 .bfg-steps-list .bfg-access-link__content .bfg-step__desc {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
 }
 
@@ -988,7 +988,8 @@ a.bfg-btn--text,
 
 .bfg-btn--text:hover,
 a.bfg-btn--text:hover,
-.bfg-admin-page a.bfg-btn--text:hover {
+.bfg-admin-page a.bfg-btn--text:hover,
+body.wp-admin .bfg-admin-page a.bfg-btn--text:hover {
     background: transparent;
     color: var(--bfg-primary-hover);
     text-decoration: underline;
@@ -1738,7 +1739,7 @@ a.bfg-step__link:hover,
     height: 28px;
     padding: 0 12px;
     border-radius: 9999px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
@@ -1841,7 +1842,7 @@ a.bfg-step__link:hover,
 .bfg-badge--completed-text {
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     color: #15803d;
     background: none;
@@ -2149,7 +2150,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     background: #F3F4F6;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 12px;
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     color: var(--bfg-text-main);
 }
@@ -2453,7 +2454,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-pro-teaser__divider span {
     padding: 0 16px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     color: #9CA3AF;
     text-transform: uppercase;
@@ -2510,8 +2511,8 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
-    letter-spacing: 0.05em;
+    font-size: 12px;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: #6B7280;
     font-weight: 500;
@@ -2521,17 +2522,19 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-subscription__icon {
     color: #9CA3AF;
     flex-shrink: 0;
+    width: 12px;
+    height: 12px;
 }
 
 .bfg-subscription__value {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     color: #111827;
     margin-bottom: 2px;
 }
 
 .bfg-subscription__detail {
-    font-size: var(--bfg-text-level-5);
+    font-size: 14px;
     color: #6B7280;
     font-weight: 400;
 }
@@ -3290,7 +3293,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 .bfg-badge--pro-green {
     background: var(--bfg-primary-light);
     color: var(--bfg-primary);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 0 8px;
@@ -3335,7 +3338,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-booking-upsell__no-cc {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
 }
 
@@ -3372,7 +3375,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-stat-card__label {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
     margin-top: 2px;
 }
@@ -3422,7 +3425,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-do-more-feature span {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
 }
 
@@ -3513,8 +3516,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 .bfg-license-active-card__actions {
     display: flex;
     align-items: center;
-    padding-top: 12px;
-    border-top: 1px solid #F3F4F6;
+    padding-top: 0;
     gap: 8px;
 }
 
@@ -3531,7 +3533,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     border-radius: 6px;
     padding: 2px 10px;
     font-family: monospace;
-    font-size: 13px;
+    font-size: 12px;
     color: #374151;
     margin: 6px 0 4px;
     letter-spacing: 0.05em;
@@ -3589,7 +3591,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-pro-features-section__subtitle {
-    font-size: 13px;
+    font-size: 12px;
     color: #6B7280;
     margin: 0 !important;
 }

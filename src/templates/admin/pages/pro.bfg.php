@@ -10,6 +10,7 @@ use BringFraktguiden\Admin\FieldRenderer;
  * @var bool $pro_enabled
  * @var bool $pro_activated
  * @var int $days_remaining
+ * @var int $license_days_remaining
  * @var int|false $pro_activated_on
  * @var bool $is_trial
  * @var bool $is_expired
@@ -53,18 +54,17 @@ use BringFraktguiden\Admin\FieldRenderer;
 					<bfg-subscription-info class="bfg-subscription--active">
 						<bfg-subscription-item.lock label="LICENSE STATUS" value="Active" :detail="$license_key ? 'License: ' . esc_html( $license_key ) : ''"></bfg-subscription-item.lock>
 						<?php if ($valid_to_formatted): ?>
-						<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$days_remaining > 0 ? sprintf( '%d days remaining', $days_remaining ) : ''"></bfg-subscription-item.calendar>
+						<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$license_days_remaining > 0 ? sprintf( '%d days remaining', $license_days_remaining ) : ''"></bfg-subscription-item.calendar>
 						<?php endif; ?>
 					</bfg-subscription-info>
 
 					<div class="bfg-license-active-card__actions">
 						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
-							<?php esc_html_e('Manage', 'bring-fraktguiden-for-woocommerce'); ?>
+							<?php esc_html_e('Manage license', 'bring-fraktguiden-for-woocommerce'); ?>
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
-								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-								<polyline points="15 3 21 3 21 9"></polyline>
-								<line x1="10" y1="14" x2="21" y2="3"></line>
+								<line x1="5" y1="12" x2="19" y2="12"></line>
+								<polyline points="12 5 19 12 12 19"></polyline>
 							</svg>
 						</a>
 					</div>
