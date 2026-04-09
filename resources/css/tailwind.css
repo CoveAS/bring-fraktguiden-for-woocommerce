@@ -3205,9 +3205,9 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-complete-card__title {
-    font-size: 24px !important;
-    line-height: 32px !important;
-    font-weight: 500 !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+    font-weight: 600 !important;
     color: #111827 !important;
     margin: 0 0 4px !important;
     padding: 0 !important;
@@ -3584,14 +3584,14 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-pro-features-section__title {
-    font-size: 24px !important;
+    font-size: 28px !important;
     font-weight: 500 !important;
     color: #111827;
     margin: 0 0 4px !important;
 }
 
 .bfg-pro-features-section__subtitle {
-    font-size: 12px;
+    font-size: var(--bfg-text-level-6);
     color: #6B7280;
     margin: 0 !important;
 }
