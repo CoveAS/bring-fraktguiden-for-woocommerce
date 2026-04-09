@@ -306,37 +306,41 @@ if ($license_active && $pro_enabled) {
 					<div class="bfg-complete-card__body">
 						<h3 class="bfg-complete-card__title"><t>Have a license key?</t></h3>
 						<p class="bfg-complete-card__desc"><t>Activate your existing Pro license</t></p>
-						<a href="#bfg-license-form-section" class="bfg-btn bfg-btn--text" id="bfg-activate-license-toggle">
+						<a href="#" class="bfg-btn bfg-btn--text" id="bfg-activate-license-toggle">
 							<t>Activate License</t>
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="5" y1="12" x2="19" y2="12"></line>
+								<polyline points="12 5 19 12 12 19"></polyline>
+							</svg>
 						</a>
+
+						<!-- License Form (inline, revealed on click) -->
+						<div id="bfg-license-form-section" style="display:none; margin-top: 1.25rem;">
+							<form method="post" action="options.php" id="bfg-license-form-pro">
+								<?php settings_fields('bring_fraktguiden_pro'); ?>
+								<div style="display:none">
+									<?php FieldRenderer::pro_enabled(); ?>
+								</div>
+								<div class="bfg-field">
+									<label class="bfg-field__label">
+										<t>Enter Your License Key</t>
+									</label>
+									<div class="bfg-pro-license-form__row" style="display:flex; gap: 0.5rem; align-items: center; width: 100%;">
+										<div style="flex: 1; min-width: 0;"><?php FieldRenderer::test_url(); ?></div>
+										<button type="submit" class="bfg-btn bfg-btn--primary" style="flex-shrink:0;">
+											<t>Activate</t>
+										</button>
+										<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
+									</div>
+									<p class="bfg-description">
+										<t>Your license key is a 16-character code you received after purchase</t>
+									</p>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 
-			</div>
-
-			<!-- License Form (hidden, revealed on click) -->
-			<div class="bfg-section" id="bfg-license-form-section" style="display:none">
-				<bfg-section.header title="Activate Your License" description="Enter your 16-character license key to activate Pro."></bfg-section.header>
-				<bfg-section.section>
-					<form method="post" action="options.php" id="bfg-license-form-pro">
-						<?php settings_fields('bring_fraktguiden_pro'); ?>
-						<div style="display:none">
-							<?php FieldRenderer::pro_enabled(); ?>
-						</div>
-						<div class="bfg-field">
-							<label class="bfg-field__label">
-								<t>Enter Your License Key</t>
-							</label>
-							<div class="bfg-pro-license-form__row">
-								<?php FieldRenderer::test_url(); ?>
-								<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
-							</div>
-							<p class="bfg-description">
-								<t>Your license key is a 16-character code you received after purchase</t>
-							</p>
-						</div>
-					</form>
-				</bfg-section.section>
 			</div>
 
 			<script>
@@ -356,8 +360,9 @@ if ($license_active && $pro_enabled) {
 					if (toggle && licenseSection) {
 						toggle.addEventListener('click', function (e) {
 							e.preventDefault();
-							licenseSection.style.display = licenseSection.style.display === 'none' ? '' : 'none';
-							licenseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+							toggle.style.display = 'none';
+							licenseSection.style.display = '';
+							licenseSection.querySelector('input').focus();
 						});
 					}
 				});
@@ -375,7 +380,7 @@ if ($license_active && $pro_enabled) {
 				<!-- MyBring Booking -->
 				<bfg-feature-card :href="$bfg_booking_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
 							<line x1="16" y1="2" x2="16" y2="6"></line>
 							<line x1="8" y1="2" x2="8" y2="6"></line>
@@ -394,7 +399,7 @@ if ($license_active && $pro_enabled) {
 				<!-- Pickup Points -->
 				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
 							<circle cx="12" cy="10" r="3"></circle>
 						</svg>
@@ -402,8 +407,8 @@ if ($license_active && $pro_enabled) {
 					<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
 					<span class="bfg-feature-card__desc"><t>Let customers choose their preferred Bring pickup location at checkout</t></span>
 					<bfg-feature-card.benefits>
-						<li><t>Customer selects location at checkout</t></li>
-						<li><t>Supports parcel lockers and post offices</t></li>
+						<li><t>Choose pickup location at checkout</t></li>
+						<li><t>Lockers and post offices</t></li>
 						<li><t>Location lookup by postal code</t></li>
 					</bfg-feature-card.benefits>
 				</bfg-feature-card>
@@ -411,7 +416,7 @@ if ($license_active && $pro_enabled) {
 				<!-- Fixed Pricing -->
 				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<line x1="12" y1="1" x2="12" y2="23"></line>
 							<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
 						</svg>
@@ -428,7 +433,7 @@ if ($license_active && $pro_enabled) {
 				<!-- Free Shipping -->
 				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 12V22H4V12"></path>
 							<path d="M22 7H2v5h20V7z"></path>
 							<path d="M12 22V7"></path>
@@ -448,7 +453,7 @@ if ($license_active && $pro_enabled) {
 				<!-- Fallback Pricing -->
 				<bfg-feature-card :href="$bfg_fallback_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
 							<polyline points="2 17 12 22 22 17"></polyline>
 							<polyline points="2 12 12 17 22 12"></polyline>
@@ -466,7 +471,7 @@ if ($license_active && $pro_enabled) {
 				<!-- PRO Settings -->
 				<bfg-feature-card :href="$bfg_settings_url" :active="$bfg_cards_active">
 					<bfg-feature-card.icon>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="3"></circle>
 							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
 						</svg>

@@ -36,7 +36,7 @@ return [
 			'test_url' => [
 				'type' => 'text',
 				'label' => __('License key', 'bring-fraktguiden-for-woocommerce'),
-				'placeholder' => 'https://staging.yoursite.com',
+				'placeholder' => 'XXXX-XXXX-XXXX-XXXX',
 				'default' => '',
 			],
 		],
