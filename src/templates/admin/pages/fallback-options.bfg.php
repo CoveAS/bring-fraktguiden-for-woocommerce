@@ -67,7 +67,7 @@
 						</div>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 
 				<div class="bfg-section__header bfg-section__header--divider">
@@ -100,7 +100,7 @@
 						</div>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 
@@ -176,7 +176,7 @@
 						</div>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 		</form>

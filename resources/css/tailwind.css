@@ -1153,7 +1153,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
 }
 
 .bfg-admin-page .bfg-page__main {
-    max-width: 1152px;
+    max-width: 1024px;
     margin: 0 auto;
     padding: 48px 32px 64px;
 }
@@ -3205,8 +3205,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-complete-card__title {
-    font-size: 20px !important;
-    line-height: 28px !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
     font-weight: 600 !important;
     color: #111827 !important;
     margin: 0 0 4px !important;
@@ -3600,6 +3600,12 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-pro-feature-card-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .bfg-pro-feature-card {

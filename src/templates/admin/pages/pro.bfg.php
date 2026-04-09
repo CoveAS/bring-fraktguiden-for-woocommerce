@@ -306,7 +306,7 @@ if ($license_active && $pro_enabled) {
 					<div class="bfg-complete-card__body">
 						<h3 class="bfg-complete-card__title"><t>Have a license key?</t></h3>
 						<p class="bfg-complete-card__desc"><t>Activate your existing Pro license</t></p>
-						<a href="#bfg-license-form-section" class="bfg-link-green bfg-link-green--bold" id="bfg-activate-license-toggle">
+						<a href="#bfg-license-form-section" class="bfg-btn bfg-btn--text" id="bfg-activate-license-toggle">
 							<t>Activate License</t>
 						</a>
 					</div>

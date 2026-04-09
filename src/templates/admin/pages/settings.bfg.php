@@ -48,7 +48,7 @@
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->shipping_options_full_width; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->display_desc; ?></div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 
@@ -134,7 +134,7 @@
 						<p class="bfg-description"><t>Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees.</t></p>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 
@@ -162,7 +162,7 @@
 						</div>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 
@@ -173,7 +173,7 @@
 				<div class="bfg-section__section">
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->debug; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->disable_stylesheet; ?></div>
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>
 			</div>
 		</form>

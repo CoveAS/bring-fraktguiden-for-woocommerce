@@ -37,7 +37,7 @@ use BringFraktguiden\Fields\Fields;
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
 					</div>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>
 
@@ -158,7 +158,7 @@ use BringFraktguiden\Fields\Fields;
 						/>
 					</bfg-field.text>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>
 
@@ -190,7 +190,7 @@ use BringFraktguiden\Fields\Fields;
 						} ?>
 					</bfg-field.select>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>
 
@@ -207,7 +207,7 @@ use BringFraktguiden\Fields\Fields;
 						} ?>
 					</bfg-field.select>
 
-					<?php submit_button(__('Save Changes', 'bring-fraktguiden-for-woocommerce')); ?>
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>
 		</form>
