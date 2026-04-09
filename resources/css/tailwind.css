@@ -1153,7 +1153,7 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
 }
 
 .bfg-admin-page .bfg-page__main {
-    max-width: 896px;
+    max-width: 1152px;
     margin: 0 auto;
     padding: 48px 32px 64px;
 }
