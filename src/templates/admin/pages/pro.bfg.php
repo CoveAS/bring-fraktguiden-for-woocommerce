@@ -2,6 +2,25 @@
 
 use BringFraktguiden\Admin\FieldRenderer;
 
+// Feature card state — active (blue, linked) when Pro is fully enabled
+$bfg_cards_active   = ($license_active && $pro_enabled) || ($is_test_site && $pro_enabled);
+$bfg_booking_url    = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
+$bfg_shipping_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')) : '';
+$bfg_fallback_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')) : '';
+$bfg_settings_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')) : '';
+
+if ($license_active && $pro_enabled) {
+	$bfg_features_subtitle = __('Click to configure each feature', 'bring-fraktguiden-for-woocommerce');
+} elseif ($is_trial) {
+	$bfg_features_subtitle = __('All features active during your trial', 'bring-fraktguiden-for-woocommerce');
+} elseif ($is_expired) {
+	$bfg_features_subtitle = __('Purchase a license to regain access', 'bring-fraktguiden-for-woocommerce');
+} elseif ($is_test_site && $pro_enabled) {
+	$bfg_features_subtitle = __('PRO features enabled for testing', 'bring-fraktguiden-for-woocommerce');
+} else {
+	$bfg_features_subtitle = __('Available with Pro', 'bring-fraktguiden-for-woocommerce');
+}
+
 /**
  * Pro Page Template
  *
@@ -68,89 +87,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 							</svg>
 						</a>
 					</div>
-				</div>
-			</div>
-
-			<!-- PRO Features Grid -->
-			<div class="bfg-pro-features-section">
-				<div class="bfg-pro-features-section__header">
-					<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
-					<p class="bfg-pro-features-section__subtitle"><t>Click to configure each feature</t></p>
-				</div>
-				<div class="bfg-pro-feature-card-grid">
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=bring_fraktguiden_booking'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-								<line x1="16" y1="2" x2="16" y2="6"></line>
-								<line x1="8" y1="2" x2="8" y2="6"></line>
-								<line x1="3" y1="10" x2="21" y2="10"></line>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=wc-settings&tab=shipping'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=wc-settings&tab=shipping'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="12" y1="1" x2="12" y2="23"></line>
-								<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=wc-settings&tab=shipping'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 12V22H4V12"></path>
-								<path d="M22 7H2v5h20V7z"></path>
-								<path d="M12 22V7"></path>
-								<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-								<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-						<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-								<polyline points="2 17 12 22 22 17"></polyline>
-								<polyline points="2 12 12 17 22 12"></polyline>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card :href="esc_url(admin_url('admin.php?page=bring_fraktguiden_settings'))" active>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="3"></circle>
-								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-						<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
-					</bfg-feature-card>
-
 				</div>
 			</div>
 
@@ -250,89 +186,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 				</div>
 			</div>
 
-			<!-- PRO Features Overview -->
-			<div class="bfg-pro-features-section">
-				<div class="bfg-pro-features-section__header">
-					<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
-					<p class="bfg-pro-features-section__subtitle"><t>All features active during your trial</t></p>
-				</div>
-				<div class="bfg-pro-feature-card-grid">
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-								<line x1="16" y1="2" x2="16" y2="6"></line>
-								<line x1="8" y1="2" x2="8" y2="6"></line>
-								<line x1="3" y1="10" x2="21" y2="10"></line>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="12" y1="1" x2="12" y2="23"></line>
-								<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 12V22H4V12"></path>
-								<path d="M22 7H2v5h20V7z"></path>
-								<path d="M12 22V7"></path>
-								<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-								<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-						<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-								<polyline points="2 17 12 22 22 17"></polyline>
-								<polyline points="2 12 12 17 22 12"></polyline>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="3"></circle>
-								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-						<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
-					</bfg-feature-card>
-
-				</div>
-			</div>
-
 			<!-- License Activation Form -->
 			<div class="bfg-section">
 				<bfg-section.header title="Activate Your License" description="Already have a license? Enter it below to activate."></bfg-section.header>
@@ -404,89 +257,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 						class="bfg-btn bfg-btn--secondary bfg-btn--lg bfg-btn--full-width">
 						<t>Purchase PRO License</t>
 					</a>
-				</div>
-			</div>
-
-			<!-- PRO Features Overview -->
-			<div class="bfg-pro-features-section">
-				<div class="bfg-pro-features-section__header">
-					<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
-					<p class="bfg-pro-features-section__subtitle"><t>Purchase a license to regain access</t></p>
-				</div>
-				<div class="bfg-pro-feature-card-grid">
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-								<line x1="16" y1="2" x2="16" y2="6"></line>
-								<line x1="8" y1="2" x2="8" y2="6"></line>
-								<line x1="3" y1="10" x2="21" y2="10"></line>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="12" y1="1" x2="12" y2="23"></line>
-								<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 12V22H4V12"></path>
-								<path d="M22 7H2v5h20V7z"></path>
-								<path d="M12 22V7"></path>
-								<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-								<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-						<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-								<polyline points="2 17 12 22 22 17"></polyline>
-								<polyline points="2 12 12 17 22 12"></polyline>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="3"></circle>
-								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-						<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
-					</bfg-feature-card>
-
 				</div>
 			</div>
 
@@ -569,89 +339,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 				</bfg-section.section>
 			</div>
 
-			<!-- Features Section -->
-			<div class="bfg-pro-features-section">
-				<div class="bfg-pro-features-section__header">
-					<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
-					<p class="bfg-pro-features-section__subtitle"><t>Available with Pro</t></p>
-				</div>
-				<div class="bfg-pro-feature-card-grid">
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-								<line x1="16" y1="2" x2="16" y2="6"></line>
-								<line x1="8" y1="2" x2="8" y2="6"></line>
-								<line x1="3" y1="10" x2="21" y2="10"></line>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-								<circle cx="12" cy="10" r="3"></circle>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="12" y1="1" x2="12" y2="23"></line>
-								<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M20 12V22H4V12"></path>
-								<path d="M22 7H2v5h20V7z"></path>
-								<path d="M12 22V7"></path>
-								<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-								<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-						<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-								<polyline points="2 17 12 22 22 17"></polyline>
-								<polyline points="2 12 12 17 22 12"></polyline>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-						<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
-					</bfg-feature-card>
-
-					<bfg-feature-card>
-						<bfg-feature-card.icon>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="3"></circle>
-								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-							</svg>
-						</bfg-feature-card.icon>
-						<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-						<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
-					</bfg-feature-card>
-
-				</div>
-			</div>
-
 			<script>
 				document.addEventListener('DOMContentLoaded', function () {
 					const proCheckbox = document.querySelector('#bfg-pro-activation-form-pro input[name="pro_enabled"]');
@@ -676,6 +363,113 @@ use BringFraktguiden\Admin\FieldRenderer;
 				});
 			</script>
 		<?php endif; ?>
+
+		<!-- Features Grid — shared across all states -->
+		<div class="bfg-pro-features-section">
+			<div class="bfg-pro-features-section__header">
+				<h3 class="bfg-pro-features-section__title"><t>Features</t></h3>
+				<p class="bfg-pro-features-section__subtitle"><?php echo esc_html($bfg_features_subtitle); ?></p>
+			</div>
+			<div class="bfg-pro-feature-card-grid">
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_booking_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+							<line x1="16" y1="2" x2="16" y2="6"></line>
+							<line x1="8" y1="2" x2="8" y2="6"></line>
+							<line x1="3" y1="10" x2="21" y2="10"></line>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
+					<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+				</bfg-feature-card>
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_shipping_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+							<circle cx="12" cy="10" r="3"></circle>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
+					<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+				</bfg-feature-card>
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_shipping_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="12" y1="1" x2="12" y2="23"></line>
+							<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
+					<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
+				</bfg-feature-card>
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_shipping_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M20 12V22H4V12"></path>
+							<path d="M22 7H2v5h20V7z"></path>
+							<path d="M12 22V7"></path>
+							<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+							<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
+					<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
+				</bfg-feature-card>
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_fallback_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+							<polyline points="2 17 12 22 22 17"></polyline>
+							<polyline points="2 12 12 17 22 12"></polyline>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
+					<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
+				</bfg-feature-card>
+
+				<?php if ($bfg_cards_active): ?>
+				<bfg-feature-card :href="$bfg_settings_url" active>
+				<?php else: ?>
+				<bfg-feature-card>
+				<?php endif; ?>
+					<bfg-feature-card.icon>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="3"></circle>
+							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+						</svg>
+					</bfg-feature-card.icon>
+					<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
+					<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
+				</bfg-feature-card>
+
+			</div>
+		</div>
 
 	</div>
 </div>
