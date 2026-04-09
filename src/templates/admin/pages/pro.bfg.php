@@ -372,6 +372,7 @@ if ($license_active && $pro_enabled) {
 			</div>
 			<div class="bfg-pro-feature-card-grid">
 
+				<!-- MyBring Booking -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_booking_url" active>
 					<bfg-feature-card.icon>
@@ -383,7 +384,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-					<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+					<span class="bfg-feature-card__desc"><t>Book shipments and print labels directly from WooCommerce orders</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Book directly from order view</t></li>
+						<li><t>Print Bring shipping labels</t></li>
+						<li><t>Automatic tracking number</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -396,10 +402,16 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
-					<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
+					<span class="bfg-feature-card__desc"><t>Book shipments and print labels directly from WooCommerce orders</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Book directly from order view</t></li>
+						<li><t>Print Bring shipping labels</t></li>
+						<li><t>Automatic tracking number</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
+				<!-- Pickup Points -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_shipping_url" active>
 					<bfg-feature-card.icon>
@@ -409,7 +421,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-					<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+					<span class="bfg-feature-card__desc"><t>Let customers choose their preferred Bring pickup location at checkout</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Customer selects location at checkout</t></li>
+						<li><t>Supports parcel lockers and post offices</t></li>
+						<li><t>Location lookup by postal code</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -420,10 +437,16 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
-					<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
+					<span class="bfg-feature-card__desc"><t>Let customers choose their preferred Bring pickup location at checkout</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Customer selects location at checkout</t></li>
+						<li><t>Supports parcel lockers and post offices</t></li>
+						<li><t>Location lookup by postal code</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
+				<!-- Fixed Pricing -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_shipping_url" active>
 					<bfg-feature-card.icon>
@@ -433,7 +456,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-					<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
+					<span class="bfg-feature-card__desc"><t>Override Bring API rates with your own fixed prices per shipping service</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Set price per shipping method</t></li>
+						<li><t>Per-zone price rules</t></li>
+						<li><t>Cart weight-based pricing</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -444,10 +472,16 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Fixed Pricing</t></strong>
-					<span class="bfg-feature-card__desc"><t>Set custom prices per shipping service</t></span>
+					<span class="bfg-feature-card__desc"><t>Override Bring API rates with your own fixed prices per shipping service</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Set price per shipping method</t></li>
+						<li><t>Per-zone price rules</t></li>
+						<li><t>Cart weight-based pricing</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
+				<!-- Free Shipping -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_shipping_url" active>
 					<bfg-feature-card.icon>
@@ -460,7 +494,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-					<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
+					<span class="bfg-feature-card__desc"><t>Offer free shipping when cart meets a minimum order value</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Set order value threshold</t></li>
+						<li><t>Per-service configuration</t></li>
+						<li><t>Combine with fixed pricing</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -474,10 +513,16 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Free Shipping</t></strong>
-					<span class="bfg-feature-card__desc"><t>Configure free shipping thresholds</t></span>
+					<span class="bfg-feature-card__desc"><t>Offer free shipping when cart meets a minimum order value</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Set order value threshold</t></li>
+						<li><t>Per-service configuration</t></li>
+						<li><t>Combine with fixed pricing</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
+				<!-- Fallback Pricing -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_fallback_url" active>
 					<bfg-feature-card.icon>
@@ -488,7 +533,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-					<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
+					<span class="bfg-feature-card__desc"><t>Keep checkout working with fixed fallback rates when the Bring API is unavailable</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Prevent checkout errors</t></li>
+						<li><t>Fallback rate per service</t></li>
+						<li><t>Always show shipping options</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -500,10 +550,16 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-					<span class="bfg-feature-card__desc"><t>Fallback rates when API is unavailable</t></span>
+					<span class="bfg-feature-card__desc"><t>Keep checkout working with fixed fallback rates when the Bring API is unavailable</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Prevent checkout errors</t></li>
+						<li><t>Fallback rate per service</t></li>
+						<li><t>Always show shipping options</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
+				<!-- PRO Settings -->
 				<?php if ($bfg_cards_active): ?>
 				<bfg-feature-card :href="$bfg_settings_url" active>
 					<bfg-feature-card.icon>
@@ -513,7 +569,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-					<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
+					<span class="bfg-feature-card__desc"><t>Advanced configuration for customer numbers, service names and display options</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Multiple customer numbers</t></li>
+						<li><t>Custom service display names</t></li>
+						<li><t>Estimated delivery display</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php else: ?>
 				<bfg-feature-card>
@@ -524,7 +585,12 @@ if ($license_active && $pro_enabled) {
 						</svg>
 					</bfg-feature-card.icon>
 					<strong class="bfg-feature-card__title"><t>PRO Settings</t></strong>
-					<span class="bfg-feature-card__desc"><t>Customer numbers, service names and more</t></span>
+					<span class="bfg-feature-card__desc"><t>Advanced configuration for customer numbers, service names and display options</t></span>
+					<bfg-feature-card.benefits>
+						<li><t>Multiple customer numbers</t></li>
+						<li><t>Custom service display names</t></li>
+						<li><t>Estimated delivery display</t></li>
+					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 				<?php endif; ?>
 
