@@ -3215,7 +3215,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-complete-card__desc {
-    font-size: 15px;
+    font-size: 14px;
     color: #4B5563;
     margin: 0 0 4px !important;
 }
@@ -3469,7 +3469,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-pro-upsell-card__desc {
-    font-size: 15px;
+    font-size: 14px;
     color: #4B5563;
     margin: 0 0 16px !important;
 }
