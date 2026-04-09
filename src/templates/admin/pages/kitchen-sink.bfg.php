@@ -499,10 +499,6 @@ echo "</div>";
 						</bfg-feature-card.icon>
 						<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
 						<span class="bfg-feature-card__desc"><t>Book shipments directly from WooCommerce</t></span>
-						<bfg-feature-card.benefits>
-							<li><t>7-day free trial</t></li>
-							<li><t>Test on live site</t></li>
-						</bfg-feature-card.benefits>
 					</bfg-feature-card>
 
 					<bfg-feature-card>
@@ -514,10 +510,6 @@ echo "</div>";
 						</bfg-feature-card.icon>
 						<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
 						<span class="bfg-feature-card__desc"><t>Show pickup locations to customers</t></span>
-						<bfg-feature-card.benefits>
-							<li><t>Parcel lockers</t></li>
-							<li><t>Post offices</t></li>
-						</bfg-feature-card.benefits>
 					</bfg-feature-card>
 				</div>
 
