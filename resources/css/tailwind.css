@@ -2551,7 +2551,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-subscription__value {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: #111827;
     margin-bottom: 2px;
@@ -3004,10 +3004,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
     .bfg-subscription__label {
         font-size: 12px;
-    }
-
-    .bfg-subscription__value {
-        font-size: 16px;
     }
 
     body.wp-admin .bfg-admin-page .button-primary {
@@ -3525,9 +3521,11 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Active license card */
 .bfg-license-active-card {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+}
+
+.bfg-license-active-card .bfg-complete-card__title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
 }
 
 .bfg-license-active-card .bfg-subscription {
@@ -3598,13 +3596,19 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     color: #374151;
 }
 
+/* Pro page: section spacing and border color aligned to card border */
+.bfg-admin-page__pro .bfg-section {
+    padding-bottom: 56px;
+    border-bottom-color: #E5E7EB;
+}
+
 /* Pro Features Section */
 .bfg-pro-features-section {
-    margin-top: 32px;
+    margin-top: 56px;
 }
 
 .bfg-pro-features-section__header {
-    margin-bottom: 16px;
+    margin-bottom: 28px;
 }
 
 .bfg-pro-features-section__title {
@@ -3615,7 +3619,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-pro-features-section__subtitle {
-    font-size: var(--bfg-text-level-6);
+    font-size: var(--bfg-text-level-5);
     color: #6B7280;
     margin: 0 !important;
 }

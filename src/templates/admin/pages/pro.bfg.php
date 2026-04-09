@@ -69,23 +69,35 @@ if ($license_active && $pro_enabled) {
 
 			<!-- License Info Card -->
 			<div class="bfg-section bfg-license-info-section">
-				<div class="bfg-free-card bfg-license-active-card">
-					<bfg-subscription-info class="bfg-subscription--active">
-						<bfg-subscription-item.lock label="LICENSE STATUS" value="Active" :detail="$license_key ? 'License: ' . esc_html( $license_key ) : ''"></bfg-subscription-item.lock>
-						<?php if ($valid_to_formatted): ?>
-						<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$license_days_remaining > 0 ? sprintf( '%d days remaining', $license_days_remaining ) : ''"></bfg-subscription-item.calendar>
-						<?php endif; ?>
-					</bfg-subscription-info>
+				<div class="bfg-free-card bfg-complete-card bfg-license-active-card">
+					<div class="bfg-complete-card__icon">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="7.5" cy="15.5" r="5.5"/>
+							<path d="m21 2-9.6 9.6"/>
+							<path d="m15.5 7.5 3 3L22 7l-3-3"/>
+						</svg>
+					</div>
+					<div class="bfg-complete-card__body">
+						<h3 class="bfg-complete-card__title"><t>License Details</t></h3>
+						<p class="bfg-complete-card__desc"><t>Your active Pro license</t></p>
+						<bfg-subscription-info class="bfg-subscription--active" style="margin-top: 12px;">
+							<bfg-subscription-item.lock label="LICENSE STATUS" value="Active" :detail="$license_key ? 'License: ' . esc_html( $license_key ) : ''"></bfg-subscription-item.lock>
+							<?php if ($valid_to_formatted): ?>
+							<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$license_days_remaining > 0 ? sprintf( '%d days remaining', $license_days_remaining ) : ''"></bfg-subscription-item.calendar>
+							<?php endif; ?>
+						</bfg-subscription-info>
 
-					<div class="bfg-license-active-card__actions">
-						<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
-							<?php esc_html_e('Manage license', 'bring-fraktguiden-for-woocommerce'); ?>
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round">
-								<line x1="5" y1="12" x2="19" y2="12"></line>
-								<polyline points="12 5 19 12 12 19"></polyline>
-							</svg>
-						</a>
+						<div class="bfg-license-active-card__actions">
+							<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
+								<?php esc_html_e('Manage license', 'bring-fraktguiden-for-woocommerce'); ?>
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round">
+									<line x1="5" y1="12" x2="19" y2="12"></line>
+									<polyline points="12 5 19 12 12 19"></polyline>
+								</svg>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

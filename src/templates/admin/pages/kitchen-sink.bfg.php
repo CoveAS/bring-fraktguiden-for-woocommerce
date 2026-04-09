@@ -305,7 +305,7 @@ echo "</div>";
 
 		<!-- Form Fields -->
 		<bfg-section>
-			<bfg-section.header title="Form Fields" description="All input types with SM / MD / LG size variants"></bfg-section.header>
+			<bfg-section.header title="Form Fields" description="All input types with MD / LG size variants"></bfg-section.header>
 			<bfg-section.section>
 
 				<?php $size_label = 'width:28px;flex-shrink:0;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--bfg-text-muted);display:flex;align-items:center'; ?>
@@ -318,10 +318,6 @@ echo "</div>";
 					</bfg-field.text>
 				</div>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-10" style="">
-					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
-						<span style="<?php echo $size_label; ?>">SM</span>
-						<div class="bfg-field bfg-field--sm bfgu:flex-1" style="margin:0"><input type="text" placeholder="Small — 32px" style="width:100%"></div>
-					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
 						<span style="<?php echo $size_label; ?>">MD</span>
 						<div class="bfg-field bfgu:flex-1" style="margin:0"><input type="text" placeholder="Medium — 40px" style="width:100%"></div>
@@ -339,12 +335,6 @@ echo "</div>";
 					<bfg-field.number id="demo-number-lg-s" name="demo-number-lg-s" label="Amount (large suffix)" value="250" suffix-lg="NOK"></bfg-field.number>
 				</div>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-10" style="">
-					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
-						<span style="<?php echo $size_label; ?>">SM</span>
-						<div class="bfg-field bfg-field--sm bfgu:flex-1" style="margin:0">
-							<div class="bfg-input bfg-input--number"><input type="number" value="100"><span class="bfg-suffix">NOK</span></div>
-						</div>
-					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
 						<span style="<?php echo $size_label; ?>">MD</span>
 						<div class="bfg-field bfgu:flex-1" style="margin:0">
@@ -370,10 +360,6 @@ echo "</div>";
 				</div>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-10" style="">
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
-						<span style="<?php echo $size_label; ?>">SM</span>
-						<div class="bfg-field bfg-field--sm bfgu:flex-1" style="margin:0"><select style="width:100%"><option>Option 1</option><option>Option 2</option></select></div>
-					</div>
-					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
 						<span style="<?php echo $size_label; ?>">MD</span>
 						<div class="bfg-field bfgu:flex-1" style="margin:0"><select style="width:100%"><option>Option 1</option><option>Option 2</option></select></div>
 					</div>
@@ -394,16 +380,6 @@ echo "</div>";
 				<!-- ── Grid Layouts ────────────────────────────────────────── -->
 				<h3 class="bfg-field-group-title bfgu:mt-4"><bfg-t>3-Column Grid</bfg-t></h3>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-10">
-					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
-						<span style="<?php echo $size_label; ?>">SM</span>
-						<div class="bfg-field bfg-field--sm bfgu:flex-1" style="margin:0">
-							<div class="bfgu:flex bfgu:gap-3">
-								<div class="bfgu:flex-1"><div class="bfg-input bfg-input--number"><input type="number" value="120"><span class="bfg-suffix">cm</span></div></div>
-								<div class="bfgu:flex-1"><div class="bfg-input bfg-input--number"><input type="number" value="80"><span class="bfg-suffix">cm</span></div></div>
-								<div class="bfgu:flex-1"><div class="bfg-input bfg-input--number"><input type="number" value="60"><span class="bfg-suffix">cm</span></div></div>
-							</div>
-						</div>
-					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
 						<span style="<?php echo $size_label; ?>">MD</span>
 						<div class="bfg-field bfgu:flex-1" style="margin:0">
@@ -428,15 +404,6 @@ echo "</div>";
 
 				<h3 class="bfg-field-group-title"><bfg-t>2-Column Grid</bfg-t></h3>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3">
-					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
-						<span style="<?php echo $size_label; ?>">SM</span>
-						<div class="bfg-field bfg-field--sm bfgu:flex-1" style="margin:0">
-							<div class="bfgu:flex bfgu:gap-3">
-								<div class="bfgu:flex-1"><input type="text" value="Standard Shipping" style="width:100%"></div>
-								<div class="bfgu:flex-1"><div class="bfg-input bfg-input--number"><input type="number" value="99"><span class="bfg-suffix-lg">NOK</span></div></div>
-							</div>
-						</div>
-					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
 						<span style="<?php echo $size_label; ?>">MD</span>
 						<div class="bfg-field bfgu:flex-1" style="margin:0">
