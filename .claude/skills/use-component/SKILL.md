@@ -1,6 +1,6 @@
 ---
 name: use-component
-description: Guide for using existing BFG components in templates. Shows component syntax, available components, and common patterns.
+description: Reference for using existing BFG components in .bfg.php templates. Use when adding a component to a page, looking up component syntax or attributes, converting raw HTML to components, or understanding available components.
 ---
 
 # Use Component Skill

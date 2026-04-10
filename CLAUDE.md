@@ -1,0 +1,118 @@
+# Bring Fraktguiden for WooCommerce
+
+WooCommerce shipping plugin integrating the Bring/Posten carrier API. Admin UI is built with a custom build-time template compiler — understanding this pipeline is essential before working on any admin page or component.
+
+## Architecture Overview
+
+Admin pages are written as `.bfg.php` source templates using a custom component syntax. At build time, `npm run compile-php` compiles them into plain PHP files in `build/`. The PHP runtime only ever loads files from `build/` — source files are never included directly. There is zero runtime overhead from the compiler.
+
+## Directory Map
+
+| Path | Purpose |
+|---|---|
+| `src/templates/admin/pages/*.bfg.php` | Admin page source templates (edit these) |
+| `src/templates/admin/pages/pro/*.bfg.php` | Pro page state partials (one per license state) |
+| `src/components/*.bfgc.php` | Reusable component definitions |
+| `build/*` | Compiled output (do not edit) |
+| `resources/css/tailwind.css` | CSS source — Tailwind + all component styles |
+| `classes/BringFraktguiden/Admin/SettingsPage.php` | Registers admin menu, renders all pages |
+| `bin/compile-templates.php` | Compilation entry point |
+| `src/Compiler/` | Custom HTML parser + processor pipeline |
+
+## Template System (.bfg.php)
+
+Source templates use a custom tag syntax that compiles away entirely:
+
+| Syntax | Compiles to |
+|---|---|
+| `<bfg-section>` | Expanded component HTML |
+| `<t>Text</t>` | `<?php esc_html_e('Text', 'bring-fraktguiden-for-woocommerce'); ?>` |
+| `:attr="$var"` | PHP variable substitution in attribute |
+| `attr="value"` | Static attribute (auto-translated if component handles it) |
+| `<slot/>` | Replaced with component inner content |
+| `<if :attr>...</if>` | Conditional block (renders if attribute is present) |
+| `<else>...</else>` | Else branch |
+
+**Rules:**
+- Always use closing tags: `<bfg-section></bfg-section>` — self-closing breaks compilation
+- Keep `<t>` text on a single line — line breaks break translation extraction
+- After any edit to `.bfg.php` or `.bfgc.php`, run `npm run compile-php`
+
+## Admin Page Rendering
+
+All pages are registered and rendered by `BringFraktguiden\Admin\SettingsPage`.
+
+Each page method:
+1. Calls `self::maybe_build()` — auto-compiles in local dev
+2. Prepares PHP variables (e.g., `$steps`, `$fields`, `$currency`)
+3. Calls `require_once` on the compiled file from `build/templates/admin/pages/`
+
+The compiled template receives variables via PHP scope — no explicit passing.
+
+**Pages (source → compiled):**
+
+| Page | Source | Data provided |
+|---|---|---|
+| Home / Get Started | `home.bfg.php` | `$steps` (array of Step objects), `$stepCount`, `$stepsCompleted`, `$nextStep` |
+| Settings | `settings.bfg.php` | `$fields` (Fields instance), `$currency` |
+| Pro | `pro.bfg.php` + `pro/*.bfg.php` | License/subscription data + derived view vars (`$bfg_cards_active`, `$bfg_features_subtitle`, etc.) — all prepared in `SettingsPage::pro_page()` |
+| Pro Settings | `pro-settings.bfg.php` | Pro fields |
+| Booking | `booking.bfg.php` | Booking config |
+| Service Wizard | `service-wizard.bfg.php` | — |
+| Fallback Options | `fallback-options.bfg.php` | — |
+| Kitchen Sink | `kitchen-sink.bfg.php` | Dev-only component gallery |
+
+## Component Inventory
+
+Components live in `src/components/*.bfgc.php`. Each file has a docblock with description, usage example, and available attributes.
+
+**Categories:**
+- **Layout:** `section`, `section.header`, `section.section`
+- **Notices:** `notice`
+- **Badges:** `badge.completed`, `badge.completed.md`, `badge.completed.text`, `badge.in-progress`, `badge.progress`
+- **Steps:** `step.completed`, `step.in-progress`, `step.pending`, `step-desc`
+- **Fields:** `field.text`, `field.number`, `field.select`, `field.checkbox`, `conditional-field-group`
+- **Feature cards:** `feature-card`, `feature-card.icon`, `feature-card.benefits`, `feature-list`
+- **Subscription:** `subscription-info`, `subscription-item.*` (4 variants)
+- **Pro page:** `pro-license-form`
+- **Utilities:** `t`, `access-link`, `indicator-dot`, `progress`
+
+**To see all components with descriptions:**
+```bash
+php bin/list-components.php
+```
+
+**Naming rule:** Tag `<bfg-section.header>` → file `src/components/section.header.bfgc.php` (drop `bfg-` prefix, add `.bfgc.php`).
+
+## CSS
+
+| Layer | Prefix | Where |
+|---|---|---|
+| Tailwind utilities | `bfgu:` (Tailwind v4 variant syntax) | Any template/component |
+| Component/block styles | `bfg-` (BEM) | `resources/css/tailwind.css` |
+
+- Edit styles in `resources/css/tailwind.css`
+- Output compiles to `build/css/admin.css` — never edit this directly
+- Frontend/checkout legacy styles: `assets/css/bring-fraktguiden.css`
+- Pro-specific admin styles: `pro/assets/css/admin.css`
+
+## Build Commands
+
+| Command | When to run |
+|---|---|
+| `npm run compile-php` | After editing any `.bfg.php` or `.bfgc.php` file |
+| `npm run build` | Full production build (CSS + JS + PHP) |
+| `npm run dev` | Development build |
+| `npm run watch` | Watch mode for CSS/JS (PHP still needs manual compile) |
+| `npm run test-php-compiler` | Run compiler tests |
+
+## Skills
+
+Use `/skill-name` in chat to invoke:
+
+| Skill | Use when |
+|---|---|
+| `/use-component` | Looking up how to use an existing component in a template |
+| `/create-component` | Creating a new `.bfgc.php` component (TDD workflow) |
+| `/templating` | Building or modifying admin pages (structure, fields, patterns) |
+| `/css` | Styling decisions — Tailwind vs component class vs custom CSS |

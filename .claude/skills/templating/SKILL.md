@@ -1,6 +1,6 @@
 ---
 name: templating
-description: Use for working with custom admin pages
+description: Conventions for building and modifying admin pages in .bfg.php templates. Use when creating a new admin page, adding sections/fields to an existing page, or deciding between components vs. PHP field methods.
 ---
 
 # Admin Templating Guide

@@ -1,6 +1,7 @@
 ---
 name: create-component
-description: Create a new BFG component using TDD approach. Creates component template (.bfgc.php), test input (.bfg.php), and expected output (.php), then runs tests to verify compilation works correctly.
+description: Create a new reusable BFG component (.bfgc.php). Use when a UI pattern needs to be extracted into a component for reuse across admin pages. Follows TDD: writes component, test input, and expected output, then verifies compilation.
+disable-model-invocation: true
 ---
 
 # Create Component Skill

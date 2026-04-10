@@ -1,6 +1,6 @@
 ---
 name: css
-description: Style plugin UI using Tailwind utilities (bfgu:), BFG components, or custom CSS
+description: Styling guide for admin UI. Use when deciding between Tailwind utilities (bfgu:), BFG component classes (bfg-), or custom CSS — includes which files to edit, BEM conventions, and when to create a new component class vs. using utilities.
 ---
 
 # CSS & Styling Guide
