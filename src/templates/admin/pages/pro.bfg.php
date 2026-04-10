@@ -537,7 +537,7 @@ if ($license_active && $pro_enabled) {
 			</div>
 		</div>
 
-		<div class="bfg-page__footer-notes" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--bfg-border); display: flex; flex-direction: column; gap: 0.375rem;">
+		<div class="bfg-page__footer-notes" style="border-top: 1px solid var(--bfg-border); display: flex; flex-direction: column; gap: 0.375rem;">
 			<small style="color: var(--bfg-text-muted);"><sup>1</sup>
 				<t>Domestic shipments only. We're working on building support for international shipping.</t>
 			</small>

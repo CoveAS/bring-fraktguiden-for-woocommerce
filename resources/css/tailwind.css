@@ -1263,6 +1263,45 @@ body.wp-admin .bfg-admin-page .button-primary:disabled {
     margin-bottom: 16px !important;
 }
 
+/* Type Scale */
+.bfg-text-display    { font-size: 48px; line-height: 56px; font-weight: 600; }
+.bfg-text-heading-xl { font-size: 32px; line-height: 40px; font-weight: 600; }
+.bfg-text-heading-l  { font-size: 28px; line-height: 36px; font-weight: 500; }
+.bfg-text-heading-m  { font-size: 24px; line-height: 32px; font-weight: 500; }
+.bfg-text-heading-s  { font-size: 20px; line-height: 28px; font-weight: 500; }
+.bfg-text-body       { font-size: 16px; line-height: 24px; font-weight: 400; }
+.bfg-text-type-label { font-size: 15px; line-height: 24px; font-weight: 500; }
+.bfg-text-small      { font-size: 14px; line-height: 20px; font-weight: 400; }
+.bfg-text-xs         { font-size: 13px; line-height: 20px; font-weight: 400; }
+
+.bfg-type-scale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+}
+.bfg-type-scale-table tr {
+    border-bottom: 1px solid var(--bfg-border);
+}
+.bfg-type-scale-table tbody tr:last-child {
+    border-bottom: none;
+}
+.bfg-type-scale-table thead tr {
+    text-align: left;
+}
+.bfg-type-scale-table th {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bfg-text-muted);
+}
+.bfg-type-scale-table th:first-child { padding-left: 0; }
+.bfg-type-scale-table th:last-child  { padding-right: 0; }
+.bfg-type-scale-table td {
+    padding: 16px;
+}
+.bfg-type-scale-table td:first-child { padding-left: 0; }
+.bfg-type-scale-table td:last-child  { padding-right: 0; }
+
 .bfg-field--valid input,
 .bfg-field--valid select {
     border-color: #16a34a !important;
@@ -3639,6 +3678,27 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 .bfg-admin-page__pro .bfg-section {
     padding-bottom: 56px;
     border-bottom-color: #E5E7EB;
+}
+
+/* Pro page: flex column so footnotes can be pushed to the very bottom */
+.bfg-admin-page__pro {
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-admin-page__pro .bfg-page__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-admin-page__pro .bfg-page__footer-notes {
+    margin-top: auto !important;
+    padding-top: 1.5rem;
+}
+
+.bfg-admin-page__pro .bfg-pro-features-section {
+    padding-bottom: 20rem;
 }
 
 /* Pro Features Section */
