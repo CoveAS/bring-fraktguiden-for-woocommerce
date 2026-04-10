@@ -230,17 +230,6 @@ if ($license_active && $pro_enabled) {
 				</bfg-section.section>
 			</div>
 
-			<div class="bfg-page__footer-notes">
-				<small><sup>1</sup>
-					<t>Domestic shipments only. We're working on building support for international shipping.</t>
-				</small>
-				<small><sup>2</sup>
-					<t>List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til
-						Pakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL
-						and PICKUP_PARCEL_BULK</t>
-				</small>
-			</div>
-
 		<?php elseif ($is_test_site && $pro_enabled): ?>
 			<!-- Test Site State -->
 			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--test">
@@ -447,7 +436,7 @@ if ($license_active && $pro_enabled) {
 							<line x1="3" y1="10" x2="21" y2="10"></line>
 						</svg>
 					</bfg-feature-card.icon>
-					<strong class="bfg-feature-card__title"><t>MyBring Booking</t></strong>
+					<strong class="bfg-feature-card__title"><t>MyBring Booking</t><sup>1</sup></strong>
 					<span class="bfg-feature-card__desc"><t>Book shipments and print labels directly from WooCommerce orders</t></span>
 					<bfg-feature-card.benefits>
 						<li><t>Book directly from order view</t></li>
@@ -464,7 +453,7 @@ if ($license_active && $pro_enabled) {
 							<circle cx="12" cy="10" r="3"></circle>
 						</svg>
 					</bfg-feature-card.icon>
-					<strong class="bfg-feature-card__title"><t>Pickup Points</t></strong>
+					<strong class="bfg-feature-card__title"><t>Pickup Points</t><sup>2</sup></strong>
 					<span class="bfg-feature-card__desc"><t>Let customers choose their preferred Bring pickup location at checkout</t></span>
 					<bfg-feature-card.benefits>
 						<li><t>Choose pickup location at checkout</t></li>
@@ -546,6 +535,17 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 			</div>
+		</div>
+
+		<div class="bfg-page__footer-notes" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--bfg-border); display: flex; flex-direction: column; gap: 0.375rem;">
+			<small style="color: var(--bfg-text-muted);"><sup>1</sup>
+				<t>Domestic shipments only. We're working on building support for international shipping.</t>
+			</small>
+			<small style="color: var(--bfg-text-muted);"><sup>2</sup>
+				<t>List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til
+					Pakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL
+					and PICKUP_PARCEL_BULK</t>
+			</small>
 		</div>
 
 	</div>
