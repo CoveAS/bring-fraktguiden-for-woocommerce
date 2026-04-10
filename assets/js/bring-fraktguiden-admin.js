@@ -61,7 +61,7 @@ jQuery(function ($) {
 
 	// Custom Select Dropdown
 	function initCustomSelects() {
-		$('.bfg-custom-select').each(function() {
+		$('.bfg-custom-select:not([data-bfg-select])').each(function() {
 			const $select = $(this);
 			const $trigger = $select.find('.bfg-custom-select__trigger');
 			const $native = $select.find('.bfg-custom-select__native');

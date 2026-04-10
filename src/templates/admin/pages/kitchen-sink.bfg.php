@@ -40,69 +40,69 @@
 				<h3 class="bfg-field-group-title">
 					<bfg-t>Type Scale</bfg-t>
 				</h3>
-				<table class="bfg-type-scale-table" style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
+				<table class="bfg-type-scale-table">
 					<thead>
-						<tr style="text-align: left; border-bottom: 1px solid var(--bfg-border);">
-							<th style="padding: 8px 16px 8px 0; font-size: 13px; font-weight: 500; color: var(--bfg-text-muted);">Size</th>
-							<th style="padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--bfg-text-muted);">Line Height</th>
-							<th style="padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--bfg-text-muted);">Weight</th>
-							<th style="padding: 8px 0 8px 16px; font-size: 13px; font-weight: 500; color: var(--bfg-text-muted);">Example</th>
+						<tr>
+							<th>Size</th>
+							<th>Line Height</th>
+							<th>Weight</th>
+							<th>Example</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>48px</code></td>
-							<td style="padding: 16px;"><code>56px</code></td>
-							<td style="padding: 16px;"><code>600</code> Semibold</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 48px; line-height: 56px; font-weight: 600;">Display</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>32px</code></td>
-							<td style="padding: 16px;"><code>40px</code></td>
-							<td style="padding: 16px;"><code>600</code> Semibold</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 32px; line-height: 40px; font-weight: 600;">Heading XL</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>28px</code></td>
-							<td style="padding: 16px;"><code>36px</code></td>
-							<td style="padding: 16px;"><code>500</code> Medium</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 28px; line-height: 36px; font-weight: 500;">Heading L</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>24px</code></td>
-							<td style="padding: 16px;"><code>32px</code></td>
-							<td style="padding: 16px;"><code>500</code> Medium</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 24px; line-height: 32px; font-weight: 500;">Heading M</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>20px</code></td>
-							<td style="padding: 16px;"><code>28px</code></td>
-							<td style="padding: 16px;"><code>500</code> Medium</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 20px; line-height: 28px; font-weight: 500;">Heading S</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>16px</code></td>
-							<td style="padding: 16px;"><code>24px</code></td>
-							<td style="padding: 16px;"><code>400</code> Regular</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 16px; line-height: 24px; font-weight: 400;">Body / Base</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>15px</code></td>
-							<td style="padding: 16px;"><code>24px</code></td>
-							<td style="padding: 16px;"><code>500</code> Medium</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 15px; line-height: 24px; font-weight: 500;">Label</td>
-						</tr>
-						<tr style="border-bottom: 1px solid var(--bfg-border);">
-							<td style="padding: 16px 16px 16px 0;"><code>14px</code></td>
-							<td style="padding: 16px;"><code>20px</code></td>
-							<td style="padding: 16px;"><code>400</code> Regular</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 14px; line-height: 20px; font-weight: 400;">Small / Caption</td>
+						<tr>
+							<td><code>48px</code></td>
+							<td><code>56px</code></td>
+							<td><code>600</code> Semibold</td>
+							<td class="bfg-text-display">Display</td>
 						</tr>
 						<tr>
-							<td style="padding: 16px 16px 16px 0;"><code>13px</code></td>
-							<td style="padding: 16px;"><code>20px</code></td>
-							<td style="padding: 16px;"><code>400</code> Regular</td>
-							<td style="padding: 16px 0 16px 16px; font-size: 13px; line-height: 20px; font-weight: 400;">Extra Small</td>
+							<td><code>32px</code></td>
+							<td><code>40px</code></td>
+							<td><code>600</code> Semibold</td>
+							<td class="bfg-text-heading-xl">Heading XL</td>
+						</tr>
+						<tr>
+							<td><code>28px</code></td>
+							<td><code>36px</code></td>
+							<td><code>500</code> Medium</td>
+							<td class="bfg-text-heading-l">Heading L</td>
+						</tr>
+						<tr>
+							<td><code>24px</code></td>
+							<td><code>32px</code></td>
+							<td><code>500</code> Medium</td>
+							<td class="bfg-text-heading-m">Heading M</td>
+						</tr>
+						<tr>
+							<td><code>20px</code></td>
+							<td><code>28px</code></td>
+							<td><code>500</code> Medium</td>
+							<td class="bfg-text-heading-s">Heading S</td>
+						</tr>
+						<tr>
+							<td><code>16px</code></td>
+							<td><code>24px</code></td>
+							<td><code>400</code> Regular</td>
+							<td class="bfg-text-body">Body / Base</td>
+						</tr>
+						<tr>
+							<td><code>15px</code></td>
+							<td><code>24px</code></td>
+							<td><code>500</code> Medium</td>
+							<td class="bfg-text-type-label">Label</td>
+						</tr>
+						<tr>
+							<td><code>14px</code></td>
+							<td><code>20px</code></td>
+							<td><code>400</code> Regular</td>
+							<td class="bfg-text-small">Small / Caption</td>
+						</tr>
+						<tr>
+							<td><code>13px</code></td>
+							<td><code>20px</code></td>
+							<td><code>400</code> Regular</td>
+							<td class="bfg-text-xs">Extra Small</td>
 						</tr>
 					</tbody>
 				</table>
@@ -113,19 +113,19 @@
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-8">
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">400</code>
-						<span style="font-size: 20px; font-weight: 400;">Regular — Body text, descriptions, captions</span>
+						<span class="bfg-text-heading-s bfgu:font-normal">Regular — Body text, descriptions, captions</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">500</code>
-						<span style="font-size: 20px; font-weight: 500;">Medium — Labels, headings, buttons</span>
+						<span class="bfg-text-heading-s">Medium — Labels, headings, buttons</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">600</code>
-						<span style="font-size: 20px; font-weight: 600;">Semibold — Display headings, field group titles</span>
+						<span class="bfg-text-heading-s bfgu:font-semibold">Semibold — Display headings, field group titles</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">700</code>
-						<span style="font-size: 20px; font-weight: 700;">Bold — Strong emphasis</span>
+						<span class="bfg-text-heading-s bfgu:font-bold">Bold — Strong emphasis</span>
 					</div>
 				</div>
 
@@ -135,15 +135,15 @@
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-8">
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">14px</code>
-						<span style="font-size: 14px; font-weight: 500;">Medium 14 — Small labels, compact UI</span>
+						<span class="bfg-text-small bfgu:font-medium">Medium 14 — Small labels, compact UI</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">16px</code>
-						<span style="font-size: 16px; font-weight: 500;">Medium 16 — Default labels, buttons</span>
+						<span class="bfg-text-body bfgu:font-medium">Medium 16 — Default labels, buttons</span>
 					</div>
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 						<code class="bfgu:w-12 bfgu:shrink-0">18px</code>
-						<span style="font-size: 18px; font-weight: 500;">Medium 18 — Larger labels, subheadings</span>
+						<span class="bfgu:text-lg bfgu:font-medium">Medium 18 — Larger labels, subheadings</span>
 					</div>
 				</div>
 
@@ -427,11 +427,11 @@ echo "</div>";
 				<!-- ── Select ──────────────────────────────────────────────── -->
 				<h3 class="bfg-field-group-title bfgu:mt-4"><bfg-t>Select</bfg-t></h3>
 				<div>
-					<bfg-field.select id="demo-select" name="demo-select" label="Label" :options="[
-						'option1' => __('Option 1', 'bring-fraktguiden-for-woocommerce'),
-						'option2' => __('Option 2', 'bring-fraktguiden-for-woocommerce'),
-						'option3' => __('Option 3', 'bring-fraktguiden-for-woocommerce'),
-					]" value="option1" placeholder="Select an option"></bfg-field.select>
+					<bfg-field.select id="demo-select" name="demo-select" label="Label" placeholder="Select an option">
+						<option value="option1"><?php esc_html_e('Option 1', 'bring-fraktguiden-for-woocommerce'); ?></option>
+						<option value="option2"><?php esc_html_e('Option 2', 'bring-fraktguiden-for-woocommerce'); ?></option>
+						<option value="option3"><?php esc_html_e('Option 3', 'bring-fraktguiden-for-woocommerce'); ?></option>
+					</bfg-field.select>
 				</div>
 				<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-10" style="">
 					<div class="bfgu:flex bfgu:items-center bfgu:gap-3">
