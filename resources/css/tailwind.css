@@ -544,9 +544,6 @@ input:checked+.bring-toggle-alt::after {
         border-top: none;
     }
 
-    .bfg-subscription__label {
-        font-size: 14px;
-    }
 
     .bfg-subscription__value {
         font-size: 14px;
@@ -2593,7 +2590,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0;
     text-transform: uppercase;
     color: #6B7280;
@@ -3060,9 +3057,6 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
         border-top: none;
     }
 
-    .bfg-subscription__label {
-        font-size: 14px;
-    }
 
     body.wp-admin .bfg-admin-page .button-primary {
         padding: 8px 32px;
@@ -3598,9 +3592,12 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     gap: 0;
 }
 
-.bfg-subscription__label--status {
-    padding-left: 14px;
+@media (max-width: 782px) {
+    .bfg-subscription--grid3 {
+        grid-template-columns: 1fr;
+    }
 }
+
 
 .bfg-subscription__value--status {
     display: flex;
@@ -3615,9 +3612,9 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     flex-shrink: 0;
 }
 
-.bfg-subscription__value--green .bfg-subscription__dot { background: #16A34A; }
-.bfg-subscription__value--red .bfg-subscription__dot   { background: #DC2626; }
-.bfg-subscription__value--gray .bfg-subscription__dot  { background: #9CA3AF; }
+.bfg-subscription__value--status[data-color="green"] .bfg-subscription__dot { background: #16A34A; }
+.bfg-subscription__value--status[data-color="red"] .bfg-subscription__dot   { background: #DC2626; }
+.bfg-subscription__value--status[data-color="gray"] .bfg-subscription__dot  { background: #9CA3AF; }
 
 
 .bfg-license-active-card__header {

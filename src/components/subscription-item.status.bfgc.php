@@ -15,7 +15,7 @@
 
 <div class="bfg-subscription__item <t>class</t>">
 	<span class="bfg-subscription__label bfg-subscription__label--status"><t>label</t></span>
-	<span class="bfg-subscription__value bfg-subscription__value--status bfg-subscription__value--<t>color</t>">
+	<span class="bfg-subscription__value bfg-subscription__value--status" data-color=":color">
 		<span class="bfg-subscription__dot"></span>
 		<t>value</t>
 	</span>
