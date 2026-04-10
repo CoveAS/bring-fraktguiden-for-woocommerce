@@ -22,5 +22,5 @@
 		<t>label</t>
 	</div>
 	<span class="bfg-subscription__value"><t>value</t></span>
-	<span class="bfg-subscription__detail"><t>detail</t></span>
+	<span class="bfg-subscription__detail bfgu:text-sm bfgu:font-medium bfgu:text-left"><t>detail</t></span>
 </div>

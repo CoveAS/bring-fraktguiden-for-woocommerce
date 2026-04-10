@@ -155,6 +155,81 @@
 			</bfg-section.section>
 		</bfg-section>
 
+		<!-- Title Hierarchy -->
+		<bfg-section>
+			<bfg-section.header title="Title Hierarchy" description="6-level heading system with heading and description pairings"></bfg-section.header>
+			<bfg-section.section>
+				<div class="bfgu:flex bfgu:flex-col bfgu:divide-y bfgu:divide-[var(--bfg-border)]">
+					<!-- Level 1 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 1</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Hero / Page Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 32px; font-weight: 600; line-height: 1.2; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 16px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">32px · Semibold 600 · lh 1.2 &nbsp;/&nbsp; 16px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+					<!-- Level 2 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 2</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Section Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 24px; font-weight: 600; line-height: 1.3; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 16px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">24px · Semibold 600 · lh 1.3 &nbsp;/&nbsp; 16px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+					<!-- Level 3 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 3</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Subsection Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 20px; font-weight: 600; line-height: 1.3; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">20px · Semibold 600 · lh 1.3 &nbsp;/&nbsp; 14px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+					<!-- Level 4 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 4</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Card / Component Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 18px; font-weight: 500; line-height: 1.4; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">18px · Medium 500 · lh 1.4 &nbsp;/&nbsp; 14px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+					<!-- Level 5 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 5</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Small Component Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 16px; font-weight: 500; line-height: 1.4; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">16px · Medium 500 · lh 1.4 &nbsp;/&nbsp; 14px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+					<!-- Level 6 -->
+					<div class="bfgu:py-6 bfgu:flex bfgu:gap-8 bfgu:items-start">
+						<div class="bfgu:w-48 bfgu:shrink-0">
+							<code style="font-size: 13px; color: var(--bfg-text-muted);">Level 6</code>
+							<p style="font-size: 13px; color: var(--bfg-text-muted); margin: 2px 0 0;">Label / Caption Title</p>
+						</div>
+						<div class="bfgu:flex bfgu:flex-col bfgu:gap-1">
+							<p style="font-size: 14px; font-weight: 500; line-height: 1.4; margin: 0; color: var(--bfg-text-primary);">The quick brown fox</p>
+							<p style="font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--bfg-text-secondary);">14px · Medium 500 · lh 1.4 &nbsp;/&nbsp; 14px · Regular 400 · lh 1.5</p>
+						</div>
+					</div>
+				</div>
+			</bfg-section.section>
+		</bfg-section>
+
 		<!-- Notice Banners -->
 		<bfg-section>
 			<bfg-section.header title="Notice Banners"></bfg-section.header>
@@ -501,20 +576,14 @@ echo "</div>";
 			<bfg-section.header title="Subscription Status" description="Displays license and subscription details"></bfg-section.header>
 			<bfg-section.section>
 				<h3 class="bfg-field-group-title">
-					<bfg-t>Active License</bfg-t>
+					<bfg-t>Active License (with status dot)</bfg-t>
 				</h3>
-				<bfg-subscription-info class="bfgu:mb-0">
-					<bfg-subscription-item.lock class="bfgu:p-0" label="LICENSE STATUS" value="Active" detail="License: PRO-2026-XXXX"></bfg-subscription-item.lock>
-					<bfg-subscription-item.calendar class="bfgu:p-0" label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-subscription-item.calendar>
+				<bfg-subscription-info class="bfgu:mb-0 bfg-subscription--active bfg-subscription--grid3">
+					<bfg-subscription-item class="bfgu:p-0" label="LICENSE KEY" value="PRO-2026-XXXX"></bfg-subscription-item>
+					<bfg-subscription-item.status class="bfgu:p-0" label="STATUS" value="Active" color="green"></bfg-subscription-item.status>
+					<bfg-subscription-item.calendar class="bfgu:p-0" label="VALID UNTIL" value="March 13, 2027" detail="365 days left"></bfg-subscription-item.calendar>
 				</bfg-subscription-info>
 
-				<h3 class="bfg-field-group-title">
-					<bfg-t>Trial License</bfg-t>
-				</h3>
-				<bfg-subscription-info class="bfgu:mb-0">
-					<bfg-subscription-item.lock class="bfgu:p-0" label="LICENSE STATUS" value="Trial" detail="Activated: March 25, 2026"></bfg-subscription-item.lock>
-					<bfg-subscription-item.calendar class="bfgu:p-0" label="VALID UNTIL" value="April 1, 2026" detail="7 days remaining"></bfg-subscription-item.calendar>
-				</bfg-subscription-info>
 			</bfg-section.section>
 		</bfg-section>
 

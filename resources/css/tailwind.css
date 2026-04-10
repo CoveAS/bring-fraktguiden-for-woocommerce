@@ -532,7 +532,7 @@ input:checked+.bring-toggle-alt::after {
     }
 
     .bfg-subscription__value {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .bfg-badge {
@@ -1802,13 +1802,15 @@ a.bfg-step__link:hover,
     flex-grow: 1;
     font-size: 16px;
     font-weight: 500;
+    line-height: 1.4;
     color: var(--bfg-text-main);
 }
 
 .bfg-access-link__content .bfg-step__desc {
     font-size: 14px;
-    color: var(--bfg-text-muted);
     font-weight: 400;
+    line-height: 1.5;
+    color: var(--bfg-text-muted);
     margin-top: 4px;
 }
 
@@ -2551,7 +2553,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-subscription__value {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #111827;
     margin-bottom: 2px;
@@ -3534,18 +3536,38 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     padding: 0;
 }
 
-
-.bfg-license-active-card__actions {
-    display: flex;
-    align-items: center;
-    padding-top: 0;
-    gap: 8px;
+.bfg-subscription--grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
 }
 
-.bfg-license-active-card__actions a {
-    display: inline-flex;
+.bfg-subscription__label--status {
+    padding-left: 14px;
+}
+
+.bfg-subscription__value--status {
+    display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.bfg-subscription__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.bfg-subscription__value--green .bfg-subscription__dot { background: #16A34A; }
+.bfg-subscription__value--red .bfg-subscription__dot   { background: #DC2626; }
+.bfg-subscription__value--gray .bfg-subscription__dot  { background: #9CA3AF; }
+
+
+.bfg-license-active-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .bfg-license-key-pill {

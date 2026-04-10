@@ -1,28 +1,20 @@
 <?php
-/**
- * BFG Subscription Item with Calendar Icon
+/*
+ * BFG Subscription Item with Date
  *
- * Subscription item with calendar icon for displaying validity dates.
+ * Subscription item for displaying validity dates.
  *
- * @param string $label The label text (displayed uppercase)
- * @param string $value The value text
- * @param string $detail Optional detail text below value
+ * Attributes:
+ *   label  - The label text (displayed uppercase)
+ *   value  - The date value text
+ *   detail - Optional detail shown in parentheses after the value
  *
  * Usage:
- * <bfg-subscription-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days remaining"></bfg-subscription-item.calendar>
+ * <bfg-subscription-item.calendar label="VALID UNTIL" value="March 13, 2027" detail="365 days left"></bfg-subscription-item.calendar>
  */
 ?>
 
 <div class="bfg-subscription__item <t>class</t>">
-	<div class="bfg-subscription__label">
-		<svg class="bfg-subscription__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-			<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-			<line x1="16" y1="2" x2="16" y2="6"></line>
-			<line x1="8" y1="2" x2="8" y2="6"></line>
-			<line x1="3" y1="10" x2="21" y2="10"></line>
-		</svg>
-		<t>label</t>
-	</div>
-	<span class="bfg-subscription__value"><t>value</t></span>
-	<span class="bfg-subscription__detail"><t>detail</t></span>
+	<span class="bfg-subscription__label"><t>label</t></span>
+	<span class="bfg-subscription__value"><t>value</t> <span class="bfg-subscription__detail bfgu:font-normal bfgu:opacity-60">(<t>detail</t>)</span></span>
 </div>
