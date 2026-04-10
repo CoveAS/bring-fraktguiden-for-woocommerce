@@ -7,7 +7,6 @@
  *
  * Usage:
  *   php bin/list-components.php
- *   php bin/list-components.php --detailed
  */
 
 $projectRoot = dirname(__DIR__);
