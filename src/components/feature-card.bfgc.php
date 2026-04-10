@@ -26,8 +26,9 @@
  *     <span class="bfg-feature-card__desc">Description</span>
  *   </bfg-feature-card>
  *
- * @param string $href   Optional URL — renders card as a link with hover effect
- * @param bool   $active Blue icon state (Pro license active)
+ * @param string $href    Optional URL — renders card as a link with hover effect
+ * @param bool   $active  Blue icon state (Pro license active)
+ * @param bool   $expired Orange icon state (Pro license expired)
  *
  * Note: <else> must be a sibling of <if> (placed after </if>, not inside it).
  */
@@ -46,6 +47,11 @@
 <div class="bfg-feature-card bfg-feature-card--active"><slot></slot></div>
 </if>
 <else>
+<if :expired>
+<div class="bfg-feature-card bfg-feature-card--expired"><slot></slot></div>
+</if>
+<else>
 <div class="bfg-feature-card"><slot></slot></div>
+</else>
 </else>
 </else>

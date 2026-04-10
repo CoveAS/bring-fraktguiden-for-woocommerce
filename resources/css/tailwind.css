@@ -3523,6 +3523,33 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     border-color: rgba(191, 219, 254, 0.4) !important;
 }
 
+/* License Expired Card */
+.bfg-license-expired-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: linear-gradient(to bottom right, rgba(255, 251, 235, 0.5), rgba(254, 243, 199, 0.5)) !important;
+    border-color: #FDE68A !important;
+}
+
+.bfg-license-expired-card .bfg-pro-upsell-card__icon {
+    background: #F59E0B;
+    color: #ffffff;
+}
+
+.bfg-license-expired-card .bfg-btn--primary,
+.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary {
+    background: #D97706;
+    border-color: #D97706;
+    color: #ffffff;
+}
+
+.bfg-license-expired-card .bfg-btn--primary:hover,
+.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary:hover {
+    background: #B45309;
+    border-color: #B45309;
+}
+
 .bfg-pro-upsell-card__icon {
     flex-shrink: 0;
     width: 44px;
@@ -3586,11 +3613,14 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Active license card */
 .bfg-license-active-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
 }
 
-.bfg-license-active-card .bfg-complete-card__title {
-    font-size: 16px !important;
-    font-weight: 600 !important;
+.bfg-license-active-card .bfg-pro-upsell-card__icon {
+    background: #2563EB;
+    color: #ffffff;
 }
 
 .bfg-license-active-card .bfg-subscription {
@@ -3684,10 +3714,10 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     color: #374151;
 }
 
-/* Pro page: section spacing and border color aligned to card border */
+/* Pro page: section spacing, no border separators */
 .bfg-admin-page__pro .bfg-section {
     padding-bottom: 56px;
-    border-bottom-color: #E5E7EB;
+    border-bottom: none;
 }
 
 /* Pro page: flex column so footnotes can be pushed to the very bottom */
@@ -3822,6 +3852,11 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 .bfg-feature-card--active .bfg-feature-card__icon {
     background: #EFF6FF;
     color: #2563EB;
+}
+
+.bfg-feature-card--expired .bfg-feature-card__icon {
+    background: #FEF3C7;
+    color: #D97706;
 }
 
 .bfg-feature-card__title {

@@ -2,8 +2,9 @@
 
 use BringFraktguiden\Admin\FieldRenderer;
 
-// Feature card state — active (blue, linked) when Pro is fully enabled
+// Feature card state — active (blue, linked) when Pro is fully enabled; expired (orange) when license lapsed
 $bfg_cards_active   = ($license_active && $pro_enabled) || ($is_test_site && $pro_enabled);
+$bfg_cards_expired  = $is_expired;
 $bfg_booking_url    = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
 $bfg_shipping_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')) : '';
 $bfg_fallback_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')) : '';
@@ -55,42 +56,29 @@ if ($license_active && $pro_enabled) {
 		<?php if ($license_active && $pro_enabled): ?>
 			<!-- PRO Active State -->
 
-			<!-- Status Banner -->
-			<div class="bfg-notice-banner" type="success">
-				<span class="bfg-notice-icon">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round">
-						<path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/>
-						<path d="M5 21h14"/>
-					</svg>
-				</span>
-				<p><t>Pro license active — All features available</t></p>
-			</div>
-
-			<!-- License Info Card -->
+			<!-- License Active Card -->
 			<div class="bfg-section bfg-license-info-section">
-				<div class="bfg-free-card bfg-complete-card bfg-license-active-card">
-					<div class="bfg-complete-card__icon">
+				<div class="bfg-free-card bfg-license-active-card">
+					<div class="bfg-pro-upsell-card__icon">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 							stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="7.5" cy="15.5" r="5.5"/>
-							<path d="m21 2-9.6 9.6"/>
-							<path d="m15.5 7.5 3 3L22 7l-3-3"/>
+							<path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/>
+							<path d="M5 21h14"/>
 						</svg>
 					</div>
-					<div class="bfg-complete-card__body">
-						<h3 class="bfg-complete-card__title"><t>License Details</t></h3>
-						<bfg-subscription-info class="bfg-subscription--active bfg-subscription--grid3" style="margin-top: 12px;">
+					<div class="bfg-pro-upsell-card__body">
+						<h2 class="bfg-complete-card__title"><t>Pro License Active</t></h2>
+						<p class="bfg-pro-upsell-card__desc"><t>All features are available. Your configurations are active and running.</t></p>
+						<bfg-subscription-info class="bfg-subscription--active bfg-subscription--grid3">
 							<bfg-subscription-item label="LICENSE KEY" :value="$license_key ? esc_html( $license_key ) : ''"></bfg-subscription-item>
 							<bfg-subscription-item.status label="STATUS" value="Active" color="green"></bfg-subscription-item.status>
 							<?php if ($valid_to_formatted): ?>
 							<bfg-subscription-item.calendar label="VALID UNTIL" :value="esc_html( $valid_to_formatted )" :detail="$license_days_remaining > 0 ? sprintf( '%d days left', $license_days_remaining ) : ''"></bfg-subscription-item.calendar>
 							<?php endif; ?>
 						</bfg-subscription-info>
-
-						<div class="bfg-license-active-card__actions">
+						<div class="bfg-pro-upsell-card__ctas">
 							<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--text">
-								<?php esc_html_e('Manage license', 'bring-fraktguiden-for-woocommerce'); ?>
+								<t>Manage license</t>
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 									stroke-linecap="round" stroke-linejoin="round">
 									<line x1="7" y1="17" x2="17" y2="7"></line>
@@ -104,41 +92,34 @@ if ($license_active && $pro_enabled) {
 
 		<?php elseif ($is_expired): ?>
 			<!-- Expired State -->
-			<div class="bfg-section bfg-pro-teaser-v2 bfg-pro-teaser--expired">
-				<div class="bfg-pro-teaser__shield bfg-pro-teaser__shield--expired">
-					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-						stroke-linecap="round" stroke-linejoin="round">
-						<circle cx="12" cy="12" r="10"></circle>
-						<line x1="12" y1="8" x2="12" y2="12"></line>
-						<line x1="12" y1="16" x2="12.01" y2="16"></line>
-					</svg>
-				</div>
 
-				<h2 class="bfg-pro-teaser__title">
-					<t>Trial Expired</t>
-				</h2>
-				<p class="bfg-pro-teaser__subtitle">
-					<t>Your trial has ended. Purchase a license to continue using PRO features.</t>
-				</p>
-
-				<bfg-subscription-info class="bfg-subscription--expired">
-					<bfg-subscription-item label="Status" value="Expired"></bfg-subscription-item>
-					<bfg-subscription-item label="PRO Features" value="Disabled"></bfg-subscription-item>
-				</bfg-subscription-info>
-
-				<div class="bfg-pro-footer">
-					<a href="https://bringfraktguiden.no/" target="_blank"
-						class="bfg-btn bfg-btn--primary bfg-btn--lg bfg-btn--full-width">
-						<t>Purchase PRO License</t>
-					</a>
+			<!-- License Expired Card -->
+			<div class="bfg-section bfg-license-info-section">
+				<div class="bfg-free-card bfg-license-expired-card">
+					<div class="bfg-pro-upsell-card__icon">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+							<path d="M21 3v5h-5"/>
+							<path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+							<path d="M8 16H3v5"/>
+						</svg>
+					</div>
+					<div class="bfg-pro-upsell-card__body">
+						<h2 class="bfg-complete-card__title"><t>License Expired</t></h2>
+						<p class="bfg-pro-upsell-card__desc"><t>Your configurations are preserved. Renew your license to reactivate all Pro features.</t></p>
+						<div class="bfg-pro-upsell-card__ctas">
+							<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary">
+								<t>Renew License</t>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<!-- License Activation Form -->
 			<div class="bfg-section">
-				<bfg-section.header>
-					<t>Activate Your License</t>
-				</bfg-section.header>
+				<bfg-section.header title="Have a new license key?" description="Enter it below to activate your renewed license."></bfg-section.header>
 
 				<bfg-section.section>
 					<form method="post" action="options.php" id="bfg-license-form-pro">
@@ -427,7 +408,7 @@ if ($license_active && $pro_enabled) {
 			<div class="bfg-pro-feature-card-grid">
 
 				<!-- MyBring Booking -->
-				<bfg-feature-card :href="$bfg_booking_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_booking_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -446,7 +427,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Pickup Points -->
-				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
@@ -463,7 +444,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Fixed Pricing -->
-				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<line x1="12" y1="1" x2="12" y2="23"></line>
@@ -480,7 +461,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Free Shipping -->
-				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_shipping_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M20 12V22H4V12"></path>
@@ -500,7 +481,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- Fallback Pricing -->
-				<bfg-feature-card :href="$bfg_fallback_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_fallback_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -518,7 +499,7 @@ if ($license_active && $pro_enabled) {
 				</bfg-feature-card>
 
 				<!-- PRO Settings -->
-				<bfg-feature-card :href="$bfg_settings_url" :active="$bfg_cards_active">
+				<bfg-feature-card :href="$bfg_settings_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
 					<bfg-feature-card.icon>
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="3"></circle>
