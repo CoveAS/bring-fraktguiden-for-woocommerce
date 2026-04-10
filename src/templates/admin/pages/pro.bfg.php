@@ -152,9 +152,11 @@ if ($license_active && $pro_enabled) {
 							<label class="bfg-field__label">
 								<t>Enter Your License Key</t>
 							</label>
-							<div class="bfg-pro-license-form__row">
-								<?php FieldRenderer::test_url(); ?>
-								<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
+							<div class="bfg-pro-license-form__row" style="display:flex; gap: 0.5rem; align-items: center; width: 100%;">
+								<div style="flex: 1; min-width: 0;"><?php FieldRenderer::test_url(); ?></div>
+								<button type="submit" class="bfg-btn bfg-btn--primary" style="flex-shrink:0;">
+									<t>Activate</t>
+								</button>
 							</div>
 							<p class="bfg-description">
 								<t>Your license key is a 16-character code you received after purchase</t>
@@ -214,9 +216,11 @@ if ($license_active && $pro_enabled) {
 							<label class="bfg-field__label">
 								<t>Enter Your License Key</t>
 							</label>
-							<div class="bfg-pro-license-form__row">
-								<?php FieldRenderer::test_url(); ?>
-								<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
+							<div class="bfg-pro-license-form__row" style="display:flex; gap: 0.5rem; align-items: center; width: 100%;">
+								<div style="flex: 1; min-width: 0;"><?php FieldRenderer::test_url(); ?></div>
+								<button type="submit" class="bfg-btn bfg-btn--primary" style="flex-shrink:0;">
+									<t>Activate</t>
+								</button>
 							</div>
 							<p class="bfg-description">
 								<t>Your license key is a 16-character code you received after purchase</t>
@@ -342,7 +346,6 @@ if ($license_active && $pro_enabled) {
 										<button type="submit" class="bfg-btn bfg-btn--primary" style="flex-shrink:0;">
 											<t>Activate</t>
 										</button>
-										<span class="bfg-license-feedback" id="bfg-license-feedback-pro"></span>
 									</div>
 									<p class="bfg-description">
 										<t>Your license key is a 16-character code you received after purchase</t>
@@ -377,9 +380,54 @@ if ($license_active && $pro_enabled) {
 							licenseSection.querySelector('input').focus();
 						});
 					}
+
 				});
 			</script>
 		<?php endif; ?>
+
+		<!-- Shared license key validation — applies to whichever state renders #bfg-license-form-pro -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const licenseForm = document.getElementById('bfg-license-form-pro');
+				const licenseInput = licenseForm ? licenseForm.querySelector('input[type="text"], input:not([type])') : null;
+
+				if (!licenseForm || !licenseInput) return;
+
+				licenseInput.addEventListener('input', function () {
+					const raw = licenseInput.value;
+					if (!raw) { bfgField.clearError(licenseInput); return; }
+					if (!/^[A-Za-z0-9-]*$/.test(raw)) {
+						bfgField.showError(licenseInput, 'Only letters and numbers are allowed.');
+						return;
+					}
+					if (raw.replace(/-/g, '').length > 16) {
+						bfgField.showError(licenseInput, 'License key must be 16 characters.');
+						return;
+					}
+					bfgField.clearError(licenseInput);
+				});
+
+				licenseForm.addEventListener('submit', function (e) {
+					const raw = licenseInput.value.trim();
+					if (!raw) {
+						e.preventDefault();
+						bfgField.showError(licenseInput, 'Please enter your license key.');
+						return;
+					}
+					const normalized = raw.replace(/-/g, '');
+					if (!/^[A-Za-z0-9]+$/.test(normalized)) {
+						e.preventDefault();
+						bfgField.showError(licenseInput, 'Only letters and numbers are allowed.');
+						return;
+					}
+					if (normalized.length !== 16) {
+						e.preventDefault();
+						bfgField.showError(licenseInput, 'License key must be 16 characters.');
+						return;
+					}
+				});
+			});
+		</script>
 
 		<!-- Features Grid — shared across all states -->
 		<div class="bfg-pro-features-section">

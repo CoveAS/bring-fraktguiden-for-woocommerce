@@ -429,6 +429,14 @@ class SettingsPage
 			true
 		);
 
+		wp_enqueue_script(
+			'bfg-field-validation',
+			plugins_url('bring-fraktguiden-for-woocommerce/resources/js/field-validation.js'),
+			[],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
+
 		if ($hook === 'toplevel_page_bring_fraktguiden_home') {
 			wp_enqueue_script(
 				'bring-home-js',
