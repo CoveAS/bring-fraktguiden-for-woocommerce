@@ -3553,6 +3553,19 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     flex-wrap: wrap;
 }
 
+@media screen and (max-width: 782px) {
+    .bfg-pro-upsell-card__ctas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bfg-pro-upsell-card__ctas form,
+    .bfg-pro-upsell-card__ctas .bfg-btn {
+        width: 100%;
+        display: flex;
+    }
+}
+
 /* License Activate Card */
 .bfg-license-activate-card .bfg-complete-card__desc {
     margin-bottom: 8px !important;
