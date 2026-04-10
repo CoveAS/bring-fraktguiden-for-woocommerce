@@ -24,9 +24,6 @@ use BringFraktguiden\Fields\Fields;
 		<form method="post" action="options.php" id="bfg-booking-form" novalidate>
 			<?php settings_fields('bring_fraktguiden_booking'); ?>
 
-			<!-- Live region for screen reader announcements -->
-			<div aria-live="polite" aria-atomic="true" class="sr-only" id="bfg-form-announcements"></div>
-
 			<bfg-section>
 				<bfg-section.header title="MyBring Booking"
 					description="Book orders directly from the order page with MyBring integration"></bfg-section.header>
@@ -118,6 +115,7 @@ use BringFraktguiden\Fields\Fields;
 							name="booking_address_reference"
 							placeholder="<?php echo esc_attr__('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'); ?>"
 							maxlength="35"
+							aria-required="true"
 							required
 						/>
 					</bfg-field.text>
@@ -130,6 +128,7 @@ use BringFraktguiden\Fields\Fields;
 							id="booking_address_contact_person"
 							name="booking_address_contact_person"
 							autocomplete="name"
+							aria-required="true"
 							required
 						/>
 					</bfg-field.text>
@@ -142,6 +141,7 @@ use BringFraktguiden\Fields\Fields;
 							id="booking_address_phone"
 							name="booking_address_phone"
 							autocomplete="tel"
+							aria-required="true"
 							required
 						/>
 					</bfg-field.text>
@@ -154,6 +154,7 @@ use BringFraktguiden\Fields\Fields;
 							id="booking_address_email"
 							name="booking_address_email"
 							autocomplete="email"
+							aria-required="true"
 							required
 						/>
 					</bfg-field.text>
@@ -221,7 +222,6 @@ use BringFraktguiden\Fields\Fields;
 		const form = document.getElementById('bfg-booking-form');
 		const checkbox = document.querySelector('input[name="booking_use_custom_address"]');
 		const addressFields = document.getElementById('bfg-custom-shipping-address');
-		const announcements = document.getElementById('bfg-form-announcements');
 
 		// Toggle custom address fields
 		function toggleAddressFields() {
@@ -231,67 +231,55 @@ use BringFraktguiden\Fields\Fields;
 		checkbox.addEventListener('change', toggleAddressFields);
 		toggleAddressFields();
 
-		// Validation functions
-		const validators = {
-			required: (value) => value.trim().length > 0,
-			email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-			phone: (value) => /^[\d\s\-+()]{6,}$/.test(value.trim())
-		};
+		// Wire up aria-describedby for fields whose description is rendered by the component
+		form.querySelectorAll('.bfg-field').forEach(function (fieldEl) {
+			const input = fieldEl.querySelector('input, select, textarea');
+			const desc = fieldEl.querySelector('.bfg-description');
+			if (!input || !desc || !input.id) return;
+			const descId = input.id + '-description';
+			desc.id = descId;
+			input.setAttribute('aria-describedby', descId);
+		});
 
-		// Validate a single field
+		// Validate a single required field using the bfgField utility
 		function validateField(field) {
-			const container = field.closest('[data-validate]') || field.closest('.bfg-field');
-			if (!container || !container.dataset.validate) return true;
-
-			const rules = container.dataset.validate.split('|');
-			const value = field.value;
-			let isValid = true;
-
-			for (const rule of rules) {
-				if (validators[rule] && !validators[rule](value)) {
-					isValid = false;
-					break;
-				}
+			const value = field.value.trim();
+			if (!value) {
+				bfgField.showError(field, '<?php esc_html_e('This field is required.', 'bring-fraktguiden-for-woocommerce'); ?>');
+				return false;
 			}
-
-			// Update visual state
-			const errorEl = container.querySelector('.bfg-field__validation--error');
-
-			container.classList.remove('bfg-field--valid', 'bfg-field--error');
-			if (errorEl) errorEl.classList.remove('is-visible');
-
-			if (value.trim().length > 0) {
-				if (isValid) {
-					container.classList.add('bfg-field--valid');
-				} else {
-					container.classList.add('bfg-field--error');
-					if (errorEl) errorEl.classList.add('is-visible');
-				}
+			if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+				bfgField.showError(field, '<?php esc_html_e('Please enter a valid email address.', 'bring-fraktguiden-for-woocommerce'); ?>');
+				return false;
 			}
-
-			return isValid;
+			if (field.type === 'tel' && !/^[\d\s\-+()]{6,}$/.test(value)) {
+				bfgField.showError(field, '<?php esc_html_e('Please enter a valid phone number.', 'bring-fraktguiden-for-woocommerce'); ?>');
+				return false;
+			}
+			bfgField.clearError(field);
+			return true;
 		}
 
-		// Add blur validation to all required fields
+		// Blur validation — only trigger after the user has interacted with the field
 		const requiredFields = form.querySelectorAll('[required]');
-		requiredFields.forEach(field => {
-			field.addEventListener('blur', () => validateField(field));
-			field.addEventListener('input', () => {
-				// Clear error state on input
-				const container = field.closest('[data-validate]') || field.closest('.bfg-field');
-				if (container && container.classList.contains('bfg-field--error')) {
-					validateField(field);
-				}
+		requiredFields.forEach(function (field) {
+			field.addEventListener('blur', function () {
+				if (field.value.trim()) validateField(field);
+			});
+			field.addEventListener('input', function () {
+				if (field.closest('.bfg-field--has-error')) validateField(field);
 			});
 		});
 
-		// Announce validation errors for screen readers
-		function announceError(message) {
-			announcements.textContent = message;
-			setTimeout(() => {
-				announcements.textContent = '';
-			}, 1000);
-		}
+		// Submit-time validation — prevent submission if any visible required field is invalid
+		form.addEventListener('submit', function (e) {
+			let firstInvalid = null;
+			requiredFields.forEach(function (field) {
+				if (field.offsetParent === null) return; // skip hidden fields
+				if (!validateField(field) && !firstInvalid) firstInvalid = field;
+			});
+			if (firstInvalid) e.preventDefault();
+		});
 
 	})();
 </script>
