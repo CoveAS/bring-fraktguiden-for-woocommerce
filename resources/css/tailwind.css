@@ -3998,7 +3998,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 
 .bfg-pro-feature-card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
@@ -4099,6 +4099,11 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     display: block;
     margin: 0 0 6px !important;
     line-height: 1.3;
+}
+
+.bfg-feature-card__title sup {
+    font-size: 10px;
+    margin-left: 3px;
 }
 
 .bfg-feature-card__desc {
