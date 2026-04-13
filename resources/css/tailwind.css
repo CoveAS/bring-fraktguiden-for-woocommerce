@@ -3317,8 +3317,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.15), rgba(147, 197, 253, 0.15)) !important;
-    border-color: rgba(191, 219, 254, 0.4) !important;
+    background: linear-gradient(to right, #F0F4FF, #DBEAFE) !important;
+    border-color: #BFDBFE !important;
 }
 
 .bfg-booking-upsell__icon {
@@ -3519,8 +3519,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.15), rgba(147, 197, 253, 0.15)) !important;
-    border-color: rgba(191, 219, 254, 0.4) !important;
+    background: linear-gradient(to right, #F0F4FF, #DBEAFE) !important;
+    border-color: #BFDBFE !important;
 }
 
 /* License Expired Card */
@@ -3596,6 +3596,48 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 /* License Activate Card */
 .bfg-license-activate-card .bfg-complete-card__desc {
     margin-bottom: 8px !important;
+}
+
+/* Trial Notice Banner */
+.bfg-trial-notice {
+    background: linear-gradient(to right, #F0F4FF, #DBEAFE) !important;
+    border-color: #BFDBFE !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bfg-trial-notice__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-trial-notice__title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+}
+
+.bfg-trial-notice__desc {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-trial-notice {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bfg-trial-notice .bfg-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /* ==========================================================================
