@@ -99,6 +99,22 @@ class GetStartedSteps
 			completed: $pro_enabled && $has_valid_license,
 		);
 
+		// Enforce sequential completion: once a step is incomplete, all following steps are too
+		$blocked = false;
+		foreach ($steps as $i => $step) {
+			if ($blocked) {
+				$steps[$i] = new Step(
+					label: $step->label,
+					description: $step->description,
+					action: $step->action,
+					actionText: $step->actionText,
+					completed: false,
+				);
+			} elseif (!$step->completed) {
+				$blocked = true;
+			}
+		}
+
 		return $steps;
 
 	}
