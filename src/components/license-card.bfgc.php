@@ -41,7 +41,12 @@
 		</div>
 		<div class="bfg-license-card__key-section">
 			<div class="bfg-license-card__key-label"><?php esc_html_e( 'License Key', 'bring-fraktguiden-for-woocommerce' ); ?></div>
-			<div class="bfg-license-card__key-value"><t>license-key</t></div>
+			<if :license-key>
+				<div class="bfg-license-card__key-value"><t>license-key</t></div>
+			</if>
+			<else>
+				<div class="bfg-license-card__key-value bfg-license-card__key-value--placeholder">●●●● – ●●●● – ●●●●</div>
+			</else>
 		</div>
 	</div>
 	<div class="bfg-license-card__footer">

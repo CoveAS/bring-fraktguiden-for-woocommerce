@@ -10,6 +10,22 @@
  */
 ?>
 
+<!-- License Active -->
+<div class="bfg-section bfg-pro-free-state">
+
+	<!-- Banner: active status + manage CTA -->
+	<div class="bfg-free-card bfg-active-notice">
+		<div class="bfg-active-notice__body">
+			<strong class="bfg-active-notice__title"><t>Pro is active</t></strong>
+			<p class="bfg-active-notice__desc"><t>All Pro features are enabled on your live site</t></p>
+		</div>
+		<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary">
+			<t>Manage License</t>
+		</a>
+	</div>
+
+</div>
+
 <!-- License Active Card -->
 <div class="bfg-section bfg-license-info-section">
 	<bfg-license-card
