@@ -13,21 +13,15 @@
 <!-- License Active -->
 <div class="bfg-section bfg-pro-free-state">
 
-	<!-- Banner: active status + manage CTA -->
+	<!-- Banner: active status -->
 	<div class="bfg-free-card bfg-active-notice">
 		<div class="bfg-active-notice__body">
 			<strong class="bfg-active-notice__title"><t>Pro is active</t></strong>
 			<p class="bfg-active-notice__desc"><t>All Pro features are enabled on your live site</t></p>
 		</div>
-		<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary">
-			<t>Manage License</t>
-		</a>
 	</div>
 
-</div>
-
-<!-- License Active Card -->
-<div class="bfg-section bfg-license-info-section">
+	<!-- License Card -->
 	<bfg-license-card
 		title="Pro License"
 		:subtitle="$valid_to_formatted ? sprintf( __( 'Active until %s', 'bring-fraktguiden-for-woocommerce' ), esc_html( $valid_to_formatted ) ) : ''"
@@ -38,4 +32,5 @@
 		manage-url="https://bringfraktguiden.no/"
 		manage-label="Manage License">
 	</bfg-license-card>
+
 </div>

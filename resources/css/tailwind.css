@@ -3244,7 +3244,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     background: #ffffff;
     border: 1px solid #E5E7EB;
     border-radius: 12px;
-    padding: 24px;
+    padding: 24px 24px 20px;
 }
 
 /* Setup Complete Card */
@@ -3666,8 +3666,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 /* Active Notice Banner */
 .bfg-active-notice {
-    background: linear-gradient(to right, #F0F7FF, #E8F0FE) !important;
-    border-color: #BFDBFE !important;
+    background: linear-gradient(to right, #F0FDF4, #DCFCE7) !important;
+    border-color: #BBF7D0 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
