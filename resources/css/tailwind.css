@@ -3787,7 +3787,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-license-card__key-label {
     font-size: 12px;
-    color: #9CA3AF;
+    color: #596270;
     margin-bottom: 8px;
 }
 
@@ -3815,17 +3815,8 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-license-card__manage {
-    display: inline-flex;
-    align-items: center;
     gap: 4px;
     font-size: 13px;
-    font-weight: 600;
-    color: #2563EB;
-    text-decoration: none;
-}
-
-.bfg-license-card__manage:hover {
-    text-decoration: underline;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────── */

@@ -46,7 +46,7 @@
 	</div>
 	<div class="bfg-license-card__footer">
 		<span class="bfg-license-card__days"><t>days</t></span>
-		<a class="bfg-license-card__manage" href=":manage-url">
+		<a class="bfg-btn bfg-btn--text bfg-license-card__manage" href=":manage-url">
 			<t>manage-label</t>
 			<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 				<path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5"/>
