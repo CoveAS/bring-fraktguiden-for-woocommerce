@@ -150,7 +150,7 @@ input:checked+.bring-toggle-alt::after {
 
 .bfg-setup-header__subtitle {
     font-size: 16px;
-    color: #6B7280;
+    color: #596270;
     margin: 0 0 24px !important;
     font-weight: 400;
 }
@@ -175,7 +175,7 @@ input:checked+.bring-toggle-alt::after {
 
 .bfg-setup-header__stat-label {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
     font-weight: 400;
 }
 
@@ -258,7 +258,7 @@ input:checked+.bring-toggle-alt::after {
 
 .bfg-steps-list .bfg-access-link__content .bfg-step__desc {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
 }
 
 /* ==========================================================================
@@ -314,7 +314,7 @@ input:checked+.bring-toggle-alt::after {
 /* Pro Teaser Subtitle */
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
     font-size: 16px;
-    color: #6B7280;
+    color: #596270;
     margin: 0 auto 32px;
     text-align: center;
     max-width: 480px;
@@ -356,7 +356,7 @@ input:checked+.bring-toggle-alt::after {
 }
 
 .bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-description {
-    color: #6B7280;
+    color: #596270;
 }
 
 /* Pro Teaser Divider */
@@ -727,7 +727,7 @@ input:checked+.bring-toggle-alt::after {
     --bfg-primary-light: #DBEAFE;
     --bfg-primary-light-hover: #BFDBFE;
     --bfg-text-main: #111827;
-    --bfg-text-secondary: #4B5563;
+    --bfg-text-secondary: #596270;
     --bfg-text-muted: #6B7280;
     --bfg-border: #D1D5DB;
     --bfg-bg-card: #ffffff;
@@ -1615,7 +1615,7 @@ body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
 
 .bfg-step-row__description {
     font-size: 14px;
-    color: var(--bfg-text-muted);
+    color: #596270;
     font-weight: 400;
     margin-top: 4px;
 }
@@ -1680,7 +1680,7 @@ a.bfg-step:focus-visible,
     border-radius: 50%;
     background: #F3F4F6; /* gray-100 - slightly darker than card bg */
     border: 1px solid #E5E7EB; /* gray-200 */
-    color: #6B7280;
+    color: #596270;
     font-size: 14px;
     font-weight: 500;
     display: flex;
@@ -1790,7 +1790,7 @@ a.bfg-step__link:hover,
 /* Description for step rows */
 .bfg-step__desc {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
     font-weight: 400;
     margin: 2px 0 0 0 !important;
     line-height: 1.4;
@@ -1863,7 +1863,7 @@ a.bfg-step__link:hover,
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
-    color: var(--bfg-text-muted);
+    color: #596270;
     margin-top: 4px;
 }
 
@@ -2353,7 +2353,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-pro-teaser__subtitle {
     font-size: var(--bfg-text-level-2);
-    color: #4B5563;
+    color: #596270;
     line-height: 1.5;
     margin-bottom: 32px !important;
     max-width: 460px;
@@ -2433,7 +2433,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     margin: 0 !important;
     max-width: none;
     text-align: left;
-    color: #4B5563;
+    color: #596270;
     font-size: 16px;
     opacity: 0.9;
 }
@@ -2555,7 +2555,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-pro-teaser__footer-text {
     margin-top: 12px !important;
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
 }
 
 .bfg-pro-teaser__footer-text a {
@@ -2593,7 +2593,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     font-size: 12px;
     letter-spacing: 0;
     text-transform: uppercase;
-    color: #6B7280;
+    color: #596270;
     font-weight: 500;
     margin-bottom: 4px;
 }
@@ -2614,7 +2614,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-subscription__detail {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
     font-weight: 400;
 }
 
@@ -3259,7 +3259,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     height: 44px;
     border-radius: 10px;
     background: #F3F4F6;
-    color: #6B7280;
+    color: #596270;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3288,7 +3288,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-complete-card__desc {
     font-size: 14px;
-    color: #4B5563;
+    color: #596270;
     margin: 0 0 4px !important;
 }
 
@@ -3377,7 +3377,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-booking-upsell__desc {
     font-size: 14px;
-    color: #4B5563;
+    color: #596270;
     margin: 0 0 16px !important;
 }
 
@@ -3411,7 +3411,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-booking-upsell__no-cc {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
 }
 
 /* Stats Row */
@@ -3448,7 +3448,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-stat-card__label {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
     margin-top: 2px;
 }
 
@@ -3498,7 +3498,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-do-more-feature span {
     font-size: 14px;
-    color: #6B7280;
+    color: #596270;
 }
 
 /* Free Version State — Status card */
@@ -3555,7 +3555,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     width: 44px;
     height: 44px;
     background: #F3F4F6;
-    color: #6B7280;
+    color: #596270;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -3569,7 +3569,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 
 .bfg-pro-upsell-card__desc {
     font-size: 14px;
-    color: #4B5563;
+    color: #596270;
     margin: 0 0 16px !important;
 }
 
@@ -3726,7 +3726,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     align-items: center;
     gap: 6px;
     font-size: 14px !important;
-    color: #6B7280;
+    color: #596270;
     margin: 4px 0 0 !important;
 }
 
@@ -3801,7 +3801,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 
 .bfg-pro-features-section__subtitle {
     font-size: var(--bfg-text-level-5);
-    color: #6B7280;
+    color: #596270;
     margin: 0 !important;
 }
 
@@ -3902,7 +3902,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-feature-card__title {
-    font-size: 16px !important;
+    font-size: 18px !important;
     font-weight: 600 !important;
     color: #111827;
     display: block;
@@ -3912,7 +3912,8 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 
 .bfg-feature-card__desc {
     font-size: 14px !important;
-    color: #6B7280;
+    font-weight: 500 !important;
+    color: #596270;
     display: block;
     margin: 0 !important;
     line-height: 1.5;
@@ -3933,7 +3934,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    color: #374151;
+    color: #596270;
     padding: 0;
 }
 
