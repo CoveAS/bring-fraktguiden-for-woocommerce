@@ -773,7 +773,7 @@ input:checked+.bring-toggle-alt::after {
 
    Usage:
    - Base: .bfg-btn (required)
-   - Variants: .bfg-btn--primary, .bfg-btn--secondary, .bfg-btn--outline, .bfg-btn--ghost
+   - Variants: .bfg-btn--primary, .bfg-btn--secondary, .bfg-btn--outline
    - Sizes: .bfg-btn--sm, .bfg-btn--lg (default is medium)
    - Modifiers: .bfg-btn--full-width, .bfg-btn--icon-only
 
@@ -911,27 +911,6 @@ a.bfg-btn--outline:hover,
     transform: translateY(1px);
 }
 
-/* Ghost Button */
-.bfg-btn--ghost,
-a.bfg-btn--ghost,
-.bfg-admin-page a.bfg-btn--ghost {
-    background: transparent;
-    color: var(--bfg-text-secondary);
-    border: 1px solid transparent;
-}
-
-.bfg-btn--ghost:hover,
-a.bfg-btn--ghost:hover,
-.bfg-admin-page a.bfg-btn--ghost:hover {
-    background: #F3F4F6;
-    color: var(--bfg-text-main);
-}
-
-.bfg-btn--ghost:active {
-    background: #E5E7EB;
-    transform: translateY(1px);
-}
-
 /* Size Variants */
 .bfg-btn--sm {
     padding: var(--bfg-btn-sm-padding);
@@ -965,33 +944,6 @@ a.bfg-btn--ghost:hover,
 
 .bfg-btn--icon-only.bfg-btn--lg {
     width: var(--bfg-btn-lg-height);
-}
-
-/* Grey Button */
-.bfg-btn--grey,
-a.bfg-btn--grey,
-.bfg-admin-page a.bfg-btn--grey {
-    background: #F3F4F6;
-    color: var(--bfg-text-secondary);
-}
-
-.bfg-btn--grey:hover,
-a.bfg-btn--grey:hover,
-.bfg-admin-page a.bfg-btn--grey:hover {
-    background: #E5E7EB;
-    color: var(--bfg-text-main);
-}
-
-.bfg-btn--grey:active {
-    background: #D1D5DB;
-    transform: translateY(1px);
-}
-
-.bfg-btn--grey:disabled,
-.bfg-btn--grey.is-disabled {
-    background: #F9FAFB;
-    color: #9CA3AF;
-    box-shadow: none;
 }
 
 /* Text Button */
@@ -3244,7 +3196,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     background: #ffffff;
     border: 1px solid #E5E7EB;
     border-radius: 12px;
-    padding: 24px 24px 20px;
+    padding: 24px;
 }
 
 /* Setup Complete Card */
@@ -3706,6 +3658,34 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     }
 }
 
+/* Test Mode Notice Banner */
+.bfg-test-notice {
+    background: linear-gradient(to right, #F9FAFB, #F3F4F6) !important;
+    border-color: #D1D5DB !important;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-test-notice__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-test-notice__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+.bfg-test-notice__desc {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #6B7280;
+}
+
 /* ==========================================================================
    Pro Page — Active State
    ========================================================================== */
@@ -3783,7 +3763,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-license-card__body {
-    padding: 24px 24px 20px;
+    padding: 24px;
 }
 
 .bfg-license-card__header {
@@ -4050,7 +4030,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     background: #ffffff;
     border: 1px solid #E5E7EB;
     border-radius: 10px;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -4107,7 +4087,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-feature-card__desc {
-    font-size: 14px !important;
+    font-size: 15px !important;
     font-weight: 500 !important;
     color: #596270;
     display: block;

@@ -307,14 +307,6 @@ function bfg_ks_variant( string $name, string $variant, array $hover, array $pre
 		[ 'background:#DBEAFE', 'color:#1D4ED8', 'border-color:#2563EB' ],
 		[ 'background:#BFDBFE', 'color:#1D4ED8', 'transform:translateY(1px)' ]
 	);
-	bfg_ks_variant( 'Ghost', 'ghost',
-		[ 'background:#F3F4F6', 'color:#111827' ],
-		[ 'background:#E5E7EB', 'color:#111827', 'transform:translateY(1px)' ]
-	);
-	bfg_ks_variant( 'Grey', 'grey',
-		[ 'background:#E5E7EB', 'color:#111827' ],
-		[ 'background:#D1D5DB', 'color:#111827', 'transform:translateY(1px)' ]
-	);
 ?>
 
 				<!-- ── Full Width ─────────────────────────────────────────────── -->
