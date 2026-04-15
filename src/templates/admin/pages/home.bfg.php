@@ -26,11 +26,9 @@ use BringFraktguiden\Admin\Step;
 
 		<div class="bfg-section">
 			<?php
-			// Only show "next step" highlighting if at least one step is completed
-			// For fresh state (nothing completed), don't highlight any step as "in progress"
-			$showNextStep = $stepsCompleted > 0 && $nextStep;
-			$nextStepIndex = $showNextStep ? array_search($nextStep, $steps, true) : false;
-			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : 1;
+			$showNextStep = (bool) $nextStep;
+				$nextStepIndex = $showNextStep ? array_search($nextStep, $steps, true) : false;
+			$currentStepNumber = $nextStepIndex !== false ? $nextStepIndex + 1 : $stepCount;
 			?>
 
 			<!-- Setup Header -->
@@ -78,7 +76,6 @@ use BringFraktguiden\Admin\Step;
 			<div class="bfg-steps-list">
 				<?php foreach ($steps as $i => $step): ?>
 					<?php
-					// Only mark as "in progress" if we're showing the next step (i.e., at least one step completed)
 					$isNext = $showNextStep && $nextStep === $step;
 					?>
 					<?php if ($step->completed): ?>
