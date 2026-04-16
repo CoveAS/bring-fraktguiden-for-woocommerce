@@ -1009,6 +1009,159 @@ body.wp-admin .bfg-admin-page a.bfg-btn--text:hover {
 }
 
 /* ==========================================================================
+   Button Simulated States (Kitchen Sink / Design Reference)
+
+   .bfg-btn--hover, .bfg-btn--pressed, .bfg-btn--disabled mirror the
+   corresponding pseudo-class styles so the kitchen sink can display all
+   states statically without JavaScript.
+   ========================================================================== */
+
+.bfg-btn--hover,
+.bfg-btn--pressed,
+.bfg-btn--disabled {
+    pointer-events: none;
+}
+
+/* Primary */
+.bfg-btn--primary.bfg-btn--hover {
+    background: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
+}
+.bfg-btn--primary.bfg-btn--pressed {
+    background: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(1px);
+}
+.bfg-btn--primary.bfg-btn--disabled {
+    background: #E5E7EB;
+    border-color: #E5E7EB;
+    color: #9CA3AF;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Secondary */
+.bfg-btn--secondary.bfg-btn--hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #000000;
+}
+.bfg-btn--secondary.bfg-btn--pressed {
+    background: #F3F4F6;
+    transform: translateY(1px);
+}
+.bfg-btn--secondary.bfg-btn--disabled {
+    background: #F9FAFB;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Outline */
+.bfg-btn--outline.bfg-btn--hover {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary);
+}
+.bfg-btn--outline.bfg-btn--pressed {
+    background: #BFDBFE;
+    transform: translateY(1px);
+}
+.bfg-btn--outline.bfg-btn--disabled {
+    background: transparent;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+}
+
+/* Text */
+.bfg-btn--text.bfg-btn--hover {
+    color: var(--bfg-primary-hover);
+    text-decoration: underline;
+}
+.bfg-btn--text.bfg-btn--pressed {
+    color: #1e40af;
+}
+.bfg-btn--text.bfg-btn--disabled {
+    color: #9CA3AF;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Kitchen Sink Layout Helpers
+   ========================================================================== */
+
+.bfg-ks-variant {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-ks-size {
+    padding-top: 28px;
+    margin-top: 32px;
+    border-top: 1px dashed var(--bfg-border);
+}
+
+.bfg-ks-size:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+}
+
+.bfg-ks-size-label {
+    font-size: 12px;
+    color: var(--bfg-text-muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.bfg-ks-state-label {
+    width: 68px;
+    flex-shrink: 0;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--bfg-text-muted);
+}
+
+/* Title hierarchy row */
+.bfg-ks-level-label {
+    font-size: 13px;
+    color: var(--bfg-text-muted);
+}
+
+.bfg-ks-level-sublabel {
+    font-size: 13px;
+    color: var(--bfg-text-muted);
+    margin: 2px 0 0;
+}
+
+.bfg-ks-heading-example {
+    margin: 0;
+    color: var(--bfg-text-primary);
+}
+
+.bfg-ks-heading-1 { font-size: 32px; font-weight: 600; line-height: 1.2; }
+.bfg-ks-heading-2 { font-size: 24px; font-weight: 600; line-height: 1.3; }
+.bfg-ks-heading-3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
+.bfg-ks-heading-4 { font-size: 18px; font-weight: 500; line-height: 1.4; }
+.bfg-ks-heading-5 { font-size: 16px; font-weight: 500; line-height: 1.4; }
+.bfg-ks-heading-6 { font-size: 14px; font-weight: 500; line-height: 1.4; }
+
+.bfg-ks-spec-text {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bfg-text-secondary);
+}
+
+/* ==========================================================================
    Legacy Button Aliases (for backward compatibility)
 
    These map old class names to the new button system.
