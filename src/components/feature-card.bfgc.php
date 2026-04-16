@@ -3,7 +3,7 @@
  * BFG Feature Card
  *
  * Card for presenting Pro features across different page states.
- * Gray icon by default, blue when active. Renders as <a> when href is provided.
+ * Blue icon by default. Renders as <a> when href is provided.
  *
  * Sub-components:
  * - <bfg-feature-card.icon>     — icon wrapper (inherits gray/blue from parent state)
