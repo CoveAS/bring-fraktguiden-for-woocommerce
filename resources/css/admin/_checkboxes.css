@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Checkbox Components — Checkbox Card + Standalone Checkbox
+   ========================================================================== */
+
+/* Checkbox Card (.bfg-field--checkbox-box)
+   ========================================================================== */
+
+.bfg-field--checkbox-box {
+    --cb-padding: 20px;
+    --cb-checkbox-size: 20px;
+    --cb-gap: 16px;
+    --cb-title-size: 15px;
+    --cb-title-line-height: 1.5;
+    --cb-desc-size: 14px;
+    --cb-desc-line-height: 21px;
+    --cb-content-gap: 6px;
+
+    background: #fff;
+    border: 1px solid var(--bfg-border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.bfg-field--checkbox-box:hover {
+    background: #F7F8FA;
+}
+
+.bfg-field--checkbox-box:active {
+    border-color: #BFDBFE;
+    background: #F0F7FF;
+}
+
+.bfg-field--checkbox-box.is-checked,
+.bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
+    border-color: #BFDBFE;
+    background: #F0F7FF;
+}
+
+body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.bfg-field--checkbox-box>.bfg-input--checkbox {
+    position: relative;
+}
+
+.bfg-admin-page .bfg-field--checkbox-box .bfg-input--checkbox label {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: var(--cb-gap);
+    cursor: pointer;
+    margin: 0 !important;
+    font-weight: normal;
+    padding: var(--cb-padding);
+}
+
+.bfg-field--checkbox-box .bfg-checkbox-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cb-content-gap);
+    text-align: left;
+    align-items: start;
+}
+
+.bfg-field--checkbox-box .bfg-checkbox-title {
+    font-weight: 500;
+    font-size: var(--cb-title-size);
+    line-height: var(--cb-title-line-height);
+    color: var(--bfg-text-main);
+    text-wrap: pretty;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.bfg-field--checkbox-box .bfg-checkbox-desc {
+    font-weight: 400;
+    font-size: var(--cb-desc-size);
+    line-height: var(--cb-desc-line-height);
+    color: var(--bfg-text-secondary);
+    text-wrap: pretty;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* Checkbox Input Styles (shared)
+   ========================================================================== */
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"] {
+    width: var(--cb-checkbox-size, 20px) !important;
+    height: var(--cb-checkbox-size, 20px) !important;
+    margin: 2px 0 0 0 !important;
+    border-radius: 4px !important;
+    flex-shrink: 0;
+    border: 1px solid #D1D5DB !important;
+    cursor: pointer;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    position: relative;
+    background: #fff !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked {
+    background: var(--bfg-primary) !important;
+    border-color: var(--bfg-primary) !important;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #D1D5DB;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked:focus {
+    border-color: var(--bfg-primary);
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:active {
+    border-color: var(--bfg-primary);
+    background: #DBEAFE;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::before,
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::before {
+    content: none !important;
+    display: none !important;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::after {
+    content: none;
+    pointer-events: none;
+}
+
+.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    display: block;
+    pointer-events: none;
+}
+
+/* Standalone Checkbox (outside checkbox-box)
+   ========================================================================== */
+
+.bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--cb-gap, 16px);
+    cursor: pointer;
+    margin: 0;
+}
+
+.bfg-input--checkbox .bfg-description {
+    margin: 8px 0 0 calc(var(--cb-checkbox-size, 20px) + var(--cb-gap, 16px));
+    font-size: 14px;
+    color: var(--bfg-text-secondary);
+    font-weight: 400;
+    line-height: 24px;
+    display: block;
+    text-wrap: pretty;
+}
+
+.bfg-checkbox-desc a {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/* Legacy: .bfg-section__checkbox
+   ========================================================================== */
+
+.bfg-section__checkbox {
+    margin-bottom: 16px;
+    padding: 0 32px;
+}
+
+.bfg-section__checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: var(--bfg-text-level-4);
+    color: var(--bfg-text-secondary);
+    cursor: pointer;
+}
+
+.bfg-section__checkbox input[type="checkbox"] {
+    margin: 0;
+}

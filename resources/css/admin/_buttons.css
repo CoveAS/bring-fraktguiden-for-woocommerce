@@ -1,0 +1,453 @@
+/* ==========================================================================
+   Button System
+
+   Usage:
+   - Base: .bfg-btn (required)
+   - Variants: .bfg-btn--primary, .bfg-btn--secondary, .bfg-btn--outline
+   - Sizes: .bfg-btn--sm, .bfg-btn--lg (default is medium)
+   - Modifiers: .bfg-btn--full-width, .bfg-btn--icon-only
+
+   Example: <button class="bfg-btn bfg-btn--primary bfg-btn--lg">Click me</button>
+   ========================================================================== */
+
+/* Base Button
+   ========================================================================== */
+
+.bfg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: var(--bfg-btn-md-padding);
+    font-size: var(--bfg-btn-md-font-size);
+    font-weight: var(--bfg-btn-font-weight);
+    line-height: var(--bfg-btn-md-line-height);
+    height: var(--bfg-btn-md-height);
+    border: 1px solid transparent;
+    border-radius: var(--bfg-btn-radius);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: var(--bfg-btn-transition);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.bfg-btn:focus,
+.bfg-btn:focus-visible,
+.bfg-admin-page .bfg-btn:focus,
+.bfg-admin-page .bfg-btn:focus-visible,
+body.wp-admin .bfg-btn:focus,
+body.wp-admin .bfg-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none;
+}
+
+body:not(.using-mouse) .bfg-btn:focus,
+body:not(.using-mouse) .bfg-btn:focus-visible {
+    box-shadow: var(--bfg-btn-focus-ring);
+}
+
+.bfg-btn:disabled,
+.bfg-btn.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Primary Button
+   ========================================================================== */
+
+.bfg-btn--primary,
+a.bfg-btn--primary,
+.bfg-admin-page a.bfg-btn--primary {
+    background: var(--bfg-primary);
+    color: #ffffff;
+    border: 1px solid var(--bfg-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bfg-btn--primary:hover,
+a.bfg-btn--primary:hover,
+.bfg-admin-page a.bfg-btn--primary:hover {
+    background: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
+}
+
+.bfg-btn--primary:active {
+    background: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(1px);
+}
+
+.bfg-btn--primary:disabled,
+.bfg-btn--primary.is-disabled {
+    background: #E5E7EB;
+    border-color: #E5E7EB;
+    color: #9CA3AF;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Secondary Button
+   ========================================================================== */
+
+.bfg-btn--secondary,
+a.bfg-btn--secondary,
+.bfg-admin-page a.bfg-btn--secondary {
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    border: 1px solid var(--bfg-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bfg-btn--secondary:hover,
+a.bfg-btn--secondary:hover,
+.bfg-admin-page a.bfg-btn--secondary:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #000000;
+}
+
+.bfg-btn--secondary:active {
+    background: #F3F4F6;
+    transform: translateY(1px);
+}
+
+.bfg-btn--secondary:disabled,
+.bfg-btn--secondary.is-disabled {
+    background: #F9FAFB;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Outline Button
+   ========================================================================== */
+
+.bfg-btn--outline,
+a.bfg-btn--outline,
+.bfg-admin-page a.bfg-btn--outline {
+    background: transparent;
+    color: var(--bfg-primary);
+    border: 1px solid var(--bfg-primary);
+}
+
+.bfg-btn--outline:hover,
+a.bfg-btn--outline:hover,
+.bfg-admin-page a.bfg-btn--outline:hover {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary-hover);
+}
+
+.bfg-btn--outline:active {
+    background: #BFDBFE;
+    transform: translateY(1px);
+}
+
+/* Text Button
+   ========================================================================== */
+
+.bfg-btn--text,
+a.bfg-btn--text,
+.bfg-admin-page a.bfg-btn--text {
+    background: transparent;
+    color: var(--bfg-primary);
+    border: 1px solid transparent;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    text-decoration: none;
+}
+
+.bfg-btn--text:hover,
+a.bfg-btn--text:hover,
+.bfg-admin-page a.bfg-btn--text:hover,
+body.wp-admin .bfg-admin-page a.bfg-btn--text:hover {
+    background: transparent;
+    color: var(--bfg-primary-hover);
+    text-decoration: underline;
+}
+
+.bfg-btn--text:active {
+    color: #1e40af;
+    transform: none;
+}
+
+.bfg-btn--text:disabled,
+.bfg-btn--text.is-disabled {
+    color: #9CA3AF;
+    text-decoration: none;
+}
+
+/* Size Variants
+   ========================================================================== */
+
+.bfg-btn--sm {
+    padding: var(--bfg-btn-sm-padding);
+    font-size: var(--bfg-btn-sm-font-size);
+    line-height: var(--bfg-btn-sm-line-height);
+    height: var(--bfg-btn-sm-height);
+}
+
+.bfg-btn--lg {
+    padding: var(--bfg-btn-lg-padding);
+    font-size: var(--bfg-btn-lg-font-size);
+    line-height: var(--bfg-btn-lg-line-height);
+    height: var(--bfg-btn-lg-height);
+}
+
+/* Modifiers
+   ========================================================================== */
+
+.bfg-btn--full-width {
+    width: 100%;
+    display: flex;
+}
+
+.bfg-btn--icon-only {
+    padding: 0;
+    width: var(--bfg-btn-md-height);
+    flex-shrink: 0;
+}
+
+.bfg-btn--icon-only.bfg-btn--sm {
+    width: var(--bfg-btn-sm-height);
+}
+
+.bfg-btn--icon-only.bfg-btn--lg {
+    width: var(--bfg-btn-lg-height);
+}
+
+/* Loading State
+   ========================================================================== */
+
+.bfg-btn.is-loading {
+    color: transparent;
+    pointer-events: none;
+    position: relative;
+}
+
+.bfg-btn.is-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: bfg-btn-spin 0.8s linear infinite;
+}
+
+.bfg-btn--primary.is-loading::after {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+}
+
+@keyframes bfg-btn-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* WordPress .button-primary override
+   ========================================================================== */
+
+body.wp-admin .bfg-admin-page .button-primary,
+body.wp-admin .bfg-admin-page input[type="submit"].button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: var(--bfg-btn-md-padding);
+    font-size: var(--bfg-btn-md-font-size);
+    font-weight: var(--bfg-btn-font-weight);
+    line-height: var(--bfg-btn-md-line-height);
+    height: var(--bfg-btn-md-height);
+    background: var(--bfg-primary);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: var(--bfg-btn-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-shadow: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: var(--bfg-btn-transition);
+}
+
+body.wp-admin .bfg-admin-page .button-primary:hover {
+    background: var(--bfg-primary-hover);
+    color: #fff;
+}
+
+body.wp-admin .bfg-admin-page .button-primary:focus {
+    outline: none;
+}
+
+body.wp-admin:not(.using-mouse) .bfg-admin-page .button-primary:focus {
+    box-shadow: var(--bfg-btn-focus-ring);
+}
+
+body.wp-admin .bfg-admin-page .button-primary:disabled {
+    background: #E5E7EB;
+    color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Button Simulated States (Kitchen Sink / Design Reference)
+
+   .bfg-btn--hover, .bfg-btn--pressed, .bfg-btn--disabled mirror the
+   corresponding pseudo-class styles so the kitchen sink can display all
+   states statically without JavaScript.
+   ========================================================================== */
+
+.bfg-btn--hover,
+.bfg-btn--pressed,
+.bfg-btn--disabled {
+    pointer-events: none;
+}
+
+/* Primary */
+.bfg-btn--primary.bfg-btn--hover {
+    background: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
+}
+.bfg-btn--primary.bfg-btn--pressed {
+    background: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(1px);
+}
+.bfg-btn--primary.bfg-btn--disabled {
+    background: #E5E7EB;
+    border-color: #E5E7EB;
+    color: #9CA3AF;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Secondary */
+.bfg-btn--secondary.bfg-btn--hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #000000;
+}
+.bfg-btn--secondary.bfg-btn--pressed {
+    background: #F3F4F6;
+    transform: translateY(1px);
+}
+.bfg-btn--secondary.bfg-btn--disabled {
+    background: #F9FAFB;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Outline */
+.bfg-btn--outline.bfg-btn--hover {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary);
+}
+.bfg-btn--outline.bfg-btn--pressed {
+    background: #BFDBFE;
+    transform: translateY(1px);
+}
+.bfg-btn--outline.bfg-btn--disabled {
+    background: transparent;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+}
+
+/* Text */
+.bfg-btn--text.bfg-btn--hover {
+    color: var(--bfg-primary-hover);
+    text-decoration: underline;
+}
+.bfg-btn--text.bfg-btn--pressed {
+    color: #1e40af;
+}
+.bfg-btn--text.bfg-btn--disabled {
+    color: #9CA3AF;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Kitchen Sink Layout Helpers
+   ========================================================================== */
+
+.bfg-ks-variant {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-ks-size {
+    padding-top: 28px;
+    margin-top: 32px;
+    border-top: 1px dashed var(--bfg-border);
+}
+
+.bfg-ks-size:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+}
+
+.bfg-ks-size-label {
+    font-size: 12px;
+    color: var(--bfg-text-muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.bfg-ks-state-label {
+    width: 68px;
+    flex-shrink: 0;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--bfg-text-muted);
+}
+
+.bfg-ks-level-label {
+    font-size: 13px;
+    color: var(--bfg-text-muted);
+}
+
+.bfg-ks-level-sublabel {
+    font-size: 13px;
+    color: var(--bfg-text-muted);
+    margin: 2px 0 0;
+}
+
+.bfg-ks-heading-example {
+    margin: 0;
+    color: var(--bfg-text-primary);
+}
+
+.bfg-ks-heading-1 { font-size: 32px; font-weight: 600; line-height: 1.2; }
+.bfg-ks-heading-2 { font-size: 24px; font-weight: 600; line-height: 1.3; }
+.bfg-ks-heading-3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
+.bfg-ks-heading-4 { font-size: 18px; font-weight: 500; line-height: 1.4; }
+.bfg-ks-heading-5 { font-size: 16px; font-weight: 500; line-height: 1.4; }
+.bfg-ks-heading-6 { font-size: 14px; font-weight: 500; line-height: 1.4; }
+
+.bfg-ks-spec-text {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bfg-text-secondary);
+}

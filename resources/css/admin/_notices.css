@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Notice Banners
+   ========================================================================== */
+
+.bfg-notice-banner {
+    background: #FFF7ED !important;
+    color: #9A3412 !important;
+    padding: 16px 24px !important;
+    border-radius: 8px !important;
+    border: 1px solid #FED7AA !important;
+    font-weight: 500 !important;
+    margin: 0 0 24px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.bfg-notice-banner .bfg-notice-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.bfg-notice-banner p {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    line-height: 1.5 !important;
+    font-size: var(--bfg-text-level-4) !important;
+    font-weight: 400 !important;
+}
+
+/* Notice type variants
+   ========================================================================== */
+
+.bfg-notice-banner[type="info"] {
+    background: #F3F4F6 !important;
+    color: #374151 !important;
+    border-color: #D1D5DB !important;
+}
+
+.bfg-notice-banner[type="success"] {
+    background: #DCFCE7 !important;
+    color: #166534 !important;
+    border-color: #86EFAC !important;
+}
+
+.bfg-notice-banner[type="error"] {
+    background: #FEE2E2 !important;
+    color: #991B1B !important;
+    border-color: #FCA5A5 !important;
+}
+
+/* Trial Notice
+   ========================================================================== */
+
+.bfg-trial-notice {
+    background: linear-gradient(to right, #FAF7FF, #EFE8FE) !important;
+    border-color: #DDD1FD !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bfg-trial-notice__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-trial-notice__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+}
+
+.bfg-trial-notice__desc {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+.bfg-trial-notice .bfg-btn--primary,
+.bfg-admin-page .bfg-trial-notice a.bfg-btn--primary {
+    background: #7C3AED;
+    border-color: #7C3AED;
+    color: #ffffff;
+}
+
+.bfg-trial-notice .bfg-btn--primary:hover,
+.bfg-admin-page .bfg-trial-notice a.bfg-btn--primary:hover {
+    background: #6D28D9;
+    border-color: #6D28D9;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-trial-notice {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bfg-trial-notice .bfg-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Active Notice
+   ========================================================================== */
+
+.bfg-active-notice {
+    background: linear-gradient(to right, #F0FDF4, #DCFCE7) !important;
+    border-color: #BBF7D0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bfg-active-notice__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-active-notice__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+}
+
+.bfg-active-notice__desc {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-active-notice {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bfg-active-notice .bfg-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Test Mode Notice
+   ========================================================================== */
+
+.bfg-test-notice {
+    background: linear-gradient(to right, #F9FAFB, #F3F4F6) !important;
+    border-color: #D1D5DB !important;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-test-notice__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-test-notice__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+.bfg-test-notice__desc {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #6B7280;
+}

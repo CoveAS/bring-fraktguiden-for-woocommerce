@@ -1,0 +1,358 @@
+/* ==========================================================================
+   Pro Teaser — teaser section, subscription info, pro features grid
+   ========================================================================== */
+
+/* Pro Teaser (free state)
+   ========================================================================== */
+
+.bfg-pro-teaser-v2 {
+    text-align: center;
+}
+
+.bfg-pro-teaser__shield {
+    width: 64px;
+    height: 64px;
+    background: #2563EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.bfg-pro-teaser__shield--success {
+    background: #16A34A !important;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3) !important;
+}
+
+.bfg-pro-teaser__title {
+    font-size: var(--bfg-text-level-1);
+    font-weight: 500;
+    color: #111827;
+    margin: 0 0 8px !important;
+    line-height: 40px;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.bfg-pro-teaser__subtitle {
+    font-size: var(--bfg-text-level-2);
+    color: #596270;
+    line-height: 1.5;
+    margin-bottom: 32px !important;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+}
+
+.bfg-pro-features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bfg-pro-features-grid li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--bfg-text-level-4);
+    color: #374151;
+    font-weight: 400;
+}
+
+.bfg-pro-features-grid li svg {
+    color: #2563EB;
+    flex-shrink: 0;
+}
+
+.bfg-pro-features-grid--compact {
+    max-width: 460px;
+    margin: 0 auto !important;
+}
+
+.bfg-pro-features-grid--compact li {
+    white-space: nowrap;
+}
+
+.bfg-pro-features-grid--compact li svg {
+    color: #16A34A;
+}
+
+/* Pro Teaser Active State
+   ========================================================================== */
+
+.bfg-pro-teaser-v2--active {
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+.bfg-pro-teaser__header {
+    background: linear-gradient(135deg, #F0F4FF 0%, #E9EFFF 100%);
+    padding: 40px 48px;
+    text-align: left;
+    border-bottom: none;
+}
+
+.bfg-pro-teaser__title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.bfg-pro-teaser-v2--active .bfg-pro-teaser__title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 0 !important;
+    line-height: 1;
+}
+
+.bfg-pro-teaser-v2--active .bfg-pro-teaser__subtitle {
+    margin: 0 !important;
+    max-width: none;
+    text-align: left;
+    color: #596270;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.bfg-pro-teaser__content {
+    padding: 48px;
+}
+
+/* Pro Features List
+   ========================================================================== */
+
+.bfg-pro-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bfg-pro-features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #111827;
+    font-weight: 400;
+}
+
+.bfg-pro-features-list li svg {
+    flex-shrink: 0;
+}
+
+/* Pro Teaser Footer
+   ========================================================================== */
+
+.bfg-pro-teaser__footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.bfg-pro-teaser__divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.bfg-pro-teaser__divider::before,
+.bfg-pro-teaser__divider::after {
+    content: '';
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: #E5E7EB;
+}
+
+.bfg-pro-teaser__divider span {
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.bfg-pro-teaser__link {
+    display: inline-block;
+    font-size: 16px;
+    color: #2563EB;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.bfg-pro-teaser__link:hover {
+    text-decoration: underline;
+}
+
+.bfg-pro-teaser__footer-text {
+    margin-top: 12px !important;
+    font-size: 14px;
+    color: #596270;
+}
+
+.bfg-pro-teaser__footer-text a {
+    color: #2563EB;
+    text-decoration: underline;
+}
+
+/* Subscription Info
+   ========================================================================== */
+
+.bfg-subscription {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 32px;
+}
+
+.bfg-subscription__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    flex: 1;
+}
+
+.bfg-subscription__item + .bfg-subscription__item {
+    border-left: none;
+}
+
+.bfg-subscription__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #596270;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.bfg-subscription__icon {
+    color: #9CA3AF;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+}
+
+.bfg-subscription__value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.bfg-subscription__detail {
+    font-size: 14px;
+    color: #596270;
+    font-weight: 400;
+}
+
+.bfg-subscription__value--success {
+    color: #16A34A;
+}
+
+.bfg-subscription__value--status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bfg-subscription__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.bfg-subscription__value--status[data-color="green"] .bfg-subscription__dot { background: #16A34A; }
+.bfg-subscription__value--status[data-color="red"] .bfg-subscription__dot   { background: #DC2626; }
+.bfg-subscription__value--status[data-color="gray"] .bfg-subscription__dot  { background: #9CA3AF; }
+
+.bfg-subscription--grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+}
+
+@media (max-width: 782px) {
+    .bfg-subscription--grid3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Remove borders from status card when inside pro teaser content */
+.bfg-pro-teaser__content .bfg-subscription {
+    margin-bottom: 40px;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.bfg-pro-teaser__content .bfg-subscription__item + .bfg-subscription__item {
+    border-left: none !important;
+}
+
+/* What's Next Section
+   ========================================================================== */
+
+.bfg-whats-next .bfg-section-card-title {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.bfg-whats-next .bfg-pro-teaser__subtitle {
+    text-align: left;
+    max-width: none;
+    margin-bottom: 24px !important;
+}
+
+.bfg-whats-next__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-whats-next__links li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--bfg-link);
+    text-decoration: underline;
+    font-size: 16px;
+    line-height: 24px;
+    transition: color 0.15s ease;
+}
+
+.bfg-whats-next__links li a:hover {
+    color: var(--bfg-link-hover);
+}
+
+.bfg-whats-next__links li a svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}

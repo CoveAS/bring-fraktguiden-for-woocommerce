@@ -1,0 +1,594 @@
+/* ==========================================================================
+   Home Page Styles
+   Scoped to .bfg-admin-page__home — loaded on the home/get-started page.
+   ========================================================================== */
+
+/* Page Layout
+   ========================================================================== */
+
+.bfg-admin-page__home {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #1d2327;
+    margin-top: 0;
+    background-color: var(--bfg-bg-page);
+    min-height: 100vh;
+}
+
+.bfg-admin-page__home .bfg-page__main {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+}
+
+.bfg-admin-page__home .bfg-section:last-child {
+    margin-bottom: 0;
+}
+
+.bfg-page__header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+/* Progress Bar
+   ========================================================================== */
+
+.bfg-progress-badge {
+    background: #F3F4F6;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.bfg-progress-container {
+    margin-bottom: 40px;
+}
+
+.bfg-progress-bar-new {
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bfg-progress-bar-fill {
+    height: 100%;
+    background: #111827;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Setup Header
+   ========================================================================== */
+
+.bfg-setup-header {
+    margin-bottom: 24px;
+}
+
+.bfg-setup-header__title {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--bfg-text-main);
+    margin: 0 0 8px !important;
+    line-height: 36px;
+}
+
+.bfg-setup-header__subtitle {
+    font-size: 16px;
+    color: #596270;
+    margin: 0 0 24px !important;
+    font-weight: 400;
+}
+
+.bfg-setup-header__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+.bfg-setup-header__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bfg-setup-header__stat--right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.bfg-setup-header__stat-label {
+    font-size: 14px;
+    color: #596270;
+    font-weight: 400;
+}
+
+.bfg-setup-header__stat-value {
+    font-size: 16px;
+    color: #111827;
+    font-weight: 500;
+}
+
+.bfg-setup-header .bfg-progress-container {
+    margin-bottom: 0;
+}
+
+/* Active Step Card
+   ========================================================================== */
+
+.bfg-active-step-card {
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.bfg-active-step__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: #2563EB;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.bfg-active-step__content h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 8px !important;
+    color: #111827;
+    line-height: 32px;
+    text-wrap: balance;
+}
+
+.bfg-active-step__content p {
+    font-size: 16px;
+    margin: 0 0 24px !important;
+    color: #4B5563;
+    line-height: 24px;
+    font-weight: 400;
+    text-wrap: pretty;
+}
+
+.bfg-admin-page__home .bfg-btn--primary {
+    font-weight: 500;
+}
+
+/* Steps List
+   ========================================================================== */
+
+.bfg-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bfg-steps-list .bfg-access-link__content {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.bfg-steps-list .bfg-access-link__content .bfg-step__desc {
+    font-size: 14px;
+    color: #596270;
+}
+
+/* WordPress Notice Overrides
+   ========================================================================== */
+
+.bfg-admin-page__home .notice,
+.bfg-admin-page__home .error {
+    display: none !important;
+}
+
+/* Home Page Scoped Overrides
+   ========================================================================== */
+
+.bfg-admin-page__home .bfg-step-row__number {
+    background: #E5E7EB;
+    color: #111827;
+}
+
+.bfg-admin-page__home .bfg-step--in-progress .bfg-step-row__number,
+.bfg-admin-page__home .bfg-step--in-progress:hover .bfg-step-row__number {
+    background: #2563EB;
+    color: #fff;
+}
+
+.bfg-pro-teaser-v2 .bfg-section-card-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 auto 8px;
+    text-align: center;
+}
+
+.bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
+    font-size: 16px;
+    color: #596270;
+    margin: 0 auto 32px;
+    text-align: center;
+    max-width: 480px;
+}
+
+.bfg-field--has-error .bfg-description {
+    display: none;
+}
+
+.bfg-field__error {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #dc2626;
+    margin-top: 0.375rem;
+}
+
+.bfg-field__error:empty {
+    display: none;
+}
+
+.bfg-admin-page input[aria-invalid="true"],
+.bfg-admin-page select[aria-invalid="true"] {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 1px #dc2626;
+    outline: none;
+}
+
+.bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-description {
+    color: #596270;
+}
+
+/* Responsive - Tablet (max-width: 782px)
+   ========================================================================== */
+
+@media screen and (max-width: 782px) {
+    .bfg-admin-page__home {
+        margin: 0 !important;
+    }
+
+    .bfg-admin-page__home .bfg-page__main {
+        padding: 32px 20px;
+    }
+
+    .bfg-admin-page__home .bfg-section {
+        padding: 0;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
+    }
+
+    .bfg-admin-page__home .bfg-section:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .bfg-page__header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .bfg-progress-container {
+        margin-bottom: 24px;
+    }
+
+    .bfg-section-card-title {
+        font-size: 24px !important;
+        line-height: 32px !important;
+    }
+
+    .bfg-active-step-card {
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .bfg-steps-list {
+        gap: 16px;
+    }
+
+    .bfg-active-step__icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .bfg-active-step__content h3 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .bfg-active-step__content p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .bfg-admin-page__home .bfg-active-step__content .bfg-btn {
+        width: fit-content;
+    }
+
+    .bfg-step-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        height: 80px;
+        max-height: 80px;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .bfg-step-row__content {
+        flex: 1 1 0% !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .bfg-step-row__label {
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .bfg-step-row__description {
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .bfg-step-row__status {
+        flex: 0 0 auto !important;
+    }
+
+    .bfg-step-row .bfg-badge {
+        flex-shrink: 0 !important;
+    }
+
+    .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
+        margin-top: 40px;
+        margin-bottom: 24px;
+    }
+
+    .bfg-pro-teaser__shield {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 24px;
+    }
+
+    .bfg-pro-teaser__shield svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .bfg-pro-teaser-v2 .bfg-section-card-title {
+        font-size: 24px;
+    }
+
+    .bfg-pro-teaser__title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .bfg-pro-teaser__subtitle,
+    .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
+        font-size: 14px;
+        line-height: 21px;
+        margin-bottom: 24px !important;
+    }
+
+    .bfg-pro-features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 32px !important;
+        background: #F8FAFC !important;
+        border-radius: 12px !important;
+    }
+
+    .bfg-pro-features-grid li {
+        font-size: 14px;
+    }
+
+    .bfg-subscription {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+
+    .bfg-subscription__item {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .bfg-subscription__item + .bfg-subscription__item {
+        border-left: none;
+        border-top: none;
+    }
+
+    .bfg-subscription__value {
+        font-size: 14px;
+    }
+
+    .bfg-badge {
+        font-size: 14px;
+    }
+}
+
+/* Responsive - Mobile (max-width: 480px)
+   ========================================================================== */
+
+@media screen and (max-width: 480px) {
+    .bfg-admin-page__home .bfg-page__main {
+        padding: 32px 20px;
+    }
+
+    .bfg-admin-page__home .bfg-section {
+        padding: 0;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        margin-bottom: 0;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid var(--bfg-border);
+    }
+
+    .bfg-admin-page__home .bfg-section:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .bfg-page__header-row {
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .bfg-progress-container {
+        margin-bottom: 24px;
+    }
+
+    .bfg-section-card-title {
+        font-size: 20px !important;
+        line-height: 28px !important;
+    }
+
+    .bfg-active-step-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .bfg-steps-list {
+        gap: 16px;
+    }
+
+    .bfg-step-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        height: 80px;
+        max-height: 80px;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .bfg-step-row__indicator {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+    }
+
+    .bfg-step-row__number {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .bfg-step-row__indicator svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .bfg-step-row__content {
+        flex: 1 1 0% !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .bfg-step-row .bfg-badge {
+        padding: 4px 8px;
+        font-size: 14px;
+        flex-shrink: 0 !important;
+    }
+
+    .bfg-active-step__icon {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .bfg-active-step__content h3 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .bfg-active-step__content p {
+        font-size: 14px;
+        margin-bottom: 16px !important;
+    }
+
+    .bfg-admin-page__home .bfg-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        height: auto;
+    }
+
+    .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
+        margin-top: 48px;
+        margin-bottom: 24px;
+        border-radius: 8px;
+    }
+
+    .bfg-pro-teaser__shield {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+
+    .bfg-pro-teaser__shield svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .bfg-pro-teaser__title {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .bfg-pro-teaser__subtitle {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 24px !important;
+    }
+
+    .bfg-pro-features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 32px;
+    }
+
+    .bfg-subscription {
+        padding: 0;
+        gap: 0;
+    }
+
+    .bfg-admin-page__home .bfg-active-step__content .bfg-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

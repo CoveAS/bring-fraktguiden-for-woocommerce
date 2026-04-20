@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Badges + Indicator Dot
+   ========================================================================== */
+
+/* Badge Base
+   ========================================================================== */
+
+.bfg-badge {
+    font-size: 14px;
+    padding: 0 16px;
+    height: 32px;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 500;
+    line-height: 1;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bfg-badge--completed {
+    background-color: color-mix(in srgb, #15803d 15%, white);
+    color: #15803d;
+}
+
+.bfg-badge--md {
+    font-size: 12px;
+    padding: 0 10px;
+    height: 28px;
+}
+
+.bfg-badge--completed-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #15803d;
+    background: none;
+    padding: 0;
+    height: auto;
+    border-radius: 0;
+    line-height: 1;
+}
+
+.bfg-badge--in-progress {
+    background-color: color-mix(in srgb, #2563EB 15%, white);
+    color: var(--bfg-primary);
+}
+
+.bfg-badge--outline,
+.bfg-admin-page a.bfg-badge--outline,
+.bfg-admin-page a.bfg-badge--outline:hover,
+.bfg-admin-page a.bfg-badge--outline:visited,
+.bfg-admin-page a.bfg-badge--outline:focus,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:hover,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:visited,
+body.wp-admin .bfg-admin-page a.bfg-badge--outline:focus {
+    background-color: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    color: #6B7280 !important;
+    border-radius: 8px;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    outline: none;
+    cursor: pointer;
+}
+
+.bfg-badge--active {
+    background: #2563EB;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 6px;
+    text-transform: none;
+}
+
+.bfg-badge--pro-green {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0 8px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.bfg-badge__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.bfg-badge__dot--green {
+    background-color: #16A34A;
+}
+
+/* Indicator Dot
+   ========================================================================== */
+
+.bfg-indicator-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #9CA3AF;
+    flex-shrink: 0;
+}
+
+.bfg-indicator-dot--healthy {
+    background-color: #16A34A;
+}
+
+.bfg-indicator-dot--warning {
+    background-color: #F59E0B;
+}
+
+.bfg-indicator-dot--error {
+    background-color: #dc2626;
+}

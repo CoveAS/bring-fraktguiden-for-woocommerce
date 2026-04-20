@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Custom Select Dropdown
+   ========================================================================== */
+
+.bfg-custom-select {
+    position: relative;
+    width: 100% !important;
+    max-width: none !important;
+    display: block;
+}
+
+.bfg-admin-page .bfg-field .bfg-custom-select,
+.bfg-admin-page .bfg-custom-select,
+.bfg-input .bfg-custom-select {
+    width: 100% !important;
+    max-width: none !important;
+    display: block !important;
+    flex: 1 1 100% !important;
+}
+
+.bfg-custom-select__native {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.bfg-custom-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100% !important;
+    height: 48px;
+    padding: 0 16px;
+    margin: 0 !important;
+    background: #ffffff;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    font-size: var(--bfg-text-level-4);
+    color: var(--bfg-text-main);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.bfg-custom-select__trigger:hover {
+    border-color: #CBD5E1;
+}
+
+.bfg-custom-select__trigger:focus {
+    outline: none;
+    border-color: var(--bfg-primary);
+    box-shadow: none;
+}
+
+body:not(.using-mouse) .bfg-custom-select__trigger:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.bfg-custom-select__value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bfg-custom-select__value.is-placeholder {
+    color: var(--bfg-text-muted);
+}
+
+.bfg-custom-select__arrow {
+    flex-shrink: 0;
+    color: var(--bfg-text-muted);
+    transition: transform 0.2s ease-in-out;
+}
+
+.bfg-custom-select__dropdown {
+    position: absolute !important;
+    top: 100%;
+    margin-top: 8px !important;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+    max-height: 280px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-custom-select__dropdown::-webkit-scrollbar {
+    display: none;
+}
+
+.bfg-custom-select__option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    font-size: var(--bfg-text-level-4);
+    color: var(--bfg-text-main);
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.bfg-custom-select__option:first-child {
+    border-radius: calc(var(--bfg-radius-input) - 1px) calc(var(--bfg-radius-input) - 1px) 0 0;
+}
+
+.bfg-custom-select__option:last-child {
+    border-radius: 0 0 calc(var(--bfg-radius-input) - 1px) calc(var(--bfg-radius-input) - 1px);
+}
+
+.bfg-custom-select__option:only-child {
+    border-radius: calc(var(--bfg-radius-input) - 1px);
+}
+
+.bfg-custom-select__option:hover {
+    background: #F7F8FA;
+}
+
+.bfg-custom-select__option.is-selected {
+    background: #F0F7FF;
+}
+
+.bfg-custom-select__option.is-selected:hover {
+    background: #E8F2FF;
+}
+
+.bfg-custom-select__option-text {
+    flex: 1;
+}
+
+.bfg-custom-select__check {
+    flex-shrink: 0;
+    color: var(--bfg-primary);
+    margin-left: 12px;
+}

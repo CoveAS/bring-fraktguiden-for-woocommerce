@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Design Tokens — CSS Custom Properties
+   ========================================================================== */
+
+:root {
+    /* Colors */
+    --bfg-primary: #2563EB;
+    --bfg-primary-hover: #1D4ED8;
+    --bfg-primary-light: #DBEAFE;
+    --bfg-primary-light-hover: #BFDBFE;
+    --bfg-text-main: #111827;
+    --bfg-text-secondary: #596270;
+    --bfg-text-muted: #6B7280;
+    --bfg-border: #D1D5DB;
+    --bfg-bg-card: #ffffff;
+    --bfg-bg-page: #ffffff;
+    --bfg-radius-card: 12px;
+    --bfg-radius-input: 8px;
+    --bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    /* Typography */
+    --bfg-text-level-1: 32px;
+    --bfg-text-level-2: 16px;
+    --bfg-text-level-3: 16px;
+    --bfg-text-level-4: 16px;
+    --bfg-text-level-5: 16px;
+    --bfg-text-level-6: 14px;
+
+    /* Button System */
+    --bfg-btn-radius: 8px;
+    --bfg-btn-font-weight: 500;
+    --bfg-btn-transition: all 0.2s ease;
+    --bfg-btn-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
+
+    /* Button Sizes */
+    --bfg-btn-sm-padding: 6px 16px;
+    --bfg-btn-sm-font-size: 14px;
+    --bfg-btn-sm-line-height: 20px;
+    --bfg-btn-sm-height: 32px;
+
+    --bfg-btn-md-padding: 8px 24px;
+    --bfg-btn-md-font-size: 14px;
+    --bfg-btn-md-line-height: 24px;
+    --bfg-btn-md-height: 40px;
+
+    --bfg-btn-lg-padding: 12px 32px;
+    --bfg-btn-lg-font-size: 16px;
+    --bfg-btn-lg-line-height: 24px;
+    --bfg-btn-lg-height: 48px;
+}

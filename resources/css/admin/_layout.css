@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Admin Page Layout — Page skeleton, sections, header, global utilities
+   ========================================================================== */
+
+.bfg-admin-page #wpcontent,
+.bfg-admin-page__home #wpcontent,
+.bfg-admin-page__settings #wpcontent,
+.bfg-admin-page__fallback #wpcontent,
+.bfg-admin-page__booking #wpcontent {
+    padding: 0 !important;
+}
+
+.bfg-admin-page,
+.bfg-admin-page__settings,
+.bfg-admin-page__fallback,
+.bfg-admin-page__booking {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1d2327;
+    background-color: var(--bfg-bg-page);
+    min-height: 100vh;
+}
+
+/* Page Header
+   ========================================================================== */
+
+.bfg-page__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-admin-page .bfg-page__header h1 {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--bfg-text-secondary);
+    margin: 0;
+    padding: 0;
+}
+
+.bfg-page__header-with-back {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-admin-page .bfg-back-link,
+.bfg-admin-page .bfg-back-link:visited {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bfg-text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.bfg-admin-page .bfg-back-link:hover,
+.bfg-admin-page .bfg-back-link:focus {
+    color: var(--bfg-primary);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Page Main
+   ========================================================================== */
+
+.bfg-admin-page .bfg-page__main {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+}
+
+/* Sections
+   ========================================================================== */
+
+.bfg-admin-page .bfg-section {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-admin-page .bfg-section:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.bfg-admin-page .bfg-section__header {
+    padding: 0 !important;
+    margin-bottom: 32px !important;
+    border: none !important;
+}
+
+.bfg-admin-page .bfg-section .bfg-section__header--divider {
+    margin-top: 64px !important;
+    padding-top: 64px !important;
+    border-top: 1px solid var(--bfg-border) !important;
+    display: block !important;
+    clear: both !important;
+}
+
+.bfg-admin-page .bfg-section__header h2,
+.bfg-section-card-title {
+    font-size: 28px !important;
+    font-weight: 500 !important;
+    color: var(--bfg-text-main) !important;
+    margin: 0 0 8px !important;
+    line-height: 36px !important;
+    text-wrap: balance;
+}
+
+.bfg-admin-page .bfg-section__header p {
+    font-size: var(--bfg-text-level-2) !important;
+    color: var(--bfg-text-secondary) !important;
+    margin: 0 !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+}
+
+.bfg-admin-page .bfg-section__section {
+    padding: 0 !important;
+}
+
+/* Submit Row
+   ========================================================================== */
+
+.bfg-admin-page .submit {
+    margin: 32px 0 0 !important;
+    padding: 0 !important;
+}
+
+.bfg-section__section>*:has(+ .submit) {
+    margin-bottom: 0 !important;
+}
+
+.submit+.bfg-section__header--divider {
+    margin-top: 32px !important;
+}
+
+/* Links
+   ========================================================================== */
+
+.bfg-admin-page a {
+    color: var(--bfg-primary);
+    text-decoration: none;
+}
+
+.bfg-admin-page a:hover {
+    text-decoration: underline;
+}
+
+.bfg-admin-page a.bfg-btn:hover,
+.bfg-admin-page a.button-primary:hover {
+    text-decoration: none;
+}
+
+/* Code element
+   ========================================================================== */
+
+.bfg-admin-page code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    color: var(--bfg-text-main);
+}
+
+.bfg-admin-page code:hover {
+    color: var(--bfg-text-main);
+    background: #F3F4F6;
+}
+
+/* WordPress Notice Hide
+   ========================================================================== */
+
+.bfg-admin-page .notice,
+.bfg-admin-page .error,
+.bfg-admin-page #wpfooter,
+.bfg__notice-list-hide {
+    display: none !important;
+}
+
+/* Text Wrap Utilities
+   ========================================================================== */
+
+.bfg-section-card-title,
+.bfg-pro-teaser__title,
+.bfg-admin-page .bfg-section__header h2,
+.bfg-active-step__content h3,
+.bfg-step-row__label,
+.bfg-field-group-title,
+.bfg-page__header h1 {
+    text-wrap: balance;
+}
+
+.bfg-pro-teaser__subtitle,
+.bfg-admin-page .bfg-section__header p,
+.bfg-step-row__description,
+.bfg-active-step__content p,
+.bfg-pro-features-grid li,
+.bfg-notice-banner p {
+    text-wrap: pretty;
+}
+
+/* Shared Nowrap
+   ========================================================================== */
+
+.bfg-badge,
+.bfg-progress-badge,
+.bfg-subscription__value,
+.bfg-subscription__label {
+    white-space: nowrap;
+}
+
+/* Accessibility
+   ========================================================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

@@ -1,0 +1,349 @@
+/* ==========================================================================
+   Forms — Fields, labels, inputs, selects, number spinner, type scale
+   ========================================================================== */
+
+/* Field wrapper
+   ========================================================================== */
+
+.bfg-field {
+    margin-bottom: 24px;
+}
+
+.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
+.bfg-admin-page .bfg-field>.label,
+.bfg-admin-page .bfg-label {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--bfg-text-main);
+    margin-bottom: 8px !important;
+}
+
+.bfg-field>.bfg-field-group-title,
+.bfg-field-group-title {
+    display: block;
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: var(--bfg-text-main);
+    margin-top: 8px;
+    margin-bottom: 16px !important;
+}
+
+/* Type Scale
+   ========================================================================== */
+
+.bfg-text-display    { font-size: 48px; line-height: 56px; font-weight: 600; }
+.bfg-text-heading-xl { font-size: 32px; line-height: 40px; font-weight: 600; }
+.bfg-text-heading-l  { font-size: 28px; line-height: 36px; font-weight: 500; }
+.bfg-text-heading-m  { font-size: 24px; line-height: 32px; font-weight: 500; }
+.bfg-text-heading-s  { font-size: 20px; line-height: 28px; font-weight: 500; }
+.bfg-text-body       { font-size: 16px; line-height: 24px; font-weight: 400; }
+.bfg-text-type-label { font-size: 16px; line-height: 24px; font-weight: 500; }
+.bfg-text-small      { font-size: 14px; line-height: 20px; font-weight: 400; }
+.bfg-text-xs         { font-size: 13px; line-height: 20px; font-weight: 400; }
+
+.bfg-type-scale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+}
+.bfg-type-scale-table tr {
+    border-bottom: 1px solid var(--bfg-border);
+}
+.bfg-type-scale-table tbody tr:last-child {
+    border-bottom: none;
+}
+.bfg-type-scale-table thead tr {
+    text-align: left;
+}
+.bfg-type-scale-table th {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bfg-text-muted);
+}
+.bfg-type-scale-table th:first-child { padding-left: 0; }
+.bfg-type-scale-table th:last-child  { padding-right: 0; }
+.bfg-type-scale-table td {
+    padding: 16px;
+}
+.bfg-type-scale-table td:first-child { padding-left: 0; }
+.bfg-type-scale-table td:last-child  { padding-right: 0; }
+
+/* Field Validation
+   ========================================================================== */
+
+.bfg-field--valid input,
+.bfg-field--valid select {
+    border-color: #16a34a !important;
+}
+
+.bfg-field--error input,
+.bfg-field--error select {
+    border-color: #dc2626 !important;
+}
+
+.bfg-field__validation {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.bfg-field__validation.is-visible {
+    display: flex;
+}
+
+.bfg-field__validation--error {
+    color: #dc2626;
+}
+
+.bfg-field__validation-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.bfg-required {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+@keyframes bfg-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Description text
+   ========================================================================== */
+
+.bfg-description,
+.bfg-admin-page .bfg-description {
+    font-size: 16px !important;
+    color: var(--bfg-text-secondary) !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+    display: block;
+    text-wrap: pretty;
+}
+
+.bfg-field .bfg-description,
+.bfg-input .bfg-description {
+    font-size: 14px !important;
+    line-height: 21px !important;
+    margin-top: 8px !important;
+    margin-bottom: 24px !important;
+}
+
+.bfg-field .bfg-description:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Text + Select inputs
+   ========================================================================== */
+
+.bfg-admin-page select,
+.bfg-admin-page input[type="text"],
+.bfg-admin-page input[type="number"],
+.bfg-admin-page input[type="url"],
+.bfg-admin-page input[type="tel"],
+.bfg-admin-page input[type="email"],
+.bfg-admin-page input[type="time"],
+.bfg-admin-page .select {
+    border: 1px solid var(--bfg-border) !important;
+    border-radius: var(--bfg-radius-input);
+    padding: 0 12px;
+    height: var(--bfg-btn-md-height);
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100% !important;
+    max-width: none !important;
+    background: #F9FAFB !important;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: var(--bfg-text-main);
+    margin: 0 !important;
+}
+
+/* Input size variants
+   ========================================================================== */
+
+.bfg-admin-page .bfg-field--sm input[type="text"],
+.bfg-admin-page .bfg-field--sm input[type="number"],
+.bfg-admin-page .bfg-field--sm input[type="url"],
+.bfg-admin-page .bfg-field--sm input[type="tel"],
+.bfg-admin-page .bfg-field--sm input[type="email"] {
+    height: var(--bfg-btn-sm-height) !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+}
+
+.bfg-admin-page .bfg-field--lg input[type="text"],
+.bfg-admin-page .bfg-field--lg input[type="number"],
+.bfg-admin-page .bfg-field--lg input[type="url"],
+.bfg-admin-page .bfg-field--lg input[type="tel"],
+.bfg-admin-page .bfg-field--lg input[type="email"] {
+    height: var(--bfg-btn-lg-height) !important;
+    padding: 0 16px !important;
+    font-size: 16px !important;
+}
+
+.bfg-admin-page .bfg-field--sm select {
+    height: var(--bfg-btn-sm-height) !important;
+    padding: 0 32px 0 8px !important;
+    font-size: 12px !important;
+}
+
+.bfg-admin-page .bfg-field--lg select {
+    height: var(--bfg-btn-lg-height) !important;
+    padding: 0 44px 0 16px !important;
+    font-size: 16px !important;
+}
+
+/* Select arrow
+   ========================================================================== */
+
+.bfg-admin-page select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px !important;
+}
+
+/* Prevent WordPress admin hover effects on inputs
+   ========================================================================== */
+
+.bfg-admin-page select:hover,
+.bfg-admin-page input[type="text"]:hover,
+.bfg-admin-page input[type="number"]:hover,
+.bfg-admin-page input[type="url"]:hover,
+.bfg-admin-page input[type="tel"]:hover,
+.bfg-admin-page input[type="email"]:hover,
+.bfg-admin-page input[type="time"]:hover {
+    color: var(--bfg-text-main) !important;
+    border-color: var(--bfg-border) !important;
+}
+
+[class*="bfg-admin-page"] input:active,
+[class*="bfg-admin-page"] select:active,
+[class*="bfg-admin-page"] textarea:active {
+    border-color: #93C5FD !important;
+    background: #F9FAFB !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+[class*="bfg-admin-page"] input:focus,
+[class*="bfg-admin-page"] select:focus,
+[class*="bfg-admin-page"] textarea:focus {
+    border-color: var(--bfg-primary) !important;
+    background: #ffffff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+body:not(.using-mouse) [class*="bfg-admin-page"] input:focus,
+body:not(.using-mouse) [class*="bfg-admin-page"] select:focus,
+body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+}
+
+.bfg-admin-page select:invalid {
+    color: var(--bfg-text-muted);
+}
+
+.bfg-admin-page select option {
+    color: var(--bfg-text-main);
+}
+
+.bfg-admin-page select option[value=""],
+.bfg-admin-page select option[value="none"],
+.bfg-admin-page select option:disabled {
+    color: var(--bfg-text-muted);
+}
+
+/* Input wrapper
+   ========================================================================== */
+
+.bfg-input {
+    position: relative;
+}
+
+.bfg-input div {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.bfg-input--select {
+    display: block !important;
+}
+
+.bfg-input--select .bfg-custom-select {
+    display: block !important;
+}
+
+/* Number spinner
+   ========================================================================== */
+
+.bfg-input--number {
+    display: flex !important;
+    align-items: stretch !important;
+    background: #ffffff;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    overflow: hidden;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.bfg-input--number:focus-within {
+    border-color: var(--bfg-primary);
+}
+
+.bfg-input--number input[type="number"] {
+    flex: 1;
+    text-align: right;
+    padding-right: 16px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.bfg-input--number input[type="number"]::-webkit-outer-spin-button,
+.bfg-input--number input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.bfg-input--number input[type="number"]:focus {
+    box-shadow: none !important;
+}
+
+.bfg-suffix,
+.bfg-suffix-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    color: var(--bfg-text-muted);
+    font-size: var(--bfg-text-level-5);
+    background: var(--bfg-bg-page);
+    border-left: 1px solid var(--bfg-border);
+    flex-shrink: 0;
+}
+
+.bfg-input--number+.bfg-description {
+    margin-top: 8px !important;
+}
