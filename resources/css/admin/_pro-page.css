@@ -1,0 +1,767 @@
+/* ==========================================================================
+   Pro Page — Free state, active state, license cards, feature cards
+   ========================================================================== */
+
+/* Free Version State
+   ========================================================================== */
+
+.bfg-pro-free-state {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 0 !important;
+}
+
+.bfg-free-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* Setup Complete Card */
+.bfg-complete-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.bfg-complete-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #F3F4F6;
+    color: #596270;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-complete-card__icon--success {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.bfg-complete-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-complete-card__title {
+    font-size: 18px !important;
+    line-height: 26px !important;
+    font-weight: 600 !important;
+    color: #111827 !important;
+    margin: 0 0 4px !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.bfg-complete-card__desc {
+    font-size: 14px;
+    color: #596270;
+    margin: 0 0 4px !important;
+}
+
+.bfg-complete-card__hint {
+    font-size: 14px;
+    color: #4B5563;
+    margin: 0 !important;
+}
+
+.bfg-link-green {
+    color: var(--bfg-primary) !important;
+    text-decoration: none !important;
+}
+
+.bfg-link-green:hover {
+    color: var(--bfg-primary-hover) !important;
+    text-decoration: underline !important;
+}
+
+.bfg-link-green--bold {
+    font-weight: 600;
+}
+
+/* Booking Upsell Card */
+.bfg-booking-upsell {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: linear-gradient(to right, #F7FAFF, #E8F0FE) !important;
+    border-color: #D1E4FD !important;
+}
+
+.bfg-booking-upsell__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #F3F4F6;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-booking-upsell__body {
+    flex: 1;
+}
+
+.bfg-booking-upsell__title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.bfg-booking-upsell__eyebrow {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6B7280 !important;
+    margin: 0 0 4px !important;
+}
+
+.bfg-booking-upsell__title {
+    font-size: 24px !important;
+    line-height: 32px !important;
+    font-weight: 500 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+.bfg-booking-upsell__desc {
+    font-size: 14px;
+    color: #596270;
+    margin: 0 0 16px !important;
+}
+
+.bfg-check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.bfg-check-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.bfg-check-list li svg {
+    color: var(--bfg-primary);
+    flex-shrink: 0;
+}
+
+.bfg-booking-upsell__cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-booking-upsell__no-cc {
+    font-size: 14px;
+    color: #596270;
+}
+
+/* Stats Row */
+.bfg-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.bfg-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bfg-stat-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #F3F4F6;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-stat-card__number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.1;
+}
+
+.bfg-stat-card__label {
+    font-size: 14px;
+    color: #596270;
+    margin-top: 2px;
+}
+
+/* Do More with Pro Card */
+.bfg-do-more-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.bfg-do-more-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #F3F4F6;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bfg-do-more-card__title {
+    font-size: 24px !important;
+    line-height: 32px !important;
+    font-weight: 500 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+.bfg-do-more-card__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+.bfg-do-more-feature strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.bfg-do-more-feature span {
+    font-size: 14px;
+    color: #596270;
+}
+
+/* Free Version State — Status card */
+.bfg-free-status-card .bfg-complete-card__desc {
+    font-size: 14px;
+}
+
+.bfg-free-status__title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+    color: #111827;
+    margin: 0 0 4px !important;
+}
+
+/* Pro Upsell Card */
+.bfg-pro-upsell-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: linear-gradient(to right, #F7FAFF, #E8F0FE) !important;
+    border-color: #D1E4FD !important;
+}
+
+.bfg-pro-upsell-card__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: #F3F4F6;
+    color: #596270;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bfg-pro-upsell-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-pro-upsell-card__desc {
+    font-size: 14px;
+    color: #596270;
+    margin: 0 0 16px !important;
+}
+
+.bfg-pro-upsell-card__ctas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-pro-upsell-card__ctas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bfg-pro-upsell-card__ctas form,
+    .bfg-pro-upsell-card__ctas .bfg-btn {
+        width: 100%;
+        display: flex;
+    }
+}
+
+/* License Expired Card */
+.bfg-license-expired-card {
+    background: linear-gradient(to bottom right, rgba(255, 251, 235, 0.5), rgba(254, 243, 199, 0.5)) !important;
+    border-color: #FDE68A !important;
+}
+
+.bfg-license-expired-card__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.bfg-license-expired-card__body .bfg-pro-upsell-card__desc {
+    margin-bottom: 0 !important;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-license-expired-card__body {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.bfg-license-expired-card .bfg-btn--primary,
+.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary {
+    background: #D97706;
+    border-color: #D97706;
+    color: #ffffff;
+}
+
+.bfg-license-expired-card .bfg-btn--primary:hover,
+.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary:hover {
+    background: #B45309;
+    border-color: #B45309;
+}
+
+/* License Activate Card */
+.bfg-license-activate-card .bfg-complete-card__desc {
+    margin-bottom: 8px !important;
+}
+
+/* Active State
+   ========================================================================== */
+
+.bfg-license-info-section {
+    margin-top: 16px;
+    padding-top: 0 !important;
+}
+
+.bfg-license-card {
+    align-items: center;
+}
+
+.bfg-license-active-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.bfg-license-active-card .bfg-pro-upsell-card__icon {
+    background: #2563EB;
+    color: #ffffff;
+}
+
+.bfg-license-active-card .bfg-subscription {
+    margin-bottom: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.bfg-license-active-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bfg-license-key-pill {
+    display: inline-block;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #374151;
+    margin: 6px 0 4px;
+    letter-spacing: 0.05em;
+}
+
+.bfg-license-expiry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px !important;
+    color: #596270;
+    margin: 4px 0 0 !important;
+}
+
+/* License Card
+   ========================================================================== */
+
+.bfg-license-card {
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+}
+
+.bfg-field-group-title:has(+ .bfg-license-card) {
+    margin-bottom: 6px !important;
+}
+
+.bfg-license-card__body {
+    padding: 24px;
+}
+
+.bfg-license-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.bfg-license-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.bfg-license-card__subtitle {
+    font-size: 13px;
+    color: #596270;
+}
+
+.bfg-license-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.bfg-license-card__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.bfg-license-card__status[data-color="green"] {
+    background: #F0FDF4;
+    color: #16A34A;
+    border: 1px solid #DCFCE7;
+}
+
+.bfg-license-card__status[data-color="green"] .bfg-license-card__dot { background: #16A34A; }
+
+.bfg-license-card__status[data-color="red"] {
+    background: #FEF2F2;
+    color: #DC2626;
+    border: 1px solid #FEE2E2;
+}
+
+.bfg-license-card__status[data-color="red"] .bfg-license-card__dot { background: #DC2626; }
+
+.bfg-license-card__status[data-color="gray"] {
+    background: #F9FAFB;
+    color: #6B7280;
+    border: 1px solid #E5E7EB;
+}
+
+.bfg-license-card__status[data-color="gray"] .bfg-license-card__dot { background: #9CA3AF; }
+
+.bfg-license-card__key-label {
+    font-size: 12px;
+    color: #596270;
+    margin-bottom: 8px;
+}
+
+.bfg-license-card__key-value {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    color: #374151;
+    background: #F3F4F6;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+.bfg-license-card__key-value--placeholder {
+    color: #9CA3AF;
+    letter-spacing: 0.05em;
+}
+
+.bfg-license-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.bfg-license-card__days {
+    font-size: 13px;
+    color: #596270;
+}
+
+.bfg-license-card__manage {
+    gap: 4px;
+    font-size: 13px;
+}
+
+/* Pro Page Layout
+   ========================================================================== */
+
+.bfg-admin-page__pro .bfg-section {
+    padding-bottom: 56px;
+    border-bottom: none;
+}
+
+.bfg-admin-page__pro {
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-admin-page__pro .bfg-page__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bfg-admin-page__pro .bfg-page__footer-notes {
+    margin-top: auto !important;
+    padding-top: 1.5rem;
+}
+
+.bfg-admin-page__pro .bfg-pro-features-section {
+    padding-bottom: 20rem;
+}
+
+/* Pro Features Section
+   ========================================================================== */
+
+.bfg-pro-features-section {
+    margin-top: 56px;
+}
+
+.bfg-pro-features-section__header {
+    margin-bottom: 28px;
+}
+
+.bfg-pro-features-section__title {
+    font-size: 28px !important;
+    font-weight: 500 !important;
+    color: #111827;
+    margin: 0 0 4px !important;
+}
+
+.bfg-pro-features-section__subtitle {
+    font-size: var(--bfg-text-level-5);
+    color: #596270;
+    margin: 0 !important;
+}
+
+.bfg-pro-feature-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+@media screen and (max-width: 782px) {
+    .bfg-pro-feature-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Pro Feature Card (inactive/upsell)
+   ========================================================================== */
+
+.bfg-pro-feature-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bfg-pro-feature-card__icon {
+    width: 36px;
+    height: 36px;
+    background: #F3F4F6;
+    color: #9CA3AF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.bfg-pro-feature-card__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    display: block;
+}
+
+.bfg-pro-feature-card__desc {
+    font-size: 14px;
+    color: #9CA3AF;
+    display: block;
+}
+
+/* Clickable feature cards (active/enabled state) */
+a.bfg-pro-feature-card {
+    text-decoration: none !important;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+a.bfg-pro-feature-card:hover {
+    text-decoration: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__icon {
+    background: #EFF6FF;
+    color: #2563EB;
+}
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__title {
+    color: #111827;
+}
+
+a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
+    color: #374151;
+}
+
+/* Feature Card Component (generic, used on pro page)
+   ========================================================================== */
+
+.bfg-feature-card {
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bfg-feature-card--link {
+    text-decoration: none !important;
+    color: inherit;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.bfg-feature-card--link:hover {
+    text-decoration: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.bfg-feature-card__icon {
+    width: 40px;
+    height: 40px;
+    background: #EFF6FF;
+    color: #2563EB;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.bfg-feature-card--expired .bfg-feature-card__icon {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.bfg-feature-card__title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #111827;
+    display: block;
+    margin: 0 0 6px !important;
+    line-height: 1.3;
+}
+
+.bfg-feature-card__title sup {
+    font-size: 10px;
+    margin-left: 3px;
+}
+
+.bfg-feature-card__desc {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #596270;
+    display: block;
+    margin: 0 !important;
+    line-height: 1.5;
+}
+
+.bfg-feature-card__benefits {
+    list-style: none;
+    margin: 16px 0 0 !important;
+    padding: 16px 0 0 !important;
+    border-top: 1px solid #F3F4F6;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bfg-feature-card__benefits li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #596270;
+    padding: 0;
+}
+
+.bfg-feature-card__benefits li::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
