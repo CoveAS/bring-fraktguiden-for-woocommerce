@@ -25,7 +25,7 @@ trait Settings
 	 */
 	public function get_setting(string $key, $default = ''): mixed
 	{
-		return BringSettings::instance()->get($key)->value;
+		return BringSettings::instance()->get($key)?->value;
 	}
 
 	/**

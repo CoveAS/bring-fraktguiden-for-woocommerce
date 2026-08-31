@@ -258,7 +258,7 @@ class Bring_WC_Order_Adapter {
 	 * @param array $shipping_items Order items to save.
 	 */
 	public function admin_update_pickup_point( $shipping_items ) {
-		$shipping_methods = $shipping_items['shipping_method'];
+		$shipping_methods = $shipping_items['shipping_method'] ?? null;
 
 		if ( ! $shipping_methods ) {
 			return;
