@@ -270,7 +270,7 @@ jQuery(function ($) {
 						action: 'bfg_select_pick_up_point',
 						id: pickUpPoint.id,
 					}
-				).error(
+				).fail(
 					function (data) {
 						console.error(data);
 						el.unblock();
