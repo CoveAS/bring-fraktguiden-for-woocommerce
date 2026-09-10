@@ -18,6 +18,21 @@ nothing points the reader from the data to the list.
 Write a list in code only when no data source holds the trait. Name the source
 in a comment when you do.
 
+### Data keys
+
+Write a data key as a plain string, in the same spelling the data file uses.
+
+Do: `$service['nvit'] ?? true`.
+
+Do not: `private const FLAG = 'nvit';` and then `$service[self::FLAG]`. The
+constant hides the key from the reader and buys nothing.
+
+Name the key after the trait of the row, not after the rule that reads it. A
+second rule may read the same trait later.
+
+Return the flag as it is. Do not wrap it in a comparison such as
+`false !== ($service['nvit'] ?? true)`. A boolean needs no test.
+
 ## Fields and rules
 
 A field is one thing. Describe it in one place.

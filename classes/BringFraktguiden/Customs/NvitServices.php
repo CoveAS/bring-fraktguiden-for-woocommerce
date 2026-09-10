@@ -14,11 +14,6 @@ use Fraktguiden_Helper;
 class NvitServices
 {
 	/**
-	 * The key that marks a service as outside the rule.
-	 */
-	private const FLAG = 'nvit';
-
-	/**
 	 * Return whether the NVIT rule covers a Bring service.
 	 *
 	 * A service the plugin does not know is covered, because the rule names
@@ -34,7 +29,7 @@ class NvitServices
 			$service = $group['services'][$product] ?? null;
 
 			if ($service) {
-				return false !== ($service[self::FLAG] ?? true);
+				return $service['nvit'] ?? true;
 			}
 		}
 
