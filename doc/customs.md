@@ -48,6 +48,9 @@ out for an export.
 | `numberOfPieces` | integer | no | The number of declared pieces. |
 | `quantity` | integer | no | Deprecated. |
 
+The schema sets no length limit on `goodsDescription`. The `goodsDescription`
+on a package is a different field, and that one has a limit of 35 characters.
+
 The schema marks `customsArticleNumber`, `grossWeight` and `netWeight` as
 optional. Both rules still need all three, so treat them as required. Bring's
 separate Customs API does mark them required.

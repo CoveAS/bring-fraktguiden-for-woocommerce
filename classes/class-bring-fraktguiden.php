@@ -22,6 +22,7 @@ use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
+use BringFraktguiden\Customs\GoodsDescription;
 use BringFraktguiden\Customs\HsCodeAttribute;
 use BringFraktguidenPro\BringFraktguidenPro;
 
@@ -45,6 +46,7 @@ class Bring_Fraktguiden {
 		SettingsMigration::init();
 		SettingsPage::init();
 		HsCodeAttribute::init();
+		GoodsDescription::init();
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname( __DIR__ );
