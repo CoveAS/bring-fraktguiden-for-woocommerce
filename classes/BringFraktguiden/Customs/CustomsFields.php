@@ -33,7 +33,7 @@ class CustomsFields
 		add_action('woocommerce_process_product_meta', [self::class, 'save_product']);
 		add_action('woocommerce_product_after_variable_attributes', [self::class, 'variation_fields'], 10, 3);
 		add_action('woocommerce_save_product_variation', [self::class, 'save_variation'], 10, 2);
-		add_action('admin_footer', [self::class, 'print_toggle_script']);
+		add_action('admin_enqueue_scripts', [self::class, 'enqueue_script']);
 	}
 
 	/**
@@ -82,13 +82,21 @@ class CustomsFields
 			'list'      => self::DATALIST_ID,
 			'inputmode' => 'numeric',
 			'pattern'   => '[0-9]{' . HsCode::MIN_DIGITS . ',' . HsCode::MAX_DIGITS . '}',
-			'title'     => sprintf(
-				/* translators: 1: the shortest code length, 2: the longest code length. */
-				__('An HS code holds %1$d to %2$d digits, without dots.', 'bring-fraktguiden-for-woocommerce'),
-				HsCode::MIN_DIGITS,
-				HsCode::MAX_DIGITS
-			),
+			'title'     => self::hs_code_rule(),
 		];
+	}
+
+	/**
+	 * Return the sentence that states the length of an HS code.
+	 */
+	private static function hs_code_rule(): string
+	{
+		return sprintf(
+			/* translators: 1: the shortest code length, 2: the longest code length. */
+			__('An HS code holds %1$d to %2$d digits, without dots.', 'bring-fraktguiden-for-woocommerce'),
+			HsCode::MIN_DIGITS,
+			HsCode::MAX_DIGITS
+		);
 	}
 
 	/**
@@ -255,12 +263,9 @@ class CustomsFields
 	}
 
 	/**
-	 * Print the scripts of the customs fields.
-	 *
-	 * WooCommerce loads the variation form over ajax, so both listeners sit on
-	 * the document.
+	 * Load the script of the customs fields on the product screen.
 	 */
-	public static function print_toggle_script(): void
+	public static function enqueue_script(): void
 	{
 		$screen = get_current_screen();
 
@@ -268,45 +273,23 @@ class CustomsFields
 			return;
 		}
 
-		$name = esc_js(self::OVERRIDE_META);
-		$code = esc_js(HsCode::META);
+		wp_enqueue_script(
+			'bring-customs-fields',
+			plugin_dir_url(dirname(__DIR__, 2)) . 'resources/js/customs-fields.js',
+			['jquery'],
+			\Bring_Fraktguiden::VERSION,
+			true
+		);
 
-		echo <<<HTML
-			<script>
-			document.addEventListener('input', function (event) {
-				var field = event.target;
-
-				if (!field.name || field.name.indexOf('{$code}') !== 0) {
-					return;
-				}
-
-				// Tolltariffen prints a code with dots. Customs takes the digits.
-				var digits = field.value.replace(/\D/g, '');
-
-				if (digits !== field.value) {
-					field.value = digits;
-				}
-			});
-
-			document.addEventListener('change', function (event) {
-				var box = event.target;
-
-				if (!box.name || box.name.indexOf('{$name}') !== 0) {
-					return;
-				}
-
-				var panel = box.closest('.woocommerce_variable_attributes');
-
-				if (!panel) {
-					return;
-				}
-
-				panel.querySelectorAll('.bring-customs-override').forEach(function (row) {
-					row.classList.toggle('hidden', !box.checked);
-				});
-			});
-			</script>
-			HTML;
+		wp_localize_script('bring-customs-fields', 'bringCustomsFields', [
+			'overrideName' => self::OVERRIDE_META,
+			'codeName'     => HsCode::META,
+			'netName'      => NetWeight::META,
+			'minDigits'    => HsCode::MIN_DIGITS,
+			'maxDigits'    => HsCode::MAX_DIGITS,
+			'codeRule'     => self::hs_code_rule(),
+			'tooHeavy'     => __('The net weight is above the weight of the product.', 'bring-fraktguiden-for-woocommerce'),
+		]);
 	}
 
 	private static function clean($value): string
