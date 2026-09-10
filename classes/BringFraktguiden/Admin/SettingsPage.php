@@ -499,8 +499,13 @@ class SettingsPage
 		}
 		$pageFieldKeys = array_keys($admin_settings[$page]['fields']);
 
+		$rendered = array_map('sanitize_key', (array) ($_POST['bfg_rendered'] ?? []));
+
 		$settings = Settings::instance();
 		foreach ($pageFieldKeys as $key) {
+			if (!in_array($key, $rendered, true)) {
+				continue;
+			}
 			$setting = $settings->get($key);
 			if ('info' == $setting->type) {
 				continue;

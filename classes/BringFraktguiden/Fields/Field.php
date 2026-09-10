@@ -45,11 +45,18 @@ class Field
 	{
 		extract($this->field);
 		$name = $this->name;
-		$value = Settings::instance()->{$name}->raw_value;
+		$value = Settings::instance()->{$name}->value;
 		$template = $this->get_template();
 		ob_start();
 		require dirname(__DIR__, 3) . '/templates/admin/fields/' . $template . '.php';
-		return ob_get_clean();
+
+		// Tell the form handler that this field was on the page. A field the page leaves out keeps
+		// its stored value, and an unticked checkbox still sends its marker.
+		return sprintf(
+			'<input type="hidden" name="bfg_rendered[]" value="%s">%s',
+			esc_attr($name),
+			ob_get_clean()
+		);
 	}
 	public function title(): string
 	{
