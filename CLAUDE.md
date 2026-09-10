@@ -64,6 +64,26 @@ a sound.
 Do: give a class one job. A class that renders, saves, prints markup and loads
 a script is four classes.
 
+## Failed idea: several shipping lines per order
+
+The booking code loops over every Bring shipping line of an order and sends one
+booking per line. `Bring_Booking::send_booking()` holds the loop.
+
+The idea does not work. A WooCommerce order records no link between a product
+line and a shipping line. Nothing says which goods travel on which shipment.
+
+So each booking claims the whole order. `order_update_packages()` packs every
+product line of the order, then saves that package list on whichever shipping
+line it was called for. An order with two Bring shipping lines therefore books
+the same goods twice.
+
+Any new per order data follows the same shape, because the order offers nothing
+finer. Write it for the whole order and let each booking carry it.
+
+Do not build on the loop. Do not add a feature that needs to know which goods
+belong to which shipping line. The plan is to drop the loop and book one
+shipment per order.
+
 ## Directory Map
 
 | Path | Purpose |
@@ -171,6 +191,34 @@ and the default database. Add missing values to that file if a plain `mysql`
 call fails.
 
 The table prefix is `bfgd_`, so the options table is `bfgd_options`.
+
+## Test site
+
+The local WordPress admin is at https://bringdemo.test/wp/wp-admin/ .
+
+An order screen is at `https://bringdemo.test/wp/wp-admin/post.php?post=<id>&action=edit`.
+
+## Test orders
+
+`bin/make-test-order.php` makes an order the Bring booking box accepts. Run it
+with WP-CLI from the WordPress root.
+
+```
+wp eval-file wp-content/plugins/bring-fraktguiden-for-woocommerce/bin/make-test-order.php 9008 none,0.4,299,1 62034000,0,450,2
+```
+
+The first argument is the shipping postal code. 9008 is Tromso, which is an NVIT
+transit route.
+
+Every argument after it makes one order line, as `hs,weight,price,quantity`.
+Write `none` for a product without an HS code. Write `0` for a missing weight or
+a missing price.
+
+The script prints the order id, the edit URL and the customs problems it made.
+It reuses a product per set of values, so a repeat run adds no duplicate product.
+
+The printed URL uses the `siteurl` option, which is `http://localhost`. Open the
+order on https://bringdemo.test/ instead.
 
 ## Skills
 
