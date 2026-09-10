@@ -580,14 +580,23 @@ class Bring_Booking_Order_View {
 	/**
 	 * Warn about the customs data that Bring needs for this order.
 	 *
+	 * The warning covers the whole order, so it prints once. The first Bring
+	 * shipping line names the product the rules read.
+	 *
 	 * The warning never stops a booking. Bring holds the real guard.
 	 */
 	private static function render_customs_warning( Bring_WC_Order_Adapter $adapter ): void {
-		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
-			$product = Bring_Booking_Consignment_Request::get_bring_product( $shipping_item );
+		$shipping_items = $adapter->get_fraktguiden_shipping_items();
 
-			CustomsWarningView::render( CustomsWarning::for_shipping_item( $shipping_item, $product ) );
+		if ( ! $shipping_items ) {
+			return;
 		}
+
+		$shipping_item = reset( $shipping_items );
+
+		$product = Bring_Booking_Consignment_Request::get_bring_product( $shipping_item );
+
+		CustomsWarningView::render( CustomsWarning::for_order( $adapter->order, $product ) );
 	}
 
 	private static function render_booking_meta_box_content(Bring_WC_Order_Adapter $adapter)
