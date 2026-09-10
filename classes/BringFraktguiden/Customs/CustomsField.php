@@ -14,24 +14,26 @@ use WC_Product;
 class CustomsField
 {
 	/**
+	 * Every field is built with named arguments. See CustomsField::all().
+	 *
 	 * @param string   $meta        The post meta key.
 	 * @param string   $label       The field label.
 	 * @param string   $description The help text. The product screen shows it.
 	 * @param string   $row_class   The layout of the row on a variation.
-	 * @param array    $attributes  Extra input attributes.
-	 * @param string   $data_type   The WooCommerce input type, or an empty string.
 	 * @param \Closure $clean       Turns a posted value into the stored value.
 	 * @param \Closure $placeholder Returns the value that applies when the field is empty.
+	 * @param array    $attributes  Extra input attributes.
+	 * @param string   $data_type   The WooCommerce input type, or an empty string.
 	 */
 	private function __construct(
 		public readonly string $meta,
 		private readonly string $label,
 		private readonly string $description,
 		private readonly string $row_class,
-		private readonly array $attributes,
-		private readonly string $data_type,
 		private readonly \Closure $clean,
-		private readonly \Closure $placeholder
+		private readonly \Closure $placeholder,
+		private readonly array $attributes = [],
+		private readonly string $data_type = ''
 	) {
 	}
 
@@ -44,40 +46,37 @@ class CustomsField
 	{
 		return [
 			new self(
-				HsCode::META,
-				__('HS code', 'bring-fraktguiden-for-woocommerce'),
-				__('The customs code of the goods. Bring needs it for goods in transit and for export.', 'bring-fraktguiden-for-woocommerce'),
-				'form-row-first',
-				[
+				meta: HsCode::META,
+				label: __('HS code', 'bring-fraktguiden-for-woocommerce'),
+				description: __('The customs code of the goods. Bring needs it for goods in transit and for export.', 'bring-fraktguiden-for-woocommerce'),
+				row_class: 'form-row-first',
+				clean: HsCode::strip(...),
+				placeholder: fn(WC_Product $product, ?WC_Product $parent): string
+					=> $parent ? HsCode::for_product($parent) : '',
+				attributes: [
 					'list'      => HsCodeDatalist::ID,
 					'inputmode' => 'numeric',
 					'pattern'   => '[0-9]{' . HsCode::MIN_DIGITS . ',' . HsCode::MAX_DIGITS . '}',
 					'title'     => self::hs_code_rule(),
-				],
-				'',
-				HsCode::strip(...),
-				fn(WC_Product $product, ?WC_Product $parent): string => $parent ? HsCode::for_product($parent) : ''
+				]
 			),
 			new self(
-				GoodsDescription::META,
-				__('Customs goods description', 'bring-fraktguiden-for-woocommerce'),
-				__('Bring sends this text to customs. The product name is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
-				'form-row-last',
-				[],
-				'',
-				static fn($value): string => (string) $value,
-				fn(WC_Product $product, ?WC_Product $parent): string
+				meta: GoodsDescription::META,
+				label: __('Customs goods description', 'bring-fraktguiden-for-woocommerce'),
+				description: __('Bring sends this text to customs. The product name is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
+				row_class: 'form-row-last',
+				clean: static fn(string $value): string => $value,
+				placeholder: fn(WC_Product $product, ?WC_Product $parent): string
 					=> ($parent ? trim((string) $parent->get_meta(GoodsDescription::META)) : '') ?: $product->get_name()
 			),
 			new self(
-				NetWeight::META,
-				self::net_weight_label(),
-				__('The weight of the goods alone, without the packing. The weight above is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
-				'form-row-full',
-				[],
-				'decimal',
-				wc_format_decimal(...),
-				fn(WC_Product $product, ?WC_Product $parent): string => (string) $product->get_weight()
+				meta: NetWeight::META,
+				label: self::net_weight_label(),
+				description: __('The weight of the goods alone, without the packing. The weight above is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
+				row_class: 'form-row-full',
+				clean: wc_format_decimal(...),
+				placeholder: fn(WC_Product $product, ?WC_Product $parent): string => (string) $product->get_weight(),
+				data_type: 'decimal'
 			),
 		];
 	}
