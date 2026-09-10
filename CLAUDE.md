@@ -116,3 +116,14 @@ Use `/skill-name` in chat to invoke:
 | `/create-component` | Creating a new `.bfgc.php` component (TDD workflow) |
 | `/templating` | Building or modifying admin pages (structure, fields, patterns) |
 | `/css` | Styling decisions — Tailwind vs component class vs custom CSS |
+
+## Documentation
+
+`doc/` holds durable facts only. A durable fact stays true across sessions, for
+example an external rule, an API contract, or a decision and its reason.
+
+`doc/report/` holds everything else. Put a research note, an audit, a status
+write-up, a migration log or any dated snapshot there.
+
+Write a doc for a reader who was not in the session that produced it. Do not
+record the questions or comparisons that came up while you worked.
