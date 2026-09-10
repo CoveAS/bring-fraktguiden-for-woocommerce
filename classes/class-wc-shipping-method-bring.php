@@ -699,8 +699,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function get_selected_from_country() {
 		global $woocommerce;
 
-		$countries = $woocommerce->countries?->get_base_country();
-		return isset( $this->from_country ) ? $this->from_country : $countries;
+		return $this->from_country ?: $woocommerce->countries?->get_base_country();
 	}
 
 	/**

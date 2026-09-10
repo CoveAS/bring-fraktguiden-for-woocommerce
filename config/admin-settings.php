@@ -7,9 +7,10 @@ if (defined('WC_LOG_DIR')) {
 	$wc_log_dir = WC_LOG_DIR;
 }
 $nordic_countries = Fraktguiden_Helper::get_nordic_countries();
-$base_country_code = WC()->countries?->get_base_country();
+// The store base, read from the options. WC()->countries is not ready this early.
+$base_country_code = explode(':', get_option('woocommerce_default_country', ''))[0];
 $base_country = $nordic_countries[$base_country_code] ?? __('Choose a country', 'bring-fraktguiden-for-woocommerce');
-$base_postcode = WC()->countries?->get_base_postcode();
+$base_postcode = get_option('woocommerce_store_postcode', '');
 
 $all_services = Fraktguiden_Helper::get_all_services();
 $first_service = reset($all_services);
@@ -85,16 +86,16 @@ return [
 				'type' => 'text',
 				'placeholder' => '0010',
 				'css' => 'width: 100px; text-align: right;',
-				'default' => '',
+				'default' => $base_postcode,
 			],
 			'from_country' => [
 				'title' => __('From country', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
 				'class' => 'chosen_select',
 				'css' => 'width: 200px;',
-				'default' => '',
+				'default' => $base_country_code,
 				'placeholder' => $base_country,
-				'options' => Fraktguiden_Helper::get_nordic_countries(),
+				'options' => $nordic_countries,
 			],
 			'handling_fee' => [
 				'title' => __('Handling Fee', 'bring-fraktguiden-for-woocommerce'),
@@ -358,6 +359,7 @@ return [
 				'title' => __('Side', 'bring-fraktguiden-for-woocommerce'),
 				'css' => 'width: 8em;',
 				'placeholder' => '240',
+				'default' => 240,
 				'type' => 'number',
 				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [
@@ -370,6 +372,7 @@ return [
 				'title' => __('Circumference', 'bring-fraktguiden-for-woocommerce'),
 				'css' => 'width: 8em;',
 				'placeholder' => '360',
+				'default' => 360,
 				'type' => 'number',
 				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [
@@ -382,6 +385,7 @@ return [
 				'title' => __('Weight', 'bring-fraktguiden-for-woocommerce'),
 				'css' => 'width: 8em;',
 				'placeholder' => '35',
+				'default' => 35,
 				'type' => 'number',
 				'dependencies' => ['enable_multipack' => true],
 				'custom_attributes' => [

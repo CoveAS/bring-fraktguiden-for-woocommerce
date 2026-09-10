@@ -106,6 +106,14 @@ php bin/list-components.php
 | `npm run watch` | Watch mode for CSS/JS (PHP still needs manual compile) |
 | `npm run test-php-compiler` | Run compiler tests |
 
+## Database
+
+Run `mysql` with no parameters. The file `~/.my.cnf` holds the user, the socket
+and the default database. Add missing values to that file if a plain `mysql`
+call fails.
+
+The table prefix is `bfgd_`, so the options table is `bfgd_options`.
+
 ## Skills
 
 Use `/skill-name` in chat to invoke:

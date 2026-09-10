@@ -31,9 +31,9 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		$value      = $this->sanitize($raw_value);
+		$value = $this->sanitize($raw_value);
 		if (!$value) {
-			$value = $this->sanitize($data['placeholder'] ?? '');
+			$value = $this->sanitize($data['default'] ?? '');
 		}
 		$this->value = $value;
 	}

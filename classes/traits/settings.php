@@ -38,8 +38,7 @@ trait Settings
 	 */
 	public function get_price_setting(string $key, $default = ''): float
 	{
-		$value = BringSettings::instance()->get($key);
-		$price = floatval($value);
+		$price = floatval(BringSettings::instance()->get($key)?->value);
 		return $this->calculate_excl_vat($price);
 	}
 
