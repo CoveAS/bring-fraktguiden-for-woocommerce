@@ -126,9 +126,15 @@ Copy their field names. Do not copy these values.
 
 ## What our plugin must do to stay compatible
 
+Compatibility runs one way. Our plugin reads their attribute. It never writes
+one. Our own codes live in the post meta `_bring_hs_code`, because an attribute
+is a shop wide taxonomy and every code would become a term.
+
 - Read the four slugs in the same order, through the same taxonomy names.
-- Store the HS code as the term name, not as the term slug.
-- Read a variation from `attribute_pa_hscode` post meta first, then fall back to
-  the parent.
-- Create the attribute with the slug `hscode` when none of the four exists.
+- Read the term name, for example `330510`, not the term slug.
+- Read a variation from `attribute_pa_hscode` post meta, then fall back to the
+  parent.
 - Do not require the shop to re-enter a code that their plugin already saved.
+
+Our own meta wins over their attribute, so a shop can correct a code without
+touching the old attribute.

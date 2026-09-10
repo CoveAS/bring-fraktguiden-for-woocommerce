@@ -76,6 +76,12 @@ structure.
 The plugin also builds only `sender` and `recipient` in `parties`, so an export
 booking has no `exporter` and no `importer`.
 
+This plugin stores the HS code and the goods description in post meta, on a
+product and on a variation. A variation uses its own pair only when the shop
+turns on the override checkbox. See
+[Posten Bring Checkout](posten-bring-checkout-nvit.md) for the attribute that
+this plugin reads as a fallback.
+
 WooCommerce has no native field for an HS code. It stores one weight per
 product, so the gross weight and the net weight need a source each. It stores a
 line total without tax, so the VAT needs to be added back.
