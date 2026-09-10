@@ -6,6 +6,9 @@
  * and express services that travel by air, and those services carry the flag.
  * A service without the flag is covered. See doc/nvit.md.
  *
+ * A service may carry 'customs' => true. Bring requires customs data on that
+ * service for a shipment that leaves Norway. See doc/export.md.
+ *
  * @package Bring_Fraktguiden
  */
 
@@ -164,6 +167,7 @@ return [
 					'bring-fraktguiden-for-woocommerce' ),
 				'deprecated'  => false,
 				'pickuppoint' => false,
+				'customs'     => true,
 			],
 			/**
 			 * Business pallets
@@ -264,6 +268,7 @@ return [
 				'helptext'    => 'PickUp Parcel leveres til mottakers lokale hentested. Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
 				'pickuppoint' => false,
+				'customs'     => true,
 			],
 			'HOME_DELIVERY_PARCEL'       => [
 				'ProductCode' => '0349',
