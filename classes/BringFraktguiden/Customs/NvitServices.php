@@ -2,7 +2,7 @@
 
 namespace BringFraktguiden\Customs;
 
-use Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 /**
  * The service part of the NVIT rule.
