@@ -18,6 +18,25 @@ nothing points the reader from the data to the list.
 Write a list in code only when no data source holds the trait. Name the source
 in a comment when you do.
 
+## Fields and rules
+
+A field is one thing. Describe it in one place.
+
+Do: hold the meta key, the label, the description, the placeholder and the
+clean rule of a field in one value object. Walk a list of those objects to
+render and to save. A script config is one more reader of that list.
+
+Do not: write the same field out again in a second render method, in a save
+method and in a script config. Every copy goes stale on its own.
+
+Do: give a save method one typed argument per field, or one object.
+
+Do not: pass several untyped values in a fixed order. Two of them swap without
+a sound.
+
+Do: give a class one job. A class that renders, saves, prints markup and loads
+a script is four classes.
+
 ## Directory Map
 
 | Path | Purpose |
