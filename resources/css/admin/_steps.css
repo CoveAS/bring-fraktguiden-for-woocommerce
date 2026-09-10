@@ -226,8 +226,21 @@ a.bfg-step__link,
 .bfg-step__link {
     text-decoration: none !important;
     color: #111827 !important;
-    display: flex;
-    flex-direction: column;
+    align-self: flex-start;
+}
+
+/* The label link covers the whole row, so the row stays clickable.
+   Anything interactive inside the row must sit above it. */
+.bfg-step__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.bfg-step__desc a,
+.bfg-step .bfg-btn {
+    position: relative;
+    z-index: 1;
 }
 
 a.bfg-step__link:hover,
@@ -261,9 +274,16 @@ a.bfg-step__link:hover,
 .bfg-step .bfg-btn {
     display: none;
 }
-.bfg-step--in-progress .bfg-btn {
+.bfg-step--in-progress .bfg-btn,
+.bfg-step--action .bfg-btn {
     display: inline-flex;
     margin-top: 16px;
+    align-self: flex-start;
+}
+
+/* The label of an action step is plain text, so it carries the link styles. */
+.bfg-step__label {
+    color: #111827;
     align-self: flex-start;
 }
 
