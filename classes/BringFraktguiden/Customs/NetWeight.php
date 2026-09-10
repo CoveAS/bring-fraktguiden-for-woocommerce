@@ -2,6 +2,7 @@
 
 namespace BringFraktguiden\Customs;
 
+use BringFraktguiden\Order\ShippedLine;
 use WC_Order_Item_Product;
 use WC_Product;
 
@@ -98,11 +99,18 @@ class NetWeight
 	}
 
 	/**
-	 * Multiply a unit weight by the quantity of the order line.
+	 * Multiply a unit weight by the number of units the shop ships.
+	 *
+	 * A refund lowers that number, so the weight follows the value of the line.
 	 */
 	private static function line_total(WC_Order_Item_Product $item, float $unit): float
 	{
-		return round($unit * max(1, $item->get_quantity()), 3);
+		$order  = $item->get_order();
+		$pieces = $order
+			? ShippedLine::for_order_item($item, $order)->pieces
+			: (int) $item->get_quantity();
+
+		return round($unit * max(1, $pieces), 3);
 	}
 
 	/**

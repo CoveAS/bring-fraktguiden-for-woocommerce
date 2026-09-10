@@ -9,8 +9,10 @@ namespace BringFraktguidenPro\Booking\Consignment_Request;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Order\ShippedLine;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use WC_Order;
+use WC_Order_Item_Product;
 use WC_Order_Item_Shipping;
 use WC_Shipping_Method_Bring;
 use WP_Bring_Request;
@@ -213,9 +215,12 @@ abstract class Bring_Consignment_Request {
 		$items = $wc_order->get_items();
 		$names = [];
 		foreach ( $items as $item ) {
-			$name = $item->get_name();
-			if ( $item->get_quantity() > 1 ) {
-				$name = $item->get_quantity() . " x $name";
+			$name   = $item->get_name();
+			$pieces = $item instanceof WC_Order_Item_Product
+				? ShippedLine::for_order_item( $item, $wc_order )->pieces
+				: (int) $item->get_quantity();
+			if ( $pieces > 1 ) {
+				$name = $pieces . " x $name";
 			}
 			$names[] = apply_filters(
 				'bring_reference_product_name',
