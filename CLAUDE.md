@@ -6,6 +6,18 @@ WooCommerce shipping plugin integrating the Bring/Posten carrier API. Admin UI i
 
 Admin pages are written as `.bfg.php` source templates using a custom component syntax. At build time, `npm run compile-php` compiles them into plain PHP files in `build/`. The PHP runtime only ever loads files from `build/` — source files are never included directly. There is zero runtime overhead from the compiler.
 
+## PHP version
+
+The plugin requires PHP 8.3. The local command line PHP may be newer.
+
+Write code that runs on PHP 8.3. Do not use syntax or functions added after
+8.3, even when the local PHP accepts them.
+
+The requirement is written in three places. Change all three together:
+`readme.txt`, the `Requires PHP` header in
+`bring-fraktguiden-for-woocommerce.php`, and the `php` entry in
+`composer.json`.
+
 ## Data over lists
 
 Mark a trait on the data, never as a list of ids in code. A service that behaves

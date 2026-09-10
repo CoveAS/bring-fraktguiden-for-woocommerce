@@ -8,6 +8,7 @@
  *
  * Version:              ###BRING_VERSION###
  * Requires at least:    5.6.0
+ * Requires PHP:         8.3
  * Tested up to:         6.6.1
  *
  * WC requires at least: 4.8.0
