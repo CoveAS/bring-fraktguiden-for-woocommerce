@@ -7,12 +7,13 @@ use WC_Product;
 /**
  * The customs fields on the product edit screen.
  *
- * A product holds one HS code and one goods description. A variation may hold
- * its own pair, behind an override checkbox, because one parent can hold goods
- * that differ, for example shampoo and conditioner.
+ * A product holds an HS code, a goods description and a net weight. A variation
+ * may hold its own set, behind an override checkbox, because one parent can
+ * hold goods that differ, for example shampoo and conditioner.
  *
- * Both fields are optional. The HS code has no fallback. The goods description
- * falls back to the order line name.
+ * All three fields are optional. The HS code has no fallback. The goods
+ * description falls back to the order line name. The net weight falls back to
+ * the WooCommerce weight.
  */
 class CustomsFields
 {
@@ -49,7 +50,7 @@ class CustomsFields
 			'label'             => __('HS code', 'bring-fraktguiden-for-woocommerce'),
 			'description'       => __('The customs code of the goods. Bring needs it for goods in transit and for export.', 'bring-fraktguiden-for-woocommerce'),
 			'desc_tip'          => true,
-			'custom_attributes' => ['list' => self::DATALIST_ID],
+			'custom_attributes' => self::hs_code_attributes(),
 		]);
 
 		woocommerce_wp_text_input([
@@ -59,6 +60,47 @@ class CustomsFields
 			'description' => __('Bring sends this text to customs. The product name is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
 			'desc_tip'    => true,
 		]);
+
+		woocommerce_wp_text_input([
+			'id'          => NetWeight::META,
+			'label'       => self::net_weight_label(),
+			'placeholder' => $product_object ? $product_object->get_weight() : '',
+			'description' => __('The weight of the goods alone, without the packing. The weight above is used when you leave it empty.', 'bring-fraktguiden-for-woocommerce'),
+			'desc_tip'    => true,
+			'data_type'   => 'decimal',
+		]);
+	}
+
+	/**
+	 * Return the attributes that make the browser check an HS code.
+	 *
+	 * @return array<string, string>
+	 */
+	private static function hs_code_attributes(): array
+	{
+		return [
+			'list'      => self::DATALIST_ID,
+			'inputmode' => 'numeric',
+			'pattern'   => '[0-9]{' . HsCode::MIN_DIGITS . ',' . HsCode::MAX_DIGITS . '}',
+			'title'     => sprintf(
+				/* translators: 1: the shortest code length, 2: the longest code length. */
+				__('An HS code holds %1$d to %2$d digits, without dots.', 'bring-fraktguiden-for-woocommerce'),
+				HsCode::MIN_DIGITS,
+				HsCode::MAX_DIGITS
+			),
+		];
+	}
+
+	/**
+	 * Return the net weight label, with the weight unit of the shop.
+	 */
+	private static function net_weight_label(): string
+	{
+		return sprintf(
+			/* translators: %s: the weight unit of the shop, for example kg. */
+			__('Customs net weight (%s)', 'bring-fraktguiden-for-woocommerce'),
+			get_option('woocommerce_weight_unit')
+		);
 	}
 
 	public static function save_product(int $product_id): void
@@ -69,7 +111,12 @@ class CustomsFields
 			return;
 		}
 
-		self::save_meta($product, $_POST[HsCode::META] ?? null, $_POST[GoodsDescription::META] ?? null);
+		self::save_meta(
+			$product,
+			$_POST[HsCode::META] ?? null,
+			$_POST[GoodsDescription::META] ?? null,
+			$_POST[NetWeight::META] ?? null
+		);
 	}
 
 	/**
@@ -105,7 +152,7 @@ class CustomsFields
 			'value'             => $product->get_meta(HsCode::META),
 			'label'             => __('HS code', 'bring-fraktguiden-for-woocommerce'),
 			'placeholder'       => $parent ? HsCode::for_product($parent) : '',
-			'custom_attributes' => ['list' => self::DATALIST_ID],
+			'custom_attributes' => self::hs_code_attributes(),
 			'wrapper_class'     => 'form-row form-row-first bring-customs-override' . $hidden,
 		]);
 
@@ -116,6 +163,16 @@ class CustomsFields
 			'label'         => __('Customs goods description', 'bring-fraktguiden-for-woocommerce'),
 			'placeholder'   => self::description_placeholder($product, $parent),
 			'wrapper_class' => 'form-row form-row-last bring-customs-override' . $hidden,
+		]);
+
+		woocommerce_wp_text_input([
+			'id'            => NetWeight::META . '[' . $loop . ']',
+			'name'          => NetWeight::META . '[' . $loop . ']',
+			'value'         => $product->get_meta(NetWeight::META),
+			'label'         => self::net_weight_label(),
+			'placeholder'   => $product->get_weight(),
+			'data_type'     => 'decimal',
+			'wrapper_class' => 'form-row form-row-full bring-customs-override' . $hidden,
 		]);
 	}
 
@@ -141,21 +198,26 @@ class CustomsFields
 		self::save_meta(
 			$variation,
 			$_POST[HsCode::META][$loop] ?? null,
-			$_POST[GoodsDescription::META][$loop] ?? null
+			$_POST[GoodsDescription::META][$loop] ?? null,
+			$_POST[NetWeight::META][$loop] ?? null
 		);
 	}
 
 	/**
-	 * Write both fields, then drop the list of used codes.
+	 * Write the fields, then drop the list of used codes.
 	 */
-	private static function save_meta(WC_Product $product, $hs_code, $description): void
+	private static function save_meta(WC_Product $product, $hs_code, $description, $net_weight): void
 	{
 		if (null !== $hs_code) {
-			$product->update_meta_data(HsCode::META, self::clean($hs_code));
+			$product->update_meta_data(HsCode::META, HsCode::strip(self::clean($hs_code)));
 		}
 
 		if (null !== $description) {
 			$product->update_meta_data(GoodsDescription::META, self::clean($description));
+		}
+
+		if (null !== $net_weight) {
+			$product->update_meta_data(NetWeight::META, wc_format_decimal(self::clean($net_weight)));
 		}
 
 		$product->save();
@@ -193,9 +255,9 @@ class CustomsFields
 	}
 
 	/**
-	 * Let the override checkbox show and hide the fields under it.
+	 * Print the scripts of the customs fields.
 	 *
-	 * WooCommerce loads the variation form over ajax, so the listener sits on
+	 * WooCommerce loads the variation form over ajax, so both listeners sit on
 	 * the document.
 	 */
 	public static function print_toggle_script(): void
@@ -207,9 +269,25 @@ class CustomsFields
 		}
 
 		$name = esc_js(self::OVERRIDE_META);
+		$code = esc_js(HsCode::META);
 
 		echo <<<HTML
 			<script>
+			document.addEventListener('input', function (event) {
+				var field = event.target;
+
+				if (!field.name || field.name.indexOf('{$code}') !== 0) {
+					return;
+				}
+
+				// Tolltariffen prints a code with dots. Customs takes the digits.
+				var digits = field.value.replace(/\D/g, '');
+
+				if (digits !== field.value) {
+					field.value = digits;
+				}
+			});
+
 			document.addEventListener('change', function (event) {
 				var box = event.target;
 

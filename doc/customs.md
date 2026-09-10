@@ -48,8 +48,12 @@ out for an export.
 | `numberOfPieces` | integer | no | The number of declared pieces. |
 | `quantity` | integer | no | Deprecated. |
 
-The schema sets no length limit on `goodsDescription`. The `goodsDescription`
-on a package is a different field, and that one has a limit of 35 characters.
+The schema sets no length limit on `goodsDescription`. A test booking confirms
+it. The API accepted a description of 20000 characters and returned a
+consignment number.
+
+The `goodsDescription` on a package is a different field, and that one has a
+limit of 35 characters. The two fields do not share a rule.
 
 The schema marks `customsArticleNumber`, `grossWeight` and `netWeight` as
 optional. Both rules still need all three, so treat them as required. Bring's
@@ -76,17 +80,40 @@ structure.
 The plugin also builds only `sender` and `recipient` in `parties`, so an export
 booking has no `exporter` and no `importer`.
 
-This plugin stores the HS code and the goods description in post meta, on a
-product and on a variation. A variation uses its own pair only when the shop
-turns on the override checkbox. See
+This plugin stores the HS code, the goods description and the net weight in post
+meta, on a product and on a variation. A variation uses its own set only when
+the shop turns on the override checkbox. See
 [Posten Bring Checkout](posten-bring-checkout-nvit.md) for the attribute that
 this plugin reads as a fallback.
 
-WooCommerce has no native field for an HS code. It stores one weight per
-product, so the gross weight and the net weight need a source each. It stores a
-line total without tax, so the VAT needs to be added back.
+WooCommerce has no native field for an HS code. It stores a line total without
+tax, so the VAT needs to be added back.
 
 One HS code field serves both rules, because the item line fields are the same.
+
+## The HS code notation
+
+Tolltariffen prints an HS code with dots, for example 3305.10.00. Customs takes
+the plain digits, and the Booking API counts characters for its length rule of 6
+to 10. A code with dots therefore does not fit.
+
+This plugin stores and sends the digits only. It drops a code that holds fewer
+than 6 or more than 10 digits, because such a code names no goods.
+
+## The two weights
+
+The gross weight is the goods with their packing. The net weight is the goods
+alone. Both exclude the equipment of the carrier, such as a pallet. The World
+Customs Organization sets these definitions, and Norwegian customs follows them.
+
+WooCommerce stores one weight per product. A shop enters what the parcel scale
+shows, so that weight is the gross weight. This plugin adds a net weight field
+per product and per variation, and falls back to the WooCommerce weight when the
+field is empty.
+
+Both weights are per item line, so the plugin multiplies the unit weight by the
+quantity of the line. The plugin converts the weight to kilograms, because a
+shop may set another weight unit.
 
 ## Sources
 

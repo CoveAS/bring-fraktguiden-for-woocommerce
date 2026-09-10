@@ -25,6 +25,16 @@ class HsCode
 	private const USED_TRANSIENT = 'bring_fraktguiden_used_hs_codes';
 
 	/**
+	 * The shortest code customs accepts.
+	 */
+	public const MIN_DIGITS = 6;
+
+	/**
+	 * The longest code the Booking API accepts.
+	 */
+	public const MAX_DIGITS = 10;
+
+	/**
 	 * Return the HS code of an order line, or an empty string.
 	 */
 	public static function for_order_item(WC_Order_Item_Product $item): string
@@ -53,9 +63,43 @@ class HsCode
 			return $parent ? self::for_product($parent) : '';
 		}
 
-		$code = trim((string) $product->get_meta(self::META));
+		$code = self::digits($product->get_meta(self::META));
 
 		return $code ?: self::from_attribute($product);
+	}
+
+	/**
+	 * Return the digits of a code, or an empty string when it cannot be used.
+	 *
+	 * Tolltariffen prints a code with dots, for example 3305.10.00. Customs
+	 * takes the plain digits. A code shorter than six digits names no goods, so
+	 * this method drops it.
+	 *
+	 * @param mixed $code A code in any notation, or an empty value.
+	 */
+	public static function digits($code): string
+	{
+		$digits = self::strip($code);
+		$length = strlen($digits);
+
+		if ($length < self::MIN_DIGITS || $length > self::MAX_DIGITS) {
+			return '';
+		}
+
+		return $digits;
+	}
+
+	/**
+	 * Remove every character that is not a digit.
+	 *
+	 * The product screen stores the result, so a shop keeps a code of the wrong
+	 * length on the screen and can correct it.
+	 *
+	 * @param mixed $code A code in any notation, or an empty value.
+	 */
+	public static function strip($code): string
+	{
+		return preg_replace('/\D/', '', (string) $code);
 	}
 
 	/**
@@ -67,7 +111,7 @@ class HsCode
 			return '';
 		}
 
-		$code = trim((string) $variation->get_meta(self::META));
+		$code = self::digits($variation->get_meta(self::META));
 
 		return $code ?: self::from_attribute($variation);
 	}
@@ -87,7 +131,7 @@ class HsCode
 
 			// A product with several terms gives a comma separated list. Only
 			// one code can go to customs, so the first one wins.
-			$code = trim(explode(',', $code)[0]);
+			$code = self::digits(explode(',', $code)[0]);
 
 			if ($code) {
 				return $code;
@@ -135,6 +179,8 @@ class HsCode
 				self::META
 			)
 		);
+
+		$codes = array_values(array_unique(array_filter(array_map([self::class, 'digits'], $codes))));
 
 		set_transient(self::USED_TRANSIENT, $codes, DAY_IN_SECONDS);
 
