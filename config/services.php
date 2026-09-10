@@ -2,6 +2,10 @@
 /**
  * This file is part of Bring Fraktguiden for WooCommerce.
  *
+ * A service may carry 'nvit' => false. The NVIT transit rule leaves out letters
+ * and express services that travel by air, and those services carry the flag.
+ * A service without the flag is covered. See doc/nvit.md.
+ *
  * @package Bring_Fraktguiden
  */
 
@@ -45,6 +49,7 @@ return [
 				'deprecated'  => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'EKSPRESS09',
+				'nvit'        => false,
 			],
 			'5100' => [
 				'ProductCode' => '5100',
@@ -130,6 +135,7 @@ return [
 				'deprecated'  => false,
 				'warning'     => __( 'Please note that Mail does not return with prices from the api and you need to set a fixed price override to use this service' ),
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'CARGO_GROUPAGE' => [
 				'ProductCode' => '3050',
@@ -203,6 +209,7 @@ return [
 				'helptext'    => 'Levering hjem på dør før kl 0900 (til mindre steder normalt før kl 1600). Du kan varsles ved SMS/e-post, forutsatt at du har oppgitt telefonnummer/epostadresse ved bestilling. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'EXPRESS_NORDIC_SAME_DAY'    => [
 				'ProductCode' => '3336',
@@ -210,6 +217,7 @@ return [
 				'helptext'    => 'Når du trenger raskest mulig budlevering. Bring henter pakken omgående hos avsender og flyr den med første fly til mottaker. Innenfor Norden inkluderer produktet også forsikring av forsendelsen som dekker inntil NOK 100 000,- per sending.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'EXPRESS_INTERNATIONAL_0900' => [
 				'ProductCode' => '3337',
@@ -217,6 +225,7 @@ return [
 				'helptext'    => 'Når du trenger raskest mulig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'EXPRESS_INTERNATIONAL_1200' => [
 				'ProductCode' => '3338',
@@ -224,6 +233,7 @@ return [
 				'helptext'    => 'Når du trenger rask budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'EXPRESS_INTERNATIONAL'      => [
 				'ProductCode' => '3339',
@@ -231,6 +241,7 @@ return [
 				'helptext'    => 'Når du trenger en rask og rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 			'EXPRESS_ECONOMY'            => [
 				'ProductCode' => '3340',
@@ -238,6 +249,7 @@ return [
 				'helptext'    => 'Når du trenger rimelig budlevering. Bring henter pakken hos avsender og leverer den på dør til mottaker.',
 				'deprecated'  => true,
 				'pickuppoint' => false,
+				'nvit'        => false,
 			],
 
 			/**

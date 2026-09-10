@@ -48,11 +48,9 @@ The rule also covers returns. It covers an import that Bring forwards to a
 recipient in one of these ranges after customs clearance, because the goods then
 leave Norway a second time.
 
-The rule covers all services, with two exceptions. Letters are outside it. Air
-transported express services are outside it.
-
-Bring publishes the ranges as prose on its own page and offers no endpoint for
-them. `BringFraktguiden\Customs\Nvit` holds them.
+The rule covers all services, with two exceptions. Letters are outside it.
+Express services that travel by air are outside it. Bring names no product for
+either exception, so the plugin marks the products itself.
 
 ### Who does not need to send the data
 
@@ -90,6 +88,22 @@ Notes from Bring's own questions and answers:
 - Customs accepts data that is "good enough" for now. The item number must give
   an indication of the goods. The old collective number 54.02.53 says nothing,
   so it has no value.
+
+## Where the rule lives in the plugin
+
+The rule has two parts, and one class asks both.
+
+| Class | Answers |
+|---|---|
+| `BringFraktguiden\Customs\NvitPostalCodes` | Does the route leave Norway? |
+| `BringFraktguiden\Customs\NvitServices` | Does the rule cover the service? |
+| `BringFraktguiden\Customs\NvitRule` | Must this booking carry transit data? |
+
+Bring publishes the postal code ranges as prose on its own page and offers no
+endpoint and no file for them, so `NvitPostalCodes` holds them.
+
+A service that the rule leaves out carries `'nvit' => false` in
+`config/services.php`. A service without the flag is covered.
 
 ## Two ways to send the data
 

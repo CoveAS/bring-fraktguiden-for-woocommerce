@@ -3,18 +3,18 @@
 namespace BringFraktguiden\Customs;
 
 /**
- * The rule that says whether a domestic Norwegian shipment is in transit.
+ * The postal code part of the NVIT rule.
  *
  * A shipment is NVIT when it goes from one place in Norway to another place in
- * Norway, but passes through Sweden or Finland. The postal codes decide it, in
- * both directions. See doc/nvit.md.
+ * Norway, but passes through Sweden or Finland. The postal codes decide the
+ * route, in both directions. See doc/nvit.md.
  *
- * Bring publishes the ranges as prose on one page and offers no endpoint for
- * them, so they are written out here.
+ * Bring publishes the ranges as prose on one page and offers no endpoint and no
+ * file for them, so they are written out here.
  *
  * @see https://www.bring.no/en/services/customs/norwegian-goods-in-transit-changes
  */
-class Nvit
+class NvitPostalCodes
 {
 	/**
 	 * The postal code ranges that pair with each other, in both directions.
@@ -28,15 +28,12 @@ class Nvit
 	];
 
 	/**
-	 * Return whether a shipment between two postal codes is in transit.
+	 * Return whether a route between two postal codes leaves Norway.
 	 *
-	 * The rule covers a Norwegian shipment only. A shipment that leaves Norway
-	 * needs an export declaration instead.
-	 *
-	 * ponytail: the rule leaves out letters and air transported express
-	 * services. The caller must skip those services itself.
+	 * This answers the route only. NvitRule also asks whether the service is
+	 * covered.
 	 */
-	public static function covers(string $from, string $to): bool
+	public static function is_transit_route(string $from, string $to): bool
 	{
 		$from = self::code($from);
 		$to   = self::code($to);
