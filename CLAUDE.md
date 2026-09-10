@@ -6,6 +6,18 @@ WooCommerce shipping plugin integrating the Bring/Posten carrier API. Admin UI i
 
 Admin pages are written as `.bfg.php` source templates using a custom component syntax. At build time, `npm run compile-php` compiles them into plain PHP files in `build/`. The PHP runtime only ever loads files from `build/` — source files are never included directly. There is zero runtime overhead from the compiler.
 
+## Data over lists
+
+Mark a trait on the data, never as a list of ids in code. A service that behaves
+in a special way carries a flag in `config/services.php`, and the code reads
+that flag.
+
+A list of ids in code goes stale the moment someone adds a row to the data, and
+nothing points the reader from the data to the list.
+
+Write a list in code only when no data source holds the trait. Name the source
+in a comment when you do.
+
 ## Directory Map
 
 | Path | Purpose |
