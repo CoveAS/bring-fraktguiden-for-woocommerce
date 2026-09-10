@@ -484,16 +484,19 @@ class SettingsPage
 
 	public static function process_settings($value, $old_value): array
 	{
-		$value = isset($old_value) && is_array($old_value) ? $old_value : [];
-
-		// Get the current page
-		$page = 'settings';
-		if (preg_match('/^bring_fraktguiden_(.*)$/', $_POST['option_page'] ?? '', $matches)) {
-			$page = $matches[1];
+		// Only a settings form post carries the fields. Any other write to the option passes through.
+		if (!preg_match('/^bring_fraktguiden_(.*)$/', $_POST['option_page'] ?? '', $matches)) {
+			return is_array($value) ? $value : [];
 		}
+		$page = $matches[1];
+
+		$value = is_array($old_value) ? $old_value : [];
 
 		// Get the page settings
 		$admin_settings = Config::get('admin-settings');
+		if (!isset($admin_settings[$page]['fields'])) {
+			return $value;
+		}
 		$pageFieldKeys = array_keys($admin_settings[$page]['fields']);
 
 		$settings = Settings::instance();
@@ -502,7 +505,8 @@ class SettingsPage
 			if ('info' == $setting->type) {
 				continue;
 			}
-			$sanitized = $_POST[$key] ? $setting->sanitize($_POST[$key]) : '';
+			$posted = $_POST[$key] ?? '';
+			$sanitized = $posted ? $setting->sanitize($posted) : '';
 			if ($setting->type === 'checkbox') {
 				$sanitized = $sanitized ? 'yes' : 'no';
 			}
