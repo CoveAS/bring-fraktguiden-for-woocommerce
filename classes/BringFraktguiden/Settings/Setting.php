@@ -31,11 +31,9 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		$value = $this->sanitize($raw_value);
-		if (!$value) {
-			$value = $this->sanitize($data['default'] ?? '');
-		}
-		$this->value = $value;
+		// A stored false is a real value, so only an unset or empty value falls back.
+		$has_value = $raw_value !== null && $raw_value !== '';
+		$this->value = $this->sanitize($has_value ? $raw_value : ($data['default'] ?? ''));
 	}
 
 	public function validate(mixed $param): array
@@ -81,7 +79,7 @@ class Setting
 			'info',
 			'url' => esc_url($param),
 			'text' => wp_kses_post($param),
-			'checkbox' => !empty($param),
+			'checkbox' => filter_var($param, FILTER_VALIDATE_BOOL),
 			'number' => $param === '' ? 0 : floatval($param),
 			default => throw new \Exception("Unknown data type: " . $this->data['type']),
 		};

@@ -2,7 +2,7 @@
 
 namespace BringFraktguidenPro\PickUpPoint;
 
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Settings\Settings as BringSettings;
 use WP_Bring_Request;
 
 class GetRawPickupPointsAction {
@@ -21,11 +21,9 @@ class GetRawPickupPointsAction {
 		if ($customer) {
 			$args['street'] = $customer->get_shipping_address();
 		}
-		if ('manned' === Fraktguiden_Helper::get_option('pickup_point_types')) {
-			$args['pickupPointType'] = 'manned';
-		}
-		if ('locker' === Fraktguiden_Helper::get_option('pickup_point_types')) {
-			$args['pickupPointType'] = 'locker';
+		$pickup_point_type = BringSettings::instance()->pickup_point_types->value;
+		if (in_array($pickup_point_type, ['manned', 'locker'], true)) {
+			$args['pickupPointType'] = $pickup_point_type;
 		}
 		$response = $request->get(
 			'https://api.bring.com/pickuppoint/api/pickuppoint/' . $country . '/postalCode/' . $postcode . '.json',

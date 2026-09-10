@@ -9,6 +9,7 @@ namespace BringFraktguidenPro\PickUpPoint;
 
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Settings\Settings as BringSettings;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use WC_Order;
 use WC_Order_Item_Shipping;
@@ -43,7 +44,7 @@ class PickUpPoint
 		// Enqueue checkout Javascript.
 		add_action('wp_enqueue_scripts', [ __CLASS__, 'checkout_load_javascript' ] );
 
-		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
+		$legacy = BringSettings::instance()->pickup_point_style->value === 'legacy';
 		if ( 'kco' === WC()->session?->get( 'chosen_payment_method' ) ) {
 			$legacy = true;
 		}
@@ -111,7 +112,7 @@ class PickUpPoint
 		if (!is_checkout()) {
 			return;
 		}
-		$legacy = Fraktguiden_Helper::get_option('pickup_point_style', 'regular') === 'legacy';
+		$legacy = BringSettings::instance()->pickup_point_style->value === 'legacy';
 		$path = $legacy
 			? 'assets/js/legacy-pickup-point-checkout.js'
 			: 'assets/js/pick-up-point-checkout.js';
@@ -133,7 +134,7 @@ class PickUpPoint
 			[
 				'ajaxurl' => admin_url('admin-ajax.php'),
 				'i18n' => self::get_i18n(),
-				'country' => Fraktguiden_Helper::get_option('from_country'),
+				'country' => BringSettings::instance()->from_country->value,
 				'klarna_checkout_nonce' => wp_create_nonce('klarna_checkout_nonce'),
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
 				'pick_up_points' => PickUpPointData::rawCollection(

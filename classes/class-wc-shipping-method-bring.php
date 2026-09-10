@@ -69,7 +69,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 *
 	 * @var string
 	 */
-	private $post_office = '';
+	private $post_office = false;
 
 	/**
 	 * Recipient notification over SMS or E-Mail
@@ -90,7 +90,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 *
 	 * @var string
 	 */
-	private $display_desc = '';
+	private $display_desc = false;
 
 	/**
 	 * Maximum total quantity of products in the cart before offering a custom price
@@ -188,7 +188,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
 
-		$this->display_desc = $this->get_setting( 'display_desc', 'no' );
+		$this->display_desc = $this->get_setting( 'display_desc' );
 
 		$max_products       = (int) $this->get_setting( 'max_products', 1000 );
 		$this->max_products = $max_products ?: 1000;
@@ -469,7 +469,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			$this->id,
 			$this->debug,
 			(float) $this->fee,
-			'no' !== $this->display_desc,
+			$this->display_desc,
 		);
 		foreach ( $response['consignments'][0]['products'] as $service_details ) {
 			$rates[] = $factory->make(
@@ -518,7 +518,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			'year'   => $shipping_date->format( 'Y' ),
 		];
 
-		$weight_only = Fraktguiden_Helper::get_option( 'calculate_by_weight' ) === 'yes';
+		$weight_only = BringSettings::instance()->calculate_by_weight->value;
 		$packages    = array_map(
 			function ( array $packageData ) use ( $weight_only ) {
 				$result = [
@@ -550,10 +550,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$params = [
 			'language'                         => $this->get_bring_language(),
 			'withPrice'                        => $with_price,
-			'withExpectedDelivery'             => $this->get_setting('display_eta', 'no') === 'yes',
+			'withExpectedDelivery'             => (bool) $this->get_setting('display_eta'),
 //			'withEstimatedDeliveryTime'        => false,
 			'withGuiInformation'               => true, //
-			'withEnvironmentalData'            => $this->get_setting('display_desc', 'no') === 'yes',
+			'withEnvironmentalData'            => $this->display_desc,
 			'numberOfAlternativeDeliveryDates' => 0,
 			'edi'                              => true,
 			'trace'                            => true,
@@ -563,7 +563,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 					'fromCountryCode'     => $this->get_selected_from_country(),
 					'toPostalCode'        => $postcode,
 					'toCountryCode'       => $country,
-					'postingAtPostOffice' => ( 'no' === $this->post_office ) ? 'false' : 'true',
+					'postingAtPostOffice' => $this->post_office ? 'true' : 'false',
 					'additionalServices'  => $additional_services,
 					'shippingDate'        => $shipping_date,
 					'packages'            => $packages,

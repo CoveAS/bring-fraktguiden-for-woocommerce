@@ -11,6 +11,7 @@ use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use BringFraktguiden\Settings\Settings as BringSettings;
 use Fraktguiden_Packer;
 use WC_Order;
 use WC_Product_Simple;
@@ -137,11 +138,11 @@ class PickUpPointAjax
 		// @todo: share / filter
 		$standard_params = [
 			'clientUrl' => Fraktguiden_Helper::get_client_url(),
-			'frompostalcode' => Fraktguiden_Helper::get_option('from_zip'),
-			'fromcountry' => Fraktguiden_Helper::get_option('from_country'),
+			'frompostalcode' => BringSettings::instance()->from_zip->value,
+			'fromcountry' => BringSettings::instance()->from_country->value,
 			'topostalcode' => $postcode,
 			'tocountry' => $country,
-			'postingatpostoffice' => (Fraktguiden_Helper::get_option('post_office') === 'no') ? 'false' : 'true',
+			'postingatpostoffice' => BringSettings::instance()->post_office->value ? 'true' : 'false',
 		];
 
 		$shipping_method = new WC_Shipping_Method_Bring();
