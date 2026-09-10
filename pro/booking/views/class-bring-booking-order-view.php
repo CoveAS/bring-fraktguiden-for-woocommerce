@@ -12,6 +12,8 @@ use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguiden\Customs\CustomsWarning;
+use BringFraktguiden\Customs\CustomsWarningView;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use DateTime;
 use Exception;
@@ -575,6 +577,19 @@ class Bring_Booking_Order_View {
 		die;
 	}
 
+	/**
+	 * Warn about the customs data that Bring needs for this order.
+	 *
+	 * The warning never stops a booking. Bring holds the real guard.
+	 */
+	private static function render_customs_warning( Bring_WC_Order_Adapter $adapter ): void {
+		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
+			$product = Bring_Booking_Consignment_Request::get_bring_product( $shipping_item );
+
+			CustomsWarningView::render( CustomsWarning::for_shipping_item( $shipping_item, $product ) );
+		}
+	}
+
 	private static function render_booking_meta_box_content(Bring_WC_Order_Adapter $adapter)
 	{
 
@@ -586,6 +601,11 @@ class Bring_Booking_Order_View {
 		}
 
 		$step2    = Bring_Booking_Common_View::is_step2();
+
+		if ( ! $adapter->is_booked() ) {
+			self::render_customs_warning( $adapter );
+		}
+
 		if ( $adapter->has_booking_errors() && ! $step2 ) {
 			self::render_errors( $adapter );
 		}

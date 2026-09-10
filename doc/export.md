@@ -112,6 +112,23 @@ For 0340 and 3639 from Norway, a shipment with IOSS to Belgium, Denmark,
 Finland, France, Portugal, Germany, Austria or Luxembourg can only be bought
 prepaid on posten.no.
 
+## How the plugin marks a service
+
+A service that needs export customs data carries `'customs' => true` in
+`config/services.php`. `ExportRule` reads the flag, and it also checks that the
+sender is in Norway and the recipient is not.
+
+## The warning on the order screen
+
+The booking box warns when an order needs customs data and lacks it.
+`CustomsWarning` holds the problems, and the markup lives in
+`src/templates/admin/parts/customs-warning.bfg.php`.
+
+The warning never stops a booking. Bring holds the guard, and answers with the
+reason when it refuses. The three shop settings that an export needs, consent,
+the exporter number and the cargo type, have no settings screen yet, so an
+export order reports all three.
+
 ## Sources
 
 - [Bring Developer, Customs information](https://developer.bring.com/api/booking/customs/)
