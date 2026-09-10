@@ -107,7 +107,7 @@ class HsCode
 	 */
 	private static function own_code(WC_Product $variation): string
 	{
-		if ('yes' !== $variation->get_meta(CustomsFields::OVERRIDE_META)) {
+		if (!Override::is_on($variation)) {
 			return '';
 		}
 

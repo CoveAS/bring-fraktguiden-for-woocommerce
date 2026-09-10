@@ -110,7 +110,7 @@ class NetWeight
 	 */
 	private static function own_weight(WC_Product $variation): float
 	{
-		if ('yes' !== $variation->get_meta(CustomsFields::OVERRIDE_META)) {
+		if (!Override::is_on($variation)) {
 			return 0.0;
 		}
 
