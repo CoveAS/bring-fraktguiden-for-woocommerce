@@ -2,6 +2,8 @@
 
 namespace BringFraktguiden\Development;
 
+use BringFraktguiden\Settings\SettingsMigration;
+
 class StateSelector
 {
 
@@ -78,9 +80,9 @@ class StateSelector
 
 			$state = self::getStates()[$stateKey];
 			if ($stateKey === 'fresh') {
-				delete_option('woocommerce_bring_fraktguiden_settings');
+				delete_option(SettingsMigration::WOO_OPTION);
 			} else {
-				update_option('woocommerce_bring_fraktguiden_settings', $state);
+				update_option(SettingsMigration::WOO_OPTION, $state);
 			}
 
 			if ($stateKey === 'pro') {
@@ -89,8 +91,10 @@ class StateSelector
 				delete_option('bring_fraktguiden_pro_valid_to');
 			}
 
-			// Reset the new settings
-			delete_option('bring_fraktguiden_for_woocommerce_settings');
+			// Reset the plugin settings and the sync snapshot, so the next request copies the
+			// WooCommerce option forward again.
+			delete_option(SettingsMigration::PLUGIN_OPTION);
+			delete_option(SettingsMigration::SNAPSHOT_OPTION);
 
 			$referer = $_SERVER['HTTP_REFERER'] ?? null;
 			if ($referer) {

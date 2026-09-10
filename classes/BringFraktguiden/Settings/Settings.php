@@ -78,7 +78,9 @@ class Settings
 	 */
 	protected function __construct()
 	{
-		$repository = SettingsRepository::instance('bring_fraktguiden_for_woocommerce_settings');
+		SettingsMigration::run_once();
+
+		$repository = SettingsRepository::instance(SettingsMigration::PLUGIN_OPTION);
 		$settings = $repository->all();
 
 		$admin_settings = Config::get('admin-settings');

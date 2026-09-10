@@ -7,6 +7,7 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use BringFraktguiden\Settings\SettingsMigration;
 use WC_Shipping_Zones;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -319,7 +320,7 @@ class Fraktguiden_Helper {
 	}
 
 	/**
-	 * Gets a Woo admin setting by key
+	 * Gets a plugin setting by key
 	 * Returns false if key is not found.
 	 *
 	 * @param string  $key     Key.
@@ -331,7 +332,8 @@ class Fraktguiden_Helper {
 	 */
 	public static function get_option( $key, $default = false ) {
 		if ( empty( self::$options ) ) {
-			self::$options = get_option( 'woocommerce_bring_fraktguiden_settings' );
+			SettingsMigration::run_once();
+			self::$options = get_option( SettingsMigration::PLUGIN_OPTION );
 		}
 
 		if ( empty( self::$options ) ) {
@@ -350,7 +352,7 @@ class Fraktguiden_Helper {
 	}
 
 	/**
-	 * Updates a Woo admin setting by key
+	 * Updates a plugin setting by key
 	 *
 	 * @param string $key Key.
 	 * @param mixed  $data Data.
@@ -359,11 +361,12 @@ class Fraktguiden_Helper {
 	 */
 	public static function update_option( $key, $data ) {
 		if ( empty( self::$options ) ) {
-			self::$options = get_option( 'woocommerce_bring_fraktguiden_settings', [] );
+			SettingsMigration::run_once();
+			self::$options = get_option( SettingsMigration::PLUGIN_OPTION, [] );
 		}
 
 		self::$options[ $key ] = $data;
-		update_option( 'woocommerce_bring_fraktguiden_settings', self::$options, true );
+		update_option( SettingsMigration::PLUGIN_OPTION, self::$options, true );
 	}
 
 	/**

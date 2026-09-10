@@ -21,6 +21,7 @@ use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
+use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguidenPro\BringFraktguidenPro;
 
 /**
@@ -40,6 +41,7 @@ class Bring_Fraktguiden {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
+		SettingsMigration::init();
 		SettingsPage::init();
 		BringFraktguidenPro::setup();
 
