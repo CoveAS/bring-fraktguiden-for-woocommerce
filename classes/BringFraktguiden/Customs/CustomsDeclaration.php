@@ -27,6 +27,28 @@ class CustomsDeclaration
 	{
 		$entries = [];
 
+		foreach (self::items($order) as $item) {
+			$entries[] = self::for_order_item($item, $order);
+		}
+
+		return $entries;
+	}
+
+	/**
+	 * Return the item lines that need a declaration, keyed by item id.
+	 *
+	 * Customs declares goods that cross a border. A line the shop refunds in
+	 * full ships nothing. A download crosses no border. Neither is declared.
+	 *
+	 * A line whose product the shop deleted stays in the list, because nothing
+	 * says the goods did not ship.
+	 *
+	 * @return array<int, WC_Order_Item_Product>
+	 */
+	public static function items(WC_Order $order): array
+	{
+		$items = [];
+
 		foreach ($order->get_items() as $item) {
 			if (!$item instanceof WC_Order_Item_Product) {
 				continue;
@@ -36,10 +58,16 @@ class CustomsDeclaration
 				continue;
 			}
 
-			$entries[] = self::for_order_item($item, $order);
+			$product = $item->get_product();
+
+			if ($product && !$product->needs_shipping()) {
+				continue;
+			}
+
+			$items[$item->get_id()] = $item;
 		}
 
-		return $entries;
+		return $items;
 	}
 
 	/**
