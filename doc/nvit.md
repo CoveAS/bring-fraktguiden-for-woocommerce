@@ -51,6 +51,9 @@ leave Norway a second time.
 The rule covers all services, with two exceptions. Letters are outside it. Air
 transported express services are outside it.
 
+Bring publishes the ranges as prose on its own page and offers no endpoint for
+them. `BringFraktguiden\Customs\Nvit` holds them.
+
 ### Who does not need to send the data
 
 - A VOEC customer, when Bring reports the VOEC data to the authorities. Bring
