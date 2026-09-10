@@ -78,33 +78,18 @@ use BringFraktguiden\Admin\Step;
 					<?php
 					$isNext = $showNextStep && $nextStep === $step;
 					?>
-					<?php if ($step->actionIsWrite): ?>
-						<bfg-step.action :number="$i + 1" :label="esc_html($step->label)">
-							<bfg-step-desc><?php echo wp_kses_post($step->description); ?></bfg-step-desc>
-							<?php if ($step->completed): ?>
-								<bfg-badge.completed>
-									<t>Done</t>
-								</bfg-badge.completed>
-							<?php else: ?>
-								<form method="post" action="<?php echo esc_url($step->action); ?>">
-									<?php wp_nonce_field(\BringFraktguiden\Customs\HsCodeAttribute::ACTION); ?>
-									<input type="hidden" name="action" value="<?php echo esc_attr(\BringFraktguiden\Customs\HsCodeAttribute::ACTION); ?>" />
-									<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--sm">
-										<?php echo esc_html($step->actionText); ?>
-									</button>
-								</form>
-							<?php endif; ?>
-						</bfg-step.action>
-					<?php elseif ($step->completed): ?>
-						<bfg-step.completed :href="esc_url($step->action)" :label="esc_html($step->label)">
-							<bfg-step-desc><?php echo wp_kses_post($step->description); ?></bfg-step-desc>
+					<?php if ($step->completed): ?>
+						<bfg-step.completed :href="$step->action">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
 							<bfg-badge.completed>
 								<t>Done</t>
 							</bfg-badge.completed>
 						</bfg-step.completed>
 					<?php elseif ($isNext): ?>
-						<bfg-step.in-progress :href="esc_url($step->action)" :number="$i + 1" :label="esc_html($step->label)">
-							<bfg-step-desc><?php echo wp_kses_post($step->description); ?></bfg-step-desc>
+						<bfg-step.in-progress :number="$i + 1">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
 							<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_attr($step->action); ?>">
 								<?php echo esc_html($step->actionText); ?>
 							</a>
@@ -113,8 +98,9 @@ use BringFraktguiden\Admin\Step;
 							</bfg-badge.in-progress>
 						</bfg-step.in-progress>
 					<?php else: ?>
-						<bfg-step.pending :href="esc_url($step->action)" :number="$i + 1" :label="esc_html($step->label)">
-							<bfg-step-desc><?php echo wp_kses_post($step->description); ?></bfg-step-desc>
+						<bfg-step.pending :href="$step->action" :number="$i + 1">
+							<?php echo esc_html($step->label); ?>
+							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
 						</bfg-step.pending>
 					<?php endif; ?>
 				<?php endforeach; ?>

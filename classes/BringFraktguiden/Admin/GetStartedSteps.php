@@ -3,7 +3,6 @@
 namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
-use BringFraktguiden\Customs\HsCodeAttribute;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
 use WC_Shipping_Zones;
@@ -110,39 +109,11 @@ class GetStartedSteps
 					action: $step->action,
 					actionText: $step->actionText,
 					completed: false,
-					actionIsWrite: $step->actionIsWrite,
 				);
 			} elseif (!$step->completed) {
 				$blocked = true;
 			}
 		}
-
-		$nvit_link = sprintf(
-			'<a href="%s" target="_blank" rel="noopener">%s</a>',
-			esc_url('https://www.bring.no/en/services/customs/norwegian-goods-in-transit-changes'),
-			esc_html__('What is NVIT?', 'bring-fraktguiden-for-woocommerce')
-		);
-		$tariff_link = sprintf(
-			'<a href="%s" target="_blank" rel="noopener">%s</a>',
-			esc_url('https://tolltariffen.toll.no/'),
-			esc_html__('Find a code', 'bring-fraktguiden-for-woocommerce')
-		);
-
-		// The HS code step stands outside the sequential rule. A shop needs it
-		// only when it ships goods in transit or exports from Norway.
-		$steps [] = new Step(
-			label: __('Add the HS code field', 'bring-fraktguiden-for-woocommerce'),
-			description: implode(' ', [
-				esc_html__('Bring needs a customs code per product for NVIT and for export.', 'bring-fraktguiden-for-woocommerce'),
-				$nvit_link,
-				'·',
-				$tariff_link,
-			]),
-			action: admin_url('admin-post.php'),
-			actionText: __('Add the HS code field', 'bring-fraktguiden-for-woocommerce'),
-			completed: (bool) HsCodeAttribute::find(),
-			actionIsWrite: true,
-		);
 
 		return $steps;
 
