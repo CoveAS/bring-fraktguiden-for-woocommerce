@@ -4,6 +4,9 @@
  * The browser never builds the form. It collects what the shop worker typed,
  * sends it, and puts the markup that comes back in place of the old box. So the
  * form lives in one place, in PHP.
+ *
+ * A draft save is the one send that redraws nothing. The shop worker already
+ * holds the true form, so the box waits for no answer and keeps the caret.
  */
 
 import { initCustomSelects } from './custom-select.js';
@@ -11,6 +14,9 @@ import { initCustomSelects } from './custom-select.js';
 const SAVE_DELAY = 600;
 
 let saveTimer = null;
+
+// The order screen holds one box, so one timer and one pending save are enough.
+let pendingSave = null;
 
 /** Return the box element that holds the given node. */
 function boxOf(node) {
@@ -59,24 +65,33 @@ function setBusy(box, busy) {
 	});
 }
 
-/** Send the box to WordPress and show the markup that comes back. */
-async function send(box, action) {
+/** Post the box to WordPress and return what comes back. */
+async function post(box, action) {
 	const token = box.querySelector('[data-bfg-form]')?.dataset.token || '';
 
+	const response = await fetch(box.dataset.url, {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-WP-Nonce': box.dataset.nonce,
+		},
+		body: JSON.stringify({ action, token, form: readForm(box) }),
+	});
+
+	if (!response.ok) {
+		throw new Error('The server refused the box.');
+	}
+
+	return response.json();
+}
+
+/** Send the box to WordPress and show the markup that comes back. */
+async function send(box, action) {
 	setBusy(box, true);
 
 	try {
-		const response = await fetch(box.dataset.url, {
-			method: 'POST',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-WP-Nonce': box.dataset.nonce,
-			},
-			body: JSON.stringify({ action, token, form: readForm(box) }),
-		});
-
-		const answer = await response.json();
+		const answer = await post(box, action);
 
 		if (!answer || typeof answer.html !== 'string') {
 			throw new Error(answer?.message || 'The server sent no box.');
@@ -87,6 +102,62 @@ async function send(box, action) {
 		setBusy(box, false);
 		window.alert(error.message);
 	}
+}
+
+/**
+ * Keep the draft without a redraw.
+ *
+ * The shop worker holds the true form, so the answer carries no markup. The box
+ * stays as it is, and the caret and the scroll position stay with it.
+ */
+function saveDraft(box) {
+	pendingSave = post(box, 'save').then(
+		() => setUnsaved(box, false),
+		() => setUnsaved(box, true)
+	);
+
+	return pendingSave;
+}
+
+/**
+ * Show or hide the warning that the draft is not saved.
+ *
+ * A booking of an unsaved form is refused, because the shop worker cannot see
+ * what the order now holds.
+ */
+function setUnsaved(box, failed) {
+	const line = box.querySelector('[data-bfg-unsaved]');
+	const book = box.querySelector('[data-bfg-book]');
+
+	if (line) {
+		line.hidden = !failed;
+	}
+
+	if (!book) {
+		return;
+	}
+
+	// The button is also off when the order carries no Bring shipping line, so
+	// only a block this code put on comes off again.
+	if (failed && !book.disabled) {
+		book.disabled = true;
+		book.dataset.bfgBlocked = '';
+	} else if (!failed && 'bfgBlocked' in book.dataset) {
+		book.disabled = false;
+		delete book.dataset.bfgBlocked;
+	}
+}
+
+/**
+ * Book the order, but let the save in flight finish first.
+ *
+ * A booking clears the draft, and a save that lands after it would write a
+ * draft back onto a booked order.
+ */
+async function book(box) {
+	setBusy(box, true);
+	await pendingSave;
+	send(box, 'book');
 }
 
 /**
@@ -108,7 +179,7 @@ function replace(box, html) {
 /** Keep the draft, but wait until the shop worker stops typing. */
 function saveLater(box) {
 	window.clearTimeout(saveTimer);
-	saveTimer = window.setTimeout(() => send(box, 'save'), SAVE_DELAY);
+	saveTimer = window.setTimeout(() => saveDraft(box), SAVE_DELAY);
 }
 
 document.addEventListener('input', (event) => {
@@ -130,7 +201,7 @@ document.addEventListener('change', (event) => {
 	// redraws at once instead of waiting for the typing to stop.
 	if (event.target.matches('[data-bfg-reload]')) {
 		window.clearTimeout(saveTimer);
-		send(box, 'save');
+		send(box, 'reload');
 
 		return;
 	}
@@ -188,7 +259,7 @@ document.addEventListener('click', (event) => {
 
 	if (button.hasAttribute('data-bfg-book')) {
 		window.clearTimeout(saveTimer);
-		send(box, 'book');
+		book(box);
 
 		return;
 	}

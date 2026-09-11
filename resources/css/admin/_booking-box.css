@@ -106,9 +106,15 @@
 
 .bfg-booking-form__actions {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     gap: 8px;
     margin-top: 24px;
+}
+
+.bfg-booking-form__unsaved {
+    margin: 0 auto 0 0;
+    color: #b32d2e;
 }
 
 /* Packages -------------------------------------------------------------- */

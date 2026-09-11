@@ -13,8 +13,12 @@ use WP_REST_Server;
  * The one route the booking box talks to.
  *
  * The payload is always the booking form. An action field says what to do with
- * it: keep it as a draft, throw it away, or book it. Every answer carries the
- * fresh markup of the box, so the browser never builds the form itself.
+ * it: keep it as a draft, throw it away, or book it.
+ *
+ * An answer that changes the form carries the fresh markup of the box, so the
+ * browser never builds the form itself. A draft save changes no form, and its
+ * answer carries no markup, so the shop worker keeps the caret and the scroll
+ * position while a save runs.
  */
 class BookingRoute
 {
@@ -63,14 +67,28 @@ class BookingRoute
 		$form   = BookingForm::from_payload((array) $request->get_param('form'));
 
 		return match ($action) {
-			'reset' => self::reset($order),
-			'book'  => self::book($order, $form, (string) $request->get_param('token')),
-			'form'  => self::answer($order, force_form: true),
-			default => self::save($order, $form),
+			'reset'  => self::reset($order),
+			'book'   => self::book($order, $form, (string) $request->get_param('token')),
+			'form'   => self::answer($order, force_form: true),
+			'reload' => self::reload($order, $form),
+			default  => self::save($order, $form),
 		};
 	}
 
 	private static function save(WC_Order $order, BookingForm $form): WP_REST_Response
+	{
+		BookingDraft::write($order, $form);
+
+		return new WP_REST_Response(['saved' => true]);
+	}
+
+	/**
+	 * Keep the draft and send the form back.
+	 *
+	 * A new service brings other extra services and other fields, so the box
+	 * cannot redraw itself.
+	 */
+	private static function reload(WC_Order $order, BookingForm $form): WP_REST_Response
 	{
 		BookingDraft::write($order, $form);
 

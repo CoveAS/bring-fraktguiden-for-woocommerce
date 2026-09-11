@@ -174,6 +174,9 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 	</details>
 
 	<div class="bfg-booking-form__actions">
+		<p class="bfg-booking-form__unsaved" data-bfg-unsaved role="alert" hidden>
+			<t>The draft was not saved. Check the connection and edit a field to try again.</t>
+		</p>
 		<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-reset><t>Reset</t></button>
 		<button type="button" class="bfg-btn bfg-btn--primary" data-bfg-book <?php disabled(!$has_shipping_line); ?>>
 			<?php if ($test_mode) : ?>

@@ -59,16 +59,32 @@ issues a new token.
 ## The route
 
 The browser never builds the form. `BookingRoute` takes the form as JSON at
-`POST /bring-fraktguiden/v1/orders/<id>/booking`, and every answer carries the
-fresh markup of the whole box. So one render path serves the first paint and
-every redraw.
+`POST /bring-fraktguiden/v1/orders/<id>/booking`, and an answer that changes the
+form carries the fresh markup of the whole box. So one render path serves the
+first paint and every redraw.
 
 The route registers outside the `is_admin()` check, because a REST request is
 not an admin request.
 
-An `action` field says what to do with the form: `save` keeps the draft, `reset`
-throws it away, `book` sends it to Bring, and `form` opens the form on a booked
-order.
+An `action` field says what to do with the form: `save` keeps the draft, `reload`
+keeps the draft and redraws, `reset` throws the draft away, `book` sends the form
+to Bring, and `form` opens the form on a booked order.
+
+## The silent save
+
+A `save` answer carries no markup. The shop worker already holds the true form,
+so a redraw would only take the caret, the open dropdown and the scroll
+position away in the middle of the typing.
+
+A `reload` does redraw, because a new service brings other extra services and
+other fields, which only the server knows.
+
+A failed save shows a line above the buttons and turns the Book button off. The
+next save that works clears both. A booking of an unsaved form is refused,
+because the shop worker cannot see what the order now holds.
+
+A booking waits for the save in flight. A booking clears the draft, and a save
+that lands after it would write a draft back onto a booked order.
 
 ## Values that used to come from $_POST
 
