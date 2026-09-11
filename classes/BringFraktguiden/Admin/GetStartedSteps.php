@@ -41,14 +41,13 @@ class GetStartedSteps
 			form: 'connect-account',
 		);
 
-		$fallback = false;
-
 		$steps [] = new Step(
-			label: __('Set up fallback rates', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Configure backup shipping rates', 'bring-fraktguiden-for-woocommerce'),
+			label: __('Price the orders Bring cannot price', 'bring-fraktguiden-for-woocommerce'),
+			description: __('Say what the checkout charges when Bring gives no price', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_fallback'),
-			actionText: __('Configure fallback options', 'bring-fraktguiden-for-woocommerce'),
-			completed: $fallback,
+			actionText: __('Answer', 'bring-fraktguiden-for-woocommerce'),
+			completed: FallbackPrice::current()->decided(),
+			form: 'fallback-price',
 		);
 
 		$steps [] = new Step(

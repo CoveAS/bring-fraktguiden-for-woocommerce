@@ -44,7 +44,7 @@ use BringFraktguiden\Admin\Step;
 				</bfg-notice>
 			<?php endif; ?>
 			<?php if (($_GET[ConnectAccount::RESULT] ?? null) === 'yes'): ?>
-				<bfg-notice>
+				<bfg-notice type="success">
 					<?php echo esc_html(ConnectAccount::message()); ?>
 				</bfg-notice>
 			<?php endif; ?>
@@ -104,8 +104,8 @@ use BringFraktguiden\Admin\Step;
 					<?php
 					$isNext = $showNextStep && $nextStep === $step;
 					?>
-					<?php if ($step->form === 'connect-account'): ?>
-						<?php require dirname(__FILE__, 5) . '/build/templates/admin/pages/home/connect-account.php'; ?>
+					<?php if ($step->form): ?>
+						<?php require dirname(__FILE__, 5) . '/build/templates/admin/pages/home/' . $step->form . '.php'; ?>
 					<?php elseif ($step->completed): ?>
 						<bfg-step.completed :href="$step->action">
 							<?php echo esc_html($step->label); ?>

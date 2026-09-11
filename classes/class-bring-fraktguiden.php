@@ -20,6 +20,7 @@ use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
+use BringFraktguiden\Admin\FallbackPrice;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
@@ -49,6 +50,7 @@ class Bring_Fraktguiden {
 		SettingsPage::init();
 		AddShippingMethod::init();
 		ConnectAccount::init();
+		FallbackPrice::init();
 		CustomsFields::init();
 		HsCodeIndexRoute::init();
 		BringFraktguidenPro::setup();
