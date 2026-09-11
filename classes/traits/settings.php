@@ -18,12 +18,13 @@ trait Settings
 	/**
 	 * Get setting
 	 *
+	 * The config file holds the default of every setting, so a caller gives none.
+	 *
 	 * @param string $key Key.
-	 * @param string|mixed $default Default.
 	 *
 	 * @return mixed
 	 */
-	public function get_setting(string $key, $default = ''): mixed
+	public function get_setting(string $key): mixed
 	{
 		return BringSettings::instance()->get($key)?->value;
 	}
@@ -32,11 +33,10 @@ trait Settings
 	 * Get Price Setting
 	 *
 	 * @param string $key Key.
-	 * @param string|mixed $default Default.
 	 *
 	 * @return float
 	 */
-	public function get_price_setting(string $key, $default = ''): float
+	public function get_price_setting(string $key): float
 	{
 		$price = floatval(BringSettings::instance()->get($key)?->value);
 		return $this->calculate_excl_vat($price);

@@ -169,12 +169,12 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
 		$this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
 
-		// $this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled', 'no' );
+		// $this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled' );
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
 		$this->mybring_api_key                = $this->get_setting( 'mybring_api_key' );
-		$this->booking_enabled                = $this->get_setting( 'booking_enabled', 'no' );
-		$this->booking_without_bring          = $this->get_setting( 'booking_without_bring', 'no' );
-		$this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name', get_bloginfo( 'name' ) );
+		$this->booking_enabled                = $this->get_setting( 'booking_enabled' );
+		$this->booking_without_bring          = $this->get_setting( 'booking_without_bring' );
+		$this->booking_address_store_name     = $this->get_setting( 'booking_address_store_name' );
 		$this->booking_address_street1        = $this->get_setting( 'booking_address_street1' );
 		$this->booking_address_street2        = $this->get_setting( 'booking_address_street2' );
 		$this->booking_address_postcode       = $this->get_setting( 'booking_address_postcode' );
@@ -184,7 +184,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		$this->booking_address_contact_person = $this->get_setting( 'booking_address_contact_person' );
 		$this->booking_address_phone          = $this->get_setting( 'booking_address_phone' );
 		$this->booking_address_email          = $this->get_setting( 'booking_address_email' );
-		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode', 'no' );
+		$this->booking_test_mode              = $this->get_setting( 'booking_test_mode' );
 
 		if (! self::$filters_registered) {
 			add_filter( 'bring_shipping_rates', [ $this, 'filter_shipping_rates' ], 10, 2 );
