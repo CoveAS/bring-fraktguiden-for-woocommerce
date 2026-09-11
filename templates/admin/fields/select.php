@@ -57,9 +57,7 @@ $uniqueId = 'bfg-select-' . esc_attr($name) . '-' . wp_rand();
 		<?php foreach ($options as $key => $option): ?>
 			<option
 				value="<?php echo esc_attr($key); ?>"
-				<?php if ($value && $value == $key ): ?>
-					selected="selected"
-				<?php elseif ($default && $default == $key ): ?>
+				<?php if ($selectedValue == $key): ?>
 					selected="selected"
 				<?php endif;?>
 			><?php echo esc_html($option); ?></option>
