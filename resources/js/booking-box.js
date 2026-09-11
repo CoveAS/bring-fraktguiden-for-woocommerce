@@ -10,6 +10,7 @@
  */
 
 import { initCustomSelects } from './custom-select.js';
+import { pickHsCode, setHsCode, showHsCodeLabels } from './hs-code-picker.js';
 
 const SAVE_DELAY = 600;
 
@@ -206,6 +207,7 @@ function replace(box, html) {
 
 	box.replaceWith(fresh);
 	initCustomSelects(fresh);
+	showHsCodeLabels(fresh);
 }
 
 /** Keep the draft, but wait until the shop worker stops typing. */
@@ -265,18 +267,18 @@ function syncHsStatus(box) {
 	}
 }
 
-/** Tell the toggle button what it does next, and show the bulk code field. */
+/** Tell the toggle button what it does next, and show the bulk code button. */
 function syncToggle(box) {
 	const button = box.querySelector('[data-bfg-hs-toggle]');
-	const group = box.querySelector('[data-bfg-hs-bulk-group]');
+	const bulk = box.querySelector('[data-bfg-hs-set]');
 
 	if (button) {
 		button.textContent = allMarked(box) ? button.dataset.deselect : button.dataset.select;
 	}
 
-	// The field writes into the marked rows, so it waits for the first mark.
-	if (group) {
-		group.hidden = !box.querySelector('[data-bfg-hs-mark]:checked');
+	// The button writes into the marked rows, so it waits for the first mark.
+	if (bulk) {
+		bulk.hidden = !box.querySelector('[data-bfg-hs-mark]:checked');
 	}
 }
 
@@ -287,24 +289,19 @@ function allMarked(box) {
 	return marks.length > 0 && marks.every((mark) => mark.checked);
 }
 
-/** Write the typed code into every marked row of the HS code list. */
+/** Ask for one code, and write it into every marked row of the HS code list. */
 function setMarkedCodes(box) {
-	const code = box.querySelector('[data-bfg-hs-bulk]')?.value.trim() ?? '';
-	let written = false;
+	pickHsCode((code) => {
+		box.querySelectorAll('[data-bfg-hs-mark]:checked').forEach((mark) => {
+			const field = box.querySelector(`[data-hs-product="${mark.dataset.bfgHsMark}"]`);
 
-	box.querySelectorAll('[data-bfg-hs-mark]').forEach((mark) => {
-		const field = box.querySelector(`[data-hs-product="${mark.dataset.bfgHsMark}"]`);
-
-		if (mark.checked && field) {
-			field.value = code;
-			written = true;
-		}
+			// The picker writes through the button, so the button shows the
+			// code it now carries.
+			if (field) {
+				setHsCode(field.parentElement.querySelector('[data-bfg-hs-pick]'), code);
+			}
+		});
 	});
-
-	if (written) {
-		syncHsStatus(box);
-		saveLater(box);
-	}
 }
 
 document.addEventListener('input', (event) => {

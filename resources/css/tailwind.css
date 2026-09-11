@@ -19,3 +19,5 @@
 @import "./admin/_toggle-legacy.css";
 @import "./admin/_booking-box.css";
 @import "./admin/_booking-bulk.css";
+@import "./admin/_modal.css";
+@import "./admin/_hs-code-picker.css";

@@ -5,6 +5,7 @@ namespace BringFraktguidenPro\Booking\Box;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguiden\Customs\CustomsRoute;
+use BringFraktguiden\Customs\HsCodePicker;
 use BringFraktguiden\Customs\CustomsWarning;
 use BringFraktguiden\Customs\OrderHsCodes;
 use BringFraktguiden\Customs\NatureOfCargo;
@@ -90,6 +91,10 @@ class BookingBox
 			\Bring_Fraktguiden::VERSION,
 			true
 		);
+
+		// The box imports the picker, so it needs the settings of the picker
+		// and must not load the file a second time.
+		HsCodePicker::add_config('bfg-booking-box');
 	}
 
 	/**

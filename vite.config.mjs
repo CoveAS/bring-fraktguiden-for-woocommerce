@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/checkout.js',
         'resources/js/custom-select.js',
         'resources/js/home.js',
+        'resources/js/hs-code-picker.js',
         'resources/js/pro.js',
       ],
       output: {

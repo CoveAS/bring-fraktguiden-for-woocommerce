@@ -55,8 +55,7 @@ class OrderHsCodes
 	 */
 	public static function save(WC_Order $order, array $codes): void
 	{
-		$rows    = self::rows($order);
-		$written = false;
+		$rows = self::rows($order);
 
 		foreach ($codes as $id => $code) {
 			$id = (int) $id;
@@ -79,12 +78,6 @@ class OrderHsCodes
 
 			$product->update_meta_data(HsCode::META, $code);
 			$product->save();
-
-			$written = true;
-		}
-
-		if ($written) {
-			HsCode::forget_used();
 		}
 	}
 }

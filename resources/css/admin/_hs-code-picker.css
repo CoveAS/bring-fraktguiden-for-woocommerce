@@ -1,0 +1,94 @@
+/* ==========================================================================
+   HS code picker — the button and the modal that searches the tariff
+   ========================================================================== */
+
+.bfg-hs-button-field {
+    display: block;
+}
+
+.bfg-hs-button {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+}
+
+.bfg-hs-button:hover {
+    border-color: var(--bfg-text-secondary);
+}
+
+.bfg-hs-button__code {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.bfg-hs-button--empty .bfg-hs-button__code {
+    color: var(--bfg-text-secondary);
+    font-weight: 400;
+}
+
+.bfg-hs-button__text {
+    color: var(--bfg-text-secondary);
+}
+
+/* Modal ------------------------------------------------------------------ */
+
+.bfg-hs-modal__search {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 8px 10px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    line-height: 1.4;
+}
+
+.bfg-hs-modal__hint {
+    margin: 0.5rem 0 0 0;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-hs-modal__list {
+    margin: 0.5rem 0 0 0;
+    padding: 0;
+    max-height: 22rem;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.bfg-hs-modal__hit {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: var(--bfg-radius-input);
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.bfg-hs-modal__hit:hover,
+.bfg-hs-modal__hit:focus-visible {
+    background: var(--bfg-primary-light);
+}
+
+.bfg-hs-modal__hit-code {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.bfg-hs-modal__hit-text {
+    color: var(--bfg-text-secondary);
+}

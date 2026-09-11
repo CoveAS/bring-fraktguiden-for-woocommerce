@@ -31,8 +31,6 @@ class CustomsFields
 	{
 		global $product_object;
 
-		HsCodeDatalist::render();
-
 		foreach (CustomsField::all() as $field) {
 			$field->render_for_product($product_object instanceof WC_Product ? $product_object : null);
 		}
@@ -50,7 +48,7 @@ class CustomsFields
 			$field->save($product);
 		}
 
-		self::finish($product);
+		$product->save();
 	}
 
 	/**
@@ -107,16 +105,7 @@ class CustomsFields
 			$field->save($variation, $loop);
 		}
 
-		self::finish($variation);
-	}
-
-	/**
-	 * Write the fields, then drop the list of used codes.
-	 */
-	private static function finish(WC_Product $product): void
-	{
-		$product->save();
-		HsCode::forget_used();
+		$variation->save();
 	}
 
 	/**
@@ -130,6 +119,8 @@ class CustomsFields
 			return;
 		}
 
+		HsCodePicker::enqueue();
+
 		wp_enqueue_script(
 			'bring-customs-fields',
 			plugin_dir_url(dirname(__DIR__, 2)) . 'resources/js/customs-fields.js',
@@ -140,11 +131,7 @@ class CustomsFields
 
 		wp_localize_script('bring-customs-fields', 'bringCustomsFields', [
 			'overrideName' => Override::META,
-			'codeName'     => HsCode::META,
 			'netName'      => NetWeight::META,
-			'minDigits'    => HsCode::MIN_DIGITS,
-			'maxDigits'    => HsCode::MAX_DIGITS,
-			'codeRule'     => CustomsField::hs_code_rule(),
 			'tooHeavy'     => __('The net weight is above the weight of the product.', 'bring-fraktguiden-for-woocommerce'),
 		]);
 	}

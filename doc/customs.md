@@ -102,6 +102,34 @@ to 10. A code with dots therefore does not fit.
 This plugin stores and sends the digits only. It drops a code that holds fewer
 than 6 or more than 10 digits, because such a code names no goods.
 
+## Where the list of HS codes comes from
+
+A shop does not type an HS code. It picks one from a list, and the list holds
+the Norwegian customs tariff.
+
+Tolletaten publishes the tariff as open data, under Creative Commons
+Attribution 4.0. The file is `tolltariffstruktur.json` on data.toll.no. It holds
+the whole tariff as a tree of sections, chapters, positions and goods.
+
+The plugin fetches that file, keeps one row per six digit code, and holds the
+result in a transient for a month. That gives 4587 codes and about 550 kB. The
+browser reads the rows from the REST route `bring-fraktguiden/v1/hs-codes`, and
+keeps them in localStorage, so a shop downloads the tariff once.
+
+The tariff names goods down to eight digits. The first six are the
+international HS code, and customs takes those six from an exporter. So the
+list stops at six.
+
+data.toll.no sends no CORS header, so the browser cannot read the file itself.
+WordPress fetches it.
+
+The tariff changes on 1 January each year. The month long transient picks the
+change up without a plugin release.
+
+Bring runs its own HS code search at `/checkout/customs/hscode`. It is not
+documented, and it needs the onboarding token of Posten Bring Checkout, which
+this plugin does not hold.
+
 ## The two weights
 
 The gross weight is the goods with their packing. The net weight is the goods
@@ -124,3 +152,4 @@ shop may set another weight unit.
 - [Bring Developer, Customs API](https://developer.bring.com/api/customs/)
 - [Bring Developer, API service portfolio](https://developer.bring.com/api/services/)
 - [Tolltariffen, look up an HS code](http://tolltariffen.toll.no/)
+- [Tolletaten open data, the tariff structure](https://data.toll.no/dataset/tolltariffstruktur)

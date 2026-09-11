@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Modal — the shell of a dialog, with a title row and a close button
+   ========================================================================== */
+
+.bfg-modal {
+    width: min(40rem, calc(100vw - 2rem));
+    max-height: min(36rem, calc(100vh - 4rem));
+    padding: 1rem;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-card);
+    background: var(--bfg-bg-card);
+    color: var(--bfg-text-main);
+    box-shadow: var(--bfg-shadow);
+}
+
+.bfg-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.bfg-modal__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.bfg-modal__title {
+    margin: 0;
+    font-size: var(--bfg-text-level-2);
+}
+
+.bfg-modal__close {
+    padding: 4px 10px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    background: var(--bfg-bg-card);
+    color: inherit;
+    cursor: pointer;
+}

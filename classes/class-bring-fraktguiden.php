@@ -23,6 +23,7 @@ use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Customs\CustomsFields;
+use BringFraktguiden\Customs\HsCodeIndexRoute;
 use BringFraktguidenPro\BringFraktguidenPro;
 
 /**
@@ -45,6 +46,7 @@ class Bring_Fraktguiden {
 		SettingsMigration::init();
 		SettingsPage::init();
 		CustomsFields::init();
+		HsCodeIndexRoute::init();
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname( __DIR__ );

@@ -2,11 +2,10 @@
  * The customs fields on the product edit screen.
  *
  * The script does two things. It shows and hides the customs fields of a
- * variation behind the override checkbox. It warns when a value cannot go to
- * customs.
+ * variation behind the override checkbox. It warns when the net weight is
+ * above the weight of the product.
  *
- * A warning waits for the field to lose focus, and then for a short delay. A
- * warning that appears after the first digit of an HS code is only noise.
+ * A warning waits for the field to lose focus, and then for a short delay.
  *
  * PHP passes the field names and the texts in window.bringCustomsFields.
  * See BringFraktguiden\Customs\CustomsFields.
@@ -20,10 +19,6 @@
 
 	var NOTE = 'bring-customs-warning';
 	var TIMER = 'bringCustomsTimer';
-
-	// wp_localize_script sends every value as a string.
-	var MIN_DIGITS = Number(config.minDigits);
-	var MAX_DIGITS = Number(config.maxDigits);
 
 	/**
 	 * The wait after a field loses focus, in milliseconds.
@@ -66,13 +61,6 @@
 		// A variation with the override off never sends its value.
 		if (field.closest('.bring-customs-override.hidden')) {
 			return '';
-		}
-
-		if (named(field, config.codeName)) {
-			var digits = field.value.length;
-			var wrong = digits < MIN_DIGITS || digits > MAX_DIGITS;
-
-			return digits > 0 && wrong ? config.codeRule : '';
 		}
 
 		var gross = grossField(field);
@@ -153,9 +141,7 @@
 	 * Return every customs field the script checks.
 	 */
 	function fields() {
-		return document.querySelectorAll(
-			'[name^="' + config.codeName + '"], [name^="' + config.netName + '"]'
-		);
+		return document.querySelectorAll('[name^="' + config.netName + '"]');
 	}
 
 	/**
@@ -170,7 +156,7 @@
 	}
 
 	function isCustomsField(field) {
-		return named(field, config.codeName) || named(field, config.netName);
+		return named(field, config.netName);
 	}
 
 	document.addEventListener('input', function (event) {
@@ -178,15 +164,6 @@
 
 		if (!field.name) {
 			return;
-		}
-
-		if (named(field, config.codeName)) {
-			// Tolltariffen prints a code with dots. Customs takes the digits.
-			var digits = field.value.replace(/[^0-9]/g, '');
-
-			if (digits !== field.value) {
-				field.value = digits;
-			}
 		}
 
 		if (isCustomsField(field)) {

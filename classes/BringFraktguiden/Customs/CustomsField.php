@@ -26,6 +26,7 @@ class CustomsField
 	 * @param string   $data_type   The WooCommerce input type, or an empty string.
 	 * @param array    $choices     The options of a select, keyed by stored value.
 	 *                              An empty array makes the field a text input.
+	 * @param bool     $picker      Show a button that opens the HS code picker.
 	 */
 	private function __construct(
 		public readonly string $meta,
@@ -36,7 +37,8 @@ class CustomsField
 		private readonly \Closure $placeholder,
 		private readonly array $attributes = [],
 		private readonly string $data_type = '',
-		private readonly array $choices = []
+		private readonly array $choices = [],
+		private readonly bool $picker = false
 	) {
 	}
 
@@ -56,12 +58,7 @@ class CustomsField
 				clean: HsCode::strip(...),
 				placeholder: fn(WC_Product $product, ?WC_Product $parent): string
 					=> $parent ? HsCode::for_product($parent) : '',
-				attributes: [
-					'list'      => HsCodeDatalist::ID,
-					'inputmode' => 'numeric',
-					'pattern'   => '[0-9]{' . HsCode::MIN_DIGITS . ',' . HsCode::MAX_DIGITS . '}',
-					'title'     => self::hs_code_rule(),
-				]
+				picker: true
 			),
 			new self(
 				meta: GoodsDescription::META,
@@ -95,19 +92,6 @@ class CustomsField
 	}
 
 	/**
-	 * Return the sentence that states the length of an HS code.
-	 */
-	public static function hs_code_rule(): string
-	{
-		return sprintf(
-			/* translators: 1: the shortest code length, 2: the longest code length. */
-			__('An HS code holds %1$d to %2$d digits, without dots.', 'bring-fraktguiden-for-woocommerce'),
-			HsCode::MIN_DIGITS,
-			HsCode::MAX_DIGITS
-		);
-	}
-
-	/**
 	 * Return the net weight label, with the weight unit of the shop.
 	 */
 	private static function net_weight_label(): string
@@ -126,6 +110,7 @@ class CustomsField
 	{
 		$args = $this->args() + [
 			'id'          => $this->meta,
+			'value'       => $product ? (string) $product->get_meta($this->meta) : '',
 			'placeholder' => $product ? ($this->placeholder)($product, null) : '',
 			'description' => $this->description,
 			'desc_tip'    => true,
@@ -167,6 +152,12 @@ class CustomsField
 	 */
 	private function render(array $args, string $placeholder): void
 	{
+		if ($this->picker) {
+			$this->render_button($args);
+
+			return;
+		}
+
 		if (!$this->choices) {
 			woocommerce_wp_text_input($args);
 
@@ -178,6 +169,26 @@ class CustomsField
 		$args['options'] = ['' => $empty] + $this->choices;
 
 		woocommerce_wp_select($args);
+	}
+
+	/**
+	 * Print the button that opens the HS code picker.
+	 *
+	 * WooCommerce has no field of this shape, so the row is written out here.
+	 * It carries the same wrapper class as a WooCommerce field, because the
+	 * variation screen hides a row by that class.
+	 *
+	 * @param array $args The WooCommerce field arguments.
+	 */
+	private function render_button(array $args): void
+	{
+		printf(
+			'<p class="form-field %s"><label>%s</label>%s<span class="description">%s</span></p>',
+			esc_attr($args['wrapper_class'] ?? 'form-field-wide'),
+			esc_html($this->label),
+			HsCodeButton::html($args['name'] ?? $args['id'], (string) ($args['value'] ?? '')),
+			esc_html($this->description)
+		);
 	}
 
 	/**

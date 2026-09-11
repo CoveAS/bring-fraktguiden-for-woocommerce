@@ -20,11 +20,6 @@ class HsCode
 	public const META = '_bring_hs_code';
 
 	/**
-	 * The transient that holds the codes a shop already uses.
-	 */
-	private const USED_TRANSIENT = 'bring_fraktguiden_used_hs_codes';
-
-	/**
 	 * The shortest code customs accepts.
 	 */
 	public const MIN_DIGITS = 6;
@@ -171,43 +166,5 @@ class HsCode
 		$term = get_term_by('slug', $slug, $taxonomy);
 
 		return $term && !is_wp_error($term) ? $term->name : '';
-	}
-
-	/**
-	 * Return every code the shop already uses, so a field can suggest them.
-	 *
-	 * @return string[]
-	 */
-	public static function used(): array
-	{
-		$cached = get_transient(self::USED_TRANSIENT);
-
-		if (is_array($cached)) {
-			return $cached;
-		}
-
-		global $wpdb;
-
-		$codes = $wpdb->get_col(
-			$wpdb->prepare(
-				"SELECT DISTINCT meta_value FROM {$wpdb->postmeta}
-				 WHERE meta_key = %s AND meta_value <> '' ORDER BY meta_value",
-				self::META
-			)
-		);
-
-		$codes = array_values(array_unique(array_filter(array_map([self::class, 'digits'], $codes))));
-
-		set_transient(self::USED_TRANSIENT, $codes, DAY_IN_SECONDS);
-
-		return $codes;
-	}
-
-	/**
-	 * Drop the list of used codes. A save calls this.
-	 */
-	public static function forget_used(): void
-	{
-		delete_transient(self::USED_TRANSIENT);
 	}
 }
