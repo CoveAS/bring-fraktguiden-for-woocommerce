@@ -109,6 +109,16 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     display: none;
 }
 
+.bfg-custom-select.is-open .bfg-custom-select__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.bfg-custom-select.is-open .bfg-custom-select__arrow {
+    transform: rotate(180deg);
+}
+
 .bfg-custom-select__option {
     display: flex;
     flex-direction: row;
