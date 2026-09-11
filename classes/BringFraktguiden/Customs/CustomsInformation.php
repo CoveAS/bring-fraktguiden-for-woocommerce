@@ -10,8 +10,9 @@ use WC_Order;
  * The object covers the whole order, because a WooCommerce order does not say
  * which goods travel on which shipping line. See the failed idea in CLAUDE.md.
  *
- * Only NVIT is built. An export also needs the exporter and the importer
- * parties, and no settings screen holds those yet. See doc/export.md.
+ * An NVIT booking carries the top level type. An export leaves it out, and
+ * carries the exporter and the importer parties instead. CustomsParties builds
+ * those. See doc/nvit.md and doc/export.md.
  */
 class CustomsInformation
 {
@@ -28,7 +29,9 @@ class CustomsInformation
 	 */
 	public static function for_order(WC_Order $order, string $product, ?NatureOfCargo $cargo = null): ?array
 	{
-		if (CustomsRoute::NVIT !== CustomsRoute::for_order($order, $product)) {
+		$route = CustomsRoute::for_order($order, $product);
+
+		if (!$route) {
 			return null;
 		}
 
@@ -39,10 +42,15 @@ class CustomsInformation
 		}
 
 		$information = [
-			'type'                => 'NVIT',
 			'customsDeclarations' => $declarations,
 			'natureOfCargo'       => ['type' => ($cargo ?? NatureOfCargo::from_request())->value],
 		];
+
+		// The type marks the data as transit data. An export needs a normal
+		// customs declaration, and the NVIT type does not work for it.
+		if (CustomsRoute::NVIT === $route) {
+			$information = ['type' => 'NVIT'] + $information;
+		}
 
 		// A shop that has not confirmed signs nothing. An absent field is not a
 		// refusal, so leave it out rather than send false.

@@ -9,6 +9,7 @@ namespace BringFraktguidenPro\Booking\Consignment_Request;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Customs\CustomsInformation;
+use BringFraktguiden\Customs\CustomsParties;
 use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
 use Exception;
 use WC_Order_Item_Shipping;
@@ -276,6 +277,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		if ( $customs_information ) {
 			$consignment['customsInformation'] = $customs_information;
 		}
+
+		$consignment['parties'] += CustomsParties::for_order( $this->adapter->order, $this->service_id );
 
 		if ( ! empty( $this->customer_specified_delivery_date_time ) ) {
 			$consignment['customerSpecifiedDeliveryDateTime'] = $this->customer_specified_delivery_date_time;

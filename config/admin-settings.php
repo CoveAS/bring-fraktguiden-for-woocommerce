@@ -431,6 +431,12 @@ return [
 				'description' => __('The goods description, the value and the HS code of every order line are correct and complete, and the goods are neither dangerous nor prohibited. Bring prints this confirmation as your signature on the customs declaration.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
+			'customs_exporter_number' => [
+				'title' => __('Exporter number', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'description' => __('Your VAT number or EORI number. Bring sends it with the customs declaration of a shipment that leaves Norway.', 'bring-fraktguiden-for-woocommerce'),
+				'default' => '',
+			],
 			'auto_set_status_after_booking_success' => [
 				'title' => __('Order status after booking', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',

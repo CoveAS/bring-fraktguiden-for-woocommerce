@@ -114,10 +114,15 @@ use BringFraktguiden\Fields\Fields;
 
 			<bfg-section>
 				<bfg-section.header title="Customs"
-					description="Bring needs a signed confirmation for a shipment that leaves Norway"></bfg-section.header>
+					description="What Bring needs for a shipment that leaves Norway"></bfg-section.header>
 
 				<bfg-section.section>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->customs_consent; ?></div>
+
+					<div class="bfg-field">
+						<?php echo $fields->customs_exporter_number->label(); ?>
+						<?php echo $fields->customs_exporter_number; ?>
+					</div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>

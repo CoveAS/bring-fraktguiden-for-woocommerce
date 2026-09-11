@@ -45,8 +45,10 @@ Each party needs a `name`, an `addressLine`, a `city`, a `postalCode` and a
 accepts the same data for the exporter as for the sender, and the same data for
 the importer as for the recipient, when they do not differ.
 
-The plugin builds only `sender` and `recipient` in `parties`. See
-[class-bring-booking-consignment-request.php:229-236](../pro/booking/consignment-request/class-bring-booking-consignment-request.php#L229-L236).
+`CustomsParties` builds the exporter and the importer. It reads the booking
+address of the shop for the exporter, and the shipping address of the order for
+the importer. Both carry an address only, because the contact, the reference and
+the additional address info belong to the sender party and the recipient party.
 
 ## An export request
 
@@ -112,6 +114,12 @@ For 0340 and 3639 from Norway, a shipment with IOSS to Belgium, Denmark,
 Finland, France, Portugal, Germany, Austria or Luxembourg can only be bought
 prepaid on posten.no.
 
+## The exporter number
+
+The setting holds a VAT number or an EORI number. The booking sends it as
+`parties.exporter.vatNumber`, because the party holds no other number field.
+Bring takes at most 30 characters.
+
 ## How the plugin marks a service
 
 A service that needs export customs data carries `'customs' => true` in
@@ -128,7 +136,9 @@ The warning never stops a booking. Bring holds the guard, and answers with the
 reason when it refuses. `ShopCheck` reads the shop settings, and
 `ShopProblem` names each one that is empty.
 
-The exporter number has no settings screen yet, so every export order reports it.
+The exporter number is the setting `customs_exporter_number`, on the Booking
+settings page. An empty number still books, because the warning never stops a
+booking.
 
 ## Where the plugin keeps consent and the cargo type
 
