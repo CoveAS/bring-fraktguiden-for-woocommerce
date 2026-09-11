@@ -133,28 +133,6 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 			<?php endforeach; ?>
 		</div>
 
-		<template data-bfg-package-template>
-			<div class="bfg-booking-packages__row" data-bfg-package>
-				<div class="bfg-input bfg-input--number">
-					<input type="number" step="0.01" min="0" data-package-field="weight_in_kg" value="0" aria-label="<?php esc_attr_e('Weight in kg', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<span class="bfg-suffix">kg</span>
-				</div>
-				<div class="bfg-input bfg-input--number">
-					<input type="number" step="1" min="0" data-package-field="length" value="0" aria-label="<?php esc_attr_e('Length in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<span class="bfg-suffix">cm</span>
-				</div>
-				<div class="bfg-input bfg-input--number">
-					<input type="number" step="1" min="0" data-package-field="width" value="0" aria-label="<?php esc_attr_e('Width in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<span class="bfg-suffix">cm</span>
-				</div>
-				<div class="bfg-input bfg-input--number">
-					<input type="number" step="1" min="0" data-package-field="height" value="0" aria-label="<?php esc_attr_e('Height in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<span class="bfg-suffix">cm</span>
-				</div>
-				<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm bfg-btn--icon-only bfg-booking-packages__remove" data-bfg-remove-package aria-label="<?php esc_attr_e('Remove package', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
-			</div>
-		</template>
-
 		<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm" data-bfg-add-package><t>Add a package</t></button>
 	</div>
 

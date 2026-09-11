@@ -136,6 +136,11 @@
     min-width: 0;
 }
 
+/* A booking needs one package, so a lone row offers no remove button. */
+.bfg-booking-packages__row:only-child .bfg-booking-packages__remove {
+    visibility: hidden;
+}
+
 /* The unit box draws the border, so the focus ring goes on the box. */
 .bfg-booking-box .bfg-input--number:focus-within {
     outline: 2px solid var(--bfg-primary-light);

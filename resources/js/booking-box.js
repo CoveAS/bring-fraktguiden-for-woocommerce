@@ -154,11 +154,20 @@ document.addEventListener('click', (event) => {
 	}
 
 	if (button.hasAttribute('data-bfg-add-package')) {
-		const template = box.querySelector('[data-bfg-package-template]');
-		const rows = box.querySelector('[data-bfg-packages]');
+		const rows = box.querySelectorAll('[data-bfg-package]');
+		const last = rows[rows.length - 1];
 
-		if (template && rows) {
-			rows.appendChild(template.content.cloneNode(true));
+		if (last) {
+			const row = last.cloneNode(true);
+			const sources = last.querySelectorAll('[data-package-field]');
+
+			// A clone carries the attribute value, so copy the typed value over it.
+			row.querySelectorAll('[data-package-field]').forEach((input, index) => {
+				input.value = sources[index].value;
+			});
+
+			last.after(row);
+			row.querySelector('[data-package-field]').focus();
 			saveLater(box);
 		}
 
