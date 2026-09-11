@@ -1,4 +1,10 @@
-@import "tailwindcss" prefix(bfgu);
+@layer theme, base, components, utilities;
+
+/* The Tailwind base layer, called preflight, is left out on purpose.
+   This stylesheet loads inside wp-admin, where preflight would reset the
+   WordPress markup around our own pages. */
+@import "tailwindcss/theme.css" layer(theme) prefix(bfgu);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(bfgu);
 
 /* Admin CSS — split into partials under admin/
    Load order matters: tokens first, then layout, then components. */
