@@ -10,6 +10,8 @@ class Step
 		public readonly string $action,
 		public readonly string $actionText,
 		public readonly bool $completed,
+		/** The id of a dialog the action button opens, instead of a link. */
+		public readonly ?string $dialog = null,
 	)
 	{
 	}

@@ -18,6 +18,7 @@ use Bring_Fraktguiden\Common\RateDescription;
 use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
+use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
@@ -45,6 +46,7 @@ class Bring_Fraktguiden {
 		}
 		SettingsMigration::init();
 		SettingsPage::init();
+		AddShippingMethod::init();
 		CustomsFields::init();
 		HsCodeIndexRoute::init();
 		BringFraktguidenPro::setup();

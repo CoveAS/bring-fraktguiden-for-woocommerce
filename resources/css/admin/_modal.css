@@ -38,3 +38,40 @@
     color: inherit;
     cursor: pointer;
 }
+
+.bfg-modal__body {
+    max-height: 24rem;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+
+.bfg-modal__foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--bfg-border);
+}
+
+/* One shipping zone in the picker of the setup page. */
+.bfg-zone-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid var(--bfg-border);
+    cursor: pointer;
+}
+
+.bfg-zone-row:last-child {
+    border-bottom: 0;
+}
+
+.bfg-zone-row__name {
+    flex: 1;
+}
+
+.bfg-zone-row__note {
+    color: var(--bfg-text-muted);
+    font-size: var(--bfg-text-level-6, 0.75rem);
+}

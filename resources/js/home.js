@@ -14,3 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.location.href = window.bfgHomeData.proPageUrl + '&celebrate=1';
 	}
 });
+
+/**
+ * A step whose button carries data-bfg-dialog opens that dialog.
+ */
+document.addEventListener('click', (event) => {
+	const open = event.target.closest('[data-bfg-dialog]');
+	if (open) {
+		document.getElementById(open.dataset.bfgDialog)?.showModal();
+		return;
+	}
+
+	event.target.closest('[data-bfg-dialog-close]')?.closest('dialog')?.close();
+});

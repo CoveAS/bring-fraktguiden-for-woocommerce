@@ -5,7 +5,6 @@ namespace BringFraktguiden\Admin;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsRepository;
-use WC_Shipping_Zones;
 
 class GetStartedSteps
 {
@@ -18,26 +17,13 @@ class GetStartedSteps
 			return $steps;
 		}
 
-		$zones = WC_Shipping_Zones::get_zones();
-
-		$added = false;
-		foreach ($zones as $zone) {
-			foreach ($zone['shipping_methods'] as $shipping_method) {
-				if (
-					$shipping_method instanceof \WC_Shipping_Method_Bring
-				) {
-					$added = true;
-					break;
-				}
-			}
-		}
-
 		$steps [] = new Step(
 			label: __('Add shipping method', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Add the Bring method to your shipping zone', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=wc-settings&tab=shipping'),
-			actionText: __('Configure shipping zone', 'bring-fraktguiden-for-woocommerce'),
-			completed: $added,
+			actionText: __('Add to shipping zones', 'bring-fraktguiden-for-woocommerce'),
+			completed: ShippingZones::any_added(),
+			dialog: 'bfg-add-shipping-method',
 		);
 
 		$steps [] = new Step(
@@ -109,6 +95,7 @@ class GetStartedSteps
 					action: $step->action,
 					actionText: $step->actionText,
 					completed: false,
+					dialog: $step->dialog,
 				);
 			} elseif (!$step->completed) {
 				$blocked = true;

@@ -9,6 +9,8 @@ use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Settings\SettingsRepository;
 use BringFraktguiden\Admin\GetStartedSteps;
+use BringFraktguiden\Admin\ShippingZones;
+use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Utility\Config;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
@@ -171,6 +173,8 @@ class SettingsPage
 			return;
 		}
 
+		$zones = ShippingZones::all();
+		$zonesAdded = isset($_GET[AddShippingMethod::ADDED]) ? (int) $_GET[AddShippingMethod::ADDED] : null;
 		$steps = (new GetStartedSteps)->build();
 		$stepCount = count($steps);
 		$stepsCompleted = array_reduce($steps, fn($carry, $step) => $carry + ($step->completed ? 1 : 0), 0);
