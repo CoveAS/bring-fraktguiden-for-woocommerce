@@ -79,9 +79,16 @@ position away in the middle of the typing.
 A `reload` does redraw, because a new service brings other extra services and
 other fields, which only the server knows.
 
-A failed save shows a line above the buttons and turns the Book button off. The
-next save that works clears both. A booking of an unsaved form is refused,
-because the shop worker cannot see what the order now holds.
+A status line sits in the button row and says where the draft stands: "Saving
+the draft", "Draft saved at 14:32", or the failure. New typing hides the line,
+because what it says is true of the last save only.
+
+A save that answers inside 300 ms shows no word at all, so the line does not
+blink on every pause in the typing.
+
+A failed save turns the Book button off. The next save that works turns it on
+again. A booking of an unsaved form is refused, because the shop worker cannot
+see what the order now holds.
 
 A booking waits for the save in flight. A booking clears the draft, and a save
 that lands after it would write a draft back onto a booked order.

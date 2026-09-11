@@ -13,7 +13,12 @@ import { initCustomSelects } from './custom-select.js';
 
 const SAVE_DELAY = 600;
 
+// A save faster than this shows no word at all, so the status line does not
+// blink on every pause in the typing.
+const SLOW_SAVE = 300;
+
 let saveTimer = null;
+let slowTimer = null;
 
 // The order screen holds one box, so one timer and one pending save are enough.
 let pendingSave = null;
@@ -111,29 +116,45 @@ async function send(box, action) {
  * stays as it is, and the caret and the scroll position stay with it.
  */
 function saveDraft(box) {
+	window.clearTimeout(slowTimer);
+	slowTimer = window.setTimeout(() => setStatus(box, 'saving'), SLOW_SAVE);
+
 	pendingSave = post(box, 'save').then(
-		() => setUnsaved(box, false),
-		() => setUnsaved(box, true)
+		() => endSave(box, 'saved'),
+		() => endSave(box, 'failed')
 	);
 
 	return pendingSave;
 }
 
+function endSave(box, state) {
+	window.clearTimeout(slowTimer);
+	setStatus(box, state);
+}
+
 /**
- * Show or hide the warning that the draft is not saved.
+ * Tell the shop worker where the draft stands.
  *
- * A booking of an unsaved form is refused, because the shop worker cannot see
- * what the order now holds.
+ * The state is 'saving', 'saved' or 'failed'. A booking of a failed draft is
+ * refused, because the shop worker cannot see what the order now holds.
  */
-function setUnsaved(box, failed) {
-	const line = box.querySelector('[data-bfg-unsaved]');
+function setStatus(box, state) {
+	const line = box.querySelector('[data-bfg-status]');
 	const book = box.querySelector('[data-bfg-book]');
+	const failed = state === 'failed';
 
 	if (line) {
-		line.hidden = !failed;
+		const when = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+		line.textContent = state === 'saved'
+			? line.dataset.saved.replace('%s', when)
+			: line.dataset[state];
+		line.classList.toggle('bfg-booking-form__status--failed', failed);
+		line.hidden = false;
 	}
 
-	if (!book) {
+	// A save in flight settles nothing, so the button waits for the answer.
+	if (!book || state === 'saving') {
 		return;
 	}
 
@@ -178,7 +199,15 @@ function replace(box, html) {
 
 /** Keep the draft, but wait until the shop worker stops typing. */
 function saveLater(box) {
+	const line = box.querySelector('[data-bfg-status]');
+
+	// What the line says is true of the last save, not of the new typing.
+	if (line) {
+		line.hidden = true;
+	}
+
 	window.clearTimeout(saveTimer);
+	window.clearTimeout(slowTimer);
 	saveTimer = window.setTimeout(() => saveDraft(box), SAVE_DELAY);
 }
 
