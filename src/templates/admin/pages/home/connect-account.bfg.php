@@ -19,7 +19,7 @@ $bfg_open = $bfg_failed || (!$step->completed && $isNext);
 $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 ?>
 
-<div class="bfg-step bfg-step--connect <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
+<div class="bfg-step bfg-step--form <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
 	<?php if ($step->completed): ?>
 		<div class="bfg-step__icon bfg-step__icon--completed">
 			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -32,7 +32,7 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 
 	<div class="bfg-step__content">
 		<?php echo esc_html($step->label); ?>
-		<p class="bfg-connect__line">
+		<p class="bfg-step-form__line">
 			<span class="bfg-connect__state">
 				<?php if ($step->completed): ?>
 					<?php printf(
@@ -43,7 +43,7 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 					<?php echo esc_html($step->description); ?>
 				<?php endif; ?>
 			</span>
-			<button type="button" class="bfg-connect__change" aria-controls="bfg-connect-panel"
+			<button type="button" class="bfg-step-form__toggle" aria-controls="bfg-connect-panel"
 				aria-expanded="<?php echo $bfg_open ? 'true' : 'false'; ?>">
 				<?php if ($step->completed): ?>
 					<t>Change</t>
@@ -64,20 +64,20 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 		</bfg-badge.in-progress>
 	<?php endif; ?>
 
-	<div class="bfg-connect__panel" id="bfg-connect-panel" <?php echo $bfg_open ? '' : 'hidden'; ?>>
+	<div class="bfg-step-form__panel" id="bfg-connect-panel" <?php echo $bfg_open ? '' : 'hidden'; ?>>
 		<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
 			<input type="hidden" name="action" value="<?php echo esc_attr(ConnectAccount::ACTION); ?>">
 			<?php wp_nonce_field(ConnectAccount::ACTION); ?>
 
-			<p class="bfg-connect__intro">
+			<p class="bfg-step-form__intro">
 				<t>Bring needs two things: the email you log in with, and an API key.</t>
 			</p>
 
-			<div class="bfg-connect__field">
-				<label class="bfg-connect__label" for="bfg-api-uid"><t>Bring login email</t></label>
-				<input class="bfg-connect__input" type="email" id="bfg-api-uid" name="mybring_api_uid" required
+			<div class="bfg-step-form__field">
+				<label class="bfg-step-form__label" for="bfg-api-uid"><t>Bring login email</t></label>
+				<input class="bfg-step-form__input" type="email" id="bfg-api-uid" name="mybring_api_uid" required
 					value="<?php echo esc_attr($bfg_uid); ?>">
-				<p class="bfg-connect__help">
+				<p class="bfg-step-form__help">
 					<t>Use the email you log in to Bring with, not your shop address.</t>
 					<a href="https://www.mybring.com/useradmin/account/profile" target="_blank" rel="noopener">
 						<t>Find it on your Bring profile</t>
@@ -85,11 +85,11 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 				</p>
 			</div>
 
-			<div class="bfg-connect__field">
-				<label class="bfg-connect__label" for="bfg-api-key"><t>API key</t></label>
-				<input class="bfg-connect__input" type="text" id="bfg-api-key" name="mybring_api_key" required
+			<div class="bfg-step-form__field">
+				<label class="bfg-step-form__label" for="bfg-api-key"><t>API key</t></label>
+				<input class="bfg-step-form__input" type="text" id="bfg-api-key" name="mybring_api_key" required
 					value="<?php echo esc_attr(Fraktguiden_Helper::get_option('mybring_api_key')); ?>">
-				<p class="bfg-connect__help">
+				<p class="bfg-step-form__help">
 					<a href="https://www.mybring.com/useradmin/account/settings/api" target="_blank" rel="noopener">
 						<t>Open your Bring API settings</t>
 					</a>

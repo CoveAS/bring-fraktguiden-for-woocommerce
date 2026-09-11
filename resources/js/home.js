@@ -52,7 +52,7 @@ function outside(element, event) {
  * The Change button of step 3 opens the panel that holds the Bring credentials.
  */
 document.addEventListener('click', (event) => {
-	const button = event.target.closest('.bfg-connect__change');
+	const button = event.target.closest('.bfg-step-form__toggle');
 	if (!button) return;
 
 	const panel = document.getElementById(button.getAttribute('aria-controls'));

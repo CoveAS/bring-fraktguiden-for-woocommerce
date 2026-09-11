@@ -1,0 +1,126 @@
+/* A step row of the setup page that holds a form inside the row. */
+
+/* The row keeps the icon, the text and the badge on one line. The panel wraps
+   onto a second line, so nothing on the first line moves when it opens. */
+.bfg-step--form {
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.bfg-step--form .bfg-step__content {
+	padding-right: 16px;
+}
+
+/* The badge of a step row floats at the right edge. Here it is a flex item, so
+   the growing panel cannot pull it down. */
+.bfg-step--form .bfg-badge {
+	position: static;
+	transform: none;
+	flex-shrink: 0;
+}
+
+.bfg-step-form__panel {
+	flex-basis: 100%;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--bfg-border);
+}
+
+/* The line under the step title, with the state and the toggle. */
+.bfg-step-form__line {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 2px 0 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-step-form__toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--bfg-primary);
+}
+
+.bfg-step-form__toggle::before {
+	content: "·";
+	margin-right: 2px;
+	color: var(--bfg-text-muted);
+}
+
+/* The chevron turns down when the panel opens. */
+.bfg-step-form__toggle::after {
+	content: "";
+	width: 5px;
+	height: 5px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(-45deg);
+	transition: transform 0.2s;
+}
+
+.bfg-step-form__toggle[aria-expanded="true"]::after {
+	transform: rotate(45deg);
+}
+
+.bfg-step-form__intro {
+	margin: 0 0 12px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-step-form__field {
+	max-width: 420px;
+	margin-bottom: 12px;
+}
+
+.bfg-step-form__label {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.bfg-step-form__input {
+	width: 100%;
+}
+
+.bfg-step-form__help {
+	margin: 4px 0 0;
+	font-size: var(--bfg-text-level-6);
+	font-weight: 400;
+	color: var(--bfg-text-muted);
+}
+
+/* A step row shows its buttons only while the step is the current one. This
+   row always shows its own. */
+.bfg-step--form .bfg-step-form__panel .bfg-btn {
+	display: inline-flex;
+	margin-top: 0;
+}
+
+/* A label that starts with a radio. The whole line is the hit area. */
+.bfg-step-form__choice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+/* What belongs to a choice sits under it, lined up with the label text. */
+.bfg-step-form__choice + * {
+	margin-left: 24px;
+}
