@@ -44,7 +44,7 @@
 
 /* The height stays the same while the shop worker types, so the modal does not
    move under the pointer. The list alone scrolls. */
-.bfg-hs-modal {
+.bfg-hs-modal[open] {
     display: flex;
     flex-direction: column;
     height: min(36rem, calc(100vh - 4rem));
