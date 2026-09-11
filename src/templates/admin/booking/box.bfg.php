@@ -11,6 +11,7 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
  * @var BookingRecord|null $last_failure
  * @var string          $error
  * @var array<int, array{name: string, image: string, code: string}> $hs_rows
+ * @var bool            $service_crosses
  * @var string          $rest_url
  * @var string          $nonce
  */
@@ -19,14 +20,18 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 <div class="bfg-booking-box" data-bfg-booking data-url="<?php echo esc_url($rest_url); ?>" data-nonce="<?php echo esc_attr($nonce); ?>">
 
 	<?php if ($error) : ?>
-		<div class="bfg-notice-banner bfg-booking-box__error" role="alert">
-			<p><?php echo esc_html($error); ?></p>
+		<div class="bfg-notice-banner bfg-booking-notice bfg-booking-notice--error" role="alert">
+			<?php require dirname(__DIR__) . '/parts/notice-icon.php'; ?>
+			<div class="bfg-booking-notice__body">
+				<p><?php echo esc_html($error); ?></p>
+			</div>
 		</div>
 	<?php endif; ?>
 
 	<?php if ($showing_form && $last_failure) : ?>
-		<div class="bfg-notice-banner bfg-booking-box__error" role="alert">
-			<div>
+		<div class="bfg-notice-banner bfg-booking-notice bfg-booking-notice--error" role="alert">
+			<?php require dirname(__DIR__) . '/parts/notice-icon.php'; ?>
+			<div class="bfg-booking-notice__body">
 				<p><strong><t>Bring refused the last booking</t></strong></p>
 				<ul>
 					<?php foreach ($last_failure->errors() as $message) : ?>
@@ -39,6 +44,16 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 
 	<?php if ($hs_rows) : ?>
 		<?php require dirname(__DIR__) . '/parts/customs-products.php'; ?>
+	<?php endif; ?>
+
+	<?php if (!$service_crosses) : ?>
+		<div class="bfg-notice-banner bfg-booking-notice">
+			<?php require dirname(__DIR__) . '/parts/notice-icon.php'; ?>
+			<div class="bfg-booking-notice__body">
+				<p><strong><t>Bring carries this service inside one country only.</t></strong></p>
+				<p><t>The order goes to another country, so the booking fails. Pick a service that crosses the border.</t></p>
+			</div>
+		</div>
 	<?php endif; ?>
 
 	<?php CustomsWarningView::render($warning); ?>

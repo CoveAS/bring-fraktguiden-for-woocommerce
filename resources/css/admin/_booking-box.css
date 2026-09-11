@@ -7,11 +7,6 @@
     color: var(--bfg-text-main);
 }
 
-.bfg-booking-box__error {
-    border-color: #b32d2e;
-    color: #b32d2e;
-}
-
 .bfg-booking-box__busy {
     position: absolute;
     inset: 0;

@@ -9,6 +9,7 @@ use BringFraktguiden\Customs\HsCodePicker;
 use BringFraktguiden\Customs\CustomsWarning;
 use BringFraktguiden\Customs\OrderHsCodes;
 use BringFraktguiden\Customs\NatureOfCargo;
+use BringFraktguiden\Services\CrossBorderRule;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
@@ -139,6 +140,12 @@ class BookingBox
 			: null;
 
 		$needs_cargo   = (bool) CustomsRoute::for_order($order, (string) $form->service);
+
+		$service_crosses = CrossBorderRule::allows(
+			(string) Fraktguiden_Helper::get_option('booking_address_country'),
+			$order->get_shipping_country(),
+			(string) $form->service
+		);
 
 		// The shop fills in a missing HS code on the order screen, so the table
 		// shows whenever the route asks customs for the codes.

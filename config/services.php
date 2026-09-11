@@ -9,9 +9,29 @@
  * A service may carry 'customs' => true. Bring requires customs data on that
  * service for a shipment that leaves Norway. See doc/export.md.
  *
+ * A service may carry 'cross_border' => false. Bring sells that service inside
+ * one country only, so a booking to another country fails. A service without
+ * the flag carries goods across a border. The source is the Bring service
+ * portfolio, https://developer.bring.com/api/services/, which holds a
+ * destination column per service.
+ *
  * A service may carry 'delivery_date' => true. Bring accepts a delivery date
  * the customer asked for on that service, and the booking form shows a field
  * for it.
+ *
+ * A service may carry 'recipient' => 'private' or 'recipient' => 'business'.
+ * Bring sells the service to that kind of recipient. The service wizard offers
+ * a service only when the service carries this key.
+ *
+ * A service may carry 'weight' => [ min, max ], in kilograms. The value is the
+ * weight of one parcel the carrier accepts on that service. A max of null means
+ * the carrier sets no upper weight. The source is the service page on
+ * https://www.bring.no/ .
+ *
+ * A service may carry 'rfid' => true or 'rfid' => false. A mailbox parcel with
+ * tracking needs an approved RFID printer and carries true. The same parcel
+ * without tracking carries false. A service without the key needs no RFID
+ * printer.
  *
  * @package Bring_Fraktguiden
  */
@@ -23,29 +43,38 @@ return [
 		'services' => [
 			'5800' => [
 				'ProductCode' => '5800',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke til hentested',
 				'description' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
 				'helptext'    => 'Sendingen er en Klimanøytral Servicepakke som blir levert til mottakers postkontor/ post i butikk. Mottaker kan velge å hente sendingen på et annet postkontor/post i butikk enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Transporttid er normalt 1-3 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => true,
 				'oldcode'     => 'SERVICEPAKKE',
 			],
 			'5600' => [
 				'ProductCode' => '5600',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke levert hjem',
 				'description' => 'Pakken kan spores og leveres hjem til deg mellom kl. 08-17 eller 17-21 avhengig av ditt postnummer. Sjåføren ringer 30-60 min. før ankomst ved levering på kveldstid.',
 				'helptext'    => 'Pakke levert hjem leveres til mottaker mellom kl. 08-17 eller 17-21 avhengig av mottakers postnummer. Mottaker varsles i god tid om forventet utleveringsdag via SMS eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme dag. Mottaker kan gi Posten fullmakt til at pakken settes igjen ved døren eller et angitt sted hvis mottaker ikke er hjemme. Sjåføren ringer mottaker 30-60 minutter før ankomst ved levering på kveldstid. Mottaker kan endre leveringsdag når pakken spores (gjelder ikke lokalpakker). Dersom sendingen ikke kan leveres, blir den sendt til mottakers lokale hentested (postkontor eller Post i Butikk). Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'delivery_date' => true,
 				'oldcode'     => 'PA_DOREN',
 			],
 			'5000' => [
 				'ProductCode' => '5000',
+				'recipient'   => 'business',
+				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke til bedrift',
 				'description' => 'Pakken kan spores og utleveres på døren mellom kl. 8-16.',
 				'helptext'    => 'Pakke til bedrift leveres på døren til bedrift mellom kl. 8 og 16. Dersom sendingen ikke kan leveres ved første forsøk, gjøres et nytt utleveringsforsøk neste virkedag. Dersom sendingen ikke kan leveres, blir den sendt til mottakers lokale hentested (postkontor eller Post i Butikk). Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'BPAKKE_DOR-DOR',
 			],
@@ -55,16 +84,20 @@ return [
 				'description' => 'Pakken kan spores og utleveres neste virkedag på de fleste strekninger. Utlevering skjer på døren innen kl. 09:00, 11:30 eller 16:00. Enkelte strekninger kan ta mer enn én dag.',
 				'helptext'    => 'Pakken sendes på de fleste strekninger slik at den utleveres neste virkedag. Utlevering skjer på døren innen kl. 09:00, 11:30 eller 16:00. Enkelte strekninger kan ta mer enn én dag. Dersom sendingen ikke kan leveres, blir den sendt til mottakers hentested (postkontor eller Post i Butikk). Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'EKSPRESS09',
 				'nvit'        => false,
 			],
 			'5100' => [
 				'ProductCode' => '5100',
+				'recipient'   => 'business',
+				'weight'      => [ 35, null ],
 				'productName' => 'Stykkgods til bedrift',
 				'description' => 'Godset kan spores og leveres på døren mellom kl. 08-16.',
 				'helptext'    => 'Godset leveres på døren til bedrift mellom kl. 08-16. Dersom sendingen ikke kan leveres ved første forsøk, kontaktes mottaker for å avtale ny utkjøring. Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'CARGO_GROUPAGE',
 			],
@@ -74,11 +107,15 @@ return [
 				'description' => 'Godset fraktes direkte fra avsender til mottaker og leveres på døren mellom kl. 08-16',
 				'helptext'    => 'Godset fraktes direkte fra avsender til mottaker og leveres på døren mellom kl. 08-16. Dersom sendingen ikke kan leveres ved første forsøk, kontaktes mottaker for å avtale ny utkjøring.',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'CARGO',
 			],
 			'5400' => [
 				'ProductCode'    => '5400',
+				'recipient'      => 'business',
+				'weight'         => [ 35, null ],
+				'cross_border'   => false,
 				'productName'    => 'Pall til bedrift',
 				'description'    => 'Godset kan spores og leveres på døren mellom kl. 08-16.',
 				'helpText'       => 'Godset leveres på døren til bedrift mellom kl. 08-16. Dersom sendingen ikke kan leveres ved første forsøk, kontaktes mottaker for å avtale ny utkjøring. Sendingen kan spores ved hjelp av sporingsnummeret.',
@@ -95,10 +132,14 @@ return [
 		'services' => [
 			'3570' => [
 				'ProductCode' => '3584',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 5 ],
+				'rfid'        => true,
 				'class'       => 'warning',
 				'productName' => 'Pakke i postkassen (sporbar)',
 				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 5 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 5 kg.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL,
@@ -108,9 +149,13 @@ return [
 			],
 			'3584' => [
 				'ProductCode' => '3570',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 5 ],
+				'rfid'        => false,
 				'productName' => 'Pakke i postkassen',
 				'helptext'    => 'Pakke i postkassen leveres i mottakers postkasse, og er egnet for små og lette sendinger (maksimalt 5 kg). Dersom postkassen er låst eller full, blir pakken sendt til mottakers lokale hentested (postkontontor eller Post i Butikk).',
 				'deprecated'  => false,
+				'cross_border' => false,
 				'pickuppoint' => false,
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 5 kg.', 'bring-fraktguiden-for-woocommerce' ),
@@ -164,6 +209,8 @@ return [
 			 */
 			'BUSINESS_PARCEL'     => [
 				'ProductCode' => '0330',
+				'recipient'   => 'business',
+				'weight'      => [ 0, 35 ],
 				'class'       => 'warning',
 				'productName' => 'Business Parcel',
 				'helptext'    => 'Business Parcel leveres på døren til bedrift mellom kl. 8 og 16. Sendingen kan spores ved hjelp av sporingsnummeret.',
@@ -179,6 +226,8 @@ return [
 			 */
 			'BUSINESS_PALLET'     => [
 				'ProductCode' => '0336',
+				'recipient'   => 'business',
+				'weight'      => [ 35, null ],
 				'class'       => 'warning',
 				'productName' => 'Business Pallet',
 				'helptext'    => 'Business Pallet leveres på døren til bedrift mellom kl. 8 og 16. Sendingen kan spores ved hjelp av sporingsnummeret.',
@@ -268,6 +317,8 @@ return [
 			 */
 			'PICKUP_PARCEL'              => [
 				'ProductCode' => '0340',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 20 ],
 				'productName' => 'PickUp Parcel',
 				'description' => 'Pakken kan spores og utleveres på ditt lokale hentested.',
 				'helptext'    => 'PickUp Parcel leveres til mottakers lokale hentested. Mottaker kan velge å hente sendingen på et annet hentested enn sitt lokale. Mottaker varsles om at sendingen er ankommet via SMS, e-post eller hentemelding i postkassen. Sendingen kan spores ved hjelp av sporingsnummeret.',
@@ -277,6 +328,8 @@ return [
 			],
 			'HOME_DELIVERY_PARCEL'       => [
 				'ProductCode' => '0349',
+				'recipient'   => 'private',
+				'weight'      => [ 0, 35 ],
 				'productName' => 'Home Delivery Parcel',
 				'helptext'    => 'Parcels will be delivered between 8 a.m. - 5 p.m. or 5 p.m. - 9 p.m., based on the geographical location in the country.',
 				'deprecated'  => false,

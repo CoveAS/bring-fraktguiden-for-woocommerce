@@ -6,6 +6,7 @@
     "clean": "rm -rf build",
     "compile-php": "php bin/compile-templates.php",
     "test-php-compiler": "php bin/test-compiler.php",
+    "test-js": "node --test 'tests/js/*.test.mjs'",
     "dev": "npm run clean && vite build --mode development && npm run compile-php",
     "build": "npm run clean && vite build && npm run compile-php",
     "watch": "npm run clean && vite build --watch",

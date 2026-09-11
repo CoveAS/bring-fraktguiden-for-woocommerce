@@ -117,6 +117,14 @@ The format is `IM` and 10 digits. It is only valid when `natureOfCargo.type` is
 `SALE_OF_GOODS`. It cannot be combined with a `reference` field on the sender
 party.
 
+The plugin never sends the field. The scheme covers a consignment worth 150 euro
+or less, and only a shop that files a monthly IOSS VAT return may use it. A
+number on a parcel above the limit is an invalid claim, so customs charges the
+buyer the VAT a second time.
+
+A shop above the limit needs nothing here. It charges no EU VAT at checkout, and
+the buyer pays the VAT and the duty on import.
+
 ## The EU handling fee from 3 July 2026
 
 The EU now charges 3 euros per item line on goods that a company outside the EU

@@ -20,6 +20,7 @@ class SettingsPage
 	{
 		add_action('admin_menu', [self::class, 'add_admin_menu']);
 		add_action('admin_init', [self::class, 'settings_init']);
+		add_action('admin_init', [ServiceWizard::class, 'maybe_save']);
 		add_action('admin_notices', [self::class, 'admin_notices']);
 
 		add_filter('admin_body_class', [__CLASS__, 'add_admin_body_classes']);
@@ -169,6 +170,8 @@ class SettingsPage
 			$country_code = WC()->countries?->get_base_country();
 			$country = WC()->countries?->countries[$country_code] ?? null;
 			$settings_url = Fraktguiden_Helper::get_settings_url();
+			$services = ServiceWizard::services();
+			$active_services = ServiceWizard::active();
 			require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/service-wizard.php';
 			return;
 		}
@@ -307,6 +310,15 @@ class SettingsPage
 
 	public static function admin_notices(): void
 	{
+		if (($_GET['bfg-wizard'] ?? '') === 'saved') {
+			add_settings_error(
+				'bring_fraktguiden_messages',
+				'bfg-wizard-saved',
+				__('The guide set the shipping services this shop offers.', 'bring-fraktguiden-for-woocommerce'),
+				'success'
+			);
+		}
+
 		settings_errors('bring_fraktguiden_messages');
 	}
 
@@ -450,6 +462,23 @@ class SettingsPage
 			wp_localize_script('bring-home-js', 'bfgHomeData', [
 				'proPageUrl' => admin_url('admin.php?page=bring_fraktguiden_pro'),
 			]);
+
+			if (($_GET['sub-page'] ?? '') === 'service-wizard') {
+				wp_enqueue_script(
+					'bfg-service-wizard',
+					plugins_url('bring-fraktguiden-for-woocommerce/build/js/service-wizard.js'),
+					[],
+					Bring_Fraktguiden::VERSION,
+					true
+				);
+				// wp_localize_script turns every scalar into a string, and the
+				// wizard reads booleans and null, so the data goes out as JSON.
+				wp_add_inline_script(
+					'bfg-service-wizard',
+					'window.bfgServiceWizard = ' . wp_json_encode(['services' => ServiceWizard::services()]) . ';',
+					'before'
+				);
+			}
 		}
 
 		if ($hook === 'bring-fraktguiden_page_bring_fraktguiden_pro') {

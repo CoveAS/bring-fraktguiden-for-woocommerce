@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/home.js',
         'resources/js/hs-code-picker.js',
         'resources/js/pro.js',
+        'resources/js/service-wizard.js',
       ],
       output: {
         entryFileNames: 'js/[name].js',
