@@ -146,7 +146,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     border-radius: calc(var(--bfg-radius-input) - 1px);
 }
 
-.bfg-custom-select__option:hover {
+.bfg-custom-select__option.is-active {
     background: #F7F8FA;
 }
 
@@ -154,7 +154,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     background: #F0F7FF;
 }
 
-.bfg-custom-select__option.is-selected:hover {
+.bfg-custom-select__option.is-selected.is-active {
     background: #E8F2FF;
 }
 
