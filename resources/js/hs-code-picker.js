@@ -247,7 +247,9 @@ function build() {
 	`;
 
 	dialog.querySelector('.bfg-modal__title').textContent = text.title || '';
-	dialog.querySelector('.bfg-modal__close').textContent = text.close || '';
+	// The button is a small square, so it shows a cross and says its name to a
+	// screen reader.
+	dialog.querySelector('.bfg-modal__close').textContent = '\u00d7';
 	dialog.querySelector('.bfg-modal__close').setAttribute('aria-label', text.close || '');
 	dialog.querySelector('.bfg-hs-modal__search').placeholder = text.search || '';
 
