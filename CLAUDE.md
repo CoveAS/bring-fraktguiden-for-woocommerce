@@ -191,6 +191,100 @@ php bin/list-components.php
 | `npm run watch` | Watch mode for CSS/JS (PHP still needs manual compile) |
 | `npm run test-php-compiler` | Run compiler tests |
 
+## Translations
+
+The catalogs live in `languages/`. The POT file holds the source strings. The
+`.po` file holds one language. The `.mo` file is the compiled form that
+WordPress reads.
+
+The text domain is `bring-fraktguiden-for-woocommerce`.
+
+### Compile the templates first
+
+Run `npm run compile-php` before you scan for strings.
+
+A `<t>` tag in a `.bfg.php` file becomes an `esc_html_e()` call only in
+`build/`. A scan of `src/` alone loses most admin strings.
+
+`build/` is in `.gitignore`, so the line references in the POT file point at
+paths that a fresh checkout does not hold. That is expected. Only the `msgid`
+matters to a translator.
+
+### Update the catalogs
+
+Run the four commands in order.
+
+```
+npm run compile-php
+wp i18n make-pot . languages/bring-fraktguiden-for-woocommerce.pot \
+  --slug=bring-fraktguiden-for-woocommerce \
+  --exclude=node_modules,vendor,tests,bin,src/Compiler
+msgmerge --no-fuzzy-matching --update --backup=none \
+  languages/bring-fraktguiden-for-woocommerce-nb_NO.po \
+  languages/bring-fraktguiden-for-woocommerce.pot
+msgfmt -o languages/bring-fraktguiden-for-woocommerce-nb_NO.mo \
+  languages/bring-fraktguiden-for-woocommerce-nb_NO.po
+```
+
+Use `--no-fuzzy-matching`. `msgmerge` otherwise guesses a translation from a
+similar string and marks the entry fuzzy. WordPress skips a fuzzy entry and
+shows the English text.
+
+Run `msgfmt` after every edit of the `.po` file. WordPress reads the `.mo`
+file, never the `.po` file.
+
+### The bundled file does not always win
+
+WordPress looks for a translation in `wp-content/languages/plugins/` first. It
+falls back to the plugin `languages/` folder only when that file is absent.
+
+WordPress downloads the first file from translate.wordpress.org on its own, for
+every plugin in the wordpress.org directory. A download therefore hides the
+bundled catalog, and an edit to `languages/` changes nothing on that site.
+
+Check `wp-content/languages/plugins/bring-fraktguiden-for-woocommerce-*` when a
+new translation does not appear on a site. Delete that file to test the bundled
+one. WordPress downloads it again on the next update check.
+
+Since WordPress 6.5 a downloaded translation can arrive as a `.l10n.php` file.
+WordPress loads it in place of the `.mo` file with the same name.
+
+### What translate.wordpress.org needs
+
+A string appears on translate.wordpress.org only after a release ships as the
+stable tag. A string added on a branch stays invisible there.
+
+WordPress builds a language pack once 90 percent of the strings of the stable
+release are translated and approved for that language. Below that threshold no
+pack exists, and every site falls back to the bundled catalog.
+
+A pack that already exists rebuilds after any change, even below 90 percent.
+
+To send the Norwegian work upstream, import
+`languages/bring-fraktguiden-for-woocommerce-nb_NO.po` on the plugin page at
+translate.wordpress.org. The bundled file then serves only sites that have no
+pack yet.
+
+### When to load the text domain
+
+WordPress loads the text domain of a wordpress.org plugin on its own. Since 4.6
+it reads `wp-content/languages/plugins/`. Since 6.7 it loads just in time, at
+the first translation call.
+
+A language pack needs no `load_plugin_textdomain()` call, because it sits in
+that folder.
+
+The bundled catalog in the plugin `languages/` folder still needs the call.
+The call registers the folder, and core reaches a bundled file only through
+that registration. Keep the call.
+
+Load a translation at the `init` action or later. WordPress 6.7 prints a
+`_doing_it_wrong` notice when a translation call runs earlier.
+
+`Bring_Fraktguiden::loaded()` runs on `plugins_loaded` and holds the setup.
+`Bring_Fraktguiden::init()` runs on the `init` action and holds only the
+`load_plugin_textdomain()` call. Keep the two apart.
+
 ## Database
 
 Run `mysql` with no parameters. The file `~/.my.cnf` holds the user, the socket
