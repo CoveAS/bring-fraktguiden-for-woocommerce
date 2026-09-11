@@ -106,7 +106,7 @@ class ServiceWizard
 	}
 
 	/**
-	 * Saves the services the user chose, then goes to the settings page.
+	 * Saves the services the user chose, then goes back to the home page.
 	 *
 	 * The wizard replaces the service list. It does not add to it.
 	 */
@@ -128,7 +128,7 @@ class ServiceWizard
 
 		Fraktguiden_Helper::update_option('services', $codes);
 
-		wp_safe_redirect(admin_url('admin.php?page=bring_fraktguiden_settings&bfg-wizard=saved'));
+		wp_safe_redirect(admin_url('admin.php?page=bring_fraktguiden_home&bfg-wizard=saved'));
 		exit;
 	}
 }
