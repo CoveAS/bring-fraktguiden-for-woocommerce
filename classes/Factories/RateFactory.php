@@ -4,9 +4,9 @@ namespace Bring_Fraktguiden\Factories;
 
 use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Calculators\PriceCalculator;
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
+use BringFraktguiden\Settings\Settings;
 use Exception;
 
 class RateFactory {
@@ -53,7 +53,7 @@ class RateFactory {
 		                 ?? $service_details['price']['netPrice']['priceWithoutAdditionalServices']
 		                    ?? null;
 		// Net price is only provided when a customer number is used in the API request. Fallback to list price.
-		if ( 'list' === Fraktguiden_Helper::get_option( 'price_to_use', 'net' ) || empty( $service_price ) ) {
+		if ( 'list' === Settings::instance()->price_to_use->value || empty( $service_price ) ) {
 			$service_price = $service_details['price']['listPrice']['priceWithAdditionalServices']
 			                 ?? $service_details['price']['listPrice']['priceWithoutAdditionalServices']
 			                    ?? $service_price;
