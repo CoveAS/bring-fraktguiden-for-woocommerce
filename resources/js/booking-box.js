@@ -265,12 +265,18 @@ function syncHsStatus(box) {
 	}
 }
 
-/** Tell the toggle button what it does next. */
+/** Tell the toggle button what it does next, and show the bulk code field. */
 function syncToggle(box) {
 	const button = box.querySelector('[data-bfg-hs-toggle]');
+	const group = box.querySelector('[data-bfg-hs-bulk-group]');
 
 	if (button) {
 		button.textContent = allMarked(box) ? button.dataset.deselect : button.dataset.select;
+	}
+
+	// The field writes into the marked rows, so it waits for the first mark.
+	if (group) {
+		group.hidden = !box.querySelector('[data-bfg-hs-mark]:checked');
 	}
 }
 

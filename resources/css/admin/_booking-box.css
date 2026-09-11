@@ -308,6 +308,12 @@
     padding-top: 0.75rem;
 }
 
+.bfg-customs-products__bulk-group:not([hidden]) {
+    display: flex;
+    flex: 1;
+    gap: 0.5rem;
+}
+
 .bfg-customs-products__bulk {
     flex: 1;
     min-width: 8rem;

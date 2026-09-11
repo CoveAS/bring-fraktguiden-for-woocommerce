@@ -42,6 +42,7 @@ $hs_missing = count(array_filter($hs_rows, static fn (array $row): bool => '' ==
 			data-select="<?php esc_attr_e('Select all', 'bring-fraktguiden-for-woocommerce'); ?>"
 			data-deselect="<?php esc_attr_e('Deselect all', 'bring-fraktguiden-for-woocommerce'); ?>"
 		><t>Select all</t></button>
+		<span class="bfg-customs-products__bulk-group" data-bfg-hs-bulk-group hidden>
 		<input
 			type="text"
 			class="bfg-customs-products__bulk"
@@ -52,6 +53,7 @@ $hs_missing = count(array_filter($hs_rows, static fn (array $row): bool => '' ==
 			aria-label="<?php esc_attr_e('Code for the marked products', 'bring-fraktguiden-for-woocommerce'); ?>"
 		>
 		<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm" data-bfg-hs-set><t>Set the code</t></button>
+		</span>
 	</div>
 
 	<?php foreach ($hs_rows as $id => $row) : ?>
