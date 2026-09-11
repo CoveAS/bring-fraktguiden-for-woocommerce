@@ -2,6 +2,14 @@
    Modal — the shell of a dialog, with a title row and a close button
    ========================================================================== */
 
+/* An open dialog is a column, so the body takes the room left over and is the
+   only part that scrolls. The rule needs [open], because a plain display value
+   would show a closed dialog. */
+.bfg-modal[open] {
+    display: flex;
+    flex-direction: column;
+}
+
 .bfg-modal {
     margin: auto;
     width: min(40rem, calc(100vw - 2rem));
@@ -49,7 +57,8 @@
 }
 
 .bfg-modal__body {
-    max-height: 24rem;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     padding: 0.5rem 0;
 }
