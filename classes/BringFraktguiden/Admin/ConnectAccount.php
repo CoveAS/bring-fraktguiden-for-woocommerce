@@ -7,8 +7,9 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 /**
  * The form of the setup page that connects the shop to a Bring account.
  *
- * Bring has no endpoint that only checks credentials. Every request carries
- * them. So the test asks the shipping guide for one price and reads the answer.
+ * The test asks Mybring for the customer list of the account. That endpoint
+ * needs the two credential headers and nothing else, so a shop with no address
+ * and no services can still connect.
  */
 class ConnectAccount
 {
@@ -20,7 +21,7 @@ class ConnectAccount
 	/** The option that holds the result of the last test. */
 	public const OPTION = 'mybring_authentication';
 
-	private const URL = 'https://api.bring.com/shippingguide/v2/products';
+	private const URL = 'https://api.bring.com/booking/api/customers';
 
 	public static function init(): void
 	{
@@ -44,7 +45,7 @@ class ConnectAccount
 		Fraktguiden_Helper::update_option('mybring_api_uid', $uid);
 		Fraktguiden_Helper::update_option('mybring_api_key', $key);
 
-		update_option(self::OPTION, self::test($uid, $key));
+		update_option(self::OPTION, self::test($uid, $key) + ['credentials' => self::fingerprint($uid, $key)]);
 
 		wp_safe_redirect(add_query_arg(
 			self::RESULT,
@@ -54,10 +55,33 @@ class ConnectAccount
 		exit;
 	}
 
-	/** Has the shop connected to Bring? */
+	/**
+	 * Has the shop connected to Bring?
+	 *
+	 * The stored result belongs to the credentials it was made with. A shop
+	 * owner who changes either field elsewhere is not connected any more.
+	 */
 	public static function connected(): bool
 	{
-		return (bool) (get_option(self::OPTION)['authenticated'] ?? false);
+		$result = (array) get_option(self::OPTION);
+		$uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
+		$key = (string) Fraktguiden_Helper::get_option('mybring_api_key');
+
+		if (! $uid || ! $key) {
+			return false;
+		}
+
+		if (($result['credentials'] ?? '') !== self::fingerprint($uid, $key)) {
+			return false;
+		}
+
+		return (bool) ($result['authenticated'] ?? false);
+	}
+
+	/** Names the credential pair a stored result belongs to. */
+	private static function fingerprint(string $uid, string $key): string
+	{
+		return md5($uid . '|' . $key);
 	}
 
 	/** The message of the last test. */
@@ -67,7 +91,7 @@ class ConnectAccount
 	}
 
 	/**
-	 * Ask Bring for one price with these credentials.
+	 * Ask Mybring for the customer list with these credentials.
 	 *
 	 * @return array{authenticated: bool, message: string}
 	 */
@@ -80,34 +104,14 @@ class ConnectAccount
 			];
 		}
 
-		$country = ServiceWizard::sender_country();
-		$zip = (string) Fraktguiden_Helper::get_option('from_zip');
-
-		$response = wp_remote_post(self::URL, [
+		$response = wp_remote_get(self::URL, [
 			'timeout' => 20,
 			'headers' => [
-				'Content-Type' => 'application/json',
 				'Accept' => 'application/json',
 				'X-MyBring-API-Uid' => $uid,
 				'X-MyBring-API-Key' => $key,
 				'X-Bring-Client-URL' => Fraktguiden_Helper::get_client_url(),
 			],
-			'body' => wp_json_encode([
-				'withPrice' => true,
-				'consignments' => [
-					[
-						'fromCountryCode' => $country,
-						'fromPostalCode' => $zip,
-						'toCountryCode' => $country,
-						'toPostalCode' => $zip,
-						'packages' => [['grossWeight' => 1000]],
-						// ponytail: one product is enough to prove the
-						// credentials. Bring refuses the whole request when they
-						// are wrong, whatever the product.
-						'products' => [['id' => 'SERVICEPAKKE']],
-					],
-				],
-			]),
 		]);
 
 		if (is_wp_error($response)) {
@@ -143,7 +147,11 @@ class ConnectAccount
 
 		return [
 			'authenticated' => true,
-			'message' => __('Bring accepted your credentials.', 'bring-fraktguiden-for-woocommerce'),
+			'message' => sprintf(
+				/* translators: %s: the Bring login email of the shop. */
+				__('Your shop is connected to Bring as %s.', 'bring-fraktguiden-for-woocommerce'),
+				$uid
+			),
 		];
 	}
 }
