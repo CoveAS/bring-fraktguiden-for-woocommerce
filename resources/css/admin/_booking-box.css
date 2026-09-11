@@ -244,12 +244,32 @@
     font-size: 0.875rem;
 }
 
-.bfg-customs-products__title,
-.bfg-customs-products__rule {
-    margin: 0 0 0.25rem 0 !important;
+.bfg-customs-products__summary {
+    cursor: pointer;
+}
+
+/* The icon of the summary tells whether a code is still missing. */
+.bfg-customs-products__icon {
+    vertical-align: text-bottom;
+    color: #9A3412;
+}
+
+.bfg-customs-products__icon--ok,
+.bfg-customs-products--ok .bfg-customs-products__icon--warn {
+    display: none;
+}
+
+.bfg-customs-products--ok .bfg-customs-products__icon--ok {
+    display: inline;
+    color: #166534;
+}
+
+.bfg-customs-products__count {
+    color: var(--bfg-text-secondary);
 }
 
 .bfg-customs-products__rule {
+    margin: 0.5rem 0 0 0 !important;
     color: var(--bfg-text-secondary);
 }
 

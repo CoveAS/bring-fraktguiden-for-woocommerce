@@ -244,6 +244,27 @@ function markRow(box, mark, extend) {
 	syncToggle(box);
 }
 
+/** Show whether every product now has an HS code. */
+function syncHsStatus(box) {
+	const panel = box.querySelector('[data-bfg-hs-panel]');
+
+	if (!panel) {
+		return;
+	}
+
+	const missing = [...box.querySelectorAll('[data-hs-product]')]
+		.filter((field) => '' === field.value.trim()).length;
+	const count = panel.querySelector('[data-bfg-hs-count]');
+
+	panel.classList.toggle('bfg-customs-products--ok', 0 === missing);
+
+	if (count) {
+		count.textContent = missing
+			? count.dataset.missing.replace('%d', missing)
+			: count.dataset.done;
+	}
+}
+
 /** Tell the toggle button what it does next. */
 function syncToggle(box) {
 	const button = box.querySelector('[data-bfg-hs-toggle]');
@@ -275,6 +296,7 @@ function setMarkedCodes(box) {
 	});
 
 	if (written) {
+		syncHsStatus(box);
 		saveLater(box);
 	}
 }
@@ -283,6 +305,10 @@ document.addEventListener('input', (event) => {
 	const box = boxOf(event.target);
 
 	if (box && event.target.matches('[data-field], [data-package-field], [data-hs-product]')) {
+		if (event.target.matches('[data-hs-product]')) {
+			syncHsStatus(box);
+		}
+
 		saveLater(box);
 	}
 });
