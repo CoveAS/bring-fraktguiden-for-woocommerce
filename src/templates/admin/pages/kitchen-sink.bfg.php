@@ -9,7 +9,7 @@
  */
 ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__kitchen-sink">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__kitchen-sink">
 	<div class="bfg-page__header">
 		<h1><bfg-t>Kitchen Sink - Component Library</bfg-t></h1>
 	</div>

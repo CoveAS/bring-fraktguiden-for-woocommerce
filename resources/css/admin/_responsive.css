@@ -21,7 +21,7 @@
         padding: 32px 20px;
     }
 
-    .bfg-admin-page .bfg-section {
+    .bfg .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -33,23 +33,23 @@
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page .bfg-section:last-child {
+    .bfg .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
     }
 
-    .bfg-admin-page .bfg-section__header {
+    .bfg .bfg-section__header {
         margin-bottom: 24px !important;
     }
 
-    .bfg-admin-page .bfg-section__header h2,
+    .bfg .bfg-section__header h2,
     .bfg-section-card-title {
         font-size: 28px !important;
         line-height: 36px !important;
     }
 
-    .bfg-admin-page .bfg-section .bfg-section__header--divider {
+    .bfg .bfg-section .bfg-section__header--divider {
         margin-top: 48px !important;
         padding-top: 48px !important;
     }
@@ -59,9 +59,9 @@
         margin-bottom: 16px;
     }
 
-    .bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-    .bfg-admin-page .bfg-field>.label,
-    .bfg-admin-page .bfg-label {
+    .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
+    .bfg .bfg-field>.label,
+    .bfg .bfg-label {
         font-size: 16px;
     }
 
@@ -231,18 +231,18 @@
     }
 
     /* Buttons */
-    body.wp-admin .bfg-admin-page .button-primary {
+    body.wp-admin .bfg .button-primary {
         padding: 8px 32px;
         font-size: 14px;
     }
 
-    .bfg-admin-page .submit {
+    .bfg .submit {
         margin: 32px 0 0 !important;
     }
 
-    body.wp-admin .bfg-admin-page .submit .button,
-    body.wp-admin .bfg-admin-page .submit .button-primary,
-    body.wp-admin .bfg-admin-page .submit input[type="submit"] {
+    body.wp-admin .bfg .submit .button,
+    body.wp-admin .bfg .submit .button-primary,
+    body.wp-admin .bfg .submit input[type="submit"] {
         width: 100%;
         height: 40px;
         padding-top: 0;
@@ -262,13 +262,13 @@
     }
 
     /* Inputs */
-    .bfg-admin-page select,
-    .bfg-admin-page input[type="text"],
-    .bfg-admin-page input[type="number"],
-    .bfg-admin-page input[type="url"],
-    .bfg-admin-page input[type="tel"],
-    .bfg-admin-page input[type="email"],
-    .bfg-admin-page input[type="time"] {
+    .bfg select,
+    .bfg input[type="text"],
+    .bfg input[type="number"],
+    .bfg input[type="url"],
+    .bfg input[type="tel"],
+    .bfg input[type="email"],
+    .bfg input[type="time"] {
         height: 48px;
         font-size: 16px;
     }
@@ -287,14 +287,14 @@
 
 @media screen and (max-width: 600px) {
 
-    .bfg-admin-page select,
-    .bfg-admin-page input[type="text"],
-    .bfg-admin-page input[type="number"],
-    .bfg-admin-page input[type="url"],
-    .bfg-admin-page input[type="tel"],
-    .bfg-admin-page input[type="email"],
-    .bfg-admin-page input[type="time"],
-    .bfg-admin-page .bfg-custom-select {
+    .bfg select,
+    .bfg input[type="text"],
+    .bfg input[type="number"],
+    .bfg input[type="url"],
+    .bfg input[type="tel"],
+    .bfg input[type="email"],
+    .bfg input[type="time"],
+    .bfg .bfg-custom-select {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -307,7 +307,7 @@
         padding: 20px;
     }
 
-    .bfg-admin-page .bfg-section {
+    .bfg .bfg-section {
         padding: 0;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -319,7 +319,7 @@
         border-bottom: 1px solid var(--bfg-border);
     }
 
-    .bfg-admin-page .bfg-section:last-child {
+    .bfg .bfg-section:last-child {
         margin-bottom: 0;
         border-bottom: none;
         padding-bottom: 0;
@@ -329,15 +329,15 @@
         margin-bottom: 16px;
     }
 
-    .bfg-admin-page .bfg-section__header h2,
+    .bfg .bfg-section__header h2,
     .bfg-section-card-title {
         font-size: 24px !important;
         line-height: 32px !important;
     }
 
-    .bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-    .bfg-admin-page .bfg-field>.label,
-    .bfg-admin-page .bfg-label {
+    .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
+    .bfg .bfg-field>.label,
+    .bfg .bfg-label {
         font-size: 14px;
     }
 

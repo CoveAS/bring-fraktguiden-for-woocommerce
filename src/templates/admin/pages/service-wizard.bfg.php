@@ -9,7 +9,7 @@
  */
 ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__service-wizard">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__service-wizard">
 	<div class="bfg-page__header">
 		<h1>
 			<t>Select services</t>

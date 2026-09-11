@@ -49,14 +49,14 @@
 }
 
 .bfg-badge--outline,
-.bfg-admin-page a.bfg-badge--outline,
-.bfg-admin-page a.bfg-badge--outline:hover,
-.bfg-admin-page a.bfg-badge--outline:visited,
-.bfg-admin-page a.bfg-badge--outline:focus,
-body.wp-admin .bfg-admin-page a.bfg-badge--outline,
-body.wp-admin .bfg-admin-page a.bfg-badge--outline:hover,
-body.wp-admin .bfg-admin-page a.bfg-badge--outline:visited,
-body.wp-admin .bfg-admin-page a.bfg-badge--outline:focus {
+.bfg a.bfg-badge--outline,
+.bfg a.bfg-badge--outline:hover,
+.bfg a.bfg-badge--outline:visited,
+.bfg a.bfg-badge--outline:focus,
+body.wp-admin .bfg a.bfg-badge--outline,
+body.wp-admin .bfg a.bfg-badge--outline:hover,
+body.wp-admin .bfg a.bfg-badge--outline:visited,
+body.wp-admin .bfg a.bfg-badge--outline:focus {
     background-color: #F3F4F6;
     border: 1px solid #E5E7EB;
     color: #6B7280 !important;

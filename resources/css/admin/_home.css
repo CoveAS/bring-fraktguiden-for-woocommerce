@@ -240,8 +240,8 @@
     display: none;
 }
 
-.bfg-admin-page input[aria-invalid="true"],
-.bfg-admin-page select[aria-invalid="true"] {
+.bfg input[aria-invalid="true"],
+.bfg select[aria-invalid="true"] {
     border-color: #dc2626 !important;
     box-shadow: 0 0 0 1px #dc2626;
     outline: none;

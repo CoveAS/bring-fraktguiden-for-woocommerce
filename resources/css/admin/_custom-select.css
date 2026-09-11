@@ -9,8 +9,8 @@
     display: block;
 }
 
-.bfg-admin-page .bfg-field .bfg-custom-select,
-.bfg-admin-page .bfg-custom-select,
+.bfg .bfg-field .bfg-custom-select,
+.bfg .bfg-custom-select,
 .bfg-input .bfg-custom-select {
     width: 100% !important;
     max-width: none !important;

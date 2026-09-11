@@ -28,7 +28,7 @@
  */
 ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__pro">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__pro">
 	<div class="bfg-page__header">
 		<h1>
 			<t>Bring Fraktguiden Pro</t>

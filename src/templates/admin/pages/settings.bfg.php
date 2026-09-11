@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__settings">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__settings">
 	<div class="bfg-page__header">
 		<?php if (!empty($_GET['ref']) && $_GET['ref'] === 'bring_fraktguiden_pro'): ?>
 			<div class="bfg-page__header-with-back">

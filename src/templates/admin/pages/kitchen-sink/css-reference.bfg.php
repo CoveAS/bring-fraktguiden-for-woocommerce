@@ -8,7 +8,8 @@
 			<bfg-t>Main Classes</bfg-t>
 		</h3>
 		<ul>
-			<li><code>.bfg-admin-page</code> - Main page wrapper</li>
+			<li><code>.bfg</code> - Root of a block of plugin UI</li>
+			<li><code>.bfg-admin-page</code> - Frame of a plugin page</li>
 			<li><code>.bfg-page__main</code> - Main content area</li>
 			<li><code>.bfg-page__header</code> - Page header section</li>
 			<li><code>.bfg-page__header-row</code> - Header row with title and badge</li>

@@ -222,7 +222,7 @@ function quote(word) {
 /** Build the modal. One screen holds one. */
 function build() {
 	dialog = document.createElement('dialog');
-	dialog.className = 'bfg-modal bfg-hs-modal';
+	dialog.className = 'bfg bfg-modal bfg-hs-modal';
 	dialog.innerHTML = `
 		<form method="dialog" class="bfg-modal__head">
 			<h2 class="bfg-modal__title"></h2>

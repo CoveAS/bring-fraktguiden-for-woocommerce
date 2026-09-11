@@ -2,42 +2,41 @@
    Reset — the parts of a browser reset our components are built on.
 
    The admin stylesheet loads on every wp-admin screen, so every rule here
-   stays inside one of our own roots. `.bfg-admin-page` wraps a plugin page,
-   `.bfg-booking-box` the booking box of the order screen, and `.bfg-modal`
-   a dialog, which the browser moves to the top layer outside both.
+   stays inside `.bfg`. That class marks a block of plugin UI, and it sits on
+   the root element of every plugin page, dialog and meta box.
 
-   Every selector holds the roots in `:where()`, which adds no weight. A rule
+   Every selector holds the root in `:where()`, which adds no weight. A rule
    here therefore weighs the same as the plain element rule it replaces, and a
    WordPress rule for a class, such as `.button`, still wins.
    ========================================================================== */
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal),
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) *,
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) *::before,
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) *::after {
+:where(.bfg),
+:where(.bfg) *,
+:where(.bfg) *::before,
+:where(.bfg) *::after {
     box-sizing: border-box;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, figure, blockquote, pre) {
+:where(.bfg) :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, figure, blockquote, pre) {
     margin: 0;
     padding: 0;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) :is(h1, h2, h3, h4, h5, h6) {
+:where(.bfg) :is(h1, h2, h3, h4, h5, h6) {
     font-size: inherit;
     font-weight: inherit;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) :is(ul, ol, menu) {
+:where(.bfg) :is(ul, ol, menu) {
     list-style: none;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) a {
+:where(.bfg) a {
     color: inherit;
     text-decoration: inherit;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) button {
+:where(.bfg) button {
     font: inherit;
     color: inherit;
     background-color: transparent;
@@ -45,13 +44,13 @@
     border-radius: 0;
 }
 
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) :is(img, svg, video, canvas) {
+:where(.bfg) :is(img, svg, video, canvas) {
     display: block;
     max-width: 100%;
 }
 
 /* The hidden attribute must win over a display rule of a component.
    `until-found` is the one value that keeps the element in the layout. */
-:where(.bfg-admin-page, .bfg-booking-box, .bfg-modal) [hidden]:not([hidden="until-found"]) {
+:where(.bfg) [hidden]:not([hidden="until-found"]) {
     display: none !important;
 }

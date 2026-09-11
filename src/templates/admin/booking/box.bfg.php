@@ -17,7 +17,7 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
  */
 ?>
 
-<div class="bfg-booking-box" data-bfg-booking data-url="<?php echo esc_url($rest_url); ?>" data-nonce="<?php echo esc_attr($nonce); ?>">
+<div class="bfg bfg-booking-box" data-bfg-booking data-url="<?php echo esc_url($rest_url); ?>" data-nonce="<?php echo esc_attr($nonce); ?>">
 
 	<?php if ($error) : ?>
 		<div class="bfg-notice-banner bfg-booking-notice bfg-booking-notice--error" role="alert">

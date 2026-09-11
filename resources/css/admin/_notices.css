@@ -87,14 +87,14 @@
 }
 
 .bfg-trial-notice .bfg-btn--primary,
-.bfg-admin-page .bfg-trial-notice a.bfg-btn--primary {
+.bfg .bfg-trial-notice a.bfg-btn--primary {
     background: #7C3AED;
     border-color: #7C3AED;
     color: #ffffff;
 }
 
 .bfg-trial-notice .bfg-btn--primary:hover,
-.bfg-admin-page .bfg-trial-notice a.bfg-btn--primary:hover {
+.bfg .bfg-trial-notice a.bfg-btn--primary:hover {
     background: #6D28D9;
     border-color: #6D28D9;
     color: #ffffff;

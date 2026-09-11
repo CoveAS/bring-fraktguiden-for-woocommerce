@@ -1,5 +1,9 @@
 /* ==========================================================================
    Admin Page Layout — Page skeleton, sections, header, global utilities
+
+   This file holds both scopes. `.bfg-admin-page` styles the frame of a plugin
+   page, which no other screen has. `.bfg` styles a block of plugin UI, which
+   a meta box or a dialog can hold too.
    ========================================================================== */
 
 .bfg-admin-page #wpcontent,
@@ -75,7 +79,7 @@
 /* Sections
    ========================================================================== */
 
-.bfg-admin-page .bfg-section {
+.bfg .bfg-section {
     background: transparent;
     border: none;
     border-radius: 0;
@@ -87,19 +91,19 @@
     border-bottom: 1px solid var(--bfg-border);
 }
 
-.bfg-admin-page .bfg-section:last-child {
+.bfg .bfg-section:last-child {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.bfg-admin-page .bfg-section__header {
+.bfg .bfg-section__header {
     padding: 0 !important;
     margin-bottom: 32px !important;
     border: none !important;
 }
 
-.bfg-admin-page .bfg-section .bfg-section__header--divider {
+.bfg .bfg-section .bfg-section__header--divider {
     margin-top: 64px !important;
     padding-top: 64px !important;
     border-top: 1px solid var(--bfg-border) !important;
@@ -107,7 +111,7 @@
     clear: both !important;
 }
 
-.bfg-admin-page .bfg-section__header h2,
+.bfg .bfg-section__header h2,
 .bfg-section-card-title {
     font-size: 28px !important;
     font-weight: 500 !important;
@@ -117,7 +121,7 @@
     text-wrap: balance;
 }
 
-.bfg-admin-page .bfg-section__header p {
+.bfg .bfg-section__header p {
     font-size: var(--bfg-text-level-2) !important;
     color: var(--bfg-text-secondary) !important;
     margin: 0 !important;
@@ -125,14 +129,14 @@
     line-height: 24px !important;
 }
 
-.bfg-admin-page .bfg-section__section {
+.bfg .bfg-section__section {
     padding: 0 !important;
 }
 
 /* Submit Row
    ========================================================================== */
 
-.bfg-admin-page .submit {
+.bfg .submit {
     margin: 32px 0 0 !important;
     padding: 0 !important;
 }
@@ -148,24 +152,24 @@
 /* Links
    ========================================================================== */
 
-.bfg-admin-page a {
+.bfg a {
     color: var(--bfg-primary);
     text-decoration: none;
 }
 
-.bfg-admin-page a:hover {
+.bfg a:hover {
     text-decoration: underline;
 }
 
-.bfg-admin-page a.bfg-btn:hover,
-.bfg-admin-page a.button-primary:hover {
+.bfg a.bfg-btn:hover,
+.bfg a.button-primary:hover {
     text-decoration: none;
 }
 
 /* Code element
    ========================================================================== */
 
-.bfg-admin-page code {
+.bfg code {
     background: #F3F4F6;
     padding: 2px 6px;
     border-radius: 4px;
@@ -174,7 +178,7 @@
     color: var(--bfg-text-main);
 }
 
-.bfg-admin-page code:hover {
+.bfg code:hover {
     color: var(--bfg-text-main);
     background: #F3F4F6;
 }
@@ -194,7 +198,7 @@
 
 .bfg-section-card-title,
 .bfg-pro-teaser__title,
-.bfg-admin-page .bfg-section__header h2,
+.bfg .bfg-section__header h2,
 .bfg-active-step__content h3,
 .bfg-step-row__label,
 .bfg-field-group-title,
@@ -203,7 +207,7 @@
 }
 
 .bfg-pro-teaser__subtitle,
-.bfg-admin-page .bfg-section__header p,
+.bfg .bfg-section__header p,
 .bfg-step-row__description,
 .bfg-active-step__content p,
 .bfg-pro-features-grid li,

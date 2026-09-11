@@ -76,7 +76,7 @@ jQuery(function ($) {
 	});
 
 	// Make time inputs open picker when clicking anywhere on the field
-	$('.bfg-admin-page input[type="time"]').each(function() {
+	$('.bfg input[type="time"]').each(function() {
 		const input = this;
 		const $input = $(this);
 		const $wrapper = $input.closest('.bfg-input--time');

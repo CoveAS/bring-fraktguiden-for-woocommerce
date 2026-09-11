@@ -8,7 +8,7 @@ use BringFraktguiden\Fields\Fields;
  */
 ?>
 
-<div class="wrap bfg-admin-page bfg-admin-page__booking">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__booking">
 	<div class="bfg-page__header">
 		<h1>
 			<t>Booking</t>

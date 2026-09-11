@@ -51,7 +51,7 @@ $bfg_passed = $result->rates && ! $result->problem;
 		<button type="button" class="bfg-shipping-test__raw"><t>Show the API call</t></button>
 	</p>
 
-	<dialog class="bfg-modal bfg-shipping-test__dialog">
+	<dialog class="bfg bfg-modal bfg-shipping-test__dialog">
 		<div class="bfg-modal__head">
 			<h2 class="bfg-modal__title"><t>Shipping Guide API call</t></h2>
 			<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>

@@ -36,8 +36,8 @@
 
 .bfg-btn:focus,
 .bfg-btn:focus-visible,
-.bfg-admin-page .bfg-btn:focus,
-.bfg-admin-page .bfg-btn:focus-visible,
+.bfg .bfg-btn:focus,
+.bfg .bfg-btn:focus-visible,
 body.wp-admin .bfg-btn:focus,
 body.wp-admin .bfg-btn:focus-visible {
     outline: none !important;
@@ -61,7 +61,7 @@ body:not(.using-mouse) .bfg-btn:focus-visible {
 
 .bfg-btn--primary,
 a.bfg-btn--primary,
-.bfg-admin-page a.bfg-btn--primary {
+.bfg a.bfg-btn--primary {
     background: var(--bfg-primary);
     color: #ffffff;
     border: 1px solid var(--bfg-primary);
@@ -70,7 +70,7 @@ a.bfg-btn--primary,
 
 .bfg-btn--primary:hover,
 a.bfg-btn--primary:hover,
-.bfg-admin-page a.bfg-btn--primary:hover {
+.bfg a.bfg-btn--primary:hover {
     background: var(--bfg-primary-hover);
     border-color: var(--bfg-primary-hover);
     color: #ffffff;
@@ -97,7 +97,7 @@ a.bfg-btn--primary:hover,
 
 .bfg-btn--secondary,
 a.bfg-btn--secondary,
-.bfg-admin-page a.bfg-btn--secondary {
+.bfg a.bfg-btn--secondary {
     background: #ffffff;
     color: var(--bfg-text-main);
     border: 1px solid var(--bfg-border);
@@ -106,7 +106,7 @@ a.bfg-btn--secondary,
 
 .bfg-btn--secondary:hover,
 a.bfg-btn--secondary:hover,
-.bfg-admin-page a.bfg-btn--secondary:hover {
+.bfg a.bfg-btn--secondary:hover {
     background: #F9FAFB;
     border-color: #9CA3AF;
     color: #000000;
@@ -131,7 +131,7 @@ a.bfg-btn--secondary:hover,
 
 .bfg-btn--outline,
 a.bfg-btn--outline,
-.bfg-admin-page a.bfg-btn--outline {
+.bfg a.bfg-btn--outline {
     background: transparent;
     color: var(--bfg-primary);
     border: 1px solid var(--bfg-primary);
@@ -139,7 +139,7 @@ a.bfg-btn--outline,
 
 .bfg-btn--outline:hover,
 a.bfg-btn--outline:hover,
-.bfg-admin-page a.bfg-btn--outline:hover {
+.bfg a.bfg-btn--outline:hover {
     background: var(--bfg-primary-light);
     color: var(--bfg-primary-hover);
 }
@@ -154,7 +154,7 @@ a.bfg-btn--outline:hover,
 
 .bfg-btn--text,
 a.bfg-btn--text,
-.bfg-admin-page a.bfg-btn--text {
+.bfg a.bfg-btn--text {
     background: transparent;
     color: var(--bfg-primary);
     border: 1px solid transparent;
@@ -166,8 +166,8 @@ a.bfg-btn--text,
 
 .bfg-btn--text:hover,
 a.bfg-btn--text:hover,
-.bfg-admin-page a.bfg-btn--text:hover,
-body.wp-admin .bfg-admin-page a.bfg-btn--text:hover {
+.bfg a.bfg-btn--text:hover,
+body.wp-admin .bfg a.bfg-btn--text:hover {
     background: transparent;
     color: var(--bfg-primary-hover);
     text-decoration: underline;
@@ -257,8 +257,8 @@ body.wp-admin .bfg-admin-page a.bfg-btn--text:hover {
 /* WordPress .button-primary override
    ========================================================================== */
 
-body.wp-admin .bfg-admin-page .button-primary,
-body.wp-admin .bfg-admin-page input[type="submit"].button-primary {
+body.wp-admin .bfg .button-primary,
+body.wp-admin .bfg input[type="submit"].button-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -281,20 +281,20 @@ body.wp-admin .bfg-admin-page input[type="submit"].button-primary {
     transition: var(--bfg-btn-transition);
 }
 
-body.wp-admin .bfg-admin-page .button-primary:hover {
+body.wp-admin .bfg .button-primary:hover {
     background: var(--bfg-primary-hover);
     color: #fff;
 }
 
-body.wp-admin .bfg-admin-page .button-primary:focus {
+body.wp-admin .bfg .button-primary:focus {
     outline: none;
 }
 
-body.wp-admin:not(.using-mouse) .bfg-admin-page .button-primary:focus {
+body.wp-admin:not(.using-mouse) .bfg .button-primary:focus {
     box-shadow: var(--bfg-btn-focus-ring);
 }
 
-body.wp-admin .bfg-admin-page .button-primary:disabled {
+body.wp-admin .bfg .button-primary:disabled {
     background: #E5E7EB;
     color: #9CA3AF;
     cursor: not-allowed;

@@ -45,7 +45,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     position: relative;
 }
 
-.bfg-admin-page .bfg-field--checkbox-box .bfg-input--checkbox label {
+.bfg .bfg-field--checkbox-box .bfg-input--checkbox label {
     display: flex !important;
     align-items: flex-start !important;
     gap: var(--cb-gap);
@@ -90,7 +90,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 /* Checkbox Input Styles (shared)
    ========================================================================== */
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"] {
+.bfg .bfg-input--checkbox input[type="checkbox"] {
     width: var(--cb-checkbox-size, 20px) !important;
     height: var(--cb-checkbox-size, 20px) !important;
     margin: 2px 0 0 0 !important;
@@ -106,37 +106,37 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     transition: border-color 0.2s, background-color 0.2s;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked {
+.bfg .bfg-input--checkbox input[type="checkbox"]:checked {
     background: var(--bfg-primary) !important;
     border-color: var(--bfg-primary) !important;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:focus {
+.bfg .bfg-input--checkbox input[type="checkbox"]:focus {
     outline: none;
     border-color: #D1D5DB;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked:focus {
+.bfg .bfg-input--checkbox input[type="checkbox"]:checked:focus {
     border-color: var(--bfg-primary);
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:active {
+.bfg .bfg-input--checkbox input[type="checkbox"]:active {
     border-color: var(--bfg-primary);
     background: #DBEAFE;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::before,
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::before {
+.bfg .bfg-input--checkbox input[type="checkbox"]::before,
+.bfg .bfg-input--checkbox input[type="checkbox"]:checked::before {
     content: none !important;
     display: none !important;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]::after {
+.bfg .bfg-input--checkbox input[type="checkbox"]::after {
     content: none;
     pointer-events: none;
 }
 
-.bfg-admin-page .bfg-input--checkbox input[type="checkbox"]:checked::after {
+.bfg .bfg-input--checkbox input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;
     top: 50%;

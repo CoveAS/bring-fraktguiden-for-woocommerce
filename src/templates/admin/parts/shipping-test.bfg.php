@@ -15,7 +15,7 @@ $bfg_country = WC()->countries->get_base_country();
 $bfg_postcode = WC()->countries->get_base_postcode();
 ?>
 
-<div class="bfg-shipping-test"
+<div class="bfg bfg-shipping-test"
 	data-product="<?php echo (int) $product_id; ?>"
 	data-nonce="<?php echo esc_attr(wp_create_nonce(ShippingTest::ACTION)); ?>"
 	data-url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"

@@ -9,9 +9,9 @@
     margin-bottom: 24px;
 }
 
-.bfg-admin-page .bfg-field:not(.bfg-field--checkbox-box)>label,
-.bfg-admin-page .bfg-field>.label,
-.bfg-admin-page .bfg-label {
+.bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
+.bfg .bfg-field>.label,
+.bfg .bfg-label {
     display: block;
     font-weight: 500;
     font-size: 14px;
@@ -122,7 +122,7 @@
    ========================================================================== */
 
 .bfg-description,
-.bfg-admin-page .bfg-description {
+.bfg .bfg-description {
     font-size: 16px !important;
     color: var(--bfg-text-secondary) !important;
     font-weight: 400 !important;
@@ -148,14 +148,14 @@
 /* Text + Select inputs
    ========================================================================== */
 
-.bfg-admin-page select,
-.bfg-admin-page input[type="text"],
-.bfg-admin-page input[type="number"],
-.bfg-admin-page input[type="url"],
-.bfg-admin-page input[type="tel"],
-.bfg-admin-page input[type="email"],
-.bfg-admin-page input[type="time"],
-.bfg-admin-page .select {
+.bfg select,
+.bfg input[type="text"],
+.bfg input[type="number"],
+.bfg input[type="url"],
+.bfg input[type="tel"],
+.bfg input[type="email"],
+.bfg input[type="time"],
+.bfg .select {
     border: 1px solid var(--bfg-border) !important;
     border-radius: var(--bfg-radius-input);
     padding: 0 12px;
@@ -174,33 +174,33 @@
 /* Input size variants
    ========================================================================== */
 
-.bfg-admin-page .bfg-field--sm input[type="text"],
-.bfg-admin-page .bfg-field--sm input[type="number"],
-.bfg-admin-page .bfg-field--sm input[type="url"],
-.bfg-admin-page .bfg-field--sm input[type="tel"],
-.bfg-admin-page .bfg-field--sm input[type="email"] {
+.bfg .bfg-field--sm input[type="text"],
+.bfg .bfg-field--sm input[type="number"],
+.bfg .bfg-field--sm input[type="url"],
+.bfg .bfg-field--sm input[type="tel"],
+.bfg .bfg-field--sm input[type="email"] {
     height: var(--bfg-btn-sm-height) !important;
     padding: 0 8px !important;
     font-size: 12px !important;
 }
 
-.bfg-admin-page .bfg-field--lg input[type="text"],
-.bfg-admin-page .bfg-field--lg input[type="number"],
-.bfg-admin-page .bfg-field--lg input[type="url"],
-.bfg-admin-page .bfg-field--lg input[type="tel"],
-.bfg-admin-page .bfg-field--lg input[type="email"] {
+.bfg .bfg-field--lg input[type="text"],
+.bfg .bfg-field--lg input[type="number"],
+.bfg .bfg-field--lg input[type="url"],
+.bfg .bfg-field--lg input[type="tel"],
+.bfg .bfg-field--lg input[type="email"] {
     height: var(--bfg-btn-lg-height) !important;
     padding: 0 16px !important;
     font-size: 16px !important;
 }
 
-.bfg-admin-page .bfg-field--sm select {
+.bfg .bfg-field--sm select {
     height: var(--bfg-btn-sm-height) !important;
     padding: 0 32px 0 8px !important;
     font-size: 12px !important;
 }
 
-.bfg-admin-page .bfg-field--lg select {
+.bfg .bfg-field--lg select {
     height: var(--bfg-btn-lg-height) !important;
     padding: 0 44px 0 16px !important;
     font-size: 16px !important;
@@ -209,7 +209,7 @@
 /* Select arrow
    ========================================================================== */
 
-.bfg-admin-page select {
+.bfg select {
     appearance: none;
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
@@ -222,52 +222,52 @@
 /* Prevent WordPress admin hover effects on inputs
    ========================================================================== */
 
-.bfg-admin-page select:hover,
-.bfg-admin-page input[type="text"]:hover,
-.bfg-admin-page input[type="number"]:hover,
-.bfg-admin-page input[type="url"]:hover,
-.bfg-admin-page input[type="tel"]:hover,
-.bfg-admin-page input[type="email"]:hover,
-.bfg-admin-page input[type="time"]:hover {
+.bfg select:hover,
+.bfg input[type="text"]:hover,
+.bfg input[type="number"]:hover,
+.bfg input[type="url"]:hover,
+.bfg input[type="tel"]:hover,
+.bfg input[type="email"]:hover,
+.bfg input[type="time"]:hover {
     color: var(--bfg-text-main) !important;
     border-color: var(--bfg-border) !important;
 }
 
-[class*="bfg-admin-page"] input:active,
-[class*="bfg-admin-page"] select:active,
-[class*="bfg-admin-page"] textarea:active {
+.bfg input:active,
+.bfg select:active,
+.bfg textarea:active {
     border-color: #93C5FD !important;
     background: #F9FAFB !important;
     outline: none !important;
     box-shadow: none !important;
 }
 
-[class*="bfg-admin-page"] input:focus,
-[class*="bfg-admin-page"] select:focus,
-[class*="bfg-admin-page"] textarea:focus {
+.bfg input:focus,
+.bfg select:focus,
+.bfg textarea:focus {
     border-color: var(--bfg-primary) !important;
     background: #ffffff !important;
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
 }
 
-body:not(.using-mouse) [class*="bfg-admin-page"] input:focus,
-body:not(.using-mouse) [class*="bfg-admin-page"] select:focus,
-body:not(.using-mouse) [class*="bfg-admin-page"] textarea:focus {
+body:not(.using-mouse) .bfg input:focus,
+body:not(.using-mouse) .bfg select:focus,
+body:not(.using-mouse) .bfg textarea:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
 }
 
-.bfg-admin-page select:invalid {
+.bfg select:invalid {
     color: var(--bfg-text-muted);
 }
 
-.bfg-admin-page select option {
+.bfg select option {
     color: var(--bfg-text-main);
 }
 
-.bfg-admin-page select option[value=""],
-.bfg-admin-page select option[value="none"],
-.bfg-admin-page select option:disabled {
+.bfg select option[value=""],
+.bfg select option[value="none"],
+.bfg select option:disabled {
     color: var(--bfg-text-muted);
 }
 

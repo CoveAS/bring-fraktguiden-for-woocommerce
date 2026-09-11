@@ -349,14 +349,14 @@
 }
 
 .bfg-license-expired-card .bfg-btn--primary,
-.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary {
+.bfg .bfg-license-expired-card a.bfg-btn--primary {
     background: #D97706;
     border-color: #D97706;
     color: #ffffff;
 }
 
 .bfg-license-expired-card .bfg-btn--primary:hover,
-.bfg-admin-page .bfg-license-expired-card a.bfg-btn--primary:hover {
+.bfg .bfg-license-expired-card a.bfg-btn--primary:hover {
     background: #B45309;
     border-color: #B45309;
 }
