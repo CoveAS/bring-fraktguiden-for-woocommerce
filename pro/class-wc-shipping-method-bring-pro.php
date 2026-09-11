@@ -7,6 +7,7 @@
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguidenPro\Booking\Box\BookingBox;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\PickUpPoint\LegacyPickupPoints;
 use BringFraktguidenPro\PickUpPoint\PickUpPoint;
@@ -23,10 +24,14 @@ if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() 
 	add_action( 'init', PickUpPoint::class.'::init');
 }
 
-if ( is_admin() ) {
-	if ( 'yes' === Fraktguiden_Helper::get_option( 'booking_enabled' ) ) {
+if ( 'yes' === Fraktguiden_Helper::get_option( 'booking_enabled' ) ) {
+	if ( is_admin() ) {
 		Bring_Booking::init();
 	}
+
+	// The booking box talks to a REST route, and a REST request is not an admin
+	// request, so the route registers outside the admin check.
+	BookingBox::init_rest();
 }
 
 // Add admin CSS.

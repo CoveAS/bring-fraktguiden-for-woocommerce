@@ -81,8 +81,11 @@ Any new per order data follows the same shape, because the order offers nothing
 finer. Write it for the whole order and let each booking carry it.
 
 Do not build on the loop. Do not add a feature that needs to know which goods
-belong to which shipping line. The plan is to drop the loop and book one
-shipment per order.
+belong to which shipping line.
+
+The booking box of the order screen already books one shipment per order. See
+`doc/booking-box.md`. The loop stays only for the bulk action on the orders
+list.
 
 ## Directory Map
 
@@ -115,6 +118,10 @@ Source templates use a custom tag syntax that compiles away entirely:
 - Always use closing tags: `<bfg-section></bfg-section>` — self-closing breaks compilation
 - Keep `<t>` text on a single line — line breaks break translation extraction
 - After any edit to `.bfg.php` or `.bfgc.php`, run `npm run compile-php`
+
+A PHP tag works in attribute position, so `<option <?php selected($a, $b); ?>>`
+compiles. A `<t>` tag works inside a component, because the compiler translates
+slot content after it expands the component.
 
 ## Admin Page Rendering
 

@@ -29,7 +29,7 @@ class BringFraktguidenPro {
 	 */
 	public static function add_type_module( string $tag, string $handle, string $src ): string {
 		// Add type="module" to our Vite-built scripts
-		if ( in_array( $handle, [ 'bring-vue-runtime', 'bring-fraktguiden-admin' ], true ) ) {
+		if ( in_array( $handle, [ 'bring-vue-runtime', 'bring-fraktguiden-admin', 'bfg-booking-box' ], true ) ) {
 			$tag = str_replace( '<script ', '<script type="module" ', $tag );
 		}
 		return $tag;

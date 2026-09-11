@@ -18,12 +18,15 @@ class CustomsInformation
 	/**
 	 * Return the object of a booking, or null when the booking needs none.
 	 *
-	 * @param WC_Order $order   The order the booking ships.
-	 * @param string   $product The Bring product, for example 5800.
+	 * @param WC_Order           $order   The order the booking ships.
+	 * @param string             $product The Bring product, for example 5800.
+	 * @param NatureOfCargo|null $cargo   Why the goods move. A null reads the
+	 *                                    posted booking form, which is what the
+	 *                                    bulk booking does.
 	 *
 	 * @return array<string, mixed>|null
 	 */
-	public static function for_order(WC_Order $order, string $product): ?array
+	public static function for_order(WC_Order $order, string $product, ?NatureOfCargo $cargo = null): ?array
 	{
 		if (CustomsRoute::NVIT !== CustomsRoute::for_order($order, $product)) {
 			return null;
@@ -38,7 +41,7 @@ class CustomsInformation
 		$information = [
 			'type'                => 'NVIT',
 			'customsDeclarations' => $declarations,
-			'natureOfCargo'       => ['type' => NatureOfCargo::from_request()->value],
+			'natureOfCargo'       => ['type' => ($cargo ?? NatureOfCargo::from_request())->value],
 		];
 
 		// A shop that has not confirmed signs nothing. An absent field is not a

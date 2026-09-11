@@ -101,10 +101,14 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$wc_order        = $this->shipping_item->get_order();
 		$additional_info = '';
 
-		$bring_additional_info_sender = filter_input( INPUT_POST, '_bring_additional_info_sender', FILTER_UNSAFE_RAW );
+		if ( ! is_null( $this->additional_info_sender ) ) {
+			$additional_info = $this->additional_info_sender;
+		} else {
+			$posted = filter_input( INPUT_POST, '_bring_additional_info_sender', FILTER_UNSAFE_RAW );
 
-		if ( ! is_null( $bring_additional_info_sender ) ) {
-			$additional_info = $bring_additional_info_sender;
+			if ( ! is_null( $posted ) ) {
+				$additional_info = $posted;
+			}
 		}
 
 		$sender = $this->get_sender();
@@ -142,10 +146,14 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$name            = $order->get_shipping_company() ? $order->get_shipping_company() : $full_name;
 		$additional_info = null;
 
-		$bring_additional_info_recipient = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_UNSAFE_RAW );
+		if ( ! is_null( $this->additional_info_recipient ) ) {
+			$additional_info = $this->additional_info_recipient;
+		} else {
+			$posted = filter_input( INPUT_POST, '_bring_additional_info_recipient', FILTER_UNSAFE_RAW );
 
-		if ( ! is_null( $bring_additional_info_recipient ) ) {
-			$additional_info = $bring_additional_info_recipient;
+			if ( ! is_null( $posted ) ) {
+				$additional_info = $posted;
+			}
 		}
 		$args = [
 			'name'                  => $name,
@@ -223,8 +231,25 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		return new self( $shipping_item );
 	}
 
+	/**
+	 * Return whether the booking carries the given value added service.
+	 *
+	 * A request that was filled from the order screen box holds the answer. A
+	 * bulk booking and the old box send a form instead, so those read $_POST.
+	 *
+	 * @param string $code  The Bring code, for example 1081.
+	 * @param string $field The form field name the old box uses.
+	 */
+	private function books( string $code, string $field ): bool {
+		if ( ! is_null( $this->additional_services ) ) {
+			return in_array( $code, $this->additional_services, true );
+		}
+
+		return (bool) filter_input( INPUT_POST, $field, FILTER_VALIDATE_BOOLEAN );
+	}
+
 	private function create_consignment(): array {
-		$is_bulk = $_REQUEST['action'] === 'bring_bulk_book';
+		$is_bulk = 'bring_bulk_book' === ( $_REQUEST['action'] ?? '' );
 
 		$recipient_address = $this->get_recipient_address();
 		$consignment = [
@@ -246,7 +271,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			'packages'         => $this->create_packages(),
 		];
 
-		$customs_information = CustomsInformation::for_order( $this->adapter->order, $this->service_id );
+		$customs_information = CustomsInformation::for_order( $this->adapter->order, $this->service_id, $this->nature_of_cargo );
 
 		if ( $customs_information ) {
 			$consignment['customsInformation'] = $customs_information;
@@ -267,7 +292,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		}
 
 		$consignment['product']['additionalServices'] = [];
-		$electronic_notification = filter_input( INPUT_POST, '2084', FILTER_VALIDATE_BOOLEAN );
+		$electronic_notification = $this->books( '2084', '2084' );
 
 		if ( $this->service ) {
 			$vas_code = '2084';
@@ -292,7 +317,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			}
 
 			// Bag on door option
-			$bag_on_door_checked = filter_input( INPUT_POST, 'bag_on_door', FILTER_VALIDATE_BOOLEAN );
+			$bag_on_door_checked = $this->books( '1081', 'bag_on_door' );
 			$bag_on_door_consent = get_post_meta( $this->adapter->order->get_id(), '_bag_on_door_consent', true );
 
 			if (
@@ -310,7 +335,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			}
 
 			// Signature required
-			$signature_required_checked = filter_input( INPUT_POST, 'signature_required', FILTER_VALIDATE_BOOLEAN );
+			$signature_required_checked = $this->books( '1280', 'signature_required' );
 			if (
 				(
 					$this->service->has_vas( '1280' )
@@ -325,7 +350,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			}
 
 			// ID verification
-			$id_verification_checked = filter_input( INPUT_POST, 'id_verification', FILTER_VALIDATE_BOOLEAN );
+			$id_verification_checked = $this->books( '1133', 'id_verification' );
 			if (
 				(
 					$this->service->has_vas( '1133' )
@@ -340,7 +365,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			}
 
 			// Personal delivery option
-			$individual_verification_checked = filter_input( INPUT_POST, 'individual_verification', FILTER_VALIDATE_BOOLEAN );
+			$individual_verification_checked = $this->books( '1134', 'individual_verification' );
 			if (
 				(
 					$this->service->has_vas( '1134' )

@@ -9,6 +9,10 @@
  * A service may carry 'customs' => true. Bring requires customs data on that
  * service for a shipment that leaves Norway. See doc/export.md.
  *
+ * A service may carry 'delivery_date' => true. Bring accepts a delivery date
+ * the customer asked for on that service, and the booking form shows a field
+ * for it.
+ *
  * @package Bring_Fraktguiden
  */
 
@@ -33,6 +37,7 @@ return [
 				'helptext'    => 'Pakke levert hjem leveres til mottaker mellom kl. 08-17 eller 17-21 avhengig av mottakers postnummer. Mottaker varsles i god tid om forventet utleveringsdag via SMS eller e-post, i tillegg til nytt varsel når sendingen er lastet på bil for utkjøring samme dag. Mottaker kan gi Posten fullmakt til at pakken settes igjen ved døren eller et angitt sted hvis mottaker ikke er hjemme. Sjåføren ringer mottaker 30-60 minutter før ankomst ved levering på kveldstid. Mottaker kan endre leveringsdag når pakken spores (gjelder ikke lokalpakker). Dersom sendingen ikke kan leveres, blir den sendt til mottakers lokale hentested (postkontor eller Post i Butikk). Sendingen kan spores ved hjelp av sporingsnummeret.',
 				'deprecated'  => false,
 				'pickuppoint' => false,
+				'delivery_date' => true,
 				'oldcode'     => 'PA_DOREN',
 			],
 			'5000' => [

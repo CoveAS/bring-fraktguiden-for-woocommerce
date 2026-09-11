@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Booking box — the Bring booking form of the order screen
+   ========================================================================== */
+
+.bfg-booking-box {
+    position: relative;
+    color: var(--bfg-text-main);
+}
+
+.bfg-booking-box__error {
+    border-color: #b32d2e;
+    color: #b32d2e;
+}
+
+.bfg-booking-box__busy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+/* Form ------------------------------------------------------------------ */
+
+/* The box redraws itself, so a select widget built once at page load cannot
+   survive. These are plain selects, styled to match the plugin. */
+.bfg-booking-box select,
+.bfg-booking-box textarea,
+.bfg-booking-box input[type="date"],
+.bfg-booking-box input[type="time"],
+.bfg-booking-box input[type="number"] {
+    width: 100%;
+    max-width: none;
+    padding: 8px 10px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    line-height: 1.4;
+}
+
+.bfg-booking-box select:focus,
+.bfg-booking-box textarea:focus,
+.bfg-booking-box input:focus {
+    border-color: var(--bfg-primary);
+    outline: 2px solid var(--bfg-primary-light);
+    outline-offset: 0;
+}
+
+.bfg-booking-box .bfg-field label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.bfg-booking-form__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.bfg-booking-form__title {
+    margin: 24px 0 8px;
+    font-size: var(--bfg-text-level-6);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-booking-form__datetime {
+    display: flex;
+    gap: 8px;
+}
+
+.bfg-booking-form__datetime input {
+    min-width: 0;
+}
+
+.bfg-booking-form__services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 8px;
+}
+
+.bfg-booking-form__service {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bfg-booking-form__note {
+    margin: 16px 0 0;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-booking-form__parties {
+    margin: 16px 0;
+}
+
+.bfg-booking-form__parties summary {
+    cursor: pointer;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-booking-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+/* Packages -------------------------------------------------------------- */
+
+.bfg-booking-packages__head,
+.bfg-booking-packages__row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 40px;
+    gap: 8px;
+    align-items: center;
+}
+
+.bfg-booking-packages__head {
+    font-size: var(--bfg-text-level-6);
+    color: var(--bfg-text-secondary);
+    margin-bottom: 4px;
+}
+
+.bfg-booking-packages__row {
+    margin-bottom: 8px;
+}
+
+.bfg-booking-packages__row input {
+    width: 100%;
+}
+
+/* Parties --------------------------------------------------------------- */
+
+.bfg-booking-parties {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 12px;
+}
+
+.bfg-booking-parties__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bfg-booking-parties__table th {
+    text-align: left;
+    font-weight: 400;
+    color: var(--bfg-text-secondary);
+    padding: 2px 12px 2px 0;
+    white-space: nowrap;
+}
+
+/* History --------------------------------------------------------------- */
+
+.bfg-booking-history__entry {
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-card);
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.bfg-booking-history__entry--failed {
+    border-color: #b32d2e;
+}
+
+.bfg-booking-history__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.bfg-booking-history__when {
+    color: var(--bfg-text-muted);
+    font-size: var(--bfg-text-level-6);
+}
+
+.bfg-booking-history__consignments,
+.bfg-booking-history__errors {
+    margin: 8px 0 12px;
+}
+
+.bfg-booking-history__number {
+    font-family: monospace;
+    margin-right: 8px;
+}
+
+.bfg-booking-history__errors li {
+    color: #b32d2e;
+}
+
+.bfg-booking-history__actions {
+    display: flex;
+    justify-content: flex-end;
+}

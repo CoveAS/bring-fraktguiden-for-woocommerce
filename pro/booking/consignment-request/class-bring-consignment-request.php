@@ -9,6 +9,7 @@ namespace BringFraktguidenPro\Booking\Consignment_Request;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Customs\NatureOfCargo;
 use BringFraktguiden\Order\ShippedLine;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use WC_Order;
@@ -73,6 +74,31 @@ abstract class Bring_Consignment_Request {
 	 * @var Bring_WC_Order_Adapter
 	 */
 	public $adapter;
+
+	/**
+	 * The value added service codes to book.
+	 *
+	 * A null means the request reads the booking form out of $_POST, which is
+	 * what the bulk booking and the old order screen box do.
+	 *
+	 * @var string[]|null
+	 */
+	public ?array $additional_services = null;
+
+	/**
+	 * Extra address line for the sender, or null to read $_POST.
+	 */
+	public ?string $additional_info_sender = null;
+
+	/**
+	 * Extra address line for the recipient, or null to read $_POST.
+	 */
+	public ?string $additional_info_recipient = null;
+
+	/**
+	 * Why the goods move, or null to read $_POST.
+	 */
+	public ?NatureOfCargo $nature_of_cargo = null;
 
 	/**
 	 * Construct
@@ -142,6 +168,10 @@ abstract class Bring_Consignment_Request {
 		$this->customer_number                       = $args['customer_number'];
 		$this->shipping_date_time                    = $args['shipping_date_time'];
 		$this->customer_specified_delivery_date_time = $args['customer_specified_delivery_date_time'] ?? '';
+		$this->additional_services                   = $args['additional_services'] ?? $this->additional_services;
+		$this->additional_info_sender                = $args['additional_info_sender'] ?? $this->additional_info_sender;
+		$this->additional_info_recipient             = $args['additional_info_recipient'] ?? $this->additional_info_recipient;
+		$this->nature_of_cargo                       = $args['nature_of_cargo'] ?? $this->nature_of_cargo;
 
 		if ( '3584' == $this->service_id || '3570' == $this->service_id ) {
 			// Special mailbox rule.

@@ -6,5 +6,5 @@
 		<span class="bfg-suffix"><?php esc_html_e('NOK', 'bring-fraktguiden-for-woocommerce'); ?></span>
 		
 		
-	</input></div>
+	</div>
 </div>

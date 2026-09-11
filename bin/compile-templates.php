@@ -54,13 +54,15 @@ class BFGComponentCompiler
 
         $sourceContent = file_get_contents($sourceFilePath);
 
-        // Protect existing PHP tags before HTML parsing
-        // Use escape-proof placeholders that won't be HTML-entity-encoded
+        // Protect existing PHP tags before HTML parsing.
+        // The placeholder starts with a letter and holds only letters and
+        // digits, so it survives both text and attribute positions. An HTML
+        // parser rewrites anything else.
         $phpTagMap = [];
         $sourceContent = preg_replace_callback(
             '/<\?php(.*?)\?>/s',
             function($matches) use (&$phpTagMap) {
-                $placeholder = '__BFG_PHP_PRESERVE_' . count($phpTagMap) . '__';
+                $placeholder = 'bfgphp' . count($phpTagMap) . 'end';
                 $phpTagMap[$placeholder] = '<?php' . $matches[1] . '?>';
                 return $placeholder;
             },
@@ -76,6 +78,10 @@ class BFGComponentCompiler
         // Find all <bfg-*> component tags and process them
         $this->processComponentTags($sourceDoc);
 
+        // A component moves its slot content into its own markup, so a <t> tag
+        // that a page wrote inside a component arrives after the first pass.
+        $this->translationProcessor->process($sourceDoc);
+
         // Extract only the body content (avoid <!DOCTYPE>, <html>, etc.)
         $output = '';
         foreach ($sourceDoc->body->childNodes as $node) {
@@ -87,10 +93,26 @@ class BFGComponentCompiler
             $output = str_replace($placeholder, '<?php echo ' . $expression . '; ?>', $output);
         }
 
-        // Restore original PHP tags from escape-proof placeholders
-        foreach ($phpTagMap as $placeholder => $phpTag) {
-            $output = str_replace($placeholder, $phpTag, $output);
-        }
+        // An HTML parser accepts no end tag for a void element, but the
+        // serialiser writes one, so drop them.
+        $output = preg_replace(
+            '#</(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)>#i',
+            '',
+            $output
+        );
+
+        // Restore original PHP tags from escape-proof placeholders.
+        // A tag that sat in attribute position became a valueless attribute, so
+        // drop the empty value the parser added.
+        $output = preg_replace_callback(
+            '/(bfgphp\d+end)(="")?/i',
+            function($matches) use ($phpTagMap) {
+                $placeholder = strtolower($matches[1]);
+
+                return $phpTagMap[$placeholder] ?? $matches[0];
+            },
+            $output
+        );
 
         return $output;
     }

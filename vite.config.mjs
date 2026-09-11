@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       input: [
         'resources/js/admin.js',
+        'resources/js/booking-box.js',
         'resources/js/checkout.js',
         'resources/js/home.js',
         'resources/js/pro.js',

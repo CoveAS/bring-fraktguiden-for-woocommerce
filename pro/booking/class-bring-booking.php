@@ -8,6 +8,7 @@
 namespace BringFraktguidenPro\Booking;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Box\BookingBox;
 use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
@@ -52,7 +53,11 @@ class Bring_Booking {
 		}
 
 		Bring_Booking_Orders_View::init();
-		Bring_Booking_Order_View::init();
+		BookingBox::init();
+
+		if ( in_array( BookingBox::mode(), [ 'old', 'both' ], true ) ) {
+			Bring_Booking_Order_View::init();
+		}
 
 		// Update status on printed orders
 		add_action( 'init', __CLASS__ . '::update_printed_orders' );
