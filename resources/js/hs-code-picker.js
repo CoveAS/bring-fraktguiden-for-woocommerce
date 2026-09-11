@@ -1,3 +1,5 @@
+import './dialog.js';
+
 /**
  * The HS code picker.
  *
@@ -24,6 +26,12 @@ const MIN_QUERY = 2;
 
 const MAX_HITS = 50;
 
+/** How many rows the empty search adds at a time. */
+const PAGE = 100;
+
+/** How near the end of the list the shop worker scrolls before more rows come. */
+const PAGE_MARGIN = 400;
+
 /**
  * The search of Tolltariffen, where a shop worker can look further.
  *
@@ -48,6 +56,9 @@ let pending = null;
 
 /** The code the field already holds, while the modal is open. */
 let current = '';
+
+/** The rows of the empty search that the list does not hold yet. */
+let queue = [];
 
 /**
  * Return the code with dots, as Tolltariffen prints it.
@@ -257,6 +268,16 @@ function build() {
 		render(event.target.value.trim());
 	});
 
+	// The empty search holds the whole tariff, so the list takes the next rows
+	// as the shop worker comes near its end.
+	dialog.querySelector('.bfg-hs-modal__list').addEventListener('scroll', (event) => {
+		const list = event.target;
+
+		if (list.scrollHeight - list.scrollTop - list.clientHeight < PAGE_MARGIN) {
+			addPage();
+		}
+	});
+
 	dialog.querySelector('.bfg-hs-modal__list').addEventListener('click', (event) => {
 		const hit = event.target.closest('[data-code]');
 
@@ -279,6 +300,7 @@ function render(query) {
 	const hint = dialog.querySelector('.bfg-hs-modal__hint');
 
 	list.textContent = '';
+	queue = [];
 
 	if (!index) {
 		hint.textContent = text.loading || '';
@@ -287,28 +309,16 @@ function render(query) {
 	}
 
 	// An empty search shows the whole tariff, with the code the field already
-	// holds on top.
-	//
-	// ponytail: the list holds one element per code, so 4587 codes build some
-	// 14000 elements every time the search empties. A windowed list would
-	// build only the rows in sight.
+	// holds on top. The list takes it a page at a time, because 4587 rows at
+	// once hold the browser up.
 	if (query.length < MIN_QUERY) {
 		hint.textContent = text.hint || '';
 
 		const chosen = rowOf(current);
-		const rows = chosen ? [chosen, ...index.codes.filter((row) => row !== chosen)] : index.codes;
-		const batch = document.createDocumentFragment();
 
-		for (const row of rows) {
-			const hit = addHit(batch, row, []);
-
-			if (row === chosen) {
-				hit.classList.add('bfg-hs-modal__hit--current');
-				hit.setAttribute('aria-current', 'true');
-			}
-		}
-
-		list.append(batch);
+		queue = chosen ? [chosen, ...index.codes.filter((row) => row !== chosen)] : [...index.codes];
+		list.scrollTop = 0;
+		addPage();
 
 		return;
 	}
@@ -345,6 +355,33 @@ function addHit(into, row, words) {
 	into.append(item);
 
 	return button;
+}
+
+/**
+ * Move the next page of the empty search into the list.
+ *
+ * The code the field already holds is the first row of the queue, so it is
+ * marked on the first page and never again.
+ */
+function addPage() {
+	if (!queue.length) {
+		return;
+	}
+
+	const list = dialog.querySelector('.bfg-hs-modal__list');
+	const chosen = rowOf(current);
+	const batch = document.createDocumentFragment();
+
+	for (const row of queue.splice(0, PAGE)) {
+		const hit = addHit(batch, row, []);
+
+		if (row === chosen) {
+			hit.classList.add('bfg-hs-modal__hit--current');
+			hit.setAttribute('aria-current', 'true');
+		}
+	}
+
+	list.append(batch);
 }
 
 /** Return a link that runs the same search on Tolltariffen. */
