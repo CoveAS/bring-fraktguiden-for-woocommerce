@@ -245,12 +245,38 @@
 }
 
 .bfg-customs-products__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
+
+    /* A flex summary drops the marker of the browser, so the panel draws one. */
+    list-style: none;
+}
+
+.bfg-customs-products__summary::-webkit-details-marker {
+    display: none;
+}
+
+.bfg-customs-products__summary::before {
+    content: "";
+    flex: none;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid var(--bfg-text-secondary);
+    transition: transform 0.15s ease;
+}
+
+.bfg-customs-products[open] > .bfg-customs-products__summary::before {
+    transform: rotate(90deg);
 }
 
 /* The icon of the summary tells whether a code is still missing. */
 .bfg-customs-products__icon {
-    vertical-align: text-bottom;
+    display: flex;
+    flex: none;
     color: #9A3412;
 }
 
@@ -260,7 +286,7 @@
 }
 
 .bfg-customs-products--ok .bfg-customs-products__icon--ok {
-    display: inline;
+    display: flex;
     color: #166534;
 }
 
