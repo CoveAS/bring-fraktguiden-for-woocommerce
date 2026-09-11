@@ -80,7 +80,6 @@
 }
 
 .bfg-step-form__field {
-	max-width: 420px;
 	margin-bottom: 12px;
 }
 
@@ -121,6 +120,24 @@
 }
 
 /* What belongs to a choice sits under it, lined up with the label text. */
-.bfg-step-form__choice + * {
+.bfg-step-form__choice ~ * {
 	margin-left: 24px;
+}
+
+/* The price and the service sit on one line. */
+.bfg-step-form__row {
+	display: flex;
+	max-width: 420px;
+	align-items: center;
+	gap: 8px;
+}
+
+.bfg-step-form__row .bfg-input {
+	width: 130px;
+	flex-shrink: 0;
+}
+
+.bfg-step-form__row select {
+	flex: 1;
+	min-width: 0;
 }

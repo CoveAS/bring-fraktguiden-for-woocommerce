@@ -42,8 +42,8 @@ class GetStartedSteps
 		);
 
 		$steps [] = new Step(
-			label: __('Price the orders Bring cannot price', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Say what the checkout charges when Bring gives no price', 'bring-fraktguiden-for-woocommerce'),
+			label: __('Price the carts that fall through', 'bring-fraktguiden-for-woocommerce'),
+			description: __('Set a price for carts that are too big, too heavy or too full, or when the Bring API is quiet', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_fallback'),
 			actionText: __('Answer', 'bring-fraktguiden-for-woocommerce'),
 			completed: FallbackPrice::current()->decided(),

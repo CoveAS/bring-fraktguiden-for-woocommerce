@@ -56,6 +56,7 @@ final class FallbackPrice
 	private function __construct(
 		public readonly string $state,
 		public readonly float $price,
+		public readonly string $service = '',
 	) {
 	}
 
@@ -101,7 +102,7 @@ final class FallbackPrice
 			return new self(self::CUSTOM, 0.0);
 		}
 
-		return new self(self::PRICE, $prices[0]);
+		return new self(self::PRICE, $prices[0], $rates[0]);
 	}
 
 	/** Does the setting still hold the value it shipped with? */
@@ -138,11 +139,12 @@ final class FallbackPrice
 
 		$answer = (string) ($_POST['bfg_fallback_answer'] ?? '');
 		$price = (float) str_replace(',', '.', (string) ($_POST['bfg_fallback_price'] ?? '0'));
+		$service = (string) ($_POST['bfg_fallback_service'] ?? '');
 
 		// The custom state has a radio of its own, and it writes nothing. Only
 		// the two real answers touch the settings.
 		if (in_array($answer, [self::PRICE, self::NO_SHIPPING], true)) {
-			self::save($answer === self::PRICE, max(0.0, $price));
+			self::save($answer === self::PRICE, max(0.0, $price), $service);
 		}
 
 		wp_safe_redirect(admin_url('admin.php?page=bring_fraktguiden_home'));
@@ -150,9 +152,13 @@ final class FallbackPrice
 	}
 
 	/** Write one answer into both cases. */
-	public static function save(bool $charge, float $price): void
+	public static function save(bool $charge, float $price, string $service = ''): void
 	{
-		$rate = $charge ? self::service() : self::NONE;
+		if (! isset(self::services()[$service])) {
+			$service = self::service();
+		}
+
+		$rate = $charge ? $service : self::NONE;
 
 		update_option(self::ANSWER_OPTION, $charge ? self::PRICE : self::NO_SHIPPING);
 
@@ -163,21 +169,32 @@ final class FallbackPrice
 	}
 
 	/**
-	 * The Bring service the fallback rate carries.
+	 * The services the fallback rate may carry, as id to name.
+	 *
+	 * A shop that sells no service yet may pick from every Bring service.
+	 */
+	public static function services(): array
+	{
+		$all = Fraktguiden_Helper::get_all_services();
+		$sold = [];
+
+		foreach ((array) Fraktguiden_Helper::get_option('services') as $service) {
+			if (isset($all[$service])) {
+				$sold[$service] = $all[$service];
+			}
+		}
+
+		return $sold ?: $all;
+	}
+
+	/**
+	 * The Bring service the fallback rate carries when the shop names none.
 	 *
 	 * The checkout shows the label, not the service, so this only names the
 	 * service a later booking uses. The first service the shop sells fits best.
 	 */
-	private static function service(): string
+	public static function service(): string
 	{
-		$all = Fraktguiden_Helper::get_all_services();
-
-		foreach ((array) Fraktguiden_Helper::get_option('services') as $service) {
-			if (isset($all[$service])) {
-				return (string) $service;
-			}
-		}
-
-		return (string) array_key_first($all);
+		return (string) array_key_first(self::services());
 	}
 }

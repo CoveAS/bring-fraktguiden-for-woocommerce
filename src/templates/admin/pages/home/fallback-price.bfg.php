@@ -17,6 +17,8 @@ $bfg_fallback = FallbackPrice::current();
 $bfg_open = !$step->completed && $isNext;
 $bfg_currency = get_option('woocommerce_currency');
 $bfg_advanced = admin_url('admin.php?page=bring_fraktguiden_fallback');
+$bfg_service = $bfg_fallback->service ?: FallbackPrice::service();
+$bfg_services = FallbackPrice::services();
 ?>
 
 <div class="bfg-step bfg-step--form <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
@@ -37,12 +39,12 @@ $bfg_advanced = admin_url('admin.php?page=bring_fraktguiden_fallback');
 				<?php if ($bfg_fallback->state === FallbackPrice::PRICE): ?>
 					<?php printf(
 						/* translators: 1: the price, 2: the currency of the shop. */
-						esc_html__('These orders cost %1$s %2$s', 'bring-fraktguiden-for-woocommerce'),
+						esc_html__('These carts cost: %1$s %2$s', 'bring-fraktguiden-for-woocommerce'),
 						esc_html(number_format_i18n($bfg_fallback->price, 2)),
 						esc_html($bfg_currency)
 					); ?>
 				<?php elseif ($bfg_fallback->state === FallbackPrice::NO_SHIPPING): ?>
-					<t>These orders get no shipping</t>
+					<t>These carts get no shipping</t>
 				<?php elseif ($bfg_fallback->state === FallbackPrice::CUSTOM): ?>
 					<t>You set your own price for each case</t>
 				<?php else: ?>
@@ -76,7 +78,7 @@ $bfg_advanced = admin_url('admin.php?page=bring_fraktguiden_fallback');
 			<?php wp_nonce_field(FallbackPrice::ACTION); ?>
 
 			<p class="bfg-step-form__intro">
-				<t>Some orders get no price from Bring. The line is down, or the goods are too big or too heavy. What should the checkout do then?</t>
+				<t>Some carts are too big, too heavy or too full for a Bring parcel. Some come when the Bring API is quiet. Bring sends no price for them. What should the checkout show then?</t>
 			</p>
 
 			<div class="bfg-step-form__field">
@@ -86,12 +88,27 @@ $bfg_advanced = admin_url('admin.php?page=bring_fraktguiden_fallback');
 						<?php checked($bfg_fallback->state, FallbackPrice::PRICE); ?>>
 					<t>Charge a fixed price</t>
 				</label>
-				<div class="bfg-input bfg-input--number">
-					<input class="bfg-step-form__input" type="number" id="bfg-fallback-price" name="bfg_fallback_price"
-						step="0.1" min="0" value="<?php echo esc_attr($bfg_fallback->price ?: ''); ?>"
-						placeholder="<?php esc_attr_e('ie: 99', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<span class="bfg-suffix-lg"><?php echo esc_html($bfg_currency); ?></span>
+				<div class="bfg-step-form__row">
+					<div class="bfg-input bfg-input--number">
+						<input class="bfg-step-form__input" type="number" id="bfg-fallback-price" name="bfg_fallback_price"
+							step="0.1" min="0" value="<?php echo esc_attr($bfg_fallback->price ?: ''); ?>"
+							placeholder="<?php esc_attr_e('Free: 0', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<span class="bfg-suffix-lg"><?php echo esc_html($bfg_currency); ?></span>
+					</div>
+					<label class="screen-reader-text" for="bfg-fallback-service">
+						<t>Service</t>
+					</label>
+					<select id="bfg-fallback-service" name="bfg_fallback_service">
+						<?php foreach ($bfg_services as $bfg_id => $bfg_name): ?>
+							<option value="<?php echo esc_attr($bfg_id); ?>" <?php selected($bfg_service, (string) $bfg_id); ?>>
+								<?php echo esc_html($bfg_name); ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
 				</div>
+				<p class="bfg-step-form__help">
+					<t>The customer pays this price. The booking sends the goods with this service.</t>
+				</p>
 			</div>
 
 			<div class="bfg-step-form__field">
