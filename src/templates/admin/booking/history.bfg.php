@@ -54,12 +54,12 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 
 			<?php if (0 === $bfg_index && !$record->failed()) : ?>
 				<?php // ponytail: a label downloads through the order, so only the newest booking offers one. Per booking labels need the download screen to take a consignment number. ?>
-				<a class="button" href="<?php echo esc_url($labels_url); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
+				<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="<?php echo esc_url($labels_url); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
 			<?php endif; ?>
 		</div>
 	<?php endforeach; ?>
 
 	<div class="bfg-booking-history__actions">
-		<button type="button" class="button button-primary" data-bfg-again><t>Book again</t></button>
+		<button type="button" class="bfg-btn bfg-btn--primary" data-bfg-again><t>Book again</t></button>
 	</div>
 </div>

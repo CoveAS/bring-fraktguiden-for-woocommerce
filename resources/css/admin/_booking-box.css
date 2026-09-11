@@ -133,6 +133,17 @@
 
 .bfg-booking-packages__row input {
     width: 100%;
+    min-width: 0;
+}
+
+/* The unit box draws the border, so the focus ring goes on the box. */
+.bfg-booking-box .bfg-input--number:focus-within {
+    outline: 2px solid var(--bfg-primary-light);
+    outline-offset: 0;
+}
+
+.bfg-booking-box .bfg-input--number input:focus {
+    outline: none;
 }
 
 /* Parties --------------------------------------------------------------- */

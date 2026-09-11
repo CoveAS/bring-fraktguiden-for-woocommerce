@@ -102,36 +102,60 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 
 	<div class="bfg-booking-packages">
 		<div class="bfg-booking-packages__head">
-			<span><t>Weight in kg</t></span>
-			<span><t>Length in cm</t></span>
-			<span><t>Width in cm</t></span>
-			<span><t>Height in cm</t></span>
+			<span><t>Weight</t></span>
+			<span><t>Length</t></span>
+			<span><t>Width</t></span>
+			<span><t>Height</t></span>
 			<span></span>
 		</div>
 
 		<div data-bfg-packages>
 			<?php foreach ($form->packages as $index => $package) : ?>
 				<div class="bfg-booking-packages__row" data-bfg-package>
-					<input type="number" step="0.01" min="0" data-package-field="weight_in_kg" value="<?php echo esc_attr($package->weight_in_kg); ?>" aria-label="<?php esc_attr_e('Weight in kg', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<input type="number" step="1" min="0" data-package-field="length" value="<?php echo esc_attr($package->length); ?>" aria-label="<?php esc_attr_e('Length in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<input type="number" step="1" min="0" data-package-field="width" value="<?php echo esc_attr($package->width); ?>" aria-label="<?php esc_attr_e('Width in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<input type="number" step="1" min="0" data-package-field="height" value="<?php echo esc_attr($package->height); ?>" aria-label="<?php esc_attr_e('Height in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-					<button type="button" class="button bfg-booking-packages__remove" data-bfg-remove-package aria-label="<?php esc_attr_e('Remove package', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
+					<div class="bfg-input bfg-input--number">
+						<input type="number" step="0.01" min="0" data-package-field="weight_in_kg" value="<?php echo esc_attr($package->weight_in_kg); ?>" aria-label="<?php esc_attr_e('Weight in kg', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<span class="bfg-suffix">kg</span>
+					</div>
+					<div class="bfg-input bfg-input--number">
+						<input type="number" step="1" min="0" data-package-field="length" value="<?php echo esc_attr($package->length); ?>" aria-label="<?php esc_attr_e('Length in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<span class="bfg-suffix">cm</span>
+					</div>
+					<div class="bfg-input bfg-input--number">
+						<input type="number" step="1" min="0" data-package-field="width" value="<?php echo esc_attr($package->width); ?>" aria-label="<?php esc_attr_e('Width in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<span class="bfg-suffix">cm</span>
+					</div>
+					<div class="bfg-input bfg-input--number">
+						<input type="number" step="1" min="0" data-package-field="height" value="<?php echo esc_attr($package->height); ?>" aria-label="<?php esc_attr_e('Height in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<span class="bfg-suffix">cm</span>
+					</div>
+					<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm bfg-btn--icon-only bfg-booking-packages__remove" data-bfg-remove-package aria-label="<?php esc_attr_e('Remove package', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
 				</div>
 			<?php endforeach; ?>
 		</div>
 
 		<template data-bfg-package-template>
 			<div class="bfg-booking-packages__row" data-bfg-package>
-				<input type="number" step="0.01" min="0" data-package-field="weight_in_kg" value="0" aria-label="<?php esc_attr_e('Weight in kg', 'bring-fraktguiden-for-woocommerce'); ?>">
-				<input type="number" step="1" min="0" data-package-field="length" value="0" aria-label="<?php esc_attr_e('Length in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-				<input type="number" step="1" min="0" data-package-field="width" value="0" aria-label="<?php esc_attr_e('Width in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-				<input type="number" step="1" min="0" data-package-field="height" value="0" aria-label="<?php esc_attr_e('Height in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
-				<button type="button" class="button bfg-booking-packages__remove" data-bfg-remove-package aria-label="<?php esc_attr_e('Remove package', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
+				<div class="bfg-input bfg-input--number">
+					<input type="number" step="0.01" min="0" data-package-field="weight_in_kg" value="0" aria-label="<?php esc_attr_e('Weight in kg', 'bring-fraktguiden-for-woocommerce'); ?>">
+					<span class="bfg-suffix">kg</span>
+				</div>
+				<div class="bfg-input bfg-input--number">
+					<input type="number" step="1" min="0" data-package-field="length" value="0" aria-label="<?php esc_attr_e('Length in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+					<span class="bfg-suffix">cm</span>
+				</div>
+				<div class="bfg-input bfg-input--number">
+					<input type="number" step="1" min="0" data-package-field="width" value="0" aria-label="<?php esc_attr_e('Width in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+					<span class="bfg-suffix">cm</span>
+				</div>
+				<div class="bfg-input bfg-input--number">
+					<input type="number" step="1" min="0" data-package-field="height" value="0" aria-label="<?php esc_attr_e('Height in cm', 'bring-fraktguiden-for-woocommerce'); ?>">
+					<span class="bfg-suffix">cm</span>
+				</div>
+				<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm bfg-btn--icon-only bfg-booking-packages__remove" data-bfg-remove-package aria-label="<?php esc_attr_e('Remove package', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
 			</div>
 		</template>
 
-		<button type="button" class="button" data-bfg-add-package><t>Add a package</t></button>
+		<button type="button" class="bfg-btn bfg-btn--secondary bfg-btn--sm" data-bfg-add-package><t>Add a package</t></button>
 	</div>
 
 	<?php if ($service && $service->vas) : ?>
@@ -172,8 +196,8 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 	</details>
 
 	<div class="bfg-booking-form__actions">
-		<button type="button" class="button" data-bfg-reset><t>Reset</t></button>
-		<button type="button" class="button button-primary" data-bfg-book <?php disabled(!$has_shipping_line); ?>>
+		<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-reset><t>Reset</t></button>
+		<button type="button" class="bfg-btn bfg-btn--primary" data-bfg-book <?php disabled(!$has_shipping_line); ?>>
 			<?php if ($test_mode) : ?>
 				<t>Book with Bring, test mode</t>
 			<?php else : ?>
