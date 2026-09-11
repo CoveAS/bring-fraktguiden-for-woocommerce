@@ -46,6 +46,9 @@ let dialog = null;
 /** What the modal writes to when a code is chosen. */
 let pending = null;
 
+/** The code the field already holds, while the modal is open. */
+let current = '';
+
 /**
  * Return the code with dots, as Tolltariffen prints it.
  *
@@ -61,6 +64,16 @@ function rowText(row) {
 	const position = index.positions[row[1]] || '';
 
 	return row[2] ? `${position}, ${row[2]}` : position;
+}
+
+/**
+ * Return the tariff row of a code, or null.
+ *
+ * A shop may hold a longer code than the tariff names here, for example an
+ * eight digit Norwegian number. The first six digits still name the goods.
+ */
+function rowOf(code) {
+	return code && index ? index.codes.find((line) => line[0] === code.slice(0, 6)) || null : null;
 }
 
 /** Read the index the browser saved, or null. */
@@ -274,6 +287,17 @@ function render(query) {
 	if (query.length < MIN_QUERY) {
 		hint.textContent = text.hint || '';
 
+		// The shop worker came from a field that already holds a code, so the
+		// empty search shows that code instead of an empty list.
+		const row = rowOf(current);
+
+		if (row) {
+			const hit = addHit(list, row, []);
+
+			hit.classList.add('bfg-hs-modal__hit--current');
+			hit.setAttribute('aria-current', 'true');
+		}
+
 		return;
 	}
 
@@ -289,19 +313,26 @@ function render(query) {
 	}
 
 	for (const row of hits) {
-		const item = document.createElement('li');
-		const button = document.createElement('button');
-
-		button.type = 'button';
-		button.className = 'bfg-hs-modal__hit';
-		button.dataset.code = row[0];
-		button.innerHTML = '<span class="bfg-hs-modal__hit-code"></span><span class="bfg-hs-modal__hit-text"></span>';
-		button.querySelector('.bfg-hs-modal__hit-code').textContent = dotted(row[0]);
-		highlight(button.querySelector('.bfg-hs-modal__hit-text'), rowText(row), words);
-
-		item.append(button);
-		list.append(item);
+		addHit(list, row, words);
 	}
+}
+
+/** Add one tariff row to the list, and return its button. */
+function addHit(list, row, words) {
+	const item = document.createElement('li');
+	const button = document.createElement('button');
+
+	button.type = 'button';
+	button.className = 'bfg-hs-modal__hit';
+	button.dataset.code = row[0];
+	button.innerHTML = '<span class="bfg-hs-modal__hit-code"></span><span class="bfg-hs-modal__hit-text"></span>';
+	button.querySelector('.bfg-hs-modal__hit-code').textContent = dotted(row[0]);
+	highlight(button.querySelector('.bfg-hs-modal__hit-text'), rowText(row), words);
+
+	item.append(button);
+	list.append(item);
+
+	return button;
 }
 
 /** Return a link that runs the same search on Tolltariffen. */
@@ -335,13 +366,17 @@ function choose(code) {
  * Open the modal, and call back with the chosen code.
  *
  * Nothing calls back when the shop worker closes the modal.
+ *
+ * @param {Function} onPick Takes the chosen code.
+ * @param {string}   code   The code the field already holds, if it holds one.
  */
-export async function pickHsCode(onPick) {
+export async function pickHsCode(onPick, code = '') {
 	if (!dialog) {
 		build();
 	}
 
 	pending = onPick;
+	current = code;
 
 	const field = dialog.querySelector('.bfg-hs-modal__search');
 
@@ -364,12 +399,7 @@ function fieldOf(button) {
 /** Show the code and its text on one button. */
 function label(button) {
 	const code = fieldOf(button)?.value || '';
-
-	// A shop may hold a longer code than the tariff names here, for example an
-	// eight digit Norwegian number. The first six digits still name the goods.
-	const row = code && index
-		? index.codes.find((line) => line[0] === code.slice(0, 6))
-		: null;
+	const row = rowOf(code);
 
 	button.querySelector('[data-bfg-hs-code]').textContent = code ? dotted(code) : text.choose || '';
 	button.querySelector('[data-bfg-hs-text]').textContent = row ? rowText(row) : '';
@@ -408,7 +438,7 @@ document.addEventListener('click', (event) => {
 	const button = event.target.closest('[data-bfg-hs-pick]');
 
 	if (button) {
-		pickHsCode((code) => setHsCode(button, code));
+		pickHsCode((code) => setHsCode(button, code), fieldOf(button)?.value || '');
 	}
 });
 

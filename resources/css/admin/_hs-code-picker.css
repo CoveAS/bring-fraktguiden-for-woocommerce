@@ -117,3 +117,10 @@
     color: var(--bfg-text-main);
     font-weight: 600;
 }
+
+/* The code the field already holds. It opens the list, so the line on the left
+   says the shop worker is looking at their own code. */
+.bfg-hs-modal__hit--current {
+    box-shadow: inset 2px 0 0 0 var(--bfg-primary);
+    background: var(--bfg-primary-light);
+}
