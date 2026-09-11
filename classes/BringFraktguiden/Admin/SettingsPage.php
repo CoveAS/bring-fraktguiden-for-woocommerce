@@ -26,6 +26,7 @@ class SettingsPage
 		add_action('admin_notices', [__CLASS__, 'inject_after_notices'], PHP_INT_MAX);
 
 		add_action('admin_enqueue_scripts', __CLASS__ . '::enqueue_admin_styles');
+		add_filter('script_loader_tag', __CLASS__ . '::add_type_module', 10, 2);
 		add_filter('admin_head', __CLASS__ . '::admin_head');
 
 		add_filter('pre_update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'process_settings'], 10, 2);
@@ -426,6 +427,14 @@ class SettingsPage
 			true
 		);
 
+		wp_enqueue_script(
+			'bfg-custom-select',
+			plugins_url('bring-fraktguiden-for-woocommerce/build/js/custom-select.js'),
+			[],
+			Bring_Fraktguiden::VERSION,
+			true
+		);
+
 		if ($hook === 'toplevel_page_bring_fraktguiden_home') {
 			wp_enqueue_script(
 				'bring-home-js',
@@ -448,6 +457,18 @@ class SettingsPage
 				true
 			);
 		}
+	}
+
+	/**
+	 * The custom select script is an ES module, so its tag needs type="module".
+	 * WordPress 5.6 is the lowest supported version and has no wp_enqueue_script_module().
+	 */
+	public static function add_type_module(string $tag, string $handle): string
+	{
+		if ($handle !== 'bfg-custom-select') {
+			return $tag;
+		}
+		return str_replace('<script ', '<script type="module" ', $tag);
 	}
 
 	public static function process_settings($value, $old_value): array

@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/admin.js',
         'resources/js/booking-box.js',
         'resources/js/checkout.js',
+        'resources/js/custom-select.js',
         'resources/js/home.js',
         'resources/js/pro.js',
       ],
