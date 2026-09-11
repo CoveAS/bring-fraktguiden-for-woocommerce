@@ -1,3 +1,5 @@
+import './dialog.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 	const page = document.querySelector('.bfg-admin-page__home');
 	if (!page) return;
@@ -14,39 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.location.href = window.bfgHomeData.proPageUrl + '&celebrate=1';
 	}
 });
-
-/**
- * A step whose button carries data-bfg-dialog opens that dialog.
- */
-document.addEventListener('click', (event) => {
-	const open = event.target.closest('[data-bfg-dialog]');
-	if (open) {
-		document.getElementById(open.dataset.bfgDialog)?.showModal();
-		return;
-	}
-
-	const dialog = event.target.closest('dialog');
-
-	if (event.target.closest('[data-bfg-dialog-close]')) {
-		dialog?.close();
-		return;
-	}
-
-	// A click on the backdrop reports the dialog as the target, so compare the
-	// point with the box of the dialog.
-	if (dialog && outside(dialog, event)) {
-		dialog.close();
-	}
-});
-
-function outside(element, event) {
-	const box = element.getBoundingClientRect();
-
-	return event.clientX < box.left
-		|| event.clientX > box.right
-		|| event.clientY < box.top
-		|| event.clientY > box.bottom;
-}
 
 /**
  * The Change button of step 3 opens the panel that holds the Bring credentials.

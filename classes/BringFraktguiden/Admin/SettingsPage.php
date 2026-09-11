@@ -504,12 +504,12 @@ class SettingsPage
 	}
 
 	/**
-	 * The custom select script is an ES module, so its tag needs type="module".
+	 * These scripts are ES modules, so their tags need type="module".
 	 * WordPress 5.6 is the lowest supported version and has no wp_enqueue_script_module().
 	 */
 	public static function add_type_module(string $tag, string $handle): string
 	{
-		if ($handle !== 'bfg-custom-select') {
+		if (! in_array($handle, ['bfg-custom-select', 'bring-home-js', 'bfg-shipping-test'], true)) {
 			return $tag;
 		}
 		return str_replace('<script ', '<script type="module" ', $tag);

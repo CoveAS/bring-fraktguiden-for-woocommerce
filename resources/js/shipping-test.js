@@ -4,6 +4,8 @@
  * The answer comes back as ready made HTML, so this file only sends the values
  * and puts the answer in place.
  */
+import './dialog.js';
+
 document.addEventListener('click', async (event) => {
 	const box = event.target.closest('.bfg-shipping-test');
 	if (!box) return;
@@ -12,11 +14,6 @@ document.addEventListener('click', async (event) => {
 
 	if (event.target.closest('.bfg-shipping-test__raw')) {
 		dialog.showModal();
-		return;
-	}
-
-	if (event.target.closest('[data-bfg-dialog-close]')) {
-		dialog.close();
 		return;
 	}
 
