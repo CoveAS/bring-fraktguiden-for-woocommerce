@@ -14,6 +14,7 @@ use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use Bring_Fraktguiden\Traits\Settings;
 use BringFraktguiden\Common\Fraktguiden_Service_Table;
 use BringFraktguiden\Settings\Settings as BringSettings;
+use BringFraktguiden\Shipping\FallbackCase;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -49,6 +50,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @var array
 	 */
 	private $trace_messages = [];
+
+	/**
+	 * How many rates push_rate has added during this calculation
+	 *
+	 * @var int
+	 */
+	private int $rates_pushed = 0;
 
 	/**
 	 * 'From country' field
@@ -188,7 +196,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		$this->display_desc = $this->get_setting( 'display_desc' );
 
-		$max_products       = (int) $this->get_setting( 'max_products', 1000 );
+		$max_products       = (int) $this->get_setting( 'max_products' );
 		$this->max_products = $max_products ?: 1000;
 
 		// The packer may make a lot of recursion when the cart contains many items.
@@ -293,6 +301,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( empty( $args['price_decimals'] ) ) {
 			$args['price_decimals'] = 2;
 		}
+		++$this->rates_pushed;
 		$this->add_rate( $args );
 	}
 
@@ -303,33 +312,36 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	public function calculate_shipping( $package = [] ): void {
 		$this->trace_messages = [];
+		$this->rates_pushed   = 0;
 
-		// include_once( 'common/class-fraktguiden-packer.php' );
-		// Offer flat rate if the cart contents exceeds max product.
-		// @TODO: Use the package instead of the cart.
-		$contents = $package['contents'];
-		$settings = BringSettings::instance();
-		if ( ! $settings->calculate_by_weight->value && count($contents) > $this->max_products) {
-			// Package is not calculated by weight and contents exceeds max products.
-			$alt_flat_rate_id = $settings->alt_flat_rate_id->value;
-			if ( $alt_flat_rate_id ) {
-				$rate = array(
-					'id'            => $this->id,
-					'bring_product' => $alt_flat_rate_id,
-					'cost'          => $this->get_price_setting( 'alt_flat_rate' ),
-					'label'         => $this->get_setting( 'alt_flat_rate_label',
-						__( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
-				);
-				$this->push_rate( $rate );
-			}
+		$case = $this->find_rates( $package );
 
+		if ( $this->rates_pushed || ! $case ) {
 			return;
 		}
 
-		$cart                  = $package['contents'];
-		$this->packages_params = $this->pack_order( $cart );
+		$this->push_fallback_rate( $case );
+	}
+
+	/**
+	 * Ask Bring for the rates of a package and push every rate it gives.
+	 *
+	 * @param array $package Package.
+	 *
+	 * @return FallbackCase|null The reason for the empty checkout, or null when Bring gave rates.
+	 * @throws Exception
+	 */
+	private function find_rates( array $package ): ?FallbackCase {
+		// @TODO: Use the package instead of the cart.
+		$contents = $package['contents'];
+		$settings = BringSettings::instance();
+		if ( ! $settings->calculate_by_weight->value && count( $contents ) > $this->max_products ) {
+			return FallbackCase::TooManyProducts;
+		}
+
+		$this->packages_params = $this->pack_order( $contents );
 		if ( ! $this->packages_params ) {
-			return;
+			return FallbackCase::GoodsDoNotFit;
 		}
 
 		if ( is_checkout() ) {
@@ -337,8 +349,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		}
 
 		if ( ! $package['destination']['postcode'] ) {
-			// Postcode must be specified.
-			return;
+			return FallbackCase::NoAddress;
 		}
 
 		$enabled_services = Fraktguiden_Service::all( self::$field_key, true );
@@ -354,12 +365,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'Content-Type' => 'application/json',
 				'Accept'       => 'application/json',
 			],
-			'body'    => json_encode($params),
+			'body'    => json_encode( $params ),
 		];
 
 		// Make the request.
-		$request = new WP_Bring_Request();
-		//$response = $request->getWithCustomerNumber( $url, [], $options );
+		$request  = new WP_Bring_Request();
 		$response = $request->post(
 			self::SERVICE_URL,
 			[],
@@ -368,30 +378,22 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );
-			if (empty($json['fieldErrors'])) {
-				$this->log->add( $this->id, 'Response error: '. $response->get_body() );
-				$this->set_trace_messages( ['An unknown error occurred. Please contact support on bringfraktguiden.no'] );
-				return;
-			}
-			$this->set_trace_messages( $json['fieldErrors'] );
-		}
-		if ( 200 != $response->status_code ) {
-			$no_connection_rate_id = $this->get_setting( 'no_connection_rate_id' );
-			if ( $no_connection_rate_id ) {
-				$this->push_rate(
-					[
-						'id'            => $this->id,
-						'bring_product' => $no_connection_rate_id,
-						'cost'          => $this->get_price_setting( 'no_connection_flat_rate' ),
-						'label'         => $this->get_setting(
-							'no_connection_flat_rate_label',
-								__( 'Shipping', 'bring-fraktguiden-for-woocommerce' )
-							),
-					]
-				);
+			if ( empty( $json['fieldErrors'] ) ) {
+				$this->log->add( $this->id, 'Response error: ' . $response->get_body() );
+				$this->set_trace_messages( [ 'An unknown error occurred. Please contact support on bringfraktguiden.no' ] );
+
+				return FallbackCase::NoAnswer;
 			}
 
-			return;
+			// A field error names the address, the shop data or the package. The
+			// customer can fix none of those, so the offline price answers best.
+			$this->set_trace_messages( $json['fieldErrors'] );
+
+			return FallbackCase::NoAnswer;
+		}
+
+		if ( 200 != $response->status_code ) {
+			return FallbackCase::NoAnswer;
 		}
 
 		// Decode the JSON data from bring.
@@ -400,31 +402,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		if ( isset( $json['traceMessages'] ) ) {
 			$this->set_trace_messages( $json['traceMessages'] );
 		}
-		$exception_rate_id = $this->get_setting( 'exception_rate_id', 'servicepakke' );
 
 		// Filter the response json to get only the selected services from the settings.
 		$rates = $this->get_services_from_response( $json );
 		$rates = apply_filters( 'bring_shipping_rates', $rates, $this );
-
-		// Only push the heavy rate when there are no other bring rates.
-		if ( $exception_rate_id && empty( $rates ) ) {
-			// Check if any package exeeds the max settings.
-			$messages = $this->get_trace_messages();
-			foreach ( $messages as $message ) {
-				if ( str_contains( $message, 'INVALID_MEASUREMENTS' ) ) {
-					$this->push_rate(
-						[
-							'id'            => $this->id,
-							'bring_product' => $exception_rate_id,
-							'cost'          => $this->get_price_setting( 'exception_flat_rate' ),
-							'label'         => $this->get_setting( 'exception_flat_rate_label',
-								__( 'Shipping', 'bring-fraktguiden-for-woocommerce' ) ),
-						]
-					);
-					break;
-				}
-			}
-		}
 
 		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Request url: ' . print_r( self::SERVICE_URL, true ) );
@@ -437,12 +418,63 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			}
 		}
 
-		// Calculate rate.
-		if ( $rates ) {
-			foreach ( $rates as $rate ) {
-				$this->push_rate( $rate );
+		if ( ! $rates ) {
+			return $this->empty_answer_case();
+		}
+
+		foreach ( $rates as $rate ) {
+			$this->push_rate( $rate );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Why a 200 answer carried no rates.
+	 *
+	 * Bring names a package it cannot carry in the trace messages.
+	 */
+	private function empty_answer_case(): FallbackCase {
+		foreach ( $this->get_trace_messages() as $message ) {
+			if ( str_contains( $message, 'INVALID_MEASUREMENTS' ) ) {
+				return FallbackCase::GoodsDoNotFit;
 			}
 		}
+
+		return FallbackCase::NoService;
+	}
+
+	/**
+	 * Show the price the shop owner set for this case.
+	 *
+	 * A rate id of 0 is the "No shipping" option, so the checkout stays empty.
+	 */
+	private function push_fallback_rate( FallbackCase $case ): void {
+		if ( FallbackCase::NoAddress === $case ) {
+			// The customer has not filled in the form yet. Nothing failed.
+			return;
+		}
+
+		$this->log->add( $this->id, 'No rate from Bring. ' . $case->trace() );
+
+		$settings = $case->settings();
+		if ( ! $settings ) {
+			return;
+		}
+
+		$rate_id = $this->get_setting( $settings['rate_id'] );
+		if ( ! $rate_id ) {
+			return;
+		}
+
+		$this->push_rate(
+			[
+				'id'            => $this->id,
+				'bring_product' => $rate_id,
+				'cost'          => $this->get_price_setting( $settings['price'] ),
+				'label'         => $this->get_setting( $settings['label'] ),
+			]
+		);
 	}
 
 	/**
@@ -611,7 +643,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	public function get_bring_language() {
 
-		$selected = $this->get_setting( 'language', 'website' );
+		$selected = $this->get_setting( 'language' );
 
 		$languages = [
 			'en' => 'en',

@@ -540,7 +540,7 @@ return [
 				'title' => __('Service to use', 'bring-fraktguiden-for-woocommerce'),
 				'css' => '',
 				'type' => 'select',
-				'default' => '1',
+				'default' => '0',
 				'options' => [
 					__('No shipping'),
 					...$all_services,
@@ -592,7 +592,7 @@ return [
 				'description' => __('Show this service as a shipping rate if the maximum product limit is exceeded.', 'bring-fraktguiden-for-woocommerce'),
 				'css' => '',
 				'type' => 'select',
-				'default' => 1,
+				'default' => '0',
 				'options' => [
 					__('No shipping'),
 					...$all_services,
@@ -622,7 +622,7 @@ return [
 				'title' => __('Service to use', 'bring-fraktguiden-for-woocommerce'),
 				'css' => '',
 				'type' => 'select',
-				'default' => 1,
+				'default' => '0',
 				'options' => [
 					__('No shipping'),
 					...$all_services,
