@@ -19,15 +19,22 @@ class ServiceWizard
 	/**
 	 * Every service the wizard may recommend.
 	 *
+	 * A sender country leaves out the services Bring does not sell from there,
+	 * so an empty list means the shop cannot use the guide at all.
+	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public static function services(): array
+	public static function services(?string $sender = null): array
 	{
 		$services = [];
 
 		foreach (Config::get('services') as $group) {
 			foreach ($group['services'] as $code => $service) {
 				if (!isset($service['recipient'])) {
+					continue;
+				}
+
+				if ($sender !== null && !in_array($sender, $service['from'] ?? [], true)) {
 					continue;
 				}
 
@@ -111,7 +118,7 @@ class ServiceWizard
 
 		check_admin_referer(self::NONCE);
 
-		$known = array_column(self::services(), 'code');
+		$known = array_column(self::services(self::sender_country()), 'code');
 		$chosen = array_map('sanitize_text_field', wp_unslash($_POST['bfg_services'] ?? []));
 		$codes = array_values(array_intersect($known, $chosen));
 

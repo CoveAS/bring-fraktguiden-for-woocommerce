@@ -170,7 +170,7 @@ class SettingsPage
 			$country_code = ServiceWizard::sender_country();
 			$country = WC()->countries?->countries[$country_code] ?? null;
 			$settings_url = Fraktguiden_Helper::get_settings_url();
-			$services = ServiceWizard::services();
+			$services = ServiceWizard::services($country_code);
 			$active_services = ServiceWizard::active();
 			require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/service-wizard.php';
 			return;
@@ -476,7 +476,7 @@ class SettingsPage
 				wp_add_inline_script(
 					'bfg-service-wizard',
 					'window.bfgServiceWizard = ' . wp_json_encode([
-						'services' => ServiceWizard::services(),
+						'services' => ServiceWizard::services(ServiceWizard::sender_country()),
 						'sender' => ServiceWizard::sender_country(),
 					]) . ';',
 					'before'

@@ -2,6 +2,7 @@
 
 /**
  * @var string $country
+ * @var string $country_code
  * @var string $settings_url
  * @var array  $services
  * @var array  $active_services
@@ -41,6 +42,20 @@
 
 			</p>
 
+			<?php if (!$services): ?>
+				<bfg-notice type="warning">
+					<?php echo esc_html(sprintf(
+						/* translators: %s: the country the shop sends from. */
+						__('Bring sells no shipping service from %s, so the guide has nothing to recommend. Check the From country setting, or choose services manually.', 'bring-fraktguiden-for-woocommerce'),
+						$country ?: $country_code
+					)); ?>
+				</bfg-notice>
+				<p>
+					<a href="<?php echo esc_url($settings_url); ?>" class="bfg-btn bfg-btn--primary">
+						<t>Go to the settings</t>
+					</a>
+				</p>
+			<?php else: ?>
 			<form method="post" class="bfg-wizard">
 				<?php wp_nonce_field(\BringFraktguiden\Admin\ServiceWizard::NONCE); ?>
 
@@ -230,6 +245,7 @@
 					</bfg-section.section>
 				</bfg-section>
 			</form>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
