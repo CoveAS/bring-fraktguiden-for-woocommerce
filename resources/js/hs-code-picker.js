@@ -24,6 +24,14 @@ const MIN_QUERY = 2;
 
 const MAX_HITS = 50;
 
+/**
+ * The search of Tolltariffen, where a shop worker can look further.
+ *
+ * The site reads the word from `q`, and takes `no` or `en` as the language.
+ */
+const TARIFF_SEARCH = 'https://tolltariffen.toll.no/import/search';
+
+
 const config = window.bringHsCodePicker || {};
 const text = config.i18n || {};
 
@@ -109,32 +117,106 @@ function load() {
 	return loading;
 }
 
-/** Return the rows that match what the shop worker typed. */
+/**
+ * Return the score of one word in one text, or 0 when the text lacks it.
+ *
+ * A word start beats a letter inside a word, and an early hit beats a late
+ * one.
+ *
+ * ponytail: Norwegian builds compounds, so "ullgensere" holds "genser" in the
+ * same shape "reagenser" does, and both score low. A word list of Norwegian
+ * stems would tell them apart.
+ */
+function score(haystack, word) {
+	const at = haystack.indexOf(word);
+
+	if (at < 0) {
+		return 0;
+	}
+
+	const starts = 0 === at || !/[a-z0-9æøå]/.test(haystack[at - 1]);
+	const whole = starts && !/[a-z0-9æøå]/.test(haystack[at + word.length] || '');
+
+	// The later the hit sits, the less it says about the goods.
+	const place = Math.max(1, 100 - at);
+
+	return (whole ? 30000 : starts ? 20000 : 10000) + place;
+}
+
+/** Return the rows that match what the shop worker typed, best first. */
 function search(query) {
 	const digits = query.replace(/\D/g, '');
 	const words = query.toLowerCase().split(/\s+/).filter(Boolean);
 	const hits = [];
 
 	for (const row of index.codes) {
-		if (hits.length >= MAX_HITS) {
-			break;
-		}
-
 		// A typed number is a code, so it matches from the first digit.
-		if (digits && row[0].startsWith(digits)) {
-			hits.push(row);
+		if (digits) {
+			if (row[0].startsWith(digits)) {
+				hits.push([row, 0]);
+			}
 
 			continue;
 		}
 
 		const haystack = rowText(row).toLowerCase();
+		let total = 0;
 
-		if (!digits && words.every((word) => haystack.includes(word))) {
-			hits.push(row);
+		for (const word of words) {
+			const one = score(haystack, word);
+
+			if (!one) {
+				total = 0;
+
+				break;
+			}
+
+			total += one;
+		}
+
+		if (total) {
+			hits.push([row, total]);
 		}
 	}
 
-	return hits;
+	hits.sort((a, b) => b[1] - a[1]);
+
+	return hits.slice(0, MAX_HITS).map((hit) => hit[0]);
+}
+
+/**
+ * Write a text into an element, with every typed word marked.
+ *
+ * The text comes from the tariff, so it goes in as text nodes and never as
+ * HTML.
+ */
+function highlight(element, value, words) {
+	element.textContent = '';
+
+	if (!words.length) {
+		element.textContent = value;
+
+		return;
+	}
+
+	const pattern = new RegExp(`(${words.map(quote).join('|')})`, 'gi');
+
+	for (const part of value.split(pattern)) {
+		if (!part) {
+			continue;
+		}
+
+		// split keeps the matched words as their own parts, so a part that
+		// equals a typed word is a hit.
+		const hit = words.includes(part.toLowerCase());
+
+		element.append(hit ? Object.assign(document.createElement('mark'), { textContent: part }) : part);
+	}
+}
+
+/** Return a word that means itself inside a regular expression. */
+function quote(word) {
+	return word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /** Build the modal. One screen holds one. */
@@ -197,7 +279,14 @@ function render(query) {
 
 	const hits = search(query);
 
+	// A typed number is a code, and a code carries no word to mark.
+	const words = /\d/.test(query) ? [] : query.toLowerCase().split(/\s+/).filter(Boolean);
+
 	hint.textContent = hits.length ? '' : text.empty || '';
+
+	if (!hits.length) {
+		hint.append(' ', tariffLink(query));
+	}
 
 	for (const row of hits) {
 		const item = document.createElement('li');
@@ -208,11 +297,26 @@ function render(query) {
 		button.dataset.code = row[0];
 		button.innerHTML = '<span class="bfg-hs-modal__hit-code"></span><span class="bfg-hs-modal__hit-text"></span>';
 		button.querySelector('.bfg-hs-modal__hit-code').textContent = dotted(row[0]);
-		button.querySelector('.bfg-hs-modal__hit-text').textContent = rowText(row);
+		highlight(button.querySelector('.bfg-hs-modal__hit-text'), rowText(row), words);
 
 		item.append(button);
 		list.append(item);
 	}
+}
+
+/** Return a link that runs the same search on Tolltariffen. */
+function tariffLink(query) {
+	// wp-admin writes the locale of the shop here, and every Norwegian locale
+	// starts with an n.
+	const language = document.documentElement.lang.startsWith('n') ? 'no' : 'en';
+	const link = document.createElement('a');
+
+	link.href = `${TARIFF_SEARCH}?q=${encodeURIComponent(query)}&language=${language}`;
+	link.target = '_blank';
+	link.rel = 'noopener';
+	link.textContent = text.tariff || '';
+
+	return link;
 }
 
 /** Hand the chosen code to whoever opened the modal. */

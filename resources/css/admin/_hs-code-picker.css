@@ -42,6 +42,21 @@
 
 /* Modal ------------------------------------------------------------------ */
 
+/* The height stays the same while the shop worker types, so the modal does not
+   move under the pointer. The list alone scrolls. */
+.bfg-hs-modal {
+    display: flex;
+    flex-direction: column;
+    height: min(36rem, calc(100vh - 4rem));
+    max-height: none;
+}
+
+.bfg-hs-modal__head,
+.bfg-hs-modal__search,
+.bfg-hs-modal__hint {
+    flex: none;
+}
+
 .bfg-hs-modal__search {
     width: 100%;
     margin-top: 0.75rem;
@@ -51,15 +66,17 @@
     line-height: 1.4;
 }
 
+/* The line stays even when it holds nothing, so the list below it sits still. */
 .bfg-hs-modal__hint {
     margin: 0.5rem 0 0 0;
+    min-height: 1.4em;
     color: var(--bfg-text-secondary);
 }
 
 .bfg-hs-modal__list {
+    flex: 1;
     margin: 0.5rem 0 0 0;
     padding: 0;
-    max-height: 22rem;
     overflow-y: auto;
     list-style: none;
 }
@@ -91,4 +108,12 @@
 
 .bfg-hs-modal__hit-text {
     color: var(--bfg-text-secondary);
+}
+
+/* The hovered row is already tinted, so the mark stands out by weight and
+   colour instead of a second background. */
+.bfg-hs-modal__hit-text mark {
+    background: transparent;
+    color: var(--bfg-text-main);
+    font-weight: 600;
 }

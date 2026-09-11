@@ -54,6 +54,7 @@ class HsCodePicker
 				'hint'   => __('Type a code, or type what the goods are.', 'bring-fraktguiden-for-woocommerce'),
 				'loading' => __('Loading the customs tariff.', 'bring-fraktguiden-for-woocommerce'),
 				'empty'  => __('No code matches.', 'bring-fraktguiden-for-woocommerce'),
+				'tariff' => __('Search Tolltariffen', 'bring-fraktguiden-for-woocommerce'),
 				'choose' => __('Choose an HS code', 'bring-fraktguiden-for-woocommerce'),
 				'close'  => __('Close', 'bring-fraktguiden-for-woocommerce'),
 			],
