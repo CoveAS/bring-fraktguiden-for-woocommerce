@@ -8,17 +8,12 @@ import './dialog.js';
  * the hidden input beside the button.
  *
  * The whole tariff is 4587 codes, so the browser holds it and searches without
- * a call. It keeps the list in localStorage, so a shop downloads it once.
+ * a call. The route sends an ETag, so a repeat visit gets a short 304 and the
+ * browser reuses the copy in its own cache.
  *
  * PHP passes the route and the texts in window.bringHsCodePicker. See
  * BringFraktguiden\Customs\HsCodePicker.
  */
-
-const STORE_KEY = 'bring-fraktguiden-hs-codes';
-
-// The tariff changes once a year. A month old copy is close enough, and the
-// server keeps its own copy for the same time.
-const STORE_LIFETIME = 30 * 24 * 60 * 60 * 1000;
 
 // A shorter query matches nearly everything, so the list stays empty until the
 // shop worker has typed this much.
@@ -87,31 +82,6 @@ function rowOf(code) {
 	return code && index ? index.codes.find((line) => line[0] === code.slice(0, 6)) || null : null;
 }
 
-/** Read the index the browser saved, or null. */
-function readStore() {
-	try {
-		const saved = JSON.parse(window.localStorage.getItem(STORE_KEY) || 'null');
-
-		return saved && Date.now() - saved.savedAt < STORE_LIFETIME ? saved.index : null;
-	} catch {
-		return null;
-	}
-}
-
-/**
- * Keep the index for the next screen.
- *
- * A browser that refuses to store it still works. The index then lives for the
- * one page, and the next screen fetches it again.
- */
-function writeStore(value) {
-	try {
-		window.localStorage.setItem(STORE_KEY, JSON.stringify({ savedAt: Date.now(), index: value }));
-	} catch {
-		// The quota is full, or the browser stores nothing.
-	}
-}
-
 /** Load the index once. */
 function load() {
 	if (index) {
@@ -119,23 +89,13 @@ function load() {
 	}
 
 	if (!loading) {
-		const saved = readStore();
+		loading = fetch(config.url, { credentials: 'same-origin', headers: { 'X-WP-Nonce': config.nonce } })
+			.then((response) => response.json())
+			.then((value) => {
+				index = value;
 
-		loading = saved
-			? Promise.resolve(saved)
-			: fetch(config.url, { credentials: 'same-origin', headers: { 'X-WP-Nonce': config.nonce } })
-				.then((response) => response.json())
-				.then((value) => {
-					writeStore(value);
-
-					return value;
-				});
-
-		loading = loading.then((value) => {
-			index = value;
-
-			return value;
-		});
+				return value;
+			});
 	}
 
 	return loading;

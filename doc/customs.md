@@ -112,9 +112,17 @@ Attribution 4.0. The file is `tolltariffstruktur.json` on data.toll.no. It holds
 the whole tariff as a tree of sections, chapters, positions and goods.
 
 The plugin fetches that file, keeps one row per six digit code, and holds the
-result in a transient for a month. That gives 4587 codes and about 550 kB. The
-browser reads the rows from the REST route `bring-fraktguiden/v1/hs-codes`, and
-keeps them in localStorage, so a shop downloads the tariff once.
+result in the option `bring_fraktguiden_hs_code_index`. That gives 4587 codes
+and about 550 kB. The browser reads the rows from the REST route
+`bring-fraktguiden/v1/hs-codes`.
+
+The stored index always answers the reader. The daily cron event builds it
+again when it is a month old, so nobody waits for the download. A shop worker
+waits only when no index is stored at all, or when the stored one is three
+months old, which happens on a site whose cron never runs.
+
+The route sends the version of the index as an ETag. A browser that already
+holds that version gets a 304, so the half megabyte travels once.
 
 The tariff names goods down to eight digits. The first six are the
 international HS code, and customs takes those six from an exporter. So the
@@ -123,8 +131,8 @@ list stops at six.
 data.toll.no sends no CORS header, so the browser cannot read the file itself.
 WordPress fetches it.
 
-The tariff changes on 1 January each year. The month long transient picks the
-change up without a plugin release.
+The tariff changes on 1 January each year. The monthly rebuild picks the change
+up without a plugin release.
 
 Bring runs its own HS code search at `/checkout/customs/hscode`. It is not
 documented, and it needs the onboarding token of Posten Bring Checkout, which

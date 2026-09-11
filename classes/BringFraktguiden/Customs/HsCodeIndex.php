@@ -24,20 +24,35 @@ class HsCodeIndex
 	private const URL = 'https://data.toll.no/dataset/6350e783-b989-4c7c-9ec0-de2dcb97363c/resource/68f78255-cbb0-4e75-86b1-3d5928816903/download/tolltariffstruktur.json';
 
 	/**
-	 * The transient that holds the built index.
+	 * The option that holds the built index, with the time it was built.
 	 */
-	private const TRANSIENT = 'bring_fraktguiden_hs_code_index';
+	private const OPTION = 'bring_fraktguiden_hs_code_index';
 
 	/**
-	 * How long a built index is kept. The tariff changes once a year.
+	 * The transient that marks a download in flight.
+	 *
+	 * A failed download leaves the mark behind, so a source that is down is not
+	 * called again on every order screen.
 	 */
-	private const LIFETIME = MONTH_IN_SECONDS;
+	private const FETCHING = 'bring_fraktguiden_hs_code_index_fetching';
 
 	/**
-	 * How long a failed fetch is kept, so a source that is down is not called
-	 * again on every order screen.
+	 * How long the mark of a download lives.
 	 */
 	private const RETRY = 15 * MINUTE_IN_SECONDS;
+
+	/**
+	 * When the daily job builds the index again. The tariff changes once a year.
+	 */
+	private const STALE = MONTH_IN_SECONDS;
+
+	/**
+	 * The oldest index a shop worker is served.
+	 *
+	 * A site whose cron never runs passes this, and then one order screen waits
+	 * for the download.
+	 */
+	private const MAX_AGE = 3 * MONTH_IN_SECONDS;
 
 	/**
 	 * The digits of a code in this index. The tariff holds longer numbers, but
@@ -48,29 +63,84 @@ class HsCodeIndex
 	/**
 	 * Return the index, or an empty index when the tariff cannot be read.
 	 *
+	 * The stored index answers the reader. Only a missing index, or one past
+	 * MAX_AGE, makes the reader wait for the tariff.
+	 *
 	 * @return array{version: string, positions: string[], codes: array<int, array{0: string, 1: int, 2: string}>}
 	 */
 	public static function get(): array
 	{
-		$cached = get_transient(self::TRANSIENT);
+		$stored = get_option(self::OPTION);
 
-		if (is_array($cached)) {
-			return $cached;
+		if (!is_array($stored)) {
+			return self::refresh();
 		}
+
+		if (time() - $stored['built'] > self::MAX_AGE) {
+			return self::refresh();
+		}
+
+		return $stored['index'];
+	}
+
+	/**
+	 * Build the index again when the stored one is old.
+	 *
+	 * The daily cron event calls this. See Bring_Fraktguiden::setup().
+	 */
+	public static function maybe_refresh(): void
+	{
+		// ponytail: the index lived in a transient before version 2.0. Drop this
+		// line once no shop upgrades from an older version.
+		delete_transient(self::OPTION);
+
+		$stored = get_option(self::OPTION);
+
+		if (is_array($stored) && time() - $stored['built'] < self::STALE) {
+			return;
+		}
+
+		self::refresh();
+	}
+
+	/**
+	 * Download the tariff, build the index and store it.
+	 *
+	 * Return the stored index when another process already downloads, or when
+	 * the download fails.
+	 */
+	public static function refresh(): array
+	{
+		$stored = get_option(self::OPTION);
+
+		// ponytail: the mark is read and written in two steps, so two screens
+		// opened in the same second can both download. The cost is one extra
+		// request. An atomic mark needs add_option and a takeover by age.
+		if (get_transient(self::FETCHING)) {
+			return is_array($stored) ? $stored['index'] : self::build([]);
+		}
+
+		set_transient(self::FETCHING, time(), self::RETRY);
 
 		$index = self::build(self::download());
 
-		set_transient(self::TRANSIENT, $index, $index['codes'] ? self::LIFETIME : self::RETRY);
+		if (!$index['codes']) {
+			return is_array($stored) ? $stored['index'] : $index;
+		}
+
+		update_option(self::OPTION, ['built' => time(), 'index' => $index], false);
+		delete_transient(self::FETCHING);
 
 		return $index;
 	}
 
 	/**
-	 * Drop the built index, so the next read fetches the tariff again.
+	 * Drop the stored index, so the next read downloads the tariff again.
 	 */
 	public static function forget(): void
 	{
-		delete_transient(self::TRANSIENT);
+		delete_option(self::OPTION);
+		delete_transient(self::FETCHING);
 	}
 
 	/**
@@ -107,8 +177,8 @@ class HsCodeIndex
 		}
 
 		return [
-			// The browser keeps the index, and compares this to know when the
-			// tariff it holds is stale.
+			// The route sends this as the ETag, so a browser that already holds
+			// this tariff gets a 304.
 			'version'   => substr(md5(serialize($codes)), 0, 12),
 			'positions' => array_keys($positions),
 			'codes'     => $codes,

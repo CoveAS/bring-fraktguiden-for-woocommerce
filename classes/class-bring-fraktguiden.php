@@ -27,6 +27,7 @@ use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Customs\CustomsFields;
+use BringFraktguiden\Customs\HsCodeIndex;
 use BringFraktguiden\Customs\HsCodeIndexRoute;
 use BringFraktguidenPro\BringFraktguidenPro;
 
@@ -104,6 +105,7 @@ class Bring_Fraktguiden {
 			wp_schedule_event( time(), 'daily', 'bring_fraktguiden_cron' );
 		}
 		add_action( 'bring_fraktguiden_cron', __CLASS__ . '::cron_task' );
+		add_action( 'bring_fraktguiden_cron', [ HsCodeIndex::class, 'maybe_refresh' ] );
 
 		add_action( 'woocommerce_before_checkout_form', __CLASS__ . '::checkout_message' );
 		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
