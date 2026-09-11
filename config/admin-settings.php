@@ -541,10 +541,7 @@ return [
 				'css' => '',
 				'type' => 'select',
 				'default' => '0',
-				'options' => [
-					__('No shipping'),
-					...$all_services,
-				],
+				'options' => ['0' => __('No shipping', 'bring-fraktguiden-for-woocommerce')] + $all_services,
 			],
 
 			'calculate_by_weight' => [
@@ -593,10 +590,7 @@ return [
 				'css' => '',
 				'type' => 'select',
 				'default' => '0',
-				'options' => [
-					__('No shipping'),
-					...$all_services,
-				],
+				'options' => ['0' => __('No shipping', 'bring-fraktguiden-for-woocommerce')] + $all_services,
 			],
 
 			// Heavy and oversized
@@ -623,10 +617,7 @@ return [
 				'css' => '',
 				'type' => 'select',
 				'default' => '0',
-				'options' => [
-					__('No shipping'),
-					...$all_services,
-				],
+				'options' => ['0' => __('No shipping', 'bring-fraktguiden-for-woocommerce')] + $all_services,
 			],
 		],
 	],
