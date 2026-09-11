@@ -72,12 +72,21 @@ class Settings
 	public Setting $booking_test_mode_enabled;
 	#[Checkbox]
 	public Setting $booking_use_custom_address;
+	public Setting $booking_address_store_name;
+	public Setting $booking_address_street1;
+	public Setting $booking_address_street2;
+	public Setting $booking_address_postcode;
+	public Setting $booking_address_city;
+	public Setting $booking_address_country;
 	public Setting $booking_address_reference;
 	public Setting $booking_address_contact_person;
 	public Setting $booking_address_phone;
 	public Setting $booking_address_email;
 	#[Checkbox]
 	public Setting $customs_consent;
+	public Setting $auto_set_status_after_booking_success;
+	public Setting $auto_set_status_after_print_label_success;
+	public Setting $booking_home_delivery_package_type;
 
 	/**
 	 * @throws SettingsPropertyException

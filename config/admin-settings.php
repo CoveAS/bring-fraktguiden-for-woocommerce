@@ -12,6 +12,13 @@ $base_country_code = explode(':', get_option('woocommerce_default_country', ''))
 $base_country = $nordic_countries[$base_country_code] ?? __('Choose a country', 'bring-fraktguiden-for-woocommerce');
 $base_postcode = get_option('woocommerce_store_postcode', '');
 
+$all_countries = WC()->countries?->get_countries() ?: [];
+// The order statuses a booking can set. 'none' leaves the order status alone.
+$order_status_options = array_merge(
+	['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
+	wc_get_order_statuses()
+);
+
 $all_services = Fraktguiden_Helper::get_all_services();
 $first_service = reset($all_services);
 
@@ -341,6 +348,45 @@ return [
 				'description' => __('Enable this if you ship from a different address than your WooCommerce store address.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
+			'booking_address_store_name' => [
+				'title' => __('Store Name', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'description' => __('Your business name as it appears on shipping labels.', 'bring-fraktguiden-for-woocommerce'),
+				'placeholder' => get_bloginfo('name'),
+				'custom_attributes' => ['maxlength' => 35],
+			],
+			'booking_address_street1' => [
+				'title' => __('Street Address 1', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'custom_attributes' => [
+					'maxlength' => 35,
+					'autocomplete' => 'address-line1',
+				],
+			],
+			'booking_address_street2' => [
+				'title' => __('Street Address 2', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'custom_attributes' => [
+					'maxlength' => 35,
+					'autocomplete' => 'address-line2',
+				],
+			],
+			'booking_address_postcode' => [
+				'title' => __('Postcode', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'custom_attributes' => ['autocomplete' => 'postal-code'],
+			],
+			'booking_address_city' => [
+				'title' => __('City', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'custom_attributes' => ['autocomplete' => 'address-level2'],
+			],
+			'booking_address_country' => [
+				'title' => __('Country', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'select',
+				'options' => $all_countries,
+				'default' => $base_country_code,
+			],
 			'booking_address_reference' => [
 				'title' => __('Reference', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
@@ -384,6 +430,32 @@ return [
 				'label' => __('I confirm the customs data of my shipments', 'bring-fraktguiden-for-woocommerce'),
 				'description' => __('The goods description, the value and the HS code of every order line are correct and complete, and the goods are neither dangerous nor prohibited. Bring prints this confirmation as your signature on the customs declaration.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
+			],
+			'auto_set_status_after_booking_success' => [
+				'title' => __('Order status after booking', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'select',
+				'description' => __('Order status will be automatically set when successfully booked', 'bring-fraktguiden-for-woocommerce'),
+				'options' => $order_status_options,
+				'default' => 'wc-bring-shipment',
+			],
+			'auto_set_status_after_print_label_success' => [
+				'title' => __('Order status after printing', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'select',
+				'description' => __('Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce'),
+				'options' => $order_status_options,
+				'default' => 'none',
+			],
+			'booking_home_delivery_package_type' => [
+				'title' => __('Package type for home delivery', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'select',
+				'description' => __('Only applies to home delivery services', 'bring-fraktguiden-for-woocommerce'),
+				'options' => [
+					'hd_eur' => 'HD_EUR_PALLET',
+					'hd_half' => 'HD_HALF_PALLET',
+					'hd_quarter' => 'HD_QUARTER_PALLET',
+					'hd_loose' => 'HD_SPECIAL_PALLET',
+				],
+				'default' => 'hd_eur',
 			],
 		],
 	],

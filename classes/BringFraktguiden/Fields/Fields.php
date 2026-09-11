@@ -55,11 +55,20 @@ class Fields
 	public readonly Field $booking_without_bring;
 	public readonly Field $booking_test_mode_enabled;
 	public readonly Field $booking_use_custom_address;
+	public readonly Field $booking_address_store_name;
+	public readonly Field $booking_address_street1;
+	public readonly Field $booking_address_street2;
+	public readonly Field $booking_address_postcode;
+	public readonly Field $booking_address_city;
+	public readonly Field $booking_address_country;
 	public readonly Field $booking_address_reference;
 	public readonly Field $booking_address_contact_person;
 	public readonly Field $booking_address_phone;
 	public readonly Field $booking_address_email;
 	public readonly Field $customs_consent;
+	public readonly Field $auto_set_status_after_booking_success;
+	public readonly Field $auto_set_status_after_print_label_success;
+	public readonly Field $booking_home_delivery_package_type;
 
 	protected function __construct()
 	{

@@ -4,7 +4,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Fields\Fields;
 
 /**
- * @var string $currency
  * @var Fields $fields
  */
 ?>
@@ -47,26 +46,19 @@ use BringFraktguiden\Fields\Fields;
 					</div>
 
 					<div id="bfg-custom-shipping-address" style="">
-						<bfg-field.text id="booking_address_store_name" label="Store Name"
-							description="Your business name as it appears on shipping labels.">
-							<input type="text" id="booking_address_store_name" name="booking_address_store_name"
-								maxlength="35" placeholder="<?php echo esc_attr(get_bloginfo('name')); ?>" />
-						</bfg-field.text>
-
 						<div class="bfg-field">
-							<label for="booking_address_street1">
-								<t>Street Address 1</t>
-							</label>
-							<input type="text" id="booking_address_street1" name="booking_address_street1"
-								maxlength="35" autocomplete="address-line1" />
+							<?php echo $fields->booking_address_store_name->label(); ?>
+							<?php echo $fields->booking_address_store_name; ?>
 						</div>
 
 						<div class="bfg-field">
-							<label for="booking_address_street2">
-								<t>Street Address 2</t>
-							</label>
-							<input type="text" id="booking_address_street2" name="booking_address_street2"
-								maxlength="35" autocomplete="address-line2" />
+							<?php echo $fields->booking_address_street1->label(); ?>
+							<?php echo $fields->booking_address_street1; ?>
+						</div>
+
+						<div class="bfg-field">
+							<?php echo $fields->booking_address_street2->label(); ?>
+							<?php echo $fields->booking_address_street2; ?>
 						</div>
 
 						<div class="bfg-field">
@@ -75,31 +67,22 @@ use BringFraktguiden\Fields\Fields;
 							</h3>
 							<div class="bfgu:flex bfgu:flex-col bfgu:gap-8">
 								<div class="bfgu:flex-1">
-									<label for="booking_address_postcode">
-										<t>Postcode</t>
-									</label>
-									<input type="text" id="booking_address_postcode" name="booking_address_postcode"
-										autocomplete="postal-code" />
+									<?php echo $fields->booking_address_postcode->label(); ?>
+									<?php echo $fields->booking_address_postcode->field(); ?>
 								</div>
 								<div class="bfgu:flex-1">
-									<label for="booking_address_city">
-										<t>City</t>
-									</label>
-									<input type="text" id="booking_address_city" name="booking_address_city"
-										autocomplete="address-level2" />
+									<?php echo $fields->booking_address_city->label(); ?>
+									<?php echo $fields->booking_address_city->field(); ?>
 								</div>
 								<div class="bfgu:flex-1">
-									<bfg-field.select id="booking_address_country" name="booking_address_country"
-										label="Country">
-										<?php foreach ($countries as $code => $name) {
-											$selected = $code === $base_country ? ' selected' : '';
-											echo '<option value="' . esc_attr($code) . '"' . $selected . '>' . esc_html($name) . '</option>';
-										} ?>
-									</bfg-field.select>
+									<?php echo $fields->booking_address_country->label(); ?>
+									<?php echo $fields->booking_address_country->field(); ?>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 
 				<bfg-section.header class="bfg-section__header--divider" title="Contact Information"></bfg-section.header>
@@ -150,23 +133,15 @@ use BringFraktguiden\Fields\Fields;
 							completed</bfg-t>
 					</bfg-notice>
 
-					<bfg-field.select id="auto_set_status_after_booking_success"
-						name="auto_set_status_after_booking_success" label="Order status after booking"
-						description="Order status will be automatically set when successfully booked">
-						<?php foreach ($booking_status_options as $value => $label) {
-							$selected = $value === $booking_status_value ? ' selected' : '';
-							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						} ?>
-					</bfg-field.select>
+					<div class="bfg-field">
+						<?php echo $fields->auto_set_status_after_booking_success->label(); ?>
+						<?php echo $fields->auto_set_status_after_booking_success; ?>
+					</div>
 
-					<bfg-field.select id="auto_set_status_after_print_label_success"
-						name="auto_set_status_after_print_label_success" label="Order status after printing"
-						description="Order status will be automatically set when a label is downloaded">
-						<?php foreach ($print_status_options as $value => $label) {
-							$selected = $value === $print_status_value ? ' selected' : '';
-							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						} ?>
-					</bfg-field.select>
+					<div class="bfg-field">
+						<?php echo $fields->auto_set_status_after_print_label_success->label(); ?>
+						<?php echo $fields->auto_set_status_after_print_label_success; ?>
+					</div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
@@ -177,13 +152,10 @@ use BringFraktguiden\Fields\Fields;
 					description="Configure package type for home delivery services"></bfg-section.header>
 
 				<bfg-section.section>
-					<bfg-field.select id="booking_home_delivery_package_type" name="booking_home_delivery_package_type"
-						label="Package type for home delivery" description="Only applies to home delivery services">
-						<?php foreach ($package_type_options as $value => $label) {
-							$selected = $value === $package_type_value ? ' selected' : '';
-							echo '<option value="' . esc_attr($value) . '"' . $selected . '>' . esc_html($label) . '</option>';
-						} ?>
-					</bfg-field.select>
+					<div class="bfg-field">
+						<?php echo $fields->booking_home_delivery_package_type->label(); ?>
+						<?php echo $fields->booking_home_delivery_package_type; ?>
+					</div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
