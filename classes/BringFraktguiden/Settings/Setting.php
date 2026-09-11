@@ -78,7 +78,10 @@ class Setting
 			'select' => $param,
 			'info',
 			'url' => esc_url($param),
-			'text' => wp_kses_post($param),
+			'email' => sanitize_email($param),
+			'tel',
+			// A text setting holds plain text, so it keeps no HTML.
+			'text' => sanitize_text_field($param),
 			'checkbox' => filter_var($param, FILTER_VALIDATE_BOOL),
 			'number' => $param === '' ? 0 : floatval($param),
 			default => throw new \Exception("Unknown data type: " . $this->data['type']),

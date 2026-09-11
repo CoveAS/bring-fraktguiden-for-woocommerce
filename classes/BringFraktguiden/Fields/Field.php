@@ -99,6 +99,8 @@ class Field
 			'time',
 			'number',
 			'url',
+			'tel',
+			'email',
 			'text' => 'input',
 			'checkbox' => 'checkbox',
 			'select' => 'select',
