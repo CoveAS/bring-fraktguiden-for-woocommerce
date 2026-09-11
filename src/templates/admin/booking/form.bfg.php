@@ -178,9 +178,9 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 			class="bfg-booking-form__status"
 			data-bfg-status
 			aria-live="polite"
-			data-saving="<?php esc_attr_e('Saving the draft…', 'bring-fraktguiden-for-woocommerce'); ?>"
-			data-saved="<?php esc_attr_e('Draft saved at %s', 'bring-fraktguiden-for-woocommerce'); ?>"
-			data-failed="<?php esc_attr_e('The draft was not saved. Edit a field to try again.', 'bring-fraktguiden-for-woocommerce'); ?>"
+			data-saving="<?php esc_attr_e('Saving…', 'bring-fraktguiden-for-woocommerce'); ?>"
+			data-saved="<?php esc_attr_e('Saved at %s', 'bring-fraktguiden-for-woocommerce'); ?>"
+			data-failed="<?php esc_attr_e('Not saved. Edit a field to try again.', 'bring-fraktguiden-for-woocommerce'); ?>"
 			hidden
 		></p>
 		<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-reset><t>Reset</t></button>
