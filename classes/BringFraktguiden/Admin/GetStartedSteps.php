@@ -52,10 +52,11 @@ class GetStartedSteps
 
 		$steps [] = new Step(
 			label: __('Test shipping', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Test with a sample product', 'bring-fraktguiden-for-woocommerce'),
+			description: __('Ask Bring for the price of a sample parcel', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('edit.php?post_type=product'),
 			actionText: __('Test shipping', 'bring-fraktguiden-for-woocommerce'),
-			completed: false,
+			completed: ShippingTest::passed(),
+			form: 'test-shipping',
 		);
 
 		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';

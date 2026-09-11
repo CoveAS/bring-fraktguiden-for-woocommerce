@@ -15,12 +15,13 @@ use Bring_Fraktguiden\Common\Fraktguiden_License;
 use Bring_Fraktguiden\Common\FraktguidenSystemInfo;
 use Bring_Fraktguiden\Common\Rate_Eta;
 use Bring_Fraktguiden\Common\RateDescription;
-use Bring_Fraktguiden\Debug\Fraktguiden_Product_Debug;
 use Bring_Fraktguiden\ResourceManagement\Scripts;
 use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
 use BringFraktguiden\Admin\FallbackPrice;
+use BringFraktguiden\Admin\ProductShippingTest;
+use BringFraktguiden\Admin\ShippingTest;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
@@ -91,7 +92,8 @@ class Bring_Fraktguiden {
 
 		Fraktguiden_Minimum_Dimensions::setup();
 
-		Fraktguiden_Product_Debug::setup();
+		ProductShippingTest::init();
+		ShippingTest::init();
 		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
 			Styles::setup();
 		}

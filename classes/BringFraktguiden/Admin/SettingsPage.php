@@ -463,6 +463,14 @@ class SettingsPage
 				'proPageUrl' => admin_url('admin.php?page=bring_fraktguiden_pro'),
 			]);
 
+			wp_enqueue_script(
+				'bfg-shipping-test',
+				plugins_url('bring-fraktguiden-for-woocommerce/build/js/shipping-test.js'),
+				[],
+				Bring_Fraktguiden::VERSION,
+				true
+			);
+
 			if (($_GET['sub-page'] ?? '') === 'service-wizard') {
 				wp_enqueue_script(
 					'bfg-service-wizard',

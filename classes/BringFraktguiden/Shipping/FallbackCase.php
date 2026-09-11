@@ -59,6 +59,18 @@ enum FallbackCase
 		};
 	}
 
+	/** The line the shipping test shows the shop owner. */
+	public function reason(): string
+	{
+		return match ($this) {
+			self::TooManyProducts => __('The cart holds more product lines than the plugin sends to Bring.', 'bring-fraktguiden-for-woocommerce'),
+			self::GoodsDoNotFit   => __('The goods do not fit the Bring size and weight limits.', 'bring-fraktguiden-for-woocommerce'),
+			self::NoAnswer        => __('Bring did not answer.', 'bring-fraktguiden-for-woocommerce'),
+			self::NoService       => __('Bring sells no service for this address.', 'bring-fraktguiden-for-woocommerce'),
+			self::NoAddress       => __('Fill in a post code.', 'bring-fraktguiden-for-woocommerce'),
+		};
+	}
+
 	/** The line the log writes when this case ends the calculation. */
 	public function trace(): string
 	{

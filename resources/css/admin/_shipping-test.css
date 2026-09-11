@@ -1,0 +1,71 @@
+/* The shipping test block, on the setup page and on the product screen. */
+
+.bfg-shipping-test__form {
+	display: flex;
+	align-items: flex-end;
+	gap: 8px;
+	max-width: 560px;
+}
+
+.bfg-shipping-test__field {
+	flex: 1;
+	min-width: 0;
+}
+
+.bfg-shipping-test__field select {
+	width: 100%;
+}
+
+/* The room stays reserved, so the step list below does not jump on an answer. */
+.bfg-shipping-test__result {
+	min-height: 24px;
+	margin-top: 12px;
+	font-size: 14px;
+}
+
+.bfg-shipping-test__problem {
+	margin: 0;
+	font-weight: 600;
+	color: #B32D2E;
+}
+
+.bfg-shipping-test__pass {
+	margin: 0;
+	font-weight: 600;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-shipping-test__messages {
+	margin: 4px 0 0;
+	padding-left: 18px;
+	list-style: disc;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-shipping-test__rates {
+	margin: 8px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bfg-shipping-test__rate {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	padding: 8px 0;
+	border-top: 1px solid var(--bfg-border);
+}
+
+.bfg-shipping-test__rate-label {
+	font-weight: 600;
+}
+
+.bfg-shipping-test__rate-date {
+	color: var(--bfg-text-muted);
+}
+
+/* The price sits at the right edge of the row. */
+.bfg-shipping-test__rate-cost {
+	margin-left: auto;
+	font-weight: 600;
+}

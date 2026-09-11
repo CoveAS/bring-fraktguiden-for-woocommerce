@@ -58,6 +58,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	private int $rates_pushed = 0;
 
+	/** Why the last calculation got no rate from Bring. */
+	private ?FallbackCase $fallback_case = null;
+
 	/**
 	 * 'From country' field
 	 *
@@ -313,6 +316,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function calculate_shipping( $package = [] ): void {
 		$this->trace_messages = [];
 		$this->rates_pushed   = 0;
+		$this->fallback_case  = null;
 
 		$case = $this->find_rates( $package );
 
@@ -320,7 +324,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			return;
 		}
 
+		$this->fallback_case = $case;
+
 		$this->push_fallback_rate( $case );
+	}
+
+	/**
+	 * Why the last calculation got no rate from Bring.
+	 *
+	 * Null when Bring gave the rates. A rate pushed after a case is the
+	 * fallback rate of the shop, not a price from Bring.
+	 */
+	public function get_fallback_case(): ?FallbackCase {
+		return $this->fallback_case;
 	}
 
 	/**
