@@ -40,7 +40,7 @@ $bfg_postcode = WC()->countries->get_base_postcode();
 			</select>
 		</div>
 
-		<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm bfg-shipping-test__run">
+		<button type="button" class="bfg-btn bfg-btn--primary bfg-shipping-test__run">
 			<t>Test shipping</t>
 		</button>
 	</div>

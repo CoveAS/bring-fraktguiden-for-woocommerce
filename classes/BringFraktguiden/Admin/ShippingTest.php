@@ -113,10 +113,10 @@ final class ShippingTest
 		// A rate pushed after a fallback case is the price of the shop, not a
 		// price from Bring. The test passes only on a price from Bring.
 		if ($case) {
-			return ShippingTestResult::problem($case->reason(), $bring->get_trace_messages());
+			return ShippingTestResult::problem($case->reason(), $bring->get_trace_messages(), $bring->get_last_call());
 		}
 
-		return ShippingTestResult::rates($rates);
+		return ShippingTestResult::rates($rates, $bring->get_last_call());
 	}
 
 	/** @return array<string, mixed> */

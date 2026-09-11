@@ -64,5 +64,10 @@ $product_id = 0;
 			<t>Send a sample parcel of one kilo to an address and see what the checkout would show.</t>
 		</p>
 		<?php require dirname(__FILE__, 6) . '/build/templates/admin/parts/shipping-test.php'; ?>
+
+		<p class="bfg-step-form__help">
+			<t>The same test sits on every product, and tests the weight and the size of that product.</t>
+			<a href="<?php echo esc_url(admin_url('edit.php?post_type=product')); ?>"><t>Open your products</t></a>
+		</p>
 	</div>
 </div>

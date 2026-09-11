@@ -62,6 +62,15 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	private ?FallbackCase $fallback_case = null;
 
 	/**
+	 * The bodies of the last Bring rate query, as [ request, answer ].
+	 *
+	 * Only the bodies. The headers carry the API key of the shop.
+	 *
+	 * @var array{request: string, answer: string}|null
+	 */
+	private ?array $last_call = null;
+
+	/**
 	 * 'From country' field
 	 *
 	 * @var string
@@ -317,6 +326,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->trace_messages = [];
 		$this->rates_pushed   = 0;
 		$this->fallback_case  = null;
+		$this->last_call      = null;
 
 		$case = $this->find_rates( $package );
 
@@ -337,6 +347,17 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 */
 	public function get_fallback_case(): ?FallbackCase {
 		return $this->fallback_case;
+	}
+
+	/**
+	 * The bodies of the last Bring rate query.
+	 *
+	 * Null when the calculation stopped before it asked Bring.
+	 *
+	 * @return array{request: string, answer: string}|null
+	 */
+	public function get_last_call(): ?array {
+		return $this->last_call;
 	}
 
 	/**
@@ -391,6 +412,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			[],
 			$options
 		);
+
+		$this->last_call = [
+			'request' => $options['body'],
+			'answer'  => (string) $response->get_body(),
+		];
 
 		if ( 400 == $response->status_code ) {
 			$json = json_decode( $response->get_body(), true );

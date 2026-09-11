@@ -12,6 +12,13 @@
 	min-width: 0;
 }
 
+/* The button is the main action, so the labels stay quiet. */
+.bfg-shipping-test__field .bfg-step-form__label {
+	font-size: var(--bfg-text-level-6);
+	font-weight: 400;
+	color: var(--bfg-text-muted);
+}
+
 .bfg-shipping-test__field select {
 	width: 100%;
 }
@@ -19,45 +26,66 @@
 /* The room stays reserved, so the step list below does not jump on an answer. */
 .bfg-shipping-test__result {
 	min-height: 24px;
-	margin-top: 12px;
+	margin-top: 16px;
 	font-size: 14px;
 }
 
-.bfg-shipping-test__problem {
+/* The answer sits in its own card, tinted by the outcome. */
+.bfg-shipping-test__card {
+	padding: 12px 16px;
+	border: 1px solid var(--bfg-border);
+	border-radius: var(--bfg-radius-input);
+	background: var(--bfg-bg-card);
+}
+
+.bfg-shipping-test__card--pass {
+	border-color: #A7D8B4;
+	background: #F1F9F4;
+}
+
+.bfg-shipping-test__card--problem {
+	border-color: #E7B3B3;
+	background: #FDF4F4;
+}
+
+.bfg-shipping-test__headline {
 	margin: 0;
 	font-weight: 600;
+	color: var(--bfg-text-main);
+}
+
+.bfg-shipping-test__card--problem .bfg-shipping-test__headline {
 	color: #B32D2E;
 }
 
-.bfg-shipping-test__pass {
-	margin: 0;
-	font-weight: 600;
-	color: var(--bfg-text-secondary);
-}
-
 .bfg-shipping-test__messages {
-	margin: 4px 0 0;
+	margin: 6px 0 0;
 	padding-left: 18px;
 	list-style: disc;
 	color: var(--bfg-text-secondary);
 }
 
+/* One text size and one weight across the whole table. */
 .bfg-shipping-test__rates {
-	margin: 8px 0 0;
+	margin: 0;
 	padding: 0;
 	list-style: none;
+	font-size: var(--bfg-text-level-6);
+	font-weight: 500;
+	color: var(--bfg-text-main);
 }
 
 .bfg-shipping-test__rate {
 	display: flex;
 	align-items: baseline;
 	gap: 8px;
-	padding: 8px 0;
-	border-top: 1px solid var(--bfg-border);
+	padding: 10px 0;
+	border-top: 1px solid #D3E7DA;
 }
 
-.bfg-shipping-test__rate-label {
-	font-weight: 600;
+.bfg-shipping-test__rate:first-child {
+	border-top: 0;
+	padding-top: 0;
 }
 
 .bfg-shipping-test__rate-date {
@@ -67,5 +95,60 @@
 /* The price sits at the right edge of the row. */
 .bfg-shipping-test__rate-cost {
 	margin-left: auto;
-	font-weight: 600;
+}
+
+.bfg-shipping-test__raw-line {
+	margin: 8px 0 0;
+}
+
+/* A link in every way but the tag. A button carries the click. */
+.bfg-shipping-test__raw {
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	font-size: var(--bfg-text-level-6);
+	color: var(--bfg-primary);
+	text-decoration: underline;
+}
+
+.bfg-shipping-test__json {
+	margin: 0;
+	padding: 12px 0;
+	overflow-x: auto;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 12px;
+	line-height: 1.5;
+	white-space: pre;
+	tab-size: 2;
+}
+
+/* The JSON is wide and tall, so the dialog takes what the screen allows. */
+.bfg-shipping-test__dialog {
+	width: min(820px, 92vw);
+	max-height: calc(100vh - 4rem);
+}
+
+/* The tab row stays put while the block below it scrolls. */
+.bfg-shipping-test__tabs {
+	display: flex;
+	gap: 4px;
+	margin-top: 12px;
+	border-bottom: 1px solid var(--bfg-border);
+}
+
+.bfg-shipping-test__tab {
+	padding: 8px 12px;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	background: none;
+	cursor: pointer;
+	font-size: var(--bfg-text-level-6);
+	font-weight: 500;
+	color: var(--bfg-text-muted);
+}
+
+.bfg-shipping-test__tab[aria-selected="true"] {
+	border-bottom-color: var(--bfg-primary);
+	color: var(--bfg-primary);
 }

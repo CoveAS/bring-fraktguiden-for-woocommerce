@@ -5,10 +5,34 @@
  * and puts the answer in place.
  */
 document.addEventListener('click', async (event) => {
+	const box = event.target.closest('.bfg-shipping-test');
+	if (!box) return;
+
+	const dialog = box.querySelector('.bfg-shipping-test__dialog');
+
+	if (event.target.closest('.bfg-shipping-test__raw')) {
+		dialog.showModal();
+		return;
+	}
+
+	if (event.target.closest('[data-bfg-dialog-close]')) {
+		dialog.close();
+		return;
+	}
+
+	const tab = event.target.closest('.bfg-shipping-test__tab');
+	if (tab) {
+		dialog.querySelectorAll('.bfg-shipping-test__tab').forEach((other) => {
+			const chosen = other === tab;
+			other.setAttribute('aria-selected', String(chosen));
+			dialog.querySelector('#' + other.getAttribute('aria-controls')).hidden = !chosen;
+		});
+		return;
+	}
+
 	const button = event.target.closest('.bfg-shipping-test__run');
 	if (!button) return;
 
-	const box = button.closest('.bfg-shipping-test');
 	const result = box.querySelector('.bfg-shipping-test__result');
 
 	button.disabled = true;
