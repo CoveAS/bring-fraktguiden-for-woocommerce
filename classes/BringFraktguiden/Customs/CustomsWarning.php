@@ -41,7 +41,7 @@ class CustomsWarning
 		}
 
 		$lines         = self::lines($order);
-		$shop_messages = CustomsRoute::EXPORT === $reason ? self::shop_messages() : [];
+		$shop_messages = self::shop_messages($reason);
 
 		if (!$lines && !$shop_messages) {
 			return null;
@@ -71,13 +71,17 @@ class CustomsWarning
 	}
 
 	/**
+	 * Return the problems of the shop settings.
+	 *
+	 * @param string $route A CustomsRoute constant.
+	 *
 	 * @return array<int, string>
 	 */
-	private static function shop_messages(): array
+	private static function shop_messages(string $route): array
 	{
 		return array_map(
-			fn(ExportProblem $problem) => $problem->message(),
-			ExportCheck::problems()
+			fn(ShopProblem $problem) => $problem->message(),
+			ShopCheck::problems($route)
 		);
 	}
 }

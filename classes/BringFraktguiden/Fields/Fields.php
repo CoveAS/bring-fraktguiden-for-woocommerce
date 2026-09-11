@@ -55,6 +55,11 @@ class Fields
 	public readonly Field $booking_without_bring;
 	public readonly Field $booking_test_mode_enabled;
 	public readonly Field $booking_use_custom_address;
+	public readonly Field $booking_address_reference;
+	public readonly Field $booking_address_contact_person;
+	public readonly Field $booking_address_phone;
+	public readonly Field $booking_address_email;
+	public readonly Field $customs_consent;
 
 	protected function __construct()
 	{

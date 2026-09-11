@@ -72,6 +72,12 @@ class Settings
 	public Setting $booking_test_mode_enabled;
 	#[Checkbox]
 	public Setting $booking_use_custom_address;
+	public Setting $booking_address_reference;
+	public Setting $booking_address_contact_person;
+	public Setting $booking_address_phone;
+	public Setting $booking_address_email;
+	#[Checkbox]
+	public Setting $customs_consent;
 
 	/**
 	 * @throws SettingsPropertyException

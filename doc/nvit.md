@@ -99,6 +99,9 @@ The rule has two parts, and one class asks both.
 | `BringFraktguiden\Customs\NvitServices` | Does the rule cover the service? |
 | `BringFraktguiden\Customs\NvitRule` | Must this booking carry transit data? |
 
+The shop must also confirm the customs data. `ShopCheck` reads that setting for
+both rules, and the order screen warns when it is off.
+
 Bring publishes the postal code ranges as prose on its own page and offers no
 endpoint and no file for them, so `NvitPostalCodes` holds them.
 
@@ -157,8 +160,11 @@ Bring's own NVIT example, cut down to the customs part:
 ```
 
 Bring's NVIT examples leave out `consent` and `natureOfCargo`, although the
-schema marks both as required. This is not confirmed with Bring. Test a real
-booking before you rely on it.
+schema marks both as required.
+
+The plugin sends both on an NVIT booking. Posten Bring Checkout sends both on
+every NVIT booking as well, so the API takes them. See
+[export](export.md) for where the plugin keeps the two values.
 
 The full examples in Bring's documentation are named "Norwegian Parcels with
 NVIT information" and "Nordic Parcels with NVIT information".

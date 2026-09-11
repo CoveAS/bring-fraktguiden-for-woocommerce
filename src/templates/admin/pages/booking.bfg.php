@@ -105,59 +105,36 @@ use BringFraktguiden\Fields\Fields;
 				<bfg-section.header class="bfg-section__header--divider" title="Contact Information"></bfg-section.header>
 
 				<bfg-section.section>
-					<bfg-field.text
-						id="booking_address_reference"
-						label="Reference"
-						description="The store's reference printed on the shipping label. Usually {order_id}, but can also be {products}.">
-						<input
-							type="text"
-							id="booking_address_reference"
-							name="booking_address_reference"
-							placeholder="<?php echo esc_attr__('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'); ?>"
-							maxlength="35"
-							aria-required="true"
-							required
-						/>
-					</bfg-field.text>
+					<div class="bfg-field">
+						<?php echo $fields->booking_address_reference->label(); ?>
+						<?php echo $fields->booking_address_reference; ?>
+					</div>
 
-					<bfg-field.text
-						id="booking_address_contact_person"
-						label="Contact Person">
-						<input
-							type="text"
-							id="booking_address_contact_person"
-							name="booking_address_contact_person"
-							autocomplete="name"
-							aria-required="true"
-							required
-						/>
-					</bfg-field.text>
+					<div class="bfg-field">
+						<?php echo $fields->booking_address_contact_person->label(); ?>
+						<?php echo $fields->booking_address_contact_person; ?>
+					</div>
 
-					<bfg-field.text
-						id="booking_address_phone"
-						label="Phone">
-						<input
-							type="tel"
-							id="booking_address_phone"
-							name="booking_address_phone"
-							autocomplete="tel"
-							aria-required="true"
-							required
-						/>
-					</bfg-field.text>
+					<div class="bfg-field">
+						<?php echo $fields->booking_address_phone->label(); ?>
+						<?php echo $fields->booking_address_phone; ?>
+					</div>
 
-					<bfg-field.text
-						id="booking_address_email"
-						label="Email">
-						<input
-							type="email"
-							id="booking_address_email"
-							name="booking_address_email"
-							autocomplete="email"
-							aria-required="true"
-							required
-						/>
-					</bfg-field.text>
+					<div class="bfg-field">
+						<?php echo $fields->booking_address_email->label(); ?>
+						<?php echo $fields->booking_address_email; ?>
+					</div>
+
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
+				</bfg-section.section>
+			</bfg-section>
+
+			<bfg-section>
+				<bfg-section.header title="Customs"
+					description="Bring needs a signed confirmation for a shipment that leaves Norway"></bfg-section.header>
+
+				<bfg-section.section>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->customs_consent; ?></div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>

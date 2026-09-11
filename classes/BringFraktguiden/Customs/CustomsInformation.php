@@ -10,9 +10,8 @@ use WC_Order;
  * The object covers the whole order, because a WooCommerce order does not say
  * which goods travel on which shipping line. See the failed idea in CLAUDE.md.
  *
- * Only NVIT is built. An export needs a consent flag, a cargo type and the
- * exporter and importer parties, and no settings screen holds those yet. See
- * doc/export.md.
+ * Only NVIT is built. An export also needs the exporter and the importer
+ * parties, and no settings screen holds those yet. See doc/export.md.
  */
 class CustomsInformation
 {
@@ -36,9 +35,18 @@ class CustomsInformation
 			return null;
 		}
 
-		return [
+		$information = [
 			'type'                => 'NVIT',
 			'customsDeclarations' => $declarations,
+			'natureOfCargo'       => ['type' => NatureOfCargo::from_request()->value],
 		];
+
+		// A shop that has not confirmed signs nothing. An absent field is not a
+		// refusal, so leave it out rather than send false.
+		if (CustomsConsent::given()) {
+			$information['consent'] = true;
+		}
+
+		return $information;
 	}
 }

@@ -125,9 +125,24 @@ The booking box warns when an order needs customs data and lacks it.
 `src/templates/admin/parts/customs-warning.bfg.php`.
 
 The warning never stops a booking. Bring holds the guard, and answers with the
-reason when it refuses. The three shop settings that an export needs, consent,
-the exporter number and the cargo type, have no settings screen yet, so an
-export order reports all three.
+reason when it refuses. `ShopCheck` reads the shop settings, and
+`ShopProblem` names each one that is empty.
+
+The exporter number has no settings screen yet, so every export order reports it.
+
+## Where the plugin keeps consent and the cargo type
+
+The consent is the setting `customs_consent`, on the Booking settings page.
+`CustomsConsent` reads it. The confirmation says how the whole shop works, so it
+is a setting and not a tick on each order. The booking sends `consent` only when
+the setting is on, because an absent field is not a refusal but a `false` is.
+
+The cargo type is a select on the booking box of the order screen, in the field
+`_bring_nature_of_cargo`. `NatureOfCargo` holds the values and reads the form. A
+bulk booking sends no form, so it books `SALE_OF_GOODS`.
+
+The select leaves out `OTHER`, because `OTHER` needs a free text
+`natureOfCargo.detail` and the form holds no text field.
 
 ## Sources
 

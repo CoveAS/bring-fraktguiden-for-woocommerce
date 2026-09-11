@@ -341,6 +341,50 @@ return [
 				'description' => __('Enable this if you ship from a different address than your WooCommerce store address.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
+			'booking_address_reference' => [
+				'title' => __('Reference', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'description' => __('The store\'s reference printed on the shipping label. Usually {order_id}, but can also be {products}.', 'bring-fraktguiden-for-woocommerce'),
+				'placeholder' => __('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'),
+				'custom_attributes' => [
+					'maxlength' => 35,
+					'aria-required' => 'true',
+					'required' => 'required',
+				],
+			],
+			'booking_address_contact_person' => [
+				'title' => __('Contact Person', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'text',
+				'custom_attributes' => [
+					'autocomplete' => 'name',
+					'aria-required' => 'true',
+					'required' => 'required',
+				],
+			],
+			'booking_address_phone' => [
+				'title' => __('Phone', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'tel',
+				'custom_attributes' => [
+					'autocomplete' => 'tel',
+					'aria-required' => 'true',
+					'required' => 'required',
+				],
+			],
+			'booking_address_email' => [
+				'title' => __('Email', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'email',
+				'custom_attributes' => [
+					'autocomplete' => 'email',
+					'aria-required' => 'true',
+					'required' => 'required',
+				],
+			],
+			'customs_consent' => [
+				'type' => 'checkbox',
+				'label' => __('I confirm the customs data of my shipments', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('The goods description, the value and the HS code of every order line are correct and complete, and the goods are neither dangerous nor prohibited. Bring prints this confirmation as your signature on the customs declaration.', 'bring-fraktguiden-for-woocommerce'),
+				'default' => 'no',
+			],
 		],
 	],
 

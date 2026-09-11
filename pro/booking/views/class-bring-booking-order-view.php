@@ -12,7 +12,9 @@ use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguiden\Customs\CustomsRoute;
 use BringFraktguiden\Customs\CustomsWarning;
+use BringFraktguiden\Customs\NatureOfCargo;
 use BringFraktguiden\Customs\CustomsWarningView;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use DateTime;
@@ -249,6 +251,8 @@ class Bring_Booking_Order_View {
 		$consignment   = Bring_Booking_Consignment_Request::create( $shipping_item );
 		self::render_parties( $consignment );
 		?>
+		<?php self::render_nature_of_cargo( $order ); ?>
+
 		<div class="bring-form-field">
 			<label for="_bring_additional_info_sender">
 				<?php esc_html_e( 'Additional Info', 'bring-fraktguiden-for-woocommerce' ); ?>
@@ -575,6 +579,45 @@ class Bring_Booking_Order_View {
 		}
 		// @TODO: with multiple shipping items, remove the metadata for items no longer used
 		die;
+	}
+
+	/**
+	 * Ask why the goods move.
+	 *
+	 * Bring needs the reason for a booking that carries customs data. The field
+	 * stays hidden for an order that needs none. A bulk booking sends no form,
+	 * so it books the default of NatureOfCargo.
+	 */
+	private static function render_nature_of_cargo( Bring_WC_Order_Adapter $adapter ): void {
+		$shipping_items = $adapter->get_fraktguiden_shipping_items();
+
+		if ( ! $shipping_items ) {
+			return;
+		}
+
+		$product = Bring_Booking_Consignment_Request::get_bring_product( reset( $shipping_items ) );
+
+		if ( ! CustomsRoute::for_order( $adapter->order, $product ) ) {
+			return;
+		}
+
+		$field   = NatureOfCargo::FIELD;
+		$default = NatureOfCargo::from_request();
+		?>
+		<div class="bring-form-field">
+			<label for="<?php echo esc_attr( $field ); ?>">
+				<?php esc_html_e( 'Why the goods move', 'bring-fraktguiden-for-woocommerce' ); ?>:
+			</label>
+			<select name="<?php echo esc_attr( $field ); ?>" id="<?php echo esc_attr( $field ); ?>">
+				<?php foreach ( NatureOfCargo::cases() as $cargo ) : ?>
+					<option
+						value="<?php echo esc_attr( $cargo->value ); ?>"
+						<?php selected( $cargo->value, $default->value ); ?>
+					><?php echo esc_html( $cargo->label() ); ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<?php
 	}
 
 	/**

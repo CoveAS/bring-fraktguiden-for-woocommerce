@@ -71,14 +71,10 @@ with edi@bring.com, and it serves bulk and routing label flows.
 
 ## The state of this plugin
 
-The plugin sends no customs data. `create_consignment()` in
-[class-bring-booking-consignment-request.php:241](../pro/booking/consignment-request/class-bring-booking-consignment-request.php#L241)
-sets `customsDeclaration` to `null` inside the `product` object. That element
-name is not the current one, and Bring deprecated the whole older customs
-structure.
-
-The plugin also builds only `sender` and `recipient` in `parties`, so an export
-booking has no `exporter` and no `importer`.
+The plugin now builds `customsInformation` for an NVIT booking.
+`CustomsInformation::for_order()` holds it. An export booking still sends none,
+because `parties` holds only `sender` and `recipient`, and an export needs an
+`exporter` and an `importer`.
 
 This plugin stores the HS code, the goods description and the net weight in post
 meta, on a product and on a variation. A variation uses its own set only when
