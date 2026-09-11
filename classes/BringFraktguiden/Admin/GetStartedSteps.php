@@ -3,8 +3,6 @@
 namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
-use BringFraktguiden\Settings\Settings;
-use BringFraktguiden\Settings\SettingsRepository;
 
 class GetStartedSteps
 {
@@ -34,29 +32,16 @@ class GetStartedSteps
 			completed: !empty(Fraktguiden_Helper::get_option('services')),
 		);
 
-		$has_api_credentials = !empty(Fraktguiden_Helper::get_option('mybring_api_uid'))
-			&& !empty(Fraktguiden_Helper::get_option('mybring_api_key'));
-
 		$steps [] = new Step(
-			label: __('API conversion', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Connect your Bring API credentials', 'bring-fraktguiden-for-woocommerce'),
+			label: __('Connect your Bring account', 'bring-fraktguiden-for-woocommerce'),
+			description: __('Add your Bring login email and API key', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
-			actionText: __('Connect API', 'bring-fraktguiden-for-woocommerce'),
-			completed: $has_api_credentials,
+			actionText: __('Connect account', 'bring-fraktguiden-for-woocommerce'),
+			completed: ConnectAccount::connected(),
+			form: 'connect-account',
 		);
 
 		$fallback = false;
-		$fallback_settings = [
-			'fallback'
-		];
-		Settings::instance();
-		foreach ($fallback_settings as $setting) {
-			$value = false;//Settings::instance()->pro_enabled;
-			if ($value) {
-				$fallback = true;
-				break;
-			}
-		}
 
 		$steps [] = new Step(
 			label: __('Set up fallback rates', 'bring-fraktguiden-for-woocommerce'),
@@ -84,23 +69,6 @@ class GetStartedSteps
 			actionText: __('Go live', 'bring-fraktguiden-for-woocommerce'),
 			completed: $pro_enabled && $has_valid_license,
 		);
-
-		// Enforce sequential completion: once a step is incomplete, all following steps are too
-		$blocked = false;
-		foreach ($steps as $i => $step) {
-			if ($blocked) {
-				$steps[$i] = new Step(
-					label: $step->label,
-					description: $step->description,
-					action: $step->action,
-					actionText: $step->actionText,
-					completed: false,
-					dialog: $step->dialog,
-				);
-			} elseif (!$step->completed) {
-				$blocked = true;
-			}
-		}
 
 		return $steps;
 

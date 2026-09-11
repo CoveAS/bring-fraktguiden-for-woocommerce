@@ -1,0 +1,132 @@
+/* Step 3 of the setup page, the row that connects the shop to Bring. */
+
+/* The row keeps the icon, the text and the badge on one line. The panel wraps
+   onto a second line, so nothing on the first line moves when it opens. */
+.bfg-step--connect {
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.bfg-step--connect .bfg-step__content {
+	padding-right: 16px;
+}
+
+/* The badge of a step row floats at the right edge. Here it is a flex item, so
+   the growing panel cannot pull it down. */
+.bfg-step--connect .bfg-badge {
+	position: static;
+	transform: none;
+	flex-shrink: 0;
+}
+
+.bfg-connect__panel {
+	flex-basis: 100%;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--bfg-border);
+}
+
+/* The line under the step title, with the state and the toggle. */
+.bfg-connect__line {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 2px 0 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-connect__change {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--bfg-primary);
+}
+
+.bfg-connect__change::before {
+	content: "·";
+	margin-right: 2px;
+	color: var(--bfg-text-muted);
+}
+
+/* The chevron turns down when the panel opens. */
+.bfg-connect__change::after {
+	content: "";
+	width: 5px;
+	height: 5px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(-45deg);
+	transition: transform 0.2s;
+}
+
+.bfg-connect__change[aria-expanded="true"]::after {
+	transform: rotate(45deg);
+}
+
+.bfg-connect__intro {
+	margin: 0 0 12px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--bfg-text-secondary);
+}
+
+.bfg-connect__field {
+	max-width: 420px;
+	margin-bottom: 12px;
+}
+
+.bfg-connect__label {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.bfg-connect__input {
+	width: 100%;
+}
+
+.bfg-connect__help {
+	margin: 4px 0 0;
+	font-size: var(--bfg-text-level-6);
+	font-weight: 400;
+	color: var(--bfg-text-muted);
+}
+
+/* The room stays reserved, so the step list below does not jump on an error. */
+.bfg-connect__result {
+	min-height: 24px;
+	margin-bottom: 8px;
+}
+
+.bfg-connect__error {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #B32D2E;
+}
+
+.bfg-connect__checks {
+	margin: 4px 0 0;
+	padding-left: 18px;
+	list-style: disc;
+	font-size: var(--bfg-text-level-6);
+	font-weight: 400;
+	color: var(--bfg-text-secondary);
+}
+
+/* A step row shows its buttons only while the step is the current one. This
+   row always shows its own. */
+.bfg-step--connect .bfg-connect__panel .bfg-btn {
+	display: inline-flex;
+	margin-top: 0;
+}

@@ -13,12 +13,12 @@ use WC_Shipping_Zones;
 class ShippingZones
 {
 	/**
-	 * Return one row per zone, as id, name and added.
+	 * Return one row per zone, as id, name, regions and added.
 	 *
 	 * The last row is zone 0, the rest of the world. WooCommerce leaves it out
 	 * of get_zones(), but a shop can add a method to it.
 	 *
-	 * @return array<int, array{id: int, name: string, added: bool}>
+	 * @return array<int, array{id: int, name: string, regions: string, added: bool}>
 	 */
 	public static function all(): array
 	{
@@ -66,7 +66,7 @@ class ShippingZones
 		return true;
 	}
 
-	/** @return array{id: int, name: string, added: bool} */
+	/** @return array{id: int, name: string, regions: string, added: bool} */
 	private static function row(WC_Shipping_Zone $zone): array
 	{
 		$added = false;
@@ -77,10 +77,15 @@ class ShippingZones
 			}
 		}
 
+		$id = (int) $zone->get_id();
+
 		return [
-			'id'    => (int) $zone->get_id(),
-			'name'  => $zone->get_zone_name(),
-			'added' => $added,
+			'id'      => $id,
+			'name'    => $zone->get_zone_name(),
+			'regions' => $id === 0
+				? __('Everywhere else', 'bring-fraktguiden-for-woocommerce')
+				: $zone->get_formatted_location(),
+			'added'   => $added,
 		];
 	}
 }

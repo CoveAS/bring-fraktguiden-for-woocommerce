@@ -31,12 +31,21 @@
 }
 
 .bfg-modal__close {
-    padding: 4px 10px;
-    border: 1px solid var(--bfg-border);
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
     border-radius: var(--bfg-radius-input);
-    background: var(--bfg-bg-card);
-    color: inherit;
+    background: transparent;
+    color: var(--bfg-text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
     cursor: pointer;
+}
+
+.bfg-modal__close:hover {
+    background: var(--bfg-bg-subtle, rgba(0, 0, 0, 0.05));
+    color: var(--bfg-text-main);
 }
 
 .bfg-modal__body {
@@ -67,11 +76,21 @@
     border-bottom: 0;
 }
 
+.bfg-zone-row__regions {
+    font-weight: 600;
+}
+
 .bfg-zone-row__name {
-    flex: 1;
+    color: var(--bfg-text-muted);
+}
+
+.bfg-zone-row__name::before {
+    content: '\00b7';
+    margin-right: 0.5rem;
 }
 
 .bfg-zone-row__note {
+    margin-left: auto;
     color: var(--bfg-text-muted);
     font-size: var(--bfg-text-level-6, 0.75rem);
 }

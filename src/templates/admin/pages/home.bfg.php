@@ -3,6 +3,7 @@
 use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Admin\AddShippingMethod;
+use BringFraktguiden\Admin\ConnectAccount;
 use BringFraktguiden\Admin\Step;
 
 /**
@@ -40,6 +41,11 @@ use BringFraktguiden\Admin\Step;
 					<?php else: ?>
 						<t>No shipping zone was changed.</t>
 					<?php endif; ?>
+				</bfg-notice>
+			<?php endif; ?>
+			<?php if (($_GET[ConnectAccount::RESULT] ?? null) === 'yes'): ?>
+				<bfg-notice>
+					<?php echo esc_html(ConnectAccount::message()); ?>
 				</bfg-notice>
 			<?php endif; ?>
 		</div>
@@ -88,7 +94,7 @@ use BringFraktguiden\Admin\Step;
 				<div class="bfg-progress-container">
 					<div class="bfg-progress-bar-new">
 						<div class="bfg-progress-bar-fill"
-							style="width: <?php echo ($stepsCompleted / $stepCount) * 100; ?>%;"></div>
+							style="width: <?php echo $stepCount ? ($stepsCompleted / $stepCount) * 100 : 0; ?>%;"></div>
 					</div>
 				</div>
 			</div>
@@ -98,7 +104,9 @@ use BringFraktguiden\Admin\Step;
 					<?php
 					$isNext = $showNextStep && $nextStep === $step;
 					?>
-					<?php if ($step->completed): ?>
+					<?php if ($step->form === 'connect-account'): ?>
+						<?php require dirname(__FILE__, 5) . '/build/templates/admin/pages/home/connect-account.php'; ?>
+					<?php elseif ($step->completed): ?>
 						<bfg-step.completed :href="$step->action">
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
@@ -137,7 +145,7 @@ use BringFraktguiden\Admin\Step;
 	<dialog class="bfg-modal" id="bfg-add-shipping-method">
 		<div class="bfg-modal__head">
 			<h2 class="bfg-modal__title"><t>Add Bring to shipping zones</t></h2>
-			<button type="button" class="bfg-modal__close" data-bfg-dialog-close><t>Close</t></button>
+			<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
 		</div>
 		<?php if (!$zones): ?>
 			<div class="bfg-modal__body">
@@ -153,12 +161,16 @@ use BringFraktguiden\Admin\Step;
 				<input type="hidden" name="action" value="<?php echo esc_attr(AddShippingMethod::ACTION); ?>">
 				<?php wp_nonce_field(AddShippingMethod::ACTION); ?>
 				<div class="bfg-modal__body">
-					<p><t>Pick the zones that offer Bring shipping.</t></p>
+					<p><t>A shipping zone is a group of places with its own shipping prices.</t></p>
+					<p><t>Tick a zone to show Bring shipping options to customers there.</t></p>
 					<?php foreach ($zones as $zone): ?>
 						<label class="bfg-zone-row">
 							<input type="checkbox" name="zones[]" value="<?php echo esc_attr($zone['id']); ?>"
-								<?php echo $zone['added'] ? 'checked disabled' : ''; ?>>
-							<span class="bfg-zone-row__name"><?php echo esc_html($zone['name']); ?></span>
+								checked <?php echo $zone['added'] ? 'disabled' : ''; ?>>
+							<span class="bfg-zone-row__regions"><?php echo esc_html($zone['regions']); ?></span>
+							<?php if ($zone['name'] !== $zone['regions']): ?>
+								<span class="bfg-zone-row__name"><?php echo esc_html($zone['name']); ?></span>
+							<?php endif; ?>
 							<?php if ($zone['added']): ?>
 								<span class="bfg-zone-row__note"><t>Already added</t></span>
 							<?php endif; ?>
@@ -166,7 +178,6 @@ use BringFraktguiden\Admin\Step;
 					<?php endforeach; ?>
 				</div>
 				<div class="bfg-modal__foot">
-					<button type="button" class="bfg-btn bfg-btn--sm" data-bfg-dialog-close><t>Cancel</t></button>
 					<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--sm"><t>Add Bring</t></button>
 				</div>
 			</form>

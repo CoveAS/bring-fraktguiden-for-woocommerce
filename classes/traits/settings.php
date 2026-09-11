@@ -62,16 +62,6 @@ trait Settings
 	}
 
 	/**
-	 * Initialize form fields
-	 *
-	 * @return void
-	 */
-	public function init_instance_form_fields()
-	{
-		$this->form_fields = [];
-	}
-
-	/**
 	 * Display settings in HTML
 	 *
 	 * @return void

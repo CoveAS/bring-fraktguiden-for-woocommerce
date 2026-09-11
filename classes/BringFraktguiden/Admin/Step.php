@@ -12,6 +12,8 @@ class Step
 		public readonly bool $completed,
 		/** The id of a dialog the action button opens, instead of a link. */
 		public readonly ?string $dialog = null,
+		/** The id of a form the step shows in the card, instead of a button. */
+		public readonly ?string $form = null,
 	)
 	{
 	}

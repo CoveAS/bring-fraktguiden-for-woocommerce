@@ -25,5 +25,39 @@ document.addEventListener('click', (event) => {
 		return;
 	}
 
-	event.target.closest('[data-bfg-dialog-close]')?.closest('dialog')?.close();
+	const dialog = event.target.closest('dialog');
+
+	if (event.target.closest('[data-bfg-dialog-close]')) {
+		dialog?.close();
+		return;
+	}
+
+	// A click on the backdrop reports the dialog as the target, so compare the
+	// point with the box of the dialog.
+	if (dialog && outside(dialog, event)) {
+		dialog.close();
+	}
+});
+
+function outside(element, event) {
+	const box = element.getBoundingClientRect();
+
+	return event.clientX < box.left
+		|| event.clientX > box.right
+		|| event.clientY < box.top
+		|| event.clientY > box.bottom;
+}
+
+/**
+ * The Change button of step 3 opens the panel that holds the Bring credentials.
+ */
+document.addEventListener('click', (event) => {
+	const button = event.target.closest('.bfg-connect__change');
+	if (!button) return;
+
+	const panel = document.getElementById(button.getAttribute('aria-controls'));
+	if (!panel) return;
+
+	panel.hidden = !panel.hidden;
+	button.setAttribute('aria-expanded', String(!panel.hidden));
 });

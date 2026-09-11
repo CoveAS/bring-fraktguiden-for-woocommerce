@@ -72,10 +72,8 @@ class Fraktguiden_Service_Table {
 
 	/**
 	 * Process services field
-	 *
-	 * @param string|null $instance_key Instance key.
 	 */
-	public function process_services_field( $instance_key ) {
+	public function process_services_field() {
 
 		$service_key = $this->shipping_method->get_field_key( 'services' );
 

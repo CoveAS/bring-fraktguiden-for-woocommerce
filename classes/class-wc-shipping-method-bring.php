@@ -149,8 +149,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->supports           = array(
 			'shipping-zones',
 			'settings',
-			'instance-settings',
-			'instance-settings-modal',
 		);
 
 		if ( $instance_id ) {
@@ -238,11 +236,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function process_admin_options() {
 		parent::process_admin_options();
 
-		$instance_key = null;
-		if ( $this->instance_id ) {
-			$instance_key = $this->get_instance_option_key();
-		}
-		$this->service_table->process_services_field( $instance_key );
+		$this->service_table->process_services_field();
 //		$this->process_mybring_api_credentials();
 	}
 

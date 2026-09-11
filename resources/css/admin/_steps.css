@@ -170,23 +170,7 @@ a.bfg-step:focus-visible,
     align-items: center;
     justify-content: center;
 }
-.bfg-step--in-progress:hover {
-    background: color-mix(in srgb, #EFF6FF 97%, #2563EB) !important;
-}
 
-/* Make the entire in-progress card clickable via stretched link */
-.bfg-step--in-progress .bfg-step__link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-/* Ensure button stays clickable above the stretched link */
-.bfg-step--in-progress .bfg-btn {
-    position: relative;
-    z-index: 1;
-}
 
 /* Completed State */
 .bfg-step--completed {
@@ -221,27 +205,6 @@ a.bfg-step:focus-visible,
     padding-right: 100px;
 }
 
-/* Links inside Step */
-a.bfg-step__link,
-.bfg-step__link {
-    text-decoration: none !important;
-    color: #111827 !important;
-    display: flex;
-    flex-direction: column;
-}
-
-a.bfg-step__link:hover,
-.bfg-step__link:hover {
-    text-decoration: none !important;
-    color: #111827 !important;
-}
-
-.bfg-step__link:focus,
-.bfg-step__link:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
 
 .bfg-step--in-progress:focus-within {
     border-color: var(--bfg-primary) !important;
