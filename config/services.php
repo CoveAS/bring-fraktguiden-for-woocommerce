@@ -19,6 +19,17 @@
  * the customer asked for on that service, and the booking form shows a field
  * for it.
  *
+ * A service may carry 'from' => [ 'NO', ... ]. Bring sells the service to a
+ * sender in one of those countries. The plugin accepts NO, SE, DK, FI and IS as
+ * the sender country, so a shop outside the list cannot offer the service.
+ *
+ * A service may carry 'domestic_from' => [ 'SE', ... ]. The service carries a
+ * parcel inside one of those countries. A service is often sold from a country
+ * it does not serve inside, so the two lists differ. Business Parcel is sold
+ * from Norway, and it carries a parcel inside Sweden and Denmark only. The
+ * source of both lists is the sender and domestic columns of the Bring service
+ * portfolio, https://developer.bring.com/api/services/ .
+ *
  * A service may carry 'recipient' => 'private' or 'recipient' => 'business'.
  * Bring sells the service to that kind of recipient. The service wizard offers
  * a service only when the service carries this key.
@@ -43,6 +54,8 @@ return [
 		'services' => [
 			'5800' => [
 				'ProductCode' => '5800',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke til hentested',
@@ -55,6 +68,8 @@ return [
 			],
 			'5600' => [
 				'ProductCode' => '5600',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke levert hjem',
@@ -68,6 +83,8 @@ return [
 			],
 			'5000' => [
 				'ProductCode' => '5000',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'business',
 				'weight'      => [ 0, 35 ],
 				'productName' => 'Pakke til bedrift',
@@ -91,6 +108,8 @@ return [
 			],
 			'5100' => [
 				'ProductCode' => '5100',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'business',
 				'weight'      => [ 35, null ],
 				'productName' => 'Stykkgods til bedrift',
@@ -113,6 +132,8 @@ return [
 			],
 			'5400' => [
 				'ProductCode'    => '5400',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'      => 'business',
 				'weight'         => [ 35, null ],
 				'cross_border'   => false,
@@ -132,6 +153,8 @@ return [
 		'services' => [
 			'3570' => [
 				'ProductCode' => '3584',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 5 ],
 				'rfid'        => true,
@@ -149,6 +172,8 @@ return [
 			],
 			'3584' => [
 				'ProductCode' => '3570',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 5 ],
 				'rfid'        => false,
@@ -209,6 +234,8 @@ return [
 			 */
 			'BUSINESS_PARCEL'     => [
 				'ProductCode' => '0330',
+				'from'          => [ 'NO', 'SE', 'DK' ],
+				'domestic_from' => [ 'SE', 'DK' ],
 				'recipient'   => 'business',
 				'weight'      => [ 0, 35 ],
 				'class'       => 'warning',
@@ -226,6 +253,8 @@ return [
 			 */
 			'BUSINESS_PALLET'     => [
 				'ProductCode' => '0336',
+				'from'          => [ 'NO', 'SE', 'DK' ],
+				'domestic_from' => [ 'SE', 'DK' ],
 				'recipient'   => 'business',
 				'weight'      => [ 35, null ],
 				'class'       => 'warning',
@@ -317,6 +346,8 @@ return [
 			 */
 			'PICKUP_PARCEL'              => [
 				'ProductCode' => '0340',
+				'from'          => [ 'NO', 'SE', 'DK' ],
+				'domestic_from' => [ 'SE', 'DK' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 20 ],
 				'productName' => 'PickUp Parcel',
@@ -328,6 +359,8 @@ return [
 			],
 			'HOME_DELIVERY_PARCEL'       => [
 				'ProductCode' => '0349',
+				'from'          => [ 'NO', 'SE', 'DK' ],
+				'domestic_from' => [ 'SE', 'DK' ],
 				'recipient'   => 'private',
 				'weight'      => [ 0, 35 ],
 				'productName' => 'Home Delivery Parcel',
