@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (!form) return;
 
 	const services = window.bfgServiceWizard?.services ?? [];
+	const sender = window.bfgServiceWizard?.sender ?? '';
 	const steps = [...form.querySelectorAll('.bfg-wizard__step')];
 	const result = form.querySelector('.bfg-wizard__result');
 	const empty = form.querySelector('.bfg-wizard__empty');
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const row = result.querySelector(`[data-code="${service.code}"]`);
 			if (!row) return;
 
-			row.hidden = !matches(service, answers);
+			row.hidden = !matches(service, answers, sender);
 			row.querySelector('input').checked = !row.hidden;
 			if (!row.hidden) found += 1;
 		});

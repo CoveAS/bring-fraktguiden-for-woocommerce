@@ -167,7 +167,7 @@ class SettingsPage
 
 		$sub_page = $_GET['sub-page'] ?? '';
 		if ($sub_page === 'service-wizard') {
-			$country_code = WC()->countries?->get_base_country();
+			$country_code = ServiceWizard::sender_country();
 			$country = WC()->countries?->countries[$country_code] ?? null;
 			$settings_url = Fraktguiden_Helper::get_settings_url();
 			$services = ServiceWizard::services();
@@ -475,7 +475,10 @@ class SettingsPage
 				// wizard reads booleans and null, so the data goes out as JSON.
 				wp_add_inline_script(
 					'bfg-service-wizard',
-					'window.bfgServiceWizard = ' . wp_json_encode(['services' => ServiceWizard::services()]) . ';',
+					'window.bfgServiceWizard = ' . wp_json_encode([
+						'services' => ServiceWizard::services(),
+						'sender' => ServiceWizard::sender_country(),
+					]) . ';',
 					'before'
 				);
 			}

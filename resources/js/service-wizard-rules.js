@@ -13,8 +13,19 @@ const WEIGHT_BANDS = {
 
 const matchesRecipient = (service, answers) => answers.recipient.includes(service.recipient);
 
-const matchesDestination = (service, answers) =>
-	answers.destination.includes(service.domestic ? 'domestic' : 'international');
+/**
+ * A service is domestic when it carries a parcel inside the country the shop
+ * sends from. It reaches another country when it may cross a border at all.
+ */
+const matchesDestination = (service, answers, sender) => {
+	const domestic = service.domesticFrom.includes(sender);
+	const international = service.crossBorder !== false;
+
+	return (
+		(domestic && answers.destination.includes('domestic')) ||
+		(international && answers.destination.includes('international'))
+	);
+};
 
 const matchesWeight = (service, answers) =>
 	answers.weight.some((band) => {
@@ -37,8 +48,9 @@ const matchesRfid = (service, answers) => {
 	return answers.rfid.includes(service.rfid ? 'yes' : 'no');
 };
 
-export const matches = (service, answers) =>
+export const matches = (service, answers, sender) =>
+	service.from.includes(sender) &&
 	matchesRecipient(service, answers) &&
-	matchesDestination(service, answers) &&
+	matchesDestination(service, answers, sender) &&
 	matchesWeight(service, answers) &&
 	matchesRfid(service, answers);

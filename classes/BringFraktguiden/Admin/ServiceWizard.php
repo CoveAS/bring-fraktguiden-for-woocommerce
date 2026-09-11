@@ -39,13 +39,28 @@ class ServiceWizard
 					'recipient' => $service['recipient'],
 					'minWeight' => $weight[0],
 					'maxWeight' => $weight[1],
-					'domestic' => isset($service['cross_border']) && !$service['cross_border'],
+					'from' => $service['from'] ?? [],
+					'domesticFrom' => $service['domestic_from'] ?? [],
+					'crossBorder' => $service['cross_border'] ?? true,
 					'rfid' => $service['rfid'] ?? null,
 				];
 			}
 		}
 
 		return $services;
+	}
+
+	/**
+	 * The country the shop sends from.
+	 *
+	 * The plugin setting wins over the WooCommerce store country, the same way
+	 * WC_Shipping_Method_Bring::get_selected_from_country() picks it.
+	 */
+	public static function sender_country(): string
+	{
+		$country = Fraktguiden_Helper::get_option('from_country');
+
+		return $country ?: (string) WC()->countries?->get_base_country();
 	}
 
 	/**
