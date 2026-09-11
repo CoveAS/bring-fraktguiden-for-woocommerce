@@ -25,6 +25,7 @@
  */
 
 use BringFraktguiden\Customs\CustomsCheck;
+use BringFraktguiden\Customs\CustomsRoute;
 use BringFraktguiden\Customs\HsCode;
 use BringFraktguiden\Customs\NetWeight;
 
@@ -89,7 +90,7 @@ $order->save();
 
 printf("order %d, ship to %s\n%s\n", $order->get_id(), $postcode, $order->get_edit_order_url());
 
-$problems = CustomsCheck::problems($order);
+$problems = CustomsCheck::problems($order, CustomsRoute::for_order($order, '5800'));
 
 if (!$problems) {
 	echo "customs check: ok\n";

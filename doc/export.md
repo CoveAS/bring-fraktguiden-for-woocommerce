@@ -27,7 +27,7 @@ notice before the period ends.
 
 ## What an export adds on top of NVIT
 
-The item line fields are the same. The request differs in four ways.
+The request differs in five ways.
 
 1. `consent` must be `true`. The sender confirms that the customs data is
    correct and complete, and that the goods are not dangerous or prohibited.
@@ -39,6 +39,17 @@ The item line fields are the same. The request differs in four ways.
 3. `parties.exporter` and `parties.importer` are required. Bring's page states
    this, although the schema does not mark them required.
 4. Do not set the top level `type` to `NVIT`.
+5. Each entry of `customsDeclarations` needs `countryCodeOrigin`, the country
+   the goods come from. The schema marks the field optional, and the export
+   validator requires it. An export without it fails with `BOOK-INPUT-028`,
+   "Invalid country code". A transit booking books without the field.
+
+The other item line fields are the same as for NVIT.
+
+The country of origin is a trait of the goods, so the plugin stores it per
+product and per variation, in the meta key `_bring_country_of_origin`.
+`CountryOfOrigin` reads it. There is no shop wide fallback, because a reseller
+sells goods from several countries.
 
 Each party needs a `name`, an `addressLine`, a `city`, a `postalCode` and a
 `countryCode`. Both may carry a `vatNumber`, at most 30 characters. Bring

@@ -40,7 +40,7 @@ class CustomsWarning
 			return null;
 		}
 
-		$lines         = self::lines($order);
+		$lines         = self::lines($order, $reason);
 		$shop_messages = self::shop_messages($reason);
 
 		if (!$lines && !$shop_messages) {
@@ -53,14 +53,28 @@ class CustomsWarning
 	/**
 	 * Return the problems of the order lines, with the name of each line.
 	 *
+	 * A missing HS code is left out. The booking box holds a field for every
+	 * product, so the shop worker reads the missing code there.
+	 *
+	 * @param string $route A CustomsRoute constant.
+	 *
 	 * @return array<int, array{name: string, messages: array<int, string>}>
 	 */
-	private static function lines(WC_Order $order): array
+	private static function lines(WC_Order $order, string $route): array
 	{
 		$items = CustomsDeclaration::items($order);
 		$lines = [];
 
-		foreach (CustomsCheck::problems($order) as $id => $problems) {
+		foreach (CustomsCheck::problems($order, $route) as $id => $problems) {
+			$problems = array_filter(
+				$problems,
+				fn(CustomsProblem $problem) => CustomsProblem::MissingHsCode !== $problem
+			);
+
+			if (!$problems) {
+				continue;
+			}
+
 			$lines[] = [
 				'name'     => $items[$id]->get_name(),
 				'messages' => array_map(fn(CustomsProblem $problem) => $problem->message(), $problems),

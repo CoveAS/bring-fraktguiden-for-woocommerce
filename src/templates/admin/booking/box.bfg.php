@@ -10,6 +10,7 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
  * @var bool            $showing_form
  * @var BookingRecord|null $last_failure
  * @var string          $error
+ * @var array<int, array{name: string, image: string, code: string}> $hs_rows
  * @var string          $rest_url
  * @var string          $nonce
  */
@@ -34,6 +35,10 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 				</ul>
 			</div>
 		</div>
+	<?php endif; ?>
+
+	<?php if ($hs_rows) : ?>
+		<?php require dirname(__DIR__) . '/parts/customs-products.php'; ?>
 	<?php endif; ?>
 
 	<?php CustomsWarningView::render($warning); ?>

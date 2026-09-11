@@ -24,6 +24,8 @@ class CustomsField
 	 * @param \Closure $placeholder Returns the value that applies when the field is empty.
 	 * @param array    $attributes  Extra input attributes.
 	 * @param string   $data_type   The WooCommerce input type, or an empty string.
+	 * @param array    $choices     The options of a select, keyed by stored value.
+	 *                              An empty array makes the field a text input.
 	 */
 	private function __construct(
 		public readonly string $meta,
@@ -33,7 +35,8 @@ class CustomsField
 		private readonly \Closure $clean,
 		private readonly \Closure $placeholder,
 		private readonly array $attributes = [],
-		private readonly string $data_type = ''
+		private readonly string $data_type = '',
+		private readonly array $choices = []
 	) {
 	}
 
@@ -78,6 +81,16 @@ class CustomsField
 				placeholder: fn(WC_Product $product, ?WC_Product $parent): string => (string) $product->get_weight(),
 				data_type: 'decimal'
 			),
+			new self(
+				meta: CountryOfOrigin::META,
+				label: __('Country of origin', 'bring-fraktguiden-for-woocommerce'),
+				description: __('The country the goods come from. Bring needs it for export, and refuses a booking without it.', 'bring-fraktguiden-for-woocommerce'),
+				row_class: 'form-row-full',
+				clean: CountryOfOrigin::clean(...),
+				placeholder: fn(WC_Product $product, ?WC_Product $parent): string
+					=> $parent ? CountryOfOrigin::name(CountryOfOrigin::for_product($parent)) : '',
+				choices: CountryOfOrigin::countries()
+			),
 		];
 	}
 
@@ -111,12 +124,14 @@ class CustomsField
 	 */
 	public function render_for_product(?WC_Product $product): void
 	{
-		woocommerce_wp_text_input($this->args() + [
+		$args = $this->args() + [
 			'id'          => $this->meta,
 			'placeholder' => $product ? ($this->placeholder)($product, null) : '',
 			'description' => $this->description,
 			'desc_tip'    => true,
-		]);
+		];
+
+		$this->render($args, $args['placeholder']);
 	}
 
 	/**
@@ -126,15 +141,43 @@ class CustomsField
 	 */
 	public function render_for_variation(WC_Product $variation, ?WC_Product $parent, int $loop, bool $override): void
 	{
-		$name = $this->meta . '[' . $loop . ']';
+		$name        = $this->meta . '[' . $loop . ']';
+		$placeholder = ($this->placeholder)($variation, $parent);
 
-		woocommerce_wp_text_input($this->args() + [
+		$args = $this->args() + [
 			'id'            => $name,
 			'name'          => $name,
 			'value'         => $variation->get_meta($this->meta),
-			'placeholder'   => ($this->placeholder)($variation, $parent),
+			'placeholder'   => $placeholder,
 			'wrapper_class' => 'form-row ' . $this->row_class . ' bring-customs-override' . ($override ? '' : ' hidden'),
-		]);
+		];
+
+		$this->render($args, $placeholder);
+	}
+
+	/**
+	 * Print the field, as a select when it has choices and as a text input otherwise.
+	 *
+	 * A select carries an empty option, because every customs field is optional
+	 * on the screen. The option names the value that applies when the shop
+	 * leaves the field empty, the same answer the placeholder gives.
+	 *
+	 * @param array  $args        The WooCommerce field arguments.
+	 * @param string $placeholder The value that applies when the field is empty.
+	 */
+	private function render(array $args, string $placeholder): void
+	{
+		if (!$this->choices) {
+			woocommerce_wp_text_input($args);
+
+			return;
+		}
+
+		$empty = $placeholder ?: __('Not set', 'bring-fraktguiden-for-woocommerce');
+
+		$args['options'] = ['' => $empty] + $this->choices;
+
+		woocommerce_wp_select($args);
 	}
 
 	/**

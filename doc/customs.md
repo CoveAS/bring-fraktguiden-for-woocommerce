@@ -8,7 +8,8 @@ Two separate rules make this plugin need it. This page holds what the two share.
 - [Export from Norway](export.md), a declaration for a shipment that leaves
   Norway.
 
-Both rules ask for the same data per item line. The rest of the request differs.
+Both rules ask for nearly the same data per item line. An export adds the
+country of origin. The rest of the request differs more.
 
 ## Where the data goes
 
@@ -44,7 +45,7 @@ out for an export.
 | `customsArticleNumber` | string | no | The HS code. Length 6 to 10. |
 | `grossWeight` | number | no | The weight in kg, with the packaging. |
 | `netWeight` | number | no | The weight in kg, without the packaging. |
-| `countryCodeOrigin` | string | no | The country of origin. |
+| `countryCodeOrigin` | string | for an export | The country of origin. |
 | `numberOfPieces` | integer | no | The number of declared pieces. |
 | `quantity` | integer | no | Deprecated. |
 
@@ -58,6 +59,11 @@ limit of 35 characters. The two fields do not share a rule.
 The schema marks `customsArticleNumber`, `grossWeight` and `netWeight` as
 optional. Both rules still need all three, so treat them as required. Bring's
 separate Customs API does mark them required.
+
+The schema also marks `countryCodeOrigin` as optional, but an export needs it.
+An export without it fails with `BOOK-INPUT-028`, "Invalid country code". The
+code carries no party name, so it does not say which field is wrong. A transit
+booking books without the field.
 
 ## The separate Customs API
 
@@ -76,9 +82,9 @@ The plugin builds `customsInformation` for both rules.
 level `type`, and an export leaves it out. `CustomsParties::for_order()` adds
 the `exporter` and the `importer` that an export needs.
 
-This plugin stores the HS code, the goods description and the net weight in post
-meta, on a product and on a variation. A variation uses its own set only when
-the shop turns on the override checkbox. See
+This plugin stores the HS code, the goods description, the net weight and the
+country of origin in post meta, on a product and on a variation. A variation
+uses its own set only when the shop turns on the override checkbox. See
 [Posten Bring Checkout](posten-bring-checkout-nvit.md) for the attribute that
 this plugin reads as a fallback.
 

@@ -6,6 +6,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguiden\Customs\CustomsRoute;
 use BringFraktguiden\Customs\CustomsWarning;
+use BringFraktguiden\Customs\OrderHsCodes;
 use BringFraktguiden\Customs\NatureOfCargo;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
@@ -133,6 +134,10 @@ class BookingBox
 			: null;
 
 		$needs_cargo   = (bool) CustomsRoute::for_order($order, (string) $form->service);
+
+		// The shop fills in a missing HS code on the order screen, so the table
+		// shows whenever the route asks customs for the codes.
+		$hs_rows = $needs_cargo ? OrderHsCodes::rows($order) : [];
 		$cargo_reasons = NatureOfCargo::cases();
 		$wants_date    = (bool) ($service?->service_data['delivery_date'] ?? false);
 

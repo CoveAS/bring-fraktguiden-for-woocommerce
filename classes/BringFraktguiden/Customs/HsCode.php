@@ -103,6 +103,22 @@ class HsCode
 	}
 
 	/**
+	 * Return the product that holds the code of another product.
+	 *
+	 * A variation holds its own code only when the shop turns the override on.
+	 * Without the override the parent holds the code, so a screen that writes a
+	 * code writes it on the product this method returns.
+	 */
+	public static function owner(WC_Product $product): WC_Product
+	{
+		if (!$product->is_type('variation') || Override::is_on($product)) {
+			return $product;
+		}
+
+		return wc_get_product($product->get_parent_id()) ?: $product;
+	}
+
+	/**
 	 * Return the code of a variation when its override is on.
 	 */
 	private static function own_code(WC_Product $variation): string

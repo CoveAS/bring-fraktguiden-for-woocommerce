@@ -2,6 +2,7 @@
 
 namespace BringFraktguidenPro\Booking\Box;
 
+use BringFraktguiden\Customs\OrderHsCodes;
 use Exception;
 use WC_Order;
 use WP_Error;
@@ -12,8 +13,9 @@ use WP_REST_Server;
 /**
  * The one route the booking box talks to.
  *
- * The payload is always the booking form. An action field says what to do with
- * it: keep it as a draft, throw it away, or book it.
+ * The payload holds the booking form and the HS codes of the products. An
+ * action field says what to do with the form: keep it as a draft, throw it
+ * away, or book it. The codes are written on every call.
  *
  * An answer that changes the form carries the fresh markup of the box, so the
  * browser never builds the form itself. A draft save changes no form, and its
@@ -65,6 +67,10 @@ class BookingRoute
 
 		$action = (string) $request->get_param('action');
 		$form   = BookingForm::from_payload((array) $request->get_param('form'));
+
+		// An HS code is a trait of the product, not of the booking, so it is
+		// written here and never enters the form.
+		OrderHsCodes::save($order, (array) $request->get_param('hs_codes'));
 
 		return match ($action) {
 			'reset'  => self::reset($order),

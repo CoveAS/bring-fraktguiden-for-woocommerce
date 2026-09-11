@@ -10,8 +10,8 @@ use WC_Order_Item_Product;
  * One entry of the `customsDeclarations` array of a Bring booking.
  *
  * Customs asks for one entry per item line of the order. Each entry holds the
- * value of the line, a description of the goods, the HS code and the two
- * weights. See doc/customs.md.
+ * value of the line, a description of the goods, the HS code, the country of
+ * origin and the two weights. See doc/customs.md.
  *
  * The declaration covers the goods the shop ships. A line the shop refunds in
  * full ships nothing, so it gets no entry.
@@ -92,6 +92,12 @@ class CustomsDeclaration
 
 		if ($code) {
 			$entry['customsArticleNumber'] = $code;
+		}
+
+		$origin = CountryOfOrigin::for_order_item($item);
+
+		if ($origin) {
+			$entry['countryCodeOrigin'] = $origin;
 		}
 
 		return $entry;

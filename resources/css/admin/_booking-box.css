@@ -231,3 +231,85 @@
     display: flex;
     justify-content: flex-end;
 }
+
+/* Customs products ------------------------------------------------------- */
+
+/* The HS code of every product of the order. The shop worker fills in a
+   missing code here instead of on the product screen. */
+.bfg-customs-products {
+    margin: 0 0 0.75rem 0;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.bfg-customs-products__title,
+.bfg-customs-products__rule {
+    margin: 0 0 0.25rem 0 !important;
+}
+
+.bfg-customs-products__rule {
+    color: var(--bfg-text-secondary);
+}
+
+/* The buttons that mark rows, and the code they write into the marked rows. */
+.bfg-customs-products__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+}
+
+.bfg-customs-products__bulk {
+    flex: 1;
+    min-width: 8rem;
+    padding: 4px 8px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    line-height: 1.4;
+}
+
+.bfg-customs-products__row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.75rem;
+}
+
+.bfg-customs-products__mark {
+    flex: none;
+    margin: 0;
+}
+
+.bfg-customs-products__image img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: var(--bfg-radius-input);
+}
+
+.bfg-customs-products__field {
+    flex: 1;
+    min-width: 0;
+}
+
+.bfg-customs-products__field label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.bfg-customs-products__field input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    line-height: 1.4;
+}

@@ -26,14 +26,20 @@ enum CustomsProblem
 	case NoValue;
 
 	/**
+	 * The product names no country of origin, and neither does its parent.
+	 */
+	case MissingCountryOfOrigin;
+
+	/**
 	 * Return the message a shop reads.
 	 */
 	public function message(): string
 	{
 		return match ($this) {
-			self::MissingHsCode  => __('The product needs an HS code.', 'bring-fraktguiden-for-woocommerce'),
-			self::MissingWeight  => __('The product needs a weight.', 'bring-fraktguiden-for-woocommerce'),
-			self::NoValue        => __('The line needs a value above zero.', 'bring-fraktguiden-for-woocommerce'),
+			self::MissingHsCode           => __('The product needs an HS code.', 'bring-fraktguiden-for-woocommerce'),
+			self::MissingWeight           => __('The product needs a weight.', 'bring-fraktguiden-for-woocommerce'),
+			self::NoValue                 => __('The line needs a value above zero.', 'bring-fraktguiden-for-woocommerce'),
+			self::MissingCountryOfOrigin  => __('The product needs a country of origin.', 'bring-fraktguiden-for-woocommerce'),
 		};
 	}
 }
