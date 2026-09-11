@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Booking styles of the orders list and the bulk booking modal.
+   ========================================================================== */
+
+.bring-customer-numbers {
+    max-width: 35rem;
+}
+
+.bring-customer-number {
+    float: right;
+    color: #CCC;
+}
+
+[type=radio]:checked+.bring-customer-name+.bring-customer-number {
+    color: black;
+}
+
+.bring-customer-label {
+    position: relative;
+}
+
+.bring-form-field {
+    margin: 8px 0 0;
+}
+
+.bring-form-field label {
+    display: block;
+    padding: 0 0 4px;
+    color: #777;
+}
+
+.bring-form-field .error {
+    border-left: 8px solid red;
+    padding-left: 8px;
+    font-weight: bold;
+}
+
+.bring-flex-box {
+    display: flex;
+    flex-flow: row;
+}
+
+.bring-booking-status-icon {
+    background-color: #42a2ce;
+    border-radius: 20rem;
+    color: #fff;
+    display: inline-block;
+}
+
+.bring-booking-status-icon::before {
+    display: inline-block;
+    position: relative;
+}
+
+.bring-booking-status-icon.dashicons-yes::before {
+    left: -1px;
+}

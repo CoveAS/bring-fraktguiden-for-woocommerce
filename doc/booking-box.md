@@ -70,16 +70,10 @@ An `action` field says what to do with the form: `save` keeps the draft, `reset`
 throws it away, `book` sends it to Bring, and `form` opens the form on a booked
 order.
 
-## Which box the order screen shows
-
-`BRING_BOOKING_BOX` in `wp-config.php` takes `new`, `old` or `both`. The default
-is `both`, so the new box and the old one can be compared. Remove the constant
-and its branch when the old box goes.
-
 ## Values that used to come from $_POST
 
 `Bring_Booking_Consignment_Request` read the booking form straight out of
 `$_POST`. The box sends JSON, so the request now takes the same values through
 `fill()`: `additional_services`, `additional_info_sender`,
 `additional_info_recipient` and `nature_of_cargo`. A null value still reads
-`$_POST`, which is what the bulk booking and the old box do.
+`$_POST`, which is what the bulk booking does.

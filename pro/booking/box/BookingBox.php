@@ -29,29 +29,8 @@ class BookingBox
 {
 	public const SERVICE_KEY = 'woocommerce_bring_fraktguiden_services';
 
-	/**
-	 * Which box the order screen shows.
-	 *
-	 * Define BRING_BOOKING_BOX in wp-config.php as 'new', 'old' or 'both'. The
-	 * default shows both, so the two can be compared while the new box is
-	 * built.
-	 */
-	public static function mode(): string
-	{
-		return defined('BRING_BOOKING_BOX') ? (string) BRING_BOOKING_BOX : 'both';
-	}
-
-	public static function enabled(): bool
-	{
-		return in_array(self::mode(), ['new', 'both'], true);
-	}
-
 	public static function init(): void
 	{
-		if (!self::enabled()) {
-			return;
-		}
-
 		add_action('add_meta_boxes', [self::class, 'add'], 1, 2);
 		add_action('admin_enqueue_scripts', [self::class, 'enqueue']);
 	}
@@ -63,10 +42,6 @@ class BookingBox
 	 */
 	public static function init_rest(): void
 	{
-		if (!self::enabled()) {
-			return;
-		}
-
 		add_action('rest_api_init', [BookingRoute::class, 'register']);
 	}
 
