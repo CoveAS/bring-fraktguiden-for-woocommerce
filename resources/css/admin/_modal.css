@@ -3,6 +3,7 @@
    ========================================================================== */
 
 .bfg-modal {
+    margin: auto;
     width: min(40rem, calc(100vw - 2rem));
     max-height: min(36rem, calc(100vh - 4rem));
     padding: 1rem;
