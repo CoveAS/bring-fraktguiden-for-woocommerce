@@ -5,6 +5,7 @@ namespace Bring_Fraktguiden\Factories;
 use Bring_Fraktguiden\Actions\CreateDateFromArray;
 use Bring_Fraktguiden\Calculators\PriceCalculator;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use Bring_Fraktguiden\Common\Rate_Eta;
 use Bring_Fraktguiden\Sanitizers\Sanitize_Alternative_Delivery_Dates;
 use BringFraktguiden\Settings\Settings;
 use Exception;
@@ -52,6 +53,7 @@ class RateFactory {
 		$service_price = $service_details['price']['netPrice']['priceWithAdditionalServices']
 		                 ?? $service_details['price']['netPrice']['priceWithoutAdditionalServices']
 		                    ?? null;
+
 		// Net price is only provided when a customer number is used in the API request. Fallback to list price.
 		if ( 'list' === Settings::instance()->price_to_use->value || empty( $service_price ) ) {
 			$service_price = $service_details['price']['listPrice']['priceWithAdditionalServices']
@@ -92,6 +94,7 @@ class RateFactory {
 			'bring_environmental_logo_url'    => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
 			'bring_environmental_tag_url'     => $service_details['guiInformation']['environmentalTagUrl'] ?? null,
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
+			'bring_eta'                       => Rate_Eta::eta($expected_delivery_date),
 		];
 
 		$rate = [

@@ -24,7 +24,12 @@ class Checkout_Modifications {
 
 		add_action(
 			'wp_enqueue_scripts',
-			__CLASS__ . '::enqueue_scripts'
+			__CLASS__ . '::classic_checkout_javascript'
+		);
+
+		add_action(
+		'woocommerce_blocks_enqueue_checkout_block_scripts_before',
+		__CLASS__ . '::block_checkout_javascript'
 		);
 
 		add_action(
@@ -60,11 +65,21 @@ class Checkout_Modifications {
 	}
 
 
-	public static function enqueue_scripts() {
-		if ( ! is_checkout() ) {
+	public static function block_checkout_javascript(): void
+	{
+		self::register_javascript();
+	}
+
+	public static function classic_checkout_javascript(): void
+	{
+		if (!is_checkout()) {
 			return;
 		}
+		self::register_javascript();
+	}
 
+	public static function register_javascript(): void
+	{
 		$file = 'checkout.js';
 		$url = plugins_url( 'build/js/' . $file, dirname( __DIR__ ) );
 		wp_register_script(
@@ -81,6 +96,9 @@ class Checkout_Modifications {
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
 				'one_column_shipping' => Fraktguiden_Helper::get_option( 'shipping_options_full_width', 'yes' ) === 'yes',
 				'map_key'             => Fraktguiden_Helper::get_option( 'pickup_point_map', 'postenMapsLink' ),
+				'i18n' => [
+					'expected_delivery' => esc_html__('Expected delivery', 'bring-fraktguiden-for-woocommerce'),
+				],
 			]
 		);
 		wp_enqueue_script( 'fraktguiden-checkout-js' );

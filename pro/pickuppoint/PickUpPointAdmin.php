@@ -21,16 +21,25 @@ class PickUpPointAdmin {
 	 */
 	public static function admin_load_javascript()
 	{
+		$order = wc_get_order();
 		$screen = get_current_screen();
 
 		// Only for order edit screen.
-		if ('shop_order' !== $screen->id && 'shop_subscription' !== $screen->id) {
+		if (
+			! in_array(
+				$screen->id,
+				[
+					'shop_order',
+					'shop_subscription',
+					'woocommerce_page_wc-orders',
+				],
+			)
+			|| ! $order
+		) {
 			return;
 		}
 
-		global $post;
-
-		$order = new Bring_WC_Order_Adapter(new WC_Order($post->ID));
+		$order = new Bring_WC_Order_Adapter($order);
 
 		$make_items_editable = !$order->order->is_editable();
 

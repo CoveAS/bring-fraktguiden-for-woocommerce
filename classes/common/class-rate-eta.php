@@ -17,19 +17,9 @@ class Rate_Eta {
 	static function setup() {
 	}
 
-	/**
-	 * Add opening hours to a full label
-	 *
-	 * @param WC_Shipping_Rate $rate Shipping rate.
-	 *
-	 * @throws Exception
-	 */
-	public static function add_estimated_delivery_date( WC_Shipping_Rate $rate ): void {
-		$meta_data = $rate->get_meta_data();
-		if ( empty( $meta_data['expected_delivery_date'] ) ) {
-			return;
-		}
-		$expected_delivery_date = new DateTime( $meta_data['expected_delivery_date'] );
+	public static function eta($date)
+	{
+		$expected_delivery_date = new DateTime( $date );
 		$today                  = new DateTime( 'now', $expected_delivery_date->getTimezone() );
 		$diff                   = $today->diff( $expected_delivery_date );
 		$diffDays               = $diff->format( "%r%a%H%I" );
@@ -49,6 +39,22 @@ class Rate_Eta {
 				$expected_delivery_date->getTimezone()
 			);
 		}
+		return ucfirst( $eta );
+	}
+
+	/**
+	 * Add opening hours to a full label
+	 *
+	 * @param WC_Shipping_Rate $rate Shipping rate.
+	 *
+	 * @throws Exception
+	 */
+	public static function add_estimated_delivery_date( WC_Shipping_Rate $rate ): void {
+		$meta_data = $rate->get_meta_data();
+		if ( empty( $meta_data['expected_delivery_date'] ) ) {
+			return;
+		}
+		$eta = self::eta($meta_data['expected_delivery_date']);
 
 		printf(
 			'<div class="bring-fraktguiden-eta">%s: %s</div>',
@@ -56,8 +62,8 @@ class Rate_Eta {
 			esc_html(
 				apply_filters(
 					'bring_fraktguiden_shipping_rate_eta',
-					ucfirst( $eta ),
-					$expected_delivery_date,
+					$eta,
+					new DateTime( $meta_data['expected_delivery_date'] ),
 					$rate
 				)
 			)

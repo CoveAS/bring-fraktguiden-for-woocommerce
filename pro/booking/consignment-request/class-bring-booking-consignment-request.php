@@ -76,12 +76,16 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 				];
 
 				if ( $include_info ) {
+					$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+					if (is_object($pickup_point_id) && property_exists($pickup_point_id, 'id')) {
+						$pickup_point_id = $pickup_point_id->id;
+					}
 					$data['shipping_item_info'] = [
 						'item_id'         => $item_id,
 						'shipping_method' => [
 							'name'            => $this->shipping_item['method_id'],
 							'service'         => $this->service_id,
-							'pickup_point_id' => $this->shipping_item->get_meta( 'pickup_point_id' ),
+							'pickup_point_id' => $pickup_point_id,
 						],
 					];
 				}
@@ -212,6 +216,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	public static function create( WC_Order_Item_Shipping $shipping_item ): Bring_Booking_Consignment_Request {
 		$bring_product = self::get_bring_product( $shipping_item );
 
+
 		if (
 			filter_var(
 				Fraktguiden_Helper::get_option( 'booking_without_bring' ),
@@ -224,7 +229,8 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			$shipping_item->save();
 		}
 		if ( ! $bring_product ) {
-			$shipping_item->update_meta_data('bring_product', '5800');
+			$default_bring_product = apply_filters( 'bring_fraktguiden_default_bring_product', '5800', $shipping_item );
+			$shipping_item->update_meta_data('bring_product', $default_bring_product);
 			$shipping_item->save();
 			throw new Exception( 'No bring product was found on the shipping method' );
 		}
@@ -286,6 +292,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 		// Add pickup point.
 		$pickup_point_id = $this->shipping_item->get_meta( 'pickup_point_id' );
+		if (is_object($pickup_point_id) && property_exists($pickup_point_id, 'id')) {
+			$pickup_point_id = $pickup_point_id->id;
+		}
 
 		if ( $pickup_point_id ) {
 			$consignment['parties']['pickupPoint'] = [

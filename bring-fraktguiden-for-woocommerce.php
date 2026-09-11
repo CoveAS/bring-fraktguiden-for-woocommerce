@@ -5,14 +5,16 @@
  * Description:          Bring Fraktguiden for WooCommerce makes it easy for your customers to choose delivery methods from Bring.
  * Author:               Cove AS
  * Author URI:           https://bringfraktguiden.no/
+ * License:              GPL v2 or later
+ * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Version:              ###BRING_VERSION###
  * Requires at least:    5.6.0
  * Requires PHP:         8.3
- * Tested up to:         6.6.1
+ * Tested up to:         6.9
  *
  * WC requires at least: 4.8.0
- * WC tested up to:      9.2.2
+ * WC tested up to:      10.4.2
  *
  * Text Domain:          bring-fraktguiden-for-woocommerce
  * Domain Path:          /languages
@@ -59,5 +61,5 @@ if (
 	die;
 }
 
-add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'init'] );
+add_action( 'plugins_loaded', [Bring_Fraktguiden::class, 'loaded'] );
 register_deactivation_hook( __FILE__, [Bring_Fraktguiden::class, 'plugin_deactivate'] );

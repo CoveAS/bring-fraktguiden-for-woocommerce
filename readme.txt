@@ -3,13 +3,15 @@ Author: Cove AS
 Author URI: https://bringfraktguiden.no/
 Contributors: forsvunnet, yratof
 Donate link: https://bringfraktguiden.no/product/bring-fraktguiden-pro-for-woocommerce/
-Tags: woocommerce, shipping, posten, frakt, sporing, sende, servicepakke, kolli, brev, forsendelse, postnord, nettbutikk
+Tags: woocommerce, posten, frakt, sporing, bring
 Requires at least: 5.6
-Tested up to: 6.6.1
+Tested up to: 6.9
 Requires PHP: 8.3
 WC requires at least: 4.8.0
-WC tested up to: 9.2.2
-Stable tag: 1.10.12
+WC tested up to: 10.4.2
+Stable tag: 1.11.7
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Bring Fraktguiden provides shipping calculation based on rates from bring.no.
 
@@ -63,6 +65,36 @@ To ensure Bring will work correctly, you must set the following:
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.11.7 =
+
+* Fixed bug with printing labels introduced by changing the loading order
+
+= 1.11.6 =
+
+* Fixed translations loaded too early
+
+= 1.11.5 =
+
+* Fixed permission issue for status page
+* Fixed a bug where pickup points would not show in legacy mode
+
+= 1.11.4 =
+
+* Added a fix for a bug where the entire pick up point data was stored instead of just the id
+* Added a fix for pickup points where localisation of the script sometimes happens after the script has loaded
+
+= 1.11.2 =
+
+* Added GPL license
+* Fixed a bug with showing the pickup point in the block checkout
+
+= 1.11.0 =
+
+* Added support for WooCommerce Block Checkout
+* Fixed a minor bug when creating an order in admin
+* Added HPOS support for pick up point selection in the admin
+* Improvments to the pick up point selector on checkout
 
 = 1.10.12 =
 

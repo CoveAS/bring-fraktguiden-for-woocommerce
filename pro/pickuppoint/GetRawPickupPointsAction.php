@@ -8,9 +8,6 @@ use WP_Bring_Request;
 class GetRawPickupPointsAction {
 	public function __invoke(?string $country, ?string $postcode): array {
 
-		$country = esc_html( apply_filters('bring_pickup_point_country', $country ?? WC()->customer->get_shipping_country() ) );
-		$postcode = esc_html( apply_filters('bring_pickup_point_postcode', $postcode ?? WC()->customer->get_shipping_postcode()) );
-
 		if (! $postcode || ! $country) {
 			return [];
 		}
