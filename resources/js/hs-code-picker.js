@@ -286,19 +286,29 @@ function render(query) {
 		return;
 	}
 
+	// An empty search shows the whole tariff, with the code the field already
+	// holds on top.
+	//
+	// ponytail: the list holds one element per code, so 4587 codes build some
+	// 14000 elements every time the search empties. A windowed list would
+	// build only the rows in sight.
 	if (query.length < MIN_QUERY) {
 		hint.textContent = text.hint || '';
 
-		// The shop worker came from a field that already holds a code, so the
-		// empty search shows that code instead of an empty list.
-		const row = rowOf(current);
+		const chosen = rowOf(current);
+		const rows = chosen ? [chosen, ...index.codes.filter((row) => row !== chosen)] : index.codes;
+		const batch = document.createDocumentFragment();
 
-		if (row) {
-			const hit = addHit(list, row, []);
+		for (const row of rows) {
+			const hit = addHit(batch, row, []);
 
-			hit.classList.add('bfg-hs-modal__hit--current');
-			hit.setAttribute('aria-current', 'true');
+			if (row === chosen) {
+				hit.classList.add('bfg-hs-modal__hit--current');
+				hit.setAttribute('aria-current', 'true');
+			}
 		}
+
+		list.append(batch);
 
 		return;
 	}
@@ -319,8 +329,8 @@ function render(query) {
 	}
 }
 
-/** Add one tariff row to the list, and return its button. */
-function addHit(list, row, words) {
+/** Add one tariff row to a list or a fragment, and return its button. */
+function addHit(into, row, words) {
 	const item = document.createElement('li');
 	const button = document.createElement('button');
 
@@ -332,7 +342,7 @@ function addHit(list, row, words) {
 	highlight(button.querySelector('.bfg-hs-modal__hit-text'), rowText(row), words);
 
 	item.append(button);
-	list.append(item);
+	into.append(item);
 
 	return button;
 }
