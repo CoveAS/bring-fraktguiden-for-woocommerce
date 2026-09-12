@@ -314,16 +314,14 @@ class Fraktguiden_Service {
 	}
 
 	public function getProduct() {
-		$customer_number = Fraktguiden_Helper::get_option( 'use_customer_number_to_get_prices', 'yes' ) === 'yes'
-			? Fraktguiden_Helper::get_option( 'mybring_customer_number' )
-			: null;
+		$customer_number = Fraktguiden_Helper::price_customer_number();
 		if ( ! empty( $this->settings['customer_number_cb'] ) && ! empty( $this->settings['customer_number'] ) ) {
 			return [
 				'id'             => $this->bring_product,
 				'customerNumber' => $this->settings['customer_number'],
 			];
 		}
-		if ( $customer_number && '3584' == $this->bring_product || '3570' == $this->bring_product ) {
+		if ( $customer_number && ( '3584' == $this->bring_product || '3570' == $this->bring_product ) ) {
 			// Special mailbox rule.
 			$customer_number = preg_replace( '/^[A-Z_\-0]+/', '', $customer_number );
 

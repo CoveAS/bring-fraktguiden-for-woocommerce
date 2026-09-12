@@ -237,6 +237,27 @@ class Fraktguiden_Helper {
 	 *
 	 * @return array
 	 */
+	/**
+	 * The customer number a rate query may carry, or null.
+	 *
+	 * Bring gives the agreed prices of an account only when the request holds
+	 * the two credentials and the customer number. Any one of them missing
+	 * leaves the shop with list prices, so the setting alone decides nothing.
+	 *
+	 * @return string|null
+	 */
+	public static function price_customer_number() {
+		if ( 'yes' !== self::get_option( 'use_customer_number_to_get_prices', 'yes' ) ) {
+			return null;
+		}
+
+		if ( ! self::get_option( 'mybring_api_uid' ) || ! self::get_option( 'mybring_api_key' ) ) {
+			return null;
+		}
+
+		return self::get_option( 'mybring_customer_number' ) ?: null;
+	}
+
 	public static function get_services_data() {
 		static $services_data;
 		static $customer_number;
