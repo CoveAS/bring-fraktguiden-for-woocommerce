@@ -4,6 +4,7 @@ namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Settings\Settings;
+use BringFraktguiden\Shipping\FallbackCase;
 
 /**
  * The price the checkout shows when Bring gives no price.
@@ -46,12 +47,18 @@ final class FallbackPrice
 	 */
 	private const ANSWER_OPTION = 'bring_fraktguiden_fallback_answer';
 
-	/** The settings the answer writes, one pair per case. */
-	private const CASES = [
-		['no_connection_rate_id', 'no_connection_flat_rate'],
-		['exception_rate_id', 'exception_flat_rate'],
-		['alt_flat_rate_id', 'alt_flat_rate'],
-	];
+	/**
+	 * The settings the answer writes, one set per case.
+	 *
+	 * @return array<array{rate_id: string, price: string, label: string}>
+	 */
+	private static function cases(): array
+	{
+		return array_values(array_filter(array_map(
+			fn (FallbackCase $case) => $case->settings(),
+			FallbackCase::cases()
+		)));
+	}
 
 	private function __construct(
 		public readonly string $state,
@@ -71,7 +78,7 @@ final class FallbackPrice
 		$rates = [];
 		$prices = [];
 
-		foreach (self::CASES as [$rate_key, $price_key]) {
+		foreach (self::cases() as ['rate_id' => $rate_key, 'price' => $price_key]) {
 			$rate = Fraktguiden_Helper::get_option($rate_key);
 			$price = Fraktguiden_Helper::get_option($price_key);
 
@@ -123,6 +130,20 @@ final class FallbackPrice
 		return $setting->sanitize($value) === $setting->sanitize($setting->data['default'] ?? '');
 	}
 
+	/**
+	 * May this step write the checkout label of a case?
+	 *
+	 * The label is the plugin's as long as it holds the default or the name of
+	 * a Bring service. An owner who wrote a label of their own keeps it.
+	 */
+	private static function label_is_ours(string $key): bool
+	{
+		$label = Fraktguiden_Helper::get_option($key);
+
+		return self::untouched($key, $label)
+			|| in_array((string) $label, Fraktguiden_Helper::get_all_services(), true);
+	}
+
 	/** Has the shop owner answered? */
 	public function decided(): bool
 	{
@@ -162,9 +183,13 @@ final class FallbackPrice
 
 		update_option(self::ANSWER_OPTION, $charge ? self::PRICE : self::NO_SHIPPING);
 
-		foreach (self::CASES as [$rate_key, $price_key]) {
+		foreach (self::cases() as ['rate_id' => $rate_key, 'price' => $price_key, 'label' => $label_key]) {
 			Fraktguiden_Helper::update_option($rate_key, $rate);
 			Fraktguiden_Helper::update_option($price_key, $charge ? (string) $price : '0');
+
+			if ($charge && self::label_is_ours($label_key)) {
+				Fraktguiden_Helper::update_option($label_key, self::services()[$service]);
+			}
 		}
 	}
 
