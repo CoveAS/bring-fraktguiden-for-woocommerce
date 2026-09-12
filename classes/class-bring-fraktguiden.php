@@ -68,8 +68,6 @@ class Bring_Fraktguiden {
 
 		Scripts::setup();
 
-		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
-
 		if ( Settings::instance()->display_desc->value ) {
 //			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
 			add_action( 'woocommerce_after_shipping_rate', [ CarrierLogo::class, 'add_carrier_logo'], 10, 2 );
