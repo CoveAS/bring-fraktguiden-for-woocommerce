@@ -45,7 +45,7 @@ class Field
 	{
 		extract($this->field);
 		$name = $this->name;
-		$value = Settings::instance()->{$name}->value;
+		$value = Settings::instance()->{$name}->entered;
 		$template = $this->get_template();
 		ob_start();
 		require dirname(__DIR__, 3) . '/templates/admin/fields/' . $template . '.php';

@@ -5,7 +5,7 @@
  * @package Bring_Fraktguiden
  */
 
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -32,20 +32,14 @@ class Fraktguiden_Minimum_Dimensions {
 	 */
 	public static function minimum_dimensions( $dimensions ) {
 		// Check the weight.
-		$minimum_weight = floatval(Fraktguiden_Helper::get_option( 'minimum_weight', '0.01' )) * 1000;
+		$minimum_weight = Settings::instance()->minimum_weight->value * 1000;
 
 		if ( $minimum_weight > $dimensions['weight_in_grams'] ) {
 			$dimensions['weight_in_grams'] = $minimum_weight;
 		}
 
-		$fields = [
-			'length' => 23,
-			'width'  => 13,
-			'height' => 1,
-		];
-
-		foreach ( $fields as $key => $value ) {
-			$minimum = Fraktguiden_Helper::get_option( 'minimum_' . $key, $value );
+		foreach ( [ 'length', 'width', 'height' ] as $key ) {
+			$minimum = Settings::instance()->{'minimum_' . $key}->value;
 
 			if ( $minimum > $dimensions[ $key ] ) {
 				$dimensions[ $key ] = $minimum;

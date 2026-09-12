@@ -5,6 +5,7 @@ namespace BringFraktguiden\Admin;
 use Automattic\WooCommerce\Admin\PageController;
 use Bring_Fraktguiden;
 use BringFraktguiden\Fields\Fields;
+use BringFraktguiden\Settings\Setting;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Settings\SettingsRepository;
@@ -553,12 +554,12 @@ class SettingsPage
 			if ('info' == $setting->type) {
 				continue;
 			}
-			$posted = $_POST[$key] ?? '';
-			$sanitized = $posted ? $setting->sanitize($posted) : '';
+			// A new Setting cleans the posted value and keeps an empty number field empty.
+			$entered = (new Setting($key, $_POST[$key] ?? ''))->entered;
 			if ($setting->type === 'checkbox') {
-				$sanitized = $sanitized ? 'yes' : 'no';
+				$entered = $entered ? 'yes' : 'no';
 			}
-			$value[$key] = $sanitized;
+			$value[$key] = $entered;
 		}
 
 		// Handle trial activation date

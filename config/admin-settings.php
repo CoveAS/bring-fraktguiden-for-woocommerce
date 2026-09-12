@@ -214,6 +214,7 @@ return [
 			'lead_time' => [
 				'title' => __('Lead time in days', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
+				'placeholder' => '0',
 				'description' => __('Number of days before orders are shipped', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 0,
 				'css' => 'width: 90px',
@@ -236,10 +237,11 @@ return [
 			'minimum_length' => [
 				'title' => __('Length', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
+				'placeholder' => '23',
 				'css' => 'width: 75px;',
-				'default' => '23.0',
+				'default' => '23',
 				'custom_attributes' => [
-					'step' => '0.1',
+					'step' => '1',
 					'min' => '1',
 					'class' => 'bfg-suffixed-number'
 				],
@@ -247,10 +249,11 @@ return [
 			'minimum_width' => [
 				'title' => __('Width', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
+				'placeholder' => '13',
 				'css' => 'width: 75px;',
-				'default' => '13.0',
+				'default' => '13',
 				'custom_attributes' => [
-					'step' => '0.1',
+					'step' => '1',
 					'min' => '1',
 					'class' => 'bfg-suffixed-number'
 				],
@@ -258,10 +261,11 @@ return [
 			'minimum_height' => [
 				'title' => __('Height', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
+				'placeholder' => '1',
 				'css' => 'width: 75px;',
-				'default' => '1.0',
+				'default' => '1',
 				'custom_attributes' => [
-					'step' => '0.1',
+					'step' => '1',
 					'min' => '1',
 					'class' => 'bfg-suffixed-number'
 				],
@@ -269,6 +273,7 @@ return [
 			'minimum_weight' => [
 				'title' => __('Weight', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
+				'placeholder' => '0.01',
 				'css' => 'width: 75px;',
 				'default' => '0.01',
 				'custom_attributes' => [

@@ -87,9 +87,9 @@ class Fraktguiden_Packer {
 
 		$package = [
 			'weight_in_grams' => $this->get_weight( $total_weight ),
-			'length' => Fraktguiden_Helper::get_option( 'minimum_length' ),
-			'width' => Fraktguiden_Helper::get_option( 'minimum_width' ),
-			'height' => Fraktguiden_Helper::get_option( 'minimum_height' ),
+			'length' => Settings::instance()->minimum_length->value,
+			'width' => Settings::instance()->minimum_width->value,
+			'height' => Settings::instance()->minimum_height->value,
 		];
 
 		$calculate_by_weight = Settings::instance()->calculate_by_weight->value;

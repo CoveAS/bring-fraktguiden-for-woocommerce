@@ -342,3 +342,6 @@ write-up, a migration log or any dated snapshot there.
 
 Write a doc for a reader who was not in the session that produced it. Do not
 record the questions or comparisons that came up while you worked.
+
+## Working
+Commit using the commit skill when you consider work done. Try to only commit your own work, but sometimes multiple session tangle their edits in the same files. In such cases commit their changes too.

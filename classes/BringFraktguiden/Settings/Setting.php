@@ -9,6 +9,9 @@ class Setting
 	readonly public array  $data;
 	readonly public string $type;
 	readonly public mixed  $value;
+	// The text the input box shows and the option keeps. An empty number field holds an empty
+	// string, so the placeholder tells the shop owner what an empty box means.
+	readonly public mixed  $entered;
 
 	public function __construct(
 		readonly public string $key,
@@ -31,8 +34,10 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		// The caller supplies the value. Settings applies the default when no value is stored.
-		$this->value = $this->sanitize($raw_value);
+		// An empty number box means the field default, which the placeholder prints.
+		$empty_number = $this->type === 'number' && (string) $raw_value === '';
+		$this->value = $this->sanitize($empty_number ? ($data['default'] ?? '') : $raw_value);
+		$this->entered = $empty_number ? '' : $this->value;
 	}
 
 	public function validate(mixed $param): array
@@ -67,6 +72,15 @@ class Setting
 		return $errors;
 	}
 
+	// The step of the box says how fine the number is. A whole step means a whole number.
+	private function number(mixed $param): int|float
+	{
+		$value = floatval($param);
+		return ($this->data['custom_attributes']['step'] ?? '') === '1'
+			? (int) round($value)
+			: $value;
+	}
+
 	/**
 	 * @throws \Exception
 	 */
@@ -82,7 +96,7 @@ class Setting
 			// A text setting holds plain text, so it keeps no HTML.
 			'text' => sanitize_text_field($param),
 			'checkbox' => filter_var($param, FILTER_VALIDATE_BOOL),
-			'number' => $param === '' ? 0 : floatval($param),
+			'number' => $this->number($param),
 			default => throw new \Exception("Unknown data type: " . $this->data['type']),
 		};
 	}
