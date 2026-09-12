@@ -7,6 +7,7 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use BringFraktguiden\Settings\Settings as BringSettings;
 use BringFraktguiden\Settings\SettingsMigration;
 use WC_Shipping_Zones;
 
@@ -319,6 +320,30 @@ class Fraktguiden_Helper {
 
 		// Return the i18n-ed phone number.
 		return '+' . $map[ $country ] . ' ' . $phone_number;
+	}
+
+	/**
+	 * The postal code the plugin ships from.
+	 *
+	 * A blank from_zip setting falls back to the postcode of the store address.
+	 *
+	 * @return string
+	 */
+	public static function get_from_zip(): string {
+		return BringSettings::instance()->from_zip->value
+			?: get_option( 'woocommerce_store_postcode', '' );
+	}
+
+	/**
+	 * The country the plugin ships from.
+	 *
+	 * A blank from_country setting falls back to the country of the store address.
+	 *
+	 * @return string
+	 */
+	public static function get_from_country(): string {
+		return BringSettings::instance()->from_country->value
+			?: (string) WC()->countries?->get_base_country();
 	}
 
 	/**

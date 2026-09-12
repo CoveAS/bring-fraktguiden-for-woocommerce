@@ -31,9 +31,8 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		// A stored false is a real value, so only an unset or empty value falls back.
-		$has_value = $raw_value !== null && $raw_value !== '';
-		$this->value = $this->sanitize($has_value ? $raw_value : ($data['default'] ?? ''));
+		// An empty string is a real value, so a user can clear a field. Only an unset value falls back.
+		$this->value = $this->sanitize($raw_value ?? ($data['default'] ?? ''));
 	}
 
 	public function validate(mixed $param): array

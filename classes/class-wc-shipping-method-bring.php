@@ -200,8 +200,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->fee          = $this->get_setting( 'handling_fee' );
 
 		// WC_Shipping_Method_Bring.
-		$this->from_country = $this->get_setting( 'from_country' );
-		$this->from_zip     = $this->get_setting( 'from_zip' );
+		$this->from_country = Fraktguiden_Helper::get_from_country();
+		$this->from_zip     = Fraktguiden_Helper::get_from_zip();
 		$this->post_office  = $this->get_setting( 'post_office' );
 		self::$field_key    = $this->get_field_key( 'services' );
 		$this->services     = $this->get_services();
@@ -766,9 +766,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * Get selected 'From country' option
 	 */
 	public function get_selected_from_country() {
-		global $woocommerce;
-
-		return $this->from_country ?: $woocommerce->countries?->get_base_country();
+		return $this->from_country;
 	}
 
 	/**

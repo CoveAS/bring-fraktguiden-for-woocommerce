@@ -139,8 +139,8 @@ class PickUpPointAjax
 		// @todo: share / filter
 		$standard_params = [
 			'clientUrl' => Fraktguiden_Helper::get_client_url(),
-			'frompostalcode' => BringSettings::instance()->from_zip->value,
-			'fromcountry' => BringSettings::instance()->from_country->value,
+			'frompostalcode' => Fraktguiden_Helper::get_from_zip(),
+			'fromcountry' => Fraktguiden_Helper::get_from_country(),
 			'topostalcode' => $postcode,
 			'tocountry' => $country,
 			'postingatpostoffice' => BringSettings::instance()->post_office->value ? 'true' : 'false',

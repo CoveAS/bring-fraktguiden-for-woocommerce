@@ -156,7 +156,7 @@ class PickUpPoint
 			[
 				'ajaxurl' => admin_url('admin-ajax.php'),
 				'i18n' => self::get_i18n(),
-				'country' => BringSettings::instance()->from_country->value,
+				'country' => Fraktguiden_Helper::get_from_country(),
 				'klarna_checkout_nonce' => wp_create_nonce('klarna_checkout_nonce'),
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
 				'pick_up_points' => $pick_up_points,

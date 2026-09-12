@@ -91,16 +91,16 @@ return [
 			'from_zip' => [
 				'title' => __('From zip', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'placeholder' => '0010',
+				// A blank zip falls back to the postcode of the store address.
+				'placeholder' => $base_postcode,
 				'css' => 'width: 100px; text-align: right;',
-				'default' => $base_postcode,
 			],
 			'from_country' => [
 				'title' => __('From country', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
 				'class' => 'chosen_select',
 				'css' => 'width: 200px;',
-				'default' => $base_country_code,
+				// A blank country falls back to the country of the store address.
 				'placeholder' => $base_country,
 				'options' => $nordic_countries,
 			],
