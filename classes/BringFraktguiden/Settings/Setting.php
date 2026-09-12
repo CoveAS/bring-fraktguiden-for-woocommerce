@@ -31,8 +31,8 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		// An empty string is a real value, so a user can clear a field. Only an unset value falls back.
-		$this->value = $this->sanitize($raw_value ?? ($data['default'] ?? ''));
+		// The caller supplies the value. Settings applies the default when no value is stored.
+		$this->value = $this->sanitize($raw_value);
 	}
 
 	public function validate(mixed $param): array

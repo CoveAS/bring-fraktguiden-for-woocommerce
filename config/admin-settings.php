@@ -231,8 +231,9 @@ return [
 				'label' => __('Enable expected delivery date', 'bring-fraktguiden-for-woocommerce'),
 				'description' => __('Display expected delivery date below shipping rates',
 					'bring-fraktguiden-for-woocommerce'),
-				'default' => '12:00',
-			],			'minimum_length' => [
+				'default' => 'no',
+			],
+			'minimum_length' => [
 				'title' => __('Length', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'number',
 				'css' => 'width: 75px;',
