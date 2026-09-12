@@ -130,20 +130,6 @@ final class FallbackPrice
 		return $setting->sanitize($value) === $setting->sanitize($setting->data['default'] ?? '');
 	}
 
-	/**
-	 * May this step write the checkout label of a case?
-	 *
-	 * The label is the plugin's as long as it holds the default or the name of
-	 * a Bring service. An owner who wrote a label of their own keeps it.
-	 */
-	private static function label_is_ours(string $key): bool
-	{
-		$label = Fraktguiden_Helper::get_option($key);
-
-		return self::untouched($key, $label)
-			|| in_array((string) $label, Fraktguiden_Helper::get_all_services(), true);
-	}
-
 	/** Has the shop owner answered? */
 	public function decided(): bool
 	{
@@ -183,13 +169,9 @@ final class FallbackPrice
 
 		update_option(self::ANSWER_OPTION, $charge ? self::PRICE : self::NO_SHIPPING);
 
-		foreach (self::cases() as ['rate_id' => $rate_key, 'price' => $price_key, 'label' => $label_key]) {
+		foreach (self::cases() as ['rate_id' => $rate_key, 'price' => $price_key]) {
 			Fraktguiden_Helper::update_option($rate_key, $rate);
 			Fraktguiden_Helper::update_option($price_key, $charge ? (string) $price : '0');
-
-			if ($charge && self::label_is_ours($label_key)) {
-				Fraktguiden_Helper::update_option($label_key, self::services()[$service]);
-			}
 		}
 	}
 
@@ -215,8 +197,9 @@ final class FallbackPrice
 	/**
 	 * The Bring service the fallback rate carries when the shop names none.
 	 *
-	 * The checkout shows the label, not the service, so this only names the
-	 * service a later booking uses. The first service the shop sells fits best.
+	 * A later booking uses this service. The checkout shows its name too, as
+	 * long as the shop writes no label of its own. The first service the shop
+	 * sells fits best.
 	 */
 	public static function service(): string
 	{

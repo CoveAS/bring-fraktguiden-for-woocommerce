@@ -522,7 +522,9 @@ return [
 				'title' => __('Label',
 					'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'default' => __('Shipping', 'bring-fraktguiden-for-woocommerce'),
+				// A blank label falls back to the name of the chosen service.
+				'placeholder' => $all_services[(string) Fraktguiden_Helper::get_option('no_connection_rate_id')] ?? '',
+				'custom_attributes' => ['data-placeholder-from' => 'no_connection_rate_id'],
 			],
 			'no_connection_flat_rate' => [
 				'title' => __('Fixed price', 'bring-fraktguiden-for-woocommerce'),
@@ -569,8 +571,9 @@ return [
 			'alt_flat_rate_label' => [
 				'title' => __('Label', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'placeholder' => __('ie: Cargo shipping', 'bring-fraktguiden-for-woocommerce'),
-				'default' => __('Shipping', 'bring-fraktguiden-for-woocommerce'),
+				// A blank label falls back to the name of the chosen service.
+				'placeholder' => $all_services[(string) Fraktguiden_Helper::get_option('alt_flat_rate_id')] ?? '',
+				'custom_attributes' => ['data-placeholder-from' => 'alt_flat_rate_id'],
 			],
 			'alt_flat_rate' => [
 				'title' => __('Fixed price', 'bring-fraktguiden-for-woocommerce'),
@@ -597,8 +600,9 @@ return [
 			'exception_flat_rate_label' => [
 				'title' => __('Label', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'placeholder' => __('ie: Cargo shipping', 'bring-fraktguiden-for-woocommerce'),
-				'default' => __('Shipping', 'bring-fraktguiden-for-woocommerce'),
+				// A blank label falls back to the name of the chosen service.
+				'placeholder' => $all_services[(string) Fraktguiden_Helper::get_option('exception_rate_id')] ?? '',
+				'custom_attributes' => ['data-placeholder-from' => 'exception_rate_id'],
 			],
 			'exception_flat_rate' => [
 				'title' => __('Fixed price', 'bring-fraktguiden-for-woocommerce'),

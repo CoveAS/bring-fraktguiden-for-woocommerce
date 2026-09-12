@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/booking-box.js',
         'resources/js/checkout.js',
         'resources/js/custom-select.js',
+        'resources/js/fallback-label.js',
         'resources/js/home.js',
         'resources/js/hs-code-picker.js',
         'resources/js/pro.js',

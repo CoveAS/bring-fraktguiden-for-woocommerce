@@ -514,7 +514,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 				'id'            => $this->id,
 				'bring_product' => $rate_id,
 				'cost'          => $this->get_price_setting( $settings['price'] ),
-				'label'         => $this->get_setting( $settings['label'] ),
+				// A blank label falls back to the name of the chosen service.
+				'label'         => $this->get_setting( $settings['label'] ) ?: ( Fraktguiden_Helper::get_all_services()[ $rate_id ] ?? '' ),
 			]
 		);
 	}

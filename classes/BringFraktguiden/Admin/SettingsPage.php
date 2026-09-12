@@ -451,6 +451,16 @@ class SettingsPage
 			true
 		);
 
+		if ($hook === 'bring-fraktguiden_page_bring_fraktguiden_fallback') {
+			wp_enqueue_script(
+				'bfg-fallback-label',
+				plugins_url('bring-fraktguiden-for-woocommerce/build/js/fallback-label.js'),
+				[],
+				Bring_Fraktguiden::VERSION,
+				true
+			);
+		}
+
 		if ($hook === 'toplevel_page_bring_fraktguiden_home') {
 			wp_enqueue_script(
 				'bring-home-js',
