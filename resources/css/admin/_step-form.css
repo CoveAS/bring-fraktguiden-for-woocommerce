@@ -7,7 +7,11 @@
 	align-items: center;
 }
 
+/* The content takes the space that is left on the first line. Without a basis
+   of 0 a long line sizes the item to its text and wraps under the icon. */
 .bfg-step--form .bfg-step__content {
+	flex: 1;
+	min-width: 0;
 	padding-right: 16px;
 }
 
