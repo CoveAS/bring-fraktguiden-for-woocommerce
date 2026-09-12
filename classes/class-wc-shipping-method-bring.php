@@ -258,7 +258,6 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		parent::process_admin_options();
 
 		$this->service_table->process_services_field();
-//		$this->process_mybring_api_credentials();
 	}
 
 	/**
