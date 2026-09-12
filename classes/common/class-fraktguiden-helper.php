@@ -239,13 +239,15 @@ class Fraktguiden_Helper {
 	public static function get_services_data() {
 		static $services_data;
 		static $customer_number;
+		static $warning_added = false;
 		if (! isset($services_data)) {
 			$services_data = require dirname( dirname( __DIR__ ) ) . '/config/services.php';
 		}
 		if (! isset($customer_number)) {
 			$customer_number = self::get_option( 'mybring_customer_number' );
 		}
-		if ( ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+		if ( ! $warning_added && ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+			$warning_added = true;
 			$warning = sprintf(
 				__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
 				$customer_number

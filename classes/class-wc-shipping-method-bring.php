@@ -230,7 +230,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 * @return array Services.
 	 */
 	public function get_services() {
-		$services = $this->get_setting( 'services' );
+		$services = Fraktguiden_Helper::get_option( 'services' );
 		if ( ! is_array( $services ) ) {
 			$services = [];
 		}
