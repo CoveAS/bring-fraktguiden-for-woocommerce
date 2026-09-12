@@ -53,7 +53,14 @@ $bfg_passed = $result->rates && ! $result->problem;
 
 	<dialog class="bfg bfg-modal bfg-shipping-test__dialog">
 		<div class="bfg-modal__head">
-			<h2 class="bfg-modal__title"><t>Shipping Guide API call</t></h2>
+			<h2 class="bfg-modal__title">
+				<t>Shipping Guide API call</t>
+				<?php if ($result->status()): ?>
+					<span class="bfg-shipping-test__status <?php echo 200 === $result->status() ? '' : 'bfg-shipping-test__status--error'; ?>">
+						<?php echo esc_html($result->status()); ?>
+					</span>
+				<?php endif; ?>
+			</h2>
 			<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
 		</div>
 		<div class="bfg-shipping-test__tabs" role="tablist">
@@ -65,7 +72,11 @@ $bfg_passed = $result->rates && ! $result->problem;
 
 		<div class="bfg-modal__body">
 			<pre class="bfg-shipping-test__json" id="bfg-shipping-test-request" role="tabpanel" hidden><?php echo esc_html($result->json('request')); ?></pre>
-			<pre class="bfg-shipping-test__json" id="bfg-shipping-test-answer" role="tabpanel"><?php echo esc_html($result->json('answer')); ?></pre>
+			<pre class="bfg-shipping-test__json" id="bfg-shipping-test-answer" role="tabpanel"><?php
+				echo $result->json('answer') === ''
+					? esc_html__('Bring sent no body.', 'bring-fraktguiden-for-woocommerce')
+					: esc_html($result->json('answer'));
+			?></pre>
 		</div>
 	</dialog>
 <?php endif; ?>

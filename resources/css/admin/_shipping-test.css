@@ -152,3 +152,19 @@
 	border-bottom-color: var(--bfg-primary);
 	color: var(--bfg-primary);
 }
+
+/* The HTTP status of the Bring answer, beside the title of the call dialog. */
+.bfg-shipping-test__status {
+	margin-left: 8px;
+	padding: 2px 8px;
+	border-radius: 9999px;
+	font-size: 12px;
+	font-weight: 600;
+	background: color-mix(in srgb, #15803d 15%, white);
+	color: #15803d;
+}
+
+.bfg-shipping-test__status--error {
+	background: color-mix(in srgb, #b91c1c 15%, white);
+	color: #b91c1c;
+}

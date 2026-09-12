@@ -64,9 +64,10 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	/**
 	 * The bodies of the last Bring rate query, as [ request, answer ].
 	 *
-	 * Only the bodies. The headers carry the API key of the shop.
+	 * The two bodies and the HTTP status. The headers carry the API key of the
+	 * shop, so they stay out.
 	 *
-	 * @var array{request: string, answer: string}|null
+	 * @var array{request: string, answer: string, status: int|string}|null
 	 */
 	private ?array $last_call = null;
 
@@ -354,7 +355,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	 *
 	 * Null when the calculation stopped before it asked Bring.
 	 *
-	 * @return array{request: string, answer: string}|null
+	 * @return array{request: string, answer: string, status: int|string}|null
 	 */
 	public function get_last_call(): ?array {
 		return $this->last_call;
@@ -416,6 +417,8 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$this->last_call = [
 			'request' => $options['body'],
 			'answer'  => (string) $response->get_body(),
+			// Empty when the request never reached Bring, for example on a timeout.
+			'status'  => $response->status_code,
 		];
 
 		if ( 400 == $response->status_code ) {

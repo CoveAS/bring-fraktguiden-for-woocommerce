@@ -2,6 +2,7 @@
 
 namespace BringFraktguiden\Admin;
 
+use BringFraktguiden\Shipping\FallbackCase;
 use WC_Product;
 use WC_Shipping_Method_Bring;
 use WC_Shipping_Zone;
@@ -110,13 +111,44 @@ final class ShippingTest
 		$rates = $bring->get_rates_for_package($package);
 		$case = $bring->get_fallback_case();
 
+		$call = $bring->get_last_call();
+
 		// A rate pushed after a fallback case is the price of the shop, not a
 		// price from Bring. The test passes only on a price from Bring.
 		if ($case) {
-			return ShippingTestResult::problem($case->reason(), $bring->get_trace_messages(), $bring->get_last_call());
+			return ShippingTestResult::problem(
+				$case === FallbackCase::NoAnswer
+					? self::answer_problem((int) ($call['status'] ?? 0))
+					: $case->reason(),
+				$bring->get_trace_messages(),
+				$call
+			);
 		}
 
-		return ShippingTestResult::rates($rates, $bring->get_last_call());
+		return ShippingTestResult::rates($rates, $call);
+	}
+
+	/**
+	 * Why Bring sent no rate, told by the HTTP status of the answer.
+	 *
+	 * A status of zero means the request never came back, so the shop saw a
+	 * timeout or a broken connection.
+	 */
+	private static function answer_problem(int $status): string
+	{
+		if (401 === $status || 403 === $status) {
+			return __('Bring did not accept the API credentials of this shop.', 'bring-fraktguiden-for-woocommerce');
+		}
+
+		if ($status && 200 !== $status) {
+			return sprintf(
+				/* translators: %d: the HTTP status code Bring answered with. */
+				__('Bring answered with an error (%d).', 'bring-fraktguiden-for-woocommerce'),
+				$status
+			);
+		}
+
+		return FallbackCase::NoAnswer->reason();
 	}
 
 	/** @return array<string, mixed> */

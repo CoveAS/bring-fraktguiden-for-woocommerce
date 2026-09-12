@@ -16,7 +16,7 @@ final class ShippingTestResult
 	 * @param WC_Shipping_Rate[] $rates    The rates the checkout would show.
 	 * @param string[]           $messages What Bring said about an empty answer.
 	 * @param string             $problem  Why the test could not run at all.
-	 * @param array{request: string, answer: string}|null $call The bodies of the Bring call.
+	 * @param array{request: string, answer: string, status: int|string}|null $call The Bring call.
 	 */
 	private function __construct(
 		public readonly array $rates = [],
@@ -28,7 +28,7 @@ final class ShippingTestResult
 
 	/**
 	 * @param string[] $messages
-	 * @param array{request: string, answer: string}|null $call
+	 * @param array{request: string, answer: string, status: int|string}|null $call
 	 */
 	public static function problem(string $problem, array $messages = [], ?array $call = null): self
 	{
@@ -37,7 +37,7 @@ final class ShippingTestResult
 
 	/**
 	 * @param WC_Shipping_Rate[] $rates
-	 * @param array{request: string, answer: string}|null $call
+	 * @param array{request: string, answer: string, status: int|string}|null $call
 	 */
 	public static function rates(array $rates, ?array $call = null): self
 	{
@@ -62,6 +62,12 @@ final class ShippingTestResult
 		}
 
 		return (string) wp_json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+	}
+
+	/** The HTTP status Bring answered with. Zero when no answer came back. */
+	public function status(): int
+	{
+		return (int) ($this->call['status'] ?? 0);
 	}
 
 	public function passed(): bool
