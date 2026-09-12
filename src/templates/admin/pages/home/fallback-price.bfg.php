@@ -3,7 +3,7 @@
 use BringFraktguiden\Admin\FallbackPrice;
 
 /**
- * Step 4 of the setup page. The whole row, not only the form.
+ * The fallback price step of the setup page. The whole row, not only the form.
  *
  * The other step rows wrap in a link, and a form may not sit inside a link.
  * So this step builds its row from the same classes.
