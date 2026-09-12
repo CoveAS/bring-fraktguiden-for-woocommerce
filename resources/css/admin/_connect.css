@@ -21,3 +21,32 @@
 	font-weight: 400;
 	color: var(--bfg-text-secondary);
 }
+
+/* The side path to the partner that sells a Bring agreement. */
+.bfg-connect__signup {
+	margin: 0 0 20px;
+	padding: 14px 16px;
+	background: #ffffff;
+	border: 1px solid var(--bfg-border);
+	border-radius: var(--bfg-radius-input);
+}
+
+.bfg-connect__signup-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 18px;
+	margin: 0;
+	font-size: 14px;
+}
+
+.bfg-connect__signup-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	white-space: nowrap;
+}
+
+.bfg-connect__signup-link svg {
+	flex-shrink: 0;
+}

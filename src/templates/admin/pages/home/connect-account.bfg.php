@@ -17,6 +17,12 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 $bfg_failed = ($_GET[ConnectAccount::RESULT] ?? null) === 'no';
 $bfg_open = $bfg_failed || (!$step->completed && $isNext);
 $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
+$bfg_quickship_subject = rawurlencode(__('Bring Fraktguiden for WooCommerce: I would like a shipping agreement', 'bring-fraktguiden-for-woocommerce'));
+$bfg_quickship_body = rawurlencode(sprintf(
+	/* translators: %s is the address of the shop. */
+	__("Hi, I have a WooCommerce shop, %s, and I would like an account.\nCan you help me?", 'bring-fraktguiden-for-woocommerce'),
+	home_url()
+));
 ?>
 
 <div class="bfg-step bfg-step--form <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
@@ -72,6 +78,31 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 			<p class="bfg-step-form__intro">
 				<t>Bring needs two things: the email you log in with, and an API key.</t>
 			</p>
+
+			<div class="bfg-connect__signup">
+				<p class="bfg-step-form__intro">
+					<t>Save as much as 30 to 40 percent against a normal Bring account.</t>
+					<t>Our partner Quickship opens an account for you, or takes over the one you have.</t>
+				</p>
+				<p class="bfg-connect__signup-links">
+					<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="mailto:support@quickship.no?subject=<?php echo esc_attr($bfg_quickship_subject); ?>&amp;body=<?php echo esc_attr($bfg_quickship_body); ?>">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<rect x="2" y="4" width="20" height="16" rx="2"></rect>
+							<polyline points="2 6 12 13 22 6"></polyline>
+						</svg>
+						<t>Set up an account</t>
+					</a>
+					<a class="bfg-connect__signup-link" href="tel:+4740001714">+47 40 00 17 14</a>
+					<a class="bfg-connect__signup-link" href="https://quickship.no/fraktavtale/" target="_blank" rel="noopener">
+						<t>Read more</t>
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+							<polyline points="15 3 21 3 21 9"></polyline>
+							<line x1="10" y1="14" x2="21" y2="3"></line>
+						</svg>
+					</a>
+				</p>
+			</div>
 
 			<div class="bfg-step-form__field">
 				<label class="bfg-step-form__label" for="bfg-api-uid"><t>Bring login email</t></label>
