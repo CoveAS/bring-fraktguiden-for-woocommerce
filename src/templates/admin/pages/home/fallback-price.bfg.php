@@ -89,7 +89,7 @@ $bfg_services = FallbackPrice::services();
 					<t>Charge a fixed price</t>
 				</label>
 				<div class="bfg-step-form__row">
-					<div class="bfg-input bfg-input--number">
+					<div class="bfg-input bfg-input--number bfgu:w-40 bfgu:shrink-0">
 						<input class="bfg-step-form__input" type="number" id="bfg-fallback-price" name="bfg_fallback_price"
 							step="0.1" min="0" value="<?php echo esc_attr($bfg_fallback->price ?: ''); ?>"
 							placeholder="<?php esc_attr_e('Free: 0', 'bring-fraktguiden-for-woocommerce'); ?>">
@@ -98,7 +98,7 @@ $bfg_services = FallbackPrice::services();
 					<label class="screen-reader-text" for="bfg-fallback-service">
 						<t>Service</t>
 					</label>
-					<select id="bfg-fallback-service" name="bfg_fallback_service">
+					<select class="bfgu:flex-1 bfgu:min-w-0" id="bfg-fallback-service" name="bfg_fallback_service">
 						<?php foreach ($bfg_services as $bfg_id => $bfg_name): ?>
 							<option value="<?php echo esc_attr($bfg_id); ?>" <?php selected($bfg_service, (string) $bfg_id); ?>>
 								<?php echo esc_html($bfg_name); ?>

@@ -132,12 +132,3 @@
 	gap: 8px;
 }
 
-.bfg-step-form__row .bfg-input {
-	width: 130px;
-	flex-shrink: 0;
-}
-
-.bfg-step-form__row select {
-	flex: 1;
-	min-width: 0;
-}
