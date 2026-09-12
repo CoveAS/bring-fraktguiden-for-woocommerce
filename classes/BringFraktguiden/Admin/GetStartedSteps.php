@@ -59,17 +59,6 @@ class GetStartedSteps
 			form: 'test-shipping',
 		);
 
-		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
-		$has_valid_license = Fraktguiden_Helper::valid_license();
-
-		$steps [] = new Step(
-			label: __('Go live', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Activate shipping on your store', 'bring-fraktguiden-for-woocommerce'),
-			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
-			actionText: __('Go live', 'bring-fraktguiden-for-woocommerce'),
-			completed: $pro_enabled && $has_valid_license,
-		);
-
 		return $steps;
 
 	}
