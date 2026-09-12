@@ -32,7 +32,11 @@ $fallback_services = [
 ];
 
 return [
-	'home' => [
+	/**
+	 * Pro page - license management and feature overview
+	 */
+	'pro' => [
+		'title' => __('Bring Fraktguiden Pro', 'bring-fraktguiden-for-woocommerce'),
 		'fields' => [
 			'pro_enabled' => [
 				'title' => __('Activate PRO', 'bring-fraktguiden-for-woocommerce'),
@@ -48,15 +52,6 @@ return [
 				'default' => '',
 			],
 		],
-	],
-
-	/**
-	 * Pro page - license management and feature overview
-	 * Note: Uses pro_enabled and test_url fields from 'home' section
-	 */
-	'pro' => [
-		'title' => __('Bring Fraktguiden Pro', 'bring-fraktguiden-for-woocommerce'),
-		'fields' => [],
 	],
 	/**
 	 * General options setting
