@@ -21,6 +21,9 @@ class ConnectAccount
 	/** The option that holds the result of the last test. */
 	public const OPTION = 'mybring_authentication';
 
+	/** The option that holds the choice to leave the account unconnected. */
+	public const SKIPPED = 'bfg_connect_skipped';
+
 	private const URL = 'https://api.bring.com/booking/api/customers';
 
 	public static function init(): void
@@ -36,6 +39,12 @@ class ConnectAccount
 
 		check_admin_referer(self::ACTION);
 
+		if (isset($_POST['skip'])) {
+			update_option(self::SKIPPED, true);
+			wp_safe_redirect(admin_url('admin.php?page=bring_fraktguiden_home'));
+			exit;
+		}
+
 		// A key copied by hand often carries a space or a line break.
 		$uid = trim((string) ($_POST['mybring_api_uid'] ?? ''));
 		$key = trim((string) ($_POST['mybring_api_key'] ?? ''));
@@ -46,6 +55,9 @@ class ConnectAccount
 		Fraktguiden_Helper::update_option('mybring_api_key', $key);
 
 		update_option(self::OPTION, self::test($uid, $key) + ['credentials' => self::fingerprint($uid, $key)]);
+
+		// The shop owner asked to connect, so the test now decides the step.
+		delete_option(self::SKIPPED);
 
 		wp_safe_redirect(add_query_arg(
 			self::RESULT,
@@ -76,6 +88,12 @@ class ConnectAccount
 		}
 
 		return (bool) ($result['authenticated'] ?? false);
+	}
+
+	/** Did the shop owner choose to leave the account unconnected? */
+	public static function skipped(): bool
+	{
+		return (bool) get_option(self::SKIPPED);
 	}
 
 	/** Names the credential pair a stored result belongs to. */

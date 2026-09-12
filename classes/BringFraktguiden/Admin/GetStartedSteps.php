@@ -33,21 +33,21 @@ class GetStartedSteps
 		);
 
 		$steps [] = new Step(
-			label: __('Connect your Bring account', 'bring-fraktguiden-for-woocommerce'),
-			description: __('Add your Bring login email and API key', 'bring-fraktguiden-for-woocommerce'),
-			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
-			actionText: __('Connect account', 'bring-fraktguiden-for-woocommerce'),
-			completed: ConnectAccount::connected(),
-			form: 'connect-account',
-		);
-
-		$steps [] = new Step(
 			label: __('Price the carts that fall through', 'bring-fraktguiden-for-woocommerce'),
 			description: __('Set a price for carts that are too big, too heavy or too full, or when the Bring API is quiet', 'bring-fraktguiden-for-woocommerce'),
 			action: admin_url('admin.php?page=bring_fraktguiden_fallback'),
 			actionText: __('Answer', 'bring-fraktguiden-for-woocommerce'),
 			completed: FallbackPrice::current()->decided(),
 			form: 'fallback-price',
+		);
+
+		$steps [] = new Step(
+			label: __('Connect your Bring account', 'bring-fraktguiden-for-woocommerce'),
+			description: __('Add your Bring login email and API key', 'bring-fraktguiden-for-woocommerce'),
+			action: admin_url('admin.php?page=bring_fraktguiden_settings'),
+			actionText: __('Connect account', 'bring-fraktguiden-for-woocommerce'),
+			completed: ConnectAccount::connected() || ConnectAccount::skipped(),
+			form: 'connect-account',
 		);
 
 		$steps [] = new Step(

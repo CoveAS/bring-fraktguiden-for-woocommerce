@@ -4,7 +4,10 @@ use BringFraktguiden\Admin\ConnectAccount;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 /**
- * Step 3 of the setup page. The whole row, not only the form.
+ * The connect step of the setup page. The whole row, not only the form.
+ *
+ * The step is optional. Only the booking of a label needs a Bring account, so
+ * the shop owner may skip it and still take orders.
  *
  * The other step rows wrap in a link, and a form may not sit inside a link.
  * So this step builds its row from the same classes.
@@ -17,10 +20,12 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 $bfg_failed = ($_GET[ConnectAccount::RESULT] ?? null) === 'no';
 $bfg_open = $bfg_failed || (!$step->completed && $isNext);
 $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
+$bfg_connected = ConnectAccount::connected();
+$bfg_skipped = $step->completed && !$bfg_connected;
 ?>
 
-<div class="bfg-step bfg-step--form <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
-	<?php if ($step->completed): ?>
+<div class="bfg-step bfg-step--form <?php echo $bfg_connected ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
+	<?php if ($bfg_connected): ?>
 		<div class="bfg-step__icon bfg-step__icon--completed">
 			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 				<polyline points="20 6 9 17 4 12"></polyline>
@@ -34,18 +39,20 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 		<?php echo esc_html($step->label); ?>
 		<p class="bfg-step-form__line">
 			<span class="bfg-connect__state">
-				<?php if ($step->completed): ?>
+				<?php if ($bfg_connected): ?>
 					<?php printf(
 						esc_html__('Connected as %s', 'bring-fraktguiden-for-woocommerce'),
 						esc_html($bfg_uid)
 					); ?>
+				<?php elseif ($bfg_skipped): ?>
+					<t>Skipped. You can connect whenever you want to book labels.</t>
 				<?php else: ?>
 					<?php echo esc_html($step->description); ?>
 				<?php endif; ?>
 			</span>
 			<button type="button" class="bfg-step-form__toggle" aria-controls="bfg-connect-panel"
 				aria-expanded="<?php echo $bfg_open ? 'true' : 'false'; ?>">
-				<?php if ($step->completed): ?>
+				<?php if ($bfg_connected): ?>
 					<t>Change</t>
 				<?php else: ?>
 					<t>Connect</t>
@@ -54,10 +61,12 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 		</p>
 	</div>
 
-	<?php if ($step->completed): ?>
+	<?php if ($bfg_connected): ?>
 		<bfg-badge.completed>
 			<t>Done</t>
 		</bfg-badge.completed>
+	<?php elseif ($bfg_skipped): ?>
+		<span class="bfg-badge bfg-badge--outline"><t>Skipped</t></span>
 	<?php elseif ($isNext): ?>
 		<bfg-badge.in-progress>
 			<t>In Progress</t>
@@ -71,6 +80,7 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 
 			<p class="bfg-step-form__intro">
 				<t>Bring needs two things: the email you log in with, and an API key.</t>
+				<t>You only need an account to book labels. Prices work without one.</t>
 			</p>
 
 			<div class="bfg-step-form__field">
@@ -108,6 +118,11 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 			</div>
 
 			<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--sm"><t>Save and test</t></button>
+			<?php if (!$bfg_skipped): ?>
+				<button type="submit" name="skip" value="1" formnovalidate class="bfg-btn bfg-btn--secondary bfg-btn--sm">
+					<t>Skip this step</t>
+				</button>
+			<?php endif; ?>
 		</form>
 	</div>
 </div>
