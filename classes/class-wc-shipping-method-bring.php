@@ -390,6 +390,11 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 			return FallbackCase::NoAddress;
 		}
 
+		// Bring answers 401 without the credentials, so the shop saves the call.
+		if ( ! Fraktguiden_Helper::has_api_credentials() ) {
+			return FallbackCase::NoCredentials;
+		}
+
 		$enabled_services = Fraktguiden_Service::all( self::$field_key, true );
 		// Request parameters.
 		$params = $this->make_shipping_guide_request_body(

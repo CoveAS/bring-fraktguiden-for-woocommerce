@@ -238,6 +238,17 @@ class Fraktguiden_Helper {
 	 * @return array
 	 */
 	/**
+	 * Does the shop hold both Mybring credentials?
+	 *
+	 * Bring answers a rate query with 401 when one of them is missing.
+	 *
+	 * @return bool
+	 */
+	public static function has_api_credentials() {
+		return (bool) self::get_option( 'mybring_api_uid' ) && (bool) self::get_option( 'mybring_api_key' );
+	}
+
+	/**
 	 * The customer number a rate query may carry, or null.
 	 *
 	 * Bring gives the agreed prices of an account only when the request holds
@@ -251,7 +262,7 @@ class Fraktguiden_Helper {
 			return null;
 		}
 
-		if ( ! self::get_option( 'mybring_api_uid' ) || ! self::get_option( 'mybring_api_key' ) ) {
+		if ( ! self::has_api_credentials() ) {
 			return null;
 		}
 

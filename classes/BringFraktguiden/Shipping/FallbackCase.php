@@ -20,6 +20,14 @@ enum FallbackCase
 	case NoAnswer;
 
 	/**
+	 * The shop holds no Mybring credentials, so the plugin asks Bring nothing.
+	 *
+	 * Bring answers every rate query with 401 without them, so the shop gets
+	 * the same empty checkout as a broken connection.
+	 */
+	case NoCredentials;
+
+	/**
 	 * Bring answered and sells no service for this order.
 	 *
 	 * A price here promises a delivery nobody can make, so the checkout shows
@@ -50,7 +58,7 @@ enum FallbackCase
 				'price'   => 'exception_flat_rate',
 				'label'   => 'exception_flat_rate_label',
 			],
-			self::NoAnswer => [
+			self::NoAnswer, self::NoCredentials => [
 				'rate_id' => 'no_connection_rate_id',
 				'price'   => 'no_connection_flat_rate',
 				'label'   => 'no_connection_flat_rate_label',
@@ -66,6 +74,7 @@ enum FallbackCase
 			self::TooManyProducts => __('The cart holds more product lines than the plugin sends to Bring.', 'bring-fraktguiden-for-woocommerce'),
 			self::GoodsDoNotFit   => __('The goods do not fit the Bring size and weight limits.', 'bring-fraktguiden-for-woocommerce'),
 			self::NoAnswer        => __('Bring did not answer.', 'bring-fraktguiden-for-woocommerce'),
+			self::NoCredentials   => __('The shop has no Bring API credentials.', 'bring-fraktguiden-for-woocommerce'),
 			self::NoService       => __('Bring sells no service for this address.', 'bring-fraktguiden-for-woocommerce'),
 			self::NoAddress       => __('Fill in a post code.', 'bring-fraktguiden-for-woocommerce'),
 		};
@@ -78,6 +87,7 @@ enum FallbackCase
 			self::TooManyProducts => 'The cart holds more products than the maximum product limit.',
 			self::GoodsDoNotFit   => 'No package fits the Bring size and weight limits.',
 			self::NoAnswer        => 'Bring did not answer.',
+			self::NoCredentials   => 'The shop has no Bring API credentials.',
 			self::NoService       => 'Bring sells no service for this order.',
 			self::NoAddress       => 'The customer has given no postal code.',
 		};

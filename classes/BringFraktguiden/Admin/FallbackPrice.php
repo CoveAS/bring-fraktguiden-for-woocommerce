@@ -50,14 +50,16 @@ final class FallbackPrice
 	/**
 	 * The settings the answer writes, one set per case.
 	 *
+	 * Two cases may share one set of settings, so the list holds each set once.
+	 *
 	 * @return array<array{rate_id: string, price: string, label: string}>
 	 */
 	private static function cases(): array
 	{
-		return array_values(array_filter(array_map(
+		return array_values(array_unique(array_filter(array_map(
 			fn (FallbackCase $case) => $case->settings(),
 			FallbackCase::cases()
-		)));
+		)), SORT_REGULAR));
 	}
 
 	private function __construct(
