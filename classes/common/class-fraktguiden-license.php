@@ -18,6 +18,8 @@ use Exception;
 class Fraktguiden_License
 {
 
+	protected const STATE_OPTION = 'bring_fraktguiden_license_state';
+
 	protected static self $instance;
 
 	/**
@@ -103,6 +105,44 @@ class Fraktguiden_License
 	}
 
 	/**
+	 * Clean a key that a user typed or pasted.
+	 *
+	 * The license server applies the same rule before it looks the key up.
+	 * The key alphabet leaves out I, L, O and U, so those letters map to the
+	 * digits a reader mistook them for.
+	 *
+	 * @param string $key Key.
+	 *
+	 * @return string
+	 */
+	public static function normalise_key(string $key): string
+	{
+		$key = strtoupper((string) preg_replace('/[^0-9a-zA-Z]/', '', $key));
+
+		return strtr($key, ['I' => '1', 'L' => '1', 'O' => '0']);
+	}
+
+	/**
+	 * Get the key this shop holds.
+	 */
+	public static function get_key(): string
+	{
+		return self::normalise_key(Fraktguiden_Helper::get_option('license_key') ?? '');
+	}
+
+	/**
+	 * Get the last answer of the license server.
+	 *
+	 * @return array
+	 */
+	public static function get_state(): array
+	{
+		$state = get_option(self::STATE_OPTION, []);
+
+		return is_array($state) ? $state : [];
+	}
+
+	/**
 	 * Check the license
 	 * @throws Exception
 	 */
@@ -115,6 +155,73 @@ class Fraktguiden_License
 			$this->ping();
 			return;
 		}
+
+		$key = self::get_key();
+
+		$this->store_answer(
+			$this->curl_request($this->request_data($key ? 'check_key' : 'check_license', $key)),
+			$key ? 'key' : 'domain'
+		);
+	}
+
+	/**
+	 * Move the license of this key to the domain of this shop.
+	 *
+	 * A move costs the owner one of the moves of the year, so call this only
+	 * after the owner confirms it.
+	 *
+	 * @return array The new state.
+	 */
+	public function move_key(): array
+	{
+		$key = self::get_key();
+
+		if (!$key) {
+			return self::get_state();
+		}
+
+		return $this->store_answer(
+			$this->curl_request($this->request_data('move_key', $key)),
+			'key'
+		);
+	}
+
+	/**
+	 * Build the parameters every license call sends.
+	 *
+	 * @param string $action Action.
+	 * @param string $key    Cleaned key, or an empty string.
+	 *
+	 * @return array
+	 */
+	protected function request_data(string $action, string $key = ''): array
+	{
+		$url      = get_site_url();
+		$url_info = wp_parse_url($url);
+
+		$data = [
+			'action'        => $action,
+			'domain'        => $url_info['host'] ?? '',
+			'url'           => $url,
+			'booking_count' => $this->booking_count(),
+			'pro_enabled'   => Fraktguiden_Helper::get_option('pro_enabled'),
+			'version'       => Bring_Fraktguiden::VERSION,
+		];
+
+		if ($key) {
+			$data['key'] = $key;
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Get the booking count, and drop the months that are older than two.
+	 *
+	 * @return array
+	 */
+	protected function booking_count(): array
+	{
 		$date_utc  = new DateTime('-2 months', new DateTimeZone('UTC'));
 		$date_then = (int) $date_utc->format('Ymd');
 
@@ -136,34 +243,56 @@ class Fraktguiden_License
 			update_option('bring_fraktguiden_booking_count', $count, false);
 		}
 
-		$data = $this->curl_request(
-			[
-				'action'        => 'check_license',
-				'domain'        => $url_info['host'],
-				'url'           => $url,
-				'booking_count' => $count,
-				'pro_enabled'   => Fraktguiden_Helper::get_option('pro_enabled'),
-				'version'       => Bring_Fraktguiden::VERSION,
-			]
-		);
+		return $count;
+	}
 
-		if (empty($data)) {
-			return;
+	/**
+	 * Store the answer of the license server.
+	 *
+	 * @param array|false $data   Answer.
+	 * @param string      $source Where the answer came from, key or domain.
+	 *
+	 * @return array The new state.
+	 */
+	protected function store_answer($data, string $source): array
+	{
+		if (empty($data['data']['license'])) {
+			return self::get_state();
 		}
 
-		if (!isset($data['data']['license']['valid_to'])) {
-			return;
+		$license = $data['data']['license'];
+
+		$state = [
+			'key_state'    => $license['key_state'] ?? '',
+			'domain'       => $license['domain'] ?? '',
+			'moves_left'   => isset($license['moves_left']) ? (int) $license['moves_left'] : null,
+			'other_domain' => $license['other_domain'] ?? '',
+			'year'         => isset($license['year']) ? (int) $license['year'] : null,
+			'reason'       => $license['reason'] ?? '',
+			'source'       => $source,
+			'checked_at'   => time(),
+		];
+
+		update_option(self::STATE_OPTION, $state, false);
+
+		// A shop that never typed a key learns its key from the domain check.
+		if (!self::get_key() && !empty($license['key'])) {
+			Fraktguiden_Helper::update_option('license_key', self::normalise_key($license['key']));
 		}
 
-		$valid = (int) $data['data']['license']['valid_to'];
-
-		if ($valid > 0) {
-			update_option('bring_fraktguiden_pro_valid_to', $valid);
+		if (isset($license['valid_to']) && (int) $license['valid_to'] > 0) {
+			update_option('bring_fraktguiden_pro_valid_to', (int) $license['valid_to']);
 		}
+
+		return $state;
 	}
 
 	/**
 	 * Ping the licensing server
+	 *
+	 * A shop whose site URL does not parse has no domain of its own to send.
+	 * The server reads the domain before it reads the action, so the ping
+	 * sends the host of the request instead.
 	 *
 	 * @return void
 	 */
@@ -172,6 +301,7 @@ class Fraktguiden_License
 		$this->curl_request(
 			[
 				'action'  => 'ping',
+				'domain'  => $_SERVER['HTTP_HOST'] ?? 'unknown',
 				'version' => Bring_Fraktguiden::VERSION,
 			]
 		);

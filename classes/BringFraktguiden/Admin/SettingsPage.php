@@ -14,6 +14,7 @@ use BringFraktguiden\Admin\ShippingZones;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Utility\Config;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_License;
 
 class SettingsPage
 {
@@ -34,6 +35,7 @@ class SettingsPage
 		add_filter('admin_head', __CLASS__ . '::admin_head');
 
 		add_filter('pre_update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'process_settings'], 10, 2);
+		add_action('update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'check_new_license_key'], 10, 2);
 	}
 
 	/**
@@ -229,6 +231,26 @@ class SettingsPage
 			$clean = str_replace('-', '', $raw_key);
 			$last4 = strtoupper(substr($clean, -4));
 			$license_key = 'XXXX-XXXX-XXXX-' . $last4;
+		}
+
+		// License state, as the license server last reported it.
+		$state                = Fraktguiden_License::get_state();
+		$license_state        = $state['key_state'] ?? '';
+		$license_moves_left   = $state['moves_left'] ?? null;
+		$license_other_domain = $state['other_domain'] ?? '';
+		$license_year         = $state['year'] ?? (int) gmdate('Y');
+		$license_reason       = $state['reason'] ?? '';
+		$license_domain       = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
+		$license_move_nonce   = wp_create_nonce('bring_move_license');
+		$license_support_url  = 'https://support.bringfraktguiden.no';
+
+		// Where the current Pro access comes from.
+		if ($license_active) {
+			$license_source = $state['source'] ?? 'domain';
+		} elseif ($is_trial) {
+			$license_source = 'trial';
+		} else {
+			$license_source = '';
 		}
 
 		// Stats for free state
@@ -559,6 +581,10 @@ class SettingsPage
 			$value[$key] = $entered;
 		}
 
+		if (isset($value['license_key'])) {
+			$value['license_key'] = Fraktguiden_License::normalise_key($value['license_key']);
+		}
+
 		// Handle trial activation date
 		if (
 			isset($value['pro_enabled']) && $value['pro_enabled'] === 'yes'
@@ -568,5 +594,23 @@ class SettingsPage
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Ask the license server about a key the owner just entered.
+	 *
+	 * The check runs only when the key changed, so an ordinary settings save
+	 * never calls the server.
+	 */
+	public static function check_new_license_key($old_value, $value): void
+	{
+		$old = Fraktguiden_License::normalise_key(is_array($old_value) ? ($old_value['license_key'] ?? '') : '');
+		$new = Fraktguiden_License::normalise_key(is_array($value) ? ($value['license_key'] ?? '') : '');
+
+		if ($old === $new) {
+			return;
+		}
+
+		Fraktguiden_License::get_instance()->check_license();
 	}
 }

@@ -24,6 +24,15 @@
  * @var string $bfg_fallback_url
  * @var string $bfg_settings_url
  * @var string $bfg_features_subtitle
+ * @var string $license_state
+ * @var string $license_domain
+ * @var int|null $license_moves_left
+ * @var string $license_other_domain
+ * @var int    $license_year
+ * @var string $license_reason
+ * @var string $license_source
+ * @var string $license_move_nonce
+ * @var string $license_support_url
  */
 ?>
 
@@ -38,6 +47,164 @@
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
+
+		<?php
+		$bfg_source_labels = [
+			'key'    => __('Your license key', 'bring-fraktguiden-for-woocommerce'),
+			'domain' => __('The domain of this shop', 'bring-fraktguiden-for-woocommerce'),
+			'trial'  => __('Your free trial', 'bring-fraktguiden-for-woocommerce'),
+		];
+		$bfg_no_moves = 0 === $license_moves_left;
+		?>
+
+		<?php if ('other_domain' === $license_state): ?>
+			<div class="bfg-notice-banner">
+				<span class="bfg-notice-icon">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<p>
+					<?php printf(
+						/* translators: 1: masked domain, 2: number of moves, 3: year. */
+						esc_html__('This key is linked to %1$s. It has %2$d moves left in %3$d.', 'bring-fraktguiden-for-woocommerce'),
+						esc_html($license_other_domain),
+						(int) $license_moves_left,
+						(int) $license_year
+					); ?>
+				</p>
+				<?php if (!$bfg_no_moves): ?>
+					<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-move-open">
+						<?php printf(
+							/* translators: %s: the domain of this shop. */
+							esc_html__('Link it to %s', 'bring-fraktguiden-for-woocommerce'),
+							esc_html($license_domain)
+						); ?>
+					</button>
+				<?php endif; ?>
+			</div>
+		<?php elseif ('move_refused' === $license_state): ?>
+			<div class="bfg-notice-banner" type="error">
+				<span class="bfg-notice-icon">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<p>
+					<t>The license did not move.</t>
+					<?php echo esc_html($license_reason); ?>
+					<?php if ($bfg_no_moves): ?>
+						<a href="<?php echo esc_url($license_support_url); ?>"><t>Ask support for help</t></a>
+					<?php endif; ?>
+				</p>
+			</div>
+		<?php elseif ('unknown' === $license_state): ?>
+			<div class="bfg-notice-banner" type="error">
+				<span class="bfg-notice-icon">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<p><t>The license server does not know this key. Check it for a typing mistake.</t></p>
+			</div>
+		<?php endif; ?>
+
+		<!-- License panel — the same facts in every state -->
+		<dl class="bfg-license-status">
+			<div class="bfg-license-status__item">
+				<dt><t>Domain</t></dt>
+				<dd><?php echo esc_html($license_domain); ?></dd>
+			</div>
+			<div class="bfg-license-status__item">
+				<dt><t>Expires</t></dt>
+				<dd><?php echo $license_active ? esc_html($valid_to_formatted) : esc_html__('No active license', 'bring-fraktguiden-for-woocommerce'); ?></dd>
+			</div>
+			<?php if (null !== $license_moves_left): ?>
+				<div class="bfg-license-status__item">
+					<dt><t>Moves left</t></dt>
+					<dd>
+						<?php printf(
+							/* translators: 1: number of moves, 2: year. */
+							esc_html__('%1$d in %2$d', 'bring-fraktguiden-for-woocommerce'),
+							(int) $license_moves_left,
+							(int) $license_year
+						); ?>
+					</dd>
+				</div>
+			<?php endif; ?>
+			<div class="bfg-license-status__item">
+				<dt><t>Pro comes from</t></dt>
+				<dd><?php echo esc_html($bfg_source_labels[$license_source] ?? __('Nothing yet', 'bring-fraktguiden-for-woocommerce')); ?></dd>
+			</div>
+		</dl>
+
+		<?php if ('other_domain' === $license_state && !$bfg_no_moves): ?>
+			<dialog class="bfg bfg-modal" id="bfg-move-license">
+				<div class="bfg-modal__head">
+					<h2 class="bfg-modal__title"><t>Move the license to this shop?</t></h2>
+					<button type="button" class="bfg-modal__close" data-bfg-move-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
+				</div>
+				<div class="bfg-modal__body">
+					<p>
+						<?php printf(
+							/* translators: 1: masked domain, 2: the domain of this shop. */
+							esc_html__('The license moves from %1$s to %2$s.', 'bring-fraktguiden-for-woocommerce'),
+							esc_html($license_other_domain),
+							esc_html($license_domain)
+						); ?>
+					</p>
+					<p><t>The old domain loses Pro at once.</t></p>
+					<p>
+						<?php printf(
+							/* translators: 1: number of moves, 2: year. */
+							esc_html__('This spends one move. You have %1$d left in %2$d.', 'bring-fraktguiden-for-woocommerce'),
+							(int) $license_moves_left,
+							(int) $license_year
+						); ?>
+					</p>
+					<p class="bfg-move-error" role="alert" hidden></p>
+				</div>
+				<div class="bfg-modal__foot">
+					<button type="button" class="bfg-btn bfg-btn--sm" data-bfg-move-close><t>Cancel</t></button>
+					<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-move-confirm"><t>Move the license</t></button>
+				</div>
+			</dialog>
+
+			<script>
+				document.addEventListener('DOMContentLoaded', function () {
+					const dialog = document.getElementById('bfg-move-license');
+					const confirm = document.getElementById('bfg-move-confirm');
+					const error = dialog.querySelector('.bfg-move-error');
+
+					document.getElementById('bfg-move-open').addEventListener('click', () => dialog.showModal());
+					dialog.querySelectorAll('[data-bfg-move-close]').forEach(
+						(button) => button.addEventListener('click', () => dialog.close())
+					);
+
+					confirm.addEventListener('click', async function () {
+						confirm.disabled = true;
+						error.hidden = true;
+
+						const body = new URLSearchParams({
+							action: 'bring_move_license',
+							_wpnonce: <?php echo wp_json_encode($license_move_nonce); ?>,
+						});
+
+						try {
+							const response = await fetch(ajaxurl, { method: 'POST', body });
+							const answer = await response.json();
+
+							if (answer.status === 'success' && answer.state.key_state === 'active') {
+								window.location.reload();
+								return;
+							}
+
+							error.textContent = answer.state?.reason || answer.message
+								|| <?php echo wp_json_encode(__('The license did not move.', 'bring-fraktguiden-for-woocommerce')); ?>;
+						} catch (e) {
+							error.textContent = <?php echo wp_json_encode(__('The license server did not answer.', 'bring-fraktguiden-for-woocommerce')); ?>;
+						}
+
+						error.hidden = false;
+						confirm.disabled = false;
+					});
+				});
+			</script>
+		<?php endif; ?>
 
 		<?php if ($license_active && $pro_enabled): ?>
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-active.php'; ?>
@@ -60,11 +227,11 @@
 				licenseInput.addEventListener('input', function () {
 					const raw = licenseInput.value;
 					if (!raw) { bfgField.clearError(licenseInput); return; }
-					if (!/^[A-Za-z0-9-]*$/.test(raw)) {
-						bfgField.showError(licenseInput, 'Only letters and numbers are allowed.');
+					if (!/^[A-Za-z0-9 -]*$/.test(raw)) {
+						bfgField.showError(licenseInput, 'Only letters, numbers, spaces and dashes are allowed.');
 						return;
 					}
-					if (raw.replace(/-/g, '').length > 16) {
+					if (raw.replace(/[ -]/g, '').length > 16) {
 						bfgField.showError(licenseInput, 'License key must be 16 characters.');
 						return;
 					}
@@ -78,10 +245,10 @@
 						bfgField.showError(licenseInput, 'Please enter your license key.');
 						return;
 					}
-					const normalized = raw.replace(/-/g, '');
+					const normalized = raw.replace(/[ -]/g, '');
 					if (!/^[A-Za-z0-9]+$/.test(normalized)) {
 						e.preventDefault();
-						bfgField.showError(licenseInput, 'Only letters and numbers are allowed.');
+						bfgField.showError(licenseInput, 'Only letters, numbers, spaces and dashes are allowed.');
 						return;
 					}
 					if (normalized.length !== 16) {

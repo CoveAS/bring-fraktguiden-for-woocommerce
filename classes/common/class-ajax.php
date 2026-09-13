@@ -10,7 +10,7 @@ class Ajax {
 	static function setup() {
 		add_action( 'wp_ajax_bring_select_time_slot', __CLASS__ . '::select_time_slot' );
 		add_action( 'wp_ajax_nopriv_bring_select_time_slot', __CLASS__ . '::select_time_slot' );
-		add_action( 'wp_ajax_bring_save_license', __CLASS__ . '::save_license' );
+		add_action( 'wp_ajax_bring_move_license', __CLASS__ . '::move_license' );
 	}
 
 	public static function select_time_slot( $fragments ) {
@@ -43,7 +43,13 @@ class Ajax {
 		);
 	}
 
-	public static function save_license() {
+	/**
+	 * Move the license of this shop to this domain.
+	 *
+	 * The move spends one of the moves of the year, so it runs only after the
+	 * owner confirms it on the Pro page.
+	 */
+	public static function move_license() {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			wp_send_json( [
 				'status'  => 'error',
@@ -51,27 +57,13 @@ class Ajax {
 			] );
 		}
 
-		$license_key = filter_input( INPUT_POST, 'license_key', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		check_ajax_referer( 'bring_move_license' );
 
-		if ( empty( $license_key ) ) {
-			wp_send_json( [
-				'status'  => 'error',
-				'message' => __( 'License key is required', 'bring-fraktguiden-for-woocommerce' ),
-			] );
-		}
-
-		// Save license key and enable pro
-		Fraktguiden_Helper::update_option( 'license_key', $license_key );
-		Fraktguiden_Helper::update_option( 'pro_enabled', 'yes' );
-
-		// Set pro_activated_on if not already set
-		if ( ! Fraktguiden_Helper::get_option( 'pro_activated_on' ) ) {
-			Fraktguiden_Helper::update_option( 'pro_activated_on', time() );
-		}
+		$state = Fraktguiden_License::get_instance()->move_key();
 
 		wp_send_json( [
-			'status'  => 'success',
-			'message' => __( 'License saved', 'bring-fraktguiden-for-woocommerce' ),
+			'status' => 'success',
+			'state'  => $state,
 		] );
 	}
 }
