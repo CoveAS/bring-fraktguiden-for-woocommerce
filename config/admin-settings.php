@@ -324,7 +324,7 @@ return [
 				/* translators: %s: Mybring API settings page URL */
 				'description' => sprintf(__('Find your API customer number %1$shere%2$s.',
 					'bring-fraktguiden-for-woocommerce'),
-					'<a href="https://www.mybring.com/useradmin/account/settings/api" target="_blank">', '</a>'),
+					'<a href="https://www.mybring.com/useradmin/account/settings" target="_blank">', '</a>'),
 			],
 			'booking_enabled' => [
 				'type' => 'checkbox',
