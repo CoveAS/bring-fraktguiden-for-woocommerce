@@ -77,6 +77,12 @@ class Fraktguiden_Service_Table {
 
 		$service_key = $this->shipping_method->get_field_key( 'services' );
 
+		// The service card fields are PRO only. A shop without PRO posts none of
+		// them, and a save would drop every stored checkbox.
+		if ( ! Fraktguiden_Helper::pro_allowed() ) {
+			return;
+		}
+
 		// Process services table.
 		$services  = Fraktguiden_Service::all( $service_key );
 

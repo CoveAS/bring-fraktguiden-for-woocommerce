@@ -80,19 +80,32 @@ class Fraktguiden_Helper {
 	 * @return boolean True means that PRO mode is active.
 	 */
 	public static function pro_activated( $ignore_license = false ) {
-		$trial_on = self::get_option( 'pro_enabled' ) === 'yes';
-
 		if ( $ignore_license ) {
-			return $trial_on;
+			return self::get_option( 'pro_enabled' ) === 'yes';
 		}
 
-		$allowed = self::valid_license() || ( $trial_on && self::get_pro_days_remaining() >= 0 );
+		$allowed = self::pro_allowed();
 
 		if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
 			return isset( $_POST['woocommerce_bring_fraktguiden_enabled'] ) && $allowed;
 		}
 
 		return $allowed;
+	}
+
+	/**
+	 * Check whether the shop may use PRO features.
+	 *
+	 * The answer covers the license and the trial only. It does not depend on
+	 * the shipping method being enabled, so a save that turns the method off
+	 * still counts as a PRO shop.
+	 *
+	 * @return boolean True means that the shop may use PRO features.
+	 */
+	public static function pro_allowed() {
+		$trial_on = self::get_option( 'pro_enabled' ) === 'yes';
+
+		return self::valid_license() || ( $trial_on && self::get_pro_days_remaining() >= 0 );
 	}
 
 	/**

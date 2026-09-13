@@ -95,6 +95,9 @@
             if (service.service_data.class) {
                 div.classList.add(service.service_data.class);
             }
+            if (!this.proActivated) {
+                div.classList.add('pro-disabled');
+            }
 
             div.innerHTML = this.getServiceCardHTML(service);
 
@@ -141,7 +144,7 @@
                         name="${service.option_key}[${service.bring_product}][custom_name]"
                         value="${this.escapeHtml(service.settings.custom_name || '')}"
                         placeholder="${service.service_data.productName}"
-                        ${!this.proActivated ? 'readonly' : ''}
+                        ${!this.proActivated ? 'disabled' : ''}
                     >
                 </label>
             `;
@@ -162,7 +165,7 @@
                             class="bring-toggle-checkbox"
                             name="${namePrefix}[${fieldId}_cb]"
                             ${checkboxValue ? 'checked' : ''}
-                            ${!this.proActivated ? 'readonly' : ''}
+                            ${!this.proActivated ? 'disabled' : ''}
                             data-target-field="${fieldId}"
                             data-service-id="${service.bring_product}"
                         >
@@ -172,7 +175,8 @@
                             name="${namePrefix}[${fieldId}]"
                             value="${this.escapeHtml(fieldValue)}"
                             ${inputType === 'number' ? `step="${step}" min="0"` : ''}
-                            ${!checkboxValue || !this.proActivated ? 'readonly' : ''}
+                            ${!checkboxValue ? 'readonly' : ''}
+                            ${!this.proActivated ? 'disabled' : ''}
                             data-field-id="${fieldId}"
                             data-service-id="${service.bring_product}"
                             class="${validationClass}"
@@ -192,6 +196,7 @@
                             class="vas-checkbox bring-checkbox"
                             name="${namePrefix}[vas_${vas.code}]"
                             ${vas.value ? 'checked' : ''}
+                            ${!this.proActivated ? 'disabled' : ''}
                         >
                         <span>${vas.name}</span>
                     </label>
@@ -224,7 +229,7 @@
             // Find the corresponding input field
             const input = checkbox.parentElement.querySelector(`input[data-field-id="${fieldId}"]`);
             if (input) {
-                input.readOnly = !isChecked || !this.proActivated;
+                input.readOnly = !isChecked;
                 input.required = isChecked;
 
                 // Trigger validation if customer_number field

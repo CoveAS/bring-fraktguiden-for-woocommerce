@@ -151,11 +151,15 @@ input.validation-error {
 }
 
 /* Pro feature gating */
-.pro-disabled .override-toggle-label::after {
+.fraktguiden-product.pro-disabled header {
+    position: relative;
+}
+
+.fraktguiden-product.pro-disabled header::after {
     content: 'Pro only';
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0.5rem;
+    right: 0.5rem;
     color: #C00;
     background-color: #fff;
     border-radius: 5px;
@@ -164,7 +168,8 @@ input.validation-error {
     opacity: 0.8;
 }
 
-.pro-disabled input[readonly] {
+.pro-disabled input:disabled,
+.pro-disabled input:disabled + .bring-toggle-alt {
     opacity: 0.6;
     cursor: not-allowed;
 }
