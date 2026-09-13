@@ -35,6 +35,10 @@
  * @var string $license_manage_url
  * @var string $license_support_url
  */
+
+use BringFraktguiden\Admin\RefreshLicense;
+
+$bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 ?>
 
 <div class="wrap bfg bfg-admin-page bfg-admin-page__pro">
@@ -118,7 +122,22 @@
 				<dt><t>Pro comes from</t></dt>
 				<dd><?php echo esc_html($bfg_source_labels[$license_source] ?? __('Nothing yet', 'bring-fraktguiden-for-woocommerce')); ?></dd>
 			</div>
+			<div class="bfg-license-status__refresh">
+				<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+					<input type="hidden" name="action" value="<?php echo esc_attr(RefreshLicense::ACTION); ?>">
+					<?php wp_nonce_field(RefreshLicense::ACTION); ?>
+					<button type="submit" class="bfg-license-refresh" title="<?php esc_attr_e('Check the license again', 'bring-fraktguiden-for-woocommerce'); ?>" aria-label="<?php esc_attr_e('Check the license again', 'bring-fraktguiden-for-woocommerce'); ?>">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 8a6 6 0 1 1-1.76-4.24M14 2.5V6h-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</button>
+				</form>
+			</div>
 		</dl>
+
+		<?php if ('yes' === $bfg_checked): ?>
+			<p class="bfg-license-checked"><t>The license server answered. The facts above are current.</t></p>
+		<?php elseif ('no' === $bfg_checked): ?>
+			<p class="bfg-license-checked bfg-license-checked--error"><t>The license server could not be reached. Try again in a moment.</t></p>
+		<?php endif; ?>
 
 		<?php if ('other_domain' === $license_state && $bfg_can_move): ?>
 			<dialog class="bfg bfg-modal" id="bfg-move-license">
@@ -148,20 +167,94 @@
 				</div>
 				<div class="bfg-modal__foot">
 					<button type="button" class="bfg-btn bfg-btn--sm" data-bfg-move-close><t>Cancel</t></button>
-					<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_url($license_move_url); ?>" target="_blank" rel="noopener">
+					<a class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-move-go" href="<?php echo esc_url($license_move_url); ?>" target="_blank" rel="noopener">
 						<t>Move the license on bringfraktguiden.no</t>
 					</a>
 				</div>
+				<p class="bfg-modal__watch" id="bfg-move-watch" hidden></p>
 			</dialog>
 
 			<script>
 				document.addEventListener('DOMContentLoaded', function () {
 					const dialog = document.getElementById('bfg-move-license');
+					const watch = document.getElementById('bfg-move-watch');
+					const ajaxUrl = <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>;
+					const action = <?php echo wp_json_encode(RefreshLicense::POLL); ?>;
+					const nonce = <?php echo wp_json_encode(wp_create_nonce(RefreshLicense::POLL)); ?>;
+
+					/* translators: %d: seconds until the next check. */
+					const waitText = <?php echo wp_json_encode(__('We check the license server in %d seconds.', 'bring-fraktguiden-for-woocommerce')); ?>;
+					const nowText = <?php echo wp_json_encode(__('We check the license server now.', 'bring-fraktguiden-for-woocommerce')); ?>;
+
+					// The gap grows, so a modal left open all afternoon stays cheap.
+					const gapFor = (elapsed) => elapsed < 30000 ? 3000 : elapsed < 600000 ? 15000 : 300000;
+					const GIVE_UP = 3600000;
+
+					const started = Date.now();
+					let tick = null;
+					let due = 0;
+					let watching = false;
+					let busy = false;
+
+					function stop() {
+						watching = false;
+						clearInterval(tick);
+						watch.hidden = true;
+					}
+
+					function schedule() {
+						due = Date.now() + gapFor(Date.now() - started);
+					}
+
+					async function check() {
+						busy = true;
+						const body = new URLSearchParams({ action: action, _wpnonce: nonce });
+						try {
+							const answer = await fetch(ajaxUrl, { method: 'POST', credentials: 'same-origin', body: body });
+							const data = await answer.json();
+							if (data && data.success && data.data.key_state !== 'other_domain') {
+								window.location.reload();
+								return;
+							}
+						} catch (error) {
+							// A failed call is one lost check. The next one follows.
+						}
+						busy = false;
+						schedule();
+					}
+
+					function beat() {
+						if (!watching) return;
+						if (Date.now() - started >= GIVE_UP) {
+							window.location.reload();
+							return;
+						}
+						if (busy) {
+							watch.textContent = nowText;
+							return;
+						}
+						const left = Math.ceil((due - Date.now()) / 1000);
+						watch.textContent = left > 0 ? waitText.replace('%d', left) : nowText;
+						if (left <= 0) {
+							check();
+						}
+					}
+
+					function start() {
+						if (watching) return;
+						watching = true;
+						watch.hidden = false;
+						schedule();
+						beat();
+						tick = setInterval(beat, 1000);
+					}
 
 					document.getElementById('bfg-move-open').addEventListener('click', () => dialog.showModal());
+					document.getElementById('bfg-move-go').addEventListener('click', start);
 					dialog.querySelectorAll('[data-bfg-move-close]').forEach(
-						(button) => button.addEventListener('click', () => dialog.close())
+						(button) => button.addEventListener('click', () => { stop(); dialog.close(); })
 					);
+					dialog.addEventListener('close', stop);
 				});
 			</script>
 		<?php endif; ?>

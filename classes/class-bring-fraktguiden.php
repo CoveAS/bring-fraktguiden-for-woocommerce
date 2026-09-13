@@ -21,6 +21,7 @@ use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
 use BringFraktguiden\Admin\FallbackPrice;
 use BringFraktguiden\Admin\ProductShippingTest;
+use BringFraktguiden\Admin\RefreshLicense;
 use BringFraktguiden\Admin\ShippingTest;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Development\LicenseSelector;
@@ -54,6 +55,7 @@ class Bring_Fraktguiden {
 		AddShippingMethod::init();
 		ConnectAccount::init();
 		FallbackPrice::init();
+		RefreshLicense::init();
 		CustomsFields::init();
 		HsCodeIndexRoute::init();
 		BringFraktguidenPro::setup();

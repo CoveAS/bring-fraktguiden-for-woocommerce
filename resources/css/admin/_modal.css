@@ -71,6 +71,14 @@
     border-top: 1px solid var(--bfg-border);
 }
 
+/* The line that counts down to the next license check. */
+.bfg-modal__watch {
+    margin: 0.5rem 0 0;
+    color: var(--bfg-text-muted);
+    font-size: var(--bfg-text-level-6, 0.75rem);
+    text-align: right;
+}
+
 /* One shipping zone in the picker of the setup page. */
 .bfg-zone-row {
     display: flex;

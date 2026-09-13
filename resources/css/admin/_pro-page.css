@@ -796,6 +796,48 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     color: var(--bfg-text-main);
 }
 
+/* The refresh button sits at the far end of the row, level with the values. */
+.bfg-license-status__refresh {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.bfg-license-refresh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--bfg-text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.bfg-license-refresh:hover {
+    background: var(--bfg-primary-light);
+    color: var(--bfg-primary);
+}
+
+.bfg-license-refresh:focus-visible {
+    outline: 2px solid var(--bfg-primary);
+    outline-offset: 2px;
+}
+
+.bfg-license-checked {
+    margin: -16px 0 24px 0;
+    font-size: 13px;
+    color: var(--bfg-text-muted);
+}
+
+.bfg-license-checked--error {
+    color: #b32d2e;
+}
+
 /* The move button of the other-domain notice sits at the far end of the row. */
 .bfg-notice-banner .bfg-btn {
     margin-left: auto;
