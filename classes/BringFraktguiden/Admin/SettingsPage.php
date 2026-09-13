@@ -238,6 +238,12 @@ class SettingsPage
 		$license_domain       = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
 		$license_move_url     = $state['move_url'] ?? '';
 
+		// When the plugin last asked the license server.
+		$license_checked_at   = (int) ($state['checked_at'] ?? 0);
+		$license_checked      = $license_checked_at
+			? date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $license_checked_at)
+			: __('Never', 'bring-fraktguiden-for-woocommerce');
+
 		// The account page that manages the license. The server sends the link,
 		// because the address follows the permalink of the shop account page.
 		$license_manage_url   = ($state['manage_url'] ?? '') ?: 'https://bringfraktguiden.no/';

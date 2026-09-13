@@ -15,7 +15,7 @@ class RefreshLicense
 {
 	public const ACTION = 'bfg_refresh_license';
 
-	/** The query argument that carries the result back to the Pro page. */
+	/** The query argument that reports a failed check on the Pro page. */
 	public const RESULT = 'bfg-license-checked';
 
 	/** The action the move modal polls while it waits for a move. */
@@ -35,18 +35,16 @@ class RefreshLicense
 
 		check_admin_referer(self::ACTION);
 
+		$url = admin_url('admin.php?page=bring_fraktguiden_pro');
+
+		// A successful check needs no message. The box shows the fresh facts.
 		try {
 			Fraktguiden_License::get_instance()->check_license();
-			$result = 'yes';
 		} catch (Exception $e) {
-			$result = 'no';
+			$url = add_query_arg(self::RESULT, 'no', $url);
 		}
 
-		wp_safe_redirect(add_query_arg(
-			self::RESULT,
-			$result,
-			admin_url('admin.php?page=bring_fraktguiden_pro')
-		));
+		wp_safe_redirect($url);
 		exit;
 	}
 

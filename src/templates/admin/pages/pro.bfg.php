@@ -34,6 +34,7 @@
  * @var string $license_move_url
  * @var string $license_manage_url
  * @var string $license_support_url
+ * @var string $license_checked
  */
 
 use BringFraktguiden\Admin\RefreshLicense;
@@ -122,6 +123,10 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 				<dt><t>Pro comes from</t></dt>
 				<dd><?php echo esc_html($bfg_source_labels[$license_source] ?? __('Nothing yet', 'bring-fraktguiden-for-woocommerce')); ?></dd>
 			</div>
+			<div class="bfg-license-status__item">
+				<dt><t>License checked</t></dt>
+				<dd><?php echo esc_html($license_checked); ?></dd>
+			</div>
 			<div class="bfg-license-status__refresh">
 				<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
 					<input type="hidden" name="action" value="<?php echo esc_attr(RefreshLicense::ACTION); ?>">
@@ -133,10 +138,8 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 			</div>
 		</dl>
 
-		<?php if ('yes' === $bfg_checked): ?>
-			<p class="bfg-license-checked"><t>The license server answered. The facts above are current.</t></p>
-		<?php elseif ('no' === $bfg_checked): ?>
-			<p class="bfg-license-checked bfg-license-checked--error"><t>The license server could not be reached. Try again in a moment.</t></p>
+		<?php if ('no' === $bfg_checked): ?>
+			<p class="bfg-license-checked"><t>The license server could not be reached. Try again in a moment.</t></p>
 		<?php endif; ?>
 
 		<?php if ('other_domain' === $license_state && $bfg_can_move): ?>

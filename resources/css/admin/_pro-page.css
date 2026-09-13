@@ -831,10 +831,6 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 .bfg-license-checked {
     margin: -16px 0 24px 0;
     font-size: 13px;
-    color: var(--bfg-text-muted);
-}
-
-.bfg-license-checked--error {
     color: #b32d2e;
 }
 
