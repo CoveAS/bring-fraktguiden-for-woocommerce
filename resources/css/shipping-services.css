@@ -155,6 +155,11 @@ input.validation-error {
     position: relative;
 }
 
+/* Keep the title clear of the badge. */
+.fraktguiden-product.pro-disabled h3 {
+    padding-right: 6rem;
+}
+
 .fraktguiden-product.pro-disabled header::after {
     content: 'Pro only';
     position: absolute;
