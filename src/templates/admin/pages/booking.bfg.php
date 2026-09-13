@@ -41,16 +41,14 @@ use BringFraktguiden\Fields\Fields;
 						<?php echo $fields->mybring_customer_number->description(); ?>
 					</div>
 
-					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
-				</bfg-section.section>
-			</bfg-section>
-
-			<bfg-section>
-				<bfg-section.header title="Contact Information"
-					description="The sender name, phone and email Bring shows on every shipment."></bfg-section.header>
-
-				<bfg-section.section>
 					<div id="bfg-contact-information">
+						<h3 class="bfg-field-group-title">
+							<t>Contact information</t>
+						</h3>
+						<p class="bfg-description">
+							<t>The sender name, phone and email Bring shows on every shipment.</t>
+						</p>
+
 						<div class="bfg-field">
 							<?php echo $fields->booking_address_reference->label(); ?>
 							<?php echo $fields->booking_address_reference; ?>
@@ -198,16 +196,20 @@ use BringFraktguiden\Fields\Fields;
 		'use strict';
 
 		const form = document.getElementById('bfg-booking-form');
-		const checkbox = document.querySelector('input[name="booking_use_custom_address"]');
-		const addressFields = document.getElementById('bfg-custom-shipping-address');
 
-		// Toggle custom address fields
-		function toggleAddressFields() {
-			addressFields.style.display = checkbox.checked ? 'block' : 'none';
+		// Show a block of fields only while its checkbox is on
+		function toggleBlock(checkboxName, blockId) {
+			const checkbox = document.querySelector('input[name="' + checkboxName + '"]');
+			const block = document.getElementById(blockId);
+			const update = function () {
+				block.style.display = checkbox.checked ? 'block' : 'none';
+			};
+			checkbox.addEventListener('change', update);
+			update();
 		}
 
-		checkbox.addEventListener('change', toggleAddressFields);
-		toggleAddressFields();
+		toggleBlock('booking_use_custom_address', 'bfg-custom-shipping-address');
+		toggleBlock('booking_enabled', 'bfg-contact-information');
 
 		// Wire up aria-describedby for fields whose description is rendered by the component
 		form.querySelectorAll('.bfg-field').forEach(function (fieldEl) {
@@ -238,17 +240,6 @@ use BringFraktguiden\Fields\Fields;
 			return true;
 		}
 
-		// Contact Information fields are only checked once the user edits one of them.
-		// A shop saved before these fields existed can still save the other sections.
-		const contactGroup = document.getElementById('bfg-contact-information');
-		const contactSection = contactGroup.closest('.bfg-section__section');
-		const contactFields = Array.from(contactGroup.querySelectorAll('[required]'));
-		const loadedValues = new Map(contactFields.map(function (field) { return [field, field.value]; }));
-
-		function contactEdited() {
-			return contactFields.some(function (field) { return field.value !== loadedValues.get(field); });
-		}
-
 		// Blur validation — only trigger after the user has interacted with the field
 		const requiredFields = form.querySelectorAll('[required]');
 		requiredFields.forEach(function (field) {
@@ -262,13 +253,9 @@ use BringFraktguiden\Fields\Fields;
 
 		// Submit-time validation — prevent submission if any visible required field is invalid
 		form.addEventListener('submit', function (e) {
-			// The Save button of the Contact Information section always checks the fields.
-			const skipContact = !contactEdited() && !contactSection.contains(e.submitter);
-
 			let firstInvalid = null;
 			requiredFields.forEach(function (field) {
 				if (field.offsetParent === null) return; // skip hidden fields
-				if (skipContact && contactFields.includes(field)) return;
 				if (!validateField(field) && !firstInvalid) firstInvalid = field;
 			});
 			if (firstInvalid) e.preventDefault();
