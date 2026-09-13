@@ -186,8 +186,8 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 					const nonce = <?php echo wp_json_encode(wp_create_nonce(RefreshLicense::POLL)); ?>;
 
 					/* translators: %d: seconds until the next check. */
-					const waitText = <?php echo wp_json_encode(__('We check the license server in %d seconds.', 'bring-fraktguiden-for-woocommerce')); ?>;
-					const nowText = <?php echo wp_json_encode(__('We check the license server now.', 'bring-fraktguiden-for-woocommerce')); ?>;
+					const waitText = <?php echo wp_json_encode(__('Checking in %d', 'bring-fraktguiden-for-woocommerce')); ?>;
+					const nowText = <?php echo wp_json_encode(__('Checking', 'bring-fraktguiden-for-woocommerce')); ?>;
 
 					// The gap grows, so a modal left open all afternoon stays cheap.
 					// The comparisons read backwards, because the template compiler

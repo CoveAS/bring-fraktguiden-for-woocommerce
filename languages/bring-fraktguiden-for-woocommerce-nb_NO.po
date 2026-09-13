@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-13T11:02:57+00:00\n"
+"POT-Creation-Date: 2026-09-13T11:06:43+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -306,11 +306,11 @@ msgstr "Booking"
 #: build/templates/admin/pages/booking.php:30
 #: build/templates/admin/pages/kitchen-sink/access-links.php:22
 #: build/templates/admin/pages/kitchen-sink/feature-cards.php:34
-#: build/templates/admin/pages/pro.php:338
-#: build/templates/admin/pages/pro.php:356
-#: build/templates/admin/pages/pro.php:377
-#: build/templates/admin/pages/pro.php:396
-#: build/templates/admin/pages/pro.php:414
+#: build/templates/admin/pages/pro.php:341
+#: build/templates/admin/pages/pro.php:359
+#: build/templates/admin/pages/pro.php:380
+#: build/templates/admin/pages/pro.php:399
+#: build/templates/admin/pages/pro.php:417
 msgid "MyBring Booking"
 msgstr "MyBring Booking"
 
@@ -1523,185 +1523,185 @@ msgstr ""
 #: build/templates/admin/pages/pro.php:189
 #: src/templates/admin/pages/pro.bfg.php:189
 #, php-format
-msgid "We check the license server in %d seconds."
-msgstr "Vi sjekker lisensserveren om %d sekunder."
+msgid "Checking in %d"
+msgstr "Sjekker om %d"
 
 #: build/templates/admin/pages/pro.php:190
 #: src/templates/admin/pages/pro.bfg.php:190
-msgid "We check the license server now."
-msgstr "Vi sjekker lisensserveren nå."
+msgid "Checking"
+msgstr "Sjekker"
 
-#: build/templates/admin/pages/pro.php:321
+#: build/templates/admin/pages/pro.php:324
 msgid "Features"
 msgstr "Funksjoner"
-
-#: build/templates/admin/pages/pro.php:339
-#: build/templates/admin/pages/pro.php:357
-#: build/templates/admin/pages/pro.php:378
-#: build/templates/admin/pages/pro.php:397
-#: build/templates/admin/pages/pro.php:415
-msgid "Book shipments and print labels directly from WooCommerce orders"
-msgstr "Book sendinger og skriv ut etiketter direkte fra WooCommerce-ordrer"
-
-#: build/templates/admin/pages/pro.php:341
-#: build/templates/admin/pages/pro.php:359
-#: build/templates/admin/pages/pro.php:380
-#: build/templates/admin/pages/pro.php:399
-#: build/templates/admin/pages/pro.php:417
-msgid "Book directly from order view"
-msgstr "Book direkte fra ordrevisningen"
 
 #: build/templates/admin/pages/pro.php:342
 #: build/templates/admin/pages/pro.php:360
 #: build/templates/admin/pages/pro.php:381
 #: build/templates/admin/pages/pro.php:400
 #: build/templates/admin/pages/pro.php:418
+msgid "Book shipments and print labels directly from WooCommerce orders"
+msgstr "Book sendinger og skriv ut etiketter direkte fra WooCommerce-ordrer"
+
+#: build/templates/admin/pages/pro.php:344
+#: build/templates/admin/pages/pro.php:362
+#: build/templates/admin/pages/pro.php:383
+#: build/templates/admin/pages/pro.php:402
+#: build/templates/admin/pages/pro.php:420
+msgid "Book directly from order view"
+msgstr "Book direkte fra ordrevisningen"
+
+#: build/templates/admin/pages/pro.php:345
+#: build/templates/admin/pages/pro.php:363
+#: build/templates/admin/pages/pro.php:384
+#: build/templates/admin/pages/pro.php:403
+#: build/templates/admin/pages/pro.php:421
 msgid "Print Bring shipping labels"
 msgstr "Skriv ut Bring-fraktetiketter"
 
-#: build/templates/admin/pages/pro.php:343
-#: build/templates/admin/pages/pro.php:361
-#: build/templates/admin/pages/pro.php:382
-#: build/templates/admin/pages/pro.php:401
-#: build/templates/admin/pages/pro.php:419
+#: build/templates/admin/pages/pro.php:346
+#: build/templates/admin/pages/pro.php:364
+#: build/templates/admin/pages/pro.php:385
+#: build/templates/admin/pages/pro.php:404
+#: build/templates/admin/pages/pro.php:422
 msgid "Automatic tracking number"
 msgstr "Automatisk sporingsnummer"
-
-#: build/templates/admin/pages/pro.php:439
-#: build/templates/admin/pages/pro.php:455
-#: build/templates/admin/pages/pro.php:474
-#: build/templates/admin/pages/pro.php:491
-#: build/templates/admin/pages/pro.php:507
-msgid "Pickup Points"
-msgstr "Hentesteder"
-
-#: build/templates/admin/pages/pro.php:440
-#: build/templates/admin/pages/pro.php:456
-#: build/templates/admin/pages/pro.php:475
-#: build/templates/admin/pages/pro.php:492
-#: build/templates/admin/pages/pro.php:508
-msgid "Let customers choose their preferred Bring pickup location at checkout"
-msgstr "La kundene velge sitt foretrukne Bring-hentested i kassen"
 
 #: build/templates/admin/pages/pro.php:442
 #: build/templates/admin/pages/pro.php:458
 #: build/templates/admin/pages/pro.php:477
 #: build/templates/admin/pages/pro.php:494
 #: build/templates/admin/pages/pro.php:510
-msgid "Choose pickup location at checkout"
-msgstr "Velg hentested i kassen"
+msgid "Pickup Points"
+msgstr "Hentesteder"
 
 #: build/templates/admin/pages/pro.php:443
 #: build/templates/admin/pages/pro.php:459
 #: build/templates/admin/pages/pro.php:478
 #: build/templates/admin/pages/pro.php:495
 #: build/templates/admin/pages/pro.php:511
+msgid "Let customers choose their preferred Bring pickup location at checkout"
+msgstr "La kundene velge sitt foretrukne Bring-hentested i kassen"
+
+#: build/templates/admin/pages/pro.php:445
+#: build/templates/admin/pages/pro.php:461
+#: build/templates/admin/pages/pro.php:480
+#: build/templates/admin/pages/pro.php:497
+#: build/templates/admin/pages/pro.php:513
+msgid "Choose pickup location at checkout"
+msgstr "Velg hentested i kassen"
+
+#: build/templates/admin/pages/pro.php:446
+#: build/templates/admin/pages/pro.php:462
+#: build/templates/admin/pages/pro.php:481
+#: build/templates/admin/pages/pro.php:498
+#: build/templates/admin/pages/pro.php:514
 msgid "Lockers and post offices"
 msgstr "Pakkebokser og postkontorer"
 
-#: build/templates/admin/pages/pro.php:444
-#: build/templates/admin/pages/pro.php:460
-#: build/templates/admin/pages/pro.php:479
-#: build/templates/admin/pages/pro.php:496
-#: build/templates/admin/pages/pro.php:512
+#: build/templates/admin/pages/pro.php:447
+#: build/templates/admin/pages/pro.php:463
+#: build/templates/admin/pages/pro.php:482
+#: build/templates/admin/pages/pro.php:499
+#: build/templates/admin/pages/pro.php:515
 msgid "Location lookup by postal code"
 msgstr "Søk opp hentested med postnummer"
-
-#: build/templates/admin/pages/pro.php:532
-#: build/templates/admin/pages/pro.php:548
-#: build/templates/admin/pages/pro.php:567
-#: build/templates/admin/pages/pro.php:584
-#: build/templates/admin/pages/pro.php:600
-msgid "Fixed Pricing"
-msgstr "Fastpris"
-
-#: build/templates/admin/pages/pro.php:533
-#: build/templates/admin/pages/pro.php:549
-#: build/templates/admin/pages/pro.php:568
-#: build/templates/admin/pages/pro.php:585
-#: build/templates/admin/pages/pro.php:601
-msgid ""
-"Override Bring API rates with your own fixed prices per shipping service"
-msgstr ""
-"Overstyr prisene fra Bring API med dine egne faste priser per frakttjeneste"
 
 #: build/templates/admin/pages/pro.php:535
 #: build/templates/admin/pages/pro.php:551
 #: build/templates/admin/pages/pro.php:570
 #: build/templates/admin/pages/pro.php:587
 #: build/templates/admin/pages/pro.php:603
-msgid "Set price per shipping method"
-msgstr "Sett pris per fraktmetode"
+msgid "Fixed Pricing"
+msgstr "Fastpris"
 
 #: build/templates/admin/pages/pro.php:536
 #: build/templates/admin/pages/pro.php:552
 #: build/templates/admin/pages/pro.php:571
 #: build/templates/admin/pages/pro.php:588
 #: build/templates/admin/pages/pro.php:604
+msgid ""
+"Override Bring API rates with your own fixed prices per shipping service"
+msgstr ""
+"Overstyr prisene fra Bring API med dine egne faste priser per frakttjeneste"
+
+#: build/templates/admin/pages/pro.php:538
+#: build/templates/admin/pages/pro.php:554
+#: build/templates/admin/pages/pro.php:573
+#: build/templates/admin/pages/pro.php:590
+#: build/templates/admin/pages/pro.php:606
+msgid "Set price per shipping method"
+msgstr "Sett pris per fraktmetode"
+
+#: build/templates/admin/pages/pro.php:539
+#: build/templates/admin/pages/pro.php:555
+#: build/templates/admin/pages/pro.php:574
+#: build/templates/admin/pages/pro.php:591
+#: build/templates/admin/pages/pro.php:607
 msgid "Per-zone price rules"
 msgstr "Prisregler per sone"
 
-#: build/templates/admin/pages/pro.php:537
-#: build/templates/admin/pages/pro.php:553
-#: build/templates/admin/pages/pro.php:572
-#: build/templates/admin/pages/pro.php:589
-#: build/templates/admin/pages/pro.php:605
+#: build/templates/admin/pages/pro.php:540
+#: build/templates/admin/pages/pro.php:556
+#: build/templates/admin/pages/pro.php:575
+#: build/templates/admin/pages/pro.php:592
+#: build/templates/admin/pages/pro.php:608
 msgid "Cart weight-based pricing"
 msgstr "Pris basert på vekten i handlekurven"
-
-#: build/templates/admin/pages/pro.php:628
-#: build/templates/admin/pages/pro.php:647
-#: build/templates/admin/pages/pro.php:669
-#: build/templates/admin/pages/pro.php:689
-#: build/templates/admin/pages/pro.php:708
-msgid "Free Shipping"
-msgstr "Fri frakt"
-
-#: build/templates/admin/pages/pro.php:629
-#: build/templates/admin/pages/pro.php:648
-#: build/templates/admin/pages/pro.php:670
-#: build/templates/admin/pages/pro.php:690
-#: build/templates/admin/pages/pro.php:709
-msgid "Offer free shipping when cart meets a minimum order value"
-msgstr "Tilby fri frakt når handlekurven når en minste ordreverdi"
 
 #: build/templates/admin/pages/pro.php:631
 #: build/templates/admin/pages/pro.php:650
 #: build/templates/admin/pages/pro.php:672
 #: build/templates/admin/pages/pro.php:692
 #: build/templates/admin/pages/pro.php:711
-msgid "Set order value threshold"
-msgstr "Sett grense for ordreverdi"
+msgid "Free Shipping"
+msgstr "Fri frakt"
 
 #: build/templates/admin/pages/pro.php:632
 #: build/templates/admin/pages/pro.php:651
 #: build/templates/admin/pages/pro.php:673
 #: build/templates/admin/pages/pro.php:693
 #: build/templates/admin/pages/pro.php:712
+msgid "Offer free shipping when cart meets a minimum order value"
+msgstr "Tilby fri frakt når handlekurven når en minste ordreverdi"
+
+#: build/templates/admin/pages/pro.php:634
+#: build/templates/admin/pages/pro.php:653
+#: build/templates/admin/pages/pro.php:675
+#: build/templates/admin/pages/pro.php:695
+#: build/templates/admin/pages/pro.php:714
+msgid "Set order value threshold"
+msgstr "Sett grense for ordreverdi"
+
+#: build/templates/admin/pages/pro.php:635
+#: build/templates/admin/pages/pro.php:654
+#: build/templates/admin/pages/pro.php:676
+#: build/templates/admin/pages/pro.php:696
+#: build/templates/admin/pages/pro.php:715
 msgid "Per-service configuration"
 msgstr "Oppsett per tjeneste"
 
-#: build/templates/admin/pages/pro.php:633
-#: build/templates/admin/pages/pro.php:652
-#: build/templates/admin/pages/pro.php:674
-#: build/templates/admin/pages/pro.php:694
-#: build/templates/admin/pages/pro.php:713
+#: build/templates/admin/pages/pro.php:636
+#: build/templates/admin/pages/pro.php:655
+#: build/templates/admin/pages/pro.php:677
+#: build/templates/admin/pages/pro.php:697
+#: build/templates/admin/pages/pro.php:716
 msgid "Combine with fixed pricing"
 msgstr "Kombiner med fastpris"
 
-#: build/templates/admin/pages/pro.php:734
-#: build/templates/admin/pages/pro.php:751
-#: build/templates/admin/pages/pro.php:771
-#: build/templates/admin/pages/pro.php:789
-#: build/templates/admin/pages/pro.php:806
+#: build/templates/admin/pages/pro.php:737
+#: build/templates/admin/pages/pro.php:754
+#: build/templates/admin/pages/pro.php:774
+#: build/templates/admin/pages/pro.php:792
+#: build/templates/admin/pages/pro.php:809
 msgid "Fallback Pricing"
 msgstr "Fallback-priser"
 
-#: build/templates/admin/pages/pro.php:735
-#: build/templates/admin/pages/pro.php:752
-#: build/templates/admin/pages/pro.php:772
-#: build/templates/admin/pages/pro.php:790
-#: build/templates/admin/pages/pro.php:807
+#: build/templates/admin/pages/pro.php:738
+#: build/templates/admin/pages/pro.php:755
+#: build/templates/admin/pages/pro.php:775
+#: build/templates/admin/pages/pro.php:793
+#: build/templates/admin/pages/pro.php:810
 msgid ""
 "Keep checkout working with fixed fallback rates when the Bring API is "
 "unavailable"
@@ -1709,79 +1709,79 @@ msgstr ""
 "Hold kassen i gang med faste fallback-priser når Bring API-et er "
 "utilgjengelig"
 
-#: build/templates/admin/pages/pro.php:737
-#: build/templates/admin/pages/pro.php:754
-#: build/templates/admin/pages/pro.php:774
-#: build/templates/admin/pages/pro.php:792
-#: build/templates/admin/pages/pro.php:809
+#: build/templates/admin/pages/pro.php:740
+#: build/templates/admin/pages/pro.php:757
+#: build/templates/admin/pages/pro.php:777
+#: build/templates/admin/pages/pro.php:795
+#: build/templates/admin/pages/pro.php:812
 msgid "Prevent checkout errors"
 msgstr "Unngå feil i kassen"
 
-#: build/templates/admin/pages/pro.php:738
-#: build/templates/admin/pages/pro.php:755
-#: build/templates/admin/pages/pro.php:775
-#: build/templates/admin/pages/pro.php:793
-#: build/templates/admin/pages/pro.php:810
+#: build/templates/admin/pages/pro.php:741
+#: build/templates/admin/pages/pro.php:758
+#: build/templates/admin/pages/pro.php:778
+#: build/templates/admin/pages/pro.php:796
+#: build/templates/admin/pages/pro.php:813
 msgid "Fallback rate per service"
 msgstr "Fallback-pris per tjeneste"
 
-#: build/templates/admin/pages/pro.php:739
-#: build/templates/admin/pages/pro.php:756
-#: build/templates/admin/pages/pro.php:776
-#: build/templates/admin/pages/pro.php:794
-#: build/templates/admin/pages/pro.php:811
+#: build/templates/admin/pages/pro.php:742
+#: build/templates/admin/pages/pro.php:759
+#: build/templates/admin/pages/pro.php:779
+#: build/templates/admin/pages/pro.php:797
+#: build/templates/admin/pages/pro.php:814
 msgid "Always show shipping options"
 msgstr "Vis alltid fraktalternativer"
-
-#: build/templates/admin/pages/pro.php:831
-#: build/templates/admin/pages/pro.php:847
-#: build/templates/admin/pages/pro.php:866
-#: build/templates/admin/pages/pro.php:883
-#: build/templates/admin/pages/pro.php:899
-msgid "PRO Settings"
-msgstr "PRO-innstillinger"
-
-#: build/templates/admin/pages/pro.php:832
-#: build/templates/admin/pages/pro.php:848
-#: build/templates/admin/pages/pro.php:867
-#: build/templates/admin/pages/pro.php:884
-#: build/templates/admin/pages/pro.php:900
-msgid ""
-"Advanced configuration for customer numbers, service names and display "
-"options"
-msgstr "Avanserte innstillinger for kundenummer, tjenestenavn og visning"
 
 #: build/templates/admin/pages/pro.php:834
 #: build/templates/admin/pages/pro.php:850
 #: build/templates/admin/pages/pro.php:869
 #: build/templates/admin/pages/pro.php:886
 #: build/templates/admin/pages/pro.php:902
-msgid "Multiple customer numbers"
-msgstr "Flere kundenummer"
+msgid "PRO Settings"
+msgstr "PRO-innstillinger"
 
 #: build/templates/admin/pages/pro.php:835
 #: build/templates/admin/pages/pro.php:851
 #: build/templates/admin/pages/pro.php:870
 #: build/templates/admin/pages/pro.php:887
 #: build/templates/admin/pages/pro.php:903
+msgid ""
+"Advanced configuration for customer numbers, service names and display "
+"options"
+msgstr "Avanserte innstillinger for kundenummer, tjenestenavn og visning"
+
+#: build/templates/admin/pages/pro.php:837
+#: build/templates/admin/pages/pro.php:853
+#: build/templates/admin/pages/pro.php:872
+#: build/templates/admin/pages/pro.php:889
+#: build/templates/admin/pages/pro.php:905
+msgid "Multiple customer numbers"
+msgstr "Flere kundenummer"
+
+#: build/templates/admin/pages/pro.php:838
+#: build/templates/admin/pages/pro.php:854
+#: build/templates/admin/pages/pro.php:873
+#: build/templates/admin/pages/pro.php:890
+#: build/templates/admin/pages/pro.php:906
 msgid "Custom service display names"
 msgstr "Egne visningsnavn på tjenester"
 
-#: build/templates/admin/pages/pro.php:836
-#: build/templates/admin/pages/pro.php:852
-#: build/templates/admin/pages/pro.php:871
-#: build/templates/admin/pages/pro.php:888
-#: build/templates/admin/pages/pro.php:904
+#: build/templates/admin/pages/pro.php:839
+#: build/templates/admin/pages/pro.php:855
+#: build/templates/admin/pages/pro.php:874
+#: build/templates/admin/pages/pro.php:891
+#: build/templates/admin/pages/pro.php:907
 msgid "Estimated delivery display"
 msgstr "Visning av beregnet leveringstid"
 
-#: build/templates/admin/pages/pro.php:919
+#: build/templates/admin/pages/pro.php:922
 msgid ""
 "Domestic shipments only. We're working on building support for international "
 "shipping."
 msgstr "Kun innenlands sendinger. Vi jobber med støtte for frakt til utlandet."
 
-#: build/templates/admin/pages/pro.php:922
+#: build/templates/admin/pages/pro.php:925
 msgid ""
 "List of currently supported services for using pickup point: Pickup parcel "
 "(5800), Pakke til\n"
@@ -2322,7 +2322,7 @@ msgstr "Komponentgalleri"
 msgid "Home"
 msgstr "Hjem"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:244
+#: classes/BringFraktguiden/Admin/SettingsPage.php:245
 msgid "Never"
 msgstr "Aldri"
 
@@ -3679,6 +3679,13 @@ msgstr "Fullført"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#, php-format
+#~ msgid "We check the license server in %d seconds."
+#~ msgstr "Vi sjekker lisensserveren om %d sekunder."
+
+#~ msgid "We check the license server now."
+#~ msgstr "Vi sjekker lisensserveren nå."
 
 #~ msgid "The license server answered. The facts above are current."
 #~ msgstr "Lisensserveren svarte. Opplysningene over er oppdaterte."
