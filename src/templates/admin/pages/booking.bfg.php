@@ -45,8 +45,8 @@ use BringFraktguiden\Fields\Fields;
 						<h3 class="bfg-field-group-title">
 							<t>Contact information</t>
 						</h3>
-						<p class="bfg-description">
-							<t>The sender name, phone and email Bring shows on every shipment.</t>
+						<p class="bfg-description bfgu:mb-4!">
+							<t>Every booking carries this as the sender contact of your shop.</t>
 						</p>
 
 						<div class="bfg-field">
@@ -79,7 +79,7 @@ use BringFraktguiden\Fields\Fields;
 					description="What Bring needs when a shipment crosses a border"></bfg-section.header>
 
 				<bfg-section.section>
-					<p>
+					<p class="bfgu:mb-4!">
 						<?php echo strtr(
 							esc_html__('NVIT means Norwegian goods in transit. A parcel that travels from one place in Norway to another, through Sweden or Finland, needs customs data for each order line. Read more at {{bring}}Bring{{/a}} and at {{toll}}the Norwegian Customs Authority{{/a}}.', 'bring-fraktguiden-for-woocommerce'),
 							[
