@@ -35,6 +35,12 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 					</div>
 
+					<div class="bfg-field">
+						<?php echo $fields->mybring_customer_number->label(); ?>
+						<?php echo $fields->mybring_customer_number->field(); ?>
+						<?php echo $fields->mybring_customer_number->description(); ?>
+					</div>
+
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>

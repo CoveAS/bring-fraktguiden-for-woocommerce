@@ -213,13 +213,13 @@ class Fraktguiden_Admin_Notices {
 		$messages   = [];
 		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = __( 'Mybring Booking requires an API customer number.', 'bring-fraktguiden-for-woocommerce' );
-		/* translators: %s: Mybring settings tab URL */
+		/* translators: %s: booking page URL */
 		$messages[] = sprintf(
 			__(
 				'Enter your API customer number <a href="%s">here</a>.',
 				'bring-fraktguiden-for-woocommerce'
 			),
-			Fraktguiden_Helper::get_settings_url()
+			admin_url( 'admin.php?page=bring_fraktguiden_booking' )
 		);
 
 		return implode( '<br>', $messages );
