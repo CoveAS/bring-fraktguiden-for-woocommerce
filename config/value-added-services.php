@@ -168,7 +168,7 @@ return [
 		'enabled'        => true,
 		'code'           => 'PICKUP_POINT',
 		'name'           => 'Delivery to pickup point',
-		'default'        => false,
+		'default'        => true,
 		'bring_products' => [ 'PICKUP_PARCEL', 'PICKUP_PARCEL_BULK' ],
 		'class'          => VAS_Checkbox::class,
 	],

@@ -83,9 +83,16 @@ class Fraktguiden_Service {
 		$this->enabled       = ! empty( $selected ) ? in_array( $bring_product, $selected, true ) : false;
 		$this->vas           = VAS::create_collection( $bring_product, $service_option );
 
+		// An empty option array means the shop never saved this service. Only
+		// then does a default apply, because a cleared checkbox posts nothing
+		// and would otherwise turn itself back on after every save.
+		$never_saved = empty( $service_option );
+
 		if ( $service_data['pickuppoint'] ) {
 			$this->settings['pickup_point']    = esc_html( $service_option['pickup_point'] ?? '' );
-			$this->settings['pickup_point_cb'] = esc_html( $service_option['pickup_point_cb'] ?? '' );
+			$this->settings['pickup_point_cb'] = $never_saved
+				? 'on'
+				: esc_html( $service_option['pickup_point_cb'] ?? '' );
 		}
 
 		$this->settings['custom_name']        = esc_html( $service_option['custom_name'] ?? '' );
@@ -255,11 +262,19 @@ class Fraktguiden_Service {
 			$this->settings[ $post_field ] = $post_data[ $this->bring_product ][ $post_field ];
 		}
 
+		if ( isset( $post_data[ $this->bring_product ] ) ) {
+			// Mark the service as saved, so the stored row never falls back to
+			// empty. An empty row would read as a fresh service and bring the
+			// defaults back.
+			$this->settings['saved'] = 'yes';
+		}
+
 		return $this;
 	}
 
 	public function get_setting_fields() {
 		$post_fields = [
+			'saved',
 			'pickup_point',
 			'pickup_point_cb',
 			'custom_name',

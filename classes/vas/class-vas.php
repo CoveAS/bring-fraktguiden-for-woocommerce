@@ -91,8 +91,12 @@ class VAS {
 			if ( empty( $vas_data['class'] ) ) {
 				throw new Exception( "VAS item, {$vas_data['code']}, does not have a class" );
 			}
-			$vas_class    = $vas_data['class'];
-			$value        =  ! empty( $service_option["vas_{$vas_data['code']}"] );
+			$vas_class = $vas_data['class'];
+			// An empty option array means the shop never saved this service, so
+			// the default of the VAS applies. A null value asks for that default.
+			$value        = empty( $service_option )
+				? null
+				: ! empty( $service_option["vas_{$vas_data['code']}"] );
 			$collection[] = new $vas_class( $vas_data, $value );
 		}
 		return $collection;
