@@ -223,7 +223,9 @@ use BringFraktguiden\Fields\Fields;
 
 		// Contact Information fields are only checked once the user edits one of them.
 		// A shop saved before these fields existed can still save the other sections.
-		const contactFields = Array.from(document.getElementById('bfg-contact-information').querySelectorAll('[required]'));
+		const contactGroup = document.getElementById('bfg-contact-information');
+		const contactSection = contactGroup.closest('.bfg-section__section');
+		const contactFields = Array.from(contactGroup.querySelectorAll('[required]'));
 		const loadedValues = new Map(contactFields.map(function (field) { return [field, field.value]; }));
 
 		function contactEdited() {
@@ -243,7 +245,8 @@ use BringFraktguiden\Fields\Fields;
 
 		// Submit-time validation — prevent submission if any visible required field is invalid
 		form.addEventListener('submit', function (e) {
-			const skipContact = !contactEdited();
+			// The Save button of the Contact Information section always checks the fields.
+			const skipContact = !contactEdited() && !contactSection.contains(e.submitter);
 
 			let firstInvalid = null;
 			requiredFields.forEach(function (field) {
