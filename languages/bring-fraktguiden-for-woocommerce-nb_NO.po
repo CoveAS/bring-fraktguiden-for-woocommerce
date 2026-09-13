@@ -373,8 +373,8 @@ msgid "Customs"
 msgstr "Toll"
 
 #: build/templates/admin/pages/booking.php:154
-msgid "What Bring needs for a shipment that leaves Norway"
-msgstr "Hva Bring trenger for en sending som forlater Norge"
+msgid "What Bring needs when a shipment crosses a border"
+msgstr "Dette trenger Bring når en sending krysser en grense"
 
 #: build/templates/admin/pages/booking.php:178
 #: build/templates/admin/pages/pro-settings.php:40
@@ -3201,11 +3201,13 @@ msgstr "Eksportørnummer"
 
 #: config/admin-settings.php:439
 msgid ""
-"Your VAT number or EORI number. Bring sends it with the customs declaration "
-"of a shipment that leaves Norway."
+"Your VAT number or EORI number, for example NO 999 999 999 MVA or "
+"NO999999999. Bring sends it with the customs declaration of a shipment that "
+"leaves Norway. An NVIT parcel needs no exporter number."
 msgstr ""
-"Organisasjonsnummeret (MVA) eller EORI-nummeret ditt. Bring sender det med "
-"tolldeklarasjonen for en sending som forlater Norge."
+"Organisasjonsnummeret (MVA) eller EORI-nummeret ditt, for eksempel NO 999 "
+"999 999 MVA eller NO999999999. Bring sender det med tolldeklarasjonen for en "
+"sending som forlater Norge. En NVIT-sending trenger ikke eksportørnummer."
 
 #: config/admin-settings.php:477
 msgid "Pack in multiple boxes"
@@ -3679,6 +3681,33 @@ msgstr "Fullført"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#: build/templates/admin/pages/booking.php
+msgid "Customs and NVIT"
+msgstr "Toll og NVIT"
+
+#: build/templates/admin/pages/booking.php
+msgid ""
+"NVIT means Norwegian goods in transit. A parcel that travels from one place "
+"in Norway to another, through Sweden or Finland, needs customs data for each "
+"order line. Read more at {{bring}}Bring{{/a}} and at {{toll}}the Norwegian "
+"Customs Authority{{/a}}."
+msgstr ""
+"NVIT betyr norske varer i transitt. En sending som går fra ett sted i Norge "
+"til et annet, gjennom Sverige eller Finland, trenger tolldata for hver "
+"ordrelinje. Les mer hos {{bring}}Bring{{/a}} og hos {{toll}}Tolletaten{{/a}}."
+
+#~ msgid "What Bring needs for a shipment that leaves Norway"
+#~ msgstr "Hva Bring trenger for en sending som forlater Norge"
+
+#~ msgid ""
+#~ "Your VAT number or EORI number, for example NO 999 999 999 MVA or "
+#~ "NO999999999. Bring sends it with the customs declaration of a shipment "
+#~ "that leaves Norway."
+#~ msgstr ""
+#~ "Organisasjonsnummeret (MVA) eller EORI-nummeret ditt, for eksempel NO 999 "
+#~ "999 999 MVA eller NO999999999. Bring sender det med tolldeklarasjonen for "
+#~ "en sending som forlater Norge."
 
 #, php-format
 #~ msgid "We check the license server in %d seconds."

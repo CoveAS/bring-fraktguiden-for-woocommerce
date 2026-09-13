@@ -71,10 +71,21 @@ use BringFraktguiden\Fields\Fields;
 			</bfg-section>
 
 			<bfg-section>
-				<bfg-section.header title="Customs"
-					description="What Bring needs for a shipment that leaves Norway"></bfg-section.header>
+				<bfg-section.header title="Customs and NVIT"
+					description="What Bring needs when a shipment crosses a border"></bfg-section.header>
 
 				<bfg-section.section>
+					<p>
+						<?php echo strtr(
+							esc_html__('NVIT means Norwegian goods in transit. A parcel that travels from one place in Norway to another, through Sweden or Finland, needs customs data for each order line. Read more at {{bring}}Bring{{/a}} and at {{toll}}the Norwegian Customs Authority{{/a}}.', 'bring-fraktguiden-for-woocommerce'),
+							[
+								'{{bring}}' => '<a href="https://www.bring.no/en/services/customs/norwegian-goods-in-transit-changes" target="_blank" rel="noopener">',
+								'{{toll}}' => '<a href="https://www.toll.no/no/bedrift/transport-og-tollager/norske-varer-i-transitt" target="_blank" rel="noopener">',
+								'{{/a}}' => '</a>',
+							]
+						); ?>
+					</p>
+
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->customs_consent; ?></div>
 
 					<div class="bfg-field">

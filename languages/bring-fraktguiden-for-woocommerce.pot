@@ -367,7 +367,7 @@ msgid "Customs"
 msgstr ""
 
 #: build/templates/admin/pages/booking.php:154
-msgid "What Bring needs for a shipment that leaves Norway"
+msgid "What Bring needs when a shipment crosses a border"
 msgstr ""
 
 #: build/templates/admin/pages/booking.php:178
@@ -2954,7 +2954,7 @@ msgid "Exporter number"
 msgstr ""
 
 #: config/admin-settings.php:439
-msgid "Your VAT number or EORI number. Bring sends it with the customs declaration of a shipment that leaves Norway."
+msgid "Your VAT number or EORI number, for example NO 999 999 999 MVA or NO999999999. Bring sends it with the customs declaration of a shipment that leaves Norway. An NVIT parcel needs no exporter number."
 msgstr ""
 
 #: config/admin-settings.php:477
@@ -3379,4 +3379,12 @@ msgstr ""
 
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
+msgstr ""
+
+#: build/templates/admin/pages/booking.php
+msgid "Customs and NVIT"
+msgstr ""
+
+#: build/templates/admin/pages/booking.php
+msgid "NVIT means Norwegian goods in transit. A parcel that travels from one place in Norway to another, through Sweden or Finland, needs customs data for each order line. Read more at {{bring}}Bring{{/a}} and at {{toll}}the Norwegian Customs Authority{{/a}}."
 msgstr ""

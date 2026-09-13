@@ -436,7 +436,8 @@ return [
 			'customs_exporter_number' => [
 				'title' => __('Exporter number', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'description' => __('Your VAT number or EORI number. Bring sends it with the customs declaration of a shipment that leaves Norway.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Your VAT number or EORI number, for example NO 999 999 999 MVA or NO999999999. Bring sends it with the customs declaration of a shipment that leaves Norway. An NVIT parcel needs no exporter number.', 'bring-fraktguiden-for-woocommerce'),
+				'placeholder' => 'NO 999 999 999 MVA',
 				'default' => '',
 			],
 			'auto_set_status_after_booking_success' => [
