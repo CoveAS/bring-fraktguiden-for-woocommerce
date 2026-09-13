@@ -28,9 +28,11 @@ use BringFraktguiden\Fields\Fields;
 					description="Book orders directly from the order page with MyBring integration"></bfg-section.header>
 
 				<bfg-section.section>
-					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_enabled; ?></div>
-					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_without_bring; ?></div>
-					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
+					<div class="bfg-checkbox-group">
+						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_enabled; ?></div>
+						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_without_bring; ?></div>
+						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
+						</div>
 					</div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
@@ -38,74 +40,30 @@ use BringFraktguiden\Fields\Fields;
 			</bfg-section>
 
 			<bfg-section>
-				<bfg-section.header title="Shipping Address"
-					description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."></bfg-section.header>
+				<bfg-section.header title="Contact Information"
+					description="The sender name, phone and email Bring shows on every shipment."></bfg-section.header>
 
 				<bfg-section.section>
-					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_use_custom_address; ?>
-					</div>
-
-					<div id="bfg-custom-shipping-address" style="">
+					<div id="bfg-contact-information">
 						<div class="bfg-field">
-							<?php echo $fields->booking_address_store_name->label(); ?>
-							<?php echo $fields->booking_address_store_name; ?>
+							<?php echo $fields->booking_address_reference->label(); ?>
+							<?php echo $fields->booking_address_reference; ?>
 						</div>
 
 						<div class="bfg-field">
-							<?php echo $fields->booking_address_street1->label(); ?>
-							<?php echo $fields->booking_address_street1; ?>
+							<?php echo $fields->booking_address_contact_person->label(); ?>
+							<?php echo $fields->booking_address_contact_person; ?>
 						</div>
 
 						<div class="bfg-field">
-							<?php echo $fields->booking_address_street2->label(); ?>
-							<?php echo $fields->booking_address_street2; ?>
+							<?php echo $fields->booking_address_phone->label(); ?>
+							<?php echo $fields->booking_address_phone; ?>
 						</div>
 
 						<div class="bfg-field">
-							<h3 class="bfg-field-group-title">
-								<t>Address details</t>
-							</h3>
-							<div class="bfgu:flex bfgu:flex-col bfgu:gap-8">
-								<div class="bfgu:flex-1">
-									<?php echo $fields->booking_address_postcode->label(); ?>
-									<?php echo $fields->booking_address_postcode->field(); ?>
-								</div>
-								<div class="bfgu:flex-1">
-									<?php echo $fields->booking_address_city->label(); ?>
-									<?php echo $fields->booking_address_city->field(); ?>
-								</div>
-								<div class="bfgu:flex-1">
-									<?php echo $fields->booking_address_country->label(); ?>
-									<?php echo $fields->booking_address_country->field(); ?>
-								</div>
-							</div>
+							<?php echo $fields->booking_address_email->label(); ?>
+							<?php echo $fields->booking_address_email; ?>
 						</div>
-					</div>
-
-					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
-				</bfg-section.section>
-
-				<bfg-section.header class="bfg-section__header--divider" title="Contact Information"></bfg-section.header>
-
-				<bfg-section.section>
-					<div class="bfg-field">
-						<?php echo $fields->booking_address_reference->label(); ?>
-						<?php echo $fields->booking_address_reference; ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->booking_address_contact_person->label(); ?>
-						<?php echo $fields->booking_address_contact_person; ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->booking_address_phone->label(); ?>
-						<?php echo $fields->booking_address_phone; ?>
-					</div>
-
-					<div class="bfg-field">
-						<?php echo $fields->booking_address_email->label(); ?>
-						<?php echo $fields->booking_address_email; ?>
 					</div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
@@ -165,6 +123,55 @@ use BringFraktguiden\Fields\Fields;
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</bfg-section.section>
 			</bfg-section>
+
+			<bfg-section>
+				<bfg-section.header title="Shipping Address"
+					description="By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."></bfg-section.header>
+
+				<bfg-section.section>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_use_custom_address; ?>
+					</div>
+
+					<div id="bfg-custom-shipping-address" style="">
+						<div class="bfg-field">
+							<?php echo $fields->booking_address_store_name->label(); ?>
+							<?php echo $fields->booking_address_store_name; ?>
+						</div>
+
+						<div class="bfg-field">
+							<?php echo $fields->booking_address_street1->label(); ?>
+							<?php echo $fields->booking_address_street1; ?>
+						</div>
+
+						<div class="bfg-field">
+							<?php echo $fields->booking_address_street2->label(); ?>
+							<?php echo $fields->booking_address_street2; ?>
+						</div>
+
+						<div class="bfg-field">
+							<h3 class="bfg-field-group-title">
+								<t>Address details</t>
+							</h3>
+							<div class="bfgu:flex bfgu:flex-col bfgu:gap-8">
+								<div class="bfgu:flex-1">
+									<?php echo $fields->booking_address_postcode->label(); ?>
+									<?php echo $fields->booking_address_postcode->field(); ?>
+								</div>
+								<div class="bfgu:flex-1">
+									<?php echo $fields->booking_address_city->label(); ?>
+									<?php echo $fields->booking_address_city->field(); ?>
+								</div>
+								<div class="bfgu:flex-1">
+									<?php echo $fields->booking_address_country->label(); ?>
+									<?php echo $fields->booking_address_country->field(); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
+				</bfg-section.section>
+			</bfg-section>
 		</form>
 	</div>
 </div>
@@ -214,6 +221,15 @@ use BringFraktguiden\Fields\Fields;
 			return true;
 		}
 
+		// Contact Information fields are only checked once the user edits one of them.
+		// A shop saved before these fields existed can still save the other sections.
+		const contactFields = Array.from(document.getElementById('bfg-contact-information').querySelectorAll('[required]'));
+		const loadedValues = new Map(contactFields.map(function (field) { return [field, field.value]; }));
+
+		function contactEdited() {
+			return contactFields.some(function (field) { return field.value !== loadedValues.get(field); });
+		}
+
 		// Blur validation — only trigger after the user has interacted with the field
 		const requiredFields = form.querySelectorAll('[required]');
 		requiredFields.forEach(function (field) {
@@ -227,9 +243,12 @@ use BringFraktguiden\Fields\Fields;
 
 		// Submit-time validation — prevent submission if any visible required field is invalid
 		form.addEventListener('submit', function (e) {
+			const skipContact = !contactEdited();
+
 			let firstInvalid = null;
 			requiredFields.forEach(function (field) {
 				if (field.offsetParent === null) return; // skip hidden fields
+				if (skipContact && contactFields.includes(field)) return;
 				if (!validateField(field) && !firstInvalid) firstInvalid = field;
 			});
 			if (firstInvalid) e.preventDefault();

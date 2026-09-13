@@ -197,3 +197,31 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-section__checkbox input[type="checkbox"] {
     margin: 0;
 }
+
+/* Checkbox Group (.bfg-checkbox-group)
+   Several checkbox cards in one box, with a line between them.
+   ========================================================================== */
+
+.bfg-checkbox-group {
+    border: 1px solid var(--bfg-border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.bfg-checkbox-group .bfg-field--checkbox-box {
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.bfg-checkbox-group .bfg-field--checkbox-box:first-child {
+    border-radius: 7px 7px 0 0;
+}
+
+.bfg-checkbox-group .bfg-field--checkbox-box:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+.bfg-checkbox-group .bfg-field--checkbox-box+.bfg-field--checkbox-box {
+    border-top: 1px solid var(--bfg-border);
+}
