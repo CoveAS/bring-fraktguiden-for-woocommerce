@@ -35,13 +35,13 @@ use BringFraktguiden\Fields\Fields;
 						</div>
 					</div>
 
-					<div class="bfg-field">
-						<?php echo $fields->mybring_customer_number->label(); ?>
-						<?php echo $fields->mybring_customer_number->field(); ?>
-						<?php echo $fields->mybring_customer_number->description(); ?>
-					</div>
+					<div id="bfg-booking-fields">
+						<div class="bfg-field">
+							<?php echo $fields->mybring_customer_number->label(); ?>
+							<?php echo $fields->mybring_customer_number->field(); ?>
+							<?php echo $fields->mybring_customer_number->description(); ?>
+						</div>
 
-					<div id="bfg-contact-information">
 						<h3 class="bfg-field-group-title">
 							<t>Contact information</t>
 						</h3>
@@ -209,7 +209,7 @@ use BringFraktguiden\Fields\Fields;
 		}
 
 		toggleBlock('booking_use_custom_address', 'bfg-custom-shipping-address');
-		toggleBlock('booking_enabled', 'bfg-contact-information');
+		toggleBlock('booking_enabled', 'bfg-booking-fields');
 
 		// Wire up aria-describedby for fields whose description is rendered by the component
 		form.querySelectorAll('.bfg-field').forEach(function (fieldEl) {
