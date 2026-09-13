@@ -7,6 +7,7 @@
  * @var int    $license_days_remaining
  * @var string $valid_to_formatted
  * @var string $license_key
+ * @var string $license_manage_url
  */
 ?>
 
@@ -29,7 +30,7 @@
 		status-color="green"
 		:license-key="$license_key ? esc_html( $license_key ) : ''"
 		:days="$license_days_remaining > 0 ? sprintf( __( '%d days remaining', 'bring-fraktguiden-for-woocommerce' ), $license_days_remaining ) : ''"
-		manage-url="https://bringfraktguiden.no/"
+		:manage-url="esc_url( $license_manage_url )"
 		manage-label="Manage License">
 	</bfg-license-card>
 

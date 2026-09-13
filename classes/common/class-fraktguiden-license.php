@@ -18,7 +18,7 @@ use Exception;
 class Fraktguiden_License
 {
 
-	protected const STATE_OPTION = 'bring_fraktguiden_license_state';
+	public const STATE_OPTION = 'bring_fraktguiden_license_state';
 
 	protected static self $instance;
 
@@ -144,9 +144,15 @@ class Fraktguiden_License
 
 	/**
 	 * Check the license
+	 *
+	 * The caller passes a key when the shop just saved one. The settings cache
+	 * still holds the key of the last request at that point.
+	 *
+	 * @param string|null $key Key to ask about, or null to read the saved one.
+	 *
 	 * @throws Exception
 	 */
-	public function check_license(): void
+	public function check_license(?string $key = null): void
 	{
 		$url      = get_site_url();
 		$url_info = wp_parse_url($url);
@@ -156,7 +162,7 @@ class Fraktguiden_License
 			return;
 		}
 
-		$key = self::get_key();
+		$key = null === $key ? self::get_key() : self::normalise_key($key);
 
 		$this->store_answer(
 			$this->curl_request($this->request_data($key ? 'check_key' : 'check_license', $key)),
@@ -232,7 +238,7 @@ class Fraktguiden_License
 	 *
 	 * @return array The new state.
 	 */
-	protected function store_answer($data, string $source): array
+	public function store_answer($data, string $source): array
 	{
 		if (empty($data['data']['license'])) {
 			return self::get_state();
@@ -248,6 +254,7 @@ class Fraktguiden_License
 			'year'         => isset($license['year']) ? (int) $license['year'] : null,
 			'reason'       => $license['reason'] ?? '',
 			'move_url'     => $license['move_url'] ?? '',
+			'manage_url'   => $license['manage_url'] ?? '',
 			'source'       => $source,
 			'checked_at'   => time(),
 		];

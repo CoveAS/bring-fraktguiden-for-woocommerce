@@ -224,14 +224,8 @@ class SettingsPage
 		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
 		$license_days_remaining = $pro_valid_to ? max(0, (int) floor(((int) $pro_valid_to - time()) / 86400)) : 0;
 
-		// Masked license key for display (last 4 chars visible)
-		$raw_key = Fraktguiden_Helper::get_option('license_key') ?? '';
-		$license_key = '';
-		if ($raw_key) {
-			$clean = str_replace('-', '', $raw_key);
-			$last4 = strtoupper(substr($clean, -4));
-			$license_key = 'XXXX-XXXX-XXXX-' . $last4;
-		}
+		// The license key names a license row. It is a label, not a secret.
+		$license_key = Fraktguiden_Helper::get_option('license_key') ?? '';
 
 		// License state, as the license server last reported it.
 		$state                = Fraktguiden_License::get_state();
@@ -242,6 +236,10 @@ class SettingsPage
 		$license_reason       = $state['reason'] ?? '';
 		$license_domain       = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
 		$license_move_url     = $state['move_url'] ?? '';
+
+		// The account page that manages the license. The server sends the link,
+		// because the address follows the permalink of the shop account page.
+		$license_manage_url   = ($state['manage_url'] ?? '') ?: 'https://bringfraktguiden.no/';
 		$license_support_url  = 'https://support.bringfraktguiden.no';
 
 		// Where the current Pro access comes from.
@@ -611,6 +609,6 @@ class SettingsPage
 			return;
 		}
 
-		Fraktguiden_License::get_instance()->check_license();
+		Fraktguiden_License::get_instance()->check_license($new);
 	}
 }

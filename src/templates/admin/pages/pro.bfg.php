@@ -32,6 +32,7 @@
  * @var string $license_reason
  * @var string $license_source
  * @var string $license_move_url
+ * @var string $license_manage_url
  * @var string $license_support_url
  */
 ?>
@@ -64,7 +65,7 @@
 				</span>
 				<p>
 					<?php printf(
-						/* translators: 1: masked domain, 2: number of moves, 3: year. */
+						/* translators: 1: the domain the key is linked to, 2: number of moves, 3: year. */
 						esc_html__('This key is linked to %1$s. It has %2$d moves left in %3$d.', 'bring-fraktguiden-for-woocommerce'),
 						esc_html($license_other_domain),
 						(int) $license_moves_left,
@@ -128,14 +129,14 @@
 				<div class="bfg-modal__body">
 					<p>
 						<?php printf(
-							/* translators: 1: masked domain, 2: the domain of this shop. */
+							/* translators: 1: the domain the key is linked to, 2: the domain of this shop. */
 							esc_html__('The license moves from %1$s to %2$s.', 'bring-fraktguiden-for-woocommerce'),
 							esc_html($license_other_domain),
 							esc_html($license_domain)
 						); ?>
 					</p>
 					<p><t>The old domain loses Pro at once.</t></p>
-					<p><t>Only the owner of the account that pays for the license can move it. You sign in and confirm the move on our web site.</t></p>
+					<p><t>Only the account that owns the license can move it. You sign in and confirm the move on our web site.</t></p>
 					<p>
 						<?php printf(
 							/* translators: 1: number of moves, 2: year. */
