@@ -50,7 +50,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 							<t>Enter Your License Key</t>
 						</label>
 						<div class="bfg-pro-license-form__row" style="display:flex; gap: 0.5rem; align-items: center; width: 100%;">
-							<div style="flex: 1; min-width: 0;"><?php FieldRenderer::test_url(); ?></div>
+							<div style="flex: 1; min-width: 0;"><?php FieldRenderer::license_key(); ?></div>
 							<button type="submit" class="bfg-btn bfg-btn--primary" style="flex-shrink:0;">
 								<t>Activate</t>
 							</button>

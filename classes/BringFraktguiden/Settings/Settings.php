@@ -14,7 +14,7 @@ class Settings
 
 	#[Checkbox]
 	public Setting $pro_enabled;
-	public Setting $test_url;
+	public Setting $license_key;
 	public Setting $language;
 	#[Checkbox]
 	public Setting $post_office;

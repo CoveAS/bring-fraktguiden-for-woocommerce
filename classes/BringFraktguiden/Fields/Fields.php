@@ -9,7 +9,7 @@ class Fields
 {
 	use HasInstance;
 	public readonly Field $pro_enabled;
-	public readonly Field $test_url;
+	public readonly Field $license_key;
 	public readonly Field $language;
 	public readonly Field $post_office;
 	public readonly Field $from_zip;

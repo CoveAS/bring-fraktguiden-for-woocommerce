@@ -61,7 +61,7 @@ class Ajax {
 		}
 
 		// Save license key and enable pro
-		Fraktguiden_Helper::update_option( 'test_url', $license_key );
+		Fraktguiden_Helper::update_option( 'license_key', $license_key );
 		Fraktguiden_Helper::update_option( 'pro_enabled', 'yes' );
 
 		// Set pro_activated_on if not already set

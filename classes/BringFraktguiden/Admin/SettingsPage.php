@@ -223,7 +223,7 @@ class SettingsPage
 		$license_days_remaining = $pro_valid_to ? max(0, (int) floor(((int) $pro_valid_to - time()) / 86400)) : 0;
 
 		// Masked license key for display (last 4 chars visible)
-		$raw_key = Fraktguiden_Helper::get_option('test_url') ?? '';
+		$raw_key = Fraktguiden_Helper::get_option('license_key') ?? '';
 		$license_key = '';
 		if ($raw_key) {
 			$clean = str_replace('-', '', $raw_key);
