@@ -165,28 +165,6 @@ class Fraktguiden_License
 	}
 
 	/**
-	 * Move the license of this key to the domain of this shop.
-	 *
-	 * A move costs the owner one of the moves of the year, so call this only
-	 * after the owner confirms it.
-	 *
-	 * @return array The new state.
-	 */
-	public function move_key(): array
-	{
-		$key = self::get_key();
-
-		if (!$key) {
-			return self::get_state();
-		}
-
-		return $this->store_answer(
-			$this->curl_request($this->request_data('move_key', $key)),
-			'key'
-		);
-	}
-
-	/**
 	 * Build the parameters every license call sends.
 	 *
 	 * @param string $action Action.
@@ -269,6 +247,7 @@ class Fraktguiden_License
 			'other_domain' => $license['other_domain'] ?? '',
 			'year'         => isset($license['year']) ? (int) $license['year'] : null,
 			'reason'       => $license['reason'] ?? '',
+			'move_url'     => $license['move_url'] ?? '',
 			'source'       => $source,
 			'checked_at'   => time(),
 		];

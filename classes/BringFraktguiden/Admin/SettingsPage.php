@@ -241,7 +241,7 @@ class SettingsPage
 		$license_year         = $state['year'] ?? (int) gmdate('Y');
 		$license_reason       = $state['reason'] ?? '';
 		$license_domain       = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
-		$license_move_nonce   = wp_create_nonce('bring_move_license');
+		$license_move_url     = $state['move_url'] ?? '';
 		$license_support_url  = 'https://support.bringfraktguiden.no';
 
 		// Where the current Pro access comes from.

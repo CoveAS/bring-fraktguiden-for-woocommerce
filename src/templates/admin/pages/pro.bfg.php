@@ -31,7 +31,7 @@
  * @var int    $license_year
  * @var string $license_reason
  * @var string $license_source
- * @var string $license_move_nonce
+ * @var string $license_move_url
  * @var string $license_support_url
  */
 ?>
@@ -54,7 +54,7 @@
 			'domain' => __('The domain of this shop', 'bring-fraktguiden-for-woocommerce'),
 			'trial'  => __('Your free trial', 'bring-fraktguiden-for-woocommerce'),
 		];
-		$bfg_no_moves = 0 === $license_moves_left;
+		$bfg_can_move = 0 !== $license_moves_left && '' !== $license_move_url;
 		?>
 
 		<?php if ('other_domain' === $license_state): ?>
@@ -71,7 +71,7 @@
 						(int) $license_year
 					); ?>
 				</p>
-				<?php if (!$bfg_no_moves): ?>
+				<?php if ($bfg_can_move): ?>
 					<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-move-open">
 						<?php printf(
 							/* translators: %s: the domain of this shop. */
@@ -80,19 +80,6 @@
 						); ?>
 					</button>
 				<?php endif; ?>
-			</div>
-		<?php elseif ('move_refused' === $license_state): ?>
-			<div class="bfg-notice-banner" type="error">
-				<span class="bfg-notice-icon">
-					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-				</span>
-				<p>
-					<t>The license did not move.</t>
-					<?php echo esc_html($license_reason); ?>
-					<?php if ($bfg_no_moves): ?>
-						<a href="<?php echo esc_url($license_support_url); ?>"><t>Ask support for help</t></a>
-					<?php endif; ?>
-				</p>
 			</div>
 		<?php elseif ('unknown' === $license_state): ?>
 			<div class="bfg-notice-banner" type="error">
@@ -132,7 +119,7 @@
 			</div>
 		</dl>
 
-		<?php if ('other_domain' === $license_state && !$bfg_no_moves): ?>
+		<?php if ('other_domain' === $license_state && $bfg_can_move): ?>
 			<dialog class="bfg bfg-modal" id="bfg-move-license">
 				<div class="bfg-modal__head">
 					<h2 class="bfg-modal__title"><t>Move the license to this shop?</t></h2>
@@ -148,6 +135,7 @@
 						); ?>
 					</p>
 					<p><t>The old domain loses Pro at once.</t></p>
+					<p><t>Only the owner of the account that pays for the license can move it. You sign in and confirm the move on our web site.</t></p>
 					<p>
 						<?php printf(
 							/* translators: 1: number of moves, 2: year. */
@@ -156,52 +144,23 @@
 							(int) $license_year
 						); ?>
 					</p>
-					<p class="bfg-move-error" role="alert" hidden></p>
 				</div>
 				<div class="bfg-modal__foot">
 					<button type="button" class="bfg-btn bfg-btn--sm" data-bfg-move-close><t>Cancel</t></button>
-					<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-move-confirm"><t>Move the license</t></button>
+					<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_url($license_move_url); ?>" target="_blank" rel="noopener">
+						<t>Move the license on bringfraktguiden.no</t>
+					</a>
 				</div>
 			</dialog>
 
 			<script>
 				document.addEventListener('DOMContentLoaded', function () {
 					const dialog = document.getElementById('bfg-move-license');
-					const confirm = document.getElementById('bfg-move-confirm');
-					const error = dialog.querySelector('.bfg-move-error');
 
 					document.getElementById('bfg-move-open').addEventListener('click', () => dialog.showModal());
 					dialog.querySelectorAll('[data-bfg-move-close]').forEach(
 						(button) => button.addEventListener('click', () => dialog.close())
 					);
-
-					confirm.addEventListener('click', async function () {
-						confirm.disabled = true;
-						error.hidden = true;
-
-						const body = new URLSearchParams({
-							action: 'bring_move_license',
-							_wpnonce: <?php echo wp_json_encode($license_move_nonce); ?>,
-						});
-
-						try {
-							const response = await fetch(ajaxurl, { method: 'POST', body });
-							const answer = await response.json();
-
-							if (answer.status === 'success' && answer.state.key_state === 'active') {
-								window.location.reload();
-								return;
-							}
-
-							error.textContent = answer.state?.reason || answer.message
-								|| <?php echo wp_json_encode(__('The license did not move.', 'bring-fraktguiden-for-woocommerce')); ?>;
-						} catch (e) {
-							error.textContent = <?php echo wp_json_encode(__('The license server did not answer.', 'bring-fraktguiden-for-woocommerce')); ?>;
-						}
-
-						error.hidden = false;
-						confirm.disabled = false;
-					});
 				});
 			</script>
 		<?php endif; ?>
