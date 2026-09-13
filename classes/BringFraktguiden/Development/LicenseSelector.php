@@ -162,6 +162,9 @@ class LicenseSelector
 	 * carries a valid_to. So this clears the option first, and a state without
 	 * a valid_to leaves the shop without Pro.
 	 *
+	 * The state without a license also clears the trial start date. The shop
+	 * then shows the free state, not the trial state.
+	 *
 	 * @param array $state One entry of self::states().
 	 */
 	protected static function apply(array $state): void
@@ -172,6 +175,7 @@ class LicenseSelector
 
 		if (!$state['license']) {
 			delete_option(Fraktguiden_License::STATE_OPTION);
+			Fraktguiden_Helper::update_option('pro_activated_on', '');
 			return;
 		}
 
