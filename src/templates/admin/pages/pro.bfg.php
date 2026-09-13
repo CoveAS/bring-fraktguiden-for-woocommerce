@@ -5,7 +5,6 @@
  *
  * All variables are prepared in SettingsPage::pro_page().
  *
- * @var bool   $is_test_site
  * @var bool   $license_active
  * @var bool   $pro_enabled
  * @var bool   $pro_activated
@@ -46,8 +45,6 @@
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-expired.php'; ?>
 		<?php elseif ($is_trial): ?>
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-trial.php'; ?>
-		<?php elseif ($is_test_site && $pro_enabled): ?>
-			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-test-site.php'; ?>
 		<?php else: ?>
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-free.php'; ?>
 		<?php endif; ?>

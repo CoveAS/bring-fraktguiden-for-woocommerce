@@ -209,7 +209,6 @@ class SettingsPage
 		$fields = Fields::instance();
 
 		// Pro status data
-		$is_test_site = Fraktguiden_Helper::is_test_site();
 		$pro_valid_to = get_option('bring_fraktguiden_pro_valid_to', false);
 		$license_active = $pro_valid_to && intval($pro_valid_to) > time();
 		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
@@ -237,7 +236,7 @@ class SettingsPage
 		$activeShippingMethodsCount = self::get_active_bring_methods_count();
 
 		// Derived view state for the template
-		$bfg_cards_active  = ($license_active && $pro_enabled) || ($is_test_site && $pro_enabled);
+		$bfg_cards_active  = $license_active && $pro_enabled;
 		$bfg_cards_expired = $is_expired;
 		$bfg_booking_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
 		$bfg_shipping_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')) : '';
@@ -250,8 +249,6 @@ class SettingsPage
 			$bfg_features_subtitle = __('All features active during your trial', 'bring-fraktguiden-for-woocommerce');
 		} elseif ($is_expired) {
 			$bfg_features_subtitle = __('Purchase a license to regain access', 'bring-fraktguiden-for-woocommerce');
-		} elseif ($is_test_site && $pro_enabled) {
-			$bfg_features_subtitle = __('PRO features enabled for testing', 'bring-fraktguiden-for-woocommerce');
 		} else {
 			$bfg_features_subtitle = __('Available with Pro', 'bring-fraktguiden-for-woocommerce');
 		}
