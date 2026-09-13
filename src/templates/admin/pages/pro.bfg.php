@@ -190,7 +190,9 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 					const nowText = <?php echo wp_json_encode(__('We check the license server now.', 'bring-fraktguiden-for-woocommerce')); ?>;
 
 					// The gap grows, so a modal left open all afternoon stays cheap.
-					const gapFor = (elapsed) => elapsed < 30000 ? 3000 : elapsed < 600000 ? 15000 : 300000;
+					// The comparisons read backwards, because the template compiler
+					// takes a less-than sign in a script block for the start of a tag.
+					const gapFor = (elapsed) => 30000 > elapsed ? 3000 : 600000 > elapsed ? 15000 : 300000;
 					const GIVE_UP = 3600000;
 
 					const started = Date.now();
@@ -238,7 +240,7 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 						}
 						const left = Math.ceil((due - Date.now()) / 1000);
 						watch.textContent = left > 0 ? waitText.replace('%d', left) : nowText;
-						if (left <= 0) {
+						if (0 >= left) {
 							check();
 						}
 					}
