@@ -285,6 +285,19 @@ Load a translation at the `init` action or later. WordPress 6.7 prints a
 `Bring_Fraktguiden::init()` runs on the `init` action and holds only the
 `load_plugin_textdomain()` call. Keep the two apart.
 
+## The license key is mostly cosmetic
+
+The domain is the real key. The license server ties a license to one domain, and
+a shop with the right domain gets Pro whether it holds a key or not.
+
+The license key only names a license row. The server hands the key of any domain
+to any caller, and this plugin shows the key on the Pro page. So the key is a
+label, never a secret.
+
+Never let a key alone grant or move anything. Only the owner of the account that
+pays for the license can move it to another domain. The Pro page links to the
+move page of the shop site, and the server sends that link in the check answer.
+
 ## Database
 
 Run `mysql` with no parameters. The file `~/.my.cnf` holds the user, the socket
