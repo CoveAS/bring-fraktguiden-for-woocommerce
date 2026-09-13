@@ -59,6 +59,7 @@ class Scripts
 					'additional_fee'              => esc_html__( 'Additional fee:', 'bring-fraktguiden-for-woocommerce' ),
 					'value_added_services'        => esc_html__( 'Value added services', 'bring-fraktguiden-for-woocommerce' ),
 					'pickup_point'                => esc_html__( 'Pickup points', 'bring-fraktguiden-for-woocommerce' ),
+					'pro_only'                    => esc_html__( 'Pro only', 'bring-fraktguiden-for-woocommerce' ),
 					'error_api_uid'               => esc_html__( 'The api email should be a valid email address.', 'bring-fraktguiden-for-woocommerce' ),
 					'error_customer_number'       => esc_html__( 'Customer numbers should be letters (A-Z) and underscores followed by a dash and a number.', 'bring-fraktguiden-for-woocommerce' ),
 					'error_api_key'               => esc_html__( 'The api key should only contain letters (a-z), numbers and dashes.', 'bring-fraktguiden-for-woocommerce' ),

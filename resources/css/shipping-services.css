@@ -151,26 +151,30 @@ input.validation-error {
 }
 
 /* Pro feature gating */
-.fraktguiden-product.pro-disabled header {
+
+/* The lock sits in the top right corner of the field it gates. */
+.pro-disabled .fraktguiden-product__fields label {
     position: relative;
+    padding-right: 5rem;
 }
 
-/* Keep the title clear of the badge. */
-.fraktguiden-product.pro-disabled h3 {
-    padding-right: 6rem;
-}
-
-.fraktguiden-product.pro-disabled header::after {
-    content: 'Pro only';
+.bfg-pro-lock {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    color: #C00;
-    background-color: #fff;
+    top: 0;
+    right: 0;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 0.25rem 0.5rem;
+    background: #f0f0f1;
+    color: #50575e;
+    padding: 0.15rem 0.5rem;
     font-size: 0.8em;
-    opacity: 0.8;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.bfg-pro-lock:hover {
+    background: #e0e0e1;
+    color: #1d2327;
 }
 
 .pro-disabled input:disabled,

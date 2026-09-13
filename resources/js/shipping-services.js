@@ -65,6 +65,21 @@
                 }
             });
 
+            container.addEventListener('click', (e) => {
+                const open = e.target.closest('[data-bfg-dialog]');
+                if (!open) return;
+
+                // The button sits in a label, which would toggle the field.
+                e.preventDefault();
+                document.getElementById(open.dataset.bfgDialog)?.showModal();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('[data-bfg-dialog-close]')) {
+                    e.target.closest('dialog')?.close();
+                }
+            });
+
             container.addEventListener('input', (e) => {
                 if (e.target.matches('.customer-number-input')) {
                     this.validateCustomerNumber(e.target);
@@ -135,9 +150,17 @@
             `;
         },
 
+        // A gated field carries a button that opens the Pro dialog.
+        getProLockHTML: function() {
+            if (this.proActivated) return '';
+
+            return `<button type="button" class="bfg-pro-lock" data-bfg-dialog="bfg-pro-lock-dialog">${this.i18n.pro_only}</button>`;
+        },
+
         getCustomNameFieldHTML: function(service) {
             return `
                 <label>
+                    ${this.getProLockHTML()}
                     <span>${this.i18n.shipping_name}</span>
                     <input
                         type="text"
@@ -158,6 +181,7 @@
 
             return `
                 <label class="override-toggle-label">
+                    ${this.getProLockHTML()}
                     <span>${label}</span>
                     <div class="togglererer">
                         <input

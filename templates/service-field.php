@@ -39,6 +39,24 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 				<div id="service-cards-container"></div>
 
 			</div>
+
+			<?php if ( ! Fraktguiden_Helper::pro_activated() ) : ?>
+				<dialog class="bfg bfg-modal" id="bfg-pro-lock-dialog">
+					<div class="bfg-modal__head">
+						<h2 class="bfg-modal__title"><?php esc_html_e( 'Pro only', 'bring-fraktguiden-for-woocommerce' ); ?></h2>
+						<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e( 'Close', 'bring-fraktguiden-for-woocommerce' ); ?>">&times;</button>
+					</div>
+					<div class="bfg-modal__body">
+						<p><?php esc_html_e( 'Service overrides and pickup points need a Pro license.', 'bring-fraktguiden-for-woocommerce' ); ?></p>
+						<p><?php esc_html_e( 'You can also start a free trial on the license page.', 'bring-fraktguiden-for-woocommerce' ); ?></p>
+					</div>
+					<div class="bfg-modal__foot">
+						<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_url( admin_url( 'admin.php?page=bring_fraktguiden_pro' ) ); ?>">
+							<?php esc_html_e( 'Go to license settings', 'bring-fraktguiden-for-woocommerce' ); ?>
+						</a>
+					</div>
+				</dialog>
+			<?php endif; ?>
 		</td>
 	</tr>
 <tr>
