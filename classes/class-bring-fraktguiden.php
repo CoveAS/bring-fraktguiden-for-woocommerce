@@ -23,6 +23,7 @@ use BringFraktguiden\Admin\FallbackPrice;
 use BringFraktguiden\Admin\ProductShippingTest;
 use BringFraktguiden\Admin\ShippingTest;
 use BringFraktguiden\Admin\SettingsPage;
+use BringFraktguiden\Development\LicenseSelector;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
@@ -123,6 +124,7 @@ class Bring_Fraktguiden {
 
 		if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local') {
 			StateSelector::setup();
+			LicenseSelector::setup();
 		}
 
 		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
