@@ -35,7 +35,7 @@ class SettingsPage
 		add_filter('admin_head', __CLASS__ . '::admin_head');
 
 		add_filter('pre_update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'process_settings'], 10, 2);
-		add_action('update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'check_new_license_key'], 10, 2);
+		add_filter('pre_update_option_' . SettingsMigration::PLUGIN_OPTION, [__CLASS__, 'check_entered_license_key'], 11, 1);
 	}
 
 	/**
@@ -595,20 +595,32 @@ class SettingsPage
 	}
 
 	/**
-	 * Ask the license server about a key the owner just entered.
+	 * Ask the license server about the key the owner just entered.
 	 *
-	 * The check runs only when the key changed, so an ordinary settings save
-	 * never calls the server.
+	 * The check runs whenever the owner submits the license form, even when the
+	 * key did not change. The owner presses Activate again to learn that a move
+	 * on another shop went through.
+	 *
+	 * @param mixed $value The settings the form is about to save.
+	 *
+	 * @return mixed The same settings, unchanged.
 	 */
-	public static function check_new_license_key($old_value, $value): void
+	public static function check_entered_license_key($value)
 	{
-		$old = Fraktguiden_License::normalise_key(is_array($old_value) ? ($old_value['license_key'] ?? '') : '');
-		$new = Fraktguiden_License::normalise_key(is_array($value) ? ($value['license_key'] ?? '') : '');
+		$rendered = array_map('sanitize_key', (array) ($_POST['bfg_rendered'] ?? []));
 
-		if ($old === $new) {
-			return;
+		if (!in_array('license_key', $rendered, true)) {
+			return $value;
 		}
 
-		Fraktguiden_License::get_instance()->check_license($new);
+		$key = is_array($value) ? ($value['license_key'] ?? '') : '';
+
+		if (!$key) {
+			return $value;
+		}
+
+		Fraktguiden_License::get_instance()->check_license($key);
+
+		return $value;
 	}
 }
