@@ -92,16 +92,11 @@ class Fraktguiden_License
 	 */
 	public function valid(): bool
 	{
-		$valid = get_option('bring_fraktguiden_pro_valid_to', '0');
+		// store_answer() writes the option only for a date in the future. A
+		// missing option therefore means the shop holds no license.
+		$valid_to = (int) get_option('bring_fraktguiden_pro_valid_to', 0);
 
-		if (!ctype_digit($valid)) {
-			return false;
-		}
-		if ($valid && $valid < time()) {
-			return false;
-		}
-
-		return true;
+		return $valid_to > time();
 	}
 
 	/**
