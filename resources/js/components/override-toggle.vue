@@ -31,47 +31,6 @@
 	</label>
 </template>
 
-<style lang="scss">
-.togglererer {
-  position: relative;
-  width: 100%;
-
-  .bring-toggle-alt {
-	position: absolute;
-	border-radius: 0;
-	height: 100%;
-	border: 1px solid #7e8993;
-	border-radius: 4px 0 0 4px;
-
-	&::after {
-	  top: 4px;
-	  height: 20px;
-	  width: 22px;
-	  border-radius: 2px;
-	}
-
-	.validation-error & {
-	  background-color: red;
-	  border-color: #a50000;
-	}
-  }
-
-  #shipping_services & {
-	input[type="number"],
-	input[type="text"] {
-	  padding-left: 4.2rem;
-	}
-  }
-}
-
-.validation-error {
-  input[type="number"],
-  input[type="text"] {
-	border-color: #CC0000;
-	box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);
-  }
-}
-</style>
 <script>
 var validation = function () {
 	if (this.validation && !this.validation(this.field_val, this.checkbox_val)) {

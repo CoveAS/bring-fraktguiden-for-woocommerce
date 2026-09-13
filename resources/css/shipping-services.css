@@ -37,20 +37,41 @@
     margin: 0.5rem 0 0;
 }
 
-/* Fields container */
+/* Fields container. The fields sit in two columns on a wide screen. */
 .fraktguiden-product__fields {
-    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
 }
 
 .fraktguiden-product__fields label {
-    display: block;
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex: 1 0 50%;
+    min-width: 25rem;
+    max-width: 100%;
+    padding: 0.5rem;
+}
+
+@media (max-width: 32em) {
+    .fraktguiden-product__fields label {
+        min-width: 15rem;
+        flex-wrap: wrap;
+    }
 }
 
 .fraktguiden-product__fields label > span {
-    display: block;
-    margin-bottom: 0.25rem;
+    flex: 0 0 14rem;
     font-weight: 500;
+}
+
+#shipping_services .fraktguiden-product__fields input[type="text"],
+#shipping_services .fraktguiden-product__fields input[type="number"] {
+    width: 100%;
+}
+
+#shipping_services .fraktguiden-product__fields input[type="number"] {
+    text-align: right;
 }
 
 /* Override toggle fields */
@@ -62,6 +83,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    width: 100%;
 }
 
 /* The checkbox stays in the page for the form, and the em is the visible
