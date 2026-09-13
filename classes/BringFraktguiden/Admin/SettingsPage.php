@@ -213,12 +213,13 @@ class SettingsPage
 		// Pro status data
 		$pro_valid_to = get_option('bring_fraktguiden_pro_valid_to', false);
 		$license_active = $pro_valid_to && intval($pro_valid_to) > time();
-		$pro_enabled = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
+		// 'pro_enabled' starts the free trial. A license grants Pro without it.
+		$trial_on = Fraktguiden_Helper::get_option('pro_enabled') === 'yes';
 		$pro_activated = Fraktguiden_Helper::pro_activated();
 		$days_remaining = Fraktguiden_Helper::get_pro_days_remaining();
 		$pro_activated_on = Fraktguiden_Helper::get_option('pro_activated_on');
-		$is_trial = $pro_enabled && $pro_activated_on && !$license_active && $days_remaining >= 0;
-		$is_expired = $pro_enabled && $pro_activated_on && $days_remaining < 0 && !$license_active;
+		$is_trial = $trial_on && $pro_activated_on && !$license_active && $days_remaining >= 0;
+		$is_expired = $trial_on && $pro_activated_on && $days_remaining < 0 && !$license_active;
 
 		// Format valid_to date if set
 		$valid_to_formatted = $pro_valid_to ? date_i18n(get_option('date_format'), intval($pro_valid_to)) : '';
@@ -256,14 +257,14 @@ class SettingsPage
 		$activeShippingMethodsCount = self::get_active_bring_methods_count();
 
 		// Derived view state for the template
-		$bfg_cards_active  = $license_active && $pro_enabled;
+		$bfg_cards_active  = $license_active;
 		$bfg_cards_expired = $is_expired;
 		$bfg_booking_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
 		$bfg_shipping_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')) : '';
 		$bfg_fallback_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')) : '';
 		$bfg_settings_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')) : '';
 
-		if ($license_active && $pro_enabled) {
+		if ($license_active) {
 			$bfg_features_subtitle = __('Click to configure each feature', 'bring-fraktguiden-for-woocommerce');
 		} elseif ($is_trial) {
 			$bfg_features_subtitle = __('All features active during your trial', 'bring-fraktguiden-for-woocommerce');

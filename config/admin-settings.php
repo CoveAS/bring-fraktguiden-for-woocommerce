@@ -38,12 +38,13 @@ return [
 	'pro' => [
 		'title' => __('Bring Fraktguiden Pro', 'bring-fraktguiden-for-woocommerce'),
 		'fields' => [
+			// A license grants PRO on its own. This option starts the free trial.
 			'pro_enabled' => [
-				'title' => __('Activate PRO', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Start the free trial', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'checkbox',
-				'label' => __('Activate PRO', 'bring-fraktguiden-for-woocommerce'),
+				'label' => __('Start the free trial', 'bring-fraktguiden-for-woocommerce'),
 				'class' => 'bring-toggle-checkbox',
-				'description' => __('A license is required to use PRO features on a live website. Activating PRO first gives you a free 7-day trial. After the trial, PRO features will be disabled until a license is activated.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('The trial gives you every PRO feature for 7 days. After the trial, PRO features stop until you activate a license.', 'bring-fraktguiden-for-woocommerce'),
 			],
 			'license_key' => [
 				'type' => 'text',

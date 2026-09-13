@@ -6,7 +6,7 @@
  * All variables are prepared in SettingsPage::pro_page().
  *
  * @var bool   $license_active
- * @var bool   $pro_enabled
+ * @var bool   $trial_on
  * @var bool   $pro_activated
  * @var int    $days_remaining
  * @var int    $license_days_remaining
@@ -166,7 +166,7 @@
 			</script>
 		<?php endif; ?>
 
-		<?php if ($license_active && $pro_enabled): ?>
+		<?php if ($license_active): ?>
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-active.php'; ?>
 		<?php elseif ($is_expired): ?>
 			<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/pro/state-expired.php'; ?>

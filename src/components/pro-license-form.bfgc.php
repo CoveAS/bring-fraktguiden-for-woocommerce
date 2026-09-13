@@ -28,10 +28,6 @@
 		<form method="post" action="options.php" id="bfg-license-form-pro">
 			<?php settings_fields('bring_fraktguiden_pro'); ?>
 
-			<div style="display:none">
-				<?php FieldRenderer::pro_enabled(); ?>
-			</div>
-
 			<div class="bfg-field">
 				<label class="bfg-field__label">
 					<t>Enter Your License Key</t>

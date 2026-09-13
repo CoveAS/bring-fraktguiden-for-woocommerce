@@ -72,23 +72,27 @@ class Fraktguiden_Helper {
 	/**
 	 * Pro activated
 	 *
+	 * A valid license grants PRO on its own. The option 'pro_enabled' starts the
+	 * free trial, and grants PRO only while the trial days remain.
+	 *
 	 * @param boolean $ignore_license Ignore the license check if true (default=false).
 	 *
 	 * @return boolean True means that PRO mode is active.
 	 */
 	public static function pro_activated( $ignore_license = false ) {
-		$pro_allowed = true;
+		$trial_on = self::get_option( 'pro_enabled' ) === 'yes';
 
-		if ( ! $ignore_license ) {
-			$days        = self::get_pro_days_remaining();
-			$pro_allowed = ( $days >= 0 ) || self::valid_license();
-
-			if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-				return isset( $_POST['woocommerce_bring_fraktguiden_enabled'] ) && $pro_allowed;
-			}
+		if ( $ignore_license ) {
+			return $trial_on;
 		}
 
-		return self::get_option( 'pro_enabled' ) === 'yes' && $pro_allowed;
+		$allowed = self::valid_license() || ( $trial_on && self::get_pro_days_remaining() >= 0 );
+
+		if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
+			return isset( $_POST['woocommerce_bring_fraktguiden_enabled'] ) && $allowed;
+		}
+
+		return $allowed;
 	}
 
 	/**
