@@ -46,7 +46,8 @@ class Fraktguiden_License
 		// Get cURL resource.
 		$handle = curl_init();
 
-		$url = 'https://bringfraktguiden.no/license-check.php?'.$query_string;
+		$base = defined('BRING_LICENSE_URL') ? BRING_LICENSE_URL : 'https://bringfraktguiden.no/license-check.php';
+		$url  = $base.'?'.$query_string;
 
 		// Set some options - we are passing in a useragent too here.
 		curl_setopt_array(
