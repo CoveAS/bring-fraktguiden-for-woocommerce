@@ -15,3 +15,7 @@
 - [ ] 1 Step setup?
 - [ ] License system
 - [ ] Start free trial not working
+
+
+- [ ] buttons for the variables to insert them in the order ref. eg {order_id}
+- [ ] {order_id} default value
