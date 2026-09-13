@@ -191,6 +191,9 @@ input.validation-error {
 }
 
 .bfg-pro-lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     position: absolute;
     top: 0;
     right: 0;
@@ -202,6 +205,10 @@ input.validation-error {
     font-size: 0.8em;
     line-height: 1.5;
     cursor: pointer;
+}
+
+.bfg-pro-lock svg {
+    opacity: 0.7;
 }
 
 .bfg-pro-lock:hover {

@@ -154,7 +154,12 @@
         getProLockHTML: function() {
             if (this.proActivated) return '';
 
-            return `<button type="button" class="bfg-pro-lock" data-bfg-dialog="bfg-pro-lock-dialog">${this.i18n.pro_only}</button>`;
+            const icon = '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">'
+                + '<circle cx="8" cy="8" r="6.5"></circle>'
+                + '<path d="M8 7.25v4M8 4.75v.5" stroke-linecap="round"></path>'
+                + '</svg>';
+
+            return `<button type="button" class="bfg-pro-lock" data-bfg-dialog="bfg-pro-lock-dialog">${this.i18n.pro_only}${icon}</button>`;
         },
 
         getCustomNameFieldHTML: function(service) {
