@@ -82,8 +82,19 @@
 					</div>
 
 					<div class="bfg-field">
-						<?php echo $fields->price_to_use->label(); ?>
-						<?php echo $fields->price_to_use; ?>
+						<h3 class="bfg-field-group-title"><t>Mybring prices</t></h3>
+						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->use_customer_number_to_get_prices; ?></div>
+						<div id="bfg-customer-number-fields">
+							<div class="bfg-field">
+								<?php echo $fields->mybring_customer_number->label(); ?>
+								<?php echo $fields->mybring_customer_number->field(); ?>
+								<?php echo $fields->mybring_customer_number->description(); ?>
+							</div>
+							<div class="bfg-field">
+								<?php echo $fields->price_to_use->label(); ?>
+								<?php echo $fields->price_to_use; ?>
+							</div>
+						</div>
 					</div>
 
 					<div class="bfg-field">
@@ -96,7 +107,6 @@
 					</div>
 
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->post_office; ?></div>
-					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->use_customer_number_to_get_prices; ?></div>
 					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->calculate_by_weight; ?></div>
 
 					<div class="bfg-field bfgu:mt-8">
@@ -179,3 +189,21 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	(function () {
+		'use strict';
+
+		// Show the customer number fields only while the customer number checkbox is on
+		const checkbox = document.querySelector('input[name="use_customer_number_to_get_prices"]');
+		const block = document.getElementById('bfg-customer-number-fields');
+		if (!checkbox || !block) {
+			return;
+		}
+		const update = function () {
+			block.style.display = checkbox.checked ? 'block' : 'none';
+		};
+		checkbox.addEventListener('change', update);
+		update();
+	})();
+</script>

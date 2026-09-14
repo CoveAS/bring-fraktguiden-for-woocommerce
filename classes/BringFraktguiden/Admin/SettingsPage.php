@@ -553,29 +553,19 @@ class SettingsPage
 	public static function process_settings($value, $old_value): array
 	{
 		// Only a settings form post carries the fields. Any other write to the option passes through.
-		if (!preg_match('/^bring_fraktguiden_(.*)$/', $_POST['option_page'] ?? '', $matches)) {
+		if (!preg_match('/^bring_fraktguiden_/', $_POST['option_page'] ?? '')) {
 			return is_array($value) ? $value : [];
 		}
-		$page = $matches[1];
 
 		$value = is_array($old_value) ? $old_value : [];
 
-		// Get the page settings
-		$admin_settings = Config::get('admin-settings');
-		if (!isset($admin_settings[$page]['fields'])) {
-			return $value;
-		}
-		$pageFieldKeys = array_keys($admin_settings[$page]['fields']);
-
+		// The page tells the handler which fields it rendered. A page may show a field of any section.
 		$rendered = array_map('sanitize_key', (array) ($_POST['bfg_rendered'] ?? []));
 
 		$settings = Settings::instance();
-		foreach ($pageFieldKeys as $key) {
-			if (!in_array($key, $rendered, true)) {
-				continue;
-			}
+		foreach ($rendered as $key) {
 			$setting = $settings->get($key);
-			if ('info' == $setting->type) {
+			if (!$setting || 'info' == $setting->type) {
 				continue;
 			}
 			// A new Setting cleans the posted value and keeps an empty number field empty.
