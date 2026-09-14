@@ -2,7 +2,7 @@
 
 namespace BringFraktguiden\Customs;
 
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Settings\Settings;
 use WC_Order;
 
 /**
@@ -26,8 +26,9 @@ class CustomsRoute
 	 */
 	public static function for_order(WC_Order $order, string $product): string
 	{
-		$from_postcode = (string) Fraktguiden_Helper::get_option('booking_address_postcode');
-		$from_country  = (string) Fraktguiden_Helper::get_option('booking_address_country');
+		$settings      = Settings::instance();
+		$from_postcode = (string) $settings->booking_address_postcode->value;
+		$from_country  = (string) $settings->booking_address_country->value;
 
 		if (ExportRule::requires_customs_data($from_country, $order->get_shipping_country(), $product)) {
 			return self::EXPORT;

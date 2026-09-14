@@ -11,6 +11,9 @@ $nordic_countries = Fraktguiden_Helper::get_nordic_countries();
 $base_country_code = explode(':', get_option('woocommerce_default_country', ''))[0];
 $base_country = $nordic_countries[$base_country_code] ?? __('Choose a country', 'bring-fraktguiden-for-woocommerce');
 $base_postcode = get_option('woocommerce_store_postcode', '');
+$base_street1 = get_option('woocommerce_store_address', '');
+$base_city = get_option('woocommerce_store_city', '');
+$base_store_name = get_bloginfo('name');
 
 $all_countries = WC()->countries?->get_countries() ?: [];
 // The order statuses a booking can set. 'none' leaves the order status alone.
@@ -354,12 +357,17 @@ return [
 				'title' => __('Store Name', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
 				'description' => __('Your business name as it appears on shipping labels.', 'bring-fraktguiden-for-woocommerce'),
-				'placeholder' => get_bloginfo('name'),
+				// A blank name falls back to the name of the site.
+				'placeholder' => $base_store_name,
+				'default' => $base_store_name,
 				'custom_attributes' => ['maxlength' => 35],
 			],
 			'booking_address_street1' => [
 				'title' => __('Street Address 1', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
+				// A blank street falls back to the street of the store address.
+				'placeholder' => $base_street1,
+				'default' => $base_street1,
 				'custom_attributes' => [
 					'maxlength' => 35,
 					'autocomplete' => 'address-line1',
@@ -376,11 +384,17 @@ return [
 			'booking_address_postcode' => [
 				'title' => __('Postcode', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
+				// A blank postcode falls back to the postcode of the store address.
+				'placeholder' => $base_postcode,
+				'default' => $base_postcode,
 				'custom_attributes' => ['autocomplete' => 'postal-code'],
 			],
 			'booking_address_city' => [
 				'title' => __('City', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
+				// A blank city falls back to the city of the store address.
+				'placeholder' => $base_city,
+				'default' => $base_city,
 				'custom_attributes' => ['autocomplete' => 'address-level2'],
 			],
 			'booking_address_country' => [

@@ -217,11 +217,13 @@ abstract class Bring_Consignment_Request {
 			'booking_address_reference',
 		];
 
-		// Load sender address data from options.
-		$result = [];
+		// Load sender address data from the settings. A blank box falls back to
+		// the store address, which the setting default holds.
+		$settings = Settings::instance();
+		$result   = [];
 
 		foreach ( $form_fields as $field ) {
-			$result[ $field ] = Fraktguiden_Helper::get_option( $field );
+			$result[ $field ] = $settings->{$field}->value;
 		}
 
 		return apply_filters('bring_fraktguiden_get_consignment_sender', $result, $wc_order);

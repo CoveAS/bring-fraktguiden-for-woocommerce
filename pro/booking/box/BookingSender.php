@@ -4,6 +4,7 @@ namespace BringFraktguidenPro\Booking\Box;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Customs\NatureOfCargo;
+use BringFraktguiden\Settings\Settings;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
@@ -125,8 +126,10 @@ class BookingSender
 	 */
 	private static function guard_settings(): void
 	{
+		$settings = Settings::instance();
+
 		foreach (self::REQUIRED_SETTINGS as $setting) {
-			if (Fraktguiden_Helper::get_option($setting)) {
+			if ($settings->{$setting}->value) {
 				continue;
 			}
 
