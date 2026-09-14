@@ -10,7 +10,8 @@
  */
 
 import { initCustomSelects } from './custom-select.js';
-import { pickHsCode, setHsCode, showHsCodeLabels } from './hs-code-picker.js';
+import { showHsCodeLabels } from './hs-code-picker.js';
+import './hs-code-panel.js';
 
 const SAVE_DELAY = 600;
 
@@ -224,94 +225,10 @@ function saveLater(box) {
 	saveTimer = window.setTimeout(() => saveDraft(box), SAVE_DELAY);
 }
 
-// The product id of the last marked row. A shift click marks from here.
-let hsAnchor = null;
-
-/** Mark a row of the HS code list, or the whole range down from the anchor. */
-function markRow(box, mark, extend) {
-	const marks = [...box.querySelectorAll('[data-bfg-hs-mark]')];
-	const from = marks.findIndex((row) => row.dataset.bfgHsMark === hsAnchor);
-	const to = marks.indexOf(mark);
-
-	if (extend && from !== -1) {
-		marks.slice(Math.min(from, to), Math.max(from, to) + 1).forEach((row) => {
-			row.checked = mark.checked;
-		});
-
-		// A shift click also selects the text between the two rows.
-		window.getSelection().removeAllRanges();
-	}
-
-	hsAnchor = mark.dataset.bfgHsMark;
-	syncToggle(box);
-}
-
-/** Show whether every product now has an HS code. */
-function syncHsStatus(box) {
-	const panel = box.querySelector('[data-bfg-hs-panel]');
-
-	if (!panel) {
-		return;
-	}
-
-	const missing = [...box.querySelectorAll('[data-hs-product]')]
-		.filter((field) => '' === field.value.trim()).length;
-	const count = panel.querySelector('[data-bfg-hs-count]');
-
-	panel.classList.toggle('bfg-customs-products--ok', 0 === missing);
-
-	if (count) {
-		count.textContent = missing
-			? count.dataset.missing.replace('%d', missing)
-			: count.dataset.done;
-	}
-}
-
-/** Tell the toggle button what it does next, and show the bulk code button. */
-function syncToggle(box) {
-	const button = box.querySelector('[data-bfg-hs-toggle]');
-	const bulk = box.querySelector('[data-bfg-hs-set]');
-
-	if (button) {
-		button.textContent = allMarked(box) ? button.dataset.deselect : button.dataset.select;
-	}
-
-	// The button writes into the marked rows, so it waits for the first mark.
-	if (bulk) {
-		bulk.hidden = !box.querySelector('[data-bfg-hs-mark]:checked');
-	}
-}
-
-/** Is every row of the HS code list marked? */
-function allMarked(box) {
-	const marks = [...box.querySelectorAll('[data-bfg-hs-mark]')];
-
-	return marks.length > 0 && marks.every((mark) => mark.checked);
-}
-
-/** Ask for one code, and write it into every marked row of the HS code list. */
-function setMarkedCodes(box) {
-	pickHsCode((code) => {
-		box.querySelectorAll('[data-bfg-hs-mark]:checked').forEach((mark) => {
-			const field = box.querySelector(`[data-hs-product="${mark.dataset.bfgHsMark}"]`);
-
-			// The picker writes through the button, so the button shows the
-			// code it now carries.
-			if (field) {
-				setHsCode(field.parentElement.querySelector('[data-bfg-hs-pick]'), code);
-			}
-		});
-	});
-}
-
 document.addEventListener('input', (event) => {
 	const box = boxOf(event.target);
 
 	if (box && event.target.matches('[data-field], [data-package-field], [data-hs-product]')) {
-		if (event.target.matches('[data-hs-product]')) {
-			syncHsStatus(box);
-		}
-
 		saveLater(box);
 	}
 });
@@ -344,35 +261,9 @@ document.addEventListener('click', (event) => {
 		return;
 	}
 
-	const mark = event.target.closest('[data-bfg-hs-mark]');
-
-	if (mark) {
-		markRow(box, mark, event.shiftKey);
-
-		return;
-	}
-
 	const button = event.target.closest('button');
 
 	if (!button) {
-		return;
-	}
-
-	if (button.hasAttribute('data-bfg-hs-toggle')) {
-		const checked = !allMarked(box);
-
-		box.querySelectorAll('[data-bfg-hs-mark]').forEach((mark) => {
-			mark.checked = checked;
-		});
-		hsAnchor = null;
-		syncToggle(box);
-
-		return;
-	}
-
-	if (button.hasAttribute('data-bfg-hs-set')) {
-		setMarkedCodes(box);
-
 		return;
 	}
 
