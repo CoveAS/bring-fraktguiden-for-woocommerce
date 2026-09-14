@@ -256,8 +256,9 @@ class Fraktguiden_License
 
 		update_option(self::STATE_OPTION, $state, false);
 
-		// A shop that never typed a key learns its key from the domain check.
-		if (!self::get_key() && !empty($license['key'])) {
+		// The domain owns the license, so the key of the answer is the right one.
+		// It replaces a key the shop typed wrong, and fills in a missing key.
+		if (!empty($license['key'])) {
 			Fraktguiden_Helper::update_option('license_key', self::normalise_key($license['key']));
 		}
 
