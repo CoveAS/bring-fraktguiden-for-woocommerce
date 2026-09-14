@@ -10,7 +10,9 @@ namespace BringFraktguidenPro\Booking\Views;
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Booking\Bring_Booking;
+use BringFraktguidenPro\Booking\Bring_Booking_Customer;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
+use Exception;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -28,6 +30,8 @@ class Bring_Booking_Orders_View {
 	 */
 	public static function init(): void
 	{
+		add_filter( 'script_loader_tag', [ __CLASS__, 'add_type_module' ], 10, 2 );
+
 		// Legacy
 		add_action( 'admin_footer-edit.php', [ __CLASS__, 'add_bulk_admin_footer' ] );
 		add_filter( 'manage_edit-shop_order_columns', [ __CLASS__, 'booking_status_column' ], 15 );
@@ -128,21 +132,55 @@ class Bring_Booking_Orders_View {
 	 * Add bulk admin footer
 	 */
 	public static function add_bulk_admin_footer() {
-		$screen = get_current_screen();
-		if ( 'edit-shop_order' !== $screen->id && 'woocommerce_page_wc-orders' !== $screen->id ) {
+		if ( ! self::is_orders_screen() ) {
 			return;
 		}
-		require_once dirname( __DIR__ ) . '/templates/modal-templates.php';
+
+		$customers      = [];
+		$customer_error = '';
+
+		try {
+			$customers = Bring_Booking_Customer::get_customer_numbers_formatted();
+		} catch ( Exception $exception ) {
+			$customer_error = $exception->getMessage();
+		}
+
+		$customer_number = (string) Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+		$shipping_date   = Bring_Booking::create_shipping_date();
+		$book_label      = Bring_Booking_Common_View::booking_label( true );
+
+		require_once dirname( __DIR__, 3 ) . '/build/templates/admin/booking/bulk-modal.php';
+	}
+
+	/**
+	 * Tell whether the current screen lists orders.
+	 */
+	private static function is_orders_screen(): bool {
+		$screen = get_current_screen();
+
+		return 'edit-shop_order' === $screen->id || 'woocommerce_page_wc-orders' === $screen->id;
 	}
 
 	/**
 	 * Load admin javascript
 	 */
 	public static function admin_load_javascript() {
-		$screen = get_current_screen();
-		// Only for order edit screen.
-		if ( 'edit-shop_order' !== $screen->id && 'woocommerce_page_wc-orders' !== $screen->id ) {
+		if ( ! self::is_orders_screen() ) {
 			return;
+		}
+
+		$plugin_dir = dirname( __DIR__, 3 );
+
+		// The bulk booking dialogs use the same shell and the same select as the
+		// admin pages, so the orders list loads those two modules too.
+		foreach ( [ 'dialog', 'custom-select' ] as $module ) {
+			wp_enqueue_script(
+				'bfg-' . $module,
+				plugins_url( basename( $plugin_dir ) . '/build/js/' . $module . '.js' ),
+				[],
+				Bring_Fraktguiden::VERSION,
+				true
+			);
 		}
 
 		wp_register_script(
@@ -163,6 +201,20 @@ class Bring_Booking_Orders_View {
 		);
 
 		wp_enqueue_script( 'fraktguiden-booking-admin' );
+	}
+
+	/**
+	 * Mark the built modules as ES modules.
+	 *
+	 * WordPress 5.6 is the lowest supported version and has no
+	 * wp_enqueue_script_module().
+	 */
+	public static function add_type_module( string $tag, string $handle ): string {
+		if ( ! in_array( $handle, [ 'bfg-dialog', 'bfg-custom-select' ], true ) ) {
+			return $tag;
+		}
+
+		return str_replace( '<script ', '<script type="module" ', $tag );
 	}
 
 	/**

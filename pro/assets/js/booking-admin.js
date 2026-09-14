@@ -1,28 +1,21 @@
-
 jQuery(function ($) {
-	var modal = $( {} );
 	var form = $( 'form#posts-filter, #wc-orders-filter' );
 
 	if ( ! form.length ) {
 		return;
 	}
 
+	var bookDialog = document.getElementById( 'bfg-bulk-book' );
+	var errorDialog = document.getElementById( 'bfg-bulk-errors' );
+
 	const handleBulkBookResponse = function (data) {
 		form.unblock();
 		if ( ! data.bring_column ) {
 			return;
 		}
-		console.log(data)
 		if ( data.print_url ) {
 			window.open( data.print_url, '_blank' ).focus();
 		}
-		var error_messages = [];
-		$.each( data.report, function( id, record ) {
-			if ( record.status === 'ok' ) {
-				return;
-			}
-			error_messages.push( record.message );
-		} );
 		$.each( data.bring_column, function( id, column_item ) {
 			var elem = $( '#post-' + id +',#order-' + id );
 			if ( ! elem.length ) {
@@ -62,11 +55,9 @@ jQuery(function ($) {
 				)
 			);
 		} );
-		if ( error_list.children().length ) {
-			modal.WCBackboneModal( {
-				template: 'bring-modal-bulk-errors'
-			} );
-			$( '#bring-error-modal-content' ).html( error_list );
+		if ( error_list.children().length && errorDialog ) {
+			$( '#bfg-bulk-errors-list' ).empty().append( error_list.children() );
+			errorDialog.showModal();
 		}
 	};
 	const buttons = $('[data-action="bring-book-orders"]');
@@ -89,18 +80,6 @@ jQuery(function ($) {
 			handleClick(e, $(this));
 		}
 	});
-	//@todo: does this need to be global?
-
-	// Add input for form filter submit from modal.
-	var customer_number = $( '<input type="hidden" name="_bring-customer-number" value="">' );
-	var shipping_date = $( '<input type="hidden" name="_bring-shipping-date" value="">' );
-	var shipping_date_hour = $( '<input type="hidden" name="_bring-shipping-date-hour" value="">' );
-	var shipping_date_minutes = $( '<input type="hidden" name="_bring-shipping-date-minutes" value="">' );
-
-	form.append( customer_number );
-	form.append( shipping_date );
-	form.append( shipping_date_hour );
-	form.append( shipping_date_minutes );
 
 	function get_checked_order_ids() {
 		var result = [];
@@ -110,43 +89,61 @@ jQuery(function ($) {
 		return result;
 	}
 
-	let busy = false;
-
 	function show_bulk_book_dialog() {
-		if (busy) {
+		if ( ! bookDialog ) {
 			return;
 		}
-		busy = true;
-		// Open dialog.
-		modal.WCBackboneModal( {
-			template: 'bring-modal-bulk'
-		} );
 
-		// Initialize data picker.
-		$( "[name=_bring-modal-shipping-date]" ).datepicker( {
-			minDate: 0,
-			dateFormat: 'yy-mm-dd'
-		} );
-
-		// Disable dialog submit button if no orders are checked.
 		var order_ids = get_checked_order_ids();
-		if ( order_ids.length == 0 ) {
-			$( '#btn-ok' ).attr( 'disabled', 'true' );
-		}
-		else {
-			$( '#btn-ok' ).removeAttr( 'disabled' );
-		}
 
-		// Print order ids in dialog.
-		$( '.bring-modal-selected-orders-list' ).text( order_ids.join( ' - ' ) );
-		setTimeout(function() { busy= false; }, 500);
+		$( '#bfg-bulk-book-orders' ).text( order_ids.join( ' - ' ) );
+		$( '#bfg-bulk-book-send' ).prop( 'disabled', order_ids.length === 0 );
+
+		bookDialog.showModal();
 	}
 
-	var display_errors = function() {
-		modal.WCBackboneModal( {
-			template: 'bring-modal-bulk-errors'
-		} );
+	function send_bulk_booking() {
+		var order_ids = get_checked_order_ids();
+		if ( ! order_ids.length ) {
+			return;
+		}
+
+		// The form asks for one time, and the booking reads the hour and the
+		// minute apart.
+		var time = ( $( '#bfg-bulk-book-time' ).val() || '' ).split( ':' );
+
+		bookDialog.close();
+
+		form.block(
+			{
+				message: '',
+				css: {
+					border: 'none'
+				},
+				overlayCSS: {
+					backgroundColor: '#f9f9f9'
+				},
+			}
+		);
+
+		$.post(
+			_booking_data.ajaxurl,
+			{
+				action: 'bring_bulk_book',
+				json: true,
+				'id[]': order_ids,
+				// The custom select widget moves the id to its trigger button,
+				// so the native select answers to its name.
+				'_bring-customer-number': $( '#bfg-bulk-book select[name="_bring-customer-number"]' ).val(),
+				'_bring-shipping-date': $( '#bfg-bulk-book-date' ).val(),
+				'_bring-shipping-date-hour': time[0] || '',
+				'_bring-shipping-date-minutes': time[1] || '',
+			},
+			handleBulkBookResponse
+		);
 	}
+
+	$( '#bfg-bulk-book-send' ).on( 'click', send_bulk_booking );
 
 	// Run bulk booking or printing actions when selected and clicked
 	$( '#doaction, #doaction2' ).on( 'click', function ( evt ) {
@@ -166,45 +163,5 @@ jQuery(function ($) {
 			window.open(url);
 			evt.preventDefault();
 		}
-	} );
-
-	$( document.body ).on( 'wc_backbone_modal_response', function ( e ) {
-		customer_number.val( $( '[name=_bring-modal-customer-selector]:checked' ).val() );
-		shipping_date.val( $( '[name=_bring-modal-shipping-date]' ).val() );
-		shipping_date_hour.val( $( '[name=_bring-modal-shipping-date-hour]' ).val() );
-		shipping_date_minutes.val( $( '[name=_bring-modal-shipping-date-minutes]' ).val() );
-
-		form.block(
-			{
-				message: '',
-				css: {
-					border: 'none'
-				},
-				overlayCSS: {
-					backgroundColor: '#f9f9f9'
-				},
-			}
-		);
-
-		var url = _booking_data.ajaxurl;
-		var dataArray = form.serializeArray();
-		var formDataObj = {};
-		// Convert array to object
-		$.each(dataArray, function() {
-			if (formDataObj[this.name]) {
-				// If the property already exists, (for checkboxes or multiple selects), add it as an array
-				if (!formDataObj[this.name].push) {
-					formDataObj[this.name] = [formDataObj[this.name]];
-				}
-				formDataObj[this.name].push(this.value || '');
-			} else {
-				formDataObj[this.name] = this.value || '';
-			}
-		});
-		formDataObj.json = true;
-		$.post( url,
-			formDataObj,
-			handleBulkBookResponse
-		 );
 	} );
 });

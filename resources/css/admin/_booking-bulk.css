@@ -2,42 +2,27 @@
    Booking styles of the orders list and the bulk booking modal.
    ========================================================================== */
 
-.bring-customer-numbers {
-    max-width: 35rem;
+/* The order numbers the shop worker picked for the bulk booking. */
+.bfg-bulk-book__orders {
+    margin: 0;
+    color: var(--bfg-text-muted);
 }
 
-.bring-customer-number {
-    float: right;
-    color: #CCC;
+.bfg-bulk-book__errors {
+    margin: 0;
+    list-style: disc;
+    padding-left: 1.25rem;
 }
 
-[type=radio]:checked+.bring-customer-name+.bring-customer-number {
-    color: black;
-}
-
-.bring-customer-label {
-    position: relative;
-}
-
-.bring-form-field {
-    margin: 8px 0 0;
-}
-
-.bring-form-field label {
-    display: block;
-    padding: 0 0 4px;
-    color: #777;
-}
-
-.bring-form-field .error {
-    border-left: 8px solid red;
-    padding-left: 8px;
-    font-weight: bold;
+.bfg-bulk-book__errors .error-post-message {
+    color: var(--bfg-text-muted);
 }
 
 .bring-flex-box {
     display: flex;
     flex-flow: row;
+    align-items: center;
+    gap: 6px;
 }
 
 .bring-booking-status-icon {
@@ -45,11 +30,17 @@
     border-radius: 20rem;
     color: #fff;
     display: inline-block;
+    flex: none;
+    line-height: 1;
 }
 
 .bring-booking-status-icon::before {
     display: inline-block;
     position: relative;
+}
+
+.bring-booking-status-icon.dashicons-yes {
+    background-color: #00a32a;
 }
 
 .bring-booking-status-icon.dashicons-yes::before {
