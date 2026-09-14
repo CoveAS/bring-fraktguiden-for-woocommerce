@@ -616,7 +616,26 @@ class SettingsPage
 			return $value;
 		}
 
-		Fraktguiden_License::get_instance()->check_license($key);
+		// The answer of the server writes the key back into this same option,
+		// which fires this filter again. The flag stops the loop.
+		static $checking = false;
+
+		if ($checking) {
+			return $value;
+		}
+
+		$checking = true;
+
+		try {
+			Fraktguiden_License::get_instance()->check_license($key);
+		} finally {
+			$checking = false;
+		}
+
+		// The server names the key that the domain owns. It replaces a key the
+		// owner typed wrong. This filter returns the value that gets saved, so
+		// the corrected key has to travel in it.
+		$value['license_key'] = Fraktguiden_License::get_key();
 
 		return $value;
 	}
