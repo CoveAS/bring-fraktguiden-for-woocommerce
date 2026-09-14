@@ -298,6 +298,11 @@ Never let a key alone grant or move anything. Only the owner of the account that
 pays for the license can move it to another domain. The Pro page links to the
 move page of the shop site, and the server sends that link in the check answer.
 
+### The local license server
+
+The license server is the `bfg` project. It usually sits in `~/Workspace/bfg`
+and answers on https://bfg.test/ .
+
 ## Database
 
 Run `mysql` with no parameters. The file `~/.my.cnf` holds the user, the socket
