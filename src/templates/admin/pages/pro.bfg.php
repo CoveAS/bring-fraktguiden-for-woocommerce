@@ -21,7 +21,6 @@
  * @var bool   $bfg_cards_expired
  * @var string $bfg_booking_url
  * @var string $bfg_shipping_url
- * @var string $bfg_fallback_url
  * @var string $bfg_features_subtitle
  * @var string $license_state
  * @var string $license_domain
@@ -395,24 +394,6 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 						<li><t>Set order value threshold</t></li>
 						<li><t>Per-service configuration</t></li>
 						<li><t>Combine with fixed pricing</t></li>
-					</bfg-feature-card.benefits>
-				</bfg-feature-card>
-
-				<!-- Fallback Pricing -->
-				<bfg-feature-card :href="$bfg_fallback_url" :active="$bfg_cards_active" :expired="$bfg_cards_expired">
-					<bfg-feature-card.icon>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-							<polyline points="2 17 12 22 22 17"></polyline>
-							<polyline points="2 12 12 17 22 12"></polyline>
-						</svg>
-					</bfg-feature-card.icon>
-					<strong class="bfg-feature-card__title"><t>Fallback Pricing</t></strong>
-					<span class="bfg-feature-card__desc"><t>Keep checkout working with fixed fallback rates when the Bring API is unavailable</t></span>
-					<bfg-feature-card.benefits>
-						<li><t>Prevent checkout errors</t></li>
-						<li><t>Fallback rate per service</t></li>
-						<li><t>Always show shipping options</t></li>
 					</bfg-feature-card.benefits>
 				</bfg-feature-card>
 
