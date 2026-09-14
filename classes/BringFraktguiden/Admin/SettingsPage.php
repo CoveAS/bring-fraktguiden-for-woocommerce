@@ -268,7 +268,6 @@ class SettingsPage
 		$bfg_booking_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
 		$bfg_shipping_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden')) : '';
 		$bfg_fallback_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')) : '';
-		$bfg_settings_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')) : '';
 
 		if ($license_active) {
 			$bfg_features_subtitle = __('Click to configure each feature', 'bring-fraktguiden-for-woocommerce');
