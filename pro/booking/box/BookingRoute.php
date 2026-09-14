@@ -110,6 +110,12 @@ class BookingRoute
 
 	private static function book(WC_Order $order, BookingForm $form, string $token): WP_REST_Response
 	{
+		$block = BookingBlock::find();
+
+		if ($block) {
+			return self::answer($order, force_form: false, error: $block->message);
+		}
+
 		if (!BookingToken::spend($order, $token)) {
 			return self::answer(
 				$order,

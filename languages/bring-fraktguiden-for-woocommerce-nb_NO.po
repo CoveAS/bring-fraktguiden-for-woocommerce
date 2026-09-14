@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-14T15:55:46+00:00\n"
+"POT-Creation-Date: 2026-09-14T19:59:31+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -198,7 +198,7 @@ msgstr "Bring avviste denne bookingen"
 
 #: build/templates/admin/booking/history.php:23
 #: pro/booking/box/BookingSender.php:112
-#: pro/booking/class-bring-booking.php:252
+#: pro/booking/class-bring-booking.php:255
 msgid "Booked with Bring"
 msgstr "Reservert hos Bring"
 
@@ -3389,6 +3389,22 @@ msgstr "Slett"
 msgid "Add"
 msgstr "Legg til"
 
+#: pro/booking/box/BookingBlock.php:29
+msgid "Booking is a Pro feature, and Pro is off on this shop."
+msgstr "Booking er en Pro-funksjon, og Pro er av i denne butikken."
+
+#: pro/booking/box/BookingBlock.php:30
+msgid "Turn on Pro"
+msgstr "Slå på Pro"
+
+#: pro/booking/box/BookingBlock.php:37
+msgid "The Mybring account is not connected, so Bring cannot take a booking."
+msgstr "Mybring-kontoen er ikke koblet til, så Bring kan ikke ta imot en booking."
+
+#: pro/booking/box/BookingBlock.php:38
+msgid "Connect the account"
+msgstr "Koble til kontoen"
+
 #: pro/booking/box/BookingBox.php:68
 msgid "Bring Booking"
 msgstr "Bring Booking"
@@ -3397,7 +3413,7 @@ msgstr "Bring Booking"
 msgid "Order not found."
 msgstr "Fant ikke ordren."
 
-#: pro/booking/box/BookingRoute.php:117
+#: pro/booking/box/BookingRoute.php:123
 msgid "This booking was already sent. Reload the order to book it again."
 msgstr ""
 "Denne bookingen er allerede sendt. Last ordren på nytt for å booke den igjen."
@@ -3456,24 +3472,24 @@ msgstr ""
 "Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
 "bring_booking_labels’."
 
-#: pro/booking/class-bring-booking.php:105
+#: pro/booking/class-bring-booking.php:108
 msgid "Changing status because the label was downloaded."
 msgstr "Endrer status fordi etiketten ble lastet ned."
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:120
-#: pro/booking/class-bring-booking.php:126
-#: pro/booking/class-bring-booking.php:145
+#: pro/booking/class-bring-booking.php:123
+#: pro/booking/class-bring-booking.php:129
+#: pro/booking/class-bring-booking.php:148
 msgid "Awaiting Shipment"
 msgstr "Avventer frakt"
 
-#: pro/booking/class-bring-booking.php:231
+#: pro/booking/class-bring-booking.php:234
 msgid "Booking errors. See the Bring Booking box for details."
 msgstr ""
 "Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
 "detaljer."
 
-#: pro/booking/class-bring-booking.php:327
+#: pro/booking/class-bring-booking.php:330
 msgid "Error: Could not book the order!"
 msgstr "Feil: Kunne ikke booke ordren!"
 

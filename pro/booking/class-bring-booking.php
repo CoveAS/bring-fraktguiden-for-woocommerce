@@ -47,12 +47,15 @@ class Bring_Booking {
 	 * @return void
 	 */
 	public static function init() {
+		// The box shows even without Mybring keys, because it then names the
+		// reason booking is blocked and links to the page that fixes it.
+		BookingBox::init();
+
 		if ( ! self::is_valid_for_use() ) {
 			return;
 		}
 
 		Bring_Booking_Orders_View::init();
-		BookingBox::init();
 
 		// Update status on printed orders
 		add_action( 'init', __CLASS__ . '::update_printed_orders' );

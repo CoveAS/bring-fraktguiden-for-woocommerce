@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-14T15:55:46+00:00\n"
+"POT-Creation-Date: 2026-09-14T19:59:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: build/templates/admin/booking/history.php:23
 #: pro/booking/box/BookingSender.php:112
-#: pro/booking/class-bring-booking.php:252
+#: pro/booking/class-bring-booking.php:255
 msgid "Booked with Bring"
 msgstr ""
 
@@ -3111,6 +3111,22 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+#: pro/booking/box/BookingBlock.php:29
+msgid "Booking is a Pro feature, and Pro is off on this shop."
+msgstr ""
+
+#: pro/booking/box/BookingBlock.php:30
+msgid "Turn on Pro"
+msgstr ""
+
+#: pro/booking/box/BookingBlock.php:37
+msgid "The Mybring account is not connected, so Bring cannot take a booking."
+msgstr ""
+
+#: pro/booking/box/BookingBlock.php:38
+msgid "Connect the account"
+msgstr ""
+
 #: pro/booking/box/BookingBox.php:68
 msgid "Bring Booking"
 msgstr ""
@@ -3119,7 +3135,7 @@ msgstr ""
 msgid "Order not found."
 msgstr ""
 
-#: pro/booking/box/BookingRoute.php:117
+#: pro/booking/box/BookingRoute.php:123
 msgid "This booking was already sent. Reload the order to book it again."
 msgstr ""
 
@@ -3159,22 +3175,22 @@ msgstr ""
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:105
+#: pro/booking/class-bring-booking.php:108
 msgid "Changing status because the label was downloaded."
 msgstr ""
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:120
-#: pro/booking/class-bring-booking.php:126
-#: pro/booking/class-bring-booking.php:145
+#: pro/booking/class-bring-booking.php:123
+#: pro/booking/class-bring-booking.php:129
+#: pro/booking/class-bring-booking.php:148
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:231
+#: pro/booking/class-bring-booking.php:234
 msgid "Booking errors. See the Bring Booking box for details."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:327
+#: pro/booking/class-bring-booking.php:330
 msgid "Error: Could not book the order!"
 msgstr ""
 

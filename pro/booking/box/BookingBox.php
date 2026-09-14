@@ -109,6 +109,15 @@ class BookingBox
 	 */
 	public static function html(WC_Order $order, bool $force_form = false, string $error = ''): string
 	{
+		$block = BookingBlock::find();
+
+		if ($block) {
+			ob_start();
+			require dirname(__DIR__, 3) . '/build/templates/admin/booking/blocked.php';
+
+			return (string) ob_get_clean();
+		}
+
 		$adapter        = new Bring_WC_Order_Adapter($order);
 		$shipping_items = $adapter->get_fraktguiden_shipping_items();
 		$shipping_item  = reset($shipping_items) ?: null;
