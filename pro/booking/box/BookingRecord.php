@@ -3,6 +3,7 @@
 namespace BringFraktguidenPro\Booking\Box;
 
 use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
+use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
 
 /**
  * One attempt to book an order with Bring.
@@ -47,6 +48,20 @@ class BookingRecord
 	public function consignments(): array
 	{
 		return Bring_Consignment::create_from_response($this->response, $this->order_id);
+	}
+
+	/**
+	 * Return the address that prints the labels of this booking.
+	 */
+	public function labels_url(): string
+	{
+		return Bring_Booking_Labels::create_download_url(
+			(string) $this->order_id,
+			array_map(
+				fn(Bring_Consignment $consignment) => $consignment->get_consignment_number(),
+				$this->consignments()
+			)
+		);
 	}
 
 	/**

@@ -36,8 +36,14 @@ Every attempt appends to `_bring_booking_responses`, oldest first. A failed
 attempt is recorded too, so the reason survives a reload.
 
 The newest attempt also writes `_bring_booking_response`, the key the plugin
-used before it kept a history. The label download, the orders list column and
-the debug screen read that key and need no change.
+used before it kept a history. The orders list column and the debug screen read
+that key.
+
+Every booking of the list offers its own Print button, because the plugin
+cancels nothing at Bring and an earlier consignment stays live. The button adds
+a `consignments` parameter to the label screen, which then searches the whole
+history for those numbers. The screen without that parameter still prints the
+newest booking only.
 
 An order booked before the history existed has only the old key. The box reads
 it as a history of one.

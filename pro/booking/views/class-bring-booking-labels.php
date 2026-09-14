@@ -8,6 +8,7 @@
 namespace BringFraktguidenPro\Booking\Views;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguidenPro\Booking\Box\BookingHistory;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Labels\Bring_Pdf_Collection;
 use BringFraktguidenPro\Booking\Labels\Bring_Zpl_Collection;
@@ -24,13 +25,24 @@ class Bring_Booking_Labels {
 
 	/**
 	 * Create download URL
+	 *
+	 * An order can hold more than one booking. Name the consignments to print
+	 * the labels of one booking. Name none to print the newest booking.
+	 *
+	 * @param string[] $consignment_numbers Consignment numbers.
 	 */
-	public static function create_download_url( array|string $order_ids ):string {
+	public static function create_download_url( array|string $order_ids, array $consignment_numbers = [] ):string {
 		if ( is_array( $order_ids ) ) {
 			$order_ids = implode( ',', $order_ids );
 		}
 
-		return admin_url( 'admin.php?page=bring_download&order_ids=' . $order_ids );
+		$url = admin_url( 'admin.php?page=bring_download&order_ids=' . $order_ids );
+
+		if ( $consignment_numbers ) {
+			$url .= '&consignments=' . rawurlencode( implode( ',', $consignment_numbers ) );
+		}
+
+		return $url;
 	}
 
 	/**
@@ -110,6 +122,8 @@ class Bring_Booking_Labels {
 
 		$order_ids = filter_input( INPUT_GET, 'order_ids' );
 
+		$consignment_numbers = array_filter( explode( ',', (string) filter_input( INPUT_GET, 'consignments' ) ) );
+
 		$printed_orders = [];
 
 		if ( empty( $order_ids ) ) {
@@ -140,7 +154,9 @@ class Bring_Booking_Labels {
 			$adapter = new Bring_WC_Order_Adapter( $order );
 
 			// Get the booking consignments from the adapter.
-			$consignments = $adapter->get_booking_consignments();
+			$consignments = $consignment_numbers
+				? self::history_consignments( $order, $consignment_numbers )
+				: $adapter->get_booking_consignments();
 
 			foreach ( $consignments as $consignment ) {
 				// Get the label file.
@@ -181,6 +197,31 @@ class Bring_Booking_Labels {
 			$merge_file = $zpl_collection->merge();
 			static::render_file_content( $merge_file );
 		}
+	}
+
+	/**
+	 * Return the named consignments out of every booking of the order.
+	 *
+	 * The newest booking is not the only one that holds a label. An order
+	 * booked twice keeps both consignments at Bring.
+	 *
+	 * @param \WC_Order $order   Order.
+	 * @param string[]  $numbers Consignment numbers.
+	 *
+	 * @return array
+	 */
+	private static function history_consignments( $order, array $numbers ): array {
+		$found = [];
+
+		foreach ( BookingHistory::all( $order ) as $record ) {
+			foreach ( $record->consignments() as $consignment ) {
+				if ( in_array( $consignment->get_consignment_number(), $numbers, true ) ) {
+					$found[] = $consignment;
+				}
+			}
+		}
+
+		return $found;
 	}
 
 	/**

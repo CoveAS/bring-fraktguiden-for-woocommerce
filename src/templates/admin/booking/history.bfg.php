@@ -6,7 +6,6 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
  * Every booking attempt of the order, newest first.
  *
  * @var BookingRecord[] $records
- * @var string          $labels_url
  */
 ?>
 
@@ -19,10 +18,8 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 				<strong>
 					<?php if ($record->failed()) : ?>
 						<t>Bring refused this booking</t>
-					<?php elseif (0 === $bfg_index) : ?>
-						<t>Booked with Bring</t>
 					<?php else : ?>
-						<t>Replaced by a later booking</t>
+						<t>Booked with Bring</t>
 					<?php endif; ?>
 				</strong>
 				<?php if ($record->booked_at_local()) : ?>
@@ -52,14 +49,13 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 				</ul>
 			<?php endif; ?>
 
-			<?php if (0 === $bfg_index && !$record->failed()) : ?>
-				<?php // ponytail: a label downloads through the order, so only the newest booking offers one. Per booking labels need the download screen to take a consignment number. ?>
-				<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="<?php echo esc_url($labels_url); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
+			<?php if (!$record->failed()) : ?>
+				<a class="bfg-btn <?php echo 0 === $bfg_index ? 'bfg-btn--primary' : 'bfg-btn--secondary'; ?> bfg-btn--sm" href="<?php echo esc_url($record->labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
 			<?php endif; ?>
 		</div>
 	<?php endforeach; ?>
 
 	<div class="bfg-booking-history__actions">
-		<button type="button" class="bfg-btn bfg-btn--primary" data-bfg-again><t>Book again</t></button>
+		<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-again><t>Book again</t></button>
 	</div>
 </div>

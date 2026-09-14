@@ -13,7 +13,6 @@ use BringFraktguiden\Services\CrossBorderRule;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
-use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
 use WC_Order;
@@ -163,7 +162,6 @@ class BookingBox
 		$wants_date    = (bool) ($service?->service_data['delivery_date'] ?? false);
 
 		$token      = $showing_form ? BookingToken::current($order) : '';
-		$labels_url = Bring_Booking_Labels::create_download_url($order->get_id());
 		$test_mode  = Bring_Booking::is_test_mode();
 
 		$rest_url = rest_url(BookingRoute::ROUTE_NAMESPACE . '/orders/' . $order->get_id() . '/booking');
