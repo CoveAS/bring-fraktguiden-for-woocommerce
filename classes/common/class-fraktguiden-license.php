@@ -35,48 +35,30 @@ class Fraktguiden_License
 	}
 
 	/**
-	 * Curl request
+	 * Ask the license server a question.
 	 *
 	 * @param array $data GET parameters.
 	 *
-	 * @return boolean
+	 * @return array|false The answer, or false when the server does not answer.
 	 */
-	public function curl_request($data)
+	public function request($data)
 	{
-		$query_string = http_build_query($data);
-
-		// Get cURL resource.
-		$handle = curl_init();
-
 		$base = defined('BRING_LICENSE_URL') ? BRING_LICENSE_URL : 'https://bringfraktguiden.no/license-check.php';
-		$url  = $base.'?'.$query_string;
+		$url  = $base.'?'.http_build_query($data);
 
-		// Set some options - we are passing in a useragent too here.
-		curl_setopt_array(
-			$handle,
+		$response = wp_remote_get(
+			$url,
 			[
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_URL            => $url,
-				CURLOPT_USERAGENT      => 'Bring plugin @ '.get_site_url(),
+				'timeout'    => 5,
+				'user-agent' => 'Bring plugin @ '.get_site_url(),
 			]
 		);
 
-		// Send the request & save response to $resp.
-		$content = curl_exec($handle);
-
-		// Get the HTTP code.
-		$code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-		// Close request to clear up some resources.
-		curl_close($handle);
-
-		// handle error; error output.
-		if (200 !== $code) {
+		if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
 			return false;
 		}
 
-		$data = json_decode($content, true);
+		$data = json_decode(wp_remote_retrieve_body($response), true);
 
 		if (empty($data)) {
 			return false;
@@ -160,7 +142,7 @@ class Fraktguiden_License
 		$key = null === $key ? self::get_key() : self::normalise_key($key);
 
 		$this->store_answer(
-			$this->curl_request($this->request_data($key ? 'check_key' : 'check_license', $key)),
+			$this->request($this->request_data($key ? 'check_key' : 'check_license', $key)),
 			$key ? 'key' : 'domain'
 		);
 	}
@@ -280,7 +262,7 @@ class Fraktguiden_License
 	 */
 	public function ping()
 	{
-		$this->curl_request(
+		$this->request(
 			[
 				'action'  => 'ping',
 				'domain'  => $_SERVER['HTTP_HOST'] ?? 'unknown',
