@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const questions = steps.filter((step) => step !== result);
 
 	const answersOf = (step) =>
-		[...step.querySelectorAll('input[type="checkbox"]:checked')].map((input) => input.value);
+		[...step.querySelectorAll('input:checked')].map((input) => input.value);
 
 	const update = () => {
 		const answers = {};

@@ -194,7 +194,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     cursor: pointer;
 }
 
-.bfg-section__checkbox input[type="checkbox"] {
+.bfg-section__checkbox input {
     margin: 0;
 }
 

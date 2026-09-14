@@ -177,7 +177,7 @@
 					</div>
 					<div class="bfg-section__checkbox">
 						<label>
-							<input type="checkbox" name="rfid[]" value="yes">
+							<input type="radio" name="rfid" value="yes">
 							<span>
 								<t>Yes, my printer can print RFID labels</t>
 							</span>
@@ -185,7 +185,7 @@
 					</div>
 					<div class="bfg-section__checkbox">
 						<label>
-							<input type="checkbox" name="rfid[]" value="no">
+							<input type="radio" name="rfid" value="no">
 							<span>
 								<t>No, I have a regular label printer</t>
 							</span>
