@@ -266,7 +266,7 @@ class SettingsPage
 		$bfg_cards_active  = $license_active;
 		$bfg_cards_expired = $is_expired;
 		$bfg_booking_url   = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')) : '';
-		$bfg_shipping_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping')) : '';
+		$bfg_shipping_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=wc-settings&tab=shipping&section=bring_fraktguiden')) : '';
 		$bfg_fallback_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_fallback')) : '';
 		$bfg_settings_url  = $bfg_cards_active ? esc_url(admin_url('admin.php?page=bring_fraktguiden_settings')) : '';
 
