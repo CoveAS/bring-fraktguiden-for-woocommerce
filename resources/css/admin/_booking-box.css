@@ -328,3 +328,15 @@
     margin-bottom: 4px;
     font-weight: 600;
 }
+
+/* The filter of the HS code table hides every row that already has a code. */
+.bfg-customs-products__filter {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--bfg-text-secondary);
+}
+
+.bfg-customs-products__row--filtered {
+    display: none;
+}

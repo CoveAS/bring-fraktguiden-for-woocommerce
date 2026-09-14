@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-14T21:30:14+00:00\n"
+"POT-Creation-Date: 2026-09-14T21:50:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -51,21 +51,21 @@ msgstr ""
 msgid "Working"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:14
+#: build/templates/admin/booking/bulk-modal.php:16
 #: build/templates/admin/pages/pro-settings.php:11
 #: src/templates/admin/pages/pro-settings.bfg.php:11
 msgid "Mybring Booking"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:15
-#: build/templates/admin/booking/bulk-modal.php:65
-#: build/templates/admin/booking/bulk-modal.php:71
+#: build/templates/admin/booking/bulk-modal.php:17
+#: build/templates/admin/booking/bulk-modal.php:69
+#: build/templates/admin/booking/bulk-modal.php:75
 #: build/templates/admin/pages/home.php:166
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
-#: src/templates/admin/booking/bulk-modal.bfg.php:15
-#: src/templates/admin/booking/bulk-modal.bfg.php:60
+#: src/templates/admin/booking/bulk-modal.bfg.php:17
+#: src/templates/admin/booking/bulk-modal.bfg.php:68
 #: src/templates/admin/pages/home.bfg.php:148
 #: src/templates/admin/pages/pro.bfg.php:147
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
@@ -73,26 +73,26 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:27
+#: build/templates/admin/booking/bulk-modal.php:29
 msgid "This books only the orders that hold no booking yet."
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:30
+#: build/templates/admin/booking/bulk-modal.php:32
 msgid "Selected orders"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:35
+#: build/templates/admin/booking/bulk-modal.php:39
 #: build/templates/admin/booking/form.php:45
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:48
+#: build/templates/admin/booking/bulk-modal.php:52
 #: build/templates/admin/booking/form.php:77
 msgid "Shipping date"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:64
+#: build/templates/admin/booking/bulk-modal.php:68
 msgid "Mybring Booking errors"
 msgstr ""
 
@@ -329,7 +329,7 @@ msgstr ""
 #: build/templates/admin/pages/booking.php:14
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
-#: pro/booking/views/class-bring-booking-orders-view.php:74
+#: pro/booking/views/class-bring-booking-orders-view.php:76
 msgid "Booking"
 msgstr ""
 
@@ -1893,7 +1893,7 @@ msgstr ""
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:207
+#: classes/class-bring-fraktguiden.php:209
 msgid "Settings"
 msgstr ""
 
@@ -1950,42 +1950,46 @@ msgstr ""
 msgid "Advanced Settings"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:20
+#: build/templates/admin/parts/customs-products.php:24
 msgid "HS codes of the products"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:21
-#: build/templates/admin/parts/customs-products.php:22
-#: src/templates/admin/parts/customs-products.bfg.php:24
-#: src/templates/admin/parts/customs-products.bfg.php:27
+#: build/templates/admin/parts/customs-products.php:25
+#: build/templates/admin/parts/customs-products.php:26
+#: src/templates/admin/parts/customs-products.bfg.php:28
+#: src/templates/admin/parts/customs-products.bfg.php:31
 #, php-format
 msgid "without a code: %d"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:21
-#: build/templates/admin/parts/customs-products.php:23
-#: src/templates/admin/parts/customs-products.bfg.php:25
-#: src/templates/admin/parts/customs-products.bfg.php:28
+#: build/templates/admin/parts/customs-products.php:25
+#: build/templates/admin/parts/customs-products.php:27
+#: src/templates/admin/parts/customs-products.bfg.php:29
+#: src/templates/admin/parts/customs-products.bfg.php:32
 msgid "every product has a code"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:27
+#: build/templates/admin/parts/customs-products.php:31
 #: pro/booking/templates/waybills-table-labels.php:90
-#: src/templates/admin/parts/customs-products.bfg.php:36
+#: src/templates/admin/parts/customs-products.bfg.php:40
 msgid "Select all"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:27
-#: src/templates/admin/parts/customs-products.bfg.php:37
+#: build/templates/admin/parts/customs-products.php:31
+#: src/templates/admin/parts/customs-products.bfg.php:41
 msgid "Deselect all"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:28
+#: build/templates/admin/parts/customs-products.php:32
 msgid "Set a code for the marked products"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:33
-#: src/templates/admin/parts/customs-products.bfg.php:53
+#: build/templates/admin/parts/customs-products.php:35
+msgid "Show only products without an HS code"
+msgstr ""
+
+#: build/templates/admin/parts/customs-products.php:41
+#: src/templates/admin/parts/customs-products.bfg.php:61
 #, php-format
 msgid "Mark %s"
 msgstr ""
@@ -2365,16 +2369,16 @@ msgstr ""
 msgid "Fill in a post code."
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:148
-#: classes/class-bring-fraktguiden.php:149
+#: classes/class-bring-fraktguiden.php:150
+#: classes/class-bring-fraktguiden.php:151
 msgid "Bring settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:207
+#: classes/class-bring-fraktguiden.php:209
 msgid "View Bring Fraktguiden Settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:228
+#: classes/class-bring-fraktguiden.php:230
 msgid "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message."
 msgstr ""
 
@@ -3237,7 +3241,7 @@ msgstr ""
 msgid "Your tracking number:"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:61
+#: pro/booking/views/class-bring-booking-orders-view.php:63
 msgid "Bring - Print labels"
 msgstr ""
 

@@ -21,7 +21,7 @@ function panelOf(node) {
 
 /** Mark a row, or the whole range down from the anchor. */
 function markRow(panel, mark, extend) {
-	const marks = [...panel.querySelectorAll('[data-bfg-hs-mark]')];
+	const marks = marksOf(panel);
 	const from = marks.findIndex((row) => row.dataset.bfgHsMark === anchor);
 	const to = marks.indexOf(mark);
 
@@ -72,9 +72,35 @@ function syncToggle(panel) {
 	}
 }
 
+/** Return the mark of every row the worker can see. */
+function marksOf(panel) {
+	return [...panel.querySelectorAll(
+		'.bfg-customs-products__row:not(.bfg-customs-products__row--filtered) [data-bfg-hs-mark]'
+	)];
+}
+
+/** Hide every row that already has a code, or show all rows again. */
+function filterRows(panel, only) {
+	panel.querySelectorAll('[data-hs-product]').forEach((field) => {
+		const row = field.closest('.bfg-customs-products__row');
+		const hide = only && '' !== field.value.trim();
+
+		// The list is picked once, so a row the worker fills stays in place.
+		row.classList.toggle('bfg-customs-products__row--filtered', hide);
+
+		// A hidden mark would send a code into a row nobody sees.
+		if (hide) {
+			row.querySelector('[data-bfg-hs-mark]').checked = false;
+		}
+	});
+
+	anchor = null;
+	syncToggle(panel);
+}
+
 /** Is every row of the table marked? */
 function allMarked(panel) {
-	const marks = [...panel.querySelectorAll('[data-bfg-hs-mark]')];
+	const marks = marksOf(panel);
 
 	return marks.length > 0 && marks.every((mark) => mark.checked);
 }
@@ -107,6 +133,14 @@ document.addEventListener('click', (event) => {
 		return;
 	}
 
+	const filter = event.target.closest('[data-bfg-hs-filter]');
+
+	if (filter) {
+		filterRows(panel, filter.checked);
+
+		return;
+	}
+
 	const mark = event.target.closest('[data-bfg-hs-mark]');
 
 	if (mark) {
@@ -124,7 +158,7 @@ document.addEventListener('click', (event) => {
 	if (button.hasAttribute('data-bfg-hs-toggle')) {
 		const checked = !allMarked(panel);
 
-		panel.querySelectorAll('[data-bfg-hs-mark]').forEach((row) => {
+		marksOf(panel).forEach((row) => {
 			row.checked = checked;
 		});
 		anchor = null;

@@ -7,6 +7,10 @@ use BringFraktguiden\Customs\HsCodeButton;
  */
 
 $hs_missing = count(array_filter($hs_rows, static fn (array $row): bool => '' === $row['code']));
+
+// The filter starts on, so the worker sees the rows that still need work.
+// It starts off when there is nothing to filter, to keep the table full.
+$hs_filter = $hs_missing > 0;
 ?>
 
 <details class="bfg-customs-products<?php echo $hs_missing ? '' : ' bfg-customs-products--ok'; ?>" data-bfg-hs-panel <?php echo $hs_missing ? 'open' : ''; ?>>
@@ -42,10 +46,14 @@ $hs_missing = count(array_filter($hs_rows, static fn (array $row): bool => '' ==
 			data-bfg-hs-set
 			hidden
 		><t>Set a code for the marked products</t></button>
+		<label class="bfg-customs-products__filter">
+			<input type="checkbox" data-bfg-hs-filter <?php checked($hs_filter); ?>>
+			<t>Show only products without an HS code</t>
+		</label>
 	</div>
 
 	<?php foreach ($hs_rows as $id => $row) : ?>
-		<div class="bfg-customs-products__row">
+		<div class="bfg-customs-products__row<?php echo $hs_filter && '' !== $row['code'] ? ' bfg-customs-products__row--filtered' : ''; ?>">
 			<input
 				type="checkbox"
 				class="bfg-customs-products__mark"

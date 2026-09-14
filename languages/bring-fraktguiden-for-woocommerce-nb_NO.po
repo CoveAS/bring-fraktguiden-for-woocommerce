@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-14T21:30:14+00:00\n"
+"POT-Creation-Date: 2026-09-14T21:50:04+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -62,21 +62,21 @@ msgstr ""
 msgid "Working"
 msgstr "Jobber"
 
-#: build/templates/admin/booking/bulk-modal.php:14
+#: build/templates/admin/booking/bulk-modal.php:16
 #: build/templates/admin/pages/pro-settings.php:11
 #: src/templates/admin/pages/pro-settings.bfg.php:11
 msgid "Mybring Booking"
 msgstr "Mybring Booking"
 
-#: build/templates/admin/booking/bulk-modal.php:15
-#: build/templates/admin/booking/bulk-modal.php:65
-#: build/templates/admin/booking/bulk-modal.php:71
+#: build/templates/admin/booking/bulk-modal.php:17
+#: build/templates/admin/booking/bulk-modal.php:69
+#: build/templates/admin/booking/bulk-modal.php:75
 #: build/templates/admin/pages/home.php:166
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
-#: src/templates/admin/booking/bulk-modal.bfg.php:15
-#: src/templates/admin/booking/bulk-modal.bfg.php:60
+#: src/templates/admin/booking/bulk-modal.bfg.php:17
+#: src/templates/admin/booking/bulk-modal.bfg.php:68
 #: src/templates/admin/pages/home.bfg.php:148
 #: src/templates/admin/pages/pro.bfg.php:147
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
@@ -84,26 +84,26 @@ msgstr "Mybring Booking"
 msgid "Close"
 msgstr "Lukk"
 
-#: build/templates/admin/booking/bulk-modal.php:27
+#: build/templates/admin/booking/bulk-modal.php:29
 msgid "This books only the orders that hold no booking yet."
 msgstr "Dette bestiller bare ordrene som ikke er bestilt fra før."
 
-#: build/templates/admin/booking/bulk-modal.php:30
+#: build/templates/admin/booking/bulk-modal.php:32
 msgid "Selected orders"
 msgstr "Valgte bestillinger"
 
-#: build/templates/admin/booking/bulk-modal.php:35
+#: build/templates/admin/booking/bulk-modal.php:39
 #: build/templates/admin/booking/form.php:45
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr "Kundenummer"
 
-#: build/templates/admin/booking/bulk-modal.php:48
+#: build/templates/admin/booking/bulk-modal.php:52
 #: build/templates/admin/booking/form.php:77
 msgid "Shipping date"
 msgstr "Fraktdato"
 
-#: build/templates/admin/booking/bulk-modal.php:64
+#: build/templates/admin/booking/bulk-modal.php:68
 msgid "Mybring Booking errors"
 msgstr "Mybring Booking feil"
 
@@ -331,7 +331,7 @@ msgstr "Mottaker"
 #: build/templates/admin/pages/booking.php:14
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
-#: pro/booking/views/class-bring-booking-orders-view.php:74
+#: pro/booking/views/class-bring-booking-orders-view.php:76
 msgid "Booking"
 msgstr "Booking"
 
@@ -2009,7 +2009,7 @@ msgstr "Aktiver valgte tjenester"
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:207
+#: classes/class-bring-fraktguiden.php:209
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -2078,42 +2078,46 @@ msgstr "dager"
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
-#: build/templates/admin/parts/customs-products.php:20
+#: build/templates/admin/parts/customs-products.php:24
 msgid "HS codes of the products"
 msgstr "HS-koder for produktene"
 
-#: build/templates/admin/parts/customs-products.php:21
-#: build/templates/admin/parts/customs-products.php:22
-#: src/templates/admin/parts/customs-products.bfg.php:24
-#: src/templates/admin/parts/customs-products.bfg.php:27
+#: build/templates/admin/parts/customs-products.php:25
+#: build/templates/admin/parts/customs-products.php:26
+#: src/templates/admin/parts/customs-products.bfg.php:28
+#: src/templates/admin/parts/customs-products.bfg.php:31
 #, php-format
 msgid "without a code: %d"
 msgstr "uten kode: %d"
 
-#: build/templates/admin/parts/customs-products.php:21
-#: build/templates/admin/parts/customs-products.php:23
-#: src/templates/admin/parts/customs-products.bfg.php:25
-#: src/templates/admin/parts/customs-products.bfg.php:28
+#: build/templates/admin/parts/customs-products.php:25
+#: build/templates/admin/parts/customs-products.php:27
+#: src/templates/admin/parts/customs-products.bfg.php:29
+#: src/templates/admin/parts/customs-products.bfg.php:32
 msgid "every product has a code"
 msgstr "alle produkter har kode"
 
-#: build/templates/admin/parts/customs-products.php:27
+#: build/templates/admin/parts/customs-products.php:31
 #: pro/booking/templates/waybills-table-labels.php:90
-#: src/templates/admin/parts/customs-products.bfg.php:36
+#: src/templates/admin/parts/customs-products.bfg.php:40
 msgid "Select all"
 msgstr "Merk alle"
 
-#: build/templates/admin/parts/customs-products.php:27
-#: src/templates/admin/parts/customs-products.bfg.php:37
+#: build/templates/admin/parts/customs-products.php:31
+#: src/templates/admin/parts/customs-products.bfg.php:41
 msgid "Deselect all"
 msgstr "Fjern alle valg"
 
-#: build/templates/admin/parts/customs-products.php:28
+#: build/templates/admin/parts/customs-products.php:32
 msgid "Set a code for the marked products"
 msgstr "Sett en kode for de merkede produktene"
 
-#: build/templates/admin/parts/customs-products.php:33
-#: src/templates/admin/parts/customs-products.bfg.php:53
+#: build/templates/admin/parts/customs-products.php:35
+msgid "Show only products without an HS code"
+msgstr "Vis bare produkter uten HS-kode"
+
+#: build/templates/admin/parts/customs-products.php:41
+#: src/templates/admin/parts/customs-products.bfg.php:61
 #, php-format
 msgid "Mark %s"
 msgstr "Merk %s"
@@ -2512,16 +2516,16 @@ msgstr "Bring selger ingen tjeneste til denne adressen."
 msgid "Fill in a post code."
 msgstr "Fyll inn et postnummer."
 
-#: classes/class-bring-fraktguiden.php:148
-#: classes/class-bring-fraktguiden.php:149
+#: classes/class-bring-fraktguiden.php:150
+#: classes/class-bring-fraktguiden.php:151
 msgid "Bring settings"
 msgstr "Bring innstillinger"
 
-#: classes/class-bring-fraktguiden.php:207
+#: classes/class-bring-fraktguiden.php:209
 msgid "View Bring Fraktguiden Settings"
 msgstr "Vis Bring Fraktguiden innstillinger"
 
-#: classes/class-bring-fraktguiden.php:228
+#: classes/class-bring-fraktguiden.php:230
 msgid ""
 "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
 "this message."
@@ -3533,7 +3537,7 @@ msgstr "Sammenslåtte PDF etiketter"
 msgid "Your tracking number:"
 msgstr "Sporingsnummer:"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:61
+#: pro/booking/views/class-bring-booking-orders-view.php:63
 msgid "Bring - Print labels"
 msgstr "Bring - Etiketter"
 
