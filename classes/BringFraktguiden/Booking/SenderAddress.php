@@ -17,19 +17,6 @@ use BringFraktguiden\Settings\Settings;
 class SenderAddress
 {
 	/**
-	 * The settings that hold the address. The booking settings and the store
-	 * settings answer in this same shape.
-	 */
-	private const KEYS = [
-		'booking_address_store_name',
-		'booking_address_street1',
-		'booking_address_street2',
-		'booking_address_postcode',
-		'booking_address_city',
-		'booking_address_country',
-	];
-
-	/**
 	 * Return the address, keyed by the setting names.
 	 *
 	 * @return array<string, string>
@@ -42,13 +29,14 @@ class SenderAddress
 			return self::store_address();
 		}
 
-		$address = [];
-
-		foreach (self::KEYS as $key) {
-			$address[$key] = (string) $settings->{$key}->value;
-		}
-
-		return $address;
+		return [
+			'booking_address_store_name' => (string) $settings->booking_address_store_name->value,
+			'booking_address_street1'    => (string) $settings->booking_address_street1->value,
+			'booking_address_street2'    => (string) $settings->booking_address_street2->value,
+			'booking_address_postcode'   => (string) $settings->booking_address_postcode->value,
+			'booking_address_city'       => (string) $settings->booking_address_city->value,
+			'booking_address_country'    => (string) $settings->booking_address_country->value,
+		];
 	}
 
 	/**
