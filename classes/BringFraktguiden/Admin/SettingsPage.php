@@ -117,7 +117,7 @@ class SettingsPage
 			'bring_fraktguiden_home',
 			[self::class, 'home_page'],
 			'dashicons-admin-generic',
-			99
+			58
 		);
 		add_submenu_page(
 			'bring_fraktguiden_home',
