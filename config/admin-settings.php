@@ -392,12 +392,11 @@ return [
 			'booking_address_reference' => [
 				'title' => __('Reference', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
-				'description' => __('The store\'s reference printed on the shipping label. Usually {order_id}, but can also be {products}.', 'bring-fraktguiden-for-woocommerce'),
-				'placeholder' => __('e.g. {order_id}', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('The store\'s reference printed on the shipping label. An empty box prints {order_id}. You can also use {products}.', 'bring-fraktguiden-for-woocommerce'),
+				'placeholder' => '{order_id}',
+				'default' => '{order_id}',
 				'custom_attributes' => [
 					'maxlength' => 35,
-					'aria-required' => 'true',
-					'required' => 'required',
 				],
 			],
 			'booking_address_contact_person' => [

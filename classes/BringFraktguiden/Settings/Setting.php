@@ -34,10 +34,10 @@ class Setting
 		}
 		$this->data = $data;
 		$this->type = $data['type'];
-		// An empty number box means the field default, which the placeholder prints.
-		$empty_number = $this->type === 'number' && (string) $raw_value === '';
-		$this->value = $this->sanitize($empty_number ? ($data['default'] ?? '') : $raw_value);
-		$this->entered = $empty_number ? '' : $this->value;
+		// An empty text or number box means the field default, which the placeholder prints.
+		$empty_box = in_array($this->type, ['number', 'text'], true) && (string) $raw_value === '';
+		$this->value = $this->sanitize($empty_box ? ($data['default'] ?? '') : $raw_value);
+		$this->entered = $empty_box ? '' : $this->value;
 	}
 
 	public function validate(mixed $param): array

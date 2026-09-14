@@ -11,6 +11,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguiden\Customs\NatureOfCargo;
 use BringFraktguiden\Order\ShippedLine;
+use BringFraktguiden\Settings\Settings;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use WC_Order;
 use WC_Order_Item_Product;
@@ -188,7 +189,7 @@ abstract class Bring_Consignment_Request {
 	 */
 	public function get_reference() {
 		$order     = $this->shipping_item->get_order();
-		$reference = Fraktguiden_Helper::get_option( 'booking_address_reference' );
+		$reference = Settings::instance()->booking_address_reference->value;
 
 		return self::parse_sender_address_reference( $reference, $order );
 	}
