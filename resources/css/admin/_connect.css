@@ -50,3 +50,7 @@
 .bfg-connect__signup-link svg {
 	flex-shrink: 0;
 }
+
+.bfg-connect__signup .bfg-connect__checks {
+	margin-bottom: 12px;
+}

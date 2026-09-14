@@ -81,8 +81,15 @@ $bfg_quickship_body = rawurlencode(sprintf(
 
 			<div class="bfg-connect__signup">
 				<p class="bfg-step-form__intro">
-					<t>Save as much as 30 to 40 percent against a normal Bring account.</t>
-					<t>Our partner Quickship opens an account for you, or takes over the one you have.</t>
+					<t>Save 20 to 40 percent on shipping</t>
+				</p>
+				<ul class="bfg-connect__checks">
+					<li><t>Lower prices than a normal Bring account</t></li>
+					<li><t>Keep the Mybring account you have, or get a new one</t></li>
+					<li><t>Ready in minutes, by phone or a few emails</t></li>
+				</ul>
+				<p class="bfg-step-form__intro">
+					<t>What to expect: Send Quickship your shop name, parcels per month, phone and email. You get a price offer. Accept it, and Quickship sets up your API access.</t>
 				</p>
 				<p class="bfg-connect__signup-links">
 					<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="mailto:support@quickship.no?subject=<?php echo esc_attr($bfg_quickship_subject); ?>&amp;body=<?php echo esc_attr($bfg_quickship_body); ?>">
