@@ -116,7 +116,7 @@ class SettingsPage
 			'manage_options',
 			'bring_fraktguiden_home',
 			[self::class, 'home_page'],
-			'dashicons-admin-generic',
+			'none',
 			58
 		);
 		add_submenu_page(
