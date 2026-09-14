@@ -9,6 +9,8 @@ namespace BringFraktguidenPro\Booking\Views;
 
 use Bring_Fraktguiden;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Customs\BulkHsCodesRoute;
+use BringFraktguiden\Customs\HsCodePicker;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
@@ -148,6 +150,8 @@ class Bring_Booking_Orders_View {
 		$customer_number = (string) Fraktguiden_Helper::get_option( 'mybring_customer_number' );
 		$shipping_date   = Bring_Booking::create_shipping_date();
 		$book_label      = Bring_Booking_Common_View::booking_label( true );
+		$hs_url          = rest_url( BulkHsCodesRoute::ROUTE_NAMESPACE . BulkHsCodesRoute::ROUTE );
+		$hs_nonce        = wp_create_nonce( 'wp_rest' );
 
 		require_once dirname( __DIR__, 3 ) . '/build/templates/admin/booking/bulk-modal.php';
 	}
@@ -173,7 +177,7 @@ class Bring_Booking_Orders_View {
 
 		// The bulk booking dialogs use the same shell and the same select as the
 		// admin pages, so the orders list loads those two modules too.
-		foreach ( [ 'dialog', 'custom-select' ] as $module ) {
+		foreach ( [ 'dialog', 'custom-select', 'bulk-hs' ] as $module ) {
 			wp_enqueue_script(
 				'bfg-' . $module,
 				plugins_url( basename( $plugin_dir ) . '/build/js/' . $module . '.js' ),
@@ -182,6 +186,10 @@ class Bring_Booking_Orders_View {
 				true
 			);
 		}
+
+		// The bulk module imports the picker, so the picker takes its settings
+		// through that script instead of a second enqueue.
+		HsCodePicker::add_config( 'bfg-bulk-hs' );
 
 		wp_register_script(
 			'fraktguiden-booking-admin',
@@ -210,7 +218,7 @@ class Bring_Booking_Orders_View {
 	 * wp_enqueue_script_module().
 	 */
 	public static function add_type_module( string $tag, string $handle ): string {
-		if ( ! in_array( $handle, [ 'bfg-dialog', 'bfg-custom-select' ], true ) ) {
+		if ( ! in_array( $handle, [ 'bfg-dialog', 'bfg-custom-select', 'bfg-bulk-hs' ], true ) ) {
 			return $tag;
 		}
 

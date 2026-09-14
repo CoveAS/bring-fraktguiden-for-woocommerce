@@ -28,6 +28,7 @@ use BringFraktguiden\Development\LicenseSelector;
 use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
+use BringFraktguiden\Customs\BulkHsCodesRoute;
 use BringFraktguiden\Customs\CustomsFields;
 use BringFraktguiden\Customs\HsCodeIndex;
 use BringFraktguiden\Customs\HsCodeIndexRoute;
@@ -58,6 +59,7 @@ class Bring_Fraktguiden {
 		RefreshLicense::init();
 		CustomsFields::init();
 		HsCodeIndexRoute::init();
+		BulkHsCodesRoute::init();
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname(__DIR__);

@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
       input: [
         'resources/js/admin.js',
         'resources/js/booking-box.js',
+        'resources/js/bulk-hs.js',
         'resources/js/checkout.js',
         'resources/js/custom-select.js',
         'resources/js/dialog.js',
