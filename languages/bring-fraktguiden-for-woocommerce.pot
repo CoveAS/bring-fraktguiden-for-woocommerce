@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-14T15:47:27+00:00\n"
+"POT-Creation-Date: 2026-09-14T15:55:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -2963,7 +2963,7 @@ msgid "Your business name as it appears on shipping labels."
 msgstr ""
 
 #: config/admin-settings.php:395
-msgid "The store's reference printed on the shipping label. An empty box prints {order_id}. You can also use {products}."
+msgid "The store's reference printed on the shipping label. An empty box prints {order_number}. You can also use {order_id} or {products}."
 msgstr ""
 
 #: config/admin-settings.php:431

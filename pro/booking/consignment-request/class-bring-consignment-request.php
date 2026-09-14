@@ -231,11 +231,13 @@ abstract class Bring_Consignment_Request {
 	 * Parses the sender address reference value.
 	 * Supports simple template macros.
 	 *
-	 * Eg. "Order: {order_id}" will be replace {order_id} with the order's ID
+	 * Eg. "Order: {order_number}" prints the order number of the order.
 	 *
 	 * Available macros:
 	 *
+	 *   {order_number}
 	 *   {order_id}
+	 *   {products}
 	 *
 	 * @param string   $reference Reference.
 	 * @param WC_Order $wc_order  WC Order.
@@ -264,8 +266,9 @@ abstract class Bring_Consignment_Request {
 			strtr(
 				$reference,
 				[
-					'{order_id}' => $wc_order->get_id(),
-					'{products}' => implode( ', ', $names ),
+					'{order_number}' => $wc_order->get_order_number(),
+					'{order_id}'     => $wc_order->get_id(),
+					'{products}'     => implode( ', ', $names ),
 				]
 			),
 			$reference,
