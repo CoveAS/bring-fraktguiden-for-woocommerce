@@ -11,7 +11,7 @@ use WP_REST_Server;
  *
  * The payload holds the selected order ids and the HS codes a shop worker set.
  * The codes are written first, and the answer carries the fresh markup of the
- * table. So the browser never builds the table itself.
+ * customs warning and the table. So the browser never builds either itself.
  */
 class BulkHsCodesRoute
 {
@@ -51,7 +51,27 @@ class BulkHsCodesRoute
 
 		BulkHsCodes::save($order_ids, (array) $request->get_param('codes'));
 
-		return new WP_REST_Response(['html' => self::html(BulkHsCodes::rows($order_ids))]);
+		$html = self::warning_html($order_ids) . self::html(BulkHsCodes::rows($order_ids));
+
+		return new WP_REST_Response(['html' => $html]);
+	}
+
+	/**
+	 * Render one customs warning for the whole selection.
+	 *
+	 * @param int[] $order_ids
+	 */
+	private static function warning_html(array $order_ids): string
+	{
+		$warning = CustomsWarning::for_orders(
+			BulkOrders::with_customs($order_ids),
+			BulkOrders::service(...)
+		);
+
+		ob_start();
+		CustomsWarningView::render($warning);
+
+		return (string) ob_get_clean();
 	}
 
 	/**

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-14T21:50:04+00:00\n"
+"POT-Creation-Date: 2026-09-14T21:55:52+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2123,14 +2123,15 @@ msgid "Mark %s"
 msgstr "Merk %s"
 
 #: build/templates/admin/parts/customs-warning.php:15
-msgid "This order leaves Norway, so Bring needs customs data."
-msgstr "Denne ordren går ut av Norge, så Bring trenger tolldata."
+msgid "The goods leave Norway, so Bring needs customs data."
+msgstr "Varene går ut av Norge, så Bring trenger tolldata."
 
-#: build/templates/admin/parts/customs-warning.php:17
-msgid "This order passes through another country, so Bring needs transit data."
-msgstr "Denne ordren går gjennom et annet land, så Bring trenger transittdata."
+#: build/templates/admin/parts/customs-warning.php:19
+msgid "The goods pass through another country, so Bring needs transit data."
+msgstr ""
+"Varene går gjennom et annet land, så Bring trenger transittdata."
 
-#: build/templates/admin/parts/customs-warning.php:33
+#: build/templates/admin/parts/customs-warning.php:35
 msgid "Shop settings"
 msgstr "Butikkinnstillinger"
 
@@ -3635,6 +3636,14 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "This order leaves Norway, so Bring needs customs data."
+#~ msgstr "Denne ordren går ut av Norge, så Bring trenger tolldata."
+
+#~ msgid ""
+#~ "This order passes through another country, so Bring needs transit data."
+#~ msgstr ""
+#~ "Denne ordren går gjennom et annet land, så Bring trenger transittdata."
 
 #~ msgid "Close modal panel"
 #~ msgstr "Lukk dialogvindu"

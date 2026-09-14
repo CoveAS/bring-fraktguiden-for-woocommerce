@@ -29,7 +29,7 @@ class BulkHsCodes
 	{
 		$rows = [];
 
-		foreach (self::orders($order_ids) as $order) {
+		foreach (BulkOrders::with_customs($order_ids) as $order) {
 			$rows += OrderHsCodes::rows($order);
 		}
 
@@ -47,55 +47,8 @@ class BulkHsCodes
 	 */
 	public static function save(array $order_ids, array $codes): void
 	{
-		foreach (self::orders($order_ids) as $order) {
+		foreach (BulkOrders::with_customs($order_ids) as $order) {
 			OrderHsCodes::save($order, $codes);
 		}
-	}
-
-	/**
-	 * Return the orders of the selection that need customs data.
-	 *
-	 * @param int[] $order_ids
-	 *
-	 * @return WC_Order[]
-	 */
-	private static function orders(array $order_ids): array
-	{
-		$orders = [];
-
-		foreach ($order_ids as $order_id) {
-			$order = wc_get_order((int) $order_id);
-
-			if (!$order instanceof WC_Order) {
-				continue;
-			}
-
-			if (!CustomsRoute::for_order($order, self::service($order))) {
-				continue;
-			}
-
-			$orders[] = $order;
-		}
-
-		return $orders;
-	}
-
-	/**
-	 * Return the Bring service the order ships with.
-	 *
-	 * The shipping line carries the service in the `bring_product` meta, the
-	 * same key the booking box reads.
-	 */
-	private static function service(WC_Order $order): string
-	{
-		foreach ($order->get_shipping_methods() as $item) {
-			$service = (string) $item->get_meta('bring_product');
-
-			if ($service) {
-				return $service;
-			}
-		}
-
-		return '';
 	}
 }

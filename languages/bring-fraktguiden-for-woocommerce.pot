@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-14T21:50:04+00:00\n"
+"POT-Creation-Date: 2026-09-14T21:55:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -1995,14 +1995,14 @@ msgid "Mark %s"
 msgstr ""
 
 #: build/templates/admin/parts/customs-warning.php:15
-msgid "This order leaves Norway, so Bring needs customs data."
+msgid "The goods leave Norway, so Bring needs customs data."
 msgstr ""
 
-#: build/templates/admin/parts/customs-warning.php:17
-msgid "This order passes through another country, so Bring needs transit data."
+#: build/templates/admin/parts/customs-warning.php:19
+msgid "The goods pass through another country, so Bring needs transit data."
 msgstr ""
 
-#: build/templates/admin/parts/customs-warning.php:33
+#: build/templates/admin/parts/customs-warning.php:35
 msgid "Shop settings"
 msgstr ""
 

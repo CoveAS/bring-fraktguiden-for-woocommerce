@@ -15,12 +15,12 @@ use WC_Order;
 class CustomsWarning
 {
 	/**
-	 * @param string                                      $reason        A CustomsRoute constant.
+	 * @param array<int, string>                          $reasons       CustomsRoute constants.
 	 * @param array<int, array{name: string, messages: array<int, string>}> $lines
 	 * @param array<int, string>                          $shop_messages
 	 */
 	private function __construct(
-		public readonly string $reason,
+		public readonly array $reasons,
 		public readonly array $lines,
 		public readonly array $shop_messages,
 	) {
@@ -47,7 +47,53 @@ class CustomsWarning
 			return null;
 		}
 
-		return new self($reason, $lines, $shop_messages);
+		return new self([$reason], $lines, $shop_messages);
+	}
+
+	/**
+	 * Return one warning for several orders.
+	 *
+	 * The bulk booking modal shows one banner for the whole selection. Two
+	 * orders that hold the same product carry the same line problems, so the
+	 * warning names each product once. A shop settings problem is the same for
+	 * every order, so it also appears once.
+	 *
+	 * @param WC_Order[] $orders
+	 * @param callable(WC_Order): string $service The Bring product of an order.
+	 */
+	public static function for_orders(array $orders, callable $service): ?self
+	{
+		$reasons       = [];
+		$lines         = [];
+		$shop_messages = [];
+
+		foreach ($orders as $order) {
+			$warning = self::for_order($order, $service($order));
+
+			if (!$warning) {
+				continue;
+			}
+
+			$reasons       = array_merge($reasons, $warning->reasons);
+			$shop_messages = array_merge($shop_messages, $warning->shop_messages);
+
+			foreach ($warning->lines as $line) {
+				$lines[$line['name']]['name']     = $line['name'];
+				$lines[$line['name']]['messages'] = array_unique(
+					array_merge($lines[$line['name']]['messages'] ?? [], $line['messages'])
+				);
+			}
+		}
+
+		if (!$lines && !$shop_messages) {
+			return null;
+		}
+
+		return new self(
+			array_values(array_unique($reasons)),
+			array_values($lines),
+			array_values(array_unique($shop_messages)),
+		);
 	}
 
 	/**

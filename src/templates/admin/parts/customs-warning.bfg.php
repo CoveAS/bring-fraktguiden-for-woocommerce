@@ -11,10 +11,12 @@ use BringFraktguiden\Customs\CustomsWarning;
 <div class="bfg-notice-banner bfg-booking-notice">
 	<?php require __DIR__ . '/notice-icon.php'; ?>
 	<div class="bfg-booking-notice__body">
-		<?php if (CustomsRoute::EXPORT === $warning->reason) : ?>
-			<p><strong><t>This order leaves Norway, so Bring needs customs data.</t></strong></p>
-		<?php else : ?>
-			<p><strong><t>This order passes through another country, so Bring needs transit data.</t></strong></p>
+		<?php if (in_array(CustomsRoute::EXPORT, $warning->reasons, true)) : ?>
+			<p><strong><t>The goods leave Norway, so Bring needs customs data.</t></strong></p>
+		<?php endif; ?>
+
+		<?php if (in_array(CustomsRoute::NVIT, $warning->reasons, true)) : ?>
+			<p><strong><t>The goods pass through another country, so Bring needs transit data.</t></strong></p>
 		<?php endif; ?>
 
 		<?php foreach ($warning->lines as $line) : ?>
