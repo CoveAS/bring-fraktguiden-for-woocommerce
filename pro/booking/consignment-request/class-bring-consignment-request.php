@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\Booking\Consignment_Request;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguiden\Customs\NatureOfCargo;
+use BringFraktguiden\Booking\SenderAddress;
 use BringFraktguiden\Order\ShippedLine;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
@@ -204,25 +205,19 @@ abstract class Bring_Consignment_Request {
 		// Get the order
 		$wc_order = $this->shipping_item->get_order();
 
-		$form_fields = [
-			'booking_address_store_name',
-			'booking_address_street1',
-			'booking_address_street2',
-			'booking_address_postcode',
-			'booking_address_city',
-			'booking_address_country',
+		// The contact of the shop stands apart from the address. It holds
+		// whoever Bring calls about the shipment, wherever the goods ship from.
+		$contact_fields = [
 			'booking_address_contact_person',
 			'booking_address_phone',
 			'booking_address_email',
 			'booking_address_reference',
 		];
 
-		// Load sender address data from the settings. A blank box falls back to
-		// the store address, which the setting default holds.
 		$settings = Settings::instance();
-		$result   = [];
+		$result   = SenderAddress::get();
 
-		foreach ( $form_fields as $field ) {
+		foreach ( $contact_fields as $field ) {
 			$result[ $field ] = $settings->{$field}->value;
 		}
 

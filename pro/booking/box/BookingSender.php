@@ -3,8 +3,8 @@
 namespace BringFraktguidenPro\Booking\Box;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Booking\SenderAddress;
 use BringFraktguiden\Customs\NatureOfCargo;
-use BringFraktguiden\Settings\Settings;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
@@ -21,9 +21,9 @@ use WC_Order;
 class BookingSender
 {
 	/**
-	 * The shop settings a booking cannot do without.
+	 * The parts of the sender address a booking cannot do without.
 	 */
-	private const REQUIRED_SETTINGS = [
+	private const REQUIRED_ADDRESS_PARTS = [
 		'booking_address_store_name',
 		'booking_address_street1',
 		'booking_address_postcode',
@@ -126,10 +126,10 @@ class BookingSender
 	 */
 	private static function guard_settings(): void
 	{
-		$settings = Settings::instance();
+		$address = SenderAddress::get();
 
-		foreach (self::REQUIRED_SETTINGS as $setting) {
-			if ($settings->{$setting}->value) {
+		foreach (self::REQUIRED_ADDRESS_PARTS as $part) {
+			if ('' !== trim($address[$part])) {
 				continue;
 			}
 

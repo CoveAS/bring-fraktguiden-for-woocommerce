@@ -3,7 +3,7 @@
 namespace BringFraktguiden\Customs;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
-use BringFraktguiden\Settings\Settings;
+use BringFraktguiden\Booking\SenderAddress;
 use WC_Order;
 
 /**
@@ -45,14 +45,14 @@ class CustomsParties
 	 */
 	private static function exporter(): array
 	{
-		$settings = Settings::instance();
+		$address = SenderAddress::get();
 
 		$exporter = [
-			'name'        => (string) $settings->booking_address_store_name->value,
-			'addressLine' => (string) $settings->booking_address_street1->value,
-			'postalCode'  => (string) $settings->booking_address_postcode->value,
-			'city'        => (string) $settings->booking_address_city->value,
-			'countryCode' => (string) $settings->booking_address_country->value,
+			'name'        => $address['booking_address_store_name'],
+			'addressLine' => $address['booking_address_street1'],
+			'postalCode'  => $address['booking_address_postcode'],
+			'city'        => $address['booking_address_city'],
+			'countryCode' => $address['booking_address_country'],
 		];
 
 		// Bring takes at most 30 characters. An empty number is left out,
