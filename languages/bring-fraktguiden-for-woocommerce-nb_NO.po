@@ -337,7 +337,7 @@ msgstr "Kontaktinformasjon"
 
 #: build/templates/admin/pages/booking.php:59
 msgid "Every booking carries this as the sender contact of your shop."
-msgstr ""
+msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 
 #: build/templates/admin/pages/booking.php:83
 #: build/templates/admin/pages/booking.php:122
@@ -661,34 +661,34 @@ msgstr "Bring trenger to ting: eposten du logger inn med, og en API-nøkkel."
 
 #: build/templates/admin/pages/home/connect-account.php:79
 msgid "Save 20 to 40 percent on shipping"
-msgstr ""
+msgstr "Spar 20 til 40 prosent på frakt"
 
 #: build/templates/admin/pages/home/connect-account.php:82
 msgid "Lower prices than a normal Bring account"
-msgstr ""
+msgstr "Lavere priser enn en vanlig Bring-konto"
 
 #: build/templates/admin/pages/home/connect-account.php:83
 msgid "Keep the Mybring account you have, or get a new one"
-msgstr ""
+msgstr "Behold Mybring-kontoen du har, eller få en ny"
 
 #: build/templates/admin/pages/home/connect-account.php:84
 msgid "Ready in minutes, by phone or a few emails"
-msgstr ""
+msgstr "Klar på noen minutter, over telefon eller noen e-poster"
 
 #: build/templates/admin/pages/home/connect-account.php:87
 msgid ""
 "What to expect: Send Quickship your shop name, parcels per month, phone and "
 "email. You get a price offer. Accept it, and Quickship sets up your API "
 "access."
-msgstr ""
+msgstr "Slik går det for seg: Send Quickship butikknavnet, antall sendinger per måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship setter opp API-tilgangen din."
 
 #: build/templates/admin/pages/home/connect-account.php:95
 msgid "Set up an account"
-msgstr ""
+msgstr "Opprett en konto"
 
 #: build/templates/admin/pages/home/connect-account.php:99
 msgid "Read more"
-msgstr ""
+msgstr "Les mer"
 
 #: build/templates/admin/pages/home/connect-account.php:110
 msgid "Bring login email"
@@ -1535,7 +1535,7 @@ msgstr "Det gamle domenet mister Pro med en gang."
 msgid ""
 "Only the account that owns the license can move it. You sign in and confirm "
 "the move on our web site."
-msgstr ""
+msgstr "Bare kontoen som eier lisensen kan flytte den. Du logger inn og bekrefter flyttingen på nettstedet vårt."
 
 #. translators: 1: number of moves, 2: year.
 #: build/templates/admin/pages/pro.php:163
@@ -1550,7 +1550,7 @@ msgstr "Avbryt"
 
 #: build/templates/admin/pages/pro.php:172
 msgid "Move the license on bringfraktguiden.no"
-msgstr ""
+msgstr "Flytt lisensen på bringfraktguiden.no"
 
 #: build/templates/admin/pages/pro.php:187
 #: src/templates/admin/pages/pro.bfg.php:187
@@ -2037,7 +2037,7 @@ msgstr ""
 
 #: build/templates/admin/pages/settings.php:85
 msgid "Mybring prices"
-msgstr ""
+msgstr "Mybring-priser"
 
 #: build/templates/admin/pages/settings.php:113
 msgid "Minimum package dimensions"
@@ -2235,7 +2235,7 @@ msgstr "Svar"
 #: build/templates/admin/parts/shipping-test-result.php:75
 #: src/templates/admin/parts/shipping-test-result.bfg.php:77
 msgid "Bring sent no body."
-msgstr ""
+msgstr "Bring sendte ikke noe innhold."
 
 #: build/templates/admin/parts/shipping-test.php:18
 #: src/templates/admin/parts/shipping-test.bfg.php:22
@@ -2411,13 +2411,13 @@ msgstr "Bring er ikke aktiv i fraktsonen %s."
 
 #: classes/BringFraktguiden/Admin/ShippingTest.php:140
 msgid "Bring did not accept the API credentials of this shop."
-msgstr ""
+msgstr "Bring godtok ikke API-innloggingen til denne butikken."
 
 #. translators: %d: the HTTP status code Bring answered with.
 #: classes/BringFraktguiden/Admin/ShippingTest.php:146
 #, php-format
 msgid "Bring answered with an error (%d)."
-msgstr ""
+msgstr "Bring svarte med en feil (%d)."
 
 #: classes/BringFraktguiden/Admin/ShippingZones.php:86
 msgid "Everywhere else"
@@ -2835,7 +2835,7 @@ msgstr "Hentesteder"
 
 #: classes/ResourceManagement/Scripts.php:62 templates/service-field.php:46
 msgid "Pro only"
-msgstr ""
+msgstr "Kun Pro"
 
 #: classes/ResourceManagement/Scripts.php:63
 msgid "The api email should be a valid email address."
@@ -3739,15 +3739,15 @@ msgstr "Fullført"
 
 #: templates/service-field.php:50
 msgid "Service overrides and pickup points need a Pro license."
-msgstr ""
+msgstr "Overstyring av tjenester og hentesteder krever en Pro-lisens."
 
 #: templates/service-field.php:51
 msgid "You can also start a free trial on the license page."
-msgstr ""
+msgstr "Du kan også starte en gratis prøveperiode på lisenssiden."
 
 #: templates/service-field.php:55
 msgid "Go to license settings"
-msgstr ""
+msgstr "Gå til lisensinnstillinger"
 
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
