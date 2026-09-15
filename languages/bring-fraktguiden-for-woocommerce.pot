@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T17:13:21+00:00\n"
+"POT-Creation-Date: 2026-09-15T18:12:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -50,14 +50,14 @@ msgid "Mybring Booking"
 msgstr ""
 
 #: build/templates/admin/booking/bulk-modal.php:17
-#: build/templates/admin/booking/bulk-modal.php:62
-#: build/templates/admin/booking/bulk-modal.php:68
+#: build/templates/admin/booking/bulk-modal.php:64
+#: build/templates/admin/booking/bulk-modal.php:70
 #: build/templates/admin/pages/home.php:166
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
-#: src/templates/admin/booking/bulk-modal.bfg.php:61
+#: src/templates/admin/booking/bulk-modal.bfg.php:63
 #: src/templates/admin/pages/home.bfg.php:148
 #: src/templates/admin/pages/pro.bfg.php:147
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
@@ -65,18 +65,18 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:32
+#: build/templates/admin/booking/bulk-modal.php:33
 #: build/templates/admin/booking/form.php:45
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:45
+#: build/templates/admin/booking/bulk-modal.php:46
 #: build/templates/admin/booking/form.php:77
 msgid "Shipping date"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:61
+#: build/templates/admin/booking/bulk-modal.php:63
 msgid "Mybring Booking errors"
 msgstr ""
 
@@ -1936,7 +1936,7 @@ msgstr ""
 
 #: build/templates/admin/parts/booking-groups.php:16
 #: src/templates/admin/parts/booking-groups.bfg.php:16
-msgid "Bring books these orders"
+msgid "These orders get a booking"
 msgstr ""
 
 #: build/templates/admin/parts/booking-groups.php:20
@@ -1951,7 +1951,7 @@ msgstr ""
 
 #: build/templates/admin/parts/booking-groups.php:24
 #: src/templates/admin/parts/booking-groups.bfg.php:24
-msgid "Bring books none of these orders"
+msgid "These orders get no booking"
 msgstr ""
 
 #: build/templates/admin/parts/booking-groups.php:26
@@ -1967,19 +1967,11 @@ msgid "They carry no Bring shipping service. Turn on %1$sAllow booking without B
 msgstr ""
 
 #: build/templates/admin/parts/cross-border-warning.php:18
-msgid "Bring carries some of these services inside one country only."
+msgid "These orders leave the country on a service Bring carries inside one country only, so their booking fails. Pick a service that crosses the border."
 msgstr ""
 
-#: build/templates/admin/parts/cross-border-warning.php:19
-msgid "These orders go to another country, so their booking fails. Pick a service that crosses the border."
-msgstr ""
-
-#: build/templates/admin/parts/cross-border-warning.php:34
-msgid "Bring carries this service inside one country only."
-msgstr ""
-
-#: build/templates/admin/parts/cross-border-warning.php:35
-msgid "The order goes to another country, so the booking fails. Pick a service that crosses the border."
+#: build/templates/admin/parts/cross-border-warning.php:33
+msgid "This order leaves the country on a service Bring carries inside one country only, so the booking fails. Pick a service that crosses the border."
 msgstr ""
 
 #: build/templates/admin/parts/customs-products.php:24
@@ -2020,26 +2012,12 @@ msgstr ""
 msgid "Show only products without an HS code"
 msgstr ""
 
-#: build/templates/admin/parts/customs-products.php:41
-#: src/templates/admin/parts/customs-products.bfg.php:61
-#, php-format
-msgid "Mark %s"
-msgstr ""
-
 #: build/templates/admin/parts/customs-warning.php:15
 msgid "The goods leave Norway, so Bring needs customs data."
 msgstr ""
 
 #: build/templates/admin/parts/customs-warning.php:19
 msgid "The goods pass through another country, so Bring needs transit data."
-msgstr ""
-
-#: build/templates/admin/parts/customs-warning.php:41
-msgid "Shop settings"
-msgstr ""
-
-#: build/templates/admin/parts/customs-warning.php:48
-msgid "Open the booking settings"
 msgstr ""
 
 #: build/templates/admin/parts/shipping-test-result.php:20
@@ -2357,12 +2335,16 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: classes/BringFraktguiden/Customs/ShopProblem.php:34
-msgid "The shop must confirm the customs data in the booking settings."
+#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
+#: classes/BringFraktguiden/Customs/ShopProblem.php:36
+#, php-format
+msgid "The shop must confirm the customs data in the %1$sbooking settings%2$s."
 msgstr ""
 
-#: classes/BringFraktguiden/Customs/ShopProblem.php:35
-msgid "The shop needs an exporter number."
+#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
+#: classes/BringFraktguiden/Customs/ShopProblem.php:41
+#, php-format
+msgid "The shop needs an %1$sexporter number%2$s."
 msgstr ""
 
 #: classes/BringFraktguiden/Settings/Setting.php:49
