@@ -16,7 +16,7 @@ class CustomsWarning
 {
 	/**
 	 * @param array<int, string>                          $reasons       CustomsRoute constants.
-	 * @param array<int, array{name: string, messages: array<int, string>}> $lines
+	 * @param array<int, array{name: string, url: ?string, messages: array<int, string>}> $lines
 	 * @param array<int, string>                          $shop_messages
 	 */
 	private function __construct(
@@ -79,6 +79,7 @@ class CustomsWarning
 
 			foreach ($warning->lines as $line) {
 				$lines[$line['name']]['name']     = $line['name'];
+				$lines[$line['name']]['url']      = $line['url'] ?? $lines[$line['name']]['url'] ?? null;
 				$lines[$line['name']]['messages'] = array_unique(
 					array_merge($lines[$line['name']]['messages'] ?? [], $line['messages'])
 				);
@@ -102,9 +103,13 @@ class CustomsWarning
 	 * A missing HS code is left out. The booking box holds a field for every
 	 * product, so the shop worker reads the missing code there.
 	 *
+	 * Each line carries the edit link of its product, so the shop worker
+	 * reaches the screen that holds the weight and the country of origin. The
+	 * link is null when the product is gone, or when the user may not edit it.
+	 *
 	 * @param string $route A CustomsRoute constant.
 	 *
-	 * @return array<int, array{name: string, messages: array<int, string>}>
+	 * @return array<int, array{name: string, url: ?string, messages: array<int, string>}>
 	 */
 	private static function lines(WC_Order $order, string $route): array
 	{
@@ -123,6 +128,7 @@ class CustomsWarning
 
 			$lines[] = [
 				'name'     => $items[$id]->get_name(),
+				'url'      => get_edit_post_link($items[$id]->get_product_id(), 'url'),
 				'messages' => array_map(fn(CustomsProblem $problem) => $problem->message(), $problems),
 			];
 		}

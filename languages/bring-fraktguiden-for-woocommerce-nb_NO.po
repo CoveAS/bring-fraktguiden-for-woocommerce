@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-14T21:55:52+00:00\n"
+"POT-Creation-Date: 2026-09-15T06:34:33+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2128,12 +2128,15 @@ msgstr "Varene går ut av Norge, så Bring trenger tolldata."
 
 #: build/templates/admin/parts/customs-warning.php:19
 msgid "The goods pass through another country, so Bring needs transit data."
-msgstr ""
-"Varene går gjennom et annet land, så Bring trenger transittdata."
+msgstr "Varene går gjennom et annet land, så Bring trenger transittdata."
 
-#: build/templates/admin/parts/customs-warning.php:35
+#: build/templates/admin/parts/customs-warning.php:41
 msgid "Shop settings"
 msgstr "Butikkinnstillinger"
+
+#: build/templates/admin/parts/customs-warning.php:48
+msgid "Open the booking settings"
+msgstr "Åpne bookinginnstillingene"
 
 #: build/templates/admin/parts/shipping-test-result.php:20
 msgid "Bring gave no price for this parcel."

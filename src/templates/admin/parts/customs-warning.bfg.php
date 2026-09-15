@@ -21,7 +21,13 @@ use BringFraktguiden\Customs\CustomsWarning;
 
 		<?php foreach ($warning->lines as $line) : ?>
 			<div class="bfg-booking-notice__group">
-				<p class="bfg-booking-notice__label"><?php echo esc_html($line['name']); ?></p>
+				<p class="bfg-booking-notice__label">
+					<?php if ($line['url']) : ?>
+						<a href="<?php echo esc_url($line['url']); ?>" target="_blank" rel="noopener"><?php echo esc_html($line['name']); ?></a>
+					<?php else : ?>
+						<?php echo esc_html($line['name']); ?>
+					<?php endif; ?>
+				</p>
 				<ul>
 					<?php foreach ($line['messages'] as $message) : ?>
 						<li><?php echo esc_html($message); ?></li>
@@ -38,6 +44,9 @@ use BringFraktguiden\Customs\CustomsWarning;
 						<li><?php echo esc_html($message); ?></li>
 					<?php endforeach; ?>
 				</ul>
+				<?php if (current_user_can('manage_options')) : ?>
+					<p><a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')); ?>" target="_blank" rel="noopener"><t>Open the booking settings</t></a></p>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 	</div>
