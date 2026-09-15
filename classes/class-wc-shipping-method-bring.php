@@ -164,9 +164,13 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	public function __construct( $instance_id = 0 ) {
 
 		$this->id                 = self::ID;
-		$this->method_title       = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
-		$this->method_description = __( 'Automatically calculate shipping rates using Bring Fraktguiden API.',
-			'bring-fraktguiden-for-woocommerce' );
+		$this->method_title       = __( 'Bring products', 'bring-fraktguiden-for-woocommerce' );
+		$this->method_description = sprintf(
+			/* translators: %s: link that reads "plugin settings page" */
+			__( 'Pick the Bring products your shop offers. More options on the %s.',
+				'bring-fraktguiden-for-woocommerce' ),
+			'<a href="' . esc_url( admin_url( 'admin.php?page=bring_fraktguiden_home' ) ) . '">' . __( 'plugin settings page', 'bring-fraktguiden-for-woocommerce' ) . '</a>'
+		);
 		$this->supports           = array(
 			'shipping-zones',
 			'settings',

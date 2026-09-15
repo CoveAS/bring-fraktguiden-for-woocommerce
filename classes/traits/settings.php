@@ -51,7 +51,7 @@ trait Settings
 	{
 		$this->form_fields = [
 			'services' => [
-				'title' => __('Bring products', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Products', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'services_table',
 				'class' => 'chosen_select',
 				'css' => 'width: 400px;',

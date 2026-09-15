@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T18:36:07+00:00\n"
+"POT-Creation-Date: 2026-09-15T18:48:45+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2561,14 +2561,20 @@ msgstr ""
 "denne meldingen."
 
 #: classes/class-wc-shipping-method-bring.php:167
-#: pro/class-wc-shipping-method-bring-pro.php:169
 #: pro/class-wc-shipping-method-bring-pro.php:170
-msgid "Bring Fraktguiden"
-msgstr "Bring Fraktguiden"
+msgid "Bring products"
+msgstr "Bring produkter"
 
-#: classes/class-wc-shipping-method-bring.php:168
-msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
-msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
+#. translators: %s: link that reads "plugin settings page"
+#: classes/class-wc-shipping-method-bring.php:170
+#, php-format
+msgid "Pick the Bring products your shop offers. More options on the %s."
+msgstr ""
+"Velg hvilke Bring-produkter butikken tilbyr. Flere valg på %s."
+
+#: classes/class-wc-shipping-method-bring.php:172
+msgid "plugin settings page"
+msgstr "innstillingssiden til utvidelsen"
 
 #: classes/common/class-ajax.php:21
 msgid "Required field, time_slot, was empty"
@@ -2801,8 +2807,8 @@ msgstr ""
 "Api-nøkkelen skal bare inneholde bokstaver (a-z), tall og bindestreker."
 
 #: classes/traits/settings.php:54
-msgid "Bring products"
-msgstr "Bring produkter"
+msgid "Products"
+msgstr "Produkter"
 
 #: config/admin-settings.php:12
 msgid "Choose a country"
@@ -3600,6 +3606,10 @@ msgid_plural "%d orders failed."
 msgstr[0] "%d ordre feilet."
 msgstr[1] "%d ordre feilet."
 
+#: pro/class-wc-shipping-method-bring-pro.php:169
+msgid "Bring Fraktguiden"
+msgstr "Bring Fraktguiden"
+
 #: pro/pickuppoint/LegacyPickUpPointEnhancement.php:131
 #: pro/pickuppoint/SelectedPickUpPointComponent.php:12
 msgid "View on map"
@@ -3694,6 +3704,33 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#, php-format
+#~ msgid ""
+#~ "Pick the Bring products your shop offers. All other settings sit on the "
+#~ "%s."
+#~ msgstr ""
+#~ "Velg hvilke Bring-produkter butikken tilbyr. Alle andre innstillinger "
+#~ "ligger på %s."
+
+#, php-format
+#~ msgid ""
+#~ "Pick the Bring products your shop offers. The choice applies to every "
+#~ "shipping zone. All other settings sit on the %s page."
+#~ msgstr ""
+#~ "Velg hvilke Bring-produkter butikken tilbyr. Valget gjelder alle "
+#~ "fraktsoner. Alle andre innstillinger ligger på siden %s."
+
+#, php-format
+#~ msgid ""
+#~ "Pick the Bring products this shipping zone offers. All other settings sit "
+#~ "on the %s page."
+#~ msgstr ""
+#~ "Velg hvilke Bring-produkter denne fraktsonen tilbyr. Alle andre "
+#~ "innstillinger ligger på siden %s."
+
+#~ msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
+#~ msgstr "Kalkulerer frakten automatisk ved bruk av Bring Fraktguiden API."
 
 #~ msgid "Mybring Booking errors"
 #~ msgstr "Mybring Booking feil"

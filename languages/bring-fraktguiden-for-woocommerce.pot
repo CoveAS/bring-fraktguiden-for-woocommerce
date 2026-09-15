@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T18:36:07+00:00\n"
+"POT-Creation-Date: 2026-09-15T18:48:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -2402,13 +2402,18 @@ msgid "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove
 msgstr ""
 
 #: classes/class-wc-shipping-method-bring.php:167
-#: pro/class-wc-shipping-method-bring-pro.php:169
 #: pro/class-wc-shipping-method-bring-pro.php:170
-msgid "Bring Fraktguiden"
+msgid "Bring products"
 msgstr ""
 
-#: classes/class-wc-shipping-method-bring.php:168
-msgid "Automatically calculate shipping rates using Bring Fraktguiden API."
+#. translators: %s: link that reads "plugin settings page"
+#: classes/class-wc-shipping-method-bring.php:170
+#, php-format
+msgid "Pick the Bring products your shop offers. More options on the %s."
+msgstr ""
+
+#: classes/class-wc-shipping-method-bring.php:172
+msgid "plugin settings page"
 msgstr ""
 
 #: classes/common/class-ajax.php:21
@@ -2600,7 +2605,7 @@ msgid "The api key should only contain letters (a-z), numbers and dashes."
 msgstr ""
 
 #: classes/traits/settings.php:54
-msgid "Bring products"
+msgid "Products"
 msgstr ""
 
 #: config/admin-settings.php:12
@@ -3295,6 +3300,10 @@ msgid "%d order failed."
 msgid_plural "%d orders failed."
 msgstr[0] ""
 msgstr[1] ""
+
+#: pro/class-wc-shipping-method-bring-pro.php:169
+msgid "Bring Fraktguiden"
+msgstr ""
 
 #: pro/pickuppoint/LegacyPickUpPointEnhancement.php:131
 #: pro/pickuppoint/SelectedPickUpPointComponent.php:12

@@ -167,7 +167,7 @@ class WC_Shipping_Method_Bring_Pro extends WC_Shipping_Method_Bring {
 		parent::__construct( $instance_id );
 
 		$this->title        = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
-		$this->method_title = __( 'Bring Fraktguiden', 'bring-fraktguiden-for-woocommerce' );
+		$this->method_title = __( 'Bring products', 'bring-fraktguiden-for-woocommerce' );
 
 		// $this->pickup_point_enabled           = $this->get_setting( 'pickup_point_enabled' );
 		$this->mybring_api_uid                = $this->get_setting( 'mybring_api_uid' );
