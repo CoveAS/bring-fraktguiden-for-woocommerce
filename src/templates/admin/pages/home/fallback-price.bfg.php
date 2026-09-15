@@ -83,7 +83,7 @@ $bfg_services = FallbackPrice::services();
 
 			<div class="bfg-step-form__field">
 				<label class="bfg-step-form__choice" for="bfg-fallback-answer-price">
-					<input type="radio" name="bfg_fallback_answer" id="bfg-fallback-answer-price"
+					<input type="radio" name="bfg_fallback_answer" id="bfg-fallback-answer-price" required
 						value="<?php echo esc_attr(FallbackPrice::PRICE); ?>"
 						<?php checked($bfg_fallback->state, FallbackPrice::PRICE); ?>>
 					<t>Charge a fixed price</t>
@@ -113,7 +113,7 @@ $bfg_services = FallbackPrice::services();
 
 			<div class="bfg-step-form__field">
 				<label class="bfg-step-form__choice">
-					<input type="radio" name="bfg_fallback_answer"
+					<input type="radio" name="bfg_fallback_answer" required
 						value="<?php echo esc_attr(FallbackPrice::NO_SHIPPING); ?>"
 						<?php checked($bfg_fallback->state, FallbackPrice::NO_SHIPPING); ?>>
 					<t>Show no shipping and let the customer call me</t>

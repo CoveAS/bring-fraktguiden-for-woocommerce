@@ -30,3 +30,14 @@ document.addEventListener('click', (event) => {
 	panel.hidden = !panel.hidden;
 	button.setAttribute('aria-expanded', String(!panel.hidden));
 });
+
+/**
+ * The price field and the service list of step 3 belong to the fixed price
+ * answer. Use of either one picks that answer.
+ */
+document.addEventListener('focusin', (event) => {
+	if (!event.target.matches('#bfg-fallback-price, #bfg-fallback-service')) return;
+
+	const radio = document.getElementById('bfg-fallback-answer-price');
+	if (radio) radio.checked = true;
+});
