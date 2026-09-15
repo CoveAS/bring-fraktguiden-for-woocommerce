@@ -201,7 +201,7 @@
 				<bfg-section class="bfg-wizard__step bfg-wizard__result" data-step="result" hidden>
 					<div class="bfg-section__header">
 						<h2>
-							<t>Based on your selection we recommend that you enable these services</t>
+							<t>Based on your selection these services may suit you</t>
 						</h2>
 					</div>
 

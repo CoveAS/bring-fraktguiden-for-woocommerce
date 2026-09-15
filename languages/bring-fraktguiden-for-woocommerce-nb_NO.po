@@ -1953,8 +1953,8 @@ msgid "No, I have a regular label printer"
 msgstr "Nei, jeg har en vanlig etikettskriver"
 
 #: build/templates/admin/pages/service-wizard.php:231
-msgid "Based on your selection we recommend that you enable these services"
-msgstr "Ut fra valgene dine anbefaler vi at du aktiverer disse tjenestene"
+msgid "Based on your selection these services may suit you"
+msgstr "Ut fra valgene dine kan disse tjenestene passe"
 
 #: build/templates/admin/pages/service-wizard.php:250
 msgid ""
