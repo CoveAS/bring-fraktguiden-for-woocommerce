@@ -119,7 +119,7 @@ $bfg_services = FallbackPrice::services();
 					<t>Show no shipping and let the customer call me</t>
 				</label>
 				<p class="bfg-step-form__help">
-					<t>The customer cannot finish the order without a shipping price.</t>
+					<t>The customer cannot finish the order without a shipping option.</t>
 				</p>
 			</div>
 

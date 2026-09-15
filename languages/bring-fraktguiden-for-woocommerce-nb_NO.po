@@ -779,8 +779,8 @@ msgid "Show no shipping and let the customer call me"
 msgstr "Vis ingen frakt og la kunden ringe meg"
 
 #: build/templates/admin/pages/home/fallback-price.php:111
-msgid "The customer cannot finish the order without a shipping price."
-msgstr "Kunden kan ikke fullføre ordren uten en fraktpris."
+msgid "The customer cannot finish the order without a shipping option."
+msgstr "Kunden kan ikke fullføre ordren uten et fraktalternativ."
 
 #: build/templates/admin/pages/home/fallback-price.php:119
 msgid "A different price for each case"
