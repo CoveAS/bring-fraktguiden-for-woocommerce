@@ -36,18 +36,8 @@ use BringFraktguiden\Customs\CustomsWarning;
 			</div>
 		<?php endforeach; ?>
 
-		<?php if ($warning->shop_messages) : ?>
-			<div class="bfg-booking-notice__group">
-				<p class="bfg-booking-notice__label"><t>Shop settings</t></p>
-				<ul>
-					<?php foreach ($warning->shop_messages as $message) : ?>
-						<li><?php echo esc_html($message); ?></li>
-					<?php endforeach; ?>
-				</ul>
-				<?php if (current_user_can('manage_options')) : ?>
-					<p><a href="<?php echo esc_url(admin_url('admin.php?page=bring_fraktguiden_booking')); ?>" target="_blank" rel="noopener"><t>Open the booking settings</t></a></p>
-				<?php endif; ?>
-			</div>
-		<?php endif; ?>
+		<?php foreach ($warning->shop_messages as $message) : ?>
+			<p><?php echo wp_kses_post($message); ?></p>
+		<?php endforeach; ?>
 	</div>
 </div>
