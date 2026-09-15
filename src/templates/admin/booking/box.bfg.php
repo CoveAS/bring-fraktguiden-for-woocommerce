@@ -47,13 +47,8 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 	<?php endif; ?>
 
 	<?php if (!$service_crosses) : ?>
-		<div class="bfg-notice-banner bfg-booking-notice">
-			<?php require dirname(__DIR__) . '/parts/notice-icon.php'; ?>
-			<div class="bfg-booking-notice__body">
-				<p><strong><t>Bring carries this service inside one country only.</t></strong></p>
-				<p><t>The order goes to another country, so the booking fails. Pick a service that crosses the border.</t></p>
-			</div>
-		</div>
+		<?php $cross_border_orders = []; ?>
+		<?php require dirname(__DIR__) . '/parts/cross-border-warning.php'; ?>
 	<?php endif; ?>
 
 	<?php CustomsWarningView::render($warning); ?>

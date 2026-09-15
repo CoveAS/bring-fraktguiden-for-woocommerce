@@ -2,6 +2,9 @@
 
 namespace BringFraktguiden\Customs;
 
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Services\CrossBorderRule;
+use WC_Order;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
@@ -10,8 +13,8 @@ use WP_REST_Server;
  * The one route the bulk booking modal talks to.
  *
  * The payload holds the selected order ids and the HS codes a shop worker set.
- * The codes are written first, and the answer carries the fresh markup of the
- * customs warning and the table. So the browser never builds either itself.
+ * The codes are written first, and the answer carries the fresh markup of every
+ * warning and of the table. So the browser never builds any of it itself.
  */
 class BulkHsCodesRoute
 {
@@ -51,9 +54,50 @@ class BulkHsCodesRoute
 
 		BulkHsCodes::save($order_ids, (array) $request->get_param('codes'));
 
-		$html = self::warning_html($order_ids) . self::html(BulkHsCodes::rows($order_ids));
+		$html = self::cross_border_html($order_ids)
+			. self::warning_html($order_ids)
+			. self::html(BulkHsCodes::rows($order_ids));
 
 		return new WP_REST_Response(['html' => $html]);
+	}
+
+	/**
+	 * Render one cross border warning for the whole selection.
+	 *
+	 * Bring sells some services inside one country only, and refuses a booking
+	 * that leaves the country on such a service. The banner names every order
+	 * of the selection that the sender country and the service disagree on.
+	 *
+	 * @param int[] $order_ids
+	 */
+	private static function cross_border_html(array $order_ids): string
+	{
+		$from = (string) Fraktguiden_Helper::get_option('booking_address_country');
+
+		$cross_border_orders = [];
+
+		foreach ($order_ids as $order_id) {
+			$order = wc_get_order((int) $order_id);
+
+			if (!$order instanceof WC_Order) {
+				continue;
+			}
+
+			if (CrossBorderRule::allows($from, $order->get_shipping_country(), BulkOrders::service($order))) {
+				continue;
+			}
+
+			$cross_border_orders[] = $order;
+		}
+
+		if (!$cross_border_orders) {
+			return '';
+		}
+
+		ob_start();
+		require dirname(__DIR__, 3) . '/build/templates/admin/parts/cross-border-warning.php';
+
+		return (string) ob_get_clean();
 	}
 
 	/**
