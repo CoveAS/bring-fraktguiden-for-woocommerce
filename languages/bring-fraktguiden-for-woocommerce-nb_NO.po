@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T18:48:45+00:00\n"
+"POT-Creation-Date: 2026-09-15T19:03:38+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -1990,7 +1990,7 @@ msgstr "Aktiver valgte tjenester"
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:209
+#: classes/class-bring-fraktguiden.php:211
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -2111,6 +2111,48 @@ msgstr ""
 "Denne ordren går ut av landet på en tjeneste Bring bare frakter innenfor ett "
 "land, så bookingen feiler. Velg en tjeneste som krysser grensen."
 
+#: build/templates/admin/parts/customs-consent.php:18
+#: src/templates/admin/parts/customs-consent.bfg.php:23
+msgid "The signature did not save. Nothing was booked. Try again."
+msgstr "Signaturen ble ikke lagret. Ingenting ble booket. Prøv igjen."
+
+#: build/templates/admin/parts/customs-consent.php:21
+msgid "Sign the customs declaration before you book"
+msgstr "Signer tolldeklarasjonen før du booker"
+
+#: build/templates/admin/parts/customs-consent.php:22
+msgid ""
+"You confirm that the goods description, the value and the HS code of every "
+"order line are correct and complete, and that the goods are neither "
+"dangerous nor prohibited."
+msgstr ""
+"Du bekrefter at varebeskrivelsen, verdien og HS-koden på hver ordrelinje er "
+"riktig og fullstendig, og at varene verken er farlige eller forbudte."
+
+#: build/templates/admin/parts/customs-consent.php:23
+msgid ""
+"Bring uses this confirmation as your signature on the customs declaration. A "
+"wrong declaration is your responsibility."
+msgstr ""
+"Bring bruker denne bekreftelsen som din signatur på tolldeklarasjonen. En feil "
+"deklarasjon er ditt ansvar."
+
+#: build/templates/admin/parts/customs-consent.php:24
+msgid ""
+"One signature covers every Bring booking of this shop, now and later. You "
+"withdraw it in the booking settings."
+msgstr ""
+"Én signatur gjelder alle Bring-bookinger fra denne butikken, nå og senere. "
+"Du trekker den tilbake i bookinginnstillingene."
+
+#: build/templates/admin/parts/customs-consent.php:30
+msgid "I confirm and sign"
+msgstr "Jeg bekrefter og signerer"
+
+#: build/templates/admin/parts/customs-consent.php:34
+msgid "Ask the shop owner to sign it in the Bring booking settings."
+msgstr "Be butikkeieren signere i bookinginnstillingene for Bring."
+
 #: build/templates/admin/parts/customs-products.php:24
 msgid "HS codes of the products"
 msgstr "HS-koder for produktene"
@@ -2149,11 +2191,11 @@ msgstr "Sett en kode for de merkede produktene"
 msgid "Show only products without an HS code"
 msgstr "Vis bare produkter uten HS-kode"
 
-#: build/templates/admin/parts/customs-warning.php:17
+#: build/templates/admin/parts/customs-warning.php:28
 msgid "The goods leave Norway, so Bring needs customs data."
 msgstr "Varene går ut av Norge, så Bring trenger tolldata."
 
-#: build/templates/admin/parts/customs-warning.php:19
+#: build/templates/admin/parts/customs-warning.php:30
 msgid "The goods pass through another country, so Bring needs transit data."
 msgstr "Varene går gjennom et annet land, så Bring trenger transittdata."
 
@@ -2492,13 +2534,7 @@ msgid "Documents"
 msgstr "Dokumenter"
 
 #. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: classes/BringFraktguiden/Customs/ShopProblem.php:36
-#, php-format
-msgid "The shop must confirm the customs data in the %1$sbooking settings%2$s."
-msgstr "Butikken må bekrefte tolldataene i %1$sbookinginnstillingene%2$s."
-
-#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: classes/BringFraktguiden/Customs/ShopProblem.php:41
+#: classes/BringFraktguiden/Customs/ShopProblem.php:33
 #, php-format
 msgid "The shop needs an %1$sexporter number%2$s."
 msgstr "Butikken trenger et %1$seksportørnummer%2$s."
@@ -2543,16 +2579,16 @@ msgstr "Bring selger ingen tjeneste til denne adressen."
 msgid "Fill in a post code."
 msgstr "Fyll inn et postnummer."
 
-#: classes/class-bring-fraktguiden.php:150
-#: classes/class-bring-fraktguiden.php:151
+#: classes/class-bring-fraktguiden.php:152
+#: classes/class-bring-fraktguiden.php:153
 msgid "Bring settings"
 msgstr "Bring innstillinger"
 
-#: classes/class-bring-fraktguiden.php:209
+#: classes/class-bring-fraktguiden.php:211
 msgid "View Bring Fraktguiden Settings"
 msgstr "Vis Bring Fraktguiden innstillinger"
 
-#: classes/class-bring-fraktguiden.php:230
+#: classes/class-bring-fraktguiden.php:232
 msgid ""
 "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
 "this message."
@@ -2569,8 +2605,7 @@ msgstr "Bring produkter"
 #: classes/class-wc-shipping-method-bring.php:170
 #, php-format
 msgid "Pick the Bring products your shop offers. More options on the %s."
-msgstr ""
-"Velg hvilke Bring-produkter butikken tilbyr. Flere valg på %s."
+msgstr "Velg hvilke Bring-produkter butikken tilbyr. Flere valg på %s."
 
 #: classes/class-wc-shipping-method-bring.php:172
 msgid "plugin settings page"
@@ -3704,6 +3739,18 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid ""
+#~ "Bring prints your confirmation as your signature on the customs "
+#~ "declaration. A wrong declaration is your responsibility."
+#~ msgstr ""
+#~ "Bring skriver bekreftelsen din som din signatur på tolldeklarasjonen. En "
+#~ "feil deklarasjon er ditt ansvar."
+
+#, php-format
+#~ msgid ""
+#~ "The shop must confirm the customs data in the %1$sbooking settings%2$s."
+#~ msgstr "Butikken må bekrefte tolldataene i %1$sbookinginnstillingene%2$s."
 
 #, php-format
 #~ msgid ""

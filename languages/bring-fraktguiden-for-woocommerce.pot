@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T18:48:45+00:00\n"
+"POT-Creation-Date: 2026-09-15T19:03:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -1878,7 +1878,7 @@ msgstr ""
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:209
+#: classes/class-bring-fraktguiden.php:211
 msgid "Settings"
 msgstr ""
 
@@ -1975,6 +1975,35 @@ msgstr ""
 msgid "This order leaves the country on a service Bring carries inside one country only, so the booking fails. Pick a service that crosses the border."
 msgstr ""
 
+#: build/templates/admin/parts/customs-consent.php:18
+#: src/templates/admin/parts/customs-consent.bfg.php:23
+msgid "The signature did not save. Nothing was booked. Try again."
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:21
+msgid "Sign the customs declaration before you book"
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:22
+msgid "You confirm that the goods description, the value and the HS code of every order line are correct and complete, and that the goods are neither dangerous nor prohibited."
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:23
+msgid "Bring uses this confirmation as your signature on the customs declaration. A wrong declaration is your responsibility."
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:24
+msgid "One signature covers every Bring booking of this shop, now and later. You withdraw it in the booking settings."
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:30
+msgid "I confirm and sign"
+msgstr ""
+
+#: build/templates/admin/parts/customs-consent.php:34
+msgid "Ask the shop owner to sign it in the Bring booking settings."
+msgstr ""
+
 #: build/templates/admin/parts/customs-products.php:24
 msgid "HS codes of the products"
 msgstr ""
@@ -2013,11 +2042,11 @@ msgstr ""
 msgid "Show only products without an HS code"
 msgstr ""
 
-#: build/templates/admin/parts/customs-warning.php:17
+#: build/templates/admin/parts/customs-warning.php:28
 msgid "The goods leave Norway, so Bring needs customs data."
 msgstr ""
 
-#: build/templates/admin/parts/customs-warning.php:19
+#: build/templates/admin/parts/customs-warning.php:30
 msgid "The goods pass through another country, so Bring needs transit data."
 msgstr ""
 
@@ -2337,13 +2366,7 @@ msgid "Documents"
 msgstr ""
 
 #. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: classes/BringFraktguiden/Customs/ShopProblem.php:36
-#, php-format
-msgid "The shop must confirm the customs data in the %1$sbooking settings%2$s."
-msgstr ""
-
-#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: classes/BringFraktguiden/Customs/ShopProblem.php:41
+#: classes/BringFraktguiden/Customs/ShopProblem.php:33
 #, php-format
 msgid "The shop needs an %1$sexporter number%2$s."
 msgstr ""
@@ -2388,16 +2411,16 @@ msgstr ""
 msgid "Fill in a post code."
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:150
-#: classes/class-bring-fraktguiden.php:151
+#: classes/class-bring-fraktguiden.php:152
+#: classes/class-bring-fraktguiden.php:153
 msgid "Bring settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:209
+#: classes/class-bring-fraktguiden.php:211
 msgid "View Bring Fraktguiden Settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:230
+#: classes/class-bring-fraktguiden.php:232
 msgid "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message."
 msgstr ""
 

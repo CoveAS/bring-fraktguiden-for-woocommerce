@@ -162,9 +162,23 @@ booking.
 ## Where the plugin keeps consent and the cargo type
 
 The consent is the setting `customs_consent`, on the Booking settings page.
-`CustomsConsent` reads it. The confirmation says how the whole shop works, so it
-is a setting and not a tick on each order. The booking sends `consent` only when
-the setting is on, because an absent field is not a refusal but a `false` is.
+`CustomsConsent` reads it and writes it. The confirmation says how the whole
+shop works, so it is a setting and not a tick on each order. The booking sends
+`consent` only when the setting is on, because an absent field is not a refusal
+but a `false` is.
+
+A shop also signs the consent from the booking screens. `CustomsWarning` carries
+the flag `needs_consent`, and the template
+`src/templates/admin/parts/customs-consent.bfg.php` turns it into a red callout
+with a Sign button. The button posts to `ConsentRoute`, which asks for
+`manage_options`, because one signature binds the whole shop.
+
+`resources/js/customs-consent.js` holds the browser side. It hides the callout
+at the press and turns the booking buttons on, then sends. A refused request
+brings the callout back with the reason, and the buttons go off again. A booking
+pressed in between waits for the answer, and a failed signature cancels it. The
+bulk booking button lives in `pro/assets/js/booking-admin.js`, outside the
+module bundle, so the module also puts `consentReady` on `window`.
 
 The cargo type is a select on the booking box of the order screen, in the field
 `_bring_nature_of_cargo`. `NatureOfCargo` holds the values and reads the form. A

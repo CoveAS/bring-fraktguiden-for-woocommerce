@@ -9,6 +9,7 @@
  * who closes the modal without a booking keeps the work.
  */
 
+import { applyConsent } from './customs-consent.js';
 import { showHsCodeLabels } from './hs-code-picker.js';
 import './hs-code-panel.js';
 
@@ -41,6 +42,10 @@ async function send(codes) {
 
 	holder.innerHTML = html;
 	showHsCodeLabels(holder);
+
+	// The markup carries the customs consent callout, so the Book button waits
+	// for the signature.
+	applyConsent();
 }
 
 /** Return the code of every row, keyed by product id. */
@@ -63,6 +68,7 @@ if (holder) {
 	document.addEventListener('bfg:bulk-open', (event) => {
 		orders = event.detail.orders;
 		holder.innerHTML = '';
+		applyConsent();
 		send(null);
 	});
 

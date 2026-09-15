@@ -5,19 +5,16 @@ namespace BringFraktguiden\Customs;
 /**
  * A reason why a customs booking lacks data that the shop holds.
  *
- * These come from the shop settings, not from the order. Both customs rules
- * need the consent. Only an export needs the exporter number. See doc/export.md
- * and doc/nvit.md.
+ * These come from the shop settings, not from the order. See doc/export.md and
+ * doc/nvit.md.
+ *
+ * The missing consent is not here. The warning shows it as a callout with a
+ * button, because the shop signs it on the spot. See CustomsWarning.
  *
  * The warning is a warning only. Bring holds the real guard.
  */
 enum ShopProblem
 {
-	/**
-	 * The shop has not confirmed that the customs data is correct.
-	 */
-	case MissingConsent;
-
 	/**
 	 * The shop has no exporter number, such as a VAT or an EORI number.
 	 *
@@ -31,11 +28,6 @@ enum ShopProblem
 	public function message(): string
 	{
 		return match ($this) {
-			self::MissingConsent  => sprintf(
-				/* translators: %1$s and %2$s are the open and close tags of a link to the booking settings. */
-				__('The shop must confirm the customs data in the %1$sbooking settings%2$s.', 'bring-fraktguiden-for-woocommerce'),
-				...self::settings_link()
-			),
 			self::MissingExporter => sprintf(
 				/* translators: %1$s and %2$s are the open and close tags of a link to the booking settings. */
 				__('The shop needs an %1$sexporter number%2$s.', 'bring-fraktguiden-for-woocommerce'),

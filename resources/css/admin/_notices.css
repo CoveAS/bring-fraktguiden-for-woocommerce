@@ -241,3 +241,39 @@
     list-style: disc !important;
     padding-left: 1.25rem !important;
 }
+
+/* Customs consent callout
+   ========================================================================== */
+
+/* The shop signs the customs declaration here. The whole callout stays red,
+   because the signature carries a legal responsibility. */
+.bfg-consent .bfg-consent__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #991B1B !important;
+}
+
+.bfg-consent .bfg-consent__body p {
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+    color: inherit !important;
+}
+
+.bfg-consent__title {
+    font-size: 1rem !important;
+}
+
+.bfg-consent__scope {
+    opacity: 0.85;
+}
+
+.bfg-consent__error {
+    font-weight: 600 !important;
+}
+
+/* .bfg-notice-banner sets display: flex !important, so the hidden attribute
+   needs the same weight to win. */
+.bfg-consent[hidden] {
+    display: none !important;
+}

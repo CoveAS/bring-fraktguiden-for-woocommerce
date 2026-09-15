@@ -29,6 +29,7 @@ use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Booking\BulkBookingRoute;
+use BringFraktguiden\Customs\ConsentRoute;
 use BringFraktguiden\Customs\CustomsFields;
 use BringFraktguiden\Customs\HsCodeIndex;
 use BringFraktguiden\Customs\HsCodeIndexRoute;
@@ -59,6 +60,7 @@ class Bring_Fraktguiden {
 		RefreshLicense::init();
 		CustomsFields::init();
 		HsCodeIndexRoute::init();
+		ConsentRoute::init();
 		BulkBookingRoute::init();
 		BringFraktguidenPro::setup();
 

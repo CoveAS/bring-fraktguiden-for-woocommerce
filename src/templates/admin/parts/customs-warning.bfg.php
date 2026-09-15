@@ -6,8 +6,19 @@ use BringFraktguiden\Customs\CustomsWarning;
 /**
  * @var CustomsWarning $warning
  */
+
+// A warning that holds nothing but the missing consent prints the callout only.
+$bfg_has_rules = (bool) array_filter(
+	$warning->groups,
+	fn(array $group) => $group['lines'] || $group['shop_messages']
+);
 ?>
 
+<?php if ($warning->needs_consent) : ?>
+	<?php require __DIR__ . '/customs-consent.php'; ?>
+<?php endif; ?>
+
+<?php if ($bfg_has_rules) : ?>
 <div class="bfg-notice-banner bfg-booking-notice">
 	<?php require __DIR__ . '/notice-icon.php'; ?>
 	<div class="bfg-booking-notice__body">
@@ -43,3 +54,4 @@ use BringFraktguiden\Customs\CustomsWarning;
 		<?php endforeach; ?>
 	</div>
 </div>
+<?php endif; ?>

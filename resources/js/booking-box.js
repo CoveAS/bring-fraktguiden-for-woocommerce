@@ -9,6 +9,7 @@
  * holds the true form, so the box waits for no answer and keeps the caret.
  */
 
+import { applyConsent, consentReady } from './customs-consent.js';
 import { initCustomSelects } from './custom-select.js';
 import { showHsCodeLabels } from './hs-code-picker.js';
 import './hs-code-panel.js';
@@ -81,6 +82,10 @@ function setBusy(box, busy) {
 	box.querySelectorAll('button').forEach((button) => {
 		button.disabled = busy;
 	});
+
+	// The loop turns every button back on, so the consent puts its own block
+	// back on the Book button.
+	applyConsent();
 }
 
 /** Post the box to WordPress and return what comes back. */
@@ -187,9 +192,21 @@ function setStatus(box, state) {
  *
  * A booking clears the draft, and a save that lands after it would write a
  * draft back onto a booked order.
+ *
+ * A booking also waits for the customs signature in flight. A signature that
+ * fails cancels the booking, and the callout says why.
  */
 async function book(box) {
 	setBusy(box, true);
+
+	try {
+		await consentReady();
+	} catch {
+		setBusy(box, false);
+
+		return;
+	}
+
 	await pendingSave;
 	send(box, 'book');
 }
@@ -209,6 +226,7 @@ function replace(box, html) {
 	box.replaceWith(fresh);
 	initCustomSelects(fresh);
 	showHsCodeLabels(fresh);
+	applyConsent();
 }
 
 /** Keep the draft, but wait until the shop worker stops typing. */
@@ -322,6 +340,7 @@ document.addEventListener('click', (event) => {
 /** Build the select widget of every box already on the page. */
 function start() {
 	document.querySelectorAll('[data-bfg-booking]').forEach(initCustomSelects);
+	applyConsent();
 }
 
 // A module script runs after the document is parsed, so the ready event may

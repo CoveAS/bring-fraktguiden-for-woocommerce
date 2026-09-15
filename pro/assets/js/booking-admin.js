@@ -115,7 +115,20 @@ jQuery(function ($) {
 		bookDialog.showModal();
 	}
 
+	/**
+	 * Book every selected order, but wait for the customs signature in flight.
+	 *
+	 * A signature that fails cancels the booking, and the callout of the modal
+	 * says why. customs-consent.js puts the wait on the window, because this
+	 * file sits outside the module bundle.
+	 */
 	function send_bulk_booking() {
+		var ready = window.bfgConsentReady ? window.bfgConsentReady() : Promise.resolve();
+
+		ready.then( run_bulk_booking, function () {} );
+	}
+
+	function run_bulk_booking() {
 		var order_ids = get_checked_order_ids();
 		if ( ! order_ids.length ) {
 			return;

@@ -451,3 +451,29 @@ body.wp-admin .bfg .button-primary:disabled {
     line-height: 1.5;
     color: var(--bfg-text-secondary);
 }
+
+/* Danger Button
+   ========================================================================== */
+
+.bfg-btn--danger,
+a.bfg-btn--danger,
+.bfg a.bfg-btn--danger {
+    background: #B91C1C;
+    color: #ffffff;
+    border: 1px solid #B91C1C;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bfg-btn--danger:hover,
+a.bfg-btn--danger:hover,
+.bfg a.bfg-btn--danger:hover {
+    background: #991B1B;
+    border-color: #991B1B;
+    color: #ffffff;
+}
+
+.bfg-btn--danger:active {
+    background: #7F1D1D;
+    border-color: #7F1D1D;
+    transform: translateY(1px);
+}

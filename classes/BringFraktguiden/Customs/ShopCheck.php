@@ -10,6 +10,9 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  * The check reads the shop settings. It says nothing about the order lines.
  * CustomsRoute decides which rule covers a booking.
  *
+ * The customs consent is not here. CustomsWarning reads it on its own, because
+ * the warning shows it as a callout and not as a message.
+ *
  * The cargo type is not here. The booking form asks for it per order, and the
  * select always holds a value. See NatureOfCargo.
  */
@@ -27,10 +30,6 @@ class ShopCheck
 	public static function problems(string $route): array
 	{
 		$problems = [];
-
-		if (!CustomsConsent::given()) {
-			$problems[] = ShopProblem::MissingConsent;
-		}
 
 		if (CustomsRoute::EXPORT === $route && '' === (string) Fraktguiden_Helper::get_option('customs_exporter_number')) {
 			$problems[] = ShopProblem::MissingExporter;

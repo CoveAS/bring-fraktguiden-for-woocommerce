@@ -10,6 +10,10 @@ use WC_Order;
  * The warning holds the problems. It never stops a booking. Bring holds the
  * real guard, and answers with the reason when it refuses.
  *
+ * The missing consent is the one exception. It carries its own flag, because
+ * the warning shows it as a callout with a Sign button, and the booking waits
+ * until the shop signs. See CustomsConsent.
+ *
  * CustomsRoute says which rule applies.
  */
 class CustomsWarning
@@ -19,6 +23,7 @@ class CustomsWarning
 	 */
 	private function __construct(
 		public readonly array $groups,
+		public readonly bool $needs_consent,
 	) {
 	}
 
@@ -38,16 +43,20 @@ class CustomsWarning
 
 		$lines         = self::lines($order, $route);
 		$shop_messages = self::shop_messages($route);
+		$needs_consent = !CustomsConsent::given();
 
-		if (!$lines && !$shop_messages) {
+		if (!$lines && !$shop_messages && !$needs_consent) {
 			return null;
 		}
 
-		return new self([[
-			'route'         => $route,
-			'lines'         => $lines,
-			'shop_messages' => $shop_messages,
-		]]);
+		return new self(
+			[[
+				'route'         => $route,
+				'lines'         => $lines,
+				'shop_messages' => $shop_messages,
+			]],
+			$needs_consent
+		);
 	}
 
 	/**
@@ -66,7 +75,8 @@ class CustomsWarning
 	 */
 	public static function for_orders(array $orders, callable $service): ?self
 	{
-		$groups = [];
+		$groups        = [];
+		$needs_consent = false;
 
 		foreach ($orders as $order) {
 			$warning = self::for_order($order, $service($order));
@@ -74,6 +84,8 @@ class CustomsWarning
 			if (!$warning) {
 				continue;
 			}
+
+			$needs_consent = $needs_consent || $warning->needs_consent;
 
 			foreach ($warning->groups as $group) {
 				$groups[$group['route']] = self::merge($groups[$group['route']] ?? null, $group);
@@ -93,7 +105,7 @@ class CustomsWarning
 			}
 		}
 
-		return new self($sorted);
+		return new self($sorted, $needs_consent);
 	}
 
 	/**
