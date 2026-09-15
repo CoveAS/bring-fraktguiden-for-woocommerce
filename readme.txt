@@ -13,53 +13,32 @@ Stable tag: 1.11.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Bring Fraktguiden provides shipping calculation based on rates from bring.no.
+Bring Fraktguiden shows your customers the real price of shipping, from bring.no.
 
 == Description ==
 
-Bring Fraktguiden provides shipping calculations based on shipping rates from bring.no All standard shipping methods from Bring are built-in. Volume calculations based on product dimensions and weight.
-**NB! You must have a [Mybring.com](https://www.mybring.com) account and API credentials to use this plugin.**
+Bring Fraktguiden asks Bring for the price of the cart, so the shipping cost at checkout matches what you pay.
+
+* All standard Bring services, from mailbox parcels to pallets.
+* The price follows the cart. The plugin measures the products and packs them into parcels.
+* Pickup points at checkout, with a map.
+* Fallback prices for carts that fall through
+* Works with the block checkout and the classic checkout.
+* Easily extendible via hooks and actions
+
+A setup page walks you through five steps, from the shipping zone to a test parcel. You need a free [Mybring](https://www.mybring.com) account for the prices.
+
+We also sell a Pro license. It lets you book orders directly from WooCommerce, print labels, set a free shipping threshold per service and unlock pickup points. Read more at [bringfraktguiden.no](https://bringfraktguiden.no/).
+
+Need help? See [support.bringfraktguiden.no](https://support.bringfraktguiden.no).
 
 == Installation ==
 
-When you install Bring, you need to head to the settings page to start configuring Bring to your specifications.
+1. Install the plugin from the WordPress plugin directory, or upload `bring-fraktguiden-for-woocommerce` to `/wp-content/plugins/`.
+2. Activate the plugin.
+3. Open the Bring Fraktguiden menu in the WordPress admin.
 
-1. Upload `bring-fraktguiden-for-woocommerce` to the `/wp-content/plugins/` directory or install through Wordpress
-2. Activate the plugin
-3. WooCommerce → Settings → Shipping
-4. Add Bring Fraktguiden to a shipping zone
-5. Go to WooCommerce → Bring settings
-6. Enter your Mybring API credentials
-7. Go to WooCommerce → Bring settings → Shipping options
-5. Select the bring products`*` you want to enable
-6. Start shipping!
-
-`*` The most commonly used bring products are "Pakke til hentested" and/or "Pakke i postkassen"
-
-== Pro version ==
-
-We offer a [PRO license](https://bringfraktguiden.no/) adds more features to the plugin.
-
-* Book orders with mybring directly from WooCommerce
-* Configure free shipping threshold for bring services
-* Enable pickup points for supported services
-
-Read more about the pro features on [https://bringfraktguiden.no/](https://bringfraktguiden.no/).
-
-== Prerequisites ==
-
-To ensure Bring will work correctly, you must set the following:
-
-1. **Dimension and weight units**
-    * WooCommerce > Settings > Products > Set your default dimensions
-
-2. **Currency**
-    * WooCommerce > Settings > General > Set store currency
-
-3. **Product dimensions**
-    * Woocommerce > Products > Select a products > Set the dimensions for the item
-        - This will fallback to the options in the Bring Settings if you don't set them here.
-
+The setup page lists five steps. It adds Bring to a shipping zone, picks your services, sets a fallback price, connects your Mybring account and tests a parcel. Each step marks itself done when you finish it.
 
 == Frequently Asked Questions ==
 See faq.txt for frequently asked questions
