@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T19:07:59+00:00\n"
+"POT-Creation-Date: 2026-09-15T20:00:29+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -620,7 +620,7 @@ msgstr "Legg til Bring"
 #: build/templates/admin/pages/home/connect-account.php:20
 #: src/templates/admin/pages/home/connect-account.bfg.php:20
 msgid "Bring Fraktguiden for WooCommerce: I would like a shipping agreement"
-msgstr ""
+msgstr "Bring Fraktguiden for WooCommerce: Jeg ønsker en fraktavtale"
 
 #. translators: %s is the address of the shop.
 #: build/templates/admin/pages/home/connect-account.php:23
@@ -628,8 +628,16 @@ msgstr ""
 #, php-format
 msgid ""
 "Hi, I have a WooCommerce shop, %s, and I would like an account.\n"
-"Can you help me?"
+"Can you help me?\n"
+"\n"
+"Packages we send per month (approximately):\n"
+"Phone number (optional):"
 msgstr ""
+"Hei, jeg har en WooCommerce-butikk, %s, og ønsker en konto.\n"
+"Kan dere hjelpe meg?\n"
+"\n"
+"Antall sendinger per måned (omtrent):\n"
+"Telefonnummer (valgfritt):"
 
 #: build/templates/admin/pages/home/connect-account.php:45
 #: src/templates/admin/pages/home/connect-account.bfg.php:45

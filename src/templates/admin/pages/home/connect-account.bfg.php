@@ -20,7 +20,7 @@ $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
 $bfg_quickship_subject = rawurlencode(__('Bring Fraktguiden for WooCommerce: I would like a shipping agreement', 'bring-fraktguiden-for-woocommerce'));
 $bfg_quickship_body = rawurlencode(sprintf(
 	/* translators: %s is the address of the shop. */
-	__("Hi, I have a WooCommerce shop, %s, and I would like an account.\nCan you help me?", 'bring-fraktguiden-for-woocommerce'),
+	__("Hi, I have a WooCommerce shop, %s, and I would like an account.\nCan you help me?\n\nPackages we send per month (approximately):\nPhone number (optional):", 'bring-fraktguiden-for-woocommerce'),
 	home_url()
 ));
 ?>
