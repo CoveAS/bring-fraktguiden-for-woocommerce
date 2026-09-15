@@ -77,10 +77,11 @@
     min-width: 11rem;
 }
 
-/* A time holds four digits, so it needs none of the room a date needs. */
+/* A time holds four digits, so it needs none of the room a date needs. The
+   width of every other input is 100% !important, so this one says it again. */
 .bfg-booking-form__datetime input[type="time"] {
-    flex: none;
-    width: 8rem;
+    flex: 0 0 8rem;
+    width: 8rem !important;
 }
 
 .bfg-booking-form__services {
