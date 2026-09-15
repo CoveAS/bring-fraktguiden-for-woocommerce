@@ -66,7 +66,8 @@ class BulkHsCodesRoute
 	 *
 	 * Bring sells some services inside one country only, and refuses a booking
 	 * that leaves the country on such a service. The banner names every order
-	 * of the selection that the sender country and the service disagree on.
+	 * of the selection that the sender country and the service disagree on, and
+	 * the service it ships with, so the worker knows which one to change.
 	 *
 	 * @param int[] $order_ids
 	 */
@@ -83,11 +84,17 @@ class BulkHsCodesRoute
 				continue;
 			}
 
-			if (CrossBorderRule::allows($from, $order->get_shipping_country(), BulkOrders::service($order))) {
+			$service = BulkOrders::service($order);
+
+			if (CrossBorderRule::allows($from, $order->get_shipping_country(), $service)) {
 				continue;
 			}
 
-			$cross_border_orders[] = $order;
+			$cross_border_orders[] = [
+				'url'     => $order->get_edit_order_url(),
+				'number'  => (string) $order->get_order_number(),
+				'service' => self::service_name($service),
+			];
 		}
 
 		if (!$cross_border_orders) {
@@ -98,6 +105,14 @@ class BulkHsCodesRoute
 		require dirname(__DIR__, 3) . '/build/templates/admin/parts/cross-border-warning.php';
 
 		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Return the name Bring gives the service, or the code when it has none.
+	 */
+	private static function service_name(string $service): string
+	{
+		return Fraktguiden_Helper::get_service_data_for_key($service)['productName'] ?? $service;
 	}
 
 	/**

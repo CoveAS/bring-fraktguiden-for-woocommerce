@@ -5,9 +5,9 @@
  *
  * The booking box shows the banner for the one order it books, and passes an
  * empty list. The bulk booking modal books many orders, so it passes the
- * orders it found and the banner names them.
+ * orders it found and the banner names each one with its service.
  *
- * @var WC_Order[] $cross_border_orders
+ * @var array<int, array{url: string, number: string, service: string}> $cross_border_orders
  */
 ?>
 
@@ -19,13 +19,13 @@
 			<p><t>These orders go to another country, so their booking fails. Pick a service that crosses the border.</t></p>
 
 			<div class="bfg-booking-notice__group">
-				<p class="bfg-booking-notice__label"><t>Orders</t></p>
 				<ul>
 					<?php foreach ($cross_border_orders as $cross_border_order) : ?>
 						<li>
-							<a href="<?php echo esc_url($cross_border_order->get_edit_order_url()); ?>" target="_blank" rel="noopener">
-								<?php echo esc_html('#' . $cross_border_order->get_order_number()); ?>
+							<a href="<?php echo esc_url($cross_border_order['url']); ?>" target="_blank" rel="noopener">
+								<?php echo esc_html('#' . $cross_border_order['number']); ?>
 							</a>
+							<?php echo esc_html($cross_border_order['service']); ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>

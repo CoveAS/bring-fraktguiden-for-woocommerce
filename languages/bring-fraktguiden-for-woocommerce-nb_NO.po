@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T16:55:48+00:00\n"
+"POT-Creation-Date: 2026-09-15T17:00:07+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2078,10 +2078,6 @@ msgstr ""
 "Disse ordrene går til et annet land, så bookingen feiler. Velg en tjeneste "
 "som krysser grensen."
 
-#: build/templates/admin/parts/cross-border-warning.php:22
-msgid "Orders"
-msgstr "Ordrer"
-
 #: build/templates/admin/parts/cross-border-warning.php:34
 msgid "Bring carries this service inside one country only."
 msgstr "Bring frakter denne tjenesten bare innenfor ett land."
@@ -3655,6 +3651,9 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "Orders"
+#~ msgstr "Ordrer"
 
 #~ msgid "This order leaves Norway, so Bring needs customs data."
 #~ msgstr "Denne ordren går ut av Norge, så Bring trenger tolldata."
