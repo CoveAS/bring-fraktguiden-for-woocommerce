@@ -25,9 +25,13 @@ if ( empty( $output ) ) {
 	die( "ERROR: No version tag found for the current git commit.\n" );
 }
 $version = trim( $output[0] );
-if ( ! preg_match( '/^\d+\.\d+\.\d+$/', $version ) ) {
-	die( "ERROR: Invalid version number in git tag, \"$version\". Should be \"#.#.#\".\n" );
+if ( ! preg_match( '/^\d+\.\d+\.\d+(-rc\d+)?$/', $version, $rc ) ) {
+	die( "ERROR: Invalid version number in git tag, \"$version\". Should be \"#.#.#\" or \"#.#.#-rc#\".\n" );
 }
+// A release candidate goes to trunk only. WordPress serves the stable tag, so no
+// site updates to it. Testers download it as the Development Version.
+$is_dev = ! empty( $rc[1] );
+echo $is_dev ? "Publishing development version $version to trunk only.\n" : "Publishing release $version.\n";
 unset( $output );
 // Go back
 chdir( $cwd );
@@ -53,10 +57,14 @@ foreach ( $tags as $tag ) {
 }
 $version_exists && die( "ERROR: Version, $version, already exists" );
 
-$esc_version = str_replace( '.', '\.', $version );
+$esc_version = preg_quote( $version, '/' );
 echo "Checking readme.txt version number\n";
-$content = `head -n 20 $dir/readme.txt`;
-if ( ! preg_match( '/Stable tag:\s+' . $esc_version . '/', $content, $matches ) ) {
+$content        = `head -n 20 $dir/readme.txt`;
+$stable_is_this = (bool) preg_match( '/Stable tag:\s+' . $esc_version . '\s/', $content );
+if ( $is_dev && $stable_is_this ) {
+	die( "ERROR: Stable tag names $version in readme.txt. A development version has no tag to serve.\n" );
+}
+if ( ! $is_dev && ! $stable_is_this ) {
 	die( "Stable tag doesn't match $version in readme.txt" );
 }
 
@@ -236,9 +244,14 @@ if ( $answer !== 'y' ) {
 }
 
 echo "Committing to SVN\n";
-exec( 'svn commit --username Forsvunnet -m "Synchronized trunk with master branch from Github"', $output, $result );
+$message = $is_dev ? "Published development version $version" : 'Synchronized trunk with master branch from Github';
+exec( "svn commit --username Forsvunnet -m \"$message\"", $output, $result );
 if ( $result ) {
 	die( "ERROR: Failed to commit to SVN.\n" );
+}
+if ( $is_dev ) {
+	echo "Done. Testers get $version from the Development Version download.\n";
+	exit;
 }
 chdir( '..' );
 exec( "svn cp trunk tags/$version && svn commit -m \"Updated the version number to $version\"", $output, $result );
