@@ -149,6 +149,21 @@ document.addEventListener('click', (event) => {
 		return;
 	}
 
+	const label = event.target.closest('[data-bfg-hs-label]');
+
+	if (label) {
+		// The browser forwards a label click to the mark without the shift
+		// key, so the mark flips here instead.
+		event.preventDefault();
+
+		const labelled = panel.querySelector(`#${CSS.escape(label.htmlFor)}`);
+
+		labelled.checked = !labelled.checked;
+		markRow(panel, labelled, event.shiftKey);
+
+		return;
+	}
+
 	const button = event.target.closest('button');
 
 	if (!button) {

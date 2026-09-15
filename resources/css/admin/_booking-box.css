@@ -329,6 +329,13 @@
     font-weight: 600;
 }
 
+/* The name and the image both mark the row, and a shift click marks a range. */
+.bfg-customs-products__name,
+.bfg-customs-products__image {
+    cursor: pointer;
+    user-select: none;
+}
+
 /* The filter of the HS code table hides every row that already has a code. */
 .bfg-customs-products__filter {
     display: flex;

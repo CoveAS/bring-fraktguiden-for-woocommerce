@@ -56,13 +56,22 @@ $hs_filter = $hs_missing > 0;
 		<div class="bfg-customs-products__row<?php echo $hs_filter && '' !== $row['code'] ? ' bfg-customs-products__row--filtered' : ''; ?>">
 			<input
 				type="checkbox"
+				id="bfg-hs-mark-<?php echo esc_attr($id); ?>"
 				class="bfg-customs-products__mark"
 				data-bfg-hs-mark="<?php echo esc_attr($id); ?>"
-				aria-label="<?php printf(esc_attr__('Mark %s', 'bring-fraktguiden-for-woocommerce'), esc_attr($row['name'])); ?>"
 			>
-			<div class="bfg-customs-products__image"><?php echo wp_kses_post($row['image']); ?></div>
+			<label
+				class="bfg-customs-products__image"
+				for="bfg-hs-mark-<?php echo esc_attr($id); ?>"
+				data-bfg-hs-label
+				aria-hidden="true"
+			><?php echo wp_kses_post($row['image']); ?></label>
 			<div class="bfg-customs-products__field">
-				<span class="bfg-customs-products__name"><?php echo esc_html($row['name']); ?></span>
+				<label
+					class="bfg-customs-products__name"
+					for="bfg-hs-mark-<?php echo esc_attr($id); ?>"
+					data-bfg-hs-label
+				><?php echo esc_html($row['name']); ?></label>
 				<?php echo HsCodeButton::html('', $row['code'], ['hs-product' => (string) $id]); ?>
 			</div>
 		</div>
