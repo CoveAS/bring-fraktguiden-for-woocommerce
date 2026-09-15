@@ -15,8 +15,7 @@
 	<?php require __DIR__ . '/notice-icon.php'; ?>
 	<div class="bfg-booking-notice__body">
 		<?php if ($cross_border_orders) : ?>
-			<p><strong><t>Bring carries some of these services inside one country only.</t></strong></p>
-			<p><t>These orders go to another country, so their booking fails. Pick a service that crosses the border.</t></p>
+			<p><strong><t>These orders leave the country on a service Bring carries inside one country only, so their booking fails. Pick a service that crosses the border.</t></strong></p>
 
 			<div class="bfg-booking-notice__group">
 				<ul>
@@ -31,8 +30,7 @@
 				</ul>
 			</div>
 		<?php else : ?>
-			<p><strong><t>Bring carries this service inside one country only.</t></strong></p>
-			<p><t>The order goes to another country, so the booking fails. Pick a service that crosses the border.</t></p>
+			<p><strong><t>This order leaves the country on a service Bring carries inside one country only, so the booking fails. Pick a service that crosses the border.</t></strong></p>
 		<?php endif; ?>
 	</div>
 </div>
