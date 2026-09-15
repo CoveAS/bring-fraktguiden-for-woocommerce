@@ -7,6 +7,7 @@
 
 namespace BringFraktguidenPro\Booking;
 
+use BringFraktguiden\Booking\BulkBookingGroups;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguidenPro\Booking\Box\BookingBox;
 use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
@@ -303,16 +304,32 @@ class Bring_Booking {
 	/**
 	 * Bulk booking requests
 	 *
+	 * The report names one status per order. `ok` means the order booked now,
+	 * `booked` means it already held a booking, and `skipped` means it carries
+	 * no Bring shipping line. The caller prints the labels of the first two.
+	 *
 	 * @param array $post_ids Array of WC_Order IDs.
 	 */
 	public static function bulk_send_booking( $post_ids ) {
 		$report = [];
 		foreach ( $post_ids as $post_id ) {
 			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
+			$status  = BulkBookingGroups::of_order( $adapter->order );
+			$message = '';
+
+			if ( BulkBookingGroups::BOOK !== $status ) {
+				$report[ $post_id ] = [
+					'status'       => $status,
+					'order_id'     => $post_id,
+					'message'      => $message,
+					'order_status' => self::get_status( $post_id ),
+					'url'          => get_edit_post_link( $post_id, 'edit' ),
+				];
+				continue;
+			}
+
 			try {
-				if ( ! $adapter->has_booking_consignments() ) {
-					self::send_booking( $adapter->order, true );
-				}
+				self::send_booking( $adapter->order, true );
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
 					'status'       => 'error',
@@ -324,7 +341,6 @@ class Bring_Booking {
 				continue;
 			}
 			$status = 'ok';
-			$message = '';
 			if ($adapter->has_booking_errors()) {
 				$status = 'error';
 				$message = esc_attr__('Error: Could not book the order!', 'bring-fraktguiden-for-woocommerce');

@@ -1,8 +1,12 @@
 <?php
 
-namespace BringFraktguiden\Customs;
+namespace BringFraktguiden\Booking;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Customs\BulkHsCodes;
+use BringFraktguiden\Customs\BulkOrders;
+use BringFraktguiden\Customs\CustomsWarning;
+use BringFraktguiden\Customs\CustomsWarningView;
 use BringFraktguiden\Services\CrossBorderRule;
 use WC_Order;
 use WP_REST_Request;
@@ -13,14 +17,15 @@ use WP_REST_Server;
  * The one route the bulk booking modal talks to.
  *
  * The payload holds the selected order ids and the HS codes a shop worker set.
- * The codes are written first, and the answer carries the fresh markup of every
- * warning and of the table. So the browser never builds any of it itself.
+ * The codes are written first, and the answer carries the fresh markup of the
+ * groups, of every warning and of the table. So the browser never builds any of
+ * it itself.
  */
-class BulkHsCodesRoute
+class BulkBookingRoute
 {
 	public const ROUTE_NAMESPACE = 'bring-fraktguiden/v1';
 
-	public const ROUTE = '/orders/hs-codes';
+	public const ROUTE = '/orders/bulk-booking';
 
 	public static function init(): void
 	{
@@ -54,11 +59,44 @@ class BulkHsCodesRoute
 
 		BulkHsCodes::save($order_ids, (array) $request->get_param('codes'));
 
-		$html = self::cross_border_html($order_ids)
+		$html = self::groups_html($order_ids)
+			. self::cross_border_html($order_ids)
 			. self::warning_html($order_ids)
 			. self::html(BulkHsCodes::rows($order_ids));
 
 		return new WP_REST_Response(['html' => $html]);
+	}
+
+	/**
+	 * Render the three groups of the selection.
+	 *
+	 * @param int[] $order_ids
+	 */
+	private static function groups_html(array $order_ids): string
+	{
+		$booking_groups = [];
+
+		foreach (BulkBookingGroups::of($order_ids) as $group => $orders) {
+			$booking_groups[$group] = array_map(
+				fn(WC_Order $order) => [
+					'url'    => $order->get_edit_order_url(),
+					'number' => (string) $order->get_order_number(),
+				],
+				$orders
+			);
+		}
+
+		$booking_settings_url = admin_url('admin.php?page=bring_fraktguiden_booking');
+
+		$booking_without_bring = filter_var(
+			Fraktguiden_Helper::get_option('booking_without_bring'),
+			FILTER_VALIDATE_BOOLEAN
+		);
+
+		ob_start();
+		require dirname(__DIR__, 3) . '/build/templates/admin/parts/booking-groups.php';
+
+		return (string) ob_get_clean();
 	}
 
 	/**

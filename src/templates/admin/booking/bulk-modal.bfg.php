@@ -7,8 +7,8 @@
  * @var string $customer_number The customer number the shop books with.
  * @var array  $shipping_date  Keys date, hour and minute.
  * @var string $book_label     The label of the booking button.
- * @var string $hs_url         The route the HS code table comes from.
- * @var string $hs_nonce       The nonce of that route.
+ * @var string $bulk_url       The one route the modal loads its markup from.
+ * @var string $bulk_nonce     The nonce of that route.
  */
 ?>
 <dialog class="bfg bfg-modal bfg-modal--full" id="bfg-bulk-book">
@@ -21,17 +21,10 @@
 			<bfg-notice><?php echo esc_html($customer_error); ?></bfg-notice>
 		<?php endif; ?>
 
-		<p><t>This books only the orders that hold no booking yet.</t></p>
-
-		<div class="bfg-field">
-			<span class="label"><t>Selected orders</t></span>
-			<p class="bfg-bulk-book__orders" id="bfg-bulk-book-orders"></p>
-		</div>
-
 		<div
-			data-bfg-bulk-hs
-			data-url="<?php echo esc_url($hs_url); ?>"
-			data-nonce="<?php echo esc_attr($hs_nonce); ?>"
+			data-bfg-bulk-modal
+			data-url="<?php echo esc_url($bulk_url); ?>"
+			data-nonce="<?php echo esc_attr($bulk_nonce); ?>"
 		></div>
 
 		<div class="bfg-field">

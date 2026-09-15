@@ -1,9 +1,9 @@
 /**
- * The HS code table of the bulk booking modal.
+ * The body of the bulk booking modal.
  *
  * The modal renders in the page footer, before the shop worker picks an order.
- * So the table arrives from the server when the modal opens, and the browser
- * never builds it.
+ * So the groups, the warnings and the HS code table all arrive from the server
+ * when the modal opens, and the browser never builds them.
  *
  * A code is a trait of the product, so the table writes it at once. A worker
  * who closes the modal without a booking keeps the work.
@@ -17,9 +17,9 @@ const SAVE_DELAY = 600;
 let saveTimer = null;
 let orders = [];
 
-const holder = document.querySelector('[data-bfg-bulk-hs]');
+const holder = document.querySelector('[data-bfg-bulk-modal]');
 
-/** Send the order ids and the codes, and put the fresh table in place. */
+/** Send the order ids and the codes, and put the fresh markup in place. */
 async function send(codes) {
 	const answer = await fetch(holder.dataset.url, {
 		method: 'POST',

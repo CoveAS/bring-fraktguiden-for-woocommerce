@@ -96,7 +96,6 @@ jQuery(function ($) {
 
 		var order_ids = get_checked_order_ids();
 
-		$( '#bfg-bulk-book-orders' ).text( order_ids.join( ' - ' ) );
 		$( '#bfg-bulk-book-send' ).prop( 'disabled', order_ids.length === 0 );
 
 		// The HS code table is its own module, and it loads the rows of these

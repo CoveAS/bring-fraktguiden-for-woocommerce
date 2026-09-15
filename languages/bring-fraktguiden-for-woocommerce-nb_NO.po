@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T17:00:07+00:00\n"
+"POT-Creation-Date: 2026-09-15T17:13:21+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -57,14 +57,14 @@ msgid "Mybring Booking"
 msgstr "Mybring Booking"
 
 #: build/templates/admin/booking/bulk-modal.php:17
-#: build/templates/admin/booking/bulk-modal.php:69
-#: build/templates/admin/booking/bulk-modal.php:75
+#: build/templates/admin/booking/bulk-modal.php:62
+#: build/templates/admin/booking/bulk-modal.php:68
 #: build/templates/admin/pages/home.php:166
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
-#: src/templates/admin/booking/bulk-modal.bfg.php:68
+#: src/templates/admin/booking/bulk-modal.bfg.php:61
 #: src/templates/admin/pages/home.bfg.php:148
 #: src/templates/admin/pages/pro.bfg.php:147
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
@@ -72,26 +72,18 @@ msgstr "Mybring Booking"
 msgid "Close"
 msgstr "Lukk"
 
-#: build/templates/admin/booking/bulk-modal.php:29
-msgid "This books only the orders that hold no booking yet."
-msgstr "Dette bestiller bare ordrene som ikke er bestilt fra før."
-
 #: build/templates/admin/booking/bulk-modal.php:32
-msgid "Selected orders"
-msgstr "Valgte bestillinger"
-
-#: build/templates/admin/booking/bulk-modal.php:39
 #: build/templates/admin/booking/form.php:45
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr "Kundenummer"
 
-#: build/templates/admin/booking/bulk-modal.php:52
+#: build/templates/admin/booking/bulk-modal.php:45
 #: build/templates/admin/booking/form.php:77
 msgid "Shipping date"
 msgstr "Fraktdato"
 
-#: build/templates/admin/booking/bulk-modal.php:68
+#: build/templates/admin/booking/bulk-modal.php:61
 msgid "Mybring Booking errors"
 msgstr "Mybring Booking feil"
 
@@ -222,7 +214,7 @@ msgstr "Bring avviste denne bookingen"
 
 #: build/templates/admin/booking/history.php:22
 #: pro/booking/box/BookingSender.php:113
-#: pro/booking/class-bring-booking.php:255
+#: pro/booking/class-bring-booking.php:256
 msgid "Booked with Bring"
 msgstr "Reservert hos Bring"
 
@@ -319,7 +311,7 @@ msgstr "Mottaker"
 #: build/templates/admin/pages/booking.php:14
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
-#: pro/booking/views/class-bring-booking-orders-view.php:76
+#: pro/booking/views/class-bring-booking-orders-view.php:77
 msgid "Booking"
 msgstr "Booking"
 
@@ -2066,6 +2058,42 @@ msgstr "dager"
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
+#: build/templates/admin/parts/booking-groups.php:16
+#: src/templates/admin/parts/booking-groups.bfg.php:16
+msgid "Bring books these orders"
+msgstr "Bring booker disse ordrene"
+
+#: build/templates/admin/parts/booking-groups.php:20
+#: src/templates/admin/parts/booking-groups.bfg.php:20
+msgid "These orders already hold a booking"
+msgstr "Disse ordrene har allerede en booking"
+
+#: build/templates/admin/parts/booking-groups.php:21
+#: src/templates/admin/parts/booking-groups.bfg.php:21
+msgid "Bring does not book them again. Their labels still print."
+msgstr "Bring booker dem ikke på nytt. Etikettene deres skrives likevel ut."
+
+#: build/templates/admin/parts/booking-groups.php:24
+#: src/templates/admin/parts/booking-groups.bfg.php:24
+msgid "Bring books none of these orders"
+msgstr "Bring booker ingen av disse ordrene"
+
+#: build/templates/admin/parts/booking-groups.php:26
+#: src/templates/admin/parts/booking-groups.bfg.php:26
+msgid "They carry no shipping line at all, so Bring has nothing to book."
+msgstr "De har ingen fraktlinje, så Bring har ingenting å booke."
+
+#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
+#: build/templates/admin/parts/booking-groups.php:29
+#: src/templates/admin/parts/booking-groups.bfg.php:29
+#, php-format
+msgid ""
+"They carry no Bring shipping service. Turn on %1$sAllow booking without "
+"Bring shipping%2$s to book them anyway."
+msgstr ""
+"De har ingen Bring fraktlinje. Slå på %1$sTillat booking av ordre uten en "
+"bring fraktlinje%2$s for å booke dem likevel."
+
 #: build/templates/admin/parts/cross-border-warning.php:18
 msgid "Bring carries some of these services inside one country only."
 msgstr "Bring frakter noen av disse tjenestene bare innenfor ett land."
@@ -3416,24 +3444,24 @@ msgstr ""
 "Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
 "bring_booking_labels’."
 
-#: pro/booking/class-bring-booking.php:108
+#: pro/booking/class-bring-booking.php:109
 msgid "Changing status because the label was downloaded."
 msgstr "Endrer status fordi etiketten ble lastet ned."
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:123
-#: pro/booking/class-bring-booking.php:129
-#: pro/booking/class-bring-booking.php:148
+#: pro/booking/class-bring-booking.php:124
+#: pro/booking/class-bring-booking.php:130
+#: pro/booking/class-bring-booking.php:149
 msgid "Awaiting Shipment"
 msgstr "Avventer frakt"
 
-#: pro/booking/class-bring-booking.php:234
+#: pro/booking/class-bring-booking.php:235
 msgid "Booking errors. See the Bring Booking box for details."
 msgstr ""
 "Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
 "detaljer."
 
-#: pro/booking/class-bring-booking.php:330
+#: pro/booking/class-bring-booking.php:346
 msgid "Error: Could not book the order!"
 msgstr "Feil: Kunne ikke booke ordren!"
 
@@ -3553,7 +3581,7 @@ msgstr "Sammenslåtte PDF etiketter"
 msgid "Your tracking number:"
 msgstr "Sporingsnummer:"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:63
+#: pro/booking/views/class-bring-booking-orders-view.php:64
 msgid "Bring - Print labels"
 msgstr "Bring - Etiketter"
 
@@ -3651,6 +3679,12 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "This books only the orders that hold no booking yet."
+#~ msgstr "Dette bestiller bare ordrene som ikke er bestilt fra før."
+
+#~ msgid "Selected orders"
+#~ msgstr "Valgte bestillinger"
 
 #~ msgid "Orders"
 #~ msgstr "Ordrer"
