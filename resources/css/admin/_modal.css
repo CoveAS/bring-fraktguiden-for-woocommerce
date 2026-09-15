@@ -120,3 +120,11 @@
     height: calc(100dvh - 2rem);
     max-height: none;
 }
+
+/* A wide screen gets a bigger margin. */
+@media (min-width: 1280px) {
+    .bfg-modal--full {
+        width: calc(100vw - 4rem);
+        height: calc(100dvh - 4rem);
+    }
+}
