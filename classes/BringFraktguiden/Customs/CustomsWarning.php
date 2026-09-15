@@ -15,14 +15,10 @@ use WC_Order;
 class CustomsWarning
 {
 	/**
-	 * @param array<int, string>                          $reasons       CustomsRoute constants.
-	 * @param array<int, array{name: string, url: ?string, messages: array<int, string>}> $lines
-	 * @param array<int, string>                          $shop_messages
+	 * @param array<int, array{route: string, lines: array<int, array{name: string, url: ?string, messages: array<int, string>}>, shop_messages: array<int, string>}> $groups
 	 */
 	private function __construct(
-		public readonly array $reasons,
-		public readonly array $lines,
-		public readonly array $shop_messages,
+		public readonly array $groups,
 	) {
 	}
 
@@ -34,38 +30,43 @@ class CustomsWarning
 	 */
 	public static function for_order(WC_Order $order, string $product): ?self
 	{
-		$reason = CustomsRoute::for_order($order, $product);
+		$route = CustomsRoute::for_order($order, $product);
 
-		if (!$reason) {
+		if (!$route) {
 			return null;
 		}
 
-		$lines         = self::lines($order, $reason);
-		$shop_messages = self::shop_messages($reason);
+		$lines         = self::lines($order, $route);
+		$shop_messages = self::shop_messages($route);
 
 		if (!$lines && !$shop_messages) {
 			return null;
 		}
 
-		return new self([$reason], $lines, $shop_messages);
+		return new self([[
+			'route'         => $route,
+			'lines'         => $lines,
+			'shop_messages' => $shop_messages,
+		]]);
 	}
 
 	/**
 	 * Return one warning for several orders.
 	 *
-	 * The bulk booking modal shows one banner for the whole selection. Two
-	 * orders that hold the same product carry the same line problems, so the
-	 * warning names each product once. A shop settings problem is the same for
-	 * every order, so it also appears once.
+	 * The bulk booking modal shows one banner for the whole selection. Each
+	 * rule keeps its own group, because a rule asks for its own data, and the
+	 * reader has to see which products and which settings it means.
+	 *
+	 * Two orders that hold the same product carry the same line problems, so a
+	 * group names each product once. A shop settings problem is the same for
+	 * every order of the group, so it also appears once.
 	 *
 	 * @param WC_Order[] $orders
 	 * @param callable(WC_Order): string $service The Bring product of an order.
 	 */
 	public static function for_orders(array $orders, callable $service): ?self
 	{
-		$reasons       = [];
-		$lines         = [];
-		$shop_messages = [];
+		$groups = [];
 
 		foreach ($orders as $order) {
 			$warning = self::for_order($order, $service($order));
@@ -74,27 +75,58 @@ class CustomsWarning
 				continue;
 			}
 
-			$reasons       = array_merge($reasons, $warning->reasons);
-			$shop_messages = array_merge($shop_messages, $warning->shop_messages);
-
-			foreach ($warning->lines as $line) {
-				$lines[$line['name']]['name']     = $line['name'];
-				$lines[$line['name']]['url']      = $line['url'] ?? $lines[$line['name']]['url'] ?? null;
-				$lines[$line['name']]['messages'] = array_unique(
-					array_merge($lines[$line['name']]['messages'] ?? [], $line['messages'])
-				);
+			foreach ($warning->groups as $group) {
+				$groups[$group['route']] = self::merge($groups[$group['route']] ?? null, $group);
 			}
 		}
 
-		if (!$lines && !$shop_messages) {
+		if (!$groups) {
 			return null;
 		}
 
-		return new self(
-			array_values(array_unique($reasons)),
-			array_values($lines),
-			array_values(array_unique($shop_messages)),
-		);
+		$sorted = [];
+
+		// The export rule reads first, because it asks for the most.
+		foreach ([CustomsRoute::EXPORT, CustomsRoute::NVIT] as $route) {
+			if (isset($groups[$route])) {
+				$sorted[] = $groups[$route];
+			}
+		}
+
+		return new self($sorted);
+	}
+
+	/**
+	 * Fold a group into the group of the same rule.
+	 *
+	 * @param array{route: string, lines: array<int, array{name: string, url: ?string, messages: array<int, string>}>, shop_messages: array<int, string>}|null $into
+	 * @param array{route: string, lines: array<int, array{name: string, url: ?string, messages: array<int, string>}>, shop_messages: array<int, string>}      $group
+	 *
+	 * @return array{route: string, lines: array<int, array{name: string, url: ?string, messages: array<int, string>}>, shop_messages: array<int, string>}
+	 */
+	private static function merge(?array $into, array $group): array
+	{
+		if (!$into) {
+			return $group;
+		}
+
+		$lines = [];
+
+		foreach (array_merge($into['lines'], $group['lines']) as $line) {
+			$lines[$line['name']]['name']     = $line['name'];
+			$lines[$line['name']]['url']      = $line['url'] ?? $lines[$line['name']]['url'] ?? null;
+			$lines[$line['name']]['messages'] = array_unique(
+				array_merge($lines[$line['name']]['messages'] ?? [], $line['messages'])
+			);
+		}
+
+		return [
+			'route'         => $group['route'],
+			'lines'         => array_values($lines),
+			'shop_messages' => array_values(array_unique(
+				array_merge($into['shop_messages'], $group['shop_messages'])
+			)),
+		];
 	}
 
 	/**

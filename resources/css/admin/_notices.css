@@ -225,6 +225,13 @@
     gap: 0.25rem;
 }
 
+/* One customs rule, with the title, the products and the settings it asks for. */
+.bfg-booking-notice__rule {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .bfg-booking-notice__label {
     font-weight: 600 !important;
     color: var(--bfg-text-secondary) !important;
