@@ -6,15 +6,12 @@ jQuery(function ($) {
 	}
 
 	var bookDialog = document.getElementById( 'bfg-bulk-book' );
-	var errorDialog = document.getElementById( 'bfg-bulk-errors' );
+	var resultDialog = document.getElementById( 'bfg-bulk-result' );
 
 	const handleBulkBookResponse = function (data) {
 		form.unblock();
 		if ( ! data.bring_column ) {
 			return;
-		}
-		if ( data.print_url ) {
-			window.open( data.print_url, '_blank' ).focus();
 		}
 		$.each( data.bring_column, function( id, column_item ) {
 			var elem = $( '#post-' + id +',#order-' + id );
@@ -55,10 +52,21 @@ jQuery(function ($) {
 				)
 			);
 		} );
-		if ( error_list.children().length && errorDialog ) {
-			$( '#bfg-bulk-errors-list' ).empty().append( error_list.children() );
-			errorDialog.showModal();
+		if ( ! resultDialog ) {
+			return;
 		}
+		var summary_list = $( '<ul>' );
+		$.each( data.summary || [], function( i, line ) {
+			summary_list.append( $( '<li>' ).text( line ) );
+		} );
+		$( '#bfg-bulk-result-summary' ).empty().append( summary_list.children() );
+		$( '#bfg-bulk-errors-list' ).empty().append( error_list.children() );
+		// The labels open in a new tab, and a browser blocks that tab when the
+		// answer of the request opens it. So the worker opens it with a click.
+		$( '#bfg-bulk-result-print' )
+			.attr( 'href', data.print_url || '#' )
+			.prop( 'hidden', ! data.print_url );
+		resultDialog.showModal();
 	};
 	const buttons = $('[data-action="bring-book-orders"]');
 	const handleClick = function(e, el) {

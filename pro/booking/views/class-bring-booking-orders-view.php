@@ -269,7 +269,54 @@ class Bring_Booking_Orders_View {
 				'print_url'    => empty($printable) ? '' : Bring_Booking_Labels::create_download_url( $printable ),
 				'bring_column' => $column_data,
 				'report'       => $report,
+				'summary'      => self::booking_summary( $report ),
 			] );
 		}
+	}
+
+	/**
+	 * Say what the booking did, with one line per group of orders.
+	 *
+	 * @param array $report One record per order, as bulk_send_booking returns.
+	 *
+	 * @return string[]
+	 */
+	private static function booking_summary( array $report ): array {
+		$counts = array_count_values( array_column( $report, 'status' ) );
+
+		$lines = [
+			'ok'                        => fn( int $count ) => sprintf(
+				/* translators: %d: number of orders. */
+				_n( '%d order booked.', '%d orders booked.', $count, 'bring-fraktguiden-for-woocommerce' ),
+				$count
+			),
+			BulkBookingGroups::BOOKED   => fn( int $count ) => sprintf(
+				/* translators: %d: number of orders. */
+				_n( '%d order already held a booking.', '%d orders already held a booking.', $count, 'bring-fraktguiden-for-woocommerce' ),
+				$count
+			),
+			BulkBookingGroups::SKIPPED  => fn( int $count ) => sprintf(
+				/* translators: %d: number of orders. */
+				_n( '%d order has no Bring shipping, so it got no booking.', '%d orders have no Bring shipping, so they got no booking.', $count, 'bring-fraktguiden-for-woocommerce' ),
+				$count
+			),
+			'error'                     => fn( int $count ) => sprintf(
+				/* translators: %d: number of orders. */
+				_n( '%d order failed.', '%d orders failed.', $count, 'bring-fraktguiden-for-woocommerce' ),
+				$count
+			),
+		];
+
+		$summary = [];
+
+		foreach ( $lines as $status => $line ) {
+			$count = (int) ( $counts[ $status ] ?? 0 );
+
+			if ( $count ) {
+				$summary[] = $line( $count );
+			}
+		}
+
+		return $summary;
 	}
 }

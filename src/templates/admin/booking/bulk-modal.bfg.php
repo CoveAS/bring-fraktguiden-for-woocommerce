@@ -57,15 +57,17 @@
 	</div>
 </dialog>
 
-<dialog class="bfg bfg-modal" id="bfg-bulk-errors">
+<dialog class="bfg bfg-modal" id="bfg-bulk-result">
 	<div class="bfg-modal__head">
-		<h2 class="bfg-modal__title"><t>Mybring Booking errors</t></h2>
+		<h2 class="bfg-modal__title"><t>Mybring Booking</t></h2>
 		<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>
 	</div>
 	<div class="bfg-modal__body">
+		<ul class="bfg-bulk-book__summary" id="bfg-bulk-result-summary"></ul>
 		<ul class="bfg-bulk-book__errors" id="bfg-bulk-errors-list"></ul>
 	</div>
 	<div class="bfg-modal__foot">
+		<a class="bfg-btn bfg-btn--primary bfg-btn--sm" id="bfg-bulk-result-print" href="#" target="_blank" rel="noopener" hidden><t>Print labels</t></a>
 		<button type="button" class="bfg-btn bfg-btn--sm" data-bfg-dialog-close><t>Close</t></button>
 	</div>
 </dialog>

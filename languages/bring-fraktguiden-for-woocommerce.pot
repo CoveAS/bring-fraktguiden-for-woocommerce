@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T18:12:12+00:00\n"
+"POT-Creation-Date: 2026-09-15T18:36:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -44,6 +44,7 @@ msgid "Working"
 msgstr ""
 
 #: build/templates/admin/booking/bulk-modal.php:16
+#: build/templates/admin/booking/bulk-modal.php:63
 #: build/templates/admin/pages/pro-settings.php:11
 #: src/templates/admin/pages/pro-settings.bfg.php:11
 msgid "Mybring Booking"
@@ -51,7 +52,7 @@ msgstr ""
 
 #: build/templates/admin/booking/bulk-modal.php:17
 #: build/templates/admin/booking/bulk-modal.php:64
-#: build/templates/admin/booking/bulk-modal.php:70
+#: build/templates/admin/booking/bulk-modal.php:72
 #: build/templates/admin/pages/home.php:166
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
@@ -76,8 +77,8 @@ msgstr ""
 msgid "Shipping date"
 msgstr ""
 
-#: build/templates/admin/booking/bulk-modal.php:63
-msgid "Mybring Booking errors"
+#: build/templates/admin/booking/bulk-modal.php:71
+msgid "Print labels"
 msgstr ""
 
 #: build/templates/admin/booking/form.php:29
@@ -2012,7 +2013,7 @@ msgstr ""
 msgid "Show only products without an HS code"
 msgstr ""
 
-#: build/templates/admin/parts/customs-warning.php:15
+#: build/templates/admin/parts/customs-warning.php:17
 msgid "The goods leave Norway, so Bring needs customs data."
 msgstr ""
 
@@ -3262,6 +3263,38 @@ msgstr ""
 #: pro/booking/views/class-bring-booking-orders-view.php:64
 msgid "Bring - Print labels"
 msgstr ""
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:290
+#, php-format
+msgid "%d order booked."
+msgid_plural "%d orders booked."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:295
+#, php-format
+msgid "%d order already held a booking."
+msgid_plural "%d orders already held a booking."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:300
+#, php-format
+msgid "%d order has no Bring shipping, so it got no booking."
+msgid_plural "%d orders have no Bring shipping, so they got no booking."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:305
+#, php-format
+msgid "%d order failed."
+msgid_plural "%d orders failed."
+msgstr[0] ""
+msgstr[1] ""
 
 #: pro/pickuppoint/LegacyPickUpPointEnhancement.php:131
 #: pro/pickuppoint/SelectedPickUpPointComponent.php:12
