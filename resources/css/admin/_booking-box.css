@@ -66,17 +66,21 @@
 
 .bfg-booking-form__datetime {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
-.bfg-booking-form__datetime input {
-    min-width: 0;
+/* A date needs the room of its three parts, so the time wraps below it
+   before the date gets any narrower. */
+.bfg-booking-form__datetime input[type="date"] {
+    flex: 1 1 11rem;
+    min-width: 11rem;
 }
 
 /* A time holds four digits, so it needs none of the room a date needs. */
 .bfg-booking-form__datetime input[type="time"] {
     flex: none;
-    max-width: 9rem;
+    width: 8rem;
 }
 
 .bfg-booking-form__services {
