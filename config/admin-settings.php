@@ -441,7 +441,7 @@ return [
 			'customs_consent' => [
 				'type' => 'checkbox',
 				'label' => __('I confirm the customs data of my shipments', 'bring-fraktguiden-for-woocommerce'),
-				'description' => __('The goods description, the value and the HS code of every order line are correct and complete, and the goods are neither dangerous nor prohibited. Bring prints this confirmation as your signature on the customs declaration.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('The goods description, the value and the HS code of every order line are correct and complete, and the goods are not dangerous and not prohibited. Bring uses this confirmation as your signature on the customs declaration.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'no',
 			],
 			'customs_exporter_number' => [

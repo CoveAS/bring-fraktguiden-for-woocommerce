@@ -8,7 +8,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  * Whether the shop signs the customs declaration of its shipments.
  *
  * The shop confirms once that the customs data is correct and that the goods
- * are neither dangerous nor prohibited. Bring uses the confirmation as a
+ * are not dangerous and not prohibited. Bring uses the confirmation as a
  * signature on the declaration. See doc/export.md.
  *
  * The confirmation says how the shop works, so it is a setting and not a tick
