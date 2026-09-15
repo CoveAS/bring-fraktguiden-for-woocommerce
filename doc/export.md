@@ -173,12 +173,13 @@ the flag `needs_consent`, and the template
 with a Sign button. The button posts to `ConsentRoute`, which asks for
 `manage_options`, because one signature binds the whole shop.
 
-`resources/js/customs-consent.js` holds the browser side. It hides the callout
-at the press and turns the booking buttons on, then sends. A refused request
-brings the callout back with the reason, and the buttons go off again. A booking
-pressed in between waits for the answer, and a failed signature cancels it. The
-bulk booking button lives in `pro/assets/js/booking-admin.js`, outside the
-module bundle, so the module also puts `consentReady` on `window`.
+`resources/js/customs-consent.js` holds the browser side. The press hides the
+callout, puts a green Signed line in its place and turns the booking buttons on,
+then sends. A refused request drops the green line, brings the callout back with
+the reason, and turns the buttons off again. A booking pressed in between waits
+for the answer, and a failed signature cancels it. The bulk booking button lives
+in `pro/assets/js/booking-admin.js`, outside the module bundle, so the module
+also puts `consentReady` on `window`.
 
 The cargo type is a select on the booking box of the order screen, in the field
 `_bring_nature_of_cargo`. `NatureOfCargo` holds the values and reads the form. A

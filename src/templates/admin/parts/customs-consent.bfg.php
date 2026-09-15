@@ -21,6 +21,7 @@ $bfg_may_sign = current_user_can('manage_options');
 	data-url="<?php echo esc_url(rest_url(ConsentRoute::ROUTE_NAMESPACE . ConsentRoute::ROUTE)); ?>"
 	data-nonce="<?php echo esc_attr(wp_create_nonce('wp_rest')); ?>"
 	data-error="<?php esc_attr_e('The signature did not save. Nothing was booked. Try again.', 'bring-fraktguiden-for-woocommerce'); ?>"
+	data-signed="<?php esc_attr_e('Signed', 'bring-fraktguiden-for-woocommerce'); ?>"
 >
 	<?php require __DIR__ . '/notice-icon.php'; ?>
 	<div class="bfg-consent__body">

@@ -58,6 +58,23 @@ export function consentReady() {
 // booking button lives there.
 window.bfgConsentReady = consentReady;
 
+/**
+ * Put a green line beside the callout that says the shop signed.
+ *
+ * The line goes up at the press, before the server answers, so the shop worker
+ * reads an answer at once. It stays until the next redraw of the screen, which
+ * renders no callout because the setting then holds the signature.
+ */
+function showSigned(box) {
+	const line = document.createElement('p');
+
+	line.className = 'bfg-consent-signed';
+	line.textContent = box.dataset.signed;
+	box.after(line);
+
+	return line;
+}
+
 /** Show why the signature failed, and let the shop worker try again. */
 function showError(box, message) {
 	const line = box.querySelector('[data-bfg-consent-error]');
@@ -70,13 +87,16 @@ function showError(box, message) {
 
 /** Sign the customs declaration, and show the callout again when that fails. */
 function sign(box) {
-	const line = box.querySelector('[data-bfg-consent-error]');
+	const error = box.querySelector('[data-bfg-consent-error]');
 
-	if (line) {
-		line.hidden = true;
+	if (error) {
+		error.hidden = true;
 	}
 
 	box.hidden = true;
+
+	const green = showSigned(box);
+
 	applyConsent();
 
 	signing = fetch(box.dataset.url, {
@@ -97,6 +117,7 @@ function sign(box) {
 		throw new Error(box.dataset.error);
 	}).catch((error) => {
 		signing = null;
+		green.remove();
 		box.hidden = false;
 		applyConsent();
 		showError(box, error.message);

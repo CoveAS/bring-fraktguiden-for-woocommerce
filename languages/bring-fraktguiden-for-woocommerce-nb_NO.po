@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T19:05:30+00:00\n"
+"POT-Creation-Date: 2026-09-15T19:07:59+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2115,6 +2115,11 @@ msgstr ""
 #: src/templates/admin/parts/customs-consent.bfg.php:23
 msgid "The signature did not save. Nothing was booked. Try again."
 msgstr "Signaturen ble ikke lagret. Ingenting ble booket. Prøv igjen."
+
+#: build/templates/admin/parts/customs-consent.php:18
+#: src/templates/admin/parts/customs-consent.bfg.php:24
+msgid "Signed"
+msgstr "Signert"
 
 #: build/templates/admin/parts/customs-consent.php:21
 msgid "Sign the customs declaration before you book"
