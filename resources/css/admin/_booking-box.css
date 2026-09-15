@@ -73,6 +73,12 @@
     min-width: 0;
 }
 
+/* A time holds four digits, so it needs none of the room a date needs. */
+.bfg-booking-form__datetime input[type="time"] {
+    flex: none;
+    max-width: 9rem;
+}
+
 .bfg-booking-form__services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

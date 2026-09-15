@@ -46,8 +46,8 @@
    ========================================================================== */
 
 .bfg-booking-groups {
-    display: flex;
-    flex-flow: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 12px;
     margin-bottom: 16px;
 }
@@ -99,4 +99,11 @@
 .bfg-booking-groups__note {
     color: var(--bfg-text-muted);
     margin: 8px 0 0;
+}
+
+/* The two fields the modal asks for, side by side when the modal is wide. */
+.bfg-bulk-book__fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
 }

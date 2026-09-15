@@ -27,24 +27,26 @@
 			data-nonce="<?php echo esc_attr($bulk_nonce); ?>"
 		></div>
 
-		<div class="bfg-field">
-			<label for="bfg-bulk-book-customer"><t>Customer number</t></label>
-			<div class="bfg-input bfg-input--select">
-				<select id="bfg-bulk-book-customer" name="_bring-customer-number" class="bfg-custom-select">
-					<?php foreach ($customers as $number => $label) : ?>
-						<option value="<?php echo esc_attr($number); ?>" <?php selected((string) $number, (string) $customer_number); ?>>
-							<?php echo esc_html($label); ?>
-						</option>
-					<?php endforeach; ?>
-				</select>
+		<div class="bfg-bulk-book__fields">
+			<div class="bfg-field">
+				<label for="bfg-bulk-book-customer"><t>Customer number</t></label>
+				<div class="bfg-input bfg-input--select">
+					<select id="bfg-bulk-book-customer" name="_bring-customer-number" class="bfg-custom-select">
+						<?php foreach ($customers as $number => $label) : ?>
+							<option value="<?php echo esc_attr($number); ?>" <?php selected((string) $number, (string) $customer_number); ?>>
+								<?php echo esc_html($label); ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</div>
 			</div>
-		</div>
 
-		<div class="bfg-field">
-			<label for="bfg-bulk-book-date"><t>Shipping date</t></label>
-			<div class="bfg-booking-form__datetime">
-				<input type="date" id="bfg-bulk-book-date" value="<?php echo esc_attr($shipping_date['date']); ?>">
-				<input type="time" id="bfg-bulk-book-time" value="<?php echo esc_attr($shipping_date['hour'] . ':' . $shipping_date['minute']); ?>">
+			<div class="bfg-field">
+				<label for="bfg-bulk-book-date"><t>Shipping date</t></label>
+				<div class="bfg-booking-form__datetime">
+					<input type="date" id="bfg-bulk-book-date" value="<?php echo esc_attr($shipping_date['date']); ?>">
+					<input type="time" id="bfg-bulk-book-time" value="<?php echo esc_attr($shipping_date['hour'] . ':' . $shipping_date['minute']); ?>">
+				</div>
 			</div>
 		</div>
 	</div>

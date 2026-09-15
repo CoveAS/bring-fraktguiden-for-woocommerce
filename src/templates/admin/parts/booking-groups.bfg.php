@@ -13,7 +13,7 @@
 
 $booking_group_blocks = [
 	'book' => [
-		'title' => __('Bring books these orders', 'bring-fraktguiden-for-woocommerce'),
+		'title' => __('These orders get a booking', 'bring-fraktguiden-for-woocommerce'),
 		'note'  => '',
 	],
 	'booked' => [
@@ -21,7 +21,7 @@ $booking_group_blocks = [
 		'note'  => __('Bring does not book them again. Their labels still print.', 'bring-fraktguiden-for-woocommerce'),
 	],
 	'skipped' => [
-		'title' => __('Bring books none of these orders', 'bring-fraktguiden-for-woocommerce'),
+		'title' => __('These orders get no booking', 'bring-fraktguiden-for-woocommerce'),
 		'note'  => $booking_without_bring
 			? __('They carry no shipping line at all, so Bring has nothing to book.', 'bring-fraktguiden-for-woocommerce')
 			: sprintf(
