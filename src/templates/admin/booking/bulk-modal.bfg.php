@@ -11,7 +11,7 @@
  * @var string $hs_nonce       The nonce of that route.
  */
 ?>
-<dialog class="bfg bfg-modal" id="bfg-bulk-book">
+<dialog class="bfg bfg-modal bfg-modal--full" id="bfg-bulk-book">
 	<div class="bfg-modal__head">
 		<h2 class="bfg-modal__title"><t>Mybring Booking</t></h2>
 		<button type="button" class="bfg-modal__close" data-bfg-dialog-close aria-label="<?php esc_attr_e('Close', 'bring-fraktguiden-for-woocommerce'); ?>">&times;</button>

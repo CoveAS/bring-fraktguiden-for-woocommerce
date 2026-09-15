@@ -111,3 +111,12 @@
     color: var(--bfg-text-muted);
     font-size: var(--bfg-text-level-6, 0.75rem);
 }
+
+/* A dialog that fills the screen, with a small margin around it. The auto
+   margin of .bfg-modal centres the leftover 2rem. */
+.bfg-modal--full {
+    width: calc(100vw - 2rem);
+    max-width: none;
+    height: calc(100dvh - 2rem);
+    max-height: none;
+}
