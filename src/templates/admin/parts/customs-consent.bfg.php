@@ -27,7 +27,7 @@ $bfg_may_sign = current_user_can('manage_options');
 		<p class="bfg-consent__title"><strong><t>Sign the customs declaration before you book</t></strong></p>
 		<p><t>You confirm that the goods description, the value and the HS code of every order line are correct and complete, and that the goods are not dangerous and not prohibited.</t></p>
 		<p><t>Bring uses this confirmation as your signature on the customs declaration. A wrong declaration is your responsibility.</t></p>
-		<p class="bfg-consent__scope"><t>One signature covers every Bring booking of this shop. You withdraw it in the booking settings.</t></p>
+		<p class="bfg-consent__scope"><t>One signature covers every Bring booking of this shop. You can withdraw it in the booking settings.</t></p>
 
 		<?php if ($bfg_may_sign) : ?>
 			<p class="bfg-consent__error" data-bfg-consent-error role="alert" hidden></p>
