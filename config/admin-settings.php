@@ -436,8 +436,6 @@ return [
 				'type' => 'email',
 				'custom_attributes' => [
 					'autocomplete' => 'email',
-					'aria-required' => 'true',
-					'required' => 'required',
 				],
 			],
 			'customs_consent' => [
