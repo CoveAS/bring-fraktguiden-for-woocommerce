@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T19:04:05+00:00\n"
+"POT-Creation-Date: 2026-09-15T19:04:46+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2139,11 +2139,11 @@ msgstr ""
 
 #: build/templates/admin/parts/customs-consent.php:24
 msgid ""
-"One signature covers every Bring booking of this shop, now and later. You "
-"withdraw it in the booking settings."
+"One signature covers every Bring booking of this shop. You withdraw it in "
+"the booking settings."
 msgstr ""
-"Én signatur gjelder alle Bring-bookinger fra denne butikken, nå og senere. "
-"Du trekker den tilbake i bookinginnstillingene."
+"Én signatur gjelder alle Bring-bookinger fra denne butikken. Du trekker den "
+"tilbake i bookinginnstillingene."
 
 #: build/templates/admin/parts/customs-consent.php:30
 msgid "I confirm and sign"
@@ -3739,6 +3739,13 @@ msgstr ""
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid ""
+#~ "One signature covers every Bring booking of this shop, now and later. You "
+#~ "withdraw it in the booking settings."
+#~ msgstr ""
+#~ "Én signatur gjelder alle Bring-bookinger fra denne butikken, nå og "
+#~ "senere. Du trekker den tilbake i bookinginnstillingene."
 
 #~ msgid ""
 #~ "You confirm that the goods description, the value and the HS code of "
