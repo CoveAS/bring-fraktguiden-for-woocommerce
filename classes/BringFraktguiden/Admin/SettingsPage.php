@@ -460,7 +460,7 @@ class SettingsPage
 
 		wp_enqueue_script(
 			'bfg-field-validation',
-			plugins_url('bring-fraktguiden-for-woocommerce/resources/js/field-validation.js'),
+			plugins_url('bring-fraktguiden-for-woocommerce/build/js/field-validation.js'),
 			[],
 			Bring_Fraktguiden::VERSION,
 			true
@@ -542,7 +542,7 @@ class SettingsPage
 	 */
 	public static function add_type_module(string $tag, string $handle): string
 	{
-		if (! in_array($handle, ['bfg-custom-select', 'bring-home-js', 'bfg-shipping-test'], true)) {
+		if (! in_array($handle, ['bfg-custom-select', 'bring-home-js', 'bfg-shipping-test', 'bfg-field-validation'], true)) {
 			return $tag;
 		}
 		return str_replace('<script ', '<script type="module" ', $tag);

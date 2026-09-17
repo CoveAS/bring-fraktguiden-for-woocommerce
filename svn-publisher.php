@@ -116,6 +116,7 @@ if ( $result ) {
 $required_files = [
 	'build/js/admin.js',
 	'build/js/checkout.js',
+	'build/js/field-validation.js',
 	'build/js/shared/vue-runtime.js',
 	'build/css/admin.css',
 ];

@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/custom-select.js',
         'resources/js/dialog.js',
         'resources/js/fallback-label.js',
+        'resources/js/field-validation.js',
         'resources/js/home.js',
         'resources/js/hs-code-picker.js',
         'resources/js/pro.js',
