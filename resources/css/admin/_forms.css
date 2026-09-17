@@ -237,7 +237,6 @@
 .bfg select:active,
 .bfg textarea:active {
     border-color: #93C5FD !important;
-    background: #F9FAFB !important;
     outline: none !important;
     box-shadow: none !important;
 }
@@ -246,9 +245,22 @@
 .bfg select:focus,
 .bfg textarea:focus {
     border-color: var(--bfg-primary) !important;
-    background: #ffffff !important;
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* A checkbox and a radio button keep the background WordPress gives them.
+   A checked checkbox is blue, and its check mark is white. */
+.bfg input:not([type="checkbox"]):not([type="radio"]):active,
+.bfg select:active,
+.bfg textarea:active {
+    background: #F9FAFB !important;
+}
+
+.bfg input:not([type="checkbox"]):not([type="radio"]):focus,
+.bfg select:focus,
+.bfg textarea:focus {
+    background: #ffffff !important;
 }
 
 body:not(.using-mouse) .bfg input:focus,
