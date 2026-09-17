@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T20:12:11+00:00\n"
+"POT-Creation-Date: 2026-09-17T15:13:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -1881,7 +1881,6 @@ msgstr ""
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:211
 msgid "Settings"
 msgstr ""
 
@@ -2425,7 +2424,11 @@ msgid "Bring settings"
 msgstr ""
 
 #: classes/class-bring-fraktguiden.php:211
-msgid "View Bring Fraktguiden Settings"
+msgid "View the Bring Fraktguiden setup steps"
+msgstr ""
+
+#: classes/class-bring-fraktguiden.php:211
+msgid "Get started"
 msgstr ""
 
 #: classes/class-bring-fraktguiden.php:232

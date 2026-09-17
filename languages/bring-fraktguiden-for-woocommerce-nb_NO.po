@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-15T20:00:29+00:00\n"
+"POT-Creation-Date: 2026-09-17T15:13:37+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -680,7 +680,10 @@ msgid ""
 "What to expect: Send Quickship your shop name, parcels per month, phone and "
 "email. You get a price offer. Accept it, and Quickship sets up your API "
 "access."
-msgstr "Slik går det for seg: Send Quickship butikknavnet, antall sendinger per måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship setter opp API-tilgangen din."
+msgstr ""
+"Slik går det for seg: Send Quickship butikknavnet, antall sendinger per "
+"måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship "
+"setter opp API-tilgangen din."
 
 #: build/templates/admin/pages/home/connect-account.php:95
 msgid "Set up an account"
@@ -1535,7 +1538,9 @@ msgstr "Det gamle domenet mister Pro med en gang."
 msgid ""
 "Only the account that owns the license can move it. You sign in and confirm "
 "the move on our web site."
-msgstr "Bare kontoen som eier lisensen kan flytte den. Du logger inn og bekrefter flyttingen på nettstedet vårt."
+msgstr ""
+"Bare kontoen som eier lisensen kan flytte den. Du logger inn og bekrefter "
+"flyttingen på nettstedet vårt."
 
 #. translators: 1: number of moves, 2: year.
 #: build/templates/admin/pages/pro.php:163
@@ -1998,7 +2003,6 @@ msgstr "Aktiver valgte tjenester"
 #: build/templates/admin/pages/settings.php:22
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
-#: classes/class-bring-fraktguiden.php:211
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -2598,8 +2602,12 @@ msgid "Bring settings"
 msgstr "Bring innstillinger"
 
 #: classes/class-bring-fraktguiden.php:211
-msgid "View Bring Fraktguiden Settings"
-msgstr "Vis Bring Fraktguiden innstillinger"
+msgid "View the Bring Fraktguiden setup steps"
+msgstr "Vis oppsettstegene for Bring Fraktguiden"
+
+#: classes/class-bring-fraktguiden.php:211
+msgid "Get started"
+msgstr "Kom i gang"
 
 #: classes/class-bring-fraktguiden.php:232
 msgid ""
@@ -3752,6 +3760,9 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "View Bring Fraktguiden Settings"
+#~ msgstr "Vis Bring Fraktguiden innstillinger"
 
 #~ msgid ""
 #~ "One signature covers every Bring booking of this shop. You withdraw it in "
