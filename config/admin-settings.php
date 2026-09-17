@@ -2,6 +2,7 @@
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
+use BringFraktguiden\Booking\ReturnLabel;
 
 $wc_log_dir = '';
 if (defined('WC_LOG_DIR')) {
@@ -471,6 +472,13 @@ return [
 				'type' => 'select',
 				'description' => __('Order status will be automatically set when a label is downloaded', 'bring-fraktguiden-for-woocommerce'),
 				'options' => $order_status_options,
+				'default' => 'none',
+			],
+			'booking_return_service' => [
+				'title' => __('Return label', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'select',
+				'description' => __('Bring adds a return label to every booking of a parcel inside Norway, and invoices the return only when the customer uses it.', 'bring-fraktguiden-for-woocommerce'),
+				'options' => ['none' => __('No return label', 'bring-fraktguiden-for-woocommerce')] + ReturnLabel::services(),
 				'default' => 'none',
 			],
 			'booking_home_delivery_package_type' => [

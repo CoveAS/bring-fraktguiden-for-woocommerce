@@ -69,6 +69,7 @@ class Fields
 	public readonly Field $customs_exporter_number;
 	public readonly Field $auto_set_status_after_booking_success;
 	public readonly Field $auto_set_status_after_print_label_success;
+	public readonly Field $booking_return_service;
 	public readonly Field $booking_home_delivery_package_type;
 
 	protected function __construct()

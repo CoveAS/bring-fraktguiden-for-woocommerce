@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\Booking\Consignment_Request;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Customs\CustomsInformation;
 use BringFraktguiden\Customs\CustomsParties;
+use BringFraktguiden\Booking\ReturnLabel;
 use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use Exception;
@@ -278,6 +279,12 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 			// Packages.
 			'packages'         => $this->create_packages(),
 		];
+
+		$return_service = ReturnLabel::for_product( $this->service_id );
+
+		if ( $return_service ) {
+			$consignment['returnProduct'] = [ 'id' => $return_service ];
+		}
 
 		$customs_information = CustomsInformation::for_order( $this->adapter->order, $this->service_id, $this->nature_of_cargo );
 

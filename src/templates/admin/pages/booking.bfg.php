@@ -135,6 +135,20 @@ use BringFraktguiden\Fields\Fields;
 			</bfg-section>
 
 			<bfg-section>
+				<bfg-section.header title="Return label"
+					description="Send a return label with every booking"></bfg-section.header>
+
+				<bfg-section.section>
+					<div class="bfg-field">
+						<?php echo $fields->booking_return_service->label(); ?>
+						<?php echo $fields->booking_return_service; ?>
+					</div>
+
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
+				</bfg-section.section>
+			</bfg-section>
+
+			<bfg-section>
 				<bfg-section.header title="Home Delivery"
 					description="Configure package type for home delivery services"></bfg-section.header>
 

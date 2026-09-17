@@ -66,6 +66,14 @@ function init_form_fields_for_mybring() {
 	];
 
 
+	$form_fields['booking_return_service'] = [
+		'title'    => __( 'Return label', 'bring-fraktguiden-for-woocommerce' ),
+		'type'     => 'select',
+		'desc_tip' => __( 'Bring adds a return label to every booking of a parcel inside Norway, and invoices the return only when the customer uses it.', 'bring-fraktguiden-for-woocommerce' ),
+		'options'  => [ 'none' => __( 'No return label', 'bring-fraktguiden-for-woocommerce' ) ] + \BringFraktguiden\Booking\ReturnLabel::services(),
+		'default'  => 'none',
+	];
+
 	$form_fields['booking_home_delivery_section_title'] = [
 		'type'        => 'title',
 		'title'       => __( 'Home delivery', 'bring-fraktguiden-for-woocommerce' ),

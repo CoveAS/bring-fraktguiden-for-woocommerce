@@ -87,6 +87,7 @@ class Settings
 	public Setting $customs_exporter_number;
 	public Setting $auto_set_status_after_booking_success;
 	public Setting $auto_set_status_after_print_label_success;
+	public Setting $booking_return_service;
 	public Setting $booking_home_delivery_package_type;
 
 	/**

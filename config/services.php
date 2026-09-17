@@ -65,6 +65,7 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => true,
 				'oldcode'     => 'SERVICEPAKKE',
+				'return_label' => true,
 			],
 			'5600' => [
 				'ProductCode' => '5600',
@@ -80,6 +81,7 @@ return [
 				'pickuppoint' => false,
 				'delivery_date' => true,
 				'oldcode'     => 'PA_DOREN',
+				'return_label' => true,
 			],
 			'5000' => [
 				'ProductCode' => '5000',
@@ -94,6 +96,7 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'BPAKKE_DOR-DOR',
+				'return_label' => true,
 			],
 			'4850' => [
 				'ProductCode' => '4850',
@@ -104,6 +107,7 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => false,
 				'oldcode'     => 'EKSPRESS09',
+				'return_label' => true,
 				'nvit'        => false,
 			],
 			'5100' => [
@@ -185,6 +189,7 @@ return [
 				'ProductLink' => 'https://www.bring.no/sende/pakker/private-i-norge/pakke-i-postkassen',
 				'description' => __( 'Packages up to 5 kg.', 'bring-fraktguiden-for-woocommerce' ),
 				'oldcode'     => 'PAKKE_I_POSTKASSEN',
+				'return_label' => true,
 			],
 		],
 	],
