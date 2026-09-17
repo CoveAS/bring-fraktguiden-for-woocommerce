@@ -14,11 +14,9 @@
 	</div>
 </template>
 
-<style lang="scss">
-	.text-validator {
-		&__errors {
-			color: #C00;
-		}
+<style>
+	.text-validator__errors {
+		color: #C00;
 	}
 </style>
 
