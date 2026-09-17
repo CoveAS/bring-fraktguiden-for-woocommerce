@@ -19,7 +19,7 @@ use BringFraktguiden\Admin\Step;
 
 <?php /* Styles moved to assets/css/bring-fraktguiden-admin-home.css */ ?>
 
-<div class="wrap bfg bfg-admin-page bfg-admin-page__home" data-setup-complete="<?php echo $stepsCompleted === $stepCount ? 'true' : 'false'; ?>">
+<div class="wrap bfg bfg-admin-page bfg-admin-page__home">
 	<div class="bfg-page__header">
 		<h1><t>Setup</t></h1>
 	</div>

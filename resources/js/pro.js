@@ -1,15 +1,4 @@
-import confetti from 'canvas-confetti';
-
 document.addEventListener('DOMContentLoaded', () => {
-	if (new URLSearchParams(window.location.search).has('celebrate')) {
-		confetti({
-			particleCount: 150,
-			spread: 80,
-			origin: { x: 0, y: 1 },
-			ticks: 200,
-		});
-	}
-
 	// Next steps — mark as done when visited, restore on page load
 	const STORAGE_KEY = 'bfg_next_steps_done';
 	const stepsList = document.querySelector('.bfg-steps-list');
