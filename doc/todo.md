@@ -11,8 +11,17 @@
 - [x] Start free trial not working
 
 - [ ] buttons for the variables to insert them in the order ref. eg {order_id}
+- [ ] Return labels
+- [ ] Update services list
+- [ ] Tracking number
+- [ ] Pickup point map
+- [ ] Svalbard handling
+- [ ] Auto book
+- [ ] Better cart packing
 - [x] {order_id} default value
 - [ ] Language on shipping methods
-- [ ] Update services list
 - [ ] Split pro
 - [ ] Show selected shipping services on top of wizard
+- [ ] Status page (last 30 + any products with issues)
+- [ ] Pickup API?
+- [ ] Partial shipments
