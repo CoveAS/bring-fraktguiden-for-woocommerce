@@ -182,8 +182,8 @@ use BringFraktguiden\Admin\Step;
 						<label class="bfg-zone-row bfg-zone-row--free-shipping">
 							<input type="checkbox" name="<?php echo esc_attr(FreeShippingOnly::FIELD); ?>" value="1">
 							<span class="bfg-zone-row__text">
-								<span class="bfg-zone-row__regions"><t>Remove the free shipping</t></span>
-								<span class="bfg-zone-row__hint"><t>Free shipping is the only option this shop offers, and it hides the Bring options from a customer.</t></span>
+								<span class="bfg-zone-row__regions"><t>Delete the free shipping</t></span>
+								<span class="bfg-zone-row__hint"><t>Free shipping is the only option this shop offers, and it hides the Bring options from a customer. A deleted method does not come back.</t></span>
 							</span>
 						</label>
 					<?php endif; ?>

@@ -10,13 +10,13 @@ use WC_Shipping_Zones;
  * A shop that offers free shipping and nothing else.
  *
  * Such a shop has one zone, that zone holds only free shipping, and the rest
- * of the world holds no method at all. The setup page offers to remove the
+ * of the world holds no method at all. The setup page offers to delete the
  * free shipping, so a customer sees the Bring options.
  */
 class FreeShippingOnly
 {
-	/** The form field that asks to remove the free shipping. */
-	public const FIELD = 'bfg-remove-free-shipping';
+	/** The form field that asks to delete the free shipping. */
+	public const FIELD = 'bfg-delete-free-shipping';
 
 	/** Does the shop offer free shipping and nothing else? */
 	public static function exists(): bool
@@ -31,7 +31,7 @@ class FreeShippingOnly
 	 * else. Call it before the Bring method is added. The Bring method is a
 	 * second option, and a second option ends the rule.
 	 */
-	public static function remove(): void
+	public static function delete(): void
 	{
 		$zone = self::zone();
 
