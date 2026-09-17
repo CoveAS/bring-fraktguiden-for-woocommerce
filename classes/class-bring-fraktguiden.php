@@ -208,7 +208,7 @@ class Bring_Fraktguiden {
 	public static function plugin_action_links( $links ) {
 
 		$action_links = array(
-			'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=bring_fraktguiden_home' ) ) . '" title="' . esc_attr( __( 'View Bring Fraktguiden Settings', 'bring-fraktguiden-for-woocommerce' ) ) . '">' . __( 'Settings', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
+			'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=bring_fraktguiden_home' ) ) . '" title="' . esc_attr( __( 'View the Bring Fraktguiden setup steps', 'bring-fraktguiden-for-woocommerce' ) ) . '">' . __( 'Get started', 'bring-fraktguiden-for-woocommerce' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );
