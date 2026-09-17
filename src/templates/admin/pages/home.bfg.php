@@ -4,6 +4,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
+use BringFraktguiden\Admin\FreeShippingOnly;
 use BringFraktguiden\Admin\Step;
 
 /**
@@ -13,6 +14,7 @@ use BringFraktguiden\Admin\Step;
  * @var ?Step $nextStep
  * @var array $zones
  * @var ?int $zonesAdded
+ * @var bool $freeShippingOnly
  */
 ?>
 
@@ -176,6 +178,15 @@ use BringFraktguiden\Admin\Step;
 							<?php endif; ?>
 						</label>
 					<?php endforeach; ?>
+					<?php if ($freeShippingOnly): ?>
+						<label class="bfg-zone-row bfg-zone-row--free-shipping">
+							<input type="checkbox" name="<?php echo esc_attr(FreeShippingOnly::FIELD); ?>" value="1">
+							<span class="bfg-zone-row__text">
+								<span class="bfg-zone-row__regions"><t>Remove the free shipping</t></span>
+								<span class="bfg-zone-row__hint"><t>Free shipping is the only option this shop offers, and it hides the Bring options from a customer.</t></span>
+							</span>
+						</label>
+					<?php endif; ?>
 				</div>
 				<div class="bfg-modal__foot">
 					<button type="submit" class="bfg-btn bfg-btn--primary bfg-btn--sm"><t>Add Bring</t></button>

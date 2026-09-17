@@ -180,6 +180,7 @@ class SettingsPage
 		}
 
 		$zones = ShippingZones::all();
+		$freeShippingOnly = FreeShippingOnly::exists();
 		$zonesAdded = isset($_GET[AddShippingMethod::ADDED]) ? (int) $_GET[AddShippingMethod::ADDED] : null;
 		$steps = (new GetStartedSteps)->build();
 		$stepCount = count($steps);

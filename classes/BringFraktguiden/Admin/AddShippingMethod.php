@@ -27,6 +27,10 @@ class AddShippingMethod
 
 		$zones = array_map('intval', (array) ($_POST['zones'] ?? []));
 
+		if (! empty($_POST[FreeShippingOnly::FIELD])) {
+			FreeShippingOnly::remove();
+		}
+
 		$added = 0;
 		foreach ($zones as $zone) {
 			$added += ShippingZones::add($zone) ? 1 : 0;
