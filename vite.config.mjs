@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/bulk-modal.js',
         'resources/js/checkout.js',
         'resources/js/custom-select.js',
+        'resources/js/customs-fields.js',
         'resources/js/dialog.js',
         'resources/js/fallback-label.js',
         'resources/js/field-validation.js',

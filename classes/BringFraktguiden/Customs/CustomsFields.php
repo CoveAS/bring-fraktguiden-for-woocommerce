@@ -123,7 +123,7 @@ class CustomsFields
 
 		wp_enqueue_script(
 			'bring-customs-fields',
-			plugin_dir_url(dirname(__DIR__, 2)) . 'resources/js/customs-fields.js',
+			plugin_dir_url(dirname(__DIR__, 2)) . 'build/js/customs-fields.js',
 			['jquery'],
 			\Bring_Fraktguiden::VERSION,
 			true
