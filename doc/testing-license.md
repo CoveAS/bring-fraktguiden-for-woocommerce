@@ -17,7 +17,8 @@ The setting stays a plain setting, so every reader of
 The shop owner can still post the Booking form. `SettingsPage::process_settings()`
 therefore writes `yes` again on every save while the license is a testing one.
 The checkbox on the Booking page carries the `disabled` attribute in the same
-case, so the owner sees that the license decides.
+case. A notice under the checkbox names the license as the reason and links to
+the Pro page.
 
 ## Where a booking reads it
 

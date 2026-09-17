@@ -5,6 +5,8 @@ use BringFraktguiden\Fields\Fields;
 
 /**
  * @var Fields $fields
+ * @var bool   $license_testing
+ * @var string $license_url
  */
 ?>
 
@@ -34,6 +36,13 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
 						</div>
 					</div>
+
+					<?php if ($license_testing): ?>
+						<bfg-notice>
+							<t>Your Pro license is a test license. Test mode therefore stays on, and Bring never ships or invoices a booking from this site.</t>
+							<a href="<?php echo esc_url($license_url); ?>"><t>See your license</t></a>
+						</bfg-notice>
+					<?php endif; ?>
 
 					<div id="bfg-booking-fields">
 						<div class="bfg-field">

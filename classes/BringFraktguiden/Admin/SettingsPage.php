@@ -290,6 +290,10 @@ class SettingsPage
 
 		$fields = Fields::instance();
 
+		// A testing license holds test mode on, so the page says why.
+		$license_testing = Fraktguiden_License::is_testing();
+		$license_url     = admin_url('admin.php?page=bring_fraktguiden_pro');
+
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/booking.php';
 	}
 

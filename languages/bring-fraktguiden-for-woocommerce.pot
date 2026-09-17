@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-17T20:05:03+00:00\n"
+"POT-Creation-Date: 2026-09-17T20:11:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -310,14 +310,14 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:14
+#: build/templates/admin/pages/booking.php:16
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
 #: pro/booking/views/class-bring-booking-orders-view.php:77
 msgid "Booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:30
+#: build/templates/admin/pages/booking.php:32
 #: build/templates/admin/pages/kitchen-sink/access-links.php:22
 #: build/templates/admin/pages/kitchen-sink/feature-cards.php:34
 #: build/templates/admin/pages/pro.php:346
@@ -328,23 +328,31 @@ msgstr ""
 msgid "MyBring Booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:34
+#: build/templates/admin/pages/booking.php:36
 msgid "Book orders directly from the order page with MyBring integration"
 msgstr ""
 
 #: build/templates/admin/pages/booking.php:56
+msgid "Your Pro license is a test license. Test mode therefore stays on, and Bring never ships or invoices a booking from this site."
+msgstr ""
+
+#: build/templates/admin/pages/booking.php:57
+msgid "See your license"
+msgstr ""
+
+#: build/templates/admin/pages/booking.php:70
 msgid "Contact information"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:59
+#: build/templates/admin/pages/booking.php:73
 msgid "Every booking carries this as the sender contact of your shop."
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:83
-#: build/templates/admin/pages/booking.php:122
-#: build/templates/admin/pages/booking.php:163
-#: build/templates/admin/pages/booking.php:189
-#: build/templates/admin/pages/booking.php:250
+#: build/templates/admin/pages/booking.php:97
+#: build/templates/admin/pages/booking.php:136
+#: build/templates/admin/pages/booking.php:177
+#: build/templates/admin/pages/booking.php:203
+#: build/templates/admin/pages/booking.php:264
 #: build/templates/admin/pages/fallback-options.php:75
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
@@ -352,11 +360,11 @@ msgstr ""
 #: build/templates/admin/pages/settings.php:147
 #: build/templates/admin/pages/settings.php:175
 #: build/templates/admin/pages/settings.php:186
-#: src/templates/admin/pages/booking.bfg.php:73
-#: src/templates/admin/pages/booking.bfg.php:100
-#: src/templates/admin/pages/booking.bfg.php:124
-#: src/templates/admin/pages/booking.bfg.php:138
-#: src/templates/admin/pages/booking.bfg.php:187
+#: src/templates/admin/pages/booking.bfg.php:82
+#: src/templates/admin/pages/booking.bfg.php:109
+#: src/templates/admin/pages/booking.bfg.php:133
+#: src/templates/admin/pages/booking.bfg.php:147
+#: src/templates/admin/pages/booking.bfg.php:196
 #: src/templates/admin/pages/fallback-options.bfg.php:70
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
@@ -368,74 +376,74 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:93
+#: build/templates/admin/pages/booking.php:107
 msgid "Customs and NVIT"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:97
+#: build/templates/admin/pages/booking.php:111
 msgid "What Bring needs when a shipment crosses a border"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:106
-#: src/templates/admin/pages/booking.bfg.php:84
+#: build/templates/admin/pages/booking.php:120
+#: src/templates/admin/pages/booking.bfg.php:93
 msgid "NVIT means Norwegian goods in transit. A parcel that travels from one place in Norway to another, through Sweden or Finland, needs customs data for each order line. Read more at {{bring}}Bring{{/a}} and at {{toll}}the Norwegian Customs Authority{{/a}}."
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:132
+#: build/templates/admin/pages/booking.php:146
 #: build/templates/admin/pages/pro-settings.php:40
 #: src/templates/admin/pages/pro-settings.bfg.php:40
 msgid "Processing"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:136
+#: build/templates/admin/pages/booking.php:150
 msgid "Change order status after booking or printing labels"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:148
+#: build/templates/admin/pages/booking.php:162
 #: build/templates/admin/pages/pro-settings.php:43
 #: src/templates/admin/pages/pro-settings.bfg.php:43
 msgid "WARNING!"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:148
+#: build/templates/admin/pages/booking.php:162
 msgid ""
 "This will change the status even if the order is\n"
 "\t\t\t\t\t\t\tcompleted"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:173
+#: build/templates/admin/pages/booking.php:187
 #: config/services.php:454
 msgid "Home Delivery"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:177
+#: build/templates/admin/pages/booking.php:191
 msgid "Configure package type for home delivery services"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:199
+#: build/templates/admin/pages/booking.php:213
 msgid "Shipping Address"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:203
+#: build/templates/admin/pages/booking.php:217
 msgid "By default, your WooCommerce store address is used as the &quot;from&quot; address during booking."
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:231
+#: build/templates/admin/pages/booking.php:245
 msgid "Address details"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:293
-#: src/templates/admin/pages/booking.bfg.php:228
+#: build/templates/admin/pages/booking.php:307
+#: src/templates/admin/pages/booking.bfg.php:237
 msgid "This field is required."
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:297
-#: src/templates/admin/pages/booking.bfg.php:232
+#: build/templates/admin/pages/booking.php:311
+#: src/templates/admin/pages/booking.bfg.php:241
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:301
-#: src/templates/admin/pages/booking.bfg.php:236
+#: build/templates/admin/pages/booking.php:315
+#: src/templates/admin/pages/booking.bfg.php:245
 msgid "Please enter a valid phone number."
 msgstr ""
 
@@ -2244,7 +2252,7 @@ msgstr ""
 msgid "Available with Pro"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:343
+#: classes/BringFraktguiden/Admin/SettingsPage.php:347
 msgid "The guide set the shipping services this shop offers."
 msgstr ""
 
