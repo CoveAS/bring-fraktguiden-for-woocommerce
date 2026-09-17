@@ -7,6 +7,8 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use BringFraktguiden\Admin\GetStartedSteps;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -17,6 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shared between regular and pro version
  */
 class Fraktguiden_Admin_Notices {
+
+	/**
+	 * Notice key of the setup steps notice
+	 */
+	const SETUP_STEPS_NOTICE = 'bring_fraktguiden_setup_steps';
 
 	/**
 	 * Notices
@@ -79,6 +86,8 @@ class Fraktguiden_Admin_Notices {
 //			self::add_notice( 'from_zip_error', $message, 'error', false );
 //		}
 
+		self::add_setup_steps_notice();
+
 		self::remove_notice( 'bring_api_uid_or_key_missing' );
 
 		if ( ! Fraktguiden_Helper::get_option( 'mybring_customer_number' ) && Fraktguiden_Helper::booking_enabled() ) {
@@ -101,6 +110,42 @@ class Fraktguiden_Admin_Notices {
 				self::remove_klarna_debug_notice();
 			}
 		}
+	}
+
+	/**
+	 * Add the notice that counts the setup steps the shop has not done
+	 *
+	 * @return boolean
+	 */
+	public static function add_setup_steps_notice() {
+		$steps = ( new GetStartedSteps() )->build();
+
+		$remaining = count(
+			array_filter( $steps, fn( $step ) => ! $step->completed )
+		);
+
+		if ( ! $remaining ) {
+			return false;
+		}
+
+		$message = sprintf(
+			/* translators: %s: number of setup steps left */
+			_n(
+				'Bring Fraktguiden has %s setup step left.',
+				'Bring Fraktguiden has %s setup steps left.',
+				$remaining,
+				'bring-fraktguiden-for-woocommerce'
+			),
+			number_format_i18n( $remaining )
+		);
+
+		$message .= ' ' . sprintf(
+			/* translators: %s: get started page URL */
+			__( '<a href="%s">Finish the setup</a>.', 'bring-fraktguiden-for-woocommerce' ),
+			admin_url( 'admin.php?page=bring_fraktguiden_home' )
+		);
+
+		return self::add_notice( self::SETUP_STEPS_NOTICE, $message );
 	}
 
 	/**
