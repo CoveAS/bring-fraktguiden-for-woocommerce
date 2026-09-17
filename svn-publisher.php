@@ -229,42 +229,67 @@ $map = [
 	'~' => 'Error',
 	'!' => 'Missing',
 ];
-unset( $output );
-exec( 'svn st', $output, $result );
-// echo "\nStatus: \n";
-$lines = $output;
-echo implode( "\n", $output );
-foreach ( $lines as $line ) {
-	$line = trim( $line );
-	if ( ! $line ) {
-		continue;
+/**
+ * Read one line of "svn st". The first column holds the state of the item, and
+ * six more columns follow before the path. So "!M" means a missing item with a
+ * changed property.
+ */
+function bfg_svn_status_line( string $line ): ?array {
+	if ( ! preg_match( '/^(.)(.{6})\s+(\S.*)$/', rtrim( $line ), $parts ) ) {
+		return null;
 	}
-	if ( ! preg_match( '/^([ACDIMRX\?~\!])\s+(\S.*)/', $line, $parts ) ) {
-		die( "ERROR: Unidentified SVN modifier, \"$line\". Please investigate!\n" );
-	}
-	$modifier = $parts[1];
-	$file     = $parts[2];
-	if ( $modifier == '!' ) {
-		exec( 'svn rm --force ' . escapeshellarg( $file ) );
-	}
-	if ( $modifier == '~' ) {
-		die( "ERROR: SVN has a problem with one of the files, \"$file\". Please investigate!\n" );
-	}
+	return [ $parts[1], trim( $parts[3] ) ];
 }
 
-unset( $output );
-exec( 'svn st', $output, $result );
+function bfg_svn_status( array $map ): array {
+	$output = [];
+	exec( 'svn st', $output );
+	$rows = [];
+	foreach ( $output as $line ) {
+		if ( ! trim( $line ) ) {
+			continue;
+		}
+		$row = bfg_svn_status_line( $line );
+		if ( null === $row ) {
+			die( "ERROR: Unreadable SVN status line, \"$line\". Please investigate!\n" );
+		}
+		if ( ! isset( $map[ $row[0] ] ) ) {
+			die( "ERROR: Unidentified SVN modifier, \"$line\". Please investigate!\n" );
+		}
+		if ( '~' === $row[0] ) {
+			die( "ERROR: SVN has a problem with one of the files, \"{$row[1]}\". Please investigate!\n" );
+		}
+		$rows[] = $row;
+	}
+	return $rows;
+}
+
+// Tell SVN about every file the cleanup removed. A parent covers its children,
+// so removing a child afterwards fails with "is not a working copy".
+$missing = [];
+foreach ( bfg_svn_status( $map ) as [ $modifier, $file ] ) {
+	if ( '!' === $modifier ) {
+		$missing[] = $file;
+	}
+}
+sort( $missing );
+$removed = [];
+foreach ( $missing as $file ) {
+	foreach ( $removed as $parent ) {
+		if ( str_starts_with( $file, $parent . '/' ) ) {
+			continue 2;
+		}
+	}
+	$output = [];
+	exec( 'svn rm --force ' . escapeshellarg( $file ), $output, $result );
+	if ( $result ) {
+		die( "ERROR: Could not remove \"$file\" from SVN.\n" );
+	}
+	$removed[] = $file;
+}
+
 echo "\nStatus: \n";
-foreach ( $lines as $line ) {
-	$line = trim( $line );
-	if ( ! $line ) {
-		continue;
-	}
-	if ( ! preg_match( '/^([ACDIMRX\?~\!])\s+(\S.*)/', $line, $parts ) ) {
-		die( "ERROR: Unidentified SVN modifier, \"$line\". Please investigate!\n" );
-	}
-	$modifier = $parts[1];
-	$file     = $parts[2];
+foreach ( bfg_svn_status( $map ) as [ $modifier, $file ] ) {
 	echo "[{$map[$modifier]}] {$file}\n";
 }
 
