@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-17T15:13:37+00:00\n"
+"POT-Creation-Date: 2026-09-17T17:12:33+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -60,13 +60,13 @@ msgstr "Mybring Booking"
 #: build/templates/admin/booking/bulk-modal.php:17
 #: build/templates/admin/booking/bulk-modal.php:64
 #: build/templates/admin/booking/bulk-modal.php:72
-#: build/templates/admin/pages/home.php:166
+#: build/templates/admin/pages/home.php:167
 #: build/templates/admin/pages/pro.php:147
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
-#: src/templates/admin/pages/home.bfg.php:148
+#: src/templates/admin/pages/home.bfg.php:149
 #: src/templates/admin/pages/pro.bfg.php:147
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
 #: templates/service-field.php:47
@@ -521,56 +521,56 @@ msgstr ""
 msgid "Maximum box dimensions"
 msgstr "Største eskemål"
 
-#: build/templates/admin/pages/home.php:23
+#: build/templates/admin/pages/home.php:24
 msgid "Setup"
 msgstr "Oppsett"
 
-#: build/templates/admin/pages/home.php:37
-#: src/templates/admin/pages/home.bfg.php:33
+#: build/templates/admin/pages/home.php:38
+#: src/templates/admin/pages/home.bfg.php:34
 #, php-format
 msgid "Bring Fraktguiden was added to %d shipping zone."
 msgid_plural "Bring Fraktguiden was added to %d shipping zones."
 msgstr[0] "Bring Fraktguiden ble lagt til i %d fraktsone."
 msgstr[1] "Bring Fraktguiden ble lagt til i %d fraktsoner."
 
-#: build/templates/admin/pages/home.php:46
+#: build/templates/admin/pages/home.php:47
 msgid "No shipping zone was changed."
 msgstr "Ingen fraktsone ble endret."
 
-#: build/templates/admin/pages/home.php:74
+#: build/templates/admin/pages/home.php:75
 msgid "Get Started with Bring shipping"
 msgstr "Kom i gang med frakt fra Bring"
 
-#: build/templates/admin/pages/home.php:78
+#: build/templates/admin/pages/home.php:79
 msgid "Pro available"
 msgstr "Pro tilgjengelig"
 
-#: build/templates/admin/pages/home.php:82
+#: build/templates/admin/pages/home.php:83
 msgid "Complete these steps to configure Bring Shipping"
 msgstr "Fullfør disse stegene for å sette opp frakt med Bring"
 
-#: build/templates/admin/pages/home.php:88
+#: build/templates/admin/pages/home.php:89
 msgid "Current Step"
 msgstr "Dette steget"
 
-#: build/templates/admin/pages/home.php:91
-#: src/templates/admin/pages/home.bfg.php:81
+#: build/templates/admin/pages/home.php:92
+#: src/templates/admin/pages/home.bfg.php:82
 #, php-format
 msgid "Step %d of %d"
 msgstr "Steg %d av %d"
 
-#: build/templates/admin/pages/home.php:96
+#: build/templates/admin/pages/home.php:97
 msgid "Progress"
 msgstr "Framdrift"
 
-#: build/templates/admin/pages/home.php:99
-#: src/templates/admin/pages/home.bfg.php:89
+#: build/templates/admin/pages/home.php:100
+#: src/templates/admin/pages/home.bfg.php:90
 #, php-format
 msgid "%d of %d completed"
 msgstr "%d av %d fullført"
 
-#: build/templates/admin/pages/home.php:128
-#: build/templates/admin/pages/home/connect-account.php:63
+#: build/templates/admin/pages/home.php:129
+#: build/templates/admin/pages/home/connect-account.php:65
 #: build/templates/admin/pages/home/fallback-price.php:65
 #: build/templates/admin/pages/home/test-shipping.php:52
 #: build/templates/admin/pages/kitchen-sink/badges.php:15
@@ -581,50 +581,60 @@ msgstr "%d av %d fullført"
 msgid "Done"
 msgstr "Ferdig"
 
-#: build/templates/admin/pages/home.php:146
-#: build/templates/admin/pages/home/connect-account.php:65
+#: build/templates/admin/pages/home.php:147
+#: build/templates/admin/pages/home/connect-account.php:67
 #: build/templates/admin/pages/home/fallback-price.php:67
 #: build/templates/admin/pages/home/test-shipping.php:54
 msgid "In Progress"
 msgstr "Pågår"
 
-#: build/templates/admin/pages/home.php:165
+#: build/templates/admin/pages/home.php:166
 msgid "Add Bring to shipping zones"
 msgstr "Legg Bring til i fraktsoner"
 
-#: build/templates/admin/pages/home.php:170
+#: build/templates/admin/pages/home.php:171
 msgid "This shop has no shipping zone yet."
 msgstr "Denne butikken har ingen fraktsone ennå."
 
-#: build/templates/admin/pages/home.php:174
+#: build/templates/admin/pages/home.php:175
 msgid "Make a shipping zone"
 msgstr "Lag en fraktsone"
 
-#: build/templates/admin/pages/home.php:182
+#: build/templates/admin/pages/home.php:183
 msgid "A shipping zone is a group of places with its own shipping prices."
 msgstr "En fraktsone er en gruppe steder med egne fraktpriser."
 
-#: build/templates/admin/pages/home.php:183
+#: build/templates/admin/pages/home.php:184
 msgid "Tick a zone to show Bring shipping options to customers there."
 msgstr ""
 "Kryss av for en sone for å vise fraktalternativer fra Bring til kundene der."
 
-#: build/templates/admin/pages/home.php:192
+#: build/templates/admin/pages/home.php:193
 msgid "Already added"
 msgstr "Allerede lagt til"
 
-#: build/templates/admin/pages/home.php:198
+#: build/templates/admin/pages/home.php:201
+msgid "Delete the free shipping"
+msgstr "Slett gratis frakt"
+
+#: build/templates/admin/pages/home.php:202
+msgid ""
+"Free shipping is the only option this shop offers, and it hides the Bring "
+"options from a customer. A deleted method does not come back."
+msgstr ""
+
+#: build/templates/admin/pages/home.php:208
 msgid "Add Bring"
 msgstr "Legg til Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:20
-#: src/templates/admin/pages/home/connect-account.bfg.php:20
+#: build/templates/admin/pages/home/connect-account.php:22
+#: src/templates/admin/pages/home/connect-account.bfg.php:22
 msgid "Bring Fraktguiden for WooCommerce: I would like a shipping agreement"
 msgstr "Bring Fraktguiden for WooCommerce: Jeg ønsker en fraktavtale"
 
 #. translators: %s is the address of the shop.
-#: build/templates/admin/pages/home/connect-account.php:23
-#: src/templates/admin/pages/home/connect-account.bfg.php:23
+#: build/templates/admin/pages/home/connect-account.php:25
+#: src/templates/admin/pages/home/connect-account.bfg.php:25
 #, php-format
 msgid ""
 "Hi, I have a WooCommerce shop, %s, and I would like an account.\n"
@@ -639,43 +649,43 @@ msgstr ""
 "Antall sendinger per måned (omtrent):\n"
 "Telefonnummer (valgfritt):"
 
-#: build/templates/admin/pages/home/connect-account.php:45
-#: src/templates/admin/pages/home/connect-account.bfg.php:45
+#: build/templates/admin/pages/home/connect-account.php:47
+#: src/templates/admin/pages/home/connect-account.bfg.php:47
 #, php-format
 msgid "Connected as %s"
 msgstr "Tilkoblet som %s"
 
-#: build/templates/admin/pages/home/connect-account.php:54
+#: build/templates/admin/pages/home/connect-account.php:56
 #: build/templates/admin/pages/home/fallback-price.php:56
 #: pro/pickuppoint/SelectedPickUpPointComponent.php:11
 msgid "Change"
 msgstr "Endre"
 
-#: build/templates/admin/pages/home/connect-account.php:56
+#: build/templates/admin/pages/home/connect-account.php:58
 msgid "Connect"
 msgstr "Koble til"
 
-#: build/templates/admin/pages/home/connect-account.php:74
+#: build/templates/admin/pages/home/connect-account.php:76
 msgid "Bring needs two things: the email you log in with, and an API key."
 msgstr "Bring trenger to ting: eposten du logger inn med, og en API-nøkkel."
 
-#: build/templates/admin/pages/home/connect-account.php:79
+#: build/templates/admin/pages/home/connect-account.php:82
 msgid "Save 20 to 40 percent on shipping"
 msgstr "Spar 20 til 40 prosent på frakt"
 
-#: build/templates/admin/pages/home/connect-account.php:82
+#: build/templates/admin/pages/home/connect-account.php:85
 msgid "Lower prices than a normal Bring account"
 msgstr "Lavere priser enn en vanlig Bring-konto"
 
-#: build/templates/admin/pages/home/connect-account.php:83
+#: build/templates/admin/pages/home/connect-account.php:86
 msgid "Keep the Mybring account you have, or get a new one"
 msgstr "Behold Mybring-kontoen du har, eller få en ny"
 
-#: build/templates/admin/pages/home/connect-account.php:84
+#: build/templates/admin/pages/home/connect-account.php:87
 msgid "Ready in minutes, by phone or a few emails"
 msgstr "Klar på noen minutter, over telefon eller noen e-poster"
 
-#: build/templates/admin/pages/home/connect-account.php:87
+#: build/templates/admin/pages/home/connect-account.php:90
 msgid ""
 "What to expect: Send Quickship your shop name, parcels per month, phone and "
 "email. You get a price offer. Accept it, and Quickship sets up your API "
@@ -685,50 +695,50 @@ msgstr ""
 "måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship "
 "setter opp API-tilgangen din."
 
-#: build/templates/admin/pages/home/connect-account.php:95
+#: build/templates/admin/pages/home/connect-account.php:98
 msgid "Set up an account"
 msgstr "Opprett en konto"
 
-#: build/templates/admin/pages/home/connect-account.php:99
+#: build/templates/admin/pages/home/connect-account.php:102
 msgid "Read more"
 msgstr "Les mer"
 
-#: build/templates/admin/pages/home/connect-account.php:110
+#: build/templates/admin/pages/home/connect-account.php:114
 msgid "Bring login email"
 msgstr "Epost for innlogging hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:113
+#: build/templates/admin/pages/home/connect-account.php:117
 msgid "Use the email you log in to Bring with, not your shop address."
 msgstr ""
 "Bruk eposten du logger inn hos Bring med, ikke epostadressen til butikken."
 
-#: build/templates/admin/pages/home/connect-account.php:115
+#: build/templates/admin/pages/home/connect-account.php:119
 msgid "Find it on your Bring profile"
 msgstr "Finn den på Bring-profilen din"
 
-#: build/templates/admin/pages/home/connect-account.php:121
+#: build/templates/admin/pages/home/connect-account.php:125
 #: config/admin-settings.php:177 config/admin-settings.php:179
 msgid "API key"
 msgstr "API-nøkkel"
 
-#: build/templates/admin/pages/home/connect-account.php:125
+#: build/templates/admin/pages/home/connect-account.php:129
 msgid "Open your Bring API settings"
 msgstr "Åpne API-innstillingene dine hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:127
+#: build/templates/admin/pages/home/connect-account.php:131
 msgid "Copy the key from that page and paste it here."
 msgstr "Kopier nøkkelen fra den siden og lim den inn her."
 
-#: build/templates/admin/pages/home/connect-account.php:135
+#: build/templates/admin/pages/home/connect-account.php:139
 msgid "Check that the whole API key is copied, with no space at either end."
 msgstr ""
 "Sjekk at hele API-nøkkelen er kopiert, uten mellomrom i noen av endene."
 
-#: build/templates/admin/pages/home/connect-account.php:136
+#: build/templates/admin/pages/home/connect-account.php:140
 msgid "Check that the email is the one you log in to Bring with."
 msgstr "Sjekk at eposten er den du logger inn hos Bring med."
 
-#: build/templates/admin/pages/home/connect-account.php:141
+#: build/templates/admin/pages/home/connect-account.php:145
 msgid "Save and test"
 msgstr "Lagre og test"
 
@@ -2363,27 +2373,27 @@ msgstr "Komponentgalleri"
 msgid "Home"
 msgstr "Hjem"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:245
+#: classes/BringFraktguiden/Admin/SettingsPage.php:246
 msgid "Never"
 msgstr "Aldri"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:272
+#: classes/BringFraktguiden/Admin/SettingsPage.php:273
 msgid "Click to configure each feature"
 msgstr "Klikk for å sette opp hver funksjon"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:274
+#: classes/BringFraktguiden/Admin/SettingsPage.php:275
 msgid "All features active during your trial"
 msgstr "Alle funksjoner er aktive i prøveperioden din"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:276
+#: classes/BringFraktguiden/Admin/SettingsPage.php:277
 msgid "Purchase a license to regain access"
 msgstr "Kjøp en lisens for å få tilgang igjen"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:278
+#: classes/BringFraktguiden/Admin/SettingsPage.php:279
 msgid "Available with Pro"
 msgstr "Tilgjengelig med Pro"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:340
+#: classes/BringFraktguiden/Admin/SettingsPage.php:341
 msgid "The guide set the shipping services this shop offers."
 msgstr "Veiviseren satte frakttjenestene denne butikken tilbyr."
 
@@ -2423,7 +2433,7 @@ msgstr "Bring godtok ikke API-innloggingen til denne butikken."
 msgid "Bring answered with an error (%d)."
 msgstr "Bring svarte med en feil (%d)."
 
-#: classes/BringFraktguiden/Admin/ShippingZones.php:86
+#: classes/BringFraktguiden/Admin/ShippingZones.php:137
 msgid "Everywhere else"
 msgstr "Alle andre steder"
 
@@ -2664,13 +2674,13 @@ msgstr "Samtykke til pose på døren"
 msgid "Yes"
 msgstr "Ja"
 
-#: classes/common/class-fraktguiden-admin-notices.php:49
+#: classes/common/class-fraktguiden-admin-notices.php:56
 #: classes/common/class-fraktguiden-helper.php:483
 msgid "Click here to buy a license"
 msgstr "Klikk her for å kjøpe lisens"
 
 #. translators: %s: Number of days
-#: classes/common/class-fraktguiden-admin-notices.php:52
+#: classes/common/class-fraktguiden-admin-notices.php:59
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO license has not yet been activated. You have %s "
@@ -2680,23 +2690,23 @@ msgstr ""
 "igjen før PRO-funksjonene blir deaktivert."
 
 #. translators: %s: Number of days
-#: classes/common/class-fraktguiden-admin-notices.php:52
-#: classes/common/class-fraktguiden-admin-notices.php:61
+#: classes/common/class-fraktguiden-admin-notices.php:59
+#: classes/common/class-fraktguiden-admin-notices.php:68
 msgid "day"
 msgid_plural "days"
 msgstr[0] "dag"
 msgstr[1] "dagen"
 
-#: classes/common/class-fraktguiden-admin-notices.php:56
+#: classes/common/class-fraktguiden-admin-notices.php:63
 msgid "Bring Fraktguiden PRO features have been deactivated."
 msgstr "Bring Fraktguiden PRO funksjoner er deaktivert."
 
-#: classes/common/class-fraktguiden-admin-notices.php:57
+#: classes/common/class-fraktguiden-admin-notices.php:64
 msgid "Please ensure you have a valid license to continue using PRO."
 msgstr ""
 "Vennligst sørg for at du har en gyldig lisens før du fortsetter å bruke PRO."
 
-#: classes/common/class-fraktguiden-admin-notices.php:61
+#: classes/common/class-fraktguiden-admin-notices.php:68
 msgid ""
 "☠️ Ahoy, matey! we understand that there ye don't want to, or fer other "
 "reasons be unable pay fer our plugin. Please kindly consider gettin' a "
@@ -2707,11 +2717,25 @@ msgstr ""
 "å skaffe deg eit brev av løyve ved ei seinare anledning om du koser deg med "
 "bruket av den. Yarr!"
 
-#: classes/common/class-fraktguiden-admin-notices.php:158
+#. translators: %s: number of setup steps left
+#: classes/common/class-fraktguiden-admin-notices.php:133
+#, php-format
+msgid "Bring Fraktguiden has %s setup step left."
+msgid_plural "Bring Fraktguiden has %s setup steps left."
+msgstr[0] "Bring Fraktguiden har %s oppsettssteg igjen."
+msgstr[1] "Bring Fraktguiden har %s oppsettssteg igjen."
+
+#. translators: %s: get started page URL
+#: classes/common/class-fraktguiden-admin-notices.php:144
+#, php-format
+msgid "<a href=\"%s\">Finish the setup</a>."
+msgstr "<a href=\"%s\">Fullfør oppsettet</a>."
+
+#: classes/common/class-fraktguiden-admin-notices.php:203
 msgid "Bring Fraktguiden shipping method is missing."
 msgstr "Fraktmetoden Bring Fraktguiden mangler."
 
-#: classes/common/class-fraktguiden-admin-notices.php:159
+#: classes/common/class-fraktguiden-admin-notices.php:204
 #, php-format
 msgid ""
 "You have to add Bring Fraktguiden as a shipping method in your <a "
@@ -2720,11 +2744,11 @@ msgstr ""
 "Du må legge til Bring Fraktguiden som fraktmetode i <a "
 "href=\"%s\">fraktsonene</a> dine."
 
-#: classes/common/class-fraktguiden-admin-notices.php:183
+#: classes/common/class-fraktguiden-admin-notices.php:228
 msgid "No shipping services enabled."
 msgstr "Ingen frakttjenester er aktivert."
 
-#: classes/common/class-fraktguiden-admin-notices.php:185
+#: classes/common/class-fraktguiden-admin-notices.php:230
 #, php-format
 msgid ""
 "You have to enable at least one shipping service in <a href=\"%s\">Shipping "
@@ -2733,15 +2757,15 @@ msgstr ""
 "Du må aktivere minst én frakttjeneste i <a href=\"%s\">Fraktinnstillinger</"
 "a>."
 
-#: classes/common/class-fraktguiden-admin-notices.php:214
+#: classes/common/class-fraktguiden-admin-notices.php:259
 msgid "Bring Fraktguiden API Customer Number is missing."
 msgstr "Bring Fraktguiden API-kundenummer mangler."
 
-#: classes/common/class-fraktguiden-admin-notices.php:215
+#: classes/common/class-fraktguiden-admin-notices.php:260
 msgid "Mybring Booking requires an API customer number."
 msgstr "Mybring Booking krever API-kundenummer."
 
-#: classes/common/class-fraktguiden-admin-notices.php:218
+#: classes/common/class-fraktguiden-admin-notices.php:263
 #, php-format
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."

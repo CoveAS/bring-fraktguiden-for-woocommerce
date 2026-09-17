@@ -57,10 +57,14 @@ See faq.txt for frequently asked questions
 * Added NVIT transit data for shipments to a Norwegian transit postal code
 * Added the customs consent to the booking screens
 * Added a fallback shipping option for a checkout that Bring returns no price for
+* Added a notice that names the setup steps left
+* Added an offer to delete a free shipping method that hides the Bring options
 * The Pro license now follows the shop domain, and the owner can move it from the Pro page
 * The plugin now reads its settings from one store
 * Completed the Norwegian translation
 * Fixed a frozen checkout when the customer changes the pick-up point
+* Fixed the customs and license scripts, which did not load on a live site
+* Fixed a service that the service wizard cleared and then set again
 
 = 1.11.7 =
 
