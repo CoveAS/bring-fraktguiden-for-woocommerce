@@ -51,6 +51,32 @@ class BookingRecord
 	}
 
 	/**
+	 * Return the return consignments Bring confirmed.
+	 *
+	 * A booking without a return service confirms none.
+	 *
+	 * @return Bring_Consignment[]
+	 */
+	public function return_consignments(): array
+	{
+		return Bring_Consignment::create_returns_from_response($this->response, $this->order_id);
+	}
+
+	/**
+	 * Return the address that prints the return labels of this booking.
+	 */
+	public function return_labels_url(): string
+	{
+		return Bring_Booking_Labels::create_download_url(
+			(string) $this->order_id,
+			array_map(
+				fn(Bring_Consignment $consignment) => $consignment->get_consignment_number(),
+				$this->return_consignments()
+			)
+		);
+	}
+
+	/**
 	 * Return the address that prints the labels of this booking.
 	 */
 	public function labels_url(): string

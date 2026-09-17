@@ -142,5 +142,18 @@ shop sees that the feature covers Norway only.
 service only when the outbound service carries `'return_label' => true` in
 `config/services.php`.
 
+### Where the return label shows
+
+Bring answers a booking that carried a `returnProduct` with a second
+consignment number under `returnConsignmentNumber`, and a second label under
+`returnLinks`.
+
+`Bring_Consignment::create_returns_from_response()` reads those two fields. The
+booking box then offers a second button, "Print the return label".
+
+The return stays out of `create_from_response()`. That list feeds the customer
+facing order view, which prints every consignment as a tracking number. A
+customer tracks the parcel they wait for, not a return they may never send.
+
 The plugin books no return on its own. A return outside Norway needs a separate
 booking, a reversed address and its own customer number.

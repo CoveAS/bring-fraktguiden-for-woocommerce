@@ -214,7 +214,9 @@ class Bring_Booking_Labels {
 		$found = [];
 
 		foreach ( BookingHistory::all( $order ) as $record ) {
-			foreach ( $record->consignments() as $consignment ) {
+			$consignments = array_merge( $record->consignments(), $record->return_consignments() );
+
+			foreach ( $consignments as $consignment ) {
 				if ( in_array( $consignment->get_consignment_number(), $numbers, true ) ) {
 					$found[] = $consignment;
 				}

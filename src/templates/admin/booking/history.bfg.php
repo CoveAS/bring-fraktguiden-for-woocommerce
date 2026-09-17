@@ -51,6 +51,9 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 
 			<?php if (!$record->failed()) : ?>
 				<a class="bfg-btn <?php echo 0 === $bfg_index ? 'bfg-btn--primary' : 'bfg-btn--secondary'; ?> bfg-btn--sm" href="<?php echo esc_url($record->labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
+				<?php if ($record->return_consignments()) : ?>
+					<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="<?php echo esc_url($record->return_labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the return label</t></a>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 	<?php endforeach; ?>
