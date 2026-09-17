@@ -39,7 +39,7 @@ $checked_value = $value !== '' ? $value : $default;
 				<?php Field::attributes($custom_attributes); ?>
 				<?php checked($checked_value, $key); ?>
 			>
-			<div class="bfg-radio-content">
+			<div class="bfg-radio-content bfgu:flex bfgu:flex-col bfgu:items-start bfgu:gap-1.5">
 				<span class="bfg-radio-title"><?php echo esc_html($option_title); ?></span>
 				<?php if ($option_desc): ?>
 					<p class="bfg-radio-desc"><?php echo wp_kses_post($option_desc); ?></p>

@@ -51,11 +51,7 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
 .bfg-radio-content {
     flex: 1;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
     text-align: left;
-    align-items: start;
 }
 
 .bfg-radio-title {

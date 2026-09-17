@@ -290,7 +290,8 @@ body:not(.using-mouse) .bfg textarea:focus {
     position: relative;
 }
 
-.bfg-input div {
+/* The radio group brings its own layout, on the markup. */
+.bfg-input div:not(.bfg-radio-group, .bfg-radio-group *) {
     position: relative;
     display: flex;
     align-items: center;
