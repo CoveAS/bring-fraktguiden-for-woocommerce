@@ -32,10 +32,10 @@ $first_service = reset($all_services);
 // Filtered services for fallback options: top 3 new services + pakke i postkassen
 $fallback_services = [
 	'5800' => $all_services['5800'] ?? 'Pakke til hentested',
-	'5600' => $all_services['5600'] ?? 'Pakke levert hjem',
+	'5600' => $all_services['5600'] ?? 'Pakke hjem pluss',
 	'5000' => $all_services['5000'] ?? 'Pakke til bedrift',
-	'3570' => $all_services['3570'] ?? 'Pakke i postkassen (sporbar)',
-	'3584' => $all_services['3584'] ?? 'Pakke i postkassen',
+	'3570' => $all_services['3570'] ?? 'Pakke hjem i postkassen (sporbar)',
+	'3584' => $all_services['3584'] ?? 'Pakke hjem i postkassen',
 ];
 
 return [
