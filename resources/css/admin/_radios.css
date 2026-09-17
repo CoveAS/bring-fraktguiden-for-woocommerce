@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Radio Group — a card per choice, with a title and a description
+   ========================================================================== */
+
+.bfg-radio-group {
+    --rb-padding: 20px;
+    --rb-radio-size: 20px;
+    --rb-gap: 16px;
+
+    border: 1px solid var(--bfg-border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.bfg .bfg-radio-card {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: var(--rb-gap);
+    padding: var(--rb-padding);
+    margin: 0 !important;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.bfg-radio-card+.bfg-radio-card {
+    border-top: 1px solid var(--bfg-border);
+}
+
+.bfg-radio-card:first-child {
+    border-radius: 7px 7px 0 0;
+}
+
+.bfg-radio-card:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+.bfg-radio-card:hover {
+    background: #F7F8FA;
+}
+
+.bfg-radio-card:has(input[type="radio"]:checked) {
+    background: #F0F7FF;
+}
+
+body:not(.using-mouse) .bfg-radio-card:focus-within {
+    box-shadow: inset 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.bfg-radio-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    align-items: start;
+}
+
+.bfg-radio-title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--bfg-text-main);
+    text-wrap: pretty;
+    margin: 0;
+    padding: 0;
+}
+
+.bfg-radio-desc {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--bfg-text-secondary);
+    text-wrap: pretty;
+    margin: 0;
+    padding: 0;
+}
+
+/* The dot
+   ========================================================================== */
+
+.bfg .bfg-radio-card input[type="radio"] {
+    width: var(--rb-radio-size) !important;
+    height: var(--rb-radio-size) !important;
+    margin: 2px 0 0 0 !important;
+    flex-shrink: 0;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.bfg .bfg-radio-card input[type="radio"]:checked {
+    background: var(--bfg-primary) !important;
+    border-color: var(--bfg-primary) !important;
+}
+
+.bfg .bfg-radio-card input[type="radio"]::before {
+    content: none !important;
+    display: none !important;
+}
+
+.bfg .bfg-radio-card input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}

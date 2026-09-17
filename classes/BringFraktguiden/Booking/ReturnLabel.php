@@ -19,22 +19,41 @@ class ReturnLabel
 	/**
 	 * The return services a shop can pick, by Bring service code.
 	 *
-	 * Both services take the parcel from a private customer, who hands it in at
-	 * a post office, a parcel box or their own mailbox. They differ in where the
-	 * return lands. A shipment lands in one place, so a shop picks one.
+	 * Each service names a title and a description, because the codes differ in
+	 * ways the name alone does not carry.
 	 *
-	 * Bring also sells 9000 and 9600, which take a parcel from a business
-	 * customer. WooCommerce marks no order as a business order, so the plugin
-	 * cannot tell when to use them.
-	 *
-	 * @return array<string, string>
+	 * @return array<string, array{title: string, description: string}>
 	 */
 	public static function services(): array
 	{
 		return [
-			'9350' => __( 'Retur til bedrift - Bring drives the return to your address', 'bring-fraktguiden-for-woocommerce' ),
-			'9300' => __( 'Retur fra hentested - the return waits at your nearest pick-up point', 'bring-fraktguiden-for-woocommerce' ),
+			'9350' => [
+				'title'       => __( 'Retur til bedrift', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'Bring drives the return to your address. Your customer hands the parcel in at a post office, a parcel box or their own mailbox. Pick this one if you want the return delivered to you.', 'bring-fraktguiden-for-woocommerce' ),
+			],
+			'9300' => [
+				'title'       => __( 'Retur fra hentested', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'The return waits at the pick-up point nearest you, and you fetch it there. Your customer hands the parcel in the same way as with Retur til bedrift.', 'bring-fraktguiden-for-woocommerce' ),
+			],
+			'9000' => [
+				'title'       => __( 'Retur pakke fra bedrift', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'For a return from a business customer, up to 35 kg per parcel. Pick this one only if you sell to businesses.', 'bring-fraktguiden-for-woocommerce' ),
+			],
+			'9600' => [
+				'title'       => __( 'Retur ekspress', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __( 'For a return from a business customer, delivered the next day with a time guarantee. It costs more than Retur pakke fra bedrift.', 'bring-fraktguiden-for-woocommerce' ),
+			],
 		];
+	}
+
+	/**
+	 * The services as a plain code to title map, for a select.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function titles(): array
+	{
+		return array_map( fn( array $service ) => $service['title'], self::services() );
 	}
 
 	/**
@@ -54,6 +73,26 @@ class ReturnLabel
 		}
 
 		return self::accepts( $product ) ? $service : null;
+	}
+
+	/**
+	 * The names of the outbound services that carry a return label.
+	 *
+	 * @return string[]
+	 */
+	public static function product_names(): array
+	{
+		$names = [];
+
+		foreach ( Fraktguiden_Helper::get_services_data() as $group ) {
+			foreach ( $group['services'] as $service ) {
+				if ( $service['return_label'] ?? false ) {
+					$names[] = $service['productName'];
+				}
+			}
+		}
+
+		return $names;
 	}
 
 	/**

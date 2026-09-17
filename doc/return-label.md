@@ -126,15 +126,17 @@ pays for the return, not the customer.
 ## What this plugin does
 
 The plugin sends `returnProduct` with the outbound booking. The Booking page
-holds one select, "Return label", stored as `booking_return_service`. The value
-is `none`, `9300` or `9350`.
+holds one radio group, "Return label", stored as `booking_return_service`. The
+value is `none`, `9300`, `9350`, `9000` or `9600`.
 
-A booking carries one `returnProduct`, so a shop picks one return service. 9300
-and 9350 differ in where the return lands, and a shipment lands in one place.
+A booking carries one `returnProduct`, so a shop picks one return service. The
+control is a radio group because each service needs a description. The code and
+the name alone do not say where the return lands, or whether it serves a private
+or a business customer.
 
-The plugin offers no business return. 9000 and 9600 take a parcel from a
-business customer. WooCommerce marks no order as a business order, so the
-plugin cannot tell when to use them.
+The setting names the five outbound services that carry a return label, so a
+shop sees that the feature covers Norway only.
+`ReturnLabel::product_names()` builds that list from `config/services.php`.
 
 `BringFraktguiden\Booking\ReturnLabel` reads the setting. It returns the return
 service only when the outbound service carries `'return_label' => true` in

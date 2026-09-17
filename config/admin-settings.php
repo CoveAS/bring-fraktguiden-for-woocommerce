@@ -476,9 +476,18 @@ return [
 			],
 			'booking_return_service' => [
 				'title' => __('Return label', 'bring-fraktguiden-for-woocommerce'),
-				'type' => 'select',
-				'description' => __('Bring adds a return label to every booking of a parcel inside Norway, and invoices the return only when the customer uses it.', 'bring-fraktguiden-for-woocommerce'),
-				'options' => ['none' => __('No return label', 'bring-fraktguiden-for-woocommerce')] + ReturnLabel::services(),
+				'type' => 'radio',
+				'description' => sprintf(
+					/* translators: %s is a list of Bring service names. */
+					__('Bring only adds a return label to a shipment inside Norway, on these services: %s. Any other service books without one. Bring invoices a return only when your customer uses it.', 'bring-fraktguiden-for-woocommerce'),
+					implode(', ', ReturnLabel::product_names())
+				),
+				'options' => [
+					'none' => [
+						'title' => __('No return label', 'bring-fraktguiden-for-woocommerce'),
+						'description' => __('A booking carries the outbound label only.', 'bring-fraktguiden-for-woocommerce'),
+					],
+				] + ReturnLabel::services(),
 				'default' => 'none',
 			],
 			'booking_home_delivery_package_type' => [

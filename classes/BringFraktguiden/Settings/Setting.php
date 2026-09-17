@@ -51,7 +51,7 @@ class Setting
 				'bring-fraktguiden-for-woocommerce'
 			);
 		}
-		if ($type === 'select' && !key_exists($param, $this->data['options'])) {
+		if (in_array($type, ['select', 'radio'], true) && !key_exists($param, $this->data['options'])) {
 			$errors[] = __(
 				'Selected value must be one of the available options!',
 				'bring-fraktguiden-for-woocommerce'
@@ -88,6 +88,7 @@ class Setting
 	{
 		return match ($this->type) {
 			'time',
+			'radio',
 			'select' => $param,
 			'info',
 			'url' => esc_url($param),

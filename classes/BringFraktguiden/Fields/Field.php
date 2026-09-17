@@ -104,12 +104,19 @@ class Field
 			'text' => 'input',
 			'checkbox' => 'checkbox',
 			'select' => 'select',
+			'radio' => 'radio',
 			'info' => 'info',
 		};
 	}
 
 	public function label(): string
 	{
+		// A radio group holds one input per choice, so no label can point at it.
+		// The group carries the title as its aria-label instead.
+		if ($this->field['type'] === 'radio') {
+			return sprintf('<span class="bfg-label">%s</span>', $this->title());
+		}
+
 		return sprintf(
 			'<label for="%s">%s</label>',
 			$this->name,
