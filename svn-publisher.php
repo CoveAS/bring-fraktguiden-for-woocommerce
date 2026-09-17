@@ -59,7 +59,7 @@ $version_exists && die( "ERROR: Version, $version, already exists" );
 
 $esc_version = preg_quote( $version, '/' );
 echo "Checking readme.txt version number\n";
-$content        = `head -n 20 $dir/readme.txt`;
+$content        = file_get_contents( "$dir/readme.txt" );
 $stable_is_this = (bool) preg_match( '/Stable tag:\s+' . $esc_version . '\s/', $content );
 if ( $is_dev && $stable_is_this ) {
 	die( "ERROR: Stable tag names $version in readme.txt. A development version has no tag to serve.\n" );
@@ -161,20 +161,50 @@ $content = str_replace('###BRING_VERSION###', $version, $content);
 file_put_contents('classes/class-bring-fraktguiden.php', $content);
 
 echo "Checking bring-fraktguiden-for-woocommerce.php version number\n";
-$content = `head -n 20 bring-fraktguiden-for-woocommerce.php`;
+$content = file_get_contents( 'bring-fraktguiden-for-woocommerce.php' );
 if ( ! preg_match( '/\* Version:\s+' . $esc_version . '/', $content, $matches ) ) {
 	die( "Version doesn't match $version in bring-fraktguiden-for-woocommerce.php" );
 }
 
 echo "Checking classes/class-bring-fraktguiden.php version number\n";
-$content = `head -n 100 classes/class-bring-fraktguiden.php`;
+$content = file_get_contents( 'classes/class-bring-fraktguiden.php' );
 if ( ! preg_match( '/\sVERSION\s+=\s+\'' . $esc_version . '\';/', $content, $matches ) ) {
 	die( "Version doesn't match $version in classes/class-bring-fraktguiden.php\n\n". $content );
 }
-// Cleanup
-`find . -name ".DS_Store" -type d -delete`;
-`rm -rf .idea .git .gitignore composer.json svn-publisher.php README.md CONTRIBUTING.md`;
-`rm -rf vendor node_modules package.json package-lock.json vite.config.js resources pro/resources tags`;
+// Cleanup. Everything the shop does not run stays out of the release.
+exec( 'find . -name ".DS_Store" -delete' );
+$development_only = [
+	'.claude',
+	'.git',
+	'.gitignore',
+	'.idea',
+	'.sublime-settings',
+	'bin',
+	'bring-timeslot.md',
+	'CLAUDE.md',
+	'composer.json',
+	'composer.lock',
+	'CONTRIBUTING.md',
+	'doc',
+	'memory',
+	'node_modules',
+	'package-lock.json',
+	'package.json',
+	'phpmd.xml',
+	'postcss.config.mjs',
+	'pro/resources',
+	'README.md',
+	'resources',
+	'src',
+	'svn-publisher.php',
+	'tags',
+	'tests',
+	'vendor',
+	'vite.config.mjs',
+];
+foreach ( $development_only as $path ) {
+	exec( 'rm -rf ' . escapeshellarg( $path ) );
+}
 if ( file_exists( '.gitignore' ) ) {
 	die( "ERROR: Cleanup failed.\n" );
 }
@@ -215,7 +245,7 @@ foreach ( $lines as $line ) {
 	$modifier = $parts[1];
 	$file     = $parts[2];
 	if ( $modifier == '!' ) {
-		`svn rm --force $file`;
+		exec( 'svn rm --force ' . escapeshellarg( $file ) );
 	}
 	if ( $modifier == '~' ) {
 		die( "ERROR: SVN has a problem with one of the files, \"$file\". Please investigate!\n" );
