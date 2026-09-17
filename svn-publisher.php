@@ -119,7 +119,9 @@ $required_files = [
 	'build/js/customs-fields.js',
 	'build/js/field-validation.js',
 	'build/js/shared/vue-runtime.js',
+	'build/js/shipping-services.js',
 	'build/css/admin.css',
+	'build/css/shipping-services.css',
 ];
 foreach ( $required_files as $file ) {
 	if ( ! file_exists( $file ) ) {

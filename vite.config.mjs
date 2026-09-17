@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => ({
         'resources/js/hs-code-picker.js',
         'resources/js/pro.js',
         'resources/js/service-wizard.js',
+        'resources/js/shipping-services.js',
         'resources/js/shipping-test.js',
       ],
       output: {

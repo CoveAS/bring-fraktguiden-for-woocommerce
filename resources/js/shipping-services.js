@@ -1,3 +1,5 @@
+import '../css/shipping-services.css';
+
 (function($) {
     'use strict';
 

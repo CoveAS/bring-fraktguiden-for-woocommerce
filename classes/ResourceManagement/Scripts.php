@@ -28,7 +28,7 @@ class Scripts
 		// Enqueue vanilla JS shipping services script
 		wp_enqueue_script(
 			'bring-shipping-services',
-			$baseUrl . 'resources/js/shipping-services.js',
+			$baseUrl . 'build/js/shipping-services.js',
 			['jquery'],
 			Bring_Fraktguiden::VERSION,
 			true
@@ -74,7 +74,7 @@ class Scripts
 		// Enqueue shipping services CSS
 		wp_enqueue_style(
 			'bring-shipping-services',
-			$baseUrl . 'resources/css/shipping-services.css',
+			$baseUrl . 'build/css/shipping-services.css',
 			[],
 			Bring_Fraktguiden::VERSION
 		);
