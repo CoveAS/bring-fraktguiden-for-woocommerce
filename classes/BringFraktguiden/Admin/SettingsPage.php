@@ -49,7 +49,7 @@ class SettingsPage
 		}
 
 		$plugin_dir = dirname(__DIR__, 3);
-		$compile_script = $plugin_dir . '/bin/compile-templates.php';
+		$compile_script = $plugin_dir . '/bin/compile-templates.php'; // bfg-release-ignore: only a local build reaches the compiler.
 
 		if (!file_exists($compile_script)) {
 			return;

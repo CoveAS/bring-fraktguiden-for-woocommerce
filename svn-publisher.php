@@ -213,6 +213,42 @@ if ( file_exists( '.gitignore' ) ) {
 	die( "ERROR: Cleanup failed.\n" );
 }
 
+/**
+ * Find every quoted path in the release that names a folder the cleanup
+ * removed. The shop would request a file that the release does not hold.
+ *
+ * Write "bfg-release-ignore" in a comment on a line that names such a path on
+ * purpose, for example a path that only a local development build reaches.
+ */
+function bfg_dangling_paths( array $removed ): array {
+	$pattern = '#[\'"]/?(' . implode( '|', array_map( fn( $path ) => preg_quote( $path, '#' ), $removed ) ) . ')/#';
+	$files   = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( '.', FilesystemIterator::SKIP_DOTS )
+	);
+	$found = [];
+	foreach ( $files as $file ) {
+		if ( ! preg_match( '/\.(php|js)$/', $file->getFilename() ) ) {
+			continue;
+		}
+		foreach ( file( $file->getPathname() ) as $index => $line ) {
+			if ( str_contains( $line, 'bfg-release-ignore' ) ) {
+				continue;
+			}
+			if ( preg_match( $pattern, $line ) ) {
+				$found[] = $file->getPathname() . ':' . ( $index + 1 ) . '  ' . trim( $line );
+			}
+		}
+	}
+	return $found;
+}
+
+echo "Checking the release for paths the cleanup removed.\n";
+$dangling = bfg_dangling_paths( $development_only );
+if ( $dangling ) {
+	die( "ERROR: The release names files that the cleanup removed:\n  " . implode( "\n  ", $dangling ) . "\n" );
+}
+echo "\u{2713} No release file names a removed folder.\n";
+
 // Add and commit changes
 exec( 'svn --force --depth infinity add .', $output, $result );
 if ( $result ) {
