@@ -4,7 +4,6 @@ use BringFraktguiden\Admin\FieldRenderer;
 use BringFraktguiden\Admin\SettingsPage;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
-use BringFraktguiden\Admin\FreeShippingOnly;
 use BringFraktguiden\Admin\Step;
 
 /**
@@ -180,9 +179,9 @@ use BringFraktguiden\Admin\Step;
 					<?php endforeach; ?>
 					<?php if ($freeShippingOnly): ?>
 						<label class="bfg-zone-row bfg-zone-row--free-shipping">
-							<input type="checkbox" name="<?php echo esc_attr(FreeShippingOnly::FIELD); ?>" value="1">
+							<input type="checkbox" name="<?php echo esc_attr(AddShippingMethod::DELETE_FREE_SHIPPING); ?>" value="1">
 							<span class="bfg-zone-row__text">
-								<span class="bfg-zone-row__regions"><t>Delete the free shipping</t></span>
+								<span class="bfg-zone-row__label"><t>Delete the free shipping</t></span>
 								<span class="bfg-zone-row__hint"><t>Free shipping is the only option this shop offers, and it hides the Bring options from a customer. A deleted method does not come back.</t></span>
 							</span>
 						</label>

@@ -120,6 +120,10 @@
     gap: 0.125rem;
 }
 
+.bfg-zone-row__label {
+    font-weight: 600;
+}
+
 .bfg-zone-row__hint {
     color: var(--bfg-text-muted);
     font-size: var(--bfg-text-level-6, 0.75rem);
