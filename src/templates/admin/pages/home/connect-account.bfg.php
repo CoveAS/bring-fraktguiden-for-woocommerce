@@ -17,6 +17,8 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 $bfg_failed = ($_GET[ConnectAccount::RESULT] ?? null) === 'no';
 $bfg_open = $bfg_failed || (!$step->completed && $isNext);
 $bfg_uid = (string) Fraktguiden_Helper::get_option('mybring_api_uid');
+// Quickship sells a Norwegian shipping agreement, so only a Norwegian shop can use it.
+$bfg_quickship = WC()->countries?->get_base_country() === 'NO';
 $bfg_quickship_subject = rawurlencode(__('Bring Fraktguiden for WooCommerce: I would like a shipping agreement', 'bring-fraktguiden-for-woocommerce'));
 $bfg_quickship_body = rawurlencode(sprintf(
 	/* translators: %s is the address of the shop. */
@@ -79,6 +81,7 @@ $bfg_quickship_body = rawurlencode(sprintf(
 				<t>Bring needs two things: the email you log in with, and an API key.</t>
 			</p>
 
+			<?php if ($bfg_quickship): ?>
 			<div class="bfg-connect__signup">
 				<p class="bfg-step-form__intro">
 					<t>Save 20 to 40 percent on shipping</t>
@@ -110,6 +113,7 @@ $bfg_quickship_body = rawurlencode(sprintf(
 					</a>
 				</p>
 			</div>
+			<?php endif; ?>
 
 			<div class="bfg-step-form__field">
 				<label class="bfg-step-form__label" for="bfg-api-uid"><t>Bring login email</t></label>
