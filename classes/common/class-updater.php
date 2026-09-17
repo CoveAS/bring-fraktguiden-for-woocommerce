@@ -8,6 +8,7 @@
 namespace Bring_Fraktguiden;
 
 use Bring_Fraktguiden;
+use Bring_Fraktguiden\Common\Fraktguiden_Admin_Notices;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 /**
@@ -61,6 +62,9 @@ class Updater {
 				update_option( $service_key . '_options', $services_options );
 			}
 		}
+		// A new version brings new setup steps, so show the setup notice again.
+		Fraktguiden_Admin_Notices::recall_notice( Fraktguiden_Admin_Notices::SETUP_STEPS_NOTICE );
+
 		Fraktguiden_Helper::update_option( 'version_updater', \Bring_Fraktguiden::VERSION );
 	}
 
