@@ -20,6 +20,11 @@ class Fraktguiden_License
 
 	public const STATE_OPTION = 'bring_fraktguiden_license_state';
 
+	/**
+	 * The license server, when no constant names another one.
+	 */
+	public const SERVER_URL = 'https://bringfraktguiden.no/';
+
 	protected static self $instance;
 
 	/**
@@ -35,6 +40,46 @@ class Fraktguiden_License
 	}
 
 	/**
+	 * The address of the license check script.
+	 */
+	public static function check_url(): string
+	{
+		if (defined('BRING_LICENSE_URL')) {
+			return BRING_LICENSE_URL;
+		}
+
+		return self::SERVER_URL.'license-check.php';
+	}
+
+	/**
+	 * The root of the license server.
+	 *
+	 * BRING_LICENSE_URL names the check script, so the root is the folder that
+	 * holds it.
+	 */
+	public static function server_url(): string
+	{
+		if (defined('BRING_LICENSE_URL')) {
+			return trailingslashit(dirname(BRING_LICENSE_URL));
+		}
+
+		return self::SERVER_URL;
+	}
+
+	/**
+	 * The page that sells a license.
+	 *
+	 * The domain of this shop travels in the query. The license server keeps it
+	 * and fills the website field of its checkout.
+	 */
+	public static function purchase_url(): string
+	{
+		$domain = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
+
+		return add_query_arg('domain', $domain, self::server_url());
+	}
+
+	/**
 	 * Ask the license server a question.
 	 *
 	 * @param array $data GET parameters.
@@ -43,8 +88,7 @@ class Fraktguiden_License
 	 */
 	public function request($data)
 	{
-		$base = defined('BRING_LICENSE_URL') ? BRING_LICENSE_URL : 'https://bringfraktguiden.no/license-check.php';
-		$url  = $base.'?'.http_build_query($data);
+		$url = self::check_url().'?'.http_build_query($data);
 
 		$response = wp_remote_get(
 			$url,

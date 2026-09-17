@@ -24,7 +24,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 			</strong>
 			<p class="bfg-trial-notice__desc"><t>Configure features below to try them on your live site</t></p>
 		</div>
-		<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--primary">
+		<a href="<?php echo esc_url($license_purchase_url); ?>" target="_blank" class="bfg-btn bfg-btn--primary">
 			<t>Purchase License</t>
 		</a>
 	</div>

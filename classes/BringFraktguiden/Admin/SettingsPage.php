@@ -249,6 +249,7 @@ class SettingsPage
 		// because the address follows the permalink of the shop account page.
 		$license_manage_url   = ($state['manage_url'] ?? '') ?: 'https://bringfraktguiden.no/';
 		$license_support_url  = 'https://support.bringfraktguiden.no';
+		$license_purchase_url = Fraktguiden_License::purchase_url();
 
 		// Where the current Pro access comes from.
 		if ($license_active) {

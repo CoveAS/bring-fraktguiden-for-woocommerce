@@ -33,7 +33,7 @@ use BringFraktguiden\Admin\FieldRenderer;
 						<t>Start Free Trial</t>
 					</button>
 				</form>
-				<a href="https://bringfraktguiden.no/" target="_blank" class="bfg-btn bfg-btn--secondary">
+				<a href="<?php echo esc_url($license_purchase_url); ?>" target="_blank" class="bfg-btn bfg-btn--secondary">
 					<t>Purchase License</t>
 				</a>
 			</div>
