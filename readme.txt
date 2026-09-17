@@ -45,6 +45,23 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.12.0 =
+
+* New Get Started page that sets up shipping zones, services and a fallback price in a few steps
+* New Settings page, Booking page and Pro page
+* New booking box on the order screen that books one shipment per order
+* New bulk booking window on the orders list
+* Added customs data for shipments that leave the country, with an HS code, a goods description and a net weight per product
+* Added a search window that picks an HS code from the tariff
+* Added a warning on the order screen when a shipment misses customs data
+* Added NVIT transit data for shipments to a Norwegian transit postal code
+* Added the customs consent to the booking screens
+* Added a fallback shipping option for a checkout that Bring returns no price for
+* The Pro license now follows the shop domain, and the owner can move it from the Pro page
+* The plugin now reads its settings from one store
+* Completed the Norwegian translation
+* Fixed a frozen checkout when the customer changes the pick-up point
+
 = 1.11.7 =
 
 * Fixed bug with printing labels introduced by changing the loading order
