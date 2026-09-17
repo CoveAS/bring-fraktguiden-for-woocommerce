@@ -14,12 +14,12 @@ use WC_Shipping_Zones;
 class ShippingZones
 {
 	/**
-	 * Return one row per zone, as id, name, regions and added.
+	 * Return one row per zone, as id, name, regions, added and suggested.
 	 *
 	 * The last row is zone 0, the rest of the world. WooCommerce leaves it out
 	 * of get_zones(), but a shop can add a method to it.
 	 *
-	 * @return array<int, array{id: int, name: string, regions: string, added: bool}>
+	 * @return array<int, array{id: int, name: string, regions: string, added: bool, suggested: bool}>
 	 */
 	public static function all(): array
 	{
@@ -27,13 +27,19 @@ class ShippingZones
 			return [];
 		}
 
-		$ids = array_column(WC_Shipping_Zones::get_zones(), 'id');
-		$ids[] = 0;
-
-		return array_map(
+		$rows = array_map(
 			fn($id) => self::row(WC_Shipping_Zones::get_zone($id)),
-			$ids
+			array_column(WC_Shipping_Zones::get_zones(), 'id')
 		);
+
+		$everywhere = self::row(WC_Shipping_Zones::get_zone(0));
+
+		// Everywhere else holds the places the other zones leave out. A shop
+		// that draws its own zones ships to those zones on purpose, so the
+		// form suggests everywhere else only when it is the one zone.
+		$everywhere['suggested'] = $everywhere['added'] || ! $rows;
+
+		return [...$rows, $everywhere];
 	}
 
 	/** Is the Bring method in at least one zone? */
@@ -117,7 +123,11 @@ class ShippingZones
 		}
 	}
 
-	/** @return array{id: int, name: string, regions: string, added: bool} */
+	/**
+	 * One zone row. 'suggested' says whether the form ticks the zone by default.
+	 *
+	 * @return array{id: int, name: string, regions: string, added: bool, suggested: bool}
+	 */
 	private static function row(WC_Shipping_Zone $zone): array
 	{
 		$added = false;
@@ -131,12 +141,13 @@ class ShippingZones
 		$id = (int) $zone->get_id();
 
 		return [
-			'id'      => $id,
-			'name'    => $zone->get_zone_name(),
-			'regions' => $id === 0
+			'id'        => $id,
+			'name'      => $zone->get_zone_name(),
+			'regions'   => $id === 0
 				? __('Everywhere else', 'bring-fraktguiden-for-woocommerce')
 				: $zone->get_formatted_location(),
-			'added'   => $added,
+			'added'     => $added,
+			'suggested' => true,
 		];
 	}
 }
