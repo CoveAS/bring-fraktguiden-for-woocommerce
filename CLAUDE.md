@@ -8,10 +8,21 @@ Admin pages are written as `.bfg.php` source templates using a custom component 
 
 ## PHP version
 
-The plugin requires PHP 8.3. The local command line PHP may be newer.
+The plugin requires PHP 8.1. The local command line PHP may be newer.
 
-Write code that runs on PHP 8.3. Do not use syntax or functions added after
-8.3, even when the local PHP accepts them.
+Write code that runs on PHP 8.1. Do not use syntax or functions added after
+8.1, even when the local PHP accepts them.
+
+The local PHP never catches a mistake here. Lint a changed file with an older
+binary instead:
+
+```
+/opt/homebrew/opt/php@8.2/bin/php -l <file>
+```
+
+That binary proves 8.2 only. Check the 8.2 features by eye: `readonly class`,
+a standalone `null`, `false` or `true` type, a constant in a trait, and a
+disjunctive normal form type.
 
 The requirement is written in three places. Change all three together:
 `readme.txt`, the `Requires PHP` header in
