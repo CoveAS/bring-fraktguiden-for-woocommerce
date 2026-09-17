@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-17T19:13:00+00:00\n"
+"POT-Creation-Date: 2026-09-17T20:05:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -54,13 +54,13 @@ msgstr ""
 #: build/templates/admin/booking/bulk-modal.php:64
 #: build/templates/admin/booking/bulk-modal.php:72
 #: build/templates/admin/pages/home.php:167
-#: build/templates/admin/pages/pro.php:147
+#: build/templates/admin/pages/pro.php:154
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
 #: src/templates/admin/pages/home.bfg.php:149
-#: src/templates/admin/pages/pro.bfg.php:147
+#: src/templates/admin/pages/pro.bfg.php:154
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
 #: templates/service-field.php:47
 msgid "Close"
@@ -104,26 +104,26 @@ msgid "Packages"
 msgstr ""
 
 #: build/templates/admin/booking/form.php:115
-#: config/admin-settings.php:263
-#: config/admin-settings.php:522
+#: config/admin-settings.php:267
+#: config/admin-settings.php:529
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr ""
 
 #: build/templates/admin/booking/form.php:116
-#: config/admin-settings.php:227
+#: config/admin-settings.php:231
 #: pro/booking/actions/class-get-booking-data-action.php:59
 msgid "Length"
 msgstr ""
 
 #: build/templates/admin/booking/form.php:117
-#: config/admin-settings.php:239
+#: config/admin-settings.php:243
 #: pro/booking/actions/class-get-booking-data-action.php:57
 msgid "Width"
 msgstr ""
 
 #: build/templates/admin/booking/form.php:118
-#: config/admin-settings.php:251
+#: config/admin-settings.php:255
 #: pro/booking/actions/class-get-booking-data-action.php:58
 msgid "Height"
 msgstr ""
@@ -244,7 +244,7 @@ msgstr ""
 
 #: build/templates/admin/booking/parties.php:19
 #: build/templates/admin/pages/pro-settings.php:121
-#: config/admin-settings.php:385
+#: config/admin-settings.php:392
 #: pro/pickuppoint/PickUpPoint.php:216
 #: src/templates/admin/booking/parties.bfg.php:19
 #: src/templates/admin/pages/pro-settings.bfg.php:121
@@ -253,7 +253,7 @@ msgstr ""
 
 #: build/templates/admin/booking/parties.php:20
 #: build/templates/admin/pages/pro-settings.php:126
-#: config/admin-settings.php:393
+#: config/admin-settings.php:400
 #: src/templates/admin/booking/parties.bfg.php:20
 #: src/templates/admin/pages/pro-settings.bfg.php:126
 msgid "City"
@@ -262,7 +262,7 @@ msgstr ""
 #: build/templates/admin/booking/parties.php:21
 #: build/templates/admin/pages/pro-settings.php:131
 #: build/templates/admin/parts/shipping-test.php:27
-#: config/admin-settings.php:401
+#: config/admin-settings.php:408
 #: src/templates/admin/booking/parties.bfg.php:21
 #: src/templates/admin/pages/pro-settings.bfg.php:131
 msgid "Country"
@@ -270,7 +270,7 @@ msgstr ""
 
 #: build/templates/admin/booking/parties.php:22
 #: build/templates/admin/pages/pro-settings.php:140
-#: config/admin-settings.php:407
+#: config/admin-settings.php:414
 #: src/templates/admin/booking/parties.bfg.php:22
 #: src/templates/admin/pages/pro-settings.bfg.php:140
 msgid "Reference"
@@ -289,8 +289,8 @@ msgstr ""
 
 #: build/templates/admin/booking/parties.php:25
 #: build/templates/admin/pages/pro-settings.php:164
-#: config/admin-settings.php:168
-#: config/admin-settings.php:170
+#: config/admin-settings.php:172
+#: config/admin-settings.php:174
 #: src/templates/admin/booking/parties.bfg.php:25
 #: src/templates/admin/pages/pro-settings.bfg.php:164
 msgid "Email"
@@ -320,11 +320,11 @@ msgstr ""
 #: build/templates/admin/pages/booking.php:30
 #: build/templates/admin/pages/kitchen-sink/access-links.php:22
 #: build/templates/admin/pages/kitchen-sink/feature-cards.php:34
-#: build/templates/admin/pages/pro.php:339
-#: build/templates/admin/pages/pro.php:357
-#: build/templates/admin/pages/pro.php:378
-#: build/templates/admin/pages/pro.php:397
-#: build/templates/admin/pages/pro.php:415
+#: build/templates/admin/pages/pro.php:346
+#: build/templates/admin/pages/pro.php:364
+#: build/templates/admin/pages/pro.php:385
+#: build/templates/admin/pages/pro.php:404
+#: build/templates/admin/pages/pro.php:422
 msgid "MyBring Booking"
 msgstr ""
 
@@ -669,8 +669,8 @@ msgid "Find it on your Bring profile"
 msgstr ""
 
 #: build/templates/admin/pages/home/connect-account.php:124
-#: config/admin-settings.php:177
-#: config/admin-settings.php:179
+#: config/admin-settings.php:181
+#: config/admin-settings.php:183
 msgid "API key"
 msgstr ""
 
@@ -921,9 +921,9 @@ msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:25
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:89
-#: config/admin-settings.php:537
-#: config/admin-settings.php:587
-#: config/admin-settings.php:616
+#: config/admin-settings.php:544
+#: config/admin-settings.php:594
+#: config/admin-settings.php:623
 msgid "Label"
 msgstr ""
 
@@ -1006,14 +1006,14 @@ msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/license-card.php:20
 #: build/templates/admin/pages/kitchen-sink/license-card.php:31
-#: build/templates/admin/pages/pro/state-active.php:35
+#: build/templates/admin/pages/pro/state-active.php:41
 msgid "Active"
 msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/license-card.php:26
 #: build/templates/admin/pages/kitchen-sink/license-card.php:60
 #: build/templates/admin/pages/kitchen-sink/license-card.php:94
-#: build/templates/admin/pages/pro/state-active.php:30
+#: build/templates/admin/pages/pro/state-active.php:36
 msgid "Pro License"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr ""
 #: build/templates/admin/pages/kitchen-sink/license-card.php:35
 #: build/templates/admin/pages/kitchen-sink/license-card.php:69
 #: build/templates/admin/pages/kitchen-sink/license-card.php:103
-#: build/templates/admin/pages/pro/state-active.php:39
+#: build/templates/admin/pages/pro/state-active.php:45
 #: src/components/license-card.bfgc.php:43
 msgid "License Key"
 msgstr ""
@@ -1040,7 +1040,7 @@ msgid "11 days remaining"
 msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/license-card.php:45
-#: build/templates/admin/pages/pro/state-active.php:51
+#: build/templates/admin/pages/pro/state-active.php:57
 msgid "Manage License"
 msgstr ""
 
@@ -1198,12 +1198,13 @@ msgid "Shipping"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:27
-#: config/admin-settings.php:340
+#: config/admin-settings.php:344
 #: src/templates/admin/pages/pro-settings.bfg.php:27
 msgid "Allow booking without Bring shipping"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:32
+#: build/templates/admin/pages/pro/state-active.php:41
 #: pro/booking/views/class-bring-booking-common-view.php:34
 #: src/templates/admin/pages/pro-settings.bfg.php:32
 msgid "Test mode"
@@ -1230,33 +1231,33 @@ msgid "This will change the status even if the order is completed"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:50
-#: config/admin-settings.php:456
+#: config/admin-settings.php:463
 #: src/templates/admin/pages/pro-settings.bfg.php:50
 msgid "Order status after booking"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:52
-#: config/admin-settings.php:458
+#: config/admin-settings.php:465
 #: src/templates/admin/pages/pro-settings.bfg.php:52
 msgid "Order status will be automatically set when successfully booked"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:55
 #: build/templates/admin/pages/pro-settings.php:64
-#: config/admin-settings.php:21
+#: config/admin-settings.php:22
 #: src/templates/admin/pages/pro-settings.bfg.php:55
 #: src/templates/admin/pages/pro-settings.bfg.php:64
 msgid "None"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:59
-#: config/admin-settings.php:463
+#: config/admin-settings.php:470
 #: src/templates/admin/pages/pro-settings.bfg.php:59
 msgid "Order status after printing"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:61
-#: config/admin-settings.php:465
+#: config/admin-settings.php:472
 #: src/templates/admin/pages/pro-settings.bfg.php:61
 msgid "Order status will be automatically set when a label is downloaded"
 msgstr ""
@@ -1267,13 +1268,13 @@ msgid "Home delivery"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:75
-#: config/admin-settings.php:470
+#: config/admin-settings.php:477
 #: src/templates/admin/pages/pro-settings.bfg.php:75
 msgid "Package type for home delivery"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:77
-#: config/admin-settings.php:472
+#: config/admin-settings.php:479
 #: src/templates/admin/pages/pro-settings.bfg.php:77
 msgid "Only applies to home delivery services"
 msgstr ""
@@ -1289,19 +1290,19 @@ msgid "This address will be your 'from' address and will populate the details gi
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:102
-#: config/admin-settings.php:357
+#: config/admin-settings.php:364
 #: src/templates/admin/pages/pro-settings.bfg.php:102
 msgid "Store Name"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:109
-#: config/admin-settings.php:366
+#: config/admin-settings.php:373
 #: src/templates/admin/pages/pro-settings.bfg.php:109
 msgid "Street Address 1"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:115
-#: config/admin-settings.php:377
+#: config/admin-settings.php:384
 #: src/templates/admin/pages/pro-settings.bfg.php:115
 msgid "Street Address 2"
 msgstr ""
@@ -1313,13 +1314,13 @@ msgid "The store’s reference printed on the shipping label. Usually %s, but ca
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:154
-#: config/admin-settings.php:417
+#: config/admin-settings.php:424
 #: src/templates/admin/pages/pro-settings.bfg.php:154
 msgid "Contact Person"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:159
-#: config/admin-settings.php:426
+#: config/admin-settings.php:433
 #: src/templates/admin/pages/pro-settings.bfg.php:159
 msgid "Phone"
 msgstr ""
@@ -1359,312 +1360,332 @@ msgstr ""
 msgid "If set, it will be the maximum number of pickup points shown"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:46
-#: config/admin-settings.php:42
+#: build/templates/admin/pages/pro.php:47
+#: config/admin-settings.php:46
 msgid "Bring Fraktguiden Pro"
-msgstr ""
-
-#: build/templates/admin/pages/pro.php:57
-#: src/templates/admin/pages/pro.bfg.php:57
-msgid "Your license key"
 msgstr ""
 
 #: build/templates/admin/pages/pro.php:58
 #: src/templates/admin/pages/pro.bfg.php:58
-msgid "The domain of this shop"
+msgid "Your license key"
 msgstr ""
 
 #: build/templates/admin/pages/pro.php:59
 #: src/templates/admin/pages/pro.bfg.php:59
+msgid "The domain of this shop"
+msgstr ""
+
+#: build/templates/admin/pages/pro.php:60
+#: src/templates/admin/pages/pro.bfg.php:60
 msgid "Your free trial"
 msgstr ""
 
 #. translators: 1: the domain the key is linked to, 2: number of moves, 3: year.
-#: build/templates/admin/pages/pro.php:72
-#: src/templates/admin/pages/pro.bfg.php:72
+#: build/templates/admin/pages/pro.php:73
+#: src/templates/admin/pages/pro.bfg.php:73
 #, php-format
 msgid "This key is linked to %1$s. It has %2$d moves left in %3$d."
 msgstr ""
 
 #. translators: %s: the domain of this shop.
-#: build/templates/admin/pages/pro.php:82
-#: src/templates/admin/pages/pro.bfg.php:82
+#: build/templates/admin/pages/pro.php:83
+#: src/templates/admin/pages/pro.bfg.php:83
 #, php-format
 msgid "Link it to %s"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:93
+#: build/templates/admin/pages/pro.php:94
 msgid "The license server does not know this key. Check it for a typing mistake."
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:100
+#: build/templates/admin/pages/pro.php:101
 msgid "Domain"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:104
+#: build/templates/admin/pages/pro.php:105
 msgid "Expires"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:105
-#: src/templates/admin/pages/pro.bfg.php:105
+#: build/templates/admin/pages/pro.php:106
+#: src/templates/admin/pages/pro.bfg.php:106
 msgid "No active license"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:109
+#: build/templates/admin/pages/pro.php:110
 msgid "Moves left"
 msgstr ""
 
 #. translators: 1: number of moves, 2: year.
-#: build/templates/admin/pages/pro.php:113
-#: src/templates/admin/pages/pro.bfg.php:113
+#: build/templates/admin/pages/pro.php:114
+#: src/templates/admin/pages/pro.bfg.php:114
 #, php-format
 msgid "%1$d in %2$d"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:121
+#: build/templates/admin/pages/pro.php:123
+msgid "License type"
+msgstr ""
+
+#: build/templates/admin/pages/pro.php:124
+msgid "Test license. Every booking stays in test mode."
+msgstr ""
+
+#: build/templates/admin/pages/pro.php:128
 msgid "Pro comes from"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:122
-#: src/templates/admin/pages/pro.bfg.php:122
+#: build/templates/admin/pages/pro.php:129
+#: src/templates/admin/pages/pro.bfg.php:129
 msgid "Nothing yet"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:125
+#: build/templates/admin/pages/pro.php:132
 msgid "License checked"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:132
-#: src/templates/admin/pages/pro.bfg.php:132
+#: build/templates/admin/pages/pro.php:139
+#: src/templates/admin/pages/pro.bfg.php:139
 msgid "Check the license again"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:140
+#: build/templates/admin/pages/pro.php:147
 msgid "The license server could not be reached. Try again in a moment."
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:146
+#: build/templates/admin/pages/pro.php:153
 msgid "Move the license to this shop?"
 msgstr ""
 
 #. translators: 1: the domain the key is linked to, 2: the domain of this shop.
-#: build/templates/admin/pages/pro.php:153
-#: src/templates/admin/pages/pro.bfg.php:153
+#: build/templates/admin/pages/pro.php:160
+#: src/templates/admin/pages/pro.bfg.php:160
 #, php-format
 msgid "The license moves from %1$s to %2$s."
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:158
+#: build/templates/admin/pages/pro.php:165
 msgid "The old domain loses Pro at once."
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:159
+#: build/templates/admin/pages/pro.php:166
 msgid "Only the account that owns the license can move it. You sign in and confirm the move on our web site."
 msgstr ""
 
 #. translators: 1: number of moves, 2: year.
-#: build/templates/admin/pages/pro.php:163
-#: src/templates/admin/pages/pro.bfg.php:163
+#: build/templates/admin/pages/pro.php:170
+#: src/templates/admin/pages/pro.bfg.php:170
 #, php-format
 msgid "This spends one move. You have %1$d left in %2$d."
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:170
+#: build/templates/admin/pages/pro.php:177
 msgid "Cancel"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:172
+#: build/templates/admin/pages/pro.php:179
 msgid "Move the license on bringfraktguiden.no"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:187
-#: src/templates/admin/pages/pro.bfg.php:187
+#: build/templates/admin/pages/pro.php:194
+#: src/templates/admin/pages/pro.bfg.php:194
 #, php-format
 msgid "Checking in %d"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:188
-#: src/templates/admin/pages/pro.bfg.php:188
+#: build/templates/admin/pages/pro.php:195
+#: src/templates/admin/pages/pro.bfg.php:195
 msgid "Checking"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:322
+#: build/templates/admin/pages/pro.php:329
 msgid "Features"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:340
-#: build/templates/admin/pages/pro.php:358
-#: build/templates/admin/pages/pro.php:379
-#: build/templates/admin/pages/pro.php:398
-#: build/templates/admin/pages/pro.php:416
+#: build/templates/admin/pages/pro.php:347
+#: build/templates/admin/pages/pro.php:365
+#: build/templates/admin/pages/pro.php:386
+#: build/templates/admin/pages/pro.php:405
+#: build/templates/admin/pages/pro.php:423
 msgid "Book shipments and print labels directly from WooCommerce orders"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:342
-#: build/templates/admin/pages/pro.php:360
-#: build/templates/admin/pages/pro.php:381
-#: build/templates/admin/pages/pro.php:400
-#: build/templates/admin/pages/pro.php:418
+#: build/templates/admin/pages/pro.php:349
+#: build/templates/admin/pages/pro.php:367
+#: build/templates/admin/pages/pro.php:388
+#: build/templates/admin/pages/pro.php:407
+#: build/templates/admin/pages/pro.php:425
 msgid "Book directly from order view"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:343
-#: build/templates/admin/pages/pro.php:361
-#: build/templates/admin/pages/pro.php:382
-#: build/templates/admin/pages/pro.php:401
-#: build/templates/admin/pages/pro.php:419
+#: build/templates/admin/pages/pro.php:350
+#: build/templates/admin/pages/pro.php:368
+#: build/templates/admin/pages/pro.php:389
+#: build/templates/admin/pages/pro.php:408
+#: build/templates/admin/pages/pro.php:426
 msgid "Print Bring shipping labels"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:344
-#: build/templates/admin/pages/pro.php:362
-#: build/templates/admin/pages/pro.php:383
-#: build/templates/admin/pages/pro.php:402
-#: build/templates/admin/pages/pro.php:420
+#: build/templates/admin/pages/pro.php:351
+#: build/templates/admin/pages/pro.php:369
+#: build/templates/admin/pages/pro.php:390
+#: build/templates/admin/pages/pro.php:409
+#: build/templates/admin/pages/pro.php:427
 msgid "Automatic tracking number"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:440
-#: build/templates/admin/pages/pro.php:456
-#: build/templates/admin/pages/pro.php:475
-#: build/templates/admin/pages/pro.php:492
-#: build/templates/admin/pages/pro.php:508
+#: build/templates/admin/pages/pro.php:447
+#: build/templates/admin/pages/pro.php:463
+#: build/templates/admin/pages/pro.php:482
+#: build/templates/admin/pages/pro.php:499
+#: build/templates/admin/pages/pro.php:515
 msgid "Pickup Points"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:441
-#: build/templates/admin/pages/pro.php:457
-#: build/templates/admin/pages/pro.php:476
-#: build/templates/admin/pages/pro.php:493
-#: build/templates/admin/pages/pro.php:509
+#: build/templates/admin/pages/pro.php:448
+#: build/templates/admin/pages/pro.php:464
+#: build/templates/admin/pages/pro.php:483
+#: build/templates/admin/pages/pro.php:500
+#: build/templates/admin/pages/pro.php:516
 msgid "Let customers choose their preferred Bring pickup location at checkout"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:443
-#: build/templates/admin/pages/pro.php:459
-#: build/templates/admin/pages/pro.php:478
-#: build/templates/admin/pages/pro.php:495
-#: build/templates/admin/pages/pro.php:511
+#: build/templates/admin/pages/pro.php:450
+#: build/templates/admin/pages/pro.php:466
+#: build/templates/admin/pages/pro.php:485
+#: build/templates/admin/pages/pro.php:502
+#: build/templates/admin/pages/pro.php:518
 msgid "Choose pickup location at checkout"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:444
-#: build/templates/admin/pages/pro.php:460
-#: build/templates/admin/pages/pro.php:479
-#: build/templates/admin/pages/pro.php:496
-#: build/templates/admin/pages/pro.php:512
+#: build/templates/admin/pages/pro.php:451
+#: build/templates/admin/pages/pro.php:467
+#: build/templates/admin/pages/pro.php:486
+#: build/templates/admin/pages/pro.php:503
+#: build/templates/admin/pages/pro.php:519
 msgid "Lockers and post offices"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:445
-#: build/templates/admin/pages/pro.php:461
-#: build/templates/admin/pages/pro.php:480
-#: build/templates/admin/pages/pro.php:497
-#: build/templates/admin/pages/pro.php:513
+#: build/templates/admin/pages/pro.php:452
+#: build/templates/admin/pages/pro.php:468
+#: build/templates/admin/pages/pro.php:487
+#: build/templates/admin/pages/pro.php:504
+#: build/templates/admin/pages/pro.php:520
 msgid "Location lookup by postal code"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:533
-#: build/templates/admin/pages/pro.php:549
-#: build/templates/admin/pages/pro.php:568
-#: build/templates/admin/pages/pro.php:585
-#: build/templates/admin/pages/pro.php:601
+#: build/templates/admin/pages/pro.php:540
+#: build/templates/admin/pages/pro.php:556
+#: build/templates/admin/pages/pro.php:575
+#: build/templates/admin/pages/pro.php:592
+#: build/templates/admin/pages/pro.php:608
 msgid "Fixed Pricing"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:534
-#: build/templates/admin/pages/pro.php:550
-#: build/templates/admin/pages/pro.php:569
-#: build/templates/admin/pages/pro.php:586
-#: build/templates/admin/pages/pro.php:602
+#: build/templates/admin/pages/pro.php:541
+#: build/templates/admin/pages/pro.php:557
+#: build/templates/admin/pages/pro.php:576
+#: build/templates/admin/pages/pro.php:593
+#: build/templates/admin/pages/pro.php:609
 msgid "Override Bring API rates with your own fixed prices per shipping service"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:536
-#: build/templates/admin/pages/pro.php:552
-#: build/templates/admin/pages/pro.php:571
-#: build/templates/admin/pages/pro.php:588
-#: build/templates/admin/pages/pro.php:604
+#: build/templates/admin/pages/pro.php:543
+#: build/templates/admin/pages/pro.php:559
+#: build/templates/admin/pages/pro.php:578
+#: build/templates/admin/pages/pro.php:595
+#: build/templates/admin/pages/pro.php:611
 msgid "Set price per shipping method"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:537
-#: build/templates/admin/pages/pro.php:553
-#: build/templates/admin/pages/pro.php:572
-#: build/templates/admin/pages/pro.php:589
-#: build/templates/admin/pages/pro.php:605
+#: build/templates/admin/pages/pro.php:544
+#: build/templates/admin/pages/pro.php:560
+#: build/templates/admin/pages/pro.php:579
+#: build/templates/admin/pages/pro.php:596
+#: build/templates/admin/pages/pro.php:612
 msgid "Per-zone price rules"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:538
-#: build/templates/admin/pages/pro.php:554
-#: build/templates/admin/pages/pro.php:573
-#: build/templates/admin/pages/pro.php:590
-#: build/templates/admin/pages/pro.php:606
+#: build/templates/admin/pages/pro.php:545
+#: build/templates/admin/pages/pro.php:561
+#: build/templates/admin/pages/pro.php:580
+#: build/templates/admin/pages/pro.php:597
+#: build/templates/admin/pages/pro.php:613
 msgid "Cart weight-based pricing"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:629
-#: build/templates/admin/pages/pro.php:648
-#: build/templates/admin/pages/pro.php:670
-#: build/templates/admin/pages/pro.php:690
-#: build/templates/admin/pages/pro.php:709
+#: build/templates/admin/pages/pro.php:636
+#: build/templates/admin/pages/pro.php:655
+#: build/templates/admin/pages/pro.php:677
+#: build/templates/admin/pages/pro.php:697
+#: build/templates/admin/pages/pro.php:716
 msgid "Free Shipping"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:630
-#: build/templates/admin/pages/pro.php:649
-#: build/templates/admin/pages/pro.php:671
-#: build/templates/admin/pages/pro.php:691
-#: build/templates/admin/pages/pro.php:710
+#: build/templates/admin/pages/pro.php:637
+#: build/templates/admin/pages/pro.php:656
+#: build/templates/admin/pages/pro.php:678
+#: build/templates/admin/pages/pro.php:698
+#: build/templates/admin/pages/pro.php:717
 msgid "Offer free shipping when cart meets a minimum order value"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:632
-#: build/templates/admin/pages/pro.php:651
-#: build/templates/admin/pages/pro.php:673
-#: build/templates/admin/pages/pro.php:693
-#: build/templates/admin/pages/pro.php:712
+#: build/templates/admin/pages/pro.php:639
+#: build/templates/admin/pages/pro.php:658
+#: build/templates/admin/pages/pro.php:680
+#: build/templates/admin/pages/pro.php:700
+#: build/templates/admin/pages/pro.php:719
 msgid "Set order value threshold"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:633
-#: build/templates/admin/pages/pro.php:652
-#: build/templates/admin/pages/pro.php:674
-#: build/templates/admin/pages/pro.php:694
-#: build/templates/admin/pages/pro.php:713
+#: build/templates/admin/pages/pro.php:640
+#: build/templates/admin/pages/pro.php:659
+#: build/templates/admin/pages/pro.php:681
+#: build/templates/admin/pages/pro.php:701
+#: build/templates/admin/pages/pro.php:720
 msgid "Per-service configuration"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:634
-#: build/templates/admin/pages/pro.php:653
-#: build/templates/admin/pages/pro.php:675
-#: build/templates/admin/pages/pro.php:695
-#: build/templates/admin/pages/pro.php:714
+#: build/templates/admin/pages/pro.php:641
+#: build/templates/admin/pages/pro.php:660
+#: build/templates/admin/pages/pro.php:682
+#: build/templates/admin/pages/pro.php:702
+#: build/templates/admin/pages/pro.php:721
 msgid "Combine with fixed pricing"
 msgstr ""
 
-#: build/templates/admin/pages/pro.php:729
+#: build/templates/admin/pages/pro.php:736
 msgid ""
 "List of currently supported services for using pickup point: Pickup parcel (5800), Pakke til\n"
 "\t\t\t\t\tPakkeboks (5801), Express next day (4850), Business parcel (5000), Norgespakke (3067), PICKUP_PARCEL\n"
 "\t\t\t\t\tand PICKUP_PARCEL_BULK"
 msgstr ""
 
-#: build/templates/admin/pages/pro/state-active.php:20
+#: build/templates/admin/pages/pro/state-active.php:22
+msgid "Pro is active on a test license"
+msgstr ""
+
+#: build/templates/admin/pages/pro/state-active.php:23
+msgid "All Pro features are enabled. Bring never ships or invoices a booking from this site."
+msgstr ""
+
+#: build/templates/admin/pages/pro/state-active.php:25
 msgid "Pro is active"
 msgstr ""
 
-#: build/templates/admin/pages/pro/state-active.php:21
+#: build/templates/admin/pages/pro/state-active.php:26
 msgid "All Pro features are enabled on your live site"
 msgstr ""
 
-#: build/templates/admin/pages/pro/state-active.php:31
+#: build/templates/admin/pages/pro/state-active.php:36
+msgid "Pro Test License"
+msgstr ""
+
+#: build/templates/admin/pages/pro/state-active.php:37
 #, php-format
 msgid "Active until %s"
 msgstr ""
 
-#: build/templates/admin/pages/pro/state-active.php:49
+#: build/templates/admin/pages/pro/state-active.php:55
 #, php-format
 msgid "%d days remaining"
 msgstr ""
@@ -2203,27 +2224,27 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:246
+#: classes/BringFraktguiden/Admin/SettingsPage.php:247
 msgid "Never"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:274
+#: classes/BringFraktguiden/Admin/SettingsPage.php:275
 msgid "Click to configure each feature"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:276
+#: classes/BringFraktguiden/Admin/SettingsPage.php:277
 msgid "All features active during your trial"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:278
+#: classes/BringFraktguiden/Admin/SettingsPage.php:279
 msgid "Purchase a license to regain access"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:280
+#: classes/BringFraktguiden/Admin/SettingsPage.php:281
 msgid "Available with Pro"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:342
+#: classes/BringFraktguiden/Admin/SettingsPage.php:343
 msgid "The guide set the shipping services this shop offers."
 msgstr ""
 
@@ -2659,407 +2680,411 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#: config/admin-settings.php:12
+#: config/admin-settings.php:13
 msgid "Choose a country"
 msgstr ""
 
-#: config/admin-settings.php:46
-#: config/admin-settings.php:48
+#: config/admin-settings.php:50
+#: config/admin-settings.php:52
 msgid "Start the free trial"
 msgstr ""
 
-#: config/admin-settings.php:50
+#: config/admin-settings.php:54
 msgid "The trial gives you every PRO feature for 7 days. After the trial, PRO features stop until you activate a license."
 msgstr ""
 
-#: config/admin-settings.php:54
+#: config/admin-settings.php:58
 msgid "License key"
 msgstr ""
 
-#: config/admin-settings.php:64
+#: config/admin-settings.php:68
 msgid "Shipping Options"
 msgstr ""
 
-#: config/admin-settings.php:65
+#: config/admin-settings.php:69
 msgid "Set the default prices for shipping rates and allow free shipping options on those services. You can also set the free shipping limit for each shipping service."
 msgstr ""
 
-#: config/admin-settings.php:69
+#: config/admin-settings.php:73
 msgid "Language"
 msgstr ""
 
-#: config/admin-settings.php:71
+#: config/admin-settings.php:75
 msgid "Choose the language you want to use for the names and descriptions of shipping rates."
 msgstr ""
 
-#: config/admin-settings.php:74
+#: config/admin-settings.php:78
 msgid "Use website language"
 msgstr ""
 
-#: config/admin-settings.php:75
+#: config/admin-settings.php:79
 msgid "Norwegian"
 msgstr ""
 
-#: config/admin-settings.php:76
+#: config/admin-settings.php:80
 msgid "English"
 msgstr ""
 
-#: config/admin-settings.php:77
+#: config/admin-settings.php:81
 msgid "Swedish"
 msgstr ""
 
-#: config/admin-settings.php:78
+#: config/admin-settings.php:82
 msgid "Danish"
 msgstr ""
 
-#: config/admin-settings.php:79
+#: config/admin-settings.php:83
 msgid "Finnish"
 msgstr ""
 
-#: config/admin-settings.php:83
+#: config/admin-settings.php:87
 msgid "Post office"
 msgstr ""
 
-#: config/admin-settings.php:85
+#: config/admin-settings.php:89
 msgid "Posting at post office"
 msgstr ""
 
-#: config/admin-settings.php:86
+#: config/admin-settings.php:90
 msgid "Enable if you drop off packages at a post office. Leave unchecked if Bring picks up from your location."
 msgstr ""
 
-#: config/admin-settings.php:91
+#: config/admin-settings.php:95
 msgid "From zip"
 msgstr ""
 
-#: config/admin-settings.php:98
+#: config/admin-settings.php:102
 msgid "From country"
 msgstr ""
 
-#: config/admin-settings.php:107
+#: config/admin-settings.php:111
 msgid "Handling Fee"
 msgstr ""
 
-#: config/admin-settings.php:109
+#: config/admin-settings.php:113
 msgid "0"
 msgstr ""
 
-#: config/admin-settings.php:110
+#: config/admin-settings.php:114
 msgid "Add an additional fee on top of the calculated shipping rates. All bring shipping options will have their prices increased by this amount."
 msgstr ""
 
-#: config/admin-settings.php:120
+#: config/admin-settings.php:124
 msgid "Display shipping options full-width"
 msgstr ""
 
-#: config/admin-settings.php:124
+#: config/admin-settings.php:128
 msgid "Moves the \"Shipping\" heading to its own row so shipping options can use the full width. Makes them easier to read at checkout."
 msgstr ""
 
-#: config/admin-settings.php:129
+#: config/admin-settings.php:133
 msgid "Display detailed shipping option description"
 msgstr ""
 
-#: config/admin-settings.php:130
+#: config/admin-settings.php:134
 msgid "Displays service logos and additional info for each shipping option."
 msgstr ""
 
-#: config/admin-settings.php:135
+#: config/admin-settings.php:139
 msgid "Use customer number"
 msgstr ""
 
-#: config/admin-settings.php:137
+#: config/admin-settings.php:141
 msgid "Use main mybring customer number to get prices from the api."
 msgstr ""
 
-#: config/admin-settings.php:139
+#: config/admin-settings.php:143
 msgid "Uses your Mybring customer number to get discounted business rates instead of standard prices."
 msgstr ""
 
-#: config/admin-settings.php:144
+#: config/admin-settings.php:148
 msgid "Price type"
 msgstr ""
 
-#: config/admin-settings.php:150
+#: config/admin-settings.php:154
 msgid "Net price is the agreement price with bring and will only be used if a customer number is used for the API request"
 msgstr ""
 
-#: config/admin-settings.php:155
+#: config/admin-settings.php:159
 msgid "Sorting"
 msgstr ""
 
-#: config/admin-settings.php:159
+#: config/admin-settings.php:163
 msgid "The order in which shipping options should be displayed."
 msgstr ""
 
-#: config/admin-settings.php:162
+#: config/admin-settings.php:166
 msgid "Price, low to high"
 msgstr ""
 
-#: config/admin-settings.php:163
+#: config/admin-settings.php:167
 msgid "Price, high to low"
 msgstr ""
 
-#: config/admin-settings.php:164
+#: config/admin-settings.php:168
 msgid "No sorting"
 msgstr ""
 
 #. translators: %s: Mybring profile page URL
-#: config/admin-settings.php:173
+#: config/admin-settings.php:177
 #, php-format
 msgid "Find your Email %1$shere%2$s."
 msgstr ""
 
 #. translators: %s: Mybring API settings page URL
-#: config/admin-settings.php:182
+#: config/admin-settings.php:186
 #, php-format
 msgid "Find your API key %1$shere%2$s."
 msgstr ""
 
-#: config/admin-settings.php:186
+#: config/admin-settings.php:190
 msgid "Debug mode"
 msgstr ""
 
-#: config/admin-settings.php:188
-#: config/admin-settings.php:307
+#: config/admin-settings.php:192
+#: config/admin-settings.php:311
 msgid "Enable debug logs"
 msgstr ""
 
-#: config/admin-settings.php:189
+#: config/admin-settings.php:193
 msgid "Bring Fraktguiden logs will be saved in"
 msgstr ""
 
-#: config/admin-settings.php:190
+#: config/admin-settings.php:194
 msgid "Click here to see the logs"
 msgstr ""
 
-#: config/admin-settings.php:196
+#: config/admin-settings.php:200
 msgid "Disable stylesheet"
 msgstr ""
 
-#: config/admin-settings.php:197
+#: config/admin-settings.php:201
 msgid "Remove all plugin styles from the checkout page"
 msgstr ""
 
-#: config/admin-settings.php:199
+#: config/admin-settings.php:203
 msgid "Disable loading the default stylesheet from the Bring Fraktguiden plugin to allow custom styling by the theme"
 msgstr ""
 
-#: config/admin-settings.php:204
+#: config/admin-settings.php:208
 msgid "Lead time in days"
 msgstr ""
 
-#: config/admin-settings.php:207
+#: config/admin-settings.php:211
 msgid "Number of days before orders are shipped"
 msgstr ""
 
-#: config/admin-settings.php:212
+#: config/admin-settings.php:216
 msgid "Lead time cutoff"
 msgstr ""
 
-#: config/admin-settings.php:214
+#: config/admin-settings.php:218
 msgid "Cutoff time every day. Orders after this time will be processed the next day."
 msgstr ""
 
-#: config/admin-settings.php:219
+#: config/admin-settings.php:223
 msgid "Display ETA"
 msgstr ""
 
-#: config/admin-settings.php:221
+#: config/admin-settings.php:225
 msgid "Enable expected delivery date"
 msgstr ""
 
-#: config/admin-settings.php:222
+#: config/admin-settings.php:226
 msgid "Display expected delivery date below shipping rates"
 msgstr ""
 
-#: config/admin-settings.php:275
+#: config/admin-settings.php:279
 msgid "Pickup point types"
 msgstr ""
 
-#: config/admin-settings.php:280
+#: config/admin-settings.php:284
 msgid "All"
 msgstr ""
 
-#: config/admin-settings.php:281
+#: config/admin-settings.php:285
 msgid "Manned"
 msgstr ""
 
-#: config/admin-settings.php:282
+#: config/admin-settings.php:286
 msgid "Locker"
 msgstr ""
 
-#: config/admin-settings.php:286
+#: config/admin-settings.php:290
 msgid "Style"
 msgstr ""
 
-#: config/admin-settings.php:290
+#: config/admin-settings.php:294
 msgid "Regular"
 msgstr ""
 
-#: config/admin-settings.php:291
+#: config/admin-settings.php:295
 msgid "Legacy"
 msgstr ""
 
-#: config/admin-settings.php:295
+#: config/admin-settings.php:299
 msgid "Map link"
 msgstr ""
 
-#: config/admin-settings.php:299
+#: config/admin-settings.php:303
 msgid "Posten"
 msgstr ""
 
-#: config/admin-settings.php:300
+#: config/admin-settings.php:304
 msgid "Ingen"
 msgstr ""
 
-#: config/admin-settings.php:301
+#: config/admin-settings.php:305
 msgid "Google"
 msgstr ""
 
-#: config/admin-settings.php:305
+#: config/admin-settings.php:309
 msgid "Debug System information"
 msgstr ""
 
-#: config/admin-settings.php:308
+#: config/admin-settings.php:312
 msgid "We may ask for this information if you require support"
 msgstr ""
 
-#: config/admin-settings.php:312
+#: config/admin-settings.php:316
 msgid "View system info"
 msgstr ""
 
-#: config/admin-settings.php:323
-#: config/admin-settings.php:325
+#: config/admin-settings.php:327
+#: config/admin-settings.php:329
 msgid "API customer number"
 msgstr ""
 
 #. translators: %s: Mybring API settings page URL
-#: config/admin-settings.php:328
+#: config/admin-settings.php:332
 #, php-format
 msgid "Find your API customer number %1$shere%2$s."
 msgstr ""
 
-#: config/admin-settings.php:334
+#: config/admin-settings.php:338
 msgid "Enable MyBring booking"
 msgstr ""
 
-#: config/admin-settings.php:335
+#: config/admin-settings.php:339
 msgid "Allow booking shipments directly from WooCommerce order pages"
 msgstr ""
 
-#: config/admin-settings.php:341
+#: config/admin-settings.php:345
 msgid "Enable booking for orders that don't use Bring shipping methods"
 msgstr ""
 
-#: config/admin-settings.php:346
+#: config/admin-settings.php:350
 msgid "Enable test mode for MyBring booking"
 msgstr ""
 
-#: config/admin-settings.php:347
-msgid "When enabled, bookings will not be invoiced or fulfilled by Bring"
-msgstr ""
-
 #: config/admin-settings.php:352
-msgid "Use a different shipping address"
+msgid "Your license is a test license, so every booking stays in test mode."
 msgstr ""
 
 #: config/admin-settings.php:353
-msgid "Enable this if you ship from a different address than your WooCommerce store address."
+msgid "When enabled, bookings will not be invoiced or fulfilled by Bring"
 msgstr ""
 
 #: config/admin-settings.php:359
+msgid "Use a different shipping address"
+msgstr ""
+
+#: config/admin-settings.php:360
+msgid "Enable this if you ship from a different address than your WooCommerce store address."
+msgstr ""
+
+#: config/admin-settings.php:366
 msgid "Your business name as it appears on shipping labels."
 msgstr ""
 
-#: config/admin-settings.php:409
+#: config/admin-settings.php:416
 msgid "The store's reference printed on the shipping label. An empty box prints {order_number}. You can also use {order_id} or {products}."
 msgstr ""
 
-#: config/admin-settings.php:435
+#: config/admin-settings.php:442
 msgid "Confirmation email"
 msgstr ""
 
-#: config/admin-settings.php:437
+#: config/admin-settings.php:444
 msgid "Bring sends a confirmation with the shipping label to this address, for every booking. Leave it empty if you do not want an email per booking."
 msgstr ""
 
-#: config/admin-settings.php:444
+#: config/admin-settings.php:451
 msgid "I confirm the customs data of my shipments"
 msgstr ""
 
-#: config/admin-settings.php:445
+#: config/admin-settings.php:452
 msgid "The goods description, the value and the HS code of every order line are correct and complete, and the goods are not dangerous and not prohibited. Bring uses this confirmation as your signature on the customs declaration."
 msgstr ""
 
-#: config/admin-settings.php:449
+#: config/admin-settings.php:456
 msgid "Exporter number"
 msgstr ""
 
-#: config/admin-settings.php:451
+#: config/admin-settings.php:458
 msgid "Your VAT number or EORI number, for example NO 999 999 999 MVA or NO999999999. Bring sends it with the customs declaration of a shipment that leaves Norway. An NVIT parcel needs no exporter number."
 msgstr ""
 
-#: config/admin-settings.php:490
+#: config/admin-settings.php:497
 msgid "Pack in multiple boxes"
 msgstr ""
 
-#: config/admin-settings.php:493
+#: config/admin-settings.php:500
 msgid "Split large orders into multiple shipments. This increases shipping costs proportionally. Consider using a fallback rate instead for bulk orders."
 msgstr ""
 
-#: config/admin-settings.php:496
+#: config/admin-settings.php:503
 msgid "Side"
 msgstr ""
 
-#: config/admin-settings.php:509
+#: config/admin-settings.php:516
 msgid "Circumference"
 msgstr ""
 
-#: config/admin-settings.php:545
-#: config/admin-settings.php:594
-#: config/admin-settings.php:623
+#: config/admin-settings.php:552
+#: config/admin-settings.php:601
+#: config/admin-settings.php:630
 msgid "Fixed price"
 msgstr ""
 
-#: config/admin-settings.php:548
-#: config/admin-settings.php:626
+#: config/admin-settings.php:555
+#: config/admin-settings.php:633
 msgid "ie: 500"
 msgstr ""
 
-#: config/admin-settings.php:557
-#: config/admin-settings.php:606
-#: config/admin-settings.php:635
+#: config/admin-settings.php:564
+#: config/admin-settings.php:613
+#: config/admin-settings.php:642
 msgid "Service to use"
 msgstr ""
 
-#: config/admin-settings.php:561
-#: config/admin-settings.php:611
-#: config/admin-settings.php:639
+#: config/admin-settings.php:568
+#: config/admin-settings.php:618
+#: config/admin-settings.php:646
 msgid "No shipping"
 msgstr ""
 
-#: config/admin-settings.php:565
+#: config/admin-settings.php:572
 msgid "Calculate shipping costs based on weight only"
 msgstr ""
 
-#: config/admin-settings.php:569
+#: config/admin-settings.php:576
 msgid "Uses weight only for shipping rates. Works best if you pack orders in standard-size boxes."
 msgstr ""
 
-#: config/admin-settings.php:574
+#: config/admin-settings.php:581
 msgid "Maximum product limit"
 msgstr ""
 
-#: config/admin-settings.php:578
+#: config/admin-settings.php:585
 msgid "Limit how many cart items are processed for shipping calculation. Higher values may slow down checkout. Default: 1000."
 msgstr ""
 
-#: config/admin-settings.php:597
+#: config/admin-settings.php:604
 msgid "ie: 1500"
 msgstr ""
 
-#: config/admin-settings.php:607
+#: config/admin-settings.php:614
 msgid "Show this service as a shipping rate if the maximum product limit is exceeded."
 msgstr ""
 

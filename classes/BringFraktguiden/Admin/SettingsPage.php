@@ -238,6 +238,7 @@ class SettingsPage
 		$license_reason       = $state['reason'] ?? '';
 		$license_domain       = wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '';
 		$license_move_url     = $state['move_url'] ?? '';
+		$license_testing      = Fraktguiden_License::is_testing();
 
 		// When the plugin last asked the license server.
 		$license_checked_at   = (int) ($state['checked_at'] ?? 0);
@@ -570,6 +571,11 @@ class SettingsPage
 				$entered = $entered ? 'yes' : 'no';
 			}
 			$value[$key] = $entered;
+		}
+
+		// A testing license books in test mode only, so the form may not turn it off.
+		if (Fraktguiden_License::is_testing()) {
+			$value['booking_test_mode_enabled'] = 'yes';
 		}
 
 		if (isset($value['license_key'])) {

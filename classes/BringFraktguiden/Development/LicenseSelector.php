@@ -52,6 +52,19 @@ class LicenseSelector
 					'valid_to'   => time() + (30 * 86400),
 				],
 			],
+			'testing-key' => [
+				'title'   => 'Active, test license',
+				'source'  => 'key',
+				'license' => [
+					'key_state'   => 'ok',
+					'key'         => 'BFG1TEST2KEY34568',
+					'domain'      => $domain,
+					'moves_left'  => 2,
+					'year'        => $year,
+					'testing_key' => true,
+					'valid_to'    => time() + (365 * 86400),
+				],
+			],
 			'other-domain' => [
 				'title'   => 'Held by another domain',
 				'source'  => 'key',

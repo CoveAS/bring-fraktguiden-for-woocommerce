@@ -175,6 +175,16 @@ class Fraktguiden_License
 	}
 
 	/**
+	 * Check whether the license server calls this license a testing license.
+	 *
+	 * A testing license unlocks every Pro feature. It books in test mode only.
+	 */
+	public static function is_testing(): bool
+	{
+		return !empty(self::get_state()['testing_key']);
+	}
+
+	/**
 	 * Check the license
 	 *
 	 * The caller passes a key when the shop just saved one. The settings cache
@@ -285,6 +295,7 @@ class Fraktguiden_License
 			'other_domain' => $license['other_domain'] ?? '',
 			'year'         => isset($license['year']) ? (int) $license['year'] : null,
 			'reason'       => $license['reason'] ?? '',
+			'testing_key'  => !empty($license['testing_key']),
 			'move_url'     => $license['move_url'] ?? '',
 			'manage_url'   => $license['manage_url'] ?? '',
 			'source'       => $source,
@@ -292,6 +303,11 @@ class Fraktguiden_License
 		];
 
 		update_option(self::STATE_OPTION, $state, false);
+
+		// A testing license may never book a real shipment.
+		if ($state['testing_key']) {
+			Fraktguiden_Helper::update_option('booking_test_mode_enabled', 'yes');
+		}
 
 		// The domain owns the license, so the key of the answer is the right one.
 		// It replaces a key the shop typed wrong, and fills in a missing key.

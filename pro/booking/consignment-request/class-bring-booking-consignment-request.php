@@ -11,6 +11,7 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Customs\CustomsInformation;
 use BringFraktguiden\Customs\CustomsParties;
 use BringFraktguidenPro\Booking\Actions\Get_First_Enabled_Bring_Product;
+use BringFraktguidenPro\Booking\Bring_Booking;
 use Exception;
 use WC_Order_Item_Shipping;
 
@@ -196,7 +197,7 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		$consignment = $this->create_consignment();
 
 		$data = [
-			'testIndicator' => ( 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' ) ),
+			'testIndicator' => Bring_Booking::is_test_mode(),
 			'schemaVersion' => 1,
 			'consignments'  => [ $consignment ],
 		];

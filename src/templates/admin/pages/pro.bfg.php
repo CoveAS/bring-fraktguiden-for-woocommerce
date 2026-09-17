@@ -33,6 +33,7 @@
  * @var string $license_manage_url
  * @var string $license_support_url
  * @var string $license_checked
+ * @var bool   $license_testing
  */
 
 use BringFraktguiden\Admin\RefreshLicense;
@@ -115,6 +116,12 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 							(int) $license_year
 						); ?>
 					</dd>
+				</div>
+			<?php endif; ?>
+			<?php if ($license_testing): ?>
+				<div class="bfg-license-status__item">
+					<dt><t>License type</t></dt>
+					<dd><t>Test license. Every booking stays in test mode.</t></dd>
 				</div>
 			<?php endif; ?>
 			<div class="bfg-license-status__item">

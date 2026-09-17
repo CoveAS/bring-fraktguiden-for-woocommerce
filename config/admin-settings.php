@@ -1,6 +1,7 @@
 <?php
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_License;
 
 $wc_log_dir = '';
 if (defined('WC_LOG_DIR')) {
@@ -21,6 +22,9 @@ $order_status_options = array_merge(
 	['none' => __('None', 'bring-fraktguiden-for-woocommerce')],
 	wc_get_order_statuses()
 );
+
+// A test license books in test mode only, so the booking test checkbox locks.
+$testing_license = Fraktguiden_License::is_testing();
 
 $all_services = Fraktguiden_Helper::get_all_services();
 $first_service = reset($all_services);
@@ -344,8 +348,11 @@ return [
 			'booking_test_mode_enabled' => [
 				'type' => 'checkbox',
 				'label' => __('Enable test mode for MyBring booking', 'bring-fraktguiden-for-woocommerce'),
-				'description' => __('When enabled, bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce'),
+				'description' => $testing_license
+					? __('Your license is a test license, so every booking stays in test mode.', 'bring-fraktguiden-for-woocommerce')
+					: __('When enabled, bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
+				'custom_attributes' => $testing_license ? ['disabled' => 'disabled'] : [],
 			],
 			'booking_use_custom_address' => [
 				'type' => 'checkbox',
