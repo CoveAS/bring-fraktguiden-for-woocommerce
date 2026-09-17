@@ -220,16 +220,6 @@ a.bfg-step:focus-visible,
     line-height: 1.4;
 }
 
-/* Button inside Step */
-.bfg-step .bfg-btn {
-    display: none;
-}
-.bfg-step--in-progress .bfg-btn {
-    display: inline-flex;
-    margin-top: 16px;
-    align-self: flex-start;
-}
-
 /* Badges inside Step */
 .bfg-step .bfg-badge {
     position: absolute;

@@ -105,13 +105,6 @@
 	color: var(--bfg-text-muted);
 }
 
-/* A step row shows its buttons only while the step is the current one. This
-   row always shows its own. */
-.bfg-step--form .bfg-step-form__panel .bfg-btn {
-	display: inline-flex;
-	margin-top: 0;
-}
-
 /* A label that starts with a radio. The whole line is the hit area. */
 .bfg-step-form__choice {
 	display: flex;

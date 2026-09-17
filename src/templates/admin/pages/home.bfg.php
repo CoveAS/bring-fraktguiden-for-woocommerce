@@ -120,11 +120,11 @@ use BringFraktguiden\Admin\Step;
 							<?php echo esc_html($step->label); ?>
 							<bfg-step-desc><?php echo esc_html($step->description); ?></bfg-step-desc>
 							<?php if ($step->dialog): ?>
-								<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm" data-bfg-dialog="<?php echo esc_attr($step->dialog); ?>">
+								<button type="button" class="bfg-btn bfg-btn--primary bfg-btn--sm bfgu:mt-4 bfgu:self-start" data-bfg-dialog="<?php echo esc_attr($step->dialog); ?>">
 									<?php echo esc_html($step->actionText); ?>
 								</button>
 							<?php else: ?>
-								<a class="bfg-btn bfg-btn--primary bfg-btn--sm" href="<?php echo esc_attr($step->action); ?>">
+								<a class="bfg-btn bfg-btn--primary bfg-btn--sm bfgu:mt-4 bfgu:self-start" href="<?php echo esc_attr($step->action); ?>">
 									<?php echo esc_html($step->actionText); ?>
 								</a>
 							<?php endif; ?>

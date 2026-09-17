@@ -20,7 +20,7 @@
 			<bfg-step.in-progress number="3">
 				<bfg-t>Connect your Bring account</bfg-t>
 				<bfg-step-desc><bfg-t>Add your Bring login email and API key</bfg-t></bfg-step-desc>
-				<button class="bfg-btn bfg-btn--primary bfg-btn--sm"><bfg-t>Connect account</bfg-t></button>
+				<button class="bfg-btn bfg-btn--primary bfg-btn--sm bfgu:mt-4 bfgu:self-start"><bfg-t>Connect account</bfg-t></button>
 				<bfg-badge.in-progress><t>In progress</t></bfg-badge.in-progress>
 			</bfg-step.in-progress>
 
