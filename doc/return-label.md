@@ -30,11 +30,17 @@ Return services: 9000, 9300, 9350, 9600.
 
 | Code | Name | Who returns |
 |---|---|---|
-| 9300 | Return from pick-up point | Private customer |
-| 9350 | Return parcel to business | Private customer |
+| 9300 | Retur fra hentested | Private customer |
+| 9350 | Retur til bedrift | Private customer |
 | 9000 | Return business parcel | Business |
 | 9600 | Return express | Business |
 | 9100 | Return business groupage | Business, cargo |
+
+9300 and 9350 both take the parcel from a private customer. The customer hands
+it in at a post office, a parcel box or their own mailbox.
+
+The two differ in where the return lands. 9350 ends at the shop address, driven
+by Bring. 9300 waits at the pick-up point nearest the shop.
 
 ### Nordic and international parcel
 
@@ -121,7 +127,14 @@ pays for the return, not the customer.
 
 The plugin sends `returnProduct` with the outbound booking. The Booking page
 holds one select, "Return label", stored as `booking_return_service`. The value
-is `none` or a Bring return service code.
+is `none`, `9300` or `9350`.
+
+A booking carries one `returnProduct`, so a shop picks one return service. 9300
+and 9350 differ in where the return lands, and a shipment lands in one place.
+
+The plugin offers no business return. 9000 and 9600 take a parcel from a
+business customer. WooCommerce marks no order as a business order, so the
+plugin cannot tell when to use them.
 
 `BringFraktguiden\Booking\ReturnLabel` reads the setting. It returns the return
 service only when the outbound service carries `'return_label' => true` in

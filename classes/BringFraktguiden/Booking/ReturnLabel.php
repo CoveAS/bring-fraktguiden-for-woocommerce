@@ -19,15 +19,21 @@ class ReturnLabel
 	/**
 	 * The return services a shop can pick, by Bring service code.
 	 *
+	 * Both services take the parcel from a private customer, who hands it in at
+	 * a post office, a parcel box or their own mailbox. They differ in where the
+	 * return lands. A shipment lands in one place, so a shop picks one.
+	 *
+	 * Bring also sells 9000 and 9600, which take a parcel from a business
+	 * customer. WooCommerce marks no order as a business order, so the plugin
+	 * cannot tell when to use them.
+	 *
 	 * @return array<string, string>
 	 */
 	public static function services(): array
 	{
 		return [
-			'9300' => __( 'Return from pick-up point', 'bring-fraktguiden-for-woocommerce' ),
-			'9350' => __( 'Return parcel to business', 'bring-fraktguiden-for-woocommerce' ),
-			'9000' => __( 'Return business parcel', 'bring-fraktguiden-for-woocommerce' ),
-			'9600' => __( 'Return express', 'bring-fraktguiden-for-woocommerce' ),
+			'9350' => __( 'Retur til bedrift - Bring drives the return to your address', 'bring-fraktguiden-for-woocommerce' ),
+			'9300' => __( 'Retur fra hentested - the return waits at your nearest pick-up point', 'bring-fraktguiden-for-woocommerce' ),
 		];
 	}
 
