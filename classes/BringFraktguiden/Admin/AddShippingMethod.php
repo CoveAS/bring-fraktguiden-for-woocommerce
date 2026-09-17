@@ -12,9 +12,6 @@ class AddShippingMethod
 	/** The query argument that carries the count back to the setup page. */
 	public const ADDED = 'bfg-zones-added';
 
-	/** The checkbox that asks to delete the free shipping of the shop. */
-	public const DELETE_FREE_SHIPPING = 'bfg-delete-free-shipping';
-
 	public static function init(): void
 	{
 		add_action('admin_post_' . self::ACTION, [self::class, 'handle']);
@@ -32,7 +29,7 @@ class AddShippingMethod
 
 		$freeShipping = ShippingZones::only_free_shipping();
 
-		if ($freeShipping && ! empty($_POST[self::DELETE_FREE_SHIPPING])) {
+		if ($freeShipping && ! empty($_POST['bfg-delete-free-shipping'])) {
 			ShippingZones::delete_free_shipping($freeShipping);
 		}
 
