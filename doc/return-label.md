@@ -59,6 +59,18 @@ PickUp Parcel Return does not cover a return inside Finland.
 
 Source: https://developer.bring.com/api/services/
 
+## The mailbox return is not in the API
+
+Bring sells "Retur Pakke i postkassen" as service 9650 on bring.no. The customer
+leaves the parcel in their own mailbox.
+
+The service portfolio at developer.bring.com does not list 9650, and the free
+return page does not pair it with an outbound booking. So the plugin cannot
+offer it.
+
+Service 3584, "Pakke hjem i postkassen", is an outbound service, not a return.
+Its ride along return travels as 9300 or 9350, from a pick-up point.
+
 ## The label free code
 
 Bring can replace a printed label with a code. The code looks like
