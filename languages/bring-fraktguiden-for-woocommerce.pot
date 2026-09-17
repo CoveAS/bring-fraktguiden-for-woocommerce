@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-17T17:12:33+00:00\n"
+"POT-Creation-Date: 2026-09-17T19:09:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -642,60 +642,56 @@ msgid "Lower prices than a normal Bring account"
 msgstr ""
 
 #: build/templates/admin/pages/home/connect-account.php:86
-msgid "Keep the Mybring account you have, or get a new one"
-msgstr ""
-
-#: build/templates/admin/pages/home/connect-account.php:87
 msgid "Ready in minutes, by phone or a few emails"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:90
+#: build/templates/admin/pages/home/connect-account.php:89
 msgid "What to expect: Send Quickship your shop name, parcels per month, phone and email. You get a price offer. Accept it, and Quickship sets up your API access."
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:98
+#: build/templates/admin/pages/home/connect-account.php:97
 msgid "Set up an account"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:102
+#: build/templates/admin/pages/home/connect-account.php:101
 msgid "Read more"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:114
+#: build/templates/admin/pages/home/connect-account.php:113
 msgid "Bring login email"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:117
+#: build/templates/admin/pages/home/connect-account.php:116
 msgid "Use the email you log in to Bring with, not your shop address."
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:119
+#: build/templates/admin/pages/home/connect-account.php:118
 msgid "Find it on your Bring profile"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:125
+#: build/templates/admin/pages/home/connect-account.php:124
 #: config/admin-settings.php:177
 #: config/admin-settings.php:179
 msgid "API key"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:129
+#: build/templates/admin/pages/home/connect-account.php:128
 msgid "Open your Bring API settings"
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:131
+#: build/templates/admin/pages/home/connect-account.php:130
 msgid "Copy the key from that page and paste it here."
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:139
+#: build/templates/admin/pages/home/connect-account.php:138
 msgid "Check that the whole API key is copied, with no space at either end."
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:140
+#: build/templates/admin/pages/home/connect-account.php:139
 msgid "Check that the email is the one you log in to Bring with."
 msgstr ""
 
-#: build/templates/admin/pages/home/connect-account.php:145
+#: build/templates/admin/pages/home/connect-account.php:144
 msgid "Save and test"
 msgstr ""
 
@@ -2212,23 +2208,23 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:273
+#: classes/BringFraktguiden/Admin/SettingsPage.php:274
 msgid "Click to configure each feature"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:275
+#: classes/BringFraktguiden/Admin/SettingsPage.php:276
 msgid "All features active during your trial"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:277
+#: classes/BringFraktguiden/Admin/SettingsPage.php:278
 msgid "Purchase a license to regain access"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:279
+#: classes/BringFraktguiden/Admin/SettingsPage.php:280
 msgid "Available with Pro"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:341
+#: classes/BringFraktguiden/Admin/SettingsPage.php:342
 msgid "The guide set the shipping services this shop offers."
 msgstr ""
 

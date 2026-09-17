@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-17T17:12:33+00:00\n"
+"POT-Creation-Date: 2026-09-17T19:09:58+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -678,14 +678,10 @@ msgid "Lower prices than a normal Bring account"
 msgstr "Lavere priser enn en vanlig Bring-konto"
 
 #: build/templates/admin/pages/home/connect-account.php:86
-msgid "Keep the Mybring account you have, or get a new one"
-msgstr "Behold Mybring-kontoen du har, eller få en ny"
-
-#: build/templates/admin/pages/home/connect-account.php:87
 msgid "Ready in minutes, by phone or a few emails"
 msgstr "Klar på noen minutter, over telefon eller noen e-poster"
 
-#: build/templates/admin/pages/home/connect-account.php:90
+#: build/templates/admin/pages/home/connect-account.php:89
 msgid ""
 "What to expect: Send Quickship your shop name, parcels per month, phone and "
 "email. You get a price offer. Accept it, and Quickship sets up your API "
@@ -695,50 +691,50 @@ msgstr ""
 "måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship "
 "setter opp API-tilgangen din."
 
-#: build/templates/admin/pages/home/connect-account.php:98
+#: build/templates/admin/pages/home/connect-account.php:97
 msgid "Set up an account"
 msgstr "Opprett en konto"
 
-#: build/templates/admin/pages/home/connect-account.php:102
+#: build/templates/admin/pages/home/connect-account.php:101
 msgid "Read more"
 msgstr "Les mer"
 
-#: build/templates/admin/pages/home/connect-account.php:114
+#: build/templates/admin/pages/home/connect-account.php:113
 msgid "Bring login email"
 msgstr "Epost for innlogging hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:117
+#: build/templates/admin/pages/home/connect-account.php:116
 msgid "Use the email you log in to Bring with, not your shop address."
 msgstr ""
 "Bruk eposten du logger inn hos Bring med, ikke epostadressen til butikken."
 
-#: build/templates/admin/pages/home/connect-account.php:119
+#: build/templates/admin/pages/home/connect-account.php:118
 msgid "Find it on your Bring profile"
 msgstr "Finn den på Bring-profilen din"
 
-#: build/templates/admin/pages/home/connect-account.php:125
+#: build/templates/admin/pages/home/connect-account.php:124
 #: config/admin-settings.php:177 config/admin-settings.php:179
 msgid "API key"
 msgstr "API-nøkkel"
 
-#: build/templates/admin/pages/home/connect-account.php:129
+#: build/templates/admin/pages/home/connect-account.php:128
 msgid "Open your Bring API settings"
 msgstr "Åpne API-innstillingene dine hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:131
+#: build/templates/admin/pages/home/connect-account.php:130
 msgid "Copy the key from that page and paste it here."
 msgstr "Kopier nøkkelen fra den siden og lim den inn her."
 
-#: build/templates/admin/pages/home/connect-account.php:139
+#: build/templates/admin/pages/home/connect-account.php:138
 msgid "Check that the whole API key is copied, with no space at either end."
 msgstr ""
 "Sjekk at hele API-nøkkelen er kopiert, uten mellomrom i noen av endene."
 
-#: build/templates/admin/pages/home/connect-account.php:140
+#: build/templates/admin/pages/home/connect-account.php:139
 msgid "Check that the email is the one you log in to Bring with."
 msgstr "Sjekk at eposten er den du logger inn hos Bring med."
 
-#: build/templates/admin/pages/home/connect-account.php:145
+#: build/templates/admin/pages/home/connect-account.php:144
 msgid "Save and test"
 msgstr "Lagre og test"
 
@@ -2377,23 +2373,23 @@ msgstr "Hjem"
 msgid "Never"
 msgstr "Aldri"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:273
+#: classes/BringFraktguiden/Admin/SettingsPage.php:274
 msgid "Click to configure each feature"
 msgstr "Klikk for å sette opp hver funksjon"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:275
+#: classes/BringFraktguiden/Admin/SettingsPage.php:276
 msgid "All features active during your trial"
 msgstr "Alle funksjoner er aktive i prøveperioden din"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:277
+#: classes/BringFraktguiden/Admin/SettingsPage.php:278
 msgid "Purchase a license to regain access"
 msgstr "Kjøp en lisens for å få tilgang igjen"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:279
+#: classes/BringFraktguiden/Admin/SettingsPage.php:280
 msgid "Available with Pro"
 msgstr "Tilgjengelig med Pro"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:341
+#: classes/BringFraktguiden/Admin/SettingsPage.php:342
 msgid "The guide set the shipping services this shop offers."
 msgstr "Veiviseren satte frakttjenestene denne butikken tilbyr."
 
@@ -3784,6 +3780,9 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "Keep the Mybring account you have, or get a new one"
+#~ msgstr "Behold Mybring-kontoen du har, eller få en ny"
 
 #~ msgid "View Bring Fraktguiden Settings"
 #~ msgstr "Vis Bring Fraktguiden innstillinger"

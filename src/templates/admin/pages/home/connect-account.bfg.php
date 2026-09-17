@@ -88,7 +88,6 @@ $bfg_quickship_body = rawurlencode(sprintf(
 				</p>
 				<ul class="bfg-connect__checks">
 					<li><t>Lower prices than a normal Bring account</t></li>
-					<li><t>Keep the Mybring account you have, or get a new one</t></li>
 					<li><t>Ready in minutes, by phone or a few emails</t></li>
 				</ul>
 				<p class="bfg-step-form__intro">
