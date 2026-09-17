@@ -3,6 +3,7 @@
 namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use WC_Shipping_Free_Shipping;
 use WC_Shipping_Method_Bring;
 use WC_Shipping_Zone;
 use WC_Shipping_Zones;
@@ -64,6 +65,56 @@ class ShippingZones
 		$zone->save();
 
 		return true;
+	}
+
+	/**
+	 * The zone that holds the free shipping, when free shipping is the only
+	 * option the shop offers.
+	 *
+	 * Such a shop has one zone, that zone holds only free shipping, and the
+	 * rest of the world holds no method at all. Free shipping then wins every
+	 * price, so a customer never sees a Bring option.
+	 */
+	public static function only_free_shipping(): ?WC_Shipping_Zone
+	{
+		if (! class_exists('WC_Shipping_Zones')) {
+			return null;
+		}
+
+		$zones = WC_Shipping_Zones::get_zones();
+
+		if (count($zones) !== 1) {
+			return null;
+		}
+
+		if (WC_Shipping_Zones::get_zone(0)->get_shipping_methods()) {
+			return null;
+		}
+
+		$zone = WC_Shipping_Zones::get_zone((int) reset($zones)['id']);
+		$methods = $zone ? $zone->get_shipping_methods() : [];
+
+		if (! $methods) {
+			return null;
+		}
+
+		foreach ($methods as $method) {
+			if (! $method instanceof WC_Shipping_Free_Shipping) {
+				return null;
+			}
+		}
+
+		return $zone;
+	}
+
+	/** Delete every free shipping method of a zone. A delete cannot be undone. */
+	public static function delete_free_shipping(WC_Shipping_Zone $zone): void
+	{
+		foreach ($zone->get_shipping_methods() as $instance_id => $method) {
+			if ($method instanceof WC_Shipping_Free_Shipping) {
+				$zone->delete_shipping_method((int) $instance_id);
+			}
+		}
 	}
 
 	/** @return array{id: int, name: string, regions: string, added: bool} */

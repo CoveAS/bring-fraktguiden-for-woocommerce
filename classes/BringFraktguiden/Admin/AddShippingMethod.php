@@ -27,6 +27,12 @@ class AddShippingMethod
 
 		$zones = array_map('intval', (array) ($_POST['zones'] ?? []));
 
+		$freeShipping = ShippingZones::only_free_shipping();
+
+		if ($freeShipping && ! empty($_POST['bfg-delete-free-shipping'])) {
+			ShippingZones::delete_free_shipping($freeShipping);
+		}
+
 		$added = 0;
 		foreach ($zones as $zone) {
 			$added += ShippingZones::add($zone) ? 1 : 0;
