@@ -227,7 +227,7 @@ class SettingsPage
 		$license_days_remaining = $pro_valid_to ? max(0, (int) floor(((int) $pro_valid_to - time()) / 86400)) : 0;
 
 		// The license key names a license row. It is a label, not a secret.
-		$license_key = Fraktguiden_Helper::get_option('license_key') ?? '';
+		$license_key = Fraktguiden_License::format_key(Fraktguiden_Helper::get_option('license_key') ?? '');
 
 		// License state, as the license server last reported it.
 		$state                = Fraktguiden_License::get_state();

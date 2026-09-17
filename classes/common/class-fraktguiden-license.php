@@ -144,6 +144,17 @@ class Fraktguiden_License
 	}
 
 	/**
+	 * Group a key in fours, for a reader.
+	 *
+	 * A key of 16 characters reads AAAA-BBBB-CCCC-DDDD. Only the display uses
+	 * this form. Every call to the license server sends the plain key.
+	 */
+	public static function format_key(string $key): string
+	{
+		return implode('-', str_split(self::normalise_key($key), 4));
+	}
+
+	/**
 	 * Get the key this shop holds.
 	 */
 	public static function get_key(): string

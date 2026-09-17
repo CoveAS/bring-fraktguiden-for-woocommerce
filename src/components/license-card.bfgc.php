@@ -9,7 +9,7 @@
  * @param string $subtitle     Sub-heading (e.g. "Active until April 21, 2026")
  * @param string $status       Status badge label (e.g. "Active")
  * @param string $status-color Dot/badge color: "green" (default), "red", "gray"
- * @param string $license-key  The license key string (e.g. "XXXX–XXXX–AB3F")
+ * @param string $license-key  The license key string (e.g. "XXXX-XXXX-XXXX-XXXX")
  * @param string $days         Footer left text (e.g. "11 days remaining")
  * @param string $manage-url   Href for the action link
  * @param string $manage-label Link label (e.g. "Manage License", "Renew")
@@ -20,7 +20,7 @@
  *     subtitle="Active until April 21, 2026"
  *     status="Active"
  *     status-color="green"
- *     license-key="XXXX–XXXX–AB3F"
+ *     license-key="XXXX-XXXX-XXXX-XXXX"
  *     days="11 days remaining"
  *     manage-url="https://example.com">
  * </bfg-license-card>
