@@ -634,6 +634,8 @@ msgid ""
 "Free shipping is the only option this shop offers, and it hides the Bring "
 "options from a customer. A deleted method does not come back."
 msgstr ""
+"Gratis frakt er det eneste alternativet denne butikken tilbyr, og den skjuler "
+"Bring-alternativene for kunden. En slettet metode kommer ikke tilbake."
 
 #: build/templates/admin/pages/home.php:208
 msgid "Add Bring"

@@ -60,11 +60,15 @@ See faq.txt for frequently asked questions
 * Added a notice that names the setup steps left
 * Added an offer to delete a free shipping method that hides the Bring options
 * The Pro license now follows the shop domain, and the owner can move it from the Pro page
+* A testing license now books in test mode only, and the booking page says why
+* The buy link now carries the shop domain, so the license goes to the right shop
 * The plugin now reads its settings from one store
 * Completed the Norwegian translation
 * Fixed a frozen checkout when the customer changes the pick-up point
 * Fixed the customs and license scripts, which did not load on a live site
 * Fixed a service that the service wizard cleared and then set again
+* Fixed the test step, which needed a reload before it turned green
+* Fixed a jump to the Pro page after the last setup step
 
 = 1.11.7 =
 
