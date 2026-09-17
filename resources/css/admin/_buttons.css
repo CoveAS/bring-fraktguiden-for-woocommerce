@@ -477,3 +477,78 @@ a.bfg-btn--danger:hover,
     border-color: #7F1D1D;
     transform: translateY(1px);
 }
+
+/* Split Button
+   ========================================================================== */
+
+.bfg-split-button {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+}
+
+.bfg-split-button__main {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.bfg-split-button__toggle {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    list-style: none;
+}
+
+/* Safari draws a triangle on a summary element. */
+.bfg-split-button__toggle::-webkit-details-marker {
+    display: none;
+}
+
+.bfg-split-button__menu[open] .bfg-split-button__toggle svg {
+    transform: rotate(180deg);
+}
+
+.bfg-split-button__list {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    min-width: 200px;
+    margin-top: 4px;
+    padding: 4px;
+    background: #ffffff;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-btn-radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bfg-split-button__list a {
+    display: block;
+    padding: 6px 10px;
+    font-size: var(--bfg-btn-sm-font-size);
+    color: var(--bfg-text-main);
+    text-decoration: none;
+    border-radius: var(--bfg-btn-radius);
+    white-space: nowrap;
+}
+
+.bfg-split-button__list a:hover,
+.bfg-split-button__list a:focus {
+    background: #F3F4F6;
+    color: #000000;
+}
+
+.bfg-split-button--primary .bfg-split-button__main,
+.bfg-split-button--primary .bfg-split-button__toggle {
+    background: var(--bfg-primary);
+    color: #ffffff;
+    border-color: var(--bfg-primary);
+}
+
+.bfg-split-button--primary .bfg-split-button__main:hover,
+.bfg-split-button--primary .bfg-split-button__toggle:hover {
+    background: var(--bfg-primary-hover);
+    border-color: var(--bfg-primary-hover);
+    color: #ffffff;
+}

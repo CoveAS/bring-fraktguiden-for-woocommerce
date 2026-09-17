@@ -50,9 +50,13 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 			<?php endif; ?>
 
 			<?php if (!$record->failed()) : ?>
-				<a class="bfg-btn <?php echo 0 === $bfg_index ? 'bfg-btn--primary' : 'bfg-btn--secondary'; ?> bfg-btn--sm" href="<?php echo esc_url($record->labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
 				<?php if ($record->return_consignments()) : ?>
-					<a class="bfg-btn bfg-btn--secondary bfg-btn--sm" href="<?php echo esc_url($record->return_labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the return label</t></a>
+					<bfg-split-button class="<?php echo 0 === $bfg_index ? 'bfg-split-button--primary' : ''; ?>" :href="esc_url($record->all_labels_url())" label="Print the labels">
+						<a href="<?php echo esc_url($record->labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the shipping label only</t></a>
+						<a href="<?php echo esc_url($record->return_labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the return label only</t></a>
+					</bfg-split-button>
+				<?php else : ?>
+					<a class="bfg-btn <?php echo 0 === $bfg_index ? 'bfg-btn--primary' : 'bfg-btn--secondary'; ?> bfg-btn--sm" href="<?php echo esc_url($record->labels_url()); ?>" target="_blank" rel="noreferrer"><t>Print the label</t></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>

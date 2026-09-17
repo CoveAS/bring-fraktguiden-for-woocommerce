@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-17T20:11:16+00:00\n"
+"POT-Creation-Date: 2026-09-17T22:17:18+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -60,13 +60,13 @@ msgstr "Mybring Booking"
 #: build/templates/admin/booking/bulk-modal.php:17
 #: build/templates/admin/booking/bulk-modal.php:64
 #: build/templates/admin/booking/bulk-modal.php:72
-#: build/templates/admin/pages/home.php:167
+#: build/templates/admin/pages/home.php:169
 #: build/templates/admin/pages/pro.php:154
 #: build/templates/admin/parts/shipping-test-result.php:64
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
-#: src/templates/admin/pages/home.bfg.php:149
+#: src/templates/admin/pages/home.bfg.php:151
 #: src/templates/admin/pages/pro.bfg.php:154
 #: src/templates/admin/parts/shipping-test-result.bfg.php:64
 #: templates/service-field.php:47
@@ -111,23 +111,23 @@ msgstr "Hvorfor varene sendes"
 msgid "Packages"
 msgstr "Pakker"
 
-#: build/templates/admin/booking/form.php:115 config/admin-settings.php:267
-#: config/admin-settings.php:529
+#: build/templates/admin/booking/form.php:115 config/admin-settings.php:268
+#: config/admin-settings.php:546
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr "Vekt"
 
-#: build/templates/admin/booking/form.php:116 config/admin-settings.php:231
+#: build/templates/admin/booking/form.php:116 config/admin-settings.php:232
 #: pro/booking/actions/class-get-booking-data-action.php:59
 msgid "Length"
 msgstr "Lengde"
 
-#: build/templates/admin/booking/form.php:117 config/admin-settings.php:243
+#: build/templates/admin/booking/form.php:117 config/admin-settings.php:244
 #: pro/booking/actions/class-get-booking-data-action.php:57
 msgid "Width"
 msgstr "Bredde"
 
-#: build/templates/admin/booking/form.php:118 config/admin-settings.php:255
+#: build/templates/admin/booking/form.php:118 config/admin-settings.php:256
 #: pro/booking/actions/class-get-booking-data-action.php:58
 msgid "Height"
 msgstr "Høyde"
@@ -223,11 +223,36 @@ msgstr "Reservert hos Bring"
 msgid "Track"
 msgstr "Spor"
 
-#: build/templates/admin/booking/history.php:53
+#: build/templates/admin/booking/history.php:55
+#: build/templates/admin/pages/kitchen-sink/split-button.php:20
+#: build/templates/admin/pages/kitchen-sink/split-button.php:37
+msgid "Print the labels"
+msgstr "Skriv ut etikettene"
+
+#: build/templates/admin/booking/history.php:57
+#: build/templates/admin/pages/kitchen-sink/split-button.php:22
+#: build/templates/admin/pages/kitchen-sink/split-button.php:39
+#: src/components/split-button.bfgc.php:26
+msgid "More options"
+msgstr "Flere valg"
+
+#: build/templates/admin/booking/history.php:64
+#: build/templates/admin/pages/kitchen-sink/split-button.php:29
+#: build/templates/admin/pages/kitchen-sink/split-button.php:46
+msgid "Print the shipping label only"
+msgstr "Skriv ut bare fraktetiketten"
+
+#: build/templates/admin/booking/history.php:65
+#: build/templates/admin/pages/kitchen-sink/split-button.php:30
+#: build/templates/admin/pages/kitchen-sink/split-button.php:47
+msgid "Print the return label only"
+msgstr "Skriv ut bare returetiketten"
+
+#: build/templates/admin/booking/history.php:71
 msgid "Print the label"
 msgstr "Skriv ut etiketten"
 
-#: build/templates/admin/booking/history.php:59
+#: build/templates/admin/booking/history.php:78
 msgid "Book again"
 msgstr "Book på nytt"
 
@@ -247,32 +272,32 @@ msgid "Street, second line"
 msgstr "Gate, andre linje"
 
 #: build/templates/admin/booking/parties.php:19
-#: build/templates/admin/pages/pro-settings.php:121
-#: config/admin-settings.php:392 pro/pickuppoint/PickUpPoint.php:216
+#: build/templates/admin/pages/pro-settings.php:133
+#: config/admin-settings.php:393 pro/pickuppoint/PickUpPoint.php:216
 #: src/templates/admin/booking/parties.bfg.php:19
-#: src/templates/admin/pages/pro-settings.bfg.php:121
+#: src/templates/admin/pages/pro-settings.bfg.php:133
 msgid "Postcode"
 msgstr "Postnummer"
 
 #: build/templates/admin/booking/parties.php:20
-#: build/templates/admin/pages/pro-settings.php:126
-#: config/admin-settings.php:400 src/templates/admin/booking/parties.bfg.php:20
-#: src/templates/admin/pages/pro-settings.bfg.php:126
+#: build/templates/admin/pages/pro-settings.php:138
+#: config/admin-settings.php:401 src/templates/admin/booking/parties.bfg.php:20
+#: src/templates/admin/pages/pro-settings.bfg.php:138
 msgid "City"
 msgstr "By"
 
 #: build/templates/admin/booking/parties.php:21
-#: build/templates/admin/pages/pro-settings.php:131
+#: build/templates/admin/pages/pro-settings.php:143
 #: build/templates/admin/parts/shipping-test.php:27
-#: config/admin-settings.php:408 src/templates/admin/booking/parties.bfg.php:21
-#: src/templates/admin/pages/pro-settings.bfg.php:131
+#: config/admin-settings.php:409 src/templates/admin/booking/parties.bfg.php:21
+#: src/templates/admin/pages/pro-settings.bfg.php:143
 msgid "Country"
 msgstr "Land"
 
 #: build/templates/admin/booking/parties.php:22
-#: build/templates/admin/pages/pro-settings.php:140
-#: config/admin-settings.php:414 src/templates/admin/booking/parties.bfg.php:22
-#: src/templates/admin/pages/pro-settings.bfg.php:140
+#: build/templates/admin/pages/pro-settings.php:152
+#: config/admin-settings.php:415 src/templates/admin/booking/parties.bfg.php:22
+#: src/templates/admin/pages/pro-settings.bfg.php:152
 msgid "Reference"
 msgstr "Referanse"
 
@@ -288,10 +313,10 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #: build/templates/admin/booking/parties.php:25
-#: build/templates/admin/pages/pro-settings.php:164
-#: config/admin-settings.php:172 config/admin-settings.php:174
+#: build/templates/admin/pages/pro-settings.php:176
+#: config/admin-settings.php:173 config/admin-settings.php:175
 #: src/templates/admin/booking/parties.bfg.php:25
-#: src/templates/admin/pages/pro-settings.bfg.php:164
+#: src/templates/admin/pages/pro-settings.bfg.php:176
 msgid "Email"
 msgstr "Epost"
 
@@ -355,7 +380,8 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: build/templates/admin/pages/booking.php:136
 #: build/templates/admin/pages/booking.php:177
 #: build/templates/admin/pages/booking.php:203
-#: build/templates/admin/pages/booking.php:264
+#: build/templates/admin/pages/booking.php:229
+#: build/templates/admin/pages/booking.php:290
 #: build/templates/admin/pages/fallback-options.php:75
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
@@ -367,7 +393,8 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: src/templates/admin/pages/booking.bfg.php:109
 #: src/templates/admin/pages/booking.bfg.php:133
 #: src/templates/admin/pages/booking.bfg.php:147
-#: src/templates/admin/pages/booking.bfg.php:196
+#: src/templates/admin/pages/booking.bfg.php:161
+#: src/templates/admin/pages/booking.bfg.php:210
 #: src/templates/admin/pages/fallback-options.bfg.php:70
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
@@ -423,19 +450,30 @@ msgstr ""
 "Dette endrer statusen selv om ordren er\n"
 "\t\t\t\t\t\t\tfullført"
 
-#: build/templates/admin/pages/booking.php:187 config/services.php:454
+#: build/templates/admin/pages/booking.php:187
+#: build/templates/admin/pages/pro-settings.php:70
+#: config/admin-settings.php:478
+#: src/templates/admin/pages/pro-settings.bfg.php:70
+msgid "Return label"
+msgstr ""
+
+#: build/templates/admin/pages/booking.php:191
+msgid "Send a return label with every booking"
+msgstr ""
+
+#: build/templates/admin/pages/booking.php:213 config/services.php:459
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
-#: build/templates/admin/pages/booking.php:191
+#: build/templates/admin/pages/booking.php:217
 msgid "Configure package type for home delivery services"
 msgstr "Still inn pakketype for hjemleveringstjenester"
 
-#: build/templates/admin/pages/booking.php:213
+#: build/templates/admin/pages/booking.php:239
 msgid "Shipping Address"
 msgstr "Fraktadresse"
 
-#: build/templates/admin/pages/booking.php:217
+#: build/templates/admin/pages/booking.php:243
 msgid ""
 "By default, your WooCommerce store address is used as the &quot;from&quot; "
 "address during booking."
@@ -443,22 +481,22 @@ msgstr ""
 "Som standard brukes butikkadressen i WooCommerce som &quot;fra&quot;-adresse "
 "ved booking."
 
-#: build/templates/admin/pages/booking.php:245
+#: build/templates/admin/pages/booking.php:271
 msgid "Address details"
 msgstr "Adressedetaljer"
 
-#: build/templates/admin/pages/booking.php:307
-#: src/templates/admin/pages/booking.bfg.php:237
+#: build/templates/admin/pages/booking.php:333
+#: src/templates/admin/pages/booking.bfg.php:251
 msgid "This field is required."
 msgstr "Dette feltet er påkrevd."
 
-#: build/templates/admin/pages/booking.php:311
-#: src/templates/admin/pages/booking.bfg.php:241
+#: build/templates/admin/pages/booking.php:337
+#: src/templates/admin/pages/booking.bfg.php:255
 msgid "Please enter a valid email address."
 msgstr "Skriv inn en gyldig epostadresse."
 
-#: build/templates/admin/pages/booking.php:315
-#: src/templates/admin/pages/booking.bfg.php:245
+#: build/templates/admin/pages/booking.php:341
+#: src/templates/admin/pages/booking.bfg.php:259
 msgid "Please enter a valid phone number."
 msgstr "Skriv inn et gyldig telefonnummer."
 
@@ -575,16 +613,18 @@ msgstr "Steg %d av %d"
 msgid "Progress"
 msgstr "Framdrift"
 
-#: build/templates/admin/pages/home.php:100
-#: src/templates/admin/pages/home.bfg.php:90
+#: build/templates/admin/pages/home.php:101
+#: build/templates/admin/pages/home.php:102
+#: src/templates/admin/pages/home.bfg.php:91
+#: src/templates/admin/pages/home.bfg.php:92
 #, php-format
 msgid "%d of %d completed"
 msgstr "%d av %d fullført"
 
-#: build/templates/admin/pages/home.php:129
+#: build/templates/admin/pages/home.php:131
 #: build/templates/admin/pages/home/connect-account.php:65
 #: build/templates/admin/pages/home/fallback-price.php:65
-#: build/templates/admin/pages/home/test-shipping.php:52
+#: build/templates/admin/pages/home/test-shipping.php:40
 #: build/templates/admin/pages/kitchen-sink/badges.php:15
 #: build/templates/admin/pages/kitchen-sink/badges.php:21
 #: build/templates/admin/pages/kitchen-sink/badges.php:25
@@ -593,51 +633,52 @@ msgstr "%d av %d fullført"
 msgid "Done"
 msgstr "Ferdig"
 
-#: build/templates/admin/pages/home.php:147
+#: build/templates/admin/pages/home.php:149
 #: build/templates/admin/pages/home/connect-account.php:67
 #: build/templates/admin/pages/home/fallback-price.php:67
-#: build/templates/admin/pages/home/test-shipping.php:54
+#: build/templates/admin/pages/home/test-shipping.php:42
 msgid "In Progress"
 msgstr "Pågår"
 
-#: build/templates/admin/pages/home.php:166
+#: build/templates/admin/pages/home.php:168
 msgid "Add Bring to shipping zones"
 msgstr "Legg Bring til i fraktsoner"
 
-#: build/templates/admin/pages/home.php:171
+#: build/templates/admin/pages/home.php:173
 msgid "This shop has no shipping zone yet."
 msgstr "Denne butikken har ingen fraktsone ennå."
 
-#: build/templates/admin/pages/home.php:175
+#: build/templates/admin/pages/home.php:177
 msgid "Make a shipping zone"
 msgstr "Lag en fraktsone"
 
-#: build/templates/admin/pages/home.php:183
+#: build/templates/admin/pages/home.php:185
 msgid "A shipping zone is a group of places with its own shipping prices."
 msgstr "En fraktsone er en gruppe steder med egne fraktpriser."
 
-#: build/templates/admin/pages/home.php:184
+#: build/templates/admin/pages/home.php:186
 msgid "Tick a zone to show Bring shipping options to customers there."
 msgstr ""
 "Kryss av for en sone for å vise fraktalternativer fra Bring til kundene der."
 
-#: build/templates/admin/pages/home.php:193
+#: build/templates/admin/pages/home.php:195
 msgid "Already added"
 msgstr "Allerede lagt til"
 
-#: build/templates/admin/pages/home.php:201
+#: build/templates/admin/pages/home.php:203
 msgid "Delete the free shipping"
 msgstr "Slett gratis frakt"
 
-#: build/templates/admin/pages/home.php:202
+#: build/templates/admin/pages/home.php:204
 msgid ""
 "Free shipping is the only option this shop offers, and it hides the Bring "
 "options from a customer. A deleted method does not come back."
 msgstr ""
-"Gratis frakt er det eneste alternativet denne butikken tilbyr, og den skjuler "
-"Bring-alternativene for kunden. En slettet metode kommer ikke tilbake."
+"Gratis frakt er det eneste alternativet denne butikken tilbyr, og den "
+"skjuler Bring-alternativene for kunden. En slettet metode kommer ikke "
+"tilbake."
 
-#: build/templates/admin/pages/home.php:208
+#: build/templates/admin/pages/home.php:210
 msgid "Add Bring"
 msgstr "Legg til Bring"
 
@@ -727,7 +768,7 @@ msgid "Find it on your Bring profile"
 msgstr "Finn den på Bring-profilen din"
 
 #: build/templates/admin/pages/home/connect-account.php:124
-#: config/admin-settings.php:181 config/admin-settings.php:183
+#: config/admin-settings.php:182 config/admin-settings.php:184
 msgid "API key"
 msgstr "API-nøkkel"
 
@@ -825,26 +866,26 @@ msgstr "Lagre"
 msgid "Advanced settings"
 msgstr "Avanserte innstillinger"
 
-#: build/templates/admin/pages/home/test-shipping.php:36
+#: build/templates/admin/pages/home/test-shipping.php:31
 msgid "Bring gave a price for a test parcel"
 msgstr "Bring ga en pris for en testpakke"
 
-#: build/templates/admin/pages/home/test-shipping.php:43
+#: build/templates/admin/pages/home/test-shipping.php:34
 msgid "Test again"
 msgstr "Test på nytt"
 
-#: build/templates/admin/pages/home/test-shipping.php:45
+#: build/templates/admin/pages/home/test-shipping.php:35
 msgid "Test"
 msgstr "Kjør test"
 
-#: build/templates/admin/pages/home/test-shipping.php:59
+#: build/templates/admin/pages/home/test-shipping.php:47
 msgid ""
 "Send a sample parcel of one kilo to an address and see what the checkout "
 "would show."
 msgstr ""
 "Send en prøvepakke på én kilo til en adresse og se hva kassen ville vist."
 
-#: build/templates/admin/pages/home/test-shipping.php:64
+#: build/templates/admin/pages/home/test-shipping.php:52
 msgid ""
 "The same test sits on every product, and tests the weight and the size of "
 "that product."
@@ -852,7 +893,7 @@ msgstr ""
 "Den samme testen finnes på hvert produkt, og tester vekten og størrelsen på "
 "det produktet."
 
-#: build/templates/admin/pages/home/test-shipping.php:65
+#: build/templates/admin/pages/home/test-shipping.php:53
 msgid "Open your products"
 msgstr "Åpne produktene dine"
 
@@ -1002,8 +1043,8 @@ msgstr "Tekstfelt"
 
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:25
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:89
-#: config/admin-settings.php:544 config/admin-settings.php:594
-#: config/admin-settings.php:623
+#: config/admin-settings.php:561 config/admin-settings.php:611
+#: config/admin-settings.php:640
 msgid "Label"
 msgstr "Etikett"
 
@@ -1162,6 +1203,14 @@ msgstr "Forny for å få tilgang igjen"
 msgid "Notice Banners"
 msgstr "Meldingsbannere"
 
+#: build/templates/admin/pages/kitchen-sink/split-button.php:8
+msgid "Split Button"
+msgstr ""
+
+#: build/templates/admin/pages/kitchen-sink/split-button.php:12
+msgid "A main action with a caret that opens more actions"
+msgstr ""
+
 #: build/templates/admin/pages/kitchen-sink/step-rows.php:8
 msgid "Step Rows"
 msgstr "Trinnrader"
@@ -1263,9 +1312,9 @@ msgid "Text Formatting"
 msgstr "Tekstformatering"
 
 #: build/templates/admin/pages/pro-settings.php:18
-#: build/templates/admin/pages/pro-settings.php:183
+#: build/templates/admin/pages/pro-settings.php:195
 #: src/templates/admin/pages/pro-settings.bfg.php:18
-#: src/templates/admin/pages/pro-settings.bfg.php:183
+#: src/templates/admin/pages/pro-settings.bfg.php:195
 msgid "Enable"
 msgstr "Aktiver"
 
@@ -1280,7 +1329,7 @@ msgid "Shipping"
 msgstr "Frakt"
 
 #: build/templates/admin/pages/pro-settings.php:27
-#: config/admin-settings.php:344
+#: config/admin-settings.php:345
 #: src/templates/admin/pages/pro-settings.bfg.php:27
 msgid "Allow booking without Bring shipping"
 msgstr "Tillat booking av ordre uten en bring fraktlinje"
@@ -1313,60 +1362,75 @@ msgid "This will change the status even if the order is completed"
 msgstr "Dette vil endre statusen selv om ordren er fullført"
 
 #: build/templates/admin/pages/pro-settings.php:50
-#: config/admin-settings.php:463
+#: config/admin-settings.php:464
 #: src/templates/admin/pages/pro-settings.bfg.php:50
 msgid "Order status after booking"
 msgstr "Bestillingsstatus etter reservering"
 
 #: build/templates/admin/pages/pro-settings.php:52
-#: config/admin-settings.php:465
+#: config/admin-settings.php:466
 #: src/templates/admin/pages/pro-settings.bfg.php:52
 msgid "Order status will be automatically set when successfully booked"
 msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
 
 #: build/templates/admin/pages/pro-settings.php:55
-#: build/templates/admin/pages/pro-settings.php:64 config/admin-settings.php:22
+#: build/templates/admin/pages/pro-settings.php:64 config/admin-settings.php:23
 #: src/templates/admin/pages/pro-settings.bfg.php:55
 #: src/templates/admin/pages/pro-settings.bfg.php:64
 msgid "None"
 msgstr "Ingen"
 
 #: build/templates/admin/pages/pro-settings.php:59
-#: config/admin-settings.php:470
+#: config/admin-settings.php:471
 #: src/templates/admin/pages/pro-settings.bfg.php:59
 msgid "Order status after printing"
 msgstr "Ordrestatus etter utskrift"
 
 #: build/templates/admin/pages/pro-settings.php:61
-#: config/admin-settings.php:472
+#: config/admin-settings.php:473
 #: src/templates/admin/pages/pro-settings.bfg.php:61
 msgid "Order status will be automatically set when a label is downloaded"
 msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
 
-#: build/templates/admin/pages/pro-settings.php:71
-#: src/templates/admin/pages/pro-settings.bfg.php:71
+#. translators: %s is a list of Bring service names.
+#: build/templates/admin/pages/pro-settings.php:74
+#: src/templates/admin/pages/pro-settings.bfg.php:74
+#, php-format
+msgid ""
+"Bring only adds a return label to a shipment inside Norway, on these "
+"services: %s. Any other service books without one."
+msgstr ""
+
+#: build/templates/admin/pages/pro-settings.php:77
+#: config/admin-settings.php:487
+#: src/templates/admin/pages/pro-settings.bfg.php:77
+msgid "No return label"
+msgstr ""
+
+#: build/templates/admin/pages/pro-settings.php:83
+#: src/templates/admin/pages/pro-settings.bfg.php:83
 msgid "Home delivery"
 msgstr "Hjemlevering"
 
-#: build/templates/admin/pages/pro-settings.php:75
-#: config/admin-settings.php:477
-#: src/templates/admin/pages/pro-settings.bfg.php:75
+#: build/templates/admin/pages/pro-settings.php:87
+#: config/admin-settings.php:494
+#: src/templates/admin/pages/pro-settings.bfg.php:87
 msgid "Package type for home delivery"
 msgstr "Pakketype for hjemlevering"
 
-#: build/templates/admin/pages/pro-settings.php:77
-#: config/admin-settings.php:479
-#: src/templates/admin/pages/pro-settings.bfg.php:77
+#: build/templates/admin/pages/pro-settings.php:89
+#: config/admin-settings.php:496
+#: src/templates/admin/pages/pro-settings.bfg.php:89
 msgid "Only applies to home delivery services"
 msgstr "Gjelder bare for hjemleveringstjenester"
 
-#: build/templates/admin/pages/pro-settings.php:96
-#: src/templates/admin/pages/pro-settings.bfg.php:96
+#: build/templates/admin/pages/pro-settings.php:108
+#: src/templates/admin/pages/pro-settings.bfg.php:108
 msgid "Store address and contact information"
 msgstr "Butikkadresse og kontaktinformasjon"
 
-#: build/templates/admin/pages/pro-settings.php:97
-#: src/templates/admin/pages/pro-settings.bfg.php:97
+#: build/templates/admin/pages/pro-settings.php:109
+#: src/templates/admin/pages/pro-settings.bfg.php:109
 msgid ""
 "This address will be your 'from' address and will populate the details given "
 "to Bring during the booking process"
@@ -1374,26 +1438,26 @@ msgstr ""
 "Denne adressen vil være din fra-adresse og vil fylle ut disse detaljene gitt "
 "til Bring under bookingprosessen"
 
-#: build/templates/admin/pages/pro-settings.php:102
-#: config/admin-settings.php:364
-#: src/templates/admin/pages/pro-settings.bfg.php:102
+#: build/templates/admin/pages/pro-settings.php:114
+#: config/admin-settings.php:365
+#: src/templates/admin/pages/pro-settings.bfg.php:114
 msgid "Store Name"
 msgstr "Butikknavn"
 
-#: build/templates/admin/pages/pro-settings.php:109
-#: config/admin-settings.php:373
-#: src/templates/admin/pages/pro-settings.bfg.php:109
+#: build/templates/admin/pages/pro-settings.php:121
+#: config/admin-settings.php:374
+#: src/templates/admin/pages/pro-settings.bfg.php:121
 msgid "Street Address 1"
 msgstr "Gateaddress 1"
 
-#: build/templates/admin/pages/pro-settings.php:115
-#: config/admin-settings.php:384
-#: src/templates/admin/pages/pro-settings.bfg.php:115
+#: build/templates/admin/pages/pro-settings.php:127
+#: config/admin-settings.php:385
+#: src/templates/admin/pages/pro-settings.bfg.php:127
 msgid "Street Address 2"
 msgstr "Gateadresse 2"
 
-#: build/templates/admin/pages/pro-settings.php:144
-#: src/templates/admin/pages/pro-settings.bfg.php:144
+#: build/templates/admin/pages/pro-settings.php:156
+#: src/templates/admin/pages/pro-settings.bfg.php:156
 #, php-format
 msgid ""
 "The store’s reference printed on the shipping label. Usually %s, but can "
@@ -1402,25 +1466,25 @@ msgstr ""
 "Butikkens referanse som skrives ut på fraktetiketten. Vanligvis %s, men kan "
 "også være %s."
 
-#: build/templates/admin/pages/pro-settings.php:154
-#: config/admin-settings.php:424
-#: src/templates/admin/pages/pro-settings.bfg.php:154
+#: build/templates/admin/pages/pro-settings.php:166
+#: config/admin-settings.php:425
+#: src/templates/admin/pages/pro-settings.bfg.php:166
 msgid "Contact Person"
 msgstr "Kontaktperson"
 
-#: build/templates/admin/pages/pro-settings.php:159
-#: config/admin-settings.php:433
-#: src/templates/admin/pages/pro-settings.bfg.php:159
+#: build/templates/admin/pages/pro-settings.php:171
+#: config/admin-settings.php:434
+#: src/templates/admin/pages/pro-settings.bfg.php:171
 msgid "Phone"
 msgstr "Telefonnummer"
 
-#: build/templates/admin/pages/pro-settings.php:177
-#: src/templates/admin/pages/pro-settings.bfg.php:177
+#: build/templates/admin/pages/pro-settings.php:189
+#: src/templates/admin/pages/pro-settings.bfg.php:189
 msgid "Pickup Point Options"
 msgstr "Hentested valg"
 
-#: build/templates/admin/pages/pro-settings.php:178
-#: src/templates/admin/pages/pro-settings.bfg.php:178
+#: build/templates/admin/pages/pro-settings.php:190
+#: src/templates/admin/pages/pro-settings.bfg.php:190
 msgid ""
 "Enable pickup points on the cart / checkout. If disabled, Bring will show "
 "the names of shipment methods. <em>ie: <strong>\"Climate Neutral Service "
@@ -1430,32 +1494,32 @@ msgstr ""
 "aktiveres. Hvis deaktivert, vil Bring kun vise navn på forsendelsesmetoder. "
 "<em>f.eks: <strong>”Klimanøytral Servicepakke”</strong> </em>"
 
-#: build/templates/admin/pages/pro-settings.php:185
-#: src/templates/admin/pages/pro-settings.bfg.php:185
+#: build/templates/admin/pages/pro-settings.php:197
+#: src/templates/admin/pages/pro-settings.bfg.php:197
 msgid "If not checked, default services will be shown"
 msgstr "Hvis ikke merket, vises standardtjenester"
 
-#: build/templates/admin/pages/pro-settings.php:186
-#: src/templates/admin/pages/pro-settings.bfg.php:186
+#: build/templates/admin/pages/pro-settings.php:198
+#: src/templates/admin/pages/pro-settings.bfg.php:198
 msgid "Enable pickup point"
 msgstr "Aktiver hentested"
 
-#: build/templates/admin/pages/pro-settings.php:191
-#: src/templates/admin/pages/pro-settings.bfg.php:191
+#: build/templates/admin/pages/pro-settings.php:203
+#: src/templates/admin/pages/pro-settings.bfg.php:203
 msgid "Pickup point limit"
 msgstr "Hentested valg"
 
-#: build/templates/admin/pages/pro-settings.php:194
-#: src/templates/admin/pages/pro-settings.bfg.php:194
+#: build/templates/admin/pages/pro-settings.php:206
+#: src/templates/admin/pages/pro-settings.bfg.php:206
 msgid "Leave blank to remove limit"
 msgstr "La være tom for ingen grense"
 
-#: build/templates/admin/pages/pro-settings.php:196
-#: src/templates/admin/pages/pro-settings.bfg.php:196
+#: build/templates/admin/pages/pro-settings.php:208
+#: src/templates/admin/pages/pro-settings.bfg.php:208
 msgid "If set, it will be the maximum number of pickup points shown"
 msgstr "Hvis det er satt, blir det maksimalt antall hentested vist"
 
-#: build/templates/admin/pages/pro.php:47 config/admin-settings.php:46
+#: build/templates/admin/pages/pro.php:47 config/admin-settings.php:47
 msgid "Bring Fraktguiden Pro"
 msgstr "Bring Fraktguiden Pro"
 
@@ -2472,6 +2536,47 @@ msgstr "Bring svarte med en feil (%d)."
 msgid "Everywhere else"
 msgstr "Alle andre steder"
 
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:31
+msgid "Retur til bedrift"
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:32
+msgid ""
+"Bring drives the return to your address. Your customer hands the parcel in "
+"at a post office, a parcel box or their own mailbox. Pick this one if you "
+"want the return delivered to you."
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:35
+msgid "Retur fra hentested"
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:36
+msgid ""
+"The return waits at the pick-up point nearest you, and you fetch it there. "
+"Your customer hands the parcel in the same way as with Retur til bedrift."
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:39
+msgid "Retur pakke fra bedrift"
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:40
+msgid ""
+"For a return from a business customer, up to 35 kg per parcel. Pick this one "
+"only if you sell to businesses."
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:43
+msgid "Retur ekspress"
+msgstr ""
+
+#: classes/BringFraktguiden/Booking/ReturnLabel.php:44
+msgid ""
+"For a return from a business customer, delivered the next day with a time "
+"guarantee. It costs more than Retur pakke fra bedrift."
+msgstr ""
+
 #: classes/BringFraktguiden/Customs/CustomsField.php:55
 msgid "HS code"
 msgstr "HS-kode"
@@ -2925,15 +3030,15 @@ msgstr ""
 msgid "Products"
 msgstr "Produkter"
 
-#: config/admin-settings.php:13
+#: config/admin-settings.php:14
 msgid "Choose a country"
 msgstr "Velg et land"
 
-#: config/admin-settings.php:50 config/admin-settings.php:52
+#: config/admin-settings.php:51 config/admin-settings.php:53
 msgid "Start the free trial"
 msgstr "Start gratis prøveperiode"
 
-#: config/admin-settings.php:54
+#: config/admin-settings.php:55
 msgid ""
 "The trial gives you every PRO feature for 7 days. After the trial, PRO "
 "features stop until you activate a license."
@@ -2941,15 +3046,15 @@ msgstr ""
 "Prøveperioden gir deg alle PRO-funksjoner i 7 dager. Etter prøveperioden "
 "stopper PRO-funksjonene til du aktiverer en lisens."
 
-#: config/admin-settings.php:58
+#: config/admin-settings.php:59
 msgid "License key"
 msgstr "Lisensnøkkel"
 
-#: config/admin-settings.php:68
+#: config/admin-settings.php:69
 msgid "Shipping Options"
 msgstr "Fraktalternativer"
 
-#: config/admin-settings.php:69
+#: config/admin-settings.php:70
 msgid ""
 "Set the default prices for shipping rates and allow free shipping options on "
 "those services. You can also set the free shipping limit for each shipping "
@@ -2959,50 +3064,50 @@ msgstr ""
 "under hver tjeneste. Du kan også sette fraktfri grense under hver av "
 "tjenestene."
 
-#: config/admin-settings.php:73
+#: config/admin-settings.php:74
 msgid "Language"
 msgstr "Språk"
 
-#: config/admin-settings.php:75
+#: config/admin-settings.php:76
 msgid ""
 "Choose the language you want to use for the names and descriptions of "
 "shipping rates."
 msgstr ""
 "Velg hvilket språk du vil bruke for navn og beskrivelser av fraktpriser."
 
-#: config/admin-settings.php:78
+#: config/admin-settings.php:79
 msgid "Use website language"
 msgstr "Bruk nettsidens språk"
 
-#: config/admin-settings.php:79
+#: config/admin-settings.php:80
 msgid "Norwegian"
 msgstr "Norsk"
 
-#: config/admin-settings.php:80
+#: config/admin-settings.php:81
 msgid "English"
 msgstr "Engelsk"
 
-#: config/admin-settings.php:81
+#: config/admin-settings.php:82
 msgid "Swedish"
 msgstr "Svensk"
 
-#: config/admin-settings.php:82
+#: config/admin-settings.php:83
 msgid "Danish"
 msgstr "Dansk"
 
-#: config/admin-settings.php:83
+#: config/admin-settings.php:84
 msgid "Finnish"
 msgstr "Finsk"
 
-#: config/admin-settings.php:87
+#: config/admin-settings.php:88
 msgid "Post office"
 msgstr "Postkontor"
 
-#: config/admin-settings.php:89
+#: config/admin-settings.php:90
 msgid "Posting at post office"
 msgstr "Levering på postkontor"
 
-#: config/admin-settings.php:90
+#: config/admin-settings.php:91
 msgid ""
 "Enable if you drop off packages at a post office. Leave unchecked if Bring "
 "picks up from your location."
@@ -3010,23 +3115,23 @@ msgstr ""
 "Aktiver hvis du leverer pakker på et postkontor. La den stå uten hake hvis "
 "Bring henter hos deg."
 
-#: config/admin-settings.php:95
+#: config/admin-settings.php:96
 msgid "From zip"
 msgstr "Fra postnummer"
 
-#: config/admin-settings.php:102
+#: config/admin-settings.php:103
 msgid "From country"
 msgstr "Fra land"
 
-#: config/admin-settings.php:111
+#: config/admin-settings.php:112
 msgid "Handling Fee"
 msgstr "Ekspedisjonsgebyr"
 
-#: config/admin-settings.php:113
+#: config/admin-settings.php:114
 msgid "0"
 msgstr "0"
 
-#: config/admin-settings.php:114
+#: config/admin-settings.php:115
 msgid ""
 "Add an additional fee on top of the calculated shipping rates. All bring "
 "shipping options will have their prices increased by this amount."
@@ -3034,11 +3139,11 @@ msgstr ""
 "Legg til et gebyr oppe på de beregnede fraktprisene. Alle fraktalternativer "
 "fra Bring får prisen økt med dette beløpet."
 
-#: config/admin-settings.php:124
+#: config/admin-settings.php:125
 msgid "Display shipping options full-width"
 msgstr "Vis fraktalternativer i full bredde"
 
-#: config/admin-settings.php:128
+#: config/admin-settings.php:129
 msgid ""
 "Moves the \"Shipping\" heading to its own row so shipping options can use "
 "the full width. Makes them easier to read at checkout."
@@ -3046,23 +3151,23 @@ msgstr ""
 "Flytter overskriften \"Frakt\" til sin egen rad, slik at fraktalternativene "
 "kan bruke hele bredden. Det gjør dem lettere å lese i kassen."
 
-#: config/admin-settings.php:133
+#: config/admin-settings.php:134
 msgid "Display detailed shipping option description"
 msgstr "Vis detaljert beskrivelse av fraktalternativ"
 
-#: config/admin-settings.php:134
+#: config/admin-settings.php:135
 msgid "Displays service logos and additional info for each shipping option."
 msgstr "Viser tjenestelogoer og mer informasjon for hvert fraktalternativ."
 
-#: config/admin-settings.php:139
+#: config/admin-settings.php:140
 msgid "Use customer number"
 msgstr "Bruk kundenummer"
 
-#: config/admin-settings.php:141
+#: config/admin-settings.php:142
 msgid "Use main mybring customer number to get prices from the api."
 msgstr "Bruk hovedkundenummeret fra mybring for å hente priser fra API-en."
 
-#: config/admin-settings.php:143
+#: config/admin-settings.php:144
 msgid ""
 "Uses your Mybring customer number to get discounted business rates instead "
 "of standard prices."
@@ -3070,11 +3175,11 @@ msgstr ""
 "Bruker kundenummeret ditt hos Mybring for å få rabatterte bedriftspriser i "
 "stedet for standardpriser."
 
-#: config/admin-settings.php:148
+#: config/admin-settings.php:149
 msgid "Price type"
 msgstr "Pristype"
 
-#: config/admin-settings.php:154
+#: config/admin-settings.php:155
 msgid ""
 "Net price is the agreement price with bring and will only be used if a "
 "customer number is used for the API request"
@@ -3082,63 +3187,63 @@ msgstr ""
 "Nettoprisen er avtaleprisen med Bring og vil kun bli brukt hvis et "
 "kundenummer brukes i API-forespørselen"
 
-#: config/admin-settings.php:159
+#: config/admin-settings.php:160
 msgid "Sorting"
 msgstr "Sortering"
 
-#: config/admin-settings.php:163
+#: config/admin-settings.php:164
 msgid "The order in which shipping options should be displayed."
 msgstr "Rekkefølgen fraktalternativene skal vises i."
 
-#: config/admin-settings.php:166
+#: config/admin-settings.php:167
 msgid "Price, low to high"
 msgstr "Pris, lav til høy"
 
-#: config/admin-settings.php:167
+#: config/admin-settings.php:168
 msgid "Price, high to low"
 msgstr "Pris, høy til lav"
 
-#: config/admin-settings.php:168
+#: config/admin-settings.php:169
 msgid "No sorting"
 msgstr "Ingen sortering"
 
 #. translators: %s: Mybring profile page URL
-#: config/admin-settings.php:177
+#: config/admin-settings.php:178
 #, php-format
 msgid "Find your Email %1$shere%2$s."
 msgstr "Finn din Epost %1$sher%2$s."
 
 #. translators: %s: Mybring API settings page URL
-#: config/admin-settings.php:186
+#: config/admin-settings.php:187
 #, php-format
 msgid "Find your API key %1$shere%2$s."
 msgstr "Finn din API-nøkkel %1$sher%2$s."
 
-#: config/admin-settings.php:190
+#: config/admin-settings.php:191
 msgid "Debug mode"
 msgstr "Debug modus"
 
-#: config/admin-settings.php:192 config/admin-settings.php:311
+#: config/admin-settings.php:193 config/admin-settings.php:312
 msgid "Enable debug logs"
 msgstr "Aktiver debug-logging"
 
-#: config/admin-settings.php:193
+#: config/admin-settings.php:194
 msgid "Bring Fraktguiden logs will be saved in"
 msgstr "Bring Fraktguiden logg vil bli lagret i"
 
-#: config/admin-settings.php:194
+#: config/admin-settings.php:195
 msgid "Click here to see the logs"
 msgstr "Klikk her for å se loggene"
 
-#: config/admin-settings.php:200
+#: config/admin-settings.php:201
 msgid "Disable stylesheet"
 msgstr "Deaktiver stylesheets"
 
-#: config/admin-settings.php:201
+#: config/admin-settings.php:202
 msgid "Remove all plugin styles from the checkout page"
 msgstr "Fjern alle plugin stiler fra kassa siden"
 
-#: config/admin-settings.php:203
+#: config/admin-settings.php:204
 msgid ""
 "Disable loading the default stylesheet from the Bring Fraktguiden plugin to "
 "allow custom styling by the theme"
@@ -3146,133 +3251,133 @@ msgstr ""
 "Deaktiver lasting standardstil arket fra Bring Fraktguiden plugin for å "
 "tillate tilpasset styling av temaet"
 
-#: config/admin-settings.php:208
+#: config/admin-settings.php:209
 msgid "Lead time in days"
 msgstr "Antall dager lead time"
 
-#: config/admin-settings.php:211
+#: config/admin-settings.php:212
 msgid "Number of days before orders are shipped"
 msgstr "Antall dager før ordrer sendes"
 
-#: config/admin-settings.php:216
+#: config/admin-settings.php:217
 msgid "Lead time cutoff"
 msgstr "Lead time cutoff"
 
-#: config/admin-settings.php:218
+#: config/admin-settings.php:219
 msgid ""
 "Cutoff time every day. Orders after this time will be processed the next day."
 msgstr ""
 "Avskjæringstid hver dag. Bestillinger etter dette tidspunktet vil bli "
 "behandlet neste dag."
 
-#: config/admin-settings.php:223
+#: config/admin-settings.php:224
 msgid "Display ETA"
 msgstr "Vis ETA"
 
-#: config/admin-settings.php:225
+#: config/admin-settings.php:226
 msgid "Enable expected delivery date"
 msgstr "Aktiver forventet leveringsdato"
 
-#: config/admin-settings.php:226
+#: config/admin-settings.php:227
 msgid "Display expected delivery date below shipping rates"
 msgstr "Vis forventet leveringsdato under fraktpriser"
 
-#: config/admin-settings.php:279
+#: config/admin-settings.php:280
 msgid "Pickup point types"
 msgstr "Hentesteder"
 
-#: config/admin-settings.php:284
+#: config/admin-settings.php:285
 msgid "All"
 msgstr "Alle"
 
-#: config/admin-settings.php:285
+#: config/admin-settings.php:286
 msgid "Manned"
 msgstr "Betjente"
 
-#: config/admin-settings.php:286
+#: config/admin-settings.php:287
 msgid "Locker"
 msgstr "Pakkebokser"
 
-#: config/admin-settings.php:290
+#: config/admin-settings.php:291
 msgid "Style"
 msgstr "Type"
 
-#: config/admin-settings.php:294
+#: config/admin-settings.php:295
 msgid "Regular"
 msgstr "Vanlig"
 
-#: config/admin-settings.php:295
+#: config/admin-settings.php:296
 msgid "Legacy"
 msgstr "Legacy (gammel)"
 
-#: config/admin-settings.php:299
+#: config/admin-settings.php:300
 msgid "Map link"
 msgstr "Kart-lenke"
 
-#: config/admin-settings.php:303
+#: config/admin-settings.php:304
 msgid "Posten"
 msgstr "Posten"
 
-#: config/admin-settings.php:304
+#: config/admin-settings.php:305
 msgid "Ingen"
 msgstr "Ingen"
 
-#: config/admin-settings.php:305
+#: config/admin-settings.php:306
 msgid "Google"
 msgstr "Google"
 
-#: config/admin-settings.php:309
+#: config/admin-settings.php:310
 msgid "Debug System information"
 msgstr "Debug systeminformasjon"
 
-#: config/admin-settings.php:312
+#: config/admin-settings.php:313
 msgid "We may ask for this information if you require support"
 msgstr "Vi kan etterspørre denne informasjonen hvis du ber om support"
 
-#: config/admin-settings.php:316
+#: config/admin-settings.php:317
 msgid "View system info"
 msgstr "Se systeminformasjon"
 
-#: config/admin-settings.php:327 config/admin-settings.php:329
+#: config/admin-settings.php:328 config/admin-settings.php:330
 msgid "API customer number"
 msgstr "API-kundenummer"
 
 #. translators: %s: Mybring API settings page URL
-#: config/admin-settings.php:332
+#: config/admin-settings.php:333
 #, php-format
 msgid "Find your API customer number %1$shere%2$s."
 msgstr "Finn ditt API-kundenummer %1$sher%2$s."
 
-#: config/admin-settings.php:338
+#: config/admin-settings.php:339
 msgid "Enable MyBring booking"
 msgstr "Aktiver booking med MyBring"
 
-#: config/admin-settings.php:339
+#: config/admin-settings.php:340
 msgid "Allow booking shipments directly from WooCommerce order pages"
 msgstr "Tillat booking av sendinger direkte fra ordresidene i WooCommerce"
 
-#: config/admin-settings.php:345
+#: config/admin-settings.php:346
 msgid "Enable booking for orders that don't use Bring shipping methods"
 msgstr "Aktiver booking for ordrer som ikke bruker fraktmetoder fra Bring"
 
-#: config/admin-settings.php:350
+#: config/admin-settings.php:351
 msgid "Enable test mode for MyBring booking"
 msgstr "Aktiver testmodus for booking med MyBring"
 
-#: config/admin-settings.php:352
+#: config/admin-settings.php:353
 msgid "Your license is a test license, so every booking stays in test mode."
 msgstr "Lisensen din er en testlisens, så alle bestillinger går i testmodus."
 
-#: config/admin-settings.php:353
+#: config/admin-settings.php:354
 msgid "When enabled, bookings will not be invoiced or fulfilled by Bring"
 msgstr ""
 "Når dette er aktivert, blir bookinger verken fakturert eller utført av Bring"
 
-#: config/admin-settings.php:359
+#: config/admin-settings.php:360
 msgid "Use a different shipping address"
 msgstr "Bruk en annen fraktadresse"
 
-#: config/admin-settings.php:360
+#: config/admin-settings.php:361
 msgid ""
 "Enable this if you ship from a different address than your WooCommerce store "
 "address."
@@ -3280,11 +3385,11 @@ msgstr ""
 "Aktiver dette hvis du sender fra en annen adresse enn butikkadressen i "
 "WooCommerce."
 
-#: config/admin-settings.php:366
+#: config/admin-settings.php:367
 msgid "Your business name as it appears on shipping labels."
 msgstr "Firmanavnet ditt slik det står på fraktetikettene."
 
-#: config/admin-settings.php:416
+#: config/admin-settings.php:417
 msgid ""
 "The store's reference printed on the shipping label. An empty box prints "
 "{order_number}. You can also use {order_id} or {products}."
@@ -3292,11 +3397,11 @@ msgstr ""
 "Butikkens referanse som skrives ut på fraktetiketten. Et tomt felt skriver "
 "ut {order_number}. Du kan også bruke {order_id} eller {products}."
 
-#: config/admin-settings.php:442
+#: config/admin-settings.php:443
 msgid "Confirmation email"
 msgstr "Bekreftelses-e-post"
 
-#: config/admin-settings.php:444
+#: config/admin-settings.php:445
 msgid ""
 "Bring sends a confirmation with the shipping label to this address, for "
 "every booking. Leave it empty if you do not want an email per booking."
@@ -3304,11 +3409,11 @@ msgstr ""
 "Bring sender en bekreftelse med fraktetiketten til denne adressen, for hver "
 "booking. La feltet stå tomt om du ikke vil ha en e-post per booking."
 
-#: config/admin-settings.php:451
+#: config/admin-settings.php:452
 msgid "I confirm the customs data of my shipments"
 msgstr "Jeg bekrefter tolldataene for sendingene mine"
 
-#: config/admin-settings.php:452
+#: config/admin-settings.php:453
 msgid ""
 "The goods description, the value and the HS code of every order line are "
 "correct and complete, and the goods are not dangerous and not prohibited. "
@@ -3318,11 +3423,11 @@ msgstr ""
 "fullstendig, og varene er ikke farlige og ikke forbudte. Bring bruker denne "
 "bekreftelsen som din signatur på tolldeklarasjonen."
 
-#: config/admin-settings.php:456
+#: config/admin-settings.php:457
 msgid "Exporter number"
 msgstr "Eksportørnummer"
 
-#: config/admin-settings.php:458
+#: config/admin-settings.php:459
 msgid ""
 "Your VAT number or EORI number, for example NO 999 999 999 MVA or "
 "NO999999999. Bring sends it with the customs declaration of a shipment that "
@@ -3332,11 +3437,24 @@ msgstr ""
 "999 999 MVA eller NO999999999. Bring sender det med tolldeklarasjonen for en "
 "sending som forlater Norge. En NVIT-sending trenger ikke eksportørnummer."
 
-#: config/admin-settings.php:497
+#. translators: %s is a list of Bring service names.
+#: config/admin-settings.php:482
+#, php-format
+msgid ""
+"Bring only adds a return label to a shipment inside Norway, on these "
+"services: %s. Any other service books without one. Bring invoices a return "
+"only when your customer uses it."
+msgstr ""
+
+#: config/admin-settings.php:488
+msgid "A booking carries the outbound label only."
+msgstr ""
+
+#: config/admin-settings.php:514
 msgid "Pack in multiple boxes"
 msgstr "Pakk i flere esker"
 
-#: config/admin-settings.php:500
+#: config/admin-settings.php:517
 msgid ""
 "Split large orders into multiple shipments. This increases shipping costs "
 "proportionally. Consider using a fallback rate instead for bulk orders."
@@ -3344,38 +3462,38 @@ msgstr ""
 "Del store ordrer i flere sendinger. Det øker fraktkostnaden tilsvarende. "
 "Vurder heller en fallback-pris for store ordrer."
 
-#: config/admin-settings.php:503
+#: config/admin-settings.php:520
 msgid "Side"
 msgstr "Sidelengde"
 
-#: config/admin-settings.php:516
+#: config/admin-settings.php:533
 msgid "Circumference"
 msgstr "Omkrets"
 
-#: config/admin-settings.php:552 config/admin-settings.php:601
-#: config/admin-settings.php:630
+#: config/admin-settings.php:569 config/admin-settings.php:618
+#: config/admin-settings.php:647
 msgid "Fixed price"
 msgstr "Fast pris"
 
-#: config/admin-settings.php:555 config/admin-settings.php:633
+#: config/admin-settings.php:572 config/admin-settings.php:650
 msgid "ie: 500"
 msgstr "f.eks. 500"
 
-#: config/admin-settings.php:564 config/admin-settings.php:613
-#: config/admin-settings.php:642
+#: config/admin-settings.php:581 config/admin-settings.php:630
+#: config/admin-settings.php:659
 msgid "Service to use"
 msgstr "Tjeneste som skal brukes"
 
-#: config/admin-settings.php:568 config/admin-settings.php:618
-#: config/admin-settings.php:646
+#: config/admin-settings.php:585 config/admin-settings.php:635
+#: config/admin-settings.php:663
 msgid "No shipping"
 msgstr "Ingen frakt"
 
-#: config/admin-settings.php:572
+#: config/admin-settings.php:589
 msgid "Calculate shipping costs based on weight only"
 msgstr "Kalkuler frakt kostnader basert kun på vekt"
 
-#: config/admin-settings.php:576
+#: config/admin-settings.php:593
 msgid ""
 "Uses weight only for shipping rates. Works best if you pack orders in "
 "standard-size boxes."
@@ -3383,11 +3501,11 @@ msgstr ""
 "Bruker bare vekt til fraktpriser. Fungerer best hvis du pakker ordrer i "
 "esker med standardstørrelse."
 
-#: config/admin-settings.php:581
+#: config/admin-settings.php:598
 msgid "Maximum product limit"
 msgstr "Maksimalt produktantall"
 
-#: config/admin-settings.php:585
+#: config/admin-settings.php:602
 msgid ""
 "Limit how many cart items are processed for shipping calculation. Higher "
 "values may slow down checkout. Default: 1000."
@@ -3395,11 +3513,11 @@ msgstr ""
 "Begrens hvor mange varer i handlekurven som tas med i fraktberegningen. "
 "Høyere verdier kan gjøre kassen tregere. Standard: 1000."
 
-#: config/admin-settings.php:604
+#: config/admin-settings.php:621
 msgid "ie: 1500"
 msgstr "f.eks. 1500"
 
-#: config/admin-settings.php:614
+#: config/admin-settings.php:631
 msgid ""
 "Show this service as a shipping rate if the maximum product limit is "
 "exceeded."
@@ -3411,29 +3529,29 @@ msgstr ""
 msgid "New services"
 msgstr "Nye tjenester"
 
-#: config/services.php:151
+#: config/services.php:155
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: config/services.php:168 config/services.php:186
+#: config/services.php:172 config/services.php:190
 msgid "Packages up to 5 kg."
 msgstr "Pakker opp til 5 kg."
 
-#: config/services.php:169
+#: config/services.php:173
 msgid ""
 "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 "NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
 
-#: config/services.php:192
+#: config/services.php:197
 msgid "Services"
 msgstr "Tjenester"
 
-#: config/services.php:228 config/services.php:283
+#: config/services.php:233 config/services.php:288
 msgid "Other services"
 msgstr "Andre tjenester"
 
-#: config/services.php:245 config/services.php:264 config/services.php:275
+#: config/services.php:250 config/services.php:269 config/services.php:280
 msgid ""
 "Fuel surcharge is not included in the price returned from the ShippingGuide "
 "and must be calculated / added manually. Bring Parcels is entitled to change "
@@ -3445,7 +3563,7 @@ msgstr ""
 "denne kostnaden uten varsel til kunden. Eventuelt anvendt drivstofftillegg "
 "vil være detaljert på fakturaen."
 
-#: config/services.php:412
+#: config/services.php:417
 msgid "Courier"
 msgstr "Courier"
 

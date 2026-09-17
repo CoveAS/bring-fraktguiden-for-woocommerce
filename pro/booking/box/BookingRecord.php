@@ -63,6 +63,22 @@ class BookingRecord
 	}
 
 	/**
+	 * Return the address that prints every label of this booking.
+	 *
+	 * One file holds the shipping labels and the return labels.
+	 */
+	public function all_labels_url(): string
+	{
+		return Bring_Booking_Labels::create_download_url(
+			(string) $this->order_id,
+			array_map(
+				fn(Bring_Consignment $consignment) => $consignment->get_consignment_number(),
+				array_merge($this->consignments(), $this->return_consignments())
+			)
+		);
+	}
+
+	/**
 	 * Return the address that prints the return labels of this booking.
 	 */
 	public function return_labels_url(): string
