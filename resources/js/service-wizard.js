@@ -42,9 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			const row = result.querySelector(`[data-code="${service.code}"]`);
 			if (!row) return;
 
-			row.hidden = !matches(service, answers, sender);
-			row.querySelector('input').checked = !row.hidden;
-			if (!row.hidden) found += 1;
+			const show = matches(service, answers, sender);
+
+			// Tick a service only when it appears, so a box the user clears stays clear.
+			if (show === row.hidden) {
+				row.querySelector('input').checked = show;
+			}
+
+			row.hidden = !show;
+			if (show) found += 1;
 		});
 
 		empty.hidden = found > 0;
