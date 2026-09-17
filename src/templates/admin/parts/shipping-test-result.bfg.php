@@ -11,7 +11,7 @@ use BringFraktguiden\Admin\ShippingTestResult;
 $bfg_passed = $result->rates && ! $result->problem;
 ?>
 
-<div class="bfg-shipping-test__card <?php echo $bfg_passed ? 'bfg-shipping-test__card--pass' : 'bfg-shipping-test__card--problem'; ?>">
+<div <?php echo $bfg_passed ? 'data-bfg-passed' : ''; ?> class="bfg-shipping-test__card <?php echo $bfg_passed ? 'bfg-shipping-test__card--pass' : 'bfg-shipping-test__card--problem'; ?>">
 	<?php if (! $bfg_passed): ?>
 		<p class="bfg-shipping-test__headline">
 			<?php if ($result->problem): ?>

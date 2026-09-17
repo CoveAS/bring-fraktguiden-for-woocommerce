@@ -18,45 +18,29 @@ $product_id = 0;
 ?>
 
 <div class="bfg-step bfg-step--form <?php echo $step->completed ? 'bfg-step--completed' : ($isNext ? 'bfg-step--in-progress' : 'bfg-step--pending'); ?>">
-	<?php if ($step->completed): ?>
-		<div class="bfg-step__icon bfg-step__icon--completed">
-			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-				<polyline points="20 6 9 17 4 12"></polyline>
-			</svg>
-		</div>
-	<?php else: ?>
-		<div class="bfg-step__icon bfg-step__icon--number"><?php echo esc_html($i + 1); ?></div>
-	<?php endif; ?>
+	<div class="bfg-step__icon bfg-step__icon--completed bfg-step__done-only">
+		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="20 6 9 17 4 12"></polyline>
+		</svg>
+	</div>
+	<div class="bfg-step__icon bfg-step__icon--number bfg-step__todo-only"><?php echo esc_html($i + 1); ?></div>
 
 	<div class="bfg-step__content">
 		<?php echo esc_html($step->label); ?>
 		<p class="bfg-step-form__line">
-			<span>
-				<?php if ($step->completed): ?>
-					<t>Bring gave a price for a test parcel</t>
-				<?php else: ?>
-					<?php echo esc_html($step->description); ?>
-				<?php endif; ?>
-			</span>
+			<span class="bfg-step__done-only"><t>Bring gave a price for a test parcel</t></span>
+			<span class="bfg-step__todo-only"><?php echo esc_html($step->description); ?></span>
 			<button type="button" class="bfg-step-form__toggle" aria-controls="bfg-test-shipping-panel"
 				aria-expanded="<?php echo $bfg_open ? 'true' : 'false'; ?>">
-				<?php if ($step->completed): ?>
-					<t>Test again</t>
-				<?php else: ?>
-					<t>Test</t>
-				<?php endif; ?>
+				<span class="bfg-step__done-only"><t>Test again</t></span>
+				<span class="bfg-step__todo-only"><t>Test</t></span>
 			</button>
 		</p>
 	</div>
 
-	<?php if ($step->completed): ?>
-		<bfg-badge.completed>
-			<t>Done</t>
-		</bfg-badge.completed>
-	<?php elseif ($isNext): ?>
-		<bfg-badge.in-progress>
-			<t>In Progress</t>
-		</bfg-badge.in-progress>
+	<span class="bfg-badge bfg-badge--completed bfg-step__done-only"><t>Done</t></span>
+	<?php if ($isNext): ?>
+		<span class="bfg-badge bfg-badge--in-progress bfg-step__todo-only"><t>In Progress</t></span>
 	<?php endif; ?>
 
 	<div class="bfg-step-form__panel" id="bfg-test-shipping-panel" <?php echo $bfg_open ? '' : 'hidden'; ?>>

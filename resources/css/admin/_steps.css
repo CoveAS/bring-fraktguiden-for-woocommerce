@@ -304,3 +304,10 @@ a.bfg-step:focus-visible,
 .bfg-access-link--done .bfg-badge--completed-text {
     display: inline-flex;
 }
+
+/* A step row holds both its done state and its to do state. The row class
+   picks which one shows, so a script can turn the row green with one class. */
+.bfg-step:not(.bfg-step--completed) .bfg-step__done-only,
+.bfg-step--completed .bfg-step__todo-only {
+    display: none;
+}

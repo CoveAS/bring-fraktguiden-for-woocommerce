@@ -86,15 +86,17 @@ use BringFraktguiden\Admin\Step;
 						<span class="bfg-setup-header__stat-label">
 							<t>Progress</t>
 						</span>
-						<span class="bfg-setup-header__stat-value">
-							<?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted, $stepCount); ?>
+						<span class="bfg-setup-header__stat-value bfg-setup-header__completed">
+							<?php /* A step may turn green without a reload, so the next count waits here already. */ ?>
+							<span data-bfg-count="now"><?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), $stepsCompleted, $stepCount); ?></span>
+							<span data-bfg-count="next" hidden><?php printf(__('%d of %d completed', 'bring-fraktguiden-for-woocommerce'), min($stepsCompleted + 1, $stepCount), $stepCount); ?></span>
 						</span>
 					</div>
 				</div>
 
 				<div class="bfg-progress-container">
 					<div class="bfg-progress-bar-new">
-						<div class="bfg-progress-bar-fill"
+						<div class="bfg-progress-bar-fill" data-bfg-progress-fill data-step-count="<?php echo (int) $stepCount; ?>"
 							style="width: <?php echo $stepCount ? ($stepsCompleted / $stepCount) * 100 : 0; ?>%;"></div>
 					</div>
 				</div>

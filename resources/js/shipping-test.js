@@ -51,9 +51,37 @@ document.addEventListener('click', async (event) => {
 		if (!response.ok) throw new Error(response.status);
 
 		result.innerHTML = await response.text();
+
+		if (result.querySelector('[data-bfg-passed]')) markStepDone(box);
 	} catch (error) {
 		result.textContent = box.dataset.failed;
 	}
 
 	button.disabled = false;
 });
+
+/**
+ * Turn the setup step green once a test finds a price.
+ *
+ * The row holds both states, so one class is enough. The header count and the
+ * bar follow the rows.
+ */
+function markStepDone(box) {
+	const step = box.closest('.bfg-step');
+	if (!step || step.classList.contains('bfg-step--completed')) return;
+
+	step.classList.remove('bfg-step--in-progress', 'bfg-step--pending');
+	step.classList.add('bfg-step--completed');
+
+	const page = step.closest('.bfg-admin-page__home');
+	if (!page) return;
+
+	page.querySelectorAll('[data-bfg-count]').forEach((count) => {
+		count.hidden = count.dataset.bfgCount === 'now';
+	});
+
+	const fill = page.querySelector('[data-bfg-progress-fill]');
+	const total = Number(fill.dataset.stepCount);
+	const done = page.querySelectorAll('.bfg-step--completed').length;
+	fill.style.width = (total ? (done / total) * 100 : 0) + '%';
+}
