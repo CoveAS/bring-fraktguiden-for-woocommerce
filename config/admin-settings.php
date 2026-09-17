@@ -432,8 +432,9 @@ return [
 				],
 			],
 			'booking_address_email' => [
-				'title' => __('Email', 'bring-fraktguiden-for-woocommerce'),
+				'title' => __('Confirmation email', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'email',
+				'description' => __('Bring sends a confirmation with the shipping label to this address, for every booking. Leave it empty if you do not want an email per booking.', 'bring-fraktguiden-for-woocommerce'),
 				'custom_attributes' => [
 					'autocomplete' => 'email',
 				],

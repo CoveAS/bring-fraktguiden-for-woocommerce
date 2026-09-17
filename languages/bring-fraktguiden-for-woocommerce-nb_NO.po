@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-17T19:09:58+00:00\n"
+"POT-Creation-Date: 2026-09-17T19:13:00+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -112,7 +112,7 @@ msgid "Packages"
 msgstr "Pakker"
 
 #: build/templates/admin/booking/form.php:115 config/admin-settings.php:263
-#: config/admin-settings.php:521
+#: config/admin-settings.php:522
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr "Vekt"
@@ -290,7 +290,7 @@ msgstr "Kontakt"
 #: build/templates/admin/booking/parties.php:25
 #: build/templates/admin/pages/pro-settings.php:164
 #: config/admin-settings.php:168 config/admin-settings.php:170
-#: config/admin-settings.php:435 src/templates/admin/booking/parties.bfg.php:25
+#: src/templates/admin/booking/parties.bfg.php:25
 #: src/templates/admin/pages/pro-settings.bfg.php:164
 msgid "Email"
 msgstr "Epost"
@@ -988,8 +988,8 @@ msgstr "Tekstfelt"
 
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:25
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:89
-#: config/admin-settings.php:536 config/admin-settings.php:586
-#: config/admin-settings.php:615
+#: config/admin-settings.php:537 config/admin-settings.php:587
+#: config/admin-settings.php:616
 msgid "Label"
 msgstr "Etikett"
 
@@ -1298,13 +1298,13 @@ msgid "This will change the status even if the order is completed"
 msgstr "Dette vil endre statusen selv om ordren er fullført"
 
 #: build/templates/admin/pages/pro-settings.php:50
-#: config/admin-settings.php:455
+#: config/admin-settings.php:456
 #: src/templates/admin/pages/pro-settings.bfg.php:50
 msgid "Order status after booking"
 msgstr "Bestillingsstatus etter reservering"
 
 #: build/templates/admin/pages/pro-settings.php:52
-#: config/admin-settings.php:457
+#: config/admin-settings.php:458
 #: src/templates/admin/pages/pro-settings.bfg.php:52
 msgid "Order status will be automatically set when successfully booked"
 msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
@@ -1317,13 +1317,13 @@ msgid "None"
 msgstr "Ingen"
 
 #: build/templates/admin/pages/pro-settings.php:59
-#: config/admin-settings.php:462
+#: config/admin-settings.php:463
 #: src/templates/admin/pages/pro-settings.bfg.php:59
 msgid "Order status after printing"
 msgstr "Ordrestatus etter utskrift"
 
 #: build/templates/admin/pages/pro-settings.php:61
-#: config/admin-settings.php:464
+#: config/admin-settings.php:465
 #: src/templates/admin/pages/pro-settings.bfg.php:61
 msgid "Order status will be automatically set when a label is downloaded"
 msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
@@ -1334,13 +1334,13 @@ msgid "Home delivery"
 msgstr "Hjemlevering"
 
 #: build/templates/admin/pages/pro-settings.php:75
-#: config/admin-settings.php:469
+#: config/admin-settings.php:470
 #: src/templates/admin/pages/pro-settings.bfg.php:75
 msgid "Package type for home delivery"
 msgstr "Pakketype for hjemlevering"
 
 #: build/templates/admin/pages/pro-settings.php:77
-#: config/admin-settings.php:471
+#: config/admin-settings.php:472
 #: src/templates/admin/pages/pro-settings.bfg.php:77
 msgid "Only applies to home delivery services"
 msgstr "Gjelder bare for hjemleveringstjenester"
@@ -3249,11 +3249,23 @@ msgstr ""
 "Butikkens referanse som skrives ut på fraktetiketten. Et tomt felt skriver "
 "ut {order_number}. Du kan også bruke {order_id} eller {products}."
 
-#: config/admin-settings.php:443
+#: config/admin-settings.php:435
+msgid "Confirmation email"
+msgstr "Bekreftelses-e-post"
+
+#: config/admin-settings.php:437
+msgid ""
+"Bring sends a confirmation with the shipping label to this address, for "
+"every booking. Leave it empty if you do not want an email per booking."
+msgstr ""
+"Bring sender en bekreftelse med fraktetiketten til denne adressen, for hver "
+"booking. La feltet stå tomt om du ikke vil ha en e-post per booking."
+
+#: config/admin-settings.php:444
 msgid "I confirm the customs data of my shipments"
 msgstr "Jeg bekrefter tolldataene for sendingene mine"
 
-#: config/admin-settings.php:444
+#: config/admin-settings.php:445
 msgid ""
 "The goods description, the value and the HS code of every order line are "
 "correct and complete, and the goods are not dangerous and not prohibited. "
@@ -3263,11 +3275,11 @@ msgstr ""
 "fullstendig, og varene er ikke farlige og ikke forbudte. Bring bruker denne "
 "bekreftelsen som din signatur på tolldeklarasjonen."
 
-#: config/admin-settings.php:448
+#: config/admin-settings.php:449
 msgid "Exporter number"
 msgstr "Eksportørnummer"
 
-#: config/admin-settings.php:450
+#: config/admin-settings.php:451
 msgid ""
 "Your VAT number or EORI number, for example NO 999 999 999 MVA or "
 "NO999999999. Bring sends it with the customs declaration of a shipment that "
@@ -3277,11 +3289,11 @@ msgstr ""
 "999 999 MVA eller NO999999999. Bring sender det med tolldeklarasjonen for en "
 "sending som forlater Norge. En NVIT-sending trenger ikke eksportørnummer."
 
-#: config/admin-settings.php:489
+#: config/admin-settings.php:490
 msgid "Pack in multiple boxes"
 msgstr "Pakk i flere esker"
 
-#: config/admin-settings.php:492
+#: config/admin-settings.php:493
 msgid ""
 "Split large orders into multiple shipments. This increases shipping costs "
 "proportionally. Consider using a fallback rate instead for bulk orders."
@@ -3289,38 +3301,38 @@ msgstr ""
 "Del store ordrer i flere sendinger. Det øker fraktkostnaden tilsvarende. "
 "Vurder heller en fallback-pris for store ordrer."
 
-#: config/admin-settings.php:495
+#: config/admin-settings.php:496
 msgid "Side"
 msgstr "Sidelengde"
 
-#: config/admin-settings.php:508
+#: config/admin-settings.php:509
 msgid "Circumference"
 msgstr "Omkrets"
 
-#: config/admin-settings.php:544 config/admin-settings.php:593
-#: config/admin-settings.php:622
+#: config/admin-settings.php:545 config/admin-settings.php:594
+#: config/admin-settings.php:623
 msgid "Fixed price"
 msgstr "Fast pris"
 
-#: config/admin-settings.php:547 config/admin-settings.php:625
+#: config/admin-settings.php:548 config/admin-settings.php:626
 msgid "ie: 500"
 msgstr "f.eks. 500"
 
-#: config/admin-settings.php:556 config/admin-settings.php:605
-#: config/admin-settings.php:634
+#: config/admin-settings.php:557 config/admin-settings.php:606
+#: config/admin-settings.php:635
 msgid "Service to use"
 msgstr "Tjeneste som skal brukes"
 
-#: config/admin-settings.php:560 config/admin-settings.php:610
-#: config/admin-settings.php:638
+#: config/admin-settings.php:561 config/admin-settings.php:611
+#: config/admin-settings.php:639
 msgid "No shipping"
 msgstr "Ingen frakt"
 
-#: config/admin-settings.php:564
+#: config/admin-settings.php:565
 msgid "Calculate shipping costs based on weight only"
 msgstr "Kalkuler frakt kostnader basert kun på vekt"
 
-#: config/admin-settings.php:568
+#: config/admin-settings.php:569
 msgid ""
 "Uses weight only for shipping rates. Works best if you pack orders in "
 "standard-size boxes."
@@ -3328,11 +3340,11 @@ msgstr ""
 "Bruker bare vekt til fraktpriser. Fungerer best hvis du pakker ordrer i "
 "esker med standardstørrelse."
 
-#: config/admin-settings.php:573
+#: config/admin-settings.php:574
 msgid "Maximum product limit"
 msgstr "Maksimalt produktantall"
 
-#: config/admin-settings.php:577
+#: config/admin-settings.php:578
 msgid ""
 "Limit how many cart items are processed for shipping calculation. Higher "
 "values may slow down checkout. Default: 1000."
@@ -3340,11 +3352,11 @@ msgstr ""
 "Begrens hvor mange varer i handlekurven som tas med i fraktberegningen. "
 "Høyere verdier kan gjøre kassen tregere. Standard: 1000."
 
-#: config/admin-settings.php:596
+#: config/admin-settings.php:597
 msgid "ie: 1500"
 msgstr "f.eks. 1500"
 
-#: config/admin-settings.php:606
+#: config/admin-settings.php:607
 msgid ""
 "Show this service as a shipping rate if the maximum product limit is "
 "exceeded."
