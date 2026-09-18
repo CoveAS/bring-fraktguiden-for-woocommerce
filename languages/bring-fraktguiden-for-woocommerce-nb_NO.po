@@ -495,11 +495,11 @@ msgstr ""
 #: config/admin-settings.php:478
 #: src/templates/admin/pages/pro-settings.bfg.php:70
 msgid "Return label"
-msgstr ""
+msgstr "Returetikett"
 
 #: build/templates/admin/pages/booking.php:222
 msgid "Send a return label with every booking"
-msgstr ""
+msgstr "Send en returetikett med hver booking"
 
 #: build/templates/admin/pages/booking.php:244 config/services.php:482
 msgid "Home Delivery"
@@ -1236,11 +1236,11 @@ msgstr "Meldingsbannere"
 
 #: build/templates/admin/pages/kitchen-sink/split-button.php:8
 msgid "Split Button"
-msgstr ""
+msgstr "Delt knapp"
 
 #: build/templates/admin/pages/kitchen-sink/split-button.php:12
 msgid "A main action with a caret that opens more actions"
-msgstr ""
+msgstr "En hovedhandling med en pil som åpner flere handlinger"
 
 #: build/templates/admin/pages/kitchen-sink/step-rows.php:8
 msgid "Step Rows"
@@ -1316,7 +1316,7 @@ msgstr "Typografi"
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:12
 msgid "Four sizes. A size outside this list is a bug."
-msgstr ""
+msgstr "Fire størrelser. En størrelse utenfor denne listen er en feil."
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:19
 msgid "Type Scale"
@@ -1328,7 +1328,7 @@ msgstr "Skriftvekter"
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:82
 msgid "Letter Spacing and Family"
-msgstr ""
+msgstr "Tegnavstand og skriftfamilie"
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:88
 msgid "Text Formatting"
@@ -1422,13 +1422,13 @@ msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
 msgid ""
 "Bring only adds a return label to a shipment inside Norway, on these "
 "services: %s. Any other service books without one."
-msgstr ""
+msgstr "Bring legger bare en returetikett på en sending i Norge, på disse tjenestene: %s. Alle andre tjenester bookes uten."
 
 #: build/templates/admin/pages/pro-settings.php:77
 #: config/admin-settings.php:487
 #: src/templates/admin/pages/pro-settings.bfg.php:77
 msgid "No return label"
-msgstr ""
+msgstr "Ingen returetikett"
 
 #: build/templates/admin/pages/pro-settings.php:83
 #: src/templates/admin/pages/pro-settings.bfg.php:83
@@ -2585,44 +2585,44 @@ msgstr "Alle andre steder"
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:31
 msgid "Retur til bedrift"
-msgstr ""
+msgstr "Retur til bedrift"
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:32
 msgid ""
 "Bring drives the return to your address. Your customer hands the parcel in "
 "at a post office, a parcel box or their own mailbox. Pick this one if you "
 "want the return delivered to you."
-msgstr ""
+msgstr "Bring kjører returen til adressen din. Kunden din leverer pakken på et postkontor, i en pakkeboks eller i sin egen postkasse. Velg denne hvis du vil ha returen levert til deg."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:35
 msgid "Retur fra hentested"
-msgstr ""
+msgstr "Retur fra hentested"
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:36
 msgid ""
 "The return waits at the pick-up point nearest you, and you fetch it there. "
 "Your customer hands the parcel in the same way as with Retur til bedrift."
-msgstr ""
+msgstr "Returen venter på hentestedet nærmest deg, og du henter den der. Kunden din leverer pakken på samme måte som med Retur til bedrift."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:39
 msgid "Retur pakke fra bedrift"
-msgstr ""
+msgstr "Retur pakke fra bedrift"
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:40
 msgid ""
 "For a return from a business customer, up to 35 kg per parcel. Pick this one "
 "only if you sell to businesses."
-msgstr ""
+msgstr "For en retur fra en bedriftskunde, opptil 35 kg per pakke. Velg denne bare hvis du selger til bedrifter."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:43
 msgid "Retur ekspress"
-msgstr ""
+msgstr "Retur ekspress"
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:44
 msgid ""
 "For a return from a business customer, delivered the next day with a time "
 "guarantee. It costs more than Retur pakke fra bedrift."
-msgstr ""
+msgstr "For en retur fra en bedriftskunde, levert neste dag med tidsgaranti. Den koster mer enn Retur pakke fra bedrift."
 
 #. translators: %s: the name of a shipping service, for example Pakkeboks.
 #: classes/BringFraktguiden/Checkout/PhoneRequirement.php:142
@@ -3508,11 +3508,11 @@ msgid ""
 "Bring only adds a return label to a shipment inside Norway, on these "
 "services: %s. Any other service books without one. Bring invoices a return "
 "only when your customer uses it."
-msgstr ""
+msgstr "Bring legger bare en returetikett på en sending i Norge, på disse tjenestene: %s. Alle andre tjenester bookes uten. Bring fakturerer en retur bare når kunden din bruker den."
 
 #: config/admin-settings.php:488
 msgid "A booking carries the outbound label only."
-msgstr ""
+msgstr "En booking har bare utgående etikett."
 
 #: config/admin-settings.php:514
 msgid "Pack in multiple boxes"
