@@ -501,6 +501,27 @@ a.bfg-btn--danger:hover,
     list-style: none;
 }
 
+/* The split button carries the look of its two parts, so the markup needs no
+   button variant class. */
+.bfg-split-button__main,
+.bfg-split-button__toggle,
+a.bfg-split-button__main,
+.bfg a.bfg-split-button__main {
+    background: #ffffff;
+    color: var(--bfg-text-main);
+    border: 1px solid var(--bfg-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bfg-split-button__main:hover,
+.bfg-split-button__toggle:hover,
+a.bfg-split-button__main:hover,
+.bfg a.bfg-split-button__main:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #000000;
+}
+
 /* Safari draws a triangle on a summary element. */
 .bfg-split-button__toggle::-webkit-details-marker {
     display: none;
@@ -540,14 +561,16 @@ a.bfg-btn--danger:hover,
 }
 
 .bfg-split-button--primary .bfg-split-button__main,
-.bfg-split-button--primary .bfg-split-button__toggle {
+.bfg-split-button--primary .bfg-split-button__toggle,
+.bfg .bfg-split-button--primary a.bfg-split-button__main {
     background: var(--bfg-primary);
     color: #ffffff;
     border-color: var(--bfg-primary);
 }
 
 .bfg-split-button--primary .bfg-split-button__main:hover,
-.bfg-split-button--primary .bfg-split-button__toggle:hover {
+.bfg-split-button--primary .bfg-split-button__toggle:hover,
+.bfg .bfg-split-button--primary a.bfg-split-button__main:hover {
     background: var(--bfg-primary-hover);
     border-color: var(--bfg-primary-hover);
     color: #ffffff;

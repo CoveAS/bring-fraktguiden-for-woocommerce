@@ -21,9 +21,9 @@
 ?>
 
 <div class="bfg-split-button">
-    <a href=":href" class="bfg-btn bfg-btn--secondary bfg-btn--sm bfg-split-button__main" target="_blank" rel="noreferrer"><t>label</t></a>
+    <a href=":href" class="bfg-btn bfg-btn--sm bfg-split-button__main" target="_blank" rel="noreferrer"><t>label</t></a>
     <details class="bfg-split-button__menu">
-        <summary class="bfg-btn bfg-btn--secondary bfg-btn--sm bfg-split-button__toggle" aria-label="<?php esc_attr_e('More options', 'bring-fraktguiden-for-woocommerce'); ?>">
+        <summary class="bfg-btn bfg-btn--sm bfg-split-button__toggle" aria-label="<?php esc_attr_e('More options', 'bring-fraktguiden-for-woocommerce'); ?>">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
