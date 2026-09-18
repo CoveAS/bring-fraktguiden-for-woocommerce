@@ -12,8 +12,41 @@
     --bfg-text-secondary: #596270;
     --bfg-text-muted: #6B7280;
     --bfg-border: #D1D5DB;
-    --bfg-bg-card: #ffffff;
-    --bfg-bg-page: #ffffff;
+    --bfg-bg-card: var(--bfg-white);
+    --bfg-bg-page: var(--bfg-white);
+
+    /* Neutrals. A gray here serves several roles at once: a background, a
+       border and a disabled fill. So the name follows the ramp, not a role.
+       Use a role token above when one exists. */
+    --bfg-white: #ffffff;
+    --bfg-black: #000000;
+    --bfg-gray-50: #F9FAFB;
+    --bfg-gray-100: #F3F4F6;
+    --bfg-gray-200: #E5E7EB;
+    --bfg-gray-400: #9CA3AF;
+    --bfg-gray-600: #4B5563;
+    --bfg-gray-700: #374151;
+    --bfg-bg-shell: #F7F8FA;
+
+    /* Status colors. `light` is a background, `dark` and `darker` are text
+       on that background. */
+    --bfg-success: #16A34A;
+    --bfg-success-dark: #15803D;
+    --bfg-success-darker: #166534;
+    --bfg-success-light: #DCFCE7;
+    --bfg-danger: #DC2626;
+    --bfg-danger-dark: #B91C1C;
+    --bfg-danger-darker: #991B1B;
+    --bfg-danger-light: #FEE2E2;
+    --bfg-warning: #D97706;
+    --bfg-warning-dark: #B45309;
+
+    /* The red WordPress uses for an error link. */
+    --bfg-wp-danger: #B32D2E;
+
+    --bfg-primary-dark: #1E40AF;
+    --bfg-primary-bg: #EFF6FF;
+    --bfg-primary-tint: #F0F7FF;
     --bfg-radius-card: 12px;
     --bfg-radius-input: 8px;
     --bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

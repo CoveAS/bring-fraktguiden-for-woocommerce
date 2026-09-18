@@ -175,7 +175,7 @@
    ========================================================================== */
 
 .bfg code {
-    background: #F3F4F6;
+    background: var(--bfg-gray-100);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: var(--bfg-font-xs);
@@ -185,7 +185,7 @@
 
 .bfg code:hover {
     color: var(--bfg-text-main);
-    background: #F3F4F6;
+    background: var(--bfg-gray-100);
 }
 
 /* WordPress Notice Hide

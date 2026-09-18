@@ -32,7 +32,7 @@
 .bring-booking-status-icon {
     background-color: #42a2ce;
     border-radius: 20rem;
-    color: #fff;
+    color: var(--bfg-white);
     display: inline-block;
     flex: none;
     line-height: var(--bfg-leading-none);

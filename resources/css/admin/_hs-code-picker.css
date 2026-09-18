@@ -14,7 +14,7 @@
     padding: 8px 10px;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
-    background: #ffffff;
+    background: var(--bfg-white);
     color: var(--bfg-text-main);
     line-height: var(--bfg-leading-base);
     text-align: left;

@@ -35,12 +35,12 @@
    ========================================================================== */
 
 .bfg-progress-badge {
-    background: #F3F4F6;
+    background: var(--bfg-gray-100);
     border-radius: 6px;
     padding: 4px 8px;
     font-size: var(--bfg-font-sm);
     font-weight: 600;
-    color: #374151;
+    color: var(--bfg-gray-700);
     white-space: nowrap;
 }
 
@@ -50,14 +50,14 @@
 
 .bfg-progress-bar-new {
     height: 8px;
-    background: #E5E7EB;
+    background: var(--bfg-gray-200);
     border-radius: 4px;
     overflow: hidden;
 }
 
 .bfg-progress-bar-fill {
     height: 100%;
-    background: #111827;
+    background: var(--bfg-text-main);
     border-radius: 4px;
     transition: width 0.3s ease;
 }
@@ -79,7 +79,7 @@
 
 .bfg-setup-header__subtitle {
     font-size: var(--bfg-font-base);
-    color: #596270;
+    color: var(--bfg-text-secondary);
     margin: 0 0 24px !important;
     font-weight: 400;
 }
@@ -104,13 +104,13 @@
 
 .bfg-setup-header__stat-label {
     font-size: var(--bfg-font-sm);
-    color: #596270;
+    color: var(--bfg-text-secondary);
     font-weight: 400;
 }
 
 .bfg-setup-header__stat-value {
     font-size: var(--bfg-font-base);
-    color: #111827;
+    color: var(--bfg-text-main);
     font-weight: 600;
 }
 
@@ -122,8 +122,8 @@
    ========================================================================== */
 
 .bfg-active-step-card {
-    background: #EFF6FF;
-    border: 1px solid #DBEAFE;
+    background: var(--bfg-primary-bg);
+    border: 1px solid var(--bfg-primary-light);
     border-radius: 12px;
     padding: 32px;
     display: flex;
@@ -135,8 +135,8 @@
     flex-shrink: 0;
     width: 48px;
     height: 48px;
-    background: #2563EB;
-    color: #fff;
+    background: var(--bfg-primary);
+    color: var(--bfg-white);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -149,7 +149,7 @@
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
     margin: 0 0 8px !important;
-    color: #111827;
+    color: var(--bfg-text-main);
     line-height: var(--bfg-leading-2xl);
     text-wrap: balance;
 }
@@ -157,7 +157,7 @@
 .bfg-active-step__content p {
     font-size: var(--bfg-font-base);
     margin: 0 0 24px !important;
-    color: #4B5563;
+    color: var(--bfg-gray-600);
     line-height: var(--bfg-leading-base);
     font-weight: 400;
     text-wrap: pretty;
@@ -179,12 +179,12 @@
 .bfg-steps-list .bfg-access-link__content {
     font-size: var(--bfg-font-sm);
     font-weight: 600;
-    color: #111827;
+    color: var(--bfg-text-main);
 }
 
 .bfg-steps-list .bfg-access-link__content .bfg-step__desc {
     font-size: var(--bfg-font-sm);
-    color: #596270;
+    color: var(--bfg-text-secondary);
 }
 
 /* WordPress Notice Overrides
@@ -199,14 +199,14 @@
    ========================================================================== */
 
 .bfg-admin-page__home .bfg-step-row__number {
-    background: #E5E7EB;
-    color: #111827;
+    background: var(--bfg-gray-200);
+    color: var(--bfg-text-main);
 }
 
 .bfg-admin-page__home .bfg-step--in-progress .bfg-step-row__number,
 .bfg-admin-page__home .bfg-step--in-progress:hover .bfg-step-row__number {
-    background: #2563EB;
-    color: #fff;
+    background: var(--bfg-primary);
+    color: var(--bfg-white);
 }
 
 .bfg-pro-teaser-v2 .bfg-section-card-title {
@@ -218,7 +218,7 @@
 
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
     font-size: var(--bfg-font-base);
-    color: #596270;
+    color: var(--bfg-text-secondary);
     margin: 0 auto 32px;
     text-align: center;
     max-width: 480px;
@@ -232,7 +232,7 @@
     display: flex;
     align-items: center;
     font-size: var(--bfg-font-sm);
-    color: #dc2626;
+    color: var(--bfg-danger);
     margin-top: 0.375rem;
 }
 
@@ -242,13 +242,13 @@
 
 .bfg input[aria-invalid="true"],
 .bfg select[aria-invalid="true"] {
-    border-color: #dc2626 !important;
-    box-shadow: 0 0 0 1px #dc2626;
+    border-color: var(--bfg-danger) !important;
+    box-shadow: 0 0 0 1px var(--bfg-danger);
     outline: none;
 }
 
 .bfg-admin-page__home .bfg-pro-teaser-v2 .bfg-description {
-    color: #596270;
+    color: var(--bfg-text-secondary);
 }
 
 /* Responsive - Tablet (max-width: 782px)

@@ -63,7 +63,7 @@ body:not(.using-mouse) .bfg-btn:focus-visible {
 a.bfg-btn--primary,
 .bfg a.bfg-btn--primary {
     background: var(--bfg-primary);
-    color: #ffffff;
+    color: var(--bfg-white);
     border: 1px solid var(--bfg-primary);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -73,21 +73,21 @@ a.bfg-btn--primary:hover,
 .bfg a.bfg-btn--primary:hover {
     background: var(--bfg-primary-hover);
     border-color: var(--bfg-primary-hover);
-    color: #ffffff;
+    color: var(--bfg-white);
     box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
 }
 
 .bfg-btn--primary:active {
-    background: #1e40af;
-    border-color: #1e40af;
+    background: var(--bfg-primary-dark);
+    border-color: var(--bfg-primary-dark);
     transform: translateY(1px);
 }
 
 .bfg-btn--primary:disabled,
 .bfg-btn--primary.is-disabled {
-    background: #E5E7EB;
-    border-color: #E5E7EB;
-    color: #9CA3AF;
+    background: var(--bfg-gray-200);
+    border-color: var(--bfg-gray-200);
+    color: var(--bfg-gray-400);
     box-shadow: none;
     transform: none;
 }
@@ -98,7 +98,7 @@ a.bfg-btn--primary:hover,
 .bfg-btn--secondary,
 a.bfg-btn--secondary,
 .bfg a.bfg-btn--secondary {
-    background: #ffffff;
+    background: var(--bfg-white);
     color: var(--bfg-text-main);
     border: 1px solid var(--bfg-border);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -107,21 +107,21 @@ a.bfg-btn--secondary,
 .bfg-btn--secondary:hover,
 a.bfg-btn--secondary:hover,
 .bfg a.bfg-btn--secondary:hover {
-    background: #F9FAFB;
-    border-color: #9CA3AF;
-    color: #000000;
+    background: var(--bfg-gray-50);
+    border-color: var(--bfg-gray-400);
+    color: var(--bfg-black);
 }
 
 .bfg-btn--secondary:active {
-    background: #F3F4F6;
+    background: var(--bfg-gray-100);
     transform: translateY(1px);
 }
 
 .bfg-btn--secondary:disabled,
 .bfg-btn--secondary.is-disabled {
-    background: #F9FAFB;
-    color: #9CA3AF;
-    border-color: #E5E7EB;
+    background: var(--bfg-gray-50);
+    color: var(--bfg-gray-400);
+    border-color: var(--bfg-gray-200);
     box-shadow: none;
     transform: none;
 }
@@ -145,7 +145,7 @@ a.bfg-btn--outline:hover,
 }
 
 .bfg-btn--outline:active {
-    background: #BFDBFE;
+    background: var(--bfg-primary-light-hover);
     transform: translateY(1px);
 }
 
@@ -174,13 +174,13 @@ body.wp-admin .bfg a.bfg-btn--text:hover {
 }
 
 .bfg-btn--text:active {
-    color: #1e40af;
+    color: var(--bfg-primary-dark);
     transform: none;
 }
 
 .bfg-btn--text:disabled,
 .bfg-btn--text.is-disabled {
-    color: #9CA3AF;
+    color: var(--bfg-gray-400);
     text-decoration: none;
 }
 
@@ -245,7 +245,7 @@ body.wp-admin .bfg a.bfg-btn--text:hover {
 
 .bfg-btn--primary.is-loading::after {
     border-color: rgba(255, 255, 255, 0.3);
-    border-top-color: #fff;
+    border-top-color: var(--bfg-white);
 }
 
 @keyframes bfg-btn-spin {
@@ -269,7 +269,7 @@ body.wp-admin .bfg input[type="submit"].button-primary {
     line-height: var(--bfg-leading-base);
     height: var(--bfg-btn-md-height);
     background: var(--bfg-primary);
-    color: #fff;
+    color: var(--bfg-white);
     border: 1px solid transparent;
     border-radius: var(--bfg-btn-radius);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -283,7 +283,7 @@ body.wp-admin .bfg input[type="submit"].button-primary {
 
 body.wp-admin .bfg .button-primary:hover {
     background: var(--bfg-primary-hover);
-    color: #fff;
+    color: var(--bfg-white);
 }
 
 body.wp-admin .bfg .button-primary:focus {
@@ -295,8 +295,8 @@ body.wp-admin:not(.using-mouse) .bfg .button-primary:focus {
 }
 
 body.wp-admin .bfg .button-primary:disabled {
-    background: #E5E7EB;
-    color: #9CA3AF;
+    background: var(--bfg-gray-200);
+    color: var(--bfg-gray-400);
     cursor: not-allowed;
 }
 
@@ -318,36 +318,36 @@ body.wp-admin .bfg .button-primary:disabled {
 .bfg-btn--primary.bfg-btn--hover {
     background: var(--bfg-primary-hover);
     border-color: var(--bfg-primary-hover);
-    color: #ffffff;
+    color: var(--bfg-white);
     box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
 }
 .bfg-btn--primary.bfg-btn--pressed {
-    background: #1e40af;
-    border-color: #1e40af;
+    background: var(--bfg-primary-dark);
+    border-color: var(--bfg-primary-dark);
     transform: translateY(1px);
 }
 .bfg-btn--primary.bfg-btn--disabled {
-    background: #E5E7EB;
-    border-color: #E5E7EB;
-    color: #9CA3AF;
+    background: var(--bfg-gray-200);
+    border-color: var(--bfg-gray-200);
+    color: var(--bfg-gray-400);
     box-shadow: none;
     transform: none;
 }
 
 /* Secondary */
 .bfg-btn--secondary.bfg-btn--hover {
-    background: #F9FAFB;
-    border-color: #9CA3AF;
-    color: #000000;
+    background: var(--bfg-gray-50);
+    border-color: var(--bfg-gray-400);
+    color: var(--bfg-black);
 }
 .bfg-btn--secondary.bfg-btn--pressed {
-    background: #F3F4F6;
+    background: var(--bfg-gray-100);
     transform: translateY(1px);
 }
 .bfg-btn--secondary.bfg-btn--disabled {
-    background: #F9FAFB;
-    color: #9CA3AF;
-    border-color: #E5E7EB;
+    background: var(--bfg-gray-50);
+    color: var(--bfg-gray-400);
+    border-color: var(--bfg-gray-200);
     box-shadow: none;
     transform: none;
 }
@@ -359,13 +359,13 @@ body.wp-admin .bfg .button-primary:disabled {
     border-color: var(--bfg-primary);
 }
 .bfg-btn--outline.bfg-btn--pressed {
-    background: #BFDBFE;
+    background: var(--bfg-primary-light-hover);
     transform: translateY(1px);
 }
 .bfg-btn--outline.bfg-btn--disabled {
     background: transparent;
-    color: #9CA3AF;
-    border-color: #E5E7EB;
+    color: var(--bfg-gray-400);
+    border-color: var(--bfg-gray-200);
 }
 
 /* Text */
@@ -374,10 +374,10 @@ body.wp-admin .bfg .button-primary:disabled {
     text-decoration: underline;
 }
 .bfg-btn--text.bfg-btn--pressed {
-    color: #1e40af;
+    color: var(--bfg-primary-dark);
 }
 .bfg-btn--text.bfg-btn--disabled {
-    color: #9CA3AF;
+    color: var(--bfg-gray-400);
     text-decoration: none;
 }
 
@@ -430,18 +430,18 @@ body.wp-admin .bfg .button-primary:disabled {
 .bfg-btn--danger,
 a.bfg-btn--danger,
 .bfg a.bfg-btn--danger {
-    background: #B91C1C;
-    color: #ffffff;
-    border: 1px solid #B91C1C;
+    background: var(--bfg-danger-dark);
+    color: var(--bfg-white);
+    border: 1px solid var(--bfg-danger-dark);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .bfg-btn--danger:hover,
 a.bfg-btn--danger:hover,
 .bfg a.bfg-btn--danger:hover {
-    background: #991B1B;
-    border-color: #991B1B;
-    color: #ffffff;
+    background: var(--bfg-danger-darker);
+    border-color: var(--bfg-danger-darker);
+    color: var(--bfg-white);
 }
 
 .bfg-btn--danger:active {
@@ -479,7 +479,7 @@ a.bfg-btn--danger:hover,
 .bfg-split-button__toggle,
 a.bfg-split-button__main,
 .bfg a.bfg-split-button__main {
-    background: #ffffff;
+    background: var(--bfg-white);
     color: var(--bfg-text-main);
     border: 1px solid var(--bfg-border);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -489,9 +489,9 @@ a.bfg-split-button__main,
 .bfg-split-button__toggle:hover,
 a.bfg-split-button__main:hover,
 .bfg a.bfg-split-button__main:hover {
-    background: #F9FAFB;
-    border-color: #9CA3AF;
-    color: #000000;
+    background: var(--bfg-gray-50);
+    border-color: var(--bfg-gray-400);
+    color: var(--bfg-black);
 }
 
 /* Safari draws a triangle on a summary element. */
@@ -510,7 +510,7 @@ a.bfg-split-button__main:hover,
     min-width: 200px;
     margin-top: 4px;
     padding: 4px;
-    background: #ffffff;
+    background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-btn-radius);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -528,15 +528,15 @@ a.bfg-split-button__main:hover,
 
 .bfg-split-button__list a:hover,
 .bfg-split-button__list a:focus {
-    background: #F3F4F6;
-    color: #000000;
+    background: var(--bfg-gray-100);
+    color: var(--bfg-black);
 }
 
 .bfg-split-button--primary .bfg-split-button__main,
 .bfg-split-button--primary .bfg-split-button__toggle,
 .bfg .bfg-split-button--primary a.bfg-split-button__main {
     background: var(--bfg-primary);
-    color: #ffffff;
+    color: var(--bfg-white);
     border-color: var(--bfg-primary);
 }
 
@@ -545,5 +545,5 @@ a.bfg-split-button__main:hover,
 .bfg .bfg-split-button--primary a.bfg-split-button__main:hover {
     background: var(--bfg-primary-hover);
     border-color: var(--bfg-primary-hover);
-    color: #ffffff;
+    color: var(--bfg-white);
 }

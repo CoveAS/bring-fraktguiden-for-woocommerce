@@ -38,7 +38,7 @@
     height: 48px;
     padding: 0 16px;
     margin: 0 !important;
-    background: #ffffff;
+    background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     font-size: var(--bfg-font-base);
@@ -87,7 +87,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     left: 0;
     right: 0;
     width: 100%;
-    background: #ffffff;
+    background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -147,11 +147,11 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
 }
 
 .bfg-custom-select__option.is-active {
-    background: #F7F8FA;
+    background: var(--bfg-bg-shell);
 }
 
 .bfg-custom-select__option.is-selected {
-    background: #F0F7FF;
+    background: var(--bfg-primary-tint);
 }
 
 .bfg-custom-select__option.is-selected.is-active {

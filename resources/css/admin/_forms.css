@@ -75,12 +75,12 @@
 
 .bfg-field--valid input,
 .bfg-field--valid select {
-    border-color: #16a34a !important;
+    border-color: var(--bfg-success) !important;
 }
 
 .bfg-field--error input,
 .bfg-field--error select {
-    border-color: #dc2626 !important;
+    border-color: var(--bfg-danger) !important;
 }
 
 .bfg-field__validation {
@@ -96,7 +96,7 @@
 }
 
 .bfg-field__validation--error {
-    color: #dc2626;
+    color: var(--bfg-danger);
 }
 
 .bfg-field__validation-icon {
@@ -106,7 +106,7 @@
 }
 
 .bfg-required {
-    color: #dc2626;
+    color: var(--bfg-danger);
     font-weight: 600;
 }
 
@@ -162,7 +162,7 @@
     font-size: var(--bfg-font-sm);
     width: 100% !important;
     max-width: none !important;
-    background: #F9FAFB !important;
+    background: var(--bfg-gray-50) !important;
     box-shadow: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     color: var(--bfg-text-main);
@@ -252,13 +252,13 @@
 .bfg input:not([type="checkbox"]):not([type="radio"]):active,
 .bfg select:active,
 .bfg textarea:active {
-    background: #F9FAFB !important;
+    background: var(--bfg-gray-50) !important;
 }
 
 .bfg input:not([type="checkbox"]):not([type="radio"]):focus,
 .bfg select:focus,
 .bfg textarea:focus {
-    background: #ffffff !important;
+    background: var(--bfg-white) !important;
 }
 
 body:not(.using-mouse) .bfg input:focus,
@@ -309,7 +309,7 @@ body:not(.using-mouse) .bfg textarea:focus {
 .bfg-input--number {
     display: flex !important;
     align-items: stretch !important;
-    background: #ffffff;
+    background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     overflow: hidden;

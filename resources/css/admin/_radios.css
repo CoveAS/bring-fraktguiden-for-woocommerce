@@ -10,7 +10,7 @@
     border: 1px solid var(--bfg-border);
     border-radius: 8px;
     margin-bottom: 20px;
-    background: #fff;
+    background: var(--bfg-white);
 }
 
 .bfg .bfg-radio-card {
@@ -37,11 +37,11 @@
 }
 
 .bfg-radio-card:hover {
-    background: #F7F8FA;
+    background: var(--bfg-bg-shell);
 }
 
 .bfg-radio-card:has(input[type="radio"]:checked) {
-    background: #F0F7FF;
+    background: var(--bfg-primary-tint);
 }
 
 body:not(.using-mouse) .bfg-radio-card:focus-within {
@@ -82,9 +82,9 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
     height: var(--rb-radio-size) !important;
     margin: 2px 0 0 0 !important;
     flex-shrink: 0;
-    border: 1px solid #D1D5DB !important;
+    border: 1px solid var(--bfg-border) !important;
     border-radius: 50% !important;
-    background: #fff !important;
+    background: var(--bfg-white) !important;
     box-shadow: none !important;
     appearance: none !important;
     -webkit-appearance: none !important;
@@ -111,7 +111,7 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--bfg-white);
     transform: translate(-50%, -50%);
     pointer-events: none;
 }

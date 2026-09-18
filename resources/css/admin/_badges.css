@@ -19,9 +19,12 @@
     justify-content: center;
 }
 
+/* The hex inside color-mix() stays literal. The build computes the mix
+   only from a literal, and a var makes it emit the unmixed color as a
+   fallback, which is unreadable. */
 .bfg-badge--completed {
     background-color: color-mix(in srgb, #15803d 15%, white);
-    color: #15803d;
+    color: var(--bfg-success-dark);
 }
 
 .bfg-badge--md {
@@ -35,7 +38,7 @@
     align-items: center;
     font-size: var(--bfg-font-xs);
     font-weight: 600;
-    color: #15803d;
+    color: var(--bfg-success-dark);
     background: none;
     padding: 0;
     height: auto;
@@ -57,9 +60,9 @@ body.wp-admin .bfg a.bfg-badge--outline,
 body.wp-admin .bfg a.bfg-badge--outline:hover,
 body.wp-admin .bfg a.bfg-badge--outline:visited,
 body.wp-admin .bfg a.bfg-badge--outline:focus {
-    background-color: #F3F4F6;
-    border: 1px solid #E5E7EB;
-    color: #6B7280 !important;
+    background-color: var(--bfg-gray-100);
+    border: 1px solid var(--bfg-gray-200);
+    color: var(--bfg-text-muted) !important;
     border-radius: 8px;
     text-decoration: none !important;
     box-shadow: none !important;
@@ -68,8 +71,8 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
 }
 
 .bfg-badge--active {
-    background: #2563EB;
-    color: #fff;
+    background: var(--bfg-primary);
+    color: var(--bfg-white);
     font-size: var(--bfg-font-xs);
     font-weight: 600;
     padding: 2px 10px;
@@ -100,7 +103,7 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
 }
 
 .bfg-badge__dot--green {
-    background-color: #16A34A;
+    background-color: var(--bfg-success);
 }
 
 /* Indicator Dot
@@ -111,12 +114,12 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #9CA3AF;
+    background-color: var(--bfg-gray-400);
     flex-shrink: 0;
 }
 
 .bfg-indicator-dot--healthy {
-    background-color: #16A34A;
+    background-color: var(--bfg-success);
 }
 
 .bfg-indicator-dot--warning {
@@ -124,5 +127,5 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
 }
 
 .bfg-indicator-dot--error {
-    background-color: #dc2626;
+    background-color: var(--bfg-danger);
 }

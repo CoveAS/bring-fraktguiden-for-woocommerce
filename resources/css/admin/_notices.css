@@ -38,20 +38,20 @@
    ========================================================================== */
 
 .bfg-notice-banner[type="info"] {
-    background: #F3F4F6 !important;
-    color: #374151 !important;
-    border-color: #D1D5DB !important;
+    background: var(--bfg-gray-100) !important;
+    color: var(--bfg-gray-700) !important;
+    border-color: var(--bfg-border) !important;
 }
 
 .bfg-notice-banner[type="success"] {
-    background: #DCFCE7 !important;
-    color: #166534 !important;
+    background: var(--bfg-success-light) !important;
+    color: var(--bfg-success-darker) !important;
     border-color: #86EFAC !important;
 }
 
 .bfg-notice-banner[type="error"] {
-    background: #FEE2E2 !important;
-    color: #991B1B !important;
+    background: var(--bfg-danger-light) !important;
+    color: var(--bfg-danger-darker) !important;
     border-color: #FCA5A5 !important;
 }
 
@@ -83,21 +83,21 @@
 .bfg-trial-notice__desc {
     margin: 0 !important;
     font-size: var(--bfg-font-sm);
-    color: #4B5563;
+    color: var(--bfg-gray-600);
 }
 
 .bfg-trial-notice .bfg-btn--primary,
 .bfg .bfg-trial-notice a.bfg-btn--primary {
     background: #7C3AED;
     border-color: #7C3AED;
-    color: #ffffff;
+    color: var(--bfg-white);
 }
 
 .bfg-trial-notice .bfg-btn--primary:hover,
 .bfg .bfg-trial-notice a.bfg-btn--primary:hover {
     background: #6D28D9;
     border-color: #6D28D9;
-    color: #ffffff;
+    color: var(--bfg-white);
 }
 
 @media screen and (max-width: 782px) {
@@ -117,7 +117,7 @@
    ========================================================================== */
 
 .bfg-active-notice {
-    background: linear-gradient(to right, #F0FDF4, #DCFCE7) !important;
+    background: linear-gradient(to right, #F0FDF4, var(--bfg-success-light)) !important;
     border-color: #BBF7D0 !important;
     display: flex;
     align-items: center;
@@ -141,7 +141,7 @@
 .bfg-active-notice__desc {
     margin: 0 !important;
     font-size: var(--bfg-font-sm);
-    color: #4B5563;
+    color: var(--bfg-gray-600);
 }
 
 @media screen and (max-width: 782px) {
@@ -161,8 +161,8 @@
    ========================================================================== */
 
 .bfg-test-notice {
-    background: linear-gradient(to right, #F9FAFB, #F3F4F6) !important;
-    border-color: #D1D5DB !important;
+    background: linear-gradient(to right, var(--bfg-gray-50), var(--bfg-gray-100)) !important;
+    border-color: var(--bfg-border) !important;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -177,14 +177,14 @@
     display: block;
     font-size: var(--bfg-font-base);
     font-weight: 600;
-    color: #374151;
+    color: var(--bfg-gray-700);
     margin-bottom: 4px;
 }
 
 .bfg-test-notice__desc {
     margin: 0 !important;
     font-size: var(--bfg-font-sm);
-    color: #6B7280;
+    color: var(--bfg-text-muted);
 }
 
 /* Customs warning
@@ -199,8 +199,8 @@
 /* A refused booking, or a send that failed. The shape is the same, and only
    the colour says that Bring already said no. */
 .bfg-booking-notice--error {
-    background: #FEE2E2 !important;
-    color: #991B1B !important;
+    background: var(--bfg-danger-light) !important;
+    color: var(--bfg-danger-darker) !important;
     border-color: #FCA5A5 !important;
 }
 
@@ -251,7 +251,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    color: #991B1B !important;
+    color: var(--bfg-danger-darker) !important;
 }
 
 .bfg-consent .bfg-consent__body p {
@@ -287,8 +287,8 @@
     margin: 0 0 0.75rem 0 !important;
     padding: 12px 16px !important;
     border-radius: 8px !important;
-    background: #DCFCE7 !important;
-    color: #166534 !important;
+    background: var(--bfg-success-light) !important;
+    color: var(--bfg-success-darker) !important;
     border: 1px solid #86EFAC !important;
     font-size: var(--bfg-font-sm) !important;
     font-weight: 600 !important;

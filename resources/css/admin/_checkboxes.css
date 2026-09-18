@@ -11,7 +11,7 @@
     --cb-gap: 16px;
     --cb-content-gap: 6px;
 
-    background: #fff;
+    background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: 8px;
     margin-bottom: 20px;
@@ -19,18 +19,18 @@
 }
 
 .bfg-field--checkbox-box:hover {
-    background: #F7F8FA;
+    background: var(--bfg-bg-shell);
 }
 
 .bfg-field--checkbox-box:active {
-    border-color: #BFDBFE;
-    background: #F0F7FF;
+    border-color: var(--bfg-primary-light-hover);
+    background: var(--bfg-primary-tint);
 }
 
 .bfg-field--checkbox-box.is-checked,
 .bfg-field--checkbox-box:has(input[type="checkbox"]:checked) {
-    border-color: #BFDBFE;
-    background: #F0F7FF;
+    border-color: var(--bfg-primary-light-hover);
+    background: var(--bfg-primary-tint);
 }
 
 body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
@@ -92,12 +92,12 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     margin: 2px 0 0 0 !important;
     border-radius: 4px !important;
     flex-shrink: 0;
-    border: 1px solid #D1D5DB !important;
+    border: 1px solid var(--bfg-border) !important;
     cursor: pointer;
     appearance: none !important;
     -webkit-appearance: none !important;
     position: relative;
-    background: #fff !important;
+    background: var(--bfg-white) !important;
     box-shadow: none !important;
     transition: border-color 0.2s, background-color 0.2s;
 }
@@ -109,7 +109,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg .bfg-input--checkbox input[type="checkbox"]:focus {
     outline: none;
-    border-color: #D1D5DB;
+    border-color: var(--bfg-border);
 }
 
 .bfg .bfg-input--checkbox input[type="checkbox"]:checked:focus {
@@ -118,7 +118,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg .bfg-input--checkbox input[type="checkbox"]:active {
     border-color: var(--bfg-primary);
-    background: #DBEAFE;
+    background: var(--bfg-primary-light);
 }
 
 .bfg .bfg-input--checkbox input[type="checkbox"]::before,

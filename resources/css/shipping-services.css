@@ -3,7 +3,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 1rem;
-    background: #fff;
+    background: var(--bfg-white);
 }
 
 .fraktguiden-product header {
@@ -118,7 +118,7 @@
     left: 2px;
     width: 0.75rem;
     height: 0.75rem;
-    background: #fff;
+    background: var(--bfg-white);
     border-radius: 50%;
     transition: left 0.3s;
 }

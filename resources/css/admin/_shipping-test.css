@@ -55,7 +55,7 @@
 }
 
 .bfg-shipping-test__card--problem .bfg-shipping-test__headline {
-	color: #B32D2E;
+	color: var(--bfg-wp-danger);
 }
 
 /* A warning above the rates, so a pass can still carry bad news. */
@@ -161,6 +161,9 @@
 }
 
 /* The HTTP status of the Bring answer, beside the title of the call dialog. */
+/* The hex inside color-mix() stays literal. The build computes the mix
+   only from a literal, and a var makes it emit the unmixed color as a
+   fallback, which is unreadable. */
 .bfg-shipping-test__status {
 	margin-left: 8px;
 	padding: 2px 8px;
@@ -168,10 +171,10 @@
 	font-size: var(--bfg-font-xs);
 	font-weight: 600;
 	background: color-mix(in srgb, #15803d 15%, white);
-	color: #15803d;
+	color: var(--bfg-success-dark);
 }
 
 .bfg-shipping-test__status--error {
 	background: color-mix(in srgb, #b91c1c 15%, white);
-	color: #b91c1c;
+	color: var(--bfg-danger-dark);
 }
