@@ -28,7 +28,7 @@
 .bfg-booking-box input[type="number"] {
     width: 100%;
     max-width: none;
-    padding: 8px 10px;
+    padding: var(--bfg-space-2) 10px;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     background: var(--bfg-white);
@@ -46,7 +46,7 @@
 
 .bfg-booking-box .bfg-field label {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: var(--bfg-space-1);
     font-weight: 600;
 }
 
@@ -55,12 +55,12 @@
 .bfg-booking-card {
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-card);
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: var(--bfg-space-4);
+    margin-bottom: var(--bfg-space-4);
 }
 
 .bfg-booking-card__title {
-    margin: 0 0 12px;
+    margin: 0 0 var(--bfg-space-3);
     font-size: var(--bfg-font-xs);
     line-height: var(--bfg-leading-xs);
     font-weight: 600;
@@ -72,7 +72,7 @@
 .bfg-booking-form__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 /* The grid sets the gap, so a field adds none of its own. */
@@ -83,7 +83,7 @@
 .bfg-booking-form__datetime {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--bfg-space-2);
 }
 
 /* A date needs the room of its three parts, so the time wraps below it
@@ -103,15 +103,15 @@
 .bfg-booking-form__services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 8px;
+    gap: var(--bfg-space-2);
 }
 
 /* A tile makes the whole row of an extra service clickable. */
 .bfg-booking-form__service {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
+    gap: var(--bfg-space-2);
+    padding: 10px var(--bfg-space-3);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     font-size: var(--bfg-font-sm);
@@ -131,8 +131,8 @@
 }
 
 .bfg-booking-form__note {
-    margin: 0 0 16px;
-    padding: 12px 16px;
+    margin: 0 0 var(--bfg-space-4);
+    padding: var(--bfg-space-3) var(--bfg-space-4);
     border-radius: var(--bfg-radius-input);
     background: var(--bfg-gray-100);
     color: var(--bfg-text-secondary);
@@ -142,8 +142,8 @@
 
 /* The two addresses sit under the fields that change them, behind a summary. */
 .bfg-booking-form__parties {
-    margin: 16px 0 0;
-    padding-top: 12px;
+    margin: var(--bfg-space-4) 0 0;
+    padding-top: var(--bfg-space-3);
     border-top: 1px solid var(--bfg-border);
 }
 
@@ -160,8 +160,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
-    gap: 8px;
-    margin-top: 24px;
+    gap: var(--bfg-space-2);
+    margin-top: var(--bfg-space-6);
 }
 
 /* The status line keeps a readable width. A narrow box therefore puts the
@@ -182,18 +182,18 @@
 .bfg-booking-packages__row {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 40px;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     align-items: center;
 }
 
 .bfg-booking-packages__head {
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
-    margin-bottom: 4px;
+    margin-bottom: var(--bfg-space-1);
 }
 
 .bfg-booking-packages__row {
-    margin-bottom: 8px;
+    margin-bottom: var(--bfg-space-2);
 }
 
 .bfg-booking-packages__row input {
@@ -221,8 +221,8 @@
 .bfg-booking-parties {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-top: 12px;
+    gap: var(--bfg-space-6);
+    margin-top: var(--bfg-space-3);
 }
 
 .bfg-booking-parties__table {
@@ -234,7 +234,7 @@
     text-align: left;
     font-weight: 400;
     color: var(--bfg-text-secondary);
-    padding: 2px 12px 2px 0;
+    padding: 2px var(--bfg-space-3) 2px 0;
     white-space: nowrap;
 }
 
@@ -243,8 +243,8 @@
 .bfg-booking-history__entry {
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-card);
-    padding: 16px;
-    margin-bottom: 12px;
+    padding: var(--bfg-space-4);
+    margin-bottom: var(--bfg-space-3);
 }
 
 .bfg-booking-history__entry--failed {
@@ -254,7 +254,7 @@
 .bfg-booking-history__head {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     justify-content: space-between;
     align-items: baseline;
 }
@@ -266,12 +266,12 @@
 
 .bfg-booking-history__consignments,
 .bfg-booking-history__errors {
-    margin: 8px 0 12px;
+    margin: var(--bfg-space-2) 0 var(--bfg-space-3);
 }
 
 .bfg-booking-history__number {
     font-family: var(--bfg-font-mono);
-    margin-right: 8px;
+    margin-right: var(--bfg-space-2);
 }
 
 .bfg-booking-history__errors li {
@@ -381,7 +381,7 @@
 
 .bfg-customs-products__name {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: var(--bfg-space-1);
     font-weight: 600;
 }
 
@@ -419,7 +419,7 @@
 }
 
 .bfg-booking-box__title {
-    margin: 0 0 16px;
+    margin: 0 0 var(--bfg-space-4);
     font-size: var(--bfg-font-base);
     font-weight: 600;
     color: var(--bfg-text-main);

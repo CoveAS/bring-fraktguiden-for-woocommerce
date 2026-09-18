@@ -17,7 +17,7 @@
 .bfg-admin-page__home .bfg-page__main {
     max-width: 768px;
     margin: 0 auto;
-    padding: 48px 32px 64px;
+    padding: var(--bfg-space-12) var(--bfg-space-8) var(--bfg-space-16);
 }
 
 .bfg-admin-page__home .bfg-section:last-child {
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: var(--bfg-space-6);
 }
 
 /* Progress Bar
@@ -37,7 +37,7 @@
 .bfg-progress-badge {
     background: var(--bfg-gray-100);
     border-radius: 6px;
-    padding: 4px 8px;
+    padding: var(--bfg-space-1) var(--bfg-space-2);
     font-size: var(--bfg-font-sm);
     font-weight: 600;
     color: var(--bfg-gray-700);
@@ -45,7 +45,7 @@
 }
 
 .bfg-progress-container {
-    margin-bottom: 40px;
+    margin-bottom: var(--bfg-space-10);
 }
 
 .bfg-progress-bar-new {
@@ -66,21 +66,21 @@
    ========================================================================== */
 
 .bfg-setup-header {
-    margin-bottom: 24px;
+    margin-bottom: var(--bfg-space-6);
 }
 
 .bfg-setup-header__title {
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
     color: var(--bfg-text-main);
-    margin: 0 0 8px !important;
+    margin: 0 0 var(--bfg-space-2) !important;
     line-height: var(--bfg-leading-2xl);
 }
 
 .bfg-setup-header__subtitle {
     font-size: var(--bfg-font-base);
     color: var(--bfg-text-secondary);
-    margin: 0 0 24px !important;
+    margin: 0 0 var(--bfg-space-6) !important;
     font-weight: 400;
 }
 
@@ -88,13 +88,13 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 12px;
+    margin-bottom: var(--bfg-space-3);
 }
 
 .bfg-setup-header__stat {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--bfg-space-1);
 }
 
 .bfg-setup-header__stat--right {
@@ -125,10 +125,10 @@
     background: var(--bfg-primary-bg);
     border: 1px solid var(--bfg-primary-light);
     border-radius: 12px;
-    padding: 32px;
+    padding: var(--bfg-space-8);
     display: flex;
-    gap: 24px;
-    margin-bottom: 40px;
+    gap: var(--bfg-space-6);
+    margin-bottom: var(--bfg-space-10);
 }
 
 .bfg-active-step__icon {
@@ -148,7 +148,7 @@
 .bfg-active-step__content h3 {
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
-    margin: 0 0 8px !important;
+    margin: 0 0 var(--bfg-space-2) !important;
     color: var(--bfg-text-main);
     line-height: var(--bfg-leading-2xl);
     text-wrap: balance;
@@ -156,7 +156,7 @@
 
 .bfg-active-step__content p {
     font-size: var(--bfg-font-base);
-    margin: 0 0 24px !important;
+    margin: 0 0 var(--bfg-space-6) !important;
     color: var(--bfg-gray-600);
     line-height: var(--bfg-leading-base);
     font-weight: 400;
@@ -173,7 +173,7 @@
 .bfg-steps-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 .bfg-steps-list .bfg-access-link__content {
@@ -212,14 +212,14 @@
 .bfg-pro-teaser-v2 .bfg-section-card-title {
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
-    margin: 0 auto 8px;
+    margin: 0 auto var(--bfg-space-2);
     text-align: center;
 }
 
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
     font-size: var(--bfg-font-base);
     color: var(--bfg-text-secondary);
-    margin: 0 auto 32px;
+    margin: 0 auto var(--bfg-space-8);
     text-align: center;
     max-width: 480px;
 }
@@ -260,13 +260,13 @@
     }
 
     .bfg-admin-page__home .bfg-page__main {
-        padding: 32px 20px;
+        padding: var(--bfg-space-8) var(--bfg-space-5);
     }
 
     .bfg-admin-page__home .bfg-section {
         padding: 0;
-        padding-top: 32px;
-        padding-bottom: 32px;
+        padding-top: var(--bfg-space-8);
+        padding-bottom: var(--bfg-space-8);
         margin-bottom: 0;
         background: transparent;
         border: none;
@@ -284,23 +284,23 @@
     .bfg-page__header-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 16px;
+        gap: var(--bfg-space-2);
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg-progress-container {
-        margin-bottom: 24px;
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-active-step-card {
         flex-direction: column;
-        padding: 24px;
-        gap: 16px;
-        margin-bottom: 24px;
+        padding: var(--bfg-space-6);
+        gap: var(--bfg-space-4);
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-steps-list {
-        gap: 16px;
+        gap: var(--bfg-space-4);
     }
 
     .bfg-active-step__icon {
@@ -319,8 +319,8 @@
         align-items: center !important;
         height: 80px;
         max-height: 80px;
-        padding: 16px;
-        gap: 16px;
+        padding: var(--bfg-space-4);
+        gap: var(--bfg-space-4);
     }
 
     .bfg-step-row__content {
@@ -350,14 +350,14 @@
     }
 
     .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
-        margin-top: 40px;
-        margin-bottom: 24px;
+        margin-top: var(--bfg-space-10);
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-pro-teaser__shield {
         width: 48px;
         height: 48px;
-        margin-bottom: 24px;
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-pro-teaser__shield svg {
@@ -370,13 +370,13 @@
     .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-sm);
         line-height: var(--bfg-leading-sm);
-        margin-bottom: 24px !important;
+        margin-bottom: var(--bfg-space-6) !important;
     }
 
     .bfg-pro-features-grid {
         grid-template-columns: 1fr !important;
-        gap: 16px !important;
-        padding: 32px !important;
+        gap: var(--bfg-space-4) !important;
+        padding: var(--bfg-space-8) !important;
         background: #F8FAFC !important;
         border-radius: 12px !important;
     }
@@ -410,13 +410,13 @@
 
 @media screen and (max-width: 480px) {
     .bfg-admin-page__home .bfg-page__main {
-        padding: 32px 20px;
+        padding: var(--bfg-space-8) var(--bfg-space-5);
     }
 
     .bfg-admin-page__home .bfg-section {
         padding: 0;
-        padding-top: 32px;
-        padding-bottom: 32px;
+        padding-top: var(--bfg-space-8);
+        padding-bottom: var(--bfg-space-8);
         margin-bottom: 0;
         background: transparent;
         border: none;
@@ -432,21 +432,21 @@
     }
 
     .bfg-page__header-row {
-        gap: 8px;
-        margin-bottom: 16px;
+        gap: var(--bfg-space-2);
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg-progress-container {
-        margin-bottom: 24px;
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-active-step-card {
-        padding: 16px;
-        margin-bottom: 16px;
+        padding: var(--bfg-space-4);
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg-steps-list {
-        gap: 16px;
+        gap: var(--bfg-space-4);
     }
 
     .bfg-step-row {
@@ -456,8 +456,8 @@
         align-items: center !important;
         height: 80px;
         max-height: 80px;
-        padding: 16px;
-        gap: 16px;
+        padding: var(--bfg-space-4);
+        gap: var(--bfg-space-4);
     }
 
     .bfg-step-row__indicator {
@@ -483,7 +483,7 @@
     }
 
     .bfg-step-row .bfg-badge {
-        padding: 4px 8px;
+        padding: var(--bfg-space-1) var(--bfg-space-2);
         font-size: var(--bfg-font-sm);
         flex-shrink: 0 !important;
     }
@@ -500,25 +500,25 @@
 
     .bfg-active-step__content p {
         font-size: var(--bfg-font-sm);
-        margin-bottom: 16px !important;
+        margin-bottom: var(--bfg-space-4) !important;
     }
 
     .bfg-admin-page__home .bfg-btn {
-        padding: 8px 16px;
+        padding: var(--bfg-space-2) var(--bfg-space-4);
         font-size: var(--bfg-font-sm);
         height: auto;
     }
 
     .bfg-admin-page__home .bfg-section.bfg-pro-teaser-v2 {
-        margin-top: 48px;
-        margin-bottom: 24px;
+        margin-top: var(--bfg-space-12);
+        margin-bottom: var(--bfg-space-6);
         border-radius: 8px;
     }
 
     .bfg-pro-teaser__shield {
         width: 48px;
         height: 48px;
-        margin-bottom: 16px;
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg-pro-teaser__shield svg {
@@ -534,13 +534,13 @@
     .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-sm);
         line-height: var(--bfg-leading-base);
-        margin-bottom: 24px !important;
+        margin-bottom: var(--bfg-space-6) !important;
     }
 
     .bfg-pro-features-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 32px;
+        gap: var(--bfg-space-5);
+        padding: var(--bfg-space-8);
     }
 
     .bfg-subscription {

@@ -11,7 +11,7 @@
     align-items: baseline;
     gap: 0.5rem;
     width: 100%;
-    padding: 8px 10px;
+    padding: var(--bfg-space-2) 10px;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     background: var(--bfg-white);
@@ -60,7 +60,7 @@
 .bfg-hs-modal__search {
     width: 100%;
     margin-top: 0.75rem;
-    padding: 8px 10px;
+    padding: var(--bfg-space-2) 10px;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     line-height: var(--bfg-leading-base);
@@ -86,7 +86,7 @@
     align-items: baseline;
     gap: 0.75rem;
     width: 100%;
-    padding: 8px 10px;
+    padding: var(--bfg-space-2) 10px;
     border: 0;
     border-radius: var(--bfg-radius-input);
     background: transparent;

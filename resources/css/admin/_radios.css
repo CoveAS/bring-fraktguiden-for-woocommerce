@@ -3,13 +3,13 @@
    ========================================================================== */
 
 .bfg-radio-group {
-    --rb-padding: 20px;
+    --rb-padding: var(--bfg-space-5);
     --rb-radio-size: 20px;
-    --rb-gap: 16px;
+    --rb-gap: var(--bfg-space-4);
 
     border: 1px solid var(--bfg-border);
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: var(--bfg-space-5);
     background: var(--bfg-white);
 }
 

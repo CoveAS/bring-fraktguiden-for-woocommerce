@@ -3,7 +3,7 @@
 .bfg-shipping-test__form {
 	display: flex;
 	align-items: flex-end;
-	gap: 8px;
+	gap: var(--bfg-space-2);
 	max-width: 560px;
 }
 
@@ -26,13 +26,13 @@
 /* The room stays reserved, so the step list below does not jump on an answer. */
 .bfg-shipping-test__result {
 	min-height: 24px;
-	margin-top: 16px;
+	margin-top: var(--bfg-space-4);
 	font-size: var(--bfg-font-sm);
 }
 
 /* The answer sits in its own card, tinted by the outcome. */
 .bfg-shipping-test__card {
-	padding: 12px 16px;
+	padding: var(--bfg-space-3) var(--bfg-space-4);
 	border: 1px solid var(--bfg-border);
 	border-radius: var(--bfg-radius-input);
 	background: var(--bfg-bg-card);
@@ -60,7 +60,7 @@
 
 /* A warning above the rates, so a pass can still carry bad news. */
 .bfg-shipping-test__note {
-	margin: 0 0 8px;
+	margin: 0 0 var(--bfg-space-2);
 	font-weight: 600;
 	color: #8A5700;
 }
@@ -85,7 +85,7 @@
 .bfg-shipping-test__rate {
 	display: flex;
 	align-items: baseline;
-	gap: 8px;
+	gap: var(--bfg-space-2);
 	padding: 10px 0;
 	border-top: 1px solid #D3E7DA;
 }
@@ -105,7 +105,7 @@
 }
 
 .bfg-shipping-test__raw-line {
-	margin: 8px 0 0;
+	margin: var(--bfg-space-2) 0 0;
 }
 
 /* A link in every way but the tag. A button carries the click. */
@@ -121,7 +121,7 @@
 
 .bfg-shipping-test__json {
 	margin: 0;
-	padding: 12px 0;
+	padding: var(--bfg-space-3) 0;
 	overflow-x: auto;
 	font-family: var(--bfg-font-mono);
 	font-size: var(--bfg-font-xs);
@@ -139,13 +139,13 @@
 /* The tab row stays put while the block below it scrolls. */
 .bfg-shipping-test__tabs {
 	display: flex;
-	gap: 4px;
-	margin-top: 12px;
+	gap: var(--bfg-space-1);
+	margin-top: var(--bfg-space-3);
 	border-bottom: 1px solid var(--bfg-border);
 }
 
 .bfg-shipping-test__tab {
-	padding: 8px 12px;
+	padding: var(--bfg-space-2) var(--bfg-space-3);
 	border: 0;
 	border-bottom: 2px solid transparent;
 	background: none;
@@ -165,8 +165,8 @@
    only from a literal, and a var makes it emit the unmixed color as a
    fallback, which is unreadable. */
 .bfg-shipping-test__status {
-	margin-left: 8px;
-	padding: 2px 8px;
+	margin-left: var(--bfg-space-2);
+	padding: 2px var(--bfg-space-2);
 	border-radius: 9999px;
 	font-size: var(--bfg-font-xs);
 	font-weight: 600;

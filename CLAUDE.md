@@ -244,6 +244,28 @@ repeats the sm step in its own `<style>` block.
 
 The Kitchen Sink typography page shows the scale.
 
+### The spacing scale
+
+A padding, margin, gap or inset value reads a `--bfg-space-*` token. The ladder
+holds 4, 8, 12, 16, 20, 24, 32, 40, 48, 56 and 64px.
+
+A value off the ladder stays a raw px. A 1px border and a 2px nudge are the
+common cases. A negative value stays a raw px too, because `calc()` reads worse
+than the number.
+
+`npm run test-js` fails on an on-ladder value written as a raw px.
+
+### Colors
+
+A color reads a `--bfg-*` token. The token file names a role, such as
+`--bfg-text-main` or `--bfg-success`. A neutral gray serves several roles at
+once, so it carries a ramp name, such as `--bfg-gray-200`.
+
+A one-off color that appears once or twice stays a raw hex.
+
+A hex inside `color-mix()` stays literal. The build computes the mix only from a
+literal, and a var makes it emit the unmixed color as a fallback.
+
 ## Build Commands
 
 | Command | When to run |

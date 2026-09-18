@@ -14,17 +14,17 @@
     }
 
     .bfg-page__header {
-        padding: 12px 16px;
+        padding: var(--bfg-space-3) var(--bfg-space-4);
     }
 
     .bfg-admin-page .bfg-page__main {
-        padding: 32px 20px;
+        padding: var(--bfg-space-8) var(--bfg-space-5);
     }
 
     .bfg .bfg-section {
         padding: 0;
-        padding-top: 32px;
-        padding-bottom: 32px;
+        padding-top: var(--bfg-space-8);
+        padding-bottom: var(--bfg-space-8);
         margin-bottom: 0;
         background: transparent;
         border: none;
@@ -40,17 +40,17 @@
     }
 
     .bfg .bfg-section__header {
-        margin-bottom: 24px !important;
+        margin-bottom: var(--bfg-space-6) !important;
     }
 
     .bfg .bfg-section .bfg-section__header--divider {
-        margin-top: 48px !important;
-        padding-top: 48px !important;
+        margin-top: var(--bfg-space-12) !important;
+        padding-top: var(--bfg-space-12) !important;
     }
 
     /* Fields */
     .bfg-field {
-        margin-bottom: 16px;
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
@@ -66,7 +66,7 @@
     .bfg-field .bfg-description,
 
     .bfg-field-group-title {
-        margin-bottom: 8px !important;
+        margin-bottom: var(--bfg-space-2) !important;
     }
 
     /* Step Rows */
@@ -79,8 +79,8 @@
         justify-content: flex-start !important;
         height: auto;
         min-height: 72px;
-        padding: 16px;
-        gap: 16px;
+        padding: var(--bfg-space-4);
+        gap: var(--bfg-space-4);
     }
 
     a.bfg-step-row>*,
@@ -103,7 +103,7 @@
     }
 
     .bfg-step-row__description {
-        margin-top: 4px;
+        margin-top: var(--bfg-space-1);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -125,7 +125,7 @@
     }
 
     .bfg-step-row .bfg-badge {
-        padding: 4px 8px;
+        padding: var(--bfg-space-1) var(--bfg-space-2);
         min-height: 32px;
         flex: 0 0 auto !important;
         width: auto !important;
@@ -135,15 +135,15 @@
 
     /* Checkbox Card */
     .bfg-field--checkbox-box {
-        --cb-padding: 20px;
+        --cb-padding: var(--bfg-space-5);
         --cb-checkbox-size: 20px;
-        --cb-gap: 16px;
+        --cb-gap: var(--bfg-space-4);
         --cb-content-gap: 6px;
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) {
         --cb-checkbox-size: 20px;
-        --cb-gap: 16px;
+        --cb-gap: var(--bfg-space-4);
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
@@ -151,7 +151,7 @@
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) .bfg-description {
-        margin-left: calc(24px + 16px);
+        margin-left: calc(var(--bfg-space-6) + var(--bfg-space-4));
         font-size: var(--bfg-font-sm);
     }
 
@@ -163,7 +163,7 @@
     .bfg-pro-teaser__shield {
         width: 56px;
         height: 56px;
-        margin-bottom: 24px;
+        margin-bottom: var(--bfg-space-6);
     }
 
     .bfg-pro-teaser__shield svg {
@@ -173,12 +173,12 @@
 
     .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-base);
-        margin-bottom: 24px !important;
+        margin-bottom: var(--bfg-space-6) !important;
     }
 
     .bfg-pro-features-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: var(--bfg-space-4);
     }
 
     .bfg-pro-features-grid li {
@@ -209,12 +209,12 @@
 
     /* Buttons */
     body.wp-admin .bfg .button-primary {
-        padding: 8px 32px;
+        padding: var(--bfg-space-2) var(--bfg-space-8);
         font-size: var(--bfg-font-sm);
     }
 
     .bfg .submit {
-        margin: 32px 0 0 !important;
+        margin: var(--bfg-space-8) 0 0 !important;
     }
 
     body.wp-admin .bfg .submit .button,
@@ -233,7 +233,7 @@
     }
 
     .bfg-custom-select__option {
-        padding: 12px 16px;
+        padding: var(--bfg-space-3) var(--bfg-space-4);
     }
 
     /* Inputs */
@@ -250,8 +250,8 @@
 
     /* Notices */
     .bfg-notice-banner {
-        padding: 16px !important;
-        gap: 16px !important;
+        padding: var(--bfg-space-4) !important;
+        gap: var(--bfg-space-4) !important;
         flex-direction: row;
     }
 
@@ -276,13 +276,13 @@
 
 @media screen and (max-width: 480px) {
     .bfg-admin-page .bfg-page__main {
-        padding: 20px;
+        padding: var(--bfg-space-5);
     }
 
     .bfg .bfg-section {
         padding: 0;
-        padding-top: 32px;
-        padding-bottom: 32px;
+        padding-top: var(--bfg-space-8);
+        padding-bottom: var(--bfg-space-8);
         margin-bottom: 0;
         background: transparent;
         border: none;
@@ -298,7 +298,7 @@
     }
 
     .bfg-field {
-        margin-bottom: 16px;
+        margin-bottom: var(--bfg-space-4);
     }
 
     .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
@@ -308,7 +308,7 @@
     }
 
     .bfg-field-group-title {
-        margin-bottom: 8px !important;
+        margin-bottom: var(--bfg-space-2) !important;
     }
 
     .bfg-pro-teaser__title {
@@ -326,7 +326,7 @@
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         align-items: center !important;
-        padding: 16px;
+        padding: var(--bfg-space-4);
     }
 
     a.bfg-step-row>.bfg-step-row__content,
@@ -346,15 +346,15 @@
 
     /* Checkbox Card */
     .bfg-field--checkbox-box {
-        --cb-padding: 16px;
+        --cb-padding: var(--bfg-space-4);
         --cb-checkbox-size: 20px;
-        --cb-gap: 16px;
+        --cb-gap: var(--bfg-space-4);
         --cb-content-gap: 6px;
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) {
         --cb-checkbox-size: 20px;
-        --cb-gap: 16px;
+        --cb-gap: var(--bfg-space-4);
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {

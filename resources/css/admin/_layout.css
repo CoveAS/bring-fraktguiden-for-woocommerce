@@ -35,7 +35,7 @@
    ========================================================================== */
 
 .bfg-page__header {
-    padding: 16px 20px;
+    padding: var(--bfg-space-4) var(--bfg-space-5);
     border-bottom: 1px solid var(--bfg-border);
 }
 
@@ -50,7 +50,7 @@
 .bfg-page__header-with-back {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--bfg-space-2);
 }
 
 .bfg-admin-page .bfg-back-link,
@@ -78,7 +78,7 @@
 .bfg-admin-page .bfg-page__main {
     max-width: 1024px;
     margin: 0 auto;
-    padding: 48px 32px 64px;
+    padding: var(--bfg-space-12) var(--bfg-space-8) var(--bfg-space-16);
 }
 
 /* Sections
@@ -90,8 +90,8 @@
     border-radius: 0;
     box-shadow: none;
     padding: 0;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: var(--bfg-space-12);
+    padding-bottom: var(--bfg-space-12);
     margin-bottom: 0;
     border-bottom: 1px solid var(--bfg-border);
 }
@@ -104,13 +104,13 @@
 
 .bfg .bfg-section__header {
     padding: 0 !important;
-    margin-bottom: 32px !important;
+    margin-bottom: var(--bfg-space-8) !important;
     border: none !important;
 }
 
 .bfg .bfg-section .bfg-section__header--divider {
-    margin-top: 64px !important;
-    padding-top: 64px !important;
+    margin-top: var(--bfg-space-16) !important;
+    padding-top: var(--bfg-space-16) !important;
     border-top: 1px solid var(--bfg-border) !important;
     display: block !important;
     clear: both !important;
@@ -121,7 +121,7 @@
     font-size: var(--bfg-font-2xl) !important;
     font-weight: 600 !important;
     color: var(--bfg-text-main) !important;
-    margin: 0 0 8px !important;
+    margin: 0 0 var(--bfg-space-2) !important;
     line-height: var(--bfg-leading-2xl) !important;
     text-wrap: balance;
 }
@@ -142,7 +142,7 @@
    ========================================================================== */
 
 .bfg .submit {
-    margin: 32px 0 0 !important;
+    margin: var(--bfg-space-8) 0 0 !important;
     padding: 0 !important;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .submit+.bfg-section__header--divider {
-    margin-top: 32px !important;
+    margin-top: var(--bfg-space-8) !important;
 }
 
 /* Links

@@ -17,7 +17,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     padding: var(--bfg-btn-md-padding);
     font-size: var(--bfg-btn-md-font-size);
     font-weight: var(--bfg-btn-font-weight);
@@ -262,7 +262,7 @@ body.wp-admin .bfg input[type="submit"].button-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     padding: var(--bfg-btn-md-padding);
     font-size: var(--bfg-btn-md-font-size);
     font-weight: var(--bfg-btn-font-weight);
@@ -386,14 +386,14 @@ body.wp-admin .bfg .button-primary:disabled {
    ========================================================================== */
 
 .bfg-ks-variant {
-    padding-bottom: 40px;
-    margin-bottom: 40px;
+    padding-bottom: var(--bfg-space-10);
+    margin-bottom: var(--bfg-space-10);
     border-bottom: 1px solid var(--bfg-border);
 }
 
 .bfg-ks-size {
     padding-top: 28px;
-    margin-top: 32px;
+    margin-top: var(--bfg-space-8);
     border-top: 1px dashed var(--bfg-border);
 }
 
@@ -468,8 +468,8 @@ a.bfg-btn--danger:hover,
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: var(--bfg-space-2);
+    padding-right: var(--bfg-space-2);
     list-style: none;
 }
 
@@ -508,8 +508,8 @@ a.bfg-split-button__main:hover,
     right: 0;
     z-index: 10;
     min-width: 200px;
-    margin-top: 4px;
-    padding: 4px;
+    margin-top: var(--bfg-space-1);
+    padding: var(--bfg-space-1);
     background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-btn-radius);

@@ -47,6 +47,20 @@
     --bfg-primary-dark: #1E40AF;
     --bfg-primary-bg: #EFF6FF;
     --bfg-primary-tint: #F0F7FF;
+    /* Spacing. A value on this ladder is written as a token. A value off
+       the ladder, such as a 1px border or a 2px nudge, stays a raw px. */
+    --bfg-space-1: 4px;
+    --bfg-space-2: 8px;
+    --bfg-space-3: 12px;
+    --bfg-space-4: 16px;
+    --bfg-space-5: 20px;
+    --bfg-space-6: 24px;
+    --bfg-space-8: 32px;
+    --bfg-space-10: 40px;
+    --bfg-space-12: 48px;
+    --bfg-space-14: 56px;
+    --bfg-space-16: 64px;
+
     --bfg-radius-card: 12px;
     --bfg-radius-input: 8px;
     --bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

@@ -3,7 +3,7 @@
 /* The room stays reserved, so the step list below does not jump on an error. */
 .bfg-connect__result {
 	min-height: 24px;
-	margin-bottom: 8px;
+	margin-bottom: var(--bfg-space-2);
 }
 
 .bfg-connect__error {
@@ -14,7 +14,7 @@
 }
 
 .bfg-connect__checks {
-	margin: 4px 0 0;
+	margin: var(--bfg-space-1) 0 0;
 	padding-left: 18px;
 	list-style: disc;
 	font-size: var(--bfg-font-sm);
@@ -24,8 +24,8 @@
 
 /* The side path to the partner that sells a Bring agreement. */
 .bfg-connect__signup {
-	margin: 0 0 20px;
-	padding: 14px 16px;
+	margin: 0 0 var(--bfg-space-5);
+	padding: 14px var(--bfg-space-4);
 	background: var(--bfg-white);
 	border: 1px solid var(--bfg-border);
 	border-radius: var(--bfg-radius-input);
@@ -36,8 +36,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: 8px 16px;
-	margin-bottom: 12px;
+	gap: var(--bfg-space-2) var(--bfg-space-4);
+	margin-bottom: var(--bfg-space-3);
 }
 
 .bfg-connect__signup-head .bfg-step-form__intro {
@@ -72,5 +72,5 @@
 }
 
 .bfg-connect__signup .bfg-connect__checks {
-	margin-bottom: 12px;
+	margin-bottom: var(--bfg-space-3);
 }

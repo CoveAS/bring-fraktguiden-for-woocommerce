@@ -6,15 +6,15 @@
    ========================================================================== */
 
 .bfg-field--checkbox-box {
-    --cb-padding: 20px;
+    --cb-padding: var(--bfg-space-5);
     --cb-checkbox-size: 20px;
-    --cb-gap: 16px;
+    --cb-gap: var(--bfg-space-4);
     --cb-content-gap: 6px;
 
     background: var(--bfg-white);
     border: 1px solid var(--bfg-border);
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: var(--bfg-space-5);
     transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
@@ -153,13 +153,13 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
     display: flex;
     align-items: flex-start;
-    gap: var(--cb-gap, 16px);
+    gap: var(--cb-gap, var(--bfg-space-4));
     cursor: pointer;
     margin: 0;
 }
 
 .bfg-input--checkbox .bfg-description {
-    margin: 8px 0 0 calc(var(--cb-checkbox-size, 20px) + var(--cb-gap, 16px));
+    margin: var(--bfg-space-2) 0 0 calc(var(--cb-checkbox-size, var(--bfg-space-5)) + var(--cb-gap, var(--bfg-space-4)));
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
     font-weight: 400;
@@ -170,21 +170,21 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-checkbox-desc a {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: var(--bfg-space-2);
 }
 
 /* Legacy: .bfg-section__checkbox
    ========================================================================== */
 
 .bfg-section__checkbox {
-    margin-bottom: 16px;
-    padding: 0 32px;
+    margin-bottom: var(--bfg-space-4);
+    padding: 0 var(--bfg-space-8);
 }
 
 .bfg-section__checkbox label {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--bfg-space-4);
     font-size: var(--bfg-font-base);
     color: var(--bfg-text-secondary);
     cursor: pointer;
@@ -201,7 +201,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-checkbox-group {
     border: 1px solid var(--bfg-border);
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: var(--bfg-space-5);
 }
 
 .bfg-checkbox-group .bfg-field--checkbox-box {

@@ -7,7 +7,7 @@
 
 .bfg-badge {
     font-size: var(--bfg-font-sm);
-    padding: 0 16px;
+    padding: 0 var(--bfg-space-4);
     height: 32px;
     border: none;
     border-radius: 9999px;
@@ -86,7 +86,7 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
     font-size: var(--bfg-font-xs);
     font-weight: 600;
     letter-spacing: var(--bfg-tracking-meta);
-    padding: 0 8px;
+    padding: 0 var(--bfg-space-2);
     height: 20px;
     border-radius: 4px;
     display: inline-flex;
@@ -98,7 +98,7 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: var(--bfg-space-2);
     flex-shrink: 0;
 }
 

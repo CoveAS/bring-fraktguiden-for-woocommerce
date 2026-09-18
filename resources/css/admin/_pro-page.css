@@ -8,7 +8,7 @@
 .bfg-pro-free-state {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--bfg-space-4);
     padding-top: 0 !important;
 }
 
@@ -16,14 +16,14 @@
     background: var(--bfg-white);
     border: 1px solid var(--bfg-gray-200);
     border-radius: 12px;
-    padding: 24px;
+    padding: var(--bfg-space-6);
 }
 
 /* Setup Complete Card */
 .bfg-complete-card {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: var(--bfg-space-5);
 }
 
 .bfg-complete-card__icon {
@@ -53,7 +53,7 @@
     line-height: var(--bfg-leading-base) !important;
     font-weight: 600 !important;
     color: var(--bfg-text-main) !important;
-    margin: 0 0 4px !important;
+    margin: 0 0 var(--bfg-space-1) !important;
     padding: 0 !important;
     border: none !important;
 }
@@ -61,7 +61,7 @@
 .bfg-complete-card__desc {
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
-    margin: 0 0 4px !important;
+    margin: 0 0 var(--bfg-space-1) !important;
 }
 
 .bfg-complete-card__hint {
@@ -88,7 +88,7 @@
 .bfg-booking-upsell {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: var(--bfg-space-5);
     background: linear-gradient(to right, #F7FAFF, #E8F0FE) !important;
     border-color: #D1E4FD !important;
 }
@@ -122,7 +122,7 @@
     text-transform: uppercase;
     letter-spacing: var(--bfg-tracking-meta);
     color: var(--bfg-text-muted) !important;
-    margin: 0 0 4px !important;
+    margin: 0 0 var(--bfg-space-1) !important;
 }
 
 .bfg-booking-upsell__title {
@@ -136,13 +136,13 @@
 .bfg-booking-upsell__desc {
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
-    margin: 0 0 16px !important;
+    margin: 0 0 var(--bfg-space-4) !important;
 }
 
 .bfg-check-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 16px !important;
+    margin: 0 0 var(--bfg-space-4) !important;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -164,7 +164,7 @@
 .bfg-booking-upsell__cta {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 .bfg-booking-upsell__no-cc {
@@ -176,13 +176,13 @@
 .bfg-stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 .bfg-stat-card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 .bfg-stat-card__icon {
@@ -215,7 +215,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 20px;
+    margin-bottom: var(--bfg-space-5);
 }
 
 .bfg-do-more-card__icon {
@@ -241,9 +241,9 @@
 .bfg-do-more-card__grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-    margin-bottom: 20px;
+    gap: var(--bfg-space-4);
+    margin-top: var(--bfg-space-4);
+    margin-bottom: var(--bfg-space-5);
 }
 
 .bfg-do-more-feature strong {
@@ -269,14 +269,14 @@
     font-weight: 600 !important;
     line-height: var(--bfg-leading-base) !important;
     color: var(--bfg-text-main);
-    margin: 0 0 4px !important;
+    margin: 0 0 var(--bfg-space-1) !important;
 }
 
 /* Pro Upsell Card */
 .bfg-pro-upsell-card {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--bfg-space-4);
     background: linear-gradient(to right, #F7FAFF, #E8F0FE) !important;
     border-color: #D1E4FD !important;
 }
@@ -301,13 +301,13 @@
 .bfg-pro-upsell-card__desc {
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
-    margin: 0 0 16px !important;
+    margin: 0 0 var(--bfg-space-4) !important;
 }
 
 .bfg-pro-upsell-card__ctas {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     flex-wrap: wrap;
 }
 
@@ -334,7 +334,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: var(--bfg-space-6);
 }
 
 .bfg-license-expired-card__body .bfg-pro-upsell-card__desc {
@@ -363,14 +363,14 @@
 
 /* License Activate Card */
 .bfg-license-activate-card .bfg-complete-card__desc {
-    margin-bottom: 8px !important;
+    margin-bottom: var(--bfg-space-2) !important;
 }
 
 /* Active State
    ========================================================================== */
 
 .bfg-license-info-section {
-    margin-top: 16px;
+    margin-top: var(--bfg-space-4);
     padding-top: 0 !important;
 }
 
@@ -381,7 +381,7 @@
 .bfg-license-active-card {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--bfg-space-4);
 }
 
 .bfg-license-active-card .bfg-pro-upsell-card__icon {
@@ -410,7 +410,7 @@
     font-family: var(--bfg-font-mono);
     font-size: var(--bfg-font-xs);
     color: var(--bfg-gray-700);
-    margin: 6px 0 4px;
+    margin: 6px 0 var(--bfg-space-1);
     letter-spacing: var(--bfg-tracking-meta);
 }
 
@@ -420,7 +420,7 @@
     gap: 6px;
     font-size: var(--bfg-font-sm) !important;
     color: var(--bfg-text-secondary);
-    margin: 4px 0 0 !important;
+    margin: var(--bfg-space-1) 0 0 !important;
 }
 
 /* License Card
@@ -431,7 +431,7 @@
     border: 1px solid var(--bfg-gray-200);
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 48px;
+    margin-bottom: var(--bfg-space-12);
 }
 
 .bfg-field-group-title:has(+ .bfg-license-card) {
@@ -439,21 +439,21 @@
 }
 
 .bfg-license-card__body {
-    padding: 24px;
+    padding: var(--bfg-space-6);
 }
 
 .bfg-license-card__header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: var(--bfg-space-5);
 }
 
 .bfg-license-card__title {
     font-size: var(--bfg-font-base);
     font-weight: 600;
     color: var(--bfg-text-main);
-    margin-bottom: 4px;
+    margin-bottom: var(--bfg-space-1);
 }
 
 .bfg-license-card__subtitle {
@@ -465,7 +465,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 12px;
+    padding: 5px var(--bfg-space-3);
     border-radius: 99px;
     font-size: var(--bfg-font-xs);
     font-weight: 600;
@@ -506,7 +506,7 @@
 .bfg-license-card__key-label {
     font-size: var(--bfg-font-xs);
     color: var(--bfg-text-secondary);
-    margin-bottom: 8px;
+    margin-bottom: var(--bfg-space-2);
 }
 
 .bfg-license-card__key-value {
@@ -516,7 +516,7 @@
     color: var(--bfg-gray-700);
     background: var(--bfg-gray-100);
     border-radius: 6px;
-    padding: 6px 12px;
+    padding: 6px var(--bfg-space-3);
 }
 
 .bfg-license-card__key-value--placeholder {
@@ -528,7 +528,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 24px;
+    padding: 14px var(--bfg-space-6);
     border-top: 1px solid var(--bfg-gray-200);
 }
 
@@ -538,7 +538,7 @@
 }
 
 .bfg-license-card__manage {
-    gap: 4px;
+    gap: var(--bfg-space-1);
     font-size: var(--bfg-font-xs);
 }
 
@@ -546,7 +546,7 @@
    ========================================================================== */
 
 .bfg-admin-page__pro .bfg-section {
-    padding-bottom: 56px;
+    padding-bottom: var(--bfg-space-14);
     border-bottom: none;
 }
 
@@ -574,7 +574,7 @@
    ========================================================================== */
 
 .bfg-pro-features-section {
-    margin-top: 56px;
+    margin-top: var(--bfg-space-14);
 }
 
 .bfg-pro-features-section__header {
@@ -585,7 +585,7 @@
     font-size: var(--bfg-font-2xl) !important;
     font-weight: 600 !important;
     color: var(--bfg-text-main);
-    margin: 0 0 4px !important;
+    margin: 0 0 var(--bfg-space-1) !important;
 }
 
 .bfg-pro-features-section__subtitle {
@@ -597,7 +597,7 @@
 .bfg-pro-feature-card-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: var(--bfg-space-3);
 }
 
 @media screen and (max-width: 782px) {
@@ -613,10 +613,10 @@
     background: var(--bfg-white);
     border: 1px solid var(--bfg-gray-200);
     border-radius: 10px;
-    padding: 20px;
+    padding: var(--bfg-space-5);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--bfg-space-2);
 }
 
 .bfg-pro-feature-card__icon {
@@ -628,7 +628,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4px;
+    margin-bottom: var(--bfg-space-1);
 }
 
 .bfg-pro-feature-card__title {
@@ -676,7 +676,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     background: var(--bfg-white);
     border: 1px solid var(--bfg-gray-200);
     border-radius: 10px;
-    padding: 24px;
+    padding: var(--bfg-space-6);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -704,7 +704,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: var(--bfg-space-4);
     flex-shrink: 0;
 }
 
@@ -738,8 +738,8 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 
 .bfg-feature-card__benefits {
     list-style: none;
-    margin: 16px 0 0 !important;
-    padding: 16px 0 0 !important;
+    margin: var(--bfg-space-4) 0 0 !important;
+    padding: var(--bfg-space-4) 0 0 !important;
     border-top: 1px solid var(--bfg-gray-100);
     display: flex;
     flex-direction: column;
@@ -749,7 +749,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 .bfg-feature-card__benefits li {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--bfg-space-2);
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
     padding: 0;
@@ -774,15 +774,15 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem 2.5rem;
-    margin: 0 0 24px 0;
-    padding: 16px 24px;
+    margin: 0 0 var(--bfg-space-6) 0;
+    padding: var(--bfg-space-4) var(--bfg-space-6);
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-card);
     background: var(--bfg-bg-card);
 }
 
 .bfg-license-status__item dt {
-    margin: 0 0 4px 0;
+    margin: 0 0 var(--bfg-space-1) 0;
     font-size: var(--bfg-font-xs);
     font-weight: 600;
     text-transform: uppercase;
@@ -829,7 +829,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 }
 
 .bfg-license-checked {
-    margin: -16px 0 24px 0;
+    margin: -16px 0 var(--bfg-space-6) 0;
     font-size: var(--bfg-font-xs);
     color: var(--bfg-wp-danger);
 }
