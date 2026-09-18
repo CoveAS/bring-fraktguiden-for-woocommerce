@@ -10,8 +10,9 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  * Bring answers some accounts with an error when a rate query carries their
  * customer number. The shop then asks for list prices instead.
  *
- * The refusal is stored on its own. The checkbox of the shop owner stays as
- * the owner left it, so the shop tries the number again on the next save.
+ * The refusal is stored on its own, next to the checkbox of the shop owner.
+ * It names the number Bring refused, so the notice stays true after the owner
+ * enters another number.
  */
 final class PriceCustomerNumberRefusal
 {

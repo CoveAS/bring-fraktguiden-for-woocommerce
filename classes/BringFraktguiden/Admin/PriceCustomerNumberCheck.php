@@ -101,7 +101,13 @@ final class PriceCustomerNumberCheck
 			return $value;
 		}
 
-		self::test_shop((string) Fraktguiden_Helper::get_option('from_country'), $postcode);
+		$result = self::test_shop((string) Fraktguiden_Helper::get_option('from_country'), $postcode);
+
+		// Bring refused the number, so the shop asks for list prices. Turn the
+		// checkbox off, so the page shows what the shop really does.
+		if ($result->note) {
+			$value[self::SETTING] = 'no';
+		}
 
 		return $value;
 	}
