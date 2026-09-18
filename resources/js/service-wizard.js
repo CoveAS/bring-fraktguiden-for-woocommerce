@@ -21,16 +21,30 @@ document.addEventListener('DOMContentLoaded', () => {
 	const answersOf = (step) =>
 		[...step.querySelectorAll('input:checked')].map((input) => input.value);
 
+	/**
+	 * A step may depend on an answer to an earlier step, written as
+	 * data-needs="<step>:<value>". A step without the attribute always applies.
+	 */
+	const applies = (step, answers) => {
+		if (!step.dataset.needs) return true;
+
+		const [question, value] = step.dataset.needs.split(':');
+
+		return (answers[question] ?? []).includes(value);
+	};
+
 	const update = () => {
 		const answers = {};
 		let answered = true;
 
 		questions.forEach((step) => {
-			step.hidden = !answered;
-			const given = answersOf(step);
+			const skipped = !applies(step, answers);
+			const given = skipped ? [] : answersOf(step);
+
+			step.hidden = !answered || skipped;
 			answers[step.dataset.step] = given;
 			step.querySelector('.bfg-wizard__hint').hidden = given.length > 0;
-			answered = answered && given.length > 0;
+			answered = answered && (skipped || given.length > 0);
 		});
 
 		result.hidden = !answered;

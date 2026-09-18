@@ -161,7 +161,7 @@
 					</bfg-section.section>
 				</bfg-section>
 
-				<bfg-section class="bfg-wizard__step" data-step="rfid" hidden>
+				<bfg-section class="bfg-wizard__step" data-step="rfid" data-needs="weight:0-5" hidden>
 					<div class="bfg-section__header">
 						<h2>
 							<t>Do you have an RFID-enabled printer and labels?</t>
