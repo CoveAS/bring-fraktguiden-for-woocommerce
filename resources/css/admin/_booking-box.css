@@ -359,3 +359,22 @@
 .bfg-customs-products__row--filtered {
     display: none;
 }
+
+/* Postbox chrome ---------------------------------------------------------- */
+
+/* The box always renders first, so the move buttons would promise something
+   they cannot do. The drag starts from .hndle in the postbox script of
+   WordPress, so a handle that takes no pointer stops the drag as well. */
+#bring-fraktguiden-booking-box .handle-order-higher,
+#bring-fraktguiden-booking-box .handle-order-lower {
+    display: none;
+}
+
+#bring-fraktguiden-booking-box .postbox-header {
+    cursor: default;
+}
+
+#bring-fraktguiden-booking-box .hndle {
+    cursor: default;
+    pointer-events: none;
+}

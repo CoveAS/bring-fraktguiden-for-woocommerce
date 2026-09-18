@@ -31,10 +31,19 @@ class BookingBox
 {
 	public const SERVICE_KEY = 'woocommerce_bring_fraktguiden_services';
 
+	public const BOX_ID = 'bring-fraktguiden-booking-box';
+
 	public static function init(): void
 	{
-		add_action('add_meta_boxes', [self::class, 'add'], 1, 2);
+		// WooCommerce adds the order boxes before it fires add_meta_boxes on the
+		// HPOS screen, so a low number cannot win the first place. The box takes
+		// the first place in add() instead, after every other box exists.
+		add_action('add_meta_boxes', [self::class, 'add'], 100, 2);
 		add_action('admin_enqueue_scripts', [self::class, 'enqueue']);
+
+		foreach (['shop_order', 'woocommerce_page_wc-orders'] as $screen) {
+			add_filter("get_user_option_meta-box-order_{$screen}", [self::class, 'drop_from_saved_order']);
+		}
 	}
 
 	/**
@@ -63,13 +72,53 @@ class BookingBox
 		}
 
 		add_meta_box(
-			'bring-fraktguiden-booking-box',
+			self::BOX_ID,
 			__('Bring Booking', 'bring-fraktguiden-for-woocommerce'),
 			fn() => print(self::html($order)),
 			$post_type,
 			'normal',
 			'high'
 		);
+
+		self::move_to_front($post_type);
+	}
+
+	/**
+	 * Put the box first inside the high priority of the normal column.
+	 *
+	 * WordPress renders a priority in the order the boxes were added, and it
+	 * offers no way to add one in front. So the list is rebuilt here.
+	 */
+	private static function move_to_front(string $screen): void
+	{
+		global $wp_meta_boxes;
+
+		$boxes = $wp_meta_boxes[$screen]['normal']['high'];
+
+		$wp_meta_boxes[$screen]['normal']['high'] = [self::BOX_ID => $boxes[self::BOX_ID]] + $boxes;
+	}
+
+	/**
+	 * Take the box out of the box order a user saved.
+	 *
+	 * WordPress moves every saved box into the "sorted" priority, and renders
+	 * "high" before it. The box keeps the first place only while it is absent
+	 * from the saved list.
+	 *
+	 * @param mixed $order The saved order, an array of context to id list.
+	 * @return mixed
+	 */
+	public static function drop_from_saved_order($order)
+	{
+		if (!is_array($order)) {
+			return $order;
+		}
+
+		foreach ($order as $context => $ids) {
+			$order[$context] = implode(',', array_diff(explode(',', (string) $ids), [self::BOX_ID]));
+		}
+
+		return $order;
 	}
 
 	public static function enqueue(string $hook): void
