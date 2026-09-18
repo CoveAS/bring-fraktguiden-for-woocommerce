@@ -102,6 +102,7 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => false,
 				'delivery_date' => true,
+				'requires_phone' => true,
 				'oldcode'     => 'PA_DOREN',
 				'return_label' => true,
 			],

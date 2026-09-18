@@ -2,11 +2,14 @@
 
 Bring reaches the recipient by phone on some services. Pakkeboks sends the
 locker code by SMS, so a Pakkeboks parcel with no number cannot be collected.
+The Pakke hjem pluss driver rings the recipient 30 to 60 minutes before an
+evening delivery.
 
 ## The rule in this plugin
 
 A service that needs a number carries `requires_phone => true` in
-`config/services.php`. Only 5801 Pakkeboks carries it today.
+`config/services.php`. 5801 Pakkeboks and 5600 Pakke hjem pluss carry it
+today.
 
 `BringFraktguiden\Checkout\PhoneRequirement` reads the flag. The checkout
 refuses the order when the customer chose such a service and gave no usable

@@ -9,8 +9,9 @@ use WP_Error;
  * The phone number a service needs from the recipient.
  *
  * Bring reaches the recipient by phone on some services. Pakkeboks sends the
- * locker code by SMS. The service rows carry the trait as
- * 'requires_phone' => true in config/services.php.
+ * locker code by SMS, and the Pakke hjem pluss driver rings the recipient
+ * before arrival. The service rows carry the trait as 'requires_phone' => true
+ * in config/services.php.
  *
  * A service without the flag needs no number, so an unknown service stops no
  * order.
@@ -138,7 +139,7 @@ class PhoneRequirement
 	{
 		return sprintf(
 			/* translators: %s: the name of a shipping service, for example Pakkeboks. */
-			__('%s needs a phone number. Bring sends the recipient a message when the parcel arrives.', 'bring-fraktguiden-for-woocommerce'),
+			__('%s needs a phone number. Bring sends the recipient a message about the parcel.', 'bring-fraktguiden-for-woocommerce'),
 			$service
 		);
 	}

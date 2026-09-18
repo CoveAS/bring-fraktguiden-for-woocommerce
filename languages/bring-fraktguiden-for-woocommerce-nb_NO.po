@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T21:19:02+00:00\n"
+"POT-Creation-Date: 2026-09-18T21:21:45+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -501,7 +501,7 @@ msgstr ""
 msgid "Send a return label with every booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:244 config/services.php:481
+#: build/templates/admin/pages/booking.php:244 config/services.php:482
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
@@ -2625,14 +2625,13 @@ msgid ""
 msgstr ""
 
 #. translators: %s: the name of a shipping service, for example Pakkeboks.
-#: classes/BringFraktguiden/Checkout/PhoneRequirement.php:141
+#: classes/BringFraktguiden/Checkout/PhoneRequirement.php:142
 #, php-format
 msgid ""
-"%s needs a phone number. Bring sends the recipient a message when the parcel "
-"arrives."
+"%s needs a phone number. Bring sends the recipient a message about the "
+"parcel."
 msgstr ""
-"%s krever et telefonnummer. Bring sender mottakeren en melding når pakken "
-"er fremme."
+"%s krever et telefonnummer. Bring sender mottakeren en melding om pakken."
 
 #: classes/BringFraktguiden/Customs/CustomsField.php:55
 msgid "HS code"
@@ -3594,29 +3593,29 @@ msgstr ""
 msgid "New services"
 msgstr "Nye tjenester"
 
-#: config/services.php:177
+#: config/services.php:178
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: config/services.php:194 config/services.php:212
+#: config/services.php:195 config/services.php:213
 msgid "Packages up to 5 kg."
 msgstr "Pakker opp til 5 kg."
 
-#: config/services.php:195
+#: config/services.php:196
 msgid ""
 "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 "NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
 
-#: config/services.php:219
+#: config/services.php:220
 msgid "Services"
 msgstr "Tjenester"
 
-#: config/services.php:255 config/services.php:310
+#: config/services.php:256 config/services.php:311
 msgid "Other services"
 msgstr "Andre tjenester"
 
-#: config/services.php:272 config/services.php:291 config/services.php:302
+#: config/services.php:273 config/services.php:292 config/services.php:303
 msgid ""
 "Fuel surcharge is not included in the price returned from the ShippingGuide "
 "and must be calculated / added manually. Bring Parcels is entitled to change "
@@ -3628,7 +3627,7 @@ msgstr ""
 "denne kostnaden uten varsel til kunden. Eventuelt anvendt drivstofftillegg "
 "vil være detaljert på fakturaen."
 
-#: config/services.php:439
+#: config/services.php:440
 msgid "Courier"
 msgstr "Courier"
 
@@ -4014,6 +4013,14 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#, php-format
+#~ msgid ""
+#~ "%s needs a phone number. Bring sends the recipient a message when the "
+#~ "parcel arrives."
+#~ msgstr ""
+#~ "%s krever et telefonnummer. Bring sender mottakeren en melding når pakken "
+#~ "er fremme."
 
 #~ msgid ""
 #~ "This site is running in a local environment and production settings has "
