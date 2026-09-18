@@ -377,6 +377,10 @@ Use `/skill-name` in chat to invoke:
 
 ## Documentation
 
+`doc/dictionary.md` explains the words this plugin uses. Many are Norwegian or
+are a Bring trade name. Read it when a word is new, and add an entry when you
+meet a word it does not hold.
+
 `doc/` holds durable facts only. A durable fact stays true across sessions, for
 example an external rule, an API contract, or a decision and its reason.
 
