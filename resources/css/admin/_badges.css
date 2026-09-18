@@ -6,12 +6,12 @@
    ========================================================================== */
 
 .bfg-badge {
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     padding: 0 16px;
     height: 32px;
     border: none;
     border-radius: 9999px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1;
     box-sizing: border-box;
     display: inline-flex;
@@ -25,7 +25,7 @@
 }
 
 .bfg-badge--md {
-    font-size: 12px;
+    font-size: var(--bfg-font-xs);
     padding: 0 10px;
     height: 28px;
 }
@@ -33,8 +33,8 @@
 .bfg-badge--completed-text {
     display: inline-flex;
     align-items: center;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: var(--bfg-font-xs);
+    font-weight: 600;
     color: #15803d;
     background: none;
     padding: 0;
@@ -70,7 +70,7 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
 .bfg-badge--active {
     background: #2563EB;
     color: #fff;
-    font-size: 12px;
+    font-size: var(--bfg-font-xs);
     font-weight: 600;
     padding: 2px 10px;
     border-radius: 6px;
@@ -80,8 +80,8 @@ body.wp-admin .bfg a.bfg-badge--outline:focus {
 .bfg-badge--pro-green {
     background: var(--bfg-primary-light);
     color: var(--bfg-primary);
-    font-size: 12px;
-    font-weight: 700;
+    font-size: var(--bfg-font-xs);
+    font-weight: 600;
     letter-spacing: 0.05em;
     padding: 0 8px;
     height: 20px;

@@ -18,34 +18,42 @@
     --bfg-radius-input: 8px;
     --bfg-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-    /* Typography */
-    --bfg-text-level-1: 32px;
-    --bfg-text-level-2: 16px;
-    --bfg-text-level-3: 16px;
-    --bfg-text-level-4: 16px;
-    --bfg-text-level-5: 16px;
-    --bfg-text-level-6: 14px;
+    /* Type scale — the four sizes the admin UI is allowed to use.
+       A size outside this list is a bug. The names follow the Tailwind
+       ladder, so 2xl is 24px there too. The gaps in the names are on
+       purpose: lg and xl do not exist here.
+       The kitchen sink typography page shows each step and its role. */
+    --bfg-font-xs: 12px;
+    --bfg-font-sm: 14px;
+    --bfg-font-base: 16px;
+    --bfg-font-2xl: 24px;
+
+    --bfg-leading-xs: 16px;
+    --bfg-leading-sm: 20px;
+    --bfg-leading-base: 24px;
+    --bfg-leading-2xl: 32px;
+
     --bfg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
 
     /* Button System */
     --bfg-btn-radius: 8px;
-    --bfg-btn-font-weight: 500;
+    --bfg-btn-font-weight: 600;
     --bfg-btn-transition: all 0.2s ease;
     --bfg-btn-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
 
     /* Button Sizes */
     --bfg-btn-sm-padding: 6px 16px;
-    --bfg-btn-sm-font-size: 14px;
+    --bfg-btn-sm-font-size: var(--bfg-font-sm);
     --bfg-btn-sm-line-height: 20px;
     --bfg-btn-sm-height: 32px;
 
     --bfg-btn-md-padding: 8px 24px;
-    --bfg-btn-md-font-size: 14px;
+    --bfg-btn-md-font-size: var(--bfg-font-sm);
     --bfg-btn-md-line-height: 24px;
     --bfg-btn-md-height: 40px;
 
     --bfg-btn-lg-padding: 12px 32px;
-    --bfg-btn-lg-font-size: 16px;
+    --bfg-btn-lg-font-size: var(--bfg-font-base);
     --bfg-btn-lg-line-height: 24px;
     --bfg-btn-lg-height: 48px;
 }

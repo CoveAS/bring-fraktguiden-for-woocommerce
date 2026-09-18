@@ -92,7 +92,7 @@
     background: var(--bfg-primary-light);
     border-radius: 20rem;
     color: var(--bfg-text-main);
-    font-size: 12px;
+    font-size: var(--bfg-font-xs);
     line-height: 1;
     padding: 4px 8px;
 }

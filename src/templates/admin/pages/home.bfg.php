@@ -170,12 +170,14 @@ use BringFraktguiden\Admin\Step;
 						<label class="bfg-zone-row">
 							<input type="checkbox" name="zones[]" value="<?php echo esc_attr($zone['id']); ?>"
 								<?php checked($zone['suggested']); ?> <?php echo $zone['added'] ? 'disabled' : ''; ?>>
-							<span class="bfg-zone-row__regions"><?php echo esc_html($zone['regions']); ?></span>
-							<?php if ($zone['name'] !== $zone['regions']): ?>
-								<span class="bfg-zone-row__name"><?php echo esc_html($zone['name']); ?></span>
-							<?php endif; ?>
+							<span class="bfg-zone-row__text">
+								<span class="bfg-zone-row__label"><?php echo esc_html($zone['regions']); ?></span>
+								<?php if ($zone['name'] !== $zone['regions']): ?>
+									<span class="bfg-zone-row__hint"><?php echo esc_html($zone['name']); ?></span>
+								<?php endif; ?>
+							</span>
 							<?php if ($zone['added']): ?>
-								<span class="bfg-zone-row__note"><t>Already added</t></span>
+								<span class="bfg-zone-row__flag"><t>Already added</t></span>
 							<?php endif; ?>
 						</label>
 					<?php endforeach; ?>

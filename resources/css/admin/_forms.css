@@ -13,8 +13,8 @@
 .bfg .bfg-field>.label,
 .bfg .bfg-label {
     display: block;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: var(--bfg-font-sm);
     line-height: 1.5;
     color: var(--bfg-text-main);
     margin-bottom: 8px !important;
@@ -24,7 +24,7 @@
 .bfg-field-group-title {
     display: block;
     font-weight: 600;
-    font-size: 16px !important;
+    font-size: var(--bfg-font-base) !important;
     line-height: 1.5 !important;
     color: var(--bfg-text-main);
     margin-top: 8px;
@@ -34,15 +34,13 @@
 /* Type Scale
    ========================================================================== */
 
-.bfg-text-display    { font-size: 48px; line-height: 56px; font-weight: 600; }
-.bfg-text-heading-xl { font-size: 32px; line-height: 40px; font-weight: 600; }
-.bfg-text-heading-l  { font-size: 28px; line-height: 36px; font-weight: 500; }
-.bfg-text-heading-m  { font-size: 24px; line-height: 32px; font-weight: 500; }
-.bfg-text-heading-s  { font-size: 20px; line-height: 28px; font-weight: 500; }
-.bfg-text-body       { font-size: 16px; line-height: 24px; font-weight: 400; }
-.bfg-text-type-label { font-size: 16px; line-height: 24px; font-weight: 500; }
-.bfg-text-small      { font-size: 14px; line-height: 20px; font-weight: 400; }
-.bfg-text-xs         { font-size: 13px; line-height: 20px; font-weight: 400; }
+/* A step sets a size and a line height. It never sets a weight, because a
+   weight is a separate choice. Pick the weight with a Tailwind utility. */
+
+.bfg-text-xs   { font-size: var(--bfg-font-xs);   line-height: var(--bfg-leading-xs); }
+.bfg-text-sm   { font-size: var(--bfg-font-sm);   line-height: var(--bfg-leading-sm); }
+.bfg-text-base { font-size: var(--bfg-font-base); line-height: var(--bfg-leading-base); }
+.bfg-text-2xl  { font-size: var(--bfg-font-2xl);  line-height: var(--bfg-leading-2xl); }
 
 .bfg-type-scale-table {
     width: 100%;
@@ -60,8 +58,8 @@
 }
 .bfg-type-scale-table th {
     padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: var(--bfg-font-xs);
+    font-weight: 600;
     color: var(--bfg-text-muted);
 }
 .bfg-type-scale-table th:first-child { padding-left: 0; }
@@ -90,7 +88,7 @@
     align-items: center;
     gap: 8px;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
 }
 
 .bfg-field__validation.is-visible {
@@ -123,7 +121,7 @@
 
 .bfg-description,
 .bfg .bfg-description {
-    font-size: 16px !important;
+    font-size: var(--bfg-font-base) !important;
     color: var(--bfg-text-secondary) !important;
     font-weight: 400 !important;
     line-height: 22px !important;
@@ -135,7 +133,7 @@
 
 .bfg-field .bfg-description,
 .bfg-input .bfg-description {
-    font-size: 14px !important;
+    font-size: var(--bfg-font-sm) !important;
     line-height: 21px !important;
     margin-top: 8px !important;
     margin-bottom: 24px !important;
@@ -161,7 +159,7 @@
     padding: 0 12px;
     height: var(--bfg-btn-md-height);
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     width: 100% !important;
     max-width: none !important;
     background: #F9FAFB !important;
@@ -181,7 +179,7 @@
 .bfg .bfg-field--sm input[type="email"] {
     height: var(--bfg-btn-sm-height) !important;
     padding: 0 8px !important;
-    font-size: 12px !important;
+    font-size: var(--bfg-font-xs) !important;
 }
 
 .bfg .bfg-field--lg input[type="text"],
@@ -191,19 +189,19 @@
 .bfg .bfg-field--lg input[type="email"] {
     height: var(--bfg-btn-lg-height) !important;
     padding: 0 16px !important;
-    font-size: 16px !important;
+    font-size: var(--bfg-font-base) !important;
 }
 
 .bfg .bfg-field--sm select {
     height: var(--bfg-btn-sm-height) !important;
     padding: 0 32px 0 8px !important;
-    font-size: 12px !important;
+    font-size: var(--bfg-font-xs) !important;
 }
 
 .bfg .bfg-field--lg select {
     height: var(--bfg-btn-lg-height) !important;
     padding: 0 44px 0 16px !important;
-    font-size: 16px !important;
+    font-size: var(--bfg-font-base) !important;
 }
 
 /* Select arrow
@@ -351,7 +349,7 @@ body:not(.using-mouse) .bfg textarea:focus {
     justify-content: center;
     padding: 0 8px;
     color: var(--bfg-text-muted);
-    font-size: var(--bfg-text-level-5);
+    font-size: var(--bfg-font-base);
     background: var(--bfg-bg-page);
     border-left: 1px solid var(--bfg-border);
     flex-shrink: 0;

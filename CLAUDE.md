@@ -206,6 +206,27 @@ php bin/list-components.php
 - Frontend/checkout legacy styles: `assets/css/bring-fraktguiden.css`
 - Pro-specific admin styles: `pro/assets/css/admin.css`
 
+### The type scale
+
+The admin UI has four font sizes and two font weights. Nothing else.
+
+| Token | Size | Where it belongs |
+|---|---|---|
+| `--bfg-font-2xl` | 24px | Page title, card headline, big number |
+| `--bfg-font-base` | 16px | Body text, field label, card title |
+| `--bfg-font-sm` | 14px | Description, hint, button |
+| `--bfg-font-xs` | 12px | Badge, code, meta label |
+
+A weight is 400 or 600. A size sets a line height through the matching
+`--bfg-leading-*` token.
+
+Never write a font size in pixels. `npm run test-js` fails on a raw pixel size
+and on any other weight.
+
+The Kitchen Sink typography page shows the scale. The shadow root stylesheets
+under `pro/assets/css/` sit outside it, because a custom property of the page
+does not reach a shadow root.
+
 ## Build Commands
 
 | Command | When to run |

@@ -36,7 +36,7 @@
 	align-items: center;
 	gap: 8px;
 	margin: 2px 0 0;
-	font-size: 14px;
+	font-size: var(--bfg-font-sm);
 	font-weight: 400;
 	line-height: 1.4;
 	color: var(--bfg-text-secondary);
@@ -50,8 +50,8 @@
 	border: 0;
 	background: none;
 	cursor: pointer;
-	font-size: 14px;
-	font-weight: 500;
+	font-size: var(--bfg-font-sm);
+	font-weight: 600;
 	color: var(--bfg-primary);
 }
 
@@ -78,7 +78,7 @@
 
 .bfg-step-form__intro {
 	margin: 0 0 12px;
-	font-size: 14px;
+	font-size: var(--bfg-font-sm);
 	font-weight: 400;
 	color: var(--bfg-text-secondary);
 }
@@ -90,7 +90,7 @@
 .bfg-step-form__label {
 	display: block;
 	margin-bottom: 4px;
-	font-size: 14px;
+	font-size: var(--bfg-font-sm);
 	font-weight: 600;
 }
 
@@ -100,7 +100,7 @@
 
 .bfg-step-form__help {
 	margin: 4px 0 0;
-	font-size: var(--bfg-text-level-6);
+	font-size: var(--bfg-font-sm);
 	font-weight: 400;
 	color: var(--bfg-text-muted);
 }
@@ -111,7 +111,7 @@
 	align-items: center;
 	gap: 8px;
 	margin-bottom: 6px;
-	font-size: 14px;
+	font-size: var(--bfg-font-sm);
 	font-weight: 600;
 	cursor: pointer;
 }

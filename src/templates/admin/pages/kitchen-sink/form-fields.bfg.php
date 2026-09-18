@@ -5,7 +5,7 @@
 	<bfg-section.header title="Form Fields" description="All input types with MD / LG size variants"></bfg-section.header>
 	<bfg-section.section>
 
-		<?php $size_label = 'width:28px;flex-shrink:0;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--bfg-text-muted);display:flex;align-items:center'; ?>
+		<?php $size_label = 'width:28px;flex-shrink:0;font-size:var(--bfg-font-xs);text-transform:uppercase;letter-spacing:.07em;color:var(--bfg-text-muted);display:flex;align-items:center'; ?>
 
 		<!-- ── Text Input ──────────────────────────────────────────── -->
 		<h3 class="bfg-field-group-title"><bfg-t>Text Input</bfg-t></h3>

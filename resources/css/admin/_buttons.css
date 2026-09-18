@@ -404,7 +404,7 @@ body.wp-admin .bfg .button-primary:disabled {
 }
 
 .bfg-ks-size-label {
-    font-size: 12px;
+    font-size: var(--bfg-font-xs);
     color: var(--bfg-text-muted);
     margin: 0 0 10px;
     font-weight: 600;
@@ -415,41 +415,10 @@ body.wp-admin .bfg .button-primary:disabled {
 .bfg-ks-state-label {
     width: 68px;
     flex-shrink: 0;
-    font-size: 10px;
+    font-size: var(--bfg-font-xs);
     text-transform: uppercase;
     letter-spacing: .07em;
     color: var(--bfg-text-muted);
-}
-
-.bfg-ks-level-label {
-    font-size: 13px;
-    color: var(--bfg-text-muted);
-}
-
-.bfg-ks-level-sublabel {
-    font-size: 13px;
-    color: var(--bfg-text-muted);
-    margin: 2px 0 0;
-}
-
-.bfg-ks-heading-example {
-    margin: 0;
-    color: var(--bfg-text-primary);
-}
-
-.bfg-ks-heading-1 { font-size: 32px; font-weight: 600; line-height: 1.2; }
-.bfg-ks-heading-2 { font-size: 24px; font-weight: 600; line-height: 1.3; }
-.bfg-ks-heading-3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
-.bfg-ks-heading-4 { font-size: 18px; font-weight: 500; line-height: 1.4; }
-.bfg-ks-heading-5 { font-size: 16px; font-weight: 500; line-height: 1.4; }
-.bfg-ks-heading-6 { font-size: 14px; font-weight: 500; line-height: 1.4; }
-
-.bfg-ks-spec-text {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--bfg-text-secondary);
 }
 
 /* Danger Button

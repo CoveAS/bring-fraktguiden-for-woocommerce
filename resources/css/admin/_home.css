@@ -38,7 +38,7 @@
     background: #F3F4F6;
     border-radius: 6px;
     padding: 4px 8px;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     font-weight: 600;
     color: #374151;
     white-space: nowrap;
@@ -70,15 +70,15 @@
 }
 
 .bfg-setup-header__title {
-    font-size: 28px;
-    font-weight: 500;
+    font-size: var(--bfg-font-2xl);
+    font-weight: 600;
     color: var(--bfg-text-main);
     margin: 0 0 8px !important;
     line-height: 36px;
 }
 
 .bfg-setup-header__subtitle {
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     color: #596270;
     margin: 0 0 24px !important;
     font-weight: 400;
@@ -103,15 +103,15 @@
 }
 
 .bfg-setup-header__stat-label {
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #596270;
     font-weight: 400;
 }
 
 .bfg-setup-header__stat-value {
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     color: #111827;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .bfg-setup-header .bfg-progress-container {
@@ -141,13 +141,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: var(--bfg-font-base);
+    font-weight: 600;
 }
 
 .bfg-active-step__content h3 {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: var(--bfg-font-2xl);
+    font-weight: 600;
     margin: 0 0 8px !important;
     color: #111827;
     line-height: 32px;
@@ -155,7 +155,7 @@
 }
 
 .bfg-active-step__content p {
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     margin: 0 0 24px !important;
     color: #4B5563;
     line-height: 24px;
@@ -164,7 +164,7 @@
 }
 
 .bfg-admin-page__home .bfg-btn--primary {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Steps List
@@ -177,13 +177,13 @@
 }
 
 .bfg-steps-list .bfg-access-link__content {
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     font-weight: 600;
     color: #111827;
 }
 
 .bfg-steps-list .bfg-access-link__content .bfg-step__desc {
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #596270;
 }
 
@@ -210,14 +210,14 @@
 }
 
 .bfg-pro-teaser-v2 .bfg-section-card-title {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: var(--bfg-font-2xl);
+    font-weight: 600;
     margin: 0 auto 8px;
     text-align: center;
 }
 
 .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     color: #596270;
     margin: 0 auto 32px;
     text-align: center;
@@ -231,7 +231,7 @@
 .bfg-field__error {
     display: flex;
     align-items: center;
-    font-size: 0.875rem;
+    font-size: var(--bfg-font-sm);
     color: #dc2626;
     margin-top: 0.375rem;
 }
@@ -293,7 +293,6 @@
     }
 
     .bfg-section-card-title {
-        font-size: 24px !important;
         line-height: 32px !important;
     }
 
@@ -311,16 +310,13 @@
     .bfg-active-step__icon {
         width: 40px;
         height: 40px;
-        font-size: 16px;
     }
 
     .bfg-active-step__content h3 {
-        font-size: 20px;
         line-height: 28px;
     }
 
     .bfg-active-step__content p {
-        font-size: 16px;
         line-height: 24px;
     }
 
@@ -346,14 +342,12 @@
     }
 
     .bfg-step-row__label {
-        font-size: 16px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .bfg-step-row__description {
-        font-size: 14px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -383,18 +377,14 @@
         height: 28px;
     }
 
-    .bfg-pro-teaser-v2 .bfg-section-card-title {
-        font-size: 24px;
-    }
 
     .bfg-pro-teaser__title {
-        font-size: 24px;
         line-height: 32px;
     }
 
     .bfg-pro-teaser__subtitle,
     .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
         line-height: 21px;
         margin-bottom: 24px !important;
     }
@@ -408,7 +398,7 @@
     }
 
     .bfg-pro-features-grid li {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 
     .bfg-subscription {
@@ -428,13 +418,7 @@
         border-top: none;
     }
 
-    .bfg-subscription__value {
-        font-size: 14px;
-    }
 
-    .bfg-badge {
-        font-size: 14px;
-    }
 }
 
 /* Responsive - Mobile (max-width: 480px)
@@ -473,7 +457,6 @@
     }
 
     .bfg-section-card-title {
-        font-size: 20px !important;
         line-height: 28px !important;
     }
 
@@ -506,7 +489,6 @@
     .bfg-step-row__number {
         width: 28px;
         height: 28px;
-        font-size: 14px;
     }
 
     .bfg-step-row__indicator svg {
@@ -522,29 +504,28 @@
 
     .bfg-step-row .bfg-badge {
         padding: 4px 8px;
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
         flex-shrink: 0 !important;
     }
 
     .bfg-active-step__icon {
         width: 36px;
         height: 36px;
-        font-size: 14px;
     }
 
     .bfg-active-step__content h3 {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
         line-height: 24px;
     }
 
     .bfg-active-step__content p {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
         margin-bottom: 16px !important;
     }
 
     .bfg-admin-page__home .bfg-btn {
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
         height: auto;
     }
 
@@ -566,12 +547,12 @@
     }
 
     .bfg-pro-teaser__title {
-        font-size: 18px;
+        font-size: var(--bfg-font-base);
         line-height: 26px;
     }
 
     .bfg-pro-teaser__subtitle {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
         line-height: 24px;
         margin-bottom: 24px !important;
     }

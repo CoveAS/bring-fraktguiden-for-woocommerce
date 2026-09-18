@@ -8,7 +8,7 @@
     padding: 16px 24px !important;
     border-radius: 8px !important;
     border: 1px solid #FED7AA !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     margin: 0 0 24px 0 !important;
     display: flex !important;
     align-items: center !important;
@@ -30,7 +30,7 @@
     padding: 0 !important;
     text-align: left !important;
     line-height: 1.5 !important;
-    font-size: var(--bfg-text-level-4) !important;
+    font-size: var(--bfg-font-base) !important;
     font-weight: 400 !important;
 }
 
@@ -74,7 +74,7 @@
 
 .bfg-trial-notice__title {
     display: block;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     font-weight: 600;
     color: #1F2937;
     margin-bottom: 4px;
@@ -82,7 +82,7 @@
 
 .bfg-trial-notice__desc {
     margin: 0 !important;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #4B5563;
 }
 
@@ -132,7 +132,7 @@
 
 .bfg-active-notice__title {
     display: block;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     font-weight: 600;
     color: #1F2937;
     margin-bottom: 4px;
@@ -140,7 +140,7 @@
 
 .bfg-active-notice__desc {
     margin: 0 !important;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #4B5563;
 }
 
@@ -175,7 +175,7 @@
 
 .bfg-test-notice__title {
     display: block;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     font-weight: 600;
     color: #374151;
     margin-bottom: 4px;
@@ -183,7 +183,7 @@
 
 .bfg-test-notice__desc {
     margin: 0 !important;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #6B7280;
 }
 
@@ -193,7 +193,7 @@
 .bfg-booking-notice {
     align-items: flex-start !important;
     margin: 0 0 0.75rem 0 !important;
-    font-size: 0.875rem !important;
+    font-size: var(--bfg-font-sm) !important;
 }
 
 /* A refused booking, or a send that failed. The shape is the same, and only
@@ -256,12 +256,12 @@
 
 .bfg-consent .bfg-consent__body p {
     margin: 0 !important;
-    font-size: 0.875rem !important;
+    font-size: var(--bfg-font-sm) !important;
     color: inherit !important;
 }
 
 .bfg-consent__title {
-    font-size: 1rem !important;
+    font-size: var(--bfg-font-base) !important;
 }
 
 .bfg-consent__scope {
@@ -290,11 +290,11 @@
     background: #DCFCE7 !important;
     color: #166534 !important;
     border: 1px solid #86EFAC !important;
-    font-size: 0.875rem !important;
+    font-size: var(--bfg-font-sm) !important;
     font-weight: 600 !important;
 }
 
 .bfg-consent-signed::before {
     content: "✓";
-    font-size: 1rem;
+    font-size: var(--bfg-font-base);
 }

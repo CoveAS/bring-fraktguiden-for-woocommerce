@@ -28,8 +28,8 @@
 }
 
 .bfg-pro-teaser__title {
-    font-size: var(--bfg-text-level-1);
-    font-weight: 500;
+    font-size: var(--bfg-font-2xl);
+    font-weight: 600;
     color: #111827;
     margin: 0 0 8px !important;
     line-height: 40px;
@@ -38,7 +38,7 @@
 }
 
 .bfg-pro-teaser__subtitle {
-    font-size: var(--bfg-text-level-2);
+    font-size: var(--bfg-font-base);
     color: #596270;
     line-height: 1.5;
     margin-bottom: 32px !important;
@@ -61,7 +61,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: var(--bfg-text-level-4);
+    font-size: var(--bfg-font-base);
     color: #374151;
     font-weight: 400;
 }
@@ -108,8 +108,8 @@
 }
 
 .bfg-pro-teaser-v2--active .bfg-pro-teaser__title {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: var(--bfg-font-2xl);
+    font-weight: 600;
     letter-spacing: -0.025em;
     margin: 0 !important;
     line-height: 1;
@@ -120,7 +120,7 @@
     max-width: none;
     text-align: left;
     color: #596270;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     opacity: 0.9;
 }
 
@@ -144,7 +144,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     color: #111827;
     font-weight: 400;
 }
@@ -180,8 +180,8 @@
 
 .bfg-pro-teaser__divider span {
     padding: 0 16px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--bfg-font-sm);
+    font-weight: 600;
     color: #9CA3AF;
     text-transform: uppercase;
     letter-spacing: 0.025em;
@@ -189,10 +189,10 @@
 
 .bfg-pro-teaser__link {
     display: inline-block;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     color: #2563EB;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .bfg-pro-teaser__link:hover {
@@ -201,7 +201,7 @@
 
 .bfg-pro-teaser__footer-text {
     margin-top: 12px !important;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #596270;
 }
 
@@ -240,11 +240,11 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: var(--bfg-font-xs);
     letter-spacing: 0;
     text-transform: uppercase;
     color: #596270;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 4px;
 }
 
@@ -256,14 +256,14 @@
 }
 
 .bfg-subscription__value {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--bfg-font-sm);
+    font-weight: 600;
     color: #111827;
     margin-bottom: 2px;
 }
 
 .bfg-subscription__detail {
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: #596270;
     font-weight: 400;
 }
@@ -343,7 +343,7 @@
     gap: 8px;
     color: var(--bfg-link);
     text-decoration: underline;
-    font-size: 16px;
+    font-size: var(--bfg-font-base);
     line-height: 24px;
     transition: color 0.15s ease;
 }

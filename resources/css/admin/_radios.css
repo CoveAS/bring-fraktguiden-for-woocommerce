@@ -19,7 +19,7 @@
     gap: var(--rb-gap);
     padding: var(--rb-padding);
     margin: 0 !important;
-    font-weight: normal;
+    font-weight: 400;
     cursor: pointer;
     transition: background-color 0.2s;
 }
@@ -55,8 +55,8 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
 }
 
 .bfg-radio-title {
-    font-weight: 500;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: var(--bfg-font-base);
     line-height: 1.5;
     color: var(--bfg-text-main);
     text-wrap: pretty;
@@ -66,7 +66,7 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
 
 .bfg-radio-desc {
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     line-height: 21px;
     color: var(--bfg-text-secondary);
     text-wrap: pretty;

@@ -41,7 +41,7 @@
     background: #ffffff;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
-    font-size: var(--bfg-text-level-4);
+    font-size: var(--bfg-font-base);
     color: var(--bfg-text-main);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -125,7 +125,7 @@ body:not(.using-mouse) .bfg-custom-select__trigger:focus {
     align-items: center;
     justify-content: space-between;
     padding: 14px 16px;
-    font-size: var(--bfg-text-level-4);
+    font-size: var(--bfg-font-base);
     color: var(--bfg-text-main);
     cursor: pointer;
     transition: background-color 0.1s ease-in-out;

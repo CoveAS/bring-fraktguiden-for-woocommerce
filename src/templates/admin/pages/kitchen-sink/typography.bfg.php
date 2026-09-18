@@ -2,74 +2,50 @@
 
 <!-- Typography -->
 <bfg-section>
-	<bfg-section.header title="Typography" description="8pt scaling system for consistent visual rhythm"></bfg-section.header>
+	<bfg-section.header title="Typography" description="Four sizes. A size outside this list is a bug."></bfg-section.header>
 	<bfg-section.section>
 		<h3 class="bfg-field-group-title">
 			<bfg-t>Type Scale</bfg-t>
 		</h3>
+		<p class="bfgu:mb-4">Every font size in the admin UI comes from one of these four steps. A step sets a size and a line height, never a weight.</p>
 		<table class="bfg-type-scale-table">
 			<thead>
 				<tr>
+					<th>Token</th>
 					<th>Size</th>
 					<th>Line Height</th>
-					<th>Weight</th>
+					<th>Where it belongs</th>
 					<th>Example</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td><code>48px</code></td>
-					<td><code>56px</code></td>
-					<td><code>600</code> Semibold</td>
-					<td class="bfg-text-display">Display</td>
-				</tr>
-				<tr>
-					<td><code>32px</code></td>
-					<td><code>40px</code></td>
-					<td><code>600</code> Semibold</td>
-					<td class="bfg-text-heading-xl">Heading XL</td>
-				</tr>
-				<tr>
-					<td><code>28px</code></td>
-					<td><code>36px</code></td>
-					<td><code>500</code> Medium</td>
-					<td class="bfg-text-heading-l">Heading L</td>
-				</tr>
-				<tr>
+					<td><code>--bfg-font-2xl</code></td>
 					<td><code>24px</code></td>
 					<td><code>32px</code></td>
-					<td><code>500</code> Medium</td>
-					<td class="bfg-text-heading-m">Heading M</td>
+					<td>Page title, card headline, big number</td>
+					<td class="bfg-text-2xl">2xl</td>
 				</tr>
 				<tr>
-					<td><code>20px</code></td>
-					<td><code>28px</code></td>
-					<td><code>500</code> Medium</td>
-					<td class="bfg-text-heading-s">Heading S</td>
-				</tr>
-				<tr>
+					<td><code>--bfg-font-base</code></td>
 					<td><code>16px</code></td>
 					<td><code>24px</code></td>
-					<td><code>400</code> Regular</td>
-					<td class="bfg-text-body">Body / Base</td>
+					<td>Body text, field label, card title</td>
+					<td class="bfg-text-base">base</td>
 				</tr>
 				<tr>
-					<td><code>15px</code></td>
-					<td><code>24px</code></td>
-					<td><code>500</code> Medium</td>
-					<td class="bfg-text-type-label">Label</td>
-				</tr>
-				<tr>
+					<td><code>--bfg-font-sm</code></td>
 					<td><code>14px</code></td>
 					<td><code>20px</code></td>
-					<td><code>400</code> Regular</td>
-					<td class="bfg-text-small">Small / Caption</td>
+					<td>Description, hint, button</td>
+					<td class="bfg-text-sm">sm</td>
 				</tr>
 				<tr>
-					<td><code>13px</code></td>
-					<td><code>20px</code></td>
-					<td><code>400</code> Regular</td>
-					<td class="bfg-text-xs">Extra Small</td>
+					<td><code>--bfg-font-xs</code></td>
+					<td><code>12px</code></td>
+					<td><code>16px</code></td>
+					<td>Badge, code, meta label</td>
+					<td class="bfg-text-xs">xs</td>
 				</tr>
 			</tbody>
 		</table>
@@ -77,40 +53,15 @@
 		<h3 class="bfg-field-group-title">
 			<bfg-t>Font Weights</bfg-t>
 		</h3>
+		<p class="bfgu:mb-4">Two weights. A weight is a separate choice from a size, so set it with a Tailwind utility.</p>
 		<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-8">
 			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 				<code class="bfgu:w-12 bfgu:shrink-0">400</code>
-				<span class="bfg-text-heading-s bfgu:font-normal">Regular — Body text, descriptions, captions</span>
-			</div>
-			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
-				<code class="bfgu:w-12 bfgu:shrink-0">500</code>
-				<span class="bfg-text-heading-s">Medium — Labels, headings, buttons</span>
+				<span class="bfg-text-base bfgu:font-normal">Regular — body text, descriptions, hints</span>
 			</div>
 			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
 				<code class="bfgu:w-12 bfgu:shrink-0">600</code>
-				<span class="bfg-text-heading-s bfgu:font-semibold">Semibold — Display headings, field group titles</span>
-			</div>
-			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
-				<code class="bfgu:w-12 bfgu:shrink-0">700</code>
-				<span class="bfg-text-heading-s bfgu:font-bold">Bold — Strong emphasis</span>
-			</div>
-		</div>
-
-		<h3 class="bfg-field-group-title">
-			<bfg-t>Medium Weight Sizes</bfg-t>
-		</h3>
-		<div class="bfgu:flex bfgu:flex-col bfgu:gap-3 bfgu:mb-8">
-			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
-				<code class="bfgu:w-12 bfgu:shrink-0">14px</code>
-				<span class="bfg-text-small bfgu:font-medium">Medium 14 — Small labels, compact UI</span>
-			</div>
-			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
-				<code class="bfgu:w-12 bfgu:shrink-0">16px</code>
-				<span class="bfg-text-body bfgu:font-medium">Medium 16 — Default labels, buttons</span>
-			</div>
-			<div class="bfgu:flex bfgu:items-center bfgu:gap-4">
-				<code class="bfgu:w-12 bfgu:shrink-0">18px</code>
-				<span class="bfgu:text-lg bfgu:font-medium">Medium 18 — Larger labels, subheadings</span>
+				<span class="bfg-text-base bfgu:font-semibold">Semibold — titles, labels, buttons, emphasis</span>
 			</div>
 		</div>
 

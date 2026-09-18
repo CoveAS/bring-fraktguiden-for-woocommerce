@@ -58,7 +58,7 @@
 
 .bfg-booking-form__title {
     margin: 24px 0 8px;
-    font-size: var(--bfg-text-level-6);
+    font-size: var(--bfg-font-sm);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--bfg-text-secondary);
@@ -142,7 +142,7 @@
 }
 
 .bfg-booking-packages__head {
-    font-size: var(--bfg-text-level-6);
+    font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
     margin-bottom: 4px;
 }
@@ -216,7 +216,7 @@
 
 .bfg-booking-history__when {
     color: var(--bfg-text-muted);
-    font-size: var(--bfg-text-level-6);
+    font-size: var(--bfg-font-sm);
 }
 
 .bfg-booking-history__consignments,
@@ -247,7 +247,7 @@
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
     padding: 0.75rem;
-    font-size: 0.875rem;
+    font-size: var(--bfg-font-sm);
 }
 
 .bfg-customs-products__summary {

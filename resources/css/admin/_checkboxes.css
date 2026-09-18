@@ -9,9 +9,7 @@
     --cb-padding: 20px;
     --cb-checkbox-size: 20px;
     --cb-gap: 16px;
-    --cb-title-size: 15px;
     --cb-title-line-height: 1.5;
-    --cb-desc-size: 14px;
     --cb-desc-line-height: 21px;
     --cb-content-gap: 6px;
 
@@ -51,7 +49,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     gap: var(--cb-gap);
     cursor: pointer;
     margin: 0 !important;
-    font-weight: normal;
+    font-weight: 400;
     padding: var(--cb-padding);
 }
 
@@ -66,8 +64,8 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 }
 
 .bfg-field--checkbox-box .bfg-checkbox-title {
-    font-weight: 500;
-    font-size: var(--cb-title-size);
+    font-weight: 600;
+    font-size: var(--bfg-font-base);
     line-height: var(--cb-title-line-height);
     color: var(--bfg-text-main);
     text-wrap: pretty;
@@ -78,7 +76,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-field--checkbox-box .bfg-checkbox-desc {
     font-weight: 400;
-    font-size: var(--cb-desc-size);
+    font-size: var(--bfg-font-sm);
     line-height: var(--cb-desc-line-height);
     color: var(--bfg-text-secondary);
     text-wrap: pretty;
@@ -164,7 +162,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 
 .bfg-input--checkbox .bfg-description {
     margin: 8px 0 0 calc(var(--cb-checkbox-size, 20px) + var(--cb-gap, 16px));
-    font-size: 14px;
+    font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
     font-weight: 400;
     line-height: 24px;
@@ -189,7 +187,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     display: flex;
     align-items: center;
     gap: 16px;
-    font-size: var(--bfg-text-level-4);
+    font-size: var(--bfg-font-base);
     color: var(--bfg-text-secondary);
     cursor: pointer;
 }

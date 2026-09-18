@@ -14,7 +14,7 @@
 
 /* The button is the main action, so the labels stay quiet. */
 .bfg-shipping-test__field .bfg-step-form__label {
-	font-size: var(--bfg-text-level-6);
+	font-size: var(--bfg-font-sm);
 	font-weight: 400;
 	color: var(--bfg-text-muted);
 }
@@ -27,7 +27,7 @@
 .bfg-shipping-test__result {
 	min-height: 24px;
 	margin-top: 16px;
-	font-size: 14px;
+	font-size: var(--bfg-font-sm);
 }
 
 /* The answer sits in its own card, tinted by the outcome. */
@@ -77,8 +77,8 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	font-size: var(--bfg-text-level-6);
-	font-weight: 500;
+	font-size: var(--bfg-font-sm);
+	font-weight: 600;
 	color: var(--bfg-text-main);
 }
 
@@ -114,7 +114,7 @@
 	border: 0;
 	background: none;
 	cursor: pointer;
-	font-size: var(--bfg-text-level-6);
+	font-size: var(--bfg-font-sm);
 	color: var(--bfg-primary);
 	text-decoration: underline;
 }
@@ -124,7 +124,7 @@
 	padding: 12px 0;
 	overflow-x: auto;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 12px;
+	font-size: var(--bfg-font-xs);
 	line-height: 1.5;
 	white-space: pre;
 	tab-size: 2;
@@ -150,8 +150,8 @@
 	border-bottom: 2px solid transparent;
 	background: none;
 	cursor: pointer;
-	font-size: var(--bfg-text-level-6);
-	font-weight: 500;
+	font-size: var(--bfg-font-sm);
+	font-weight: 600;
 	color: var(--bfg-text-muted);
 }
 
@@ -165,7 +165,7 @@
 	margin-left: 8px;
 	padding: 2px 8px;
 	border-radius: 9999px;
-	font-size: 12px;
+	font-size: var(--bfg-font-xs);
 	font-weight: 600;
 	background: color-mix(in srgb, #15803d 15%, white);
 	color: #15803d;

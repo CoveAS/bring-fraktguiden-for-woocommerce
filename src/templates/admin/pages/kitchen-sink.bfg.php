@@ -21,7 +21,6 @@
 
 		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/boxes-containers.php'; ?>
 		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/typography.php'; ?>
-		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/title-hierarchy.php'; ?>
 		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/notice-banners.php'; ?>
 		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/buttons.php'; ?>
 		<?php require_once dirname(__FILE__, 5) . '/build/templates/admin/pages/kitchen-sink/split-button.php'; ?>

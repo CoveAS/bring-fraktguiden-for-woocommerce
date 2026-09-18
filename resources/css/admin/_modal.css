@@ -35,7 +35,7 @@
 
 .bfg-modal__title {
     margin: 0;
-    font-size: var(--bfg-text-level-2);
+    font-size: var(--bfg-font-base);
 }
 
 .bfg-modal__close {
@@ -46,7 +46,7 @@
     border-radius: var(--bfg-radius-input);
     background: transparent;
     color: var(--bfg-text-muted);
-    font-size: 1.5rem;
+    font-size: var(--bfg-font-2xl);
     line-height: 1;
     cursor: pointer;
 }
@@ -75,14 +75,16 @@
 .bfg-modal__watch {
     margin: 0.5rem 0 0;
     color: var(--bfg-text-muted);
-    font-size: var(--bfg-text-level-6, 0.75rem);
+    font-size: var(--bfg-font-sm);
     text-align: right;
 }
 
-/* One shipping zone in the picker of the setup page. */
+/* One row of the zone picker on the setup page. Every row has the same shape:
+   a checkbox, a label with an optional hint under it, and an optional flag on
+   the right. */
 .bfg-zone-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
     padding: 0.5rem 0.25rem;
     border-bottom: 1px solid var(--bfg-border);
@@ -90,27 +92,6 @@
 }
 
 .bfg-zone-row:last-child {
-    border-bottom: 0;
-}
-
-.bfg-zone-row__regions {
-    font-weight: 600;
-}
-
-.bfg-zone-row__name {
-    color: var(--bfg-text-muted);
-}
-
-.bfg-zone-row__name::before {
-    content: '\00b7';
-    margin-right: 0.5rem;
-}
-
-/* The offer to remove the free shipping, under the list of zones. */
-.bfg-zone-row--free-shipping {
-    align-items: flex-start;
-    margin-top: 0.5rem;
-    border-top: 1px solid var(--bfg-border);
     border-bottom: 0;
 }
 
@@ -126,13 +107,20 @@
 
 .bfg-zone-row__hint {
     color: var(--bfg-text-muted);
-    font-size: var(--bfg-text-level-6, 0.75rem);
+    font-size: var(--bfg-font-sm);
 }
 
-.bfg-zone-row__note {
+.bfg-zone-row__flag {
     margin-left: auto;
     color: var(--bfg-text-muted);
-    font-size: var(--bfg-text-level-6, 0.75rem);
+    font-size: var(--bfg-font-sm);
+}
+
+/* The offer to remove the free shipping, under the list of zones. */
+.bfg-zone-row--free-shipping {
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--bfg-border);
+    border-bottom: 0;
 }
 
 /* A dialog that fills the screen, with a small margin around it. The auto

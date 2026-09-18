@@ -45,7 +45,6 @@
 
     .bfg .bfg-section__header h2,
     .bfg-section-card-title {
-        font-size: 28px !important;
         line-height: 36px !important;
     }
 
@@ -62,17 +61,14 @@
     .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
     .bfg .bfg-field>.label,
     .bfg .bfg-label {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
     }
 
     .bfg-description {
-        font-size: 16px !important;
+        font-size: var(--bfg-font-base) !important;
     }
 
     .bfg-field .bfg-description,
-    .bfg-input .bfg-description {
-        font-size: 14px !important;
-    }
 
     .bfg-field-group-title {
         margin-bottom: 8px !important;
@@ -106,14 +102,12 @@
     }
 
     .bfg-step-row__label {
-        font-size: 16px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .bfg-step-row__description {
-        font-size: 14px;
         margin-top: 4px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -128,7 +122,6 @@
     .bfg-step-row__number {
         width: 28px;
         height: 28px;
-        font-size: 14px;
     }
 
     .bfg-step-row__indicator svg {
@@ -137,7 +130,6 @@
     }
 
     .bfg-step-row .bfg-badge {
-        font-size: 14px;
         padding: 4px 8px;
         min-height: 32px;
         flex: 0 0 auto !important;
@@ -164,12 +156,12 @@
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) .bfg-description {
         margin-left: calc(24px + 16px);
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 
     /* Pro Teaser */
@@ -189,12 +181,12 @@
     }
 
     .bfg-pro-teaser__title {
-        font-size: 24px;
+        font-size: var(--bfg-font-2xl);
         line-height: 32px;
     }
 
     .bfg-pro-teaser__subtitle {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
         line-height: 24px;
         margin-bottom: 24px !important;
     }
@@ -205,7 +197,7 @@
     }
 
     .bfg-pro-features-grid li {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
     }
 
     .bfg-pro-features-grid--compact {
@@ -233,7 +225,7 @@
     /* Buttons */
     body.wp-admin .bfg .button-primary {
         padding: 8px 32px;
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 
     .bfg .submit {
@@ -253,12 +245,10 @@
     /* Custom Select */
     .bfg-custom-select__trigger {
         height: 48px;
-        font-size: 16px;
     }
 
     .bfg-custom-select__option {
         padding: 12px 16px;
-        font-size: 16px;
     }
 
     /* Inputs */
@@ -270,7 +260,7 @@
     .bfg input[type="email"],
     .bfg input[type="time"] {
         height: 48px;
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
     }
 
     /* Notices */
@@ -280,9 +270,6 @@
         flex-direction: row;
     }
 
-    .bfg-notice-banner p {
-        font-size: 16px !important;
-    }
 }
 
 @media screen and (max-width: 600px) {
@@ -331,14 +318,13 @@
 
     .bfg .bfg-section__header h2,
     .bfg-section-card-title {
-        font-size: 24px !important;
         line-height: 32px !important;
     }
 
     .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
     .bfg .bfg-field>.label,
     .bfg .bfg-label {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 
     .bfg-field-group-title {
@@ -346,12 +332,12 @@
     }
 
     .bfg-pro-teaser__title {
-        font-size: 16px;
+        font-size: var(--bfg-font-base);
         line-height: 24px;
     }
 
     .bfg-pro-teaser__subtitle {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 
     a.bfg-step-row,
@@ -396,6 +382,6 @@
     }
 
     .bfg-input--checkbox:not(.bfg-field--checkbox-box .bfg-input--checkbox) label {
-        font-size: 14px;
+        font-size: var(--bfg-font-sm);
     }
 }
