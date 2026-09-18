@@ -19,6 +19,7 @@ class PickUpPointData {
 		public string $additionalServiceCode = '',
 		public array  $photos = [],
 		public string $pickupPointType = '',
+		public float $distanceInKm = 0,
 	) {
 	}
 
@@ -77,6 +78,7 @@ class PickUpPointData {
 			additionalServiceCode: $pickUpPoint['additionalServiceCode'] ?? '',
 			photos               : $photos,
 			pickupPointType      : strtolower( $pickUpPoint['pickupPointType'] ?? '' ),
+			distanceInKm         : (float) ( $pickUpPoint['distanceInKm'] ?? 0 ),
 		);
 
 //		$settings = FraktguidenSettings::getInstance();

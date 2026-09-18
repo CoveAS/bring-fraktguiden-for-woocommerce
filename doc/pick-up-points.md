@@ -74,8 +74,25 @@ The plugin reads these fields.
 | `additionalServiceCode` | The service code the point needs. |
 
 The API also returns `pickupPointType` (`MANNED` or `LOCKER`), `capabilities`,
-`maxParcelDimensions`, `status`, `distanceInKm`, `specialOpeningHourDates` and
+`maxParcelDimensions`, `status`, `specialOpeningHourDates` and
 `temporaryOpeningHours`.
+
+### Distance
+
+Each point carries `distanceInKm`, `distanceType`, `durationInMinutes` and
+`durationType`.
+
+`distanceType` is `DRIVING_DISTANCE` or `AERIAL_DISTANCE`. `durationType` is
+`DRIVING_TIME`.
+
+Bring sorts the list by drive time. It falls back to aerial distance when no
+road connects the two places, for example across water.
+
+The origin is the address in the request. Without a `street` parameter, Bring
+uses the centre of the postal code area. Bring advises to send the address.
+
+`PickUpPointData` keeps `distanceInKm` only. The modal prints it under the
+address. A point without a distance prints nothing.
 
 The opening hours arrive as one string per language, such as
 `openingHoursNorwegian` and `openingHoursEnglish`. The string is for a reader.

@@ -124,10 +124,12 @@ jQuery(function ($) {
 
 			points.forEach((point) => {
 				const address = utility.formatAddress(point);
+				const distance = utility.formatDistance(point);
 				const pointEl = $(`
 					<div class="bfg-pupm__item">
 						<div class="bfg-pupm__name">${point.name}</div>
 						<div class="bfg-pupm__address">${address}</div>
+						${distance ? `<div class="bfg-pupm__distance">${distance}</div>` : ''}
 					</div>
 				`);
 				pointEl.data('id', point.id);
@@ -242,6 +244,23 @@ jQuery(function ($) {
 		 */
 		formatAddress: function (pickUpPoint) {
 			return pickUpPoint.address + ', ' + pickUpPoint.postalCode + ' ' + pickUpPoint.city;
+		},
+		/**
+		 * Format the distance to a point. Bring leaves the distance out when it
+		 * knows no origin, and then this returns an empty string.
+		 * @param pickUpPoint
+		 * @returns {string}
+		 */
+		formatDistance: function (pickUpPoint) {
+			const km = parseFloat(pickUpPoint.distanceInKm);
+			if (!km) {
+				return '';
+			}
+			const number = new Intl.NumberFormat(
+				document.documentElement.lang || undefined,
+				{maximumFractionDigits: 1}
+			).format(km);
+			return `${number} km`;
 		},
 		/**
 		 * Write one point into one picker. Each rate has its own picker.

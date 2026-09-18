@@ -94,6 +94,11 @@
 	text-decoration: underline;
 }
 
+.bfg-pupm__distance {
+	font-size: 0.9em;
+	opacity: 0.7;
+}
+
 @media screen and (min-width: 767px) {
 	.bring-fraktguiden-pick-up-points-modal {
 		background: rgba(0, 0, 0, 0.2);
