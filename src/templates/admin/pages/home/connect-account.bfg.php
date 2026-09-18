@@ -83,9 +83,13 @@ $bfg_quickship_body = rawurlencode(sprintf(
 
 			<?php if ($bfg_quickship): ?>
 			<div class="bfg-connect__signup">
-				<p class="bfg-step-form__intro">
-					<t>Save 20 to 40 percent on shipping</t>
-				</p>
+				<div class="bfg-connect__signup-head">
+					<p class="bfg-step-form__intro">
+						<t>Save 20 to 40 percent on shipping</t>
+					</p>
+					<img class="bfg-connect__signup-logo" alt="Quickship"
+						src="<?php echo esc_url(plugins_url('bring-fraktguiden-for-woocommerce/assets/images/quickship-logo.svg')); ?>">
+				</div>
 				<ul class="bfg-connect__checks">
 					<li><t>Lower prices than a normal Bring account</t></li>
 					<li><t>Ready in minutes, by phone or a few emails</t></li>

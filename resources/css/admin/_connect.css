@@ -31,6 +31,26 @@
 	border-radius: var(--bfg-radius-input);
 }
 
+.bfg-connect__signup-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin-bottom: 12px;
+}
+
+.bfg-connect__signup-head .bfg-step-form__intro {
+	margin-bottom: 0;
+}
+
+/* The box paints its own white, so the black logo keeps its contrast in a dark admin theme. */
+.bfg-connect__signup-logo {
+	height: 18px;
+	width: auto;
+	flex-shrink: 0;
+}
+
 .bfg-connect__signup-links {
 	display: flex;
 	flex-wrap: wrap;
