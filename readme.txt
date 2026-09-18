@@ -7,6 +7,7 @@ Tags: woocommerce, posten, frakt, sporing, bring
 Requires at least: 5.6
 Tested up to: 6.9
 Requires PHP: 8.1
+Requires Plugins: woocommerce
 WC requires at least: 4.8.0
 WC tested up to: 10.4.2
 Stable tag: 1.11.7
