@@ -233,11 +233,16 @@ Never write a raw value for any of these. `npm run test-js` fails on a font
 size, a line height, a letter spacing or a font family that is not a token, and
 on a weight other than 400 or 600.
 
-The Kitchen Sink typography page shows the scale. The shadow root stylesheets
-under `pro/assets/css/` sit outside it, because a custom property of the page
-does not reach a shadow root. The system info dump in
-`classes/common/FraktguidenSystemInfo.php` also stands alone, and repeats the
-sm step in its own `<style>` block.
+The scale covers every stylesheet that loads on an admin screen, so
+`resources/css/admin/` and `resources/css/shipping-services.css`.
+
+Three places sit outside it. The checkout stylesheet `assets/css/bring-fraktguiden.css`
+styles the shop front. The shadow root stylesheets under `pro/assets/css/` cannot
+read a custom property of the page. The system info dump in
+`classes/common/FraktguidenSystemInfo.php` is a standalone HTML document, and
+repeats the sm step in its own `<style>` block.
+
+The Kitchen Sink typography page shows the scale.
 
 ## Build Commands
 

@@ -1,9 +1,10 @@
 /**
  * Guards the typography of the admin UI.
  *
- * Every font size, line height, letter spacing and font family in the admin
- * CSS reads a token from resources/css/admin/_tokens.css. A font weight is
- * 400 or 600. The kitchen sink typography page shows the scale.
+ * Every font size, line height, letter spacing and font family in a stylesheet
+ * that loads on an admin screen reads a token from
+ * resources/css/admin/_tokens.css. A font weight is 400 or 600. The kitchen
+ * sink typography page shows the scale.
  *
  * Run: npm run test-js
  */
@@ -13,12 +14,17 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const dir = fileURLToPath(new URL('../../resources/css/admin/', import.meta.url));
+const css = fileURLToPath(new URL('../../resources/css/', import.meta.url));
 
-const files = readdirSync(dir).filter((name) => name.endsWith('.css'));
+// Every stylesheet that loads on an admin screen, so every one that reads the
+// tokens. The checkout stylesheets and the shadow root ones sit outside.
+const files = readdirSync(css + 'admin/')
+	.filter((name) => name.endsWith('.css'))
+	.map((name) => 'admin/' + name)
+	.concat('shipping-services.css');
 
 const lines = files.flatMap((name) =>
-	readFileSync(dir + name, 'utf8')
+	readFileSync(css + name, 'utf8')
 		.split('\n')
 		.map((text, index) => ({ where: `${name}:${index + 1}`, text }))
 );

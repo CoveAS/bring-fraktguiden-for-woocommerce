@@ -19,7 +19,7 @@
 
 .fraktguiden-product h3 {
     margin: 0 0 0.5rem;
-    font-size: 1.1em;
+    font-size: var(--bfg-font-base);
 }
 
 .fraktguiden-product__name {
@@ -28,7 +28,7 @@
 
 .fraktguiden-product__id {
     color: #666;
-    font-size: 0.9em;
+    font-size: var(--bfg-font-xs);
     margin-left: 0.5rem;
 }
 
@@ -62,7 +62,7 @@
 
 .fraktguiden-product__fields label > span {
     flex: 0 0 14rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 #shipping_services .fraktguiden-product__fields input[type="text"],
@@ -144,7 +144,7 @@
 
 .fraktguiden-product__vas h4 {
     margin: 1rem 0 0.5rem;
-    font-size: 1em;
+    font-size: var(--bfg-font-sm);
 }
 
 .vas-checkboxes {
@@ -202,8 +202,8 @@ input.validation-error {
     background: #f0f0f1;
     color: #50575e;
     padding: 0.15rem 0.5rem;
-    font-size: 0.8em;
-    line-height: 1.5;
+    font-size: var(--bfg-font-xs);
+    line-height: var(--bfg-leading-none);
     cursor: pointer;
 }
 
