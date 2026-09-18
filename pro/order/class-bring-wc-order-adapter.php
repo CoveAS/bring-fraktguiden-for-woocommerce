@@ -103,6 +103,23 @@ class Bring_WC_Order_Adapter {
 	}
 
 	/**
+	 * Returns the return consignments of the saved Mybring response.
+	 *
+	 * A booking made without a return service holds none.
+	 *
+	 * @return array
+	 */
+	public function get_booking_return_consignments() {
+		$response = $this->get_booking_response();
+
+		if ( empty( $response ) ) {
+			return [];
+		}
+
+		return Bring_Consignment::create_returns_from_response( $response, $this->order->get_id() );
+	}
+
+	/**
 	 * Returns the consignments json decoded from the stored Mybring response.
 	 * If the saved response has errors, return empty array.
 	 *

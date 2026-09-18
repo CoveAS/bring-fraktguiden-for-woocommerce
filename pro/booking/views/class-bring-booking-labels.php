@@ -154,9 +154,14 @@ class Bring_Booking_Labels {
 			$adapter = new Bring_WC_Order_Adapter( $order );
 
 			// Get the booking consignments from the adapter.
+			// A booking made with a return service holds a return consignment
+			// too. The shop prints both labels in one file.
 			$consignments = $consignment_numbers
 				? self::history_consignments( $order, $consignment_numbers )
-				: $adapter->get_booking_consignments();
+				: array_merge(
+					$adapter->get_booking_consignments(),
+					$adapter->get_booking_return_consignments()
+				);
 
 			foreach ( $consignments as $consignment ) {
 				// Get the label file.

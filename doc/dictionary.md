@@ -64,6 +64,27 @@ outside Norway cannot guess them.
 : The Harmonized System code. It is a number of 6 to 10 digits that names a kind
   of goods to customs. A customs declaration needs one per item line.
 
+**booking**
+: The order of a shipment at Bring. The plugin sends the order data to the
+  Bring booking API, and Bring answers with a consignment and a label.
+
+**consignment**
+: One shipment inside a booking. It carries a consignment number, which is the
+  number the customer tracks.
+
+**label**
+: The address sheet that goes on the parcel. Bring holds it as a file, and the
+  plugin downloads it from the link in the booking answer.
+
+**ZPL**
+: Zebra Programming Language. It is the label format of a thermal label
+  printer. Bring gives a label as ZPL or as PDF.
+
+**return label**
+: A second label that lets the customer send the parcel back. Bring makes one
+  when the booking carries a `returnProduct`, and invoices it only when the
+  customer uses it. See [return-label.md](return-label.md).
+
 ## The shop side
 
 **shipping zone**
