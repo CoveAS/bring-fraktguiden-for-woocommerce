@@ -26,14 +26,6 @@ return [
 	],
 	[
 		'enabled'        => true,
-		'code'           => '2084',
-		'name'           => 'Electronic notification',
-		'default'        => true,
-		'bring_products' => [ 5800 ],
-		'class'          => VAS_Checkbox::class,
-	],
-	[
-		'enabled'        => true,
 		'code'           => 'alternative_delivery_dates',
 		'name'           => 'Alternative delivery dates',
 		'default'        => true,
