@@ -279,7 +279,7 @@ return [
 			'pickup_point_types' => [
 				'title' => __('Pickup point types', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
-				//'description' => __( '', 'bring-fraktguiden-for-woocommerce' ),
+				'description' => __('Pakkeboks always shows parcel lockers. While Pakkeboks is on, every other service shows manned pickup points and ignores this setting.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => '',
 				'options' => [
 					'' => __('All', 'bring-fraktguiden-for-woocommerce'),

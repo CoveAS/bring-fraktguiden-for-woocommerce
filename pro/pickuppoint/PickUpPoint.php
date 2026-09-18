@@ -145,10 +145,8 @@ class PickUpPoint
 		$pick_up_points = PickUpPointData::rawCollection(
 			(new GetRawPickupPointsAction)($country, $postcode)
 		);
-		$selected_pick_up_point = (new GetSelectedPickUpPointAction())($pick_up_points);
-		if ($selected_pick_up_point && $selected_pick_up_point instanceof PickUpPointData) {
-			WC()->session?->set( 'bring_fraktguiden_pick_up_point', $selected_pick_up_point->id );
-		}
+		$rate_types = PickupPointType::for_rates();
+		$selected_pick_up_points = self::selected_per_type($pick_up_points, $rate_types);
 
 		wp_localize_script(
 			'fraktguiden-pickup-point-checkout',
@@ -161,8 +159,8 @@ class PickUpPoint
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
 				'pick_up_points' => $pick_up_points,
 				'shipping_key' => $country . $postcode,
-				'selected_pick_up_point' => $selected_pick_up_point,
-				'pick_up_point_rate_ids' =>  ['bring_fraktguiden:5800'],
+				'selected_pick_up_points' => $selected_pick_up_points,
+				'pick_up_point_rate_types' => $rate_types,
 				'pick_up_point_modal_css' => file_get_contents(
 					dirname(__DIR__) . '/assets/css/pick-up-point-modal.css',
 				)
@@ -170,6 +168,28 @@ class PickUpPoint
 		);
 
 		wp_enqueue_script('fraktguiden-pickup-point-checkout');
+	}
+
+	/**
+	 * The point the customer holds for every type the rates need.
+	 *
+	 * @param PickUpPointData[]     $pick_up_points All points near the customer.
+	 * @param array<string, string> $rate_types     Rate id to pickup point type.
+	 *
+	 * @return array<string, PickUpPointData>
+	 */
+	public static function selected_per_type( array $pick_up_points, array $rate_types ): array {
+		$selected = [];
+		foreach ( array_unique( array_values( $rate_types ) ) as $type ) {
+			$point = ( new GetSelectedPickUpPointAction() )( $pick_up_points, $type );
+			if ( ! $point instanceof PickUpPointData ) {
+				continue;
+			}
+			$selected[ $type ] = $point;
+			WC()->session?->set( PickupPointType::session_key( $type ), $point->id );
+		}
+
+		return $selected;
 	}
 
 
@@ -276,7 +296,9 @@ class PickUpPoint
 		if (! self::supports_pick_up_point($bring_product)) {
 			return;
 		}
-		$id = WC()->session?->get( 'bring_fraktguiden_pick_up_point' );
+		$id = WC()->session?->get(
+			PickupPointType::session_key( PickupPointType::for_service( $bring_product ) )
+		);
 		if (is_object($id) && property_exists($id, 'id')) {
 			$id = $id->id;
 		}

@@ -1,8 +1,11 @@
 jQuery(function ($) {
 	// Assign data from localised js object
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
-	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
+	let selectedPickUpPoints = window._fraktguiden_data.selected_pick_up_points || {};
 	let loadedShippingKey = window._fraktguiden_data.shipping_key;
+	// The pickup point type of the rate the customer looks at. A rate carries
+	// 'manned', 'locker' or an empty string for both. Null means no rate yet.
+	let currentType = null;
 	let requireUpdate = false;
 
 	// Global picker element variable
@@ -96,8 +99,9 @@ jQuery(function ($) {
 
 			const listItems = $(el).find('.bfg-pupm__item')
 			// Find selected pick up point and focus it
+			const selected = utility.selectedPoint();
 			let selectedItems = listItems.filter(function () {
-				return $(this).data('id') === selectedPickUpPoint.id;
+				return selected && $(this).data('id') === selected.id;
 			});
 			if (!selectedItems.length) {
 				selectedItems = listItems.first().focus();
@@ -208,12 +212,45 @@ jQuery(function ($) {
 		 * @returns {boolean}
 		 */
 		usesPickUpPoint: function (value) {
-			for (let j = 0; j < _fraktguiden_data.pick_up_point_rate_ids.length; j++) {
-				if (value === _fraktguiden_data.pick_up_point_rate_ids[j]) {
-					return true;
-				}
+			return value in (_fraktguiden_data.pick_up_point_rate_types || {});
+		},
+		/**
+		 * The pickup point type of one rate
+		 * @param {string} rateId
+		 * @returns {string}
+		 */
+		typeForRate: function (rateId) {
+			return (_fraktguiden_data.pick_up_point_rate_types || {})[rateId] || '';
+		},
+		/**
+		 * The points of one type. An empty type means every point.
+		 * @param {string} type
+		 */
+		pointsForType: function (type) {
+			if (!type) {
+				return pickUpPoints;
 			}
-			return false;
+			return pickUpPoints.filter((point) => point.pickupPointType === type);
+		},
+		/**
+		 * The point the customer chose for the rate on screen
+		 */
+		selectedPoint: function () {
+			return selectedPickUpPoints[currentType || ''];
+		},
+		/**
+		 * Fill the modal with the points of one type
+		 * @param {string} type
+		 */
+		showType: function (type) {
+			if (type === currentType) {
+				return;
+			}
+			currentType = type;
+			modalEl.setPickUpPoints(
+				utility.pointsForType(type),
+				handlers.selectPickUpPointHandler
+			);
 		},
 		/**
 		 * Format Address
@@ -226,18 +263,20 @@ jQuery(function ($) {
 		/**
 		 * @param pickUpPoint
 		 */
-		renderSelectedPickUpPoint: function (pickUpPoint) {
+		renderSelectedPickUpPoint: function (pickUpPoint, scope) {
 			if (! pickUpPoint) {
 				return;
 			}
-			$('.bfg-pup__name').text(pickUpPoint.name);
-			$('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
-			$('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
-			$('.bfg-pup__description').text(pickUpPoint.description);
+			// Each rate has its own picker, so write into one picker only.
+			const el = scope && scope.length ? scope : $(document);
+			el.find('.bfg-pup__name').text(pickUpPoint.name);
+			el.find('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
+			el.find('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
+			el.find('.bfg-pup__description').text(pickUpPoint.description);
 			if (_fraktguiden_checkout.map_key) {
-				$('.bfg-pup__map').attr('href', pickUpPoint[_fraktguiden_checkout.map_key]);
+				el.find('.bfg-pup__map').attr('href', pickUpPoint[_fraktguiden_checkout.map_key]);
 			} else {
-				$('.bfg-pup__map').hide();
+				el.find('.bfg-pup__map').hide();
 			}
 		}
 	};
@@ -256,7 +295,8 @@ jQuery(function ($) {
 				e.preventDefault();
 				modalEl.close();
 
-				if (selectedPickUpPoint.id === pickUpPoint.id) {
+				const previous = utility.selectedPoint();
+				if (previous && previous.id === pickUpPoint.id) {
 					return;
 				}
 
@@ -269,6 +309,7 @@ jQuery(function ($) {
 					{
 						action: 'bfg_select_pick_up_point',
 						id: pickUpPoint.id,
+						type: currentType || '',
 					}
 				).fail(
 					function (data) {
@@ -277,9 +318,9 @@ jQuery(function ($) {
 					}
 				).done(function () {
 					el.unblock();
-					utility.renderSelectedPickUpPoint(pickUpPoint);
+					utility.renderSelectedPickUpPoint(pickUpPoint, pickerEl);
 				});
-				selectedPickUpPoint = pickUpPoint;
+				selectedPickUpPoints[currentType || ''] = pickUpPoint;
 			};
 		},
 
@@ -293,18 +334,19 @@ jQuery(function ($) {
 		fetchPickUpPointsDone: function (response) {
 			getRequest = undefined;
 			// Update values from response
-			window._fraktguiden_data.selected_pick_up_point = response.selected_pick_up_point;
-			selectedPickUpPoint = response.selected_pick_up_point;
+			window._fraktguiden_data.selected_pick_up_points = response.selected_pick_up_points;
+			selectedPickUpPoints = response.selected_pick_up_points || {};
 			window._fraktguiden_data.pick_up_points = response.pick_up_points;
 			pickUpPoints = response.pick_up_points;
 			window._fraktguiden_data.shipping_key = response.shipping_key;
 			loadedShippingKey = response.shipping_key;
 
-			if (selectedPickUpPoint) {
-				utility.renderSelectedPickUpPoint(selectedPickUpPoint);
-			}
+			utility.renderSelectedPickUpPoint(utility.selectedPoint(), pickerEl);
 			if (pickUpPoints) {
-				modalEl.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
+				modalEl.setPickUpPoints(
+					utility.pointsForType(currentType || ''),
+					handlers.selectPickUpPointHandler
+				);
 			}
 			pickerEl.unblock();
 		}
@@ -348,7 +390,12 @@ jQuery(function ($) {
 			if (!pickerEl.length) {
 				// Create a new element if the picker is not found
 				pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
-				pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
+				const picker = pickerEl;
+				picker.find('.bfg-pup__change').on('click', () => {
+					pickerEl = picker;
+					utility.showType(utility.typeForRate(rate.rate_id));
+					modalEl.open();
+				});
 				control.append(pickerEl);
 			}
 			return pickerEl;
@@ -359,9 +406,13 @@ jQuery(function ($) {
 			if (!utility.usesPickUpPoint(shippingRate.rate_id)) {
 				continue;
 			}
-			utility.renderSelectedPickUpPoint(_fraktguiden_data.selected_pick_up_point);
+			const picker = getPicker(shippingRate);
+			utility.renderSelectedPickUpPoint(
+				selectedPickUpPoints[utility.typeForRate(shippingRate.rate_id)],
+				picker
+			);
 
-			getPicker(shippingRate).show();
+			picker.show();
 		}
 
 		let timeout = undefined;
@@ -444,7 +495,10 @@ jQuery(function ($) {
 						// Doesn't support pick up points
 						continue;
 					}
-					getPicker(rate).show();
+					const picker = getPicker(rate);
+					utility.showType(utility.typeForRate(rate.rate_id));
+					utility.renderSelectedPickUpPoint(utility.selectedPoint(), picker);
+					picker.show();
 					shouldHide = false;
 
 					if (rate.rate_id === currentRateId) {
@@ -511,6 +565,7 @@ jQuery(function ($) {
 			if (!pickerEl.length) {
 				return;
 			}
+			utility.showType(utility.typeForRate(current));
 			pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
 
 			let changed = current !== previous;
@@ -519,7 +574,7 @@ jQuery(function ($) {
 			}
 			pickerEl.show();
 			requireUpdate = true;
-			utility.renderSelectedPickUpPoint(selectedPickUpPoint)
+			utility.renderSelectedPickUpPoint(utility.selectedPoint(), pickerEl)
 			loadedShippingKey = ''; // A small hack to force update the pick up points
 			utility.refreshPickUpPoints();
 		};

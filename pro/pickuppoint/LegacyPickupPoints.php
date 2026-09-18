@@ -104,7 +104,7 @@ class LegacyPickupPoints {
 		$country = $customerAddress->getCountry();
 		$postcode = $customerAddress->getPostcode();
 		$pickup_point_limit = apply_filters('bring_pickup_point_limit', (int)$service->settings['pickup_point']);
-		$pickup_points = (new GetRawPickupPointsAction)($country, $postcode);
+		$pickup_points = (new GetRawPickupPointsAction)($country, $postcode, PickupPointType::for_service($bring_product));
 
 		if (empty($pickup_points)) {
 			return $rates;

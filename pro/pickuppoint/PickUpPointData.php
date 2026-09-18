@@ -18,6 +18,7 @@ class PickUpPointData {
 		public float $longitude = 0,
 		public string $additionalServiceCode = '',
 		public array  $photos = [],
+		public string $pickupPointType = '',
 	) {
 	}
 
@@ -75,6 +76,7 @@ class PickUpPointData {
 			longitude            : $pickUpPoint['longitude'] ?? 0,
 			additionalServiceCode: $pickUpPoint['additionalServiceCode'] ?? '',
 			photos               : $photos,
+			pickupPointType      : strtolower( $pickUpPoint['pickupPointType'] ?? '' ),
 		);
 
 //		$settings = FraktguidenSettings::getInstance();
