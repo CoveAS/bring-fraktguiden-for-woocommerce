@@ -366,8 +366,15 @@
    they cannot do. The drag starts from .hndle in the postbox script of
    WordPress, so a handle that takes no pointer stops the drag as well. */
 #bring-fraktguiden-booking-box .handle-order-higher,
-#bring-fraktguiden-booking-box .handle-order-lower {
+#bring-fraktguiden-booking-box .handle-order-lower,
+#bring-fraktguiden-booking-box .handlediv {
     display: none;
+}
+
+/* A shop worker who closed the box before keeps that state in user meta, and
+   WordPress still writes the closed class. The box stays open anyway. */
+#bring-fraktguiden-booking-box .inside {
+    display: block;
 }
 
 #bring-fraktguiden-booking-box .postbox-header {
