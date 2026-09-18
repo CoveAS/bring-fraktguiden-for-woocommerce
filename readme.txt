@@ -60,16 +60,31 @@ See faq.txt for frequently asked questions
 * Added a fallback shipping option for a checkout that Bring returns no price for
 * Added a notice that names the setup steps left
 * Added an offer to delete a free shipping method that hides the Bring options
+* Added the Pakkeboks service, with its own pick-up points
+* Added a return label to a booking, printed from the same button as the shipping label
+* Added the pick-up point settings to the Settings page
+* Added the distance to each pick-up point in the checkout picker
+* Added a phone number check on a Pakkeboks and a Pakke hjem pluss order
 * The Pro license now follows the shop domain, and the owner can move it from the Pro page
 * A testing license now books in test mode only, and the booking page says why
 * The buy link now carries the shop domain, so the license goes to the right shop
 * The plugin now reads its settings from one store
+* The booking box now sits at the top of the order screen, and groups its fields into cards
+* The plugin now turns off a price customer number that Bring refuses, and names that number
+* A booking from a copied database now stays a test booking
+* The service wizard now asks about an RFID printer only for a parcel under 5 kg
+* The zone form now suggests everywhere else only when the shop draws no zones of its own
+* The checkout now keeps the shop theme out of the pick-up point picker
+* WooCommerce is now a required plugin
 * Completed the Norwegian translation
 * Fixed a frozen checkout when the customer changes the pick-up point
 * Fixed the customs and license scripts, which did not load on a live site
 * Fixed a service that the service wizard cleared and then set again
 * Fixed the test step, which needed a reload before it turned green
 * Fixed a jump to the Pro page after the last setup step
+* Fixed the pick-up points, which did not reload when the customer changed the street
+* Fixed a pick-up point picker shown under a shipping option the customer did not choose
+* Fixed an extra service sent with Pakke til hentested that Bring does not accept
 
 = 1.11.7 =
 
