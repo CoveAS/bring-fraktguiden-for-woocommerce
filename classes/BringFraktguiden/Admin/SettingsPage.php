@@ -290,6 +290,9 @@ class SettingsPage
 
 		$fields = Fields::instance();
 
+		// Booking is a Pro feature. Without Pro the form saves but never books.
+		$pro_active = Fraktguiden_Helper::pro_allowed();
+
 		// A testing license holds test mode on, so the page says why.
 		$license_testing = Fraktguiden_License::is_testing();
 		$license_url     = admin_url('admin.php?page=bring_fraktguiden_pro');

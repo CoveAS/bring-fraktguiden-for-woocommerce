@@ -1,6 +1,6 @@
 - [ ] Testing licenses?
-- [ ] Callout to go to license settings if no pro on booking settings
 
+- [x] Callout to go to license settings if no pro on booking settings
 - [x] NVIT explainer
 - [x] Enable Booking ???
 - [x] Enable PRO ???
