@@ -28,11 +28,21 @@
     --bfg-font-base: 16px;
     --bfg-font-2xl: 24px;
 
-    --bfg-leading-xs: 16px;
-    --bfg-leading-sm: 20px;
+    /* One line height per size. A rule that sets a size sets the matching
+       leading. The three text sizes sit at 1.5, which is what `.bfg`
+       hands down, so a rule needs the token only where it fights a
+       WordPress rule. Use `none` for a box that holds one glyph, such as
+       a badge or an icon button. */
+    --bfg-leading-none: 1;
+    --bfg-leading-xs: 18px;
+    --bfg-leading-sm: 21px;
     --bfg-leading-base: 24px;
     --bfg-leading-2xl: 32px;
 
+    /* The tracking of an uppercase meta label. Nothing else tracks. */
+    --bfg-tracking-meta: 0.05em;
+
+    --bfg-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     --bfg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
 
     /* Button System */
@@ -44,16 +54,13 @@
     /* Button Sizes */
     --bfg-btn-sm-padding: 6px 16px;
     --bfg-btn-sm-font-size: var(--bfg-font-sm);
-    --bfg-btn-sm-line-height: 20px;
     --bfg-btn-sm-height: 32px;
 
     --bfg-btn-md-padding: 8px 24px;
     --bfg-btn-md-font-size: var(--bfg-font-sm);
-    --bfg-btn-md-line-height: 24px;
     --bfg-btn-md-height: 40px;
 
     --bfg-btn-lg-padding: 12px 32px;
     --bfg-btn-lg-font-size: var(--bfg-font-base);
-    --bfg-btn-lg-line-height: 24px;
     --bfg-btn-lg-height: 48px;
 }

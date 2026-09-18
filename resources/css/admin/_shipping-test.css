@@ -123,9 +123,9 @@
 	margin: 0;
 	padding: 12px 0;
 	overflow-x: auto;
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-family: var(--bfg-font-mono);
 	font-size: var(--bfg-font-xs);
-	line-height: 1.5;
+	line-height: var(--bfg-leading-xs);
 	white-space: pre;
 	tab-size: 2;
 }

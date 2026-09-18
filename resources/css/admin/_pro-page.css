@@ -50,7 +50,7 @@
 
 .bfg-complete-card__title {
     font-size: var(--bfg-font-base) !important;
-    line-height: 26px !important;
+    line-height: var(--bfg-leading-base) !important;
     font-weight: 600 !important;
     color: #111827 !important;
     margin: 0 0 4px !important;
@@ -120,14 +120,14 @@
     font-size: var(--bfg-font-xs) !important;
     font-weight: 600 !important;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--bfg-tracking-meta);
     color: #6B7280 !important;
     margin: 0 0 4px !important;
 }
 
 .bfg-booking-upsell__title {
     font-size: var(--bfg-font-2xl) !important;
-    line-height: 32px !important;
+    line-height: var(--bfg-leading-2xl) !important;
     font-weight: 600 !important;
     color: #111827 !important;
     margin: 0 !important;
@@ -201,7 +201,7 @@
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
     color: #111827;
-    line-height: 1.1;
+    line-height: var(--bfg-leading-none);
 }
 
 .bfg-stat-card__label {
@@ -232,7 +232,7 @@
 
 .bfg-do-more-card__title {
     font-size: var(--bfg-font-2xl) !important;
-    line-height: 32px !important;
+    line-height: var(--bfg-leading-2xl) !important;
     font-weight: 600 !important;
     color: #111827 !important;
     margin: 0 !important;
@@ -267,7 +267,7 @@
 .bfg-free-status__title {
     font-size: var(--bfg-font-base) !important;
     font-weight: 600 !important;
-    line-height: 24px !important;
+    line-height: var(--bfg-leading-base) !important;
     color: #111827;
     margin: 0 0 4px !important;
 }
@@ -411,7 +411,7 @@
     font-size: var(--bfg-font-xs);
     color: #374151;
     margin: 6px 0 4px;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--bfg-tracking-meta);
 }
 
 .bfg-license-expiry {
@@ -521,7 +521,7 @@
 
 .bfg-license-card__key-value--placeholder {
     color: #9CA3AF;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--bfg-tracking-meta);
 }
 
 .bfg-license-card__footer {
@@ -719,7 +719,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     color: #111827;
     display: block;
     margin: 0 0 6px !important;
-    line-height: 1.3;
+    line-height: var(--bfg-leading-base);
 }
 
 .bfg-feature-card__title sup {
@@ -733,7 +733,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     color: #596270;
     display: block;
     margin: 0 !important;
-    line-height: 1.5;
+    line-height: var(--bfg-leading-base);
 }
 
 .bfg-feature-card__benefits {
@@ -786,7 +786,7 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
     font-size: var(--bfg-font-xs);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--bfg-tracking-meta);
     color: var(--bfg-text-muted);
 }
 
@@ -848,5 +848,5 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
    the same width. */
 #license_key {
     font-family: var(--bfg-font-mono);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--bfg-tracking-meta);
 }

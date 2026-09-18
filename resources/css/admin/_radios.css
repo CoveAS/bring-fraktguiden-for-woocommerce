@@ -57,7 +57,7 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
 .bfg-radio-title {
     font-weight: 600;
     font-size: var(--bfg-font-base);
-    line-height: 1.5;
+    line-height: var(--bfg-leading-base);
     color: var(--bfg-text-main);
     text-wrap: pretty;
     margin: 0;
@@ -67,7 +67,7 @@ body:not(.using-mouse) .bfg-radio-card:focus-within {
 .bfg-radio-desc {
     font-weight: 400;
     font-size: var(--bfg-font-sm);
-    line-height: 21px;
+    line-height: var(--bfg-leading-sm);
     color: var(--bfg-text-secondary);
     text-wrap: pretty;
     margin: 0;

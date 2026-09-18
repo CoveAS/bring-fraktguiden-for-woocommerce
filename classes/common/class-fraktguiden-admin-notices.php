@@ -200,7 +200,7 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_shipping_method_notice() {
 		$messages   = [];
-		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden shipping method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = '<span style="font-weight:600;color:red;">' . __( 'Bring Fraktguiden shipping method is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = sprintf( __( 'You have to add Bring Fraktguiden as a shipping method in your <a href="%s">shipping zones</a>.', 'bring-fraktguiden-for-woocommerce' ), admin_url() . 'admin.php?page=wc-settings&tab=shipping' );
 
 		return implode( '<br>', $messages );
@@ -225,7 +225,7 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_shipping_services_notice() {
 		$messages   = [];
-		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = '<span style="font-weight:600;color:red;">' . __( 'No shipping services enabled.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = sprintf(
 			__(
 				'You have to enable at least one shipping service in <a href="%s">Shipping Options</a>.',
@@ -256,7 +256,7 @@ class Fraktguiden_Admin_Notices {
 	 */
 	public static function generate_missing_api_customer_number_notice() {
 		$messages   = [];
-		$messages[] = '<span style="font-weight:bold;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
+		$messages[] = '<span style="font-weight:600;color:red;">' . __( 'Bring Fraktguiden API Customer Number is missing.', 'bring-fraktguiden-for-woocommerce' ) . '</span>';
 		$messages[] = __( 'Mybring Booking requires an API customer number.', 'bring-fraktguiden-for-woocommerce' );
 		/* translators: %s: booking page URL */
 		$messages[] = sprintf(

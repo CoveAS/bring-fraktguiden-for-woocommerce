@@ -36,19 +36,21 @@
 				<tr>
 					<td><code>--bfg-font-sm</code></td>
 					<td><code>14px</code></td>
-					<td><code>20px</code></td>
+					<td><code>21px</code></td>
 					<td>Description, hint, button</td>
 					<td class="bfg-text-sm">sm</td>
 				</tr>
 				<tr>
 					<td><code>--bfg-font-xs</code></td>
 					<td><code>12px</code></td>
-					<td><code>16px</code></td>
+					<td><code>18px</code></td>
 					<td>Badge, code, meta label</td>
 					<td class="bfg-text-xs">xs</td>
 				</tr>
 			</tbody>
 		</table>
+
+		<p class="bfgu:mb-8">The line height of a step is <code>--bfg-leading-*</code>, under the same name as the size. The three text steps sit at 1.5, which <code>.bfg</code> hands down, so a rule needs the token only where it fights a WordPress rule. A box that holds one glyph, such as a badge, takes <code>--bfg-leading-none</code>.</p>
 
 		<h3 class="bfg-field-group-title">
 			<bfg-t>Font Weights</bfg-t>
@@ -64,6 +66,12 @@
 				<span class="bfg-text-base bfgu:font-semibold">Semibold — titles, labels, buttons, emphasis</span>
 			</div>
 		</div>
+
+		<h3 class="bfg-field-group-title">
+			<bfg-t>Letter Spacing and Family</bfg-t>
+		</h3>
+		<p class="bfgu:mb-4">One tracking token, <code>--bfg-tracking-meta</code>. It belongs on an uppercase meta label, which is always xs and 600. Nothing else tracks.</p>
+		<p class="bfgu:mb-8">Two families: <code>--bfg-font-sans</code> for text, <code>--bfg-font-mono</code> for a code or a key.</p>
 
 		<h3 class="bfg-field-group-title">
 			<bfg-t>Text Formatting</bfg-t>

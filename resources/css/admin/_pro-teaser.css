@@ -32,15 +32,14 @@
     font-weight: 600;
     color: #111827;
     margin: 0 0 8px !important;
-    line-height: 40px;
-    letter-spacing: -0.02em;
+    line-height: var(--bfg-leading-2xl);
     text-wrap: balance;
 }
 
 .bfg-pro-teaser__subtitle {
     font-size: var(--bfg-font-base);
     color: #596270;
-    line-height: 1.5;
+    line-height: var(--bfg-leading-base);
     margin-bottom: 32px !important;
     max-width: 460px;
     margin-left: auto;
@@ -110,9 +109,8 @@
 .bfg-pro-teaser-v2--active .bfg-pro-teaser__title {
     font-size: var(--bfg-font-2xl);
     font-weight: 600;
-    letter-spacing: -0.025em;
     margin: 0 !important;
-    line-height: 1;
+    line-height: var(--bfg-leading-none);
 }
 
 .bfg-pro-teaser-v2--active .bfg-pro-teaser__subtitle {
@@ -180,11 +178,11 @@
 
 .bfg-pro-teaser__divider span {
     padding: 0 16px;
-    font-size: var(--bfg-font-sm);
+    font-size: var(--bfg-font-xs);
     font-weight: 600;
     color: #9CA3AF;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
+    letter-spacing: var(--bfg-tracking-meta);
 }
 
 .bfg-pro-teaser__link {
@@ -241,7 +239,6 @@
     align-items: center;
     gap: 6px;
     font-size: var(--bfg-font-xs);
-    letter-spacing: 0;
     text-transform: uppercase;
     color: #596270;
     font-weight: 600;
@@ -344,7 +341,7 @@
     color: var(--bfg-link);
     text-decoration: underline;
     font-size: var(--bfg-font-base);
-    line-height: 24px;
+    line-height: var(--bfg-leading-base);
     transition: color 0.15s ease;
 }
 

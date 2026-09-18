@@ -16,7 +16,7 @@
     border-radius: var(--bfg-radius-input);
     background: #ffffff;
     color: var(--bfg-text-main);
-    line-height: 1.4;
+    line-height: var(--bfg-leading-base);
     text-align: left;
     cursor: pointer;
 }
@@ -63,7 +63,7 @@
     padding: 8px 10px;
     border: 1px solid var(--bfg-border);
     border-radius: var(--bfg-radius-input);
-    line-height: 1.4;
+    line-height: var(--bfg-leading-base);
 }
 
 /* The line stays even when it holds nothing, so the list below it sits still. */

@@ -7,7 +7,7 @@
    ========================================================================== */
 
 .bfg-admin-page__home {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: var(--bfg-font-sans);
     color: #1d2327;
     margin-top: 0;
     background-color: var(--bfg-bg-page);
@@ -74,7 +74,7 @@
     font-weight: 600;
     color: var(--bfg-text-main);
     margin: 0 0 8px !important;
-    line-height: 36px;
+    line-height: var(--bfg-leading-2xl);
 }
 
 .bfg-setup-header__subtitle {
@@ -150,7 +150,7 @@
     font-weight: 600;
     margin: 0 0 8px !important;
     color: #111827;
-    line-height: 32px;
+    line-height: var(--bfg-leading-2xl);
     text-wrap: balance;
 }
 
@@ -158,7 +158,7 @@
     font-size: var(--bfg-font-base);
     margin: 0 0 24px !important;
     color: #4B5563;
-    line-height: 24px;
+    line-height: var(--bfg-leading-base);
     font-weight: 400;
     text-wrap: pretty;
 }
@@ -292,10 +292,6 @@
         margin-bottom: 24px;
     }
 
-    .bfg-section-card-title {
-        line-height: 32px !important;
-    }
-
     .bfg-active-step-card {
         flex-direction: column;
         padding: 24px;
@@ -310,14 +306,6 @@
     .bfg-active-step__icon {
         width: 40px;
         height: 40px;
-    }
-
-    .bfg-active-step__content h3 {
-        line-height: 28px;
-    }
-
-    .bfg-active-step__content p {
-        line-height: 24px;
     }
 
     .bfg-admin-page__home .bfg-active-step__content .bfg-btn {
@@ -378,14 +366,10 @@
     }
 
 
-    .bfg-pro-teaser__title {
-        line-height: 32px;
-    }
-
     .bfg-pro-teaser__subtitle,
     .bfg-pro-teaser-v2 .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-sm);
-        line-height: 21px;
+        line-height: var(--bfg-leading-sm);
         margin-bottom: 24px !important;
     }
 
@@ -456,10 +440,6 @@
         margin-bottom: 24px;
     }
 
-    .bfg-section-card-title {
-        line-height: 28px !important;
-    }
-
     .bfg-active-step-card {
         padding: 16px;
         margin-bottom: 16px;
@@ -515,7 +495,7 @@
 
     .bfg-active-step__content h3 {
         font-size: var(--bfg-font-base);
-        line-height: 24px;
+        line-height: var(--bfg-leading-base);
     }
 
     .bfg-active-step__content p {
@@ -548,12 +528,12 @@
 
     .bfg-pro-teaser__title {
         font-size: var(--bfg-font-base);
-        line-height: 26px;
+        line-height: var(--bfg-leading-base);
     }
 
     .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-sm);
-        line-height: 24px;
+        line-height: var(--bfg-leading-base);
         margin-bottom: 24px !important;
     }
 

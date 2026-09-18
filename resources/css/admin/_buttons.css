@@ -21,7 +21,7 @@
     padding: var(--bfg-btn-md-padding);
     font-size: var(--bfg-btn-md-font-size);
     font-weight: var(--bfg-btn-font-weight);
-    line-height: var(--bfg-btn-md-line-height);
+    line-height: var(--bfg-leading-base);
     height: var(--bfg-btn-md-height);
     border: 1px solid transparent;
     border-radius: var(--bfg-btn-radius);
@@ -190,14 +190,14 @@ body.wp-admin .bfg a.bfg-btn--text:hover {
 .bfg-btn--sm {
     padding: var(--bfg-btn-sm-padding);
     font-size: var(--bfg-btn-sm-font-size);
-    line-height: var(--bfg-btn-sm-line-height);
+    line-height: var(--bfg-leading-sm);
     height: var(--bfg-btn-sm-height);
 }
 
 .bfg-btn--lg {
     padding: var(--bfg-btn-lg-padding);
     font-size: var(--bfg-btn-lg-font-size);
-    line-height: var(--bfg-btn-lg-line-height);
+    line-height: var(--bfg-leading-base);
     height: var(--bfg-btn-lg-height);
 }
 
@@ -266,7 +266,7 @@ body.wp-admin .bfg input[type="submit"].button-primary {
     padding: var(--bfg-btn-md-padding);
     font-size: var(--bfg-btn-md-font-size);
     font-weight: var(--bfg-btn-font-weight);
-    line-height: var(--bfg-btn-md-line-height);
+    line-height: var(--bfg-leading-base);
     height: var(--bfg-btn-md-height);
     background: var(--bfg-primary);
     color: #fff;
@@ -403,22 +403,25 @@ body.wp-admin .bfg .button-primary:disabled {
     border-top: none;
 }
 
-.bfg-ks-size-label {
+/* The uppercase meta label of the kitchen sink. */
+.bfg-ks-size-label,
+.bfg-ks-state-label {
     font-size: var(--bfg-font-xs);
-    color: var(--bfg-text-muted);
-    margin: 0 0 10px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: var(--bfg-tracking-meta);
+    color: var(--bfg-text-muted);
+}
+
+.bfg-ks-size-label {
+    margin: 0 0 10px;
 }
 
 .bfg-ks-state-label {
+    display: flex;
+    align-items: center;
     width: 68px;
     flex-shrink: 0;
-    font-size: var(--bfg-font-xs);
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--bfg-text-muted);
 }
 
 /* Danger Button

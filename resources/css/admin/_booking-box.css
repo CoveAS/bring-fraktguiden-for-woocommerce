@@ -33,7 +33,7 @@
     border-radius: var(--bfg-radius-input);
     background: #ffffff;
     color: var(--bfg-text-main);
-    line-height: 1.4;
+    line-height: var(--bfg-leading-base);
 }
 
 .bfg-booking-box select:focus,
@@ -58,9 +58,10 @@
 
 .bfg-booking-form__title {
     margin: 24px 0 8px;
-    font-size: var(--bfg-font-sm);
+    font-size: var(--bfg-font-xs);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--bfg-tracking-meta);
     color: var(--bfg-text-secondary);
 }
 
@@ -225,7 +226,7 @@
 }
 
 .bfg-booking-history__number {
-    font-family: monospace;
+    font-family: var(--bfg-font-mono);
     margin-right: 8px;
 }
 

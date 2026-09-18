@@ -47,7 +47,7 @@
     background: transparent;
     color: var(--bfg-text-muted);
     font-size: var(--bfg-font-2xl);
-    line-height: 1;
+    line-height: var(--bfg-leading-none);
     cursor: pointer;
 }
 

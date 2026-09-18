@@ -43,11 +43,6 @@
         margin-bottom: 24px !important;
     }
 
-    .bfg .bfg-section__header h2,
-    .bfg-section-card-title {
-        line-height: 36px !important;
-    }
-
     .bfg .bfg-section .bfg-section__header--divider {
         margin-top: 48px !important;
         padding-top: 48px !important;
@@ -143,10 +138,6 @@
         --cb-padding: 20px;
         --cb-checkbox-size: 20px;
         --cb-gap: 16px;
-        --cb-title-size: 15px;
-        --cb-title-line-height: 1.5;
-        --cb-desc-size: 14px;
-        --cb-desc-line-height: 21px;
         --cb-content-gap: 6px;
     }
 
@@ -180,14 +171,8 @@
         height: 28px;
     }
 
-    .bfg-pro-teaser__title {
-        font-size: var(--bfg-font-2xl);
-        line-height: 32px;
-    }
-
     .bfg-pro-teaser__subtitle {
         font-size: var(--bfg-font-base);
-        line-height: 24px;
         margin-bottom: 24px !important;
     }
 
@@ -316,11 +301,6 @@
         margin-bottom: 16px;
     }
 
-    .bfg .bfg-section__header h2,
-    .bfg-section-card-title {
-        line-height: 32px !important;
-    }
-
     .bfg .bfg-field:not(.bfg-field--checkbox-box)>label,
     .bfg .bfg-field>.label,
     .bfg .bfg-label {
@@ -333,7 +313,7 @@
 
     .bfg-pro-teaser__title {
         font-size: var(--bfg-font-base);
-        line-height: 24px;
+        line-height: var(--bfg-leading-base);
     }
 
     .bfg-pro-teaser__subtitle {
@@ -369,10 +349,6 @@
         --cb-padding: 16px;
         --cb-checkbox-size: 20px;
         --cb-gap: 16px;
-        --cb-title-size: 15px;
-        --cb-title-line-height: 1.5;
-        --cb-desc-size: 14px;
-        --cb-desc-line-height: 21px;
         --cb-content-gap: 6px;
     }
 

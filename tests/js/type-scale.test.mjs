@@ -1,9 +1,9 @@
 /**
- * Guards the type scale of the admin UI.
+ * Guards the typography of the admin UI.
  *
- * The admin CSS may set a font size only from the four tokens in
- * resources/css/admin/_tokens.css, and a font weight only to 400 or 600.
- * The kitchen sink typography page shows the scale.
+ * Every font size, line height, letter spacing and font family in the admin
+ * CSS reads a token from resources/css/admin/_tokens.css. A font weight is
+ * 400 or 600. The kitchen sink typography page shows the scale.
  *
  * Run: npm run test-js
  */
@@ -25,21 +25,33 @@ const lines = files.flatMap((name) =>
 
 const allowedSize = /font-size:\s*(var\(--bfg-(font|btn)-[a-z0-9-]+\)|inherit)/;
 const allowedWeight = /font-weight:\s*(400|600|var\(--bfg-btn-font-weight\)|inherit)/;
+// 1.5 is the ratio `.bfg` hands down, which every child then inherits.
+const allowedLeading = /line-height:\s*(var\(--bfg-leading-[a-z0-9]+\)|1\.5|inherit)/;
+const allowedTracking = /letter-spacing:\s*var\(--bfg-tracking-[a-z]+\)/;
+const allowedFamily = /font-family:\s*var\(--bfg-font-(sans|mono)\)/;
 
-test('every font size comes from the scale', () => {
-	const bad = lines
-		.filter(({ text }) => text.includes('font-size:') && !text.trimStart().startsWith('--'))
-		.filter(({ text }) => !allowedSize.test(text))
+const guard = (property, allowed) =>
+	lines
+		.filter(({ text }) => text.includes(property) && !text.trimStart().startsWith('--'))
+		.filter(({ text }) => !allowed.test(text))
 		.map(({ where, text }) => `${where}: ${text.trim()}`);
 
-	assert.deepEqual(bad, [], 'Use a --bfg-font-* token. See the kitchen sink typography page.');
+test('every font size comes from the scale', () => {
+	assert.deepEqual(guard('font-size:', allowedSize), [], 'Use a --bfg-font-* token.');
 });
 
 test('every font weight is 400 or 600', () => {
-	const bad = lines
-		.filter(({ text }) => text.includes('font-weight:') && !text.trimStart().startsWith('--'))
-		.filter(({ text }) => !allowedWeight.test(text))
-		.map(({ where, text }) => `${where}: ${text.trim()}`);
+	assert.deepEqual(guard('font-weight:', allowedWeight), [], 'Use 400 or 600.');
+});
 
-	assert.deepEqual(bad, [], 'Use 400 or 600. See the kitchen sink typography page.');
+test('every line height comes from the scale', () => {
+	assert.deepEqual(guard('line-height:', allowedLeading), [], 'Use a --bfg-leading-* token.');
+});
+
+test('every letter spacing comes from the scale', () => {
+	assert.deepEqual(guard('letter-spacing:', allowedTracking), [], 'Use --bfg-tracking-meta.');
+});
+
+test('every font family comes from the scale', () => {
+	assert.deepEqual(guard('font-family:', allowedFamily), [], 'Use --bfg-font-sans or --bfg-font-mono.');
 });

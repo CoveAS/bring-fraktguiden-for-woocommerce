@@ -9,8 +9,6 @@
     --cb-padding: 20px;
     --cb-checkbox-size: 20px;
     --cb-gap: 16px;
-    --cb-title-line-height: 1.5;
-    --cb-desc-line-height: 21px;
     --cb-content-gap: 6px;
 
     background: #fff;
@@ -66,7 +64,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-field--checkbox-box .bfg-checkbox-title {
     font-weight: 600;
     font-size: var(--bfg-font-base);
-    line-height: var(--cb-title-line-height);
+    line-height: var(--bfg-leading-base);
     color: var(--bfg-text-main);
     text-wrap: pretty;
     margin: 0;
@@ -77,7 +75,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-field--checkbox-box .bfg-checkbox-desc {
     font-weight: 400;
     font-size: var(--bfg-font-sm);
-    line-height: var(--cb-desc-line-height);
+    line-height: var(--bfg-leading-sm);
     color: var(--bfg-text-secondary);
     text-wrap: pretty;
     margin: 0;
@@ -165,7 +163,7 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
     font-size: var(--bfg-font-sm);
     color: var(--bfg-text-secondary);
     font-weight: 400;
-    line-height: 24px;
+    line-height: var(--bfg-leading-sm);
     display: block;
     text-wrap: pretty;
 }

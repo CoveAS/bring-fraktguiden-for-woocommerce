@@ -17,7 +17,7 @@
 /* The base text of every block of plugin UI. It sits on `.bfg`, not on the
    page class, so a meta box and a dialog start from the same size as a page. */
 .bfg {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: var(--bfg-font-sans);
     font-size: var(--bfg-font-base);
     line-height: 1.5;
     color: #1d2327;
@@ -122,7 +122,7 @@
     font-weight: 600 !important;
     color: var(--bfg-text-main) !important;
     margin: 0 0 8px !important;
-    line-height: 36px !important;
+    line-height: var(--bfg-leading-2xl) !important;
     text-wrap: balance;
 }
 
@@ -131,7 +131,7 @@
     color: var(--bfg-text-secondary) !important;
     margin: 0 !important;
     font-weight: 400 !important;
-    line-height: 24px !important;
+    line-height: var(--bfg-leading-base) !important;
 }
 
 .bfg .bfg-section__section {
@@ -179,7 +179,7 @@
     padding: 2px 6px;
     border-radius: 4px;
     font-size: var(--bfg-font-xs);
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-family: var(--bfg-font-mono);
     color: var(--bfg-text-main);
 }
 

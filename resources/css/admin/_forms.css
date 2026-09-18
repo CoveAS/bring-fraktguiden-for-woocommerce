@@ -15,7 +15,7 @@
     display: block;
     font-weight: 600;
     font-size: var(--bfg-font-sm);
-    line-height: 1.5;
+    line-height: var(--bfg-leading-sm);
     color: var(--bfg-text-main);
     margin-bottom: 8px !important;
 }
@@ -25,7 +25,7 @@
     display: block;
     font-weight: 600;
     font-size: var(--bfg-font-base) !important;
-    line-height: 1.5 !important;
+    line-height: var(--bfg-leading-base) !important;
     color: var(--bfg-text-main);
     margin-top: 8px;
     margin-bottom: 16px !important;
@@ -124,7 +124,7 @@
     font-size: var(--bfg-font-base) !important;
     color: var(--bfg-text-secondary) !important;
     font-weight: 400 !important;
-    line-height: 22px !important;
+    line-height: var(--bfg-leading-base) !important;
     margin-top: 8px !important;
     margin-bottom: 0 !important;
     display: block;
@@ -134,7 +134,7 @@
 .bfg-field .bfg-description,
 .bfg-input .bfg-description {
     font-size: var(--bfg-font-sm) !important;
-    line-height: 21px !important;
+    line-height: var(--bfg-leading-sm) !important;
     margin-top: 8px !important;
     margin-bottom: 24px !important;
 }

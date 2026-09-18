@@ -210,22 +210,34 @@ php bin/list-components.php
 
 The admin UI has four font sizes and two font weights. Nothing else.
 
-| Token | Size | Where it belongs |
-|---|---|---|
-| `--bfg-font-2xl` | 24px | Page title, card headline, big number |
-| `--bfg-font-base` | 16px | Body text, field label, card title |
-| `--bfg-font-sm` | 14px | Description, hint, button |
-| `--bfg-font-xs` | 12px | Badge, code, meta label |
+| Token | Size | Leading | Where it belongs |
+|---|---|---|---|
+| `--bfg-font-2xl` | 24px | 32px | Page title, card headline, big number |
+| `--bfg-font-base` | 16px | 24px | Body text, field label, card title |
+| `--bfg-font-sm` | 14px | 21px | Description, hint, button |
+| `--bfg-font-xs` | 12px | 18px | Badge, code, meta label |
 
-A weight is 400 or 600. A size sets a line height through the matching
-`--bfg-leading-*` token.
+A weight is 400 or 600.
 
-Never write a font size in pixels. `npm run test-js` fails on a raw pixel size
-and on any other weight.
+A size sets the line height of the same name, through `--bfg-leading-*`. The
+three text steps sit at 1.5, which `.bfg` hands down, so a rule needs the token
+only where it fights a WordPress rule. A box that holds one glyph, such as a
+badge or an icon button, takes `--bfg-leading-none`.
+
+One tracking token, `--bfg-tracking-meta`. It belongs on an uppercase meta
+label, which is always `--bfg-font-xs` at 600. Nothing else tracks.
+
+Two families: `--bfg-font-sans` and `--bfg-font-mono`.
+
+Never write a raw value for any of these. `npm run test-js` fails on a font
+size, a line height, a letter spacing or a font family that is not a token, and
+on a weight other than 400 or 600.
 
 The Kitchen Sink typography page shows the scale. The shadow root stylesheets
 under `pro/assets/css/` sit outside it, because a custom property of the page
-does not reach a shadow root.
+does not reach a shadow root. The system info dump in
+`classes/common/FraktguidenSystemInfo.php` also stands alone, and repeats the
+sm step in its own `<style>` block.
 
 ## Build Commands
 

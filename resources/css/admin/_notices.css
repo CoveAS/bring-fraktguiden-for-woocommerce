@@ -29,7 +29,7 @@
     margin: 0 !important;
     padding: 0 !important;
     text-align: left !important;
-    line-height: 1.5 !important;
+    line-height: var(--bfg-leading-base) !important;
     font-size: var(--bfg-font-base) !important;
     font-weight: 400 !important;
 }

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T18:36:16+00:00\n"
+"POT-Creation-Date: 2026-09-18T19:08:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -395,9 +395,9 @@ msgstr ""
 #: build/templates/admin/pages/booking.php:234
 #: build/templates/admin/pages/booking.php:260
 #: build/templates/admin/pages/booking.php:321
-#: build/templates/admin/pages/fallback-options.php:75
-#: build/templates/admin/pages/fallback-options.php:108
-#: build/templates/admin/pages/fallback-options.php:186
+#: build/templates/admin/pages/fallback-options.php:64
+#: build/templates/admin/pages/fallback-options.php:97
+#: build/templates/admin/pages/fallback-options.php:175
 #: build/templates/admin/pages/settings.php:52
 #: build/templates/admin/pages/settings.php:77
 #: build/templates/admin/pages/settings.php:181
@@ -409,9 +409,9 @@ msgstr ""
 #: src/templates/admin/pages/booking.bfg.php:168
 #: src/templates/admin/pages/booking.bfg.php:182
 #: src/templates/admin/pages/booking.bfg.php:231
-#: src/templates/admin/pages/fallback-options.bfg.php:70
-#: src/templates/admin/pages/fallback-options.bfg.php:103
-#: src/templates/admin/pages/fallback-options.bfg.php:179
+#: src/templates/admin/pages/fallback-options.bfg.php:64
+#: src/templates/admin/pages/fallback-options.bfg.php:97
+#: src/templates/admin/pages/fallback-options.bfg.php:173
 #: src/templates/admin/pages/settings.bfg.php:52
 #: src/templates/admin/pages/settings.bfg.php:77
 #: src/templates/admin/pages/settings.bfg.php:176
@@ -516,43 +516,38 @@ msgstr ""
 msgid "Fallback Options"
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:37
-#: src/templates/admin/pages/fallback-options.bfg.php:33
-msgid "This site is running in a local environment and production settings has been deactivated."
-msgstr ""
-
-#: build/templates/admin/pages/fallback-options.php:47
-#: src/templates/admin/pages/fallback-options.bfg.php:42
+#: build/templates/admin/pages/fallback-options.php:36
+#: src/templates/admin/pages/fallback-options.bfg.php:36
 msgid "No connection"
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:48
-#: src/templates/admin/pages/fallback-options.bfg.php:43
+#: build/templates/admin/pages/fallback-options.php:37
+#: src/templates/admin/pages/fallback-options.bfg.php:37
 msgid "When the Bring API is unavailable, no shipping options appear at checkout and customers can't complete their order. Add a fallback rate here to prevent lost sales."
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:79
-#: src/templates/admin/pages/fallback-options.bfg.php:74
+#: build/templates/admin/pages/fallback-options.php:68
+#: src/templates/admin/pages/fallback-options.bfg.php:68
 msgid "Heavy and oversized items"
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:80
-#: src/templates/admin/pages/fallback-options.bfg.php:75
+#: build/templates/admin/pages/fallback-options.php:69
+#: src/templates/admin/pages/fallback-options.bfg.php:69
 msgid "Orders that exceed Bring's weight or size limits won't get a shipping rate. Add a fallback option for these cases."
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:114
-#: src/templates/admin/pages/fallback-options.bfg.php:109
+#: build/templates/admin/pages/fallback-options.php:103
+#: src/templates/admin/pages/fallback-options.bfg.php:103
 msgid "Dimension packing for cart items"
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:115
-#: src/templates/admin/pages/fallback-options.bfg.php:110
+#: build/templates/admin/pages/fallback-options.php:104
+#: src/templates/admin/pages/fallback-options.bfg.php:104
 msgid "Configure how cart items are packed into boxes before calculating shipping rates. Useful for stores with large or heavy products."
 msgstr ""
 
-#: build/templates/admin/pages/fallback-options.php:124
-#: src/templates/admin/pages/fallback-options.bfg.php:118
+#: build/templates/admin/pages/fallback-options.php:113
+#: src/templates/admin/pages/fallback-options.bfg.php:112
 msgid "Maximum box dimensions"
 msgstr ""
 
@@ -645,19 +640,19 @@ msgstr ""
 msgid "Tick a zone to show Bring shipping options to customers there."
 msgstr ""
 
-#: build/templates/admin/pages/home.php:195
+#: build/templates/admin/pages/home.php:197
 msgid "Already added"
 msgstr ""
 
-#: build/templates/admin/pages/home.php:203
+#: build/templates/admin/pages/home.php:205
 msgid "Delete the free shipping"
 msgstr ""
 
-#: build/templates/admin/pages/home.php:204
+#: build/templates/admin/pages/home.php:206
 msgid "Free shipping is the only option this shop offers, and it hides the Bring options from a customer. A deleted method does not come back."
 msgstr ""
 
-#: build/templates/admin/pages/home.php:210
+#: build/templates/admin/pages/home.php:212
 msgid "Add Bring"
 msgstr ""
 
@@ -981,84 +976,84 @@ msgstr ""
 msgid "All input types with MD / LG size variants"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:22
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:20
 msgid "Text Input"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:25
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:89
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:23
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:87
 #: config/admin-settings.php:561
 #: config/admin-settings.php:611
 #: config/admin-settings.php:640
 msgid "Label"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:30
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:28
 msgid "Help text goes here"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:46
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:44
 msgid "Number Input"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:49
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:47
 msgid "Amount (small suffix)"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:53
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:64
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:51
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:62
 msgid "NOK"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:59
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:57
 msgid "Amount (large suffix)"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:85
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:83
 #: templates/woocommerce/alternative-dates.php:46
 msgid "Select"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:95
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:93
 msgid "Select an option"
+msgstr ""
+
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:97
+#: src/templates/admin/pages/kitchen-sink/form-fields.bfg.php:51
+msgid "Option 1"
+msgstr ""
+
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:98
+#: src/templates/admin/pages/kitchen-sink/form-fields.bfg.php:52
+msgid "Option 2"
 msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:99
 #: src/templates/admin/pages/kitchen-sink/form-fields.bfg.php:53
-msgid "Option 1"
-msgstr ""
-
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:100
-#: src/templates/admin/pages/kitchen-sink/form-fields.bfg.php:54
-msgid "Option 2"
-msgstr ""
-
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:101
-#: src/templates/admin/pages/kitchen-sink/form-fields.bfg.php:55
 msgid "Option 3"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:120
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:118
 msgid "Checkbox"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:127
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:125
 msgid "With description"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:129
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:127
 msgid "Description text appears below the title"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:140
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:138
 msgid "Checked state"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:149
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:147
 msgid "3-Column Grid"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/form-fields.php:173
+#: build/templates/admin/pages/kitchen-sink/form-fields.php:171
 msgid "2-Column Grid"
 msgstr ""
 
@@ -1222,35 +1217,27 @@ msgstr ""
 msgid "Test with a sample product"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/title-hierarchy.php:19
-msgid "Title Hierarchy"
-msgstr ""
-
-#: build/templates/admin/pages/kitchen-sink/title-hierarchy.php:23
-msgid "6-level heading system with heading and description pairings"
-msgstr ""
-
 #: build/templates/admin/pages/kitchen-sink/typography.php:8
 msgid "Typography"
 msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:12
-msgid "8pt scaling system for consistent visual rhythm"
+msgid "Four sizes. A size outside this list is a bug."
 msgstr ""
 
 #: build/templates/admin/pages/kitchen-sink/typography.php:19
 msgid "Type Scale"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/typography.php:89
+#: build/templates/admin/pages/kitchen-sink/typography.php:67
 msgid "Font Weights"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/typography.php:111
-msgid "Medium Weight Sizes"
+#: build/templates/admin/pages/kitchen-sink/typography.php:82
+msgid "Letter Spacing and Family"
 msgstr ""
 
-#: build/templates/admin/pages/kitchen-sink/typography.php:129
+#: build/templates/admin/pages/kitchen-sink/typography.php:88
 msgid "Text Formatting"
 msgstr ""
 
@@ -1877,126 +1864,122 @@ msgstr ""
 msgid "Select services"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:30
-msgid "This site is running in a local environment and production setting has been deactivated!"
-msgstr ""
-
-#: build/templates/admin/pages/service-wizard.php:37
+#: build/templates/admin/pages/service-wizard.php:26
 msgid "Shipping services guide"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:41
-#: src/templates/admin/pages/service-wizard.bfg.php:36
+#: build/templates/admin/pages/service-wizard.php:30
+#: src/templates/admin/pages/service-wizard.bfg.php:30
 msgid "Please answer a few questions and get recommendations for which shipping services you should enable. Alternatively you can {{a}}skip the guide{{/a}} and choose services manually"
 msgstr ""
 
 #. translators: %s: the country the shop sends from.
-#: build/templates/admin/pages/service-wizard.php:58
-#: src/templates/admin/pages/service-wizard.bfg.php:49
+#: build/templates/admin/pages/service-wizard.php:47
+#: src/templates/admin/pages/service-wizard.bfg.php:43
 #, php-format
 msgid "Bring sells no shipping service from %s, so the guide has nothing to recommend. Check the From country setting, or choose services manually."
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:65
+#: build/templates/admin/pages/service-wizard.php:54
 msgid "Go to the settings"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:76
+#: build/templates/admin/pages/service-wizard.php:65
 msgid "Who are you shipping to?"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:79
+#: build/templates/admin/pages/service-wizard.php:68
 msgid "Choose the type of customers you ship to."
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:86
+#: build/templates/admin/pages/service-wizard.php:75
 msgid "Individuals"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:94
+#: build/templates/admin/pages/service-wizard.php:83
 msgid "Business"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:101
-#: build/templates/admin/pages/service-wizard.php:138
-#: build/templates/admin/pages/service-wizard.php:179
-#: build/templates/admin/pages/service-wizard.php:220
+#: build/templates/admin/pages/service-wizard.php:90
+#: build/templates/admin/pages/service-wizard.php:127
+#: build/templates/admin/pages/service-wizard.php:168
+#: build/templates/admin/pages/service-wizard.php:209
 msgid "Please make a selection to continue"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:112
+#: build/templates/admin/pages/service-wizard.php:101
 msgid "Where do you ship to?"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:119
-#: src/templates/admin/pages/service-wizard.bfg.php:104
+#: build/templates/admin/pages/service-wizard.php:108
+#: src/templates/admin/pages/service-wizard.bfg.php:98
 #, php-format
 msgid "Within %s"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:122
+#: build/templates/admin/pages/service-wizard.php:111
 msgid "Within my country"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:131
+#: build/templates/admin/pages/service-wizard.php:120
 msgid "To other countries"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:149
+#: build/templates/admin/pages/service-wizard.php:138
 msgid "How heavy are the packages you're sending?"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:156
+#: build/templates/admin/pages/service-wizard.php:145
 msgid "Under 5 kg"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:164
+#: build/templates/admin/pages/service-wizard.php:153
 msgid "5 to 35 kg"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:172
+#: build/templates/admin/pages/service-wizard.php:161
 msgid "Over 35 kg"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:190
+#: build/templates/admin/pages/service-wizard.php:179
 msgid "Do you have an RFID-enabled printer and labels?"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:193
+#: build/templates/admin/pages/service-wizard.php:182
 msgid "A package under 5 kg can travel as Pakke i postkassen with RFID tracking. These printer models print an RFID label:"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:205
+#: build/templates/admin/pages/service-wizard.php:194
 msgid "Yes, my printer can print RFID labels"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:213
+#: build/templates/admin/pages/service-wizard.php:202
 msgid "No, I have a regular label printer"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:231
+#: build/templates/admin/pages/service-wizard.php:220
 msgid "Based on your selection these services may suit you"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:250
+#: build/templates/admin/pages/service-wizard.php:239
 msgid "Bring has no service that matches your answers. Change an answer, or choose services manually on the settings page."
 msgstr ""
 
 #. translators: %d: number of services that are active now.
-#: build/templates/admin/pages/service-wizard.php:263
-#: src/templates/admin/pages/service-wizard.bfg.php:227
+#: build/templates/admin/pages/service-wizard.php:252
+#: src/templates/admin/pages/service-wizard.bfg.php:221
 #, php-format
 msgid "This shop offers %d Bring service today. The guide replaces it."
 msgid_plural "This shop offers %d Bring services today. The guide replaces them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: build/templates/admin/pages/service-wizard.php:277
-#: src/templates/admin/pages/service-wizard.bfg.php:242
+#: build/templates/admin/pages/service-wizard.php:266
+#: src/templates/admin/pages/service-wizard.bfg.php:236
 msgid "This replaces the Bring services the shop offers today. Continue?"
 msgstr ""
 
-#: build/templates/admin/pages/service-wizard.php:278
+#: build/templates/admin/pages/service-wizard.php:267
 msgid "Enable selected services"
 msgstr ""
 
@@ -2764,7 +2747,7 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: classes/common/FraktguidenSystemInfo.php:171
+#: classes/common/FraktguidenSystemInfo.php:172
 msgid "No authentication data"
 msgstr ""
 

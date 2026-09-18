@@ -34,9 +34,11 @@ class FraktguidenSystemInfo {
 					color: #333;
 				}
 
+				/* This page stands alone and never loads the admin CSS, so it
+				   repeats the sm step of the type scale instead of the token. */
 				body, td {
-					font-size: 13px;
-					line-height: 17px;
+					font-size: 14px;
+					line-height: 21px;
 				}
 
 				div.main {
@@ -89,7 +91,6 @@ class FraktguidenSystemInfo {
 					border-radius: 3px;
 				}
 				dt {
-					/*font-weight: 600;*/
 					color: #999;
 				}
 				dd {
