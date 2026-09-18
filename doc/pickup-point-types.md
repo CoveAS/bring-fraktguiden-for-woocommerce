@@ -37,6 +37,10 @@ A locker service claims every locker point. While a locker service is on, a
 pickup point service without a type of its own offers manned points only. The
 customer therefore never sees the same locker under two services at two prices.
 
+A service counts as on when the shop enables it and ticks its pickup point
+checkbox. A service with the checkbox cleared shows no picker, so it claims no
+point.
+
 With no locker service on, the shop setting `pickup_point_types` decides. The
 setting never overrules a service that names its own type.
 

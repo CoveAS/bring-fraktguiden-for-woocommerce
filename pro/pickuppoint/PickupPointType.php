@@ -51,8 +51,8 @@ class PickupPointType {
 	 * @return string 'manned', 'locker' or an empty string for both.
 	 */
 	private static function fallback_type(): string {
-		foreach ( Fraktguiden_Helper::get_option( 'services' ) ?: [] as $enabled ) {
-			if ( 'locker' === self::own_type( (string) $enabled ) ) {
+		foreach ( array_keys( self::picker_services() ) as $product ) {
+			if ( 'locker' === self::own_type( $product ) ) {
 				return 'manned';
 			}
 		}
@@ -69,6 +69,23 @@ class PickupPointType {
 	 */
 	public static function for_rates(): array {
 		$types = [];
+		foreach ( array_keys( self::picker_services() ) as $product ) {
+			$types[ self::RATE_PREFIX . $product ] = self::for_service( $product );
+		}
+
+		return $types;
+	}
+
+	/**
+	 * Every enabled service that shows a pickup point picker.
+	 *
+	 * A service that carries pickup points but hides the picker offers no
+	 * point, so it names no type either.
+	 *
+	 * @return array<string, Fraktguiden_Service> Bring product code to service.
+	 */
+	private static function picker_services(): array {
+		$services = [];
 		foreach ( Fraktguiden_Service::all( 'woocommerce_bring_fraktguiden_services', true ) as $product => $service ) {
 			if ( empty( $service->service_data['pickuppoint'] ) ) {
 				continue;
@@ -76,10 +93,10 @@ class PickupPointType {
 			if ( empty( $service->settings['pickup_point_cb'] ) ) {
 				continue;
 			}
-			$types[ self::RATE_PREFIX . $product ] = self::for_service( (string) $product );
+			$services[ (string) $product ] = $service;
 		}
 
-		return $types;
+		return $services;
 	}
 
 	/**
