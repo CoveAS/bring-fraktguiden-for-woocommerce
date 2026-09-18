@@ -86,6 +86,7 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => true,
 				'pickuppoint_type' => 'locker',
+				'requires_phone' => true,
 				'return_label' => true,
 			],
 			'5600' => [

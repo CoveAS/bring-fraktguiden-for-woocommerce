@@ -29,6 +29,7 @@ use BringFraktguiden\Development\StateSelector;
 use BringFraktguiden\Settings\Settings;
 use BringFraktguiden\Settings\SettingsMigration;
 use BringFraktguiden\Booking\BulkBookingRoute;
+use BringFraktguiden\Checkout\PhoneRequirement;
 use BringFraktguiden\Customs\ConsentRoute;
 use BringFraktguiden\Customs\CustomsFields;
 use BringFraktguiden\Customs\HsCodeIndex;
@@ -62,6 +63,7 @@ class Bring_Fraktguiden {
 		HsCodeIndexRoute::init();
 		ConsentRoute::init();
 		BulkBookingRoute::init();
+		PhoneRequirement::init();
 		BringFraktguidenPro::setup();
 
 		$plugin_path = dirname(__DIR__);

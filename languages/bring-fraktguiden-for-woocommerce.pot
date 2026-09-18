@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T20:05:25+00:00\n"
+"POT-Creation-Date: 2026-09-18T21:19:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -481,7 +481,7 @@ msgid "Send a return label with every booking"
 msgstr ""
 
 #: build/templates/admin/pages/booking.php:244
-#: config/services.php:480
+#: config/services.php:481
 msgid "Home Delivery"
 msgstr ""
 
@@ -2425,6 +2425,12 @@ msgstr ""
 msgid "For a return from a business customer, delivered the next day with a time guarantee. It costs more than Retur pakke fra bedrift."
 msgstr ""
 
+#. translators: %s: the name of a shipping service, for example Pakkeboks.
+#: classes/BringFraktguiden/Checkout/PhoneRequirement.php:141
+#, php-format
+msgid "%s needs a phone number. Bring sends the recipient a message when the parcel arrives."
+msgstr ""
+
 #: classes/BringFraktguiden/Customs/CustomsField.php:55
 msgid "HS code"
 msgstr ""
@@ -2579,20 +2585,20 @@ msgstr ""
 msgid "Fill in a post code."
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:152
-#: classes/class-bring-fraktguiden.php:153
+#: classes/class-bring-fraktguiden.php:154
+#: classes/class-bring-fraktguiden.php:155
 msgid "Bring settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "View the Bring Fraktguiden setup steps"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "Get started"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:232
+#: classes/class-bring-fraktguiden.php:234
 msgid "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message."
 msgstr ""
 
@@ -3243,35 +3249,35 @@ msgstr ""
 msgid "New services"
 msgstr ""
 
-#: config/services.php:176
+#: config/services.php:177
 msgid "Mailbox"
 msgstr ""
 
-#: config/services.php:193
-#: config/services.php:211
+#: config/services.php:194
+#: config/services.php:212
 msgid "Packages up to 5 kg."
 msgstr ""
 
-#: config/services.php:194
+#: config/services.php:195
 msgid "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 
-#: config/services.php:218
+#: config/services.php:219
 msgid "Services"
 msgstr ""
 
-#: config/services.php:254
-#: config/services.php:309
+#: config/services.php:255
+#: config/services.php:310
 msgid "Other services"
 msgstr ""
 
-#: config/services.php:271
-#: config/services.php:290
-#: config/services.php:301
+#: config/services.php:272
+#: config/services.php:291
+#: config/services.php:302
 msgid "Fuel surcharge is not included in the price returned from the ShippingGuide and must be calculated / added manually. Bring Parcels is entitled to change this charge without notice to the customer. Any fuel surcharge applied will be detailed on the invoice."
 msgstr ""
 
-#: config/services.php:438
+#: config/services.php:439
 msgid "Courier"
 msgstr ""
 

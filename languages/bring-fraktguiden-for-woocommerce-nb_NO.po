@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T20:05:25+00:00\n"
+"POT-Creation-Date: 2026-09-18T21:19:02+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -501,7 +501,7 @@ msgstr ""
 msgid "Send a return label with every booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:244 config/services.php:480
+#: build/templates/admin/pages/booking.php:244 config/services.php:481
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
@@ -2624,6 +2624,16 @@ msgid ""
 "guarantee. It costs more than Retur pakke fra bedrift."
 msgstr ""
 
+#. translators: %s: the name of a shipping service, for example Pakkeboks.
+#: classes/BringFraktguiden/Checkout/PhoneRequirement.php:141
+#, php-format
+msgid ""
+"%s needs a phone number. Bring sends the recipient a message when the parcel "
+"arrives."
+msgstr ""
+"%s krever et telefonnummer. Bring sender mottakeren en melding når pakken "
+"er fremme."
+
 #: classes/BringFraktguiden/Customs/CustomsField.php:55
 msgid "HS code"
 msgstr "HS-kode"
@@ -2793,20 +2803,20 @@ msgstr "Bring selger ingen tjeneste til denne adressen."
 msgid "Fill in a post code."
 msgstr "Fyll inn et postnummer."
 
-#: classes/class-bring-fraktguiden.php:152
-#: classes/class-bring-fraktguiden.php:153
+#: classes/class-bring-fraktguiden.php:154
+#: classes/class-bring-fraktguiden.php:155
 msgid "Bring settings"
 msgstr "Bring innstillinger"
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "View the Bring Fraktguiden setup steps"
 msgstr "Vis oppsettstegene for Bring Fraktguiden"
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "Get started"
 msgstr "Kom i gang"
 
-#: classes/class-bring-fraktguiden.php:232
+#: classes/class-bring-fraktguiden.php:234
 msgid ""
 "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "
 "this message."
@@ -3584,29 +3594,29 @@ msgstr ""
 msgid "New services"
 msgstr "Nye tjenester"
 
-#: config/services.php:176
+#: config/services.php:177
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: config/services.php:193 config/services.php:211
+#: config/services.php:194 config/services.php:212
 msgid "Packages up to 5 kg."
 msgstr "Pakker opp til 5 kg."
 
-#: config/services.php:194
+#: config/services.php:195
 msgid ""
 "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 "NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
 
-#: config/services.php:218
+#: config/services.php:219
 msgid "Services"
 msgstr "Tjenester"
 
-#: config/services.php:254 config/services.php:309
+#: config/services.php:255 config/services.php:310
 msgid "Other services"
 msgstr "Andre tjenester"
 
-#: config/services.php:271 config/services.php:290 config/services.php:301
+#: config/services.php:272 config/services.php:291 config/services.php:302
 msgid ""
 "Fuel surcharge is not included in the price returned from the ShippingGuide "
 "and must be calculated / added manually. Bring Parcels is entitled to change "
@@ -3618,7 +3628,7 @@ msgstr ""
 "denne kostnaden uten varsel til kunden. Eventuelt anvendt drivstofftillegg "
 "vil være detaljert på fakturaen."
 
-#: config/services.php:438
+#: config/services.php:439
 msgid "Courier"
 msgstr "Courier"
 
