@@ -1,6 +1,15 @@
 /* ==========================================================================
    Global Responsive Overrides
    Breakpoints: 782px (tablet), 600px, 480px (mobile)
+
+   These rules stay in one file, and tailwind.css imports the file late on
+   purpose. Most selectors here also appear in a component partial at the
+   same specificity, so source order decides the winner. A rule moved next
+   to its component would land before _home.css and lose.
+
+   Add a breakpoint rule here when its selector also exists in a component
+   partial. Add it to the component partial when the selector is unique to
+   that component.
    ========================================================================== */
 
 @media screen and (max-width: 782px) {
