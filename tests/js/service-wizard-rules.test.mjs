@@ -22,7 +22,7 @@ const recommend = (sender, answers) =>
 const answers = (recipient, destination, weight, rfid) => ({ recipient, destination, weight, rfid });
 
 test('every wizard service carries the traits the rules read', () => {
-	assert.equal(services.length, 11);
+	assert.equal(services.length, 12);
 
 	for (const service of services) {
 		assert.ok(['private', 'business'].includes(service.recipient), service.code);
@@ -35,19 +35,19 @@ test('every wizard service carries the traits the rules read', () => {
 test('a private domestic parcel under 5 kg needs the printer answer', () => {
 	assert.deepEqual(
 		recommend('NO', answers(['private'], ['domestic'], ['0-5'], ['no'])),
-		['3584', '5600', '5800']
+		['3584', '5600', '5800', '5801']
 	);
 
 	assert.deepEqual(
 		recommend('NO', answers(['private'], ['domestic'], ['0-5'], ['yes'])),
-		['3570', '5600', '5800']
+		['3570', '5600', '5800', '5801']
 	);
 });
 
 test('a mailbox parcel drops out above 5 kg', () => {
 	assert.deepEqual(
 		recommend('NO', answers(['private'], ['domestic'], ['5-35'], ['yes'])),
-		['5600', '5800']
+		['5600', '5800', '5801']
 	);
 });
 
@@ -101,7 +101,7 @@ test('a Norwegian shop ships inside Norway with the Posten services only', () =>
 		answers(['private', 'business'], ['domestic'], ['0-5', '5-35', '35-'], ['yes', 'no'])
 	);
 
-	assert.deepEqual(codes, ['3570', '3584', '5000', '5100', '5400', '5600', '5800']);
+	assert.deepEqual(codes, ['3570', '3584', '5000', '5100', '5400', '5600', '5800', '5801']);
 });
 
 test('an Icelandic shop gets nothing, because Bring sells no service from Iceland', () => {
