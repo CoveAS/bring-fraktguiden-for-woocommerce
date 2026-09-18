@@ -208,7 +208,9 @@ class PickUpPointAjax
 	 */
 	public static function bfg_select_pick_up_point(): void {
 		$id = filter_input(INPUT_POST, 'id');
-		$type = (string) filter_input(INPUT_POST, 'type');
+		// The rate names the type. The browser never names the session key.
+		$rate_id = (string) filter_input(INPUT_POST, 'rate_id');
+		$type = PickupPointType::for_rate($rate_id);
 		WC()->session->set(PickupPointType::session_key($type), $id);
 		wp_send_json(['message' => 'success']);
 	}

@@ -31,14 +31,28 @@ class PickupPointType {
 	 * @return string 'manned', 'locker' or an empty string for both.
 	 */
 	public static function for_service( string $bring_product ): string {
-		$services = self::services();
-		$own      = $services[ strtoupper( $bring_product ) ]['pickuppoint_type'] ?? '';
-		if ( $own ) {
-			return $own;
-		}
+		return self::own_type( $bring_product ) ?: self::fallback_type();
+	}
 
+	/**
+	 * The type the service names in config/services.php.
+	 *
+	 * @param string $bring_product Bring product code.
+	 *
+	 * @return string 'manned', 'locker' or an empty string for no type of its own.
+	 */
+	private static function own_type( string $bring_product ): string {
+		return self::services()[ strtoupper( $bring_product ) ]['pickuppoint_type'] ?? '';
+	}
+
+	/**
+	 * The type a service without one of its own offers.
+	 *
+	 * @return string 'manned', 'locker' or an empty string for both.
+	 */
+	private static function fallback_type(): string {
 		foreach ( Fraktguiden_Helper::get_option( 'services' ) ?: [] as $enabled ) {
-			if ( 'locker' === ( $services[ $enabled ]['pickuppoint_type'] ?? '' ) ) {
+			if ( 'locker' === self::own_type( (string) $enabled ) ) {
 				return 'manned';
 			}
 		}
@@ -69,6 +83,17 @@ class PickupPointType {
 	}
 
 	/**
+	 * The type one rate carries.
+	 *
+	 * @param string $rate_id WooCommerce rate id.
+	 *
+	 * @return string 'manned', 'locker' or an empty string for both.
+	 */
+	public static function for_rate( string $rate_id ): string {
+		return self::for_rates()[ $rate_id ] ?? '';
+	}
+
+	/**
 	 * The type the checkout asks the Bring API for.
 	 *
 	 * The checkout fetches one list for every rate. It asks for both types when
@@ -87,14 +112,16 @@ class PickupPointType {
 	/**
 	 * The session key that holds the point the customer chose for one type.
 	 *
+	 * Only the locker type has a store of its own. Every other type keeps the
+	 * old key, so a cart from before Pakkeboks keeps the point it holds.
+	 *
 	 * @param string $type Pickup point type.
 	 */
 	public static function session_key( string $type ): string {
-		// ponytail: the manned key keeps its old name, so a cart from before
-		// Pakkeboks keeps the point it holds. Only the locker key is new.
-		return 'locker' === $type
-			? 'bring_fraktguiden_pick_up_point_locker'
-			: 'bring_fraktguiden_pick_up_point';
+		return match ( $type ) {
+			'locker' => 'bring_fraktguiden_pick_up_point_locker',
+			default  => 'bring_fraktguiden_pick_up_point',
+		};
 	}
 
 	/**
@@ -103,6 +130,11 @@ class PickupPointType {
 	 * @return array<string, array>
 	 */
 	private static function services(): array {
+		static $flat = null;
+		if ( null !== $flat ) {
+			return $flat;
+		}
+
 		$flat = [];
 		foreach ( Fraktguiden_Helper::get_services_data() as $group ) {
 			foreach ( $group['services'] as $product => $service_data ) {
