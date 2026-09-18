@@ -162,6 +162,80 @@ jQuery(function ($) {
 		}
 	}
 
+	/**
+	 * Pick Up Point Picker
+	 *
+	 * One picker belongs to one shipping rate. The content sits in a shadow
+	 * root, so no theme rule reaches it.
+	 */
+	class PickUpPointPicker extends HTMLElement {
+		constructor() {
+			super();
+			this.attachShadow({mode: 'open'});
+
+			const styles = document.createElement('style');
+			styles.textContent = _fraktguiden_data.pick_up_point_picker_css;
+
+			const el = document.createElement('div');
+			el.classList.add('bring-fraktguiden-pick-up-point-picker');
+			el.innerHTML = `
+				<div class="bfg-pup__change" role="button" tabindex="0">${_fraktguiden_data.i18n.PICKER_CHANGE}</div>
+				<div class="bfg-pup__name"></div>
+				<div class="bfg-pup__address"></div>
+				<div class="bfg-pup__opening-hours"></div>
+				<div class="bfg-pup__description"></div>
+				<a href="#" target="_blank" class="bfg-pup__map">${_fraktguiden_data.i18n.PICKER_MAP}</a>
+			`;
+
+			this.shadowRoot.append(styles, el);
+
+			const change = el.querySelector('.bfg-pup__change');
+			change.addEventListener('click', () => this.requestChange());
+			change.addEventListener('keydown', (e) => {
+				if (e.key !== 'Enter' && e.key !== ' ') {
+					return;
+				}
+				e.preventDefault();
+				this.requestChange();
+			});
+		}
+
+		/**
+		 * Ask for the modal. The event crosses the shadow boundary, so one
+		 * listener on the document serves every picker.
+		 */
+		requestChange() {
+			this.dispatchEvent(new CustomEvent(
+				'bfg-change-pick-up-point',
+				{bubbles: true, composed: true}
+			));
+		}
+
+		/**
+		 * Write one point into this picker.
+		 * @param point
+		 */
+		render(point) {
+			if (!point) {
+				return;
+			}
+			const root = this.shadowRoot;
+			root.querySelector('.bfg-pup__name').textContent = point.name;
+			root.querySelector('.bfg-pup__address').textContent = utility.formatAddress(point);
+			root.querySelector('.bfg-pup__opening-hours').textContent = point.openingHours;
+			root.querySelector('.bfg-pup__description').textContent = point.description;
+
+			const map = root.querySelector('.bfg-pup__map');
+			if (_fraktguiden_checkout.map_key) {
+				map.setAttribute('href', point[_fraktguiden_checkout.map_key]);
+			} else {
+				map.style.display = 'none';
+			}
+		}
+	}
+
+	customElements.define('bring-fraktguiden-pick-up-point-picker', PickUpPointPicker);
+
 	let getRequest = undefined;
 
 	/**
@@ -277,21 +351,13 @@ jQuery(function ($) {
 			if (! pickUpPoint || ! picker || ! picker.length) {
 				return;
 			}
-			picker.find('.bfg-pup__name').text(pickUpPoint.name);
-			picker.find('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
-			picker.find('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
-			picker.find('.bfg-pup__description').text(pickUpPoint.description);
-			if (_fraktguiden_checkout.map_key) {
-				picker.find('.bfg-pup__map').attr('href', pickUpPoint[_fraktguiden_checkout.map_key]);
-			} else {
-				picker.find('.bfg-pup__map').hide();
-			}
+			picker[0].render(pickUpPoint);
 		},
 		/**
 		 * Write the chosen point into every picker on screen
 		 */
 		renderAllPickers: function () {
-			$('.bring-fraktguiden-pick-up-point-picker').each(function () {
+			$('bring-fraktguiden-pick-up-point-picker').each(function () {
 				const picker = $(this);
 				utility.renderSelectedPickUpPoint(
 					utility.selectedForRate(picker.data('rate-id') || ''),
@@ -390,6 +456,12 @@ jQuery(function ($) {
 		modalEl.open(selectedPickUpPoints[type]);
 	};
 
+	// Every picker asks for the modal through this one listener.
+	document.addEventListener('bfg-change-pick-up-point', function (e) {
+		const picker = $(e.target);
+		openPicker(picker.data('rate-id') || '', picker);
+	});
+
 	/**
 	 * Block checkout
 	 */
@@ -406,11 +478,10 @@ jQuery(function ($) {
 		const getPicker = function (rate) {
 			const inputEl = $('[value="' + rate.rate_id + '"]')
 			const control = inputEl.parent();
-			let picker = control.find('.bring-fraktguiden-pick-up-point-picker');
+			let picker = control.find('bring-fraktguiden-pick-up-point-picker');
 			if (!picker.length) {
 				// Create a new element if the picker is not found
-				picker = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
-				picker.find('.bfg-pup__change').on('click', () => openPicker(rate.rate_id, picker));
+				picker = $(document.createElement('bring-fraktguiden-pick-up-point-picker'));
 				control.append(picker);
 			}
 			// The picker carries its rate, so any reader knows which type it shows.
@@ -564,14 +635,11 @@ jQuery(function ($) {
 		let previous = $('#shipping_method .shipping_method:checked').val();
 		const classicCheckout = function () {
 			const current = $('#shipping_method .shipping_method:checked').val();
-			const picker = $('.bring-fraktguiden-pick-up-point-picker');
+			const picker = $('bring-fraktguiden-pick-up-point-picker');
 			if (!picker.length) {
 				return;
 			}
 			picker.data('rate-id', current);
-			// WooCommerce redraws the picker on every update, so drop the old
-			// handler before binding one for the rate on screen.
-			picker.find('.bfg-pup__change').off('click').on('click', () => openPicker(current, picker));
 
 			let changed = current !== previous;
 			if (changed) {

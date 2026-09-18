@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T12:58:25+00:00\n"
+"POT-Creation-Date: 2026-09-18T15:00:04+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -95,7 +95,7 @@ msgstr ""
 
 #: build/templates/admin/booking/form.php:58
 #: build/templates/admin/pages/home/fallback-price.php:90
-#: pro/pickuppoint/PickUpPoint.php:222
+#: pro/pickuppoint/PickUpPoint.php:245
 msgid "Service"
 msgstr "Tjeneste"
 
@@ -273,7 +273,7 @@ msgstr "Gate, andre linje"
 
 #: build/templates/admin/booking/parties.php:19
 #: build/templates/admin/pages/pro-settings.php:133
-#: config/admin-settings.php:393 pro/pickuppoint/PickUpPoint.php:216
+#: config/admin-settings.php:393 pro/pickuppoint/PickUpPoint.php:239
 #: src/templates/admin/booking/parties.bfg.php:19
 #: src/templates/admin/pages/pro-settings.bfg.php:133
 msgid "Postcode"
@@ -487,7 +487,7 @@ msgstr ""
 msgid "Send a return label with every booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:244 config/services.php:459
+#: build/templates/admin/pages/booking.php:244 config/services.php:480
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
@@ -738,7 +738,7 @@ msgstr "Tilkoblet som %s"
 
 #: build/templates/admin/pages/home/connect-account.php:56
 #: build/templates/admin/pages/home/fallback-price.php:56
-#: pro/pickuppoint/SelectedPickUpPointComponent.php:11
+#: pro/pickuppoint/PickUpPoint.php:251
 msgid "Change"
 msgstr "Endre"
 
@@ -750,19 +750,19 @@ msgstr "Koble til"
 msgid "Bring needs two things: the email you log in with, and an API key."
 msgstr "Bring trenger to ting: eposten du logger inn med, og en API-nøkkel."
 
-#: build/templates/admin/pages/home/connect-account.php:82
+#: build/templates/admin/pages/home/connect-account.php:83
 msgid "Save 20 to 40 percent on shipping"
 msgstr "Spar 20 til 40 prosent på frakt"
 
-#: build/templates/admin/pages/home/connect-account.php:85
+#: build/templates/admin/pages/home/connect-account.php:88
 msgid "Lower prices than a normal Bring account"
 msgstr "Lavere priser enn en vanlig Bring-konto"
 
-#: build/templates/admin/pages/home/connect-account.php:86
+#: build/templates/admin/pages/home/connect-account.php:89
 msgid "Ready in minutes, by phone or a few emails"
 msgstr "Klar på noen minutter, over telefon eller noen e-poster"
 
-#: build/templates/admin/pages/home/connect-account.php:89
+#: build/templates/admin/pages/home/connect-account.php:92
 msgid ""
 "What to expect: Send Quickship your shop name, parcels per month, phone and "
 "email. You get a price offer. Accept it, and Quickship sets up your API "
@@ -772,50 +772,50 @@ msgstr ""
 "måned, telefon og e-post. Du får et pristilbud. Godta det, og Quickship "
 "setter opp API-tilgangen din."
 
-#: build/templates/admin/pages/home/connect-account.php:97
+#: build/templates/admin/pages/home/connect-account.php:100
 msgid "Set up an account"
 msgstr "Opprett en konto"
 
-#: build/templates/admin/pages/home/connect-account.php:101
+#: build/templates/admin/pages/home/connect-account.php:104
 msgid "Read more"
 msgstr "Les mer"
 
-#: build/templates/admin/pages/home/connect-account.php:113
+#: build/templates/admin/pages/home/connect-account.php:116
 msgid "Bring login email"
 msgstr "Epost for innlogging hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:116
+#: build/templates/admin/pages/home/connect-account.php:119
 msgid "Use the email you log in to Bring with, not your shop address."
 msgstr ""
 "Bruk eposten du logger inn hos Bring med, ikke epostadressen til butikken."
 
-#: build/templates/admin/pages/home/connect-account.php:118
+#: build/templates/admin/pages/home/connect-account.php:121
 msgid "Find it on your Bring profile"
 msgstr "Finn den på Bring-profilen din"
 
-#: build/templates/admin/pages/home/connect-account.php:124
+#: build/templates/admin/pages/home/connect-account.php:127
 #: config/admin-settings.php:182 config/admin-settings.php:184
 msgid "API key"
 msgstr "API-nøkkel"
 
-#: build/templates/admin/pages/home/connect-account.php:128
+#: build/templates/admin/pages/home/connect-account.php:131
 msgid "Open your Bring API settings"
 msgstr "Åpne API-innstillingene dine hos Bring"
 
-#: build/templates/admin/pages/home/connect-account.php:130
+#: build/templates/admin/pages/home/connect-account.php:133
 msgid "Copy the key from that page and paste it here."
 msgstr "Kopier nøkkelen fra den siden og lim den inn her."
 
-#: build/templates/admin/pages/home/connect-account.php:138
+#: build/templates/admin/pages/home/connect-account.php:141
 msgid "Check that the whole API key is copied, with no space at either end."
 msgstr ""
 "Sjekk at hele API-nøkkelen er kopiert, uten mellomrom i noen av endene."
 
-#: build/templates/admin/pages/home/connect-account.php:139
+#: build/templates/admin/pages/home/connect-account.php:142
 msgid "Check that the email is the one you log in to Bring with."
 msgstr "Sjekk at eposten er den du logger inn hos Bring med."
 
-#: build/templates/admin/pages/home/connect-account.php:144
+#: build/templates/admin/pages/home/connect-account.php:147
 msgid "Save and test"
 msgstr "Lagre og test"
 
@@ -2470,7 +2470,7 @@ msgid "Ask Bring for the price of a sample parcel"
 msgstr "Spør Bring om prisen på en eksempelpakke"
 
 #. translators: %s: the Mybring customer number.
-#: classes/BringFraktguiden/Admin/PriceCustomerNumberRefusal.php:55
+#: classes/BringFraktguiden/Admin/PriceCustomerNumberRefusal.php:56
 #, php-format
 msgid ""
 "Bring gives no price when the shop asks with customer number %s, so the shop "
@@ -2868,7 +2868,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: classes/common/class-fraktguiden-admin-notices.php:56
-#: classes/common/class-fraktguiden-helper.php:519
+#: classes/common/class-fraktguiden-helper.php:521
 msgid "Click here to buy a license"
 msgstr "Klikk her for å kjøpe lisens"
 
@@ -2963,7 +2963,7 @@ msgstr "Mybring Booking krever API-kundenummer."
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
 
-#: classes/common/class-fraktguiden-helper.php:299
+#: classes/common/class-fraktguiden-helper.php:301
 #, php-format
 msgid ""
 "You're using an outdated customer number, %s - The latest services from "
@@ -2972,16 +2972,16 @@ msgstr ""
 "Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
 "at du oppdaterer til nytt kundenummer."
 
-#: classes/common/class-fraktguiden-helper.php:505
+#: classes/common/class-fraktguiden-helper.php:507
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 "Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
 
-#: classes/common/class-fraktguiden-helper.php:518
+#: classes/common/class-fraktguiden-helper.php:520
 msgid "Running in test-mode."
 msgstr "Kjører i testmodus."
 
-#: classes/common/class-fraktguiden-helper.php:525
+#: classes/common/class-fraktguiden-helper.php:527
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
@@ -2990,14 +2990,14 @@ msgstr ""
 "Bring Fraktguiden PRO er nå tilgjengelig, <a href=\"%s\">Klikk her for å "
 "oppgradere til PRO.</a>"
 
-#: classes/common/class-fraktguiden-helper.php:535
+#: classes/common/class-fraktguiden-helper.php:537
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 "Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
 "frakt."
 
-#: classes/common/class-fraktguiden-helper.php:536
+#: classes/common/class-fraktguiden-helper.php:538
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
@@ -3006,14 +3006,14 @@ msgstr ""
 "Pickup points: La kunden velge hentested for utlevering av pakken basert på "
 "deres lokasjon."
 
-#: classes/common/class-fraktguiden-helper.php:537
+#: classes/common/class-fraktguiden-helper.php:539
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 "Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
 "Mybring"
 
-#: classes/common/class-fraktguiden-helper.php:538
+#: classes/common/class-fraktguiden-helper.php:540
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
@@ -3339,6 +3339,12 @@ msgstr "Vis forventet leveringsdato under fraktpriser"
 msgid "Pickup point types"
 msgstr "Hentesteder"
 
+#: config/admin-settings.php:282
+msgid ""
+"Pakkeboks always shows parcel lockers. While Pakkeboks is on, every other "
+"service shows manned pickup points and ignores this setting."
+msgstr ""
+
 #: config/admin-settings.php:285
 msgid "All"
 msgstr "Alle"
@@ -3578,33 +3584,33 @@ msgstr ""
 "Vis denne tjenesten som fraktpris hvis den øvre grensen for antall produkter "
 "overskrides."
 
-#: config/services.php:52
+#: config/services.php:58
 msgid "New services"
 msgstr "Nye tjenester"
 
-#: config/services.php:155
+#: config/services.php:176
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: config/services.php:172 config/services.php:190
+#: config/services.php:193 config/services.php:211
 msgid "Packages up to 5 kg."
 msgstr "Pakker opp til 5 kg."
 
-#: config/services.php:173
+#: config/services.php:194
 msgid ""
 "Please note in order to use mailbox with tracking you need a RFID printer."
 msgstr ""
 "NB! Du må ha en RFID-skriver for å kunne skrive ut etiketter med sporing."
 
-#: config/services.php:197
+#: config/services.php:218
 msgid "Services"
 msgstr "Tjenester"
 
-#: config/services.php:233 config/services.php:288
+#: config/services.php:254 config/services.php:309
 msgid "Other services"
 msgstr "Andre tjenester"
 
-#: config/services.php:250 config/services.php:269 config/services.php:280
+#: config/services.php:271 config/services.php:290 config/services.php:301
 msgid ""
 "Fuel surcharge is not included in the price returned from the ShippingGuide "
 "and must be calculated / added manually. Bring Parcels is entitled to change "
@@ -3616,11 +3622,11 @@ msgstr ""
 "denne kostnaden uten varsel til kunden. Eventuelt anvendt drivstofftillegg "
 "vil være detaljert på fakturaen."
 
-#: config/services.php:417
+#: config/services.php:438
 msgid "Courier"
 msgstr "Courier"
 
-#: config/value-added-services.php:202
+#: config/value-added-services.php:194
 msgid ""
 "Signature required (prevents customers from selecting bag on door delivery)"
 msgstr "Signatur kreves (forhindrer kunder å velge pose på dør ved levering)"
@@ -3639,7 +3645,7 @@ msgid "Product"
 msgstr "Produkt"
 
 #: pro/booking/actions/class-get-booking-data-action.php:61
-#: pro/pickuppoint/PickUpPoint.php:209
+#: pro/pickuppoint/PickUpPoint.php:232
 msgid "Pickup point"
 msgstr "Hentested"
 
@@ -3913,7 +3919,7 @@ msgid "Bring Fraktguiden"
 msgstr "Bring Fraktguiden"
 
 #: pro/pickuppoint/LegacyPickUpPointEnhancement.php:131
-#: pro/pickuppoint/SelectedPickUpPointComponent.php:12
+#: pro/pickuppoint/PickUpPoint.php:252
 msgid "View on map"
 msgstr "Se på kartet"
 
@@ -3921,61 +3927,61 @@ msgstr "Se på kartet"
 msgid "Selected time slot"
 msgstr "Valgt tidsluke"
 
-#: pro/pickuppoint/PickUpPoint.php:210
+#: pro/pickuppoint/PickUpPoint.php:233
 msgid "Please wait..."
 msgstr "Vennligst vent…"
 
-#: pro/pickuppoint/PickUpPoint.php:211
+#: pro/pickuppoint/PickUpPoint.php:234
 msgid "Fraktguiden requires the following fields"
 msgstr "Fraktguiden krever følgende felter utfylt"
 
-#: pro/pickuppoint/PickUpPoint.php:212 pro/pickuppoint/PickUpPoint.php:213
+#: pro/pickuppoint/PickUpPoint.php:235 pro/pickuppoint/PickUpPoint.php:236
 msgid "Valid shipping postcode"
 msgstr "Gyldig postnummer for frakt"
 
-#: pro/pickuppoint/PickUpPoint.php:214
+#: pro/pickuppoint/PickUpPoint.php:237
 msgid "Please update the fields and save the order first"
 msgstr "Vennligst oppdater feltene og lagre orderen først"
 
-#: pro/pickuppoint/PickUpPoint.php:215
+#: pro/pickuppoint/PickUpPoint.php:238
 msgid "Please select service"
 msgstr "Vennligst velg tjeneste"
 
-#: pro/pickuppoint/PickUpPoint.php:217
+#: pro/pickuppoint/PickUpPoint.php:240
 msgid "Please select pickup point"
 msgstr "Vennligst velg hentested"
 
-#: pro/pickuppoint/PickUpPoint.php:218
+#: pro/pickuppoint/PickUpPoint.php:241
 msgid "Selected pickup point"
 msgstr "Velg hentested"
 
-#: pro/pickuppoint/PickUpPoint.php:219
+#: pro/pickuppoint/PickUpPoint.php:242
 msgid "No pickup points found for postcode"
 msgstr "Fant ingen hentesteder for dette postnummeret"
 
-#: pro/pickuppoint/PickUpPoint.php:220
+#: pro/pickuppoint/PickUpPoint.php:243
 msgid "Get Rate"
 msgstr "Hent pris"
 
-#: pro/pickuppoint/PickUpPoint.php:221
+#: pro/pickuppoint/PickUpPoint.php:244
 msgid "Please wait"
 msgstr "Vennligst vent"
 
-#: pro/pickuppoint/PickUpPoint.php:223
+#: pro/pickuppoint/PickUpPoint.php:246
 msgid "Rate is not available for this order. Please try another service"
 msgstr ""
 "Pris er ikke tilgjengelig for denne orderen. Vennligst forsøk en annen "
 "tjeneste"
 
-#: pro/pickuppoint/PickUpPoint.php:224
+#: pro/pickuppoint/PickUpPoint.php:247
 msgid "Request was not successful"
 msgstr "Forespørselen feilet"
 
-#: pro/pickuppoint/PickUpPoint.php:225
+#: pro/pickuppoint/PickUpPoint.php:248
 msgid "Please add postal code"
 msgstr "Vennligst legg til postnummer"
 
-#: pro/pickuppoint/PickUpPoint.php:226
+#: pro/pickuppoint/PickUpPoint.php:249
 msgid ""
 "ERROR: Could not load pick up points. If this happens again, please notify "
 "the website owner"
@@ -3983,7 +3989,7 @@ msgstr ""
 "FEIL: Kunne ikke laste inn hentesteder. Vennligst varsle nettsideeieren hvis "
 "dette skjer igjen"
 
-#: pro/pickuppoint/PickUpPoint.php:227
+#: pro/pickuppoint/PickUpPoint.php:250
 msgid "Please choose a pick up point from the list below"
 msgstr "Vennligst velg et hentested fra listen nedenfor"
 

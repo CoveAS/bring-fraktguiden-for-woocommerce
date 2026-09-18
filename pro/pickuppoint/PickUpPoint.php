@@ -163,6 +163,9 @@ class PickUpPoint
 				'pick_up_point_rate_types' => $rate_types,
 				'pick_up_point_modal_css' => file_get_contents(
 					dirname(__DIR__) . '/assets/css/pick-up-point-modal.css',
+				),
+				'pick_up_point_picker_css' => file_get_contents(
+					dirname(__DIR__) . '/assets/css/pick-up-point-picker.css',
 				)
 			]
 		);
@@ -245,6 +248,8 @@ class PickUpPoint
 			'ADD_POSTCODE' => __('Please add postal code', 'bring-fraktguiden-for-woocommerce'),
 			'ERROR_LOADING_PICK_UP_POINTS' => __('ERROR: Could not load pick up points. If this happens again, please notify the website owner', 'bring-fraktguiden-for-woocommerce'),
 			'MODAL_INSTRUCTIONS' => __('Please choose a pick up point from the list below','bring-fraktguiden-for-woocommerce'),
+			'PICKER_CHANGE' => __('Change', 'bring-fraktguiden-for-woocommerce'),
+			'PICKER_MAP' => __('View on map', 'bring-fraktguiden-for-woocommerce'),
 		];
 	}
 

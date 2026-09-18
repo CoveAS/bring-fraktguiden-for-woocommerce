@@ -1,0 +1,45 @@
+/* The picker lives in a shadow root. A shadow root stops selectors, but font-size,
+   font-weight and line-height still pass in from the page. Pin them in px, because
+   a theme can change the root font-size too. */
+:host {
+	display: block;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.bring-fraktguiden-pick-up-point-picker {
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	padding: 8px 0;
+	margin: 8px 0;
+}
+
+.bfg-pup__name {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.bfg-pup__address {
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.bfg-pup__change {
+	display: inline;
+	color: #e90000;
+	float: right;
+}
+
+.bfg-pup__change:focus,
+.bfg-pup__change:hover {
+	color: #9d1d1d;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.bfg-pup__change:active {
+	color: #157d37;
+	text-decoration: underline;
+}
