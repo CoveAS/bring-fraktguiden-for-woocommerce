@@ -240,6 +240,11 @@ class SettingsPage
 		$license_move_url     = $state['move_url'] ?? '';
 		$license_testing      = Fraktguiden_License::is_testing();
 
+		// A shop whose license belongs to another domain runs on a copy of that
+		// shop's database. Pro keeps working, but every booking stays a test.
+		$license_elsewhere    = Fraktguiden_License::licensed_elsewhere();
+		$license_owner_domain = Fraktguiden_License::licensed_domain();
+
 		// When the plugin last asked the license server.
 		$license_checked_at   = (int) ($state['checked_at'] ?? 0);
 		$license_checked      = $license_checked_at
@@ -296,6 +301,10 @@ class SettingsPage
 		// A testing license holds test mode on, so the page says why.
 		$license_testing = Fraktguiden_License::is_testing();
 		$license_url     = admin_url('admin.php?page=bring_fraktguiden_pro');
+
+		// A license that belongs to another domain holds test mode on too.
+		$license_elsewhere    = Fraktguiden_License::licensed_elsewhere();
+		$license_owner_domain = Fraktguiden_License::licensed_domain();
 
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/booking.php';
 	}

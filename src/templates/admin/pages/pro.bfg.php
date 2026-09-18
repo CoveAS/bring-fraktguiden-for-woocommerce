@@ -30,6 +30,8 @@
  * @var string $license_reason
  * @var string $license_source
  * @var string $license_move_url
+ * @var bool $license_elsewhere
+ * @var string $license_owner_domain
  * @var string $license_manage_url
  * @var string $license_support_url
  * @var string $license_checked
@@ -61,6 +63,23 @@ $bfg_checked = sanitize_key($_GET[RefreshLicense::RESULT] ?? '');
 		];
 		$bfg_can_move = 0 !== $license_moves_left && '' !== $license_move_url;
 		?>
+
+		<?php if ($license_elsewhere && 'other_domain' !== $license_state): ?>
+			<div class="bfg-notice-banner">
+				<span class="bfg-notice-icon">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334V10.0001M10 6.66675H10.0083M18.3333 10.0001C18.3333 14.6025 14.6024 18.3334 10 18.3334C5.39765 18.3334 1.66669 14.6025 1.66669 10.0001C1.66669 5.39771 5.39765 1.66675 10 1.66675C14.6024 1.66675 18.3333 5.39771 18.3333 10.0001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<p>
+					<?php printf(
+						/* translators: 1: the domain that holds the license, 2: the domain of this shop. */
+						esc_html__('The license belongs to %1$s, and this shop is %2$s. Every booking here stays a test.', 'bring-fraktguiden-for-woocommerce'),
+						esc_html($license_owner_domain),
+						esc_html($license_domain)
+					); ?>
+				</p>
+				<p><t>Check the license again if this shop moved to a new address for good.</t></p>
+			</div>
+		<?php endif; ?>
 
 		<?php if ('other_domain' === $license_state): ?>
 			<div class="bfg-notice-banner">

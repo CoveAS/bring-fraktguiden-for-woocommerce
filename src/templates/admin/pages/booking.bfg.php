@@ -8,6 +8,8 @@ use BringFraktguiden\Fields\Fields;
  * @var bool   $pro_active
  * @var bool   $license_testing
  * @var string $license_url
+ * @var bool   $license_elsewhere
+ * @var string $license_owner_domain
  */
 ?>
 
@@ -44,6 +46,17 @@ use BringFraktguiden\Fields\Fields;
 						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->booking_test_mode_enabled; ?>
 						</div>
 					</div>
+
+					<?php if ($license_elsewhere): ?>
+						<bfg-notice>
+							<?php printf(
+								/* translators: %s: the domain that holds the license. */
+								esc_html__('Your Pro license belongs to %s, so this shop runs on a copy of that shop. Test mode therefore stays on, and Bring never ships or invoices a booking from here.', 'bring-fraktguiden-for-woocommerce'),
+								esc_html($license_owner_domain)
+							); ?>
+							<a href="<?php echo esc_url($license_url); ?>"><t>See your license</t></a>
+						</bfg-notice>
+					<?php endif; ?>
 
 					<?php if ($license_testing): ?>
 						<bfg-notice>

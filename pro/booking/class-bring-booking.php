@@ -9,6 +9,7 @@ namespace BringFraktguidenPro\Booking;
 
 use BringFraktguiden\Booking\BulkBookingGroups;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use Bring_Fraktguiden\Common\Fraktguiden_License;
 use BringFraktguidenPro\Booking\Box\BookingBox;
 use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
 use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
@@ -380,6 +381,12 @@ class Bring_Booking {
 	 * @return boolean
 	 */
 	public static function is_test_mode() {
+		// A shop whose license belongs to another domain runs on a copy of that
+		// shop. A copy may never book a real shipment.
+		if ( Fraktguiden_License::licensed_elsewhere() ) {
+			return true;
+		}
+
 		return 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' );
 	}
 
