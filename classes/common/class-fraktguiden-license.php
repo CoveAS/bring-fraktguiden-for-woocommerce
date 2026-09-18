@@ -175,6 +175,49 @@ class Fraktguiden_License
 	}
 
 	/**
+	 * The host of this shop.
+	 */
+	public static function current_domain(): string
+	{
+		return strtolower(wp_parse_url(get_site_url(), PHP_URL_HOST) ?: '');
+	}
+
+	/**
+	 * The domain that holds the license, as the license server last named it.
+	 *
+	 * An answer about this shop names the domain. An answer about a key that
+	 * another shop holds names that shop instead.
+	 */
+	public static function licensed_domain(): string
+	{
+		$state = self::get_state();
+
+		$domain = $state['domain'] ?? '';
+
+		if ('' === $domain) {
+			$domain = $state['other_domain'] ?? '';
+		}
+
+		return strtolower((string) $domain);
+	}
+
+	/**
+	 * Check whether the license belongs to a shop on another domain.
+	 *
+	 * A copied database carries the license state of the shop it came from, so
+	 * the domain in that state names the other shop.
+	 *
+	 * A shop that never asked the license server holds no domain, and is not
+	 * treated as a copy.
+	 */
+	public static function licensed_elsewhere(): bool
+	{
+		$licensed = self::licensed_domain();
+
+		return '' !== $licensed && $licensed !== self::current_domain();
+	}
+
+	/**
 	 * Check whether the license server calls this license a testing license.
 	 *
 	 * A testing license unlocks every Pro feature. It books in test mode only.
