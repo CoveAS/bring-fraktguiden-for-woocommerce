@@ -328,7 +328,7 @@ return [
 				'title' => __('API customer number', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'text',
 				'label' => __('API customer number', 'bring-fraktguiden-for-woocommerce'),
-				'placeholder' => 'PARCELS_NORWAY-100########',
+				'placeholder' => '3200-########',
 				/* translators: %s: Mybring API settings page URL */
 				'description' => sprintf(__('Find your API customer number %1$shere%2$s.',
 					'bring-fraktguiden-for-woocommerce'),

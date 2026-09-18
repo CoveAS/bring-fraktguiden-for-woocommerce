@@ -293,7 +293,9 @@ class Fraktguiden_Helper {
 		if (! isset($customer_number)) {
 			$customer_number = self::get_option( 'mybring_customer_number' );
 		}
-		if ( ! $warning_added && ! preg_match( '/^\d+$/', trim( $customer_number ) ) ) {
+		// An old customer number carries a letter prefix, such as
+		// PARCELS_NORWAY-100000000. A current one holds no letter.
+		if ( ! $warning_added && preg_match( '/[a-z]/i', (string) $customer_number ) ) {
 			$warning_added = true;
 			$warning = sprintf(
 				__( 'You\'re using an outdated customer number, %s - The latest services from Bring require you to update your customer number.', 'bring-fraktguiden-for-woocommerce' ),
