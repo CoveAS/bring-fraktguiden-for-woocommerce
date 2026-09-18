@@ -5,8 +5,14 @@ jQuery(function ($) {
 	let loadedShippingKey = window._fraktguiden_data.shipping_key;
 	let requireUpdate = false;
 
-	// Global picker element variable
-	let pickerEl;
+	/**
+	 * The element that carries the busy overlay while points load.
+	 * The shipping block holds every picker, so one overlay covers them all.
+	 * @returns {jQuery}
+	 */
+	const busyEl = function () {
+		return $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
+	};
 
 
 	/**
@@ -171,7 +177,7 @@ jQuery(function ($) {
 				return;
 			}
 			requireUpdate = false;
-			pickerEl.block(blockArgs);
+			busyEl().block(blockArgs);
 			if (getRequest) {
 				getRequest.cancel();
 			}
@@ -316,7 +322,7 @@ jQuery(function ($) {
 						return;
 					}
 
-					const el = $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
+					const el = busyEl();
 					el.block(blockArgs);
 
 					// Ajax select pick up point
@@ -345,7 +351,7 @@ jQuery(function ($) {
 			getRequest = undefined;
 			const el = document.querySelector('pick-up-points-modal');
 			el.setError(_fraktguiden_data.i18n.ERROR_LOADING_PICK_UP_POINTS)
-			pickerEl.unblock();
+			busyEl().unblock();
 		},
 
 		fetchPickUpPointsDone: function (response) {
@@ -359,7 +365,7 @@ jQuery(function ($) {
 			loadedShippingKey = response.shipping_key;
 
 			utility.renderAllPickers();
-			pickerEl.unblock();
+			busyEl().unblock();
 		}
 	};
 
@@ -388,9 +394,6 @@ jQuery(function ($) {
 	 * Block checkout
 	 */
 	const blockCheckout = function (e) {
-		// Set items
-		pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
-
 		const shippingOptionsEl = e.detail.element;
 		const inputs = $(shippingOptionsEl).find('input')
 		const shippingRates = bring_fraktguiden_for_woocommerce.getShippingRates();
@@ -403,28 +406,45 @@ jQuery(function ($) {
 		const getPicker = function (rate) {
 			const inputEl = $('[value="' + rate.rate_id + '"]')
 			const control = inputEl.parent();
-			pickerEl = control.find('.bring-fraktguiden-pick-up-point-picker');
-			if (!pickerEl.length) {
+			let picker = control.find('.bring-fraktguiden-pick-up-point-picker');
+			if (!picker.length) {
 				// Create a new element if the picker is not found
-				pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
-				const picker = pickerEl;
+				picker = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
 				picker.find('.bfg-pup__change').on('click', () => openPicker(rate.rate_id, picker));
 				control.append(picker);
 			}
 			// The picker carries its rate, so any reader knows which type it shows.
-			pickerEl.data('rate-id', rate.rate_id);
-			return pickerEl;
+			picker.data('rate-id', rate.rate_id);
+			return picker;
 		}
 
-		for (let i = 0; i < shippingRates.length; i++) {
-			const shippingRate = shippingRates[i];
-			if (!utility.usesPickUpPoint(shippingRate.rate_id)) {
-				continue;
+		/**
+		 * Show the picker of the chosen rate and hide every other picker.
+		 * Each rate with pick up points owns a picker, so a picker left alone
+		 * stays on screen under a rate the customer no longer wants.
+		 * @param {Array} rates
+		 * @returns {string} The rate the customer chose
+		 */
+		const syncPickers = function (rates) {
+			const selected = rates.find((rate) => rate.selected);
+			const selectedRateId = selected ? selected.rate_id : '';
+			for (let i = 0; i < rates.length; i++) {
+				const rate = rates[i];
+				if (rate.method_id !== 'bring_fraktguiden' || !utility.usesPickUpPoint(rate.rate_id)) {
+					continue;
+				}
+				const picker = getPicker(rate);
+				if (rate.rate_id !== selectedRateId) {
+					picker.hide();
+					continue;
+				}
+				utility.renderSelectedPickUpPoint(utility.selectedForRate(rate.rate_id), picker);
+				picker.show();
 			}
-			const picker = getPicker(shippingRate);
-			utility.renderSelectedPickUpPoint(utility.selectedForRate(shippingRate.rate_id), picker);
-			picker.show();
-		}
+			return selectedRateId;
+		};
+
+		syncPickers(shippingRates);
 
 		let timeout = undefined;
 
@@ -487,46 +507,19 @@ jQuery(function ($) {
 		let currentRateId = '';
 		wp.data.subscribe(
 			function () {
-				let rates = bring_fraktguiden_for_woocommerce.getShippingRates();
-				let shouldHide = true;
-				for (let i = 0; i < rates.length; i++) {
-					const rate = rates[i];
-					if (!rate.selected ) {
-						// Not selected
-						continue;
-					}
+				const selectedRateId = syncPickers(bring_fraktguiden_for_woocommerce.getShippingRates());
 
-					if (! currentRateId) {
-						// Unselected
-						currentRateId = rate.rate_id;
-						continue;
-					}
-
-					if (rate.method_id !== 'bring_fraktguiden' || !utility.usesPickUpPoint(rate.rate_id)) {
-						// Doesn't support pick up points
-						continue;
-					}
-					const picker = getPicker(rate);
-					utility.renderSelectedPickUpPoint(utility.selectedForRate(rate.rate_id), picker);
-					picker.show();
-					shouldHide = false;
-
-					if (rate.rate_id === currentRateId) {
-						// No change
-						continue;
-					}
-					currentRateId = rate.rate_id;
-					// Selected rate supports pick up points
-
-					requireUpdate = true;
-					utility.refreshPickUpPoints();
+				if (selectedRateId === currentRateId) {
+					// No change
 					return;
 				}
+				currentRateId = selectedRateId;
 
-				// No rate selected that supports pick up points
-				if (shouldHide) {
-					pickerEl.hide();
+				if (!utility.usesPickUpPoint(selectedRateId)) {
+					return;
 				}
+				requireUpdate = true;
+				utility.refreshPickUpPoints();
 			}
 		);
 	}
@@ -571,11 +564,10 @@ jQuery(function ($) {
 		let previous = $('#shipping_method .shipping_method:checked').val();
 		const classicCheckout = function () {
 			const current = $('#shipping_method .shipping_method:checked').val();
-			pickerEl = $('.bring-fraktguiden-pick-up-point-picker');
-			if (!pickerEl.length) {
+			const picker = $('.bring-fraktguiden-pick-up-point-picker');
+			if (!picker.length) {
 				return;
 			}
-			const picker = pickerEl;
 			picker.data('rate-id', current);
 			// WooCommerce redraws the picker on every update, so drop the old
 			// handler before binding one for the rate on screen.
