@@ -56,8 +56,12 @@ final class ShippingTest
 			);
 		}
 
-		if ($result->note) {
+		// The setup page tests the shop. The product screen tests one product,
+		// and must never change a setting of the whole shop.
+		if ($result->without_customer_number && ! $product_id) {
 			Fraktguiden_Helper::update_option(PriceCustomerNumberCheck::SETTING, 'no');
+			PriceCustomerNumberCheck::refused((string) Fraktguiden_Helper::get_option('mybring_customer_number'));
+			$result = $result->with_note(PriceCustomerNumberCheck::message());
 		}
 
 		self::render($result);
@@ -134,7 +138,7 @@ final class ShippingTest
 			return $result;
 		}
 
-		return ShippingTestResult::rates($without->rates, $without->call, self::unsupported_message());
+		return ShippingTestResult::rates($without->rates, $without->call, true);
 	}
 
 	/** One rate query, and what it found. */
@@ -158,12 +162,6 @@ final class ShippingTest
 		}
 
 		return ShippingTestResult::rates($rates, $call);
-	}
-
-	/** What the shop owner reads once the setting goes off. */
-	public static function unsupported_message(): string
-	{
-		return __('Bring gave no price while the shop asked with its customer number, so the setting "Use customer number" is now off. This customer number does not support it. Ask your Bring contact for more information.', 'bring-fraktguiden-for-woocommerce');
 	}
 
 	/**

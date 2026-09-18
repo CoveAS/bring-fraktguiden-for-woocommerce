@@ -19,8 +19,34 @@ final class PriceCustomerNumberCheck
 	/** The saved fields that make the answer of Bring change. */
 	private const FIELDS = [self::SETTING, 'mybring_customer_number'];
 
-	/** Set when the check turned the setting off. The notice reads it. */
-	public const OPTION = 'bring_fraktguiden_price_customer_number_unsupported';
+	/** The customer number Bring refused, so the settings page can say which. */
+	private const OPTION = 'bring_fraktguiden_price_customer_number_refused';
+
+	/** Remember the number Bring refused. An empty string forgets the last one. */
+	public static function refused(string $customer_number): void
+	{
+		update_option(self::OPTION, $customer_number);
+	}
+
+	/**
+	 * What the settings page says under the checkbox, or an empty string.
+	 *
+	 * A number the shop no longer uses says nothing about the one it uses now.
+	 */
+	public static function message(): string
+	{
+		$number = (string) get_option(self::OPTION, '');
+
+		if (! $number || $number !== (string) Fraktguiden_Helper::get_option('mybring_customer_number')) {
+			return '';
+		}
+
+		return sprintf(
+			/* translators: %s: the Mybring customer number. */
+			__('Bring gives no price when the shop asks with customer number %s, so this setting stays off. Ask your Bring contact for more information.', 'bring-fraktguiden-for-woocommerce'),
+			$number
+		);
+	}
 
 	/**
 	 * The settings to save, with the setting off when Bring refuses the number.
@@ -41,8 +67,6 @@ final class PriceCustomerNumberCheck
 		Fraktguiden_Helper::$options = $value;
 
 		if (! Fraktguiden_Helper::price_customer_number()) {
-			update_option(self::OPTION, '');
-
 			return $value;
 		}
 
@@ -61,10 +85,9 @@ final class PriceCustomerNumberCheck
 			$postcode
 		);
 
-		// A note means the test passed only after it dropped the customer number.
-		update_option(self::OPTION, $result->note ? 'yes' : '');
+		self::refused($result->without_customer_number ? (string) Fraktguiden_Helper::get_option('mybring_customer_number') : '');
 
-		if ($result->note) {
+		if ($result->without_customer_number) {
 			$value[self::SETTING] = 'no';
 			Fraktguiden_Helper::$options = $value;
 		}

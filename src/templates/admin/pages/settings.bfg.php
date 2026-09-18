@@ -2,6 +2,7 @@
 /**
  * @var string $currency
  * @var Fields $fields
+ * @var string $bfg_customer_number_refused What Bring said about the customer number, or an empty string.
  */
 ?>
 
@@ -84,6 +85,9 @@
 					<div class="bfg-field">
 						<h3 class="bfg-field-group-title"><t>Mybring prices</t></h3>
 						<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->use_customer_number_to_get_prices; ?></div>
+						<?php if ($bfg_customer_number_refused): ?>
+							<bfg-notice><?php echo esc_html($bfg_customer_number_refused); ?></bfg-notice>
+						<?php endif; ?>
 						<div id="bfg-customer-number-fields">
 							<div class="bfg-field">
 								<?php echo $fields->mybring_customer_number->label(); ?>

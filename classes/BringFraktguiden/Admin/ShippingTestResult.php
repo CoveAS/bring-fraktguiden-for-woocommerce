@@ -18,6 +18,7 @@ final class ShippingTestResult
 	 * @param string             $problem  Why the test could not run at all.
 	 * @param array{request: string, answer: string, status: int|string}|null $call The Bring call.
 	 * @param string             $note     What the plugin changed to get these rates.
+	 * @param bool               $without_customer_number True when only a query without the customer number found rates.
 	 */
 	private function __construct(
 		public readonly array $rates = [],
@@ -25,7 +26,14 @@ final class ShippingTestResult
 		public readonly string $problem = '',
 		public readonly ?array $call = null,
 		public readonly string $note = '',
+		public readonly bool $without_customer_number = false,
 	) {
+	}
+
+	/** The same result, with a line for the shop owner to read. */
+	public function with_note(string $note): self
+	{
+		return new self($this->rates, $this->messages, $this->problem, $this->call, $note, $this->without_customer_number);
 	}
 
 	/**
@@ -41,9 +49,9 @@ final class ShippingTestResult
 	 * @param WC_Shipping_Rate[] $rates
 	 * @param array{request: string, answer: string, status: int|string}|null $call
 	 */
-	public static function rates(array $rates, ?array $call = null, string $note = ''): self
+	public static function rates(array $rates, ?array $call = null, bool $without_customer_number = false): self
 	{
-		return new self(rates: $rates, call: $call, note: $note);
+		return new self(rates: $rates, call: $call, without_customer_number: $without_customer_number);
 	}
 
 	/**

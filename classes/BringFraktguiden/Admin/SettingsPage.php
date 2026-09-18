@@ -202,6 +202,7 @@ class SettingsPage
 
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
+		$bfg_customer_number_refused = PriceCustomerNumberCheck::message();
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
 	}
 
