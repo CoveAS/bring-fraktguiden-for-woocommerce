@@ -31,3 +31,6 @@
 @import "./admin/_booking-bulk.css";
 @import "./admin/_modal.css";
 @import "./admin/_hs-code-picker.css";
+
+/* Dev only. The kitchen sink page is registered only on a local site. */
+@import "./admin/_kitchen-sink.css";

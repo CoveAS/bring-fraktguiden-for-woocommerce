@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Kitchen Sink
+   The dev only component gallery. The menu entry appears only when
+   BRING_ENVIRONMENT is 'local'.
+   ========================================================================== */
+
+.bfg-type-scale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--bfg-space-8);
+}
+.bfg-type-scale-table tr {
+    border-bottom: 1px solid var(--bfg-border);
+}
+.bfg-type-scale-table tbody tr:last-child {
+    border-bottom: none;
+}
+.bfg-type-scale-table thead tr {
+    text-align: left;
+}
+.bfg-type-scale-table th {
+    padding: var(--bfg-space-2) var(--bfg-space-4);
+    font-size: var(--bfg-font-xs);
+    font-weight: 600;
+    color: var(--bfg-text-muted);
+}
+.bfg-type-scale-table th:first-child { padding-left: 0; }
+.bfg-type-scale-table th:last-child  { padding-right: 0; }
+.bfg-type-scale-table td {
+    padding: var(--bfg-space-4);
+}
+.bfg-type-scale-table td:first-child { padding-left: 0; }
+.bfg-type-scale-table td:last-child  { padding-right: 0; }
