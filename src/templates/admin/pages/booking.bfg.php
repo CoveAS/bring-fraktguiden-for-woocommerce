@@ -5,6 +5,7 @@ use BringFraktguiden\Fields\Fields;
 
 /**
  * @var Fields $fields
+ * @var bool   $pro_active
  * @var bool   $license_testing
  * @var string $license_url
  */
@@ -21,6 +22,13 @@ use BringFraktguiden\Fields\Fields;
 		<div class="bfg-notices">
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
+
+		<?php if (!$pro_active): ?>
+			<bfg-notice>
+				<t>Booking needs Bring Fraktguiden Pro. You can save these settings now, but no order books until Pro is active.</t>
+				<a href="<?php echo esc_url($license_url); ?>"><t>Go to Pro and licenses</t></a>
+			</bfg-notice>
+		<?php endif; ?>
 
 		<form method="post" action="options.php" id="bfg-booking-form" novalidate>
 			<?php settings_fields('bring_fraktguiden_booking'); ?>

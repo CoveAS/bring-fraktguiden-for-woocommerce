@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-17T22:17:18+00:00\n"
+"POT-Creation-Date: 2026-09-18T08:49:58+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -334,7 +334,7 @@ msgstr "Avsender"
 msgid "Recipient"
 msgstr "Mottaker"
 
-#: build/templates/admin/pages/booking.php:16
+#: build/templates/admin/pages/booking.php:17
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
 #: pro/booking/views/class-bring-booking-orders-view.php:77
@@ -342,6 +342,18 @@ msgid "Booking"
 msgstr "Booking"
 
 #: build/templates/admin/pages/booking.php:32
+msgid ""
+"Booking needs Bring Fraktguiden Pro. You can save these settings now, but no "
+"order books until Pro is active."
+msgstr ""
+"Booking krever Bring Fraktguiden Pro. Du kan lagre disse innstillingene nå, "
+"men ingen ordre blir booket før Pro er aktiv."
+
+#: build/templates/admin/pages/booking.php:33
+msgid "Go to Pro and licenses"
+msgstr "Gå til Pro og lisenser"
+
+#: build/templates/admin/pages/booking.php:45
 #: build/templates/admin/pages/kitchen-sink/access-links.php:22
 #: build/templates/admin/pages/kitchen-sink/feature-cards.php:34
 #: build/templates/admin/pages/pro.php:346
@@ -352,11 +364,11 @@ msgstr "Booking"
 msgid "MyBring Booking"
 msgstr "MyBring Booking"
 
-#: build/templates/admin/pages/booking.php:36
+#: build/templates/admin/pages/booking.php:49
 msgid "Book orders directly from the order page with MyBring integration"
 msgstr "Book ordrer direkte fra ordresiden med MyBring-integrasjon"
 
-#: build/templates/admin/pages/booking.php:56
+#: build/templates/admin/pages/booking.php:69
 msgid ""
 "Your Pro license is a test license. Test mode therefore stays on, and Bring "
 "never ships or invoices a booking from this site."
@@ -364,24 +376,24 @@ msgstr ""
 "Pro-lisensen din er en testlisens. Testmodus står derfor på, og Bring sender "
 "aldri og fakturerer aldri en bestilling fra dette nettstedet."
 
-#: build/templates/admin/pages/booking.php:57
+#: build/templates/admin/pages/booking.php:70
 msgid "See your license"
 msgstr "Se lisensen din"
 
-#: build/templates/admin/pages/booking.php:70
+#: build/templates/admin/pages/booking.php:83
 msgid "Contact information"
 msgstr "Kontaktinformasjon"
 
-#: build/templates/admin/pages/booking.php:73
+#: build/templates/admin/pages/booking.php:86
 msgid "Every booking carries this as the sender contact of your shop."
 msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 
-#: build/templates/admin/pages/booking.php:97
-#: build/templates/admin/pages/booking.php:136
-#: build/templates/admin/pages/booking.php:177
-#: build/templates/admin/pages/booking.php:203
-#: build/templates/admin/pages/booking.php:229
-#: build/templates/admin/pages/booking.php:290
+#: build/templates/admin/pages/booking.php:110
+#: build/templates/admin/pages/booking.php:149
+#: build/templates/admin/pages/booking.php:190
+#: build/templates/admin/pages/booking.php:216
+#: build/templates/admin/pages/booking.php:242
+#: build/templates/admin/pages/booking.php:303
 #: build/templates/admin/pages/fallback-options.php:75
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
@@ -389,12 +401,12 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: build/templates/admin/pages/settings.php:147
 #: build/templates/admin/pages/settings.php:175
 #: build/templates/admin/pages/settings.php:186
-#: src/templates/admin/pages/booking.bfg.php:82
-#: src/templates/admin/pages/booking.bfg.php:109
-#: src/templates/admin/pages/booking.bfg.php:133
-#: src/templates/admin/pages/booking.bfg.php:147
-#: src/templates/admin/pages/booking.bfg.php:161
-#: src/templates/admin/pages/booking.bfg.php:210
+#: src/templates/admin/pages/booking.bfg.php:90
+#: src/templates/admin/pages/booking.bfg.php:117
+#: src/templates/admin/pages/booking.bfg.php:141
+#: src/templates/admin/pages/booking.bfg.php:155
+#: src/templates/admin/pages/booking.bfg.php:169
+#: src/templates/admin/pages/booking.bfg.php:218
 #: src/templates/admin/pages/fallback-options.bfg.php:70
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
@@ -406,16 +418,16 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 msgid "Save Changes"
 msgstr "Lagre endringer"
 
-#: build/templates/admin/pages/booking.php:107
+#: build/templates/admin/pages/booking.php:120
 msgid "Customs and NVIT"
 msgstr "Toll og NVIT"
 
-#: build/templates/admin/pages/booking.php:111
+#: build/templates/admin/pages/booking.php:124
 msgid "What Bring needs when a shipment crosses a border"
 msgstr "Dette trenger Bring når en sending krysser en grense"
 
-#: build/templates/admin/pages/booking.php:120
-#: src/templates/admin/pages/booking.bfg.php:93
+#: build/templates/admin/pages/booking.php:133
+#: src/templates/admin/pages/booking.bfg.php:101
 msgid ""
 "NVIT means Norwegian goods in transit. A parcel that travels from one place "
 "in Norway to another, through Sweden or Finland, needs customs data for each "
@@ -426,23 +438,23 @@ msgstr ""
 "til et annet, gjennom Sverige eller Finland, trenger tolldata for hver "
 "ordrelinje. Les mer hos {{bring}}Bring{{/a}} og hos {{toll}}Tolletaten{{/a}}."
 
-#: build/templates/admin/pages/booking.php:146
+#: build/templates/admin/pages/booking.php:159
 #: build/templates/admin/pages/pro-settings.php:40
 #: src/templates/admin/pages/pro-settings.bfg.php:40
 msgid "Processing"
 msgstr "Behandler"
 
-#: build/templates/admin/pages/booking.php:150
+#: build/templates/admin/pages/booking.php:163
 msgid "Change order status after booking or printing labels"
 msgstr "Endre ordrestatus etter booking eller utskrift av etiketter"
 
-#: build/templates/admin/pages/booking.php:162
+#: build/templates/admin/pages/booking.php:175
 #: build/templates/admin/pages/pro-settings.php:43
 #: src/templates/admin/pages/pro-settings.bfg.php:43
 msgid "WARNING!"
 msgstr "ADVARSEL!"
 
-#: build/templates/admin/pages/booking.php:162
+#: build/templates/admin/pages/booking.php:175
 msgid ""
 "This will change the status even if the order is\n"
 "\t\t\t\t\t\t\tcompleted"
@@ -450,30 +462,30 @@ msgstr ""
 "Dette endrer statusen selv om ordren er\n"
 "\t\t\t\t\t\t\tfullført"
 
-#: build/templates/admin/pages/booking.php:187
+#: build/templates/admin/pages/booking.php:200
 #: build/templates/admin/pages/pro-settings.php:70
 #: config/admin-settings.php:478
 #: src/templates/admin/pages/pro-settings.bfg.php:70
 msgid "Return label"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:191
+#: build/templates/admin/pages/booking.php:204
 msgid "Send a return label with every booking"
 msgstr ""
 
-#: build/templates/admin/pages/booking.php:213 config/services.php:459
+#: build/templates/admin/pages/booking.php:226 config/services.php:459
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
-#: build/templates/admin/pages/booking.php:217
+#: build/templates/admin/pages/booking.php:230
 msgid "Configure package type for home delivery services"
 msgstr "Still inn pakketype for hjemleveringstjenester"
 
-#: build/templates/admin/pages/booking.php:239
+#: build/templates/admin/pages/booking.php:252
 msgid "Shipping Address"
 msgstr "Fraktadresse"
 
-#: build/templates/admin/pages/booking.php:243
+#: build/templates/admin/pages/booking.php:256
 msgid ""
 "By default, your WooCommerce store address is used as the &quot;from&quot; "
 "address during booking."
@@ -481,22 +493,22 @@ msgstr ""
 "Som standard brukes butikkadressen i WooCommerce som &quot;fra&quot;-adresse "
 "ved booking."
 
-#: build/templates/admin/pages/booking.php:271
+#: build/templates/admin/pages/booking.php:284
 msgid "Address details"
 msgstr "Adressedetaljer"
 
-#: build/templates/admin/pages/booking.php:333
-#: src/templates/admin/pages/booking.bfg.php:251
+#: build/templates/admin/pages/booking.php:346
+#: src/templates/admin/pages/booking.bfg.php:259
 msgid "This field is required."
 msgstr "Dette feltet er påkrevd."
 
-#: build/templates/admin/pages/booking.php:337
-#: src/templates/admin/pages/booking.bfg.php:255
+#: build/templates/admin/pages/booking.php:350
+#: src/templates/admin/pages/booking.bfg.php:263
 msgid "Please enter a valid email address."
 msgstr "Skriv inn en gyldig epostadresse."
 
-#: build/templates/admin/pages/booking.php:341
-#: src/templates/admin/pages/booking.bfg.php:259
+#: build/templates/admin/pages/booking.php:354
+#: src/templates/admin/pages/booking.bfg.php:267
 msgid "Please enter a valid phone number."
 msgstr "Skriv inn et gyldig telefonnummer."
 
@@ -2492,7 +2504,7 @@ msgstr "Kjøp en lisens for å få tilgang igjen"
 msgid "Available with Pro"
 msgstr "Tilgjengelig med Pro"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:347
+#: classes/BringFraktguiden/Admin/SettingsPage.php:350
 msgid "The guide set the shipping services this shop offers."
 msgstr "Veiviseren satte frakttjenestene denne butikken tilbyr."
 
