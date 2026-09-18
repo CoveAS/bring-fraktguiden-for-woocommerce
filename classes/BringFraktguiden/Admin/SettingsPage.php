@@ -606,7 +606,7 @@ class SettingsPage
 			$value['pro_activated_on'] = time();
 		}
 
-		return $value;
+		return PriceCustomerNumberCheck::apply($value, $rendered);
 	}
 
 	/**

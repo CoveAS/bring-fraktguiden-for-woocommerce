@@ -2,7 +2,6 @@
 
 namespace BringFraktguiden\Admin;
 
-use BringFraktguiden\Settings\SettingsMigration;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 
 /**
@@ -14,42 +13,27 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  */
 final class PriceCustomerNumberCheck
 {
-	/** The saved fields that make the answer of Bring change. */
-	private const FIELDS = ['use_customer_number_to_get_prices', 'mybring_customer_number'];
-
 	/** The setting the check turns off. */
-	private const SETTING = 'use_customer_number_to_get_prices';
+	public const SETTING = 'use_customer_number_to_get_prices';
+
+	/** The saved fields that make the answer of Bring change. */
+	private const FIELDS = [self::SETTING, 'mybring_customer_number'];
 
 	/** Set when the check turned the setting off. The notice reads it. */
 	public const OPTION = 'bring_fraktguiden_price_customer_number_unsupported';
 
-	public static function init(): void
-	{
-		// A save that changes nothing never reaches update_option_, and the
-		// shop owner may press Save with the box already ticked.
-		add_filter('pre_update_option_' . SettingsMigration::PLUGIN_OPTION, [self::class, 'before_save'], 12, 2);
-	}
-
 	/**
-	 * Run the check on the settings the shop owner is about to save.
+	 * The settings to save, with the setting off when Bring refuses the number.
 	 *
-	 * @param mixed $value     The settings about to be saved.
-	 * @param mixed $old_value The settings before the save.
+	 * @param array<string, mixed> $value    The settings the form is about to save.
+	 * @param string[]             $rendered The fields the page showed.
 	 *
-	 * @return mixed The settings to save, with the setting off when Bring refuses the number.
+	 * @return array<string, mixed>
 	 */
-	public static function before_save($value, $old_value)
+	public static function apply(array $value, array $rendered): array
 	{
-		// The check saves the settings again, which fires this filter a second time.
-		static $running = false;
-
-		if ($running || ! is_array($value)) {
-			return $value;
-		}
-
-		// Other code writes this option too. Only a submitted settings form
-		// names the fields it rendered, and only that is worth an API call.
-		if (! array_intersect(self::FIELDS, array_map('sanitize_key', (array) ($_POST['bfg_rendered'] ?? [])))) {
+		// A page that shows neither field is not worth an API call.
+		if (! array_intersect(self::FIELDS, $rendered)) {
 			return $value;
 		}
 
@@ -71,23 +55,18 @@ final class PriceCustomerNumberCheck
 			return $value;
 		}
 
-		$running = true;
-
-		try {
-			$result = ShippingTest::run(
-				ShippingTest::sample_product(),
-				(string) Fraktguiden_Helper::get_option('from_country'),
-				$postcode
-			);
-		} finally {
-			$running = false;
-		}
+		$result = ShippingTest::run(
+			ShippingTest::sample_product(),
+			(string) Fraktguiden_Helper::get_option('from_country'),
+			$postcode
+		);
 
 		// A note means the test passed only after it dropped the customer number.
 		update_option(self::OPTION, $result->note ? 'yes' : '');
 
 		if ($result->note) {
 			$value[self::SETTING] = 'no';
+			Fraktguiden_Helper::$options = $value;
 		}
 
 		return $value;

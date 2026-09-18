@@ -56,6 +56,10 @@ final class ShippingTest
 			);
 		}
 
+		if ($result->note) {
+			Fraktguiden_Helper::update_option(PriceCustomerNumberCheck::SETTING, 'no');
+		}
+
 		self::render($result);
 		wp_die();
 	}
@@ -73,7 +77,12 @@ final class ShippingTest
 		return $product;
 	}
 
-	/** Ask Bring what the checkout would show for this product and address. */
+	/**
+	 * Ask Bring what the checkout would show for this product and address.
+	 *
+	 * A result that carries a note passed only once the query dropped the
+	 * customer number. The caller turns the setting off.
+	 */
 	public static function run(WC_Product $product, string $country, string $postcode): ShippingTestResult
 	{
 		if (! $product->get_weight() && ! $product->has_dimensions()) {
@@ -124,8 +133,6 @@ final class ShippingTest
 		if (! $without->passed()) {
 			return $result;
 		}
-
-		Fraktguiden_Helper::update_option('use_customer_number_to_get_prices', 'no');
 
 		return ShippingTestResult::rates($without->rates, $without->call, self::unsupported_message());
 	}
