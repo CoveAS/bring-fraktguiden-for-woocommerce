@@ -158,7 +158,7 @@ class PickUpPoint
 				'klarna_checkout_nonce' => wp_create_nonce('klarna_checkout_nonce'),
 				'nonce' => wp_create_nonce('bring_fraktguiden'),
 				'pick_up_points' => $pick_up_points,
-				'shipping_key' => $country . $postcode,
+				'shipping_key' => $customerAddress->getKey(),
 				'selected_pick_up_points' => $selected_pick_up_points,
 				'pick_up_point_rate_types' => $rate_types,
 				'pick_up_point_modal_css' => file_get_contents(

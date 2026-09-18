@@ -276,13 +276,15 @@ jQuery(function ($) {
 				console.warn('Customer data or shipping address is missing.');
 				return '';
 			}
-			const {country, postcode} = cartData.shippingAddress;
+			const {country, postcode, address_1: street} = cartData.shippingAddress;
 			// Ensure country and postcode are valid strings
 			if (typeof country !== 'string' || typeof postcode !== 'string') {
 				console.warn('Shipping address country or postcode is invalid.');
 				return '';
 			}
-			return `${country}${postcode}`;
+			// The street belongs in the key. Bring sorts the points by the
+			// distance from it, so a new street gives a new list.
+			return `${country}${postcode}${street || ''}`;
 		},
 
 		/**

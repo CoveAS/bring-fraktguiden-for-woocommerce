@@ -165,6 +165,18 @@ changes the address.
 A shop can pick the legacy picker instead, with the setting **Style**. The
 legacy picker is a select field. `LegacyPickupPoints` holds it.
 
+### The shipping key
+
+The shipping key names every part the lookup depends on: the country, the
+postal code and the street. `CustomerAddress::getKey()` builds it in PHP, and
+`utility.getShippingKey()` builds the same value in the browser.
+
+The block checkout reloads the points only when the key changes. The street
+belongs in the key because Bring sorts the points by the distance from it. A new
+street on the same postal code gives a new order.
+
+The classic checkout ignores the key and reloads on every `updated_checkout`.
+
 ### Which service shows a picker
 
 A service shows a picker when its `pickup_point_cb` setting holds a value. The

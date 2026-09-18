@@ -238,7 +238,7 @@ class PickUpPointAjax
 		wp_send_json(
 			[
 				'pick_up_points' => $pick_up_points,
-				'shipping_key' => $country . $postcode,
+				'shipping_key' => $customerAddress->getKey(),
 				'selected_pick_up_points' => $selected,
 			]
 		);

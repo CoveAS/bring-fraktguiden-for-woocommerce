@@ -2,6 +2,7 @@
 
 namespace BringFraktguidenPro\PickUpPoint;
 
+use BringFraktguiden\Utility\CustomerAddress;
 use WP_Bring_Request;
 
 class GetRawPickupPointsAction {
@@ -18,10 +19,10 @@ class GetRawPickupPointsAction {
 		}
 
 		$request = new WP_Bring_Request();
-		$customer = WC()->customer;
 		$args = [];
-		if ($customer) {
-			$args['street'] = $customer->get_shipping_address();
+		$street = (new CustomerAddress())->getStreet();
+		if ($street) {
+			$args['street'] = $street;
 		}
 		$pickup_point_type ??= PickupPointType::fetch_type();
 		if (in_array($pickup_point_type, ['manned', 'locker'], true)) {
