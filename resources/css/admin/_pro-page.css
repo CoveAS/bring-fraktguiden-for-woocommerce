@@ -15,7 +15,7 @@
 .bfg-free-card {
     background: var(--bfg-white);
     border: 1px solid var(--bfg-gray-200);
-    border-radius: 12px;
+    border-radius: var(--bfg-radius-card);
     padding: var(--bfg-space-6);
 }
 
@@ -429,7 +429,7 @@
 .bfg-license-card {
     background: var(--bfg-white);
     border: 1px solid var(--bfg-gray-200);
-    border-radius: 12px;
+    border-radius: var(--bfg-radius-card);
     overflow: hidden;
     margin-bottom: var(--bfg-space-12);
 }

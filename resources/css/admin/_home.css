@@ -124,7 +124,7 @@
 .bfg-active-step-card {
     background: var(--bfg-primary-bg);
     border: 1px solid var(--bfg-primary-light);
-    border-radius: 12px;
+    border-radius: var(--bfg-radius-card);
     padding: var(--bfg-space-8);
     display: flex;
     gap: var(--bfg-space-6);
@@ -378,7 +378,7 @@
         gap: var(--bfg-space-4) !important;
         padding: var(--bfg-space-8) !important;
         background: #F8FAFC !important;
-        border-radius: 12px !important;
+        border-radius: var(--bfg-radius-card) !important;
     }
 
     .bfg-pro-features-grid li {
