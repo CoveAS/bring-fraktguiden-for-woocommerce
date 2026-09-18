@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T15:00:04+00:00\n"
+"POT-Creation-Date: 2026-09-18T18:36:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -399,9 +399,10 @@ msgstr ""
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
 #: build/templates/admin/pages/settings.php:52
-#: build/templates/admin/pages/settings.php:156
-#: build/templates/admin/pages/settings.php:184
-#: build/templates/admin/pages/settings.php:195
+#: build/templates/admin/pages/settings.php:77
+#: build/templates/admin/pages/settings.php:181
+#: build/templates/admin/pages/settings.php:209
+#: build/templates/admin/pages/settings.php:220
 #: src/templates/admin/pages/booking.bfg.php:103
 #: src/templates/admin/pages/booking.bfg.php:130
 #: src/templates/admin/pages/booking.bfg.php:154
@@ -412,9 +413,10 @@ msgstr ""
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
 #: src/templates/admin/pages/settings.bfg.php:52
-#: src/templates/admin/pages/settings.bfg.php:151
-#: src/templates/admin/pages/settings.bfg.php:179
-#: src/templates/admin/pages/settings.bfg.php:190
+#: src/templates/admin/pages/settings.bfg.php:77
+#: src/templates/admin/pages/settings.bfg.php:176
+#: src/templates/admin/pages/settings.bfg.php:204
+#: src/templates/admin/pages/settings.bfg.php:215
 #: templates/admin/components/form-section-box.php:23
 msgid "Save Changes"
 msgstr ""
@@ -1411,6 +1413,7 @@ msgid "Phone"
 msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:189
+#: build/templates/admin/pages/settings.php:58
 #: src/templates/admin/pages/pro-settings.bfg.php:189
 msgid "Pickup Point Options"
 msgstr ""
@@ -2012,48 +2015,52 @@ msgstr ""
 msgid "Customize how shipping options appear to customers"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:58
+#: build/templates/admin/pages/settings.php:59
+msgid "Settings for the pickup point picker on the checkout"
+msgstr ""
+
+#: build/templates/admin/pages/settings.php:83
 msgid "Pricing Options"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:59
+#: build/templates/admin/pages/settings.php:84
 msgid "Settings that affect the shipping rates, price estimation and service availability"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:63
+#: build/templates/admin/pages/settings.php:88
 msgid "Shipping location"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:76
-#: src/templates/admin/pages/settings.bfg.php:76
+#: build/templates/admin/pages/settings.php:101
+#: src/templates/admin/pages/settings.bfg.php:101
 msgid "Required if you are sending from a different address than the {{a}}store address{{/a}}. Eg. you're shipping from a warehouse."
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:86
+#: build/templates/admin/pages/settings.php:111
 msgid "Mybring prices"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:122
+#: build/templates/admin/pages/settings.php:147
 msgid "Minimum package dimensions"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:153
+#: build/templates/admin/pages/settings.php:178
 msgid "Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees."
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:162
+#: build/templates/admin/pages/settings.php:187
 msgid "Lead Time"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:163
+#: build/templates/admin/pages/settings.php:188
 msgid "Configure lead time and cutoff settings"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:172
+#: build/templates/admin/pages/settings.php:197
 msgid "days"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:190
+#: build/templates/admin/pages/settings.php:215
 msgid "Advanced Settings"
 msgstr ""
 

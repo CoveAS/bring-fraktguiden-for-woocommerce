@@ -55,6 +55,31 @@
 
 			<div class="bfg-section">
 				<div class="bfg-section__header">
+					<h2><t>Pickup Point Options</t></h2>
+					<p><t>Settings for the pickup point picker on the checkout</t></p>
+				</div>
+
+				<div class="bfg-section__section">
+					<div class="bfg-field">
+						<?php echo $fields->pickup_point_types->label(); ?>
+						<?php echo $fields->pickup_point_types->field(); ?>
+						<?php echo $fields->pickup_point_types->description(); ?>
+					</div>
+					<div class="bfg-field">
+						<?php echo $fields->pickup_point_style->label(); ?>
+						<?php echo $fields->pickup_point_style; ?>
+					</div>
+					<div class="bfg-field">
+						<?php echo $fields->pickup_point_map->label(); ?>
+						<?php echo $fields->pickup_point_map; ?>
+					</div>
+
+					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
+				</div>
+			</div>
+
+			<div class="bfg-section">
+				<div class="bfg-section__header">
 					<h2><t>Pricing Options</t></h2>
 					<p><t>Settings that affect the shipping rates, price estimation and service availability</t></p>
 				</div>

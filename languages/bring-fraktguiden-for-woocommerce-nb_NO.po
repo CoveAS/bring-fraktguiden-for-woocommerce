@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T15:00:04+00:00\n"
+"POT-Creation-Date: 2026-09-18T18:36:16+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -412,9 +412,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
 #: build/templates/admin/pages/settings.php:52
-#: build/templates/admin/pages/settings.php:156
-#: build/templates/admin/pages/settings.php:184
-#: build/templates/admin/pages/settings.php:195
+#: build/templates/admin/pages/settings.php:77
+#: build/templates/admin/pages/settings.php:181
+#: build/templates/admin/pages/settings.php:209
+#: build/templates/admin/pages/settings.php:220
 #: src/templates/admin/pages/booking.bfg.php:103
 #: src/templates/admin/pages/booking.bfg.php:130
 #: src/templates/admin/pages/booking.bfg.php:154
@@ -425,9 +426,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
 #: src/templates/admin/pages/settings.bfg.php:52
-#: src/templates/admin/pages/settings.bfg.php:151
-#: src/templates/admin/pages/settings.bfg.php:179
-#: src/templates/admin/pages/settings.bfg.php:190
+#: src/templates/admin/pages/settings.bfg.php:77
+#: src/templates/admin/pages/settings.bfg.php:176
+#: src/templates/admin/pages/settings.bfg.php:204
+#: src/templates/admin/pages/settings.bfg.php:215
 #: templates/admin/components/form-section-box.php:23
 msgid "Save Changes"
 msgstr "Lagre endringer"
@@ -1505,6 +1507,7 @@ msgid "Phone"
 msgstr "Telefonnummer"
 
 #: build/templates/admin/pages/pro-settings.php:189
+#: build/templates/admin/pages/settings.php:58
 #: src/templates/admin/pages/pro-settings.bfg.php:189
 msgid "Pickup Point Options"
 msgstr "Hentested valg"
@@ -2166,11 +2169,15 @@ msgstr "Visningsvalg"
 msgid "Customize how shipping options appear to customers"
 msgstr "Tilpass hvordan fraktalternativene vises for kundene"
 
-#: build/templates/admin/pages/settings.php:58
+#: build/templates/admin/pages/settings.php:59
+msgid "Settings for the pickup point picker on the checkout"
+msgstr "Innstillinger for hentestedvelgeren i kassen"
+
+#: build/templates/admin/pages/settings.php:83
 msgid "Pricing Options"
 msgstr "Prisvalg"
 
-#: build/templates/admin/pages/settings.php:59
+#: build/templates/admin/pages/settings.php:84
 msgid ""
 "Settings that affect the shipping rates, price estimation and service "
 "availability"
@@ -2178,12 +2185,12 @@ msgstr ""
 "Innstillinger som påvirker fraktprisene, prisberegningen og hvilke tjenester "
 "som er tilgjengelige"
 
-#: build/templates/admin/pages/settings.php:63
+#: build/templates/admin/pages/settings.php:88
 msgid "Shipping location"
 msgstr "Sted du sender fra"
 
-#: build/templates/admin/pages/settings.php:76
-#: src/templates/admin/pages/settings.bfg.php:76
+#: build/templates/admin/pages/settings.php:101
+#: src/templates/admin/pages/settings.bfg.php:101
 msgid ""
 "Required if you are sending from a different address than the {{a}}store "
 "address{{/a}}. Eg. you're shipping from a warehouse."
@@ -2191,15 +2198,15 @@ msgstr ""
 "Påkrevd hvis du sender fra en annen adresse enn {{a}}butikkadressen{{/a}}. "
 "For eksempel hvis du sender fra et lager."
 
-#: build/templates/admin/pages/settings.php:86
+#: build/templates/admin/pages/settings.php:111
 msgid "Mybring prices"
 msgstr "Mybring-priser"
 
-#: build/templates/admin/pages/settings.php:122
+#: build/templates/admin/pages/settings.php:147
 msgid "Minimum package dimensions"
 msgstr "Minste pakkemål"
 
-#: build/templates/admin/pages/settings.php:153
+#: build/templates/admin/pages/settings.php:178
 msgid ""
 "Some Bring services charge extra for very small packages. Orders smaller "
 "than these dimensions are automatically rounded up to avoid those fees."
@@ -2207,19 +2214,19 @@ msgstr ""
 "Noen Bring-tjenester tar ekstra betalt for svært små pakker. Ordre som er "
 "mindre enn disse målene rundes automatisk opp for å unngå de gebyrene."
 
-#: build/templates/admin/pages/settings.php:162
+#: build/templates/admin/pages/settings.php:187
 msgid "Lead Time"
 msgstr "Ledetid"
 
-#: build/templates/admin/pages/settings.php:163
+#: build/templates/admin/pages/settings.php:188
 msgid "Configure lead time and cutoff settings"
 msgstr "Still inn ledetid og frist for bestilling"
 
-#: build/templates/admin/pages/settings.php:172
+#: build/templates/admin/pages/settings.php:197
 msgid "days"
 msgstr "dager"
 
-#: build/templates/admin/pages/settings.php:190
+#: build/templates/admin/pages/settings.php:215
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
@@ -3344,6 +3351,8 @@ msgid ""
 "Pakkeboks always shows parcel lockers. While Pakkeboks is on, every other "
 "service shows manned pickup points and ignores this setting."
 msgstr ""
+"Pakkeboks viser alltid pakkebokser. Når Pakkeboks er på, viser alle andre "
+"tjenester bare betjente hentesteder og ser bort fra denne innstillingen."
 
 #: config/admin-settings.php:285
 msgid "All"
