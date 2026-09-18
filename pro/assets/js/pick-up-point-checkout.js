@@ -1,7 +1,7 @@
 jQuery(function ($) {
 	// Assign data from localised js object
 	let pickUpPoints = window._fraktguiden_data.pick_up_points;
-	let selectedPickUpPoint = window._fraktguiden_data.selected_pick_up_point;
+	let selectedPickUpPoints = window._fraktguiden_data.selected_pick_up_points || {};
 	let loadedShippingKey = window._fraktguiden_data.shipping_key;
 	let requireUpdate = false;
 
@@ -90,14 +90,14 @@ jQuery(function ($) {
 		}
 
 		// Open the modal
-		open() {
+		open(selected) {
 			const el = this.shadowRoot.querySelector('.bring-fraktguiden-pick-up-points-modal');
 			el.classList.add('open');
 
 			const listItems = $(el).find('.bfg-pupm__item')
 			// Find selected pick up point and focus it
 			let selectedItems = listItems.filter(function () {
-				return $(this).data('id') === selectedPickUpPoint.id;
+				return selected && $(this).data('id') === selected.id;
 			});
 			if (!selectedItems.length) {
 				selectedItems = listItems.first().focus();
@@ -208,12 +208,32 @@ jQuery(function ($) {
 		 * @returns {boolean}
 		 */
 		usesPickUpPoint: function (value) {
-			for (let j = 0; j < _fraktguiden_data.pick_up_point_rate_ids.length; j++) {
-				if (value === _fraktguiden_data.pick_up_point_rate_ids[j]) {
-					return true;
-				}
+			return value in (_fraktguiden_data.pick_up_point_rate_types || {});
+		},
+		/**
+		 * The pickup point type of one rate
+		 * @param {string} rateId
+		 * @returns {string}
+		 */
+		typeForRate: function (rateId) {
+			return (_fraktguiden_data.pick_up_point_rate_types || {})[rateId] || '';
+		},
+		/**
+		 * The points of one type. An empty type means every point.
+		 * @param {string} type
+		 */
+		pointsForType: function (type) {
+			if (!type) {
+				return pickUpPoints;
 			}
-			return false;
+			return pickUpPoints.filter((point) => point.pickupPointType === type);
+		},
+		/**
+		 * The point the customer chose for one rate
+		 * @param {string} rateId
+		 */
+		selectedForRate: function (rateId) {
+			return selectedPickUpPoints[utility.typeForRate(rateId)];
 		},
 		/**
 		 * Format Address
@@ -224,21 +244,35 @@ jQuery(function ($) {
 			return pickUpPoint.address + ', ' + pickUpPoint.postalCode + ' ' + pickUpPoint.city;
 		},
 		/**
+		 * Write one point into one picker. Each rate has its own picker.
 		 * @param pickUpPoint
+		 * @param {jQuery} picker
 		 */
-		renderSelectedPickUpPoint: function (pickUpPoint) {
-			if (! pickUpPoint) {
+		renderSelectedPickUpPoint: function (pickUpPoint, picker) {
+			if (! pickUpPoint || ! picker || ! picker.length) {
 				return;
 			}
-			$('.bfg-pup__name').text(pickUpPoint.name);
-			$('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
-			$('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
-			$('.bfg-pup__description').text(pickUpPoint.description);
+			picker.find('.bfg-pup__name').text(pickUpPoint.name);
+			picker.find('.bfg-pup__address').text(utility.formatAddress(pickUpPoint));
+			picker.find('.bfg-pup__opening-hours').text(pickUpPoint.openingHours);
+			picker.find('.bfg-pup__description').text(pickUpPoint.description);
 			if (_fraktguiden_checkout.map_key) {
-				$('.bfg-pup__map').attr('href', pickUpPoint[_fraktguiden_checkout.map_key]);
+				picker.find('.bfg-pup__map').attr('href', pickUpPoint[_fraktguiden_checkout.map_key]);
 			} else {
-				$('.bfg-pup__map').hide();
+				picker.find('.bfg-pup__map').hide();
 			}
+		},
+		/**
+		 * Write the chosen point into every picker on screen
+		 */
+		renderAllPickers: function () {
+			$('.bring-fraktguiden-pick-up-point-picker').each(function () {
+				const picker = $(this);
+				utility.renderSelectedPickUpPoint(
+					utility.selectedForRate(picker.data('rate-id') || ''),
+					picker
+				);
+			});
 		}
 	};
 
@@ -247,39 +281,44 @@ jQuery(function ($) {
 	 */
 	const handlers = {
 		/**
-		 * Select Pickup Point handler
-		 * @param pickUpPoint
-		 * @returns {(function(*): void)|*}
+		 * Select Pickup Point handler for one rate
+		 * @param {string} rateId The rate the modal serves
+		 * @param {jQuery} picker The picker of that rate
+		 * @returns {function} A factory the modal calls per point
 		 */
-		selectPickUpPointHandler: function (pickUpPoint) {
-			return function (e) {
-				e.preventDefault();
-				modalEl.close();
+		selectHandlerFor: function (rateId, picker) {
+			return function (pickUpPoint) {
+				return function (e) {
+					e.preventDefault();
+					modalEl.close();
 
-				if (selectedPickUpPoint.id === pickUpPoint.id) {
-					return;
-				}
-
-				const el = $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
-				el.block(blockArgs);
-
-				// Ajax select pick up point
-				$.post(
-					_fraktguiden_checkout.ajaxurl,
-					{
-						action: 'bfg_select_pick_up_point',
-						id: pickUpPoint.id,
+					const previous = utility.selectedForRate(rateId);
+					if (previous && previous.id === pickUpPoint.id) {
+						return;
 					}
-				).fail(
-					function (data) {
-						console.error(data);
+
+					const el = $('.woocommerce-shipping-totals, .wp-block-woocommerce-checkout-shipping-methods-block');
+					el.block(blockArgs);
+
+					// Ajax select pick up point
+					$.post(
+						_fraktguiden_checkout.ajaxurl,
+						{
+							action: 'bfg_select_pick_up_point',
+							id: pickUpPoint.id,
+							rate_id: rateId,
+						}
+					).fail(
+						function (data) {
+							console.error(data);
+							el.unblock();
+						}
+					).done(function () {
 						el.unblock();
-					}
-				).done(function () {
-					el.unblock();
-					utility.renderSelectedPickUpPoint(pickUpPoint);
-				});
-				selectedPickUpPoint = pickUpPoint;
+						utility.renderSelectedPickUpPoint(pickUpPoint, picker);
+					});
+					selectedPickUpPoints[utility.typeForRate(rateId)] = pickUpPoint;
+				};
 			};
 		},
 
@@ -293,19 +332,14 @@ jQuery(function ($) {
 		fetchPickUpPointsDone: function (response) {
 			getRequest = undefined;
 			// Update values from response
-			window._fraktguiden_data.selected_pick_up_point = response.selected_pick_up_point;
-			selectedPickUpPoint = response.selected_pick_up_point;
+			window._fraktguiden_data.selected_pick_up_points = response.selected_pick_up_points;
+			selectedPickUpPoints = response.selected_pick_up_points || {};
 			window._fraktguiden_data.pick_up_points = response.pick_up_points;
 			pickUpPoints = response.pick_up_points;
 			window._fraktguiden_data.shipping_key = response.shipping_key;
 			loadedShippingKey = response.shipping_key;
 
-			if (selectedPickUpPoint) {
-				utility.renderSelectedPickUpPoint(selectedPickUpPoint);
-			}
-			if (pickUpPoints) {
-				modalEl.setPickUpPoints(pickUpPoints, handlers.selectPickUpPointHandler);
-			}
+			utility.renderAllPickers();
 			pickerEl.unblock();
 		}
 	};
@@ -317,13 +351,19 @@ jQuery(function ($) {
 	const modalEl = document.createElement('pick-up-points-modal');
 	document.body.appendChild(modalEl);
 
-	// Bind modal clicks and key-presses
-	if (_fraktguiden_data.pick_up_points) {
+	/**
+	 * Fill the modal with the points of one rate, then open it
+	 * @param {string} rateId
+	 * @param {jQuery} picker
+	 */
+	const openPicker = function (rateId, picker) {
+		const type = utility.typeForRate(rateId);
 		modalEl.setPickUpPoints(
-			_fraktguiden_data.pick_up_points,
-			handlers.selectPickUpPointHandler
+			utility.pointsForType(type),
+			handlers.selectHandlerFor(rateId, picker)
 		);
-	}
+		modalEl.open(selectedPickUpPoints[type]);
+	};
 
 	/**
 	 * Block checkout
@@ -348,9 +388,12 @@ jQuery(function ($) {
 			if (!pickerEl.length) {
 				// Create a new element if the picker is not found
 				pickerEl = $('.bring-fraktguiden-pick-up-point-picker').first().clone();
-				pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
-				control.append(pickerEl);
+				const picker = pickerEl;
+				picker.find('.bfg-pup__change').on('click', () => openPicker(rate.rate_id, picker));
+				control.append(picker);
 			}
+			// The picker carries its rate, so any reader knows which type it shows.
+			pickerEl.data('rate-id', rate.rate_id);
 			return pickerEl;
 		}
 
@@ -359,9 +402,9 @@ jQuery(function ($) {
 			if (!utility.usesPickUpPoint(shippingRate.rate_id)) {
 				continue;
 			}
-			utility.renderSelectedPickUpPoint(_fraktguiden_data.selected_pick_up_point);
-
-			getPicker(shippingRate).show();
+			const picker = getPicker(shippingRate);
+			utility.renderSelectedPickUpPoint(utility.selectedForRate(shippingRate.rate_id), picker);
+			picker.show();
 		}
 
 		let timeout = undefined;
@@ -444,7 +487,9 @@ jQuery(function ($) {
 						// Doesn't support pick up points
 						continue;
 					}
-					getPicker(rate).show();
+					const picker = getPicker(rate);
+					utility.renderSelectedPickUpPoint(utility.selectedForRate(rate.rate_id), picker);
+					picker.show();
 					shouldHide = false;
 
 					if (rate.rate_id === currentRateId) {
@@ -511,15 +556,19 @@ jQuery(function ($) {
 			if (!pickerEl.length) {
 				return;
 			}
-			pickerEl.find('.bfg-pup__change').on('click', () => modalEl.open());
+			const picker = pickerEl;
+			picker.data('rate-id', current);
+			// WooCommerce redraws the picker on every update, so drop the old
+			// handler before binding one for the rate on screen.
+			picker.find('.bfg-pup__change').off('click').on('click', () => openPicker(current, picker));
 
 			let changed = current !== previous;
 			if (changed) {
 				previous = current;
 			}
-			pickerEl.show();
+			picker.show();
 			requireUpdate = true;
-			utility.renderSelectedPickUpPoint(selectedPickUpPoint)
+			utility.renderSelectedPickUpPoint(utility.selectedForRate(current), picker)
 			loadedShippingKey = ''; // A small hack to force update the pick up points
 			utility.refreshPickUpPoints();
 		};

@@ -208,7 +208,10 @@ class PickUpPointAjax
 	 */
 	public static function bfg_select_pick_up_point(): void {
 		$id = filter_input(INPUT_POST, 'id');
-		WC()->session->set('bring_fraktguiden_pick_up_point', $id);
+		// The rate names the type. The browser never names the session key.
+		$rate_id = (string) filter_input(INPUT_POST, 'rate_id');
+		$type = PickupPointType::for_rate($rate_id);
+		WC()->session->set(PickupPointType::session_key($type), $id);
 		wp_send_json(['message' => 'success']);
 	}
 
@@ -230,12 +233,13 @@ class PickUpPointAjax
 
 		$pick_up_points = PickUpPointData::rawCollection($result);
 
+		$selected = PickUpPoint::selected_per_type($pick_up_points, PickupPointType::for_rates());
+
 		wp_send_json(
 			[
 				'pick_up_points' => $pick_up_points,
 				'shipping_key' => $country . $postcode,
-				'selected_pick_up_point' => (new GetSelectedPickUpPointAction())($pick_up_points),
-
+				'selected_pick_up_points' => $selected,
 			]
 		);
 	}

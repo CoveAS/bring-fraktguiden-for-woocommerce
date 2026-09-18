@@ -44,6 +44,12 @@
  * without tracking carries false. A service without the key needs no RFID
  * printer.
  *
+ * A service with 'pickuppoint' => true may carry 'pickuppoint_type' => 'locker'
+ * or 'pickuppoint_type' => 'manned'. The value is the pickup point type the
+ * Bring API returns for that service. A locker service claims every locker
+ * point, so a pickup point service without the key then offers manned points
+ * only. See doc/pickup-point-types.md.
+ *
  * @package Bring_Fraktguiden
  */
 
@@ -65,6 +71,21 @@ return [
 				'cross_border' => false,
 				'pickuppoint' => true,
 				'oldcode'     => 'SERVICEPAKKE',
+				'return_label' => true,
+			],
+			'5801' => [
+				'ProductCode' => '5801',
+				'from'          => [ 'NO' ],
+				'domestic_from' => [ 'NO' ],
+				'recipient'   => 'private',
+				'weight'      => [ 0, 10 ],
+				'productName' => 'Pakkeboks',
+				'description' => 'Pakken kan spores og hentes i en pakkeboks som er åpen hele døgnet.',
+				'helptext'    => 'Sendingen leveres til en pakkeboks. Mottaker velger pakkeboks i kassen og varsles når sendingen er ankommet via SMS, e-post eller Posten-appen. Pakkeboksen er åpen hele døgnet. Maks vekt er 10 kg, og maks mål er 60 x 50 x 44 cm. Transporttid er normalt 1-2 virkedager, avhengig av strekning. Sendingen kan spores ved hjelp av sporingsnummeret.',
+				'deprecated'  => false,
+				'cross_border' => false,
+				'pickuppoint' => true,
+				'pickuppoint_type' => 'locker',
 				'return_label' => true,
 			],
 			'5600' => [
