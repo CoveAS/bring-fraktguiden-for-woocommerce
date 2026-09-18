@@ -7,6 +7,7 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use BringFraktguiden\Admin\PriceCustomerNumberRefusal;
 use BringFraktguiden\Settings\Settings as BringSettings;
 use BringFraktguiden\Settings\SettingsMigration;
 use WC_Shipping_Zones;
@@ -226,6 +227,29 @@ class Fraktguiden_Helper {
 		return (bool) self::get_option( 'mybring_api_uid' ) && (bool) self::get_option( 'mybring_api_key' );
 	}
 
+	/** True while a rate query must ask for list prices. */
+	private static $ignore_price_customer_number = false;
+
+	/**
+	 * Run a callback with the customer number left out of every rate query.
+	 *
+	 * Some Bring accounts answer with an error when a rate query carries their
+	 * customer number. The shop finds out by asking again without it.
+	 *
+	 * @param callable $run What to run.
+	 *
+	 * @return mixed Whatever the callback returns.
+	 */
+	public static function without_price_customer_number( callable $run ) {
+		self::$ignore_price_customer_number = true;
+
+		try {
+			return $run();
+		} finally {
+			self::$ignore_price_customer_number = false;
+		}
+	}
+
 	/**
 	 * The customer number a rate query may carry, or null.
 	 *
@@ -236,6 +260,10 @@ class Fraktguiden_Helper {
 	 * @return string|null
 	 */
 	public static function price_customer_number() {
+		if ( self::$ignore_price_customer_number ) {
+			return null;
+		}
+
 		if ( 'yes' !== self::get_option( 'use_customer_number_to_get_prices', 'yes' ) ) {
 			return null;
 		}
@@ -244,7 +272,15 @@ class Fraktguiden_Helper {
 			return null;
 		}
 
-		return self::get_option( 'mybring_customer_number' ) ?: null;
+		$customer_number = (string) self::get_option( 'mybring_customer_number' );
+
+		// Bring refused this number, so the shop asks for list prices until the
+		// owner saves the settings again.
+		if ( PriceCustomerNumberRefusal::blocks( $customer_number ) ) {
+			return null;
+		}
+
+		return $customer_number ?: null;
 	}
 
 	public static function get_services_data() {

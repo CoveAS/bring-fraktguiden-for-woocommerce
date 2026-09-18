@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T09:57:32+00:00\n"
+"POT-Creation-Date: 2026-09-18T12:58:25+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -62,13 +62,13 @@ msgstr "Mybring Booking"
 #: build/templates/admin/booking/bulk-modal.php:72
 #: build/templates/admin/pages/home.php:169
 #: build/templates/admin/pages/pro.php:173
-#: build/templates/admin/parts/shipping-test-result.php:64
+#: build/templates/admin/parts/shipping-test-result.php:68
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
 #: src/templates/admin/pages/home.bfg.php:151
 #: src/templates/admin/pages/pro.bfg.php:173
-#: src/templates/admin/parts/shipping-test-result.bfg.php:64
+#: src/templates/admin/parts/shipping-test-result.bfg.php:68
 #: templates/service-field.php:47
 msgid "Close"
 msgstr "Lukk"
@@ -411,10 +411,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: build/templates/admin/pages/fallback-options.php:75
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
-#: build/templates/admin/pages/settings.php:51
-#: build/templates/admin/pages/settings.php:147
-#: build/templates/admin/pages/settings.php:175
-#: build/templates/admin/pages/settings.php:186
+#: build/templates/admin/pages/settings.php:52
+#: build/templates/admin/pages/settings.php:156
+#: build/templates/admin/pages/settings.php:184
+#: build/templates/admin/pages/settings.php:195
 #: src/templates/admin/pages/booking.bfg.php:103
 #: src/templates/admin/pages/booking.bfg.php:130
 #: src/templates/admin/pages/booking.bfg.php:154
@@ -424,10 +424,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: src/templates/admin/pages/fallback-options.bfg.php:70
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
-#: src/templates/admin/pages/settings.bfg.php:51
-#: src/templates/admin/pages/settings.bfg.php:147
-#: src/templates/admin/pages/settings.bfg.php:175
-#: src/templates/admin/pages/settings.bfg.php:186
+#: src/templates/admin/pages/settings.bfg.php:52
+#: src/templates/admin/pages/settings.bfg.php:151
+#: src/templates/admin/pages/settings.bfg.php:179
+#: src/templates/admin/pages/settings.bfg.php:190
 #: templates/admin/components/form-section-box.php:23
 msgid "Save Changes"
 msgstr "Lagre endringer"
@@ -527,7 +527,7 @@ msgid "Please enter a valid phone number."
 msgstr "Skriv inn et gyldig telefonnummer."
 
 #: build/templates/admin/pages/fallback-options.php:17
-#: build/templates/admin/pages/settings.php:17
+#: build/templates/admin/pages/settings.php:18
 #: src/templates/admin/pages/fallback-options.bfg.php:17
 msgid "Back to Pro"
 msgstr "Tilbake til Pro"
@@ -2151,26 +2151,26 @@ msgstr ""
 msgid "Enable selected services"
 msgstr "Aktiver valgte tjenester"
 
-#: build/templates/admin/pages/settings.php:19
-#: build/templates/admin/pages/settings.php:22
+#: build/templates/admin/pages/settings.php:20
+#: build/templates/admin/pages/settings.php:23
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: build/templates/admin/pages/settings.php:35
+#: build/templates/admin/pages/settings.php:36
 msgid "Display Options"
 msgstr "Visningsvalg"
 
-#: build/templates/admin/pages/settings.php:36
+#: build/templates/admin/pages/settings.php:37
 msgid "Customize how shipping options appear to customers"
 msgstr "Tilpass hvordan fraktalternativene vises for kundene"
 
-#: build/templates/admin/pages/settings.php:57
+#: build/templates/admin/pages/settings.php:58
 msgid "Pricing Options"
 msgstr "Prisvalg"
 
-#: build/templates/admin/pages/settings.php:58
+#: build/templates/admin/pages/settings.php:59
 msgid ""
 "Settings that affect the shipping rates, price estimation and service "
 "availability"
@@ -2178,12 +2178,12 @@ msgstr ""
 "Innstillinger som påvirker fraktprisene, prisberegningen og hvilke tjenester "
 "som er tilgjengelige"
 
-#: build/templates/admin/pages/settings.php:62
+#: build/templates/admin/pages/settings.php:63
 msgid "Shipping location"
 msgstr "Sted du sender fra"
 
-#: build/templates/admin/pages/settings.php:75
-#: src/templates/admin/pages/settings.bfg.php:75
+#: build/templates/admin/pages/settings.php:76
+#: src/templates/admin/pages/settings.bfg.php:76
 msgid ""
 "Required if you are sending from a different address than the {{a}}store "
 "address{{/a}}. Eg. you're shipping from a warehouse."
@@ -2191,15 +2191,15 @@ msgstr ""
 "Påkrevd hvis du sender fra en annen adresse enn {{a}}butikkadressen{{/a}}. "
 "For eksempel hvis du sender fra et lager."
 
-#: build/templates/admin/pages/settings.php:85
+#: build/templates/admin/pages/settings.php:86
 msgid "Mybring prices"
 msgstr "Mybring-priser"
 
-#: build/templates/admin/pages/settings.php:113
+#: build/templates/admin/pages/settings.php:122
 msgid "Minimum package dimensions"
 msgstr "Minste pakkemål"
 
-#: build/templates/admin/pages/settings.php:144
+#: build/templates/admin/pages/settings.php:153
 msgid ""
 "Some Bring services charge extra for very small packages. Orders smaller "
 "than these dimensions are automatically rounded up to avoid those fees."
@@ -2207,19 +2207,19 @@ msgstr ""
 "Noen Bring-tjenester tar ekstra betalt for svært små pakker. Ordre som er "
 "mindre enn disse målene rundes automatisk opp for å unngå de gebyrene."
 
-#: build/templates/admin/pages/settings.php:153
+#: build/templates/admin/pages/settings.php:162
 msgid "Lead Time"
 msgstr "Ledetid"
 
-#: build/templates/admin/pages/settings.php:154
+#: build/templates/admin/pages/settings.php:163
 msgid "Configure lead time and cutoff settings"
 msgstr "Still inn ledetid og frist for bestilling"
 
-#: build/templates/admin/pages/settings.php:163
+#: build/templates/admin/pages/settings.php:172
 msgid "days"
 msgstr "dager"
 
-#: build/templates/admin/pages/settings.php:181
+#: build/templates/admin/pages/settings.php:190
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
@@ -2372,24 +2372,24 @@ msgstr "Varene går gjennom et annet land, så Bring trenger transittdata."
 msgid "Bring gave no price for this parcel."
 msgstr "Bring ga ingen pris for denne pakken."
 
-#: build/templates/admin/parts/shipping-test-result.php:51
+#: build/templates/admin/parts/shipping-test-result.php:55
 msgid "Show the API call"
 msgstr "Vis API-kallet"
 
-#: build/templates/admin/parts/shipping-test-result.php:57
+#: build/templates/admin/parts/shipping-test-result.php:61
 msgid "Shipping Guide API call"
 msgstr "API-kall til Fraktguiden"
 
-#: build/templates/admin/parts/shipping-test-result.php:67
+#: build/templates/admin/parts/shipping-test-result.php:71
 msgid "Request"
 msgstr "Forespørsel"
 
-#: build/templates/admin/parts/shipping-test-result.php:68
+#: build/templates/admin/parts/shipping-test-result.php:72
 msgid "Response"
 msgstr "Svar"
 
-#: build/templates/admin/parts/shipping-test-result.php:75
-#: src/templates/admin/parts/shipping-test-result.bfg.php:77
+#: build/templates/admin/parts/shipping-test-result.php:79
+#: src/templates/admin/parts/shipping-test-result.bfg.php:81
 msgid "Bring sent no body."
 msgstr "Bring sendte ikke noe innhold."
 
@@ -2469,6 +2469,16 @@ msgstr ""
 msgid "Ask Bring for the price of a sample parcel"
 msgstr "Spør Bring om prisen på en eksempelpakke"
 
+#. translators: %s: the Mybring customer number.
+#: classes/BringFraktguiden/Admin/PriceCustomerNumberRefusal.php:55
+#, php-format
+msgid ""
+"Bring gives no price when the shop asks with customer number %s, so the shop "
+"asks for list prices instead. Ask your Bring contact for more information."
+msgstr ""
+"Bring gir ingen pris når butikken spør med kundenummer %s, så butikken spør "
+"om listepriser i stedet. Spør Bring-kontakten din om mer informasjon."
+
 #: classes/BringFraktguiden/Admin/ProductShippingTest.php:29
 msgid "Test Bring shipping"
 msgstr "Test Bring-frakt"
@@ -2515,27 +2525,27 @@ msgstr "Komponentgalleri"
 msgid "Home"
 msgstr "Hjem"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:252
+#: classes/BringFraktguiden/Admin/SettingsPage.php:253
 msgid "Never"
 msgstr "Aldri"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:280
+#: classes/BringFraktguiden/Admin/SettingsPage.php:281
 msgid "Click to configure each feature"
 msgstr "Klikk for å sette opp hver funksjon"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:282
+#: classes/BringFraktguiden/Admin/SettingsPage.php:283
 msgid "All features active during your trial"
 msgstr "Alle funksjoner er aktive i prøveperioden din"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:284
+#: classes/BringFraktguiden/Admin/SettingsPage.php:285
 msgid "Purchase a license to regain access"
 msgstr "Kjøp en lisens for å få tilgang igjen"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:286
+#: classes/BringFraktguiden/Admin/SettingsPage.php:287
 msgid "Available with Pro"
 msgstr "Tilgjengelig med Pro"
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:359
+#: classes/BringFraktguiden/Admin/SettingsPage.php:360
 msgid "The guide set the shipping services this shop offers."
 msgstr "Veiviseren satte frakttjenestene denne butikken tilbyr."
 
@@ -2547,30 +2557,30 @@ msgstr "Du har ikke tillatelse til å teste Bring-frakt."
 msgid "This product could not be read."
 msgstr "Dette produktet kunne ikke leses."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:66
+#: classes/BringFraktguiden/Admin/ShippingTest.php:69
 msgid "Sample parcel"
 msgstr "Eksempelpakke"
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:80
+#: classes/BringFraktguiden/Admin/ShippingTest.php:83
 msgid "This product has no weight and no dimensions. Bring needs one of them."
 msgstr "Dette produktet har verken vekt eller mål. Bring trenger ett av dem."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:95
+#: classes/BringFraktguiden/Admin/ShippingTest.php:98
 msgid "No shipping zone covers this address."
 msgstr "Ingen fraktsone dekker denne adressen."
 
 #. translators: %s: the name of the shipping zone.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:105
+#: classes/BringFraktguiden/Admin/ShippingTest.php:108
 #, php-format
 msgid "Bring is not active in the shipping zone %s."
 msgstr "Bring er ikke aktiv i fraktsonen %s."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:140
+#: classes/BringFraktguiden/Admin/ShippingTest.php:143
 msgid "Bring did not accept the API credentials of this shop."
 msgstr "Bring godtok ikke API-innloggingen til denne butikken."
 
 #. translators: %d: the HTTP status code Bring answered with.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:146
+#: classes/BringFraktguiden/Admin/ShippingTest.php:149
 #, php-format
 msgid "Bring answered with an error (%d)."
 msgstr "Bring svarte med en feil (%d)."
@@ -2858,7 +2868,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: classes/common/class-fraktguiden-admin-notices.php:56
-#: classes/common/class-fraktguiden-helper.php:483
+#: classes/common/class-fraktguiden-helper.php:519
 msgid "Click here to buy a license"
 msgstr "Klikk her for å kjøpe lisens"
 
@@ -2953,7 +2963,7 @@ msgstr "Mybring Booking krever API-kundenummer."
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
 
-#: classes/common/class-fraktguiden-helper.php:263
+#: classes/common/class-fraktguiden-helper.php:299
 #, php-format
 msgid ""
 "You're using an outdated customer number, %s - The latest services from "
@@ -2962,16 +2972,16 @@ msgstr ""
 "Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
 "at du oppdaterer til nytt kundenummer."
 
-#: classes/common/class-fraktguiden-helper.php:469
+#: classes/common/class-fraktguiden-helper.php:505
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 "Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
 
-#: classes/common/class-fraktguiden-helper.php:482
+#: classes/common/class-fraktguiden-helper.php:518
 msgid "Running in test-mode."
 msgstr "Kjører i testmodus."
 
-#: classes/common/class-fraktguiden-helper.php:489
+#: classes/common/class-fraktguiden-helper.php:525
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
@@ -2980,14 +2990,14 @@ msgstr ""
 "Bring Fraktguiden PRO er nå tilgjengelig, <a href=\"%s\">Klikk her for å "
 "oppgradere til PRO.</a>"
 
-#: classes/common/class-fraktguiden-helper.php:499
+#: classes/common/class-fraktguiden-helper.php:535
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 "Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
 "frakt."
 
-#: classes/common/class-fraktguiden-helper.php:500
+#: classes/common/class-fraktguiden-helper.php:536
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
@@ -2996,14 +3006,14 @@ msgstr ""
 "Pickup points: La kunden velge hentested for utlevering av pakken basert på "
 "deres lokasjon."
 
-#: classes/common/class-fraktguiden-helper.php:501
+#: classes/common/class-fraktguiden-helper.php:537
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 "Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
 "Mybring"
 
-#: classes/common/class-fraktguiden-helper.php:502
+#: classes/common/class-fraktguiden-helper.php:538
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"
@@ -3996,6 +4006,15 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid ""
+#~ "Bring gave no price while the shop asked with its customer number, so the "
+#~ "setting \"Use customer number\" is now off. This customer number does not "
+#~ "support it. Ask your Bring contact for more information."
+#~ msgstr ""
+#~ "Bring ga ingen pris da butikken spurte med kundenummeret sitt, så "
+#~ "innstillingen \"Bruk kundenummer\" er nå av. Dette kundenummeret støtter "
+#~ "den ikke. Spør Bring-kontakten din om mer informasjon."
 
 #~ msgid "Keep the Mybring account you have, or get a new one"
 #~ msgstr "Behold Mybring-kontoen du har, eller få en ny"

@@ -202,6 +202,7 @@ class SettingsPage
 
 		$fields = Fields::instance();
 		$currency = get_option('woocommerce_currency');
+		$bfg_customer_number_refused = PriceCustomerNumberRefusal::notice();
 		require_once dirname(__DIR__, 3) . '/build/templates/admin/pages/settings.php';
 	}
 
@@ -606,7 +607,7 @@ class SettingsPage
 			$value['pro_activated_on'] = time();
 		}
 
-		return $value;
+		return PriceCustomerNumberCheck::apply($value, $rendered);
 	}
 
 	/**

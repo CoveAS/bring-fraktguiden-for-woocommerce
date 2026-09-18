@@ -22,6 +22,10 @@ $bfg_passed = $result->rates && ! $result->problem;
 		</p>
 	<?php endif; ?>
 
+	<?php if ($result->note): ?>
+		<p class="bfg-shipping-test__note"><?php echo esc_html($result->note); ?></p>
+	<?php endif; ?>
+
 	<?php if ($result->messages): ?>
 		<ul class="bfg-shipping-test__messages">
 			<?php foreach ($result->messages as $bfg_message): ?>

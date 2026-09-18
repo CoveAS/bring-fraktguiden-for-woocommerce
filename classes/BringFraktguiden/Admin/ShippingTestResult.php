@@ -17,13 +17,21 @@ final class ShippingTestResult
 	 * @param string[]           $messages What Bring said about an empty answer.
 	 * @param string             $problem  Why the test could not run at all.
 	 * @param array{request: string, answer: string, status: int|string}|null $call The Bring call.
+	 * @param string             $note     What the plugin changed to get these rates.
 	 */
 	private function __construct(
 		public readonly array $rates = [],
 		public readonly array $messages = [],
 		public readonly string $problem = '',
 		public readonly ?array $call = null,
+		public readonly string $note = '',
 	) {
+	}
+
+	/** The same result, with a line for the shop owner to read. */
+	public function with_note(string $note): self
+	{
+		return new self($this->rates, $this->messages, $this->problem, $this->call, $note);
 	}
 
 	/**

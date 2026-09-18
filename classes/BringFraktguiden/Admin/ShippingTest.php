@@ -48,11 +48,14 @@ final class ShippingTest
 				__('This product could not be read.', 'bring-fraktguiden-for-woocommerce')
 			);
 		} else {
-			$result = self::run(
-				$product,
-				strtoupper(sanitize_text_field(wp_unslash($_POST['country'] ?? ''))),
-				sanitize_text_field(wp_unslash($_POST['postcode'] ?? ''))
-			);
+			$country = strtoupper(sanitize_text_field(wp_unslash($_POST['country'] ?? '')));
+			$postcode = sanitize_text_field(wp_unslash($_POST['postcode'] ?? ''));
+
+			// The setup page tests the shop, and answers for the whole shop.
+			// The product screen tests one product, and answers for that one.
+			$result = $product_id
+				? PriceCustomerNumberCheck::probe($product, $country, $postcode)
+				: PriceCustomerNumberCheck::test_shop($country, $postcode);
 		}
 
 		self::render($result);

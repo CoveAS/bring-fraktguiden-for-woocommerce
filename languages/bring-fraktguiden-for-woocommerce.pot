@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T09:57:32+00:00\n"
+"POT-Creation-Date: 2026-09-18T12:58:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -55,13 +55,13 @@ msgstr ""
 #: build/templates/admin/booking/bulk-modal.php:72
 #: build/templates/admin/pages/home.php:169
 #: build/templates/admin/pages/pro.php:173
-#: build/templates/admin/parts/shipping-test-result.php:64
+#: build/templates/admin/parts/shipping-test-result.php:68
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
 #: src/templates/admin/pages/home.bfg.php:151
 #: src/templates/admin/pages/pro.bfg.php:173
-#: src/templates/admin/parts/shipping-test-result.bfg.php:64
+#: src/templates/admin/parts/shipping-test-result.bfg.php:68
 #: templates/service-field.php:47
 msgid "Close"
 msgstr ""
@@ -398,10 +398,10 @@ msgstr ""
 #: build/templates/admin/pages/fallback-options.php:75
 #: build/templates/admin/pages/fallback-options.php:108
 #: build/templates/admin/pages/fallback-options.php:186
-#: build/templates/admin/pages/settings.php:51
-#: build/templates/admin/pages/settings.php:147
-#: build/templates/admin/pages/settings.php:175
-#: build/templates/admin/pages/settings.php:186
+#: build/templates/admin/pages/settings.php:52
+#: build/templates/admin/pages/settings.php:156
+#: build/templates/admin/pages/settings.php:184
+#: build/templates/admin/pages/settings.php:195
 #: src/templates/admin/pages/booking.bfg.php:103
 #: src/templates/admin/pages/booking.bfg.php:130
 #: src/templates/admin/pages/booking.bfg.php:154
@@ -411,10 +411,10 @@ msgstr ""
 #: src/templates/admin/pages/fallback-options.bfg.php:70
 #: src/templates/admin/pages/fallback-options.bfg.php:103
 #: src/templates/admin/pages/fallback-options.bfg.php:179
-#: src/templates/admin/pages/settings.bfg.php:51
-#: src/templates/admin/pages/settings.bfg.php:147
-#: src/templates/admin/pages/settings.bfg.php:175
-#: src/templates/admin/pages/settings.bfg.php:186
+#: src/templates/admin/pages/settings.bfg.php:52
+#: src/templates/admin/pages/settings.bfg.php:151
+#: src/templates/admin/pages/settings.bfg.php:179
+#: src/templates/admin/pages/settings.bfg.php:190
 #: templates/admin/components/form-section-box.php:23
 msgid "Save Changes"
 msgstr ""
@@ -502,7 +502,7 @@ msgid "Please enter a valid phone number."
 msgstr ""
 
 #: build/templates/admin/pages/fallback-options.php:17
-#: build/templates/admin/pages/settings.php:17
+#: build/templates/admin/pages/settings.php:18
 #: src/templates/admin/pages/fallback-options.bfg.php:17
 msgid "Back to Pro"
 msgstr ""
@@ -1997,63 +1997,63 @@ msgstr ""
 msgid "Enable selected services"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:19
-#: build/templates/admin/pages/settings.php:22
+#: build/templates/admin/pages/settings.php:20
+#: build/templates/admin/pages/settings.php:23
 #: classes/BringFraktguiden/Admin/SettingsPage.php:148
 #: classes/BringFraktguiden/Admin/SettingsPage.php:149
 msgid "Settings"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:35
+#: build/templates/admin/pages/settings.php:36
 msgid "Display Options"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:36
+#: build/templates/admin/pages/settings.php:37
 msgid "Customize how shipping options appear to customers"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:57
+#: build/templates/admin/pages/settings.php:58
 msgid "Pricing Options"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:58
+#: build/templates/admin/pages/settings.php:59
 msgid "Settings that affect the shipping rates, price estimation and service availability"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:62
+#: build/templates/admin/pages/settings.php:63
 msgid "Shipping location"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:75
-#: src/templates/admin/pages/settings.bfg.php:75
+#: build/templates/admin/pages/settings.php:76
+#: src/templates/admin/pages/settings.bfg.php:76
 msgid "Required if you are sending from a different address than the {{a}}store address{{/a}}. Eg. you're shipping from a warehouse."
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:85
+#: build/templates/admin/pages/settings.php:86
 msgid "Mybring prices"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:113
+#: build/templates/admin/pages/settings.php:122
 msgid "Minimum package dimensions"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:144
+#: build/templates/admin/pages/settings.php:153
 msgid "Some Bring services charge extra for very small packages. Orders smaller than these dimensions are automatically rounded up to avoid those fees."
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:153
+#: build/templates/admin/pages/settings.php:162
 msgid "Lead Time"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:154
+#: build/templates/admin/pages/settings.php:163
 msgid "Configure lead time and cutoff settings"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:163
+#: build/templates/admin/pages/settings.php:172
 msgid "days"
 msgstr ""
 
-#: build/templates/admin/pages/settings.php:181
+#: build/templates/admin/pages/settings.php:190
 msgid "Advanced Settings"
 msgstr ""
 
@@ -2181,24 +2181,24 @@ msgstr ""
 msgid "Bring gave no price for this parcel."
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:51
+#: build/templates/admin/parts/shipping-test-result.php:55
 msgid "Show the API call"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:57
+#: build/templates/admin/parts/shipping-test-result.php:61
 msgid "Shipping Guide API call"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:67
+#: build/templates/admin/parts/shipping-test-result.php:71
 msgid "Request"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:68
+#: build/templates/admin/parts/shipping-test-result.php:72
 msgid "Response"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:75
-#: src/templates/admin/parts/shipping-test-result.bfg.php:77
+#: build/templates/admin/parts/shipping-test-result.php:79
+#: src/templates/admin/parts/shipping-test-result.bfg.php:81
 msgid "Bring sent no body."
 msgstr ""
 
@@ -2274,6 +2274,12 @@ msgstr ""
 msgid "Ask Bring for the price of a sample parcel"
 msgstr ""
 
+#. translators: %s: the Mybring customer number.
+#: classes/BringFraktguiden/Admin/PriceCustomerNumberRefusal.php:55
+#, php-format
+msgid "Bring gives no price when the shop asks with customer number %s, so the shop asks for list prices instead. Ask your Bring contact for more information."
+msgstr ""
+
 #: classes/BringFraktguiden/Admin/ProductShippingTest.php:29
 msgid "Test Bring shipping"
 msgstr ""
@@ -2320,27 +2326,27 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:252
+#: classes/BringFraktguiden/Admin/SettingsPage.php:253
 msgid "Never"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:280
+#: classes/BringFraktguiden/Admin/SettingsPage.php:281
 msgid "Click to configure each feature"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:282
+#: classes/BringFraktguiden/Admin/SettingsPage.php:283
 msgid "All features active during your trial"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:284
+#: classes/BringFraktguiden/Admin/SettingsPage.php:285
 msgid "Purchase a license to regain access"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:286
+#: classes/BringFraktguiden/Admin/SettingsPage.php:287
 msgid "Available with Pro"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/SettingsPage.php:359
+#: classes/BringFraktguiden/Admin/SettingsPage.php:360
 msgid "The guide set the shipping services this shop offers."
 msgstr ""
 
@@ -2352,30 +2358,30 @@ msgstr ""
 msgid "This product could not be read."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:66
+#: classes/BringFraktguiden/Admin/ShippingTest.php:69
 msgid "Sample parcel"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:80
+#: classes/BringFraktguiden/Admin/ShippingTest.php:83
 msgid "This product has no weight and no dimensions. Bring needs one of them."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:95
+#: classes/BringFraktguiden/Admin/ShippingTest.php:98
 msgid "No shipping zone covers this address."
 msgstr ""
 
 #. translators: %s: the name of the shipping zone.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:105
+#: classes/BringFraktguiden/Admin/ShippingTest.php:108
 #, php-format
 msgid "Bring is not active in the shipping zone %s."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:140
+#: classes/BringFraktguiden/Admin/ShippingTest.php:143
 msgid "Bring did not accept the API credentials of this shop."
 msgstr ""
 
 #. translators: %d: the HTTP status code Bring answered with.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:146
+#: classes/BringFraktguiden/Admin/ShippingTest.php:149
 #, php-format
 msgid "Bring answered with an error (%d)."
 msgstr ""
@@ -2634,7 +2640,7 @@ msgid "Yes"
 msgstr ""
 
 #: classes/common/class-fraktguiden-admin-notices.php:56
-#: classes/common/class-fraktguiden-helper.php:483
+#: classes/common/class-fraktguiden-helper.php:519
 msgid "Click here to buy a license"
 msgstr ""
 
@@ -2709,40 +2715,40 @@ msgstr ""
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:263
+#: classes/common/class-fraktguiden-helper.php:299
 #, php-format
 msgid "You're using an outdated customer number, %s - The latest services from Bring require you to update your customer number."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:469
+#: classes/common/class-fraktguiden-helper.php:505
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:482
+#: classes/common/class-fraktguiden-helper.php:518
 msgid "Running in test-mode."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:489
+#: classes/common/class-fraktguiden-helper.php:525
 #, php-format
 msgid "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade to PRO.</a>"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:499
+#: classes/common/class-fraktguiden-helper.php:535
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:500
+#: classes/common/class-fraktguiden-helper.php:536
 msgctxt "Succinct explaination of feature"
 msgid "Local pickup points: Let customers select their own pickup point based on their location."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:501
+#: classes/common/class-fraktguiden-helper.php:537
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:502
+#: classes/common/class-fraktguiden-helper.php:538
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr ""
