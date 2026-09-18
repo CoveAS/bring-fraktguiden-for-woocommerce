@@ -260,8 +260,8 @@ body:not(.using-mouse) .bfg textarea:focus {
     position: relative;
 }
 
-/* The radio group brings its own layout, on the markup. */
-.bfg-input div:not(.bfg-radio-group, .bfg-radio-group *) {
+/* The radio group and the checkbox card bring their own layout. */
+.bfg-input div:not(.bfg-radio-group, .bfg-radio-group *, .bfg-checkbox-content) {
     position: relative;
     display: flex;
     align-items: center;
