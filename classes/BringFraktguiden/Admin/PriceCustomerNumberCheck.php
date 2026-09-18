@@ -3,58 +3,77 @@
 namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use WC_Product;
 
 /**
- * Proves on a settings save that Bring accepts the customer number.
+ * Proves that Bring accepts the customer number of the shop.
  *
  * Bring answers some accounts with an error when a rate query carries their
- * customer number. The shop only finds out by asking, so the check runs one
- * rate query from the postal code the shop ships from.
+ * customer number. The shop only finds out by asking, so the check sends the
+ * same query twice, once with the number and once without it.
  */
 final class PriceCustomerNumberCheck
 {
-	/** The setting the check turns off. */
+	/** The setting the check needs turned on. */
 	public const SETTING = 'use_customer_number_to_get_prices';
 
 	/** The saved fields that make the answer of Bring change. */
 	private const FIELDS = [self::SETTING, 'mybring_customer_number'];
 
-	/** The customer number Bring refused, so the settings page can say which. */
-	private const OPTION = 'bring_fraktguiden_price_customer_number_refused';
-
-	/** Remember the number Bring refused. An empty string forgets the last one. */
-	public static function refused(string $customer_number): void
-	{
-		update_option(self::OPTION, $customer_number);
-	}
-
 	/**
-	 * What the settings page says under the checkbox, or an empty string.
+	 * Ask Bring for rates, and ask again for list prices when the first fails.
 	 *
-	 * A number the shop no longer uses says nothing about the one it uses now.
+	 * The result carries a note when only the list price query found rates.
+	 * The check stores nothing here, so a test of one product may call it.
 	 */
-	public static function message(): string
+	public static function probe(WC_Product $product, string $country, string $postcode): ShippingTestResult
 	{
-		$number = (string) get_option(self::OPTION, '');
+		$result = ShippingTest::run($product, $country, $postcode);
+		$number = Fraktguiden_Helper::price_customer_number();
 
-		if (! $number || $number !== (string) Fraktguiden_Helper::get_option('mybring_customer_number')) {
-			return '';
+		// A test that never reached Bring says nothing about the number.
+		if ($result->passed() || ! $result->call || ! $number) {
+			return $result;
 		}
 
-		return sprintf(
-			/* translators: %s: the Mybring customer number. */
-			__('Bring gives no price when the shop asks with customer number %s, so this setting stays off. Ask your Bring contact for more information.', 'bring-fraktguiden-for-woocommerce'),
-			$number
+		$without = Fraktguiden_Helper::without_price_customer_number(
+			fn () => ShippingTest::run($product, $country, $postcode)
 		);
+
+		if (! $without->passed()) {
+			return $result;
+		}
+
+		return $without->with_note(PriceCustomerNumberRefusal::message($number));
 	}
 
 	/**
-	 * The settings to save, with the setting off when Bring refuses the number.
+	 * Test the shop, and store what Bring says about the customer number.
+	 *
+	 * A test of the whole shop answers for the whole shop. A test of one
+	 * product must not, so that test calls probe() instead.
+	 */
+	public static function test_shop(string $country, string $postcode): ShippingTestResult
+	{
+		// An old refusal gives the number no chance, so drop it before asking.
+		PriceCustomerNumberRefusal::forget();
+
+		$result = self::probe(ShippingTest::sample_product(), $country, $postcode);
+
+		if ($result->note) {
+			PriceCustomerNumberRefusal::remember((string) Fraktguiden_Helper::get_option('mybring_customer_number'));
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Run the check while the settings save runs.
 	 *
 	 * @param array<string, mixed> $value    The settings the form is about to save.
 	 * @param string[]             $rendered The fields the page showed.
 	 *
-	 * @return array<string, mixed>
+	 * @return array<string, mixed> The settings, unchanged.
 	 */
 	public static function apply(array $value, array $rendered): array
 	{
@@ -65,6 +84,9 @@ final class PriceCustomerNumberCheck
 
 		// The helper read the settings before the save, so it still holds the old ones.
 		Fraktguiden_Helper::$options = $value;
+
+		// The guard below reads the refusal, so drop the old one first.
+		PriceCustomerNumberRefusal::forget();
 
 		if (! Fraktguiden_Helper::price_customer_number()) {
 			return $value;
@@ -79,18 +101,7 @@ final class PriceCustomerNumberCheck
 			return $value;
 		}
 
-		$result = ShippingTest::run(
-			ShippingTest::sample_product(),
-			(string) Fraktguiden_Helper::get_option('from_country'),
-			$postcode
-		);
-
-		self::refused($result->without_customer_number ? (string) Fraktguiden_Helper::get_option('mybring_customer_number') : '');
-
-		if ($result->without_customer_number) {
-			$value[self::SETTING] = 'no';
-			Fraktguiden_Helper::$options = $value;
-		}
+		self::test_shop((string) Fraktguiden_Helper::get_option('from_country'), $postcode);
 
 		return $value;
 	}

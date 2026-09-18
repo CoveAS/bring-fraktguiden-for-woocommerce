@@ -7,6 +7,7 @@
 
 namespace Bring_Fraktguiden\Common;
 
+use BringFraktguiden\Admin\PriceCustomerNumberRefusal;
 use BringFraktguiden\Settings\Settings as BringSettings;
 use BringFraktguiden\Settings\SettingsMigration;
 use WC_Shipping_Zones;
@@ -271,7 +272,15 @@ class Fraktguiden_Helper {
 			return null;
 		}
 
-		return self::get_option( 'mybring_customer_number' ) ?: null;
+		$customer_number = (string) self::get_option( 'mybring_customer_number' );
+
+		// Bring refused this number, so the shop asks for list prices until the
+		// owner saves the settings again.
+		if ( PriceCustomerNumberRefusal::blocks( $customer_number ) ) {
+			return null;
+		}
+
+		return $customer_number ?: null;
 	}
 
 	public static function get_services_data() {

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T12:47:03+00:00\n"
+"POT-Creation-Date: 2026-09-18T12:58:25+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -2470,14 +2470,14 @@ msgid "Ask Bring for the price of a sample parcel"
 msgstr "Spør Bring om prisen på en eksempelpakke"
 
 #. translators: %s: the Mybring customer number.
-#: classes/BringFraktguiden/Admin/PriceCustomerNumberCheck.php:46
+#: classes/BringFraktguiden/Admin/PriceCustomerNumberRefusal.php:55
 #, php-format
 msgid ""
-"Bring gives no price when the shop asks with customer number %s, so this "
-"setting stays off. Ask your Bring contact for more information."
+"Bring gives no price when the shop asks with customer number %s, so the shop "
+"asks for list prices instead. Ask your Bring contact for more information."
 msgstr ""
-"Bring gir ingen pris når butikken spør med kundenummer %s, så denne "
-"innstillingen står av. Spør Bring-kontakten din om mer informasjon."
+"Bring gir ingen pris når butikken spør med kundenummer %s, så butikken spør "
+"om listepriser i stedet. Spør Bring-kontakten din om mer informasjon."
 
 #: classes/BringFraktguiden/Admin/ProductShippingTest.php:29
 msgid "Test Bring shipping"
@@ -2549,38 +2549,38 @@ msgstr "Tilgjengelig med Pro"
 msgid "The guide set the shipping services this shop offers."
 msgstr "Veiviseren satte frakttjenestene denne butikken tilbyr."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:41
+#: classes/BringFraktguiden/Admin/ShippingTest.php:40
 msgid "You may not test Bring shipping."
 msgstr "Du har ikke tillatelse til å teste Bring-frakt."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:49
+#: classes/BringFraktguiden/Admin/ShippingTest.php:48
 msgid "This product could not be read."
 msgstr "Dette produktet kunne ikke leses."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:75
+#: classes/BringFraktguiden/Admin/ShippingTest.php:69
 msgid "Sample parcel"
 msgstr "Eksempelpakke"
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:94
+#: classes/BringFraktguiden/Admin/ShippingTest.php:83
 msgid "This product has no weight and no dimensions. Bring needs one of them."
 msgstr "Dette produktet har verken vekt eller mål. Bring trenger ett av dem."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:109
+#: classes/BringFraktguiden/Admin/ShippingTest.php:98
 msgid "No shipping zone covers this address."
 msgstr "Ingen fraktsone dekker denne adressen."
 
 #. translators: %s: the name of the shipping zone.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:119
+#: classes/BringFraktguiden/Admin/ShippingTest.php:108
 #, php-format
 msgid "Bring is not active in the shipping zone %s."
 msgstr "Bring er ikke aktiv i fraktsonen %s."
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:176
+#: classes/BringFraktguiden/Admin/ShippingTest.php:143
 msgid "Bring did not accept the API credentials of this shop."
 msgstr "Bring godtok ikke API-innloggingen til denne butikken."
 
 #. translators: %d: the HTTP status code Bring answered with.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:182
+#: classes/BringFraktguiden/Admin/ShippingTest.php:149
 #, php-format
 msgid "Bring answered with an error (%d)."
 msgstr "Bring svarte med en feil (%d)."
@@ -2868,7 +2868,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: classes/common/class-fraktguiden-admin-notices.php:56
-#: classes/common/class-fraktguiden-helper.php:510
+#: classes/common/class-fraktguiden-helper.php:519
 msgid "Click here to buy a license"
 msgstr "Klikk her for å kjøpe lisens"
 
@@ -2963,7 +2963,7 @@ msgstr "Mybring Booking krever API-kundenummer."
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr "Fyll inn ditt API-kundenummer <a href=\"%s\">her</a>."
 
-#: classes/common/class-fraktguiden-helper.php:290
+#: classes/common/class-fraktguiden-helper.php:299
 #, php-format
 msgid ""
 "You're using an outdated customer number, %s - The latest services from "
@@ -2972,16 +2972,16 @@ msgstr ""
 "Du bruker et gammelt kundenummer, %s - De nyeste produktene fra Bring krever "
 "at du oppdaterer til nytt kundenummer."
 
-#: classes/common/class-fraktguiden-helper.php:496
+#: classes/common/class-fraktguiden-helper.php:505
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 "Klikk her for å kjøpe en lisens eller lære mer om Bring Fraktguiden PRO."
 
-#: classes/common/class-fraktguiden-helper.php:509
+#: classes/common/class-fraktguiden-helper.php:518
 msgid "Running in test-mode."
 msgstr "Kjører i testmodus."
 
-#: classes/common/class-fraktguiden-helper.php:516
+#: classes/common/class-fraktguiden-helper.php:525
 #, php-format
 msgid ""
 "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade "
@@ -2990,14 +2990,14 @@ msgstr ""
 "Bring Fraktguiden PRO er nå tilgjengelig, <a href=\"%s\">Klikk her for å "
 "oppgradere til PRO.</a>"
 
-#: classes/common/class-fraktguiden-helper.php:526
+#: classes/common/class-fraktguiden-helper.php:535
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 "Gratis frakt grense: Sett en grenseverdi for når en ordre skal utløse gratis "
 "frakt."
 
-#: classes/common/class-fraktguiden-helper.php:527
+#: classes/common/class-fraktguiden-helper.php:536
 msgctxt "Succinct explaination of feature"
 msgid ""
 "Local pickup points: Let customers select their own pickup point based on "
@@ -3006,14 +3006,14 @@ msgstr ""
 "Pickup points: La kunden velge hentested for utlevering av pakken basert på "
 "deres lokasjon."
 
-#: classes/common/class-fraktguiden-helper.php:528
+#: classes/common/class-fraktguiden-helper.php:537
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 "Mybring Booking: Book en forsendelse hos Bring direkte i kundeordren med "
 "Mybring"
 
-#: classes/common/class-fraktguiden-helper.php:529
+#: classes/common/class-fraktguiden-helper.php:538
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr "Fast frakt: Sett en fast fraktpris på dine forsendelser"

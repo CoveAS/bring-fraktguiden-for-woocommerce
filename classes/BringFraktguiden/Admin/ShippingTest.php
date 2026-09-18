@@ -3,7 +3,6 @@
 namespace BringFraktguiden\Admin;
 
 use BringFraktguiden\Shipping\FallbackCase;
-use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use WC_Product;
 use WC_Shipping_Method_Bring;
 use WC_Shipping_Zone;
@@ -49,19 +48,14 @@ final class ShippingTest
 				__('This product could not be read.', 'bring-fraktguiden-for-woocommerce')
 			);
 		} else {
-			$result = self::run(
-				$product,
-				strtoupper(sanitize_text_field(wp_unslash($_POST['country'] ?? ''))),
-				sanitize_text_field(wp_unslash($_POST['postcode'] ?? ''))
-			);
-		}
+			$country = strtoupper(sanitize_text_field(wp_unslash($_POST['country'] ?? '')));
+			$postcode = sanitize_text_field(wp_unslash($_POST['postcode'] ?? ''));
 
-		// The setup page tests the shop. The product screen tests one product,
-		// and must never change a setting of the whole shop.
-		if ($result->without_customer_number && ! $product_id) {
-			Fraktguiden_Helper::update_option(PriceCustomerNumberCheck::SETTING, 'no');
-			PriceCustomerNumberCheck::refused((string) Fraktguiden_Helper::get_option('mybring_customer_number'));
-			$result = $result->with_note(PriceCustomerNumberCheck::message());
+			// The setup page tests the shop, and answers for the whole shop.
+			// The product screen tests one product, and answers for that one.
+			$result = $product_id
+				? PriceCustomerNumberCheck::probe($product, $country, $postcode)
+				: PriceCustomerNumberCheck::test_shop($country, $postcode);
 		}
 
 		self::render($result);
@@ -81,12 +75,7 @@ final class ShippingTest
 		return $product;
 	}
 
-	/**
-	 * Ask Bring what the checkout would show for this product and address.
-	 *
-	 * A result that carries a note passed only once the query dropped the
-	 * customer number. The caller turns the setting off.
-	 */
+	/** Ask Bring what the checkout would show for this product and address. */
 	public static function run(WC_Product $product, string $country, string $postcode): ShippingTestResult
 	{
 		if (! $product->get_weight() && ! $product->has_dimensions()) {
@@ -122,28 +111,6 @@ final class ShippingTest
 			);
 		}
 
-		$result = self::query($bring, $package);
-
-		if ($result->passed() || ! Fraktguiden_Helper::price_customer_number()) {
-			return $result;
-		}
-
-		// The customer number may be what Bring refuses. Ask for list prices
-		// once, and keep the first answer when that fails too.
-		$without = Fraktguiden_Helper::without_price_customer_number(
-			fn () => self::query($bring, $package)
-		);
-
-		if (! $without->passed()) {
-			return $result;
-		}
-
-		return ShippingTestResult::rates($without->rates, $without->call, true);
-	}
-
-	/** One rate query, and what it found. */
-	private static function query(WC_Shipping_Method_Bring $bring, array $package): ShippingTestResult
-	{
 		$rates = $bring->get_rates_for_package($package);
 		$case = $bring->get_fallback_case();
 

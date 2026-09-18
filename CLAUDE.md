@@ -75,6 +75,20 @@ a sound.
 Do: give a class one job. A class that renders, saves, prints markup and loads
 a script is four classes.
 
+## Fraktguiden_Helper is legacy
+
+`classes/common/class-fraktguiden-helper.php` holds the old helper. Read from
+it. Do not add new code to it.
+
+The class is a bag of static methods over the shared settings array. A new
+method there gains no owner, no type and no test seam. Static state in it
+reaches every caller without a sign.
+
+Put new code in a class under `classes/BringFraktguiden/` instead. Give that
+class one job, and pass what it needs as arguments.
+
+Change the helper only to fix a fault in what it already does.
+
 ## Failed idea: several shipping lines per order
 
 The booking code loops over every Bring shipping line of an order and sends one
