@@ -362,26 +362,21 @@
 
 /* Postbox chrome ---------------------------------------------------------- */
 
-/* The box always renders first, so the move buttons would promise something
-   they cannot do. The drag starts from .hndle in the postbox script of
-   WordPress, so a handle that takes no pointer stops the drag as well. */
-#bring-fraktguiden-booking-box .handle-order-higher,
-#bring-fraktguiden-booking-box .handle-order-lower,
-#bring-fraktguiden-booking-box .handlediv {
+/* The box sits first and never moves, so the header holds nothing a shop
+   worker can use. The box prints its own title instead. */
+#bring-fraktguiden-booking-box .postbox-header {
     display: none;
 }
 
-/* A shop worker who closed the box before keeps that state in user meta, and
-   WordPress still writes the closed class. The box stays open anyway. */
+/* WordPress still writes the closed class from a state saved earlier. An ID
+   selector beats that rule, so the form stays open. */
 #bring-fraktguiden-booking-box .inside {
     display: block;
 }
 
-#bring-fraktguiden-booking-box .postbox-header {
-    cursor: default;
-}
-
-#bring-fraktguiden-booking-box .hndle {
-    cursor: default;
-    pointer-events: none;
+.bfg-booking-box__title {
+    margin: 0 0 16px;
+    font-size: var(--bfg-font-base);
+    font-weight: 600;
+    color: var(--bfg-text-main);
 }
