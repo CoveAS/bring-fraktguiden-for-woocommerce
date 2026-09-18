@@ -28,12 +28,6 @@
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
 
-		<?php if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local'): ?>
-			<bfg-notice type="warning">
-				<?php esc_html_e('This site is running in a local environment and production settings has been deactivated.', 'bring-fraktguiden-for-woocommerce'); ?>
-			</bfg-notice>
-		<?php endif; ?>
-
 		<form method="post" action="options.php">
 			<?php settings_fields('bring_fraktguiden_fallback'); ?>
 

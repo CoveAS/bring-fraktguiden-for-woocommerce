@@ -21,12 +21,6 @@
 			<div class="wp-header-end"><!-- Notices appear after this div --></div>
 		</div>
 
-		<?php if (defined('BRING_ENVIRONMENT') && BRING_ENVIRONMENT === 'local'): ?>
-			<bfg-notice type="warning">
-				<t>This site is running in a local environment and production setting has been deactivated!</t>
-			</bfg-notice>
-		<?php endif; ?>
-
 		<div class="bfg-page__content">
 			<h2>
 				<t>Shipping services guide</t>
