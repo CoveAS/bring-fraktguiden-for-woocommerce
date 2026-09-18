@@ -45,7 +45,7 @@
 				<div class="bfg-license-card__key-value"><t>license-key</t></div>
 			</if>
 			<else>
-				<div class="bfg-license-card__key-value bfg-license-card__key-value--placeholder">●●●● – ●●●● – ●●●●</div>
+				<div class="bfg-license-card__key-value bfg-license-card__key-value--placeholder">####-####-####-####</div>
 			</else>
 		</div>
 	</div>
