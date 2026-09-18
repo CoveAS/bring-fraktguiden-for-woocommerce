@@ -1,3 +1,12 @@
+/* The modal lives in a shadow root. A shadow root stops selectors, but font-size,
+   font-weight and line-height still pass in from the page. Pin them in px, because
+   a theme can change the root font-size too. */
+:host {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
 .bring-fraktguiden-pick-up-points-modal {
 	display: none;
 	position: fixed;
@@ -23,7 +32,7 @@
 }
 
 .bfg-pupm__instruction {
-	font-size: 1rem;
+	font-size: 16px;
 	padding: 16px;
 }
 
@@ -87,9 +96,17 @@
 	color: #163a5f;
 }
 
+/* :host loses to any page rule that targets the tag, so pin the list text here too. */
 .bfg-pupm__name {
+	font-size: 16px;
 	font-weight: 600;
 }
+
+.bfg-pupm__address {
+	font-size: 16px;
+	font-weight: 400;
+}
+
 .bfg-pupm__item:hover .bfg-pupm__name {
 	text-decoration: underline;
 }
