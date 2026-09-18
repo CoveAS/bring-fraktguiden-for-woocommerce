@@ -407,7 +407,7 @@
     border: 1px solid #E5E7EB;
     border-radius: 6px;
     padding: 2px 10px;
-    font-family: monospace;
+    font-family: var(--bfg-font-mono);
     font-size: 12px;
     color: #374151;
     margin: 6px 0 4px;
@@ -511,7 +511,7 @@
 
 .bfg-license-card__key-value {
     display: inline-block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--bfg-font-mono);
     font-size: 13px;
     color: #374151;
     background: #F3F4F6;
@@ -842,4 +842,11 @@ a.bfg-pro-feature-card .bfg-pro-feature-card__desc {
 
 .bfg-move-error {
     color: #991B1B;
+}
+
+/* The license key field. A key reads in groups of four, so every digit needs
+   the same width. */
+#license_key {
+    font-family: var(--bfg-font-mono);
+    letter-spacing: 0.05em;
 }

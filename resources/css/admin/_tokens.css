@@ -25,6 +25,7 @@
     --bfg-text-level-4: 16px;
     --bfg-text-level-5: 16px;
     --bfg-text-level-6: 14px;
+    --bfg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
 
     /* Button System */
     --bfg-btn-radius: 8px;
