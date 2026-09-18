@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T09:57:32+00:00\n"
+"POT-Creation-Date: 2026-09-18T12:33:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -55,13 +55,13 @@ msgstr ""
 #: build/templates/admin/booking/bulk-modal.php:72
 #: build/templates/admin/pages/home.php:169
 #: build/templates/admin/pages/pro.php:173
-#: build/templates/admin/parts/shipping-test-result.php:64
+#: build/templates/admin/parts/shipping-test-result.php:68
 #: classes/BringFraktguiden/Customs/HsCodePicker.php:59
 #: src/templates/admin/booking/bulk-modal.bfg.php:17
 #: src/templates/admin/booking/bulk-modal.bfg.php:63
 #: src/templates/admin/pages/home.bfg.php:151
 #: src/templates/admin/pages/pro.bfg.php:173
-#: src/templates/admin/parts/shipping-test-result.bfg.php:64
+#: src/templates/admin/parts/shipping-test-result.bfg.php:68
 #: templates/service-field.php:47
 msgid "Close"
 msgstr ""
@@ -2181,24 +2181,24 @@ msgstr ""
 msgid "Bring gave no price for this parcel."
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:51
+#: build/templates/admin/parts/shipping-test-result.php:55
 msgid "Show the API call"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:57
+#: build/templates/admin/parts/shipping-test-result.php:61
 msgid "Shipping Guide API call"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:67
+#: build/templates/admin/parts/shipping-test-result.php:71
 msgid "Request"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:68
+#: build/templates/admin/parts/shipping-test-result.php:72
 msgid "Response"
 msgstr ""
 
-#: build/templates/admin/parts/shipping-test-result.php:75
-#: src/templates/admin/parts/shipping-test-result.bfg.php:77
+#: build/templates/admin/parts/shipping-test-result.php:79
+#: src/templates/admin/parts/shipping-test-result.bfg.php:81
 msgid "Bring sent no body."
 msgstr ""
 
@@ -2344,38 +2344,42 @@ msgstr ""
 msgid "The guide set the shipping services this shop offers."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:40
+#: classes/BringFraktguiden/Admin/ShippingTest.php:41
 msgid "You may not test Bring shipping."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:48
+#: classes/BringFraktguiden/Admin/ShippingTest.php:49
 msgid "This product could not be read."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:66
+#: classes/BringFraktguiden/Admin/ShippingTest.php:67
 msgid "Sample parcel"
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:80
+#: classes/BringFraktguiden/Admin/ShippingTest.php:81
 msgid "This product has no weight and no dimensions. Bring needs one of them."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:95
+#: classes/BringFraktguiden/Admin/ShippingTest.php:96
 msgid "No shipping zone covers this address."
 msgstr ""
 
 #. translators: %s: the name of the shipping zone.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:105
+#: classes/BringFraktguiden/Admin/ShippingTest.php:106
 #, php-format
 msgid "Bring is not active in the shipping zone %s."
 msgstr ""
 
-#: classes/BringFraktguiden/Admin/ShippingTest.php:140
+#: classes/BringFraktguiden/Admin/ShippingTest.php:159
+msgid "Bring gave no price while the shop asked with its customer number, so the setting \"Use customer number\" is now off. This customer number does not support it. Ask your Bring contact for more information."
+msgstr ""
+
+#: classes/BringFraktguiden/Admin/ShippingTest.php:171
 msgid "Bring did not accept the API credentials of this shop."
 msgstr ""
 
 #. translators: %d: the HTTP status code Bring answered with.
-#: classes/BringFraktguiden/Admin/ShippingTest.php:146
+#: classes/BringFraktguiden/Admin/ShippingTest.php:177
 #, php-format
 msgid "Bring answered with an error (%d)."
 msgstr ""
@@ -2570,20 +2574,20 @@ msgstr ""
 msgid "Fill in a post code."
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:152
-#: classes/class-bring-fraktguiden.php:153
+#: classes/class-bring-fraktguiden.php:154
+#: classes/class-bring-fraktguiden.php:155
 msgid "Bring settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "View the Bring Fraktguiden setup steps"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:213
 msgid "Get started"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:232
+#: classes/class-bring-fraktguiden.php:234
 msgid "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message."
 msgstr ""
 
@@ -2633,39 +2637,39 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:56
-#: classes/common/class-fraktguiden-helper.php:483
+#: classes/common/class-fraktguiden-admin-notices.php:58
+#: classes/common/class-fraktguiden-helper.php:510
 msgid "Click here to buy a license"
 msgstr ""
 
 #. translators: %s: Number of days
-#: classes/common/class-fraktguiden-admin-notices.php:59
+#: classes/common/class-fraktguiden-admin-notices.php:61
 #, php-format
 msgid "Bring Fraktguiden PRO license has not yet been activated. You have %s remaining before PRO features are disabled."
 msgstr ""
 
 #. translators: %s: Number of days
-#: classes/common/class-fraktguiden-admin-notices.php:59
-#: classes/common/class-fraktguiden-admin-notices.php:68
+#: classes/common/class-fraktguiden-admin-notices.php:61
+#: classes/common/class-fraktguiden-admin-notices.php:70
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:63
+#: classes/common/class-fraktguiden-admin-notices.php:65
 msgid "Bring Fraktguiden PRO features have been deactivated."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:64
+#: classes/common/class-fraktguiden-admin-notices.php:66
 msgid "Please ensure you have a valid license to continue using PRO."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:68
+#: classes/common/class-fraktguiden-admin-notices.php:70
 msgid "☠️ Ahoy, matey! we understand that there ye don't want to, or fer other reasons be unable pay fer our plugin. Please kindly consider gettin' a license at a later time if ye enjoy usin' it."
 msgstr ""
 
 #. translators: %s: number of setup steps left
-#: classes/common/class-fraktguiden-admin-notices.php:133
+#: classes/common/class-fraktguiden-admin-notices.php:141
 #, php-format
 msgid "Bring Fraktguiden has %s setup step left."
 msgid_plural "Bring Fraktguiden has %s setup steps left."
@@ -2673,76 +2677,76 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: get started page URL
-#: classes/common/class-fraktguiden-admin-notices.php:144
+#: classes/common/class-fraktguiden-admin-notices.php:152
 #, php-format
 msgid "<a href=\"%s\">Finish the setup</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:203
+#: classes/common/class-fraktguiden-admin-notices.php:211
 msgid "Bring Fraktguiden shipping method is missing."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:204
+#: classes/common/class-fraktguiden-admin-notices.php:212
 #, php-format
 msgid "You have to add Bring Fraktguiden as a shipping method in your <a href=\"%s\">shipping zones</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:228
+#: classes/common/class-fraktguiden-admin-notices.php:236
 msgid "No shipping services enabled."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:230
+#: classes/common/class-fraktguiden-admin-notices.php:238
 #, php-format
 msgid "You have to enable at least one shipping service in <a href=\"%s\">Shipping Options</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:259
+#: classes/common/class-fraktguiden-admin-notices.php:267
 msgid "Bring Fraktguiden API Customer Number is missing."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:260
+#: classes/common/class-fraktguiden-admin-notices.php:268
 msgid "Mybring Booking requires an API customer number."
 msgstr ""
 
-#: classes/common/class-fraktguiden-admin-notices.php:263
+#: classes/common/class-fraktguiden-admin-notices.php:271
 #, php-format
 msgid "Enter your API customer number <a href=\"%s\">here</a>."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:263
+#: classes/common/class-fraktguiden-helper.php:290
 #, php-format
 msgid "You're using an outdated customer number, %s - The latest services from Bring require you to update your customer number."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:469
+#: classes/common/class-fraktguiden-helper.php:496
 msgid "Click here to buy a license or learn more about Bring Fraktguiden Pro."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:482
+#: classes/common/class-fraktguiden-helper.php:509
 msgid "Running in test-mode."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:489
+#: classes/common/class-fraktguiden-helper.php:516
 #, php-format
 msgid "Bring Fraktguiden PRO is now available, <a href=\"%s\">Click here to upgrade to PRO.</a>"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:499
+#: classes/common/class-fraktguiden-helper.php:526
 msgctxt "Succinct explaination of feature"
 msgid "Free shipping limits: Set cart thresholds to enable free shipping."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:500
+#: classes/common/class-fraktguiden-helper.php:527
 msgctxt "Succinct explaination of feature"
 msgid "Local pickup points: Let customers select their own pickup point based on their location."
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:501
+#: classes/common/class-fraktguiden-helper.php:528
 msgctxt "Succinct explaination of feature"
 msgid "Mybring Booking: Book orders directly from the order page with Mybring"
 msgstr ""
 
-#: classes/common/class-fraktguiden-helper.php:502
+#: classes/common/class-fraktguiden-helper.php:529
 msgctxt "Succinct explaination of feature"
 msgid "Fixed shipping prices: Define your set price for each freight option"
 msgstr ""

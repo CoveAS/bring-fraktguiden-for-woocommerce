@@ -20,6 +20,7 @@ use Bring_Fraktguiden\ResourceManagement\Styles;
 use BringFraktguiden\Admin\AddShippingMethod;
 use BringFraktguiden\Admin\ConnectAccount;
 use BringFraktguiden\Admin\FallbackPrice;
+use BringFraktguiden\Admin\PriceCustomerNumberCheck;
 use BringFraktguiden\Admin\ProductShippingTest;
 use BringFraktguiden\Admin\RefreshLicense;
 use BringFraktguiden\Admin\ShippingTest;
@@ -100,6 +101,7 @@ class Bring_Fraktguiden {
 
 		ProductShippingTest::init();
 		ShippingTest::init();
+		PriceCustomerNumberCheck::init();
 		if ( 'yes' !== Fraktguiden_Helper::get_option( 'disable_stylesheet' ) ) {
 			Styles::setup();
 		}

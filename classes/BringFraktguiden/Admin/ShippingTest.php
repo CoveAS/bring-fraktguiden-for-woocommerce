@@ -3,6 +3,7 @@
 namespace BringFraktguiden\Admin;
 
 use BringFraktguiden\Shipping\FallbackCase;
+use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use WC_Product;
 use WC_Shipping_Method_Bring;
 use WC_Shipping_Zone;
@@ -108,6 +109,30 @@ final class ShippingTest
 			);
 		}
 
+		$result = self::query($bring, $package);
+
+		if ($result->passed() || ! Fraktguiden_Helper::price_customer_number()) {
+			return $result;
+		}
+
+		// The customer number may be what Bring refuses. Ask for list prices
+		// once, and keep the first answer when that fails too.
+		$without = Fraktguiden_Helper::without_price_customer_number(
+			fn () => self::query($bring, $package)
+		);
+
+		if (! $without->passed()) {
+			return $result;
+		}
+
+		Fraktguiden_Helper::update_option('use_customer_number_to_get_prices', 'no');
+
+		return ShippingTestResult::rates($without->rates, $without->call, self::unsupported_message());
+	}
+
+	/** One rate query, and what it found. */
+	private static function query(WC_Shipping_Method_Bring $bring, array $package): ShippingTestResult
+	{
 		$rates = $bring->get_rates_for_package($package);
 		$case = $bring->get_fallback_case();
 
@@ -126,6 +151,12 @@ final class ShippingTest
 		}
 
 		return ShippingTestResult::rates($rates, $call);
+	}
+
+	/** What the shop owner reads once the setting goes off. */
+	public static function unsupported_message(): string
+	{
+		return __('Bring gave no price while the shop asked with its customer number, so the setting "Use customer number" is now off. This customer number does not support it. Ask your Bring contact for more information.', 'bring-fraktguiden-for-woocommerce');
 	}
 
 	/**

@@ -8,6 +8,8 @@
 namespace Bring_Fraktguiden\Common;
 
 use BringFraktguiden\Admin\GetStartedSteps;
+use BringFraktguiden\Admin\PriceCustomerNumberCheck;
+use BringFraktguiden\Admin\ShippingTest;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -89,6 +91,12 @@ class Fraktguiden_Admin_Notices {
 		self::add_setup_steps_notice();
 
 		self::remove_notice( 'bring_api_uid_or_key_missing' );
+
+		if ( get_option( PriceCustomerNumberCheck::OPTION ) ) {
+			self::add_notice( 'bring_price_customer_number_unsupported', ShippingTest::unsupported_message(), 'error' );
+		} else {
+			self::remove_notice( 'bring_price_customer_number_unsupported' );
+		}
 
 		if ( ! Fraktguiden_Helper::get_option( 'mybring_customer_number' ) && Fraktguiden_Helper::booking_enabled() ) {
 			self::add_missing_api_customer_number_notice();

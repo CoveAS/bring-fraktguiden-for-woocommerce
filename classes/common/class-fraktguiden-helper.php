@@ -226,6 +226,29 @@ class Fraktguiden_Helper {
 		return (bool) self::get_option( 'mybring_api_uid' ) && (bool) self::get_option( 'mybring_api_key' );
 	}
 
+	/** True while a rate query must ask for list prices. */
+	private static $ignore_price_customer_number = false;
+
+	/**
+	 * Run a callback with the customer number left out of every rate query.
+	 *
+	 * Some Bring accounts answer with an error when a rate query carries their
+	 * customer number. The shop finds out by asking again without it.
+	 *
+	 * @param callable $run What to run.
+	 *
+	 * @return mixed Whatever the callback returns.
+	 */
+	public static function without_price_customer_number( callable $run ) {
+		self::$ignore_price_customer_number = true;
+
+		try {
+			return $run();
+		} finally {
+			self::$ignore_price_customer_number = false;
+		}
+	}
+
 	/**
 	 * The customer number a rate query may carry, or null.
 	 *
@@ -236,6 +259,10 @@ class Fraktguiden_Helper {
 	 * @return string|null
 	 */
 	public static function price_customer_number() {
+		if ( self::$ignore_price_customer_number ) {
+			return null;
+		}
+
 		if ( 'yes' !== self::get_option( 'use_customer_number_to_get_prices', 'yes' ) ) {
 			return null;
 		}

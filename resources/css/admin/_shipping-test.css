@@ -58,6 +58,13 @@
 	color: #B32D2E;
 }
 
+/* A warning above the rates, so a pass can still carry bad news. */
+.bfg-shipping-test__note {
+	margin: 0 0 8px;
+	font-weight: 600;
+	color: #8A5700;
+}
+
 .bfg-shipping-test__messages {
 	margin: 6px 0 0;
 	padding-left: 18px;
