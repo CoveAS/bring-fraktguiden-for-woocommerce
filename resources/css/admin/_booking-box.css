@@ -50,19 +50,34 @@
     font-weight: 600;
 }
 
+/* A card groups the fields that belong together. The postbox draws the outer
+   frame, so a card stays light: a border, a radius and nothing else. */
+.bfg-booking-card {
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-card);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.bfg-booking-card__title {
+    margin: 0 0 12px;
+    font-size: var(--bfg-font-xs);
+    line-height: var(--bfg-leading-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--bfg-tracking-meta);
+    color: var(--bfg-text-secondary);
+}
+
 .bfg-booking-form__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
 }
 
-.bfg-booking-form__title {
-    margin: 24px 0 8px;
-    font-size: var(--bfg-font-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--bfg-tracking-meta);
-    color: var(--bfg-text-secondary);
+/* The grid sets the gap, so a field adds none of its own. */
+.bfg-booking-form__grid .bfg-field {
+    margin-bottom: 0;
 }
 
 .bfg-booking-form__datetime {
@@ -87,27 +102,56 @@
 
 .bfg-booking-form__services {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 8px;
 }
 
+/* A tile makes the whole row of an extra service clickable. */
 .bfg-booking-form__service {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--bfg-border);
+    border-radius: var(--bfg-radius-input);
+    font-size: var(--bfg-font-sm);
+    line-height: var(--bfg-leading-sm);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.bfg-booking-form__service:hover {
+    border-color: var(--bfg-primary);
+}
+
+.bfg-booking-form__service:has(input:checked) {
+    border-color: var(--bfg-primary);
+    background: var(--bfg-primary-light);
 }
 
 .bfg-booking-form__note {
-    margin: 16px 0 0;
+    margin: 0 0 16px;
+    padding: 12px 16px;
+    border-radius: var(--bfg-radius-input);
+    background: #F3F4F6;
     color: var(--bfg-text-secondary);
+    font-size: var(--bfg-font-sm);
+    line-height: var(--bfg-leading-sm);
 }
 
+/* The two addresses sit under the fields that change them, behind a summary. */
 .bfg-booking-form__parties {
-    margin: 16px 0;
+    margin: 16px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--bfg-border);
 }
 
 .bfg-booking-form__parties summary {
     cursor: pointer;
+    font-size: var(--bfg-font-sm);
+    line-height: var(--bfg-leading-sm);
+    font-weight: 600;
     color: var(--bfg-text-secondary);
 }
 
