@@ -55,10 +55,11 @@ final class PriceCustomerNumberCheck
 			return;
 		}
 
-		$postcode = (string) Fraktguiden_Helper::get_option('from_zip');
-
-		// Without the store postal code the query fails for its own reason,
+		// A blank from_zip falls back to the store address, the same way a rate
+		// query falls back. Without either the query fails for its own reason,
 		// which says nothing about the customer number.
+		$postcode = (string) (Fraktguiden_Helper::get_option('from_zip') ?: get_option('woocommerce_store_postcode', ''));
+
 		if (! $postcode) {
 			return;
 		}
