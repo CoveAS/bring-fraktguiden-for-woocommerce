@@ -55,6 +55,34 @@
 	}
 
 	/**
+	 * Return the weight that applies to a net weight field.
+	 *
+	 * A variation with no weight of its own inherits the parent weight. The
+	 * parent field sits on the same screen, so it holds the live value.
+	 */
+	function grossWeight(field) {
+		var gross = grossField(field);
+		var parent = document.getElementById('_weight');
+
+		if (gross && gross.value) {
+			return gross.value;
+		}
+
+		if (parent) {
+			return parent.value;
+		}
+
+		return gross ? gross.placeholder : '';
+	}
+
+	/**
+	 * Write the weight that applies into the placeholder of a net weight field.
+	 */
+	function setPlaceholder(field) {
+		field.placeholder = grossWeight(field);
+	}
+
+	/**
 	 * Return the warning a field earns, or an empty string.
 	 */
 	function problem(field) {
@@ -63,10 +91,7 @@
 			return '';
 		}
 
-		var gross = grossField(field);
-		// An empty variation weight inherits the parent weight, and the
-		// placeholder holds it.
-		var limit = gross ? number(gross.value || gross.placeholder) : NaN;
+		var limit = number(grossWeight(field));
 		var value = number(field.value);
 
 		return value > 0 && limit > 0 && value > limit ? config.tooHeavy : '';
@@ -173,6 +198,7 @@
 		}
 
 		if (field.id === '_weight' || named(field, 'variable_weight')) {
+			fields().forEach(setPlaceholder);
 			checkAll();
 		}
 	});
