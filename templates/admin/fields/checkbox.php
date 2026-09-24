@@ -33,7 +33,7 @@ $desc_content = trim(implode(' ', [$description, $desc_tip]));
 		<?php if ($css): ?>
 			style="<?php echo esc_attr($css); ?>"
 		<?php endif; ?>
-		<?php if ($value): ?>
+		<?php if ($value && !isset($custom_attributes['checked'])): ?>
 			checked="checked"
 		<?php endif; ?>
 	>

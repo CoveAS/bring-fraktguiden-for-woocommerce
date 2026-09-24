@@ -353,7 +353,8 @@ return [
 					? __('Your license is a test license, so every booking stays in test mode.', 'bring-fraktguiden-for-woocommerce')
 					: __('When enabled, bookings will not be invoiced or fulfilled by Bring', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 'yes',
-				'custom_attributes' => $testing_license ? ['disabled' => 'disabled'] : [],
+				// The box shows the mode that bookings use. The stored value stays untouched.
+				'custom_attributes' => $testing_license ? ['disabled' => 'disabled', 'checked' => 'checked'] : [],
 			],
 			'booking_use_custom_address' => [
 				'type' => 'checkbox',

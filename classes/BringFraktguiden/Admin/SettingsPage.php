@@ -576,6 +576,12 @@ class SettingsPage
 		// The page tells the handler which fields it rendered. A page may show a field of any section.
 		$rendered = array_map('sanitize_key', (array) ($_POST['bfg_rendered'] ?? []));
 
+		// A testing license locks the booking test checkbox, and a locked checkbox posts nothing.
+		// The stored value stays as it is.
+		if (Fraktguiden_License::is_testing()) {
+			$rendered = array_values(array_diff($rendered, ['booking_test_mode_enabled']));
+		}
+
 		$settings = Settings::instance();
 		foreach ($rendered as $key) {
 			$setting = $settings->get($key);
@@ -588,11 +594,6 @@ class SettingsPage
 				$entered = $entered ? 'yes' : 'no';
 			}
 			$value[$key] = $entered;
-		}
-
-		// A testing license books in test mode only, so the form may not turn it off.
-		if (Fraktguiden_License::is_testing()) {
-			$value['booking_test_mode_enabled'] = 'yes';
 		}
 
 		if (isset($value['license_key'])) {

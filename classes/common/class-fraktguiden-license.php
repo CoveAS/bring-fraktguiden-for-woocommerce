@@ -346,11 +346,6 @@ class Fraktguiden_License
 
 		update_option(self::STATE_OPTION, $state, false);
 
-		// A testing license may never book a real shipment.
-		if ($state['testing_key']) {
-			Fraktguiden_Helper::update_option('booking_test_mode_enabled', 'yes');
-		}
-
 		// The domain owns the license, so the key of the answer is the right one.
 		// It replaces a key the shop typed wrong, and fills in a missing key.
 		if (!empty($license['key'])) {

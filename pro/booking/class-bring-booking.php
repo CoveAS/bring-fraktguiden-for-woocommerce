@@ -387,6 +387,11 @@ class Bring_Booking {
 			return true;
 		}
 
+		// A testing license may never book a real shipment, whatever the setting says.
+		if ( Fraktguiden_License::is_testing() ) {
+			return true;
+		}
+
 		return 'yes' === Fraktguiden_Helper::get_option( 'booking_test_mode_enabled' );
 	}
 
