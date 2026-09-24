@@ -9,8 +9,11 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  *
  * A shipment that leaves Norway is an export, not transit. Bring requires
  * customs data on the services that carry 'customs' => true in
- * config/services.php. Svalbard counts as Norway, so a shipment between
- * Svalbard and the mainland is no export. See doc/export.md.
+ * config/services.php.
+ *
+ * Svalbard counts as Norway here. Customs treats Svalbard as abroad, but Bring
+ * carries it on domestic products and takes the customs papers outside the
+ * booking. See doc/export.md.
  */
 class ExportRule
 {

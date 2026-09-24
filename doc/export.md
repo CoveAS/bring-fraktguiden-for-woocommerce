@@ -7,9 +7,6 @@ A shipment that leaves Norway is an export, not transit. It needs a customs
 declaration of its own. The NVIT rule does not cover it, and the `NVIT` type
 does not work for it.
 
-Svalbard counts as Norway. WooCommerce names it with the country code `SJ`. A
-shipment between Svalbard and the mainland is no export.
-
 Bring requires customs data in the booking for these services, from Norway to
 any other country:
 
@@ -190,6 +187,27 @@ bulk booking sends no form, so it books `SALE_OF_GOODS`.
 
 The select leaves out `OTHER`, because `OTHER` needs a free text
 `natureOfCargo.detail` and the form holds no text field.
+
+## Svalbard
+
+Customs treats Svalbard and Jan Mayen as abroad. Normal rules for import and
+export apply. WooCommerce names both with the country code `SJ`.
+
+Bring carries goods to Svalbard on its domestic products, not on the
+international ones. The customs papers travel outside the booking:
+
+- Every shipment needs a commercial invoice or a proforma invoice.
+- A shipment on a waybill also needs a CMR waybill.
+- A parcel with a net value above NOK 5000 must be cleared through customs.
+- The sender sends the papers to Bring Tromsø.
+
+The booking therefore carries no export customs data, and the export rule
+counts `SJ` as Norway. The plugin gives the shop no notice about the papers.
+
+Parcels under 35 kg go on by air from Tromsø. Heavier goods go by boat.
+
+See [Bring, Sende pakker og gods til Svalbard](https://www.bring.no/tjenester/pakker-og-gods/svalbard)
+and [Posten, Svalbard og Jan Mayen](https://www.posten.no/sende/i-norge/svalbard).
 
 ## Sources
 

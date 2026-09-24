@@ -21,8 +21,8 @@ class CustomsRoute
 	/**
 	 * The country codes that count as Norway for both rules.
 	 *
-	 * WooCommerce names Svalbard and Jan Mayen SJ. Bring carries goods there as
-	 * a domestic shipment.
+	 * WooCommerce names Svalbard and Jan Mayen SJ. Bring carries goods there on
+	 * domestic products. See doc/export.md.
 	 */
 	public const NORWAY = ['NO', 'SJ'];
 
