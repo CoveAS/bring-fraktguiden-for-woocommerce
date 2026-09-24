@@ -10,7 +10,6 @@ namespace BringFraktguidenPro\Booking\Views;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use BringFraktguiden\Booking\BookableStatus;
 use BringFraktguidenPro\Booking\Bring_Booking;
-use BringFraktguidenPro\Booking\Bring_Booking_Url;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -66,7 +65,7 @@ class Bring_Booking_Common_View {
 
 		$result = [
 			'text' => __( 'Book now', 'bring-fraktguiden-for-woocommerce' ),
-			'href' => new Bring_Booking_Url( $order ),
+			'href' => $order->order->get_edit_order_url(),
 			'action' => 'bring-book-orders',
 			'ids' => [$order->order->get_id()],
 			'icon' => 'dashicons-minus',
