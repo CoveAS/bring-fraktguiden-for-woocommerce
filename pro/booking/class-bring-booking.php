@@ -172,13 +172,7 @@ class Bring_Booking {
 		$form           = BookingDraft::read( $order ) ?? BookingForm::from_order( $order, reset( $shipping_items ) ?: null );
 		$payload        = array_merge( $form->to_array(), $overrides );
 
-		$record = BookingSender::send( $order, BookingForm::from_payload( $payload ) );
-
-		if ( ! $record->failed() ) {
-			BookingDraft::clear( $order );
-		}
-
-		return $record;
+		return BookingSender::send( $order, BookingForm::from_payload( $payload ) );
 	}
 
 	/**

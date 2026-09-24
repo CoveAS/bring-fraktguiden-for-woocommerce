@@ -32,7 +32,8 @@ button and the page never reloads to reach a second step.
 
 What the worker types is saved to `_bring_booking_draft` on the order, so a
 reload keeps the edits. The draft never goes stale on its own. The Reset button
-clears it, and the form fills from the order again.
+clears it, and the form fills from the order again. `BookingSender::send()`
+clears it after a booking that works.
 
 Nothing but the draft is written before a booking. The product and the parcels
 reach the shipping line at the moment of the send.

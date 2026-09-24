@@ -32,7 +32,8 @@ class BookingSender
 	];
 
 	/**
-	 * Book the order and record the attempt.
+	 * Book the order and record the attempt. A booking that works clears the
+	 * saved draft of the box.
 	 *
 	 * @throws Exception When the shop or the order cannot be booked at all.
 	 */
@@ -73,6 +74,7 @@ class BookingSender
 
 		if (!$record->failed()) {
 			self::count_booking();
+			BookingDraft::clear($order);
 		}
 
 		self::note_outcome($order, $record);

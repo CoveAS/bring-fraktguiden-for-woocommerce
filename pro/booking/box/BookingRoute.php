@@ -132,10 +132,6 @@ class BookingRoute
 			return self::answer($order, force_form: true, error: $exception->getMessage());
 		}
 
-		if (!$record->failed()) {
-			BookingDraft::clear($order);
-		}
-
 		return self::answer($order, force_form: $record->failed());
 	}
 
