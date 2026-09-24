@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The three groups of a bulk booking selection.
+ * The groups of a bulk booking selection.
  *
  * The modal shows the groups before the worker sends the request, so nobody
  * has to read the result rows to learn which order was left alone.
@@ -19,6 +19,10 @@ $booking_group_blocks = [
 	'booked' => [
 		'title' => __('These orders already hold a booking', 'bring-fraktguiden-for-woocommerce'),
 		'note'  => __('Bring does not book them again. Their labels still print.', 'bring-fraktguiden-for-woocommerce'),
+	],
+	'cancelled' => [
+		'title' => __('These orders are cancelled', 'bring-fraktguiden-for-woocommerce'),
+		'note'  => __('A cancelled order ships nothing, so Bring books nothing for it.', 'bring-fraktguiden-for-woocommerce'),
 	],
 	'skipped' => [
 		'title' => __('These orders get no booking', 'bring-fraktguiden-for-woocommerce'),

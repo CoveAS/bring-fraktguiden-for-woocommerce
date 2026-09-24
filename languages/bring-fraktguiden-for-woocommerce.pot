@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18T21:21:45+00:00\n"
+"POT-Creation-Date: 2026-09-24T15:37:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -261,7 +261,7 @@ msgstr ""
 msgid "Print the label"
 msgstr ""
 
-#: build/templates/admin/booking/history.php:78
+#: build/templates/admin/booking/history.php:79
 msgid "Book again"
 msgstr ""
 
@@ -2077,17 +2077,27 @@ msgstr ""
 
 #: build/templates/admin/parts/booking-groups.php:24
 #: src/templates/admin/parts/booking-groups.bfg.php:24
+msgid "These orders are cancelled"
+msgstr ""
+
+#: build/templates/admin/parts/booking-groups.php:25
+#: src/templates/admin/parts/booking-groups.bfg.php:25
+msgid "A cancelled order ships nothing, so Bring books nothing for it."
+msgstr ""
+
+#: build/templates/admin/parts/booking-groups.php:28
+#: src/templates/admin/parts/booking-groups.bfg.php:28
 msgid "These orders get no booking"
 msgstr ""
 
-#: build/templates/admin/parts/booking-groups.php:26
-#: src/templates/admin/parts/booking-groups.bfg.php:26
+#: build/templates/admin/parts/booking-groups.php:30
+#: src/templates/admin/parts/booking-groups.bfg.php:30
 msgid "They carry no shipping line at all, so Bring has nothing to book."
 msgstr ""
 
 #. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: build/templates/admin/parts/booking-groups.php:29
-#: src/templates/admin/parts/booking-groups.bfg.php:29
+#: build/templates/admin/parts/booking-groups.php:33
+#: src/templates/admin/parts/booking-groups.bfg.php:33
 #, php-format
 msgid "They carry no Bring shipping service. Turn on %1$sAllow booking without Bring shipping%2$s to book them anyway."
 msgstr ""
@@ -2225,7 +2235,7 @@ msgstr ""
 
 #: classes/BringFraktguiden/Admin/ConnectAccount.php:34
 #: classes/BringFraktguiden/Admin/FallbackPrice.php:144
-#: classes/BringFraktguiden/Admin/RefreshLicense.php:33
+#: classes/BringFraktguiden/Admin/RefreshLicense.php:32
 msgid "You may not change the Bring settings."
 msgstr ""
 
@@ -3462,11 +3472,11 @@ msgstr ""
 msgid "Book now"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:77
+#: pro/booking/views/class-bring-booking-common-view.php:82
 msgid "Print label"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:85
+#: pro/booking/views/class-bring-booking-common-view.php:90
 msgid "Failed"
 msgstr ""
 
@@ -3525,13 +3535,21 @@ msgstr[1] ""
 #. translators: %d: number of orders.
 #: pro/booking/views/class-bring-booking-orders-view.php:300
 #, php-format
+msgid "%d order is cancelled, so it got no booking."
+msgid_plural "%d orders are cancelled, so they got no booking."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:305
+#, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:305
+#: pro/booking/views/class-bring-booking-orders-view.php:310
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."

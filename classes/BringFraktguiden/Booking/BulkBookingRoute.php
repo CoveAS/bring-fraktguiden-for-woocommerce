@@ -68,7 +68,7 @@ class BulkBookingRoute
 	}
 
 	/**
-	 * Render the three groups of the selection.
+	 * Render the groups of the selection.
 	 *
 	 * @param int[] $order_ids
 	 */

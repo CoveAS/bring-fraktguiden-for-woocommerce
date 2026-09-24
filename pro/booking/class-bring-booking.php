@@ -306,8 +306,8 @@ class Bring_Booking {
 	 * Bulk booking requests
 	 *
 	 * The report names one status per order. `ok` means the order booked now,
-	 * `booked` means it already held a booking, and `skipped` means it carries
-	 * no Bring shipping line. The caller prints the labels of the first two.
+	 * `booked` means it already held a booking, `cancelled` means the order is
+	 * cancelled, and `skipped` means it carries no Bring shipping line. The caller prints the labels of the first two.
 	 *
 	 * @param array $post_ids Array of WC_Order IDs.
 	 */

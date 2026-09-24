@@ -77,6 +77,7 @@
     border-left-color: var(--bfg-primary);
 }
 
+.bfg-booking-groups__group--cancelled,
 .bfg-booking-groups__group--skipped {
     border-left-color: var(--bfg-text-muted);
 }

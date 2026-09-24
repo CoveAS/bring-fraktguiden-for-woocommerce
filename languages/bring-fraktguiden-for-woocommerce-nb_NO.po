@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-18T21:21:45+00:00\n"
+"POT-Creation-Date: 2026-09-24T15:37:34+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -264,7 +264,7 @@ msgstr "Skriv ut bare returetiketten"
 msgid "Print the label"
 msgstr "Skriv ut etiketten"
 
-#: build/templates/admin/booking/history.php:78
+#: build/templates/admin/booking/history.php:79
 msgid "Book again"
 msgstr "Book på nytt"
 
@@ -1422,7 +1422,9 @@ msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
 msgid ""
 "Bring only adds a return label to a shipment inside Norway, on these "
 "services: %s. Any other service books without one."
-msgstr "Bring legger bare en returetikett på en sending i Norge, på disse tjenestene: %s. Alle andre tjenester bookes uten."
+msgstr ""
+"Bring legger bare en returetikett på en sending i Norge, på disse "
+"tjenestene: %s. Alle andre tjenester bookes uten."
 
 #: build/templates/admin/pages/pro-settings.php:77
 #: config/admin-settings.php:487
@@ -2234,17 +2236,27 @@ msgstr "Bring booker dem ikke på nytt. Etikettene deres skrives likevel ut."
 
 #: build/templates/admin/parts/booking-groups.php:24
 #: src/templates/admin/parts/booking-groups.bfg.php:24
+msgid "These orders are cancelled"
+msgstr "Disse ordrene er kansellert"
+
+#: build/templates/admin/parts/booking-groups.php:25
+#: src/templates/admin/parts/booking-groups.bfg.php:25
+msgid "A cancelled order ships nothing, so Bring books nothing for it."
+msgstr "En kansellert ordre sender ingenting, så Bring booker ingenting for den."
+
+#: build/templates/admin/parts/booking-groups.php:28
+#: src/templates/admin/parts/booking-groups.bfg.php:28
 msgid "These orders get no booking"
 msgstr "Booker ingen av disse ordrene"
 
-#: build/templates/admin/parts/booking-groups.php:26
-#: src/templates/admin/parts/booking-groups.bfg.php:26
+#: build/templates/admin/parts/booking-groups.php:30
+#: src/templates/admin/parts/booking-groups.bfg.php:30
 msgid "They carry no shipping line at all, so Bring has nothing to book."
 msgstr "De har ingen fraktlinje, så Bring har ingenting å booke."
 
 #. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: build/templates/admin/parts/booking-groups.php:29
-#: src/templates/admin/parts/booking-groups.bfg.php:29
+#: build/templates/admin/parts/booking-groups.php:33
+#: src/templates/admin/parts/booking-groups.bfg.php:33
 #, php-format
 msgid ""
 "They carry no Bring shipping service. Turn on %1$sAllow booking without "
@@ -2407,7 +2419,7 @@ msgstr "Du har ikke tillatelse til å endre fraktsonene."
 
 #: classes/BringFraktguiden/Admin/ConnectAccount.php:34
 #: classes/BringFraktguiden/Admin/FallbackPrice.php:144
-#: classes/BringFraktguiden/Admin/RefreshLicense.php:33
+#: classes/BringFraktguiden/Admin/RefreshLicense.php:32
 msgid "You may not change the Bring settings."
 msgstr "Du har ikke tillatelse til å endre Bring-innstillingene."
 
@@ -2592,7 +2604,10 @@ msgid ""
 "Bring drives the return to your address. Your customer hands the parcel in "
 "at a post office, a parcel box or their own mailbox. Pick this one if you "
 "want the return delivered to you."
-msgstr "Bring kjører returen til adressen din. Kunden din leverer pakken på et postkontor, i en pakkeboks eller i sin egen postkasse. Velg denne hvis du vil ha returen levert til deg."
+msgstr ""
+"Bring kjører returen til adressen din. Kunden din leverer pakken på et "
+"postkontor, i en pakkeboks eller i sin egen postkasse. Velg denne hvis du "
+"vil ha returen levert til deg."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:35
 msgid "Retur fra hentested"
@@ -2602,7 +2617,9 @@ msgstr "Retur fra hentested"
 msgid ""
 "The return waits at the pick-up point nearest you, and you fetch it there. "
 "Your customer hands the parcel in the same way as with Retur til bedrift."
-msgstr "Returen venter på hentestedet nærmest deg, og du henter den der. Kunden din leverer pakken på samme måte som med Retur til bedrift."
+msgstr ""
+"Returen venter på hentestedet nærmest deg, og du henter den der. Kunden din "
+"leverer pakken på samme måte som med Retur til bedrift."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:39
 msgid "Retur pakke fra bedrift"
@@ -2612,7 +2629,9 @@ msgstr "Retur pakke fra bedrift"
 msgid ""
 "For a return from a business customer, up to 35 kg per parcel. Pick this one "
 "only if you sell to businesses."
-msgstr "For en retur fra en bedriftskunde, opptil 35 kg per pakke. Velg denne bare hvis du selger til bedrifter."
+msgstr ""
+"For en retur fra en bedriftskunde, opptil 35 kg per pakke. Velg denne bare "
+"hvis du selger til bedrifter."
 
 #: classes/BringFraktguiden/Booking/ReturnLabel.php:43
 msgid "Retur ekspress"
@@ -2622,7 +2641,9 @@ msgstr "Retur ekspress"
 msgid ""
 "For a return from a business customer, delivered the next day with a time "
 "guarantee. It costs more than Retur pakke fra bedrift."
-msgstr "For en retur fra en bedriftskunde, levert neste dag med tidsgaranti. Den koster mer enn Retur pakke fra bedrift."
+msgstr ""
+"For en retur fra en bedriftskunde, levert neste dag med tidsgaranti. Den "
+"koster mer enn Retur pakke fra bedrift."
 
 #. translators: %s: the name of a shipping service, for example Pakkeboks.
 #: classes/BringFraktguiden/Checkout/PhoneRequirement.php:142
@@ -3508,7 +3529,10 @@ msgid ""
 "Bring only adds a return label to a shipment inside Norway, on these "
 "services: %s. Any other service books without one. Bring invoices a return "
 "only when your customer uses it."
-msgstr "Bring legger bare en returetikett på en sending i Norge, på disse tjenestene: %s. Alle andre tjenester bookes uten. Bring fakturerer en retur bare når kunden din bruker den."
+msgstr ""
+"Bring legger bare en returetikett på en sending i Norge, på disse "
+"tjenestene: %s. Alle andre tjenester bookes uten. Bring fakturerer en retur "
+"bare når kunden din bruker den."
 
 #: config/admin-settings.php:488
 msgid "A booking carries the outbound label only."
@@ -3835,11 +3859,11 @@ msgstr "Send"
 msgid "Book now"
 msgstr "Book nå"
 
-#: pro/booking/views/class-bring-booking-common-view.php:77
+#: pro/booking/views/class-bring-booking-common-view.php:82
 msgid "Print label"
 msgstr "Skriv ut etikett"
 
-#: pro/booking/views/class-bring-booking-common-view.php:85
+#: pro/booking/views/class-bring-booking-common-view.php:90
 msgid "Failed"
 msgstr "Feilet"
 
@@ -3902,13 +3926,21 @@ msgstr[1] "%d ordre hadde allerede en booking."
 #. translators: %d: number of orders.
 #: pro/booking/views/class-bring-booking-orders-view.php:300
 #, php-format
+msgid "%d order is cancelled, so it got no booking."
+msgid_plural "%d orders are cancelled, so they got no booking."
+msgstr[0] "%d ordre er kansellert, så den ble ikke booket."
+msgstr[1] "%d ordrer er kansellert, så de ble ikke booket."
+
+#. translators: %d: number of orders.
+#: pro/booking/views/class-bring-booking-orders-view.php:305
+#, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
 msgstr[0] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 msgstr[1] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:305
+#: pro/booking/views/class-bring-booking-orders-view.php:310
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."
