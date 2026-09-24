@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-24T21:03:10+00:00\n"
+"POT-Creation-Date: 2026-09-24T22:05:41+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -226,8 +226,7 @@ msgid "Bring refused this booking"
 msgstr "Bring avviste denne bookingen"
 
 #: build/templates/admin/booking/history.php:23
-#: pro/booking/box/BookingSender.php:113
-#: pro/booking/class-bring-booking.php:257
+#: pro/booking/box/BookingSender.php:133
 msgid "Booked with Bring"
 msgstr "Reservert hos Bring"
 
@@ -1359,7 +1358,7 @@ msgstr "Tillat booking av ordre uten en bring fraktlinje"
 
 #: build/templates/admin/pages/pro-settings.php:32
 #: build/templates/admin/pages/pro/state-active.php:41
-#: pro/booking/views/class-bring-booking-common-view.php:35
+#: pro/booking/views/class-bring-booking-common-view.php:34
 #: src/templates/admin/pages/pro-settings.bfg.php:32
 msgid "Test mode"
 msgstr "Test modus"
@@ -2803,8 +2802,8 @@ msgid "Value must follow the format ##:##"
 msgstr "Verdien må følge formatet ##:##"
 
 #: classes/BringFraktguiden/Shipping/FallbackCase.php:74
-msgid "The cart holds more product lines than the plugin sends to Bring."
-msgstr "Handlekurven har flere produktlinjer enn utvidelsen sender til Bring."
+msgid "The cart holds more products than the plugin sends to Bring."
+msgstr "Handlekurven har flere produkter enn utvidelsen sender til Bring."
 
 #: classes/BringFraktguiden/Shipping/FallbackCase.php:75
 msgid "The goods do not fit the Bring size and weight limits."
@@ -2872,16 +2871,16 @@ msgid "Customer requested delivery time:"
 msgstr "Kunden ba om leveringstid:"
 
 #: classes/common/class-checkout-modifications.php:285
-#: classes/common/class-checkout-modifications.php:367
+#: classes/common/class-checkout-modifications.php:372
 msgid ""
 "Deliver the package in a bag on my door if it doesn't fit in the mailbox"
 msgstr "Lever pakken i pose på døren hvis den ikke passer i postboksen"
 
-#: classes/common/class-checkout-modifications.php:341
+#: classes/common/class-checkout-modifications.php:346
 msgid "Bag on door consent"
 msgstr "Samtykke til pose på døren"
 
-#: classes/common/class-checkout-modifications.php:343
+#: classes/common/class-checkout-modifications.php:348
 #: pro/booking/templates/waybills-waybill.php:41
 msgid "Yes"
 msgstr "Ja"
@@ -3560,11 +3559,11 @@ msgstr "Maksimalt produktantall"
 
 #: config/admin-settings.php:610
 msgid ""
-"Limit how many cart items are processed for shipping calculation. Higher "
-"values may slow down checkout. Default: 1000."
+"Limit how many products the cart may hold before the fallback rate applies. "
+"Each unit counts. Higher values may slow down checkout. Default: 1000."
 msgstr ""
-"Begrens hvor mange varer i handlekurven som tas med i fraktberegningen. "
-"Høyere verdier kan gjøre kassen tregere. Standard: 1000."
+"Begrens hvor mange produkter handlekurven kan ha før fallback-prisen gjelder. "
+"Hver enhet teller. Høyere verdier kan gjøre kassen tregere. Standard: 1000."
 
 #: config/admin-settings.php:629
 msgid "ie: 1500"
@@ -3677,15 +3676,15 @@ msgid "This booking was already sent. Reload the order to book it again."
 msgstr ""
 "Denne bookingen er allerede sendt. Last ordren på nytt for å booke den igjen."
 
-#: pro/booking/box/BookingSender.php:48
+#: pro/booking/box/BookingSender.php:49
 msgid "Add a shipping line to the order before you book it."
 msgstr "Legg til en fraktlinje på ordren før du booker den."
 
-#: pro/booking/box/BookingSender.php:106
+#: pro/booking/box/BookingSender.php:126
 msgid "Bring refused the booking. See the Bring Booking box for the reason."
 msgstr "Bring avviste bookingen. Se boksen Bring Booking for årsaken."
 
-#: pro/booking/box/BookingSender.php:136
+#: pro/booking/box/BookingSender.php:156
 msgid "Fill in your store address in the booking settings before you book."
 msgstr "Fyll inn butikkadressen din i bookinginnstillingene før du booker."
 
@@ -3731,24 +3730,18 @@ msgstr ""
 "Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
 "bring_booking_labels’."
 
-#: pro/booking/class-bring-booking.php:110
+#: pro/booking/class-bring-booking.php:111
 msgid "Changing status because the label was downloaded."
 msgstr "Endrer status fordi etiketten ble lastet ned."
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:125
-#: pro/booking/class-bring-booking.php:131
-#: pro/booking/class-bring-booking.php:150
+#: pro/booking/class-bring-booking.php:126
+#: pro/booking/class-bring-booking.php:132
+#: pro/booking/class-bring-booking.php:151
 msgid "Awaiting Shipment"
 msgstr "Avventer frakt"
 
-#: pro/booking/class-bring-booking.php:236
-msgid "Booking errors. See the Bring Booking box for details."
-msgstr ""
-"Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema for "
-"detaljer."
-
-#: pro/booking/class-bring-booking.php:347
+#: pro/booking/class-bring-booking.php:234
 msgid "Error: Could not book the order!"
 msgstr "Feil: Kunne ikke booke ordren!"
 
@@ -3812,27 +3805,27 @@ msgstr "Vekt:"
 msgid "Dowload waybill"
 msgstr "Last ned fraktbrev"
 
-#: pro/booking/views/class-bring-booking-common-view.php:34
+#: pro/booking/views/class-bring-booking-common-view.php:33
 msgid "Bring - Submit Consignments"
 msgstr "Bring - Send"
 
-#: pro/booking/views/class-bring-booking-common-view.php:34
+#: pro/booking/views/class-bring-booking-common-view.php:33
 msgid "Submit Consignment"
 msgstr "Send"
 
-#: pro/booking/views/class-bring-booking-common-view.php:68
+#: pro/booking/views/class-bring-booking-common-view.php:67
 msgid "Book now"
 msgstr "Book nå"
 
-#: pro/booking/views/class-bring-booking-common-view.php:82
+#: pro/booking/views/class-bring-booking-common-view.php:81
 msgid "Print label"
 msgstr "Skriv ut etikett"
 
-#: pro/booking/views/class-bring-booking-common-view.php:90
+#: pro/booking/views/class-bring-booking-common-view.php:89
 msgid "Failed"
 msgstr "Feilet"
 
-#: pro/booking/views/class-bring-booking-labels.php:117
+#: pro/booking/views/class-bring-booking-labels.php:100
 msgid ""
 "Sorry, Labels are only available for Administrators, Warehouse Teams and "
 "Store Managers. Please contact the administrator to enable access."
@@ -3840,27 +3833,27 @@ msgstr ""
 "Etiketter er kun tilgjengelig for Administratorer, Lagermedarbeidere og "
 "Butikksjefer. Kontakt en administrator for å få tilgang."
 
-#: pro/booking/views/class-bring-booking-labels.php:119
+#: pro/booking/views/class-bring-booking-labels.php:102
 msgid "Insufficient permissions"
 msgstr "Ikke tilstrekkelig tilgang"
 
-#: pro/booking/views/class-bring-booking-labels.php:130
+#: pro/booking/views/class-bring-booking-labels.php:113
 msgid "Order ID is missing."
 msgstr "Ordre-ID mangler."
 
-#: pro/booking/views/class-bring-booking-labels.php:186
+#: pro/booking/views/class-bring-booking-labels.php:169
 msgid "No files to download."
 msgstr "Ingen filer å laste ned."
 
-#: pro/booking/views/class-bring-booking-labels.php:193
+#: pro/booking/views/class-bring-booking-labels.php:176
 msgid "Downloads"
 msgstr "Nedlastinger"
 
-#: pro/booking/views/class-bring-booking-labels.php:194
+#: pro/booking/views/class-bring-booking-labels.php:177
 msgid "Merged ZPL labels"
 msgstr "Sammenslåtte ZPL etiketter"
 
-#: pro/booking/views/class-bring-booking-labels.php:196
+#: pro/booking/views/class-bring-booking-labels.php:179
 msgid "Merged PDF labels"
 msgstr "Sammenslåtte PDF etiketter"
 
@@ -3873,7 +3866,7 @@ msgid "Bring - Print labels"
 msgstr "Bring - Etiketter"
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:290
+#: pro/booking/views/class-bring-booking-orders-view.php:322
 #, php-format
 msgid "%d order booked."
 msgid_plural "%d orders booked."
@@ -3881,7 +3874,7 @@ msgstr[0] "%d ordre er booket."
 msgstr[1] "%d ordre er booket."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:295
+#: pro/booking/views/class-bring-booking-orders-view.php:327
 #, php-format
 msgid "%d order already held a booking."
 msgid_plural "%d orders already held a booking."
@@ -3889,7 +3882,7 @@ msgstr[0] "%d ordre hadde allerede en booking."
 msgstr[1] "%d ordre hadde allerede en booking."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:300
+#: pro/booking/views/class-bring-booking-orders-view.php:332
 #, php-format
 msgid "%d order is in a status that allows no booking."
 msgid_plural "%d orders are in a status that allows no booking."
@@ -3897,7 +3890,7 @@ msgstr[0] "%d ordre har en status som ikke tillater booking."
 msgstr[1] "%d ordrer har en status som ikke tillater booking."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:305
+#: pro/booking/views/class-bring-booking-orders-view.php:337
 #, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
@@ -3905,7 +3898,7 @@ msgstr[0] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 msgstr[1] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:310
+#: pro/booking/views/class-bring-booking-orders-view.php:342
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."
@@ -4010,6 +4003,22 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "The cart holds more product lines than the plugin sends to Bring."
+#~ msgstr ""
+#~ "Handlekurven har flere produktlinjer enn utvidelsen sender til Bring."
+
+#~ msgid ""
+#~ "Limit how many cart items are processed for shipping calculation. Higher "
+#~ "values may slow down checkout. Default: 1000."
+#~ msgstr ""
+#~ "Begrens hvor mange varer i handlekurven som tas med i fraktberegningen. "
+#~ "Høyere verdier kan gjøre kassen tregere. Standard: 1000."
+
+#~ msgid "Booking errors. See the Bring Booking box for details."
+#~ msgstr ""
+#~ "Reservering hos Bring feilet. Se Bring booking boks i bestillingsskjema "
+#~ "for detaljer."
 
 #~ msgid ""
 #~ "Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove "

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-24T21:03:10+00:00\n"
+"POT-Creation-Date: 2026-09-24T22:05:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -223,8 +223,7 @@ msgid "Bring refused this booking"
 msgstr ""
 
 #: build/templates/admin/booking/history.php:23
-#: pro/booking/box/BookingSender.php:113
-#: pro/booking/class-bring-booking.php:257
+#: pro/booking/box/BookingSender.php:133
 msgid "Booked with Bring"
 msgstr ""
 
@@ -1279,7 +1278,7 @@ msgstr ""
 
 #: build/templates/admin/pages/pro-settings.php:32
 #: build/templates/admin/pages/pro/state-active.php:41
-#: pro/booking/views/class-bring-booking-common-view.php:35
+#: pro/booking/views/class-bring-booking-common-view.php:34
 #: src/templates/admin/pages/pro-settings.bfg.php:32
 msgid "Test mode"
 msgstr ""
@@ -2574,7 +2573,7 @@ msgid "Value must follow the format ##:##"
 msgstr ""
 
 #: classes/BringFraktguiden/Shipping/FallbackCase.php:74
-msgid "The cart holds more product lines than the plugin sends to Bring."
+msgid "The cart holds more products than the plugin sends to Bring."
 msgstr ""
 
 #: classes/BringFraktguiden/Shipping/FallbackCase.php:75
@@ -2643,15 +2642,15 @@ msgid "Customer requested delivery time:"
 msgstr ""
 
 #: classes/common/class-checkout-modifications.php:285
-#: classes/common/class-checkout-modifications.php:367
+#: classes/common/class-checkout-modifications.php:372
 msgid "Deliver the package in a bag on my door if it doesn't fit in the mailbox"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:341
+#: classes/common/class-checkout-modifications.php:346
 msgid "Bag on door consent"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:343
+#: classes/common/class-checkout-modifications.php:348
 #: pro/booking/templates/waybills-waybill.php:41
 msgid "Yes"
 msgstr ""
@@ -3220,7 +3219,7 @@ msgid "Maximum product limit"
 msgstr ""
 
 #: config/admin-settings.php:610
-msgid "Limit how many cart items are processed for shipping calculation. Higher values may slow down checkout. Default: 1000."
+msgid "Limit how many products the cart may hold before the fallback rate applies. Each unit counts. Higher values may slow down checkout. Default: 1000."
 msgstr ""
 
 #: config/admin-settings.php:629
@@ -3321,15 +3320,15 @@ msgstr ""
 msgid "This booking was already sent. Reload the order to book it again."
 msgstr ""
 
-#: pro/booking/box/BookingSender.php:48
+#: pro/booking/box/BookingSender.php:49
 msgid "Add a shipping line to the order before you book it."
 msgstr ""
 
-#: pro/booking/box/BookingSender.php:106
+#: pro/booking/box/BookingSender.php:126
 msgid "Bring refused the booking. See the Bring Booking box for the reason."
 msgstr ""
 
-#: pro/booking/box/BookingSender.php:136
+#: pro/booking/box/BookingSender.php:156
 msgid "Fill in your store address in the booking settings before you book."
 msgstr ""
 
@@ -3357,22 +3356,18 @@ msgstr ""
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:110
+#: pro/booking/class-bring-booking.php:111
 msgid "Changing status because the label was downloaded."
 msgstr ""
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:125
-#: pro/booking/class-bring-booking.php:131
-#: pro/booking/class-bring-booking.php:150
+#: pro/booking/class-bring-booking.php:126
+#: pro/booking/class-bring-booking.php:132
+#: pro/booking/class-bring-booking.php:151
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:236
-msgid "Booking errors. See the Bring Booking box for details."
-msgstr ""
-
-#: pro/booking/class-bring-booking.php:347
+#: pro/booking/class-bring-booking.php:234
 msgid "Error: Could not book the order!"
 msgstr ""
 
@@ -3436,51 +3431,51 @@ msgstr ""
 msgid "Dowload waybill"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:34
+#: pro/booking/views/class-bring-booking-common-view.php:33
 msgid "Bring - Submit Consignments"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:34
+#: pro/booking/views/class-bring-booking-common-view.php:33
 msgid "Submit Consignment"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:68
+#: pro/booking/views/class-bring-booking-common-view.php:67
 msgid "Book now"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:82
+#: pro/booking/views/class-bring-booking-common-view.php:81
 msgid "Print label"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-common-view.php:90
+#: pro/booking/views/class-bring-booking-common-view.php:89
 msgid "Failed"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:117
+#: pro/booking/views/class-bring-booking-labels.php:100
 msgid "Sorry, Labels are only available for Administrators, Warehouse Teams and Store Managers. Please contact the administrator to enable access."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:119
+#: pro/booking/views/class-bring-booking-labels.php:102
 msgid "Insufficient permissions"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:130
+#: pro/booking/views/class-bring-booking-labels.php:113
 msgid "Order ID is missing."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:186
+#: pro/booking/views/class-bring-booking-labels.php:169
 msgid "No files to download."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:193
+#: pro/booking/views/class-bring-booking-labels.php:176
 msgid "Downloads"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:194
+#: pro/booking/views/class-bring-booking-labels.php:177
 msgid "Merged ZPL labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:196
+#: pro/booking/views/class-bring-booking-labels.php:179
 msgid "Merged PDF labels"
 msgstr ""
 
@@ -3493,7 +3488,7 @@ msgid "Bring - Print labels"
 msgstr ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:290
+#: pro/booking/views/class-bring-booking-orders-view.php:322
 #, php-format
 msgid "%d order booked."
 msgid_plural "%d orders booked."
@@ -3501,7 +3496,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:295
+#: pro/booking/views/class-bring-booking-orders-view.php:327
 #, php-format
 msgid "%d order already held a booking."
 msgid_plural "%d orders already held a booking."
@@ -3509,7 +3504,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:300
+#: pro/booking/views/class-bring-booking-orders-view.php:332
 #, php-format
 msgid "%d order is in a status that allows no booking."
 msgid_plural "%d orders are in a status that allows no booking."
@@ -3517,7 +3512,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:305
+#: pro/booking/views/class-bring-booking-orders-view.php:337
 #, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
@@ -3525,7 +3520,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:310
+#: pro/booking/views/class-bring-booking-orders-view.php:342
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."

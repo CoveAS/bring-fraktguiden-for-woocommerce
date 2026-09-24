@@ -376,7 +376,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		// @TODO: Use the package instead of the cart.
 		$contents = $package['contents'];
 		$settings = BringSettings::instance();
-		if ( ! $settings->calculate_by_weight->value && count( $contents ) > $this->max_products ) {
+		if ( ! $settings->calculate_by_weight->value && array_sum( array_column( $contents, 'quantity' ) ) > $this->max_products ) {
 			return FallbackCase::TooManyProducts;
 		}
 

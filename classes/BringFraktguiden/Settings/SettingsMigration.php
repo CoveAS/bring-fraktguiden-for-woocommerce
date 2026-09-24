@@ -43,10 +43,55 @@ class SettingsMigration
 		}
 		self::$synced = true;
 
-		if (self::woo_settings() === self::array_option(self::SNAPSHOT_OPTION)) {
+		if (self::woo_settings() !== self::array_option(self::SNAPSHOT_OPTION)) {
+			self::copy_forward();
+		}
+		self::retire_fallback_switches();
+	}
+
+	/**
+	 * Turn the old fallback switches into the rate id that the checkout reads.
+	 *
+	 * Version 1.11.7 showed a fallback rate only when its switch said flat_rate.
+	 * Its service select had no "No shipping" option, so a saved form holds a
+	 * real service even where the switch said "Do nothing". The checkout now
+	 * shows a rate for any service, so such a shop would offer a rate it never
+	 * turned on.
+	 *
+	 * A rate id that differs from the WooCommerce option was chosen on the
+	 * Fallback Options page, so it stays. The switch leaves the plugin option,
+	 * so the step runs once. The WooCommerce option keeps it for a roll back.
+	 */
+	private static function retire_fallback_switches(): void
+	{
+		$settings = self::array_option(self::PLUGIN_OPTION);
+		$woo      = self::woo_settings();
+		$changed  = false;
+
+		// ponytail: the switch names come from the 1.11.7 settings, which no data file holds any more.
+		$switches = [
+			'no_connection_handling' => 'no_connection_rate_id',
+			'exception_handling'     => 'exception_rate_id',
+			'alt_handling'           => 'alt_flat_rate_id',
+		];
+
+		foreach ($switches as $switch => $rate_key) {
+			if (!array_key_exists($switch, $settings)) {
+				continue;
+			}
+			if ('flat_rate' !== $settings[$switch] && ($settings[$rate_key] ?? null) === ($woo[$rate_key] ?? null)) {
+				$settings[$rate_key] = '0';
+			}
+			unset($settings[$switch]);
+			$changed = true;
+		}
+
+		if (!$changed) {
 			return;
 		}
-		self::copy_forward();
+
+		update_option(self::PLUGIN_OPTION, $settings, true);
+		Fraktguiden_Helper::$options = null;
 	}
 
 	/**

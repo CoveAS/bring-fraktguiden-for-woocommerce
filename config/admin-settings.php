@@ -607,7 +607,7 @@ return [
 				'type' => 'number',
 				'css' => 'width: 8em;',
 				'placeholder' => 1000,
-				'description' => __('Limit how many cart items are processed for shipping calculation. Higher values may slow down checkout. Default: 1000.', 'bring-fraktguiden-for-woocommerce'),
+				'description' => __('Limit how many products the cart may hold before the fallback rate applies. Each unit counts. Higher values may slow down checkout. Default: 1000.', 'bring-fraktguiden-for-woocommerce'),
 				'default' => 1000,
 				'dependencies' => ['calculate_by_weight' => false],
 				'custom_attributes' => [

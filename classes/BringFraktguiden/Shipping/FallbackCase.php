@@ -10,7 +10,7 @@ namespace BringFraktguiden\Shipping;
  */
 enum FallbackCase
 {
-	/** The cart holds more product lines than the shop allows. */
+	/** The cart holds more products than the shop allows. */
 	case TooManyProducts;
 
 	/** No package fits the Bring size and weight limits. */
@@ -71,7 +71,7 @@ enum FallbackCase
 	public function reason(): string
 	{
 		return match ($this) {
-			self::TooManyProducts => __('The cart holds more product lines than the plugin sends to Bring.', 'bring-fraktguiden-for-woocommerce'),
+			self::TooManyProducts => __('The cart holds more products than the plugin sends to Bring.', 'bring-fraktguiden-for-woocommerce'),
 			self::GoodsDoNotFit   => __('The goods do not fit the Bring size and weight limits.', 'bring-fraktguiden-for-woocommerce'),
 			self::NoAnswer        => __('Bring did not answer.', 'bring-fraktguiden-for-woocommerce'),
 			self::NoCredentials   => __('The shop has no Bring API credentials.', 'bring-fraktguiden-for-woocommerce'),
