@@ -123,23 +123,6 @@ class Fraktguiden_Helper {
 	}
 
 	/**
-	 * Check if the plugin works in PRO test mode
-	 *
-	 * @return boolean
-	 */
-	public static function pro_test_mode() {
-		if ( ! self::pro_activated( true ) ) {
-			return false;
-		}
-
-		if ( isset( $_POST['woocommerce_bring_fraktguiden_title'] ) ) {
-			return isset( $_POST['woocommerce_bring_fraktguiden_test_mode'] );
-		}
-
-		return self::get_option( 'test_mode' ) === 'yes';
-	}
-
-	/**
 	 * Get all services
 	 *
 	 * @param boolean $id ID.
@@ -508,37 +491,6 @@ class Fraktguiden_Helper {
 		}
 
 		return sprintf( '<a href="%s" target="_blank">%s</a>', 'https://bringfraktguiden.no/', esc_html( $text ) );
-	}
-
-	/**
-	 * Get PRO description
-	 *
-	 * @return string
-	 */
-	public static function get_pro_description() {
-		if ( self::pro_test_mode() ) {
-			return __( 'Running in test-mode.', 'bring-fraktguiden-for-woocommerce' ) . ' '
-			. self::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
-		}
-
-		if ( self::pro_activated( true ) ) {
-		}
-
-		$message = __( 'Bring Fraktguiden PRO is now available, <a href="%s">Click here to upgrade to PRO.</a>', 'bring-fraktguiden-for-woocommerce' );
-		$message = sprintf( $message, Fraktguiden_Helper::get_settings_url() );
-
-		return $message . sprintf(
-			'<ol>
-				<li>%s</li>
-				<li>%s</li>
-				<li>%s</li>
-				<li>%s</li>
-			</ol>',
-			_x( 'Free shipping limits: Set cart thresholds to enable free shipping.', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
-			_x( 'Local pickup points: Let customers select their own pickup point based on their location.', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
-			_x( 'Mybring Booking: Book orders directly from the order page with Mybring', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' ),
-			_x( 'Fixed shipping prices: Define your set price for each freight option', 'Succinct explaination of feature', 'bring-fraktguiden-for-woocommerce' )
-		) . ' ' . self::get_pro_terms_link();
 	}
 
 	/**

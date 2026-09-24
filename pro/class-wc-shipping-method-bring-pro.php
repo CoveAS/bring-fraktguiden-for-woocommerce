@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'order/class-bring-wc-order-adapter.php';
 require_once 'booking/class-bring-booking.php';
 
-if ( Fraktguiden_Helper::pro_activated() || Fraktguiden_Helper::pro_test_mode() ) {
+if ( Fraktguiden_Helper::pro_activated() ) {
 	LegacyPickupPoints::setup();
 	add_action( 'init', PickUpPoint::class.'::init');
 }

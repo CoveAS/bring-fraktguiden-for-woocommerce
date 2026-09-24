@@ -46,12 +46,8 @@ class Fraktguiden_Admin_Notices {
 		add_action( 'wp_ajax_bring_dismiss_notice', __CLASS__ . '::ajax_dismiss_notice' );
 //		add_action( 'wp_loaded', __CLASS__ . '::missing_shipping_method_notice_middleware' );
 
-		// Check if PRO is available but not activated yet.
-		$message = Fraktguiden_Helper::get_pro_description();
-		if ( ! Fraktguiden_Helper::pro_activated( true ) ) {
-			/* translators: %s: Bring Fraktguiden settings page URL */
-//			self::add_notice( 'pro_available', $message );
-		} elseif ( ! Fraktguiden_Helper::valid_license() ) { // Check if PRO is activated but license not bought.
+		// Check if PRO is activated but license not bought.
+		if ( Fraktguiden_Helper::pro_activated( true ) && ! Fraktguiden_Helper::valid_license() ) {
 			$days = Fraktguiden_Helper::get_pro_days_remaining();
 			$terms_link = Fraktguiden_Helper::get_pro_terms_link( __( 'Click here to buy a license', 'bring-fraktguiden-for-woocommerce' ) );
 

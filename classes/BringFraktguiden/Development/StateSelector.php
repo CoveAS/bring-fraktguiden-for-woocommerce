@@ -25,13 +25,9 @@ class StateSelector
 		}
 		$pro = $bring_develop_config;
 		$pro['pro_enabled'] = 'yes';
-		$pro['test_mode'] = 'no';
 
 		$trial = $pro;
 		$trial['pro_activated_on'] = time();
-
-		$pro_test = $pro;
-		$pro_test['test_mode'] = 'yes';
 
 		$expired = $pro;
 		$expired['pro_activated_on'] = time() - (86400 * 30); // 30 days ago, trial expired
@@ -44,7 +40,6 @@ class StateSelector
 			'api' => $api_only,
 			'pro' => $pro,
 			'trial' => $trial,
-			'pro_test' => $pro_test,
 			'expired' => $expired,
 			'pirate' => $pirate,
 			'free' => $bring_develop_config,

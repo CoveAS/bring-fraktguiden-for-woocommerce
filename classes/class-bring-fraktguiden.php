@@ -114,8 +114,6 @@ class Bring_Fraktguiden {
 		add_action( 'bring_fraktguiden_cron', __CLASS__ . '::cron_task' );
 		add_action( 'bring_fraktguiden_cron', [ HsCodeIndex::class, 'maybe_refresh' ] );
 
-		add_action( 'woocommerce_before_checkout_form', __CLASS__ . '::checkout_message' );
-		add_action( 'klarna_before_kco_checkout', __CLASS__ . '::checkout_message' );
 		// Check the license when PRO version is activated.
 		if ( filter_input( INPUT_POST, 'woocommerce_bring_fraktguiden_enabled' ) ) {
 			$license = Fraktguiden_License::get_instance();
@@ -221,17 +219,6 @@ class Bring_Fraktguiden {
 	 */
 	public static function plugin_deactivate() {
 		do_action( 'bring_fraktguiden_plugin_deactivate' );
-	}
-
-	/**
-	 * Display a notification that the PRO version of the plugin runs in a test mode
-	 */
-	public static function checkout_message() {
-		if ( ! Fraktguiden_Helper::pro_test_mode() ) {
-			return;
-		}
-
-		esc_html_e( 'Bring Fraktguiden PRO is in test-mode. Deactivate the test-mode to remove this message.', 'bring-fraktguiden-for-woocommerce' );
 	}
 
 
