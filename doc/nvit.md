@@ -91,7 +91,9 @@ Notes from Bring's own questions and answers:
 
 ## Where the rule lives in the plugin
 
-The rule has two parts, and one class asks both.
+The rule has three parts, and one class asks all three. Both ends of the
+shipment must be in Norway, because other countries also use 4 digit postal
+codes.
 
 | Class | Answers |
 |---|---|

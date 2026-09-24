@@ -34,7 +34,15 @@ class CustomsRoute
 			return self::EXPORT;
 		}
 
-		if (NvitRule::requires_transit_data($from_postcode, $order->get_shipping_postcode(), $product)) {
+		$is_nvit = NvitRule::requires_transit_data(
+			from_country: $from_country,
+			from_postcode: $from_postcode,
+			to_country: $order->get_shipping_country(),
+			to_postcode: $order->get_shipping_postcode(),
+			product: $product,
+		);
+
+		if ($is_nvit) {
 			return self::NVIT;
 		}
 
