@@ -159,31 +159,18 @@ class Bring_Booking {
 	 * Book the order outside the booking box.
 	 *
 	 * The form holds the saved draft of the box, or else what the order
-	 * holds. A value the bulk dialog sends wins over both, because the shop
-	 * worker picked it for the whole selection.
+	 * holds. A value in $overrides wins over both, because the shop worker
+	 * picked it in the bulk dialog for the whole selection.
+	 *
+	 * @param array $overrides Form fields, such as customer_number, shipping_date and shipping_time.
 	 *
 	 * @throws Exception When the shop or the order cannot be booked at all.
 	 */
-	public static function book( WC_Order $order ): BookingRecord {
+	public static function book( WC_Order $order, array $overrides = [] ): BookingRecord {
 		$adapter        = new Bring_WC_Order_Adapter( $order );
 		$shipping_items = $adapter->get_fraktguiden_shipping_items();
 		$form           = BookingDraft::read( $order ) ?? BookingForm::from_order( $order, reset( $shipping_items ) ?: null );
-
-		$input   = Fraktguiden_Helper::get_input_request_method();
-		$payload = $form->to_array();
-
-		$customer_number = (string) filter_input( $input, '_bring-customer-number' );
-		if ( $customer_number ) {
-			$payload['customer_number'] = $customer_number;
-		}
-
-		$date    = (string) filter_input( $input, '_bring-shipping-date' );
-		$hour    = (string) filter_input( $input, '_bring-shipping-date-hour' );
-		$minutes = (string) filter_input( $input, '_bring-shipping-date-minutes' );
-		if ( $date && $hour && $minutes ) {
-			$payload['shipping_date'] = $date;
-			$payload['shipping_time'] = $hour . ':' . $minutes;
-		}
+		$payload        = array_merge( $form->to_array(), $overrides );
 
 		$record = BookingSender::send( $order, BookingForm::from_payload( $payload ) );
 
@@ -214,9 +201,10 @@ class Bring_Booking {
 	 * `booked` means it already held a booking, `status` means the order status
 	 * allows no booking, and `skipped` means it carries no Bring shipping line. The caller prints the labels of the first two.
 	 *
-	 * @param array $post_ids Array of WC_Order IDs.
+	 * @param array $post_ids  Array of WC_Order IDs.
+	 * @param array $overrides Form fields that win for every order. See book().
 	 */
-	public static function bulk_send_booking( $post_ids ) {
+	public static function bulk_send_booking( $post_ids, array $overrides = [] ) {
 		$report = [];
 		foreach ( $post_ids as $post_id ) {
 			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
@@ -235,7 +223,7 @@ class Bring_Booking {
 			}
 
 			try {
-				$record = self::book( $adapter->order );
+				$record = self::book( $adapter->order, $overrides );
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
 					'status'       => 'error',

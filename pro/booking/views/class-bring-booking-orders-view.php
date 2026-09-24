@@ -228,6 +228,31 @@ class Bring_Booking_Orders_View {
 	}
 
 	/**
+	 * Return the form fields the bulk dialog sets for every order.
+	 *
+	 * The Book now button of a single row sends none of them.
+	 */
+	private static function dialog_overrides(): array {
+		$input     = Fraktguiden_Helper::get_input_request_method();
+		$overrides = [];
+
+		$customer_number = (string) filter_input( $input, '_bring-customer-number' );
+		if ( $customer_number ) {
+			$overrides['customer_number'] = $customer_number;
+		}
+
+		$date    = (string) filter_input( $input, '_bring-shipping-date' );
+		$hour    = (string) filter_input( $input, '_bring-shipping-date-hour' );
+		$minutes = (string) filter_input( $input, '_bring-shipping-date-minutes' );
+		if ( $date && $hour && $minutes ) {
+			$overrides['shipping_date'] = $date;
+			$overrides['shipping_time'] = $hour . ':' . $minutes;
+		}
+
+		return $overrides;
+	}
+
+	/**
 	 * Send booking in bulk
 	 *
 	 * @return void
@@ -251,7 +276,7 @@ class Bring_Booking_Orders_View {
 			return;
 		}
 
-		$report = Bring_Booking::bulk_send_booking( $post_ids );
+		$report = Bring_Booking::bulk_send_booking( $post_ids, self::dialog_overrides() );
 
 		$column_data = [];
 		foreach ( $post_ids as $post_id ) {
