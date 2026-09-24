@@ -61,7 +61,7 @@ See faq.txt for frequently asked questions
 * Added a notice that names the setup steps left
 * Added an offer to delete a free shipping method that hides the Bring options
 * Added the Pakkeboks service, with its own pick-up points
-* Added a return label to a booking, printed from the same button as the shipping label
+* Added a return label to a booking, printed from the same button as the shipping label and from the bulk print action
 * Added the pick-up point settings to the Settings page
 * Added the distance to each pick-up point in the checkout picker
 * Added a phone number check on a Pakkeboks and a Pakke hjem pluss order
@@ -77,6 +77,7 @@ See faq.txt for frequently asked questions
 * The zone form now suggests everywhere else only when the shop draws no zones of its own
 * The checkout now keeps the shop theme out of the pick-up point picker
 * WooCommerce is now a required plugin
+* Four services now carry the names bring.no uses, such as Pakke hjem pluss and Pakke hjem i postkassen
 * A cancelled order now shows no booking buttons, and the bulk booking skips it
 * Removed the old Pro test mode, because a testing license now covers a test shop
 * Completed the Norwegian translation
@@ -88,6 +89,7 @@ See faq.txt for frequently asked questions
 * Fixed the pick-up points, which did not reload when the customer changed the street
 * Fixed a pick-up point picker shown under a shipping option the customer did not choose
 * Fixed an extra service sent with Pakke til hentested that Bring does not accept
+* Fixed a warning that called a current customer number outdated
 * Fixed the license refresh, which reported success when the server gave no answer
 * Fixed the net weight placeholder of a variation, which now shows the parent weight
 
