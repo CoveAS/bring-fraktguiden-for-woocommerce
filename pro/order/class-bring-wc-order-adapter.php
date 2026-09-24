@@ -68,13 +68,15 @@ class Bring_WC_Order_Adapter {
 	 * @param WP_Bring_Response $response Bring response.
 	 */
 	public function update_booking_response( $response ) {
-		// Create an array of the response for post meta.
-		$response_as_array = $response->to_array();
-		update_post_meta( $this->order->get_id(), '_bring_booking_response', $response_as_array );
+		$this->order->update_meta_data( '_bring_booking_response', $response->to_array() );
+		$this->order->save();
 	}
 
 	/**
 	 * Returns the saved booking response array.
+	 *
+	 * Older versions saved the response as post meta. On an HPOS shop
+	 * that lands on the placeholder post, so the order meta holds nothing.
 	 *
 	 * @return array
 	 */
@@ -83,7 +85,8 @@ class Bring_WC_Order_Adapter {
 			return false;
 		}
 
-		return get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
+		return $this->order->get_meta( '_bring_booking_response' )
+			?: get_post_meta( $this->order->get_id(), '_bring_booking_response', true );
 	}
 
 	/**

@@ -323,8 +323,11 @@ class Checkout_Modifications {
 	public static function bag_on_door_order_meta( $order_id ) {
 		$consent_value = filter_input( INPUT_POST, 'bag_on_door_consent', FILTER_VALIDATE_BOOLEAN );
 
-		if ( $consent_value ) {
-			update_post_meta( $order_id, '_bag_on_door_consent', $consent_value );
+		$order = wc_get_order( $order_id );
+
+		if ( $consent_value && $order ) {
+			$order->update_meta_data( '_bag_on_door_consent', $consent_value );
+			$order->save();
 		}
 	}
 
@@ -332,7 +335,9 @@ class Checkout_Modifications {
 	 * Display order related bag on door value in WC order admin page
 	 */
 	public static function bag_on_door_admin_value( $order ) {
-		$consent = get_post_meta( $order->get_id(), '_bag_on_door_consent', true );
+		// Older versions saved the consent as post meta.
+		$consent = $order->get_meta( '_bag_on_door_consent' )
+			?: get_post_meta( $order->get_id(), '_bag_on_door_consent', true );
 
 		if ( ! $consent ) {
 			return;

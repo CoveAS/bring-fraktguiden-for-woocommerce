@@ -338,7 +338,9 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 
 			// Bag on door option
 			$bag_on_door_checked = $this->books( '1081', 'bag_on_door' );
-			$bag_on_door_consent = get_post_meta( $this->adapter->order->get_id(), '_bag_on_door_consent', true );
+			// Older versions saved the consent as post meta.
+			$bag_on_door_consent = $this->adapter->order->get_meta( '_bag_on_door_consent' )
+				?: get_post_meta( $this->adapter->order->get_id(), '_bag_on_door_consent', true );
 
 			if (
 				(

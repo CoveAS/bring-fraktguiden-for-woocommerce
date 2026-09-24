@@ -2,6 +2,7 @@
 
 namespace BringFraktguidenPro\Booking\Box;
 
+use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use WC_Order;
 use WP_Bring_Response;
 
@@ -38,7 +39,7 @@ class BookingHistory
 			));
 		}
 
-		$legacy = $order->get_meta(self::LEGACY_META_KEY);
+		$legacy = (new Bring_WC_Order_Adapter($order))->get_booking_response();
 
 		if (!is_array($legacy) || !$legacy) {
 			return [];
