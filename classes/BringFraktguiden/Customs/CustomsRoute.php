@@ -19,6 +19,14 @@ class CustomsRoute
 	public const EXPORT = 'export';
 
 	/**
+	 * The country codes that count as Norway for both rules.
+	 *
+	 * WooCommerce names Svalbard and Jan Mayen SJ. Bring carries goods there as
+	 * a domestic shipment.
+	 */
+	public const NORWAY = ['NO', 'SJ'];
+
+	/**
 	 * Return the rule that covers the booking, or an empty string.
 	 *
 	 * @param WC_Order $order   The order the booking ships.

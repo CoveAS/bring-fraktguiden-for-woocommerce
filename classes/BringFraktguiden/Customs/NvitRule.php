@@ -15,8 +15,8 @@ class NvitRule
 	 * Return whether a booking must carry transit data.
 	 *
 	 * Other countries also use 4 digit postal codes, so the postal codes alone
-	 * do not prove a Norwegian route. Svalbard counts as Norway, because its
-	 * codes 9170 to 9179 sit inside an NVIT range and WooCommerce names it SJ.
+	 * do not prove a Norwegian route. Svalbard counts as Norway, and its codes
+	 * 9170 to 9179 sit inside an NVIT range.
 	 *
 	 * @param string $from_country  The country code of the sender.
 	 * @param string $from_postcode The postal code of the sender.
@@ -31,8 +31,8 @@ class NvitRule
 		string $to_postcode,
 		string $product
 	): bool {
-		return in_array(strtoupper($from_country), ['NO', 'SJ'], true)
-			&& in_array(strtoupper($to_country), ['NO', 'SJ'], true)
+		return in_array(strtoupper($from_country), CustomsRoute::NORWAY, true)
+			&& in_array(strtoupper($to_country), CustomsRoute::NORWAY, true)
 			&& NvitServices::is_covered($product)
 			&& NvitPostalCodes::is_transit_route($from_postcode, $to_postcode);
 	}

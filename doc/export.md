@@ -7,6 +7,9 @@ A shipment that leaves Norway is an export, not transit. It needs a customs
 declaration of its own. The NVIT rule does not cover it, and the `NVIT` type
 does not work for it.
 
+Svalbard counts as Norway. WooCommerce names it with the country code `SJ`. A
+shipment between Svalbard and the mainland is no export.
+
 Bring requires customs data in the booking for these services, from Norway to
 any other country:
 

@@ -9,7 +9,8 @@ use Bring_Fraktguiden\Common\Fraktguiden_Helper;
  *
  * A shipment that leaves Norway is an export, not transit. Bring requires
  * customs data on the services that carry 'customs' => true in
- * config/services.php. See doc/export.md.
+ * config/services.php. Svalbard counts as Norway, so a shipment between
+ * Svalbard and the mainland is no export. See doc/export.md.
  */
 class ExportRule
 {
@@ -25,7 +26,7 @@ class ExportRule
 		$from = strtoupper($from);
 		$to   = strtoupper($to);
 
-		if ('NO' !== $from || '' === $to || 'NO' === $to) {
+		if (!in_array($from, CustomsRoute::NORWAY, true) || '' === $to || in_array($to, CustomsRoute::NORWAY, true)) {
 			return false;
 		}
 
