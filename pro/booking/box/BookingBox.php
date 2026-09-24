@@ -175,6 +175,7 @@ class BookingBox
 
 		$booked       = (bool) array_filter($records, fn(BookingRecord $record) => !$record->failed());
 		$showing_form = $force_form || !$booked;
+		$cancelled    = $order->has_status('cancelled');
 
 		// A shop worker who reloads after a refused booking still needs the
 		// reason, so the form carries the newest failure.
@@ -256,6 +257,12 @@ class BookingBox
 	 */
 	private static function shows_for(WC_Order $order): bool
 	{
+		// A cancelled order ships nothing. It keeps the box only to show the
+		// bookings it already has.
+		if ($order->has_status('cancelled') && !(new Bring_WC_Order_Adapter($order))->is_booked()) {
+			return false;
+		}
+
 		if ('yes' === Fraktguiden_Helper::get_option('booking_without_bring')) {
 			return true;
 		}

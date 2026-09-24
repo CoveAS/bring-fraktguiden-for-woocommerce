@@ -71,6 +71,11 @@ class Bring_Booking_Common_View {
 			'icon' => 'dashicons-minus',
 		];
 
+		// A cancelled order ships nothing, so it offers no booking.
+		if ( ! $order->is_booked() && $order->order->has_status( 'cancelled' ) ) {
+			return null;
+		}
+
 		$labels_url         = Bring_Booking_Labels::create_download_url( $order->order->get_id() );
 		if ( $order->is_booked() ) {
 			$result = [

@@ -62,7 +62,9 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 		</div>
 	<?php endforeach; ?>
 
-	<div class="bfg-booking-history__actions">
-		<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-again><t>Book again</t></button>
-	</div>
+	<?php if (!$cancelled) : ?>
+		<div class="bfg-booking-history__actions">
+			<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-again><t>Book again</t></button>
+		</div>
+	<?php endif; ?>
 </div>
