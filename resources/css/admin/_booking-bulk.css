@@ -38,6 +38,13 @@
     line-height: var(--bfg-leading-none);
 }
 
+/* The core rule `.wp-core-ui .button .dashicons` sets a tall line height,
+   which pushes the glyph below the circle. */
+.wp-core-ui .button .bring-booking-status-icon {
+    line-height: var(--bfg-leading-none);
+    vertical-align: middle;
+}
+
 .bring-booking-status-icon::before {
     display: inline-block;
     position: relative;
