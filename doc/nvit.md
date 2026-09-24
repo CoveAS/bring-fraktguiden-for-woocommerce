@@ -95,6 +95,9 @@ The rule has three parts, and one class asks all three. Both ends of the
 shipment must be in Norway, because other countries also use 4 digit postal
 codes.
 
+Svalbard counts as Norway at both ends. WooCommerce names it with the country
+code `SJ`, and its postal codes 9170 to 9179 sit inside an NVIT range.
+
 | Class | Answers |
 |---|---|
 | `BringFraktguiden\Customs\NvitPostalCodes` | Does the route leave Norway? |
