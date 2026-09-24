@@ -63,7 +63,7 @@ class Bring_Booking_Labels {
 				if ($adapter->is_booked()) {
 					continue;
 				}
-				Bring_Booking::send_booking( $adapter, true );
+				Bring_Booking::book( $order );
 			}
 
 			static::download_page();

@@ -11,15 +11,16 @@ use BringFraktguiden\Booking\BulkBookingGroups;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
 use BringFraktguidenPro\Booking\Box\BookingBox;
-use BringFraktguidenPro\Booking\Consignment\Bring_Consignment;
-use BringFraktguidenPro\Booking\Consignment_Request\Bring_Booking_Consignment_Request;
+use BringFraktguidenPro\Booking\Box\BookingDraft;
+use BringFraktguidenPro\Booking\Box\BookingForm;
+use BringFraktguidenPro\Booking\Box\BookingRecord;
+use BringFraktguidenPro\Booking\Box\BookingSender;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Labels;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_My_Order_View;
 use BringFraktguidenPro\Booking\Views\Bring_Booking_Orders_View;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
 use WC_Admin_List_Table_Orders;
-use WC_Logger;
 use WC_Order;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -155,112 +156,42 @@ class Bring_Booking {
 	}
 
 	/**
-	 * Send booking
+	 * Book the order outside the booking box.
 	 *
-	 * @param WC_Order|Bring_WC_Order_Adapter $wc_order WooCommerce order.
+	 * The form holds the saved draft of the box, or else what the order
+	 * holds. A value the bulk dialog sends wins over both, because the shop
+	 * worker picked it for the whole selection.
+	 *
+	 * @throws Exception When the shop or the order cannot be booked at all.
 	 */
-	public static function send_booking( $wc_order, $bulk_mode = false ) {
-		$adapter = $wc_order;
-		if ( $wc_order instanceof WC_Order ) {
-			$adapter = new Bring_WC_Order_Adapter( $adapter );
-		} else {
-			$wc_order = $adapter->order;
-		}
-		// Get booking count
-		$count    = get_option( 'bring_fraktguiden_booking_count', [] );
-		$date_utc = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
-		$date_now = (int) $date_utc->format( 'Ymd' );
+	public static function book( WC_Order $order ): BookingRecord {
+		$adapter        = new Bring_WC_Order_Adapter( $order );
+		$shipping_items = $adapter->get_fraktguiden_shipping_items();
+		$form           = BookingDraft::read( $order ) ?? BookingForm::from_order( $order, reset( $shipping_items ) ?: null );
 
-		if ( ! is_array( $count ) ) {
-			$count = [];
+		$input   = Fraktguiden_Helper::get_input_request_method();
+		$payload = $form->to_array();
+
+		$customer_number = (string) filter_input( $input, '_bring-customer-number' );
+		if ( $customer_number ) {
+			$payload['customer_number'] = $customer_number;
 		}
 
-		// Bring_WC_Order_Adapter.
-		$customer_number = (string) filter_input( Fraktguiden_Helper::get_input_request_method(), '_bring-customer-number' );
-		if (! $customer_number) {
-			$customer_number = Fraktguiden_Helper::get_option( 'mybring_customer_number' );
+		$date    = (string) filter_input( $input, '_bring-shipping-date' );
+		$hour    = (string) filter_input( $input, '_bring-shipping-date-hour' );
+		$minutes = (string) filter_input( $input, '_bring-shipping-date-minutes' );
+		if ( $date && $hour && $minutes ) {
+			$payload['shipping_date'] = $date;
+			$payload['shipping_time'] = $hour . ':' . $minutes;
 		}
 
-		// One booking request per order shipping item (WC_Order_Item_Shipping).
-		foreach ( $adapter->get_fraktguiden_shipping_items() as $shipping_item ) {
-			// Create the consignment.
-			$consignment_request = Bring_Booking_Consignment_Request::create( $shipping_item );
-			$args = [
-				'shipping_date_time' => self::get_shipping_date_time(),
-				'customer_number'    => $customer_number,
-			];
-			if ( in_array( $adapter->bring_product, [5600, 'PA_DOREN'] ) ) {
-				// Alternative delivery date.
-				if ( $bulk_mode ) {
-					$time_slot = $adapter->shipping_item->get_meta( 'bring_fraktguiden_time_slot' );
-					if ( $time_slot ) {
-						$args['customer_specified_delivery_date_time'] = $time_slot;
-					}
-				} else {
-					$args['customer_specified_delivery_date_time'] = self::get_shipping_date_time( '_bring-delivery-date', false );
-				}
-			}
-			$consignment_request->fill( $args );
+		$record = BookingSender::send( $order, BookingForm::from_payload( $payload ) );
 
-			$original_order_status = $wc_order->get_status();
-
-			// Set order status to awaiting shipping.
-			$wc_order->update_status( 'wc-bring-shipment' );
-
-			// Send the booking.
-			$response = $consignment_request->post();
-
-			if ( 'yes' === Fraktguiden_Helper::get_option( 'debug' ) ) {
-				$log = new WC_Logger();
-				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Request data: ' . wp_json_encode( $consignment_request->create_data(), JSON_PRETTY_PRINT ) );
-				$log->add( Fraktguiden_Helper::ID, '[BOOKING] Response: ' . wp_json_encode( $response->to_array(), JSON_PRETTY_PRINT ) );
-			}
-
-			if ( ! in_array( $response->get_status_code(), [ 200, 201, 202, 203, 204 ], true ) ) {
-				// @TODO: Error message
-				// wp_send_json( json_decode('['.$response->get_status_code().','.$request_data['body'].','.$response->get_body().']',1) );die;
-			}
-
-			if ( empty( $count[ $date_now ] ) ) {
-				$count[ $date_now ] = 0;
-			}
-
-			// Save the response json to the order.
-			// @TODO: Save per shipping item instead. See issue #48
-			$adapter->update_booking_response( $response );
-
-			// Download labels pdf.
-			if ( $adapter->has_booking_errors() ) {
-				// If there are errors, set the status back to the original status.
-				$status      = $original_order_status;
-				$status_note = __( 'Booking errors. See the Bring Booking box for details.', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL;
-				$wc_order->update_status( $status, $status_note );
-
-				continue;
-			}
-
-			$count[ $date_now ]++;
-
-			// Download the labels.
-			$consigments = Bring_Consignment::create_from_response( $response, $wc_order->get_id() );
-			foreach ( $consigments as $consignment ) {
-				$consignment->download_label();
-			}
-
-			// Create new status and order note.
-			$status = Fraktguiden_Helper::get_option( 'auto_set_status_after_booking_success' );
-			if ( 'none' === $status ) {
-				// Set status back to the previous status.
-				$status = $original_order_status;
-			}
-
-			$status_note = __( 'Booked with Bring', 'bring-fraktguiden-for-woocommerce' ) . PHP_EOL;
-
-			// Update status.
-			$wc_order->update_status( $status, $status_note );
+		if ( ! $record->failed() ) {
+			BookingDraft::clear( $order );
 		}
 
-		update_option( 'bring_fraktguiden_booking_count', $count, false );
+		return $record;
 	}
 
 	/**
@@ -274,32 +205,6 @@ class Bring_Booking {
 			'hour'   => date_i18n( 'H', strtotime( '+1 hour', current_time( 'timestamp' ) ) ),
 			'minute' => date_i18n( 'i' ),
 		);
-	}
-
-	/**
-	 * Get a shipping date time
-	 *
-	 * @return string
-	 */
-	public static function get_shipping_date_time( $name = '_bring-shipping-date', $default_to_now = true ) {
-		$input_request = Fraktguiden_Helper::get_input_request_method();
-
-		$date         = filter_input( $input_request, $name . '' );
-		$date_hour    = filter_input( $input_request, $name . '-hour' );
-		$date_minutes = filter_input( $input_request, $name . '-minutes' );
-
-		// Get the shipping date.
-		if ( $date && $date_hour && $date_minutes ) {
-			return $date . 'T' . $date_hour . ':' . $date_minutes . ':00';
-		}
-
-		if ( ! $default_to_now ) {
-			return false;
-		}
-
-		$shipping_date = self::create_shipping_date();
-
-		return $shipping_date['date'] . 'T' . $shipping_date['hour'] . ':' . $shipping_date['minute'] . ':00';
 	}
 
 	/**
@@ -330,7 +235,7 @@ class Bring_Booking {
 			}
 
 			try {
-				self::send_booking( $adapter->order, true );
+				$record = self::book( $adapter->order );
 			} catch ( Exception $e ) {
 				$report[ $post_id ] = [
 					'status'       => 'error',
@@ -342,7 +247,7 @@ class Bring_Booking {
 				continue;
 			}
 			$status = 'ok';
-			if ($adapter->has_booking_errors()) {
+			if ( $record->failed() ) {
 				$status = 'error';
 				$message = esc_attr__('Error: Could not book the order!', 'bring-fraktguiden-for-woocommerce');
 			}

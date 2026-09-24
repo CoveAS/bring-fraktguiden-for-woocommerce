@@ -63,16 +63,6 @@ class Bring_WC_Order_Adapter {
 	}
 
 	/**
-	 * Saves the booking response to the order.
-	 *
-	 * @param WP_Bring_Response $response Bring response.
-	 */
-	public function update_booking_response( $response ) {
-		$this->order->update_meta_data( '_bring_booking_response', $response->to_array() );
-		$this->order->save();
-	}
-
-	/**
 	 * Returns the saved booking response array.
 	 *
 	 * Older versions saved the response as post meta. On an HPOS shop

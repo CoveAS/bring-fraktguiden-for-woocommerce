@@ -91,8 +91,8 @@ Change the helper only to fix a fault in what it already does.
 
 ## Failed idea: several shipping lines per order
 
-The booking code loops over every Bring shipping line of an order and sends one
-booking per line. `Bring_Booking::send_booking()` holds the loop.
+An old version of the booking code looped over every Bring shipping line of an
+order and sent one booking per line.
 
 The idea does not work. A WooCommerce order records no link between a product
 line and a shipping line. Nothing says which goods travel on which shipment.
@@ -105,12 +105,11 @@ the same goods twice.
 Any new per order data follows the same shape, because the order offers nothing
 finer. Write it for the whole order and let each booking carry it.
 
-Do not build on the loop. Do not add a feature that needs to know which goods
-belong to which shipping line.
+Do not add a feature that needs to know which goods belong to which shipping
+line.
 
-The booking box of the order screen already books one shipment per order. See
-`doc/booking-box.md`. The loop stays only for the bulk action on the orders
-list.
+Every booking sends one consignment per order, through `BookingSender::send()`.
+See `doc/booking-box.md`.
 
 ## Directory Map
 

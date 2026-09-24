@@ -71,6 +71,10 @@ class BookingSender
 
 		$record = BookingHistory::append($order, $response, $form);
 
+		if (!$record->failed()) {
+			self::count_booking();
+		}
+
 		self::note_outcome($order, $record);
 
 		return $record;
@@ -94,6 +98,20 @@ class BookingSender
 		);
 
 		$shipping_item->save();
+	}
+
+	/**
+	 * Count the booking for today. The license check reads the count.
+	 */
+	private static function count_booking(): void
+	{
+		$count = get_option('bring_fraktguiden_booking_count', []);
+		$count = is_array($count) ? $count : [];
+		$today = (int) gmdate('Ymd');
+
+		$count[$today] = ($count[$today] ?? 0) + 1;
+
+		update_option('bring_fraktguiden_booking_count', $count, false);
 	}
 
 	/**

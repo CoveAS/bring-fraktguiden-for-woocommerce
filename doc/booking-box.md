@@ -13,8 +13,15 @@ order carries. It writes the product and the parcels onto the first Bring
 shipping line, because `Bring_Booking_Consignment_Request` reads them from
 there.
 
-`Bring_Booking::send_booking()` still loops over every Bring shipping line. The
-bulk action on the orders list uses it. The box does not.
+## One path to book
+
+`BookingSender::send()` sends every booking and records it in the history. The
+box calls it directly. The bulk action on the orders list and the Book now
+button of the orders list call it through `Bring_Booking::book()`.
+
+`Bring_Booking::book()` fills the form from the saved draft, or else from the
+order. The customer number and the shipping date of the bulk dialog win over
+both, because the shop worker picks them for the whole selection.
 
 ## One form, no steps
 
@@ -105,4 +112,4 @@ that lands after it would write a draft back onto a booked order.
 `$_POST`. The box sends JSON, so the request now takes the same values through
 `fill()`: `additional_services`, `additional_info_sender`,
 `additional_info_recipient` and `nature_of_cargo`. A null value still reads
-`$_POST`, which is what the bulk booking does.
+`$_POST`.

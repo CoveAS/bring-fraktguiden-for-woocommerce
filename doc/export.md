@@ -183,7 +183,7 @@ also puts `consentReady` on `window`.
 
 The cargo type is a select on the booking box of the order screen, in the field
 `_bring_nature_of_cargo`. `NatureOfCargo` holds the values and reads the form. A
-bulk booking sends no form, so it books `SALE_OF_GOODS`.
+bulk booking takes the cargo type of the saved draft, or else `SALE_OF_GOODS`.
 
 The select leaves out `OTHER`, because `OTHER` needs a free text
 `natureOfCargo.detail` and the form holds no text field.
