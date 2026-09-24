@@ -103,6 +103,7 @@ class Field
 			'email',
 			'text' => 'input',
 			'checkbox' => 'checkbox',
+			'checkboxes' => 'checkboxes',
 			'select' => 'select',
 			'radio' => 'radio',
 			'info' => 'info',
@@ -111,9 +112,9 @@ class Field
 
 	public function label(): string
 	{
-		// A radio group holds one input per choice, so no label can point at it.
+		// A group holds one input per choice, so no label can point at it.
 		// The group carries the title as its aria-label instead.
-		if ($this->field['type'] === 'radio') {
+		if (in_array($this->field['type'], ['radio', 'checkboxes'], true)) {
 			return sprintf('<span class="bfg-label">%s</span>', $this->title());
 		}
 

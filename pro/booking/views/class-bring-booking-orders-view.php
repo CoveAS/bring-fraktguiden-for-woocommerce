@@ -295,9 +295,9 @@ class Bring_Booking_Orders_View {
 				_n( '%d order already held a booking.', '%d orders already held a booking.', $count, 'bring-fraktguiden-for-woocommerce' ),
 				$count
 			),
-			BulkBookingGroups::CANCELLED => fn( int $count ) => sprintf(
+			BulkBookingGroups::STATUS   => fn( int $count ) => sprintf(
 				/* translators: %d: number of orders. */
-				_n( '%d order is cancelled, so it got no booking.', '%d orders are cancelled, so they got no booking.', $count, 'bring-fraktguiden-for-woocommerce' ),
+				_n( '%d order is in a status that allows no booking.', '%d orders are in a status that allows no booking.', $count, 'bring-fraktguiden-for-woocommerce' ),
 				$count
 			),
 			BulkBookingGroups::SKIPPED  => fn( int $count ) => sprintf(

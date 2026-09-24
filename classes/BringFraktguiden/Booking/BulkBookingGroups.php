@@ -9,7 +9,8 @@ use WC_Order;
  * The four groups a bulk booking selection falls into.
  *
  * The booking leaves an order that already holds a booking alone, and books
- * nothing for a cancelled order or an order without a Bring shipping line. Both keep their place in
+ * nothing for an order in a status that allows no booking, or an order
+ * without a Bring shipping line. Both keep their place in
  * the label print, so the modal names every group before the worker sends the
  * request.
  */
@@ -21,8 +22,8 @@ class BulkBookingGroups
 	/** The order already holds a booking. */
 	public const BOOKED = 'booked';
 
-	/** The order is cancelled, so it ships nothing. */
-	public const CANCELLED = 'cancelled';
+	/** The order status allows no booking. */
+	public const STATUS = 'status';
 
 	/** The order gets no booking. */
 	public const SKIPPED = 'skipped';
@@ -36,7 +37,7 @@ class BulkBookingGroups
 	 */
 	public static function of(array $order_ids): array
 	{
-		$groups = [self::BOOK => [], self::BOOKED => [], self::CANCELLED => [], self::SKIPPED => []];
+		$groups = [self::BOOK => [], self::BOOKED => [], self::STATUS => [], self::SKIPPED => []];
 
 		foreach ($order_ids as $order_id) {
 			$order = wc_get_order((int) $order_id);
@@ -62,8 +63,8 @@ class BulkBookingGroups
 			return self::BOOKED;
 		}
 
-		if ($order->has_status('cancelled')) {
-			return self::CANCELLED;
+		if (!BookableStatus::allows($order)) {
+			return self::STATUS;
 		}
 
 		if (!$adapter->has_bring_shipping_methods()) {

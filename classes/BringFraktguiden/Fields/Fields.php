@@ -67,6 +67,7 @@ class Fields
 	public readonly Field $booking_address_email;
 	public readonly Field $customs_consent;
 	public readonly Field $customs_exporter_number;
+	public readonly Field $booking_order_statuses;
 	public readonly Field $auto_set_status_after_booking_success;
 	public readonly Field $auto_set_status_after_print_label_success;
 	public readonly Field $booking_return_service;

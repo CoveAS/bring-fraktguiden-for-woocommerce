@@ -8,6 +8,7 @@
 namespace BringFraktguidenPro\Booking\Views;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
+use BringFraktguiden\Booking\BookableStatus;
 use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Url;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
@@ -71,8 +72,7 @@ class Bring_Booking_Common_View {
 			'icon' => 'dashicons-minus',
 		];
 
-		// A cancelled order ships nothing, so it offers no booking.
-		if ( ! $order->is_booked() && $order->order->has_status( 'cancelled' ) ) {
+		if ( ! $order->is_booked() && ! BookableStatus::allows( $order->order ) ) {
 			return null;
 		}
 

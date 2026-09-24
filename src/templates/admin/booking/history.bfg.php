@@ -6,6 +6,7 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
  * Every booking attempt of the order, newest first.
  *
  * @var BookingRecord[] $records
+ * @var bool            $bookable Whether the order status allows a booking.
  */
 ?>
 
@@ -62,7 +63,7 @@ use BringFraktguidenPro\Booking\Box\BookingRecord;
 		</div>
 	<?php endforeach; ?>
 
-	<?php if (!$cancelled) : ?>
+	<?php if ($bookable) : ?>
 		<div class="bfg-booking-history__actions">
 			<button type="button" class="bfg-btn bfg-btn--secondary" data-bfg-again><t>Book again</t></button>
 		</div>

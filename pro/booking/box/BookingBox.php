@@ -4,6 +4,7 @@ namespace BringFraktguidenPro\Booking\Box;
 
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
+use BringFraktguiden\Booking\BookableStatus;
 use BringFraktguiden\Customs\CustomsRoute;
 use BringFraktguiden\Customs\HsCodePicker;
 use BringFraktguiden\Customs\CustomsWarning;
@@ -175,7 +176,7 @@ class BookingBox
 
 		$booked       = (bool) array_filter($records, fn(BookingRecord $record) => !$record->failed());
 		$showing_form = $force_form || !$booked;
-		$cancelled    = $order->has_status('cancelled');
+		$bookable     = BookableStatus::allows($order);
 
 		// A shop worker who reloads after a refused booking still needs the
 		// reason, so the form carries the newest failure.
@@ -257,9 +258,9 @@ class BookingBox
 	 */
 	private static function shows_for(WC_Order $order): bool
 	{
-		// A cancelled order ships nothing. It keeps the box only to show the
-		// bookings it already has.
-		if ($order->has_status('cancelled') && !(new Bring_WC_Order_Adapter($order))->is_booked()) {
+		// An order in a status that allows no booking keeps the box only to show
+		// the bookings it already has.
+		if (!BookableStatus::allows($order) && !(new Bring_WC_Order_Adapter($order))->is_booked()) {
 			return false;
 		}
 

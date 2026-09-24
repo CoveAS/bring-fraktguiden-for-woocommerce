@@ -20,9 +20,14 @@ $booking_group_blocks = [
 		'title' => __('These orders already hold a booking', 'bring-fraktguiden-for-woocommerce'),
 		'note'  => __('Bring does not book them again. Their labels still print.', 'bring-fraktguiden-for-woocommerce'),
 	],
-	'cancelled' => [
-		'title' => __('These orders are cancelled', 'bring-fraktguiden-for-woocommerce'),
-		'note'  => __('A cancelled order ships nothing, so Bring books nothing for it.', 'bring-fraktguiden-for-woocommerce'),
+	'status' => [
+		'title' => __('These orders are in a status that allows no booking', 'bring-fraktguiden-for-woocommerce'),
+		'note'  => sprintf(
+			/* translators: %1$s and %2$s are the open and close tags of a link to the booking settings. */
+			__('Choose the statuses that allow a booking in the %1$sbooking settings%2$s.', 'bring-fraktguiden-for-woocommerce'),
+			'<a href="' . esc_url($booking_settings_url) . '" target="_blank" rel="noopener">',
+			'</a>'
+		),
 	],
 	'skipped' => [
 		'title' => __('These orders get no booking', 'bring-fraktguiden-for-woocommerce'),

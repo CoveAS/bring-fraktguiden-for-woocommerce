@@ -221,3 +221,20 @@ body:not(.using-mouse) .bfg-field--checkbox-box:focus-within {
 .bfg-checkbox-group .bfg-field--checkbox-box+.bfg-field--checkbox-box {
     border-top: 1px solid var(--bfg-border);
 }
+
+/* Checkbox List (.bfg-checkbox-list)
+   One field that saves several choices, such as a list of order statuses.
+   ========================================================================== */
+
+.bfg-checkbox-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--bfg-space-3) var(--bfg-space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bfg-checkbox-list li {
+    margin: 0;
+}

@@ -142,6 +142,11 @@ use BringFraktguiden\Fields\Fields;
 					</bfg-notice>
 
 					<div class="bfg-field">
+						<?php echo $fields->booking_order_statuses->label(); ?>
+						<?php echo $fields->booking_order_statuses; ?>
+					</div>
+
+					<div class="bfg-field">
 						<?php echo $fields->auto_set_status_after_booking_success->label(); ?>
 						<?php echo $fields->auto_set_status_after_booking_success; ?>
 					</div>

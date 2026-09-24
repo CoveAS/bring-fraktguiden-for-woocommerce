@@ -98,6 +98,10 @@ class Setting
 			'text' => sanitize_text_field($param),
 			'checkbox' => filter_var($param, FILTER_VALIDATE_BOOL),
 			'number' => $this->number($param),
+			// The options can grow after the config loads, as a plugin adds an order
+			// status late. So the list keeps any clean key, and a key that names
+			// nothing matches nothing.
+			'checkboxes' => array_values(array_filter(array_map('sanitize_key', (array) $param))),
 			default => throw new \Exception("Unknown data type: " . $this->data['type']),
 		};
 	}

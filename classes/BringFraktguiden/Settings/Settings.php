@@ -85,6 +85,7 @@ class Settings
 	#[Checkbox]
 	public Setting $customs_consent;
 	public Setting $customs_exporter_number;
+	public Setting $booking_order_statuses;
 	public Setting $auto_set_status_after_booking_success;
 	public Setting $auto_set_status_after_print_label_success;
 	public Setting $booking_return_service;

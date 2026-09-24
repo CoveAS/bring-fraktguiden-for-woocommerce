@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-24T15:37:34+00:00\n"
+"POT-Creation-Date: 2026-09-24T15:43:03+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Cove AS"
 msgstr "Cove AS"
 
-#: build/templates/admin/booking/box.php:22 pro/booking/box/BookingBox.php:76
+#: build/templates/admin/booking/box.php:22 pro/booking/box/BookingBox.php:77
 msgid "Bring Booking"
 msgstr "Bring Booking"
 
@@ -124,7 +124,7 @@ msgid "Packages"
 msgstr "Pakker"
 
 #: build/templates/admin/booking/form.php:127 config/admin-settings.php:268
-#: config/admin-settings.php:546
+#: config/admin-settings.php:553
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr "Vekt"
@@ -221,50 +221,50 @@ msgstr "Book med Bring, testmodus"
 msgid "Book with Bring"
 msgstr "Book med Bring"
 
-#: build/templates/admin/booking/history.php:20
+#: build/templates/admin/booking/history.php:21
 msgid "Bring refused this booking"
 msgstr "Bring avviste denne bookingen"
 
-#: build/templates/admin/booking/history.php:22
+#: build/templates/admin/booking/history.php:23
 #: pro/booking/box/BookingSender.php:113
 #: pro/booking/class-bring-booking.php:257
 msgid "Booked with Bring"
 msgstr "Reservert hos Bring"
 
-#: build/templates/admin/booking/history.php:46
+#: build/templates/admin/booking/history.php:47
 msgid "Track"
 msgstr "Spor"
 
-#: build/templates/admin/booking/history.php:55
+#: build/templates/admin/booking/history.php:56
 #: build/templates/admin/pages/kitchen-sink/split-button.php:20
 #: build/templates/admin/pages/kitchen-sink/split-button.php:37
 msgid "Print the labels"
 msgstr "Skriv ut etikettene"
 
-#: build/templates/admin/booking/history.php:57
+#: build/templates/admin/booking/history.php:58
 #: build/templates/admin/pages/kitchen-sink/split-button.php:22
 #: build/templates/admin/pages/kitchen-sink/split-button.php:39
 #: src/components/split-button.bfgc.php:26
 msgid "More options"
 msgstr "Flere valg"
 
-#: build/templates/admin/booking/history.php:64
+#: build/templates/admin/booking/history.php:65
 #: build/templates/admin/pages/kitchen-sink/split-button.php:29
 #: build/templates/admin/pages/kitchen-sink/split-button.php:46
 msgid "Print the shipping label only"
 msgstr "Skriv ut bare fraktetiketten"
 
-#: build/templates/admin/booking/history.php:65
+#: build/templates/admin/booking/history.php:66
 #: build/templates/admin/pages/kitchen-sink/split-button.php:30
 #: build/templates/admin/pages/kitchen-sink/split-button.php:47
 msgid "Print the return label only"
 msgstr "Skriv ut bare returetiketten"
 
-#: build/templates/admin/booking/history.php:71
+#: build/templates/admin/booking/history.php:72
 msgid "Print the label"
 msgstr "Skriv ut etiketten"
 
-#: build/templates/admin/booking/history.php:79
+#: build/templates/admin/booking/history.php:80
 msgid "Book again"
 msgstr "Book på nytt"
 
@@ -416,10 +416,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 
 #: build/templates/admin/pages/booking.php:128
 #: build/templates/admin/pages/booking.php:167
-#: build/templates/admin/pages/booking.php:208
-#: build/templates/admin/pages/booking.php:234
-#: build/templates/admin/pages/booking.php:260
-#: build/templates/admin/pages/booking.php:321
+#: build/templates/admin/pages/booking.php:213
+#: build/templates/admin/pages/booking.php:239
+#: build/templates/admin/pages/booking.php:265
+#: build/templates/admin/pages/booking.php:326
 #: build/templates/admin/pages/fallback-options.php:64
 #: build/templates/admin/pages/fallback-options.php:97
 #: build/templates/admin/pages/fallback-options.php:175
@@ -430,10 +430,10 @@ msgstr "Hver bestilling sender dette som avsenderkontakt for butikken din."
 #: build/templates/admin/pages/settings.php:220
 #: src/templates/admin/pages/booking.bfg.php:103
 #: src/templates/admin/pages/booking.bfg.php:130
-#: src/templates/admin/pages/booking.bfg.php:154
-#: src/templates/admin/pages/booking.bfg.php:168
-#: src/templates/admin/pages/booking.bfg.php:182
-#: src/templates/admin/pages/booking.bfg.php:231
+#: src/templates/admin/pages/booking.bfg.php:159
+#: src/templates/admin/pages/booking.bfg.php:173
+#: src/templates/admin/pages/booking.bfg.php:187
+#: src/templates/admin/pages/booking.bfg.php:236
 #: src/templates/admin/pages/fallback-options.bfg.php:64
 #: src/templates/admin/pages/fallback-options.bfg.php:97
 #: src/templates/admin/pages/fallback-options.bfg.php:173
@@ -490,30 +490,30 @@ msgstr ""
 "Dette endrer statusen selv om ordren er\n"
 "\t\t\t\t\t\t\tfullført"
 
-#: build/templates/admin/pages/booking.php:218
+#: build/templates/admin/pages/booking.php:223
 #: build/templates/admin/pages/pro-settings.php:70
-#: config/admin-settings.php:478
+#: config/admin-settings.php:485
 #: src/templates/admin/pages/pro-settings.bfg.php:70
 msgid "Return label"
 msgstr "Returetikett"
 
-#: build/templates/admin/pages/booking.php:222
+#: build/templates/admin/pages/booking.php:227
 msgid "Send a return label with every booking"
 msgstr "Send en returetikett med hver booking"
 
-#: build/templates/admin/pages/booking.php:244 config/services.php:482
+#: build/templates/admin/pages/booking.php:249 config/services.php:482
 msgid "Home Delivery"
 msgstr "Home Delivery"
 
-#: build/templates/admin/pages/booking.php:248
+#: build/templates/admin/pages/booking.php:253
 msgid "Configure package type for home delivery services"
 msgstr "Still inn pakketype for hjemleveringstjenester"
 
-#: build/templates/admin/pages/booking.php:270
+#: build/templates/admin/pages/booking.php:275
 msgid "Shipping Address"
 msgstr "Fraktadresse"
 
-#: build/templates/admin/pages/booking.php:274
+#: build/templates/admin/pages/booking.php:279
 msgid ""
 "By default, your WooCommerce store address is used as the &quot;from&quot; "
 "address during booking."
@@ -521,22 +521,22 @@ msgstr ""
 "Som standard brukes butikkadressen i WooCommerce som &quot;fra&quot;-adresse "
 "ved booking."
 
-#: build/templates/admin/pages/booking.php:302
+#: build/templates/admin/pages/booking.php:307
 msgid "Address details"
 msgstr "Adressedetaljer"
 
-#: build/templates/admin/pages/booking.php:364
-#: src/templates/admin/pages/booking.bfg.php:272
+#: build/templates/admin/pages/booking.php:369
+#: src/templates/admin/pages/booking.bfg.php:277
 msgid "This field is required."
 msgstr "Dette feltet er påkrevd."
 
-#: build/templates/admin/pages/booking.php:368
-#: src/templates/admin/pages/booking.bfg.php:276
+#: build/templates/admin/pages/booking.php:373
+#: src/templates/admin/pages/booking.bfg.php:281
 msgid "Please enter a valid email address."
 msgstr "Skriv inn en gyldig epostadresse."
 
-#: build/templates/admin/pages/booking.php:372
-#: src/templates/admin/pages/booking.bfg.php:280
+#: build/templates/admin/pages/booking.php:377
+#: src/templates/admin/pages/booking.bfg.php:285
 msgid "Please enter a valid phone number."
 msgstr "Skriv inn et gyldig telefonnummer."
 
@@ -1074,8 +1074,8 @@ msgstr "Tekstfelt"
 
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:23
 #: build/templates/admin/pages/kitchen-sink/form-fields.php:87
-#: config/admin-settings.php:561 config/admin-settings.php:611
-#: config/admin-settings.php:640
+#: config/admin-settings.php:568 config/admin-settings.php:618
+#: config/admin-settings.php:647
 msgid "Label"
 msgstr "Etikett"
 
@@ -1359,7 +1359,7 @@ msgstr "Tillat booking av ordre uten en bring fraktlinje"
 
 #: build/templates/admin/pages/pro-settings.php:32
 #: build/templates/admin/pages/pro/state-active.php:41
-#: pro/booking/views/class-bring-booking-common-view.php:34
+#: pro/booking/views/class-bring-booking-common-view.php:35
 #: src/templates/admin/pages/pro-settings.bfg.php:32
 msgid "Test mode"
 msgstr "Test modus"
@@ -1385,13 +1385,13 @@ msgid "This will change the status even if the order is completed"
 msgstr "Dette vil endre statusen selv om ordren er fullført"
 
 #: build/templates/admin/pages/pro-settings.php:50
-#: config/admin-settings.php:464
+#: config/admin-settings.php:471
 #: src/templates/admin/pages/pro-settings.bfg.php:50
 msgid "Order status after booking"
 msgstr "Bestillingsstatus etter reservering"
 
 #: build/templates/admin/pages/pro-settings.php:52
-#: config/admin-settings.php:466
+#: config/admin-settings.php:473
 #: src/templates/admin/pages/pro-settings.bfg.php:52
 msgid "Order status will be automatically set when successfully booked"
 msgstr "Ordrestatus blir automatisk satt når den er bekreftet bestilt"
@@ -1404,13 +1404,13 @@ msgid "None"
 msgstr "Ingen"
 
 #: build/templates/admin/pages/pro-settings.php:59
-#: config/admin-settings.php:471
+#: config/admin-settings.php:478
 #: src/templates/admin/pages/pro-settings.bfg.php:59
 msgid "Order status after printing"
 msgstr "Ordrestatus etter utskrift"
 
 #: build/templates/admin/pages/pro-settings.php:61
-#: config/admin-settings.php:473
+#: config/admin-settings.php:480
 #: src/templates/admin/pages/pro-settings.bfg.php:61
 msgid "Order status will be automatically set when a label is downloaded"
 msgstr "Ordrestatus blir automatisk angitt når en etikett lastes ned"
@@ -1427,7 +1427,7 @@ msgstr ""
 "tjenestene: %s. Alle andre tjenester bookes uten."
 
 #: build/templates/admin/pages/pro-settings.php:77
-#: config/admin-settings.php:487
+#: config/admin-settings.php:494
 #: src/templates/admin/pages/pro-settings.bfg.php:77
 msgid "No return label"
 msgstr "Ingen returetikett"
@@ -1438,13 +1438,13 @@ msgid "Home delivery"
 msgstr "Hjemlevering"
 
 #: build/templates/admin/pages/pro-settings.php:87
-#: config/admin-settings.php:494
+#: config/admin-settings.php:501
 #: src/templates/admin/pages/pro-settings.bfg.php:87
 msgid "Package type for home delivery"
 msgstr "Pakketype for hjemlevering"
 
 #: build/templates/admin/pages/pro-settings.php:89
-#: config/admin-settings.php:496
+#: config/admin-settings.php:503
 #: src/templates/admin/pages/pro-settings.bfg.php:89
 msgid "Only applies to home delivery services"
 msgstr "Gjelder bare for hjemleveringstjenester"
@@ -2236,27 +2236,30 @@ msgstr "Bring booker dem ikke på nytt. Etikettene deres skrives likevel ut."
 
 #: build/templates/admin/parts/booking-groups.php:24
 #: src/templates/admin/parts/booking-groups.bfg.php:24
-msgid "These orders are cancelled"
-msgstr "Disse ordrene er kansellert"
+msgid "These orders are in a status that allows no booking"
+msgstr "Disse ordrene har en status som ikke tillater booking"
 
-#: build/templates/admin/parts/booking-groups.php:25
-#: src/templates/admin/parts/booking-groups.bfg.php:25
-msgid "A cancelled order ships nothing, so Bring books nothing for it."
-msgstr "En kansellert ordre sender ingenting, så Bring booker ingenting for den."
+#. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
+#: build/templates/admin/parts/booking-groups.php:27
+#: src/templates/admin/parts/booking-groups.bfg.php:27
+#, php-format
+msgid ""
+"Choose the statuses that allow a booking in the %1$sbooking settings%2$s."
+msgstr "Velg statusene som tillater booking i %1$sbookinginnstillingene%2$s."
 
-#: build/templates/admin/parts/booking-groups.php:28
-#: src/templates/admin/parts/booking-groups.bfg.php:28
+#: build/templates/admin/parts/booking-groups.php:33
+#: src/templates/admin/parts/booking-groups.bfg.php:33
 msgid "These orders get no booking"
 msgstr "Booker ingen av disse ordrene"
 
-#: build/templates/admin/parts/booking-groups.php:30
-#: src/templates/admin/parts/booking-groups.bfg.php:30
+#: build/templates/admin/parts/booking-groups.php:35
+#: src/templates/admin/parts/booking-groups.bfg.php:35
 msgid "They carry no shipping line at all, so Bring has nothing to book."
 msgstr "De har ingen fraktlinje, så Bring har ingenting å booke."
 
 #. translators: %1$s and %2$s are the open and close tags of a link to the booking settings.
-#: build/templates/admin/parts/booking-groups.php:33
-#: src/templates/admin/parts/booking-groups.bfg.php:33
+#: build/templates/admin/parts/booking-groups.php:38
+#: src/templates/admin/parts/booking-groups.bfg.php:38
 #, php-format
 msgid ""
 "They carry no Bring shipping service. Turn on %1$sAllow booking without "
@@ -3522,8 +3525,20 @@ msgstr ""
 "999 999 MVA eller NO999999999. Bring sender det med tolldeklarasjonen for en "
 "sending som forlater Norge. En NVIT-sending trenger ikke eksportørnummer."
 
+#: config/admin-settings.php:464
+msgid "Order statuses that allow a booking"
+msgstr "Ordrestatuser som tillater booking"
+
+#: config/admin-settings.php:466
+msgid ""
+"An order in any other status shows no booking button. An order that already "
+"holds a booking still prints its labels."
+msgstr ""
+"En ordre med en annen status viser ingen bookingknapp. En ordre som allerede "
+"har en booking kan fortsatt skrive ut etikettene sine."
+
 #. translators: %s is a list of Bring service names.
-#: config/admin-settings.php:482
+#: config/admin-settings.php:489
 #, php-format
 msgid ""
 "Bring only adds a return label to a shipment inside Norway, on these "
@@ -3534,15 +3549,15 @@ msgstr ""
 "tjenestene: %s. Alle andre tjenester bookes uten. Bring fakturerer en retur "
 "bare når kunden din bruker den."
 
-#: config/admin-settings.php:488
+#: config/admin-settings.php:495
 msgid "A booking carries the outbound label only."
 msgstr "En booking har bare utgående etikett."
 
-#: config/admin-settings.php:514
+#: config/admin-settings.php:521
 msgid "Pack in multiple boxes"
 msgstr "Pakk i flere esker"
 
-#: config/admin-settings.php:517
+#: config/admin-settings.php:524
 msgid ""
 "Split large orders into multiple shipments. This increases shipping costs "
 "proportionally. Consider using a fallback rate instead for bulk orders."
@@ -3550,38 +3565,38 @@ msgstr ""
 "Del store ordrer i flere sendinger. Det øker fraktkostnaden tilsvarende. "
 "Vurder heller en fallback-pris for store ordrer."
 
-#: config/admin-settings.php:520
+#: config/admin-settings.php:527
 msgid "Side"
 msgstr "Sidelengde"
 
-#: config/admin-settings.php:533
+#: config/admin-settings.php:540
 msgid "Circumference"
 msgstr "Omkrets"
 
-#: config/admin-settings.php:569 config/admin-settings.php:618
-#: config/admin-settings.php:647
+#: config/admin-settings.php:576 config/admin-settings.php:625
+#: config/admin-settings.php:654
 msgid "Fixed price"
 msgstr "Fast pris"
 
-#: config/admin-settings.php:572 config/admin-settings.php:650
+#: config/admin-settings.php:579 config/admin-settings.php:657
 msgid "ie: 500"
 msgstr "f.eks. 500"
 
-#: config/admin-settings.php:581 config/admin-settings.php:630
-#: config/admin-settings.php:659
+#: config/admin-settings.php:588 config/admin-settings.php:637
+#: config/admin-settings.php:666
 msgid "Service to use"
 msgstr "Tjeneste som skal brukes"
 
-#: config/admin-settings.php:585 config/admin-settings.php:635
-#: config/admin-settings.php:663
+#: config/admin-settings.php:592 config/admin-settings.php:642
+#: config/admin-settings.php:670
 msgid "No shipping"
 msgstr "Ingen frakt"
 
-#: config/admin-settings.php:589
+#: config/admin-settings.php:596
 msgid "Calculate shipping costs based on weight only"
 msgstr "Kalkuler frakt kostnader basert kun på vekt"
 
-#: config/admin-settings.php:593
+#: config/admin-settings.php:600
 msgid ""
 "Uses weight only for shipping rates. Works best if you pack orders in "
 "standard-size boxes."
@@ -3589,11 +3604,11 @@ msgstr ""
 "Bruker bare vekt til fraktpriser. Fungerer best hvis du pakker ordrer i "
 "esker med standardstørrelse."
 
-#: config/admin-settings.php:598
+#: config/admin-settings.php:605
 msgid "Maximum product limit"
 msgstr "Maksimalt produktantall"
 
-#: config/admin-settings.php:602
+#: config/admin-settings.php:609
 msgid ""
 "Limit how many cart items are processed for shipping calculation. Higher "
 "values may slow down checkout. Default: 1000."
@@ -3601,11 +3616,11 @@ msgstr ""
 "Begrens hvor mange varer i handlekurven som tas med i fraktberegningen. "
 "Høyere verdier kan gjøre kassen tregere. Standard: 1000."
 
-#: config/admin-settings.php:621
+#: config/admin-settings.php:628
 msgid "ie: 1500"
 msgstr "f.eks. 1500"
 
-#: config/admin-settings.php:631
+#: config/admin-settings.php:638
 msgid ""
 "Show this service as a shipping rate if the maximum product limit is "
 "exceeded."
@@ -3847,15 +3862,15 @@ msgstr "Vekt:"
 msgid "Dowload waybill"
 msgstr "Last ned fraktbrev"
 
-#: pro/booking/views/class-bring-booking-common-view.php:33
+#: pro/booking/views/class-bring-booking-common-view.php:34
 msgid "Bring - Submit Consignments"
 msgstr "Bring - Send"
 
-#: pro/booking/views/class-bring-booking-common-view.php:33
+#: pro/booking/views/class-bring-booking-common-view.php:34
 msgid "Submit Consignment"
 msgstr "Send"
 
-#: pro/booking/views/class-bring-booking-common-view.php:67
+#: pro/booking/views/class-bring-booking-common-view.php:68
 msgid "Book now"
 msgstr "Book nå"
 
@@ -3926,10 +3941,10 @@ msgstr[1] "%d ordre hadde allerede en booking."
 #. translators: %d: number of orders.
 #: pro/booking/views/class-bring-booking-orders-view.php:300
 #, php-format
-msgid "%d order is cancelled, so it got no booking."
-msgid_plural "%d orders are cancelled, so they got no booking."
-msgstr[0] "%d ordre er kansellert, så den ble ikke booket."
-msgstr[1] "%d ordrer er kansellert, så de ble ikke booket."
+msgid "%d order is in a status that allows no booking."
+msgid_plural "%d orders are in a status that allows no booking."
+msgstr[0] "%d ordre har en status som ikke tillater booking."
+msgstr[1] "%d ordrer har en status som ikke tillater booking."
 
 #. translators: %d: number of orders.
 #: pro/booking/views/class-bring-booking-orders-view.php:305
@@ -4045,6 +4060,19 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "These orders are cancelled"
+#~ msgstr "Disse ordrene er kansellert"
+
+#~ msgid "A cancelled order ships nothing, so Bring books nothing for it."
+#~ msgstr ""
+#~ "En kansellert ordre sender ingenting, så Bring booker ingenting for den."
+
+#, php-format
+#~ msgid "%d order is cancelled, so it got no booking."
+#~ msgid_plural "%d orders are cancelled, so they got no booking."
+#~ msgstr[0] "%d ordre er kansellert, så den ble ikke booket."
+#~ msgstr[1] "%d ordrer er kansellert, så de ble ikke booket."
 
 #, php-format
 #~ msgid ""

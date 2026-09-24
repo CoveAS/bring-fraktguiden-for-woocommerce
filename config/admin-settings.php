@@ -460,6 +460,13 @@ return [
 				'placeholder' => 'NO 999 999 999 MVA',
 				'default' => '',
 			],
+			'booking_order_statuses' => [
+				'title' => __('Order statuses that allow a booking', 'bring-fraktguiden-for-woocommerce'),
+				'type' => 'checkboxes',
+				'description' => __('An order in any other status shows no booking button. An order that already holds a booking still prints its labels.', 'bring-fraktguiden-for-woocommerce'),
+				'options' => wc_get_order_statuses(),
+				'default' => ['wc-processing', 'wc-on-hold', 'wc-bring-shipment', 'wc-completed'],
+			],
 			'auto_set_status_after_booking_success' => [
 				'title' => __('Order status after booking', 'bring-fraktguiden-for-woocommerce'),
 				'type' => 'select',
