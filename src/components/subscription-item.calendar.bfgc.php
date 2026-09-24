@@ -14,7 +14,7 @@
  */
 ?>
 
-<div class="bfg-subscription__item <t>class</t>">
+<div class="bfg-subscription__item">
 	<span class="bfg-subscription__label"><t>label</t></span>
 	<span class="bfg-subscription__value"><t>value</t> <span class="bfg-subscription__detail bfgu:font-normal bfgu:opacity-60">(<t>detail</t>)</span></span>
 </div>

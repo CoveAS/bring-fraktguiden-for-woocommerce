@@ -13,7 +13,7 @@
  */
 ?>
 
-<div class="bfg-subscription__item <t>class</t>">
+<div class="bfg-subscription__item">
 	<span class="bfg-subscription__label bfg-subscription__label--status"><t>label</t></span>
 	<span class="bfg-subscription__value bfg-subscription__value--status" data-color=":color">
 		<span class="bfg-subscription__dot"></span>

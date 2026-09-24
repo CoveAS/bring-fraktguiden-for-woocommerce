@@ -16,6 +16,6 @@
  */
 ?>
 
-<div class="bfg-subscription <t>class</t>">
+<div class="bfg-subscription">
 	<slot />
 </div>

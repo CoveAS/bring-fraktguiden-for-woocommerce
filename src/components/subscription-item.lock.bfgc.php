@@ -13,7 +13,7 @@
  */
 ?>
 
-<div class="bfg-subscription__item <t>class</t>">
+<div class="bfg-subscription__item">
 	<div class="bfg-subscription__label">
 		<svg class="bfg-subscription__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
