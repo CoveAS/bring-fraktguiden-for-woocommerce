@@ -3,7 +3,6 @@
 namespace BringFraktguiden\Admin;
 
 use Bring_Fraktguiden\Common\Fraktguiden_License;
-use Exception;
 
 /**
  * The refresh button of the license status box on the Pro page.
@@ -38,9 +37,7 @@ class RefreshLicense
 		$url = admin_url('admin.php?page=bring_fraktguiden_pro');
 
 		// A successful check needs no message. The box shows the fresh facts.
-		try {
-			Fraktguiden_License::get_instance()->check_license();
-		} catch (Exception $e) {
+		if (! Fraktguiden_License::get_instance()->check_license()) {
 			$url = add_query_arg(self::RESULT, 'no', $url);
 		}
 
@@ -62,15 +59,8 @@ class RefreshLicense
 
 		check_ajax_referer(self::POLL);
 
-		try {
-			Fraktguiden_License::get_instance()->check_license();
-			$reached = true;
-		} catch (Exception $e) {
-			$reached = false;
-		}
-
 		wp_send_json_success([
-			'reached'   => $reached,
+			'reached'   => Fraktguiden_License::get_instance()->check_license(),
 			'key_state' => Fraktguiden_License::get_state()['key_state'] ?? '',
 		]);
 	}

@@ -10,7 +10,6 @@ namespace Bring_Fraktguiden\Common;
 use Bring_Fraktguiden;
 use DateTime;
 use DateTimeZone;
-use Exception;
 
 /**
  * Fraktguiden_License class
@@ -235,24 +234,24 @@ class Fraktguiden_License
 	 *
 	 * @param string|null $key Key to ask about, or null to read the saved one.
 	 *
-	 * @throws Exception
+	 * @return bool False when the license server did not answer.
 	 */
-	public function check_license(?string $key = null): void
+	public function check_license(?string $key = null): bool
 	{
 		$url      = get_site_url();
 		$url_info = wp_parse_url($url);
 
 		if (!$url_info) {
 			$this->ping();
-			return;
+			return false;
 		}
 
-		$key = null === $key ? self::get_key() : self::normalise_key($key);
+		$key    = null === $key ? self::get_key() : self::normalise_key($key);
+		$answer = $this->request($this->request_data($key ? 'check_key' : 'check_license', $key));
 
-		$this->store_answer(
-			$this->request($this->request_data($key ? 'check_key' : 'check_license', $key)),
-			$key ? 'key' : 'domain'
-		);
+		$this->store_answer($answer, $key ? 'key' : 'domain');
+
+		return false !== $answer;
 	}
 
 	/**
