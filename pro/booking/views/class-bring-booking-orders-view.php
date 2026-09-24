@@ -206,6 +206,7 @@ class Bring_Booking_Orders_View {
 			[
 				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
 				'downloadurl' => Bring_Booking_Labels::create_download_url( '' ),
+				'nonce'       => wp_create_nonce( 'bring_bulk_book' ),
 			]
 		);
 
@@ -233,6 +234,12 @@ class Bring_Booking_Orders_View {
 	 */
 	public static function bulk_send_booking(): void
 	{
+		check_ajax_referer( 'bring_bulk_book' );
+
+		if ( ! current_user_can( 'edit_shop_orders' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
 		$json     = filter_input( Fraktguiden_Helper::get_input_request_method(), 'json' );
 		$post_ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'post', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$ids = filter_input( Fraktguiden_Helper::get_input_request_method(), 'id', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );

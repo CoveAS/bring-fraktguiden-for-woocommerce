@@ -76,6 +76,7 @@ jQuery(function ($) {
 			_booking_data.ajaxurl,
 			{
 				action: 'bring_bulk_book',
+				_ajax_nonce: _booking_data.nonce,
 				json : true,
 				'id[]': (ids + '').split(','),
 			},
@@ -156,6 +157,7 @@ jQuery(function ($) {
 			_booking_data.ajaxurl,
 			{
 				action: 'bring_bulk_book',
+				_ajax_nonce: _booking_data.nonce,
 				json: true,
 				'id[]': order_ids,
 				// The custom select widget moves the id to its trigger button,
@@ -166,7 +168,9 @@ jQuery(function ($) {
 				'_bring-shipping-date-minutes': time[1] || '',
 			},
 			handleBulkBookResponse
-		);
+		).fail( function () {
+			form.unblock();
+		} );
 	}
 
 	$( '#bfg-bulk-book-send' ).on( 'click', send_bulk_booking );
