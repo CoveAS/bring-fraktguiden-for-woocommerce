@@ -10,7 +10,7 @@ Requires PHP: 8.1
 Requires Plugins: woocommerce
 WC requires at least: 4.8.0
 WC tested up to: 10.4.2
-Stable tag: 1.11.7
+Stable tag: 1.12.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,7 @@ See faq.txt for frequently asked questions
 * Added the pick-up point settings to the Settings page
 * Added the distance to each pick-up point in the checkout picker
 * Added a phone number check on a Pakkeboks and a Pakke hjem pluss order
+* Added a setting that chooses the order statuses that allow a booking
 * The Pro license now follows the shop domain, and the owner can move it from the Pro page
 * A testing license now books in test mode only, and the booking page says why
 * The buy link now carries the shop domain, so the license goes to the right shop
@@ -76,6 +77,8 @@ See faq.txt for frequently asked questions
 * The zone form now suggests everywhere else only when the shop draws no zones of its own
 * The checkout now keeps the shop theme out of the pick-up point picker
 * WooCommerce is now a required plugin
+* A cancelled order now shows no booking buttons, and the bulk booking skips it
+* Removed the old Pro test mode, because a testing license now covers a test shop
 * Completed the Norwegian translation
 * Fixed a frozen checkout when the customer changes the pick-up point
 * Fixed the customs and license scripts, which did not load on a live site
@@ -85,6 +88,8 @@ See faq.txt for frequently asked questions
 * Fixed the pick-up points, which did not reload when the customer changed the street
 * Fixed a pick-up point picker shown under a shipping option the customer did not choose
 * Fixed an extra service sent with Pakke til hentested that Bring does not accept
+* Fixed the license refresh, which reported success when the server gave no answer
+* Fixed the net weight placeholder of a variation, which now shows the parent weight
 
 = 1.11.7 =
 
