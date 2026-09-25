@@ -92,6 +92,7 @@ See faq.txt for frequently asked questions
 * Fixed a warning that called a current customer number outdated
 * Fixed the license refresh, which reported success when the server gave no answer
 * Fixed the net weight placeholder of a variation, which now shows the parent weight
+* Fixed the shipping time sent to Bring, which used a 12 hour clock and made 14:00 read as 02:00
 
 = 1.11.7 =
 

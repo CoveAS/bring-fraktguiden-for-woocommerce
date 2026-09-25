@@ -592,7 +592,7 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$shipping_date = $this->get_shipping_date();
 		$shipping_date = [
 			'day'    => $shipping_date->format( 'd' ),
-			'hour'   => $shipping_date->format( 'h' ),
+			'hour'   => $shipping_date->format( 'H' ),
 			'minute' => $shipping_date->format( 'i' ),
 			'month'  => $shipping_date->format( 'm' ),
 			'year'   => $shipping_date->format( 'Y' ),
