@@ -221,6 +221,9 @@ class BookingBox
 
 		$has_shipping_line = (bool) $shipping_item;
 
+		$slot        = (string) $shipping_item?->get_meta('bring_fraktguiden_time_slot');
+		$unread_slot = ($slot && !BookingForm::parse_slot($slot)) ? $slot : '';
+
 		[$sender, $recipient] = self::parties($shipping_item, $form);
 
 		ob_start();

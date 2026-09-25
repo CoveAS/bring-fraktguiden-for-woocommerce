@@ -245,6 +245,11 @@ class Checkout_Modifications {
 		if ( empty( $time_slot ) ) {
 			return;
 		}
+		// The session holds whatever the browser sent, so store only a slot Bring offered.
+		$alternatives = self::get_alternative_date_parameters()['alternatives'];
+		if ( ! self::validate_selected_time_slot( $time_slot, $alternatives ) ) {
+			return;
+		}
 		$item->add_meta_data( 'bring_fraktguiden_time_slot', $time_slot, true );
 
 		add_action(

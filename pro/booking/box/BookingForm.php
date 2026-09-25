@@ -69,10 +69,9 @@ class BookingForm
 			packages: self::packages_of($shipping_item),
 		);
 
-		$slot = $shipping_item?->get_meta('bring_fraktguiden_time_slot');
+		$requested = self::parse_slot((string) $shipping_item?->get_meta('bring_fraktguiden_time_slot'));
 
-		if ($slot) {
-			$requested           = new DateTime($slot);
+		if ($requested) {
 			$form->delivery_date = $requested->format('Y-m-d');
 			$form->delivery_time = $requested->format('H:i');
 		}
@@ -84,6 +83,19 @@ class BookingForm
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Read a time slot the customer picked at checkout, such as 2026-09-25T08:00:00.
+	 *
+	 * Return null for any other text. A date that does not exist, such as
+	 * 2026-02-30, is refused too.
+	 */
+	public static function parse_slot(string $slot): ?DateTime
+	{
+		$date = DateTime::createFromFormat('!Y-m-d\TH:i:s', $slot);
+
+		return $date && $date->format('Y-m-d\TH:i:s') === $slot ? $date : null;
 	}
 
 	/**

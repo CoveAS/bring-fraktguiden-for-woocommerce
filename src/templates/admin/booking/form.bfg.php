@@ -13,6 +13,7 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
  * @var NatureOfCargo[]      $cargo_reasons
  * @var bool                 $needs_cargo
  * @var bool                 $wants_date
+ * @var string               $unread_slot
  * @var bool                 $has_shipping_line
  * @var bool                 $test_mode
  * @var string               $token
@@ -23,6 +24,10 @@ use BringFraktguidenPro\Booking\Box\BookingForm;
 
 	<?php if (!$has_shipping_line) : ?>
 		<bfg-notice><t>Add a shipping line to the order, then reload the page to book it.</t></bfg-notice>
+	<?php endif; ?>
+
+	<?php if ($unread_slot) : ?>
+		<bfg-notice><t>The delivery time the customer asked for could not be read</t>: <?php echo esc_html($unread_slot); ?></bfg-notice>
 	<?php endif; ?>
 
 	<?php if ($customer_error) : ?>
