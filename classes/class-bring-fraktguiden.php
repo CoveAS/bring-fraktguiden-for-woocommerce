@@ -77,17 +77,8 @@ class Bring_Fraktguiden {
 
 		Scripts::setup();
 
-		if ( Settings::instance()->display_desc->value ) {
-//			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
-			add_action( 'woocommerce_after_shipping_rate', [ CarrierLogo::class, 'add_carrier_logo'], 10, 2 );
-		}
-		if ( Settings::instance()->display_eta->value ) {
-			add_action( 'woocommerce_after_shipping_rate', [Rate_Eta::class, 'add_estimated_delivery_date'], 10, 2 );
-		}
-		if ( Settings::instance()->display_desc->value ) {
-			add_action( 'woocommerce_after_shipping_rate', [ RateDescription::class, 'add_description'], 10, 2 );
-			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalDescription::class, 'add_environmental_description'], 10, 2 );
-		}
+		// The settings read the translated config, so they wait for init.
+		add_action( 'init', self::class . '::add_rate_details' );
 		require_once 'class-wc-shipping-method-bring.php';
 
 		add_action( 'woocommerce_shipping_init', [Bring_Fraktguiden::class, 'shipping_init'] );
@@ -134,6 +125,23 @@ class Bring_Fraktguiden {
 		}
 
 		require_once $plugin_path . '/pro/class-wc-shipping-method-bring-pro.php';
+	}
+
+	/**
+	 * Show the details the settings ask for under each shipping rate.
+	 */
+	public static function add_rate_details(): void {
+		if ( Settings::instance()->display_desc->value ) {
+//			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalTag::class, 'add_environmental_tag'], 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', [ CarrierLogo::class, 'add_carrier_logo'], 10, 2 );
+		}
+		if ( Settings::instance()->display_eta->value ) {
+			add_action( 'woocommerce_after_shipping_rate', [Rate_Eta::class, 'add_estimated_delivery_date'], 10, 2 );
+		}
+		if ( Settings::instance()->display_desc->value ) {
+			add_action( 'woocommerce_after_shipping_rate', [ RateDescription::class, 'add_description'], 10, 2 );
+			add_action( 'woocommerce_after_shipping_rate', [ EnvironmentalDescription::class, 'add_environmental_description'], 10, 2 );
+		}
 	}
 
 	public static function init() {
