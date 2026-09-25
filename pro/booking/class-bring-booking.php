@@ -10,6 +10,7 @@ namespace BringFraktguidenPro\Booking;
 use BringFraktguiden\Booking\BulkBookingGroups;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_License;
+use BringFraktguidenPro\Booking\Box\BookingBlock;
 use BringFraktguidenPro\Booking\Box\BookingBox;
 use BringFraktguidenPro\Booking\Box\BookingDraft;
 use BringFraktguidenPro\Booking\Box\BookingForm;
@@ -200,6 +201,8 @@ class Bring_Booking {
 	 */
 	public static function bulk_send_booking( $post_ids, array $overrides = [] ) {
 		$report = [];
+		// The booking box refuses a send for the same reasons.
+		$block  = BookingBlock::find();
 		foreach ( $post_ids as $post_id ) {
 			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
 			$status  = BulkBookingGroups::of_order( $adapter->order );
@@ -212,6 +215,17 @@ class Bring_Booking {
 					'message'      => $message,
 					'order_status' => self::get_status( $post_id ),
 					'url'          => get_edit_post_link( $post_id, 'edit' ),
+				];
+				continue;
+			}
+
+			if ( $block ) {
+				$report[ $post_id ] = [
+					'status'       => 'error',
+					'order_id'     => $post_id,
+					'message'      => $block->message,
+					'order_status' => self::get_status( $post_id ),
+					'url'          => get_edit_post_link( $post_id ),
 				];
 				continue;
 			}
