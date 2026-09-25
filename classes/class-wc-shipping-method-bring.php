@@ -669,21 +669,19 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 	}
 
 	public function get_shipping_date() {
-		$lead_time        = (int) Fraktguiden_Helper::get_option( 'lead_time' );
-		$cutoff_time      = 0;
-		$lead_time_cutoff = Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
-		if ( preg_match( '/^\d{2}:\d{2}$/', $lead_time_cutoff ) ) {
-			$cutoff_time = (int) str_replace( ':', '', $lead_time_cutoff );
-		}
+		$lead_time = max( 0, (int) Fraktguiden_Helper::get_option( 'lead_time' ) );
+		$cutoff    = (string) Fraktguiden_Helper::get_option( 'lead_time_cutoff' );
 		$shipping_date = new DateTime(
 			'now',
 			new \DateTimeZone( 'Europe/Oslo' )
 		);
 
-		if ( $lead_time && $lead_time > 0 ) {
-			if ( (int) $shipping_date->format( 'Hi' ) > $cutoff_time ) {
-				$lead_time += 1;
-			}
+		// An order after the cutoff ships one day later. An empty cutoff sets no limit.
+		if ( preg_match( '/^\d{2}:\d{2}$/', $cutoff ) && $shipping_date->format( 'H:i' ) > $cutoff ) {
+			++$lead_time;
+		}
+
+		if ( $lead_time > 0 ) {
 			$shipping_date->add( new \DateInterval( "P{$lead_time}D" ) );
 		}
 

@@ -93,6 +93,7 @@ See faq.txt for frequently asked questions
 * Fixed the license refresh, which reported success when the server gave no answer
 * Fixed the net weight placeholder of a variation, which now shows the parent weight
 * Fixed the shipping time sent to Bring, which used a 12 hour clock and made 14:00 read as 02:00
+* Fixed the lead time cutoff, which moved an order to the next day only when the lead time was more than 0
 
 = 1.11.7 =
 
