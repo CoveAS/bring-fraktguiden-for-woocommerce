@@ -38,6 +38,7 @@
 					url: self.ajax_url(),
 					data: {
 						'action': 'bring_shipping_info_var',
+						'_ajax_nonce': self.root.nonce,
 						'country' : get_shipping_address_country(),
 						'postcode': get_shipping_address_postcode(),
 						'post_id': $( '#post_ID' ).val()
@@ -65,6 +66,7 @@
 					url: self.ajax_url(),
 					data: {
 						'action'  : 'bring_get_rate',
+						'_ajax_nonce': self.root.nonce,
 						'post_id' : $( '#post_ID' ).val(),
 						'country' : get_shipping_address_country(),
 						'postcode': get_shipping_address_postcode(),

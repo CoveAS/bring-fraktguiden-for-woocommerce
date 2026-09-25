@@ -55,25 +55,43 @@ class PickUpPointAjax
 	}
 
 	/**
+	 * Nonce action for the order screen calls.
+	 */
+	public const NONCE = 'bring_order_rate';
+
+	/**
+	 * Returns the order named by the post_id query argument.
+	 *
+	 * Ends the request with a JSON error when the nonce is bad, the user
+	 * cannot edit orders, or the id is not an order.
+	 */
+	private static function order_from_request(): WC_Order
+	{
+		check_ajax_referer(self::NONCE);
+
+		if (!current_user_can('edit_shop_orders')) {
+			wp_send_json_error(null, 403);
+		}
+
+		$order = wc_get_order(absint(filter_input(INPUT_GET, 'post_id')));
+
+		if (!$order instanceof WC_Order) {
+			wp_send_json_error(null, 404);
+		}
+
+		return $order;
+	}
+
+	/**
 	 * Prints shipping info json
 	 *
 	 * Only available from admin
 	 */
 	public static function bring_shipping_info_var()
 	{
-		$result = [];
-		$screen = get_current_screen();
+		$order = new Bring_WC_Order_Adapter(self::order_from_request());
 
-		if (($screen && 'shop_order' === $screen->id) || is_ajax()) {
-			// Comment to future self: wow, this code is utter trash 🤦‍
-			global $post;
-
-			$post_id = $post ? $post->ID : filter_input(INPUT_GET, 'post_id');
-			$order = new Bring_WC_Order_Adapter(new WC_Order($post_id));
-			$result = $order->get_shipping_data();
-		}
-
-		wp_send_json( [ 'bring_shipping_info' => $result ] );
+		wp_send_json( [ 'bring_shipping_info' => $order->get_shipping_data() ] );
 	}
 
 	/**
@@ -90,20 +108,12 @@ class PickUpPointAjax
 			'packages' => null,
 		];
 
+		$order = self::order_from_request();
 		$service = filter_input(INPUT_GET, 'service');
 
-		// Return false if neither integer nor string variable is representing a positive integer.
-		$post_id = filter_var(
-			filter_input(INPUT_GET, 'post_id'),
-			FILTER_VALIDATE_INT,
-			[ 'options' => [ 'min_range' => 1 ] ]
-		);
-
-		if (is_null($service) || false === $post_id) {
+		if (is_null($service)) {
 			wp_send_json($result);
 		}
-
-		$order = wc_get_order($post_id);
 
 		$country = filter_input(INPUT_GET, 'country');
 

@@ -58,6 +58,7 @@ class PickUpPointAdmin {
 			'_fraktguiden_data',
 			[
 				'ajaxurl' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce(PickUpPointAjax::NONCE),
 				'services' => Fraktguiden_Helper::get_all_services(),
 				'i18n' => PickUpPoint::get_i18n(),
 				'make_items_editable' => $make_items_editable,
