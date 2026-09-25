@@ -49,6 +49,9 @@ See faq.txt for frequently asked questions
 = 1.12.1 =
 
 * Fixed a PHP warning on the label download page when an order had no label of one file type
+* Fixed Pakke hjem pluss, which showed a raw delivery time window placeholder when Display ETA was off
+* Fixed the delivery date choices at checkout, which did not show when Display ETA was off
+* The Display ETA setting is now on the Settings page, in the Lead Time section
 
 = 1.12.0 =
 
