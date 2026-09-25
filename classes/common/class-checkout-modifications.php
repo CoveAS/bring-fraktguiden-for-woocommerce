@@ -39,6 +39,12 @@ class Checkout_Modifications {
 			4
 		);
 
+		// The cart empties after a paid order. A failed payment keeps the slot for the next try.
+		add_action(
+			'woocommerce_cart_emptied',
+			__CLASS__ . '::forget_time_slot'
+		);
+
 		add_action(
 			'woocommerce_review_order_before_submit',
 			__CLASS__ . '::bag_on_door_consent'
@@ -236,10 +242,10 @@ class Checkout_Modifications {
 			return;
 		}
 		$time_slot = WC()->session->get( 'bring_fraktguiden_time_slot' );
+		if ( empty( $time_slot ) ) {
+			return;
+		}
 		$item->add_meta_data( 'bring_fraktguiden_time_slot', $time_slot, true );
-		$order->add_order_note(
-			__( 'Customer requested time slot: ' ) . $time_slot
-		);
 
 		add_action(
 			'woocommerce_checkout_update_order_meta',
@@ -261,6 +267,13 @@ class Checkout_Modifications {
 		$order->add_order_note(
 			__( 'Customer requested delivery time:', 'bring-fraktguiden-for-woocommerce' ) . " $time_slot"
 		);
+	}
+
+	/**
+	 * Forget the time slot, so a later order in the same session does not take it.
+	 */
+	public static function forget_time_slot() {
+		WC()->session?->__unset( 'bring_fraktguiden_time_slot' );
 	}
 
 	/**
