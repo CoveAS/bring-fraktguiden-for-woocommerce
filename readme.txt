@@ -10,7 +10,7 @@ Requires PHP: 8.1
 Requires Plugins: woocommerce
 WC requires at least: 4.8.0
 WC tested up to: 10.4.2
-Stable tag: 1.12.0
+Stable tag: 1.12.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,10 @@ The setup page lists five steps. It adds Bring to a shipping zone, picks your se
 See faq.txt for frequently asked questions
 
 == Changelog ==
+
+= 1.12.1 =
+
+* Fixed a PHP warning on the label download page when an order had no label of one file type
 
 = 1.12.0 =
 
