@@ -95,6 +95,23 @@ See faq.txt for frequently asked questions
 * Fixed the shipping time sent to Bring, which used a 12 hour clock and made 14:00 read as 02:00
 * Fixed the lead time cutoff, which moved an order to the next day only when the lead time was more than 0
 * Fixed a booking that added bag on door delivery when the customer did not agree to it at checkout
+* Fixed the bulk booking, which sent every extra service the shop turned on, even one unticked in a saved draft
+* Fixed the electronic notice of the booking box, which a service with EVARSLING never sent
+* Fixed the bulk booking and the Book now link, which did not check a nonce or the user capability
+* Fixed the Book now link, which booked orders from a plain link. It now opens the order
+* Fixed the bulk booking, which sent orders when Pro was off or the Mybring account was not connected
+* Fixed a booking from the orders list, which did not show in the booking box
+* Fixed a booked order on an HPOS shop, which showed an empty booking form
+* Fixed the cross border warning, which read the wrong sender country and did not show
+* Fixed the NVIT data, which a Danish postal code could trigger
+* Fixed Svalbard, which the customs and NVIT rules did not count as Norway
+* Fixed a fallback rate that 1.11.7 kept off, which showed after the update, often at price 0
+* Fixed the maximum product limit, which counted cart lines and not the quantity
+* Fixed a time slot from an earlier order, which the next order in the same session took
+* Fixed the time slot order note, which showed twice and without a translation
+* Fixed a bad time slot value, which crashed the booking box
+* Fixed the label printed status, which an order got when no label file was found
+* Fixed a WordPress 6.7 notice about a translation loaded too early
 
 = 1.11.7 =
 
