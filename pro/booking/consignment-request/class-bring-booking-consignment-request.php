@@ -241,25 +241,17 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 	}
 
 	/**
-	 * Return whether the booking carries the given value added service.
+	 * Return whether the booking form holds the given value added service.
 	 *
-	 * A request that was filled from the order screen box holds the answer. A
-	 * bulk booking and the old box send a form instead, so those read $_POST.
-	 *
-	 * @param string $code  The Bring code, for example 1081.
-	 * @param string $field The form field name the old box uses.
+	 * @param string $code The Bring code, for example 1081.
 	 */
-	private function books( string $code, string $field ): bool {
-		if ( ! is_null( $this->additional_services ) ) {
-			return in_array( $code, $this->additional_services, true );
-		}
-
-		return (bool) filter_input( INPUT_POST, $field, FILTER_VALIDATE_BOOLEAN );
+	private function books( string $code ): bool {
+		return $this->service
+			&& $this->service->has_vas( $code )
+			&& in_array( $code, $this->additional_services ?? [], true );
 	}
 
 	private function create_consignment(): array {
-		$is_bulk = 'bring_bulk_book' === ( $_REQUEST['action'] ?? '' );
-
 		$recipient_address = $this->get_recipient_address();
 		$consignment = [
 			'shippingDateTime' => $this->shipping_date_time,
@@ -312,93 +304,23 @@ class Bring_Booking_Consignment_Request extends Bring_Consignment_Request {
 		}
 
 		$consignment['product']['additionalServices'] = [];
-		$electronic_notification = $this->books( '2084', '2084' );
 
-		if ( $this->service ) {
-			$vas_code = '2084';
-			if ( $this->service->has_vas( 'EVARSLING' ) ) {
-				$vas_code = 'EVARSLING';
-			}
-			if (
-				(
-					$this->service->has_vas( '2084' )
-					&& $electronic_notification
-				)
-				|| (
-					$is_bulk
-					&& $this->service->vas_match( ['2084', 'EVARSLING'] )
-				)
-			) {
+		// The old products name the electronic notice EVARSLING, the cargo
+		// products 2084.
+		foreach ( [ 'EVARSLING', '2084' ] as $code ) {
+			if ( $this->books( $code ) ) {
 				$consignment['product']['additionalServices'][] = [
-					'id'     => $vas_code,
+					'id'     => $code,
 					'email'  => $recipient_address['contact']['email'],
 					'mobile' => $recipient_address['contact']['phoneNumber'],
 				];
 			}
+		}
 
-			// Bag on door option
-			$bag_on_door_checked = $this->books( '1081', 'bag_on_door' );
-			// Older versions saved the consent as post meta.
-			$bag_on_door_consent = $this->adapter->order->get_meta( '_bag_on_door_consent' )
-				?: get_post_meta( $this->adapter->order->get_id(), '_bag_on_door_consent', true );
-
-			if (
-				(
-					$this->service->has_vas( '1081' )
-					&& $bag_on_door_checked
-				)
-				|| (
-					$is_bulk
-					&& $this->service->vas_match( ['1081'] )
-					&& $bag_on_door_consent
-				)
-			) {
-				$consignment['product']['additionalServices'][] = ['id' => '1081'];
-			}
-
-			// Signature required
-			$signature_required_checked = $this->books( '1280', 'signature_required' );
-			if (
-				(
-					$this->service->has_vas( '1280' )
-					&& $signature_required_checked
-				)
-				|| (
-					$is_bulk
-					&& $this->service->vas_match( ['1280'] )
-				)
-			) {
-				$consignment['product']['additionalServices'][] = ['id' => '1280'];
-			}
-
-			// ID verification
-			$id_verification_checked = $this->books( '1133', 'id_verification' );
-			if (
-				(
-					$this->service->has_vas( '1133' )
-					&& $id_verification_checked
-				)
-				|| (
-					$is_bulk
-					&& $this->service->vas_match( ['1133'] )
-				)
-			) {
-				$consignment['product']['additionalServices'][] = ['id' => '1133'];
-			}
-
-			// Personal delivery option
-			$individual_verification_checked = $this->books( '1134', 'individual_verification' );
-			if (
-				(
-					$this->service->has_vas( '1134' )
-					&& $individual_verification_checked
-				)
-				|| (
-					$is_bulk
-					&& $this->service->vas_match( ['1134'] )
-				)
-			) {
-				$consignment['product']['additionalServices'][] = ['id' => '1134'];
+		// Bag on door, signature required, ID verification and personal delivery.
+		foreach ( [ '1081', '1280', '1133', '1134' ] as $code ) {
+			if ( $this->books( $code ) ) {
+				$consignment['product']['additionalServices'][] = [ 'id' => $code ];
 			}
 		}
 
