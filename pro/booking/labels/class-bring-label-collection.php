@@ -17,7 +17,7 @@ abstract class Bring_Label_Collection {
 	 *
 	 * @var array
 	 */
-	public $files;
+	public $files = [];
 
 	/**
 	 * Merge
