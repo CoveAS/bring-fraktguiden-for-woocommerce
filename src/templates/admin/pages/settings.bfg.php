@@ -200,6 +200,7 @@
 							</div>
 						</div>
 					</div>
+					<div class="bfg-field bfg-field--checkbox-box"><?php echo $fields->display_eta; ?></div>
 
 					<button type="submit" class="bfg-btn bfg-btn--primary"><?php esc_html_e('Save Changes', 'bring-fraktguiden-for-woocommerce'); ?></button>
 				</div>

@@ -630,7 +630,9 @@ class WC_Shipping_Method_Bring extends WC_Shipping_Method {
 		$params = [
 			'language'                         => $this->get_bring_language(),
 			'withPrice'                        => $with_price,
-			'withExpectedDelivery'             => (bool) $this->get_setting('display_eta'),
+			// Bring fills the delivery time window in the description text and returns
+			// the alternative delivery dates only when the request asks for lead time.
+			'withExpectedDelivery'             => true,
 //			'withEstimatedDeliveryTime'        => false,
 			'withGuiInformation'               => true, //
 			'withEnvironmentalData'            => $this->display_desc,

@@ -94,7 +94,10 @@ class RateFactory {
 			'bring_environmental_logo_url'    => $service_details['guiInformation']['environmentalLogoUrl'] ?? null,
 			'bring_environmental_tag_url'     => $service_details['guiInformation']['environmentalTagUrl'] ?? null,
 			'bring_environmental_description' => $service_details['environmentalData'][0]['description'] ?? null,
-			'bring_eta'                       => Rate_Eta::eta($expected_delivery_date),
+			// The blocks checkout shows this value whenever the rate carries it.
+			'bring_eta'                       => Settings::instance()->display_eta->value
+				? Rate_Eta::eta( $expected_delivery_date )
+				: null,
 		];
 
 		$rate = [
