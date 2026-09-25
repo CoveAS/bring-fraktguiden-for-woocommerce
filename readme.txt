@@ -101,6 +101,8 @@ See faq.txt for frequently asked questions
 * Fixed the bulk booking and the Book now link, which did not check a nonce or the user capability
 * Fixed the Book now link, which booked orders from a plain link. It now opens the order
 * Fixed the bulk booking, which sent orders when Pro was off or the Mybring account was not connected
+* Fixed a deleted order in a bulk booking, which stopped the whole booking. The other orders now book
+* Fixed the pick-up point calls of the order screen, which did not check a nonce or the user capability
 * Fixed a booking from the orders list, which did not show in the booking box
 * Fixed a booked order on an HPOS shop, which showed an empty booking form
 * Fixed the cross border warning, which read the wrong sender country and did not show
