@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Bring Fraktguiden\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bring-fraktguiden-"
 "for-woocommerce\n"
-"POT-Creation-Date: 2026-09-24T22:05:41+00:00\n"
+"POT-Creation-Date: 2026-09-25T08:56:26+00:00\n"
 "PO-Revision-Date: 2024-08-26 14:49+0200\n"
 "Last-Translator: Andrew Smith eyeversuseye@gmail.com>\n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Cove AS"
 msgstr "Cove AS"
 
-#: build/templates/admin/booking/box.php:22 pro/booking/box/BookingBox.php:77
+#: build/templates/admin/booking/box.php:22 pro/booking/box/BookingBox.php:78
 msgid "Bring Booking"
 msgstr "Bring Booking"
 
@@ -78,13 +78,13 @@ msgid "Close"
 msgstr "Lukk"
 
 #: build/templates/admin/booking/bulk-modal.php:33
-#: build/templates/admin/booking/form.php:55
+#: build/templates/admin/booking/form.php:65
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr "Kundenummer"
 
 #: build/templates/admin/booking/bulk-modal.php:46
-#: build/templates/admin/booking/form.php:87
+#: build/templates/admin/booking/form.php:97
 msgid "Shipping date"
 msgstr "Fraktdato"
 
@@ -92,132 +92,136 @@ msgstr "Fraktdato"
 msgid "Print labels"
 msgstr "Skriv ut etiketter"
 
-#: build/templates/admin/booking/form.php:29
+#: build/templates/admin/booking/form.php:30
 msgid "Add a shipping line to the order, then reload the page to book it."
 msgstr ""
 "Legg til en fraktlinje på ordren, og last siden på nytt for å booke den."
 
-#: build/templates/admin/booking/form.php:44
+#: build/templates/admin/booking/form.php:39
+msgid "The delivery time the customer asked for could not be read"
+msgstr "Leveringstiden kunden ba om kunne ikke leses"
+
+#: build/templates/admin/booking/form.php:54
 msgid "Note from the customer"
 msgstr "Merknad fra kunden"
 
-#: build/templates/admin/booking/form.php:50
+#: build/templates/admin/booking/form.php:60
 msgid "Shipment"
 msgstr "Sending"
 
-#: build/templates/admin/booking/form.php:68
+#: build/templates/admin/booking/form.php:78
 #: build/templates/admin/pages/home/fallback-price.php:90
 #: pro/pickuppoint/PickUpPoint.php:245
 msgid "Service"
 msgstr "Tjeneste"
 
-#: build/templates/admin/booking/form.php:96
+#: build/templates/admin/booking/form.php:106
 msgid "Delivery date the customer asked for"
 msgstr "Leveringsdato kunden ba om"
 
-#: build/templates/admin/booking/form.php:106
+#: build/templates/admin/booking/form.php:116
 msgid "Why the goods move"
 msgstr "Hvorfor varene sendes"
 
-#: build/templates/admin/booking/form.php:123
+#: build/templates/admin/booking/form.php:133
 msgid "Packages"
 msgstr "Pakker"
 
-#: build/templates/admin/booking/form.php:127 config/admin-settings.php:268
+#: build/templates/admin/booking/form.php:137 config/admin-settings.php:268
 #: config/admin-settings.php:554
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr "Vekt"
 
-#: build/templates/admin/booking/form.php:128 config/admin-settings.php:232
+#: build/templates/admin/booking/form.php:138 config/admin-settings.php:232
 #: pro/booking/actions/class-get-booking-data-action.php:59
 msgid "Length"
 msgstr "Lengde"
 
-#: build/templates/admin/booking/form.php:129 config/admin-settings.php:244
+#: build/templates/admin/booking/form.php:139 config/admin-settings.php:244
 #: pro/booking/actions/class-get-booking-data-action.php:57
 msgid "Width"
 msgstr "Bredde"
 
-#: build/templates/admin/booking/form.php:130 config/admin-settings.php:256
+#: build/templates/admin/booking/form.php:140 config/admin-settings.php:256
 #: pro/booking/actions/class-get-booking-data-action.php:58
 msgid "Height"
 msgstr "Høyde"
 
-#: build/templates/admin/booking/form.php:138
-#: src/templates/admin/booking/form.bfg.php:128
+#: build/templates/admin/booking/form.php:148
+#: src/templates/admin/booking/form.bfg.php:133
 msgid "Weight in kg"
 msgstr "Vekt i kg"
 
-#: build/templates/admin/booking/form.php:142
-#: src/templates/admin/booking/form.bfg.php:132
+#: build/templates/admin/booking/form.php:152
+#: src/templates/admin/booking/form.bfg.php:137
 msgid "Length in cm"
 msgstr "Lengde i cm"
 
-#: build/templates/admin/booking/form.php:146
-#: src/templates/admin/booking/form.bfg.php:136
+#: build/templates/admin/booking/form.php:156
+#: src/templates/admin/booking/form.bfg.php:141
 msgid "Width in cm"
 msgstr "Bredde i cm"
 
-#: build/templates/admin/booking/form.php:150
-#: src/templates/admin/booking/form.bfg.php:140
+#: build/templates/admin/booking/form.php:160
+#: src/templates/admin/booking/form.bfg.php:145
 msgid "Height in cm"
 msgstr "Høyde i cm"
 
-#: build/templates/admin/booking/form.php:153
-#: src/templates/admin/booking/form.bfg.php:143
+#: build/templates/admin/booking/form.php:163
+#: src/templates/admin/booking/form.bfg.php:148
 msgid "Remove package"
 msgstr "Fjern pakke"
 
-#: build/templates/admin/booking/form.php:158
+#: build/templates/admin/booking/form.php:168
 msgid "Add a package"
 msgstr "Legg til en pakke"
 
-#: build/templates/admin/booking/form.php:164
+#: build/templates/admin/booking/form.php:174
 msgid "Extra services"
 msgstr "Tilleggstjenester"
 
-#: build/templates/admin/booking/form.php:178
+#: build/templates/admin/booking/form.php:188
 msgid "Addresses"
 msgstr "Adresser"
 
-#: build/templates/admin/booking/form.php:182
+#: build/templates/admin/booking/form.php:192
 msgid "Extra address line, sender"
 msgstr "Ekstra adresselinje, avsender"
 
-#: build/templates/admin/booking/form.php:187
+#: build/templates/admin/booking/form.php:197
 msgid "Extra address line, recipient"
 msgstr "Ekstra adresselinje, mottaker"
 
-#: build/templates/admin/booking/form.php:193
+#: build/templates/admin/booking/form.php:203
 msgid "Sender and recipient"
 msgstr "Avsender og mottaker"
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:193
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:198
 msgid "Saving…"
 msgstr "Lagrer…"
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:194
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:199
 #, php-format
 msgid "Saved at %s"
 msgstr "Lagret %s"
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:195
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:200
 msgid "Not saved. Edit a field to try again."
 msgstr "Ikke lagret. Endre et felt for å prøve igjen."
 
-#: build/templates/admin/booking/form.php:200
+#: build/templates/admin/booking/form.php:210
 msgid "Reset"
 msgstr "Nullstill"
 
-#: build/templates/admin/booking/form.php:203
+#: build/templates/admin/booking/form.php:213
 msgid "Book with Bring, test mode"
 msgstr "Book med Bring, testmodus"
 
-#: build/templates/admin/booking/form.php:205
+#: build/templates/admin/booking/form.php:215
 msgid "Book with Bring"
 msgstr "Book med Bring"
 
@@ -348,7 +352,7 @@ msgstr "Mottaker"
 #: build/templates/admin/pages/booking.php:19
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
-#: pro/booking/views/class-bring-booking-orders-view.php:77
+#: pro/booking/views/class-bring-booking-orders-view.php:78
 msgid "Booking"
 msgstr "Booking"
 
@@ -2825,16 +2829,16 @@ msgstr "Bring selger ingen tjeneste til denne adressen."
 msgid "Fill in a post code."
 msgstr "Fyll inn et postnummer."
 
-#: classes/class-bring-fraktguiden.php:152
-#: classes/class-bring-fraktguiden.php:153
+#: classes/class-bring-fraktguiden.php:160
+#: classes/class-bring-fraktguiden.php:161
 msgid "Bring settings"
 msgstr "Bring innstillinger"
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:219
 msgid "View the Bring Fraktguiden setup steps"
 msgstr "Vis oppsettstegene for Bring Fraktguiden"
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:219
 msgid "Get started"
 msgstr "Kom i gang"
 
@@ -2861,26 +2865,26 @@ msgstr "Påkrevd felt, time_slot, var tomt"
 msgid "Saved location ID"
 msgstr "Lagret lokasjons-ID"
 
-#: classes/common/class-checkout-modifications.php:100
+#: classes/common/class-checkout-modifications.php:113
 #: classes/common/class-rate-eta.php:61
 msgid "Expected delivery"
 msgstr "Forventet levert"
 
-#: classes/common/class-checkout-modifications.php:262
+#: classes/common/class-checkout-modifications.php:280
 msgid "Customer requested delivery time:"
 msgstr "Kunden ba om leveringstid:"
 
-#: classes/common/class-checkout-modifications.php:285
-#: classes/common/class-checkout-modifications.php:372
+#: classes/common/class-checkout-modifications.php:310
+#: classes/common/class-checkout-modifications.php:397
 msgid ""
 "Deliver the package in a bag on my door if it doesn't fit in the mailbox"
 msgstr "Lever pakken i pose på døren hvis den ikke passer i postboksen"
 
-#: classes/common/class-checkout-modifications.php:346
+#: classes/common/class-checkout-modifications.php:371
 msgid "Bag on door consent"
 msgstr "Samtykke til pose på døren"
 
-#: classes/common/class-checkout-modifications.php:348
+#: classes/common/class-checkout-modifications.php:373
 #: pro/booking/templates/waybills-waybill.php:41
 msgid "Yes"
 msgstr "Ja"
@@ -3001,10 +3005,6 @@ msgstr "I morgen"
 #: classes/common/FraktguidenSystemInfo.php:172
 msgid "No authentication data"
 msgstr "Ingen autentiseringsdata"
-
-#: classes/debug/class-fraktguiden-order-debug.php:36
-msgid "Bring Fraktguiden Debug information"
-msgstr "Bring Fraktguiden Debug informasjon"
 
 #: classes/ResourceManagement/Scripts.php:55
 msgid "Service name:"
@@ -3562,8 +3562,9 @@ msgid ""
 "Limit how many products the cart may hold before the fallback rate applies. "
 "Each unit counts. Higher values may slow down checkout. Default: 1000."
 msgstr ""
-"Begrens hvor mange produkter handlekurven kan ha før fallback-prisen gjelder. "
-"Hver enhet teller. Høyere verdier kan gjøre kassen tregere. Standard: 1000."
+"Begrens hvor mange produkter handlekurven kan ha før fallback-prisen "
+"gjelder. Hver enhet teller. Høyere verdier kan gjøre kassen tregere. "
+"Standard: 1000."
 
 #: config/admin-settings.php:629
 msgid "ie: 1500"
@@ -3619,7 +3620,7 @@ msgstr ""
 msgid "Courier"
 msgstr "Courier"
 
-#: config/value-added-services.php:194
+#: config/value-added-services.php:196
 msgid ""
 "Signature required (prevents customers from selecting bag on door delivery)"
 msgstr "Signatur kreves (forhindrer kunder å velge pose på dør ved levering)"
@@ -3667,7 +3668,7 @@ msgstr ""
 msgid "Connect the account"
 msgstr "Koble til kontoen"
 
-#: pro/booking/box/BookingRoute.php:65
+#: pro/booking/box/BookingRoute.php:65 pro/booking/class-bring-booking.php:214
 msgid "Order not found."
 msgstr "Fant ikke ordren."
 
@@ -3730,18 +3731,18 @@ msgstr ""
 "Bring Fraktguiden kunne ikke skrive til mappen ‘uploads/"
 "bring_booking_labels’."
 
-#: pro/booking/class-bring-booking.php:111
+#: pro/booking/class-bring-booking.php:112
 msgid "Changing status because the label was downloaded."
 msgstr "Endrer status fordi etiketten ble lastet ned."
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:126
-#: pro/booking/class-bring-booking.php:132
-#: pro/booking/class-bring-booking.php:151
+#: pro/booking/class-bring-booking.php:127
+#: pro/booking/class-bring-booking.php:133
+#: pro/booking/class-bring-booking.php:152
 msgid "Awaiting Shipment"
 msgstr "Avventer frakt"
 
-#: pro/booking/class-bring-booking.php:234
+#: pro/booking/class-bring-booking.php:262
 msgid "Error: Could not book the order!"
 msgstr "Feil: Kunne ikke booke ordren!"
 
@@ -3837,23 +3838,23 @@ msgstr ""
 msgid "Insufficient permissions"
 msgstr "Ikke tilstrekkelig tilgang"
 
-#: pro/booking/views/class-bring-booking-labels.php:113
+#: pro/booking/views/class-bring-booking-labels.php:111
 msgid "Order ID is missing."
 msgstr "Ordre-ID mangler."
 
-#: pro/booking/views/class-bring-booking-labels.php:169
+#: pro/booking/views/class-bring-booking-labels.php:170
 msgid "No files to download."
 msgstr "Ingen filer å laste ned."
 
-#: pro/booking/views/class-bring-booking-labels.php:176
+#: pro/booking/views/class-bring-booking-labels.php:177
 msgid "Downloads"
 msgstr "Nedlastinger"
 
-#: pro/booking/views/class-bring-booking-labels.php:177
+#: pro/booking/views/class-bring-booking-labels.php:178
 msgid "Merged ZPL labels"
 msgstr "Sammenslåtte ZPL etiketter"
 
-#: pro/booking/views/class-bring-booking-labels.php:179
+#: pro/booking/views/class-bring-booking-labels.php:180
 msgid "Merged PDF labels"
 msgstr "Sammenslåtte PDF etiketter"
 
@@ -3861,12 +3862,12 @@ msgstr "Sammenslåtte PDF etiketter"
 msgid "Your tracking number:"
 msgstr "Sporingsnummer:"
 
-#: pro/booking/views/class-bring-booking-orders-view.php:64
+#: pro/booking/views/class-bring-booking-orders-view.php:65
 msgid "Bring - Print labels"
 msgstr "Bring - Etiketter"
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:322
+#: pro/booking/views/class-bring-booking-orders-view.php:326
 #, php-format
 msgid "%d order booked."
 msgid_plural "%d orders booked."
@@ -3874,7 +3875,7 @@ msgstr[0] "%d ordre er booket."
 msgstr[1] "%d ordre er booket."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:327
+#: pro/booking/views/class-bring-booking-orders-view.php:331
 #, php-format
 msgid "%d order already held a booking."
 msgid_plural "%d orders already held a booking."
@@ -3882,7 +3883,7 @@ msgstr[0] "%d ordre hadde allerede en booking."
 msgstr[1] "%d ordre hadde allerede en booking."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:332
+#: pro/booking/views/class-bring-booking-orders-view.php:336
 #, php-format
 msgid "%d order is in a status that allows no booking."
 msgid_plural "%d orders are in a status that allows no booking."
@@ -3890,7 +3891,7 @@ msgstr[0] "%d ordre har en status som ikke tillater booking."
 msgstr[1] "%d ordrer har en status som ikke tillater booking."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:337
+#: pro/booking/views/class-bring-booking-orders-view.php:341
 #, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
@@ -3898,7 +3899,7 @@ msgstr[0] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 msgstr[1] "%d ordre har ingen Bring-frakt, og ble ikke booket."
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:342
+#: pro/booking/views/class-bring-booking-orders-view.php:346
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."
@@ -4003,6 +4004,9 @@ msgstr "Gå til lisensinnstillinger"
 #: templates/woocommerce/alternative-dates.php:5
 msgid "Choose delivery from"
 msgstr "Velg levering fra"
+
+#~ msgid "Bring Fraktguiden Debug information"
+#~ msgstr "Bring Fraktguiden Debug informasjon"
 
 #~ msgid "The cart holds more product lines than the plugin sends to Bring."
 #~ msgstr ""

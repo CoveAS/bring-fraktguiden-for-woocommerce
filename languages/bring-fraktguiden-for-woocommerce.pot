@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-24T22:05:41+00:00\n"
+"POT-Creation-Date: 2026-09-25T08:56:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: bring-fraktguiden-for-woocommerce\n"
@@ -36,7 +36,7 @@ msgid "Cove AS"
 msgstr ""
 
 #: build/templates/admin/booking/box.php:22
-#: pro/booking/box/BookingBox.php:77
+#: pro/booking/box/BookingBox.php:78
 msgid "Bring Booking"
 msgstr ""
 
@@ -72,13 +72,13 @@ msgid "Close"
 msgstr ""
 
 #: build/templates/admin/booking/bulk-modal.php:33
-#: build/templates/admin/booking/form.php:55
+#: build/templates/admin/booking/form.php:65
 #: pro/booking/templates/waybills-table-labels.php:46
 msgid "Customer number"
 msgstr ""
 
 #: build/templates/admin/booking/bulk-modal.php:46
-#: build/templates/admin/booking/form.php:87
+#: build/templates/admin/booking/form.php:97
 msgid "Shipping date"
 msgstr ""
 
@@ -86,135 +86,139 @@ msgstr ""
 msgid "Print labels"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:29
+#: build/templates/admin/booking/form.php:30
 msgid "Add a shipping line to the order, then reload the page to book it."
 msgstr ""
 
-#: build/templates/admin/booking/form.php:44
+#: build/templates/admin/booking/form.php:39
+msgid "The delivery time the customer asked for could not be read"
+msgstr ""
+
+#: build/templates/admin/booking/form.php:54
 msgid "Note from the customer"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:50
+#: build/templates/admin/booking/form.php:60
 msgid "Shipment"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:68
+#: build/templates/admin/booking/form.php:78
 #: build/templates/admin/pages/home/fallback-price.php:90
 #: pro/pickuppoint/PickUpPoint.php:245
 msgid "Service"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:96
+#: build/templates/admin/booking/form.php:106
 msgid "Delivery date the customer asked for"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:106
+#: build/templates/admin/booking/form.php:116
 msgid "Why the goods move"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:123
+#: build/templates/admin/booking/form.php:133
 msgid "Packages"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:127
+#: build/templates/admin/booking/form.php:137
 #: config/admin-settings.php:268
 #: config/admin-settings.php:554
 #: pro/booking/actions/class-get-booking-data-action.php:60
 msgid "Weight"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:128
+#: build/templates/admin/booking/form.php:138
 #: config/admin-settings.php:232
 #: pro/booking/actions/class-get-booking-data-action.php:59
 msgid "Length"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:129
+#: build/templates/admin/booking/form.php:139
 #: config/admin-settings.php:244
 #: pro/booking/actions/class-get-booking-data-action.php:57
 msgid "Width"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:130
+#: build/templates/admin/booking/form.php:140
 #: config/admin-settings.php:256
 #: pro/booking/actions/class-get-booking-data-action.php:58
 msgid "Height"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:138
-#: src/templates/admin/booking/form.bfg.php:128
+#: build/templates/admin/booking/form.php:148
+#: src/templates/admin/booking/form.bfg.php:133
 msgid "Weight in kg"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:142
-#: src/templates/admin/booking/form.bfg.php:132
+#: build/templates/admin/booking/form.php:152
+#: src/templates/admin/booking/form.bfg.php:137
 msgid "Length in cm"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:146
-#: src/templates/admin/booking/form.bfg.php:136
+#: build/templates/admin/booking/form.php:156
+#: src/templates/admin/booking/form.bfg.php:141
 msgid "Width in cm"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:150
-#: src/templates/admin/booking/form.bfg.php:140
+#: build/templates/admin/booking/form.php:160
+#: src/templates/admin/booking/form.bfg.php:145
 msgid "Height in cm"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:153
-#: src/templates/admin/booking/form.bfg.php:143
+#: build/templates/admin/booking/form.php:163
+#: src/templates/admin/booking/form.bfg.php:148
 msgid "Remove package"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:158
+#: build/templates/admin/booking/form.php:168
 msgid "Add a package"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:164
+#: build/templates/admin/booking/form.php:174
 msgid "Extra services"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:178
+#: build/templates/admin/booking/form.php:188
 msgid "Addresses"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:182
+#: build/templates/admin/booking/form.php:192
 msgid "Extra address line, sender"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:187
+#: build/templates/admin/booking/form.php:197
 msgid "Extra address line, recipient"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:193
+#: build/templates/admin/booking/form.php:203
 msgid "Sender and recipient"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:193
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:198
 msgid "Saving…"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:194
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:199
 #, php-format
 msgid "Saved at %s"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:199
-#: src/templates/admin/booking/form.bfg.php:195
+#: build/templates/admin/booking/form.php:209
+#: src/templates/admin/booking/form.bfg.php:200
 msgid "Not saved. Edit a field to try again."
 msgstr ""
 
-#: build/templates/admin/booking/form.php:200
+#: build/templates/admin/booking/form.php:210
 msgid "Reset"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:203
+#: build/templates/admin/booking/form.php:213
 msgid "Book with Bring, test mode"
 msgstr ""
 
-#: build/templates/admin/booking/form.php:205
+#: build/templates/admin/booking/form.php:215
 msgid "Book with Bring"
 msgstr ""
 
@@ -350,7 +354,7 @@ msgstr ""
 #: build/templates/admin/pages/booking.php:19
 #: classes/BringFraktguiden/Admin/SettingsPage.php:132
 #: classes/BringFraktguiden/Admin/SettingsPage.php:133
-#: pro/booking/views/class-bring-booking-orders-view.php:77
+#: pro/booking/views/class-bring-booking-orders-view.php:78
 msgid "Booking"
 msgstr ""
 
@@ -2596,16 +2600,16 @@ msgstr ""
 msgid "Fill in a post code."
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:152
-#: classes/class-bring-fraktguiden.php:153
+#: classes/class-bring-fraktguiden.php:160
+#: classes/class-bring-fraktguiden.php:161
 msgid "Bring settings"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:219
 msgid "View the Bring Fraktguiden setup steps"
 msgstr ""
 
-#: classes/class-bring-fraktguiden.php:211
+#: classes/class-bring-fraktguiden.php:219
 msgid "Get started"
 msgstr ""
 
@@ -2632,25 +2636,25 @@ msgstr ""
 msgid "Saved location ID"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:100
+#: classes/common/class-checkout-modifications.php:113
 #: classes/common/class-rate-eta.php:61
 msgid "Expected delivery"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:262
+#: classes/common/class-checkout-modifications.php:280
 msgid "Customer requested delivery time:"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:285
-#: classes/common/class-checkout-modifications.php:372
+#: classes/common/class-checkout-modifications.php:310
+#: classes/common/class-checkout-modifications.php:397
 msgid "Deliver the package in a bag on my door if it doesn't fit in the mailbox"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:346
+#: classes/common/class-checkout-modifications.php:371
 msgid "Bag on door consent"
 msgstr ""
 
-#: classes/common/class-checkout-modifications.php:348
+#: classes/common/class-checkout-modifications.php:373
 #: pro/booking/templates/waybills-waybill.php:41
 msgid "Yes"
 msgstr ""
@@ -2745,10 +2749,6 @@ msgstr ""
 
 #: classes/common/FraktguidenSystemInfo.php:172
 msgid "No authentication data"
-msgstr ""
-
-#: classes/debug/class-fraktguiden-order-debug.php:36
-msgid "Bring Fraktguiden Debug information"
 msgstr ""
 
 #: classes/ResourceManagement/Scripts.php:55
@@ -3266,7 +3266,7 @@ msgstr ""
 msgid "Courier"
 msgstr ""
 
-#: config/value-added-services.php:194
+#: config/value-added-services.php:196
 msgid "Signature required (prevents customers from selecting bag on door delivery)"
 msgstr ""
 
@@ -3313,6 +3313,7 @@ msgid "Connect the account"
 msgstr ""
 
 #: pro/booking/box/BookingRoute.php:65
+#: pro/booking/class-bring-booking.php:214
 msgid "Order not found."
 msgstr ""
 
@@ -3356,18 +3357,18 @@ msgstr ""
 msgid "Bring Fraktguiden could not write to 'uploads/bring_booking_labels'."
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:111
+#: pro/booking/class-bring-booking.php:112
 msgid "Changing status because the label was downloaded."
 msgstr ""
 
 #. translators: %s: Number of awaiting shipments
-#: pro/booking/class-bring-booking.php:126
-#: pro/booking/class-bring-booking.php:132
-#: pro/booking/class-bring-booking.php:151
+#: pro/booking/class-bring-booking.php:127
+#: pro/booking/class-bring-booking.php:133
+#: pro/booking/class-bring-booking.php:152
 msgid "Awaiting Shipment"
 msgstr ""
 
-#: pro/booking/class-bring-booking.php:234
+#: pro/booking/class-bring-booking.php:262
 msgid "Error: Could not book the order!"
 msgstr ""
 
@@ -3459,23 +3460,23 @@ msgstr ""
 msgid "Insufficient permissions"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:113
+#: pro/booking/views/class-bring-booking-labels.php:111
 msgid "Order ID is missing."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:169
+#: pro/booking/views/class-bring-booking-labels.php:170
 msgid "No files to download."
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:176
+#: pro/booking/views/class-bring-booking-labels.php:177
 msgid "Downloads"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:177
+#: pro/booking/views/class-bring-booking-labels.php:178
 msgid "Merged ZPL labels"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-labels.php:179
+#: pro/booking/views/class-bring-booking-labels.php:180
 msgid "Merged PDF labels"
 msgstr ""
 
@@ -3483,12 +3484,12 @@ msgstr ""
 msgid "Your tracking number:"
 msgstr ""
 
-#: pro/booking/views/class-bring-booking-orders-view.php:64
+#: pro/booking/views/class-bring-booking-orders-view.php:65
 msgid "Bring - Print labels"
 msgstr ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:322
+#: pro/booking/views/class-bring-booking-orders-view.php:326
 #, php-format
 msgid "%d order booked."
 msgid_plural "%d orders booked."
@@ -3496,7 +3497,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:327
+#: pro/booking/views/class-bring-booking-orders-view.php:331
 #, php-format
 msgid "%d order already held a booking."
 msgid_plural "%d orders already held a booking."
@@ -3504,7 +3505,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:332
+#: pro/booking/views/class-bring-booking-orders-view.php:336
 #, php-format
 msgid "%d order is in a status that allows no booking."
 msgid_plural "%d orders are in a status that allows no booking."
@@ -3512,7 +3513,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:337
+#: pro/booking/views/class-bring-booking-orders-view.php:341
 #, php-format
 msgid "%d order has no Bring shipping, so it got no booking."
 msgid_plural "%d orders have no Bring shipping, so they got no booking."
@@ -3520,7 +3521,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of orders.
-#: pro/booking/views/class-bring-booking-orders-view.php:342
+#: pro/booking/views/class-bring-booking-orders-view.php:346
 #, php-format
 msgid "%d order failed."
 msgid_plural "%d orders failed."
