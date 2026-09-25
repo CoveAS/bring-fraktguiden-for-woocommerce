@@ -5,6 +5,7 @@ namespace BringFraktguidenPro\Booking\Box;
 use Bring_Fraktguiden\Common\Fraktguiden_Helper;
 use Bring_Fraktguiden\Common\Fraktguiden_Service;
 use BringFraktguiden\Booking\BookableStatus;
+use BringFraktguiden\Booking\SenderAddress;
 use BringFraktguiden\Customs\CustomsRoute;
 use BringFraktguiden\Customs\HsCodePicker;
 use BringFraktguiden\Customs\CustomsWarning;
@@ -201,7 +202,7 @@ class BookingBox
 		$needs_cargo   = (bool) CustomsRoute::for_order($order, (string) $form->service);
 
 		$service_crosses = CrossBorderRule::allows(
-			(string) Fraktguiden_Helper::get_option('booking_address_country'),
+			SenderAddress::get()['booking_address_country'],
 			$order->get_shipping_country(),
 			(string) $form->service
 		);

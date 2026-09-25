@@ -111,7 +111,7 @@ class BulkBookingRoute
 	 */
 	private static function cross_border_html(array $order_ids): string
 	{
-		$from = (string) Fraktguiden_Helper::get_option('booking_address_country');
+		$from = SenderAddress::get()['booking_address_country'];
 
 		$cross_border_orders = [];
 
