@@ -107,8 +107,6 @@ class Bring_Booking_Labels {
 
 		$consignment_numbers = array_filter( explode( ',', (string) filter_input( INPUT_GET, 'consignments' ) ) );
 
-		$printed_orders = [];
-
 		if ( empty( $order_ids ) ) {
 			esc_html_e( 'Order ID is missing.', 'bring-fraktguiden-for-woocommerce' );
 
@@ -131,8 +129,6 @@ class Bring_Booking_Labels {
 			if ( ! $order ) {
 				continue;
 			}
-
-			$printed_orders[] = $order_id;
 
 			$adapter = new Bring_WC_Order_Adapter( $order );
 
@@ -162,6 +158,11 @@ class Bring_Booking_Labels {
 				}
 			}
 		}
+
+		// An order counts as printed only when a label file was found.
+		$printed_orders = array_unique(
+			array_merge( $pdf_collection->get_order_ids(), $zpl_collection->get_order_ids() )
+		);
 
 		Fraktguiden_Helper::update_option( 'printed_orders', $printed_orders );
 
