@@ -186,6 +186,8 @@ return [
 		'name'           => 'Bag on door delivery',
 		'default'        => false,
 		'bring_products' => [ 3584, 3570 ],
+		// The customer agrees at checkout, and the order keeps the answer here.
+		'consent_meta'   => '_bag_on_door_consent',
 		'class'          => VAS_Checkbox::class,
 	],
 	[

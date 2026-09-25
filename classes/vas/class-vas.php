@@ -58,6 +58,14 @@ class VAS {
 	public $bring_products = [];
 
 	/**
+	 * The order meta that holds the consent of the customer, or null when the
+	 * service needs none.
+	 *
+	 * @var string|null
+	 */
+	public $consent_meta = null;
+
+	/**
 	 * Construct
 	 *
 	 * @param string $vas_data VAS data
@@ -68,6 +76,7 @@ class VAS {
 		$this->value          = $value === null ? $vas_data['default'] : $value;
 		$this->name           = $vas_data['name'];
 		$this->bring_products = $vas_data['bring_products'];
+		$this->consent_meta   = $vas_data['consent_meta'] ?? null;
 	}
 
 	/**

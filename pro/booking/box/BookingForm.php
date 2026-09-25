@@ -78,12 +78,27 @@ class BookingForm
 		}
 
 		foreach ($form->service()?->vas ?? [] as $vas) {
-			if ($vas->value) {
+			if ($vas->value && self::consented($order, $vas->consent_meta)) {
 				$form->additional_services[] = $vas->code;
 			}
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Return whether the customer agreed to a service that needs consent.
+	 *
+	 * A service without a consent key needs no consent. Older versions saved
+	 * the consent as post meta.
+	 */
+	private static function consented(WC_Order $order, ?string $meta): bool
+	{
+		if (!$meta) {
+			return true;
+		}
+
+		return (bool) ($order->get_meta($meta) ?: get_post_meta($order->get_id(), $meta, true));
 	}
 
 	/**

@@ -94,6 +94,7 @@ See faq.txt for frequently asked questions
 * Fixed the net weight placeholder of a variation, which now shows the parent weight
 * Fixed the shipping time sent to Bring, which used a 12 hour clock and made 14:00 read as 02:00
 * Fixed the lead time cutoff, which moved an order to the next day only when the lead time was more than 0
+* Fixed a booking that added bag on door delivery when the customer did not agree to it at checkout
 
 = 1.11.7 =
 
