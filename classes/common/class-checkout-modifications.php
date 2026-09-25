@@ -68,6 +68,13 @@ class Checkout_Modifications {
 			'kco_additional_checkboxes',
 			__CLASS__ . '::kco_bag_on_door_consent'
 		);
+
+		add_action(
+			'kco_wc_process_payment',
+			__CLASS__ . '::kco_bag_on_door_order_meta',
+			10,
+			2
+		);
 	}
 
 
@@ -390,10 +397,31 @@ class Checkout_Modifications {
 			'text'     => __( "Deliver the package in a bag on my door if it doesn't fit in the mailbox",
 				'bring-fraktguiden-for-woocommerce' ),
 			'checked'  => false,
-			'required' => true,
+			'required' => false,
 		);
 
 		return $additional_checkboxes;
+	}
+
+	/**
+	 * Save the bag on door answer from the Klarna checkbox to order meta
+	 *
+	 * @param int   $order_id     The WooCommerce order id.
+	 * @param array $klarna_order The Klarna Checkout order.
+	 */
+	public static function kco_bag_on_door_order_meta( $order_id, $klarna_order ) {
+		$checkboxes = $klarna_order['merchant_requested']['additional_checkboxes'] ?? [];
+		$consent    = array_filter(
+			$checkboxes,
+			fn( $checkbox ) => 'klarna_bag_on_door_consent' === ( $checkbox['id'] ?? '' ) && ! empty( $checkbox['checked'] )
+		);
+
+		$order = wc_get_order( $order_id );
+
+		if ( $consent && $order ) {
+			$order->update_meta_data( '_bag_on_door_consent', true );
+			$order->save();
+		}
 	}
 
 	private static function is_bag_on_door_enabled( array $current_shipping_method ): bool {

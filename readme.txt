@@ -95,6 +95,7 @@ See faq.txt for frequently asked questions
 * Fixed the shipping time sent to Bring, which used a 12 hour clock and made 14:00 read as 02:00
 * Fixed the lead time cutoff, which moved an order to the next day only when the lead time was more than 0
 * Fixed a booking that added bag on door delivery when the customer did not agree to it at checkout
+* Fixed Klarna Checkout, which lost the bag on door answer of the customer and forced every customer to tick it
 * Fixed the bulk booking, which sent every extra service the shop turned on, even one unticked in a saved draft
 * Fixed the electronic notice of the booking box, which a service with EVARSLING never sent
 * Fixed the bulk booking and the Book now link, which did not check a nonce or the user capability
