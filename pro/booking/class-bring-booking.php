@@ -204,7 +204,21 @@ class Bring_Booking {
 		// The booking box refuses a send for the same reasons.
 		$block  = BookingBlock::find();
 		foreach ( $post_ids as $post_id ) {
-			$adapter = new Bring_WC_Order_Adapter( new WC_Order( $post_id ) );
+			$order = wc_get_order( $post_id );
+
+			// A deleted order fails alone, so the rest of the selection still books.
+			if ( ! $order instanceof WC_Order ) {
+				$report[ $post_id ] = [
+					'status'       => 'error',
+					'order_id'     => $post_id,
+					'message'      => __( 'Order not found.', 'bring-fraktguiden-for-woocommerce' ),
+					'order_status' => '',
+					'url'          => '',
+				];
+				continue;
+			}
+
+			$adapter = new Bring_WC_Order_Adapter( $order );
 			$status  = BulkBookingGroups::of_order( $adapter->order );
 			$message = '';
 

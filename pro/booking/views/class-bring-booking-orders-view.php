@@ -16,6 +16,7 @@ use BringFraktguidenPro\Booking\Bring_Booking;
 use BringFraktguidenPro\Booking\Bring_Booking_Customer;
 use BringFraktguidenPro\Order\Bring_WC_Order_Adapter;
 use Exception;
+use WC_Order;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -281,6 +282,9 @@ class Bring_Booking_Orders_View {
 		$column_data = [];
 		foreach ( $post_ids as $post_id ) {
 			$wc_order                = wc_get_order( $post_id );
+			if ( ! $wc_order instanceof WC_Order ) {
+				continue;
+			}
 			$adapter                 = new Bring_WC_Order_Adapter( $wc_order );
 			$column_data[ $post_id ] = self::get_booking_status_html( $adapter );
 		}
