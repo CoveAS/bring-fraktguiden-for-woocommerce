@@ -46,6 +46,10 @@ See faq.txt for frequently asked questions
 
 == Changelog ==
 
+= 1.12.2 =
+
+* Fixed the HS code field, which showed a code with dots such as 6203.33 as 62.03..33 and without its description
+
 = 1.12.1 =
 
 * Fixed a PHP warning on the label download page when an order had no label of one file type
