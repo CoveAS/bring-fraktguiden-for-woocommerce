@@ -20,6 +20,9 @@ class HsCodeButton
 	 */
 	public static function html(string $name, string $code, array $data = []): string
 	{
+		// An import may store the code as Tolltariffen prints it, for example
+		// 6203.33. The button and the tariff lookup take the plain digits.
+		$code       = HsCode::strip($code);
 		$attributes = '';
 
 		foreach ($data as $key => $value) {
