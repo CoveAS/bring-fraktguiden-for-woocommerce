@@ -27,10 +27,10 @@ class PackageLine
 	public static function from_payload(array $row): self
 	{
 		return new self(
-			max(0.0, (float) ($row['weight_in_kg'] ?? 0)),
-			max(0.0, (float) ($row['length'] ?? 0)),
-			max(0.0, (float) ($row['width'] ?? 0)),
-			max(0.0, (float) ($row['height'] ?? 0)),
+			self::round_up(max(0.0, (float) ($row['weight_in_kg'] ?? 0)), 100),
+			self::round_up(max(0.0, (float) ($row['length'] ?? 0)), 1),
+			self::round_up(max(0.0, (float) ($row['width'] ?? 0)), 1),
+			self::round_up(max(0.0, (float) ($row['height'] ?? 0)), 1),
 		);
 	}
 
@@ -42,11 +42,23 @@ class PackageLine
 	public static function from_meta(array $package): self
 	{
 		return new self(
-			((float) ($package['weight_in_grams'] ?? 0)) / 1000,
-			(float) ($package['length'] ?? 0),
-			(float) ($package['width'] ?? 0),
-			(float) ($package['height'] ?? 0),
+			self::round_up(((float) ($package['weight_in_grams'] ?? 0)) / 1000, 100),
+			self::round_up((float) ($package['length'] ?? 0), 1),
+			self::round_up((float) ($package['width'] ?? 0), 1),
+			self::round_up((float) ($package['height'] ?? 0), 1),
 		);
+	}
+
+	/**
+	 * Round a value up to the step of its form field, 0.01 kg or 1 cm.
+	 *
+	 * A value off the step makes the browser block the order form, so every
+	 * value leaves here on the step. Up, so a parcel is never declared too small.
+	 * The inner round() removes float noise, so 1150 g does not become 1.16 kg.
+	 */
+	private static function round_up(float $value, int $steps_per_unit): float
+	{
+		return ceil(round($value * $steps_per_unit, 6)) / $steps_per_unit;
 	}
 
 	/**
