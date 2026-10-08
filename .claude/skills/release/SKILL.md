@@ -93,11 +93,15 @@ Make no GitHub release.
 
 ## 10. Hand over the publish
 
-Give the user this command:
+Give the user this command. It runs from any folder.
 
 ```
-cd ~/Workspace/svn-bring-fraktguiden-for-woocommerce && php ~/Workspace/bringdemo/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/svn-publisher.php
+php ~/Workspace/bringdemo/public/wp-content/plugins/bring-fraktguiden-for-woocommerce/svn-publisher.php
 ```
+
+The publisher uses the SVN working copy in
+`~/Workspace/svn-bring-fraktguiden-for-woocommerce`. A first argument names
+another folder.
 
 The publisher reads the version from the git tag on HEAD. So HEAD must stay
 on the tagged commit until the publish ends.

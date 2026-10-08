@@ -1,13 +1,9 @@
 <?php
 
 $url = 'https://plugins.svn.wordpress.org/bring-fraktguiden-for-woocommerce';
-$cwd = getcwd();
 $dir = __DIR__;
-
-if ( strpos( $cwd, $dir ) ) {
-	echo "Don't run this command inside the bring repo please.\n";
-	die;
-}
+// The SVN working copy. The first argument overrides it.
+$svn_dir = $argv[1] ?? getenv( 'HOME' ) . '/Workspace/svn-bring-fraktguiden-for-woocommerce';
 
 chdir( $dir );
 
@@ -33,8 +29,6 @@ if ( ! preg_match( '/^\d+\.\d+\.\d+(-rc\d+)?$/', $version, $rc ) ) {
 $is_dev = ! empty( $rc[1] );
 echo $is_dev ? "Publishing development version $version to trunk only.\n" : "Publishing release $version.\n";
 unset( $output );
-// Go back
-chdir( $cwd );
 exec( "svn list $url/tags", $output, $result );
 if ( $result ) {
 	die( "ERROR: Could not get tags from svn repo.\n" );
@@ -68,16 +62,10 @@ if ( ! $is_dev && ! $stable_is_this ) {
 	die( "Stable tag doesn't match $version in readme.txt" );
 }
 
-if ( 'svn-bring-fraktguiden-for-woocommerce' !== basename( $cwd ) ) {
-	// Create a new dir
-	if ( ! is_dir( 'svn-bring-fraktguiden-for-woocommerce' ) ) {
-		if ( ! mkdir( 'svn-bring-fraktguiden-for-woocommerce' ) ) {
-			echo "Could not make the directory.\n";
-			die;
-		}
-	}
-	chdir( 'svn-bring-fraktguiden-for-woocommerce' );
+if ( ! is_dir( $svn_dir ) && ! mkdir( $svn_dir, 0777, true ) ) {
+	die( "ERROR: Could not make the directory $svn_dir.\n" );
 }
+chdir( $svn_dir );
 
 if ( is_dir( '.svn' ) ) {
 	// Update an existing SVN
