@@ -24,12 +24,10 @@ class HsCodeIndex
 	private const URL = 'https://data.toll.no/dataset/6350e783-b989-4c7c-9ec0-de2dcb97363c/resource/68f78255-cbb0-4e75-86b1-3d5928816903/download/tolltariffstruktur.json';
 
 	/**
-	 * The option that holds the built index, with the time it was built.
-	 *
-	 * Change the name when the build changes, so every shop builds the index
-	 * again on the next read.
+	 * The option that holds the built index, with the time it was built and the
+	 * build hash.
 	 */
-	private const OPTION = 'bring_fraktguiden_hs_code_index_v2';
+	private const OPTION = 'bring_fraktguiden_hs_code_index';
 
 	/**
 	 * The transient that marks a download in flight.
@@ -66,8 +64,9 @@ class HsCodeIndex
 	/**
 	 * Return the index, or an empty index when the tariff cannot be read.
 	 *
-	 * The stored index answers the reader. Only a missing index, or one past
-	 * MAX_AGE, makes the reader wait for the tariff.
+	 * The stored index answers the reader. Only a missing index, one past
+	 * MAX_AGE, or one from another build hash makes the reader wait for the
+	 * tariff.
 	 *
 	 * @return array{version: string, positions: string[], codes: array<int, array{0: string, 1: int, 2: string}>}
 	 */
@@ -75,11 +74,7 @@ class HsCodeIndex
 	{
 		$stored = get_option(self::OPTION);
 
-		if (!is_array($stored)) {
-			return self::refresh();
-		}
-
-		if (time() - $stored['built'] > self::MAX_AGE) {
+		if (!self::fresh($stored, self::MAX_AGE)) {
 			return self::refresh();
 		}
 
@@ -97,13 +92,7 @@ class HsCodeIndex
 		// line once no shop upgrades from an older version.
 		delete_transient('bring_fraktguiden_hs_code_index');
 
-		// ponytail: the index before version 1.12.2 missed the codes below a
-		// subchapter. Drop this line once no shop upgrades from an older version.
-		delete_option('bring_fraktguiden_hs_code_index');
-
-		$stored = get_option(self::OPTION);
-
-		if (is_array($stored) && time() - $stored['built'] < self::STALE) {
+		if (self::fresh(get_option(self::OPTION), self::STALE)) {
 			return;
 		}
 
@@ -135,10 +124,35 @@ class HsCodeIndex
 			return is_array($stored) ? $stored['index'] : $index;
 		}
 
-		update_option(self::OPTION, ['built' => time(), 'index' => $index], false);
+		update_option(self::OPTION, ['built' => time(), 'build_hash' => self::build_hash(), 'index' => $index], false);
 		delete_transient(self::FETCHING);
 
 		return $index;
+	}
+
+	/**
+	 * Tell whether a stored index is younger than the given age and comes from
+	 * the code that runs now.
+	 *
+	 * @param mixed $stored The stored option.
+	 * @param int   $age    The age in seconds at which the index goes stale.
+	 */
+	private static function fresh($stored, int $age): bool
+	{
+		return is_array($stored)
+			&& time() - $stored['built'] < $age
+			&& self::build_hash() === ($stored['build_hash'] ?? '');
+	}
+
+	/**
+	 * Return the hash of this file.
+	 *
+	 * This file holds the code that builds the index. Any change to it changes
+	 * the hash, and every shop then builds the index again.
+	 */
+	private static function build_hash(): string
+	{
+		return md5_file(__FILE__);
 	}
 
 	/**
