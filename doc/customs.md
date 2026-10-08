@@ -109,11 +109,12 @@ the Norwegian customs tariff.
 
 Tolletaten publishes the tariff as open data, under Creative Commons
 Attribution 4.0. The file is `tolltariffstruktur.json` on data.toll.no. It holds
-the whole tariff as a tree of sections, chapters, positions and goods.
+the whole tariff as a tree of sections, chapters, positions and goods. Some
+chapters put a subchapter between the chapter and its positions.
 
 The plugin fetches that file, keeps one row per six digit code, and holds the
-result in the option `bring_fraktguiden_hs_code_index`. That gives 4587 codes
-and about 550 kB. The browser reads the rows from the REST route
+result in the option `bring_fraktguiden_hs_code_index_v2`. That gives 5612
+codes and about 670 kB. The browser reads the rows from the REST route
 `bring-fraktguiden/v1/hs-codes`.
 
 The stored index always answers the reader. The daily cron event builds it

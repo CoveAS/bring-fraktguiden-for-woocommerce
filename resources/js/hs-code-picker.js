@@ -7,7 +7,7 @@ import './dialog.js';
  * the modal searches the Norwegian tariff, and the chosen code goes back into
  * the hidden input beside the button.
  *
- * The whole tariff is 4587 codes, so the browser holds it and searches without
+ * The whole tariff is 5612 codes, so the browser holds it and searches without
  * a call. The route sends an ETag, so a repeat visit gets a short 304 and the
  * browser reuses the copy in its own cache.
  *
@@ -134,9 +134,11 @@ function search(query) {
 	const hits = [];
 
 	for (const row of index.codes) {
-		// A typed number is a code, so it matches from the first digit.
+		// A typed number is a code, so it matches from the first digit. The
+		// index holds six digits, so a longer national number matches by its
+		// first six.
 		if (digits) {
-			if (row[0].startsWith(digits)) {
+			if (row[0].startsWith(digits.slice(0, 6))) {
 				hits.push([row, 0]);
 			}
 
@@ -269,7 +271,7 @@ function render(query) {
 	}
 
 	// An empty search shows the whole tariff, with the code the field already
-	// holds on top. The list takes it a page at a time, because 4587 rows at
+	// holds on top. The list takes it a page at a time, because 5612 rows at
 	// once hold the browser up.
 	if (query.length < MIN_QUERY) {
 		hint.textContent = text.hint || '';

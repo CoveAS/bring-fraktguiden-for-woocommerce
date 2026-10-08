@@ -25,8 +25,11 @@ class HsCodeIndex
 
 	/**
 	 * The option that holds the built index, with the time it was built.
+	 *
+	 * Change the name when the build changes, so every shop builds the index
+	 * again on the next read.
 	 */
-	private const OPTION = 'bring_fraktguiden_hs_code_index';
+	private const OPTION = 'bring_fraktguiden_hs_code_index_v2';
 
 	/**
 	 * The transient that marks a download in flight.
@@ -92,7 +95,11 @@ class HsCodeIndex
 	{
 		// ponytail: the index lived in a transient before version 2.0. Drop this
 		// line once no shop upgrades from an older version.
-		delete_transient(self::OPTION);
+		delete_transient('bring_fraktguiden_hs_code_index');
+
+		// ponytail: the index before version 1.12.2 missed the codes below a
+		// subchapter. Drop this line once no shop upgrades from an older version.
+		delete_option('bring_fraktguiden_hs_code_index');
 
 		$stored = get_option(self::OPTION);
 
@@ -212,7 +219,7 @@ class HsCodeIndex
 			self::add($node, $position, $sub, $positions, $codes, $seen);
 		}
 
-		foreach (['kapitler', 'inndelinger', 'oppdelinger'] as $branch) {
+		foreach (['kapitler', 'inndelinger', 'posisjoner', 'oppdelinger'] as $branch) {
 			foreach ($node[$branch] ?? [] as $child) {
 				self::walk($child, $position, $sub, $positions, $codes, $seen);
 			}

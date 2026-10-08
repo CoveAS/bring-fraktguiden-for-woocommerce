@@ -49,6 +49,7 @@ See faq.txt for frequently asked questions
 = 1.12.2 =
 
 * Fixed the HS code field, which showed a code with dots such as 6203.33 as 62.03..33 and without its description
+* Fixed the HS code search, which missed about 1000 codes, such as 7118.90 for coins, and found nothing for an eight digit number
 * Fixed the order page, which did not save a status change when a booking package weight had more than two decimals
 
 = 1.12.1 =
