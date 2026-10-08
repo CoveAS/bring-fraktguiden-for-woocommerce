@@ -5,7 +5,7 @@
 .build
 tmp/
 temp/
-release/
+/release/
 ChromePhp.php
 node_modules
 /vendor

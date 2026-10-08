@@ -433,6 +433,7 @@ Use `/skill-name` in chat to invoke:
 | `/create-component` | Creating a new `.bfgc.php` component (TDD workflow) |
 | `/templating` | Building or modifying admin pages (structure, fields, patterns) |
 | `/css` | Styling decisions — Tailwind vs component class vs custom CSS |
+| `/release` | Preparing, tagging and pushing a release or a release candidate |
 
 ## Documentation
 

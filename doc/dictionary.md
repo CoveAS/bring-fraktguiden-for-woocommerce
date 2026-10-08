@@ -148,3 +148,22 @@ outside Norway cannot guess them.
 : A translation that WordPress downloads from translate.wordpress.org into
   `wp-content/languages/plugins/`. A downloaded pack hides the catalog bundled
   with the plugin.
+
+## Releases
+
+**release**
+: A version that every shop gets as an update. The `Stable tag` in
+  `readme.txt` names it, and an SVN tag on wordpress.org holds it.
+
+**release candidate**
+: A test version of a coming release, with a `-rcN` suffix such as
+  `1.13.0-rc1`. It goes to SVN trunk only. No shop updates to it. A tester
+  downloads it as the Development Version on wordpress.org.
+
+**Stable tag**
+: The line in `readme.txt` that names the version wordpress.org serves to
+  shops.
+
+**trunk**
+: The main folder of the wordpress.org SVN repository. It holds the newest
+  published code, which may be a release candidate.
